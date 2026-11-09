@@ -1,8 +1,8 @@
 # Meroitic with Opus 5.5: results
 
 Night of 2026-11-08/09, 22:54 to about 01:00 PST, Opus 5.5 subagents. Every number names the run it comes from;
-answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw in `runs/tasks/`, the code in `src/`
-(reviewed: README, Methods 13; checks in `tests/`).
+answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw in `runs/tasks/` (local-only, as
+the tasks embed the corpus: README, Data), the code in `src/` (reviewed: README, Methods 13; checks in `tests/`).
 
 ## Did we find anything new?
 
@@ -164,5 +164,6 @@ After "are you giving up?", four more lines of attack, then data.
    *Meroitic Inscriptions* I–II and *Meroë*; 29 are partial (left out), 37 were already in the corpus or repeat
    another Griffith text, 86 are new: `data/corpus_v3.jsonl` has 748 texts and 19,066 words (+5%). The duplicate
    test is strict (a short label inside a longer text counts as present), so the gain is a lower bound.
-10. **Review:** the review of `src/lexique.py` and `src/expand.py` was stopped partway on Mike's word to push; its
-    edits are included and pass the tests.
+10. **Review:** the review of `src/lexique.py` and `src/expand.py`, stopped partway on Mike's word to push, was
+    finished before the repo was shared; `tests/test_lexique.py` checks both files, and none of the numbers above
+    changed.

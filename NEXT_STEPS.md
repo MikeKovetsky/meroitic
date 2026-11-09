@@ -14,9 +14,10 @@ looks like.
      could be gathered and made machine-readable, then we could expand our corpus"; "Eventually we will need an OCR
      model for the Meroitic REM texts"), and it describes the name-swap padding openly (871 examples swapped up to
      17,257). What it leaves out is that the released file is the padded version.
-   - Offer: the 152 Griffith inscriptions (CC BY 4.0, with source page and REM number), the reading method with its
-     measured accuracy, and the scripts that undo the padding (`src/pool.py` and the three after it).
-   - Ask: a note in his repository that `mero-corpus.txt` is the padded version, and the 871 originals beside it.
+   - Offer: the 152 Griffith inscriptions (CC BY 4.0, with source page, and REM number for 127), the reading method
+     with its measured accuracy, and the scripts that undo the padding (`src/pool.py` and the three after it).
+   - Ask: a note in his repository that `mero-corpus.txt` is the padded version, and the 871 originals beside it as
+     one file (its `Data/` folder has them only in the per-scholar files, with translations and page notes).
      [The open issue there](https://github.com/Joshua-Otten/Meroitic-Corpus/issues/1) asks for a licence and a
      provenance line for the same reason.
    - He is also the route to Claude Rilly, whom the paper thanks "for his thorough review and advice".
@@ -53,14 +54,14 @@ looks like.
      `src/expand.py`, with the measured accuracy in its notes.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
-7. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
-   pipeline once it passes. Check first whether that article has indexes like Karanòg's.
-8. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
+7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
    [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, REM 0001 to 1278:
    about 1,280 inscriptions against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
    drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
    a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
    republishing.
+8. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
+   pipeline once it passes. Check first whether that article has indexes like Karanòg's.
 9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):
    clean modern readings for private analysis only (FHN is "all rights reserved").
 10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
@@ -74,7 +75,8 @@ looks like.
 
 12. **Rebuild and rerun the corpus meaning test** with the fixed builder (`src/lexique.py` leaves out of the
     glossary a word that gives a target away) instead of removing leaked items afterwards; judge again. About 40
-    minutes.
+    minutes. The builders refuse to replace the first run's keys (`runs/keys/lexique_items.json`,
+    `lexique_open.json`), which `judged` and the tests read, so the new run needs its own key names first.
 13. **Does more data help?** Not by comparing `corpus_v2` with `corpus_v3`: a 5% change over about 35 test words
     is too small to show. A learning curve on the synthetic language would show it (25%, 50%, 100% and 200% of the
     corpus), but `synth.corpus()` has its size fixed at 1,000 texts, and with 52 test words a run it needs three or

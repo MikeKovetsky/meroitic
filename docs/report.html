@@ -106,15 +106,15 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
     <div class="word"><span class="glyphs">𐦲𐦷𐦢</span><span class="gloss"><span class="tr">kdi</span> woman</span></div>
   </div>
   <p class="lede">Meroitic, the language of ancient Kush, can be read aloud but is mostly not understood. Over a night and a morning, about 60 Opus 5.5 subagents tested what the model already knows, what it can work out from the texts alone, what new leads it finds for specialists, and whether it can grow the corpus.</p>
-  <p class="meta">Corpus: Otten &amp; Anastasopoulos's public corpus (ALP 2025), cleaned. Answer key: 82 published word meanings and 26 grammatical endings, each sourced. Code, prompts and every answer file are in the local repo <code>~/repos/mike/meroitic</code>.</p>
+  <p class="meta">Corpus: Otten &amp; Anastasopoulos's public corpus (ALP 2025), cleaned. Answer key: 82 published word meanings and 26 grammatical endings, each sourced. Code, prompts and every answer file are in <a href="https://github.com/MikeKovetsky/meroitic">the meroitic repo</a>.</p>
 </header>
 
 <section>
   <div class="eyebrow">Did we find anything new?</div>
-  <h2>No decipherment. New: the public corpus is mostly copies, 86 texts are newly machine-readable, and a test that works</h2>
+  <h2>No decipherment. New: the public corpus is mostly copies, 152 inscriptions are machine-readable under an open licence, and a test that works</h2>
   <ol class="answers">
     <li><strong>The public Meroitic corpus is mostly copies.</strong> The only machine-readable corpus is a file of 18,090 lines that holds 662 different texts or phrases: each is repeated, about 27 times on average, with only a person's name changed. The short label <span class="tr">tdxe mlEqErebr qEret ___</span> appears 198 times, once with each of 198 names. Counting words in the file counts the same texts over and over, and some titles come out about 100 times too frequent. The paper describes the name swapping (871 examples made into 17,257); the released file does not say it is that version. We recovered the swapped name lists from the data and undid it.</li>
-    <li><strong>86 texts missing from that corpus are now machine-readable.</strong> Opus reads the Meroitic type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against the modern edition. It transcribed 152 of his inscriptions; 86 were not in the corpus. His hand copies (88.8%) and photographs of the stones are beyond it.</li>
+    <li><strong>152 inscriptions are now machine-readable under an open licence, 86 of them missing from that corpus.</strong> Opus reads the Meroitic type printed in Griffith's public-domain editions of 1911–12 at 95.6% sign accuracy against the modern edition. It transcribed 152 of his inscriptions, each with its source page, under CC BY 4.0; 86 were not in the corpus. His hand copies (88.8%) and photographs of the stones are beyond it.</li>
     <li><strong>Scrambling the script doesn't hide it from a frontier model.</strong> From a 17-word glossary of letter-swapped Meroitic and no texts, it broke the cipher and matched all 35 test words. From the scrambled texts with neutral labels, it recognised the opening <span class="tr">Wos-i Sorey-i</span> ("O Isis, O Osiris") and read the script from there. Tests of AI decipherment on known-but-undeciphered scripts have to assume the model has read the literature.</li>
     <li><strong>A test that works, and what it shows.</strong> On a synthetic twin language with every word invented, it recovered 41 and 43 of 52 meanings on two runs, where chance is about 2. On real words it could not recall, the corpus got it to Rilly's meaning for 13 of 35, and 20 within three guesses.</li>
     <li><strong>Its confidence is a usable filter.</strong> In every test, all 74 answers it gave at confidence 4 or 5 were right. At confidence 1 or 2, about a third were.</li>
@@ -278,7 +278,7 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
   <div class="eyebrow">What it would take</div>
   <h2>Where a model helps from here</h2>
   <ul class="plain">
-    <li><strong>Data first.</strong> Hallof's 2024 corpus edition and the REM volumes exist only in print. A clean digital corpus with REM numbers, line breaks and doubtful signs marked would do more than any model upgrade.</li>
+    <li><strong>Data first.</strong> Hallof's 2024 corpus edition exists only in print, and the REM volumes online give photographs and drawings, not text (as Otten's paper describes them). A clean digital corpus with REM numbers, line breaks and doubtful signs marked would do more than any model upgrade.</li>
     <li><strong>Use it as a tireless analyst, scored on held-out material.</strong> The synthetic test shows its confidence is well calibrated on clean data. Its high-confidence readings of unknown words are worth a specialist's time; its low-confidence ones are not.</li>
     <li><strong>A real cognate test.</strong> Apply Rilly's sound correspondences to the full comparison series in his 2003 thesis appendix (about 200 series), not raw string similarity.</li>
     <li><strong>Pair it with a specialist from the start.</strong> The two open leads, and any future "new" label, need someone with Rilly 2007, Hintze and the REM volumes on the shelf: Claude Rilly (CNRS), Stefan Hallof, Henriette Ashby or Joshua Otten.</li>
@@ -288,6 +288,6 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
 
 <footer>
   <span>Methods, data, code and every answer file: <a href="https://github.com/MikeKovetsky/meroitic">the meroitic repo</a>. Every claim names its run in <code>REPORT.md</code>.</span>
-  <span>Three independent full code reviews checked the scripts. They fixed leaks, a wrong p-value method, a weak baseline, a corpus bug and sound rules applied too loosely, and corrected several reported numbers; 44 tests guard those fixes. A fourth review was stopped partway to push the repo.</span>
+  <span>Four independent full code reviews checked the scripts. They fixed leaks, a wrong p-value method, a weak baseline, a corpus bug and sound rules applied too loosely, and corrected several reported numbers; the checks in <code>tests/</code> guard those fixes.</span>
 </footer>
 </main>
