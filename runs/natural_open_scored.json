@@ -1,0 +1,206 @@
+[
+ {
+  "word": "asr",
+  "gold": "meat, animal",
+  "candidates": [
+   "cattle, livestock (taken as booty)",
+   "captives, prisoners",
+   "a commodity measured by weight (metal)"
+  ],
+  "confidence": 2,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "kdite",
+  "gold": "sister",
+  "candidates": [
+   "sister",
+   "daughter",
+   "female relative"
+  ],
+  "confidence": 5,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "mte",
+  "gold": "child",
+  "candidates": [
+   "child (son or daughter)",
+   "young, junior",
+   "small"
+  ],
+  "confidence": 3,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "tre",
+  "gold": "offer",
+  "candidates": [
+   "give, offer (donate)",
+   "an office or title used in kinship descriptions",
+   "a place or estate named in titles"
+  ],
+  "confidence": 1,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "mkdi",
+  "gold": "goddess",
+  "candidates": [
+   "goddess",
+   "divine lady",
+   "great lady"
+  ],
+  "confidence": 5,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "ar",
+  "gold": "boy, son",
+  "candidates": [
+   "take, seize, capture",
+   "boy, male child",
+   "bring, carry"
+  ],
+  "confidence": 2,
+  "top1": 0,
+  "top3": 1
+ },
+ {
+  "word": "are",
+  "gold": "take, receive (seize)",
+  "candidates": [
+   "take, receive (accept)",
+   "make, perform (an act of worship)",
+   "bring, offer"
+  ],
+  "confidence": 2,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "xlbi",
+  "gold": "bull, ox",
+  "candidates": [
+   "bull",
+   "ox",
+   "calf"
+  ],
+  "confidence": 4,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "ns",
+  "gold": "sacrifice",
+  "candidates": [
+   "each, every (distributive)",
+   "people, inhabitants",
+   "booty, spoils"
+  ],
+  "confidence": 1,
+  "top1": 0,
+  "top3": 0
+ },
+ {
+  "word": "tbo",
+  "gold": "two, second",
+  "candidates": [
+   "two, both",
+   "pair, couple",
+   "and (joining two items)"
+  ],
+  "confidence": 4,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "yireqw",
+  "gold": "south",
+  "candidates": [
+   "south, southward",
+   "the southern frontier or region (upstream)",
+   "east, eastward"
+  ],
+  "confidence": 4,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "kelw",
+  "gold": "and, also",
+  "candidates": [
+   "also, likewise, too",
+   "all, altogether",
+   "and (both)"
+  ],
+  "confidence": 3,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "SSor",
+  "gold": "scribe",
+  "candidates": [
+   "a priestly or temple official (title)",
+   "scribe",
+   "overseer of herds (herdsman)"
+  ],
+  "confidence": 2,
+  "top1": 0,
+  "top3": 1
+ },
+ {
+  "word": "perite",
+  "gold": "agent (administrator)",
+  "candidates": [
+   "agent (an official title)",
+   "steward, administrator",
+   "alive, living (of captives)"
+  ],
+  "confidence": 3,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "pXrs",
+  "gold": "Faras (Pachoras)",
+  "candidates": [
+   "Faras (Pakhoras), a town in Lower Nubia",
+   "a Lower Nubian district or governorate",
+   "another Lower Nubian town (e.g. Aniba or Karanog)"
+  ],
+  "confidence": 5,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "tkk",
+  "gold": "plunder, pillage",
+  "candidates": [
+   "booty, goods (possessions)",
+   "plunder, carry off",
+   "children"
+  ],
+  "confidence": 1,
+  "top1": 1,
+  "top3": 1
+ },
+ {
+  "word": "tebwe",
+  "gold": "Abaton (Philae)",
+  "candidates": [
+   "the Abaton (Bigeh island, beside Philae)",
+   "Bigeh / Senmet (a sacred island)",
+   "Elephantine or Aswan"
+  ],
+  "confidence": 4,
+  "top1": 1,
+  "top3": 1
+ }
+]

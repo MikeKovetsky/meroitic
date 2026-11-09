@@ -1,48 +1,109 @@
-# Meroitic overnight: what a 2026 model can and can't do
+# Meroitic overnight: what Opus 5.5 can and can't do
 
-Night of 2026-11-08/09, about five hours, Opus 5.5 subagents. Everything below is reproducible from `src/` and
-`runs/`; every claim names the run it comes from.
+Night of 2026-11-08/09, 22:54 to about 01:00 PST, Opus 5.5 subagents. Every number names the run it comes from;
+answers are in `runs/answers/`, keys in `runs/keys/`, the code in `src/` (reviewed: `review-fix`, full tier, CLEAN at
+`7404ee8`, with 15 tests in `tests/test_harness.py`).
 
 ## Answer first
 
-1. **Opus 5.5 already knows the published Meroitic vocabulary.** On 35 accepted words it matched every meaning
-   from memory alone (35/35), and again with the corpus (35/35). Asked openly, with no options, it recalled 52 of
-   82 published words and said "unknown" to 30 (`runs/recall_open.json`).
-2. **So the planned blind test can't be run on Meroitic.** Re-spelling the corpus with a random letter swap hides
-   nothing: given only a 17-word glossary and no texts, the model broke the cipher and scored 35/35 (`S0_f0`,
-   `S0_f1`). With the texts, the runs said outright they recognised Meroitic (`S_f0`, `S_f1`).
-3. **On a language it cannot know, it still infers meanings from context.** On a synthetic corpus of the same size
-   and texture (1,003 texts, 16k words, invented vocabulary), it matched RESULT_Y meanings where chance is about 2,
-   and every high-confidence answer was right (`Y_f0`, `Y_f1`).
-4. **Blind, it rebuilt much of the published grammar** from the scrambled corpus: the article -l and its plural
-   -leb, the plural -b-, genitive -s, vocative -i, the demonstrative qo "this", the predicate ending -lowi split into
-   its parts, the plural copula -kwi, the p- prefix of the benediction verbs, and the rule that the a-sign only
-   starts words (`K_morph`; clean rerun `K2_morph`: RESULT_K2).
-5. **Discovery:** three new, checkable proposals from the funerary texts and RESULT_D1D3 from the war stela and the
-   Philae bilinguals, each labelled ESTABLISHED / PUBLISHED HYPOTHESIS / NEW after a literature search
-   (`data/discovery/`). None is a decipherment; all need a specialist.
+1. **Opus 5.5 already knows the published Meroitic vocabulary.** Matching 35 accepted words to their 35 meanings,
+   it scored 35/35 from memory alone (`M_f0`, `M_f1`), and 35/35 with the corpus (`R_f0`, `R_f1`). Asked openly,
+   with no options, it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong: `yireqe` "east" for
+   "south") and said "unknown" to 30 (`F_recall`).
+2. **So a blind test on real Meroitic is impossible.** A letter-swap re-spelling hides nothing: given a 17-word
+   glossary and no texts, it broke the cipher and scored 35/35 (`S0_f0`, `S0_f1`). With only the scrambled corpus,
+   no meanings and neutral line ids, it recognised the opening `ryuq uyatsq` as Wos-i Sorey-i, "O Isis, O Osiris",
+   and read the script from there (`K2_morph`, which says so).
+3. **On a language it can't know, it infers meaning from context.** On a synthetic corpus of the same size and
+   style (1,003 texts, 16k words, invented vocabulary and endings), it matched 41 of 52 usable test words where
+   chance is about 2; all 24 answers at confidence 4–5 were right (`Y_f0`, `Y_f1`; 4 of the 56 original items
+   dropped by the review because the corpus doesn't show them). RESULT_YK
+4. **The texts fill gaps in its memory.** For the 17 published words it could not recall, reading the corpus took
+   it to the published meaning on the first guess for 14 and within three guesses for 16 (`N_open`,
+   `runs/natural_open_scored.json`, judged by me against the key; the table is below so anyone can re-judge).
+5. **It restores lost words far better than statistics.** On 46 held-out inscriptions with no copy in the reference
+   texts, it restored 57 of 92 masked words on the first guess (62%); an n-gram restorer trained on the same texts
+   got 23 (25%) (`C3_cloze`, `src/cloze_families.py copies`). Over all 120 masks: 84 vs 29, exact McNemar
+   p ≈ 6×10⁻¹⁵.
+6. **About 15 new, checkable leads for specialists**, each labelled after a literature search
+   (`data/discovery/`). None is a decipherment.
 
 ## The corpus
 
-- The public corpus (Otten & Anastasopoulos, ALP 2025) has 18,090 lines, but it is padded: each text repeats with
-  person names swapped from two pools (178 private names, 11 royal). Undoing that leaves 665 texts, about 19,700
-  words (`src/pool.py`, `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py`). The funerary study counts 442
-  distinct funerary texts in 306 families.
-- Two blind runs found leftovers my cleaning missed (17 multi-word names, then 5 name tails). The cloze run even
-  worked out how the padding was made and used it.
+- Otten & Anastasopoulos's public corpus (ALP 2025) has 18,090 lines, but each text repeats with person names
+  swapped from two pools (178 private, 11 royal; `src/pool.py`). Undoing that, masking names as NAME/RNAME and
+  removing the narratives' second copies leaves 662 texts and about 18,100 words (`src/dedup.py`,
+  `src/collapse.py`, `src/clean_v2.py`). The funerary study counts 442 distinct funerary texts in 306 families.
+- Three blind runs found padding my cleanup had missed (multi-word names, name tails such as `mokelowi`), and two
+  restoration runs won by exploiting it. Those runs are reported as void.
 
 ## Tests
 
-| Test | What it asks | Result |
-|---|---|---|
-| Matching, memory only (`M_f0/1`) | 35 words → 35 meanings, no texts | 35/35 |
-| Matching, real texts (`R_f0/1`) | same, with the corpus | 35/35 |
-| Matching, scrambled texts (`S_f0/1`) | same, letters swapped | 35/35, recognised Meroitic |
-| Matching, scrambled, no texts (`S0_f0/1`) | glossary + words only | 35/35, cracked the cipher |
-| Open recall (`F_recall`) | 82 words, no options | 52 answered, 30 unknown |
-| Natural experiment (`N_open`) | the 17 unrecalled words, from the texts | RESULT_N |
-| Synthetic language (`Y_f0/1`) | 56 invented words, from the texts | RESULT_Y |
-| Restoration (`C2_cloze`) | 88 masked words in unseen contexts | RESULT_C2 vs n-gram 28/88 |
-| Grammar, blind (`K_morph`, `K2_morph`) | scrambled corpus, no meanings | see above |
+| Test | Run | Result | Reading |
+|---|---|---|---|
+| Matching, memory only | `M_f0/1` | 35/35 (p = 1.6e-16, 2.8e-15) | memory |
+| Matching, real corpus | `R_f0/1` | 35/35 | memory |
+| Matching, scrambled corpus | `S_f0/1` | 35/35 | not blind: the task files carried inscription names; runs said they decoded Meroitic |
+| Matching, scrambled, no corpus | `S0_f0/1` | 35/35 | cipher broken from the glossary |
+| Open recall, 82 words | `F_recall` | 50 right, 1 partial, 1 wrong, 30 unknown | memory |
+| Natural experiment, 17 unrecalled words | `N_open` | 14/17 first guess, 16/17 top three | mostly clean |
+| Synthetic language, matching | `Y_f0/1` | 41/52; confidence 4–5: 24/24 | clean |
+| Synthetic language, grammar | `YK_morph` | RESULT_YK_SHORT | clean |
+| Grammar, scrambled real corpus | `K_morph`, `K2_morph` | about 16 of 26 published endings | recognised Meroitic |
+| Restoration v1, v2 | `C_cloze`, `C2_cloze` | 91/97, 82/88 vs n-gram 39/88 | void: copied from leftover padding |
+| Restoration v3, new texts | `C3_cloze` | 57/92 vs n-gram 23/92 | clean |
+| Nubian-family similarity | `src/cognates.py` | p = 0.004 with Rilly's reconstructions, 0.12 without | inconclusive: the reconstructions are partly circular |
 
-RESULT_DETAILS
+### Natural experiment, item by item
+
+| Word | Published meaning | First guess from the corpus | |
+|---|---|---|---|
+| kdite | sister | sister | right |
+| mkdi | goddess | goddess | right |
+| pXrs | Faras | Faras (Pakhoras) | right |
+| tebwe | Abaton | the Abaton (Bigeh) | right |
+| tbo | two | two, both | right |
+| yireqw | south | south | right |
+| xlbi | bull, ox | bull | right |
+| mte | child | child | right |
+| perite | agent | agent (official title) | right |
+| kelw | and, also | also, likewise | right |
+| are | take, receive | take, receive | right |
+| asr | meat, animal | cattle, livestock | right |
+| tkk | plunder | booty, goods | right |
+| tre | offer | give, offer | right |
+| ar | boy, son | take, seize (2nd: boy) | top three |
+| SSor | scribe | temple official (2nd: scribe) | top three |
+| ns | sacrifice | each, every | wrong |
+
+## Leads for specialists
+
+From `data/discovery/philae.md` (14 items: 1 established, 6 published, 7 new), `funerary.md` (30: 8, 19, 3) and
+`hamadab.md`. "New" means no prior proposal turned up in the searches listed there; Rilly 2007, Hintze 1979 and the
+printed REM were not searchable.
+
+1. NEW. The Faras stela REM 0129 gives the same title chain, in the same order, as the envoy Sasan in the Demotic
+   graffito Ph. 416: `qoreñ`, `kroro`, "great envoy to Rome".
+2. NEW. Bekemete's label REM 0098, "begotten by a general of the water", settles Ph. 417: the title is his father's.
+3. NEW. `wi` before a numeral marks a total (Tanyidamani: `mk lte wi 12` after twelve items counted "1").
+4. NEW. The closing totals 1,626 and 1,032 on REM 1003 count animals (`asr`), not people.
+5. NEW. `plSn` ("high priest", Millet) may be Egyptian pꜣ mr-šn, the lesonis.
+6. NEW. With an epithet, the vocative `-i` moves to the end of the god's phrase (Osiris is `Sori`, never `Soreyi`,
+   in all 11 such texts).
+7. NEW. `penn` is a counted time unit in datelines (numbers up to 34), not "day"; three runs reached this
+   separately.
+8. Published, supported here: `tebwe` is the Abaton; `ste` can name a man ("tutor").
+9. Negative: REM 1003 has nothing checkable against the Roman war, as Rilly 2014 says (the war is in REM 1039).
+
+## Corrections found along the way
+
+- Rilly withdrew "arme = Rome" in 2014; the Romans are `Tmey` in REM 1039, and `Arome` is 3rd century.
+- The corpus file called the Hamadab stela is REM 1003 (BM EA 1650, the Akinidad stela).
+- On the war stela, `kdise` is "each woman", not "sister", and `wi` before a number is not "brother".
+
+## What would move this forward
+
+1. A clean digital corpus (Hallof 2024, REM) with REM numbers, lines and doubtful signs.
+2. The model as an analyst whose high-confidence readings go to a specialist, low-confidence ones not.
+3. A cognate test with Rilly's sound correspondences over his 2003 thesis appendix (about 200 series).
+4. The leads above sent to Claude Rilly, Stefan Hallof, Henriette Ashby or Joshua Otten.

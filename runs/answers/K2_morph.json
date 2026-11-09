@@ -1,0 +1,597 @@
+{
+ "formulas": [
+  {
+   "name": "F1. Funerary formula, the dominant text type (205 of 665 texts open with it): invocation, nomination, filiation, descriptions, benedictions",
+   "segments": [
+    {
+     "form": "ryuq",
+     "role": "Invocation 1: divine name ryu + vocative -q ('O ryu!'). It is bare ryu when an epithet follows, and the epithet then carries the -q (ryu rtbmsqmgtfq, 44 texts)."
+    },
+    {
+     "form": "uyatsq (written uyat sq; short form uyaq)",
+     "role": "Invocation 2: second divine name + vocative -q. Long variant: uyaq gtbaaq or uyaq rtbaaq, with its own epithet ending in -q."
+    },
+    {
+     "form": "gy (variant gt)",
+     "role": "Nomination opener: demonstrative 'this'."
+    },
+    {
+     "form": "NAME (a title may precede it: gy vahvm hpawbt NAME gyrq)",
+     "role": "The person the text is for, most likely the deceased."
+    },
+    {
+     "form": "gyrq (variant gtrq) = gy + -rq",
+     "role": "Nomination close: demonstrative + copula, 'this is NAME'. A second gy ... gyrq frame introduces a second person (L0299; the L0086 type)."
+    },
+    {
+     "form": "NAME btjvt-fyrq (also bjvt-fyrq)",
+     "role": "Filiation, parent 1: parent's name + relation noun btjvt + copula with article, 'he/she is the btjvt of NAME'; probably 'born of' (the mother)."
+    },
+    {
+     "form": "NAME btaqnt-fyrq",
+     "role": "Filiation, parent 2: 'begotten by NAME', probably the father. Every person named gets exactly one of each; their order differs between text types."
+    },
+    {
+     "form": "TITLE (+ second title, X-fq or X-fqw) NAME stbkjt-fyrq",
+     "role": "Description, repeated 1 to 20 times: the person's kinship with a titled relative. Title words come first, then the relative's name, then a kin noun with the copula (also kjt-byrq, njqbt-fyrq, wk-fyrq, ubt-fyrq). The clause is head-final."
+    },
+    {
+     "form": "TITLE NAME TITLE NAME ... (ntfr) stbkjt xgtotbyrq / stbkjt-otbyrq",
+     "role": "Collective description: after a list of several titled relatives (optionally ntfr 'all'), the kin noun takes the plural-relatum copula: 'he/she is the relative of them all'."
+    },
+    {
+     "form": "xby kpt hquqptntw",
+     "role": "Benediction A (68 texts): object noun xby + quantifier kpt (probably 'plenty') + optative verb h-quq-pt-ntw, probably 'may you give him/her plenty of xby'. The verb comes last."
+    },
+    {
+     "form": "xb kpt huqvantw",
+     "role": "Benediction B: the same template with the noun xb and the verb root va in place of pt."
+    },
+    {
+     "form": "xbt hygt jybfvt ouqbnovtw (rare)",
+     "role": "Benediction C: a third object phrase and the verb root bn. Here the verb has plural -ov- because this text type names two people."
+    }
+   ]
+  },
+  {
+   "name": "F2. The single most-copied text, segmented (71 copies of its opening, some cut short, plus 34 copies of its second half beginning 'fyrq xaqotb'; 102 of these 105 copies add one gy, kyntfyrq or ktbt f after some NAME)",
+   "segments": [
+    {
+     "form": "ryuq uyat sq | gt NAME gtrq",
+     "role": "Invocation and nomination."
+    },
+    {
+     "form": "NAME btjvtfyrq | NAME btaqntfyrq",
+     "role": "Filiation: parent 1, then parent 2."
+    },
+    {
+     "form": "rykeqbp unfbt NAME stbkjtfyrq (4 times) | rykeqbp oabyst stbkjtfyrq | rykeqbp unfbtwwntkpta stbkjtfyrq | rykeqbp NAME stbkjtfyrq",
+     "role": "Descriptions with the title rykeqbp, plus a second title unfbt or a name ending in -st (oabyst)."
+    },
+    {
+     "form": "ukfy NAME stbkjtfyrq (2 times)",
+     "role": "Descriptions with the title ukfy."
+    },
+    {
+     "form": "xaqotb bhybtmbtfq | xaqotb NAME | xaqotb rtbtkba | xaqotb stbt ntkva | xaqotb btjtgtfq oft, each + stbkjtfyrq",
+     "role": "Descriptions with the title xaqotb; the second slot is a name or a determined possessor in -fq."
+    },
+    {
+     "form": "gyatwkft kpfq njt kjtbyrq | gyat wkft NAME kjtbyrq",
+     "role": "Descriptions with another kin noun, kjt, whose copula is -byrq; gyat is a title (probably 'ruler')."
+    },
+    {
+     "form": "xbtgq xbqstbt NAME stbkjtfy rq | xbtgq NAME stbkjtfyrq | xbtgq NAME xbtgquqbntkyfq",
+     "role": "Descriptions with the title xbtgq; here the scribe splits the copula as stbkjtfy rq."
+    },
+    {
+     "form": "xbtgq NAME hga NAME otfyfynt NAME otfyfynt NAME otfyfynt NAME xbtgq NAME stbkjt xgtotbyrq",
+     "role": "Closing collective description: six titled relatives (titles xbtgq, hga, otfyfynt three times, xbtgq), then the kin noun with the plural-relatum copula."
+    }
+   ]
+  },
+  {
+   "name": "F3. Description clause (the repeated unit of F1)",
+   "segments": [
+    {
+     "form": "rykeqbp, xaqotb, xbtgq, ukfy, hga, otfyfynt, htfkyu, htaqbt, xhybt, vahvm, katogy, btktsfp",
+     "role": "Title of the relative; it always precedes the name."
+    },
+    {
+     "form": "unfbt; X-fq; X-fqw (xjofqw, xaykt fq w)",
+     "role": "Optional second title or qualifier: -fq marks a determined possessor; -fqw means 'of the X' (an office or a place)."
+    },
+    {
+     "form": "NAME, or an unmasked name ending in -st",
+     "role": "The relative."
+    },
+    {
+     "form": "stbkjt, kjt, njqbt, ubt, wk, uuqktbt",
+     "role": "Kin noun: the relation of the person commemorated to that relative."
+    },
+    {
+     "form": "-fyrq (or -byrq); after several relatives xgtotbyrq / -otbyrq",
+     "role": "Copula that closes the clause."
+    }
+   ]
+  },
+  {
+   "name": "F4. Benediction verb template (from F1 and from 11 short texts that write the verb in pieces, e.g. 'xbt kpt hq uy pt ov nt w')",
+   "segments": [
+    {
+     "form": "xby / xb / xbt (hygt jybfvt)",
+     "role": "Object: the offering noun."
+    },
+    {
+     "form": "kpt (spellings kvt, kpy)",
+     "role": "Quantifier (probably 'plenty'), after the noun."
+    },
+    {
+     "form": "h- / hq- (variants o-, oq-; sometimes absent)",
+     "role": "Verbal prefix: optative or jussive mood."
+    },
+    {
+     "form": "uq / uy / u",
+     "role": "Constant verbal element after the prefix, probably the verb itself ('give')."
+    },
+    {
+     "form": "pt / va / bn",
+     "role": "Root that changes with the object: pt with xby, va with xb, bn with xbt."
+    },
+    {
+     "form": "ov (optional)",
+     "role": "Plural marker o inside the verb."
+    },
+    {
+     "form": "nt + w (variant nt + bt)",
+     "role": "Final person and number ending: 'may you (the two invoked gods) give to him/her'."
+    }
+   ]
+  },
+  {
+   "name": "F5. Short dedication or graffito: TITLE (+ place or office in -fq w) NAME + kin noun + fy rq (17 texts)",
+   "segments": [
+    {
+     "form": "xhybt / htfkyu / vahvm",
+     "role": "Title of the person named."
+    },
+    {
+     "form": "xaykt fq w / xjofqw / hvaw bt",
+     "role": "Qualifier in the genitive: 'of the X' (a place or an office)."
+    },
+    {
+     "form": "NAME",
+     "role": "The person."
+    },
+    {
+     "form": "stb kjt / njqbt",
+     "role": "Kin noun: relation to the person commemorated or the writer."
+    },
+    {
+     "form": "fy rq",
+     "role": "Predicative article + copula written apart: '(he/she) is the ...'."
+    }
+   ]
+  },
+  {
+   "name": "F6. Numbered label: hfue NAME htee 5 eq st btnt fy (17 texts open with hfue or hfwe)",
+   "segments": [
+    {
+     "form": "hfue (hfwe)",
+     "role": "Title."
+    },
+    {
+     "form": "NAME",
+     "role": "The person."
+    },
+    {
+     "form": "htee",
+     "role": "Counted noun, perhaps a time unit such as 'year'."
+    },
+    {
+     "form": "5 (34 in other texts)",
+     "role": "Numeral, after its noun."
+    },
+    {
+     "form": "eq",
+     "role": "Post-numeral marker."
+    },
+    {
+     "form": "st btnt fy",
+     "role": "Closing predicate ending in the predicative article fy."
+    }
+   ]
+  },
+  {
+   "name": "F7. Inventory list: nquaq NAME xvqj nqm nqwaqwgbqft eoafqw 1 otftotfbya 1 bwf btntbq ktwatntfqw otfbyat 1 (24 texts contain xvqj nqm)",
+   "segments": [
+    {
+     "form": "nquaq",
+     "role": "Title of the person responsible."
+    },
+    {
+     "form": "NAME",
+     "role": "The person."
+    },
+    {
+     "form": "xvqj nqm nqwaqwgbqft",
+     "role": "Heading of the list."
+    },
+    {
+     "form": "eoafqw 1 / otftotfbya 1 / otfbyat 1 / btntbq 59 / bfb 16",
+     "role": "Items, each followed by its numeral."
+    },
+    {
+     "form": "ktwatntfqw otfbyat",
+     "role": "Genitive modifier in -fqw before its head noun ('the otfbyat of the ktwatnt')."
+    },
+    {
+     "form": "ntfr",
+     "role": "'In all': follows the last number in the long version (bfb 16 ntfr)."
+    }
+   ]
+  },
+  {
+   "name": "F8. Prayer formula: NAME rbtfq hntfq sqayptbtrq ryu ryu kfrqfqw kfyrq fqb sqayptbt kfyrq seq omotsteq seq (11 texts)",
+   "segments": [
+    {
+     "form": "NAME (or another person phrase: otnt ktbt, bgy ktbt f, x nst)",
+     "role": "The person praying or visiting."
+    },
+    {
+     "form": "rbtfq hntfq",
+     "role": "Two determined attributes in -fq."
+    },
+    {
+     "form": "sqayptbt-rq",
+     "role": "Predicate with copula."
+    },
+    {
+     "form": "ryu ryu",
+     "role": "Divine name 1, repeated: address to the deity."
+    },
+    {
+     "form": "kfrqfqw kfyrq",
+     "role": "Genitive phrase + kfy with copula: '(it) is kfy'."
+    },
+    {
+     "form": "fqb sqayptbt kfyrq | seq omotsteq seq",
+     "role": "Repeated predicate and a fixed closing."
+    }
+   ]
+  },
+  {
+   "name": "F9. Royal filiation heading: bjvt RNAME gyat w f NAME / bjvt RNAME gyatb NAME (12 texts)",
+   "segments": [
+    {
+     "form": "bjvt (b jvt)",
+     "role": "Relation noun 'born of', bare, at the start of the text."
+    },
+    {
+     "form": "RNAME",
+     "role": "Royal name: the parent."
+    },
+    {
+     "form": "gyat w f / gyatb",
+     "role": "Title (probably 'ruler') + genitive w + article f: '(child) of the ruler'."
+    },
+    {
+     "form": "NAME",
+     "role": "The child."
+    }
+   ]
+  }
+ ],
+ "morphemes": [
+  {
+   "form": "-fyrq",
+   "type": "suffix",
+   "function": "Copula with determiner, singular: 'is (the) ...'. It closes every filiation and description clause. It is built from -f (article) + -y (predicative) + -rq (copula).",
+   "evidence": "2,170 tokens on 44 stems: stbkjt 1,333, btaqnt 188, btjvt 103, kynt 103, wk 70, bjvt 45, ubt, joatbt, njqbt, kfy, nayay, bkmbt, sqayptbt, kjt. It is clause-final: the next word starts a new clause (NAME 27, xby 26, end of text 13, a title). Scribes split it as stbkjtfy rq (80 copies). The same stems take other endings in the same slot (btaqnt-fq, btaqnt-fy, btaqnt-ftonrq). In copies of one text it is added after any NAME (NAME kyntfyrq, 94 times), so it predicates something of the noun phrase before it.",
+   "confidence": 5
+  },
+  {
+   "form": "-rq",
+   "type": "clitic",
+   "function": "Copula 'is' (predicative or assertive): the last element of a predicate. It attaches straight to vowel-final words (gy-rq, gt-rq, kfy-rq) and after -fy, -by or -nt.",
+   "evidence": "93 word types end in -rq (2,898 tokens). Minimal pairs: gy / gyrq, gt / gtrq, kfy / kfyrq, kfyfy / kfyfyrq, sqayptbt / sqayptbtrq, stbkjtfy / stbkjtfyrq. Written as a separate word 261 times when scribes split it off (stbkjtfy rq, njqbt fy rq, stb kjt fy rq); a split never falls inside it.",
+   "confidence": 4
+  },
+  {
+   "form": "-f",
+   "type": "clitic",
+   "function": "Determiner, singular (a definite article 'the'). It stands at the end of the noun phrase and is the first element of -fy, -fyrq, -fq, -fqw, -fto and -fr.",
+   "evidence": "409 free tokens, nearly always right after a noun or title (ktbt f added after NAME 92 times; xoawt f, njqwt f, vahvt f). Bound -f on 57 stems (sqrf, aywnf, otjtrqbtf, uuqktbtf, vahvtf, xaqbtrqf). The same stems alternate with plural -fto (njq-fto, nayay-fto, gy-fto) and with -fq or -fyrq (nayay-fq, nayay-fyrq).",
+   "confidence": 4
+  },
+  {
+   "form": "-fy",
+   "type": "suffix",
+   "function": "Predicative determiner 'is the', a short copula without -rq. It ends clauses and many short texts.",
+   "evidence": "155 free tokens in 96 distinct texts, mostly text-final (st btnt fy; njqbt fy rq). Bound in stbkjtfy (100), ukfy (157), kfyfy, sqnqjoqbtkfy. Adding -rq gives -fyrq: stbkjtfy + rq, kfyfy + rq = kfyfyrq.",
+   "confidence": 3
+  },
+  {
+   "form": "-fq",
+   "type": "suffix",
+   "function": "Determiner in its linking (non-final) form. It marks a determined noun that something follows: the head noun it qualifies (a possessor before a kin noun), a case ending (-fqw, -fqbyrq, -fqbto), or the same noun repeated with the copula. It also ends divine epithets in the invocation.",
+   "evidence": "797 tokens on 66 stems: btjvt, pfpq, bagfp, btbtfqbat, kbt, xua, kavt, rbt, hnt, bhybtmbt, btjtgt, kp, nayay, btaqnt, ubt. The next word is a kin noun with copula 26 times (bhybtmbtfq stbkjtfyrq, bagfpfq stbkjtfyrq, kbtfq stbkjtfyrq). -fq + -w = -fqw on 19 stems. Doubling pattern btjvtfq btjvtfyrq and btaqntfq btaqntfyrq. Epithet rtbmsqmgtfq after ryu.",
+   "confidence": 3
+  },
+  {
+   "form": "-w",
+   "type": "clitic",
+   "function": "Genitive or relational postposition 'of'. It turns a noun phrase, usually a determined one (-fq-w), into a modifier of a following title or noun.",
+   "evidence": "-fqw on 19 stems (eoafqw, xjofqw, ktwatntfqw, kfrqfqw, htwbyfqw, optstjfqw, xayktfqw, bkmbtfqw) and 187 free tokens of w. Positions: title + X-fqw + NAME (htfkyu xjofqw NAME, htaqbt xjofqw NAME, xhybt xaykt fq w NAME); X-fqw + head noun in lists (ktwatntfqw otfbyat 1); kftntsy-w before each of five names in L0107. In a predicate the same phrase takes -fq-byrq instead (xhybtfp xayktfqbyrq against xhybt xaykt fq w NAME).",
+   "confidence": 3
+  },
+  {
+   "form": "-fto",
+   "type": "suffix",
+   "function": "Plural determiner ('the' + plural): -f + -t- + plural -o.",
+   "evidence": "171 tokens on 31 stems: bkmbt-fto 65, gy-fto 15, bbm-fto, njq-fto, nayay-fto, uu-fto, kaya-fto, oa-fto, ga-fto, kn-fto. The same stems take singular forms (bkmbt, bkmbt-fyrq, bkmbt-fqw; nayay, nayay-fq, nayay-fyrq; njq). It appears in lists (njqfto kayafto uufto) and before plural-relatum copulas (bkmbtfto njqbtgtotbyrq, bkmbtfto ubtxgtotbyrq, nayayfto ubtotbyrq). A plural possessor can still take singular -fyrq (xeb bkmbtfto stbkjtfyrq).",
+   "confidence": 4
+  },
+  {
+   "form": "-o-",
+   "type": "suffix",
+   "function": "Plural marker, found inside longer endings: -f-t-o (plural article), -ft-o-nrq (plural copula), -o-tbyrq (plural relatum), verbal -o-v- (plural in the benediction verb).",
+   "evidence": "Each -o- form has a singular partner in the same slot: -f / -fto, -fyrq / -ftonrq, -byrq / -otbyrq, -ntw / -ovtw. The -o- forms turn up where the text has more than one person: -ftonrq in L0299 and -ovtw in the L0086 type (the only texts with two nominations); -otbyrq / -gtotbyrq after lists of five or six named people. In the split verb fragments (hq uy pt ov nt w) ov is written as its own unit.",
+   "confidence": 3
+  },
+  {
+   "form": "-ftonrq",
+   "type": "suffix",
+   "function": "Plural copula with determiner: 'they are (the) ...', for a plural subject.",
+   "evidence": "Only in L0299: btaqnt-ftonrq, stjvt-ftonrq, staqbt-ftonrq, where every other text uses -fyrq on btaqnt. L0299 is the only text with two nominations (gy kypq gyrq ... xoaqbt hktbt gyrq), so the filiation is said of two people. It is built as plural article -fto + -nrq (copula -rq preceded by -n-).",
+   "confidence": 3
+  },
+  {
+   "form": "-byrq",
+   "type": "suffix",
+   "function": "Copula variant with -by- in place of the determiner -fy-. It is used with certain kin nouns and after -fq (-fqbyrq).",
+   "evidence": "400 tokens on 19 stems: kjt 172, xgtot 99, vuvwfq 39, kfq 13, njq 11, xayktfq, kptsy, kftsy, enjtsy. Same clause-final slot as -fyrq (gyat wkft NAME kjtbyrq). Its plural-relatum forms add -o- or -gtot- (stbkjt-otbyrq, njqbt-gtotbyrq, ubt-xgtotbyrq).",
+   "confidence": 2
+  },
+  {
+   "form": "xgtotbyrq / -gtotbyrq / -otbyrq",
+   "type": "clitic",
+   "function": "Copula used when the relatum (the person the kin noun points to) is plural: 'he/she is the X of them (all)'.",
+   "evidence": "145 tokens. The main text ends xbtgq NAME hga NAME otfyfynt NAME otfyfynt NAME otfyfynt NAME xbtgq NAME stbkjt xgtotbyrq (six titled names, then the kin noun with this ending). L0107: five names each after kftntsyw, then ntfr stbkjtotbyrq, while the single names before and after in the same text get stbkjtfyrq and njqbyrq. 19 of the 21 occurrences in distinct texts follow a list of names or a plural-marked noun (-fto, -bto: bkmbtfto njqbtgtotbyrq, nbbatftokatogy gyaybto ntfr stbkjt xgtotbyrq); the other two are in one long text (L0024) whose context is unclear. None follows a single plain NAME. It is written apart (stbkjt xgtotbyrq) or joined (stbkjtgtotbyrq), and the x drops when it is joined.",
+   "confidence": 3
+  },
+  {
+   "form": "-q",
+   "type": "suffix",
+   "function": "Vocative (address) on the invoked divine names. It goes on the last word of each vocative phrase.",
+   "evidence": "ryuq 158 against ryu 166: ryu is bare when its epithet follows, and the epithet carries the -q (ryu rtbmsqmgtf-q). uyat-sq / uyats-q (split as uyat sq 71 times); uya-q with the epithets gtbaa-q and rtbaa-q. It occurs only in the opening invocation and in prayers.",
+   "confidence": 4
+  },
+  {
+   "form": "gy (variant gt)",
+   "type": "clitic",
+   "function": "Demonstrative 'this'. It serves as the nominator ('this is NAME') and as a deictic after a noun. It takes the copula (gyrq, gtrq) and the plural article (gyfto 'these').",
+   "evidence": "gy 352, gt 96. The frames gy NAME gyrq / gt NAME gtrq occur in 89 texts. gt and gy fill the same slot and even mix (gt njqgyatst gyrq, 3 frames), so they are one word with an o/e vowel alternation. In copies of the same text gy is added after any NAME (97 times), like an enclitic. Bound to titles: katogy, kaogy, nbbatftokatogy.",
+   "confidence": 4
+  },
+  {
+   "form": "-fp",
+   "type": "clitic",
+   "function": "Modifier of titles and kin nouns, probably 'great', 'chief' or 'elder'. It can carry determiners itself (bagfp-fq, fp-fyrq).",
+   "evidence": "131 tokens on 14 stems: btkts-fp 54, bkts-fp 23, bbm-fp, xky-fp, gyat-fp, xhybt-fp, njq-fp, btktsnjq-fp. It stands before NAME like a title (btktsfp NAME) and forms njqbt fpfyrq ('is the fp sister').",
+   "confidence": 2
+  },
+  {
+   "form": "-fr",
+   "type": "suffix",
+   "function": "Short copula or determiner (a reduced -fyrq) on titles and after the genitive -w (-wfr).",
+   "evidence": "91 tokens on 12 stems: nt-fr 51, un-fr 23, xhybt-fr, vahvt-fr, keybtw-fr, ryuw-fr, ntfqw-fr. In L0422 the pattern TITLE ... X-w fr TITLE-msq repeats seven times. In L0126 xhybtfr stands in a list of predicates with -byrq (xhybt kptsybyrq xhybtfr).",
+   "confidence": 2
+  },
+  {
+   "form": "-st",
+   "type": "suffix",
+   "function": "Ending of personal names (an onomastic suffix): the names left unmasked in NAME slots end in -st.",
+   "evidence": "465 tokens on 67 stems. In NAME slots: gy htfst gyrq, gy bktst gyrq, gy njqgyatst gyrq (person commemorated); xbqstbktst btaqntfyrq, xktmst btjvtfyrq (parents); kftntsyw batst / xbyst / jynyst / gygyst / bnatst (relatives); rykeqbp oabyst stbkjtfyrq parallels rykeqbp unfbt NAME stbkjtfyrq; htwby oabyst f parallels htwby NAME f.",
+   "confidence": 3
+  },
+  {
+   "form": "h- (hq-)",
+   "type": "prefix",
+   "function": "Verbal prefix of the benediction verbs: optative or jussive mood ('may ...'). Variant o- (oq-); it can be absent.",
+   "evidence": "It is on every benediction verb after xby, xb or xbt + kpt: h-quq-pt-ntw 29, h-uq-va-ntw 23, h-uy-pt-ntw 11, h-wq-pt-ntw, h-quv-ant. o- in two text types (o-quq-va-ntw, o-uq-pt-ovtw, o-uva-ntw); no prefix in xby u-pt-ntw. Short texts write it apart (xbt kpt hq uy pt nt w). It never occurs on nouns.",
+   "confidence": 3
+  },
+  {
+   "form": "-ntw (variant -nt bt / -ntbt)",
+   "type": "suffix",
+   "function": "Final person and number ending of the benediction verb: singular beneficiary ('to him/her'), with the two invoked gods as subject ('may you give'). -nt- and the final -w (or -bt) are written as separate units in short texts.",
+   "evidence": "136 tokens on 15 stems, almost all of them benediction verbs, after the root that matches the object (pt for xby, va for xb, bn for xbt). -ntbt replaces -ntw in L0094, L0337, L0404, L0631 (hquqptntbt, huqvantbt). The split fragments hq uy pt nt w and hq uy pt nt bt show nt and w/bt as units.",
+   "confidence": 3
+  },
+  {
+   "form": "-ovtw",
+   "type": "suffix",
+   "function": "Plural counterpart of -ntw: plural beneficiaries ('to them').",
+   "evidence": "ouqpt-ovtw, ouqva-ovtw, ouqbn-ovtw (13 copies each), only in the L0086 text type, which has two nominations (gy NAME gyrq ... gy hpyktst gyrq) with separate parents for each. Same slot as -ntw; it contains plural -o-. Weaker point: ov also appears in short fragments with no names (hq uy pt ov nt w).",
+   "confidence": 2
+  },
+  {
+   "form": "-bt",
+   "type": "suffix",
+   "function": "Locative or origin 'in, at, from (a place)'; with -f it makes 'the one of X'.",
+   "evidence": "otjtrq (once on its own) and otjtrq-bt-f in a description; njq-otjtrt-bt-f ('the woman of otjtrt') fills the parent-1 slot in place of a NAME (L0163: NAME btaqntfyrq njqotjtrtbtf btjvtfyrq); gyat-bt, atbt-f. Weak: bt is also a common stem ending (xhybt, htaqbt, ubt).",
+   "confidence": 2
+  },
+  {
+   "form": "-bto",
+   "type": "suffix",
+   "function": "Plural of -bt nouns ('those of or at X'), alternating with -fto.",
+   "evidence": "55 tokens on 14 stems: gyay-bto, xebvuvwfq-bto, xbyfq-bto, fpkyjfq-bto, ryu-bto, btrt-bto. In one list it alternates with -fto (htfkyu xbyfqbto fpraywbtfto fpkyjfqbto). gyaybto stands in a plural list before ntfr stbkjt xgtotbyrq.",
+   "confidence": 1
+  },
+  {
+   "form": "-msq",
+   "type": "suffix",
+   "function": "Ending added to titles in the long royal texts. Its function is unclear: perhaps a possessive ('his own X') or a vocative-like form (compare -sq in uyat-sq).",
+   "evidence": "21 tokens on 11 title stems: gyatmsq, hgamsq, htwbymsq, vahvtmsq, bvmsq, gamsq, uyomsq, vqatbbtmsq. In L0422 and L0583 each title recurs as TITLE ... -w fr TITLE-msq (gyat kehbt w fr gyatsq; vahvt kntjy ntfqwfr vahvtmsq).",
+   "confidence": 1
+  },
+  {
+   "form": "eq",
+   "type": "clitic",
+   "function": "Post-numeral marker (a counter or ordinal) after a number.",
+   "evidence": "20 of its 21 occurrences directly follow a digit: htee 5 eq (15 times), xw teqw 14 eq, wot 3 eq, bntatntbku 5 eq; written joined in htee 5eq.",
+   "confidence": 2
+  },
+  {
+   "form": "x-",
+   "type": "prefix",
+   "function": "Not a grammatical morpheme: a word-initial vowel letter. It helps find word boundaries in run-together writing.",
+   "evidence": "Word-initial in 2,255 of its 2,411 occurrences. The 156 medial cases are all joins of two words (stbkjtfyrqxbtgq = stbkjtfyrq + xbtgq; ubtxgtotbyrq). It drops when an ending is attached directly (stbkjt xgtotbyrq against stbkjtgtotbyrq).",
+   "confidence": 4
+  }
+ ],
+ "word_classes": [
+  {
+   "form": "NAME",
+   "class": "proper noun (personal name, masked)",
+   "note": "2,128 tokens. It fills the slots for the person commemorated, the parents and the relatives. Titles come before it; a kin noun with the copula comes after it."
+  },
+  {
+   "form": "RNAME",
+   "class": "proper noun (royal name, masked)",
+   "note": "22 tokens, mostly after bjvt and before gyat, gyatb or gyatfp."
+  },
+  {
+   "form": "ryu (ryuq)",
+   "class": "divine name",
+   "note": "First deity of the invocation; doubled in prayers (ryu ryu). Cross-check, not used as evidence: the letter values that make the formula readable (r=w, y=o, u=s, q=i, a=r, t=e, s=y) turn ryuq uyatsq into Wos-i Sorey-i, the Meroitic vocatives of Isis and Osiris. The glosses marked 'probably' in this answer ('born of', 'plenty', 'give') come from that cross-check."
+  },
+  {
+   "form": "uyat / uya (uyatsq, uyaq)",
+   "class": "divine name",
+   "note": "Second deity; always after ryu."
+  },
+  {
+   "form": "rtbmsqmgtfq (gtbmsqegtfq); gtbaaq / rtbaaq",
+   "class": "divine epithets",
+   "note": "Only in the long invocation, after ryu and after uya respectively."
+  },
+  {
+   "form": "gy / gt",
+   "class": "demonstrative pronoun",
+   "note": "'this'; the nominator of the formula. gyrq / gtrq = demonstrative + copula, 'this is'."
+  },
+  {
+   "form": "stbkjt",
+   "class": "kinship noun",
+   "note": "The general relation term of the descriptions (1,333 times with -fyrq): 'relative of'."
+  },
+  {
+   "form": "btjvt (bjvt)",
+   "class": "kinship noun or participle",
+   "note": "Parent slot 1, probably 'born of' (the mother)."
+  },
+  {
+   "form": "btaqnt",
+   "class": "kinship noun or participle",
+   "note": "Parent slot 2, probably 'begotten by' (the father)."
+  },
+  {
+   "form": "kjt",
+   "class": "kinship noun",
+   "note": "A second relation term; its copula is -byrq (kjtbyrq 172)."
+  },
+  {
+   "form": "njq / njqbt",
+   "class": "noun: woman / female relative",
+   "note": "njq is counted alongside xoa (xoa 32 njq 135; xoa 100 njq 100; xoa 58 njq 223), so the two form a pair such as men and women. njqbt takes the kin copula (njqbtfyrq)."
+  },
+  {
+   "form": "xoa",
+   "class": "noun (men)",
+   "note": "Counted alongside njq."
+  },
+  {
+   "form": "ubt, uuqktbt, wk",
+   "class": "kinship nouns",
+   "note": "They take the copula after a NAME (NAME ubtfyrq; NAME wkfyrq; NAME uuqktbtf stbkjtfyrq)."
+  },
+  {
+   "form": "rykeqbp, xaqotb, xbtgq, ukfy, unfbt",
+   "class": "titles",
+   "note": "They head the description clauses of the main text and always precede a name or a name-like word: rykeqbp 441, xaqotb 400, xbtgq 348, unfbt 213, ukfy 157."
+  },
+  {
+   "form": "otfyfynt, hga",
+   "class": "titles",
+   "note": "otfyfynt 262 and hga 106, before NAME in lists."
+  },
+  {
+   "form": "gyat",
+   "class": "title or noun, probably 'ruler'",
+   "note": "129 tokens. It takes the genitive (gyat w f, gyatwkft), -fp, -sq and -msq, and follows RNAME."
+  },
+  {
+   "form": "htfkyu (hyfkyu), xhybt, vahvm (vahvt), htwby, htaqbt, nquaq, hfue, btkts(fp), katogy, kftntsyw",
+   "class": "titles",
+   "note": "They precede NAME; several take a genitive qualifier (htfkyu xjofqw NAME, xhybt xaykt fq w NAME)."
+  },
+  {
+   "form": "kynt, ktbt",
+   "class": "epithet nouns after a NAME",
+   "note": "kynt occurs only with -fyrq (NAME kyntfyrq); ktbt takes the free article f (NAME ktbt f). Both are added after names in otherwise identical copies."
+  },
+  {
+   "form": "xby, xb, xbt",
+   "class": "nouns (offerings named in the benedictions)",
+   "note": "Objects of the benediction verbs; each selects its own verb root (pt, va, bn)."
+  },
+  {
+   "form": "kpt (kvt, kpy)",
+   "class": "adjective or quantifier",
+   "note": "Probably 'plenty'. It comes between the object noun and the verb."
+  },
+  {
+   "form": "hquqptntw, huqvantw, huyptntw, ouqptovtw (and variants)",
+   "class": "finite verbs (optative)",
+   "note": "Benediction verbs: prefix + verbal element + root + person/number ending. They always end their clause."
+  },
+  {
+   "form": "kfy (kfyrq, kfyfyrq)",
+   "class": "adjective or predicate noun",
+   "note": "Takes the copula; used in the prayer formula and descriptions (kfyfyrq)."
+  },
+  {
+   "form": "digits",
+   "class": "numerals",
+   "note": "306 tokens. They follow the counted noun (eoafqw 1, btntbq 59, xoa 32 njq 135, htee 5) and go up to 5000."
+  },
+  {
+   "form": "ntfr",
+   "class": "quantifier: 'all, in total'",
+   "note": "51 tokens. After lists of names and after numbers (bfb 16 ntfr, jqkt 24 ntfr), before plural predicates."
+  },
+  {
+   "form": "htee",
+   "class": "noun counted by numerals",
+   "note": "Perhaps a time unit such as 'year': htee 5 eq 15 times, htee 34."
+  },
+  {
+   "form": "otjtrq, xaykt",
+   "class": "place nouns",
+   "note": "Locative otjtrq-bt-f; genitive xaykt fq w after the title xhybt."
+  },
+  {
+   "form": "xjo",
+   "class": "noun (a district or office)",
+   "note": "Only as xjofqw, after the titles htfkyu and htaqbt."
+  },
+  {
+   "form": "f, fy, rq, w",
+   "class": "function words (clitics written apart)",
+   "note": "f = article, fy = predicative article, rq = copula, w = genitive."
+  }
+ ]
+}
