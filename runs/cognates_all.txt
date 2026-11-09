@@ -1,27 +1,27 @@
-meroitic words with a same-meaning NES word: 49 of 62
-mean best similarity 0.282; shuffled >= real in 33/1000 (p=0.0330)
-  0.67 asr          ~ hill_nubian:ʃar
-  0.67 ato          ~ hill_nubian:ɔto
-  0.67 kdite        ~ proto_nes:*kadete
-  0.67 are-         ~ proto_nes:*ar
-  0.67 dm-          ~ proto_nes:*dumm-
-  0.67 wle          ~ dongolawi:wˈɛl
-  0.67 yer          ~ proto_nes:*er-
+meroitic words with a same-meaning NES word: 48 of 62
+mean best similarity 0.260; shuffled >= real in 230/2000 (p=0.1154)
+  0.67 kdi          ~ midob:ìddì
+  0.67 ato          ~ hill_nubian:ɔṭo
+  0.67 wle          ~ taman:wɛː
   0.57 kisri        ~ old_nubian:kaisara
-  0.50 kdi          ~ proto_nes:*il-di
-  0.50 st           ~ midob:òt-tì
-  0.50 qo           ~ nyima:no
-  0.40 abr          ~ nyima:agwor
-  0.40 sḫi          ~ taman:san-ti
-  0.33 ked          ~ taman:ki5o
+  0.50 ked          ~ midob:pé-nd-
+  0.50 ḫre          ~ birgid:kiɽ-e
+  0.50 qo           ~ nyima:nɔ̀
+  0.40 abr          ~ nyima:ágwòr
+  0.40 are-         ~ hill_nubian:aŋíri
+  0.40 sḫi          ~ taman:sén-tí
+  0.38 teneke       ~ old_nubian:bēthlemē
+  0.33 asr          ~ taman:ɛssa
   0.33 mlo          ~ nobiin:màs
   0.33 sem          ~ old_nubian:et̅t-
+  0.33 st           ~ midob:òt-tì
   0.33 ar           ~ old_nubian:ŋal
-  0.33 ḫre          ~ hill_nubian:káīrī
   0.33 pwrite       ~ hill_nubian:ʃwi
   0.33 tbo          ~ old_nubian:uwo-
   0.33 nbr          ~ old_nubian:ŋap
+  0.30 yetmde       ~ hill_nubian:kédaŋ tɛ́rɖu
   0.29 qore         ~ old_nubian:kaisara
-  0.25 ste          ~ hill_nubian:ɛnɪnnɪ́ntaŋ
   0.25 dime         ~ hill_nubian:ti
   0.25 ḫlbi         ~ hill_nubian:kúli
+  0.25 pete         ~ old_nubian:mit-
+  0.25 beloloke     ~ old_nubian:ïereōs
