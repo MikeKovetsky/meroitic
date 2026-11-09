@@ -305,3 +305,299 @@ files.
    Zibelius-Chen 2011.
 3. FHN II and III were read from their OCR text layer. The numbers quoted (3348, 1626, 1032, 2623) should be checked on
    the page images before anyone cites them.
+
+## Tanyidamani (REM 1044)
+
+Adversarial check of the seven hypotheses that `tanyidamani.md` labels NEW (H3 to H8 and H11), run 2026-11-09, about
+45 minutes. Same method as above: the literature searched again with other terms and sources, and the corpus checked
+again (`corpus_v2`, Otten's raw `mero-corpus.txt`, and the REM texts transcribed in the Hallof samples).
+
+### Verdicts first
+
+| H | Claim | Verdict | Why, in one line |
+|---|---|---|---|
+| H3 | `pteno 3` is the total of `apette 1, sber 1, dd 1` | **WEAKENED** | `pteno` is a noun in a titulary elsewhere (REM 0088 `kroro ptenowi`); each list has a second 3 (`qore mdese 3`, `mse 3`) that 1 + 1 + 1 fits as well; 3 is 7 of the stela's 35 numerals. |
+| H4 | Every `i-…-to` verb has a 1SG `i-` = `e-` | **WEAKENED** (partly published) | Rilly 2020 already reads the royal narrative verbs as 1SG and glosses the `i-` of `i-de-bx` as 1SG; Abdalla 1969 and Hallof 2020 read the prefix and `-to` otherwise; the shape occurs outside REM 1044 (REM 0075 `ipleto`, `i[p]lemketo`) and beside `y(o)-…-to` in the same text. |
+| H5 | `(qes) (itnk) iXlXto` opens a campaign episode | **WEAKENED** (nearest to standing) | Not found in print, and the narrow pattern holds: `qes iXlXto` stands before the kill/take formula at l. 4 and 129, as `qes-to` does in REM 1003. But no war report follows at l. 38 and 42-43, and REM 1003 fills the slot with `qes-to`, so "verb" and "campaign" are not shown. |
+| H6 | `qoleb (Amnp) (i/e)-de-bx` "I gave them (to Amun)" closes four lists | **WEAKENED** (every part published) | Abdalla 1969 (vol. I part 1, p. 74) already grouped all four verb forms; Macadam 1966 gave `d(e)` "give"; Rilly 2020 translated one clause; Hintze 1960 commented on `qoleb` at l. 26 and again on p. 156. Only two of the four name Amun. |
+| H7 | `wse` "his" also in REM 1044 and 1003 | **WEAKENED** | The possessive is one of four published readings of `wse`; Millet 1973a (after Zyhlarz 1956) reads "of the country", which fits `xrpxe wse-l` "governor of the country" at least as well; four of the seven Kharamadoye tokens are route phrases (`mtr wse`). |
+| H8 | `ameloloke` = `beloloke` with `a-` and m for b | **ALREADY PUBLISHED** | Rilly 2003, *Lexique méroïtique*, p. 23 ("sans doute variante archaïque de *beloloke*") and p. 58, with a phonetic account of both changes; Hofmann 1981a had already joined the two words through a prenasalised *ᵐb. |
+| H11 | l. 36 returns at l. 158-161; `Xol(k)` "serve" | **WEAKENED** | The repetition itself was not found in print, but Hintze 1960 (pp. 158, 160) already read the close as a benediction, with `sedew` "abundant", and discussed `ẖol` there; `qes (li) ẖol(i)t(e)ke seb` also stands twice in REM 1003, so the shared run is a royal formula, not a frame peculiar to this stela; FHN II reads `molk`, not `ẖolk`, at l. 36. |
+
+None of the seven stands as a clean new finding. The nearest are H5 in its narrow form (Kush + `iXlXto` directly before
+the kill/take formula, twice) and the bare repetition in H11.
+
+### Sources used in this run
+
+New this run:
+
+1. Rilly 2003, thesis vol. II, [*Lexique méroïtique*](https://hal.science/tel-04793700) (HAL tel-04793700). About 800
+   words, each with the views published to 2003 and a full bibliography. It is an image-only scan of 304 pages; the
+   entries cited below were read from rendered page images (printed page = PDF page minus 1 or 2). This source decided
+   H8 and most of H6, H7 and H11. The HAL search API found it; the earlier runs had only vol. I.
+2. Hallof 2024, *Analytisches Wörterbuch des Meroitischen* 7: *Dokumente*,
+   [publisher's sample](https://www.lehmanns.ch/media/116874085): transcriptions of REM 0075 (p. 12) and REM 0088
+   (p. 15).
+
+Read again, from the local copies made earlier this session: FHN II pp. 665-671 (REM 1044) and 720-722 (REM 1003);
+FHN III on REM 0094; Abdalla 1969, vols. I-II (OCR, searched with hyphen-tolerant patterns, since he writes
+`i-de-b-x`); Rilly 2020 (*Dotawo* 7); Hallof 2020 and the Hallof 2022 sample; Griffith 1917 (JEA 4); Millet's glosses
+(`MilletExamples.txt`, `Kalabsha_Millet.txt`); `LobbanVocabList.txt`.
+
+Web searches run (none found a new publication): "ameloloke" Meroitic; "qoleb" Meroitic Tanyidamani "de-b" give Amun;
+"pteno" OR "apette" Meroitic stela list numerals Tanyidamani; Meroitic "ihlhto" OR "iḫlḫto" OR "iẖlẖto" OR "ihlhte";
+Meroitic "sedew" OR "eqetxe" OR "eqethe" Tanyidamani verso; stèle de Taneyidamani méroïtique traduction qoleb
+"Amanap"; Hintze 1960 "Die meroitische Stele des Königs Tanyidamani" Kush 8 Formel Segensformel; Meroitic royal
+inscription Taneyidamani first person prefix "i-" "e-" Hallof Rilly; Rilly 2003 thèse "Lexique" HAL; the HAL API for
+Rilly's titles on Meroitic.
+
+### H3. `pteno 3` is a total placed before its items
+
+**Verdict: WEAKENED.** No publication was found, but the arithmetic that carries it is weak, and a new attestation
+points the other way.
+
+**Literature.** Nothing found. FHN II comments on l. 17 (`wte mrosi`) and l. 24-25 (`ssime`, `Imlotror`), not on
+l. 18-23. Abdalla 1969 has no `pteno` or `apette`. Rilly's *Lexique* has no entry for either word: *Apedemk* is
+followed by *apḫoletri* and *apote* (pp. 30-31), and *pso* by *Ptrme* (p. 178). So none of the roughly 300
+publications Rilly surveyed to 2003 seems to have glossed them.
+
+**Corpus check.**
+
+1. `pteno` occurs outside REM 1044. Hallof's transcription of REM 0088 (rock inscription of Tayesi at Medik; Griffith
+   1912, pp. 17-18), l. 4, reads `pelmo(4)s: yetmdelowi: kroro: ptenowi:`. In a funerary titulary, `pteno-wi` is a
+   noun with the copula, next to the title `kroro`: a title or part of one. REM 0088 is in neither `corpus_v2` nor
+   Otten's raw file, and the reading was not checked on Griffith's plate. If it is the same word, `pteno 3` counts
+   three persons, as `qore mdese 3`, `mse 3`, `wtotrse 3` and `Amnise 3` do in the same section, and with `apette`
+   (compare `apote` "envoy") the list is one of personnel. Then `pteno 3` is an item, not a total.
+2. Each list has two 3s before the three 1s: `qore mdese 3 ti mXe pteno 3 apette 1 sber 1 dd 1` and
+   `nmrolde s qorese mse 3 ti mXe (pteno) 3 apette 1 sber 1 dd 1`. The sum 1 + 1 + 1 = 3 fits the recipients' 3 as
+   well as `pteno 3`.
+3. 3 is the stela's commonest numeral after 1: 7 of 35 (`qore mdese 3`, `pteno 3` twice, `mse 3` twice, `wtotrse 3`,
+   `Amnise 3`). A 3 next to three 1s is unremarkable, so the sum test carries little weight. The second list's `pteno`
+   is restored (FHN `(pteno)`), so the parallel is one reading plus one restoration.
+
+**Searched:** the web query above; Rilly's *Lexique*, a- and p-sections; full text of FHN II, Abdalla 1969
+(`pte-no`, `a-pe-tte`, `s-ber`), Rilly 2020 and the Hallof samples (which gave REM 0088).
+
+**What would settle it:** Griffith 1912, pls. VIII-IX, for `ptenowi` in REM 0088; Hintze 1960 on l. 17-23; Hallof's
+dictionary entries for `apette` and `pteno` (not in the samples).
+
+### H4. Every `i-…-to` verb has the 1st-person prefix
+
+**Verdict: WEAKENED, and partly ALREADY PUBLISHED.**
+
+**Literature.**
+
+1. Rilly 2020, §4.3, concludes "that the verbs in the narratives of the royal inscriptions are in the first person
+   singular", and ex. 8 glosses `i-de-bx` as "1sg.s-give(?)", with the prefix `i-`. The 1SG reading of REM 1044's
+   narrative verbs, one `i-` form included, is therefore his; H4 extends it from one `i-` verb to sixteen. Rilly also
+   writes that the prefix "is spelled e- everywhere" in REM 1044, so he did not state `i-` = `e-` beyond ex. 8.
+2. Against it, in print: Abdalla 1969 (vol. I part 2, pp. 109-110) takes `y(e)-` and `i-` as interchangeable prefixes
+   with no person value. Hallof 2020 (pp. 15 and 20) reads `-to` in `elto` (REM 1141) as "the pronoun 3rd person
+   plural" and lists `e-`, `i-`, `y-` as prefixes of royal inscriptions without a person value. Rilly 2003 (*Lexique*,
+   p. 79, s.v. *e-*) still took `e-` for a benediction prefix, so the 1SG reading dates from 2020.
+
+**Corpus check.**
+
+1. The shape is not confined to REM 1044 once the wider REM corpus is counted. REM 0075, an archaic Isis statue with
+   an *aleqese* inscription from Gebel Barkal (Hallof 2024, p. 12), has `ipleto` (as REM 1044 l. 50) and
+   `i[p]lemketo`. Hallof 2020 adds `yplt` (REM 1367/1, p. 15 n. 27) and `ytepleto` (REM 1141, p. 20). In `corpus_v2`
+   itself, Kharamadoye has `ytpoto` and `ywito`, and the funerary rows have `yinitxebto` (4 times). The argument
+   "absent elsewhere, as the 1st-person narrative is" holds only inside `corpus_v2`.
+2. REM 1044 has the same shape with `y(o)-`: `yonpxto` (l. 34), `yotkto` (l. 48, Abdalla's `ye-tk-te`), `ynkteketo`
+   (l. 49) and `yoto` (3 times), and a prefixless `tk-to` (l. 151). H4 makes `i-` a second spelling of `e-` and
+   leaves `y(o)-` unexplained.
+3. H4's own test: a noun phrase stands directly before the verb in `Amnp atoo lX itwdto` (l. 33), `Amnpte attomi
+   itwdto` (l. 118-119), `Amni-l de [..] ipxto` (l. 112-113) and `Amnp kek Sor sberxi ipleto` (l. 49-50). If Amun is
+   the subject in any of them, H4 fails; the corpus cannot tell subject from object here.
+
+**Searched:** the web query on first-person prefixes above; Rilly 2020, §§2-4.3 and Table 2; Hallof 2020, pp. 15-20;
+Abdalla 1969; Rilly's *Lexique*, s.v. *e-* and the i-section; the regex `(i|y|ye|yi)[a-zA-Z]+to` over `corpus_v2`.
+
+**What would settle it:** an `i-…-to` clause whose subject is fixed by context; Rilly 2007 on the verbal prefixes.
+
+### H5. `(qes) (itnk) iXlXto` opens a campaign episode
+
+**Verdict: WEAKENED.** It is the nearest to standing: in its narrow form it holds and was not found in print.
+
+**Literature.** Nothing was found on `iḫlḫto` as an opener. Rilly 2020, ex. 35, starts at `abr-se-l` and leaves
+`qes iḫlḫto` aside. FHN II (p. 669) only lists the lines with Qes. Hallof 2020 (p. 16 n. 35) cites `itnk[i]hlhto`
+for its word division only. Rilly's *Lexique* has no entry for it (its i-section, pp. 95-96, has *-i* (1)-(4),
+*-id(e)*, *Indo*, *Iphe*, *ireqe*, *itebereke*, *-iwl*). Two points come close:
+
+1. FHN II (p. 722) already reads a REM 1003 sentence with `qes arme-yose-li` (l. 2-3) as the opening of a war
+   narrative. "A Kush sentence opens the war report" is therefore in print for REM 1003.
+2. Hallof's dictionary (2022 sample, s.v. *ayotepe[te]bede*) reads REM 1044D/96-97 as `... tmte⁝ qes[l] ihl---`,
+   where FHN II and Otten have `qes lḫ-l` (l. 102-103). That would be a fifth `qes ... iḫl[ḫto]`, without the
+   kill/take formula after it, and it shows that Hallof's dictionary catalogues the form; its i-entry was not seen.
+
+**Corpus check.**
+
+1. `iXlXto` occurs 4 times, only in this stela: `tqN-l qes iXlXto abrse-l e-ked` (l. 4), `qes iXlXto tqN-l abrse-l
+   e-ked-td` (l. 129), `itnkk iXlXto seb-l ed kete` (l. 38) and `qes itnk iXlXto seb-l ed kete` (l. 42-43). The count
+   holds.
+2. Only l. 4 and l. 129 lead into the kill/take formula. At l. 38 and 42-43 the untranslated `seb-l ed kete kek ...
+   wkete` follows. "Campaign episode" is shown for two of the four.
+3. REM 1003 supports the narrow pattern and undercuts "verb": `qes to abrse-l yekedi` (row `hamadab`, token 29),
+   `qesto alle leb aberse-l yeked` (token 150) and `qes npt aro bel abrse-l yekedi` (token 85). There the slot after
+   Kush is filled by `-to`, usually read as a locative ending, so `iXlXto` could as well be an adverbial or locative
+   form. Nothing in the corpus shows that it is a verb.
+
+**Searched:** the web query on `ihlhto` above; Abdalla 1969 (OCR patterns `i-h-l-h`, `x-l-x`, "Tan 4", "Tan 129");
+Rilly 2020, ex. 35 and Table 2; Hallof 2020 and 2022; Rilly's *Lexique*, i-section; the contexts of `qes` in REM 1003.
+
+**What would settle it:** Hintze 1960 on l. 4 and 129; Hallof's dictionary entry for `iḫlḫto`; the stone at
+l. 102-103.
+
+### H6. `qoleb (Amnp/Amnpte) (i/e)-de-bx(i)` "I gave(?) them (to Amun)" closes four lists or episodes
+
+**Verdict: WEAKENED.** Every component is in print. The synthesis as a closing formula was not found, and its evidence
+is thinner than stated.
+
+**Literature.**
+
+1. **Abdalla 1969, vol. I part 1, p. 74** (A2 II i), already groups all four verbs: "The same verb, prefixless or
+   prefixed with i(e)-, used with the plural dative in the verbal complexes i-de-b-x: Tan 27, i-de-b-xi: Tan 126,
+   e-de-b-x: Tan 137, de-b-x: Tan 115-116". `tanyidamani.md` cites p. 43, which treats `ke-de-b-x`; there Abdalla also
+   derives `e-ke-d` "kill" (Tan 5) from the same verb `-d(e)-`.
+2. **"Give" is Macadam's.** Rilly 2003, *Lexique*, p. 67, s.v. *d* (var. *de*): a verb of benediction formulae B and C
+   "et les textes historiques"; Zyhlarz translated "envoyer", Macadam (1966, p. 60) "donner (?)", Priese "produire".
+3. **The pronoun and its clauses were discussed.** Rilly 2003, *Lexique*, p. 187, s.v. *qoleb*, lists eight REM 1044
+   lines (2, 26, 32, 34, 115, 125, 136, 148) and cites Hintze 1960a, pp. 148 and 156. Hintze commented on `qoleb` at
+   l. 26 (FHN II, p. 670: "Hintze 1960, 148 ad line 26") and again on p. 156, which by its place in the edition covers
+   the lines around l. 115-126, probably one of the other clauses. That page was not seen.
+4. Rilly 2020, ex. 8 and n. 26, translates l. 25-26 "I gave(?) them to Amanap" and notes that `qoleb` "is particularly
+   attested in royal chronicles". Griffith 1917 (p. 167; FHN II, p. 722) built his gloss "living persons" on `qo leb`
+   standing after counts of men and women in REM 1003.
+
+**Corpus check.**
+
+1. The four clauses are there (row `tanyidamani`, tokens 171, 560, 591 and 637).
+2. Only two name Amun (l. 26 `Amnp`, l. 125-126 `Amnpte`); `qoleb de-bx` (l. 115-116) and `qoleb e-de-bx`
+   (l. 136-137) name no recipient. "To Amun" is an inference for half of them.
+3. "Closes" is partly circular: the section ends of S6, S14 and S15 were drawn at these clauses, and l. 136-137 sits
+   inside the narrative, with killings before and after it (l. 129-155).
+4. `qoleb` + verb is the stela's general pronoun-object construction: `qoleb elbto` (l. 32-33), `qoleb ...
+   w-kb-bx-te` (l. 68-70), `qoleb troXe-li` (l. 94), `qoleb axro ... e-ked-b-to` "I killed them" (l. 148-150). In
+   REM 1003 `qo leb` follows `abr N kdi N` three times (`abr 32 kdi 135 qo leb yedxi`, `abr 100 kdi 100 qo leb
+   apotebese tkk`, `abr 58 kdi 223 qo leb apote qebese yetkbxk`). Standing after a list is a property of the pronoun;
+   the `de-bx` clauses are 4 of its 8 uses in this stela.
+5. The stela's own hieroglyphic caption (REM 1044A) uses `l-` for "give" (`lxte`; Rilly 2020, note on REM 0003-0004),
+   so "give" for `de` on the same monument stays a guess, as Rilly's "(?)" says.
+
+**Searched:** the two web queries on `qoleb` above; Rilly's *Lexique*, s.v. *d*, *qoleb*, *-bḫ-*; Abdalla 1969,
+vol. I part 1, pp. 43 and 74; Rilly 2020, §3.1; FHN II, pp. 670 and 722; Griffith 1917; `qo leb` contexts in
+`corpus_v2`.
+
+**What would settle it:** Hintze 1960, pp. 148 and 156.
+
+### H7. `wse` "his/her" also in REM 1044 (`adb wse-li`) and REM 1003 (`xrpxe wse-l`)
+
+**Verdict: WEAKENED.** The extension was not found in print, but the possessive is one of four published readings,
+and the corpus pattern cited for it fits the others equally.
+
+**Literature.** Rilly 2003, *Lexique*, p. 261, s.v. *wse*, collects the readings:
+
+1. Griffith 1912: a simple noun, plural `wteb` (= `wse-leb`, REM 0094/23).
+2. Millet 1973a (pp. 43-47), after Zyhlarz 1956: the genitive of a noun *w "country": `ado wse` "fortress (?) of the
+   country", `mte wse` "child of the country", `mtr wse` "frontier (?) of the country", `qore 8 ẖrese wse-leb` "the
+   eight kings of the North of the country". Rilly adds that `wse` could be a variant of `wte`. Hallof 2022 (sample,
+   s.v. *ayeke*) still renders `mte wse` "child of the country".
+3. For `mtr wse`, FHN III (REM 0094, comment on l. 21 f.) gives "Kushwards to Adere, northwards to Philae", and
+   Lobban's list (`LobbanVocabList.txt` l. 192) "witness; testimony?".
+4. The possessive: Millet 2003 (via F&vGO, p. 297) and Rilly 2020, §4.5 (`semle w-si` "his wife", `ste wese` "his
+   mother"). F&vGO (n. 26): perhaps a noun.
+
+With Millet's reading, REM 1003's `xrpxe wse-l` is "the governor of the country", as natural as "his governor"
+(compare `pelmos adblise` "general of the land").
+
+**Corpus check.**
+
+1. The count holds: 10 tokens in `corpus_v2` (REM 1044 once, REM 1003 twice, Kharamadoye 7 times), each after a
+   noun. That fits any genitive or postposition, so it does not favour "his".
+2. Four of the seven Kharamadoye tokens are `mtr wse` in the route phrases that FHN III reads as directions. Rilly's
+   own possessive examples (`semle wsi`, `ste wese`) are spellings H7 did not count.
+3. H7's own test (`wse` after `wide` or `ste` in REM 1003 or 1044) finds nothing.
+
+**Searched:** Rilly's *Lexique*, s.v. *wse*; FHN III on REM 0094; Millet's glosses (`Kalabsha_Millet.txt` has `ws`,
+and Millet 1968 renders `smle wSi` as a name or word "waSi"); Lobban's list; the Hallof 2022 sample; Rilly 2020,
+§4.5; F&vGO; FHN II on REM 1003 (no comment on `wse`).
+
+**What would settle it:** a `wse` after a kinship term in a royal text; Hallof's dictionary entry for `wse`.
+
+### H8. `ameloloke` is the priestly title `beloloke` with `a-` and m for b
+
+**Verdict: ALREADY PUBLISHED.**
+
+**Literature.**
+
+1. Rilly 2003, *Lexique*, p. 23, s.v. *ameloloke*: "titre en REM 1044/24, sans doute variante archaïque de
+   *beloloke*". Bibliography: Hintze 1960a, p. 147; Millet 1973c, p. 312; Hofmann 1979, p. 34; Hofmann 1980a, p. 275;
+   FHN II, p. 670.
+2. Rilly 2003, *Lexique*, p. 58, s.v. *beloloke* (var. *beliloke*, arch. *ameloloke*): the archaic form "se serait
+   prononcée [əm(ə)luluk(ə)] jusqu'à la chute des schwas", with [-ml-] later becoming [-bl-] (compare Greek βροτός
+   < *μρότος); "Il n'est donc pas nécessaire d'envisager ici de prénasalisée *ᵐb, comme le propose Hofmann 1981a."
+   Hofmann 1981a had therefore already joined the two words, and Rilly explains both the initial vowel and the m/b.
+3. Millet 1968 lists `amelElEkes` (`ameloloke-s`) on p. 182 (`MilletExamples.txt` l. 857), without a gloss in
+   Otten's transcription.
+
+**Corpus check.** `ameloloke` occurs only in REM 1044 (l. 24 and 108-109), both times among temple personnel, as
+stated. The label in `tanyidamani.md` should be PUBLISHED HYPOTHESIS (Hofmann 1981a; Rilly 2003).
+
+**Searched:** "ameloloke" Meroitic (web); Rilly's *Lexique*, s.v. *ameloloke*, *beliloke*, *beloloke*; Abdalla 1969
+(OCR, no hit); Millet's glosses; `corpus_v2` and the raw file.
+
+### H11. The verso is framed (l. 36 returns at l. 158-161), and `Xol(k)` may be "serve"
+
+**Verdict: WEAKENED.** The repetition itself was not found stated, but both readings it rests on are Hintze's, and the
+shared run is a formula that REM 1003 has too.
+
+**Literature.**
+
+1. Rilly 2003, *Lexique*, p. 203, s.v. *sedew*: "adjectif en REM 1044/159 à valeur positive, dans une bénédiction
+   finale. Hintze, exploitant un parallèle évident avec *mhe* dans les formules de bénédictions funéraires, propose un
+   sens 'abondant'." Bibliography: Hintze 1960a, p. 160; Trigger-Heyler 1970; Meeks 1973; Bender 1981a-b; Hofmann
+   1982a. The entry also cites an anthroponym `Sedew-li` (REM 1063/7), so `sedew` is not confined to this stela.
+2. Rilly 2003, *Lexique*, p. 92, s.v. *ẖol*: the verb of benedictions C, C', D and E, "accorder" or "procurer" after
+   Griffith. Its bibliography cites Hintze 1960a, pp. 158 and 160, the edition's pages on the last lines (about
+   l. 146-161). Hintze therefore discussed `ẖol` in this stela's close; what he said was not seen.
+3. The *sedew* entry lists only REM 1044/159, not l. 36, which suggests that none of the works Rilly surveyed noted
+   the repetition. That part may be new. The *Lexique* has no entry for `molk` (m-section, pp. 139-142).
+
+**Corpus check.**
+
+1. The run holds: l. 36 `sedew tbe tXe lw qes molk seb eqetxe`, l. 158-161 `ato sedew ato mlo qes Xol k seb eqetx`.
+2. `qes (li) ẖol(i)t(e)ke seb` also stands twice in REM 1003, inside a paragraph that itself repeats: FHN II l. 22
+   (p. 720) `qes li„ holitke„ seb„ seb lhe„ eno wite` and l. 32 (p. 721) `qes li„ holiteke„ seb„ seb lh„ eno wite`
+   (row `hamadab`, tokens 263 and 380). "Kush + ẖol-…-k(e) + seb" is thus a formula of two royal texts, and its return
+   at l. 36 and l. 160 is weak evidence of a deliberate frame.
+3. FHN II prints `molk` at l. 36 with no doubt mark, against `hol k` at l. 160. The funerary verb is spelled with ẖ
+   (`Xolketes`, `Xolkte` in T0046 and its copies, T0113), which matches l. 160 only. The "serve" reading reaches l. 36
+   only if the stone has ẖ there.
+4. `eqetxe` has parallels outside the stela: REM 1003 `eqetxN`, and REM 0075 `eqetḫno` (Hallof 2024, p. 12).
+
+**Searched:** the web queries on `sedew` and on Hintze's *Segensformel* above; Rilly's *Lexique*, s.v. *sedew*,
+*ẖol* and the m-section; FHN II, pp. 669-671 and 720-721; `sedew`, `Xol*`, `[mXx]olk` and `eqet[xX]*` in
+`corpus_v2`.
+
+**What would settle it:** the stone or Hintze's facsimile at l. 36; Hintze 1960, pp. 158-160.
+
+### What this means for `tanyidamani.md`
+
+1. H8 becomes PUBLISHED HYPOTHESIS (Hofmann 1981a; Rilly 2003, *Lexique*, pp. 23 and 58).
+2. H3 to H7 and H11 stay hypotheses, each with the points above, but none is cleanly NEW. The line in section 1,
+   "Seven hypotheses remain NEW", no longer holds.
+3. Three statements in the gloss hold only inside `corpus_v2`: `kek` "nowhere else" (REM 0075 has `kek`, Hallof 2024,
+   p. 12); `sedew` "nowhere else" (REM 1063/7 has `Sedew-li`); the `i-…-to` shape "in no other text" (REM 0075 has
+   `ipleto` and `i[p]lemketo`).
+4. The Abdalla page for the four `de-b-x` forms is vol. I part 1, p. 74; p. 43 is about `ke-de-b-x`.
+5. Rilly's *Lexique* (HAL tel-04793700) should be the first source checked for any future "NEW" claim on REM 1044: it
+   covers about 800 words with the views published to 2003.
+
+### Not reached
+
+1. Hintze 1960a (*Kush* 8: 125-162), the edition, is still the main gap. Rilly's bibliographies show that it
+   discussed `ameloloke` (p. 147), `qoleb` (pp. 148, 156), `ẖol` (pp. 158, 160) and `sedew` (p. 160).
+2. Hofmann 1981a; Rilly 2007; Millet 1973a and 1973c; Hallof's dictionary beyond the samples; Griffith 1912's plates
+   of REM 0088.
+3. Rilly's thesis vol. I (grammar), on HAL as an image scan, was not searched for the `i-` prefix.
