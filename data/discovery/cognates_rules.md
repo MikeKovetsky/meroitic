@@ -146,9 +146,10 @@ gives the language another one.
 | q | nothing 0.9 before an NES word-initial u/o in Nubian (*qore* ~ *ouru*); kw, gw 0.6 (its value /kʷa/, no row) | T80 |
 | y | no slot as initial dummy (*yer* ~ *er-ti*); elsewhere y 0.8 (no row) | T70 |
 
-Vowels weigh little because the script hardly writes them: initial *a* ~ a or e 0.25, u 0.2 (T1, T2, T17);
-initial *e/i* ~ e 0.25, i 0.2 (T24); *e* ~ e or o 0.2, a or i 0.1, or no vowel (T25); *i* ~ i 0.25, e 0.2
-(T29–T31); *o* ~ u or o 0.25, i 0.15, a 0.1 (T52); any other vowel −0.1.
+Vowels weigh little because the script hardly writes them: initial *a* ~ a or e 0.25, u 0.2 (T1, T2, T17),
+o 0.1 (no row); initial *e/i* ~ e 0.25, i 0.2 (T24); *e* ~ o 0.2, a 0.1 (T25), e 0.2, i 0.1 (no row), or no
+vowel; *i* ~ i 0.25, e 0.2 (T29–T31); *o* ~ i 0.15, a 0.1 (T52), u or o 0.25 (its own value, no row); any other
+vowel −0.1.
 
 ### 4.4 NES spellings (`segments`)
 
