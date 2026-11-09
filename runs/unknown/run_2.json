@@ -1,0 +1,376 @@
+{
+  "readings": [
+    {
+      "word": "wetrri",
+      "slot": "epithet after the name of Osiris in the opening invocation (vocative noun phrase)",
+      "reading": "epithet of Osiris in the opening invocation ('O Osiris, wetrri!'); lexical sense unknown",
+      "alternatives": [
+        "an honorific of the type 'lord/ruler (of the dead)'",
+        "'the justified/blessed one' (an Egyptian-style funerary epithet of Osiris)"
+      ],
+      "confidence": 5,
+      "corpus_evidence": "wetrri: 24 tokens (37 counting Soriwetrri) in 4 near-copy families; variant qetrri: 30 tokens as a word, 43 counting Seriqetrri, in 30 texts, plus qetri (T0010) and 'qe trri' (T0051). Together about 12 independent inscriptions. In every invocation it follows the name of Osiris, mirroring the Isis epithet: 'woS wetNyiNqeli Sori wetrri qo NAME qowi' (T0002), 'woSi wetNyi Nqeli Sori wetrri qo tNkdeqowi' (T0005), 'Soriwetrri' (T0015), 'So ri wetrri' (T0019); 'woS wetNyiNqeli Seriqetrri qe kdiqoreye qowi' and again mid-text 'woS wetNyiNqeli Sori qetrri qo mliye qowi' (T0037, two epitaphs); also T0023, T0011, T0892, T0074, T0051, T0010. The short invocation puts the vocative -i on the names (woSi Soreyi, gold morphology); the long one drops it from woS and ends each phrase in -i, so the epithet sits inside the vocative noun phrase. One use outside the invocation: 'mklX qetrri' ('great god' + qetrri) in the closing benediction of T0046, which marks it as a divine epithet, not a verb. No other context. The w/q alternation (wet-/qet-) is shared with the Isis epithet (qetNyinqeli, T0023).",
+      "recalled": "I remember the long invocation 'Wos(i) wetneyineqeli, Sorey(i) wetrri' from the literature on the funerary formula (Griffith's Karanog/Faras publications, later Rilly), with both words treated as untranslated divine epithets; I recall no accepted translation."
+    },
+    {
+      "word": "wetNyiNqeli",
+      "slot": "epithet after the name of Isis in the opening invocation (vocative noun phrase)",
+      "reading": "epithet of Isis in the opening invocation ('O Isis, wetNyiNqeli!'); lexical sense unknown",
+      "alternatives": [
+        "a title of the type 'mistress/lady (of ...)'",
+        "a 'great mother (of the god)'-type honorific"
+      ],
+      "confidence": 5,
+      "corpus_evidence": "56 tokens in 43 texts as one word, plus split or variant spellings wetNyi Nqeli (T0005, T0051, T0892), wet NyiNqeli (T0019), weNyi Nqeli (T0011), qetNyinqeli (T0023), wetNyiNqeliSori (T0074): about 11 independent inscriptions. Always directly after woS 'Isis' at the start of an epitaph (twice in T0037, which holds two epitaphs) and directly before Sori/Seri 'Osiris' + wetrri/qetrri: 'woS wetNyiNqeli Sori wetrri qo NAME qowi' (T0002; also T0015, T0037, T0010, T0019, T0023, T0011, T0051, T0892, T0074). Never anywhere else. woS lacks its usual vocative -i (cf. 'woSi Soreyi' in short invocations) while the epithet ends in -l-i, determiner + vocative per gold morphology, so the vocative closes the phrase 'Isis the wetNyiNqe'. Paired in every text with a different epithet for Osiris that shares wet-/qet-.",
+      "recalled": "Same as wetrri: I remember 'wetneyineqeli' as the Isis epithet of the long invocation in the funerary-formula literature (Griffith; Rilly), with no accepted translation."
+    },
+    {
+      "word": "temey",
+      "slot": "noun for a class of persons; with lX 'great' a title localized by place + -te; listed with kdi/abr in a narrative",
+      "reading": "chief, notable; temeylX 'great chief' of a town (temeykdi lX: a woman holding it)",
+      "alternatives": [
+        "a priestly or temple rank",
+        "a class of dependants (servants/herdsmen) seized as booty"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "temey 14 tokens, temeylX 54 (+ tmeylX 23), temeykdi(lX) 27; 36 texts, about 8 independent inscriptions (the T0006 family of 23 near-copies counts once). As a title: 'temeylX NAME XlXili tetelitreli yetmdelowi', 'temeylX qoye yetmdelowi' (qoye is a viceroy's name in T0019) and 'temeykdi lX dbretelowi' 'she was great temey-woman in Dbre' (T0006); 'temeylX dbrete' x3 and 'temeykdilX dbrete lo wi' (T0059); 'temey lX dbre te S qoye yetmdelewi' (T0268); 'temey lX adomn te' (T0144); 'temey lX bereqedo li tros lowi' (T0541); 'temey lX p tros lowi' (T0250). So 'great temey' + place + locative -te (Dbre in 3 texts, Adomn in 1), with a female form in -kdi 'woman'. In Kharamadoye it stands in lists of what was taken: 'lks sqyes nsedokes temeyyes nxbres bqobx' and 'mXo temey nsedoke kdi abr nxbres kbx mXoli temeyli dk' (kdi 'women', abr 'men'), repeated in the excerpts T0863, T0815, T0136. A person-class that can be 'great' in a town and can be seized beside women and men fits 'chief/notable' best, but nothing in the texts fixes the rank.",
+      "recalled": "none"
+    },
+    {
+      "word": "keN",
+      "slot": "counted noun followed by numerals in lists of goods and offerings",
+      "reading": "a counted commodity or unit of measure in lists of goods/offerings",
+      "alternatives": [
+        "a container or vessel (jar) of some commodity",
+        "a kind of offering object (cloth, garment)"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "29 tokens (+ ken) in 18 texts, 5 independent inscriptions. The Philae offering list (T0016, T0026, fragments T0212, T0989): 'Sdrte lX 2 do 6 atmi we s 12 keN 2 aritewil l woS pilqe te l xe' and 'Sdrete do 5 keN tmi 10 keN aro tros l xe'; the list of items from Caesar (T0671 'teketi 59 e 10 keN 1 tlt', T0346 'beltore le 10 keN l tlt', T0599 'ken l tlt 4'); 'y keN 6 Sns penno dteqo' (T0876, T0375); Tanyidamani 'pxe mrxi keN teritibre qore mdese 3 ti mXe pteno 3 apette 1'; 'NAME qoplto treb ken' (T0223). In four inscriptions a numeral (1, 2, 6, 10) is adjacent, and its neighbours are other counted items (do, atmi, Sdrte, tlt, teketi) given to Isis of Philae and of the Abaton. 'keN tmi 10' can be read as unit + commodity ('10 keN of tmi'), hence the unit reading first, but an object type fits as well.",
+      "recalled": "none"
+    },
+    {
+      "word": "tros",
+      "slot": "noun: predicative 'X-li tros-lowi', in the Philae gift list, and 'qrleb trose' in Kharamadoye",
+      "reading": "a relational noun or office ('he was the tros of X'), perhaps 'servant/deputy'",
+      "alternatives": [
+        "a kin term such as 'son/descendant'",
+        "a gift or offering (in the Philae list 'aro tros')"
+      ],
+      "confidence": 1,
+      "corpus_evidence": "16 tokens (22 incl. ptros, trose) in 14 texts, about 6 independent inscriptions. 'temey lX bereqedo li tros lowi' (T0541) and 'temey lX p tros lowi' (T0250): 'he was the tros of the great temey (of) ...'; 'tros lw mlo lowi' (T0252); 'tros li Xi qore mXo li s l axideSxini axi lo wi' (T0846, T0611), whose parallel in T0892 reads 'trotiXi qore mXolit axideSxini axilowi' (tros ~ troti, s/t alternation); the Philae list 'wos aro l tros l', 'keN aro tros l xe' (T0016), where the other copy T0026 writes 't rot' and 'arotrotxe', and 'NAME ptros li s lw ar mte kw' (T0016, T0152; T0026 'ptrotis'); Kharamadoye 'mkleb yereqe ... qrleb trose ariteN' (excerpt T0286 'qr leb tros'). The predicative -lowi shows a noun and the X-li possessor frame points to a relation or office, but the contexts are few and varied.",
+      "recalled": "none"
+    },
+    {
+      "word": "tlt",
+      "slot": "counted noun with numerals in a list of items; in a Kharamadoye refrain 'penn tlte br'",
+      "reading": "a counted item or unit in a list of goods/gifts",
+      "alternatives": [
+        "a unit of time (cf. 'penn tlte' in Kharamadoye)",
+        "a numeral word or measure qualifier"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "17 tokens (+ tlte x2, tlete x1, ptlteb x1) in 20 texts, but only 2 independent inscriptions. The list of items from Caesar (T0015 family of 13: 'nbrlis l belebeltor 1 bXeyedlis 1 teketi 59 yed tlt 16 kelw yikidbitelowi'; copies and fragments T0288 'yed tlt 16 kelw yikidbitelowi', T0671 'keN 1 tlt my tkteketi', T0346, T0599 'ken l tlt 4'): an item followed by 16 or 4. Kharamadoye twice 'pro dole plw penn tlte br' / 'penn tlete br' (excerpt T0536). Also 'wiyleb ptlteb ptroti ptrq' (T0320). Too little to say what is counted.",
+      "recalled": "none"
+    },
+    {
+      "word": "teketi",
+      "slot": "counted noun with the numeral 59 in a list of items (one inscription)",
+      "reading": "a counted item or unit in a list of goods/gifts",
+      "alternatives": [
+        "a money or weight unit",
+        "a measure of grain, cloth or animals"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "26 tokens in 26 texts, all one inscription (families T0015 x13 and T0021 x11 are two readings of the same list; fragments T0346, T0671). 'kiSri NAME axid kiN kiSrisqtile nbrlis l belebeltor 1 bXeyedlis 1 teketi 59 yed tlt 16 kelw yikidbitelowi' (T0015); T0021 reads 'belebeltor 1 tsl teketi mesrekelis beltore 1'; the list ends 'tk teketi' (T0346) / 'tkteketi' (T0671). Items with 1, 1, 1, 59, 16 after kiSri 'Caesar' (gold), closed by kelw yikidbitelowi (yikid-bi-te-lowi, plural -b-), so teketi is a counted object or unit among things given or received. Nothing says what it is.",
+      "recalled": "none"
+    },
+    {
+      "word": "plSn",
+      "slot": "text-initial word before a personal name or a place-qualified complement (title slot)",
+      "reading": "a title placed before a personal name",
+      "alternatives": [
+        "a word for 'dedication/adoration (of)' opening a short votive text",
+        "specifically a priestly title"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "15 tokens (+ plsn x3) in 17 texts, but only 1-2 independent texts sharing one formula: 'plSn NAME penn 5 ni ye teke lo' (T0025 family x11; T0111 'plSn beke mete penn 5 ni ye teke lo'), first-line fragments 'plSn NAME' (T0066, T0564, T0404, T0332), and the same formula with the name unmasked, 'plsn qbnti penn 5 ni yetekele qbn s li penn 5 ni' (T0441) / 'plsn qbnti penn 5 ni plsn qbn s li penn 5 ni' (T0442). It always heads the text and is followed by a name or by qbn-ti / qbn-s-li ('in/of Qbn' with locative -te or genitive -s + -li), the TITLE + NAME/PLACE frame of 'pelmoS adblis NAME' (T0017). Absent from funerary descriptions and narratives.",
+      "recalled": "none"
+    },
+    {
+      "word": "SlXS",
+      "slot": "title before a personal name, with a divine genitive",
+      "reading": "a priestly/temple title ('SlXS of Amanap')",
+      "alternatives": [
+        "a civil (non-priestly) office",
+        "a kin term"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "6 tokens in 6 short texts, at most 3 independent: 'SlXS NAME' (T0007; T0519 and T0248 are noise copies), 'SlXS mnp s l sm lo wi' (T0644) = '[SlXS mnp-s]-l sm-lowi' 'she was the wife of the SlXS of Amanap' (mnp 'Amanap', sm 'wife', -lowi: all gold), and 'SlXS terek lo' (T0694) 'begotten by a SlXS' (terike, father's filiation). Title-before-name order as with pelmoS/perite + NAME, a divine genitive as in ant mk-li-se 'priest of the god', held by men who father children.",
+      "recalled": "none"
+    },
+    {
+      "word": "SSimete",
+      "slot": "title before or after a personal name, with the genitive 'of the Candace'; plural SSime-leb",
+      "reading": "a title of an official serving the Candace (queen-mother)",
+      "alternatives": [
+        "a priestly title",
+        "a scribal title (cf. SSor 'scribe')"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "16 tokens as a word, 24 counting SSimetel and SSimeleb, in 17 texts, about 5 independent inscriptions. 'SSimete ktkelis NAME smlowi' (T0005) and 'SSimete kdke li s' (T0981): SSimete + ktke/kdke 'queen-mother' (gold) + -li-s genitive, 'SSimete of the Candace'; 'NAME SSimete mxtebedetelyetmdelowi' and 'NAME SSimetel yetmdelowi' (T0023: name + title + place-te-l); plural 'pNqoteb SSimeleb yetmdelowi' (T0795) at the end of a run of title plurals 'antleb ... mesnleb ... tqileb ... SSimeleb' (ant 'priest'); 'SSimete mleyos' (T0734). Always in the title slot of yetmde/sm clauses; its genitive complement is the Candace in two independent texts.",
+      "recalled": "none"
+    },
+    {
+      "word": "Stmdes",
+      "slot": "title before a (royal-masked) name, with the genitive 'of the viceroy'",
+      "reading": "an official title under the viceroy ('Stmdes of the viceroy')",
+      "alternatives": [
+        "a kin term, 'kinsman of the viceroy' (cf. -tmde- in yetmde 'relative')",
+        "a deputy/lieutenant specifically"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "7 tokens (+ Stmde) in 8 texts: 2 full epitaphs and 3 fragments. 'woS wet NyiNqeli So ri wetrri Stmdes pe stolis RNAME qowi' (T0019: the deceased is introduced as 'Stmdes of the viceroy, RNAME'); 'Stmdes peste lis RNAME terikeli terike lowi' (T0083: the father is 'Stmdes of the viceroy, RNAME'); fragments 'Stmdes pestolis' (T0941), 'Stmde s pestoli towi' (T0830), 'Stmdes teN te' (T0306). In 4 of 5 it is followed by pesto 'viceroy' (gold) + -li-s, the TITLE + X-li-s genitive frame of 'pelmoS adblis' (general of the land), and it precedes the person's name. Its -tmde- recalls yetmde 'relative', which keeps a kin reading open; kin terms, however, normally follow their possessor (X-l kdite-lowi).",
+      "recalled": "none"
+    },
+    {
+      "word": "kroro",
+      "slot": "title of an official: before/after names, with qoreN 'royal', with place names; plural kroro-leb",
+      "reading": "title of an official (royal or district functionary); exact office unknown",
+      "alternatives": [
+        "a priestly office (if Siremroke is a deity)",
+        "a military rank"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "16 bare tokens, 39 with suffixes (krorolowi, kroroleb, kroroli) in 31 texts, about 8 independent inscriptions. 'qoreN krorolowi ... NAME krorolowi apotelX aromelitowi' 'he was royal kroro ... kroro of NAME, great envoy to Rome' (T0046); 'qoreN kroroleb yetmdelowi' 'relative of the royal kroros' (T0045); 'Siremroke kroro Sibwiye yetmdelowi' (T0046), 'Siremroke kroroleb Stebetowi' 'she was mother of the Siremroke kroros' (T0565), 'Sire mroke kroro' (T0754); 'qo kroro bekemete lo pelmoS adblito' (T0124, T0318: kroro + bekeme-te 'in Bekeme'); 'NAME kroro' (T0008; T0510, T0579); 'kroro leb Ste bes le' (T0603); 'kroroli yikidke mete areqis 1 aspestoli yikidke ames 1' (T0002, T0403, T1006): the kroro, like the (a)spesto 'viceroy' after it, is the giver of a counted item. Plural -leb, the qualifier qoreN 'royal', place qualifiers and its company (pesto, apote, pelmoS) all mark an office.",
+      "recalled": "none"
+    },
+    {
+      "word": "qoreN",
+      "slot": "qore 'king' + -N: modifier before titles, and a title of its own paired with perite 'of Isis'",
+      "reading": "royal, of the king (qore + -N); as a noun, a royal official",
+      "alternatives": [
+        "prince, king's son (Akinidad is called qoreNyi)",
+        "plural 'kings'"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "13 tokens (16 incl. compounds) in 12 texts, about 7 independent inscriptions. Before titles: 'qoreN krorolowi', 'qoreN nkdeyotowi' (T0046), 'qoreN kroroleb yetmdelowi' (T0045). As a title with a divine genitive, paired with perite 'agent' (gold): 'perite woS s leb qoreN woS s leb ye t mde qe bes lo' (T0706), 'perite woSteb qoreNwoSteb kditebetowi' (T0565), 'perite woSteb qo reN woSteb' (T0083), 'qo qoreN woS s perite woS s' (T0721). Also 'qoreN ponnilito' (T0826), 'SSor lX lo wi qoreN l' (T0984). Hamadab: 'amnirense qore li ... qoreNyi akinidd pqrNyi pestoNyi', where qoreNyi stands beside Akinidad, who is pqr and pesto, not the ruler; Kharamadoye puts the same -N(yi) on other titles (qrNyi, xrpxNyi, sobNyi), and xrpxN is the usual funerary form of the governor title. So qoreN is 'king' + a suffix giving 'royal, of the king'.",
+      "recalled": "none"
+    },
+    {
+      "word": "womnitX",
+      "slot": "title before a name in yetmde clauses; a title held at Philae",
+      "reading": "a title (priestly or temple office), attested at Philae",
+      "alternatives": [
+        "a civil office",
+        "a kin term"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "441 tokens in 105 texts, but those 105 are near-copies of one long epitaph (families T0014, T0001, T0061; the variants differ only by inserted noise tokens such as mokelowi); plus womNtX in T0009: 2 independent inscriptions. In T0014 it heads 6 clauses: 'womnitX Sklte NAME yetmdelowi' x3, 'womnitX brtoye yetmdelowi', 'womnitX SkltesskemXer yetmdelowi', 'womnitX NAME yetmdelowi', the TITLE + NAME + yetmdelowi slot that 'polmoS NAME yetmdelowi' fills in T0013. T0009 lists one man's offices, each closed by lo: 'womNtX ppilqete lo ant qorito ... xbxN sqte lX lo', i.e. 'he was womNtX in Philae (pilqe-te), priest (ant) of ...'. Title-first order speaks against a kin term (kin terms follow their possessor).",
+      "recalled": "none"
+    },
+    {
+      "word": "aribet",
+      "slot": "title slot before names or other complements in yetmde clauses (one inscription)",
+      "reading": "a title or rank held by several relatives",
+      "alternatives": [
+        "a kin term (perhaps ar 'boy, son' + plural -b-)",
+        "a place-linked office"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "400 tokens in 105 texts, all near-copies of the same long epitaph (T0014/T0001/T0061): 1 independent inscription. Five consecutive clauses: 'aribet tpoteNteli yetmdelowi', 'aribet NAME yetmdelowi', 'aribet wetemtr yetmdelowi', 'aribet yete kemxr yetmdelowi', 'aribet tedeqeli ble yetmdelowi', between series headed by womnitX and Smlo and before ateqi. It fills the TITLE slot of TITLE + NAME/PLACE + yetmdelowi; tpoteN-te-li looks like place + locative, as in 'ateqi atiyete NAME' in the same text. Nothing outside this inscription.",
+      "recalled": "none"
+    },
+    {
+      "word": "ateqi",
+      "slot": "title localized by place + locative (-te, -te-leb)",
+      "reading": "a local office/title held in a town (ateqi of Sedeinga, of Sdos)",
+      "alternatives": [
+        "a priestly rank (listed beside beloloke)",
+        "a kin term"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "348 tokens (520 incl. compounds) in 90 texts, but 86 are copies of the long epitaph T0014: 2 independent inscriptions. T0014: 'ateqi atiyete NAME yetmdelo wi' (atiye 'Sedeinga' + locative -te, gold), 'ateqi NAME yetmdelowi', 'ateqi NAME ateqiSitkemoli', 'ateqi NAME pqr NAME beloloke NAME beloloke NAME ...', 'ateqi NAME yetmde aqebetowi'. T0046: 'ateqi Sdosteleb yetmdelowi beliloke pedemeteleb yetmdelowi trtekes tketoreteleb yetmdelowi mloyos atiyeteleb yetmdelowi', a list of TITLE + PLACE-te-leb (the ateqis in Sdos, the belolokes in Pedeme = Qasr Ibrim, the mloyos in Sedeinga). So ateqi is an office tied to a locality, in the same class as beloloke (a priestly rank in gold).",
+      "recalled": "none"
+    },
+    {
+      "word": "Sklte",
+      "slot": "qualifier between the title womnitX and a name: place + locative -te",
+      "reading": "'in Skl': place name + locative -te, localizing the title womnitX",
+      "alternatives": [
+        "a second title ('the Sklte NAME')",
+        "part of a personal name"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "213 tokens (284 incl. SkltesskemXer) in 71 texts, all copies of the one long epitaph T0014/T0061: 1 independent inscription. Only after womnitX: 'womnitX Sklte NAME yetmdelowi' x3 and 'womnitX SkltesskemXer yetmdelowi'. The same text has 'ateqi atiyete NAME' (title + Sedeinga-te + name), so 'womnitX Skl-te NAME' reads as 'the womnitX in Skl, NAME'. A stem Skl recurs with place-like morphology elsewhere: 'xtedeketeti Sklyetek nmoSdlowi' (T0892; T0217 'Sklye tek'), Kharamadoye 'axi dete skle dete'.",
+      "recalled": "none"
+    },
+    {
+      "word": "mlekeyos",
+      "slot": "title before personal names (repeated)",
+      "reading": "a title placed before personal names",
+      "alternatives": [
+        "an epithet such as 'the venerable/late'",
+        "a kin term"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "68 tokens as a word, 79 counting tedxelowimlekeyos (+ mlekeye once), in 12 texts, effectively 1 inscription (T0038 family x11; T0597 'mlekeyos p mlekeyos p kelw ye t mde bes lo' is the same passage with the names reduced to p). In T0038 it precedes six different personal names in -ye: 'mlekeyos yetekye yetmdelowi mlekeyos treye mlekeyos atoye mlekeyos dokoye mlekeyos qoqoye mlekeyos tkreye kelw yetmdebetowi' 'and he was relative of them (pl.)', then 'mlekeyos treye kditowi' 'sister of mlekeyos Treye' and 'SSor atbos mlekeye yetmdelowi'. Title-first order, as with 'pesto NAME l' (T0019). Other -yos words also stand in title slots: 'mloyos atiyeteleb yetmdelowi' (T0046), 'kdiyosmli yiroXetelowi' (T0037).",
+      "recalled": "none"
+    },
+    {
+      "word": "tmNteleb",
+      "slot": "place qualifier after titles: tmN + locative -te + plural determiner -leb",
+      "reading": "'(those) in tmN': place tmN + locative -te + plural -leb, after titles",
+      "alternatives": [
+        "'in the temple/town' (tmN as a common noun)",
+        "a plural noun 'the tmNtes' (a class of persons)"
+      ],
+      "confidence": 3,
+      "corpus_evidence": "65 tokens in 13 texts (+ tmNte, tmNtelowi, tmNtelis): 2 independent inscriptions (T0037 family; T0023), plus the fragments T0592 'wkite tmN te leb Ste aqe bes lo' and T0626 'ant mno tmN te leb kdite qe best lo', which divide it tmN te leb. In T0037 it follows three different titles: 'ant mno tmNteleb kditeqebetowi', 'wkite tmNteleb Steaqebetowi', 'Soni tmNte ...', 'ant tmNteleb yetmdelowi wkite tmNteleb Soni tmNteleb yetmdelowi', and 'wretXn tmNtelowi'; T0023 'qer tesk tmNtelis'. Same frame as 'beliloke pedemeteleb', 'mloyos atiyeteleb' (T0046) and 'xrpxN Sqekiteleb' (T0010, T0045), with gold -te 'in' and -leb plural. Soni is itself a title ('Soni mni s', T0159).",
+      "recalled": "none"
+    },
+    {
+      "word": "Smlo",
+      "slot": "title slot before a personal name (one inscription)",
+      "reading": "a title placed before a personal name",
+      "alternatives": [
+        "the place Simlo (Kharamadoye simlo-k) as a qualifier",
+        "an epithet built on mlo 'good'"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "157 tokens in 105 texts, all copies of the long epitaph T0014/T0001/T0061: 1 independent inscription, 2 occurrences per text: 'womnitX Sklte NAME yetmdelowi Smlo NAME yetmdelowi aribet ...' and 'womnitX NAME yetmdelowi Smlo NAME yetmdelowi qoresmle ...'. It fills the TITLE + NAME + yetmdelowi slot like womnitX, aribet and ateqi. Distinct from smlowi 'she was wife' (sm, the other s sign). Kharamadoye's place Simlo (simlok, gold morphology) is spelled with i.",
+      "recalled": "none"
+    },
+    {
+      "word": "brtoye",
+      "slot": "personal name (left unmasked) in the name slot after a title",
+      "reading": "a personal name (borne by a viceroy, 'pesto brtoye')",
+      "alternatives": [
+        "a place name ('the womnitX/viceroy of brtoye')",
+        "a title"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "75 tokens in 75 texts: 2 independent inscriptions. T0014 (copies T0061): 'womnitX brtoye yetmdelowi' between 'womnitX Sklte NAME yetmdelowi' and 'womnitX NAME yetmdelowi', i.e. in the NAME slot. T0019: a list of viceroys, 'pesto krinkror l pesto Ntewitror l pe s toqoye l pesto NAME l pesto mlotoN ye l pesto yitkide l pesto brtoye l pes to mXe s l pesto nibelilto l pesto tewiNye l', where a masked NAME fills the same slot. The -ye ending matches many unmasked personal names in the corpus (treye, atoye, dokoye, tkreye, Sibwiye, tewiNye, mlotoNye); the masking evidently missed this one.",
+      "recalled": "Abratoye, a peseto (viceroy) of Lower Nubia in the 3rd century AD, known from a Philae inscription and Lower Nubian texts; I remember the name and office, not a page reference."
+    },
+    {
+      "word": "kemxr",
+      "slot": "name slot after the title aribet (one inscription)",
+      "reading": "a personal (or place) name",
+      "alternatives": [
+        "a title",
+        "a common noun qualifying aribet"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "86 tokens in 86 texts, all copies of T0014/T0001: 1 independent inscription. 'aribet yete kemxr yetmdelowi', in a series 'aribet NAME yetmdelowi', 'aribet wetemtr yetmdelowi', so 'yete kemxr' fills the NAME slot. The same text has 'womnitX SkltesskemXer yetmdelowi' (kemXer, with the other h sign) in the slot of 'womnitX Sklte NAME yetmdelowi'. Nothing else.",
+      "recalled": "none"
+    },
+    {
+      "word": "penn",
+      "slot": "noun followed by a numeral (5, 34) in short texts; a refrain word in Kharamadoye",
+      "reading": "year (dating term), followed by the number",
+      "alternatives": [
+        "number/count (a tally of items)",
+        "a unit of measure"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "27 tokens (31 incl. penno, penni) in 28 texts, about 7 independent inscriptions. With numerals: 'plSn NAME penn 5 ni ye teke lo' (T0025 family; T0111; T0441/T0442 'plsn qbnti penn 5 ni ... penn 5 ni'; T0707 'penn 5 ni') and 'penn 34' (T0440), 'penn 34N kw' (T0368), 'penn 34 ati yewey e ...' (T0664). The value 34 rules out a month or day number, which suits a regnal year; '5 ni' recurs after mS (sun) in 'tkereketmS 5 ni' (T0892), as if both were time units. Also 'appoye penn tewisti msye woS' (T0035, an adoration text), 'y keN 6 Sns penno dteqo' (T0876), 'qeren penni li s le' (T0295), and the Kharamadoye refrain 'pro dole plw penn tlte br' / 'penn tlete br' (excerpt T0536). The numeral pattern is firm; 'year' over 'count' is a guess.",
+      "recalled": "none"
+    },
+    {
+      "word": "kiN",
+      "slot": "word between axid and the list of items from Caesar (one inscription); also inside akiN, ptkiN, mkiN",
+      "reading": "uncertain; introduces the list of items from Caesar ('axid kiN'), perhaps 'gift(s)'",
+      "alternatives": [
+        "Akine, Lower Nubia (cf. akiN in 'pesto akiN te leb', T0845)",
+        "a pronoun or postposition ('to him')"
+      ],
+      "confidence": 1,
+      "corpus_evidence": "24 tokens in 24 texts, all one inscription (T0015 family x13, T0021 x11): 'kiSri NAME axid kiN kisrisqtile nbrlis 1 belebeltor 1 ...' (T0021); kiSri is 'Caesar' in gold. As a piece: 'pesto akiN te leb' 'viceroys in Akine' (T0845; akiN = Akine in gold), 'd ptkiN qo' (T0435), Hamadab 'apotebese tkk mkiN y qor'. axid recurs as a verb (Hamadab 'asr axidebx wi 1626', with plural dative -bx) and at the end of the same list ('kelw axide', T0288), so 'axid kiN' may be 'gave ...' or 'gift(s)', but one context cannot decide.",
+      "recalled": "none"
+    },
+    {
+      "word": "mlolo",
+      "slot": "predicate: mlo 'good' + determiner -l + copula -o (+ -wi), the eulogy before the benedictions",
+      "reading": "'(he/she) was good': mlo 'good' + -l + copula -o",
+      "alternatives": [
+        "a noun 'the good one'",
+        "'good' in a royal phrase ('mlolo qore')"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "8 bare tokens, 26 with -wi in 22 texts, 7 independent inscriptions. 'mlolowi' closes the description of the deceased right before the water and bread benedictions: '... Soni tmNteleb yetmdelowi mlolowi ato mXe bi SiXekes' (T0037), '... qebetowi mlolowi mlomrs pXrstelowi ato mXo piSiXekes' (T0083), 'beloloke nptetelyetmdelowi mlolowi mlo mr sat mXe' (T0693), 'kdibe etowi mlolowi mlo XtoXelowi mlo mr itowi' (T0792), 'yetmdelowi mlolowi mlo mr s' (T0263), 'at mXepiSixrketemlolowi' (T0074); bare 'mlolo qore ydke mlolo' (T0035). The segmentation follows gold: mlo 'good' and -lowi 'is/was (the)'; gold's own note on mlo cites funerary mlo-l-o 'he/she was good'. It is often followed by more mlo phrases (mlo mrs), a run of eulogies.",
+      "recalled": "mlo 'good', funerary mlo-l-o 'he/she was good' (Rilly; the gold entry for mlo says the same)."
+    },
+    {
+      "word": "Sq",
+      "slot": "noun in Kharamadoye lists of things/persons taken; first element of the place name Sqeki",
+      "reading": "a noun for a class of persons or goods taken as booty (Kharamadoye)",
+      "alternatives": [
+        "the stem of the place name Sqeki ('xrpxN Sqekiteleb', governors in Sqeki)",
+        "a livestock term"
+      ],
+      "confidence": 1,
+      "corpus_evidence": "5 bare tokens, all from the Kharamadoye narrative or its excerpts: 'kdimloye sq kdi ptpoto yismeniye' (Kharamadoye; excerpts 'NAME Sq kdi' T0041, T0049, T0665) and 'lks sqye s nsedoke s temeyye s nxbre s bqo bx' (excerpts T0815, T0136): 1 independent inscription. As a piece: 'xrpxN Sqekiteleb kditebetowi' (T0010; T0562 'xrpxN Sqeki te leb'), 'xrpxN Sqekiteleb yetmdelowi' (T0045), 'kxSxsli s Sqke lowi' (T0046): Sqeki + -te + -leb, a place where governors sit. The bare word is listed with nsedoke, temey and nxbr, and kdi 'woman' follows it once; nothing fixes what it denotes.",
+      "recalled": "none"
+    },
+    {
+      "word": "yiroXe",
+      "slot": "place + locative -te after titles (yiroXe-te-lowi); bare yiroX once in Hamadab",
+      "reading": "a place name, used with locative -te ('in yiroXe')",
+      "alternatives": [
+        "a verb 'protect' (yi- + gold aroXe- 'protect') with -te",
+        "a title"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "No bare token; 35 tokens as yiroXete(lowi/wi) in 24 texts (T0037 and T0004 families), plus yroXete (T0381) and bare yiroX (Hamadab): 4 independent inscriptions. 'Soni tmNte brmeteyetmdelowi d knmre kdiyosmli yiroXetelowi wretXn tmNtelowi' (T0037): two parallel TITLE + X-te-lowi clauses, the second with the place tmN-te; 'NAME wteli pkeli yiroXetewi woS woS mlwilis mlowi lit yiroXete mlowi' (T0004 family); 'Sor qorodeli yroXete lo' (T0381). In funerary texts it always carries -te (locative in gold) after a title, as places do ('mlomrs pXrstelowi' 'he was ... in Faras', T0083). Hamadab has bare 'amnp yiroX mdewi ns seb', where a verb ('Amanap protected') is as likely as a place; gold aroXe- 'protect' with the y-/t- prefix seen in yerike/terike would give yiroXe.",
+      "recalled": "none"
+    },
+    {
+      "word": "qorete",
+      "slot": "qore 'king' + locative -te, in a list of an envoy's postings (one inscription)",
+      "reading": "'at/to the king('s court)': qore + locative -te",
+      "alternatives": [
+        "Qurta, the town (gold qoreti)",
+        "'royal' (adjectival)"
+      ],
+      "confidence": 2,
+      "corpus_evidence": "5 tokens in 5 texts, 1 inscription (T0046 family x4; T0070 is a fragment of the same text). 'apotelX aromelitowi apote mXeyotowi apotelw qorete mXeyot nte yd eSxini yetek lowi' (T0046) / 'apote l w qorete mXeyo s l nte yd eSxini ye teke lo wi' (T0070): a run of envoy (apote) titles with destinations in -te: arome-li-te 'to Rome', mXeyo-t, Xli-te-te, so qore-te 'to the king'. Tanyidamani uses qorte like a place ('aroqi tm qorte drte aqqe qorte msyose eto qorte tqeyose'), perhaps 'palace'. Gold lists the town Qurta as qoreti, an alternative that would also fit a list of destinations.",
+      "recalled": "none (gold gives qoreti = Qurta; that is an input, not a memory)"
+    },
+    {
+      "word": "SSor",
+      "slot": "title before names; takes lX 'great' and a divine genitive",
+      "reading": "scribe (an official title)",
+      "alternatives": [
+        "another administrative office",
+        "a priestly title"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "26 tokens in 26 texts, 4 independent inscriptions (+ 'S Sor atbo s', T0512). 'antxSxsliteb yetmdelowi SSor mns mlitowi' (T0002: SSor + mn-s 'of Amun'), 'SSor atbos mlekeye yetmdelowi' (T0038: title + name), 'SSor lX lo wi qoreN l' (T0984: 'he was great SSor ...', lX 'great' as in pelmoS lX), 'SSor metelXs yNhn' (T0230). Always in the title slot, with the modifiers titles take. The sense 'scribe' comes from the gold lexicon (ssor, certain, Egyptian ss); the corpus is consistent with it but cannot prove it alone.",
+      "recalled": "scribe, an Egyptian loan from ss 'scribe' (Rilly 2016, the source the gold entry cites)."
+    },
+    {
+      "word": "tbo",
+      "slot": "numeral after pairs of names or nouns",
+      "reading": "two",
+      "alternatives": [
+        "second",
+        "both, a pair"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "19 bare tokens (39 incl. atbos, tboyet...) in 35 texts, about 6 independent inscriptions. It follows exactly two entities: 'pqr NAME NAME tbo yetmdelo' 'relative of the two princes N and N' (T0689); 'dilXl tbo woS pilqetel woS tebwetel' (T0944) and 'di lX tbo woS pilege te l woS tebwe te l' (T0334): the two Isis forms, of Philae and of the Abaton (tebwe, gold); 'aSori pilqe te leb tbo yini txe bs lo' after plural -leb (T0679 and the Philae list T0016/T0026); 'woS dilXtbo ... dil tbo' (T0035); 'pqr qoris NAME tboyet md ebetowi' (T0019). These pairings support 'two' independently of the gold entry (tbo, probable).",
+      "recalled": "two; I remember this as the usual reading; the gold entry credits Millet 1968 and Rilly 2010 (p. 140, with a query)."
+    },
+    {
+      "word": "perite",
+      "slot": "title of an official, with the genitive 'of Isis' or 'of the land'",
+      "reading": "agent, administrator (an official title)",
+      "alternatives": [
+        "a temple steward specifically",
+        "a homonym heading counts of men and women in Hamadab"
+      ],
+      "confidence": 4,
+      "corpus_evidence": "25 tokens (+ prite) in 25 texts, about 8 independent inscriptions. 'perite adblis NAME yetmdelowi' (T0015) and 'perite adblis' (T0885): 'perite of the land' (adb 'land', gold), the frame of 'pelmoS adblis' (T0017); 'perite woSto' (T0029), 'perite woS s leb qoreN woS s leb' (T0706), 'perite woSteb qoreNwoSteb kditebetowi' (T0565), 'perite woSteb qo reN woSteb' (T0083), 'qo qoreN woS s perite woS s' (T0721): 'perite of Isis', paired with qoreN; 'yet mdelowi perite' (T0052). Hamadab has 'adxite perite abr 100 kdi 100 qo leb' and 'adxite prite abr 58 kdi 223', in the frame of 'adxite qeper abr 32 kdi 135', heading counts of men and women. The title slot is clear; the sense 'agent' comes from gold (certain, Coptic prit).",
+      "recalled": "agent, an Egyptian loan (Griffith 1911, p. 22, as the gold entry cites); I also remember perite as 'agent' in lists of Meroitic titles."
+    }
+  ]
+}
