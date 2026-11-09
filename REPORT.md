@@ -151,7 +151,10 @@ After "are you giving up?", four more lines of attack, then data.
 7. **Calibration across all tests:** every answer given at confidence 4–5 was right: 46 of 46 on the synthetic
    language (two runs), 7 of 7 and 19 of 19 in recall-then-corpus tests, 2 of 2 corrected corpus answers.
 8. **Reading Griffith's printed type** (`data/expansion/printed_type_test.md`): 95.6% sign accuracy against FHN on 12
-   texts (482 of 504), 99.6% against what Griffith printed; Karanòg's hand copies are untested.
+   texts (482 of 504), 99.6% against what Griffith printed. Griffith's hand copies (Karanòg, about 150 epitaphs)
+   fail the bar: 581 of 654 signs (88.8%; 91.1% on signs the copy shows clearly) on the four texts FHN prints, with
+   the errors in names, rare titles and closing formulas, and most of them not flagged "?" by the reader
+   (`data/expansion/hand_copy_test.md`). Karanòg was therefore not transcribed.
 9. **Corpus expansion** (`data/expansion/griffith_*.jsonl`, `src/expand.py`): 152 inscriptions transcribed from
    *Meroitic Inscriptions* I–II and *Meroë*; 29 are partial (left out), 37 were already in the corpus or repeat
    another Griffith text, 86 are new: `data/corpus_v3.jsonl` has 748 texts and 19,066 words (+5%). The duplicate

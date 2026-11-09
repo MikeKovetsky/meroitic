@@ -17,7 +17,8 @@ Results, with every number traced to its run: [`REPORT.md`](REPORT.md). This fil
 3. Its confidence is calibrated. In every test, all answers it gave at confidence 4–5 were right (74 of 74, after
    removing items a glossary gave away); at 1–2 it is right about a third of the time.
 4. It restores masked words better than an n-gram model (48% vs 26% where nothing can be copied), reads Griffith's
-   printed Meroitic type at 95.6% sign accuracy, and cannot read worn stones from photographs.
+   printed Meroitic type at 95.6% sign accuracy, reads his hand copies at only 88.8%, and cannot read worn stones
+   from photographs.
 5. None of the "new" findings its discovery runs proposed survived an adversarial literature check (0 of 14):
    where the key literature is print-only, it can't tell a rediscovery from a discovery.
 6. The binding constraint is data. The public corpus is small and padded; this repo cleans it, and adds 86 new texts
