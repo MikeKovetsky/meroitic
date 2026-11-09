@@ -130,7 +130,32 @@ def test_top_precision_shares_ties():
     assert abs(t["chance"] - 0.25) < 1e-12                                       # one row in four, each word
     t2 = cr.top_test(words, rows, S, sims=50, k=2)
     assert abs(t2["prec"] - 0.5) < 1e-12                                         # (1/2 + 1/2) / 2
-    assert cr.ranks(words, rows, S) == [1, 2]
+    assert cr.ranks(words, rows, S) == [1.5, 2]                                 # a's water row ties with stone
+
+
+def test_ranks_break_ties_at_random():
+    assert cr.tie_rank([0.9, 0.5, 0.1], 0.9) == 1                              # alone at the top
+    assert cr.tie_rank([1.0, 1.0, 1.0, 0.2], 1.0) == 2                         # one of three tied: (3 + 1) / 2
+    assert cr.tie_rank([2.0, 1.0, 1.0, 1.0, 1.0, 1.0], 1.0, hits=2) == 3       # 1 above, first of 2 among 5
+    rows = [row("water"), row("stone"), row("tree"), row("fire")]
+    words = [("a", frozenset({"water"}), "water")]
+    assert cr.ranks(words, rows, {"a": [0.5, 0.5, 0.5, 0.5]}) == [2.5]         # a flat scorer earns no rank
+
+
+def test_proto_repeats_are_one_form():
+    rows = [cr.Row("proto_nes", f, "g", frozenset(), "literature", "", tuple((v, seg(v)) for v in vs))
+            for f, vs in (("*ᵑkod", ["kod"]), ("*kod-", ["kod"]), ("*ŋod-", ["ŋod"]), ("*kari", ["kari"]))]
+    forms = cr.proto_forms(rows)
+    assert len(forms) == 3 and forms[frozenset({seg("kod")})] == [0, 1]
+    scores = {k: max(cr.align("ked", rows[i].variants[0][1], "proto_nes") for i in ix) for k, ix in forms.items()}
+    t = scores[frozenset({seg("kod")})]
+    assert cr.tie_rank(scores.values(), t) == 1                                # its repeat is not a rival
+
+
+def test_rank_median_is_the_middle():
+    assert cr.rank_stats([1, 2, 3, 10]) == (2.5, 1, 4)                         # even count: mean of the middle two
+    assert cr.rank_stats([1, 3, 471, 551, 900, 1200]) == (511, 1, 2)
+    assert cr.rank_stats([7, 12, 30]) == (12, 7, 1)
 
 
 def test_validation_words_leave_out_loans_names_and_circular_lists():

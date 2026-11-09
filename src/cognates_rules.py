@@ -24,7 +24,7 @@ words, lists and variants, and adds precision at the top.
 
   python3 -I src/cognates_rules.py [shuffles]
 """
-import csv, functools, json, random, re, sys, unicodedata
+import csv, functools, json, random, re, statistics, sys, unicodedata
 from collections import namedtuple
 from pathlib import Path
 
@@ -196,15 +196,20 @@ def segments(v, dataset="", lang=""):
     return tuple(s for i, s in enumerate(out) if i == 0 or s != out[i - 1])
 
 
-def load_nes(proto=False):
-    """Rows of the independent lists (proto_nes.tsv only when proto=True, and then alone)."""
+def load_nes(proto=False, names=None):
+    """Rows of the independent lists (proto_nes.tsv only when proto=True, and then alone). Wiktionary
+    names, letters and symbols are left out, and appended to `names` when it is a list."""
     rows = []
     for p in sorted((ROOT / "data/nes").glob("*.tsv")):
         if "meroitic" in p.stem or p.stem.startswith("sound_") or (p.stem in cognates.CIRCULAR) != proto:
             continue
         with open(p) as f:
             for r in csv.DictReader(f, delimiter="\t"):
-                if not (r.get("form") and r.get("gloss")) or (r.get("dataset") == "wiktionary" and r.get("pos") in NAMES):
+                if not (r.get("form") and r.get("gloss")):
+                    continue
+                if r.get("dataset") == "wiktionary" and r.get("pos") in NAMES:
+                    if names is not None:
+                        names.append(r["form"])
                     continue
                 vs = tuple((v, segments(v, r.get("dataset", ""), p.stem)) for v in variants(r["form"], r.get("dataset", "")))
                 vs = tuple((v, s) for v, s in vs if s)
@@ -458,16 +463,38 @@ def top_test(words, rows, S, sims=2000, seed=3, k=1):
             "hits": [words[a][0] for a in range(len(words)) if match[a] and prec[a][a] > 0]}
 
 
+def tie_rank(scores, b, hits=1):
+    """Expected rank of score b among scores when ties are broken at random, as top_test shares them:
+    the scores above b, plus the expected place of the first of `hits` wanted rows among those tied at b."""
+    above = sum(s > b + 1e-9 for s in scores)
+    tied = sum(abs(s - b) <= 1e-9 for s in scores)
+    return above + (tied + 1) / (hits + 1)
+
+
 def ranks(words, rows, S):
-    """For each word with a same-meaning row: the rank of its best same-meaning row among all rows
-    (ties counted in its favour)."""
+    """For each word with a same-meaning row: the expected rank of its best same-meaning row among all
+    rows, ties broken at random (a scorer that ties many rows gets no credit for the ties)."""
     out = []
     for f, k, _ in words:
         mt = [i for i, r in enumerate(rows) if r.keys & k]
         if mt:
             b = max(S[f][i] for i in mt)
-            out.append(1 + sum(s > b + 1e-9 for s in S[f]))
+            out.append(tie_rank(S[f], b, sum(abs(S[f][i] - b) <= 1e-9 for i in mt)))
     return sorted(out)
+
+
+def rank_stats(rk):
+    """Median (the mean of the middle two for an even count), best, and how many are in the top 10."""
+    return statistics.median(rk), min(rk), sum(r <= 10 for r in rk)
+
+
+def comparanda(words, rows):
+    """(form, number of same-meaning NES rows, their languages) for each word."""
+    out = []
+    for f, k, _ in words:
+        mt = [r for r in rows if r.keys & k]
+        out.append((f, len(mt), {r.lang for r in mt}))
+    return out
 
 
 def grid(sims=2000):
@@ -477,23 +504,37 @@ def grid(sims=2000):
     held = [w for w in words if w[0] not in RULE_WORDS]
     g, base = globals(), {k: globals()[k] for k in ("NEAR", "INS", "DEL", "SUB", "POS_FACTOR")}
     out = []
-    for s in ({}, {"NEAR": 0.0}, {"SUB": -0.5}, {"INS": -0.3}, {"DEL": -0.4, "INS": -0.3}, {"POS_FACTOR": 1.0}):
+    try:
+        for s in ({}, {"NEAR": 0.0}, {"SUB": -0.5}, {"INS": -0.3}, {"DEL": -0.4, "INS": -0.3}, {"POS_FACTOR": 1.0}):
+            g.update(base)
+            g.update(s)
+            _score.cache_clear()
+            reflexes.cache_clear()
+            S = matrix(words, rows, rule_score)
+            out.append((s or "defaults", shuffle_test(words, rows, S, sims)["p"],
+                        shuffle_test(held, rows, S, sims)["p"]))
+    finally:
         g.update(base)
-        g.update(s)
         _score.cache_clear()
         reflexes.cache_clear()
-        S = matrix(words, rows, rule_score)
-        out.append((s or "defaults", shuffle_test(words, rows, S, sims)["p"], shuffle_test(held, rows, S, sims)["p"]))
-    g.update(base)
-    _score.cache_clear()
-    reflexes.cache_clear()
+    return out
+
+
+def proto_forms(rows_proto):
+    """The proto rows grouped by spelling: one entry per distinct set of segment tuples, since Rilly's
+    papers repeat a reconstruction (*ᵑkod, *ᵑkod-, *kod-), and a repeat of the right form is no rival."""
+    out = {}
+    for i, x in enumerate(rows_proto):
+        out.setdefault(frozenset(s for _, s in x.variants), []).append(i)
     return out
 
 
 def proto_control(rows_proto, scorer):
     """Labelled circular check: Rilly's own Meroitic ~ proto-NES pairs (proto_nes.tsv's comparandum
-    column), the rank of his proto form among all 330 proto rows for that Meroitic word."""
+    column): (Meroitic, proto form, expected rank of the proto form among the distinct proto forms for
+    that Meroitic word with ties broken at random, whether it is first or tied first)."""
     gold = {g["form"].strip("-"): g["form"] for g in json.load(open(ROOT / "data/gold_lexicon.json"))}
+    forms = proto_forms(rows_proto)
     out = []
     with open(ROOT / "data/nes/proto_nes.tsv") as f:
         for r in csv.DictReader(f, delimiter="\t"):
@@ -505,9 +546,9 @@ def proto_control(rows_proto, scorer):
             target = [i for i, x in enumerate(rows_proto) if x.form == r["form"] and x.gloss == r["gloss"]]
             if not target:
                 continue
-            scores = [scorer(mer, x) for x in rows_proto]
-            t = scores[target[0]]
-            out.append((mer, r["form"], 1 + sum(s > t + 1e-9 for s in scores)))
+            scores = {k: max(scorer(mer, rows_proto[i]) for i in ix) for k, ix in forms.items()}
+            t = scores[frozenset(s for _, s in rows_proto[target[0]].variants)]
+            out.append((mer, r["form"], tie_rank(scores.values(), t), max(scores.values()) <= t + 1e-9))
     return out
 
 
@@ -520,12 +561,14 @@ def earned(res, alpha=0.05):
 
 
 def run(sims=2000, top=5, unknown=None):
-    rows = load_nes()
+    names = []
+    rows = load_nes(names=names)
     words, left = gold_words()
     held = [w for w in words if w[0] not in RULE_WORDS]
     built = [w for w in words if w[0] in RULE_WORDS]
     R, W = matrix(words, rows, rule_score), matrix(words, rows, raw_score)
-    res = {"rows": rows, "words": words, "held": held, "left": left, "R": R, "W": W}
+    res = {"rows": rows, "words": words, "held": held, "built": built, "left": left, "R": R, "W": W,
+           "names": len(names)}
     for name, S in (("rule", R), ("raw", W)):
         res[name] = {"all": shuffle_test(words, rows, S, sims), "held": shuffle_test(held, rows, S, sims),
                      "built": shuffle_test(built, rows, S, sims),
@@ -556,9 +599,14 @@ UNKNOWN = ["temey", "tros", "tlt", "teketi", "kroro", "aribet", "ateqi", "Sklte"
 def main(sims=2000):
     res = run(sims, unknown=UNKNOWN)
     rows, words = res["rows"], res["words"]
-    print(f"NES rows compared: {len(rows)} (independent lists; Wiktionary names and letters left out)")
+    print(f"NES rows compared: {len(rows)} ({sum(len(r.variants) for r in rows)} spellings; independent lists; "
+          f"{res['names']} Wiktionary names, letters and symbols left out)")
     print(f"gold words left out: {', '.join(f'{f} ({why})' for f, why in res['left'])}")
     print(f"held-out words (not in Rilly's series or rule examples): {len(res['held'])} of {len(words)}")
+    ch, cb = comparanda(res["held"], rows), comparanda(res["built"], rows)
+    print(f"same-meaning NES rows per word with any: median {statistics.median(n for _, n, _ in ch if n)} held-out, "
+          f"{statistics.median(n for _, n, _ in cb if n)} rule words; held-out words compared with Hill Nubian "
+          f"alone: {sum(1 for _, n, ls in ch if n and ls == {'hill_nubian'})} of {sum(1 for _, n, _ in ch if n)}")
     for name in ("rule", "raw"):
         for lab, x in (("all words", "all"), ("held-out", "held"), ("rule words only", "built")):
             a = res[name][x]
@@ -570,31 +618,34 @@ def main(sims=2000):
                   f"words with any same-meaning row there: {', '.join(t['hits']) or 'none'}")
         for lab, ws in (("all", words), ("held-out", res["held"])):
             rk = ranks(ws, rows, res["R" if name == "rule" else "W"])
-            print(f"[{name}] rank of the best same-meaning row, {lab}: median {rk[len(rk) // 2]}, "
-                  f"best {rk[0]}, in top 10 for {sum(r <= 10 for r in rk)} of {len(rk)} (of {len(rows)} rows)")
+            med, best, top10 = rank_stats(rk)
+            print(f"[{name}] rank of the best same-meaning row (ties broken at random), {lab}: median {med:g}, "
+                  f"best {best:g}, in top 10 for {top10} of {len(rk)} (of {len(rows)} rows)")
         print()
-    for f, _, g in words:
+    for f, k, g in words:
         i = max(range(len(rows)), key=lambda i: res["R"][f][i])
-        ties = sum(abs(s - res["R"][f][i]) <= 1e-9 for s in res["R"][f])
+        tied = [j for j, s in enumerate(res["R"][f]) if abs(s - res["R"][f][i]) <= 1e-9]
         print(f"  top-1 {f:9} '{g[:22]}' -> {rows[i].lang}:{rows[i].form} '{rows[i].gloss[:30]}' "
-              f"{res['R'][f][i]:.2f} ({ties} tied)")
+              f"{res['R'][f][i]:.2f} ({len(tied)} tied, {sum(1 for j in tied if rows[j].keys & k)} same meaning)")
     a = res["rule"]["all"]
-    print("\nbest same-meaning NES word per gold word (rule score):")
+    print("\nbest same-meaning NES word per gold word (rule score; raw = raw similarity of the same row):")
     for wi, (f, k, g) in sorted(enumerate(words), key=lambda x: -(a["best"][x[0]][x[0]] or -9)):
         if a["best"][wi][wi] is None:
             continue
         i = max(a["match"][wi], key=lambda i: res["R"][f][i])
         sc, v, segs, used = explain(f, rows[i])
-        raw = max(res["W"][f][i] for i in a["match"][wi])
-        print(f"  {sc:6.2f} raw {raw:.2f} {f:10} '{g}' ~ {rows[i].lang}:{v} '{rows[i].gloss[:40]}' | {'; '.join(used)}")
+        print(f"  {sc:6.2f} raw {res['W'][f][i]:.2f} {f:10} '{g}' ~ {rows[i].lang}:{v} '{rows[i].gloss[:40]}' | "
+              f"{'; '.join(used)}")
     proto = load_nes(proto=True)
     ctl = proto_control(proto, rule_score)
     ctl_raw = proto_control(proto, raw_score)
-    print(f"\nproto control (circular, labelled): {len(ctl)} of Rilly's pairs; rank 1 for "
-          f"{sum(r == 1 for *_, r in ctl)} (rule) vs {sum(r == 1 for *_, r in ctl_raw)} (raw); top 5 for "
-          f"{sum(r <= 5 for *_, r in ctl)} vs {sum(r <= 5 for *_, r in ctl_raw)}, of {len(proto)} proto rows")
-    for (m, p, r), (_, _, r2) in zip(ctl, ctl_raw):
-        print(f"  {m:8} ~ {p:24} rank {r} (raw {r2})")
+    print(f"\nproto control (circular, labelled): {len(ctl)} of Rilly's pairs, among the {len(proto_forms(proto))} "
+          f"distinct forms of {len(proto)} proto rows, ties broken at random: rank 1 for {sum(r == 1 for _, _, r, _ in ctl)} (rule) vs "
+          f"{sum(r == 1 for _, _, r, _ in ctl_raw)} (raw); top 5 for {sum(r <= 5 for _, _, r, _ in ctl)} vs "
+          f"{sum(r <= 5 for _, _, r, _ in ctl_raw)}; first or tied first for {sum(t for *_, t in ctl)} vs "
+          f"{sum(t for *_, t in ctl_raw)}")
+    for (m, p, r, _), (_, _, r2, _) in zip(ctl, ctl_raw):
+        print(f"  {m:8} ~ {p:24} rank {r:g} (raw {r2:g})")
     print("\nrobustness (other cost settings; p all words / p held-out):")
     for s, pa, ph in grid(sims):
         print(f"  {s}: {pa:.4f} / {ph:.4f}")
