@@ -169,5 +169,62 @@
    "xb",
    "kbt"
   ]
+ },
+ {
+  "run": "S_f0",
+  "k": 18,
+  "correct": 18,
+  "p": 0.0,
+  "answered": 18,
+  "confident": 14,
+  "confident_correct": 14,
+  "right_words": [
+   "xby",
+   "hga",
+   "bnt",
+   "kn",
+   "bat",
+   "jqkt",
+   "xoa",
+   "kfy",
+   "kpt",
+   "xa",
+   "xeb",
+   "fp",
+   "njq",
+   "ubt",
+   "staqnt",
+   "xwa",
+   "boy",
+   "xat"
+  ]
+ },
+ {
+  "run": "S_f1",
+  "k": 17,
+  "correct": 17,
+  "p": 0.0,
+  "answered": 17,
+  "confident": 15,
+  "confident_correct": 15,
+  "right_words": [
+   "knjq",
+   "njqbt",
+   "wk",
+   "htfkyu",
+   "ntfr",
+   "uuya",
+   "vfoq",
+   "gyat",
+   "btrqwbq",
+   "rqjt",
+   "ew",
+   "bjvt",
+   "stbkjt",
+   "xhybt",
+   "sqatgr",
+   "xb",
+   "kbt"
+  ]
  }
 ]

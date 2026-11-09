@@ -1,0 +1,3110 @@
+[
+  {
+    "form": "abr",
+    "variants": [
+      "br"
+    ],
+    "gloss": "man",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 114-115"
+      }
+    ],
+    "evidence_note": "Royal war narratives count captured abr beside kdi (men vs women); Griffith-era translation kept by Rilly.",
+    "corpus_form": "abr",
+    "corpus_variants": [],
+    "corpus_note": "also br- after loss of initial a (brleb \"the men\" in the Kharamadoye text); br alone matches many names.",
+    "in_corpus": "token",
+    "corpus_token_count": 5
+  },
+  {
+    "form": "kdi",
+    "variants": [
+      "kadi"
+    ],
+    "gloss": "woman",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 7, 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "pp. 3, 5"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Hesychius glosses kandē as Greek \"woman\"; base of ktke \"Candace\"; paired with abr in captive lists; NES cognates.",
+    "corpus_form": "kdi",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 308
+  },
+  {
+    "form": "asr",
+    "variants": [
+      "sr"
+    ],
+    "gloss": "meat, animal",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3",
+        "note": "in the list of words solidly translated since Griffith (\"meat\")"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 118"
+      }
+    ],
+    "evidence_note": "Griffith-era translation; Rilly 2004 lists \"meat\" among words solidly translated since Griffith.",
+    "corpus_form": "asr",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 3
+  },
+  {
+    "form": "at",
+    "variants": [],
+    "gloss": "bread",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 118-119"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Funerary benediction B (\"at mẖe ...\", abundant bread); Griffith-era translation of the stereotyped epitaph formulas.",
+    "corpus_form": "at",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 3129
+  },
+  {
+    "form": "ato",
+    "variants": [
+      "ate"
+    ],
+    "gloss": "water",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 6, 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 119-120"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "\"water\""
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Funerary benediction A (\"ato mẖe ...\", abundant water) on offering tables; Greek Asta- in Nile river names (Astaboras, Astapous).",
+    "corpus_form": "atE",
+    "corpus_variants": [
+      "ate"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 4311
+  },
+  {
+    "form": "kdite",
+    "variants": [
+      "kdise"
+    ],
+    "gloss": "sister",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 4, 7, 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 128"
+      }
+    ],
+    "evidence_note": "Relationship clauses of epitaphs; cognates Proto-Nubian *kedidi, Proto-Nara *kadete (Rilly 2016: 4).",
+    "corpus_form": "kdite",
+    "corpus_variants": [
+      "kdis",
+      "kdise"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 1369
+  },
+  {
+    "form": "ked",
+    "variants": [
+      "kede"
+    ],
+    "gloss": "kill, slay",
+    "category": "verb",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 128-130"
+      }
+    ],
+    "evidence_note": "Royal war narratives (lists of enemies killed); NES *kod- \"slaughter\".",
+    "corpus_form": "ked",
+    "corpus_variants": [
+      "kede"
+    ],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "l-",
+    "variants": [
+      "l"
+    ],
+    "gloss": "give",
+    "category": "verb",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 7, 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 130-132"
+      }
+    ],
+    "evidence_note": "Royal prayers to the gods: pwrite l-ḫ-te \"Give him life!\" (REM 1151).",
+    "corpus_form": "l",
+    "corpus_variants": [],
+    "corpus_note": "absent: the stem is not separable in the corpus; the token l there is the article (FHN royal texts).",
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "lẖ",
+    "variants": [
+      "lh",
+      "lx",
+      "laẖ"
+    ],
+    "gloss": "great, elder",
+    "category": "adjective",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 132"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "adjective \"great\""
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Titles and epithets (mk-lẖ \"great god\", pelmos-lẖ \"chief general\"); kdite-lẖ \"elder sister\". Rilly 2016 prints it lx (font).",
+    "corpus_form": "lX",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1622
+  },
+  {
+    "form": "mẖe",
+    "variants": [
+      "mhe",
+      "mḫe"
+    ],
+    "gloss": "abundant, plenty",
+    "category": "adjective",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 133"
+      }
+    ],
+    "evidence_note": "Funerary benedictions ato mẖe / at mẖe \"abundant water / bread\"; also spelled mḫe (Lipinski 2011: 97).",
+    "corpus_form": "mXe",
+    "corpus_variants": [
+      "mxe"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 3554
+  },
+  {
+    "form": "mlo",
+    "variants": [],
+    "gloss": "good",
+    "category": "adjective",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 6"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 133-134"
+      }
+    ],
+    "evidence_note": "Napatan names write mlo with Egyptian heart-and-trachea (nfr \"good\") ideogram; funerary mlo-l-o \"he/she was good\".",
+    "corpus_form": "mlE",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 32
+  },
+  {
+    "form": "mte",
+    "variants": [
+      "mse",
+      "mete"
+    ],
+    "gloss": "child",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 6"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 134"
+      }
+    ],
+    "evidence_note": "Napatan names write mte with the Egyptian determinative of a child sucking its thumb; later spelling mse.",
+    "corpus_form": "mte",
+    "corpus_variants": [
+      "mse"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 223
+  },
+  {
+    "form": "sem",
+    "variants": [
+      "sm"
+    ],
+    "gloss": "wife",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 139"
+      }
+    ],
+    "evidence_note": "Relationship clauses of epitaphs (X sem-lowi \"she was the wife of X\"); Griffith-era translation.",
+    "corpus_form": "sm",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 16
+  },
+  {
+    "form": "ste",
+    "variants": [
+      "sete"
+    ],
+    "gloss": "mother (tutor)",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "glossed \"tutor\", common designation for \"mother\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 140"
+      }
+    ],
+    "evidence_note": "Relationship clauses of epitaphs (X ste-lowi \"she was the mother of X\"); Rilly refines to \"tutor\".",
+    "corpus_form": "Ste",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 22
+  },
+  {
+    "form": "st",
+    "variants": [],
+    "gloss": "foot, feet",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 139"
+      }
+    ],
+    "evidence_note": "Graffiti carved beside engraved footprints in temples (\"st qo\": these are the feet of N).",
+    "corpus_form": "St",
+    "corpus_variants": [],
+    "corpus_note": "one token St; Ste (mother) is a different word.",
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "tre-",
+    "variants": [
+      "tre"
+    ],
+    "gloss": "offer",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 8-9",
+        "note": "imperative p-tre-kete \"Offer ye!\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 143-144"
+      }
+    ],
+    "evidence_note": "Offering contexts and benedictions; analysed by Rilly as verb stem in p-tre-kete.",
+    "corpus_form": "tre",
+    "corpus_variants": [],
+    "corpus_note": "substring only, inside longer words; no clear attestation.",
+    "in_corpus": "token",
+    "corpus_token_count": 3
+  },
+  {
+    "form": "wide",
+    "variants": [
+      "wi"
+    ],
+    "gloss": "brother",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "often assimilated to wi- before the article"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 144"
+      }
+    ],
+    "evidence_note": "Relationship clauses of epitaphs (X wi-lowi \"he was the brother of X\").",
+    "corpus_form": "wide",
+    "corpus_variants": [
+      "wi"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 3
+  },
+  {
+    "form": "mk",
+    "variants": [],
+    "gloss": "god, deity",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 6"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 153"
+      }
+    ],
+    "evidence_note": "Napatan names write mk with the Egyptian flag sign (ntr \"god\"); mk-leb \"the gods\"; in Apede-mk.",
+    "corpus_form": "mk",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 402
+  },
+  {
+    "form": "mkdi",
+    "variants": [],
+    "gloss": "goddess",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7",
+        "note": "mkdi < mk + kdi"
+      }
+    ],
+    "evidence_note": "Compound of mk \"god\" and kdi \"woman\" used to mark female deities (Wos mkdi-lẖ \"Isis the great goddess\").",
+    "corpus_form": "mkdi",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 3
+  },
+  {
+    "form": "tedḫe",
+    "variants": [
+      "tdḫe",
+      "edḫe",
+      "dḫe",
+      "yedḫe",
+      "tedhe"
+    ],
+    "gloss": "born of (mother)",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 14 (Filiation)"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 120"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "\"to bear\": tedhe, yedhe"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Filiation clause of epitaphs: mother's name + tedḫe-lowi; Griffith 1911 already glossed it \"to bear\".",
+    "corpus_form": "tedxe",
+    "corpus_variants": [
+      "tdxe"
+    ],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "terike",
+    "variants": [
+      "erike",
+      "yerike"
+    ],
+    "gloss": "begotten by (father)",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 14 (Filiation)"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 122-123"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "\"to beget\": terike, yerike"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Filiation clause of epitaphs: father's name + terike-lowi, paired with tedhe for the mother.",
+    "corpus_form": "terike",
+    "corpus_variants": [
+      "yerike",
+      "erike"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 11
+  },
+  {
+    "form": "yetmde",
+    "variants": [],
+    "gloss": "relative (nephew, niece)",
+    "category": "kinship",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "pqr-leb yetmde-leb-kwi \"they were nephews of princes\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 147"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Most frequent relationship term in epitaphs; Rilly reads a collateral kinsman, translated \"nephew\"; exact degree debated.",
+    "corpus_form": "yetmde",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 7266
+  },
+  {
+    "form": "ar",
+    "variants": [
+      "or"
+    ],
+    "gloss": "boy, son",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 115-116"
+      }
+    ],
+    "evidence_note": "Rilly 2010 via contexts and NES comparison; element -or in names (Netror).",
+    "corpus_form": "ar",
+    "corpus_variants": [],
+    "corpus_note": "short form; corpus tokens ar/ar- may be other words or name parts.",
+    "in_corpus": "token",
+    "corpus_token_count": 209
+  },
+  {
+    "form": "are-",
+    "variants": [
+      "are",
+      "erk-"
+    ],
+    "gloss": "take, receive (seize)",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "pp. 3, 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 116-117"
+      }
+    ],
+    "evidence_note": "Razzia contexts in royal narratives; NES *ar \"take\".",
+    "corpus_form": "are",
+    "corpus_variants": [],
+    "corpus_note": "short form; corpus token are may be another word.",
+    "in_corpus": "token",
+    "corpus_token_count": 396
+  },
+  {
+    "form": "dm-",
+    "variants": [
+      "dm"
+    ],
+    "gloss": "take, receive",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 122"
+      }
+    ],
+    "evidence_note": "Rilly 2010: 82-86 from royal texts; NES *dom- \"pick up, take\".",
+    "corpus_form": "dm",
+    "corpus_variants": [],
+    "corpus_note": "substring only, inside names (Sdmdekde, lXidmni); no clear attestation of the verb.",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "dime",
+    "variants": [],
+    "gloss": "cow",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 120-121"
+      }
+    ],
+    "evidence_note": "Counted livestock in royal texts (REM 0064, 0070); Lipinski suggests \"head (of cattle)\" instead.",
+    "corpus_form": "dime",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 4
+  },
+  {
+    "form": "ḫre",
+    "variants": [
+      "ḫr-",
+      "hre",
+      "xre"
+    ],
+    "gloss": "meal, food (eat)",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "pp. 3, 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 125"
+      }
+    ],
+    "evidence_note": "Reconstructed from funerary benediction C (\"x-mlo-l\", a good meal); NES *go(o)r \"eat\".",
+    "corpus_form": "xre",
+    "corpus_variants": [],
+    "corpus_note": "absent as a word; formula C writes x-mlE-l, read by Rilly as x(re) mlo-l.",
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "ḫlbi",
+    "variants": [
+      "hlbi",
+      "xlbi"
+    ],
+    "gloss": "bull, ox",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 123-124"
+      }
+    ],
+    "evidence_note": "Cattle offering lists (REM 0064, 0070); in royal protocols the same spelling may be a deity (Lipinski 2011).",
+    "corpus_form": "xlbi",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 4
+  },
+  {
+    "form": "pwrite",
+    "variants": [],
+    "gloss": "life",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 7, 9",
+        "note": "pwrite l-x-te \"Give him life!\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 135-136"
+      }
+    ],
+    "evidence_note": "Prayers for the king in temple texts, parallel to Egyptian ankh \"life\" formulas.",
+    "corpus_form": "pwrite",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "tke-",
+    "variants": [
+      "tke"
+    ],
+    "gloss": "love, revere",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 141-142"
+      }
+    ],
+    "evidence_note": "Royal epithet Mni tke parallels Egyptian mry Jmn \"beloved of Amun\".",
+    "corpus_form": "tke",
+    "corpus_variants": [],
+    "corpus_note": "mostly inside names (ateqiSitkemEli, twteNtkeli); one token tke.",
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "wle",
+    "variants": [],
+    "gloss": "dog",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "pp. 3, 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 145"
+      }
+    ],
+    "evidence_note": "Graffito REM 1165 at Musawwarat beside a drawn dog; NES *wel \"dog\".",
+    "corpus_form": "wle",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "yer",
+    "variants": [],
+    "gloss": "milk",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "pp. 3, 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 146"
+      }
+    ],
+    "evidence_note": "Rilly 2010 from textual contexts; NES *er- \"milk, breast\".",
+    "corpus_form": "yer",
+    "corpus_variants": [],
+    "corpus_note": "absent as a word; yer occurs only inside other words (yerike).",
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "aroẖe-",
+    "variants": [
+      "arohe",
+      "aroẖe"
+    ],
+    "gloss": "protect",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 117"
+      }
+    ],
+    "evidence_note": "Rilly 2004/2010 from royal and religious contexts; Lipinski compares Demotic hrh \"watch over\".",
+    "corpus_form": "arEXe",
+    "corpus_variants": [],
+    "corpus_note": "one token arEXetye in the Kharamadoye text.",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "nse",
+    "variants": [
+      "ns"
+    ],
+    "gloss": "sacrifice",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 135"
+      }
+    ],
+    "evidence_note": "Rilly 2004/2010 from offering contexts (ns-per).",
+    "corpus_form": "ns",
+    "corpus_variants": [],
+    "corpus_note": "short form; tokens ns/mns may be other words.",
+    "in_corpus": "token",
+    "corpus_token_count": 5
+  },
+  {
+    "form": "sdk",
+    "variants": [],
+    "gloss": "journey",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 3"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 138"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 99",
+        "note": "Millet (1977) read \"safely\""
+      }
+    ],
+    "evidence_note": "Prayers Wos-i Bedewi-k sdk p-ro-ḫe-ne for travel to Meroe; Millet translated \"safely\".",
+    "corpus_form": "sdk",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "sḫi",
+    "variants": [
+      "shi",
+      "sxi"
+    ],
+    "gloss": "small",
+    "category": "adjective",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 139"
+      }
+    ],
+    "evidence_note": "Listed among Rilly 2010's 43 translated words; no wider confirmation found.",
+    "corpus_form": "Sxi",
+    "corpus_variants": [],
+    "corpus_note": "absent as a word; Sxi occurs only inside names.",
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "tbo",
+    "variants": [
+      "tbe"
+    ],
+    "gloss": "two, second",
+    "category": "number",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 140",
+        "note": "marked with a query by Rilly"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 101"
+      }
+    ],
+    "evidence_note": "Rilly 2010: 140 marks the meaning with a query; Millet (1968) read tbE as \"two\" after pairs of names.",
+    "corpus_form": "tbE",
+    "corpus_variants": [],
+    "corpus_note": "tbE also occurs inside atbEs and tbEyet.",
+    "in_corpus": "token",
+    "corpus_token_count": 611
+  },
+  {
+    "form": "teneke",
+    "variants": [],
+    "gloss": "west",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 141"
+      }
+    ],
+    "evidence_note": "Rilly 2010 (cultural vocabulary, cardinal direction); no Nilo-Saharan parallel.",
+    "corpus_form": "teneke",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "yireqe",
+    "variants": [
+      "yereqe"
+    ],
+    "gloss": "south",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 147"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 102"
+      }
+    ],
+    "evidence_note": "Kharamadoye inscription: directional terms paired with frontier places; Rilly 2010.",
+    "corpus_form": "yereqe",
+    "corpus_variants": [
+      "yireqw"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "yirewke",
+    "variants": [],
+    "gloss": "east",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 147"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 102"
+      }
+    ],
+    "evidence_note": "Rilly 2010 from directional contexts.",
+    "corpus_form": "yirewke",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "ẖr",
+    "variants": [
+      "hr",
+      "ẖrw"
+    ],
+    "gloss": "north",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 126"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 95"
+      }
+    ],
+    "evidence_note": "Kharamadoye inscription: ẖrw ... pilqo-ke, northwards to Philae; Rilly 2010.",
+    "corpus_form": "Xr",
+    "corpus_variants": [],
+    "corpus_note": "stem inside Xrw (northward) and Xres in the Kharamadoye text.",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "kelw",
+    "variants": [
+      "kelwe"
+    ],
+    "gloss": "and, also",
+    "category": "other",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 86"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 103"
+      }
+    ],
+    "evidence_note": "Coordinates lists of persons and offerings in epitaphs and ostraca.",
+    "corpus_form": "kelw",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1765
+  },
+  {
+    "form": "abese",
+    "variants": [],
+    "gloss": "gazelle",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 411 (addendum)"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 102-103"
+      }
+    ],
+    "evidence_note": "Added by Rilly 2010 in the addendum among animal names.",
+    "corpus_form": "abes",
+    "corpus_variants": [],
+    "corpus_note": "only inside the personal name abesye.",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "pete",
+    "variants": [],
+    "gloss": "snake",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 411 (addendum)"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 103"
+      }
+    ],
+    "evidence_note": "Added by Rilly 2010 in the addendum among animal names.",
+    "corpus_form": "pete",
+    "corpus_variants": [],
+    "corpus_note": "only inside other words (atpete, tpeteNteli).",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "abore",
+    "variants": [],
+    "gloss": "elephant",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 370-371"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 103"
+      }
+    ],
+    "evidence_note": "Rilly 2010: 370-371; Lipinski 2011 calls the meaning well known.",
+    "corpus_form": "abEre",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "ms",
+    "variants": [
+      "mash",
+      "mš",
+      "mos"
+    ],
+    "gloss": "sun (god)",
+    "category": "deity",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 5",
+        "note": "Mash (sun god) in proto-Meroitic names"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 192-193, 371-372"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Divine name in proto-Meroitic names and Meroitic titles; Old Nubian masal \"sun\" borrowed from Meroitic masa-l.",
+    "corpus_form": "mS",
+    "corpus_variants": [],
+    "corpus_note": "Millet convention mS (m + plain s); the corpus also has mS inside names (mStrq).",
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "nob",
+    "variants": [],
+    "gloss": "slave; Nubian",
+    "category": "people",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "nob \"slave\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9",
+        "note": "nob \"Nubian\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2011,
+        "title": "Recent Research on Meroitic, the Ancient Language of Sudan",
+        "publication": "ITYOPIS 1: 10-24",
+        "url": "http://www.ityopis.org/Issues-1_files/ITYOPIS-I-Rilly.pdf",
+        "pages": "p. 16"
+      }
+    ],
+    "evidence_note": "Name of the Noba people, also used for captives; Proto-Nubian *nogu.",
+    "corpus_form": "nEb",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "qore",
+    "variants": [
+      "qor",
+      "qr"
+    ],
+    "gloss": "ruler, king",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 136"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Royal title of male and female sovereigns in royal inscriptions (qore Tanyidamani; Amanirenas qore).",
+    "corpus_form": "qEre",
+    "corpus_variants": [
+      "qEr",
+      "qr"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 5783
+  },
+  {
+    "form": "ktke",
+    "variants": [
+      "kdke"
+    ],
+    "gloss": "queen-mother (Candace)",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 8-9"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Greek kandakē, Latin Candace, Egyptian kntky; nasal before consonant not written.",
+    "corpus_form": "ktke",
+    "corpus_variants": [
+      "kdke"
+    ],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "pqr",
+    "variants": [
+      "pqore"
+    ],
+    "gloss": "prince, crown prince",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 8-9"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "paqar and peshte are princely titles; paqar takes precedence"
+      }
+    ],
+    "evidence_note": "Title of royal princes such as Akinidad (pqr qorise \"prince of the ruler\").",
+    "corpus_form": "pqr",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 5348
+  },
+  {
+    "form": "ant",
+    "variants": [
+      "at"
+    ],
+    "gloss": "priest, prophet",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 7-9",
+        "note": "< Egyptian hm-ntr"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 99"
+      }
+    ],
+    "evidence_note": "Egyptian loan from hm-ntr \"prophet\" (Coptic hont); ant Mnp \"priest of Amanap\".",
+    "corpus_form": "ant",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1573
+  },
+  {
+    "form": "apote",
+    "variants": [
+      "apete",
+      "epote"
+    ],
+    "gloss": "envoy",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 8-9",
+        "note": "< Egyptian wpwtj"
+      },
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 19",
+        "note": "apote arome-li-se from Egyptian wpw.tj"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 11",
+        "note": "apete = Demotic wpte \"envoy\""
+      }
+    ],
+    "evidence_note": "Egyptian loan wpwtj \"messenger\"; apote arome-li-se \"envoy to Rome\".",
+    "corpus_form": "apEte",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1384
+  },
+  {
+    "form": "pelmos",
+    "variants": [
+      "plmos",
+      "pelamos"
+    ],
+    "gloss": "general (strategos)",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "< Egyptian p3-mr-msa"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 18",
+        "note": "pelmos ato-li-se, pelmos adb-li-se"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 22"
+      }
+    ],
+    "evidence_note": "Egyptian loan p3-mr-msa \"the general\"; read /pelamusa/.",
+    "corpus_form": "pelmES",
+    "corpus_variants": [
+      "pElmES"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 638
+  },
+  {
+    "form": "ssor",
+    "variants": [
+      "sesor"
+    ],
+    "gloss": "scribe",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "< Egyptian ss"
+      }
+    ],
+    "evidence_note": "Egyptian loan from ss \"scribe\".",
+    "corpus_form": "SSEr",
+    "corpus_variants": [
+      "SSer"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 977
+  },
+  {
+    "form": "tewiseti",
+    "variants": [
+      "tewisti"
+    ],
+    "gloss": "adoration",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "< Demotic t3-wst.t"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 9, 22",
+        "note": "tewisti, \"the adoration\" (proskynema) in Philae graffiti"
+      }
+    ],
+    "evidence_note": "Demotic loan \"adoration\"; opens pilgrims' proskynema graffiti.",
+    "corpus_form": "tewisti",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 793
+  },
+  {
+    "form": "nbr",
+    "variants": [],
+    "gloss": "gold",
+    "category": "noun",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 9",
+        "note": "< Egyptian nbw"
+      }
+    ],
+    "evidence_note": "Egyptian loan nbw \"gold\".",
+    "corpus_form": "nbr",
+    "corpus_variants": [],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "wos",
+    "variants": [
+      "wosi"
+    ],
+    "gloss": "Isis",
+    "category": "deity",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 10",
+        "note": "Wos-i \"O Isis\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 23, 34"
+      }
+    ],
+    "evidence_note": "Invocation opening epitaphs, Wos-i \"O Isis!\", from Egyptian 3st (Coptic Ese).",
+    "corpus_form": "wES",
+    "corpus_variants": [
+      "wESi"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 6549
+  },
+  {
+    "form": "sorey",
+    "variants": [
+      "asori",
+      "sori",
+      "asorey"
+    ],
+    "gloss": "Osiris",
+    "category": "deity",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 10",
+        "note": "(A)sorey-i \"O Osiris\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9",
+        "note": "Asori \"Osiris\" read /usuri/"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 11",
+        "note": "Asheri = Egyptian Wsr, Osiris"
+      }
+    ],
+    "evidence_note": "Second member of the epitaph invocation (A)sorey-i \"O Osiris!\", from Egyptian Wsir.",
+    "corpus_form": "SEre",
+    "corpus_variants": [
+      "SEri",
+      "SEreyi",
+      "aSEri",
+      "Seri"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 4231
+  },
+  {
+    "form": "amni",
+    "variants": [
+      "mni",
+      "amn"
+    ],
+    "gloss": "Amun",
+    "category": "deity",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 4"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2011,
+        "title": "Recent Research on Meroitic, the Ancient Language of Sudan",
+        "publication": "ITYOPIS 1: 10-24",
+        "url": "http://www.ityopis.org/Issues-1_files/ITYOPIS-I-Rilly.pdf",
+        "pages": "p. 13"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "Amani, Eg. Amun"
+      }
+    ],
+    "evidence_note": "Name of the god Amun (Egyptian Jmn), main god of the Meroites; in royal names (Natakamani).",
+    "corpus_form": "amni",
+    "corpus_variants": [
+      "mni"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 6
+  },
+  {
+    "form": "amnpte",
+    "variants": [
+      "amnp",
+      "mnp"
+    ],
+    "gloss": "Amun of Napata",
+    "category": "deity",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9",
+        "note": "Amnpte read /aman-napat/, Egyptian Jmn-Npt"
+      }
+    ],
+    "evidence_note": "From Egyptian Jmn-Npt \"Amun of Napata\"; ant Mnp \"priest of Amanap\".",
+    "corpus_form": "amnp",
+    "corpus_variants": [
+      "mnp",
+      "amnpte"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 15
+  },
+  {
+    "form": "apedemk",
+    "variants": [
+      "apdmk",
+      "pdmk"
+    ],
+    "gloss": "Apedemak (lion god)",
+    "category": "deity",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2011,
+        "title": "Recent Research on Meroitic, the Ancient Language of Sudan",
+        "publication": "ITYOPIS 1: 10-24",
+        "url": "http://www.ityopis.org/Issues-1_files/ITYOPIS-I-Rilly.pdf",
+        "pages": "p. 16",
+        "note": "Apede-mak \"God Apede\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 5"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 5"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "Apezemak, the Lion-god"
+      }
+    ],
+    "evidence_note": "Lion god (Griffith 1911: \"the Lion-god\"); Rilly analyses Apede + mk \"god\", with Apede from Proto-NES *Ebede \"Creator God\".",
+    "corpus_form": "apedemk",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "bedewe",
+    "variants": [
+      "medewe",
+      "bedewi",
+      "medewi"
+    ],
+    "gloss": "Meroe",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 6",
+        "note": "Medewi, later Bedewi = Eg. Mrw.t, Greek Meroe"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "Bedewi-te \"in Meroe\""
+      }
+    ],
+    "evidence_note": "Matches Egyptian Mrw.t and Greek Meroe; intervocalic d heard as r by Egyptians and Greeks.",
+    "corpus_form": "bedewe",
+    "corpus_variants": [
+      "bedewi",
+      "medewi"
+    ],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "tolkte",
+    "variants": [],
+    "gloss": "Naga (city)",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 6"
+      }
+    ],
+    "evidence_note": "Meroitic name of the city of Naga, from royal temple inscriptions.",
+    "corpus_form": "tElkte",
+    "corpus_variants": [],
+    "in_corpus": false,
+    "corpus_token_count": 0
+  },
+  {
+    "form": "qoreti",
+    "variants": [],
+    "gloss": "Qurta (city)",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 5"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      }
+    ],
+    "evidence_note": "Rilly cites the Greek transcription of Qurta in Lower Nubia; read /kwurti/.",
+    "corpus_form": "qEreti",
+    "corpus_variants": [],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "akine",
+    "variants": [
+      "akin"
+    ],
+    "gloss": "Lower Nubia",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9"
+      },
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 20",
+        "note": "northern Meroitic province of Akine"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "Akin, place name at Shablul and Karanog"
+      }
+    ],
+    "evidence_note": "Province of Lower Nubia governed by the peseto (Akinidad); Rilly reads /akin(e)/.",
+    "corpus_form": "akiN",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "qo",
+    "variants": [],
+    "gloss": "this (demonstrative)",
+    "category": "other",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "qo \"this\"; Amnisxeto qo \"This is Amanishakheto\""
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 93"
+      }
+    ],
+    "evidence_note": "Nomination clause N qo-wi \"this is N\" in epitaphs; older readings (Griffith, Millet) took qe/qo as \"noble one\".",
+    "corpus_form": "qE",
+    "corpus_variants": [
+      "qe"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 9493
+  },
+  {
+    "form": "peseto",
+    "variants": [
+      "pesto",
+      "peste",
+      "pesate"
+    ],
+    "gloss": "viceroy",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "pp. 18, 20",
+        "note": "peseto (viceroy); Akinidad installed as first governor (peseto) of Akine"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "peshte/peste: a princely title"
+      },
+      {
+        "author": "Penn Museum",
+        "year": null,
+        "title": "Karanog, Wealthy Capital of a Lower Nubian Province",
+        "publication": "Expedition Magazine",
+        "url": "https://www.penn.museum/sites/expedition/karanog-wealthy-capital-of-a-lower-nubian-province/",
+        "note": "peshto, the princely governor of Lower Nubia"
+      }
+    ],
+    "evidence_note": "Title of the governors (viceroys) of the province Akine (Lower Nubia), e.g. Akinidad; also in Demotic and Greek graffiti at Philae.",
+    "corpus_form": "pestE",
+    "corpus_variants": [
+      "peStE"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 2283
+  },
+  {
+    "form": "perite",
+    "variants": [
+      "prite"
+    ],
+    "gloss": "agent (administrator)",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 22",
+        "note": "loan-word perite, Eg. \"the Agent\""
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic script",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_script",
+        "note": "Coptic prit \"the agent\" -> Meroitic perite"
+      }
+    ],
+    "evidence_note": "Egyptian loan (Coptic prit \"agent\"); perite Wos-se \"agent of Isis\" in Philae and Karanog texts.",
+    "corpus_form": "perite",
+    "corpus_variants": [
+      "prite"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 993
+  },
+  {
+    "form": "beloloke",
+    "variants": [
+      "belileke",
+      "beleleke"
+    ],
+    "gloss": "priest (a rank)",
+    "category": "title",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "belileke of Amanap or of Amun, in Napata or Pedeme"
+      }
+    ],
+    "evidence_note": "Title attached to gods (beloloke of Amanap / of Amun) and temple towns, hence a priestly rank; exact office unknown.",
+    "corpus_form": "belElEke",
+    "corpus_variants": [
+      "belilEke"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 15412
+  },
+  {
+    "form": "arome",
+    "variants": [
+      "areme",
+      "arme"
+    ],
+    "gloss": "Rome",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 11",
+        "note": "Areme = Demotic Hrme \"Rome\""
+      },
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 19",
+        "note": "apote arome-li-se \"envoy to the Roman Empire\""
+      }
+    ],
+    "evidence_note": "Matches Demotic Hrme in the title \"great envoy to Rome\" (apote arome-li-se) of Philae graffiti.",
+    "corpus_form": "arEme",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 199
+  },
+  {
+    "form": "atiye",
+    "variants": [
+      "atiyete"
+    ],
+    "gloss": "Sedeinga",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 9",
+        "note": "name of Sedeinga, Egyptian \"fortress (temple) of Tiye\""
+      },
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 20",
+        "note": "sleqene Atiye-te, an official at Sedeinga"
+      }
+    ],
+    "evidence_note": "From Egyptian Hwt-Tiye, the temple of Queen Tiye at Sedeinga.",
+    "corpus_form": "atiye",
+    "corpus_variants": [],
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "npte",
+    "variants": [
+      "napate",
+      "npt"
+    ],
+    "gloss": "Napata",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "Napate, Napata (Eg. Npt)"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9",
+        "note": "Amnpte = Egyptian Jmn-Npt \"Amun of Napata\""
+      }
+    ],
+    "evidence_note": "Egyptian Npt, Greek Napata; also inside the god name Amnpte \"Amun of Napata\".",
+    "corpus_form": "npte",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 4
+  },
+  {
+    "form": "pilqe",
+    "variants": [
+      "pileqe",
+      "pilqo",
+      "pilaqe"
+    ],
+    "gloss": "Philae",
+    "category": "place",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 8, 34",
+        "note": "name of Philae, Demotic P-iy-lq, Coptic Pilak; \"Wos Pileq-te-li\" = Isis in Philae"
+      }
+    ],
+    "evidence_note": "Matches Demotic and Coptic names of Philae; Wos Pilqe-te-li \"Isis in Philae\" in pilgrims' graffiti.",
+    "corpus_form": "pilqe",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 627
+  },
+  {
+    "form": "pẖrs",
+    "variants": [
+      "phrs",
+      "pakharas",
+      "pakhoras"
+    ],
+    "gloss": "Faras (Pachoras)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 62, 82",
+        "note": "Pakhoras (Faras); Pakharas (Faras?)"
+      }
+    ],
+    "evidence_note": "Matches Greek/Coptic Pachoras, the ancient name of Faras; Griffith once marks the identification with a query.",
+    "corpus_form": "pXrs",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 3
+  },
+  {
+    "form": "pedeme",
+    "variants": [
+      "pezeme"
+    ],
+    "gloss": "Qasr Ibrim (Primis)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Trismegistos (KU Leuven)",
+        "year": 2026,
+        "title": "Trismegistos Places, record 1916: Qasr Ibrim (Primis / Pedeme)",
+        "publication": "Trismegistos database",
+        "url": "https://www.trismegistos.org/place/1916",
+        "note": "Pedeme listed as the Meroitic name of Qasr Ibrim / Primis"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "Griffith read Pezeme and took it for Amara"
+      }
+    ],
+    "evidence_note": "Modern view: Pedeme > Greek/Latin Primis (Qasr Ibrim); Griffith 1911 identified it with Amara instead.",
+    "corpus_form": "pedeme",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 1
+  },
+  {
+    "form": "kisri",
+    "variants": [],
+    "gloss": "Caesar (Roman emperor)",
+    "category": "title",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 9",
+        "note": "Kisri \"Caesar\", read /kaisari/"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 9"
+      }
+    ],
+    "evidence_note": "Transcription of Greek Kaisar; only the second element of the diphthong is written.",
+    "corpus_form": "kiSri",
+    "corpus_variants": [],
+    "corpus_note": "corpus hits come from one repeated Lower Nubian text (kiSri mkesmeN axid ...); whether kiSri means \"Caesar\" there has not been checked.",
+    "in_corpus": "token",
+    "corpus_token_count": 1173
+  },
+  {
+    "form": "adb",
+    "variants": [
+      "adebe"
+    ],
+    "gloss": "land, territory",
+    "category": "noun",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Josefine Kuckertz",
+        "year": 2021,
+        "title": "Meroe and Egypt",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/6061m848",
+        "pages": "p. 18",
+        "note": "pelmos adb-li-se \"strategos of the land\""
+      }
+    ],
+    "evidence_note": "Title pelmos adb-li-se, contrasted with pelmos ato-li-se \"general of the water\"; Millet read \"desert\".",
+    "corpus_form": "adb",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 4
+  },
+  {
+    "form": "qes",
+    "variants": [
+      "qos",
+      "qesw"
+    ],
+    "gloss": "Kush",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary",
+        "note": "Meroitic toponym qes / qos, citing Rilly 2007 and 2011"
+      }
+    ],
+    "evidence_note": "Endonym matching Egyptian K3s \"Kush\", attested in royal inscriptions (Hamadab stela).",
+    "corpus_form": "qes",
+    "corpus_variants": [
+      "qeS"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 14
+  },
+  {
+    "form": "tkk",
+    "variants": [
+      "tk-"
+    ],
+    "gloss": "plunder, pillage",
+    "category": "verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 77-78, 142-143",
+        "note": "derived from tk \"take\""
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 102"
+      }
+    ],
+    "evidence_note": "Royal war narratives (Akinidad stela REM 1003, Hamadab stela) in razzia passages.",
+    "corpus_form": "tkk",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 7
+  },
+  {
+    "form": "sye",
+    "variants": [
+      "saye",
+      "shaye"
+    ],
+    "gloss": "Sai (island)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 65, 82",
+        "note": "\"Shaye is the island of Sai\""
+      }
+    ],
+    "evidence_note": "Place name in titles of Karanog epitaphs (X in Shaye); Griffith equates it with Sai island.",
+    "corpus_form": "Sye",
+    "corpus_variants": [],
+    "corpus_note": "substring only, in Syeteli (\"in Sai\").",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "tebwe",
+    "variants": [
+      "tebawe"
+    ],
+    "gloss": "Abaton (Philae)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 62, 82",
+        "note": "perhaps Tebawe, the \"Holy Place\" (Abaton) in or near Philae"
+      }
+    ],
+    "evidence_note": "Paired with Philae in phrases naming forms of Isis and Osiris (Wos Pilqe-te-l, Wos Tebwe-te-l); Griffith hedges with \"perhaps\".",
+    "corpus_form": "tebwe",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 825
+  },
+  {
+    "form": "ḫrpḫe",
+    "variants": [
+      "ḫrpḫne",
+      "xrpxe",
+      "xrpxN",
+      "kharpkhe"
+    ],
+    "gloss": "governor (?)",
+    "category": "title",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Nicholas B. Millet",
+        "year": 1968,
+        "title": "Meroitic Nubia (PhD dissertation, Yale University)",
+        "publication": "University Microfilms; cited via the transcription MilletExamples.txt in the Otten repository, not checked against the original",
+        "url": null,
+        "pages": "pp. 54, 77",
+        "note": "xrpxN pXrs-te \"governor of Faras\""
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 62, 70",
+        "note": "kharpakhe / kharpkhan in Pakharas, a title, untranslated"
+      }
+    ],
+    "evidence_note": "High administrative title often tied to a place (ḫrpḫne Pẖrs-te \"in Faras\"); Griffith left it untranslated; the gloss \"governor\" rests on Millet only.",
+    "corpus_form": "xrpxN",
+    "corpus_variants": [
+      "xrpxe"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 2354
+  }
+]

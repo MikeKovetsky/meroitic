@@ -122,7 +122,7 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Seen in -l/-leb, -kh(e)/-bkh(e) and plural verb forms; compared with Proto-Nubian *-gu.",
+    "evidence_note": "Seen in -l/-leb, -ḫ(e)/-bḫ(e) and plural verb forms; Rilly derives it from Proto-NES *-gu.",
     "corpus_form": "b",
     "corpus_variants": []
   },
@@ -284,7 +284,7 @@
     "variants": [
       "-k"
     ],
-    "function": "local postposition in \"from X to Y\" phrases (ablative \"from\" or terminative \"as far as\"); allative \"to\" in Rilly's reading of Bedewi-k sdk",
+    "function": "local postposition in \"from X to Y\" phrases (ablative \"from\" or terminative \"as far as\"); allative \"to\" in Lipinski's reading of Bedewi-k sdk \"to Meroe\"",
     "confidence": "debated",
     "sources": [
       {
@@ -302,7 +302,7 @@
         "publication": "Rocznik Orientalistyczny 64(2): 87-104",
         "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
         "pages": "p. 99",
-        "note": "Bedewi-k sdk p-ro-he-ne, \"to Meroe\""
+        "note": "Bedewi-k sdk p-ro-ḫe-ne, \"to Meroe\""
       }
     ],
     "evidence_note": "Kharamadoye inscription and travel prayers; scholars disagree on the direction.",
@@ -399,7 +399,7 @@
       "-lo",
       "-l-o-wi"
     ],
-    "function": "predicative ending of epitaph clauses: determiner -l + copula -o + emphatic -wi, \"he/she is (was) the ...\" (X tedhe-lowi \"born of X\")",
+    "function": "predicative ending of epitaph clauses: determiner -l + copula -o + emphatic -wi, \"he/she is (was) the ...\" (X tedḫe-lowi \"born of X\")",
     "confidence": "certain",
     "sources": [
       {
@@ -424,7 +424,8 @@
     "evidence_note": "Ends nearly every descriptive clause of epitaphs; Rilly segments it as -l-o-wi.",
     "corpus_form": "lEwi",
     "corpus_variants": [
-      "lE"
+      "lE",
+      "lewi"
     ]
   },
   {
@@ -517,15 +518,17 @@
     "evidence_note": "Follows the deceased's name after the invocation; older readings (Griffith, Millet) took qo/qe as \"noble\".",
     "corpus_form": "qEwi",
     "corpus_variants": [
-      "qE"
+      "qE",
+      "qewi",
+      "qe"
     ]
   },
   {
-    "form": "-kh(e)",
+    "form": "-ḫ(e)",
     "variants": [
       "-x",
       "-xe",
-      "-ḫe"
+      "-kh(e)"
     ],
     "function": "verbal dative / object pronoun, 3rd person singular (\"to him/her\"), placed inside the verb",
     "confidence": "probable",
@@ -548,17 +551,17 @@
         "pages": "p. 158"
       }
     ],
-    "evidence_note": "Royal prayers for life; contrasts with plural -bkh(e).",
+    "evidence_note": "Royal prayers for life; contrasts with plural -bḫ(e).",
     "corpus_form": "x",
     "corpus_variants": [],
     "corpus_note": "not separable by spelling alone; it sits inside verb forms."
   },
   {
-    "form": "-bkh(e)",
+    "form": "-bḫ(e)",
     "variants": [
       "-bx",
       "-bxe",
-      "-bḫe"
+      "-bkh(e)"
     ],
     "function": "verbal dative / object pronoun, plural (\"to them\"); appears in benedictions for several deceased",
     "confidence": "probable",
@@ -581,7 +584,7 @@
         "pages": "p. 158"
       }
     ],
-    "evidence_note": "Same prayers with plural beneficiaries; plural funerary benedictions add -bkh- to the verb.",
+    "evidence_note": "Same prayers with plural beneficiaries; plural funerary benedictions add -bḫ- to the verb.",
     "corpus_form": "bx",
     "corpus_variants": [],
     "corpus_note": "e.g. bSixrbxes, bSiXebxes in plural epitaphs."
@@ -633,7 +636,7 @@
         "pages": "pp. 19-30 (Formulas A to X)"
       }
     ],
-    "evidence_note": "Benedictions A (ato mhe p-s-...-kete, water) and B (at mhe p-s-...-kete, bread) after the invocation of Isis and Osiris.",
+    "evidence_note": "Benedictions A (ato mẖe ps-...-kete, water) and B (at mẖe ps-...-kete, bread) after the invocation of Isis and Osiris.",
     "corpus_form": "kete",
     "corpus_variants": [
       "kes"
@@ -693,7 +696,7 @@
         "pages": "pp. 19-30 (Formulas A to X)"
       }
     ],
-    "evidence_note": "Constant in formulas A and B (ato mhe ps-...-kete, at mhe ps-...-kete); segmentation varies between authors.",
+    "evidence_note": "Constant in formulas A and B (ato mẖe ps-...-kete, at mẖe ps-...-kete); segmentation varies between authors.",
     "corpus_form": "pS",
     "corpus_variants": [
       "piS",
@@ -743,10 +746,10 @@
         "publication": "Rocznik Orientalistyczny 64(2): 87-104",
         "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
         "pages": "pp. 93, 104",
-        "note": "Rilly 2010: 398-399; kdi-m-dhe \"woman who has not given birth\" (Millet 1996)"
+        "note": "Rilly 2010: 398-399; kdi-m-dḫe \"woman who has not given birth\" (Millet 1996)"
       }
     ],
-    "evidence_note": "Rilly 2010 compares Proto-NES negation; kdi-m-dhe in epitaphs.",
+    "evidence_note": "Rilly 2010 compares Proto-NES negation; kdi-m-dḫe in epitaphs.",
     "corpus_form": null,
     "corpus_variants": []
   },
@@ -778,14 +781,14 @@
     "corpus_variants": []
   },
   {
-    "form": "tedhe",
+    "form": "tedḫe",
     "variants": [
-      "tedḫe",
-      "tdhe",
-      "yedhe",
-      "dhe"
+      "tdḫe",
+      "yedḫe",
+      "dḫe",
+      "tedhe"
     ],
-    "function": "filiation predicate for the mother: mother's name + tedhe-lowi \"(he/she was) born of\"",
+    "function": "filiation predicate for the mother: mother's name + tedḫe-lowi \"(he/she was) born of\"",
     "confidence": "certain",
     "sources": [
       {

@@ -11,3 +11,5 @@ Started 2026-11-08 22:54 PST; budget ends about 03:50.
 - D2 funerary discovery: aca80ba306fd7bf24
 - C_cloze restoration: a6720a3692fb8ae86
 - Y_f0 synthetic: aa9198cc40161c373 · Y_f1 synthetic: a6878dc1f8df5ece8
+- F_recall open recall: a6fba23c58d3d882d
+- D1 Hamadab: a6d17b6b9c680f711 · D3 Philae: abc9ea093b4c9df77

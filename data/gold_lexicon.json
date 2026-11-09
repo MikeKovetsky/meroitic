@@ -35,9 +35,8 @@
     ],
     "evidence_note": "Royal war narratives count captured abr beside kdi (men vs women); Griffith-era translation kept by Rilly.",
     "corpus_form": "abr",
-    "corpus_variants": [
-      "br"
-    ],
+    "corpus_variants": [],
+    "corpus_note": "also br- after loss of initial a (brleb \"the men\" in the Kharamadoye text); br alone matches many names.",
     "in_corpus": "token",
     "corpus_token_count": 5
   },
@@ -115,7 +114,7 @@
         "pages": "p. 118"
       }
     ],
-    "evidence_note": "Griffith-era translation from offering contexts, kept in Rilly's list of basic words.",
+    "evidence_note": "Griffith-era translation; Rilly 2004 lists \"meat\" among words solidly translated since Griffith.",
     "corpus_form": "asr",
     "corpus_variants": [],
     "in_corpus": "token",
@@ -160,7 +159,7 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Funerary benediction B (\"at mhe ...\", abundant bread), parallel to the Egyptian offering of bread and water.",
+    "evidence_note": "Funerary benediction B (\"at mẖe ...\", abundant bread); Griffith-era translation of the stereotyped epitaph formulas.",
     "corpus_form": "at",
     "corpus_variants": [],
     "in_corpus": "token",
@@ -216,7 +215,7 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Funerary benediction A (\"ato mhe ...\", abundant water) for libation; Greek Asta- in Nile river names (Astaboras, Astapous).",
+    "evidence_note": "Funerary benediction A (\"ato mẖe ...\", abundant water) on offering tables; Greek Asta- in Nile river names (Astaboras, Astapous).",
     "corpus_form": "atE",
     "corpus_variants": [
       "ate"
@@ -343,18 +342,19 @@
         "pages": "pp. 130-132"
       }
     ],
-    "evidence_note": "Prayers to gods for the king: pwrite l-x-te \"give him life\", parallel to Egyptian di ankh formulas.",
+    "evidence_note": "Royal prayers to the gods: pwrite l-ḫ-te \"Give him life!\" (REM 1151).",
     "corpus_form": "l",
     "corpus_variants": [],
     "corpus_note": "absent: the stem is not separable in the corpus; the token l there is the article (FHN royal texts).",
     "in_corpus": false,
-    "corpus_token_count": 5826
+    "corpus_token_count": 0
   },
   {
-    "form": "lh",
+    "form": "lẖ",
     "variants": [
+      "lh",
       "lx",
-      "lẖ"
+      "laẖ"
     ],
     "gloss": "great, elder",
     "category": "adjective",
@@ -401,16 +401,16 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Titles and epithets (mk-lh \"great god\", pelmos-lh \"chief general\"); kdite-lh \"elder sister\". Spelled lẖ in Hintze/Rilly 2010.",
+    "evidence_note": "Titles and epithets (mk-lẖ \"great god\", pelmos-lẖ \"chief general\"); kdite-lẖ \"elder sister\". Rilly 2016 prints it lx (font).",
     "corpus_form": "lX",
     "corpus_variants": [],
     "in_corpus": "token",
     "corpus_token_count": 1622
   },
   {
-    "form": "mhe",
+    "form": "mẖe",
     "variants": [
-      "mẖe",
+      "mhe",
       "mḫe"
     ],
     "gloss": "abundant, plenty",
@@ -442,7 +442,7 @@
         "pages": "p. 133"
       }
     ],
-    "evidence_note": "Funerary benedictions ato mhe / at mhe \"abundant water / bread\"; also spelled with the other h sign.",
+    "evidence_note": "Funerary benedictions ato mẖe / at mẖe \"abundant water / bread\"; also spelled mḫe (Lipinski 2011: 97).",
     "corpus_form": "mXe",
     "corpus_variants": [
       "mxe"
@@ -791,19 +791,20 @@
         "note": "mkdi < mk + kdi"
       }
     ],
-    "evidence_note": "Compound of mk \"god\" and kdi \"woman\" used to mark female deities (Wos mkdi-lh \"Isis the great goddess\").",
+    "evidence_note": "Compound of mk \"god\" and kdi \"woman\" used to mark female deities (Wos mkdi-lẖ \"Isis the great goddess\").",
     "corpus_form": "mkdi",
     "corpus_variants": [],
     "in_corpus": "token",
     "corpus_token_count": 3
   },
   {
-    "form": "tedhe",
+    "form": "tedḫe",
     "variants": [
-      "tedḫe",
-      "tdhe",
-      "dhe",
-      "edhe"
+      "tdḫe",
+      "edḫe",
+      "dḫe",
+      "yedḫe",
+      "tedhe"
     ],
     "gloss": "born of (mother)",
     "category": "kinship",
@@ -850,7 +851,7 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Filiation clause of epitaphs: mother's name + tedhe-lowi; Griffith identified it from the female names it follows.",
+    "evidence_note": "Filiation clause of epitaphs: mother's name + tedḫe-lowi; Griffith 1911 already glossed it \"to bear\".",
     "corpus_form": "tedxe",
     "corpus_variants": [
       "tdxe"
@@ -1081,7 +1082,7 @@
         "pages": "p. 122"
       }
     ],
-    "evidence_note": "Royal narratives and offering lists; NES *dom- \"pick up, take\".",
+    "evidence_note": "Rilly 2010: 82-86 from royal texts; NES *dom- \"pick up, take\".",
     "corpus_form": "dm",
     "corpus_variants": [],
     "corpus_note": "substring only, inside names (Sdmdekde, lXidmni); no clear attestation of the verb.",
@@ -1127,11 +1128,11 @@
     "corpus_token_count": 4
   },
   {
-    "form": "hre",
+    "form": "ḫre",
     "variants": [
-      "ḫre",
-      "xre",
-      "hr-"
+      "ḫr-",
+      "hre",
+      "xre"
     ],
     "gloss": "meal, food (eat)",
     "category": "noun",
@@ -1164,17 +1165,15 @@
     ],
     "evidence_note": "Reconstructed from funerary benediction C (\"x-mlo-l\", a good meal); NES *go(o)r \"eat\".",
     "corpus_form": "xre",
-    "corpus_variants": [
-      "xr"
-    ],
+    "corpus_variants": [],
     "corpus_note": "absent as a word; formula C writes x-mlE-l, read by Rilly as x(re) mlo-l.",
     "in_corpus": false,
     "corpus_token_count": 0
   },
   {
-    "form": "hlbi",
+    "form": "ḫlbi",
     "variants": [
-      "ḫlbi",
+      "hlbi",
       "xlbi"
     ],
     "gloss": "bull, ox",
@@ -1378,10 +1377,10 @@
     "corpus_token_count": 0
   },
   {
-    "form": "arohe-",
+    "form": "aroẖe-",
     "variants": [
-      "aroẖe",
-      "arohe"
+      "arohe",
+      "aroẖe"
     ],
     "gloss": "protect",
     "category": "verb",
@@ -1477,16 +1476,17 @@
         "note": "Millet (1977) read \"safely\""
       }
     ],
-    "evidence_note": "Prayers \"Wos-i Bedewi-k sdk p-ro-he-ne\" for travel to Meroe; Millet translated \"safely\".",
+    "evidence_note": "Prayers Wos-i Bedewi-k sdk p-ro-ḫe-ne for travel to Meroe; Millet translated \"safely\".",
     "corpus_form": "sdk",
     "corpus_variants": [],
     "in_corpus": false,
     "corpus_token_count": 0
   },
   {
-    "form": "shi",
+    "form": "sḫi",
     "variants": [
-      "sḫi"
+      "shi",
+      "sxi"
     ],
     "gloss": "small",
     "category": "adjective",
@@ -1535,9 +1535,10 @@
         "pages": "p. 101"
       }
     ],
-    "evidence_note": "Follows pairs of persons in epitaphs (\"the two X\"); Rilly marks the meaning as uncertain.",
+    "evidence_note": "Rilly 2010: 140 marks the meaning with a query; Millet (1968) read tbE as \"two\" after pairs of names.",
     "corpus_form": "tbE",
     "corpus_variants": [],
+    "corpus_note": "tbE also occurs inside atbEs and tbEyet.",
     "in_corpus": "token",
     "corpus_token_count": 611
   },
@@ -1636,9 +1637,10 @@
     "corpus_token_count": 0
   },
   {
-    "form": "hr",
+    "form": "ẖr",
     "variants": [
-      "ẖr"
+      "hr",
+      "ẖrw"
     ],
     "gloss": "north",
     "category": "noun",
@@ -1661,7 +1663,7 @@
         "pages": "p. 95"
       }
     ],
-    "evidence_note": "Kharamadoye inscription: \"hrw ... pilqo-ke\" northwards from Philae; Rilly 2010.",
+    "evidence_note": "Kharamadoye inscription: ẖrw ... pilqo-ke, northwards to Philae; Rilly 2010.",
     "corpus_form": "Xr",
     "corpus_variants": [],
     "corpus_note": "stem inside Xrw (northward) and Xres in the Kharamadoye text.",
@@ -1673,7 +1675,7 @@
     "variants": [
       "kelwe"
     ],
-    "gloss": "and, as well as",
+    "gloss": "and, also",
     "category": "other",
     "confidence": "probable",
     "sources": [
@@ -1799,7 +1801,7 @@
       "mš",
       "mos"
     ],
-    "gloss": "sun, sun god (Mash)",
+    "gloss": "sun (god)",
     "category": "deity",
     "confidence": "probable",
     "sources": [
@@ -1909,7 +1911,7 @@
         "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
       }
     ],
-    "evidence_note": "Precedes names of known rulers in royal inscriptions; used for male and female sovereigns.",
+    "evidence_note": "Royal title of male and female sovereigns in royal inscriptions (qore Tanyidamani; Amanirenas qore).",
     "corpus_form": "qEre",
     "corpus_variants": [
       "qEr",
@@ -1975,6 +1977,15 @@
         "publication": "UCLA Encyclopedia of Egyptology",
         "url": "https://escholarship.org/uc/item/3128r3sw",
         "pages": "pp. 8-9"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 55",
+        "note": "paqar and peshte are princely titles; paqar takes precedence"
       }
     ],
     "evidence_note": "Title of royal princes such as Akinidad (pqr qorise \"prince of the ruler\").",
@@ -2134,7 +2145,9 @@
     ],
     "evidence_note": "Egyptian loan from ss \"scribe\".",
     "corpus_form": "SSEr",
-    "corpus_variants": [],
+    "corpus_variants": [
+      "SSer"
+    ],
     "in_corpus": "token",
     "corpus_token_count": 977
   },
@@ -2282,7 +2295,8 @@
     "corpus_variants": [
       "SEri",
       "SEreyi",
-      "aSEri"
+      "aSEri",
+      "Seri"
     ],
     "in_corpus": "token",
     "corpus_token_count": 4231
@@ -2337,7 +2351,7 @@
       "amnp",
       "mnp"
     ],
-    "gloss": "Amanap, Amun of Napata",
+    "gloss": "Amun of Napata",
     "category": "deity",
     "confidence": "certain",
     "sources": [
@@ -2413,7 +2427,7 @@
         "note": "Apezemak, the Lion-god"
       }
     ],
-    "evidence_note": "Lion god named in captions of Meroitic temples (Naga, Musawwarat); Rilly analyses Apede + mk \"god\".",
+    "evidence_note": "Lion god (Griffith 1911: \"the Lion-god\"); Rilly analyses Apede + mk \"god\", with Apede from Proto-NES *Ebede \"Creator God\".",
     "corpus_form": "apedemk",
     "corpus_variants": [],
     "in_corpus": false,
@@ -2548,9 +2562,7 @@
     ],
     "evidence_note": "Province of Lower Nubia governed by the peseto (Akinidad); Rilly reads /akin(e)/.",
     "corpus_form": "akiN",
-    "corpus_variants": [
-      "akin"
-    ],
+    "corpus_variants": [],
     "in_corpus": "token",
     "corpus_token_count": 1
   },
@@ -2581,7 +2593,9 @@
     ],
     "evidence_note": "Nomination clause N qo-wi \"this is N\" in epitaphs; older readings (Griffith, Millet) took qe/qo as \"noble one\".",
     "corpus_form": "qE",
-    "corpus_variants": [],
+    "corpus_variants": [
+      "qe"
+    ],
     "in_corpus": "token",
     "corpus_token_count": 9493
   },
@@ -2592,7 +2606,7 @@
       "peste",
       "pesate"
     ],
-    "gloss": "viceroy (of Lower Nubia)",
+    "gloss": "viceroy",
     "category": "title",
     "confidence": "certain",
     "sources": [
@@ -2623,7 +2637,7 @@
         "note": "peshto, the princely governor of Lower Nubia"
       }
     ],
-    "evidence_note": "Title of the governors of the province Akine (Lower Nubia), e.g. Akinidad; usually explained from Egyptian \"king's son\" (viceroy of Kush).",
+    "evidence_note": "Title of the governors (viceroys) of the province Akine (Lower Nubia), e.g. Akinidad; also in Demotic and Greek graffiti at Philae.",
     "corpus_form": "pestE",
     "corpus_variants": [
       "peStE"
@@ -2826,11 +2840,11 @@
     "corpus_token_count": 627
   },
   {
-    "form": "phrs",
+    "form": "pẖrs",
     "variants": [
-      "pẖrs",
-      "pḫrs",
-      "pakharas"
+      "phrs",
+      "pakharas",
+      "pakhoras"
     ],
     "gloss": "Faras (Pachoras)",
     "category": "place",
@@ -2913,6 +2927,7 @@
     "evidence_note": "Transcription of Greek Kaisar; only the second element of the diphthong is written.",
     "corpus_form": "kiSri",
     "corpus_variants": [],
+    "corpus_note": "corpus hits come from one repeated Lower Nubian text (kiSri mkesmeN axid ...); whether kiSri means \"Caesar\" there has not been checked.",
     "in_corpus": "token",
     "corpus_token_count": 1173
   },
@@ -3000,5 +3015,96 @@
     "corpus_variants": [],
     "in_corpus": "token",
     "corpus_token_count": 7
+  },
+  {
+    "form": "sye",
+    "variants": [
+      "saye",
+      "shaye"
+    ],
+    "gloss": "Sai (island)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 65, 82",
+        "note": "\"Shaye is the island of Sai\""
+      }
+    ],
+    "evidence_note": "Place name in titles of Karanog epitaphs (X in Shaye); Griffith equates it with Sai island.",
+    "corpus_form": "Sye",
+    "corpus_variants": [],
+    "corpus_note": "substring only, in Syeteli (\"in Sai\").",
+    "in_corpus": "substring",
+    "corpus_token_count": 0
+  },
+  {
+    "form": "tebwe",
+    "variants": [
+      "tebawe"
+    ],
+    "gloss": "Abaton (Philae)",
+    "category": "place",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 62, 82",
+        "note": "perhaps Tebawe, the \"Holy Place\" (Abaton) in or near Philae"
+      }
+    ],
+    "evidence_note": "Paired with Philae in phrases naming forms of Isis and Osiris (Wos Pilqe-te-l, Wos Tebwe-te-l); Griffith hedges with \"perhaps\".",
+    "corpus_form": "tebwe",
+    "corpus_variants": [],
+    "in_corpus": "token",
+    "corpus_token_count": 825
+  },
+  {
+    "form": "ḫrpḫe",
+    "variants": [
+      "ḫrpḫne",
+      "xrpxe",
+      "xrpxN",
+      "kharpkhe"
+    ],
+    "gloss": "governor (?)",
+    "category": "title",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Nicholas B. Millet",
+        "year": 1968,
+        "title": "Meroitic Nubia (PhD dissertation, Yale University)",
+        "publication": "University Microfilms; cited via the transcription MilletExamples.txt in the Otten repository, not checked against the original",
+        "url": null,
+        "pages": "pp. 54, 77",
+        "note": "xrpxN pXrs-te \"governor of Faras\""
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 62, 70",
+        "note": "kharpakhe / kharpkhan in Pakharas, a title, untranslated"
+      }
+    ],
+    "evidence_note": "High administrative title often tied to a place (ḫrpḫne Pẖrs-te \"in Faras\"); Griffith left it untranslated; the gloss \"governor\" rests on Millet only.",
+    "corpus_form": "xrpxN",
+    "corpus_variants": [
+      "xrpxe"
+    ],
+    "in_corpus": "token",
+    "corpus_token_count": 2354
   }
 ]
