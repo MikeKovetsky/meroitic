@@ -10,12 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 
 import cognates_rules as cr   # noqa: E402
-from local_only import needs, run   # noqa: E402
+from local_only import NES_LISTS, needs, run   # noqa: E402
 
-# local-only (README, Data): Rilly's correspondences and the word lists without an open licence
-RULES_TSV = "data/nes/sound_correspondences.tsv"
-LISTS = [f"data/nes/{l}.tsv" for l in ("old_nubian", "nobiin", "kenzi", "dongolawi", "midob", "birgid", "hill_nubian",
-                                         "nara", "taman", "nyima", "proto_nes")]
+RULES_TSV = "data/nes/sound_correspondences.tsv"      # local-only (README, Data): Rilly's correspondences
 
 SL = cr.Slot
 
@@ -220,7 +217,7 @@ def test_rank_median_is_the_middle():
 
 
 def test_validation_words_leave_out_loans_names_and_circular_lists():
-    needs(*LISTS)
+    needs(*NES_LISTS)
     words, left = cr.gold_words()
     forms = {f for f, _, _ in words}
     assert not forms & set(cr.LOANS) and {f for f, _ in left} >= set(cr.LOANS)

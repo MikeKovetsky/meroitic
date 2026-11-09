@@ -9,6 +9,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# the NES word lists without an open licence (data/nes/README.md) that src/cognates.py and cognates_rules.py read
+NES_LISTS = [f"data/nes/{l}.tsv" for l in ("old_nubian", "nobiin", "kenzi", "dongolawi", "midob", "birgid",
+                                             "hill_nubian", "nara", "taman", "nyima", "proto_nes")]
 
 
 class Skip(Exception):
@@ -33,7 +36,8 @@ def needs(*paths):
 
 
 def run(checks):
-    """Run each (name, function), print ok, skip or FAIL for it, and exit 1 if any failed."""
+    """Run each (name, function), print ok, skip or FAIL for it, and exit 1 if any failed. A check that exits
+    (sys.exit, even with 0) has failed: it must not end the run early and pass."""
     failed = skipped = 0
     for name, fn in checks:
         try:
@@ -42,7 +46,7 @@ def run(checks):
         except Skip as e:
             skipped += 1
             print("skip", name, "-", e)
-        except Exception as e:      # noqa: BLE001 - report every failing check, then exit non-zero
+        except (Exception, SystemExit) as e:      # noqa: BLE001 - report every failing check, then exit non-zero
             failed += 1
             print("FAIL", name, type(e).__name__, e)
     note = f", {skipped} skipped (local-only data absent: README, Data)" if skipped else ""

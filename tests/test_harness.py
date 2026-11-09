@@ -9,7 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 
 import build_extra, build_tasks, clean_v2, cloze, cloze_families, cognates, corpus, score, synth   # noqa: E402
-from local_only import needs, run   # noqa: E402
+import local_only   # noqa: E402
+from local_only import NES_LISTS, needs, run   # noqa: E402
 
 SNAPSHOT, TASKS = "data/corpus_v2_c3_snapshot.jsonl", "runs/tasks"      # local-only: README, Data
 
@@ -156,9 +157,54 @@ def test_cognate_forms_keep_their_vowels():
     assert cognates.skeleton("màlléː") == "male"
     assert cognates.skeleton("pòɕɕ-íɕí-r") == "posisir"
     assert cognates.skeleton("ki5o") == "kino"
+
+
+def test_word_lists_leave_out_proto_forms_and_split_alternatives():
+    needs(*NES_LISTS)
     nes = cognates.load_nes()
-    assert "proto_nes" not in {lang for lang, _, _ in nes}
+    assert {lang for lang, _, _ in nes} == {"old_nubian", "nobiin", "kenzi", "dongolawi", "midob", "birgid",
+                                            "hill_nubian", "nara", "taman", "nyima"}       # every list, no proto_nes
     assert not any("~" in f for _, f, _ in nes)
+
+
+def test_checks_skip_only_for_files_gitignore_lists():
+    def outcome(checks):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            try:
+                run(checks)
+            except SystemExit as e:
+                return e.code, out.getvalue()
+        return None, out.getvalue()
+
+    def fails():
+        raise AssertionError("wrong")
+
+    old = local_only.ROOT
+    with tempfile.TemporaryDirectory() as d:
+        local_only.ROOT = Path(d)
+        try:
+            (Path(d) / ".gitignore").write_text("\n".join(["data/otten/", "__pycache__/", "# kept locally",
+                                                           "data/kept.jsonl", "runs/tasks"]) + "\n")
+            (Path(d) / "data").mkdir()
+            (Path(d) / "data/kept.jsonl").write_text("{}")
+            assert local_only.ignored() == ["data/otten", "data/kept.jsonl", "runs/tasks"]
+            needs("data/kept.jsonl")                                  # present: the check runs
+            for tracked in ("data/expansion/pilot.jsonl", "data/otten2", "data/kept.jsonl.bak"):
+                try:                                                  # the repo holds it: missing is a failure
+                    needs(tracked)
+                    raise AssertionError(f"needs() took {tracked}, which .gitignore does not list")
+                except ValueError:
+                    pass
+            skipped = lambda: needs("data/kept.jsonl", "runs/tasks/C3_cloze.md", "data/otten")
+            code, out = outcome([("a", lambda: None), ("b", skipped)])
+            assert code == 0 and "skip b - needs runs/tasks/C3_cloze.md, data/otten" in out
+            assert out.endswith("1/2 passed, 1 skipped (local-only data absent: README, Data)\n")
+            for bad in (fails, lambda: sys.exit(0), lambda: needs("src/lexique.py")):
+                code, out = outcome([("a", lambda: None), ("b", bad), ("c", skipped)])
+                assert code == 1 and "FAIL b" in out and "skip c" in out, out    # reported, and the run goes on
+        finally:
+            local_only.ROOT = old
 
 
 def test_swap_partners_file_is_stable():
