@@ -10,5 +10,6 @@ A night's experiment (2026-11-08/09) on Meroitic, the language of ancient Kush.
 - `src/scramble.py` re-spells everything with a random letter swap (the blind condition).
 - `src/build_tasks.py` builds the Step 0 matching tests; `src/score.py` scores them.
 - `src/build_morph.py` builds the blind grammar (Kober) test.
+- `python3 -I tests/test_harness.py` checks the scoring, the blind tasks and the corpus build.
 
 Results and the write-up: `REPORT.md`.
