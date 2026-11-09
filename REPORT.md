@@ -19,6 +19,7 @@ open). What is new, with the run behind each claim:
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
+   The test covered cursive type only; the 48 rows in hieroglyphic type were not scored.
    Hand copies: 88.8% (`hand_copy_test.md`), below the bar. Photographs: almost nothing (`data/discovery/vision.md`).
 3. **Scrambled-script blind tests fail on a frontier model.** From a 17-word glossary of letter-swapped Meroitic and
    no texts it matched 35 of 35 meanings by breaking the cipher (`S0_f0`, `S0_f1`); from the scrambled corpus with

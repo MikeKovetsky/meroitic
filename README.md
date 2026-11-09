@@ -23,7 +23,9 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
 2. **152 inscriptions are now machine-readable under an open licence, 86 of them missing from the public corpus.**
    The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
-   the modern edition (99.6% against what Griffith printed). It transcribed 152 inscriptions (29 only in part, as
+   the modern edition (99.6% against what Griffith printed), measured on 12 texts. The test covered cursive type
+   only: about a third of the rows (48) are in hieroglyphic type, read with Griffith's sign table and not scored.
+   It transcribed 152 inscriptions (29 only in part, as
    Griffith printed them) from *Meroitic Inscriptions* I–II and *Meroë*, public-domain editions, each row with its
    source page, site and object, and 127 with a REM number (`data/expansion/`, CC BY 4.0:
    [`LICENSE-DATA.md`](LICENSE-DATA.md)); 86 are not in the public corpus (+5% words). It can't do the same for
@@ -241,5 +243,7 @@ and the glosses paraphrased from Rilly's lexicon.
 - The synthetic language's difficulty depends on its generator.
 - Judges and readers are the same model family; scoring files are kept line by line so a person can re-judge.
 - Griffith's 1911–12 readings differ from the modern REM text in about 4% of signs; rows say they are Griffith's.
+- The reading test for printed type covered 12 cursive texts from Philae. The 48 rows in hieroglyphic type were
+  not scored, and their notes say so.
 - Rilly 2007, Hintze's editions and Hallof 2024 are print-only and were not read; REM is online
   ([Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1)) but was not read either.
