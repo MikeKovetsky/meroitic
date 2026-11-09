@@ -1,0 +1,916 @@
+{
+ "recall": [
+  {
+   "word": "abr",
+   "answer": "man",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'man' = Rilly's 'man, male human being'."
+  },
+  {
+   "word": "adb",
+   "answer": "land, district, province (as in pelmos adb-li 'general of the land')",
+   "confidence": 3,
+   "verdict": "SAME",
+   "why": "'land, district, province' = Rilly's 'land, province'."
+  },
+  {
+   "word": "aḫide",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to present, offer, send'."
+  },
+  {
+   "word": "apote",
+   "answer": "envoy, messenger, ambassador",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'envoy, messenger, ambassador' = Rilly's 'envoy'."
+  },
+  {
+   "word": "apote-lẖ",
+   "answer": "great envoy, chief ambassador",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'great envoy, chief ambassador' = Rilly's 'great envoy, chief envoy'."
+  },
+  {
+   "word": "ar (2)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'male child, boy'."
+  },
+  {
+   "word": "are (3)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to take, to receive'."
+  },
+  {
+   "word": "ato",
+   "answer": "water",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'water' = Rilly's 'water' (perhaps 'river, Nile')."
+  },
+  {
+   "word": "ktke",
+   "answer": "kandake, queen (queen mother)",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'kandake, queen' = Rilly's title 'Candace' (Kandake)."
+  },
+  {
+   "word": "lẖ",
+   "answer": "great, big",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'great, big' = Rilly's 'great'."
+  },
+  {
+   "word": "mdese",
+   "answer": "a kinship term (some relative; exact relation not known to me)",
+   "confidence": 1,
+   "verdict": "TYPE",
+   "why": "Only 'a kinship term'; Rilly: a royal's relation to a god, probably 'direct descendant'."
+  },
+  {
+   "word": "mẖe",
+   "answer": "much, abundant, plentiful",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'much, abundant, plentiful' = Rilly's supposed 'abundant'."
+  },
+  {
+   "word": "mk",
+   "answer": "god",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'god' = Rilly's 'god' (and probably 'goddess')."
+  },
+  {
+   "word": "mkdi",
+   "answer": "goddess? (mk 'god' + kdi 'woman')",
+   "confidence": 1,
+   "verdict": "SAME",
+   "why": "'goddess?' (mk + kdi) = Rilly's 'goddess'."
+  },
+  {
+   "word": "mlo",
+   "answer": "good",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'good' = Rilly's adjective 'good'."
+  },
+  {
+   "word": "mte",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'child'; 'small, young, the younger'."
+  },
+  {
+   "word": "nobo",
+   "answer": "slave(s), or the Noba (Nubians)",
+   "confidence": 1,
+   "verdict": "WRONG",
+   "why": "Borderline: leads with 'slave(s)', not Rilly's 'Nubian'; its alternative 'or the Noba (Nubians)' is Rilly's. Judged on the lead, as with the first corpus candidate; SAME if an alternative counts."
+  },
+  {
+   "word": "ns",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'sacrifice'."
+  },
+  {
+   "word": "nse doke",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'good sacrifice', the offering wished for the dead."
+  },
+  {
+   "word": "pelmos",
+   "answer": "general, military commander (strategos)",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'general, military commander (strategos)' = Rilly's 'general, strategos'."
+  },
+  {
+   "word": "perite",
+   "answer": "agent, administrator (official title, from Egyptian p3 rwd 'the agent')",
+   "confidence": 3,
+   "verdict": "SAME",
+   "why": "'agent, administrator' from p3 rwḏ = Rilly's 'agent' from the same Egyptian."
+  },
+  {
+   "word": "peseto",
+   "answer": "viceroy (of Lower Nubia; from Egyptian 'king's son')",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'viceroy' from 'king's son' = Rilly's 'viceroy'."
+  },
+  {
+   "word": "pke",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a noun of blessing in the benediction formulas."
+  },
+  {
+   "word": "plsn",
+   "answer": "lesonis, temple administrator (from Egyptian p3 mr-sn)",
+   "confidence": 3,
+   "verdict": "SAME",
+   "why": "'lesonis, temple administrator' = Rilly's title akin to Demotic 'temple administrator' (lesonis)."
+  },
+  {
+   "word": "qoleb",
+   "answer": "these (demonstrative qo 'this' with plural -leb)",
+   "confidence": 2,
+   "verdict": "SAME",
+   "why": "'these' (qo + plural -leb) = Rilly's plural demonstrative 'these'."
+  },
+  {
+   "word": "qore",
+   "answer": "king, ruler",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'king, ruler' = Rilly's 'ruler, sovereign'."
+  },
+  {
+   "word": "qorene",
+   "answer": "probably a derivative of qore 'king' (royal?)",
+   "confidence": 1,
+   "verdict": "WRONG",
+   "why": "Borderline: right that it derives from qore, but 'royal?' is an adjective (Rilly's qorise), not the title Rilly gives; same text as its qorise answer. SAME if read as 'a royal title'."
+  },
+  {
+   "word": "qorise",
+   "answer": "probably a derivative of qore 'king' (royal?)",
+   "confidence": 1,
+   "verdict": "SAME",
+   "why": "'royal?' = Rilly's 'of the king' (genitive of qore); hedged, and the same text as its qorene answer."
+  },
+  {
+   "word": "qor-o",
+   "answer": "king, predicative form ('is king')",
+   "confidence": 2,
+   "verdict": "SAME",
+   "why": "'king, predicative (is king)' = Rilly's 'it is the ruler'."
+  },
+  {
+   "word": "qorode",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: an adjective (?) formed on qore."
+  },
+  {
+   "word": "sem",
+   "answer": "wife",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'wife' = Rilly's 'wife'."
+  },
+  {
+   "word": "siremroke",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: an administrative title of the central administration."
+  },
+  {
+   "word": "slẖs",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a priestly title of the Amanap clergy."
+  },
+  {
+   "word": "smlo (1)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a title (?), s 'man' + mlo 'good'."
+  },
+  {
+   "word": "snte",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a high-ranking priestly title."
+  },
+  {
+   "word": "soni",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a priestly title (Amun, Amanap, Mash)."
+  },
+  {
+   "word": "ssimete",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a priestly or temple-service office."
+  },
+  {
+   "word": "ssor",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'scribe'."
+  },
+  {
+   "word": "ste",
+   "answer": "mother",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'mother' = Rilly's 'mother'."
+  },
+  {
+   "word": "stmdese",
+   "answer": "a kinship term (ste 'mother' + mdese; a maternal relative?)",
+   "confidence": 1,
+   "verdict": "WRONG",
+   "why": "A kinship term; Rilly: title of an important official of the viceroy's office, and he keeps the title reading."
+  },
+  {
+   "word": "t-dḫe",
+   "answer": "born of (follows the mother's name in the filiation)",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'born of' (after the mother's name) = Rilly's 'the child (of a mother)'."
+  },
+  {
+   "word": "te-dḫe-l",
+   "answer": "born of (follows the mother's name in the filiation)",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'born of' = Rilly's 'whom X bore, child of such a mother'."
+  },
+  {
+   "word": "t-erike-l",
+   "answer": "begotten by (follows the father's name in the filiation)",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'begotten by' = Rilly's 'whom X begot, child of such a father'."
+  },
+  {
+   "word": "teter",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a priestly title."
+  },
+  {
+   "word": "tewiseti",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'adoration, praise' (proskynema)."
+  },
+  {
+   "word": "tk (2)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to love, to revere'."
+  },
+  {
+   "word": "tkk",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to plunder'."
+  },
+  {
+   "word": "tqi",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a priestly title (Amanap, Mash)."
+  },
+  {
+   "word": "tre",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to give'."
+  },
+  {
+   "word": "trtekese",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a royal priestly title of Apedemak's cult."
+  },
+  {
+   "word": "ttne",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: an official of the royal household."
+  },
+  {
+   "word": "yer",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'milk'."
+  },
+  {
+   "word": "yetmde",
+   "answer": "relative, kinsman (kinship term in funerary texts; possibly nephew/niece on the maternal side)",
+   "confidence": 3,
+   "verdict": "SAME",
+   "why": "Borderline: leads with generic 'relative, kinsman' but names Rilly's 'nephew/niece on the maternal side' as the likely specific; TYPE if judged on the lead."
+  },
+  {
+   "word": "yireqe (1)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'South'."
+  },
+  {
+   "word": "beltore",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a valuable object."
+  },
+  {
+   "word": "beloloke",
+   "answer": "an official title in funerary texts (exact function not known to me)",
+   "confidence": 1,
+   "verdict": "TYPE",
+   "why": "Only 'an official title'; Rilly: an important priestly title of Amanap's cult."
+  },
+  {
+   "word": "dḫe",
+   "answer": "to give birth, bear (a child)",
+   "confidence": 3,
+   "verdict": "SAME",
+   "why": "'to give birth, bear' = Rilly's maternal filiation 'the child born of'."
+  },
+  {
+   "word": "dik",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'over the whole distance'."
+  },
+  {
+   "word": "dime",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'cow'."
+  },
+  {
+   "word": "ḫbḫne",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: an official of the royal house."
+  },
+  {
+   "word": "ḫlbi",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'bull'."
+  },
+  {
+   "word": "ḫlbine",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: a title dependent on the viceroy."
+  },
+  {
+   "word": "ḫrpḫe",
+   "answer": "a high administrative title (administrator, governor)",
+   "confidence": 2,
+   "verdict": "TYPE",
+   "why": "Borderline: right domain (authority), but 'administrator, governor' is Rilly's ḫrpḫne; for ḫrpḫe he gives the verb 'to order, to command'. SAME if an agent noun counts."
+  },
+  {
+   "word": "ḫrpḫne",
+   "answer": "probably a form of the title ḫrpḫe (administrator?)",
+   "confidence": 1,
+   "verdict": "TYPE",
+   "why": "Borderline: 'administrator?' is an administrative title, not Rilly's specific 'governor' of a locality or 'mayor'. SAME if 'administrator' counts as 'governor'."
+  },
+  {
+   "word": "ẖe (1)",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'to drink'."
+  },
+  {
+   "word": "ẖr",
+   "answer": "unknown",
+   "confidence": 1,
+   "verdict": "UNKNOWN",
+   "why": "Said unknown. Rilly: 'north'."
+  },
+  {
+   "word": "kdi",
+   "answer": "woman",
+   "confidence": 5,
+   "verdict": "SAME",
+   "why": "'woman' = Rilly's 'woman'."
+  },
+  {
+   "word": "kdise",
+   "answer": "sister",
+   "confidence": 4,
+   "verdict": "SAME",
+   "why": "'sister' = Rilly's 'sister'."
+  }
+ ],
+ "corpus": [
+  {
+   "word": "aḫide",
+   "first": "count, total (what is counted)",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "Borderline any_same: 'count, total' is not Rilly's 'to present, offer, send'; the 3rd, 'delivery, goods handed over', is counted as the same idea."
+  },
+  {
+   "word": "ar (2)",
+   "first": "boy, son (young male)",
+   "confidence": 1,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'boy, son (young male)' = Rilly's 'male child, boy'."
+  },
+  {
+   "word": "are (3)",
+   "first": "to make, perform (the adoration): 'made by'",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'to make, perform' is not Rilly's 'to take, receive'; the 2nd, 'to receive, accept', is."
+  },
+  {
+   "word": "mdese",
+   "first": "son, descendant (of)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'son, descendant (of)' = Rilly's probable 'direct descendant'."
+  },
+  {
+   "word": "mkdi",
+   "first": "goddess",
+   "confidence": 5,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'goddess' = Rilly's 'goddess'."
+  },
+  {
+   "word": "mte",
+   "first": "young, junior: 'the younger'",
+   "confidence": 5,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'young, junior, the younger' = Rilly's adjective sense; 'small' and 'child' are his other senses."
+  },
+  {
+   "word": "nobo",
+   "first": "slave(s)",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'slave(s)' is not Rilly's 'Nubian'; the 2nd, 'the Noba', is."
+  },
+  {
+   "word": "ns",
+   "first": "cattle, livestock",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'cattle, livestock' is not Rilly's 'sacrifice'; the 3rd, 'to slaughter, sacrifice', is."
+  },
+  {
+   "word": "nse doke",
+   "first": "food or animal offerings (provisions for the dead and the gods)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'food or animal offerings for the dead' = Rilly's 'good sacrifice', the offering wished for the dead."
+  },
+  {
+   "word": "pke",
+   "first": "servant, devotee (of a deity)",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "'servant, devotee' is not Rilly's noun of blessing; 'temple' and 'offering, gift' aren't either."
+  },
+  {
+   "word": "qoleb",
+   "first": "these, they (plural of qo 'this')",
+   "confidence": 4,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'these, they' = Rilly's plural demonstrative 'these'."
+  },
+  {
+   "word": "qorene",
+   "first": "royal official, king's agent (a 'royal' title)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "Borderline: 'royal official, a royal title' = Rilly's 'title derived from qore'; he names no specific office. TYPE if a named office is required."
+  },
+  {
+   "word": "qorise",
+   "first": "royal, of the ruler (qore + genitive -se)",
+   "confidence": 4,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'royal, of the ruler (genitive)' = Rilly's 'of the king'."
+  },
+  {
+   "word": "qor-o",
+   "first": "ruler, king (a variant stem of qore)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "Borderline: 'ruler, king' is the right lexeme, but it calls qoro a variant stem; Rilly: the predicated form 'it is the ruler'. TYPE if the predicate is required."
+  },
+  {
+   "word": "qorode",
+   "first": "royal palace, court",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "Borderline: 'royal palace, court' is a noun; Rilly: an adjective (?) formed on qore, i.e. 'royal'. No candidate gives the adjective. TYPE if the royal link is enough."
+  },
+  {
+   "word": "siremroke",
+   "first": "title of an official, a rank/kind of kroro office",
+   "confidence": 2,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Only 'an official's title'; Rilly: an important dignity of the central administration."
+  },
+  {
+   "word": "slẖs",
+   "first": "priest of Amun (a priestly title)",
+   "confidence": 2,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Borderline: 'priest of Amun' is a priestly title; Rilly specifies the Amanap clergy and an intermediate rank. SAME if Amun is accepted for Amanap."
+  },
+  {
+   "word": "smlo (1)",
+   "first": "a title of rank (dignitary, notable)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "Borderline: 'title of rank (dignitary, notable)' = Rilly's title (?) 'good man' in a social sense. TYPE if 'notable' counts as a guess."
+  },
+  {
+   "word": "snte",
+   "first": "priest (temple title)",
+   "confidence": 1,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Generic 'priest'; Rilly: a high-ranking priestly title (high priests of Amanap)."
+  },
+  {
+   "word": "soni",
+   "first": "priest (a rank in the clergy of Amun)",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "Borderline: 'priest of the clergy of Amun' = Rilly's priestly title of Amun, Amanap and Mash. TYPE if one cult is not enough."
+  },
+  {
+   "word": "ssimete",
+   "first": "chamberlain, attendant of the Kandake (court official)",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "Borderline: a court official of the Kandake is not Rilly's priestly or temple office (TYPE if any title counts); the 2nd, 'temple servant or priest', is."
+  },
+  {
+   "word": "ssor",
+   "first": "scribe",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'scribe' = Rilly's 'scribe'."
+  },
+  {
+   "word": "stmdese",
+   "first": "deputy, assistant of the viceroy",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "Borderline: 'deputy, assistant of the viceroy' = Rilly's important official of the viceroy's office. TYPE if 'deputy' counts as a guess."
+  },
+  {
+   "word": "teter",
+   "first": "temple official (a priestly grade)",
+   "confidence": 1,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Generic 'priestly grade'; Rilly names the cults (Amun, Amanap, Mash, Mut, Ḫsḫseli)."
+  },
+  {
+   "word": "tewiseti",
+   "first": "adoration, proskynema (act of worship)",
+   "confidence": 4,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'adoration, proskynema' = Rilly's 'adoration, praise'."
+  },
+  {
+   "word": "tk (2)",
+   "first": "child, offspring (young)",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'child, offspring' is not Rilly's 'to love, revere'; the 2nd, 'to love, cherish', is."
+  },
+  {
+   "word": "tkk",
+   "first": "to raid, plunder (a place)",
+   "confidence": 2,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'to raid, plunder' = Rilly's 'to plunder'."
+  },
+  {
+   "word": "tqi",
+   "first": "local administrator, town official",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "Borderline: a civil 'town official' for Rilly's priestly title (Amanap, Mash); TYPE if any title counts. The 2nd, 'priest', is only the type."
+  },
+  {
+   "word": "tre",
+   "first": "a title or temple function (listed with ẖlẖi and tete)",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'a title' is not Rilly's verb 'to give'; the 2nd, 'to offer, present', is."
+  },
+  {
+   "word": "trtekese",
+   "first": "district official, governor of a town",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "Borderline: a civil 'governor of a town' for Rilly's royal priestly title of Apedemak; TYPE if any title counts. The 2nd, 'priest', is only the type."
+  },
+  {
+   "word": "ttne",
+   "first": "official, administrator (a title with a 'great' grade)",
+   "confidence": 1,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Generic 'official, administrator'; Rilly: an official of the royal household."
+  },
+  {
+   "word": "yer",
+   "first": "milk; to nurse (suckle)",
+   "confidence": 1,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'milk' = Rilly's 'milk'."
+  },
+  {
+   "word": "yireqe (1)",
+   "first": "beloved, favoured (of the gods)",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "'beloved, favoured' is not Rilly's 'South'; no candidate is."
+  },
+  {
+   "word": "beltore",
+   "first": "jar, vessel (a counted container)",
+   "confidence": 1,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Borderline: an object noun ('jar, vessel'), but Rilly says only 'a valuable object'. WRONG if the guessed object counts against it."
+  },
+  {
+   "word": "beloloke",
+   "first": "priest or temple official in the cult of Amun (title)",
+   "confidence": 3,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Borderline: priestly title 'in the cult of Amun'; Rilly: an important priestly title of Amanap (Amun only once). SAME if Amun is accepted for Amanap."
+  },
+  {
+   "word": "dik",
+   "first": "all, every (after a noun)",
+   "confidence": 1,
+   "verdict_first": "WRONG",
+   "any_same": false,
+   "why": "Quantifier 'all, every' is not Rilly's adverb 'over the whole distance' (from X all the way to Y)."
+  },
+  {
+   "word": "dime",
+   "first": "cow",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'cow' = Rilly's 'cow'."
+  },
+  {
+   "word": "ḫbḫne",
+   "first": "scribe (of the king, of Isis)",
+   "confidence": 2,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Borderline: an official's title with 'of the king', but 'scribe' is not Rilly's; Rilly: an official of the royal house. SAME if the royal link is enough."
+  },
+  {
+   "word": "ḫlbi",
+   "first": "bull, ox",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'bull, ox' = Rilly's 'bull'."
+  },
+  {
+   "word": "ḫlbine",
+   "first": "cattle overseer, herdsman (a title)",
+   "confidence": 2,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "A title ('cattle overseer', from ḫlbi as Rilly derives it), but Rilly's meaning is a title dependent on the viceroy."
+  },
+  {
+   "word": "ḫrpḫe",
+   "first": "governor (high provincial official)",
+   "confidence": 3,
+   "verdict_first": "TYPE",
+   "any_same": false,
+   "why": "Borderline: 'governor' is Rilly's ḫrpḫne; for ḫrpḫe he gives the verb 'to order, to command'. All three candidates are offices; SAME (and any_same via 'commander') if an agent noun counts."
+  },
+  {
+   "word": "ḫrpḫne",
+   "first": "governor, regional administrator",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'governor, regional administrator' = Rilly's 'governor' of a locality."
+  },
+  {
+   "word": "ẖe (1)",
+   "first": "drink, give to drink (water)",
+   "confidence": 3,
+   "verdict_first": "SAME",
+   "any_same": true,
+   "why": "'drink' = Rilly's preferred 'to drink'."
+  },
+  {
+   "word": "ẖr",
+   "first": "a foreign or enemy people (e.g. the Blemmyes)",
+   "confidence": 2,
+   "verdict_first": "WRONG",
+   "any_same": true,
+   "why": "'a foreign or enemy people' is not Rilly's 'north'; the 2nd, 'the north', is."
+  }
+ ],
+ "totals": {
+  "recall": {
+   "n": 68,
+   "SAME": 28,
+   "TYPE": 4,
+   "WRONG": 3,
+   "UNKNOWN": 33
+  },
+  "recall_same_by_confidence": {
+   "4-5": {
+    "SAME": 19,
+    "answers": 19
+   },
+   "1-3": {
+    "SAME": 9,
+    "answers": 16,
+    "answers_with_unknown": 49
+   }
+  },
+  "corpus_first": {
+   "n": 44,
+   "SAME": 20,
+   "TYPE": 10,
+   "WRONG": 14
+  },
+  "corpus_any_same": {
+   "count": 28,
+   "n": 44
+  },
+  "corpus_same_by_confidence": {
+   "4-5": {
+    "SAME": 5,
+    "answers": 5
+   },
+   "3": {
+    "SAME": 6,
+    "answers": 8
+   },
+   "1-2": {
+    "SAME": 9,
+    "answers": 31
+   }
+  },
+  "borderline": {
+   "recall_words": [
+    "yetmde",
+    "nobo",
+    "qorene",
+    "ḫrpḫe",
+    "ḫrpḫne"
+   ],
+   "corpus_words": [
+    "qor-o",
+    "qorene",
+    "stmdese",
+    "smlo (1)",
+    "soni",
+    "slẖs",
+    "beloloke",
+    "ḫrpḫe",
+    "ḫbḫne",
+    "beltore",
+    "qorode",
+    "aḫide",
+    "tqi",
+    "trtekese",
+    "ssimete"
+   ],
+   "recall_SAME_range": [
+    27,
+    32
+   ],
+   "corpus_first_SAME_range": [
+    15,
+    24
+   ],
+   "corpus_any_same_range": [
+    22,
+    32
+   ]
+  }
+ }
+}

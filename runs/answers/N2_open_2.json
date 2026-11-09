@@ -1,0 +1,246 @@
+{
+ "answers": [
+  {
+   "word": "siremroke",
+   "candidates": [
+    "title of an official, a rank/kind of kroro office",
+    "priestly or temple title",
+    "place or institution name ('kroro of Siremroke')"
+   ],
+   "confidence": 2,
+   "evidence": "6 texts, 3 distinct. Always directly before kroro: 'Siremroke kroro Sibwiye yetmdelowi' in a list of relatives' offices (xrpxN pXrste ..., ateqi Sdosteleb, beliloke pedemeteleb) in L0040/L0342/L0344/L0366; 'ms Siremroke kroroleb Stebetowi' ('she was mother of the siremroke-krorös') next to 'perite woSteb qoreNwoSteb' in L0607; label 'Sire mroke kroro' (L0026). kroro is itself an office ('qo kroro bekemete lo peste lo', '... lo pelmoS adblito', 'qoreN krorolowi'), so siremroke specifies a kind of kroro. It never takes kinship or locative endings itself.",
+   "recalled": "No published meaning recalled."
+  },
+  {
+   "word": "tkk",
+   "candidates": [
+    "to raid, plunder (a place)",
+    "booty, captured livestock",
+    "then, and (narrative connector)"
+   ],
+   "confidence": 2,
+   "evidence": "2 texts, both war narratives: Hamadab stela L0654 (6 times, plus 2 times tkt) and Tanyidamani stela L0486 (once). Fixed sequence 'abrse-l yekedi kdise-l arse-li tkk ymope qebese-wi' (men killed, women taken, then tkk + a place), repeated with emoqe and deqeb; also 'apotebese tkk mkiN y qor mki weste-l' and in L0486 'tkk aXotoN qorte drteyose-l' before more killing (ekedeto). It always precedes a place-like noun, alternates tkk/tkt (so it is inflected), and the root tk recurs in the same narrative with the plural-object marker -bx- (yetkbxk, etkbxi, 'qorteb etkbxe'). This makes it a war verb applied to towns.",
+   "recalled": "No."
+  },
+  {
+   "word": "are (3)",
+   "candidates": [
+    "to make, perform (the adoration): 'made by'",
+    "to receive, accept",
+    "here, at this place"
+   ],
+   "confidence": 2,
+   "evidence": "8 texts, 5 distinct, all Philae-type visitor graffiti, always 'tewisti are-ke NAME yeSo(-a)' (L0067, L0299, L0337, L0569, L0094, L0203, L0418, L0638). It sits between the word for the act of worship (tewiseti) and the visitor's name, and it can be left out ('tewisti pelmoSl yetmde apote yeSo ...', L0278). That matches the Greek/Demotic graffito formula 'the proskynema which X made', so a participle 'made/performed (by)'.",
+   "recalled": "Vaguely recall 'are' as a verb (take/receive) in other texts; no specific meaning remembered for are (3)."
+  },
+  {
+   "word": "nobo",
+   "candidates": [
+    "slave(s)",
+    "the Noba (Nubian people or land)",
+    "gold"
+   ],
+   "confidence": 2,
+   "evidence": "3 texts. L0323 (a kroro who is viceroy and 'general of the land') ends 'nobow 35 kelbo', a counted group of 35. L0302 'nobote qeSk nob brlX-l do-ke-lo' and L0154 'no b brlX-l ni dtweti yikxe-lo' pair nob with brlX 'great man', i.e. a 'chief of the nob', and show a locative nobo-te. A countable human group with its own chief and a place/locative fits a servile or ethnic group: slaves (or the Noba they came from).",
+   "recalled": "Weakly: I think Rilly linked Meroitic nob(o) with 'slave' and the ethnonym Noba; not certain."
+  },
+  {
+   "word": "nse doke",
+   "candidates": [
+    "food or animal offerings (provisions for the dead and the gods)",
+    "sacrificial cattle, meat",
+    "servants, dependents"
+   ],
+   "confidence": 2,
+   "evidence": "10 texts, 6 distinct. In funerary benedictions right after the water and bread wishes (ato mXe ..., at mXe ...): 'nsdoke-li delekw Xol-ketes' (L0040 group of 4) and 'nsdokel dole Xolkte' (L0613), with the same -kete(s) wish ending, so it is something wished for the dead. In the Kharamadoye text (L0022, L0301, L0541) it is an item in lists given (bqo) at Philae: 'lks sqye-s nsedoke-s temeyye-s nxbre-s bqo-bx ... pilqoyte', and 'mXo temey nsedoke kdi abr nxbres' ('abundant ..., women, men ...', also L0118/L0623). The first part may be ns 'livestock'.",
+   "recalled": "No."
+  },
+  {
+   "word": "tk (2)",
+   "candidates": [
+    "child, offspring (young)",
+    "to love, cherish",
+    "to protect"
+   ],
+   "confidence": 1,
+   "evidence": "Few clear contexts. L0296/L0410 'aXrrb tketore-te-li aXrrb amod-te-li tereki tk-bxe-lo' has the shape of kinship predicates such as 'beloloke npte-te-li pedeme-te-li Ste-bes-lo' (mother of the belolokes in ...), with tereki close to terike 'begotten': '(s)he is the begotten tk of them'. L0482/L0236 'tlt my tk teketi / tkteketi' (tk qualifying a counted item), L0486 'xrpxe sem lo-l tk lise' (tk of the ḫrpḫe's wife) and 'xlbe tke-s'. This points weakly to a kin or age noun.",
+   "recalled": "No (a faint, unreliable memory of tk as 'love')."
+  },
+  {
+   "word": "tre",
+   "candidates": [
+    "a title or temple function (listed with ẖlẖi and tete)",
+    "to offer, present",
+    "a place name"
+   ],
+   "confidence": 1,
+   "evidence": "As a word: 'qore tre' (L0282, caption-like); 'XlXi-li tete-li tre-li tr-s' (L0462/L0463); 'temeylX NAME XlXili tetelitreli yetmdelowi' (21 copies of one text), where tre-li stands in a row of -li nouns after a person, like titles. 'mlekeyos treye' (L0002 group) is most likely the personal name Treye (names in -ye: yetekye, atoye, dokoye, qoqoye, tkreye). The Philae graffito forms 'treb' and 'tretox' are unclear.",
+   "recalled": "No."
+  },
+  {
+   "word": "qorene",
+   "candidates": [
+    "royal official, king's agent (a 'royal' title)",
+    "royal scribe",
+    "sovereign, royal (derived form of qore)"
+   ],
+   "confidence": 2,
+   "evidence": "13 texts, 10 distinct. qore 'ruler' + -ne, the ending that titles take (pqrN, pestoN, xrpxN). Paired with perite 'agent' at the Isis temple: 'perite woS-s-leb qoreN woS-s-leb' (L0004, L0561), 'perite woSteb qoreNwoSteb' (L0607, L0316), 'qo qoreN woS-s perite woS-s' (L0398). Also 'qoreN krorolowi', 'qoreN nkdeyotowi' (L0040 group) and 'qoreN kroroleb yetmdelowi' (L0656). In the Hamadab stela protocol 'qoreNyi' is said of the queen next to 'pqrNyi pestoNyi'.",
+   "recalled": "Vague: a royal title; I don't remember the exact gloss."
+  },
+  {
+   "word": "smlo (1)",
+   "candidates": [
+    "a title of rank (dignitary, notable)",
+    "a priestly title",
+    "a royal official (cf. 'qore smle')"
+   ],
+   "confidence": 2,
+   "evidence": "Only in one long genealogical text copied about 105 times (3 near-copy families of one text): 'womnitX Sklte NAME yetmdelowi ... Smlo NAME yetmdelowi aribet tpoteNteli yetmdelowi' and 'womnitX NAME yetmdelowi Smlo NAME yetmdelowi qoresmle mXli kde mdetowi qore smle NAME mdetowi'. It is always a title before a name, in the same slot as womnitX, aribet, ateqi, pqr and beloloke. It may be s- + mlo 'good, man of worth'; 'qore smle NAME' suggests a royal variant.",
+   "recalled": "No."
+  },
+  {
+   "word": "ssimete",
+   "candidates": [
+    "chamberlain, attendant of the Kandake (court official)",
+    "temple servant or priest",
+    "steward, administrator"
+   ],
+   "confidence": 2,
+   "evidence": "16 texts, 4 distinct. 'SSimete ktke-li-s NAME' (the ssimete of the Kandake, L0049 group of 7), 'SSimete kdke li s' (L0395), 'NAME SSimete mxtebedetel yetmdelowi NAME SSimetel yetmdelowi' (L0078 group of 7), 'SSimete mleyos' (L0480). Related ssime: 'pNqoteb SSimeleb' (L0086) and 'ssime amnise 3' (3 ssime of Amun, L0486). It is a man's office attached to the Kandake, and also to gods and places.",
+   "recalled": "No."
+  },
+  {
+   "word": "tewiseti",
+   "candidates": [
+    "adoration, proskynema (act of worship)",
+    "visit, pilgrimage to the goddess",
+    "this inscription, graffito"
+   ],
+   "confidence": 4,
+   "evidence": "9 texts, 6 distinct, all temple graffiti: 'ati-ye tewisti are-ke NAME yeSo-a ...' (L0067, L0299, L0337, L0569), 'tewisti are-ke NAME yeSoa' (L0094, L0203, L0418, L0638), 'tewisti pelmoSl yetmde apote yeSo dilXl tbo woS pilqetel woS tebwetel' (L0278: before Isis of Philae and Isis of the Abaton). It opens a visitor's text naming the visitor and the goddess, which is the slot of the Greek 'proskynema'. The form te-wis(e)ti matches Demotic tꜣ wšṱ 'the adoration' with the article, like the other Demotic loans (perite, pelmos, plsn).",
+   "recalled": "Partly: I vaguely remember 'adoration/proskynema'; the link to Demotic wšṱ is my own inference."
+  },
+  {
+   "word": "ẖr",
+   "candidates": [
+    "a foreign or enemy people (e.g. the Blemmyes)",
+    "the north, northerners",
+    "enemy, foe"
+   ],
+   "confidence": 2,
+   "evidence": "7 texts, 6 distinct: the Kharamadoye inscription (L0022) and its excerpts. 'qore 8 Xrese' (L0022, L0456, L0481; 'qore 8 Xre s w s leb', L0038): numerals follow nouns ('abr 32' = 32 men), so this is '8 kings of the ẖr'. Parallel clauses: 'qesw adereke mtr wse / Xrw pilqoke mtr wse', 'Xrw addonilikete / yireqw arw terekete', 'Xrw seleleke mtr wse / yireqw adereke mtr wse'. ẖr-w stands like qes-w (Kush) and yireq-w, each with a place + -ke (Philae, Selele, Adere): a people or group with kings, moving to places.",
+   "recalled": "No."
+  },
+  {
+   "word": "ḫrpḫe",
+   "candidates": [
+    "governor (high provincial official)",
+    "commander",
+    "prince, regent (high dignitary)"
+   ],
+   "confidence": 3,
+   "evidence": "66 texts, 32 distinct. A title tied to places: 'xrpxN pXrste' (ḫrpḫe in Faras, many texts), 'xrpxN Sqekiteleb', 'xrpxN keqye'. It appears in plural lists of state offices: 'pelmoS leb apote leb xrpx leb kdite bes lo' (sister of generals, envoys, ḫrpḫes; L0013, L0277) and 'mrde pelmoS-li-s-li kelw xrpxe-bxe-li' (all the ḫrpḫes; L0380, L0471). 'qor xrpxe-l' (the king's ḫrpḫe) occurs in the Hamadab stela and its excerpts (L0654, L0258, L0319, L0381, L0628), and Kharamadoye has 'xrpxe mkdokelise lw xrpxNyi'. It is a high royal office held over a district.",
+   "recalled": "Partly: I remember it as a well-attested high administrative title, often rendered 'governor' (sometimes 'commander')."
+  },
+  {
+   "word": "ns",
+   "candidates": [
+    "cattle, livestock",
+    "many, much (intensifier when doubled)",
+    "to slaughter, sacrifice"
+   ],
+   "confidence": 2,
+   "evidence": "3 texts. L0062/L0189 'dmkte qo xlbi 3 dime 4 (24) kelw qe nS per lo': after two counted items, 'kelw' (all) + 'qe nS' sums them up as one category, a generic word for the counted beasts. In the booty part of the Hamadab stela (L0654): 'witese yesebe ns ns-l qor ate eqepi' and 'witese ns ns-l amnp yiroX mdewi ns seb krte-li'. There ns takes the determiner -l and goes to the king (qor) and to Amun (amnp) after the captives are counted.",
+   "recalled": "No."
+  },
+  {
+   "word": "soni",
+   "candidates": [
+    "priest (a rank in the clergy of Amun)",
+    "prophet, high priest",
+    "temple servant, attendant"
+   ],
+   "confidence": 3,
+   "evidence": "14 texts, 2 distinct. In the group of 13 copies (L0035 etc.): 'ant mno tmNteleb kditeqebetowi wkite tmNteleb Steaqebetowi Soni tmNte brmeteyetmdelowi' and 'ant tmNteleb yetmdelowi wkite tmNteleb Soni tmNteleb yetmdelowi'. It is a temple office in the same series as ant (priest) of Amun and wkite, at the same place tmN. L0333 has 'Soni mni-s ... kdis bes lo' (she is the sister of the sonis of Amun).",
+   "recalled": "No."
+  },
+  {
+   "word": "stmdese",
+   "candidates": [
+    "deputy, assistant of the viceroy",
+    "secretary of the viceroy",
+    "close relative of the viceroy (kinship term)"
+   ],
+   "confidence": 2,
+   "evidence": "9 texts, 6 distinct, almost always defined by pesto 'viceroy': 'Stmdes pestolis' (L0079), 'Stmdes pe stolis RNAME qowi' (the deceased's title, L0179 group of 4), 'Stmdes peste lis RNAME terikeli' (the father's title, L0316), 'Stmde s pestoli towi' (L0370; -towi as in 'apotelX aromelitowi', 'great envoy to Rome', i.e. an office held at or with someone), 'Snmdes pesto li s' (L0499). 'Stmdes teN te' (L0441) has a locative. It is an office under the viceroy, not a kinship slot (no yetmdelowi construction).",
+   "recalled": "No."
+  },
+  {
+   "word": "ar (2)",
+   "candidates": [
+    "boy, son (young male)",
+    "to bring, offer",
+    "gift, offering"
+   ],
+   "confidence": 1,
+   "evidence": "5 texts, one formula: a Philae dedication by a king's child, 't dxe RNAME qore-s-l NAME ptros-li-s-lw ar mte kw Sdrte lX 2 do 6 atmi ... woS pilqe-te-l xe-l woS tebwe-te-l xe-l t d bs lo' (L0139 group of 4, L0461; variant 'ptrotis lw armte kw', L0145 group). ar stands after -lw 'and' (cf. 'kdi-s-lw abr-s-lw', L0450) inside the donor phrase, before the list of gifts, and is followed by mte 'small, young' (cf. 'trq lX' versus 'trq mte'). That suggests 'young boy, son'.",
+   "recalled": "Faint: possibly 'boy/son'; not reliable."
+  },
+  {
+   "word": "ḫbḫne",
+   "candidates": [
+    "scribe (of the king, of Isis)",
+    "priest, prophet of Isis",
+    "treasurer, administrator"
+   ],
+   "confidence": 2,
+   "evidence": "35 texts, 17 distinct. A title of Isis and of the king: 'xbxN woS qer qo NAME' (L0130 group); 'qo xbxN NAME ... qo perite woSto' (the same person is also agent of Isis; L0054, L0544, L0583, L0614); 'xbxeN qori-s mStrq qo-ye te-bxe' closes the Philae donation texts (L0139 group, L0288; L0145 group 'xbxeN NAME mStr q qo yetebxe'), i.e. the king's ḫbḫne who records or handles the gifts. Also 'xbxe lX NAME' (great ḫbḫe; L0177, L0439, L0516, L0625) and a female form xbxeNkdi.",
+   "recalled": "No."
+  },
+  {
+   "word": "qorode",
+   "candidates": [
+    "royal palace, court",
+    "kingship, kingdom",
+    "royal estate, domain"
+   ],
+   "confidence": 2,
+   "evidence": "2 texts: 'Sor qorode li y ro Xe te lo' (L0392) and 'Sor qorodeli yroXete lo' (L0399). The pattern is office-word Sor + qorode-li + yroXete-lo, the predicate used for postings ('kdiyosmli yiroXetelowi', 'wteli pkeli yiroXetewi'). qorode contains qore 'ruler', so 'the Sor of the qorode' is an office of the royal house or palace.",
+   "recalled": "No."
+  },
+  {
+   "word": "beloloke",
+   "candidates": [
+    "priest or temple official in the cult of Amun (title)",
+    "temple administrator, steward",
+    "court official, notable"
+   ],
+   "confidence": 3,
+   "evidence": "97 texts, 10 distinct. A title: 'beliloke mnp-s-l' (beloloke of Amanap, Amun of Napata; L0176); 'beloloke nptete(l)' (in Napata; L0159, L0382, L0405); 'beloloke npte-te-li pedeme-te-li Ste bes lo' (mother of the belolokes in Napata and Primis; L0564); 'beliloke pedemeteleb yetmdelowi' (L0040 group); 'beloloke kdis lo wi' (L0217). Several 'beloloke NAME' appear in the long genealogy next to pqr and ateqi, and 'ameloloke' appears in the Tanyidamani stela (L0486) amid temple personnel and offerings for Amun.",
+   "recalled": "Only that it is a Meroitic title (Faras, Karanog); I don't recall its function."
+  },
+  {
+   "word": "qoleb",
+   "candidates": [
+    "these, they (plural of qo 'this')",
+    "all of them (pronoun summing up a list)",
+    "the said ones"
+   ],
+   "confidence": 4,
+   "evidence": "19 texts, 7 distinct. qo is 'this' ('woSi Soreyi qo NAME qowi') and -leb is the plural (pelmoS-leb, beloloke ... -bes-lo). In the Hamadab stela: 'abr 32 kdi 135 qo leb yedxi', 'abr 100 kdi 100 qo leb apotebese', 'abr 58 kdi 223 qo leb apote qebese', resuming the counted men and women. In the L0007 group and L0016: 'kroroli yikidke ... 1, aspestoli yikidke ... 1, a kye qoleb yikidbite'. After singular yikid-ke with '1', qoleb takes the plural verb yikid-bi-te; likewise 'NAME qoleb yikidbite' (L0216, L0543).",
+   "recalled": "Yes: qo is the Meroitic demonstrative and 3rd-person pronoun, and qoleb is its plural 'these/they'."
+  },
+  {
+   "word": "ḫlbine",
+   "candidates": [
+    "cattle overseer, herdsman (a title)",
+    "cattle, oxen (collective)",
+    "title of an official of the ẖlite (function unknown)"
+   ],
+   "confidence": 2,
+   "evidence": "2 texts. 'beN Xlite xlbeN Xlite te' (L0215): ḫlbene stands parallel to beN (bene), which is an office held in the ẖlite ('apote Xlitetelowi beNXlitetelowi', L0040), so ḫlbene is a title. L0486 'xlbiN ameloloke-l mse 3 ipxto ...' heads a counted list of offerings. The base ḫlbi is a counted item ('xlbi 3 dime 4 kelw qe nS', L0062/L0189) and appears in 'sob xlbi-li-se' (L0022), which fits livestock. -ne forms titles (qore/qorene, sob/sobN, xrpxe/xrpxN).",
+   "recalled": "No."
+  }
+ ]
+}

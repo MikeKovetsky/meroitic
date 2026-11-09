@@ -1,0 +1,246 @@
+{
+ "answers": [
+  {
+   "word": "ḫlbi",
+   "candidates": [
+    "bull, ox",
+    "cattle (head of cattle, generic)",
+    "sheep or goat"
+   ],
+   "confidence": 3,
+   "evidence": "A counted noun in a livestock-style list: 'dmkte qo xlbi 3 dime 4 kelw qe nS per lo' (L0062) and 'xlbi 3 dime 24' (L0189): a few ḫlbi beside more dime, closed by kelw 'all' (kelw = 'all' in 'mlekeyos p mlekeyos p kelw yetmde bes lo', L0420). Kharamadoye (L0022) pairs a title with it in the 'TITLE X-(li)se-lw TITLE-Nyi' series: 'sob xlbi-lise-lw sob-Nyi', like 'qore mnpte-se', 'arette wos-se', so an overseer of ḫlbi. In the Taneyidamani stela (L0486) 'xlbiN ameloloke-l mse 3 ipxto ... ameri 5 ipxto ... Xol 8 ipxto' stands in a list of numbered offerings to gods (amni = Amun). Few, valuable, offered and herded animals point to bulls/oxen.",
+   "recalled": "Tentatively yes: I believe ḫlbi has been read as 'bull, ox' (with dime 'cow'), but I am not sure of the source."
+  },
+  {
+   "word": "ḫrpḫne",
+   "candidates": [
+    "governor, regional administrator",
+    "commander, chief officer",
+    "steward, manager of an estate"
+   ],
+   "confidence": 3,
+   "evidence": "Always the title of a high official, mostly tied to Faras: 'xrpxN pxrs-te NAME kdite lo wi' 'she is the sister of NAME, ḫrpḫne in Pakhoras' (L0170, L0358, L0376, L0455, also L0103, L0347, L0627, L0661); 'woSi Soreyi qo xrpxN pXrste NAME qowi' (L0367 family); 'xrpxN pXrste atpete yetmdelowi' (L0040 family); 'xrpxN pXrste-axdeye smlowi' (L0035 family). Listed with generals and envoys: 'pelmoS-leb apote-leb xrpx-leb kdite bes lo' (L0013, L0277); plural with a place: 'xrpxN Sqeki-te-leb' (L0064, L0256 family). The short form ḫrpḫ(e) is used of the ruler and of Akinidad in the royal texts ('qor xrpxe-l', L0258, L0381, L0628, L0654; 'pqr qorisl qor xrpxelw', L0319), so the root means 'command/administer'; ḫrpḫne is a provincial governor, distinct from pelmos 'general'.",
+   "recalled": "Yes: a high administrative title (the ḫrpḫne of Faras), usually rendered 'governor' or 'administrator'; I don't recall an agreed etymology."
+  },
+  {
+   "word": "aḫide",
+   "candidates": [
+    "count, total (what is counted)",
+    "captives or booty taken",
+    "delivery, goods handed over"
+   ],
+   "confidence": 2,
+   "evidence": "Appears where numbers are totalled. The Hamadab stela (L0654) closes two sections with 'w-likidbte asente qer-lise-lw asr axide-bx wi 1626' and '... asr axide-bxe wi 1032'. The account fragments read 'yed tlt 16 kelw yikidbitelowi s 10 kelw axide' (L0606) and 's 10 kelw axide' (L0438), '10, all aḫide'. It heads the item list 'kiSri NAME axid kiN kiSrisqtile nbrlis 1 belebeltor 1 ... teketi 59 yed tlt 16 kelw yikidbitelowi' (L0012 family, L0056 family). It is a noun from a verb aḫi: 'axide-Sxini axi-lowi' (L0034, L0096, L0340). Its constant pairing with yikid- and the plural -bx keep 'captured/taken' open as the alternative.",
+   "recalled": "No, I don't recall a published meaning."
+  },
+  {
+   "word": "pke",
+   "candidates": [
+    "servant, devotee (of a deity)",
+    "temple, sanctuary",
+    "offering, gift"
+   ],
+   "confidence": 1,
+   "evidence": "Two contexts, both tied to Isis. The Philae formula reads 'NAME wte-li pke-li yi-roXe-te-wi woS woS mlwi-li-s mlo-wi lit yiroXete mlowi' (L0108 family, plus the same formula with other name fillers in L0182, L0190, L0201, L0231, L0298, L0523, L0588). The royal offering text at Philae reads 'pki woS pilqe-te-li-s-li-wi woS tebwe-te-li-s-li-wi', 'he is the pki of Isis in Philae, of Isis in the Abaton' (L0139 family, L0145 family, L0325). The copula -wi after the goddess's genitive makes pke a role a person holds toward a deity.",
+   "recalled": "No."
+  },
+  {
+   "word": "qor-o",
+   "candidates": [
+    "ruler, king (a variant stem of qore)",
+    "royal court, palace",
+    "royal (of the king)"
+   ],
+   "confidence": 2,
+   "evidence": "In one text the same woman is kdi-qore-ye as the first deceased and kdi-qoro-ye as the mother of the second ('qe kdiqoreye qowi' vs 'kdiqoroye-tedxelowi', L0035 family), so qoro alternates with qore. It pairs with another class of persons in 'mrebqo kttre-leb mrebqo qoro-teb kelw yetmde aqebetowi' (L0035 family) and 'mrebqo kttreleb mrebqo qoro-s-leb' (L0593). It is used with Amun of Napata in 'amnp qoro mrtxe', 'amnp qoro axboroteN', 'qoro-se amnpte-se' (L0486). Compare qor-te 'in the qor' (L0486) and qor-teb (L0654).",
+   "recalled": "No specific gloss recalled; I take it as a form of qore 'ruler'."
+  },
+  {
+   "word": "mte",
+   "candidates": [
+    "young, junior: 'the younger'",
+    "small, little",
+    "child"
+   ],
+   "confidence": 5,
+   "evidence": "It contrasts with lẖ 'the elder' for two relatives of the same name in one list: 'tmeylX trq-lX-li yetmdelowi trq mte-li yetmdelowi' (L0023/L0036 family, 16 copies), 'trq-lX-li kditelewi trq mete-li kditelowi' (L0149 family), 'boke-lX-l yetmdelowi boke-mete-l yetmdelowi' (L0049 family), 'pqr yetmet lX-l yetmdelowi NAME mete-l yetmdelowi' (L0037). It is a frequent epithet after names ('NAME mete l'). It also occurs in 'mte kdi aqtoye-se 2', 'two young women' (L0022, L0076, L0251, L0620), and in 'abr-s mte-lo' (L0151).",
+   "recalled": "Yes: mte/mete 'small, young; junior, the younger', the opposite of lẖ in personal names."
+  },
+  {
+   "word": "ssor",
+   "candidates": [
+    "scribe",
+    "priest or servant of Osiris (Sor)",
+    "treasurer, official of the ruler"
+   ],
+   "confidence": 3,
+   "evidence": "A title. 'SSor lX lo wi qoreN l', 'he is the great (chief) ššor of the ruler' (L0571). 'SSor atbo-s mlekeye yetmdelowi', 'nephew of Mlekeye, ššor of atbo' (L0002 family, about 10 copies; L0394 'S Sor atbo s'). Here atbe recurs in 'qor xrpxe-l ... atbe tmot' at the head of royal texts (L0258, L0628, L0654), plausibly 'document, inscription'. Also 'SSor mns mli-towi' (L0007 family) and 'SSor metelXs' (L0368). A lẖ grade and service to the ruler fit a scribe or secretary.",
+   "recalled": "Vaguely: 'scribe' (perhaps linked to Egyptian sš); not certain."
+  },
+  {
+   "word": "teter",
+   "candidates": [
+    "temple official (a priestly grade)",
+    "administrator or steward of a town",
+    "doorkeeper, guardian"
+   ],
+   "confidence": 1,
+   "evidence": "Only in one inscription (L0007 family, 13 copies): 'antxSxslis nni yetmdelowi teter xSxsli-towi amolX XSxslis NAME yetmdelo'. It is a title the deceased held in the town ḫšḫs, listed among the priests (ant) of ḫšḫs, an 'amo lẖ of ḫšḫs' and the titles 'aSore / mrs xSxsli-towi'. Compare 'XlXili tete-li tre-li yetmdelowi' (L0023 family), where tete and tre are titles after a name.",
+   "recalled": "No."
+  },
+  {
+   "word": "qorise",
+   "candidates": [
+    "royal, of the ruler (qore + genitive -se)",
+    "prince or princess, member of the royal house",
+    "kingship, the crown"
+   ],
+   "confidence": 4,
+   "evidence": "It behaves exactly like X plus the genitive -s(e). 'ant qori-s lo', 'he is a priest of the ruler' (L0448), matches 'ant mnp-s', 'priest of Amun of Napata' (L0063, L0592), as well as 'SlXS mnp-s-l' (L0142), 'pelmoS adb-li-s' and 'apote arome-li-s'. Other uses: 'xbxeN qori-s' (L0139 family, L0288); 'pqr qoris NAME' (L0179 family); Akinidad's style 'pqr qorise-l', 'the royal prince' (L0654, L0486; 'pqr qorisl' in L0319); 'tr qorise kdise' (L0486). So it means 'of the qore, royal'.",
+   "recalled": "Roughly yes: 'royal, of the sovereign', as in pqr qorise 'royal prince'."
+  },
+  {
+   "word": "yireqe (1)",
+   "candidates": [
+    "beloved, favoured (of the gods)",
+    "chosen (by)",
+    "offspring (of), begotten"
+   ],
+   "confidence": 1,
+   "evidence": "In a royal titulary right after 'the gods': 'xrmdoye qore ariteN-l mdese mnitke mk-leb yereqe' (L0022), where an epithet like 'beloved of the gods' is expected. As a predicate: 'akilikw xrimli yireke lo' (L0226, L0621). 'yireqw' appears twice in the closing of L0022/L0197 ('Xrw addonilikete yireqw ... yireqw adereke'). There are too few contexts to fix the sense.",
+   "recalled": "No."
+  },
+  {
+   "word": "snte",
+   "candidates": [
+    "priest (temple title)",
+    "temple official, steward",
+    "elder, notable"
+   ],
+   "confidence": 1,
+   "evidence": "Only a title before a personal name on short texts: 'sNte NAME (mete l / qo / mokelowi)' (L0172, L0240, L0580, L0622), parallel to 'plSn NAME', 'pelmoS NAME', 'kiSri NAME' and 'SlXS NAME'. In the Taneyidamani stela 'se Nte amnp-te' (L0486) may place it in the temple of Amun of Napata, hence a temple office.",
+   "recalled": "No."
+  },
+  {
+   "word": "dik",
+   "candidates": [
+    "all, every (after a noun)",
+    "tribute, offering",
+    "go (to)"
+   ],
+   "confidence": 1,
+   "evidence": "Only in late texts: Kharamadoye (L0022) and its fragments (L0027, L0118, L0361, L0541, L0623, L0639). It comes after a noun group and before a place in -te: 'qorelik dik pilqoy-te bqo-k', 'simlok dik pilqoy-te bqo-l', 'simlok dik selele-y-te'. It closes a list of people and goods: 'mXo temey nsedoke kdi abr nxbres kbx mXoli temeyli dk'. Other uses: 'byeke lx dik', 'teqelelxw dik dime' (L0101). Its place right after noun phrases suggests a quantifier.",
+   "recalled": "No."
+  },
+  {
+   "word": "mkdi",
+   "candidates": [
+    "goddess",
+    "lady, divine mistress",
+    "queen"
+   ],
+   "confidence": 5,
+   "evidence": "'woS mkdi lX mk di lX' (L0339), 'woS mkdi woS mk di lX' (L0577), 'woS mkdi lX' (L0278). It is an epithet of Isis with lẖ 'great', also written split as mk + di, i.e. mk 'god' plus kdi 'woman/female': 'Isis, the great goddess', as in Egyptian 'Isis the great goddess'.",
+   "recalled": "Yes: 'goddess' (mk 'god' + kdi 'woman')."
+  },
+  {
+   "word": "dime",
+   "candidates": [
+    "cow",
+    "sheep or goat (small stock)",
+    "calf"
+   ],
+   "confidence": 3,
+   "evidence": "Counted after ḫlbi in the same short list: 'dmkte qo xlbi 3 dime 4 kelw qe nS per lo' (L0062) and 'xlbi 3 dime 24' (L0189). There are more dime than ḫlbi; if ḫlbi are bulls, dime are the cows of the herd. It also occurs as 'dik dime' and 'yekk dime' in L0101, without numbers.",
+   "recalled": "Vaguely: 'cow' (paired with ḫlbi 'bull'); not certain."
+  },
+  {
+   "word": "slẖs",
+   "candidates": [
+    "priest of Amun (a priestly title)",
+    "temple scribe",
+    "temple steward, administrator"
+   ],
+   "confidence": 2,
+   "evidence": "A title before names ('SlXS NAME', L0058, L0408, L0511, L0635) and with a god: 'SlXS mnp-s-l sm lo wi', 'she is the wife of the slẖs of Amun of Napata' (L0142). This is the same construction as 'ant mnp-s', 'priest of Amun of Napata' (L0063, L0592, L0479), and 'beliloke mnp-s-l' (L0176). Also 'SlXS terek lo' (L0572).",
+   "recalled": "No; I only know it as a title."
+  },
+  {
+   "word": "trtekese",
+   "candidates": [
+    "district official, governor of a town",
+    "priest",
+    "steward"
+   ],
+   "confidence": 1,
+   "evidence": "Only in the L0040 family (4 copies): 'trtekes tketore-te-leb yetmdelowi', 'nephew of the trtekese(s) in Tketore'. It stands in a run of local offices: 'ateqi Sdos-te-leb', 'beliloke pedeme-te-leb' (Pedeme = Primis) and 'mloyos atiye-te-leb' (Atiye = Sedeinga). Tketore is a place (L0296, L0410: 'aXrrb tketore-te-li').",
+   "recalled": "No."
+  },
+  {
+   "word": "ẖe (1)",
+   "candidates": [
+    "drink, give to drink (water)",
+    "pour (a libation)",
+    "give"
+   ],
+   "confidence": 3,
+   "evidence": "The token Xe is the verb root of the water benediction: 'ate mXe pi Si Xe bx kes' (L0003, L0488) and 'ate mXe pi So Xe bx te / bx ke s / ke te / ke s' (L0178, L0223, L0404, L0525, L0615, L0630). This is the 'ato mXe piSiXekes' of the epitaphs, always with ato/ate 'water'. Bread takes another root ('at mXe pSixrkes', L0023 family), so ẖe is the act specific to water.",
+   "recalled": "Partly: it is the root of the verb in the water benediction (pišiẖe-kete); I don't recall a fixed published gloss, and 'give to drink' is my reading."
+  },
+  {
+   "word": "beltore",
+   "candidates": [
+    "jar, vessel (a counted container)",
+    "unit of measure",
+    "garment, piece of cloth"
+   ],
+   "confidence": 1,
+   "evidence": "A counted item in account-like lists: 'kiSri NAME axid kiN kisrisqtile nbrlis 1 belebeltor 1 tsl teketi mesreke-li-s beltore 1' (L0056 family and filler copies), and 'mes reke lis beltore le 10 keN l tlt my tk teketi' (L0482). The latter parallels 'bXe yedlis 1 teketi 59 e 10 keN 1 tlt' (L0236). So it reads as 'beltore of the mesreke: 1', with keN as a unit.",
+   "recalled": "No."
+  },
+  {
+   "word": "ttne",
+   "candidates": [
+    "official, administrator (a title with a 'great' grade)",
+    "priest",
+    "deputy, vizier"
+   ],
+   "confidence": 1,
+   "evidence": "A title, used in the plural and graded. 'ttN-leb yetmdelowi', 'nephew of the ttne(s)' (L0002 family), next to 'SSor atbos'. 'ttN lX pelmoS-lis pqe-bete yetmdelowi', 'nephew of the great ttne ... of the generals' (L0012 family, 13 copies). Also 'tepi ttN ten' (L0486).",
+   "recalled": "No."
+  },
+  {
+   "word": "yer",
+   "candidates": [
+    "milk; to nurse (suckle)",
+    "foster, bring up",
+    "protect, guard"
+   ],
+   "confidence": 1,
+   "evidence": "There is no free-standing yer/yeri; the only occurrence is 'Steqeteb yer-Sxini yeri-te-lebkwi' (L0340, L0632). It is a third filiation clause after 'tyeSi yedxe-lebkwi', 'born of Tyeši', and 'Ssmri pestoliti terike-lebkwi', 'begotten by Ssmri', with Ste 'mother' in Steqeteb, so it suggests a nursing or foster relation. Compare 'nte-yd eSxini yeteke-lowi' and 'axide eSxini axi-lowi', where a noun is followed by a verb of the same root.",
+   "recalled": "Faint and unreliable: possibly 'milk'."
+  },
+  {
+   "word": "tqi",
+   "candidates": [
+    "local administrator, town official",
+    "priest",
+    "elder, notable"
+   ],
+   "confidence": 1,
+   "evidence": "A title, usually with the prothetic a-. 'ateqi atiye-te NAME yetmdelowi', 'nephew of NAME, the ateqi in Atiye/Sedeinga', and repeated 'ateqi NAME' (L0000 and L0019 families, about 90 copies of one kin list). Also 'ateqi Sdos-te-leb yetmdelowi' (L0040 family), and the plural 'tqi-leb yetmdelowi' beside 'ant-leb' (priests) and 'mesn-leb' (L0086). The office is tied to towns, like 'xrpxN pXrs-te' and 'pesto akiN-te'.",
+   "recalled": "No."
+  },
+  {
+   "word": "mdese",
+   "candidates": [
+    "son, descendant (of)",
+    "beloved (of)",
+    "grandchild"
+   ],
+   "confidence": 2,
+   "evidence": "A royal or elite epithet after a genitive -l: 'xrmdoye qore ariteN-l mdese' (L0022), 'mnitore ariteN-l mdes-l' (L0529), 'ntkmni amni medes-l', 'Natakamani, mdese of Amani/Amun' (L0584), and 'Sorkror mkedeke-l mdes-l' (L0141). Its root mde is a kin word: yet-mde 'nephew/niece', and 'qore smle NAME mde-towi' in kin lists (L0000 family). The reading 'son/descendant of (god X)' fits both kinds of context.",
+   "recalled": "No firm recollection."
+  }
+ ]
+}
