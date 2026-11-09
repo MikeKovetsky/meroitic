@@ -11,13 +11,13 @@
  ],
  "T1013[?1]": [
   "l",
-  "ye",
-  "qo"
+  "areqis",
+  "mleyotowi"
  ],
  "T1013[?2]": [
-  "yetmdelowi",
-  "beloloke",
-  "terikelowi"
+  "wteli",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0698[?1]": [
   "yetmdelowi",
@@ -50,19 +50,19 @@
   "mete"
  ],
  "T0862[?2]": [
-  "yetmdelowi",
-  "terikelowi",
-  "beloloke"
+  "Stelowi",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0844[?1]": [
+  "mete",
   "NAME",
-  "l",
-  "ye"
+  "yetmdelowi"
  ],
  "T0844[?2]": [
-  "penn",
-  "wteli",
-  "axid"
+  "axid",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0606[?1]": [
   "qo",
@@ -86,8 +86,8 @@
  ],
  "T0191[?2]": [
   "tk",
-  "NAME",
-  "te"
+  "te",
+  "xrpxe"
  ],
  "T0126[?1]": [
   "yetmdelowi",
@@ -110,9 +110,9 @@
   "NAME"
  ],
  "T0944[?2]": [
-  "NAME",
   "l",
-  "tmNtelowi"
+  "tmNtelowi",
+  "yiroXetewi"
  ],
  "T1007[?1]": [
   "tmdelowi",
@@ -120,29 +120,29 @@
   "qowi"
  ],
  "T1007[?2]": [
-  "bili",
-  "bes",
-  "NAME"
+  "16",
+  "qoroteb",
+  "tkreye"
  ],
  "T0846[?1]": [
-  "kdite",
-  "mde",
-  "kdis"
+  "axilowi",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0846[?2]": [
   "lo",
   "k",
-  "de"
+  "yetmdelo"
  ],
  "T0855[?1]": [
   "l",
-  "NAME",
-  "qo"
+  "areqis",
+  "mleyotowi"
  ],
  "T0855[?2]": [
-  "yetmdelowi",
-  "beloloke",
-  "terikelowi"
+  "NAME",
+  "terikeli",
+  "bliye"
  ],
  "T0011[?1]": [
   "mokelowi",
@@ -180,29 +180,29 @@
   "apette"
  ],
  "T0595[?2]": [
-  "NAME",
   "mStr",
-  "w"
+  "w",
+  "moste"
  ],
  "T0815[?1]": [
   "kdi",
   "NAME",
-  "mXo"
+  "yetmdelowi"
  ],
  "T0815[?2]": [
-  "qo",
-  "mlo",
-  "qoye"
+  "NAME",
+  "yetmdelowi",
+  "l"
  ],
  "T0271[?1]": [
   "l",
-  "NAME",
-  "mokelowi"
+  "areqis",
+  "mleyotowi"
  ],
  "T0271[?2]": [
-  "yetmdelowi",
-  "beloloke",
-  "terikelowi"
+  "krorolowi",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0716[?1]": [
   "yetmdelowi",
@@ -211,8 +211,8 @@
  ],
  "T0316[?1]": [
   "yetmdelowiqoreN",
-  "NAME",
-  "amnp"
+  "amnp",
+  "NAME"
  ],
  "T0316[?2]": [
   "mde",
@@ -245,9 +245,9 @@
   "li"
  ],
  "T0409[?1]": [
-  "NAME",
   "yXNx",
-  "ntmlipy"
+  "ntmlipy",
+  "anoqo"
  ],
  "T0409[?2]": [
   "te",
@@ -270,9 +270,9 @@
   "mete"
  ],
  "T0997[?2]": [
-  "yetmdelowi",
-  "beloloke",
-  "terikelowi"
+  "Stelowi",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0914[?1]": [
   "NAME",
@@ -280,9 +280,9 @@
   "l"
  ],
  "T0914[?2]": [
-  "NAME",
   "li",
-  "xrpx"
+  "xrpx",
+  "mdetese"
  ],
  "T0768[?1]": [
   "kes",
@@ -305,19 +305,19 @@
   "qetrri"
  ],
  "T0074[?2]": [
-  "NAME",
   "dbretelowi",
-  "yetmdelowi"
+  "yetmdelowi",
+  "mlolowi"
  ],
  "T0290[?1]": [
   "l",
-  "ye",
-  "qo"
+  "areqis",
+  "mleyotowi"
  ],
  "T0290[?2]": [
-  "yetmdelowi",
-  "beloloke",
-  "terikelowi"
+  "wteli",
+  "NAME",
+  "yetmdelowi"
  ],
  "T0559[?1]": [
   "yetmdelowi",
@@ -335,9 +335,9 @@
   "NAME"
  ],
  "T0769[?2]": [
+  "wteli",
   "qowi",
-  "axid",
-  "penn"
+  "axid"
  ],
  "T0273[?1]": [
   "woSi",
@@ -345,9 +345,9 @@
   "NAME"
  ],
  "T0273[?2]": [
+  "wteli",
   "qoleb",
-  "qowi",
-  "axid"
+  "qowi"
  ],
  "T0356[?1]": [
   "yetmdelowi",
@@ -370,9 +370,9 @@
   "a"
  ],
  "T0938[?2]": [
+  "axid",
   "qowi",
-  "penn",
-  "wteli"
+  "penn"
  ],
  "T0550[?1]": [
   "yetmdelowi",
@@ -391,8 +391,8 @@
  ],
  "T0136[?1]": [
   "dik",
-  "NAME",
-  "mXe"
+  "mXe",
+  "NAME"
  ],
  "T0136[?2]": [
   "aqebetowi",
@@ -401,8 +401,8 @@
  ],
  "T0009[?1]": [
   "RNAME",
-  "NAME",
-  "s"
+  "s",
+  "te"
  ],
  "T0009[?2]": [
   "wete",
@@ -417,12 +417,12 @@
  "T0671[?1]": [
   "yed",
   "tmi",
-  "mi"
+  "s"
  ],
  "T0671[?2]": [
-  "ken",
   "keN",
-  "kelw"
+  "kelw",
+  "tepi"
  ],
  "T0234[?1]": [
   "yetmdelowi",
@@ -437,6 +437,6 @@
  "T1012[?2]": [
   "bx",
   "bqo",
-  "NAME"
+  "qore"
  ]
 }
