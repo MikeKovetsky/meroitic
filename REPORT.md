@@ -17,7 +17,9 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the code in `src/` (review
 3. **On a language it can't know, it infers meaning from context.** On a synthetic corpus of the same size and
    style (1,003 texts, 16k words, invented vocabulary and endings), it matched 41 of 52 usable test words where
    chance is about 2; all 24 answers at confidence 4–5 were right (`Y_f0`, `Y_f1`; 4 of the 56 original items
-   dropped by the review because the corpus doesn't show them). RESULT_YK
+   dropped by the review because the corpus doesn't show them). On the same language's grammar, blind, it found all
+   8 invented endings and every formula slot; it named 3 functions exactly, 2 partly, and got 3 wrong
+   (`YK_morph`, `runs/yk_morph_scored.json`).
 4. **The texts fill gaps in its memory.** For the 17 published words it could not recall, reading the corpus took
    it to the published meaning on the first guess for 14 and within three guesses for 16 (`N_open`,
    `runs/natural_open_scored.json`, judged by me against the key; the table is below so anyone can re-judge).
@@ -48,7 +50,7 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the code in `src/` (review
 | Open recall, 82 words | `F_recall` | 50 right, 1 partial, 1 wrong, 30 unknown | memory |
 | Natural experiment, 17 unrecalled words | `N_open` | 14/17 first guess, 16/17 top three | mostly clean |
 | Synthetic language, matching | `Y_f0/1` | 41/52; confidence 4–5: 24/24 | clean |
-| Synthetic language, grammar | `YK_morph` | RESULT_YK_SHORT | clean |
+| Synthetic language, grammar | `YK_morph` | 8/8 endings found; functions 3 right, 2 partly, 3 wrong | clean |
 | Grammar, scrambled real corpus | `K_morph`, `K2_morph` | about 16 of 26 published endings | recognised Meroitic |
 | Restoration v1, v2 | `C_cloze`, `C2_cloze` | 91/97, 82/88 vs n-gram 39/88 | void: copied from leftover padding |
 | Restoration v3, new texts | `C3_cloze` | 57/92 vs n-gram 23/92 | clean |

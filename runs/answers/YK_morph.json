@@ -1,0 +1,348 @@
+{
+ "formulas": [
+  {
+   "name": "A. Offering formula (the main formula: 596 of 1003 texts). Shape: OPENING + chain of genitive person-phrases + 1-3 offering clauses",
+   "segments": [
+    {
+     "form": "sui | nui | sui nui | nui sui  (= su-i, nu-i; 158 / 146 / 144 / 140 texts, either order)",
+     "role": "Opening slot: one or both of the proper names su, nu in the -i case. These are the addressees or recipients of the offering, probably deities: 'to/for Su (and) Nu'."
+    },
+    {
+     "form": "NAME-fako  (596/596, always the first person-phrase)",
+     "role": "The principal person (owner or dedicant), in the genitive: 'of NAME'."
+    },
+    {
+     "form": "NAME sutu-fako  (510/596)",
+     "role": "Fixed genealogy slot 1: 'of NAME the sutu'. The kin noun stands in apposition to the name, and -fako closes the whole phrase. This slot never has a title or a place."
+    },
+    {
+     "form": "NAME giris-fako  (502/596; directly after sutu, or after the head when sutu is absent)",
+     "role": "Fixed genealogy slot 2: 'of NAME the giris'. It is the next generation of the filiation (father/grandfather or son/grandson type). It never has a title."
+    },
+    {
+     "form": "( [TITLE] [TOWN-ne] [REGION-ne] NAME KIN-fako ) repeated 0-7 times; TITLE = haltuto/hil/gewu/gemoyun/fakmu; KIN = zu, dabon, zitomu, galu, pizu, seka, malumu",
+     "role": "Further relatives or associates, each a genitive phrase. A phrase may name the person's office (a title before the name) and place of affiliation in the -ne case, stacked from small to large ('haltuto nibi-ne fupur-ne NAME malumu-fako' = 'of NAME the malumu, the haltuto of Nibi in Fupur'). The REGION-ne words su-ne, fupur-ne and ya-ne occur only after haltuto."
+    },
+    {
+     "form": "pira-fako | suse-fako  (91 | 71 texts; never both, always the last phrase, never with NAME)",
+     "role": "A collective that closes the genitive list: 'of the pira (family/household?)' or 'of all (suse)'."
+    },
+    {
+     "form": "kikrira | zohu  +  gun | suse | zura  +  gukhi-ra",
+     "role": "Offering clause, type 1: offering noun (bare, the patient) + quantity word in the numeral slot + the verb gukhi- 'sacrifice/offer' with -ra (non-past)."
+    },
+    {
+     "form": "wu | sezi  +  gun | suse | zura  +  pafo-ra",
+     "role": "Offering clause, type 2: a second class of offering (liquids?) + quantity word + pafo- 'pour' with -ra. Selection is strict: kikrira and zohu take only gukhi-, and wu and sezi take only pafo- (no exception in about 1,100 clauses). A text has 1-3 clauses (about 165 / 294 / 137 texts), each offering noun at most once, in free order."
+    }
+   ]
+  },
+  {
+   "name": "B. Delivery record ('gurdenpir' texts: 137)",
+   "segments": [
+    {
+     "form": "gurdenpir",
+     "role": "Genre header word. It begins every delivery record."
+    },
+    {
+     "form": "su-ne | nu-ne | fupur-ne  (36 / 56 / 43)",
+     "role": "The agent's home or institution in the -ne case: 'at/of Su'."
+    },
+    {
+     "form": "NAME",
+     "role": "The agent who delivers (subject)."
+    },
+    {
+     "form": "TITLE: robo 33, hil 25, gewu 21, haltuto 20, fakmu 19, monharzas 19",
+     "role": "The agent's office, a title placed after the name."
+    },
+    {
+     "form": "COMMODITY(-du) NUMERAL, 1 pair (88 texts) or 2 pairs (49); commodities folofu, lurufo, ne, lakyu, budobo, zohu, kikrira; numerals 1, 2, 3, 5, 10, 20",
+     "role": "The goods delivered (direct object). The object ending -du appears on 106 of 186 items, in free variation: one text can have both 'budobo 5' and 'budobo-du 10'."
+    },
+    {
+     "form": "yu-bi | wuti-bi  (75 / 61)",
+     "role": "Destination in the -bi (allative) case: 'to Yu / to Wuti'."
+    },
+    {
+     "form": "dultu-zo",
+     "role": "Verb 'delivered/sent' with -zo (past)."
+    },
+    {
+     "form": "( wepak-ne togul-ra )  optional, 50/137",
+     "role": "Coda: place in -ne + verb with -ra (non-past), perhaps 'it is stored/sealed at Wepak'."
+    }
+   ]
+  },
+  {
+   "name": "C. Inventory list (89)",
+   "segments": [
+    {
+     "form": "COMMODITY NUMERAL, 2-4 pairs (folofu, kikrira, wu, zohu, ne, budobo, miyu; each at most once; numerals 1, 2, 3, 4, 6, 8, 12, 20, 40, 100)",
+     "role": "Entries: the noun in its bare citation form + a count. Lists never use -du."
+    },
+    {
+     "form": "ma  (60/89)",
+     "role": "Conjunction 'and', always before the last entry."
+    },
+    {
+     "form": "yu-ne wolo-mu  (optional, 47/89)",
+     "role": "Colophon: 'at Yu (the institution that receives deliveries): wolo-mu', perhaps 'total' or 'stock'."
+    }
+   ]
+  },
+  {
+   "name": "D. Name label (67)",
+   "segments": [
+    {
+     "form": "NAME",
+     "role": "The person."
+    },
+    {
+     "form": "TITLE (gewu 16, gemoyun 14, haltuto 12, robo 10, fakmu 8, hil 7)",
+     "role": "The office held (title after the name)."
+    }
+   ]
+  },
+  {
+   "name": "E. Official's seal (61)",
+   "segments": [
+    {
+     "form": "TITLE (fakmu, gewu, hil)",
+     "role": "The office (title before the name)."
+    },
+    {
+     "form": "TOWN-ne (13 towns: yuka, morzo, fani, sifo, hekdo, biyir, lewo, nibi, rine, fuwi, topi, yoso, kunalir)",
+     "role": "Seat of the office in the -ne case: 'the hil of/at Yuka'."
+    },
+    {
+     "form": "NAME",
+     "role": "The office holder."
+    }
+   ]
+  },
+  {
+   "name": "F. Two-name filiation or ownership label (50)",
+   "segments": [
+    {
+     "form": "NAME",
+     "role": "The first person (possessor or relative)."
+    },
+    {
+     "form": "KIN-fako (dabon 16, pizu 12, galu 8, zitomu 8, malumu 6)",
+     "role": "A genitive kin phrase 'of (NAME) the KIN', the same unit as in the main formula."
+    },
+    {
+     "form": "NAME",
+     "role": "The second person, whom the genitive phrase describes."
+    }
+   ]
+  },
+  {
+   "name": "G. Royal annals (3 long texts: L0146, L0283, L0569)",
+   "segments": [
+    {
+     "form": "monharzas RNAME robo RNAME gemoyun RNAME",
+     "role": "Royal protocol: monharzas ('king') + royal name, then two more title + royal-name pairs."
+    },
+    {
+     "form": "TOWN-bi seyo-zo  (42)",
+     "role": "Each episode opens 'to TOWN (he/I) marched': allative + past."
+    },
+    {
+     "form": "duwo-du | fefukra-du | kunalir-du  resdo-zo  (19 / 14 / 9)",
+     "role": "Object in -du + past verb: something conquered or destroyed."
+    },
+    {
+     "form": "yowi-du N fokla-du N (paso-du N) hiza-du sape-zo (30);  folofu-du N ma ne-du N sape-zo (17)",
+     "role": "Booty: counted objects in -du + 'carried off' (past). ma joins the last pair."
+    },
+    {
+     "form": "yowi-du waki-zo  (12)",
+     "role": "Object in -du + past verb."
+    },
+    {
+     "form": "gemoyun-du fo seyo-zo  (7)",
+     "role": "'Marched with the gemoyun': a noun in -du + the free word fo (postposition)."
+    },
+    {
+     "form": "su-ne | fupur-ne  yu-mu dapuk-zo  (14), always followed by  lurufo N gukhi-zo  (14)",
+     "role": "Cult act: at/for Su or Fupur, 'yu-mu dapuk-ed', then N lurufo sacrificed. gukhi- takes -zo here but -ra in the offering formula."
+    },
+    {
+     "form": "monharzas RNAME su-ne | fupur-ne doze-zo  (10)",
+     "role": "Another king of Su or Fupur, named with title + RNAME, as the subject of doze- (past)."
+    }
+   ]
+  }
+ ],
+ "morphemes": [
+  {
+   "form": "-fako",
+   "type": "suffix",
+   "function": "Genitive (possessive/relational 'of') case of person-phrases. It goes on the last word of the phrase [NAME (+ kin noun)] as group inflection.",
+   "evidence": "3,090 tokens on 12 stems: NAME 596, sutu 510, giris 502, zu 324, dabon 176, galu 176, zitomu 175, seka 170, pizu 169, malumu 130, pira 91, suse 71. Scribes write it detached ('NAME fako', 'giris fako') in about 26% of cases, so it is a separable ending; stems themselves are never split (haltuto 0/304, kikrira 0/341). It closes every person-phrase in the main formula and every chain unit (NAME-fako, NAME sutu-fako, NAME giris-fako, ...). In the 50 two-name labels 'NAME KIN-fako NAME' it links two persons through a kin term. It never occurs on places, goods or verbs, and the same names are bare in labels and receipts.",
+   "confidence": 4
+  },
+  {
+   "form": "-ne",
+   "type": "suffix",
+   "function": "Locative case for places and place-like proper names: 'at/in/of X', the place of affiliation, location or origin. Phrases stack from smaller to larger place (town-ne region-ne).",
+   "evidence": "788 tokens on 19 stems: fupur 98, su 91, yu 69, nu 56, ya 51, wepak 50, and the 13 towns yuka, morzo, fani, lewo, sifo, hekdo, biyir, nibi, rine, yoso, fuwi, kunalir, topi (23-38 each). It is detached in about 25% of cases. Contexts: seals 'TITLE TOWN-ne NAME'; main formula 'TITLE TOWN-ne (REGION-ne) NAME KIN-fako' (e.g. 'nibi-ne fupur-ne'); receipt agent 'su/nu/fupur-ne NAME TITLE'; list colophon 'yu-ne wolo-mu'; receipt coda 'wepak-ne togul-ra'; annals 'su/fupur-ne yu-mu dapuk-zo' and 'monharzas RNAME su-ne doze-zo'. Before the motion verbs seyo- and dultu- the same stems take -bi instead (yuka-ne/yuka-bi, yu-ne/yu-bi). The commodity noun 'ne' (ne 40, ne-du) is a homophone.",
+   "confidence": 4
+  },
+  {
+   "form": "-bi",
+   "type": "suffix",
+   "function": "Allative case, destination 'to X'.",
+   "evidence": "178 tokens on 14 stems: yu 75, wuti 61, and 12 towns (yuka, topi, fani, sifo, morzo, nibi, biyir, rine, hekdo, fuwi, yoso, lewo). It always stands immediately before a motion verb: dultu-zo 'delivered' (136, after the goods in receipts) or seyo-zo 'marched' (42, opening each annal episode). The same stems take -ne in static positions, which gives the Kober-style contrast yuka-ne : yuka-bi, yu-ne : yu-bi : yu-mu.",
+   "confidence": 4
+  },
+  {
+   "form": "-du",
+   "type": "suffix",
+   "function": "Accusative or direct-object marker on goods and on things acted upon. It is optional (differential) in receipts. A definite-object marker is the main alternative reading.",
+   "evidence": "308 tokens on 15 stems: yowi 42, ne 38, folofu 33, fokla 30, hiza 30, lurufo 20, duwo 19, lakyu 17, paso 17, fefukra 14, zohu 12, budobo 11, kikrira 9, kunalir 9, gemoyun 7. In receipts it is on 106 of 186 delivered items, with no conditioning by numeral, commodity, title or destination (it occurs with '1' 17 times, so it is not a plural). In the annals it marks every object of sape- 'carry off', resdo- and waki- (kunalir-ne 'at Kunalir' versus kunalir-du resdo-zo), and the noun governed by 'fo'. It never appears in lists (citation forms), on subjects, in the main formula, or on the patients of gukhi- and pafo- (kikrira gun gukhi-ra; lurufo N gukhi-zo): 0 cases.",
+   "confidence": 3
+  },
+  {
+   "form": "-i",
+   "type": "suffix",
+   "function": "A case of the names su and nu used only in the invocation opening the offering formula. Most likely dative/benefactive of the divine recipients ('to/for Su, Nu'); vocative is possible.",
+   "evidence": "901 tokens, only on su (450) and nu (449), only at the very start of the main formula, one or both names in either order. It is detached ('su i', 'nu i') in about 26% of cases. The same stems take -ne in receipts and annals (su-ne, nu-ne), so -i is a case ending and not part of the name. Fupur and ya, the other members of the class, never take it.",
+   "confidence": 2
+  },
+  {
+   "form": "-mu",
+   "type": "suffix",
+   "function": "Unclear, a rare nominal ending. Best guess: it marks a noun headed by a preceding -ne phrase as the possessed/definite thing or goal ('the yu of Su', 'the wolo of/at Yu'). Possibly a goal 'into/for' case or a second object case.",
+   "evidence": "59 tokens on 2 stems: wolo 46 ('yu-ne wolo-mu', closing inventories) and yu 13 ('su-ne / fupur-ne yu-mu dapuk-zo' in the annals, always followed by 'lurufo N gukhi-zo'). It is detached 16 times ('wolo mu', 'yu mu'). yu also takes -ne and -bi, so -mu is a nominal ending. Every -mu word follows a -ne word. Unsplit 'fakmu' (0/169) is a different, monomorphemic word.",
+   "confidence": 1
+  },
+  {
+   "form": "-zo",
+   "type": "suffix",
+   "function": "Verb ending for past/perfective (completed, narrated events). The rival reading is 1st person, as in royal first-person narrative.",
+   "evidence": "325 tokens on 8 verb stems, always clause-final: dultu 137, seyo 49, sape 47, resdo 42, dapuk 14, gukhi 14, waki 12, doze 10. It carries every verb of the annals and the delivery verb of receipts. The same stem gukhi- takes -zo in narrative ('lurufo 8 gukhi-zo') but -ra in the offering formula. It occurs with overt third-person subjects ('monharzas RNAME su-ne doze-zo'; 'NAME robo ... dultu-zo'), which favours tense over person. It is detached in about 24% of cases.",
+   "confidence": 3
+  },
+  {
+   "form": "-ra",
+   "type": "suffix",
+   "function": "Verb ending for non-past: present/habitual for ritual and standing states, possibly prescriptive (jussive) mood. It contrasts with past -zo.",
+   "evidence": "1,215 tokens on 3 stems: gukhi 586, pafo 579, togul 50. It is clause-final in the offering clauses (OBJECT + quantity + VERB-ra) and in the receipt coda 'wepak-ne togul-ra', which follows the past 'dultu-zo' in the same text. The minimal pair gukhi-ra (ritual formula) : gukhi-zo (annals) shows it is the verb ending. It is detached in about 25% of cases. Stems that merely end in -ra are never split (kikrira 0/341, zura, fefukra), so they do not contain it.",
+   "confidence": 3
+  },
+  {
+   "form": "ma",
+   "type": "word",
+   "function": "Coordinating conjunction 'and' (a free particle placed before the last conjunct).",
+   "evidence": "77 tokens, never attached to a neighbour. In lists it stands before the last commodity + numeral pair in all 60 lists that have it. In the annals it joins 'folofu-du N ma ne-du N'.",
+   "confidence": 4
+  },
+  {
+   "form": "fo",
+   "type": "word",
+   "function": "Postposition or adverb, probably 'with/together with', governing a noun in -du.",
+   "evidence": "7 tokens, only in 'gemoyun-du fo seyo-zo' in the annals, always written apart (0/7 attached, whereas real endings attach about 75% of the time). gemoyun is a title, so the clause plausibly reads 'marched with the gemoyun'.",
+   "confidence": 2
+  }
+ ],
+ "word_classes": [
+  {
+   "form": "NAME, RNAME",
+   "class": "proper nouns (persons; royal persons)",
+   "note": "NAME takes -fako in the main formula and is bare in labels, seals and receipts. RNAME occurs only in the annals, after monharzas, robo and gemoyun."
+  },
+  {
+   "form": "su, nu, fupur, ya",
+   "class": "proper nouns: deities or regions",
+   "note": "A closed class. su and nu take -i (opening of the offering formula) and -ne; fupur and ya take -ne only. su, fupur and ya follow the title haltuto; su, nu and fupur are the agent's home in receipts; su and fupur appear in the annals."
+  },
+  {
+   "form": "yuka, morzo, fani, sifo, hekdo, biyir, lewo, nibi, rine, fuwi, topi, yoso, kunalir",
+   "class": "place names (towns)",
+   "note": "They take -ne (seals and main formula) and -bi (annals: 'to TOWN marched'). kunalir also takes -du as the object of resdo-."
+  },
+  {
+   "form": "yu, wuti, wepak",
+   "class": "place or institution nouns",
+   "note": "yu and wuti are delivery destinations (-bi). yu also takes -ne (list colophon; a town slot in the main formula) and -mu (annals); it may be 'temple/palace/store'. wepak occurs only in 'wepak-ne togul-ra'."
+  },
+  {
+   "form": "sutu, giris",
+   "class": "kinship nouns (fixed genealogy slots)",
+   "note": "Always 'NAME sutu-fako' then 'NAME giris-fako' directly after the head NAME-fako, never with a title: the filiation chain (father and grandfather, or son and grandson)."
+  },
+  {
+   "form": "zu, dabon, zitomu, galu, pizu, seka, malumu",
+   "class": "kinship or relationship nouns",
+   "note": "'NAME KIN-fako' in the open part of the main formula, optionally preceded by a title and place. dabon, pizu, galu, zitomu and malumu also occur in the two-name labels."
+  },
+  {
+   "form": "pira",
+   "class": "collective noun",
+   "note": "Only as pira-fako, the last phrase of the genitive chain, never with NAME. Perhaps 'family/household/ancestors'."
+  },
+  {
+   "form": "haltuto, hil, gewu, fakmu, gemoyun, robo, monharzas",
+   "class": "titles (nouns of office)",
+   "note": "In apposition: after the name in labels and receipts, before the name in seals, the main formula and the annals. haltuto is the only title combined with su/fupur/ya-ne (priest or governor of a deity or region). hil, gewu and fakmu are tied to towns in seals. monharzas heads the royal protocol before RNAME, so it is probably 'king'. robo and monharzas never occur in the main formula."
+  },
+  {
+   "form": "kikrira, zohu, wu, sezi",
+   "class": "nouns: offerings and commodities",
+   "note": "The objects of the offering clauses. kikrira and zohu go with gukhi- (sacrifice: animals or food?); wu and sezi go with pafo- (pour: liquids?). kikrira, zohu and wu are also counted in lists and receipts."
+  },
+  {
+   "form": "miyu, budobo, folofu, ne, lakyu, lurufo",
+   "class": "nouns: counted commodities",
+   "note": "They appear as 'noun + numeral' in lists (bare) and receipts (optionally -du). folofu and ne also appear as booty in the annals, and lurufo as the sacrificed animals there. 'ne' is homophonous with the -ne ending."
+  },
+  {
+   "form": "yowi, fokla, paso, hiza; duwo, fefukra",
+   "class": "nouns (annals)",
+   "note": "yowi, fokla, paso and hiza are counted booty, objects of sape- 'carry off'; yowi is also the object of waki-. duwo and fefukra (with kunalir) are the objects of resdo- 'conquer/destroy'. All are always in -du."
+  },
+  {
+   "form": "gun, suse, zura",
+   "class": "quantity words (numeral-slot fillers or quantifiers)",
+   "note": "Only between the offering noun and its verb, in the slot that digits fill elsewhere: gun about 50%, suse and zura about 25% each, with no correlation to other slots. suse is also a substantive in suse-fako 'of all', so it may mean 'all'."
+  },
+  {
+   "form": "digits (1, 2, 3 ... 867)",
+   "class": "numerals",
+   "note": "They follow the counted noun. Lists use 1, 2, 3, 4, 6, 8, 12, 20, 40, 100; receipts use 1, 2, 3, 5, 10, 20; annals use free counts. Digits never occur in the main formula."
+  },
+  {
+   "form": "gukhi-, pafo-, togul-",
+   "class": "verbs (with -ra)",
+   "note": "gukhi- 'sacrifice/offer' (also -zo in the annals), pafo- 'pour', togul- 'store/seal' (receipt coda). They are clause-final (verb-final order)."
+  },
+  {
+   "form": "dultu-, seyo-, resdo-, sape-, waki-, dapuk-, doze-",
+   "class": "verbs (with -zo)",
+   "note": "dultu- 'deliver' takes a -du object and a -bi goal; seyo- 'march/go' takes a -bi goal; sape- 'carry off', resdo- 'conquer/destroy' and waki- take -du objects; dapuk- takes yu-mu; doze- has a title + RNAME subject. The glosses are guesses from context."
+  },
+  {
+   "form": "wolo",
+   "class": "noun",
+   "note": "Only as wolo-mu in the inventory colophon 'yu-ne wolo-mu', perhaps 'total/stock'."
+  },
+  {
+   "form": "gurdenpir",
+   "class": "genre or header word (noun?)",
+   "note": "The first word of all 137 delivery records; never inflected."
+  },
+  {
+   "form": "ma",
+   "class": "conjunction",
+   "note": "'and', before the last item."
+  },
+  {
+   "form": "fo",
+   "class": "postposition or adverb",
+   "note": "Only in 'gemoyun-du fo seyo-zo'."
+  }
+ ]
+}
