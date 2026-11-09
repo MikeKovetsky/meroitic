@@ -12,11 +12,14 @@ finds which glossed words occur in the corpus, and builds two blind tasks:
   python3 src/lexique.py build-open FILE  # writes the corpus tasks for the misses listed in FILE
   python3 src/lexique.py judged           # the judged run's totals, as judged and without the words it should not have had
 
-The judged run of 2026-11-09 (runs/tasks/R2_recall.md, N2_open_*.md) was built by commit 9ee3924. Fixed since:
-three of its 68 words are not test words (yer and nobo occur in one text each once another entry's words are
-not counted as theirs; qoleb is a demonstrative), two were wrongly left out (ntki, qor), and the corpus tasks'
-glossary gave six targets away (mk "very probably goddess" for mkdi; qore for qorise, qor-o, qorene, qorode;
-mlo for smlo). `judged` prints the totals both ways.
+The judged run of 2026-11-09 (runs/tasks/R2_recall.md, N2_open_*.md, local-only) was built by this file as of
+commit 364d792. Fixed since: three of its 68 words are not test words (yer and nobo occur in one text each once
+another entry's words are not counted as theirs; qoleb is a demonstrative), two were wrongly left out (ntki, qor),
+and the corpus tasks' glossary gave six targets away (mk "very probably goddess" for mkdi; qore for qorise, qor-o,
+qorene, qorode; mlo for smlo). `judged` prints the totals both ways. The builders refuse to replace a task or a
+key that a run is scored against.
+
+Rilly's lexicon is not in the public repo (README, Data): without data/rilly2003/ every command stops.
 """
 import collections, itertools, json, random, re, sys, unicodedata
 from pathlib import Path
@@ -47,8 +50,11 @@ MARKS = {"ḫ": "x", "h̭": "x", "ẖ": "X", "ḥ": "X", "š": "S", "ŝ": "s",
 
 
 def load():
+    files = sorted(LEX.glob("lexique_*.jsonl"))
+    if not files:
+        sys.exit(f"no lexique_*.jsonl in {LEX}: Rilly's lexicon is kept locally, not in the public repo (README, Data)")
     seen, out = set(), []
-    for p in sorted(LEX.glob("lexique_*.jsonl")):
+    for p in files:
         for line in p.read_text().splitlines():
             if not line.strip():
                 continue
@@ -166,16 +172,18 @@ def testable(entries, texts_with, min_texts=2):
     return [i for i in out if all(owners[f] == 1 for f in i["forms"])]
 
 
-def related(a, b):
-    """Two test words that give each other away: one's corpus spelling begins the
-    other's (mk, mkdi; qore, qorise), or one's meaning names the other and their
-    spellings share three letters (qore, qor-o; mlo, smlo; not qore, nobo)."""
+def related(known, target):
+    """A glossary word that gives a target away: one's corpus spelling begins the
+    other's (mk, mkdi; qore, qorise), the glossary's meaning names the target
+    (nobo "qore nobo 'Nubian king'" gives qore away), or the target's meaning,
+    which the task does not show, names the glossary word and their spellings
+    share three letters (qore, qor-o; mlo, smlo; not qore, nobo "slave of the qore")."""
     def names(x, y):
         return re.sub(r"\s*\(\d+\)$", "", y["word"]).lower() in re.findall(r"[\w-]+", x["meaning"].lower())
-    pairs = [(f, g) for f in a["forms"] for g in b["forms"]]
-    if any(f.startswith(g) or g.startswith(f) for f, g in pairs):
+    pairs = [(f, g) for f in known["forms"] for g in target["forms"]]
+    if any(f.startswith(g) or g.startswith(f) for f, g in pairs) or names(known, target):
         return True
-    return (names(a, b) or names(b, a)) and any(f[i:i + 3] in g for f, g in pairs for i in range(len(f) - 2))
+    return names(target, known) and any(f[i:i + 3] in g for f, g in pairs for i in range(len(f) - 2))
 
 
 def shown(item, texts_with, n):
@@ -225,20 +233,26 @@ Write JSON to `{out}` (and repeat a short summary in your final message):
 """
 
 
-def fresh(d):
-    if (d / "task.md").exists():
-        sys.exit(f"{d} already holds a task; refusing to overwrite a run")
-    d.mkdir(parents=True, exist_ok=True)
+def fresh(dirs, key, data):
+    """Refuse, before writing anything, a folder that holds a task or a saved key with other contents: a run is
+    scored against both, and the blind folders go when /private/tmp is emptied, the keys in runs/keys/ don't."""
+    taken = [str(d) for d in dirs if (d / "task.md").exists()]
+    if taken:
+        sys.exit(f"{', '.join(taken)} already holds a task; refusing to overwrite a run")
+    if key.exists() and json.loads(key.read_text()) != data:
+        sys.exit(f"{key} differs from this build; refusing to overwrite the key a run is scored against")
+    for d in dirs:
+        d.mkdir(parents=True, exist_ok=True)
 
 
 def build_recall(items):
-    d = BLIND / "R2_recall"
-    fresh(d)
+    d, key = BLIND / "R2_recall", ROOT / "runs/keys/lexique_items.json"
+    fresh([d], key, items)
     words = [i["word"] for i in items]
     random.Random(SEED).shuffle(words)
     (d / "task.md").write_text(RECALL.format(n=len(words), out=d / "answer.json",
                                              words="\n".join(f"- {w}" for w in words)))
-    json.dump(items, open(ROOT / "runs/keys/lexique_items.json", "w"), indent=1, ensure_ascii=False)
+    json.dump(items, open(key, "w"), indent=1, ensure_ascii=False)
     print("wrote", d / "task.md", len(words), "words")
 
 
@@ -254,16 +268,16 @@ def build_open(items, missed, parts=2):
                          for i in known if i["word"] not in gave)
     rng.shuffle(targets)
     chunks = [targets[k::parts] for k in range(parts)]
-    for k, chunk in enumerate(chunks):
-        d = BLIND / f"N2_open_{k + 1}"
-        fresh(d)
+    dirs, key = [BLIND / f"N2_open_{k + 1}" for k in range(parts)], ROOT / "runs/keys/lexique_open.json"
+    answers = {t["word"]: t["meaning"] for t in targets}
+    fresh(dirs, key, answers)
+    for d, chunk in zip(dirs, chunks):
         tl = "\n".join(f"- {t['word']} (look for: {', '.join(shown(t, texts_with, 4))})" for t in chunk)
         (d / "task.md").write_text(OPEN.format(n=len(chunk), out=d / "answer.json", targets=tl,
                                                glossary=glossary, corpus=corpus))
         print("wrote", d / "task.md", len(chunk), "targets")
     print("left out of the glossary, as they give a target away:", ", ".join(gave) or "none")
-    json.dump({t["word"]: t["meaning"] for t in targets}, open(ROOT / "runs/keys/lexique_open.json", "w"),
-              indent=1, ensure_ascii=False)
+    json.dump(answers, open(key, "w"), indent=1, ensure_ascii=False)
 
 
 ALT = re.compile(r"\b(SAME|TYPE|WRONG)(?: \([^)]*\))? if\b")

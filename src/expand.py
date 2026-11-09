@@ -39,10 +39,11 @@ def skeleton(text):
 
     FHN lines write the s and se signs s and se, Millet's S and s, so s+e and the
     se sign both become s, and likewise n; x and X fold, and o and e (Millet's o
-    is often typed e). Word division and numerals go.
+    is often typed e), first, so that so and se fold alike. Word division and
+    numerals go.
     """
     t = re.sub(r"\bR?NAME\b|[.…]+", "#", text).lower()
-    t = t.replace("se", "s").replace("ne", "n").replace("o", "e")
+    t = t.replace("o", "e").replace("se", "s").replace("ne", "n")
     return re.sub(r"#+", "#", re.sub(r"[^a-z#]", "", t))
 
 

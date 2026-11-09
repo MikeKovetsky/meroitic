@@ -2,7 +2,7 @@
 
   python3 -I tests/test_lexique.py
 """
-import contextlib, io, json, sys, tempfile
+import contextlib, io, json, shutil, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +22,14 @@ def quiet(fn, *args, **kw):
         return fn(*args, **kw)
 
 
+def quiet_out(fn, *args, **kw):
+    """What fn prints."""
+    out = io.StringIO()
+    with contextlib.redirect_stdout(out):
+        fn(*args, **kw)
+    return out.getvalue()
+
+
 def entry(headword, meaning, texts=(), **kw):
     """A lexicon entry as the extraction wrote it, and the texts its headword occurs in."""
     e = {"headword": headword, "meaning_en": meaning, "status": "established", "category": "substantif",
@@ -38,6 +46,30 @@ def lexicon(*pairs):
     return entries, texts_with
 
 
+def stops(fn, *args, **kw):
+    """True when fn exits (a builder's refusal), its output dropped."""
+    try:
+        quiet(fn, *args, **kw)
+    except SystemExit:
+        return True
+    return False
+
+
+def test_lexicon_loads_each_entry_once_and_stops_without_the_files():
+    old = lexique.LEX
+    with tempfile.TemporaryDirectory() as d:
+        lexique.LEX = Path(d)
+        try:
+            assert stops(lexique.load)                                  # a clone: no lexicon, no silent zeros
+            jsonl = lambda *rows: "".join(json.dumps(r) + "\n" for r in rows)
+            (Path(d) / "lexique_1.jsonl").write_text(jsonl({"headword": "abr", "page_pdf": 20}) + "\n")
+            (Path(d) / "lexique_52.jsonl").write_text(jsonl({"headword": "abr ", "page_pdf": 20},    # the overlap page
+                                                            {"headword": "abr", "page_pdf": 21}, {"headword": ""}))
+            assert [(e["headword"], e["page_pdf"]) for e in lexique.load()] == [("abr", 20), ("abr", 21)]
+        finally:
+            lexique.LEX = old
+
+
 def test_spellings_follow_the_corpus_convention():
     sp = lexique.corpus_spellings
     assert sp("ḫlbi") == {"xlbi"} and sp("ẖe (1)") == {"Xe"}         # the two h signs; "(1)" is a note
@@ -48,7 +80,9 @@ def test_spellings_follow_the_corpus_convention():
     assert sp("tñyi") == {"tNyi"} and sp("atê") == {"ato"} and sp("šo") == {"So"}
     assert sp("aṛe") == {"are"}                                       # a dotted letter is that letter
     assert sp("ḫbḫl(i)") == {"xbxl", "xbxli"}                         # letters in brackets are optional
+    assert sp("ḫbḫl(ị)") == {"xbxl", "xbxli"}                         # ... a dotted one too
     assert sp("qor-o") == {"qoro"} and sp("Ḫlbi") == {"xlbi"}
+    assert sp("ate (peut-être)") == {"ate"}                           # a note after a space is no part of the word
     assert sp("a[.]b") == set() and sp("a…b") == set()                # lost signs: no spelling to look for
 
 
@@ -102,10 +136,13 @@ def test_related_words_give_each_other_away():
     it = lambda word, meaning, *forms: {"word": word, "meaning": meaning, "forms": list(forms)}
     qore = it("qore", "ruler, king", "qore")
     assert lexique.related(it("mk", "god", "mk"), it("mkdi", "goddess", "mkdi"))        # one spelling begins the other
-    assert lexique.related(it("qorise", "of the king", "qoreSe", "qores", "qoriSe", "qoris"), qore)
+    assert lexique.related(qore, it("qorise", "of the king", "qoreSe", "qores", "qoriSe", "qoris"))
     assert lexique.related(qore, it("qor-o", "it is the qore (predicated form)", "qoro"))   # named, 3 letters shared
-    assert lexique.related(it("smlo (1)", "title, 'good man', from mlo", "Smlo"), it("mlo", "good", "mlo"))
-    assert not lexique.related(qore, it("nobo", "Nubian, slave of the qore", "nobo"))   # named, nothing shared
+    assert lexique.related(it("mlo", "good", "mlo"), it("smlo (1)", "title, 'good man', from mlo", "Smlo"))
+    nobo = it("nobo", "'Nubian'; qore nobo 'Nubian king'", "nobo")
+    assert lexique.related(nobo, qore)                      # the glossary's meaning names the target: given away
+    assert lexique.related(nobo, dict(qore, word="qore (1)"))           # "(1)" only tells homonyms apart
+    assert not lexique.related(qore, nobo)                  # the target's meaning, unseen, names the glossary word
     assert not lexique.related(it("abr", "man", "abr"), it("kdi", "woman", "kdi"))
 
 
@@ -142,6 +179,42 @@ def test_open_task_hides_what_gives_a_target_away():
     assert "T0" not in corpus and "T1" not in corpus                        # lines carry no text ids
 
 
+def test_builders_never_replace_what_a_run_is_scored_against():
+    item = lambda word, meaning, *forms: {"word": word, "meaning": meaning, "forms": list(forms)}
+    items = [item("qore", "ruler, sovereign", "qore"), item("abr", "man, male", "abr"),
+             item("kdi", "woman, female", "kdi")]
+    old = lexique.BLIND, lexique.ROOT, lexique.CORPUS
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        blind, keys = d / "blind", d / "runs/keys"
+        keys.mkdir(parents=True)
+        (d / "corpus.jsonl").write_text(json.dumps({"id": "T0", "text": "qore abr kdi"}) + "\n")
+        lexique.BLIND, lexique.ROOT, lexique.CORPUS = blind, d, d / "corpus.jsonl"
+        try:
+            quiet(lexique.build_recall, items)
+            recall = (blind / "R2_recall/task.md").read_text()
+            assert "- qore\n" in recall and not any(i["meaning"] in recall for i in items)    # no meaning shown
+            assert json.loads((keys / "lexique_items.json").read_text()) == items
+            quiet(lexique.build_open, items, {"abr", "kdi"})
+            saved = {p.name: p.read_text() for p in keys.iterdir()}
+            shutil.rmtree(blind)                                      # /private/tmp emptied; runs/keys/ stays
+            assert stops(lexique.build_recall, items[:2])             # another key: refused,
+            assert stops(lexique.build_open, items, {"qore", "kdi"})
+            assert not blind.exists()                                 # ... with nothing written
+            (blind / "N2_open_2").mkdir(parents=True)
+            (blind / "N2_open_2/task.md").write_text("a run")
+            assert stops(lexique.build_open, items, {"abr", "kdi"})   # one folder holds a task: refused
+            assert not (blind / "N2_open_1").exists()                 # ... before the other is written
+            assert {p.name: p.read_text() for p in keys.iterdir()} == saved
+            shutil.rmtree(blind)
+            quiet(lexique.build_recall, items)                        # the same build again: allowed
+            quiet(lexique.build_open, items, {"abr", "kdi"})
+            assert (blind / "R2_recall/task.md").read_text() == recall
+            assert {p.name: p.read_text() for p in keys.iterdir()} == saved
+        finally:
+            lexique.BLIND, lexique.ROOT, lexique.CORPUS = old
+
+
 def test_borderline_rows_set_the_ranges():
     rec = lambda word, verdict, why, c=3: {"word": word, "verdict": verdict, "confidence": c, "why": why}
     cor = lambda word, first, any_same, why, c=2: {"word": word, "verdict_first": first, "any_same": any_same,
@@ -150,24 +223,26 @@ def test_borderline_rows_set_the_ranges():
                         rec("b", "SAME", "Borderline: generic. TYPE if the kin term must be exact."),
                         rec("c", "WRONG", "Borderline: its alternative is Rilly's. SAME if the alternative counts."),
                         rec("d", "TYPE", "A title. SAME if any title counts."),          # not marked borderline
-                        rec("e", "UNKNOWN", "said unknown", 1)],
+                        rec("e", "UNKNOWN", "said unknown", 1),
+                        rec("j", "SAME", "Borderline: close to Rilly's, no other verdict named."),   # stays SAME
+                        rec("k", "UNKNOWN", "said unknown, yet sure", 4)],              # no answer, however sure
              "corpus": [cor("f", "SAME", True, "Borderline: a title. TYPE (not SAME) if the office must match.", 4),
                         cor("g", "WRONG", True, "Borderline any_same: only the 3rd candidate is the same idea."),
                         cor("h", "TYPE", False, "Borderline: right domain. SAME if the rank is left open.", 3),
                         cor("i", "WRONG", False, "plain")]}
-    assert [lexique.alt(r) for r in judge["recall"]] == [None, "TYPE", "SAME", None, None]
+    assert [lexique.alt(r) for r in judge["recall"]] == [None, "TYPE", "SAME", None, None, None, None]
     t = lexique.totals(judge)
-    assert t["recall"] == {"n": 5, "SAME": 2, "TYPE": 1, "WRONG": 1, "UNKNOWN": 1}
+    assert t["recall"] == {"n": 7, "SAME": 3, "TYPE": 1, "WRONG": 1, "UNKNOWN": 2}
     assert t["recall_same_by_confidence"] == {"4-5": {"SAME": 1, "answers": 1},
-                                              "1-3": {"SAME": 1, "answers": 3, "answers_with_unknown": 4}}
+                                              "1-3": {"SAME": 2, "answers": 4, "answers_with_unknown": 5}}
     assert t["corpus_first"] == {"n": 4, "SAME": 1, "TYPE": 1, "WRONG": 2}
     assert t["corpus_any_same"] == {"count": 2, "n": 4}
     assert t["corpus_same_by_confidence"] == {"4-5": {"SAME": 1, "answers": 1}, "3": {"SAME": 0, "answers": 1},
                                               "1-2": {"SAME": 0, "answers": 2}}
-    assert t["borderline"] == {"recall_words": ["b", "c"], "corpus_words": ["f", "g", "h"],
-                               "recall_SAME_range": [1, 3], "corpus_first_SAME_range": [0, 2],
+    assert t["borderline"] == {"recall_words": ["b", "c", "j"], "corpus_words": ["f", "g", "h"],
+                               "recall_SAME_range": [2, 4], "corpus_first_SAME_range": [0, 2],
                                "corpus_any_same_range": [0, 3]}
-    assert lexique.totals(judge, drop={"a", "f"})["recall"]["n"] == 4
+    assert lexique.totals(judge, drop={"a", "f"})["recall"]["n"] == 6
     assert lexique.totals(judge, drop={"a", "f"})["corpus_any_same"] == {"count": 1, "n": 3}
 
 
@@ -194,15 +269,20 @@ def test_reported_lexicon_numbers():
 
 def test_judged_names_the_words_the_run_should_not_have_had():
     needs("data/rilly2003", "data/corpus_v2.jsonl")
-    wrong, gave, added = quiet(lexique.judged, lexique.load(), lexique.corpus_index()[1])
-    assert (wrong, gave, added) == (NOT_TEST_WORDS, GIVEN_AWAY, LEFT_OUT)
+    out = io.StringIO()
+    with contextlib.redirect_stdout(out):
+        found = lexique.judged(lexique.load(), lexique.corpus_index()[1])
+    assert found == (NOT_TEST_WORDS, GIVEN_AWAY, LEFT_OUT)
+    assert out.getvalue().splitlines()[1] == ("fair       recall SAME 27/65 (borderline 26-30); corpus first SAME "
+                                              "13/35 (11-17), any SAME 20/35 (17-24)")      # README and REPORT
 
 
 def test_skeleton_spells_both_conventions_alike():
     sk = expand.skeleton
-    assert sk("woSi Soreyi") == sk("wosi soreyi") == "wesisereyi"     # Millet's S, FHN's s
+    assert sk("woSi Soreyi") == sk("wosi soreyi") == "wesisreyi"      # Millet's S, FHN's s
     assert sk("peseto") == sk("pesto") and sk("xrpxne") == sk("XrpXN")     # the se and ne signs; x and X
     assert sk("atE mXe") == sk("ato mxe")                             # Millet's o is often typed e
+    assert sk("Sqo psoxte") == sk("Sqe pSexte") and sk("tNo") == sk("tne")    # ... before se and ne fold
     assert sk("qo NAME 12 qowi") == sk("q o RNAME qo wi") == "qe#qewi"     # word division and numerals go
     assert sk("a ... RNAME NAME . b") == "a#b"                        # names and lost signs: one unknown stretch
 
@@ -220,6 +300,7 @@ def test_a_copy_is_present_and_a_new_text_is_not():
     assert not present(sk("tedxelowi apedemk qore lw amnp"), ref)     # under half of its 6-grams
     masked = sk("qo NAME qowi")
     assert present(sk("qo aritene qowi"), masked)           # the masked name stands for any letters
+    assert not present(sk("qo qowi"), masked)               # ... one or more
     assert not present(sk("qo aritenelisye qowi"), masked)  # ... but the text must be half the other's letters
     assert not present(sk("qo aritene qowi"), sk("qo qowi"))          # nothing masked: the letters must match
 
@@ -243,6 +324,38 @@ def test_griffith_rows_load_as_reported():
     assert sum(r["partial"] for r in rows) == 29
     assert sum(len(r["text"].split()) for r in rows if r["partial"]) == 150
     assert all(r["src"] == "griffith" and r["text"] and not set("()|#?") & set(r["text"]) for r in rows)
+
+
+def test_merge_writes_corpus_v3_from_the_griffith_files():
+    jsonl = lambda *rows: "".join(json.dumps(r) + "\n" for r in rows)
+    base = {"id": "T1", "src": "funerary", "copies": 3, "text": "woSi Soreyi NAME qowi NAME tedxelowi ato mXe pSoxte"}
+    rows = [{"griffith_no": 1, "rem": "0001", "text_corpus": "(1) wosi soreyi NAME qowi NAME tedxelowi ato mxe psoxte"},
+            {"griffith_no": 2, "rem": "0002a", "text_corpus": "apedemk qore lw amnp | tNyidmni pwrite"},
+            {"griffith_no": 2, "rem": "0002b", "text_corpus": "kdi mlo yetmde", "notes": "Partial: one line"},
+            {"griffith_no": 3, "rem": "", "text_corpus": " # ? "}]                 # nothing to read: no row
+    old = expand.ROOT
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "data/expansion").mkdir(parents=True)
+        (d / "data/corpus_v2.jsonl").write_text(jsonl(base))
+        (d / "data/expansion/griffith_mi1a.jsonl").write_text(jsonl(*rows))
+        expand.ROOT = d
+        try:
+            out = quiet_out(expand.main)
+            v3 = [json.loads(l) for l in (d / "data/corpus_v3.jsonl").read_text().splitlines()]
+            (d / "data/expansion/griffith_mi1b.jsonl").write_text(jsonl(rows[1], rows[1]))
+            try:
+                expand.load_griffith()
+                raise AssertionError("load_griffith() took two rows with one id")
+            except ValueError:
+                pass
+        finally:
+            expand.ROOT = old
+    assert v3 == [base, {"id": "G-mi1a-2a", "src": "griffith", "rem": "0002a", "copies": 1,
+                         "text": "apedemk qore lw amnp tNyidmni pwrite"}]
+    assert out.splitlines()[0] == ("griffith texts 3: partial 1 (3 words, left out); already present 1 (9 words); "
+                                   "new 1 (6 words)")
+    assert out.splitlines()[-1] == "corpus_v2 1 texts 9 words -> corpus_v3 2 texts 15 words (+67%)"
 
 
 def test_reported_expansion_numbers():
