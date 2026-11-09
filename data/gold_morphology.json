@@ -1,0 +1,899 @@
+[
+  {
+    "form": "-l",
+    "variants": [
+      "-li",
+      "-le"
+    ],
+    "function": "singular determiner (article); links the members of a noun phrase and is required before genitive and postpositional suffixes; often best translated \"a\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 7-8"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "pp. 138-143 (The Determinant)"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 6",
+        "note": "article -l /la/ from Proto-NES *de"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23"
+      }
+    ],
+    "evidence_note": "Identified by Griffith as the suffix of a qualified word; Rilly derives it from Proto-NES *de (Nara demonstrative te).",
+    "corpus_form": "l",
+    "corpus_variants": [
+      "li",
+      "lE"
+    ]
+  },
+  {
+    "form": "-leb",
+    "variants": [
+      "-lb"
+    ],
+    "function": "plural determiner (article)",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7",
+        "note": "mk-leb \"(the) gods\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2004,
+        "title": "The Linguistic Position of Meroitic",
+        "publication": "ARKAMANI Sudan Electronic Journal of Archaeology and Anthropology",
+        "url": "https://web.archive.org/web/20150923213222/http://www.ddl.ish-lyon.cnrs.fr/projets/clhass/PageWeb/ressources/Isolats/Meroitic%20Rilly%202004.pdf",
+        "pages": "p. 6",
+        "note": "plural -leb /laba/ from Proto-NES *degu"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "plural leb"
+      }
+    ],
+    "evidence_note": "Plural of -l in all contexts (pqr-leb, mk-leb); the only regular marker of noun plurality.",
+    "corpus_form": "leb",
+    "corpus_variants": []
+  },
+  {
+    "form": "-b-",
+    "variants": [
+      "-b"
+    ],
+    "function": "plural marker inside the determiner and pronouns (/ba/)",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "from Proto-NES pronominal plural *-gu"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "pp. 153-154"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary"
+      }
+    ],
+    "evidence_note": "Seen in -l/-leb, -kh(e)/-bkh(e) and plural verb forms; compared with Proto-Nubian *-gu.",
+    "corpus_form": "b",
+    "corpus_variants": []
+  },
+  {
+    "form": "-se",
+    "variants": [
+      "-s"
+    ],
+    "function": "genitive \"of\" (analytic genitive for alienable relations), placed after the possessor and its determiner: ant mk-li-se \"priest of the god\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 8",
+        "note": "-se \"of\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "pp. 146-150"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "-s for the genitive"
+      }
+    ],
+    "evidence_note": "Griffith from phrases like \"prophet of Isis\" (ant Wos-se); Rilly distinguishes it from the juxtaposed genitive.",
+    "corpus_form": "s",
+    "corpus_variants": [
+      "se"
+    ],
+    "corpus_note": "Millet-convention lines write the se sign as s (qEris = qore-se); FHN royal texts write se."
+  },
+  {
+    "form": "(juxtaposition)",
+    "variants": [],
+    "function": "synthetic genitive for inalienable relations: possessor + determiner + head noun, no suffix (ant-li kdite \"sister of a priest\")",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 147"
+      }
+    ],
+    "evidence_note": "Kinship descriptions in epitaphs (X-l kdite-lowi); original Proto-NES genitive *-n lost as in Nara.",
+    "corpus_form": null,
+    "corpus_variants": []
+  },
+  {
+    "form": "-te",
+    "variants": [],
+    "function": "locative \"in, at\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "Bedewi-te \"in Meroe\""
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2022,
+        "title": "Meroitic Writing",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/2ts0n9p0",
+        "pages": "p. 8",
+        "note": "-te \"in\""
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "pp. 23, 34",
+        "note": "Wos Pileq-te-li \"Isis in Philae\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 152"
+      }
+    ],
+    "evidence_note": "Place names + -te in titles and pilgrims' graffiti (Isis in Philae, priest in Meroe).",
+    "corpus_form": "te",
+    "corpus_variants": []
+  },
+  {
+    "form": "-yte",
+    "variants": [
+      "-yete",
+      "-ite"
+    ],
+    "function": "directional locative after place names, in \"from X to Y\" phrases; direction of the relation is read differently by different scholars",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary",
+        "note": "Simalo-ke dik Selele-yte \"from Simalo to Selele\""
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 99"
+      }
+    ],
+    "evidence_note": "Kharamadoye inscription: Simlo-k dik Selele-yte. Wikipedia reads -yte as \"to\" and -ke as \"from\"; Millet translated the reverse.",
+    "corpus_form": "yte",
+    "corpus_variants": []
+  },
+  {
+    "form": "-ke",
+    "variants": [
+      "-k"
+    ],
+    "function": "local postposition in \"from X to Y\" phrases (ablative \"from\" or terminative \"as far as\"); allative \"to\" in Rilly's reading of Bedewi-k sdk",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary",
+        "note": "-k(e) ablative"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 99",
+        "note": "Bedewi-k sdk p-ro-he-ne, \"to Meroe\""
+      }
+    ],
+    "evidence_note": "Kharamadoye inscription and travel prayers; scholars disagree on the direction.",
+    "corpus_form": "k",
+    "corpus_variants": []
+  },
+  {
+    "form": "-i",
+    "variants": [
+      "-yi"
+    ],
+    "function": "vocative \"O ...!\" on divine names (Wos-i \"O Isis!\", Sorey-i \"O Osiris!\")",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System, ch. 1 (publisher excerpt, pp. 1-10)",
+        "publication": "Cambridge University Press",
+        "url": "https://beckassets.blob.core.windows.net/product/readingsample/10057218/9781107008663_excerpt_001.pdf",
+        "pages": "p. 10"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 155"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23"
+      }
+    ],
+    "evidence_note": "Invocation opening epitaphs, syntactically independent of the rest of the text; Griffith identified it as vocative.",
+    "corpus_form": "i",
+    "corpus_variants": [
+      "yi"
+    ],
+    "corpus_note": "wESi, SEreyi"
+  },
+  {
+    "form": "-o",
+    "variants": [],
+    "function": "copula, singular (\"is/was\"), attached to the determiner (-l-o)",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "ktke-l-o \"She is the Candace\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 164"
+      },
+      {
+        "author": "Wikipedia contributors",
+        "year": 2026,
+        "title": "Meroitic language (Vocabulary section)",
+        "publication": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Meroitic_language#Vocabulary",
+        "note": "Old Nubian focus -lo from Meroitic -l + -o"
+      }
+    ],
+    "evidence_note": "Non-verbal predication in epitaphs; Old Nubian -lo continues -l + -o.",
+    "corpus_form": "E",
+    "corpus_variants": []
+  },
+  {
+    "form": "-lowi",
+    "variants": [
+      "-lo",
+      "-l-o-wi"
+    ],
+    "function": "predicative ending of epitaph clauses: determiner -l + copula -o + emphatic -wi, \"he/she is (was) the ...\" (X tedhe-lowi \"born of X\")",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "apote-l-o-wi \"He was an envoy\""
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "lowi for the copula (?) or emphasis (?)"
+      }
+    ],
+    "evidence_note": "Ends nearly every descriptive clause of epitaphs; Rilly segments it as -l-o-wi.",
+    "corpus_form": "lEwi",
+    "corpus_variants": [
+      "lE"
+    ]
+  },
+  {
+    "form": "-wi",
+    "variants": [],
+    "function": "emphatic marker after the singular copula (-o-wi)",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "\"considered as an emphatic marker\""
+      }
+    ],
+    "evidence_note": "Optional element after -o; Rilly reports it as an emphatic marker.",
+    "corpus_form": "wi",
+    "corpus_variants": []
+  },
+  {
+    "form": "-kwi",
+    "variants": [
+      "-lebkwi"
+    ],
+    "function": "copula, plural (\"they are/were\")",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 4, 8",
+        "note": "pqr-leb yetmde-leb-kwi \"They were nephews of princes\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 164"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "plural lebakwi"
+      }
+    ],
+    "evidence_note": "Plural epitaphs; cognate with Old Nubian -agoue and Proto-Taman *agi.",
+    "corpus_form": "kwi",
+    "corpus_variants": [],
+    "corpus_note": "rare in the corpus (terikelebkwi, yedxelebkwi, yeritelebkwi)."
+  },
+  {
+    "form": "qo-wi",
+    "variants": [
+      "qo",
+      "-qowi"
+    ],
+    "function": "presentative with personal names: demonstrative qo \"this\" + copula, \"this is N\" (nomination clause of epitaphs)",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "pp. 8-9",
+        "note": "Akilible qo-wi \"This is Akilibale\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 12 (Nomination); pp. 163-166"
+      }
+    ],
+    "evidence_note": "Follows the deceased's name after the invocation; older readings (Griffith, Millet) took qo/qe as \"noble\".",
+    "corpus_form": "qEwi",
+    "corpus_variants": [
+      "qE"
+    ]
+  },
+  {
+    "form": "-kh(e)",
+    "variants": [
+      "-x",
+      "-xe",
+      "-ḫe"
+    ],
+    "function": "verbal dative / object pronoun, 3rd person singular (\"to him/her\"), placed inside the verb",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7",
+        "note": "pwrite l-x-te \"Give him life!\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 158"
+      }
+    ],
+    "evidence_note": "Royal prayers for life; contrasts with plural -bkh(e).",
+    "corpus_form": "x",
+    "corpus_variants": [],
+    "corpus_note": "not separable by spelling alone; it sits inside verb forms."
+  },
+  {
+    "form": "-bkh(e)",
+    "variants": [
+      "-bx",
+      "-bxe",
+      "-bḫe"
+    ],
+    "function": "verbal dative / object pronoun, plural (\"to them\"); appears in benedictions for several deceased",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7",
+        "note": "pwrite l-b-x-te \"Give them life!\" (REM 0018)"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 158"
+      }
+    ],
+    "evidence_note": "Same prayers with plural beneficiaries; plural funerary benedictions add -bkh- to the verb.",
+    "corpus_form": "bx",
+    "corpus_variants": [],
+    "corpus_note": "e.g. bSixrbxes, bSiXebxes in plural epitaphs."
+  },
+  {
+    "form": "-te (imperative)",
+    "variants": [],
+    "function": "imperative singular verbal ending",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "l-x-te \"Give him!\""
+      }
+    ],
+    "evidence_note": "Rilly reads it in royal prayers; homonymous with locative -te.",
+    "corpus_form": null,
+    "corpus_variants": []
+  },
+  {
+    "form": "-kete",
+    "variants": [
+      "-kese",
+      "-kes"
+    ],
+    "function": "plural imperative/optative ending of the funerary benediction verbs, addressed to Isis and Osiris (\"may you (pl.) ...\")",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "-kete plural imperative: p-tre-kete \"Offer ye!\""
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "pp. 19-30 (Formulas A to X)"
+      }
+    ],
+    "evidence_note": "Benedictions A (ato mhe p-s-...-kete, water) and B (at mhe p-s-...-kete, bread) after the invocation of Isis and Osiris.",
+    "corpus_form": "kete",
+    "corpus_variants": [
+      "kes"
+    ],
+    "corpus_note": "the corpus mostly has -kes (piSiXekes, pSixrkes) beside -kete."
+  },
+  {
+    "form": "p-",
+    "variants": [
+      "pi-",
+      "b-"
+    ],
+    "function": "verbal prefix of benediction and prayer verbs, possibly an optative auxiliary (\"may ...\")",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8",
+        "note": "\"p- could be an optative auxiliary\""
+      }
+    ],
+    "evidence_note": "Initial element of benediction verbs (p-tre-kete, psi-...-kete); Rilly gives the optative reading with reservation.",
+    "corpus_form": "p",
+    "corpus_variants": [
+      "b"
+    ],
+    "corpus_note": "benediction verbs start with p or b (piSiXekes, bSixrbxes)."
+  },
+  {
+    "form": "ps-",
+    "variants": [
+      "psi-",
+      "pso-",
+      "pis-"
+    ],
+    "function": "prefix complex of the water and bread benediction verbs (p- + s-element); function of the s-element unknown",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "pp. 19-30 (Formulas A to X)"
+      }
+    ],
+    "evidence_note": "Constant in formulas A and B (ato mhe ps-...-kete, at mhe ps-...-kete); segmentation varies between authors.",
+    "corpus_form": "pS",
+    "corpus_variants": [
+      "piS",
+      "bS"
+    ]
+  },
+  {
+    "form": "-w",
+    "variants": [
+      "-xe"
+    ],
+    "function": "accusative/dative case marking on nouns (rare survivals)",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 7",
+        "note": "suffix -w or -xe, from Proto-NES *g + vowel"
+      }
+    ],
+    "evidence_note": "Rilly 2010: 394-395; local variants of one old case suffix.",
+    "corpus_form": null,
+    "corpus_variants": []
+  },
+  {
+    "form": "m-",
+    "variants": [],
+    "function": "negative marker",
+    "confidence": "probable",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 171"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 93, 104",
+        "note": "Rilly 2010: 398-399; kdi-m-dhe \"woman who has not given birth\" (Millet 1996)"
+      }
+    ],
+    "evidence_note": "Rilly 2010 compares Proto-NES negation; kdi-m-dhe in epitaphs.",
+    "corpus_form": null,
+    "corpus_variants": []
+  },
+  {
+    "form": "-se (each)",
+    "variants": [],
+    "function": "distributive \"each\", distinct from the genitive -se",
+    "confidence": "debated",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 138"
+      },
+      {
+        "author": "Edward Lipiński",
+        "year": 2011,
+        "title": "Meroitic (Review article) [review of Rilly 2010]",
+        "publication": "Rocznik Orientalistyczny 64(2): 87-104",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 99"
+      }
+    ],
+    "evidence_note": "Listed by Rilly 2010 among translated items; context-based, no wider confirmation found.",
+    "corpus_form": null,
+    "corpus_variants": []
+  },
+  {
+    "form": "tedhe",
+    "variants": [
+      "tedḫe",
+      "tdhe",
+      "yedhe",
+      "dhe"
+    ],
+    "function": "filiation predicate for the mother: mother's name + tedhe-lowi \"(he/she was) born of\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 14 (Filiation)"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "\"to bear\": tedhe, yedhe"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 120"
+      }
+    ],
+    "evidence_note": "Filiation clause; follows women's names (mother); t-/y- initial element varies.",
+    "corpus_form": "tedxe",
+    "corpus_variants": [
+      "tdxe"
+    ]
+  },
+  {
+    "form": "terike",
+    "variants": [
+      "erike",
+      "yerike"
+    ],
+    "function": "filiation predicate for the father: father's name + terike-lowi \"(he/she was) begotten by\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 14 (Filiation)"
+      },
+      {
+        "author": "F. Ll. Griffith",
+        "year": 1911,
+        "title": "Karanog: The Meroitic Inscriptions of Shablul and Karanog",
+        "publication": "University Museum, Philadelphia (Eckley B. Coxe Jr. Expedition to Nubia VI)",
+        "url": "https://archive.org/details/karangmeroitic00grifuoft",
+        "pages": "p. 23",
+        "note": "\"to beget\": terike, yerike"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "pp. 122-123"
+      }
+    ],
+    "evidence_note": "Filiation clause; follows men's names (father).",
+    "corpus_form": "terike",
+    "corpus_variants": [
+      "yerike"
+    ]
+  },
+  {
+    "form": "yetmde",
+    "variants": [],
+    "function": "relationship predicate: X yetmde-lowi \"(he/she was) a relative (nephew/niece) of X\"",
+    "confidence": "certain",
+    "sources": [
+      {
+        "author": "Claude Rilly",
+        "year": 2016,
+        "title": "Meroitic",
+        "publication": "UCLA Encyclopedia of Egyptology",
+        "url": "https://escholarship.org/uc/item/3128r3sw",
+        "pages": "p. 8"
+      },
+      {
+        "author": "Claude Rilly",
+        "year": 2010,
+        "title": "Le méroïtique et sa famille linguistique",
+        "publication": "Peeters (Afrique et Langage 14), pages as reported in Lipiński 2011",
+        "url": "https://repozytorium.uni.lodz.pl/xmlui/bitstream/handle/11089/4031/No_2_2011.87-104.pdf",
+        "pages": "p. 147"
+      },
+      {
+        "author": "Claude Rilly and Alex de Voogt",
+        "year": 2012,
+        "title": "The Meroitic Language and Writing System",
+        "publication": "Cambridge University Press",
+        "url": "https://doi.org/10.1017/CBO9780511920028",
+        "pages": "p. 17 (Description of relatives)"
+      }
+    ],
+    "evidence_note": "Most frequent term in the description of relatives in epitaphs; exact degree debated.",
+    "corpus_form": "yetmde",
+    "corpus_variants": []
+  }
+]

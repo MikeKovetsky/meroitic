@@ -1,0 +1,212 @@
+[
+ {
+  "form": "ato",
+  "gloss": "water",
+  "freq": 123,
+  "category": "noun"
+ },
+ {
+  "form": "mkdi",
+  "gloss": "goddess",
+  "freq": 3,
+  "category": "noun"
+ },
+ {
+  "form": "pqr",
+  "gloss": "prince, crown prince",
+  "freq": 123,
+  "category": "title"
+ },
+ {
+  "form": "kdite",
+  "gloss": "sister",
+  "freq": 83,
+  "category": "kinship"
+ },
+ {
+  "form": "tke",
+  "gloss": "love, revere",
+  "freq": 2,
+  "category": "verb"
+ },
+ {
+  "form": "sm",
+  "gloss": "wife",
+  "freq": 5,
+  "category": "kinship"
+ },
+ {
+  "form": "mk",
+  "gloss": "god, deity",
+  "freq": 23,
+  "category": "noun"
+ },
+ {
+  "form": "pelmoS",
+  "gloss": "general (strategos)",
+  "freq": 69,
+  "category": "title"
+ },
+ {
+  "form": "tre",
+  "gloss": "offer",
+  "freq": 3,
+  "category": "verb"
+ },
+ {
+  "form": "kelw",
+  "gloss": "and, as well as",
+  "freq": 61,
+  "category": "other"
+ },
+ {
+  "form": "dime",
+  "gloss": "cow",
+  "freq": 4,
+  "category": "noun"
+ },
+ {
+  "form": "SSor",
+  "gloss": "scribe",
+  "freq": 36,
+  "category": "title"
+ },
+ {
+  "form": "abr",
+  "gloss": "man",
+  "freq": 10,
+  "category": "noun"
+ },
+ {
+  "form": "xlbi",
+  "gloss": "bull, ox",
+  "freq": 6,
+  "category": "noun"
+ },
+ {
+  "form": "mlo",
+  "gloss": "good",
+  "freq": 25,
+  "category": "adjective"
+ },
+ {
+  "form": "qore",
+  "gloss": "ruler, king",
+  "freq": 129,
+  "category": "title"
+ },
+ {
+  "form": "mXe",
+  "gloss": "abundant, plenty",
+  "freq": 107,
+  "category": "adjective"
+ },
+ {
+  "form": "tewisti",
+  "gloss": "adoration",
+  "freq": 34,
+  "category": "noun"
+ },
+ {
+  "form": "ar",
+  "gloss": "boy, son",
+  "freq": 5,
+  "category": "noun"
+ },
+ {
+  "form": "wide",
+  "gloss": "brother",
+  "freq": 5,
+  "category": "kinship"
+ },
+ {
+  "form": "ant",
+  "gloss": "priest, prophet",
+  "freq": 36,
+  "category": "title"
+ },
+ {
+  "form": "ns",
+  "gloss": "sacrifice",
+  "freq": 8,
+  "category": "noun"
+ },
+ {
+  "form": "lX",
+  "gloss": "great, elder",
+  "freq": 99,
+  "category": "adjective"
+ },
+ {
+  "form": "tdxe",
+  "gloss": "born of (mother)",
+  "freq": 25,
+  "category": "kinship"
+ },
+ {
+  "form": "kdi",
+  "gloss": "woman",
+  "freq": 72,
+  "category": "noun"
+ },
+ {
+  "form": "yetmde",
+  "gloss": "relative (nephew, niece)",
+  "freq": 141,
+  "category": "kinship"
+ },
+ {
+  "form": "Ste",
+  "gloss": "mother (tutor)",
+  "freq": 11,
+  "category": "kinship"
+ },
+ {
+  "form": "apote",
+  "gloss": "envoy",
+  "freq": 39,
+  "category": "title"
+ },
+ {
+  "form": "yerike",
+  "gloss": "begotten by (father)",
+  "freq": 2,
+  "category": "kinship"
+ },
+ {
+  "form": "yireqw",
+  "gloss": "south",
+  "freq": 4,
+  "category": "noun"
+ },
+ {
+  "form": "asr",
+  "gloss": "meat, animal",
+  "freq": 6,
+  "category": "noun"
+ },
+ {
+  "form": "at",
+  "gloss": "bread",
+  "freq": 78,
+  "category": "noun"
+ },
+ {
+  "form": "tbo",
+  "gloss": "two, second",
+  "freq": 19,
+  "category": "number"
+ },
+ {
+  "form": "mte",
+  "gloss": "child",
+  "freq": 22,
+  "category": "kinship"
+ },
+ {
+  "form": "are",
+  "gloss": "take, receive (seize)",
+  "freq": 25,
+  "category": "verb"
+ }
+]

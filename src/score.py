@@ -1,5 +1,5 @@
 """Score the matching answers against the keys, with a permutation p-value."""
-import json, random, sys
+import difflib, json, random, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,13 +14,19 @@ def p_at_least(k, c, sims=200000, seed=1):
     return hits / sims
 
 
+def closest(meaning, options):
+    m = re.sub(r"[^a-z]", "", meaning.lower())
+    return max(options, key=lambda o: difflib.SequenceMatcher(None, m, re.sub(r"[^a-z]", "", o)).ratio())
+
+
 def score(run, keys):
     key = keys[run]
     f = BLIND / run / "answer.json"
     if not f.exists():
         return None
     ans = json.load(open(f))["assignments"]
-    got = {a["word"]: a["meaning"].strip().lower() for a in ans}
+    options = sorted(set(key.values()))
+    got = {a["word"].strip(): closest(a["meaning"], options) for a in ans}
     conf = {a["word"]: a.get("confidence", 0) for a in ans}
     right = [w for w in key if got.get(w) == key[w]]
     hi = [w for w in key if conf.get(w, 0) >= 4]

@@ -19,6 +19,8 @@ from scramble import make_map, text, word   # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 BLIND = Path("/private/tmp/claude-501/blind")
 PROPER = {"deity", "place", "people"}
+# grammatical words that would make a test item ambiguous
+FUNCTION = {"wi", "l", "li", "lo", "s", "se", "te", "qo", "qe", "ye", "yi", "k", "e", "a", "o", "i", "t", "lw", "leb"}
 SEED = 7
 
 
@@ -35,6 +37,9 @@ def eligible(corpus, min_freq):
             continue
         forms = [g.get("corpus_form") or g["form"]] + list(g.get("corpus_variants") or [])
         forms = [norm(f) for f in forms if f]
+        forms = [f for f in forms if len(f) >= 2 and f not in FUNCTION]
+        if not forms:
+            continue
         best = max(forms, key=lambda f: freq[f])
         gloss = g["gloss"].strip().lower()
         if freq[best] < min_freq or gloss in seen_gloss or best in seen_form:
@@ -109,7 +114,7 @@ def build(min_freq=2, folds=2):
             d = BLIND / run
             d.mkdir(parents=True, exist_ok=True)
             if cond == "M":
-                what = "words from the Meroitic language of ancient Kush (Sudan), in the standard scholarly transliteration"
+                what = "words from the Meroitic language of ancient Kush (Sudan), in an ASCII transliteration (x and X are the two h signs, S is the s sign, N is the n-tilde sign)"
                 spelling = "No corpus is provided: answer from what you know."
             elif cond == "S0":
                 what = "words from an ancient language, written in a substitute Latin alphabet"
