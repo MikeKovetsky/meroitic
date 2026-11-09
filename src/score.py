@@ -1,45 +1,80 @@
-"""Score the matching answers against the keys, with a permutation p-value."""
-import difflib, json, random, re, sys
+"""Score the matching answers against the keys, with an exact p-value.
+
+A meaning counts only if it is one of the task's options, compared on letters
+alone (case, spaces and punctuation ignored); anything else is unmatched, so
+wrong. The p-value is the exact chance of at least that many right if the key
+dealt its meanings to its words at random, for the answer as given (one to one
+or not).
+
+  python3 src/score.py [--answers DIR]   DIR holds <run>.json (default: the blind folders)
+"""
+import argparse, collections, json, re
+from math import comb, factorial
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BLIND = Path("/private/tmp/claude-501/blind")
 
 
-def p_at_least(k, c, sims=200000, seed=1):
-    rng, hits, idx = random.Random(seed), 0, list(range(k))
-    for _ in range(sims):
-        rng.shuffle(idx)
-        hits += sum(i == j for i, j in enumerate(idx)) >= c
-    return hits / sims
+def letters(s):
+    return re.sub(r"[^a-z]", "", str(s or "").lower())
 
 
-def closest(meaning, options):
-    m = re.sub(r"[^a-z]", "", meaning.lower())
-    return max(options, key=lambda o: difflib.SequenceMatcher(None, m, re.sub(r"[^a-z]", "", o)).ratio())
+def option(meaning, options):
+    """The option this meaning names, or None."""
+    return {letters(o): o for o in options}.get(letters(meaning))
 
 
-def score(run, keys):
-    key = keys[run]
-    f = BLIND / run / "answer.json"
-    if not f.exists():
+def level(confidence):
+    try:
+        return int(float(confidence))
+    except (TypeError, ValueError):
+        return 0
+
+
+def p_at_least(answer, key, c):
+    """Exact P(at least c right) over all one-to-one keys, for this answer (word -> option or None).
+
+    Rook polynomial of the answer's cells: rooks[i] counts the ways to pick i
+    answered words with distinct meanings, and inclusion-exclusion turns those
+    into the number of keys that get exactly j of the answers right.
+    """
+    k = len(key)
+    per_meaning = collections.Counter(m for w, m in answer.items() if w in key and m is not None)
+    rooks = [1]
+    for n in per_meaning.values():
+        rooks = [a + n * b for a, b in zip(rooks + [0], [0] + rooks)]
+    exactly = [sum((-1) ** (i - j) * comb(i, j) * rooks[i] * factorial(k - i) for i in range(j, len(rooks)))
+               for j in range(len(rooks))]
+    return sum(exactly[c:]) / factorial(k)
+
+
+def score(run, key, path):
+    if not path.exists():
         return None
-    ans = json.load(open(f))["assignments"]
     options = sorted(set(key.values()))
-    got = {a["word"].strip(): closest(a["meaning"], options) for a in ans}
-    conf = {a["word"]: a.get("confidence", 0) for a in ans}
+    if len({letters(o) for o in options}) < len(options):
+        raise ValueError(f"{run}: two meanings differ only in case or punctuation")
+    got, conf = {}, {}
+    for a in json.load(open(path))["assignments"]:
+        w = str(a.get("word", "")).strip()
+        got[w] = option(a.get("meaning"), options)
+        conf[w] = level(a.get("confidence"))
     right = [w for w in key if got.get(w) == key[w]]
     hi = [w for w in key if conf.get(w, 0) >= 4]
-    hi_right = [w for w in hi if w in right]
-    return {"run": run, "k": len(key), "correct": len(right), "p": p_at_least(len(key), len(right)),
-            "answered": len(got), "confident": len(hi), "confident_correct": len(hi_right),
-            "right_words": right}
+    return {"run": run, "k": len(key), "correct": len(right), "p": p_at_least(got, key, len(right)),
+            "answered": sum(1 for w in key if w in got), "unmatched": sum(1 for w in key if w in got and got[w] is None),
+            "confident": len(hi), "confident_correct": sum(1 for w in hi if w in right), "right_words": right}
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--answers", type=Path, help="folder of saved answers, <run>.json")
+    a = ap.parse_args()
     keys = json.load(open(ROOT / "runs/keys/step0.json"))
-    rows = [score(r, keys) for r in sorted(keys)]
+    rows = [score(r, keys[r], a.answers / f"{r}.json" if a.answers else BLIND / r / "answer.json") for r in sorted(keys)]
     rows = [r for r in rows if r]
     json.dump(rows, open(ROOT / "runs/step0_scores.json", "w"), indent=1)
     for r in rows:
-        print(f"{r['run']:7} {r['correct']:3}/{r['k']:<3} p={r['p']:.5f}  confident {r['confident_correct']}/{r['confident']}")
+        print(f"{r['run']:7} {r['correct']:3}/{r['k']:<3} p={r['p']:.1e}  unmatched {r['unmatched']}  "
+              f"confident {r['confident_correct']}/{r['confident']}")
