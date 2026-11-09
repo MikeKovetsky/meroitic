@@ -191,11 +191,11 @@ def test_checks_skip_only_for_files_gitignore_lists():
             assert local_only.ignored() == ["data/otten", "data/kept.jsonl", "runs/tasks"]
             needs("data/kept.jsonl")                                  # present: the check runs
             for tracked in ("data/expansion/pilot.jsonl", "data/otten2", "data/kept.jsonl.bak"):
-                try:                                                  # the repo holds it: missing is a failure
-                    needs(tracked)
-                    raise AssertionError(f"needs() took {tracked}, which .gitignore does not list")
+                try:                                                  # the repo holds it: missing is a failure,
+                    needs(tracked)                                    # not a skip
                 except ValueError:
-                    pass
+                    continue
+                raise AssertionError(f"needs() took {tracked}, which .gitignore does not list")
             skipped = lambda: needs("data/kept.jsonl", "runs/tasks/C3_cloze.md", "data/otten")
             code, out = outcome([("a", lambda: None), ("b", skipped)])
             assert code == 0 and "skip b - needs runs/tasks/C3_cloze.md, data/otten" in out
@@ -203,6 +203,8 @@ def test_checks_skip_only_for_files_gitignore_lists():
             for bad in (fails, lambda: sys.exit(0), lambda: needs("src/lexique.py")):
                 code, out = outcome([("a", lambda: None), ("b", bad), ("c", skipped)])
                 assert code == 1 and "FAIL b" in out and "skip c" in out, out    # reported, and the run goes on
+        except local_only.Skip as e:                                  # this check must never skip itself
+            raise AssertionError(f"needs() skipped where it should have run or failed: {e}") from e
         finally:
             local_only.ROOT = old
 
