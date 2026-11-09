@@ -1,39 +1,42 @@
-# Meroitic overnight: what Opus 5.5 can and can't do
+# Meroitic with Opus 5.5: results
 
 Night of 2026-11-08/09, 22:54 to about 01:00 PST, Opus 5.5 subagents. Every number names the run it comes from;
 answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw in `runs/tasks/`, the code in `src/`
 (reviewed: `review-fix`, full tier, CLEAN at `7404ee8`, with 15 tests in `tests/test_harness.py`).
 
-## Answer first
+## Did we find anything new?
 
-1. **Opus 5.5 already knows the published Meroitic vocabulary.** Matching 35 accepted words to their 35 meanings,
-   it scored 35/35 from memory alone (`M_f0`, `M_f1`), and 35/35 with the corpus (`R_f0`, `R_f1`). Asked openly,
-   with no options, it answered 52 of 82 published words (50 right; 1 partly right, `beloloke` "an official title"
-   for "priest (a rank)"; 1 wrong, `yireqe` "east" for "south") and said "unknown" to 30 (`F_recall`).
-2. **So a blind test on real Meroitic is impossible.** A letter-swap re-spelling hides nothing: given a 17-word
-   glossary and no texts, it broke the cipher and scored 35/35 (`S0_f0`, `S0_f1`). With only the scrambled corpus,
-   no meanings and neutral line ids, it recognised the opening `ryuq uyatsq` as Wos-i Sorey-i, "O Isis, O Osiris",
-   and read the script from there (`K2_morph`, which says so).
-3. **On a language it can't know, it infers meaning from context.** On a synthetic corpus of the same size and
-   style (1,003 texts, 16k words, invented vocabulary and endings), it matched 41 of 52 usable test words (43 on a second independent run, `runs/answers_rep/`) where
-   chance is about 2; all 24 answers at confidence 4–5 were right (`Y_f0`, `Y_f1`, `src/synth.py score`; 4 of the
-   56 original items dropped by the review because the corpus doesn't show them). On the same language's grammar,
-   blind, it found all 8 invented endings and every formula slot; it named 2 functions right, 4 partly (vocative,
-   imperative and determiner only as a second reading or a hedged guess, genitive as "at/of"), and got 2 wrong
-   (plural, copula) (`YK_morph`, `runs/yk_morph_scored.json`).
-4. **The texts fill gaps in its memory.** For the 17 published words it could not recall, reading the corpus took
-   it to the published meaning on the first guess for 13 and within three guesses for 16 (`N_open`, judged by an
-   independent agent in `runs/natural_open_judge.json`; my own looser call in `runs/natural_open_scored.json` gave
-   14, the difference being "booty" for "plunder").
-5. **It restores lost words better than an n-gram restorer, also where nothing can be copied.** Of 120 masked words
-   in 60 held-out inscriptions it restored 84 on the first guess; an n-gram restorer counting the same texts got 35
-   (exact McNemar p ≈ 3×10⁻¹³). On the 62 masks with no parallel in the task (no run of 12+ letters around the word,
-   spaces and case ignored, occurs anywhere else in it), it restored 30 (48%) against 16 (26%), p ≈ 0.001
-   (`C3_cloze`, `src/cloze_families.py copies`). The task let it use what it knows about the language, which
-   includes the published vocabulary (item 1).
-6. **Its "new" findings did not survive an adversarial check:** of 7 ideas the discovery runs called new, 2 were
-   already published and 5 were weakened; two partial extensions remain open (`data/discovery/verification.md`).
-   None is a decipherment.
+**We did not decipher anything.** No new reading of Meroitic survived checking (0 of 14 claimed, two partial leads
+open). What is new, with the run behind each claim:
+
+1. **The public corpus is mostly copies.** Otten & Anastasopoulos's released file is their name-swap augmentation:
+   each real text repeated with only a person's name changed (the label `tdxe mlEqErebr qEret ___` appears 198 times,
+   once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
+   titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
+   `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
+2. **86 texts missing from the public corpus are now machine-readable.** Griffith's printed Meroitic type read at
+   95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
+   `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
+   Hand copies: 88.8% (`hand_copy_test.md`), below the bar. Photographs: almost nothing (`data/discovery/vision.md`).
+3. **Scrambled-script blind tests fail on a frontier model.** From a 17-word glossary of letter-swapped Meroitic and
+   no texts it matched 35 of 35 meanings by breaking the cipher (`S0_f0`, `S0_f1`); from the scrambled corpus with
+   neutral labels it recognised "O Isis, O Osiris" and read the script (`K2_morph`).
+4. **A leak-free test, and its result.** Synthetic twin language: 41 and 43 of 52 meanings on two runs, chance about
+   2 (`Y_f0`, `Y_f1`, `runs/answers_rep/`). Recall-then-corpus on Rilly's lexicon: 27 of 65 from memory; for the
+   rest, 13 of 35 from the corpus on the first guess, 20 within three (`runs/lexique_judge.json`, independent judge,
+   leaked items removed).
+5. **A calibrated confidence filter.** Every answer at confidence 4–5 was right, 74 of 74 across the tests (46
+   synthetic, 7 and 19 recall-then-corpus, 2 corpus after leak removal); about a third at confidence 1–2.
+6. **Restoration beats statistics.** On the 62 masks with no parallel anywhere in the task, 30 restored (48%) against
+   16 (26%) for an n-gram model, exact McNemar p ≈ 0.001 (`C3_cloze`, `src/cloze_families.py copies`).
+7. **Negative results.** No Meroitic–Nubian lexical signal with open word lists beyond the words Rilly's sound laws
+   were built from (held-out p = 0.49, `src/cognates_rules.py`); REM 1003 holds nothing checkable against the Roman
+   war (as Rilly 2014); no "new" reading survived the adversarial check (`data/discovery/verification.md`).
+
+The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
+memory, `M_f0/1`); asked openly it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong) and said
+"unknown" to 30 (`F_recall`); a natural experiment on the 17 it could not recall got 13 right on the first guess
+and 16 within three (`N_open`, independent judge).
 
 ## The corpus
 

@@ -1,30 +1,56 @@
-# Meroitic and Opus 5.5: what a frontier model can and can't do
+# Meroitic with Opus 5.5
+
+**Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
+the data and the method: the public corpus turned out to be mostly copies, 86 texts missing from it are now
+machine-readable, the obvious way to blind a test of AI on an undeciphered script (scramble the letters) turned out
+not to work, and we built a test that does.
+
+## What's new
+
+1. **The public Meroitic corpus is mostly copies.** The only machine-readable corpus (Otten & Anastasopoulos, ALP
+   2025) looks like 18,090 inscriptions but holds 662 different ones: each real text is repeated, about 27 times on
+   average, with only a person's name changed. For example, the short label `tdxe mlEqErebr qEret ___` appears 198
+   times, once with each of 198 names (`…aplXye`, `…pqebete`, `…msxte trEbit`, …). Anyone counting words in the file
+   counts the same inscription over and over: some titles come out about 100 times more frequent than they are. The
+   paper says it added name-swapped copies to train its word vectors; the file on GitHub doesn't say it is that
+   padded version rather than the original texts. `src/pool.py` recovers the two swap pools (178 private and 11 royal
+   names) from the data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
+2. **86 Meroitic texts missing from the public corpus are now machine-readable.** The model reads the Meroitic cursive type printed in
+   Griffith's 1911–12 editions at 95.6% sign accuracy against the modern edition (99.6% against what Griffith
+   printed). It transcribed 152 inscriptions from *Meroitic Inscriptions* I–II and *Meroë*; 86 are not in the
+   public corpus (+5% words, `data/expansion/`). It can't do the same for Griffith's hand copies (88.8%) or for
+   photographs of the stones (almost nothing).
+3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
+   re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
+   scrambled corpus with neutral labels, it recognised the opening formula "O Isis, O Osiris" and read the script from
+   there. A test of AI decipherment on a known-but-undeciphered script has to assume the model has read the
+   literature.
+4. **A test that does work, and what it measures.** A synthetic twin language (same size and texture, every word
+   invented): it recovered 41 and 43 of 52 meanings on two independent runs, where chance is about 2. And a
+   recall-then-corpus test on Rilly's lexicon: of the words it could not recall, reading the corpus got it to the
+   published meaning for 13 of 35 (20 within three guesses), scored by an independent judge.
+5. **Its confidence is a usable filter.** Across every test, all 74 answers it gave at confidence 4 or 5 were right;
+   at confidence 1 or 2, about a third were.
+6. **It restores lost words better than statistics.** Where a masked word has no parallel anywhere in the texts, it
+   restored 48% on the first guess against 26% for an n-gram model.
+7. **Negative results worth knowing.**
+   - With open word lists, Meroitic words show no resemblance to their Nubian-family equivalents beyond the about 20
+     word series Rilly built his sound laws from (held-out p = 0.49): the lexical case for the family rests on those.
+   - None of the 14 "new" readings the discovery runs proposed survived an adversarial literature check; two partial
+     leads remain open ([`NEXT_STEPS.md`](NEXT_STEPS.md)). Where the key books are print-only, the model can't tell a
+     rediscovery from a discovery.
+   - The British Museum's Hamadab stela (REM 1003) holds nothing checkable against the Roman war, as Rilly said in 2014.
+
+## The question
 
 Meroitic, the language of the kingdom of Kush (Sudan, about 300 BC to 400 AD), can be read aloud since Griffith
 (1909–11), but most of it is not understood: there is no long bilingual text, and its relatives in the Northern East
-Sudanic family split from it long before it was written. This repo is a two-day experiment (2026-11-08/09) on one
-question: **can a frontier language model (Claude Opus 5.5, run as many independent subagents) find real patterns in
-Meroitic and make it more understandable?**
+Sudanic family split from it long before it was written. This repo is a two-day experiment (2026-11-08/09): can a
+frontier language model (Claude Opus 5.5, run as about 60 independent subagents) find real patterns in Meroitic and
+make it more understandable?
 
 Results, with every number traced to its run: [`REPORT.md`](REPORT.md). What to do next: [`NEXT_STEPS.md`](NEXT_STEPS.md).
-The illustrated summary page: [`docs/report.html`](docs/report.html) (published privately as a claude.ai artifact).
-This file describes the methods.
-
-## Short answer
-
-1. The model already knows the published vocabulary. On real Meroitic, memory and reasoning can't be separated, and
-   disguising the script doesn't help: it broke a letter-swap cipher from a 17-word glossary.
-2. On a synthetic language it can't know, it infers word meanings from a corpus of the same size: 41 and 43 of 52 on
-   two independent runs, where chance is about 2.
-3. Its confidence is calibrated. In every test, all answers it gave at confidence 4–5 were right (74 of 74, after
-   removing items a glossary gave away); at 1–2 it is right about a third of the time.
-4. It restores masked words better than an n-gram model (48% vs 26% where nothing can be copied), reads Griffith's
-   printed Meroitic type at 95.6% sign accuracy, reads his hand copies at only 88.8%, and cannot read worn stones
-   from photographs.
-5. None of the "new" findings its discovery runs proposed survived an adversarial literature check (0 of 14):
-   where the key literature is print-only, it can't tell a rediscovery from a discovery.
-6. The binding constraint is data. The public corpus is small and padded; this repo cleans it, and adds 86 new texts
-   out of 152 the model transcribed from Griffith's public-domain editions.
+The illustrated summary page: [`docs/report.html`](docs/report.html). This file describes the data and the methods.
 
 ## Data
 
