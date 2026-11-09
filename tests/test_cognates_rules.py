@@ -19,7 +19,10 @@ def seg(s):
 
 
 def test_pattern_reads_the_script():
-    assert cr.pattern("kdi") == (SL("C", "k", "I"), SL("C", "d", "F"), SL("V", "i", ""))
+    assert cr.pattern("kdi") == (SL("C", "k", "I"), SL("C", "d", "M"), SL("V", "i", ""))   # [kadi]: d is M (T23)
+    assert cr.pattern("ato") == (SL("V", "A", ""), SL("C", "t", "M"), SL("V", "o", ""))   # [aʈu]: t is M (T48)
+    assert cr.pattern("qo") == (SL("C", "q", "I"), SL("V", "o", ""))
+    assert cr.pattern("mte")[1] == SL("C", "t", "F") and cr.pattern("ked")[-1] == SL("C", "d", "F")  # T51, T22
     assert cr.pattern("abr") == (SL("V", "A", ""), SL("C", "b", "M"), SL("C", "r", "F"))   # inherent a: no slot
     assert cr.pattern("yer") == (SL("V", "Y", ""), SL("C", "r", "F"))                      # y- is a dummy
     assert cr.pattern("l-") == (SL("C", "l", "IF"),)
@@ -54,6 +57,57 @@ def test_reflexes_follow_the_rules():
     groups = cr.expected("kdi").split()
     assert set(groups[0].split("|")) >= {"k", "ŋ"} and set(groups[1].split("|")) >= {"d", "r", "t"}
     assert "Ø" in cr.expected("dime").split()[2] and "Ø" not in cr.expected("mte").split()[0]
+
+
+def tsv_rows():
+    import csv
+    with open(ROOT / "data/nes/sound_correspondences.tsv") as f:
+        return list(csv.DictReader(f, delimiter="\t"))
+
+
+def test_rules_keep_their_rows_positions():
+    rows, pf = tsv_rows(), cr.POS_FACTOR
+    cited = [r[5] for r in cr.RULES] + [t[-1] for t in cr.TWO.values()] + [d[3] for d in cr.DROPS.values()]
+    assert all(1 <= n <= len(rows) for ns in cited for n in ns)                  # every T<n> is a row
+    for m, n, w, p, groups, ns, cond in cr.RULES:                               # a shift stated for 2003-table
+        if m != n and ns and max(ns) <= 53:                                     # positions only holds there
+            stated = {rows[k - 1]["environment_or_note"].split("position ")[1][0] for k in ns}
+            assert set(p or "IMF") <= stated, (m, n, p, stated)
+    assert cr.reflexes("b", "M", "nubian")["g"][0] == 0.9                       # internal *g > b (T64) ...
+    assert abs(cr.reflexes("b", "I", "nubian")["g"][0] - 0.9 * pf) < 1e-12      # ... initial *g > ḫ (T62)
+    assert abs(cr.reflexes("b", "I", "nyima")["f"][0] - 0.8 * pf) < 1e-12       # Nyima f is medial (T19)
+    assert abs(cr.reflexes("r", "F", "nyima")["l"][0] - 0.9 * pf) < 1e-12       # final r is Nyima r (T44)
+    assert abs(cr.reflexes("ḫ", "M", "nyima")["t"][0] - 0.7 * pf) < 1e-12       # Nyima ṭ is initial (T26)
+    assert abs(cr.reflexes("ḫ", "I", "nara")["h"][0] - 0.9 * pf) < 1e-12        # Nara h is medial (T28)
+    for pos, grp in (("I", "nubian"), ("M", "nyima"), ("F", "taman")):          # p is a spelling of /b/ (T58)
+        p, b = cr.reflexes("p", pos, grp), cr.reflexes("b", pos, grp)
+        assert {n: (w, c) for n, (w, _, c) in p.items() if n != "p"} == {n: (w, c) for n, (w, _, c) in b.items()}
+        assert all("T58" in lab for n, (_, lab, _) in p.items() if n != "p")
+
+
+def test_rules_keep_their_rows_languages():
+    assert "s" not in cr.reflexes("t", "M", "nubian") and "s" not in cr.reflexes("t", "F", "nara")
+    assert cr.reflexes("t", "F", "taman")["s"][0] == 0.8                        # Proto-Taman *s (T51)
+    assert "d" not in cr.reflexes("t", "M", "taman")                           # Proto-Taman keeps *t (T49)
+    assert "d" not in cr.reflexes("k", "I", "nyima")                           # Ama d̪ is from *g, not *k (T75)
+    assert cr.align("ato", seg("esti"), "nobiin") > cr.align("ato", seg("esti"), "nara")   # *st is Nubian (T48)
+    assert abs(cr.reflexes("d", "M", "nara")["r"][0] - cr.POS_FACTOR) < 1e-12  # medial d is Nara d (T23)
+    assert "q~Ø (T80)" in cr.align("qore", seg("uru"), "nobiin", trace=True)[1]
+    assert "q~Ø (T80)" not in cr.align("qore", seg("uru"), "nara", trace=True)[1]     # Nubian u- (T80)
+    assert "q~Ø (T80)" not in cr.align("qo", seg("ŋu"), "nobiin", trace=True)[1]      # word-initial u only
+
+
+def test_same_sound_yields_where_every_row_says_otherwise():
+    pf = cr.POS_FACTOR
+    for mer, pos, grp in [("m", "F", "nubian"), ("m", "F", "nyima"), ("l", "I", "nubian"), ("l", "I", "taman"),
+                          ("l", "F", "nara"), ("d", "M", "nubian"), ("d", "M", "nyima"), ("d", "F", "nyima"),
+                          ("d", "I", "nara"), ("b", "M", "nyima"), ("t", "M", "nyima")]:
+        assert abs(cr.reflexes(mer, pos, grp)[mer][0] - pf) < 1e-12, (mer, pos, grp)
+    for mer, pos, grp in [("m", "M", "nubian"), ("l", "M", "nubian"), ("l", "F", "nubian"), ("d", "M", "nara"),
+                          ("d", "F", "nubian"), ("b", "M", "nubian"), ("b", "F", "nyima"), ("t", "M", "taman"),
+                          ("k", "F", "nubian"), ("w", "M", "nara")]:
+        assert cr.reflexes(mer, pos, grp)[mer][0] == 1.0, (mer, pos, grp)      # stated, or no row says otherwise
+    assert cr.align("dime", seg("tim"), "nobiin") < cr.align("dime", seg("ti"), "nobiin") + 0.5
 
 
 def test_segments_handle_each_spelling():

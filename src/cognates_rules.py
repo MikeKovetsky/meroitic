@@ -59,41 +59,49 @@ SUB, NEAR, DEL, INS, INS_GLIDE, VSUB = -1.0, 0.3, -0.8, -0.6, -0.3, -0.1
 POS_FACTOR = 0.7       # a rule seen in another position of the word still counts, at this share
 NEG = float("-inf")
 
-# meroitic, nes, weight, position (I/M/F, "" any), language groups ("" any), TSV rows, condition
+# meroitic, nes, weight, position (I/M/F, "" any), language groups ("" any), TSV rows, condition.
+# A rule holds at its weight in the positions and languages its rows state (a row's Proto-SON reflex
+# standing for a language the row does not list), and at POS_FACTOR in the other positions of those
+# languages. A same-sound rule also holds where no row states a reflex, but not where every row for that
+# position gives the language another one (final m, T40; initial l, T34-T35): there it is another position.
 RULES = [
-    ("b", "b", 1.0, "", "", (18, 19), None),
-    ("b", "f", 0.8, "", "nyima", (19,), None),
-    ("b", "g", 0.9, "", "", (64, 71, 73, 79), "rounded"),        # *g next to o/u > b
-    ("p", "b", 1.0, "", "", (58,), None),                         # p is a spelling of /b/
-    ("p", "f", 0.8, "", "nyima", (19, 58), None),
-    ("p", "g", 0.9, "", "", (58, 64, 73), "rounded"),
-    ("m", "m", 1.0, "", "", (38, 39), None),
+    ("b", "b", 1.0, "", "nubian nara taman", (18, 19), None),
+    ("b", "b", 1.0, "IF", "nyima", (18,), None),                   # medial b is Nyima f (T19)
+    ("b", "f", 0.8, "M", "nyima", (19,), None),
+    ("b", "g", 0.9, "MF", "", (64, 71, 73, 79), "rounded"),        # internal *g next to o/u > b; initial *g > ḫ
+    ("m", "m", 1.0, "IM", "", (38, 39), None),                     # final m has no NES reflex (T40)
     ("n", "n", 1.0, "", "", (73,), None),                         # nob ~ *nogu
-    ("t", "t", 1.0, "", "", (47, 49, 50, 60, 66), None),
-    ("t", "d", 1.0, "M", "", (49,), None),
-    ("t", "s", 0.8, "MF", "", (48, 51), None),
+    ("t", "t", 1.0, "", "nubian nara taman", (47, 49, 50, 60, 66), None),
+    ("t", "t", 1.0, "IF", "nyima", (47,), None),                   # medial t is Nyima d (T49)
+    ("t", "d", 1.0, "M", "nubian nara nyima", (49,), None),        # Proto-Taman keeps *t (T49)
+    ("t", "s", 0.8, "F", "taman", (51,), None),                    # Nubian *st is TWO below (T48)
     ("d", "t", 1.0, "I", "", (20,), None),
-    ("d", "d", 1.0, "", "", (21, 22, 57), None),
+    ("d", "d", 1.0, "IF", "nubian", (21, 22, 57), None),           # medial d is Nubian r (T23)
+    ("d", "d", 1.0, "MF", "nara", (22, 23), None),                 # initial d is Nara n or t (T20, T21)
+    ("d", "d", 1.0, "", "taman", (21, 22, 23, 57), None),
+    ("d", "d", 1.0, "I", "nyima", (21, 57), None),                 # medial r, final Ø in Nyima (T22, T23)
     ("d", "n", 0.8, "I", "nara", (21,), None),
-    ("d", "r", 1.0, "", "", (23, 78, 81), None),                  # wide ~ wer-i; *r > d initially
+    ("d", "r", 1.0, "", "nubian", (23, 78, 81), None),             # wide ~ wer-i
+    ("d", "r", 1.0, "IM", "taman nyima", (23, 81), None),
+    ("d", "r", 1.0, "I", "nara", (81,), None),                     # *r > d initially; medial d is Nara d (T23)
     ("l", "d", 1.0, "I", "", (34, 35, 55, 61, 65), None),         # lambdacism
     ("l", "n", 0.8, "I", "nara", (34,), None),
     ("l", "r", 0.9, "F", "", (36,), None),
-    ("l", "l", 1.0, "", "", (37, 69), None),
+    ("l", "l", 1.0, "MF", "nubian nyima", (37, 69), None),        # initial l is NES *d (T34, T35)
+    ("l", "l", 1.0, "M", "nara taman", (), None),                  # their final l is Proto-SON *r (T36)
     ("r", "r", 1.0, "", "", (41, 42, 43, 44, 45), None),
-    ("r", "l", 0.9, "", "nyima", (42,), None),
+    ("r", "l", 0.9, "M", "nyima", (42,), None),                    # final r stays r in Nyima (T44)
     ("s", "s", 1.0, "", "", (46, 67), None),
     ("s", "ʃ", 1.0, "", "", (82,), None),                          # ms ~ mašal
     ("s", "t", 0.7, "F", "taman", (51,), None),
     ("k", "k", 1.0, "", "", (32, 33, 63), None),
     ("k", "ŋ", 0.9, "I", "nubian", (33,), None),                   # *ᵑk > Proto-Nubian *ŋ
-    ("k", "t", 0.8, "I", "nyima", (33, 63, 75), None),             # Nyima dental t
-    ("k", "d", 0.6, "", "nyima", (75,), None),
+    ("k", "t", 0.8, "I", "nyima", (33, 63, 75), None),             # Nyima dental t (Ama d̪ is from *g)
     ("ḫ", "g", 1.0, "", "", (26, 27, 28, 54, 56, 62), None),       # *g > ḫ, ẖ
     ("ḫ", "k", 0.7, "I", "nyima", (26,), None),
-    ("ḫ", "t", 0.7, "", "nyima", (26, 75), None),
-    ("ḫ", "d", 0.6, "", "nyima", (75,), None),
-    ("ḫ", "h", 0.9, "", "nara", (28,), None),
+    ("ḫ", "t", 0.7, "I", "nyima", (26,), None),                    # Ama t̪ is from *k (T75)
+    ("ḫ", "d", 0.6, "", "nyima", (75,), None),                     # *g > Ama d̪
+    ("ḫ", "h", 0.9, "M", "nara", (28,), None),
     ("ḫ", "ŋ", 0.9, "M", "nyima", (28,), None),
     ("ḫ", "ŋ", 0.8, "F", "taman nyima", (76,), None),             # objective -xe = /ŋ/
     ("ḫ", "j", 0.8, "", "nubian", (74,), "front"),                # *g next to i/e > Proto-Nubian *ɟ
@@ -102,12 +110,15 @@ RULES = [
     ("w", "g", 0.7, "F", "", (72,), None),                        # accusative -w < *g + vowel
 ]
 RULES += [("ẖ",) + r[1:] for r in RULES if r[0] == "ḫ"]          # ẖ (xʷ) shares ḫ's reflexes (T28, T54)
-# one Meroitic consonant for two NES segments
-TWO = {("t", "st"): (1.0, (48,)), ("ḫ", "gw"): (0.9, (28,)), ("ẖ", "gw"): (1.0, (28,)),
-       ("ḫ", "kw"): (0.6, ()), ("ẖ", "kw"): (0.7, ()), ("q", "kw"): (0.6, ()), ("q", "gw"): (0.6, ())}
+RULES += [("p",) + r[1:5] + (tuple(sorted({*r[5], 58})),) + r[6:]  # p is a spelling of /b/ (T58)
+          for r in RULES if r[0] == "b"]
+# one Meroitic consonant for two NES segments: weight, position, groups, rows
+TWO = {("t", "st"): (1.0, "M", "nubian", (48,)), ("ḫ", "gw"): (0.9, "", "", (28,)), ("ẖ", "gw"): (1.0, "", "", (28,)),
+       ("ḫ", "kw"): (0.6, "", "", ()), ("ẖ", "kw"): (0.7, "", "", ()), ("q", "kw"): (0.6, "", "", ()),
+       ("q", "gw"): (0.6, "", "", ())}
 # a Meroitic consonant that a rule lets vanish: weight, position, groups, rows, condition
 DROPS = {"m": (0.5, "F", "", (40,), None), "d": (0.4, "F", "nyima", (22,), None),
-         "r": (0.4, "F", "taman", (45,), None), "q": (0.9, "I", "", (80,), "before_u")}
+         "r": (0.4, "F", "taman", (45,), None), "q": (0.9, "I", "nubian", (80,), "initial_u")}
 GLIDE_DROP = {"w": -0.3, "y": -0.2}
 # near sounds: same class, no rule (worth NEAR, not SUB)
 NEAR_SET = {"b": "pbfwm", "p": "pbfwm", "m": "mbn", "n": "nmŋɲ", "t": "tdsʃc", "d": "dtrln", "l": "lrdn",
@@ -232,7 +243,8 @@ def mer_letters(form):
 @functools.lru_cache(maxsize=None)
 def pattern(form):
     """Meroitic form -> slots. C slots carry the consonant and its position (I, M, F; IF for a lone
-    initial one); V slots: A initial a, Y initial e/i, e i o the vowel signs."""
+    initial one); V slots: A initial a, Y initial e/i, e i o the vowel signs. The last consonant is F
+    unless a final i or o follows it: Rilly's table counts kdi's d and ato's t as medial (rows N° 8, 3)."""
     f, slots, i = mer_letters(form), [], 0
     if f[:2] in ("ye", "yi"):
         slots, i = [Slot("V", "Y", "")], 2
@@ -247,7 +259,8 @@ def pattern(form):
             slots.append(Slot("C", ch, ""))
     cons = [k for k, s in enumerate(slots) if s.kind == "C"]
     for n, k in enumerate(cons):
-        pos = ("I" if n == 0 and k == 0 else "") + ("F" if n == len(cons) - 1 else "")
+        final = n == len(cons) - 1 and [s.sym for s in slots[k + 1:]] in ([], ["e"])
+        pos = ("I" if n == 0 and k == 0 else "") + ("F" if final else "")
         slots[k] = slots[k]._replace(pos=pos or "M")
     return tuple(slots)
 
@@ -256,15 +269,21 @@ def label(mer, nes, rows):
     return f"{mer}~{nes or 'Ø'} ({','.join('T%d' % r for r in rows)})" if rows else f"{mer}~{nes} (same sound)"
 
 
+def _weight(w, p, groups, pos, grp):
+    """A rule's weight for a slot in position pos and a list of group grp: None outside the rule's
+    languages, POS_FACTOR of it outside its positions."""
+    if groups and grp not in groups.split():
+        return None
+    return w if not p or any(c in p for c in pos) else w * POS_FACTOR
+
+
 @functools.lru_cache(maxsize=None)
 def reflexes(mer, pos, grp):
     """{nes segment: (weight, label, condition)} for one Meroitic consonant in one position and group."""
     out = {}
     for m, n, w, p, groups, rows, cond in RULES:
-        if m != mer or (groups and grp not in groups.split()):
-            continue
-        w = w if not p or any(c in p for c in pos) else w * POS_FACTOR
-        if n not in out or w > out[n][0]:
+        w = _weight(w, p, groups, pos, grp) if m == mer else None
+        if w is not None and (n not in out or w > out[n][0]):
             out[n] = (w, label(m, n, rows), cond)
     if mer in SAME and mer not in out:
         out[mer] = (0.8, label(mer, mer, ()), None)
@@ -280,7 +299,7 @@ def expected(form, lang="dongolawi"):
             continue
         refl = sorted(reflexes(s.sym, s.pos, grp).items(), key=lambda x: -x[1][0])
         alts = [n + ("°" if c else "") for n, (w, _, c) in refl]
-        alts += [m[1] for m in TWO if m[0] == s.sym]
+        alts += [m[1] for m, t in TWO.items() if m[0] == s.sym and _weight(*t[:3], s.pos, grp) is not None]
         d = DROPS.get(s.sym)
         if d and any(c in d[1] for c in s.pos) and (not d[2] or grp in d[2].split()):
             alts.append("Ø°" if d[4] else "Ø")
@@ -321,7 +340,7 @@ def _drop(slot, segs, j, grp):
     if d:
         w, p, groups, rows, cond = d
         if any(c in p for c in slot.pos) and (not groups or grp in groups.split()) and \
-                (cond != "before_u" or (j < len(segs) and segs[j] in "uo")):
+                (cond != "initial_u" or (j == 0 and segs[:1] in (("u",), ("o",)))):   # T80: Nubian u-, word-initially
             return w, label(slot.sym, "", rows)
     if slot.sym in GLIDE_DROP and "I" not in slot.pos:
         return GLIDE_DROP[slot.sym], f"{slot.sym}~Ø (glide)"
@@ -359,10 +378,10 @@ def align(form, segs, lang, trace=False):
                     best, bp = D[i - 1][j - 1] + hit[0], ("sub", hit[1])
                 if D[i][j - 1] + ins[j - 1][0] > best:
                     best, bp = D[i][j - 1] + ins[j - 1][0], ("ins", ins[j - 1][1])
-            if j >= 2 and sl.kind == "C" and (sl.sym, segs[j - 2] + segs[j - 1]) in TWO:
-                w2, rows = TWO[(sl.sym, segs[j - 2] + segs[j - 1])]
-                if D[i - 1][j - 2] + w2 > best:
-                    best, bp = D[i - 1][j - 2] + w2, ("two", label(sl.sym, segs[j - 2] + segs[j - 1], rows))
+            two = TWO.get((sl.sym, segs[j - 2] + segs[j - 1])) if j >= 2 and sl.kind == "C" else None
+            w2 = _weight(*two[:3], sl.pos, grp) if two else None
+            if w2 is not None and D[i - 1][j - 2] + w2 > best:
+                best, bp = D[i - 1][j - 2] + w2, ("two", label(sl.sym, segs[j - 2] + segs[j - 1], two[3]))
             D[i][j], B[i][j] = best, bp
     score = D[n][m] / max(1, sum(s.kind == "C" for s in slots))
     if not trace:
