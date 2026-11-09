@@ -6,33 +6,26 @@
   YK_morph   blind grammar on the synthetic language
 
 They read the corpus as it was when the runs were made
-(data/corpus_v2_c3_snapshot.jsonl). `check` rebuilds every task in memory and
-compares it with the task file the run actually used; `write NAME` writes a
-task into a new folder and refuses to overwrite one that exists.
+(data/corpus_v2_c3_snapshot.jsonl). `check` rebuilds every task in memory,
+compares it byte for byte with the task file the run used (kept in runs/tasks/,
+and in the blind folder while it lasts) and exits 1 on any difference; `write
+NAME` writes a new task and its copy, and refuses to overwrite either.
 """
 import json, random, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from build_morph import TASK as MORPH_TASK   # noqa: E402
-from scramble import make_map, text          # noqa: E402
+from build_tasks import corpus_block         # noqa: E402
+from scramble import make_map                # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 BLIND = Path("/private/tmp/claude-501/blind")
+SAVED = ROOT / "runs/tasks"
 SNAPSHOT = ROOT / "data/corpus_v2_c3_snapshot.jsonl"
 # the words open recall could not give (or gave wrongly) that occur at least twice in the corpus
 RECALL_MISSES = {"asr", "kdite", "mte", "tre-", "mkdi", "ar", "are-", "ḫlbi", "nse", "tbo", "yireqe", "kelw",
                  "ssor", "perite", "pẖrs", "tkk", "tebwe"}
-
-
-def numbered(texts, width=100):
-    lines = []
-    for i, t in enumerate(texts):
-        ws = t.split()
-        for k in range(0, len(ws), width):
-            tag = f"L{i:04d}" if len(ws) <= width else f"L{i:04d}.{k // width + 1}"
-            lines.append(f"{tag}: {' '.join(ws[k:k + width])}")
-    return lines
 
 
 def f_recall(d):
@@ -57,11 +50,10 @@ Words:
 def n_open(d):
     rows = json.load(open(ROOT / "runs/recall_rows.json"))
     targets = [(r[3], r[1]) for r in rows if r[0] in RECALL_MISSES]
-    given = [(r[3] or r[0], r[1]) for r in rows if r[0] not in RECALL_MISSES and r[3]]
+    given = [(r[3], r[1]) for r in rows if r[0] not in RECALL_MISSES and r[3]]
     corpus = [json.loads(l) for l in open(SNAPSHOT)]
     rng = random.Random(3)
     rng.shuffle(corpus)
-    lines = numbered([r["text"] for r in corpus])
     words = [t for t, _ in targets]
     rng.shuffle(words)
     return f"""# Task: work out what these Meroitic words mean, from the texts
@@ -86,20 +78,20 @@ Write JSON to `{d / 'answer.json'}` (and repeat it in your final message):
 
 ## Corpus
 
-""" + "\n".join(lines) + "\n"
+""" + corpus_block(corpus) + "\n"
 
 
 def k2_morph(d):
     rows = [json.loads(l) for l in open(SNAPSHOT)]
     random.Random(99).shuffle(rows)
     m = make_map(7)
-    return MORPH_TASK.format(out=d / "answer.json", corpus="\n".join(numbered([text(r["text"], m) for r in rows])))
+    return MORPH_TASK.format(out=d / "answer.json", corpus=corpus_block(rows, m))
 
 
 def yk_morph(d):
     texts = [l for l in (ROOT / "data/synth_corpus.txt").read_text().split("\n") if l.strip()]
     random.Random(4).shuffle(texts)
-    body = MORPH_TASK.format(out=d / "answer.json", corpus="\n".join(numbered(texts)))
+    body = MORPH_TASK.format(out=d / "answer.json", corpus=corpus_block([{"text": t} for t in texts]))
     return body.replace("The script has been transliterated letter by letter into a substitute Latin alphabet.",
                         "The script has been transliterated letter by letter into a Latin alphabet. A dot marks a lost sign.")
 
@@ -107,18 +99,30 @@ def yk_morph(d):
 BUILDERS = {"F_recall": f_recall, "N_open": n_open, "K2_morph": k2_morph, "YK_morph": yk_morph}
 
 
+def check():
+    """Rebuild every task in memory; the names whose rebuild is not byte for byte the task the run used
+    (the copy in runs/tasks/ must exist; the blind folder's is compared while it lasts)."""
+    bad = []
+    for name, fn in BUILDERS.items():
+        task, saved, blind = fn(BLIND / name), SAVED / f"{name}.md", BLIND / name / "task.md"
+        same = saved.exists() and saved.read_text() == task and (not blind.exists() or blind.read_text() == task)
+        print(f"{name}: {'identical to the task the run used' if same else 'DIFFERS or missing'}")
+        if not same:
+            bad.append(name)
+    return bad
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     if cmd == "check":
-        for name, fn in BUILDERS.items():
-            used = BLIND / name / "task.md"
-            same = used.exists() and fn(BLIND / name) == used.read_text()
-            print(f"{name}: {'identical to the task the run used' if same else 'DIFFERS or missing'}")
+        sys.exit(1 if check() else 0)
     elif cmd == "write":
         name = sys.argv[2]
         d = BLIND / name
-        if (d / "task.md").exists():
-            sys.exit(f"{d} already holds a task; refusing to overwrite a run")
+        if (SAVED / f"{name}.md").exists() or (d / "task.md").exists():
+            sys.exit(f"{name} already has a task; refusing to overwrite a run")
         d.mkdir(parents=True, exist_ok=True)
-        (d / "task.md").write_text(BUILDERS[name](d))
-        print("wrote", d / "task.md")
+        SAVED.mkdir(parents=True, exist_ok=True)
+        for p in (d / "task.md", SAVED / f"{name}.md"):
+            p.write_text(BUILDERS[name](d))
+            print("wrote", p)

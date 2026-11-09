@@ -1,8 +1,8 @@
 {
  "B001[?1]": [
+  "l",
   "NAME",
-  "yetmdelowi",
-  "womnitX"
+  "yetmdelowi"
  ],
  "B001[?2]": [
   "ni",
@@ -20,9 +20,9 @@
   "pilqoyte"
  ],
  "B003[?1]": [
+  "Stebetowi",
   "aqebetowi",
-  "yetmdelowi",
-  "lowi"
+  "yetmdelowi"
  ],
  "B003[?2]": [
   "keqye",
@@ -60,19 +60,19 @@
   "tmNtelowi"
  ],
  "B007[?1]": [
-  "NAME",
+  "dokes",
   "l",
-  "li"
+  "NAME"
  ],
  "B007[?2]": [
-  "dxe",
-  "bliye",
-  "twdto"
+  "mde",
+  "Ste",
+  "dxe"
  ],
  "B008[?1]": [
+  "axilowi",
   "NAME",
-  "yetmdelowi",
-  "womnitX"
+  "yetmdelowi"
  ],
  "B008[?2]": [
   "lo",
@@ -81,8 +81,8 @@
  ],
  "B009[?1]": [
   "li",
-  "leb",
-  "l"
+  "l",
+  "leb"
  ],
  "B009[?2]": [
   "te",
@@ -92,12 +92,12 @@
  "B010[?1]": [
   "xbxe",
   "xbxN",
-  "mStrq"
+  "pelmoS"
  ],
  "B010[?2]": [
+  "li",
   "tedxelowi",
-  "qo",
-  "yetmdelowi"
+  "qo"
  ],
  "B011[?1]": [
   "teketi",
@@ -111,8 +111,8 @@
  ],
  "B012[?1]": [
   "li",
-  "leb",
-  "l"
+  "l",
+  "leb"
  ],
  "B012[?2]": [
   "aqebetowi",
@@ -121,8 +121,8 @@
  ],
  "B013[?1]": [
   "lw",
-  "NAME",
-  "l"
+  "perite",
+  "woS"
  ],
  "B013[?2]": [
   "li",
@@ -130,8 +130,8 @@
   "krorolowi"
  ],
  "B014[?1]": [
-  "mi",
   "tmi",
+  "mi",
   "1"
  ],
  "B014[?2]": [
@@ -205,9 +205,9 @@
   "lowi"
  ],
  "B021[?2]": [
+  "wo",
   "li",
-  "sleleyte",
-  "seleleyte"
+  "sleleyte"
  ],
  "B022[?1]": [
   "qr",
@@ -220,9 +220,9 @@
   "arome"
  ],
  "B023[?1]": [
+  "yi",
   "s",
-  "ye",
-  "wi"
+  "ye"
  ],
  "B023[?2]": [
   "qoleb",
@@ -241,8 +241,8 @@
  ],
  "B025[?1]": [
   "Sirele",
-  "12",
-  "10"
+  "10",
+  "12"
  ],
  "B025[?2]": [
   "woS",
@@ -270,19 +270,19 @@
   "yiroXetewi"
  ],
  "B028[?1]": [
-  "NAME",
   "l",
+  "NAME",
   "li"
  ],
  "B028[?2]": [
   "lo",
   "k",
-  "lX"
+  "mr"
  ],
  "B029[?1]": [
   "q",
-  "kbte",
-  "lbrte"
+  "mlo",
+  "kbte"
  ],
  "B029[?2]": [
   "yd",
@@ -362,7 +362,7 @@
  "B037[?1]": [
   "wi",
   "l",
-  "NAME"
+  "nob"
  ],
  "B037[?2]": [
   "pesto",
@@ -391,13 +391,13 @@
  ],
  "B040[?1]": [
   "edx",
-  "bs",
-  "teke"
+  "ppilqete",
+  "bs"
  ],
  "B040[?2]": [
+  "lo",
   "li",
-  "leb",
-  "lo"
+  "leb"
  ],
  "B041[?1]": [
   "pxrs",
@@ -411,8 +411,8 @@
  ],
  "B042[?1]": [
   "24",
-  "NAME",
-  "yetmdelowi"
+  "Sox",
+  "4"
  ],
  "B042[?2]": [
   "NAME",
@@ -420,19 +420,19 @@
   "womnitX"
  ],
  "B043[?1]": [
+  "aye",
   "li",
-  "ni",
   "qo"
  ],
  "B043[?2]": [
   "pSoXekes",
   "piSiXekes",
-  "bSxrkes"
+  "pSiXekes"
  ],
  "B044[?1]": [
   "qo",
   "te",
-  "So"
+  "s"
  ],
  "B044[?2]": [
   "tbo",
@@ -540,19 +540,19 @@
   "NAME"
  ],
  "B055[?1]": [
+  "yetmdelowiqoreN",
   "NAME",
-  "yetmdelowi",
-  "womnitX"
+  "yetmdelowi"
  ],
  "B055[?2]": [
-  "NAME",
-  "yetmdelowi",
-  "womnitX"
+  "pelmoS",
+  "perite",
+  "NAME"
  ],
  "B056[?1]": [
   "qe",
-  "bi",
-  "bik"
+  "kid",
+  "bi"
  ],
  "B056[?2]": [
   "N",
@@ -585,9 +585,9 @@
   "woS"
  ],
  "B059[?2]": [
+  "t",
   "tmdelowi",
-  "teke",
-  "yetmdelowi"
+  "teke"
  ],
  "B060[?1]": [
   "NAME",

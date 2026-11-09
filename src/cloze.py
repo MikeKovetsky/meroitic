@@ -3,12 +3,15 @@
 100 funerary texts are held out; up to two words in each (not names or
 numerals; often a grammatical word) are masked as [?1], [?2]. The solver sees
 the other texts plus the masked ones. A baseline n-gram restorer (left/right
-context with backoff) trained on the same other texts sets the bar; it sees a
-held-out text as the solver does, with the other mask unknown. This is the
+context with backoff) sets the bar; it counts what the solver sees, the other
+texts and the masked ones with every mask unknown. This is the
 skill Ithaca brought to Greek inscriptions; here it also measures how much an
-LLM adds over plain statistics.
+LLM adds over plain statistics. Built from data/corpus_v2_c3_snapshot.jsonl,
+corpus_v2 as it was when the C2_cloze run was made (the later cleanup changed
+data/corpus_v2.jsonl).
 
   python3 src/cloze.py build
+  python3 src/cloze.py baseline     # rewrite runs/cloze_ngram.json for the saved key
   python3 src/cloze.py [--key runs/keys/cloze.json] ANSWER.json ...
 """
 import argparse, collections, json, random, sys
@@ -18,13 +21,14 @@ sys.path.insert(0, str(Path(__file__).parent))
 from build_tasks import BLIND, fresh   # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
+CORPUS = ROOT / "data/corpus_v2_c3_snapshot.jsonl"
 SEED = 11
 SKIP = {"NAME", "RNAME"}
 UNKNOWN = "<mask>"
 
 
 def load():
-    return [json.loads(l) for l in open(ROOT / "data/corpus_v2.jsonl")]
+    return [json.loads(l) for l in open(CORPUS)]
 
 
 def seen_contexts(train):
@@ -74,19 +78,25 @@ def contexts(t, i):
             ("L2", t[i - 2], t[i - 1]), ("R2", t[i + 1], t[i + 2]), ("L", t[i - 1]), ("R", t[i + 1]), ("U",)]
 
 
+def shown(test, items):
+    """The held-out texts as the solver sees them: every masked word is UNKNOWN."""
+    hidden = {(it["text"], it["pos"]) for it in items}
+    return {r["id"]: [UNKNOWN if (r["id"], j) in hidden else w for j, w in enumerate(r["text"].split())] for r in test}
+
+
 def ngram_guess(train, items, test):
+    """Three guesses per mask; counts come from what the solver sees: the reference texts and the masked ones."""
+    seen = shown(test, items)
     ctx = collections.defaultdict(collections.Counter)
-    for r in train:
-        t = ["<s>", "<s>"] + r["text"].split() + ["</s>", "</s>"]
+    for words in [r["text"].split() for r in train] + list(seen.values()):
+        t = ["<s>", "<s>"] + words + ["</s>", "</s>"]
         for i in range(2, len(t) - 2):
             for k in contexts(t, i):
-                ctx[k][t[i]] += 1
-    hidden = {(it["text"], it["pos"]) for it in items}
-    texts = {r["id"]: r["text"].split() for r in test}
+                if t[i] != UNKNOWN and UNKNOWN not in k:     # a mask is neither a word nor a context
+                    ctx[k][t[i]] += 1
     guesses = {}
     for it in items:
-        shown = [UNKNOWN if (it["text"], j) in hidden else w for j, w in enumerate(texts[it["text"]])]
-        t = ["<s>", "<s>"] + shown + ["</s>", "</s>"]
+        t = ["<s>", "<s>"] + seen[it["text"]] + ["</s>", "</s>"]
         votes = {}
         for rank, k in enumerate(contexts(t, it["pos"] + 2)):
             for w, c in ctx[k].most_common(5):
@@ -115,38 +125,53 @@ Write JSON to `{out}` (and repeat it in your final message):
 """
 
 
+def task_text(train, test, items, d=BLIND / "C2_cloze"):
+    trainblock = "\n".join(f"{r['id']}: {r['text']}" for r in train)
+    return TASK.format(n=len(test), m=len(items), out=d / "answer.json",
+                       testblock="\n".join(masked(test, items)), trainblock=trainblock)
+
+
 def build():
     fresh(["C2_cloze"])
     corpus = load()
     train, test, items = split(corpus)
     d = BLIND / "C2_cloze"
-    trainblock = "\n".join(f"{r['id']}: {r['text']}" for r in train)
-    (d / "task.md").write_text(TASK.format(n=len(test), m=len(items), out=d / "answer.json",
-                                           testblock="\n".join(masked(test, items)), trainblock=trainblock))
+    (d / "task.md").write_text(task_text(train, test, items, d))
     (ROOT / "runs/keys").mkdir(parents=True, exist_ok=True)
     json.dump({f"{it['text']}{it['mask']}": it["answer"] for it in items}, open(ROOT / "runs/keys/cloze.json", "w"), indent=1)
     json.dump(ngram_guess(train, items, test), open(ROOT / "runs/cloze_ngram.json", "w"), indent=1)
     print("masks", len(items), "task chars", len((d / "task.md").read_text()))
 
 
+def baseline():
+    """Rewrite the C2_cloze n-gram baseline; the rebuilt masks must be the saved key's."""
+    train, test, items = split(load())
+    if {f"{it['text']}{it['mask']}": it["answer"] for it in items} != json.load(open(ROOT / "runs/keys/cloze.json")):
+        sys.exit("the rebuilt masks differ from runs/keys/cloze.json")
+    json.dump(ngram_guess(train, items, test), open(ROOT / "runs/cloze_ngram.json", "w"), indent=1)
+
+
+def guesses(path):
+    """An answer's (or the baseline's) guesses by mask, each a list, best first."""
+    g = json.load(open(path))
+    g = g.get("guesses", g)
+    return {k: [v] if isinstance(v, str) else list(v or []) for k, v in g.items()}
+
+
 def score(path, key_path=ROOT / "runs/keys/cloze.json"):
     """Top-1 and top-3 hits, the number of masks, and how many masks the answer has no guess for."""
     key = json.load(open(key_path))
-    g = json.load(open(path))
-    g = g.get("guesses", g)
-
-    def ranked(k):
-        x = g.get(k) or []
-        return [x] if isinstance(x, str) else list(x)
-
-    top1 = sum(1 for k, a in key.items() if ranked(k)[:1] == [a])
-    top3 = sum(1 for k, a in key.items() if a in ranked(k)[:3])
+    g = guesses(path)
+    top1 = sum(1 for k, a in key.items() if g.get(k, [])[:1] == [a])
+    top3 = sum(1 for k, a in key.items() if a in g.get(k, [])[:3])
     return top1, top3, len(key), sum(1 for k in key if k not in g)
 
 
 if __name__ == "__main__":
     if sys.argv[1:] == ["build"]:
         build()
+    elif sys.argv[1:] == ["baseline"]:
+        baseline()
     else:
         ap = argparse.ArgumentParser()
         ap.add_argument("answers", nargs="+")

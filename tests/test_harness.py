@@ -2,13 +2,13 @@
 
   python3 -I tests/test_harness.py
 """
-import itertools, json, math, sys, tempfile
+import contextlib, io, itertools, json, math, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import build_tasks, clean_v2, cloze, cognates, corpus, score, synth   # noqa: E402
+import build_extra, build_tasks, clean_v2, cloze, cloze_families, cognates, corpus, score, synth   # noqa: E402
 
 
 def brute_p(answer, key, c):
@@ -161,6 +161,115 @@ def test_swap_partners_file_is_stable():
     keys = list(json.loads((ROOT / "data/swap_partners.json").read_text()))
     assert keys == sorted(keys)
 
+
+def c3_rebuild():
+    return cloze_families.split([json.loads(l) for l in open(cloze_families.SNAPSHOT)])
+
+
+def test_restoration_tasks_rebuild_as_run():
+    train, test, items = cloze.split(cloze.load())
+    assert cloze.task_text(train, test, items) == (ROOT / "runs/tasks/C2_cloze.md").read_text()
+    assert {f"{it['text']}{it['mask']}": it["answer"] for it in items} == json.load(open(ROOT / "runs/keys/cloze.json"))
+    _, _, train, test, items = c3_rebuild()
+    assert cloze_families.task_text(train, test, items) == (ROOT / "runs/tasks/C3_cloze.md").read_text()
+    assert {f"{it['text']}{it['mask']}": it["answer"] for it in items} == json.load(open(cloze_families.KEY))
+
+
+def test_extra_tasks_rebuild_as_run():
+    for name, fn in build_extra.BUILDERS.items():
+        assert fn(build_extra.BLIND / name) == (ROOT / f"runs/tasks/{name}.md").read_text(), name
+
+
+def test_extra_check_flags_a_changed_task():
+    old = build_extra.SAVED
+    with tempfile.TemporaryDirectory() as d:
+        build_extra.SAVED = Path(d)
+        try:
+            for name in build_extra.BUILDERS:
+                (Path(d) / f"{name}.md").write_text((ROOT / f"runs/tasks/{name}.md").read_text())
+            (Path(d) / "N_open.md").write_text("another task")
+            (Path(d) / "YK_morph.md").unlink()                # a saved copy is required, blind folder or not
+            with contextlib.redirect_stdout(io.StringIO()):
+                assert build_extra.check() == ["N_open", "YK_morph"]
+        finally:
+            build_extra.SAVED = old
+
+
+def test_saved_key_is_never_rebuilt():
+    old = cloze_families.KEY, cloze_families.NGRAM, cloze_families.SAVED_TASK, cloze_families.BLIND
+    with tempfile.TemporaryDirectory() as d:
+        key = Path(d) / "key.json"
+        key.write_text(json.dumps({"B001[?1]": "qo"}))
+        cloze_families.KEY, cloze_families.NGRAM = key, Path(d) / "ngram.json"
+        cloze_families.SAVED_TASK, cloze_families.BLIND = Path(d) / "task.md", Path(d) / "blind"
+        try:
+            cloze_families.build(write_task=False)
+            raise AssertionError("build() replaced a key that a run is scored against")
+        except SystemExit:
+            pass
+        finally:
+            cloze_families.KEY, cloze_families.NGRAM, cloze_families.SAVED_TASK, cloze_families.BLIND = old
+        assert json.loads(key.read_text()) == {"B001[?1]": "qo"}
+
+
+def test_parallel_finds_what_trigram_families_miss():
+    def blob(texts):
+        return "\n".join(t.replace(" ", "").lower() for t in texts)
+    a = blob(["amnirense qore li akinidd pqrNyi pestoNyi pqr qorise l qor", "teketi 59 yed tlt 16 kelw yikidbitelowi ato",
+              "aa yetmdelowiqoreN bb"])
+    copy = "akinidd pqrNyi peStoNyi pqr qorisl qor".split()      # another word break, S for s
+    assert cloze_families.parallel(copy, 1, a)
+    part = "yed tlt 16 kelw yikidbitelowi s 10 kelw axide".split()  # a partial copy
+    assert cloze_families.parallel(part, 3, a) and not cloze_families.parallel(part, 7, a)
+    assert not cloze_families.parallel("zz yetmdelowiqoreN zz".split(), 1, a)   # the word alone is no parallel
+    train = [{"id": "A", "text": "x"}]
+    test = [{"id": "B001", "text": "pelmoS adblis NAME yetmdelowi"}, {"id": "B002", "text": "pelmoS adblis NAME yetmdelowi ato"}]
+    own = [{"text": "B001", "pos": 0, "mask": "[?1]"}]
+    assert not cloze_families.parallel(test[0]["text"].split(), 0, cloze_families.visible(train, test[:1], own))
+    assert cloze_families.parallel(test[0]["text"].split(), 0, cloze_families.visible(train, test, own))  # B002 shows it
+
+
+def test_mcnemar_is_exact():
+    for n in range(9):
+        for b in range(n + 1):
+            m = min(b, n - b)
+            brute = sum(1 for bits in itertools.product((0, 1), repeat=n) if min(sum(bits), n - sum(bits)) <= m) / 2 ** n
+            assert math.isclose(cloze_families.mcnemar(b, n - b), brute), (b, n - b)
+    assert math.isclose(cloze_families.mcnemar(57, 2), 6.139e-15, rel_tol=1e-3)
+
+
+def test_baseline_counts_what_the_solver_sees():
+    test = [{"id": "U", "text": "a q b"}, {"id": "W", "text": "c z d"}, {"id": "T", "text": "a x b c y d"}]
+    items = [{"text": "W", "pos": 1, "answer": "z", "mask": "[?1]"},
+             {"text": "T", "pos": 1, "answer": "q", "mask": "[?1]"}, {"text": "T", "pos": 4, "answer": "z", "mask": "[?2]"}]
+    g = cloze.ngram_guess([{"id": "A", "text": "e f"}], items, test)
+    assert g["T[?1]"][0] == "q", g                       # U is shown to the solver, so the baseline counts it
+    assert "z" not in g["T[?2]"], g                      # W's masked word is hidden from both
+
+
+def test_null_guess_scores_as_wrong():
+    old = cloze_families.KEY
+    with tempfile.TemporaryDirectory() as d:
+        k, a = Path(d) / "key.json", Path(d) / "ans.json"
+        k.write_text(json.dumps({"B001[?1]": "qo", "B001[?2]": "li"}))
+        a.write_text(json.dumps({"guesses": {"B001[?1]": None, "B001[?2]": "li"}}))
+        cloze_families.KEY = k
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                cloze_families.score(a)
+        finally:
+            cloze_families.KEY = old
+        assert cloze.score(a, k) == (1, 1, 2, 0)
+
+
+
+def test_reported_restoration_numbers():
+    par = cloze_families.parallels()
+    saved = json.load(open(cloze_families.COPIES))
+    assert sorted(k for k in par if par[k]) == saved["with_parallel"]
+    rows = cloze_families.split_scores(par, ROOT / "runs/answers/C3_cloze.json", cloze_families.NGRAM)
+    assert [r[:4] for r in rows] == [("all masks", 120, 84, 35), ("with a parallel", 58, 54, 19), ("no parallel", 62, 30, 16)]
+    assert cloze.score(ROOT / "runs/cloze_ngram.json") == (40, 45, 88, 0)
 
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")]
