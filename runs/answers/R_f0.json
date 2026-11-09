@@ -1,0 +1,20 @@
+{"assignments": [
+{"word": "ato", "meaning": "water", "confidence": 5, "evidence": "Funerary blessing 'ato mXe piSiXekes at mXe piSixrkes' (about 120 times) pairs ato with at 'bread': water and bread."},
+{"word": "mXe", "meaning": "abundant, plenty", "confidence": 5, "evidence": "Qualifies both ato (water) and at (bread) in the same blessing; the variant 'ato mlo ... at mlo' (T0801) shows it is an adjective of quantity or quality."},
+{"word": "dime", "meaning": "cow", "confidence": 5, "evidence": "Counted next to known xlbi 'bull' in a sacrifice context: 'xlbi 3 dime 4 kelw qe nS per lo' (T0219), 'xlbi 3 dime 24' (T0595)."},
+{"word": "kdi", "meaning": "woman", "confidence": 5, "evidence": "It is the base of mkdi 'goddess' and kdite 'sister', and it is counted against abr in war lists: 'abr 32 kdi 135', 'abr 100 kdi 100'."},
+{"word": "abr", "meaning": "man", "confidence": 5, "evidence": "Paired with kdi 'woman' in 'kdi s lw abr s lw' (T0467) and in head counts 'abr 58 kdi 223'; 'abrse l yekedi kdise l arse li' (men killed, women seized)."},
+{"word": "mk", "meaning": "god, deity", "confidence": 5, "evidence": "mkdi 'goddess' = mk + kdi 'woman'; 'woS mkdi lX mk di lX' (Isis great goddess, T0291); 'amnp arreto mk lte' next to Amun."},
+{"word": "lX", "meaning": "great, elder", "confidence": 5, "evidence": "'woS mkdi lX' (Isis, great goddess), 'kdite lXlowi' (elder sister), 'qorelX', 'apotelX', 'SSor lX' (great scribe)."},
+{"word": "yerike", "meaning": "begotten by (father)", "confidence": 5, "evidence": "Same root as terike(lowi)/erike, which always pairs with tedxelowi 'born of (mother)' in filiation; 'mte pelmoS atolit yerike lo' = a child begotten by the general."},
+{"word": "pqr", "meaning": "prince, crown prince", "confidence": 4, "evidence": "A top title tied to the king: 'pqr qoris NAME' (of the king), 'qoreNyi akinidd pqrNyi pestoNyi'; also 'pqr NAME NAME tbo'."},
+{"word": "ant", "meaning": "priest, prophet", "confidence": 4, "evidence": "A title followed by a god's name: 'ant mno tmNteleb', 'ant mnp s li', 'ant mnptowi' (of Amun / Amun of Napata)."},
+{"word": "mlo", "meaning": "good", "confidence": 4, "evidence": "Praise word 'mlolowi' right before the blessing; 'ato mlo elxte at mlo ixrkte' (good water, good bread, T0801); 'qore mlo lo'."},
+{"word": "Ste", "meaning": "mother (tutor)", "confidence": 4, "evidence": "A kin term: 'NAME Stelowi' after 'NAME smlowi' (wife) in the family list; 'Steaqebetowi' is parallel to 'kditeqebetowi' (sisters); 'Ste li qore sm lo'."},
+{"word": "asr", "meaning": "meat, animal", "confidence": 4, "evidence": "Booty counted in thousands in the war texts next to the counts of men and women: 'itrek asr deb 5000', 'asr axidebx wi 1626', 'asr ... 1032'."},
+{"word": "tbo", "meaning": "two, second", "confidence": 4, "evidence": "'pqr NAME NAME tbo (yetmdelo)' names two princes; in 'aSori pilqeteleb tbo ... aSori tebweteli' the word comes after a pair."},
+{"word": "are", "meaning": "take, receive (seize)", "confidence": 4, "evidence": "'tewisti are ke NAME' (receive the adoration); the verb forms arse/arese in 'kdise l arse li' (the women were seized)."},
+{"word": "ar", "meaning": "boy, son", "confidence": 3, "evidence": "Only in 'ptros li s lw ar mte kw' / 'lw armte kw', right before known mte 'child' (boy-child, son)."},
+{"word": "tke", "meaning": "love, revere", "confidence": 3, "evidence": "Epithet forms 'woSi yntke' (beloved of Isis) and 'pelmoS NAME ntke lo' (beloved or revered by the general); also left over after the other assignments."},
+{"word": "tre", "meaning": "offer", "confidence": 3, "evidence": "Scene caption 'qore tre' (T0355, 'the king offers'); also left over after the other assignments, since the other verbs are taken by are and tke."}
+]}

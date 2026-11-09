@@ -1,0 +1,20 @@
+{"assignments": [
+{"word": "xby", "meaning": "water", "confidence": 5, "evidence": "Decodes to ato (x=a from xb=at 'bread', b=t, y=o from xhybt=apote); Meroitic ato 'water', paired with bread in offering formulas."},
+{"word": "hga", "meaning": "prince, crown prince", "confidence": 5, "evidence": "Decodes to pqr (h=p from htfkyu=pelmos, g=q from gyat=qore, a=r); Meroitic pqr 'crown prince'."},
+{"word": "bnt", "meaning": "love, revere", "confidence": 4, "evidence": "Decodes to tke (b=t, n=k from njqbt=kdite, t=e); Meroitic tke 'love, revere'."},
+{"word": "kn", "meaning": "god, deity", "confidence": 5, "evidence": "Decodes to mk; it opens knjq 'goddess' (mk + kdi 'woman'); Meroitic mk 'god'."},
+{"word": "bat", "meaning": "offer", "confidence": 3, "evidence": "Decodes to tre; a verb of giving fits (cf. Nubian tir- 'give'); offer vs take with xat is the main doubt."},
+{"word": "jqkt", "meaning": "cow", "confidence": 4, "evidence": "Decodes to dime (j=d, q=i, k=m, t=e); Meroitic dime 'cow', the female of glossary vfoq=hlbi 'bull'."},
+{"word": "xoa", "meaning": "man", "confidence": 5, "evidence": "Decodes to abr (o=b, which also turns vfoq into hlbi 'bull'); Meroitic abr 'man'."},
+{"word": "kfy", "meaning": "good", "confidence": 5, "evidence": "Decodes to mlo (k=m, f=l from pelmos, y=o); Meroitic mlo 'good'."},
+{"word": "kpt", "meaning": "abundant, plenty", "confidence": 5, "evidence": "Decodes to mhe (p = the second h letter); Meroitic mhe 'abundant', as in ato mhe 'abundant water'."},
+{"word": "xa", "meaning": "boy, son", "confidence": 4, "evidence": "Decodes to ar (x=a, a=r); Meroitic ar 'boy, son'."},
+{"word": "xeb", "meaning": "priest, prophet", "confidence": 5, "evidence": "Decodes to ant (e=n, b=t); Meroitic ant 'priest, prophet' (ant of Amun)."},
+{"word": "fp", "meaning": "great, elder", "confidence": 5, "evidence": "Decodes to lh (f=l, p=h); Meroitic lh 'great, elder' (mk lh 'great god')."},
+{"word": "njq", "meaning": "woman", "confidence": 5, "evidence": "Decodes to kdi; it is the stem of njqbt 'sister' (kdite) and the tail of knjq 'goddess' (mk+kdi)."},
+{"word": "ubt", "meaning": "mother (tutor)", "confidence": 5, "evidence": "Decodes to ste (u=s from uuya=ssor and htfkyu=pelmos); Meroitic ste 'mother'."},
+{"word": "staqnt", "meaning": "begotten by (father)", "confidence": 4, "evidence": "Decodes to yerike (s=y from stbkjt=yetmde); Meroitic (t/y)erike 'begotten by', the father's partner of bjvt=tdhe 'born of (mother)'."},
+{"word": "xwa", "meaning": "meat, animal", "confidence": 2, "evidence": "Decodes to a-S-r, S being the s-like letter of wk 'wife' and btrqwbq tewiSti 'adoration'; left by elimination, weakest pick."},
+{"word": "boy", "meaning": "two, second", "confidence": 3, "evidence": "Decodes to tbo (b=t, o=b, y=o), recalled as Meroitic 'two'; swapping with xwa is the main alternative."},
+{"word": "xat", "meaning": "take, receive (seize)", "confidence": 3, "evidence": "Decodes to are, a verb form beside xa=ar 'boy'; best remaining fit for take, with offer (bat) the main doubt."}
+]}

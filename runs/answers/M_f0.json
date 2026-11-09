@@ -1,0 +1,112 @@
+{
+ "assignments": [
+  {
+   "word": "ato",
+   "meaning": "water",
+   "confidence": 5,
+   "evidence": "Funerary benediction 'ato mXe ...' asks abundant water for the dead, beside 'at mXe' for bread."
+  },
+  {
+   "word": "pqr",
+   "meaning": "prince, crown prince",
+   "confidence": 5,
+   "evidence": "pqr (paqar) is the standard title of the crown prince, found beside qore 'king'."
+  },
+  {
+   "word": "tke",
+   "meaning": "love, revere",
+   "confidence": 4,
+   "evidence": "Verb tk(e) 'love' in royal epithets meaning 'beloved of <god>'."
+  },
+  {
+   "word": "mk",
+   "meaning": "god, deity",
+   "confidence": 5,
+   "evidence": "mkdi 'goddess' = mk 'god' + kdi 'woman' (one k dropped)."
+  },
+  {
+   "word": "tre",
+   "meaning": "offer",
+   "confidence": 2,
+   "evidence": "Recalled as the verb 'offer' in offering contexts; split against are partly by elimination."
+  },
+  {
+   "word": "dime",
+   "meaning": "cow",
+   "confidence": 3,
+   "evidence": "Recalled gloss 'cow' (livestock word; xlbi already covers bull); cf. Nubian tii 'cow'."
+  },
+  {
+   "word": "abr",
+   "meaning": "man",
+   "confidence": 5,
+   "evidence": "abr 'man' is the counterpart of kdi 'woman' in Meroitic texts."
+  },
+  {
+   "word": "mlo",
+   "meaning": "good",
+   "confidence": 4,
+   "evidence": "mlo 'good' recurs in funerary benedictions (mlo-lo 'it is good')."
+  },
+  {
+   "word": "mXe",
+   "meaning": "abundant, plenty",
+   "confidence": 5,
+   "evidence": "The 'ato mXe' / 'at mXe' formula: abundant water / abundant bread."
+  },
+  {
+   "word": "ar",
+   "meaning": "boy, son",
+   "confidence": 2,
+   "evidence": "Bare noun ar recalled as 'boy, son'; are carries the verb sense, so partly elimination."
+  },
+  {
+   "word": "ant",
+   "meaning": "priest, prophet",
+   "confidence": 5,
+   "evidence": "ant is the common priestly title, rendering Egyptian hm-ntr 'prophet'."
+  },
+  {
+   "word": "lX",
+   "meaning": "great, elder",
+   "confidence": 4,
+   "evidence": "lX 'great' qualifies titles and persons (the great/elder one); distinct from mXe 'abundant'."
+  },
+  {
+   "word": "kdi",
+   "meaning": "woman",
+   "confidence": 5,
+   "evidence": "Inside mkdi 'goddess' (mk + kdi) and kdite 'sister'; opposite abr 'man'."
+  },
+  {
+   "word": "Ste",
+   "meaning": "mother (tutor)",
+   "confidence": 4,
+   "evidence": "Ste recalled as 'mother' among kinship terms; the only kin word left once kdi is woman."
+  },
+  {
+   "word": "yerike",
+   "meaning": "begotten by (father)",
+   "confidence": 5,
+   "evidence": "Filiation formula: <mother> tdxe 'born of', <father> (y)erike 'begotten by'."
+  },
+  {
+   "word": "asr",
+   "meaning": "meat, animal",
+   "confidence": 2,
+   "evidence": "Weak recall; takes 'meat, animal' once dime takes cow."
+  },
+  {
+   "word": "tbo",
+   "meaning": "two, second",
+   "confidence": 3,
+   "evidence": "Recalled as the numeral 'two'; no other test word fits a numeral."
+  },
+  {
+   "word": "are",
+   "meaning": "take, receive (seize)",
+   "confidence": 2,
+   "evidence": "Verb are recalled as 'take, receive'; tre takes 'offer'."
+  }
+ ]
+}

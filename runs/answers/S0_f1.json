@@ -1,0 +1,19 @@
+{"assignments": [
+{"word": "gyat", "meaning": "ruler, king", "confidence": 5, "evidence": "Glossary decodes as Meroitic letter-for-letter (xby=ato, hga=pqr, kn=mk); gyat = qore, the Meroitic 'king'."},
+{"word": "htfkyu", "meaning": "general (strategos)", "confidence": 5, "evidence": "Decodes to pelmos, the Meroitic title for a general (from Egyptian p3 mr mS')."},
+{"word": "xhybt", "meaning": "envoy", "confidence": 5, "evidence": "Decodes to apote, the Meroitic 'envoy' (from Egyptian wpwty)."},
+{"word": "stbkjt", "meaning": "relative (nephew, niece)", "confidence": 5, "evidence": "Decodes to yetmde (s=y), the funerary kin term for a nephew or niece; s=y also turns staqnt into yerike 'begotten by'."},
+{"word": "bjvt", "meaning": "born of (mother)", "confidence": 5, "evidence": "Decodes to td?e = tdhe, the mother filiation word that pairs with staqnt 'begotten by (father)'."},
+{"word": "xb", "meaning": "bread", "confidence": 5, "evidence": "Decodes to at; with xby=ato 'water' and kpt=mhe 'abundant' it is the 'abundant bread' of the offering formula."},
+{"word": "knjq", "meaning": "goddess", "confidence": 4, "evidence": "kn 'god' + njq 'woman' merged into mkdi."},
+{"word": "rqjt", "meaning": "brother", "confidence": 4, "evidence": "Decodes to ?ide = wide (r=w), the Meroitic 'brother'."},
+{"word": "uuya", "meaning": "scribe", "confidence": 3, "evidence": "Decodes to ssor, a title shaped like Egyptian ss 'scribe'."},
+{"word": "kbt", "meaning": "child", "confidence": 3, "evidence": "Decodes to mte, the Meroitic 'child, young one'."},
+{"word": "njqbt", "meaning": "sister", "confidence": 3, "evidence": "njq 'woman' + -bt: kdite, a kdi-based kin term like kdise 'sister'."},
+{"word": "vfoq", "meaning": "bull, ox", "confidence": 3, "evidence": "Decodes to hlbi (v=h with breve, as in tdhe); an animal noun, read as the Meroitic 'bull'."},
+{"word": "btrqwbq", "meaning": "adoration", "confidence": 3, "evidence": "Decodes to tewi?ti, the long derived noun for 'adoration' (cf. Egyptian dw3 'adore')."},
+{"word": "sqatgr", "meaning": "south", "confidence": 2, "evidence": "Decodes to yireqw (yireqe-like); a long noun, left for the direction."},
+{"word": "ntfr", "meaning": "and, as well as", "confidence": 2, "evidence": "Decodes to kelw, a particle-like form (-ke + -lw), taken as the coordinator."},
+{"word": "wk", "meaning": "wife", "confidence": 2, "evidence": "Decodes to ?m with w=the second h, close to Egyptian hm.t 'wife'."},
+{"word": "ew", "meaning": "sacrifice", "confidence": 1, "evidence": "Decodes to n? (w as in xwa 'meat, animal'); the leftover meaning, by elimination."}
+]}

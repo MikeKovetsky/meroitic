@@ -1,0 +1,19 @@
+{"assignments": [
+{"word": "knjq", "meaning": "goddess", "confidence": 5, "evidence": "Only after ryu (Isis): 'ryu knjq fp', also split as 'kn jq fp'; kn 'god' + njq 'woman' + fp 'great' = great goddess."},
+{"word": "njqbt", "meaning": "sister", "confidence": 4, "evidence": "njq 'woman' + the kin ending -bt (as in ubt 'mother'); 'htfkyu xjofqw NAME njqbt fy rq' = 'is the sister of the general'."},
+{"word": "wk", "meaning": "wife", "confidence": 4, "evidence": "'NAME wkfyrq' follows a man's name in filiations (90x); 'ubt fq gyat wk fy' = mother of the king, wife of ...; reads 'sem'."},
+{"word": "htfkyu", "meaning": "general (strategos)", "confidence": 5, "evidence": "Office title with district modifiers: 'htfkyu xjofqw' (of the province), 'htfkyu xbyfqb' (of the water, xby); reads 'pelmos'."},
+{"word": "ntfr", "meaning": "and, as well as", "confidence": 4, "evidence": "Joins list items: 'vfoq 3 jqkt 4 ntfr ...', 'stj bfb 16 ntfr ...', and 'ntfr stbkjtotbyrq' adds one more kin relation at the end of a list."},
+{"word": "uuya", "meaning": "scribe", "confidence": 4, "evidence": "A personal title in funerary filiations ('stbkjtfyrq uuya kew kfqbyrq') and 'uuya fp fy rq' = 'is chief/great X'; reads 'ssor'."},
+{"word": "vfoq", "meaning": "bull, ox", "confidence": 5, "evidence": "Counted beside jqkt 'cow': 'vfoq 3 jqkt 4 ntfr ...' = 3 X, 4 cows."},
+{"word": "gyat", "meaning": "ruler, king", "confidence": 5, "evidence": "Royal title: 'RNAME gyatfp', 'bjvt RNAME gyatb', opens royal stelae ('gyat bmsqjxkxeq'), 'ubt fq gyat' = king's mother; reads 'qore'."},
+{"word": "btrqwbq", "meaning": "adoration", "confidence": 4, "evidence": "Opens 34 short votive graffiti in a fixed formula 'btrqwbq xat nt NAME stuyx' (proskynema); reads 'tewisti'."},
+{"word": "rqjt", "meaning": "brother", "confidence": 4, "evidence": "Rare kin word in royal narratives ('rqjt fy' = is brother); male counterpart of njqbt, with the kin ending -jt as in stbkjt; reads 'wide'."},
+{"word": "ew", "meaning": "sacrifice", "confidence": 3, "evidence": "Only in the long royal stela, in a religious context: 'ew ew f gya ...', 'ew ew f xkeh ...' (for the king, for Amun of Napata); cf. animals listed with 'eu' in 'vfoq 3 jqkt 4 ntfr gt eu hta'."},
+{"word": "bjvt", "meaning": "born of (mother)", "confidence": 5, "evidence": "Short form of the mother's half of filiation: 'NAME btjvtfyrq NAME btaqntfyrq' (born of ... begotten by), also 'NAME bjvtfyrq'; reads 'tdhe'."},
+{"word": "stbkjt", "meaning": "relative (nephew, niece)", "confidence": 5, "evidence": "Most frequent kin word, repeated down long genealogies of officials ('NAME stbkjtfyrq ... stbkjtfyrq'); shares staqnt's prefix; reads 'yetmde'."},
+{"word": "xhybt", "meaning": "envoy", "confidence": 5, "evidence": "Office title: 'xhybt xaykt fq w NAME' (envoy to Rome, arome), 'xhybt fp' (great envoy); reads 'apote'."},
+{"word": "sqatgr", "meaning": "south", "confidence": 3, "evidence": "Only in one royal text, in geographic narrative ('par xjyeqfqntbt sqatgr xar ...'); related 'sqatnt fy' follows 'xnqfqnr' (Akine, Lower Nubia), so it is a direction word."},
+{"word": "xb", "meaning": "bread", "confidence": 5, "evidence": "Paired with xby 'water' in the offering formula: 'xby kpt hquqptntw xb kpt hquqvantw' = abundant water ..., abundant bread ..."},
+{"word": "kbt", "meaning": "child", "confidence": 4, "evidence": "'xkeqw kbt fy' = 'is the child of Amun' (royal epithet); 'kbt njq' = female child; 'kbt htfkyu xbyfqb staqnt fy' = child begotten by the general; reads 'mte'."}
+]}

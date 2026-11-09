@@ -1,0 +1,106 @@
+{
+ "assignments": [
+  {
+   "word": "mkdi",
+   "meaning": "goddess",
+   "confidence": 4,
+   "evidence": "A compound of mk 'god' + kdi 'woman', with the doubled k merged."
+  },
+  {
+   "word": "kdite",
+   "meaning": "sister",
+   "confidence": 4,
+   "evidence": "kdi 'woman' + the kinship suffix -te: the female counterpart of wide 'brother'."
+  },
+  {
+   "word": "sm",
+   "meaning": "wife",
+   "confidence": 3,
+   "evidence": "Recalled as the epitaph term for a spouse (wife); a short kinship noun."
+  },
+  {
+   "word": "pelmoS",
+   "meaning": "general (strategos)",
+   "confidence": 5,
+   "evidence": "A loan of Egyptian p3 mr-ms' 'overseer of the army', the Meroitic title of a general."
+  },
+  {
+   "word": "kelw",
+   "meaning": "and, as well as",
+   "confidence": 3,
+   "evidence": "Recalled as the coordinating particle used in enumerations."
+  },
+  {
+   "word": "SSor",
+   "meaning": "scribe",
+   "confidence": 3,
+   "evidence": "Recalled as the title 'scribe'; it resembles Egyptian ss 'scribe'."
+  },
+  {
+   "word": "xlbi",
+   "meaning": "bull, ox",
+   "confidence": 2,
+   "evidence": "A weakly recalled animal noun (bull or ox), beside dime 'cow'."
+  },
+  {
+   "word": "qore",
+   "meaning": "ruler, king",
+   "confidence": 5,
+   "evidence": "The standard Meroitic royal title (qore = sovereign, beside kdke = queen)."
+  },
+  {
+   "word": "tewisti",
+   "meaning": "adoration",
+   "confidence": 3,
+   "evidence": "Recalled as 'adoration'; probably built on Egyptian dw3 'to adore'."
+  },
+  {
+   "word": "wide",
+   "meaning": "brother",
+   "confidence": 4,
+   "evidence": "The kinship term wi(-de) of epitaph relationship lines (wide-lowi); same -de/-te suffix as kdite."
+  },
+  {
+   "word": "ns",
+   "meaning": "sacrifice",
+   "confidence": 2,
+   "evidence": "A weakly recalled offering-context noun ('sacrifice'); partly by elimination."
+  },
+  {
+   "word": "tdxe",
+   "meaning": "born of (mother)",
+   "confidence": 5,
+   "evidence": "The epitaph filiation pair: mother's name + tdxe-lowi, father's name + yerike-lowi."
+  },
+  {
+   "word": "yetmde",
+   "meaning": "relative (nephew, niece)",
+   "confidence": 4,
+   "evidence": "A kinship term with the same -de suffix, used for a collateral relative in epitaphs."
+  },
+  {
+   "word": "apote",
+   "meaning": "envoy",
+   "confidence": 5,
+   "evidence": "A loan of Egyptian wpwty 'messenger'; the known title of envoys (for example to Rome)."
+  },
+  {
+   "word": "yireqw",
+   "meaning": "south",
+   "confidence": 2,
+   "evidence": "A weakly recalled direction word ('south'); partly by elimination."
+  },
+  {
+   "word": "at",
+   "meaning": "bread",
+   "confidence": 4,
+   "evidence": "The benediction 'at mXe ...' runs parallel to 'ato mXe ...' (abundant water, abundant bread)."
+  },
+  {
+   "word": "mte",
+   "meaning": "child",
+   "confidence": 4,
+   "evidence": "The recalled Meroitic word for child or young person; ar already covers boy and son."
+  }
+ ]
+}

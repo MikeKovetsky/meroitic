@@ -1,0 +1,20 @@
+{"assignments": [
+{"word": "xby", "meaning": "water", "confidence": 5, "evidence": "Funerary blessing pair 'xby kpt hquqptntw / xb kpt hquqvantw': xby stands parallel to glossary xb (bread), the classic water/bread pair (123 tokens)."},
+{"word": "kpt", "meaning": "abundant, plenty", "confidence": 5, "evidence": "Follows both xby (water) and xb (bread) in every blessing ('xby kpt ... xb kpt ...'), so it is the quantity word."},
+{"word": "hga", "meaning": "prince, crown prince", "confidence": 5, "evidence": "Title before NAME in genealogies and seals; in the royal stela the series 'gyatmsq xnqeqjj hgamsq htwbymsq' gives ruler / [named person] / hga / viceroy."},
+{"word": "kn", "meaning": "god, deity", "confidence": 4, "evidence": "'ryu knjq fp' and its variant 'ryu kn jq fp': kn is the first part of knjq (goddess) = kn + njq (woman); it also occurs alone in royal texts."},
+{"word": "jqkt", "meaning": "cow", "confidence": 5, "evidence": "Livestock count 'vfoq 3 jqkt 4 ntfr ...': it comes after vfoq (bull) with its own number."},
+{"word": "xoa", "meaning": "man", "confidence": 5, "evidence": "Captive lists 'xoa 32 njq 135', 'xoa 100 njq 100', 'xoa 58 njq 223', and 'njq w fr xoa w fr': it always pairs with njq."},
+{"word": "njq", "meaning": "woman", "confidence": 5, "evidence": "It is inside njqbt (sister) and knjq (goddess = god + woman), and it pairs with xoa in the counts of captives."},
+{"word": "kfy", "meaning": "good", "confidence": 4, "evidence": "Predicate 'kfyfyrq' ('is good') ends texts; 'xby kfy ... xb kfy' (good water / good bread); 'gyat kfy fy kn f r kfy fy' (good ruler, good god)."},
+{"word": "fp", "meaning": "great, elder", "confidence": 4, "evidence": "Epithet after a noun: 'ryu knjq fp' (Isis, great goddess), 'btktsnjq fp', 'gy vovt fp NAME'."},
+{"word": "ubt", "meaning": "mother (tutor)", "confidence": 5, "evidence": "Kin term in genealogies: 'NAME wkfyrq' (wife) ... 'NAME ubtfyrq' (mother); also 'ubt fq gyat wk fy' (mother of ..., wife of the ruler)."},
+{"word": "xeb", "meaning": "priest, prophet", "confidence": 4, "evidence": "'xeb keh w fq' / 'xeb key' (xeb of xkeh = Amun); a temple title listed beside hga and htwby in the royal stela."},
+{"word": "staqnt", "meaning": "begotten by (father)", "confidence": 4, "evidence": "Variant of btaqnt, the father-filiation verb in 'NAME btaqntfyrq' (paired with bjvt, born of); 'kbt htfkyu xbyfqb staqnt fy' = child begotten by the general."},
+{"word": "boy", "meaning": "two, second", "confidence": 4, "evidence": "'hga NAME NAME boy' (two princes); 'jqfpf boy ryu hqfgtbtf ryu btortbtf' introduces two Isis forms (of place A and of place B)."},
+{"word": "xa", "meaning": "boy, son", "confidence": 4, "evidence": "'xa kbt' (xa + child); plural xawt closes the captive series 'xoawt f ... njqwt f ... xawt fq' (men, women, boys)."},
+{"word": "bnt", "meaning": "love, revere", "confidence": 3, "evidence": "The royal epithet 'gyat ... keqbnt knfto' is xkeq/keq (Amun) + bnt: 'beloved of Amun ... of the gods'."},
+{"word": "xwa", "meaning": "meat, animal", "confidence": 3, "evidence": "A counted noun in booty and royal texts: 'fr xwa xvqjtov rq 1626', '... 1032', 'xwa jto 5000', next to captive and bull counts."},
+{"word": "xat", "meaning": "take, receive (seize)", "confidence": 3, "evidence": "Verb with -nt (like the blessing verbs 'hquqpt-nt-w'): 'btrqwbq xat nt NAME stuyx' asks for the adoration to be received; the same root xa- appears in the war stela 'xaovbtnt' of seized captives."},
+{"word": "bat", "meaning": "offer", "confidence": 3, "evidence": "'gyat bat' (the ruler offers); 'bato' and 'batbyv kfyfy' (the offering is good) in adoration texts; title 'kftntsyw batst' beside 'kftntsyw xbyst' (of water)."}
+]}

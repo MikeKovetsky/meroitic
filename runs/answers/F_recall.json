@@ -1,0 +1,414 @@
+{
+ "answers": [
+  {
+   "word": "qes",
+   "meaning": "Kush (the land/kingdom of Kush)",
+   "confidence": 4
+  },
+  {
+   "word": "pedeme",
+   "meaning": "Primis, i.e. Qasr Ibrim (place name)",
+   "confidence": 4
+  },
+  {
+   "word": "pilqe",
+   "meaning": "Philae (place name)",
+   "confidence": 4
+  },
+  {
+   "word": "wide",
+   "meaning": "brother (sibling)",
+   "confidence": 4
+  },
+  {
+   "word": "ant",
+   "meaning": "priest",
+   "confidence": 4
+  },
+  {
+   "word": "peseto",
+   "meaning": "viceroy (governor of Lower Nubia; from Egyptian 'king's son')",
+   "confidence": 5
+  },
+  {
+   "word": "yetmde",
+   "meaning": "relative, kinsman (perhaps a maternal relative or nephew)",
+   "confidence": 3
+  },
+  {
+   "word": "ḫre",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "teneke",
+   "meaning": "west",
+   "confidence": 2
+  },
+  {
+   "word": "tolkte",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "atiye",
+   "meaning": "Sedeinga (place name)",
+   "confidence": 4
+  },
+  {
+   "word": "tre-",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "l-",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "akine",
+   "meaning": "Lower Nubia (the northern province)",
+   "confidence": 5
+  },
+  {
+   "word": "tke-",
+   "meaning": "to love (?)",
+   "confidence": 1
+  },
+  {
+   "word": "wle",
+   "meaning": "dog",
+   "confidence": 4
+  },
+  {
+   "word": "are-",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "dime",
+   "meaning": "cow, cattle (?)",
+   "confidence": 1
+  },
+  {
+   "word": "nse",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "ar",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "ḫrpḫe",
+   "meaning": "a high official title (perhaps governor; exact meaning uncertain)",
+   "confidence": 2
+  },
+  {
+   "word": "ẖr",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "tebwe",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "mẖe",
+   "meaning": "much, plenty, abundant",
+   "confidence": 4
+  },
+  {
+   "word": "kelw",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "asr",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "npte",
+   "meaning": "Napata (place name)",
+   "confidence": 3
+  },
+  {
+   "word": "ssor",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "kdite",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "tbo",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "sḫi",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "qo",
+   "meaning": "this (demonstrative)",
+   "confidence": 3
+  },
+  {
+   "word": "tedḫe",
+   "meaning": "born of (filiation through the mother)",
+   "confidence": 4
+  },
+  {
+   "word": "sorey",
+   "meaning": "Osiris",
+   "confidence": 5
+  },
+  {
+   "word": "yireqe",
+   "meaning": "east (?)",
+   "confidence": 1
+  },
+  {
+   "word": "bedewe",
+   "meaning": "Meroe (the city)",
+   "confidence": 4
+  },
+  {
+   "word": "pete",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "sdk",
+   "meaning": "journey, mission (?)",
+   "confidence": 1
+  },
+  {
+   "word": "sem",
+   "meaning": "wife (?)",
+   "confidence": 1
+  },
+  {
+   "word": "pẖrs",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "mkdi",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "abese",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "wos",
+   "meaning": "Isis",
+   "confidence": 5
+  },
+  {
+   "word": "abore",
+   "meaning": "elephant",
+   "confidence": 2
+  },
+  {
+   "word": "tkk",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "nob",
+   "meaning": "the Noba (Nubians); perhaps 'slave'",
+   "confidence": 1
+  },
+  {
+   "word": "abr",
+   "meaning": "man",
+   "confidence": 5
+  },
+  {
+   "word": "adb",
+   "meaning": "district, province, region (land)",
+   "confidence": 3
+  },
+  {
+   "word": "qoreti",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "pwrite",
+   "meaning": "life",
+   "confidence": 2
+  },
+  {
+   "word": "tewiseti",
+   "meaning": "adoration, praise (?)",
+   "confidence": 1
+  },
+  {
+   "word": "yirewke",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "lẖ",
+   "meaning": "great",
+   "confidence": 5
+  },
+  {
+   "word": "ato",
+   "meaning": "water",
+   "confidence": 5
+  },
+  {
+   "word": "apote",
+   "meaning": "envoy, ambassador",
+   "confidence": 5
+  },
+  {
+   "word": "beloloke",
+   "meaning": "an official title (exact meaning uncertain)",
+   "confidence": 2
+  },
+  {
+   "word": "mlo",
+   "meaning": "good",
+   "confidence": 5
+  },
+  {
+   "word": "dm-",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "pqr",
+   "meaning": "prince, crown prince",
+   "confidence": 4
+  },
+  {
+   "word": "nbr",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "amni",
+   "meaning": "Amun (the god)",
+   "confidence": 5
+  },
+  {
+   "word": "mte",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "mk",
+   "meaning": "god",
+   "confidence": 5
+  },
+  {
+   "word": "pelmos",
+   "meaning": "general, strategos (military commander)",
+   "confidence": 5
+  },
+  {
+   "word": "ḫlbi",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "kdi",
+   "meaning": "woman",
+   "confidence": 5
+  },
+  {
+   "word": "arome",
+   "meaning": "Rome, the Romans",
+   "confidence": 4
+  },
+  {
+   "word": "ste",
+   "meaning": "mother",
+   "confidence": 3
+  },
+  {
+   "word": "ktke",
+   "meaning": "Kandake (Candace): queen, queen mother",
+   "confidence": 5
+  },
+  {
+   "word": "kisri",
+   "meaning": "Caesar (?)",
+   "confidence": 1
+  },
+  {
+   "word": "apedemk",
+   "meaning": "Apedemak, the lion-headed god",
+   "confidence": 5
+  },
+  {
+   "word": "qore",
+   "meaning": "king, ruler",
+   "confidence": 5
+  },
+  {
+   "word": "st",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "terike",
+   "meaning": "begotten by (filiation through the father)",
+   "confidence": 4
+  },
+  {
+   "word": "ked",
+   "meaning": "to kill, slay (?)",
+   "confidence": 1
+  },
+  {
+   "word": "yer",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "amnpte",
+   "meaning": "Amun of Napata (?)",
+   "confidence": 2
+  },
+  {
+   "word": "at",
+   "meaning": "bread",
+   "confidence": 4
+  },
+  {
+   "word": "perite",
+   "meaning": "unknown",
+   "confidence": 1
+  },
+  {
+   "word": "ms",
+   "meaning": "Mash, the sun god (?)",
+   "confidence": 2
+  },
+  {
+   "word": "aroẖe-",
+   "meaning": "to protect (?)",
+   "confidence": 1
+  },
+  {
+   "word": "sye",
+   "meaning": "unknown",
+   "confidence": 1
+  }
+ ]
+}

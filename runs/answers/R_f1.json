@@ -1,0 +1,106 @@
+{
+ "assignments": [
+  {
+   "word": "mkdi",
+   "meaning": "goddess",
+   "confidence": 5,
+   "evidence": "Only after woS (Isis): 'woS mkdi lX', 'woS mk di lX'; it is mk 'god' + kdi 'woman'."
+  },
+  {
+   "word": "kdite",
+   "meaning": "sister",
+   "confidence": 4,
+   "evidence": "kdi 'woman' + -te (83 tokens) in the kin slot '... NAME kdite lo wi', 'abesye kdite lXlowi' (elder sister), plural 'kdite bes lo'."
+  },
+  {
+   "word": "sm",
+   "meaning": "wife",
+   "confidence": 4,
+   "evidence": "Female kin term beside Ste 'mother' in a royal woman's titles: 'Ste li qore sm lo' (mother of ..., wife of the king)."
+  },
+  {
+   "word": "pelmoS",
+   "meaning": "general (strategos)",
+   "confidence": 4,
+   "evidence": "High office before names: 'pelmoS atolis' (of the water, ato), 'pelmoS adblis' (of the land); listed with apote and xrpx."
+  },
+  {
+   "word": "kelw",
+   "meaning": "and, as well as",
+   "confidence": 4,
+   "evidence": "Closes lists: 'xlbi 3 dime 4 kelw ...', 'mlekeyos treye ... mlekeyos tkreye kelw yetmdebetowi', '... 16 kelw yikidbitelowi'."
+  },
+  {
+   "word": "SSor",
+   "meaning": "scribe",
+   "confidence": 4,
+   "evidence": "Office title in rank lists ('antxSxsliteb yetmdelowi SSor mns mlitowi', 'SSor lX lo wi qoreN l' = great scribe of the king); the other titles go to qore, pelmoS, apote."
+  },
+  {
+   "word": "xlbi",
+   "meaning": "bull, ox",
+   "confidence": 5,
+   "evidence": "Counted livestock beside dime 'cow': 'dmkte qo xlbi 3 dime 4 kelw ...' and 'xlbi 3 dime 24'."
+  },
+  {
+   "word": "qore",
+   "meaning": "ruler, king",
+   "confidence": 5,
+   "evidence": "Stands next to royal names: 'qore tNyidamani', 'xrmdoye qore', 'RNAME qore s l', 'RNAME qorelX' (great king)."
+  },
+  {
+   "word": "tewisti",
+   "meaning": "adoration",
+   "confidence": 4,
+   "evidence": "Opens votive texts: 'tewisti are ke NAME yeSoa' (25 texts), 'tewisti msye woS' addressed to Isis."
+  },
+  {
+   "word": "wide",
+   "meaning": "brother",
+   "confidence": 3,
+   "evidence": "Rare kin noun with the copula ('aleqese wide lo'), near kdi/Ste in long texts; the kin meaning left after sister, wife, child, relative."
+  },
+  {
+   "word": "ns",
+   "meaning": "sacrifice",
+   "confidence": 3,
+   "evidence": "Only in Hamadab ritual passages, doubled and given to king or god: 'witese yesebe ns ns l qor', 'ns ns l amnp ... mdewi ns seb'; by elimination."
+  },
+  {
+   "word": "tdxe",
+   "meaning": "born of (mother)",
+   "confidence": 5,
+   "evidence": "Filiation in 201 texts: 'NAME tedxelowi/tdxelowi NAME terikelowi', the partner of terike/yerike 'begotten by (father)'."
+  },
+  {
+   "word": "yetmde",
+   "meaning": "relative (nephew, niece)",
+   "confidence": 5,
+   "evidence": "Most frequent kin word: long lists 'TITLE NAME yetmdelowi' after the parents, plural 'yetmde aqebetowi', 'pesto n yetmde betewi'."
+  },
+  {
+   "word": "apote",
+   "meaning": "envoy",
+   "confidence": 5,
+   "evidence": "'apote arome li s NAME', 'apote lX aromelis' (envoy to Rome), 'apotelw qorete' (to the king); listed with pelmoS and xrpx."
+  },
+  {
+   "word": "yireqw",
+   "meaning": "south",
+   "confidence": 3,
+   "evidence": "Only in Kharamadoye's itinerary, alternating with Xrw: 'Xrw adonilikete yireqw arw ... Xrw sleleke mtr ws yireqw ade leke', a direction."
+  },
+  {
+   "word": "at",
+   "meaning": "bread",
+   "confidence": 5,
+   "evidence": "Offering formula pairs it with ato 'water': 'ato mXe piSiXekes at mXe piSixrkes' (78 tokens)."
+  },
+  {
+   "word": "mte",
+   "meaning": "child",
+   "confidence": 4,
+   "evidence": "'mte pelmoS atolit yerike lo' = child begotten by the general of water; 'ar mte' (boy child); 'amnis mte lo'."
+  }
+ ]
+}

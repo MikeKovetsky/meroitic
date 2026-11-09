@@ -47,6 +47,8 @@ def keys(gloss):
 def load_nes():
     rows = []
     for p in sorted((ROOT / "data/nes").glob("*.tsv")):
+        if "meroitic" in p.stem or p.stem.startswith("sound_"):
+            continue
         with open(p) as f:
             for r in csv.DictReader(f, delimiter="\t"):
                 if r.get("form") and r.get("gloss"):
