@@ -50,4 +50,5 @@ def main():
     print(c.most_common(40))
 
 
-main()
+if __name__ == "__main__":
+    main()

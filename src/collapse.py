@@ -47,4 +47,5 @@ def main():
     print(f"merged {merged}; texts {len(keep)}; tokens {len(words)}; types {len(set(words))}")
 
 
-main()
+if __name__ == "__main__":
+    main()

@@ -26,11 +26,13 @@ def main():
             for w in words:
                 partners[w] |= words - {w}
     deg = sorted(((len(p), w) for w, p in partners.items()), reverse=True)
-    json.dump({w: sorted(p) for w, p in partners.items()}, open(ROOT / "data/swap_partners.json", "w"))
+    # sorted keys: set order changes with each run's string hashing, the file should not
+    json.dump({w: sorted(partners[w]) for w in sorted(partners)}, open(ROOT / "data/swap_partners.json", "w"))
     hist = collections.Counter(min(d, 50) // 5 * 5 for d, _ in deg)
     print("degree histogram", sorted(hist.items()))
     print("top", deg[:40])
     print("mid", [w for d, w in deg if 5 <= d < 15][:60])
 
 
-main()
+if __name__ == "__main__":
+    main()
