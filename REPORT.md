@@ -15,7 +15,7 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
    no meanings and neutral line ids, it recognised the opening `ryuq uyatsq` as Wos-i Sorey-i, "O Isis, O Osiris",
    and read the script from there (`K2_morph`, which says so).
 3. **On a language it can't know, it infers meaning from context.** On a synthetic corpus of the same size and
-   style (1,003 texts, 16k words, invented vocabulary and endings), it matched 41 of 52 usable test words where
+   style (1,003 texts, 16k words, invented vocabulary and endings), it matched 41 of 52 usable test words (43 on a second independent run, `runs/answers_rep/`) where
    chance is about 2; all 24 answers at confidence 4–5 were right (`Y_f0`, `Y_f1`, `src/synth.py score`; 4 of the
    56 original items dropped by the review because the corpus doesn't show them). On the same language's grammar,
    blind, it found all 8 invented endings and every formula slot; it named 2 functions right, 4 partly (vocative,
@@ -31,8 +31,9 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
    spaces and case ignored, occurs anywhere else in it), it restored 30 (48%) against 16 (26%), p ≈ 0.001
    (`C3_cloze`, `src/cloze_families.py copies`). The task let it use what it knows about the language, which
    includes the published vocabulary (item 1).
-6. **About 15 new, checkable leads for specialists**, each labelled after a literature search
-   (`data/discovery/`). None is a decipherment.
+6. **Its "new" findings did not survive an adversarial check:** of 7 ideas the discovery runs called new, 2 were
+   already published and 5 were weakened; two partial extensions remain open (`data/discovery/verification.md`).
+   None is a decipherment.
 
 ## The corpus
 
@@ -84,25 +85,31 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
 | SSor | scribe | temple official (2nd: scribe) | top three |
 | ns | sacrifice | each, every | wrong |
 
-## Leads for specialists
+## Leads for specialists, after an adversarial check
 
-From `data/discovery/philae.md` (14 items: 1 established, 6 published, 7 new), `funerary.md` (30: 8, 19, 3) and
-`hamadab.md`. "New" means no prior proposal turned up in the searches listed there; Rilly 2007, Hintze 1979,
-Hofmann 1981, Griffith 1917 and the printed REM were not searchable.
+The discovery runs (`data/discovery/philae.md`, `funerary.md`, `hamadab.md`) labelled 7 ideas NEW after their
+searches. A separate run then tried to prove each wrong, with harder searches in English, French and German, the FHN
+commentary and Millet's 1968 glossary (`data/discovery/verification.md`). None survived as a clean new finding:
 
-1. NEW. The Faras stela REM 0129 gives the same title chain, in the same order, as the envoy Sasan in the Demotic
-   graffito Ph. 416: `qoreñ`, `kroro`, "great envoy to Rome".
-2. NEW. Bekemete's label REM 0098, "begotten by a general of the water", settles Ph. 417: the title is his father's.
-3. NEW, though partly anticipated: Hofmann 1981 (not seen) found a sum of the counts in REM 1003 l. 25. `wi` before
-   a numeral marks a total (Tanyidamani: `mk lte wi 12` after twelve items counted "1").
-4. NEW. The closing totals 1,626 and 1,032 on REM 1003 count animals (`asr`), not people.
-5. NEW. `plSn` ("high priest", Millet) may be Egyptian pꜣ mr-šn, the lesonis.
-6. NEW. With an epithet, the vocative `-i` moves to the end of the god's phrase (Osiris is `Sori`, never `Soreyi`,
-   in all 11 such texts).
-7. NEW. `penn` is a counted time unit in datelines (numbers up to 34), not "day"; three runs reached this
-   separately.
+1. OPEN, partly. `wi` before a numeral marks a total. Hofmann 1981 (via FHN II p. 722) already found that
+   `wi 3348` on REM 1003 sums the men and women; the Tanyidamani case (`mk lte wi 12` after exactly twelve items
+   counted "1") may be new. Check Hintze 1960.
+2. OPEN, partly. Rilly published one vocative `-i` after the pair "Isis + Osiris" (Rilly 2007 p. 297; Dotawo 7).
+   The extension to "god + epithet" (Osiris never `Soreyi` before an epithet, 11 texts) may be new, but Isis keeps
+   her `-i` before an epithet in one family. Check Rilly & de Voogt 2012 p. 155 and Heyler 1964.
+3. WEAKENED. REM 0129 and Sasan's titles (Ph. 416): a word masked as a name is the title `womnis`, so REM 0129
+   lists five or more titles; FHN III p. 1008 already pairs the two; the order is ordinary rank order.
+4. WEAKENED. Bekemete's father as "general of the water": Griffith 1911 (Karanòg p. 21) already set Ph. 417 beside
+   REM 0098; Török 2009 p. 464 reportedly gives the father the title.
+5. WEAKENED. 1,626 and 1,032 as animal counts: REM 1041 counts 1,032 men (`abr wi 1032`).
+6. ALREADY PUBLISHED. `plSn` from pꜣ mr-šn, "the lesonis": FHN III p. 973 and Ashby 2016.
+7. ALREADY PUBLISHED. `penn` as a numbered year: Millet 1968 reads `penn 34` "regnal year 34". Three runs reached
+   it separately, which shows the pattern is plain in the texts.
 8. Published, supported here: `tebwe` is the Abaton; `ste` can name a man ("tutor").
 9. Negative: REM 1003 has nothing checkable against the Roman war, as Rilly 2014 says (the war is in REM 1039).
+
+The lesson: the model finds real patterns, but where the key literature is print-only (Millet 1968, Hofmann 1981,
+Rilly 2007, FHN commentary) it cannot tell a rediscovery from a discovery.
 
 ## Corrections found along the way
 

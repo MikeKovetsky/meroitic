@@ -1,0 +1,172 @@
+{
+ "assignments": [
+  {
+   "word": "seka",
+   "meaning": "father",
+   "confidence": 2,
+   "evidence": "Kin slot '[title] NAME sekafako' like dabon/galu; never in 'NAME Xfako NAME' labels (parent term); per-gender balance of kin counts puts it with the male terms"
+  },
+  {
+   "word": "yu",
+   "meaning": "temple",
+   "confidence": 4,
+   "evidence": "'yubi dultuzo' offered to the yu (beside wutibi 'to the house'); 'fupur ne yumu dapukzo' built the yu of Fupur; lists end 'yune wolomu'"
+  },
+  {
+   "word": "waki",
+   "meaning": "kill",
+   "confidence": 4,
+   "evidence": "Royal annals: 'yowidu wakizo' done to men, beside resdo (seize) and sape (take) for booty"
+  },
+  {
+   "word": "sezi",
+   "meaning": "water",
+   "confidence": 3,
+   "evidence": "Only in benedictions 'sezi gun/zura/suse pafora', poured like wu (milk); never counted in lists, so the libation water"
+  },
+  {
+   "word": "seyo",
+   "meaning": "go",
+   "confidence": 5,
+   "evidence": "'hekdobi/topibi/biyirbi seyozo' with the -bi 'to' ending on place names"
+  },
+  {
+   "word": "pafo",
+   "meaning": "pour",
+   "confidence": 4,
+   "evidence": "Benediction verb used only with liquids: wu (milk) and sezi"
+  },
+  {
+   "word": "lakyu",
+   "meaning": "silver",
+   "confidence": 2,
+   "evidence": "Counted good found only in temple dedications (often beside lurufo), never in ration lists; paired with gold as the votive metal"
+  },
+  {
+   "word": "ma",
+   "meaning": "and",
+   "confidence": 5,
+   "evidence": "Joins the last two counted items: 'folofudu 568 ma nedu 165', 'kikrira 4 ma zohu 20'"
+  },
+  {
+   "word": "gemoyun",
+   "meaning": "prince",
+   "confidence": 4,
+   "evidence": "Third royal title 'monharzas RNAME robo RNAME gemoyun RNAME'; also a common official title in epitaphs; 'gemoyundu fo seyozo'"
+  },
+  {
+   "word": "fo",
+   "meaning": "two",
+   "confidence": 4,
+   "evidence": "'gemoyundu fo seyozo' puts fo in the number slot after a -du plural, like 'yowidu 153'"
+  },
+  {
+   "word": "monharzas",
+   "meaning": "king",
+   "confidence": 4,
+   "evidence": "First royal title; 'monharzas RNAME fupurne dozezo' (beloved of Fupur) leads the campaigns, building and gifts"
+  },
+  {
+   "word": "sape",
+   "meaning": "take",
+   "confidence": 4,
+   "evidence": "'yowidu 153 fokladu 87 hizadu sapezo' (captives) and 'folofudu .. ma nedu .. sapezo' (herds) taken in war"
+  },
+  {
+   "word": "wolo",
+   "meaning": "offering",
+   "confidence": 3,
+   "evidence": "Closes lists of cattle, bread, milk and beer: 'yune wolomu' = the temple's offering(s)"
+  },
+  {
+   "word": "malumu",
+   "meaning": "daughter",
+   "confidence": 2,
+   "evidence": "Kin slot and 'NAME malumufako NAME' labels alongside dabon/pizu/zitomu/galu; balance of kin counts makes it the female term"
+  },
+  {
+   "word": "robo",
+   "meaning": "queen",
+   "confidence": 3,
+   "evidence": "Second royal title between king and prince; also a royal dedicant and label title, never a relative's title in epitaphs"
+  },
+  {
+   "word": "gurdenpir",
+   "meaning": "adoration",
+   "confidence": 3,
+   "evidence": "Heads every votive text: 'gurdenpir sune NAME [title] [gifts] yubi dultuzo wepakne togulra'"
+  },
+  {
+   "word": "lurufo",
+   "meaning": "gold",
+   "confidence": 3,
+   "evidence": "What the king gives after building a temple: 'yumu dapukzo lurufo 47 gukhizo'; also a votive gift, never in ration lists"
+  },
+  {
+   "word": "zono",
+   "meaning": "small",
+   "confidence": 1,
+   "evidence": "Not in the corpus; left over by elimination (no adjective slot uses it)"
+  },
+  {
+   "word": "giris",
+   "meaning": "begotten by (father)",
+   "confidence": 5,
+   "evidence": "Fixed filiation 'NAME sutufako NAME girisfako', after sutu 'born of (mother)'"
+  },
+  {
+   "word": "togul",
+   "meaning": "protect",
+   "confidence": 3,
+   "evidence": "Closing wish 'wepakne togulra' (may (the god) protect life); gukhi already covers give"
+  },
+  {
+   "word": "pizu",
+   "meaning": "son",
+   "confidence": 2,
+   "evidence": "Kin slot and the second most common 'NAME pizufako NAME' filiation label; groups with the male kin terms"
+  },
+  {
+   "word": "zohu",
+   "meaning": "beer",
+   "confidence": 3,
+   "evidence": "Given ('zohu gun gukhira') beside bread in benedictions and counted beside bread and milk in lists and gifts"
+  },
+  {
+   "word": "walpik",
+   "meaning": "mother",
+   "confidence": 1,
+   "evidence": "Not in the corpus; the kin meaning left over by elimination"
+  },
+  {
+   "word": "suse",
+   "meaning": "good",
+   "confidence": 4,
+   "evidence": "Benediction adjective beside gun (abundant) and zura (pure); 'susefako' (is good) beside 'pirafako' (is great)"
+  },
+  {
+   "word": "budobo",
+   "meaning": "ox",
+   "confidence": 2,
+   "evidence": "Livestock counted beside ne (cow) and folofu in both ration lists and dedications"
+  },
+  {
+   "word": "folofu",
+   "meaning": "sheep",
+   "confidence": 2,
+   "evidence": "Herd taken as booty with cows ('folofudu 568 ma nedu 165 sapezo'); in lists and gifts"
+  },
+  {
+   "word": "gukhi",
+   "meaning": "give",
+   "confidence": 4,
+   "evidence": "'kikrira gun gukhira' (bread) and the king's 'lurufo 47 gukhizo' to the temple"
+  },
+  {
+   "word": "miyu",
+   "meaning": "field",
+   "confidence": 2,
+   "evidence": "Counted only in temple offering lists (never in gifts or annals); the last good left after livestock, foods and metals"
+  }
+ ]
+}
