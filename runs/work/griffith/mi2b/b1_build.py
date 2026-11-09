@@ -1,0 +1,71 @@
+import json, sys
+sys.path.insert(0, '/private/tmp/claude-501/griffith_scripts/mi2b')
+from mkrows import conv
+SRC, ITEM = 'Meroitic Inscriptions II (Griffith 1912)', 'archaeologicals20egyp'
+LINES = ("' | ' separates the parts of the text taken from the successive sections (A to E) of Griffith's Table of Seven "
+         "Graffiti of Philae (p. 50); within a section the right-hand column is read before the left-hand one, and a "
+         "section printed on several lines is joined; (n) is his superscript stone-line number, kept where printed; "
+         "[x] his restoration; [.] a lost sign; [...] his dots.")
+R = []
+def row(no, page, obj, site, std, notes):
+    corpus, signs, unc = conv(std)
+    R.append({'source': SRC, 'item': ITEM, 'griffith_no': no, 'rem': f'{no:04d}', 'page': page, 'object': obj,
+              'site': site, 'text_std': std, 'text_corpus': corpus, 'uncertain': unc, 'signs': signs,
+              'notes': notes + ' ' + LINES})
+row(121, 'p. 50 (n69)',
+    'Graffito (adoration, proskynema), two lines of Meroitic very neatly executed, 40 x 4 cm; L., D., VI, Bl. 1, no. 1; '
+    'rubbing in Burton MS. 25,650 f. 9, squeezes Lepsius and Borchardt, photos 476-477; Pls. XXXVIII-XXXIX',
+    'Philae, Gate of Hadrian: the doorway, in the thickness of the wall, north jamb (the only inscription there)',
+    "tewiseti : apote : yebye : tiso : | (2)wos : pileqeteli : nlw : berkelo :",
+    "2 stone lines; (2) printed before wos. Assembled from the table: A right column 'tewiseti :', A left column "
+    "'apote : yebye : tiso :'; section B row empty; C right column '(2)wos : pileqeteli :', C left column "
+    "'nlw : berkelo :', then 'end'. Description p. 45 (n64): the first two characters in each line are worn but can "
+    "easily be restored; nearly identical with the inscription in the Colonnade. English (p. 51, n70): 'The adoration "
+    "made by the envoy piously unto Isis in Philae.' Griffith: te-wisti = demotic t-wste 'the salutation, obeisance'; "
+    "apote = 'envoy' (also in 95, 123, all neatly executed, perhaps by one person); the group ending -so (here tiso) "
+    "means something like 'of, done by'; nlw + berkelo render 'piously (before)'. No query marks or sic in this row. "
+    "Checked at 2.5-3.5x: the 3-shaped sign of tiso is the closed s of wos (not m or ẖ); berkelo has k (flat Z top, as "
+    "in ksbñ), not p.")
+row(122, 'p. 50 (n69)',
+    'Graffito (adoration), eleven somewhat irregular lines reaching a second block below, 20-25 x 22 cm; much worn; '
+    'L., D., VI, Bl. 1, no. 4; squeezes Lepsius and Borchardt, photos 473-475; Pls. XXXVII, XXXIX',
+    'Philae, Gate of Hadrian: outer face of the west wall of the gateway, south of the gate (looking over to Biga)',
+    "tewiseti : ḫbḫeñ : (2)qorise : qoreñ (3)blyeso : | pelmos ato(4)lit yetmdelo : | wos : pile(5)qeteli : wos : "
+    "tebweteli : (6)nlw : berwi : | perite wost (7)qoreñ wost : yetmdelo : (8)mey : mebrse : penylito (9)mdek : "
+    "pileqetelo : mde : (10)pẖrsetelo : | ksbñ : wos : (11)sebto :",
+    "11 stone lines; (2)-(11) printed. Assembled from the table: A right 'tewiseti :', A left 'ḫbḫeñ : (2)qorise : "
+    "qoreñ (3)blyeso :'; B 'pelmos ato(4)lit yetmdelo :'; C right 'wos : pile(5)qeteli :', C left 'wos : tebweteli : "
+    "(6)nlw : berwi :'; D printed on three lines: 'perite wost (7)qoreñ wost : yetmdelo :', '(8)mey : mebrse : "
+    "penylito', and '(9)mdek : pileqetelo :' (right) + 'mde : (10)pẖrsetelo :' (left); E 'ksbñ : wos : (11)sebto :'. "
+    "Griffith's queries (? over the sign): l of blyeso; y of mey; y of penylito; p of pẖrsetelo. Description pp. 47-48 "
+    "(n66-n67): the stone has deteriorated; much of it, especially the lower lines, is very obscure, lightly engraved or "
+    "worn down, but parallel passages help the reading greatly and few signs remain uncertain. English (pp. 51-52, "
+    "n70-n71): 'The adoration made by (?) the khabkhen of the king, and qeren, the kin of the strategus of the water, "
+    "remaining (?) before Isis in Philae and Isis in Tebawe; kin of the Agent of Isis and qeren of Isis, mey-mebaras of "
+    "penay(l), mazek in Philae, maze in Pachoras, belonging to the kashbam of Isis' (cf. 111/15). Griffith: perite wost "
+    "qoreñ wost = demotic p qrny n 3S p rt n 3S, 'the qeren of Isis, the Agent of Isis'; pelmos = strategus; pẖrse-telo "
+    "(122/10) a place-name, Pachoras, probably modern Faras; 122 and 123 end in the same three words. Checked at "
+    "2.5-3.5x: m (hook and long straight descender) in yetmdelo, pelmos, mey, mebrse, mdek, mde; s (closed 3) in pelmos, "
+    "wost, wos, ksbñ, blyeso; ẖ (angular top) in pẖrsetelo, matching Griffith's 'Phrs'; k (flat top) in mdek and ksbñ.")
+row(124, 'p. 50 (n69)',
+    'Graffito (adoration), two horizontal lines of large letters across one sandstone block, interrupted by a cross '
+    "pattée cut from the middle to the lower edge, 85 x 10 cm; photos 480-481, squeeze Borchardt; Pls. XXXVIII, XL",
+    'Philae, the Town Gate (north end of the island, east shore): passage of the middle arch, S.E. jamb near the S.W. '
+    'wall, about six feet above the road',
+    "tewiseti : a[s]y ye[bye] (2)t[iso] | [...] qo | wos nlw",
+    "2 stone lines; (2) printed before t. Assembled from the table: A right 'tewiseti :', A left 'a[s]y ye[bye] "
+    "(2)t[iso]'; B '. . . . . qo' (the dots stand right of qo, so they are read first); C right 'wos', C left 'nlw', then "
+    "'end'. Griffith's queries (? over the sign): the restored s and the y of a[s]y, the e of ye[bye], the t of t[iso]; "
+    "bye and iso are his restorations (after the parallel yebye : tiso of 121). Notes pp. 48-49 (n67-n68): much worn and "
+    "injured, many round pittings, so no dividers marked except after the first word; the right-hand end of l. 2 is cut "
+    "to pieces; l. 1: 'It seems hardly possible to read apote here. Nothing is recognizable after ye, and perhaps nothing "
+    "more was engraved'; l. 2: traces in the first half, possibly left blank, 'at the beginning, however, t is fairly "
+    "clear'; qo is followed by a space before the cross; of two cuttings at the top of the cross the second might be the "
+    "remains of a sign, the first is not a Meroitic letter; no third line. The gate is late (perhaps Diocletian's "
+    "fortifications), so the text is probably 4th century AD or later, the most northerly Meroitic inscription. English "
+    "(p. 51): 'The adoration made by (?) the .... .... unto Isis.' Griffith: nlw ('before' ?) is used alone here. The "
+    "3-shaped restored sign of a[s]y and t[iso] is the closed s of wos.")
+with open('/private/tmp/claude-501/griffith_scripts/mi2b/rows_121_122_124.jsonl', 'w') as f:
+    for r in R:
+        s = json.dumps(r, ensure_ascii=False); json.loads(s); f.write(s + '\n')
+        print(r['griffith_no'], r['signs'], r['uncertain'], '|', r['text_corpus'])

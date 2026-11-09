@@ -1,0 +1,98 @@
+import json, sys
+sys.path.insert(0, '/private/tmp/claude-501/griffith_scripts/mi2b')
+from mkrows import conv
+SRC, ITEM = 'Meroitic Inscriptions II (Griffith 1912)', 'archaeologicals20egyp'
+LINES = ("' | ' marks each line of Griffith's type (he sets one phrase per type line; an overflow printed right-aligned "
+         "on the next line is joined to its line); (n) is his superscript stone-line number, kept where printed; "
+         "[x] his restoration; [.] a lost sign (hatched); [...] his dots.")
+R = []
+def row(no, page, obj, site, std, notes):
+    corpus, signs, unc = conv(std)
+    R.append({'source': SRC, 'item': ITEM, 'griffith_no': no, 'rem': f'{no:04d}', 'page': page, 'object': obj,
+              'site': site, 'text_std': std, 'text_corpus': corpus, 'uncertain': unc, 'signs': signs,
+              'notes': notes + ' ' + LINES})
+
+COMP = ("Griffith prints ONE composite text for the two nearly identical graffiti 119 and 120 ('The texts give', p. 45, "
+        "two type lines: 'yeseboẖe tniqo : qoro : mret | me(y)te : tlo : wos selo :'), with the y of me(y)te in "
+        "parentheses; his note 'and 120 seems to give' te-y-e-m (meyte) shows the y belongs to 120 only, so ")
+NOTE_1920 = ("Griffith: 'They are carelessly written and leave several points doubtful.' The first word (yeseboẖe) is 'a title "
+        "or description found on the lion-bases of Meroe (Meroe 7, 9), and above in 94/2, as well as at Shablul'; 'It might "
+        "here be part of the name compounded with' mni, 'but' tni 'seems the better reading' (Tani, a name in Kar. 89 and in "
+        "that of the prince on the Ammon temple at Naga). qoro 'seems to be the royal title spelt as in no. 69 (Meroe no. 12c)'. "
+        "His '?' is printed over the m of mret, and 'The next might be read' tret. wosselo 'belonging to Isis' (cf. 'belonging "
+        "to Ammon' in 98). Re-checked at 4x: the 3-sign of yeseboẖe is the wide angular ẖ; those of mret and me(y)te are the "
+        "narrow smooth m; the s of wos is the closed 3 (s). Griffith's English rendering is not given (names only). "
+        "The type lines are Griffith's, not the stone's (each graffito has three short lines).")
+row(119, 'p. 45 (n64)',
+    "Graffito, three short lines engraved between double rules over a Romano-Egyptian figure of a king offering (the "
+    "'Pharaoh of Senemt' or Biga), lowest register, west end of the south wall of the passage; 31 x 9.6 cm; squeezes "
+    "Lepsius and Borchardt, photo no. 479; L., D. VI Bl. 1 no. 3; Pls. XXXV-XXXVI",
+    "Philae, Gate of Hadrian, passage walls (south wall)",
+    "yeseboẖe tniqo : qoro : mret | mete : tlo : wos selo :",
+    COMP + "this row is the composite without the y (mete). " + NOTE_1920 + " Condition (Griffith): the squeezes show it "
+    "complete, but the surface deteriorated, especially on the left of the top line; in the photographs the top line is "
+    "nearly hidden by cement.")
+row(120, 'p. 45 (n64)',
+    "Graffito, three short lines engraved between double rules over a figure of a king (only begun), west end of the "
+    "north wall of the passage; 27 x 8.3 cm; squeezes Lepsius and Borchardt, photo no. 478; L., D. VI Bl. 1 no. 2; "
+    "Pls. XXXV-XXXVI",
+    "Philae, Gate of Hadrian, passage walls (north wall)",
+    "yeseboẖe tniqo : qoro : mret | meyte : tlo : wos selo :",
+    COMP + "this row is the composite with the y (meyte); everything else is the shared composite, not a separate reading "
+    "of 120. " + NOTE_1920 + " Condition (Griffith): the squeezes show it perfect and in good condition; in the photograph "
+    "cement in the joints hides the characters at the left end of the lines, those at the right-hand end of l. 3 and the "
+    "tops of those in l. 3.")
+row(126, 'p. 53 (n72)',
+    "Fragment of a round-topped granite stela (most of the left half): half of a winged disk, a winged uraeus crowned "
+    "with the sun's disk, part of a kneeling figure adoring it; below, the ends of ten lines of transitional cursive "
+    "between rules; lower end lost; Pl. XLI",
+    "Provenance not stated (Griffith links the names to the royal trio of the Lion temple at Naga); Moscow, formerly "
+    "Golenischeff collection; read from the late owner's photograph",
+    "[...] ntkmn[i] (2)[...] mnitor[e] [:] | (3)[...] [a]rkḫror : (4)[...] mñ : | ḫrp(5)[ḫeñ] [...] w : yeqe (6)[...] | "
+    "te : nteñ (7)[...] qedi te (8)[...] | [...] debñqo (9)[...] [ḫr]pḫe(10)[ñ] | [...] mkli : (11)[...]",
+    "Griffith says ends of ten lines; his superscript numbers 2 to 11 are printed, each before the lost beginning of its "
+    "line (the left half survives, so every line keeps only its end). Here ' | ' marks his six printed rows, which run "
+    "on from line to line; the stone lines are the (n) marks. Griffith: the first three lines held the names and titles "
+    "of Natakamani (ntkmn[i]), Amanitere (mnitor[e]) and [A?]rakakharer ([a]rkḫror); his footnote: the loss of the "
+    "first letter of the prince's name and the absence of i after r leave some doubt about the identification. ll. 5-9: "
+    "'The well-known title kharpkhen seems probable' (ḫrp(5)[ḫeñ] and [ḫr]pḫe(10)[ñ]); yeqe 'occurs on the Isis from "
+    "Napata, no. 75'; qedi 'is a title'; l. 8 'probably ended with a proper name' (debñqo). His queries ('?' printed "
+    "over the sign): q of qedi; both restored signs of [ḫr]pḫe; the divider after mkli. His restorations: [i], [e], "
+    "[:], [a], [ḫeñ], [ḫr], [ñ]. Checked at 4x: every 3-sign here is the narrow smooth m (ntkmni, mnitore, mñ, mkli); "
+    "k has the angular Z top (ntkmni, arkḫror, mkli), p the rounded top (ḫrp, pḫe); in yeqe the q is the single q "
+    "sign (stroke + ɔ), not o + q; to in mnitor[e] is the barred hook with the dot below. Space kept as printed in "
+    "'qedi te'.")
+row(127, 'p. 53 (n72)',
+    "Upper half of a statuette of a lion-headed god (presumably Apedemak; crown and both arms lost), blackish "
+    "sandstone; part of an inscription in archaic characters in two columns on the back pilaster; Pls. XLI, XLIV",
+    "Provenance unknown (obtained a few years before 1912 in Cairo); Louvre; read from a cast sent by M. Bénédite",
+    "[...] [d]qrid bi : tñyidm[ni] [...] | (2)[...] t : ym[.] : kdem [...]",
+    "Two columns, printed as two rows; (2) is Griffith's superscript 2 at the head of the second column; his dots mark "
+    "the lost parts, and the single dot before m in the second column is read as one lost sign. tñyidm[ni] is the royal "
+    "name Tanyidamani. Griffith: 'The writing is obscure': two other readings 'would be possible' (his type: i-r and two "
+    "strokes, and debi 'with inserted e'), 'but' dqri and 'dmni tñyi' 'both occur in Meroe 5/6; cf. also' tñyiñ, ib. "
+    "7/13, Kar. 92. 'In the second column' m + [se] (the y read as se with its J restored) 'might be read, and the last "
+    "letters (cf. Meroe, no. 23) may be intended for' pdem[k], '(A)pazemek, the name of the Lion-god'. The type itself "
+    "has k (angular Z top, checked at 5x beside the rounded p of his note and of no. 126) at the head of that group, "
+    "so it is transcribed kdem. His queries ('?' over the sign): the d of tñyidm[ni]; the d after qri; the q; the "
+    "restored [d]; and in the second column the m of kdem. 3-signs all narrow smooth m (checked at 5x).")
+row(128, 'p. 54 (n73)',
+    "Fragment of a thin slab of grey metamorphic slate inscribed on each side with remains of six horizontal lines of "
+    "archaic inscription between rules; 14 x 9.5 cm, 1.8 to 3 cm thick",
+    "Provenance not stated; Römisches Museum, Hildesheim (marked as given by J. Dümichen); cast in the Berlin Museum, "
+    "G. 392",
+    "(a) [.]teqo : | [.]tḫl : nt[.] | [.]bd ñk[.] | (b) [.]ttoto : | [.]qedi se[.] | telm :",
+    "Griffith does not print the text: only the groups quoted in his commentary are transcribed, in his order. (a) face "
+    "A: l. 1 [.]teqo :, 'which may be the end of the principal name'; l. 4 [.]tḫl : nt[.]; l. 5 [.]bd ñk[.]. (b) face B: "
+    "l. 1 [.]ttoto :; l. 2 [.]qedi se[.], 'apparently the name of Aqezis, i.e., Khons'; l. 3 telm :. Here ' | ' separates "
+    "the quoted lines and [.] is his hatched block (damage, length unknown). Face A: 'Very little writing remains.' Face "
+    "B: the bad engraving of the lower lines robs us of several signs; a hard quartzy vein resisted the graving tool in "
+    "parts of ll. 3-5. 'It is impossible to say whether this was a funerary monument or otherwise.' His queries: '?' over "
+    "te in face A l. 1; '?' before k in face A l. 5; in face B l. 3 two '?' printed between m and l and between l and te. "
+    "Checked at 4x: t (with dot) and l (without) in face A l. 4; k with the angular Z top in face A l. 5; the 3-sign in "
+    "face B l. 3 is the narrow smooth m.")
+with open('/private/tmp/claude-501/griffith_scripts/mi2b/rows_119_120_126_128.jsonl', 'w') as f:
+    for r in R:
+        s = json.dumps(r, ensure_ascii=False); json.loads(s); f.write(s + '\n')
+for r in R:
+    print(r['griffith_no'], r['signs'], r['uncertain'], '|', r['text_corpus'])

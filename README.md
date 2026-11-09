@@ -6,7 +6,9 @@ Sudanic family split from it long before it was written. This repo is a two-day 
 question: **can a frontier language model (Claude Opus 5.5, run as many independent subagents) find real patterns in
 Meroitic and make it more understandable?**
 
-Results, with every number traced to its run: [`REPORT.md`](REPORT.md). This file describes the methods.
+Results, with every number traced to its run: [`REPORT.md`](REPORT.md). What to do next: [`NEXT_STEPS.md`](NEXT_STEPS.md).
+The illustrated summary page: [`docs/report.html`](docs/report.html) (published privately as a claude.ai artifact).
+This file describes the methods.
 
 ## Short answer
 
@@ -163,8 +165,10 @@ python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge.
 - `data/`: cleaned corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`), answer keys, word lists, leads, discovery
   write-ups, the Griffith transcriptions, Rilly's lexicon (private).
-- `runs/`: prompts, the task each blind run saw, its answers, keys and scores.
-- `REPORT.md`: the results.
+- `runs/`: prompts, the task each blind run saw, its answers, keys and scores; `runs/work/` holds the agents'
+  working files (transcription scripts, timestamped blind readings).
+- `docs/report.html`: the summary page's source.
+- `REPORT.md`: the results. `NEXT_STEPS.md`: what to do next.
 
 ## Limits
 
