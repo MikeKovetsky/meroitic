@@ -4,13 +4,17 @@ Same scale and texture as the real corpus (about 1,000 short, formulaic texts,
 about 20k words, masked names, numerals, a few long narratives, fused and split
 endings, lost signs), but every word and ending is invented, so a model can't
 know any meaning in advance. The matching test is then built exactly like the
-real one: half the meanings given, the other half to match.
+real one: half the meanings given, the other half to match, and only words
+that stand alone in the corpus at least twice are tested. A word spelled like
+an ending (here cow and the genitive are both "ne") is not tested either.
 """
-import json, random, sys
+import collections, json, random, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent))
+from build_tasks import BLIND, HEAD, fresh, save_keys   # noqa: E402  (same instructions as the real test)
+
 ROOT = Path(__file__).resolve().parents[1]
-BLIND = Path("/private/tmp/claude-501/blind")
 rng = random.Random(2026)
 C, V = list("ptkbdgmnlrszhwyf"), list("aeiou")
 
@@ -175,40 +179,40 @@ def corpus():
     return texts
 
 
+def testable(texts, min_freq=2):
+    """Meanings tested like the real words: seen standing alone min_freq times, and not spelled like an ending."""
+    freq = collections.Counter(x for t in texts for x in t.split())
+    return [m for m in LEX if not m.startswith("GOD") and freq[LEX[m]] >= min_freq and LEX[m] not in AFF.values()]
+
+
 def build(folds=2, seed=7):
+    fresh([f"Y_f{f}" for f in range(folds)])
     texts = corpus()
     toks = [x for t in texts for x in t.split()]
-    test_pool = [m for m in LEX if not m.startswith("GOD")]
-    r = random.Random(seed)
-    r.shuffle(test_pool)
-    gloss = {m: m for m in test_pool}
+    test_pool = testable(texts)
+    random.Random(seed).shuffle(test_pool)
     keys = {}
     body_corpus = "\n".join(f"S{i:04d}: {t}" for i, t in enumerate(texts))
-    head = open(ROOT / "src/build_tasks.py").read()
-    from build_tasks import HEAD   # same instructions as the real test
     for f in range(folds):
-        test = [m for i, m in enumerate(test_pool) if i % folds == f]
+        test = test_pool[f::folds]
         given = [m for i, m in enumerate(test_pool) if i % folds != f]
         meanings = test[:]
         random.Random(seed + f).shuffle(meanings)
         run = f"Y_f{f}"
         d = BLIND / run
-        d.mkdir(parents=True, exist_ok=True)
         body = HEAD.format(
             what="a corpus of ancient inscriptions in one language, one text per line",
             spelling=("The script has been transliterated letter by letter into a Latin alphabet. Spaces mark word boundaries, "
                       "but scribes sometimes wrote endings apart from their word. NAME stands for a personal name and RNAME for "
                       "a royal name (the names were masked). Digits are numerals. A dot marks a lost sign."),
-            glossary="\n".join(f"- {LEX[m]}: {gloss[m]}" for m in given),
+            glossary="\n".join(f"- {LEX[m]}: {m}" for m in given),
             k=len(test), fromcorpus=" from the corpus",
             evidence=" in the corpus: where each word occurs, what it occurs with, its affixes, the glossary words around it",
             words="\n".join(f"- {LEX[m]}" for m in test),
             meanings="\n".join(f"- {x}" for x in meanings), out=d / "answer.json")
         (d / "task.md").write_text(body + "\n## Corpus\n\n" + body_corpus + "\n")
         keys[run] = {LEX[m]: m for m in test}
-    old = json.load(open(ROOT / "runs/keys/step0.json"))
-    old.update(keys)
-    json.dump(old, open(ROOT / "runs/keys/step0.json", "w"), indent=1)
+    save_keys(keys)
     json.dump({"lexicon": LEX, "affixes": AFF, "places": PLACES}, open(ROOT / "runs/keys/synth_language.json", "w"), indent=1)
     (ROOT / "data/synth_corpus.txt").write_text("\n".join(texts) + "\n")
     print(f"texts {len(texts)} tokens {len(toks)} types {len(set(toks))}; test items {len(test_pool)}")
@@ -216,5 +220,4 @@ def build(folds=2, seed=7):
 
 
 if __name__ == "__main__":
-    sys.path.insert(0, str(Path(__file__).parent))
     build()
