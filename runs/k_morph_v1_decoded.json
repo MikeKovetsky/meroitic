@@ -1,0 +1,928 @@
+{
+ "formulas": [
+  {
+   "name": "F1 Genealogical funerary formula, the most common text type (71 texts open with it: 52 in the full 88-word form, 19 cut after 'xaqotb NAME stbkjt'; 34 more texts copy its second half from 'fyrq xaqotb')",
+   "segments": [
+    {
+     "form": "woSi",
+     "role": "INVOCATION, addressee 1: divine name ryu + address ending -q (text-initial in 158 of its 178 uses)."
+    },
+    {
+     "form": "Sore yi (rlyb Soreyi)",
+     "role": "INVOCATION, addressee 2: divine name uyat + address ending -sq, written as a separate word in this family."
+    },
+    {
+     "form": "qe",
+     "role": "NOMINATION, opening deictic 'this (one)'; the other families spell it gy."
+    },
+    {
+     "form": "pte oye (bw NAME)",
+     "role": "NOMINATION, name of the deceased, the implied subject of every later predicate. The slot also takes NAME gy, NAME ktbt f and NAME kyntfyrq."
+    },
+    {
+     "form": "qewi",
+     "role": "NOMINATION, closing deictic + copula: gt-rq 'this is (X)'."
+    },
+    {
+     "form": "NAME tedxelowi",
+     "role": "FILIATION 1: parent's name + btjvt-f-y-rq '(he/she) is the btjvt of NAME', the relation to one parent (probably the mother)."
+    },
+    {
+     "form": "NAME terikelowi",
+     "role": "FILIATION 2: the same construction with btaqnt, the other parent (probably the father)."
+    },
+    {
+     "form": "womnitX Sklte NAME yetmdelowi",
+     "role": "DESCRIPTION clause (first of 13): title rykeqbp + specifier unfbt + holder's name + stbkjt-f-y-rq '(is) a relative of'. Possessor before the head noun, copula last."
+    },
+    {
+     "form": "womnitX brtoye yetmdelowi",
+     "role": "DESCRIPTION: the holder slot is filled by an -st specifier (a place or office), not a person."
+    },
+    {
+     "form": "womnitX SkltesskemXer yetmdelowi",
+     "role": "DESCRIPTION: compound specifier after the title."
+    },
+    {
+     "form": "womnitX Sklte tNlxe aror yetmdelowi",
+     "role": "DESCRIPTION: title + specifier + an unmasked personal name (bmfvt xaya is also one of the 21 short-frame fillers)."
+    },
+    {
+     "form": "womnitX Sklte NAME yetmdelowi",
+     "role": "DESCRIPTION: as the first clause."
+    },
+    {
+     "form": "Smlo NAME yetmdelowi",
+     "role": "DESCRIPTION with the title ukfy."
+    },
+    {
+     "form": "aribet tpoteNteli yetmdelowi",
+     "role": "DESCRIPTION with the title xaqotb. A common noun in the holder slot carries the determiner -fq (bhybtmbt-fq); a NAME in the same slot never does."
+    },
+    {
+     "form": "aribet NAME yetmdelowi",
+     "role": "DESCRIPTION: xaqotb + name."
+    },
+    {
+     "form": "aribet wetemtr yetmdelowi",
+     "role": "DESCRIPTION: xaqotb + specifier."
+    },
+    {
+     "form": "aribet yete kemxr yetmdelowi",
+     "role": "DESCRIPTION: xaqotb + two-word specifier."
+    },
+    {
+     "form": "aribet tedeqeli ble yetmdelowi",
+     "role": "DESCRIPTION: xaqotb + determined noun btjtgt-fq + oft."
+    },
+    {
+     "form": "womnitX NAME yetmdelowi",
+     "role": "DESCRIPTION: rykeqbp + name."
+    },
+    {
+     "form": "Smlo NAME yetmdelowi",
+     "role": "DESCRIPTION: ukfy + name."
+    },
+    {
+     "form": "qoresmle mXli kde mdetowi",
+     "role": "SECOND RELATION TYPE: court title gyat wk-ft ('the wk of the gyat') + kp-fq njt + kjt-b-y-rq '(is) a kjt (descendant?) of'."
+    },
+    {
+     "form": "qore smle NAME mdetowi",
+     "role": "SECOND RELATION TYPE with a named holder."
+    },
+    {
+     "form": "ateqi atiyete NAME yetmdelo wi",
+     "role": "DESCRIPTION with the title pair xbtgq xbqstbt; determiner + copula written apart (fy rq)."
+    },
+    {
+     "form": "ateqi NAME yetmdelowi",
+     "role": "DESCRIPTION: xbtgq + name (run together with the next word as stbkjtfyrqxbtgq)."
+    },
+    {
+     "form": "ateqi NAME ateqiSitkemoli",
+     "role": "LIST item: title + name + an appositive compound title in -fq, no predicate of its own."
+    },
+    {
+     "form": "ateqi NAME pqr NAME beloloke NAME beloloke NAME beloloke NAME ateqi NAME",
+     "role": "LIST of title + name pairs with no relational noun or copula of their own."
+    },
+    {
+     "form": "yetmde aqebetowi",
+     "role": "COLLECTIVE PREDICATE closing the list: stbkjt + (x)gt-o-t-b-y-rq, the plural-possessor form '(is) a relative of these'."
+    }
+   ]
+  },
+  {
+   "name": "F2 Funerary formula with offices and offering wishes ('ryuq uyatsq gy X gyrq xhm ofst btaqntfyrq ...', 33 texts; only the nominated name and the optional appositions after NAME vary)",
+   "segments": [
+    {
+     "form": "woSi Soreyi",
+     "role": "INVOCATION: two addressees, both with address endings."
+    },
+    {
+     "form": "qo X qowi",
+     "role": "NOMINATION: deictic + name of the deceased + deictic-copula."
+    },
+    {
+     "form": "apN blye terikelowi",
+     "role": "FILIATION 2 with an unmasked parent name ending in -st."
+    },
+    {
+     "form": "NAME tedxeli tedxelowi",
+     "role": "FILIATION 1 with the term repeated: appositive btjvt-fq, then the predicate btjvt-fyrq."
+    },
+    {
+     "form": "tereke Sklw weXoke wi",
+     "role": "Predicate clause with the copula written apart."
+    },
+    {
+     "form": "Xt temeylX NAME XlXili tetelitreli yetmdelowi",
+     "role": "DESCRIPTION: title btkts + qualifier fp + name + nouns in -fq + stbkjtfyrq."
+    },
+    {
+     "form": "tmeylX trqlXli yetmdelowi",
+     "role": "DESCRIPTION with a -fq possessor."
+    },
+    {
+     "form": "trq mteli yetmdelowi",
+     "role": "DESCRIPTION with a -fq possessor."
+    },
+    {
+     "form": "abesye kdite lXlowi",
+     "role": "Relation clause in which the qualifier fp itself carries determiner + copula."
+    },
+    {
+     "form": "prSn peleklia NAME smlowi",
+     "role": "Relation term wk-f-y-rq after title + name."
+    },
+    {
+     "form": "temeylX qoye yetmdelowi",
+     "role": "DESCRIPTION with an -st specifier."
+    },
+    {
+     "form": "aSrli mrxeli yiwl wi",
+     "role": "Predicate clause with -fq nouns and the copula written apart."
+    },
+    {
+     "form": "kwt lqoye smlowi",
+     "role": "wk relation with an -st specifier."
+    },
+    {
+     "form": "NAME Stelowi",
+     "role": "Relation term ubt."
+    },
+    {
+     "form": "temeykdi lX dbretelowi",
+     "role": "Relation term joatbt."
+    },
+    {
+     "form": "ato mxe piSiXekes",
+     "role": "OFFERING WISH 1: object noun xby + modifier kvt + verb h-quq-pt-nt-w (verb last)."
+    },
+    {
+     "form": "at mxe pSixrkes",
+     "role": "OFFERING WISH 2: object xb + kvt + verb h-uq-va-nt-w; each offering noun selects its own verb root."
+    }
+   ]
+  },
+  {
+   "name": "F3 Funerary formula with a list of kftntsyw holders (21 texts)",
+   "segments": [
+    {
+     "form": "woSi Soreyi qo X qowi",
+     "role": "INVOCATION + NOMINATION."
+    },
+    {
+     "form": "atiyetmeye terikelowi",
+     "role": "FILIATION 2 (parent name in -st)."
+    },
+    {
+     "form": "ameNye tedxelowi",
+     "role": "FILIATION 1 (parent name in -st; run together with the next word)."
+    },
+    {
+     "form": "mlekeyos yetekye yetmdelowi",
+     "role": "DESCRIPTION: title kftntsyw + -st specifier + relative."
+    },
+    {
+     "form": "mlekeyos treye mlekeyos atoye mlekeyos dokoye mlekeyos qoqoye mlekeyos tkreye",
+     "role": "LIST of five title + -st specifier pairs."
+    },
+    {
+     "form": "kelw",
+     "role": "LIST CLOSER ('all these')."
+    },
+    {
+     "form": "yetmdebetowi",
+     "role": "COLLECTIVE PREDICATE stbkjt-o-t-b-y-rq (plural possessor)."
+    },
+    {
+     "form": "mlekeyos treye kditowi",
+     "role": "Relation term njq-b-y-rq."
+    },
+    {
+     "form": "SSor atbos mlekeye yetmdelowi",
+     "role": "DESCRIPTION."
+    },
+    {
+     "form": "ttNleb yetmdelowi",
+     "role": "DESCRIPTION with a plural determined possessor bbm-fto."
+    },
+    {
+     "form": "ato mXe pSoXekes",
+     "role": "OFFERING WISH (one clause only)."
+    }
+   ]
+  },
+  {
+   "name": "F4 Epithet-invocation family ('ryu rtbmsqmgtfq uyaq rtbaaq gy X gyrq ...', about 70 texts in nine sub-types)",
+   "segments": [
+    {
+     "form": "woS wetNyiNqeli",
+     "role": "INVOCATION, addressee 1 + epithet; the address ending -q sits on the epithet, not on ryu."
+    },
+    {
+     "form": "Sori wetrri (qetrri)",
+     "role": "INVOCATION, addressee 2 + epithet, each word ending in -q."
+    },
+    {
+     "form": "qo NAME qowi",
+     "role": "NOMINATION."
+    },
+    {
+     "form": "NAME terikelowi NAME tdxelowi",
+     "role": "FILIATION, btaqnt first in this sub-type; bjvt is a short spelling of btjvt (same slot, same ending)."
+    },
+    {
+     "form": "antxSxsliteb yetmdelowi",
+     "role": "DESCRIPTION with a -bto (fused genitive + plural determiner) possessor."
+    },
+    {
+     "form": "SSor mns mlitowi / aSore xSxslitowi",
+     "role": "Relation predicates in -fq-b-y-rq."
+    },
+    {
+     "form": "qo pXomeye qowi ptsnye terikelowi qo eye tdxelowi",
+     "role": "A SECOND NOMINATION with its own filiation inside the same text."
+    },
+    {
+     "form": "ato bSiXebxes / at mXe bSixrbxes / ate poqe dotlxe bSitkbxes",
+     "role": "Three OFFERING WISHES: objects xby, xb, xbt, each with its own verb root (pt, va, bn) in o-uq-ROOT-ov-t-w."
+    },
+    {
+     "form": "woSi Soreyi",
+     "role": "RE-INVOCATION right after the wishes (13 texts), so the wishes are addressed to the two deities."
+    },
+    {
+     "form": "diket Srireqetelis awSo teli tereqebxeli yetekelowi",
+     "role": "Closing clause ending in the copula."
+    }
+   ]
+  },
+  {
+   "name": "F5 Short label formulas: 21 fixed frames, each attested with exactly the same 21 fillers in the slot X (441 texts)",
+   "segments": [
+    {
+     "form": "X = NAME | NAME qo | NAME mete l | NAME mokelowi | pte oye | apN blye | mh witr | mlitr ide | mli tewen | tNlxe aror | msxte trobit | Swe ibr | x lonk | dteqox qo | beke mete | kdi qebts | a kye | S qo ye | qo eye | li ye | tqo mete l",
+     "role": "NAME SLOT: a personal name, optionally with an apposition (gy 'this', ktbt f, kyntfyrq). The 17 unmasked fillers behave exactly like NAME, so they are names."
+    },
+    {
+     "form": "pqr X / plSn X / SlXS X / sNte X / kiSri X",
+     "role": "TITLE + NAME label (the title comes first)."
+    },
+    {
+     "form": "X kroro / X mXewitr / X Smedeli / X mokelowi / X Sq kdi",
+     "role": "NAME + predicate noun or epithet (verbless label; -rq or -fq may close it)."
+    },
+    {
+     "form": "tdxe RNAME qoret X",
+     "role": "Royal filiation label: parent term bjvt + royal name + gyat-b (title + fused genitive-determiner, spelled 'gyat w f' in 8 texts) + X."
+    },
+    {
+     "form": "qo xbxN X qo perite woSto / qo xbxe lX X qo",
+     "role": "Name bracketed by the deictic gy, with the title vovm / vovt fp and the office htaqbt ryu-b-y 'htaqbt of ryu'."
+    },
+    {
+     "form": "xrpxN pxrs te X kdite lo wi / pelmoS adblis X kdite lo wi",
+     "role": "Title + specifier (hvaw bt) or genitive phrase (xjo-fq-w 'of the xjo') + X + relational predicate njqbt fy rq (determiner and copula written apart)."
+    },
+    {
+     "form": "pesto X pesto n yetmde betewi",
+     "role": "Two holders of the title htwby + the plural-possessor predicate stbkjt o-t-bt-rq."
+    },
+    {
+     "form": "pelmoS X ntke lo / plSn X penn 5 ni ye teke lo",
+     "role": "Title + X + a predicate ending in the determiner -fy with no copula; the numeral follows htee."
+    },
+    {
+     "form": "tewisti are ke X yeSoa",
+     "role": "Fixed frame around the name."
+    },
+    {
+     "form": "X wteli pkeli yiroXetewi woS woS mlwilis mlowi lit yiroXete mlowi yni bNbeyeni yni",
+     "role": "Name + a chain of short predicate clauses (sqayptbt-rq, kfy-rq)."
+    },
+    {
+     "form": "kiSri X axid kiN kisrisqtile nbrlis 1 belebeltor 1 tsl teketi mesrekelis beltore 1",
+     "role": "Title + name + an inventory or offering list: item + numeral."
+    }
+   ]
+  },
+  {
+   "name": "F6 Royal narrative inscriptions (three long texts, each given twice: T0957 = hamadab, T0396 = tanyidamani, T0411 = kharamadoye); not formulaic",
+   "segments": [
+    {
+     "form": "RNAME qorelX ... / qore ...",
+     "role": "Royal titulary: royal name + title gyat (+ qualifier fp)."
+    },
+    {
+     "form": "qore mnptese lw qoreyi / tx mnote se lw txNyi / qr ariteNlise lw qrNyi",
+     "role": "Chains of parallel clauses: title + noun in -(fq)wt + fr + the same title with -(m)sq."
+    },
+    {
+     "form": "abr 32 kdi 135 / abr 100 kdi 100 / abr 58 kdi 223",
+     "role": "Counted nouns, each followed by its numeral."
+    },
+    {
+     "form": "... qebese wi / ... seb ...",
+     "role": "Narrative clauses with the ending -wt (232 tokens across both copies, none in any funerary or label text) and the copula rq."
+    }
+   ]
+  }
+ ],
+ "morphemes": [
+  {
+   "form": "-wi (-owi rlenw l bw t; rlyb swueenk ry r ynXrwren sbwh 'wi')",
+   "type": "clitic",
+   "function": "Copula / predicate marker 'is'. It closes a verbless nominal clause; gy-rq and gt-rq mean 'this is (X)'.",
+   "evidence": "It ends every clause of the descriptive formulas. After the 3,465 words ending in -rq, the next word is typically a clause opener: a title (rykeqbp 441, xaqotb 400, xbtgq 178, ukfy 157), NAME (334) or the offering noun xby (114); 256 of them end the text. It is written as a separate word 313 times (stbkjtfy rq 86, njqbt fy rq 43, btaqntfy rq 4), so it is a clitic. It attaches with or without the determiner, so it is a separate morpheme: kfy-rq 42 vs kfy-fy-rq 17, sqayptbt-rq 21 vs sqayptbt-fy-rq 13, gy-rq 149, gt-rq 71. A linking vowel letter (y, sometimes t) appears after consonantal f and b: -f-y-rq, -b-y-rq, -ot-bt-rq.",
+   "stems": [
+    "yetmdelo",
+    "tedxelo",
+    "terikelo",
+    "kdite lo",
+    "mdeto",
+    "qo",
+    "qe",
+    "mlo",
+    "mlolo",
+    "yiroXete",
+    "bete",
+    "yiwl",
+    "smlo",
+    "mokelo"
+   ],
+   "confidence": 4
+  },
+  {
+   "form": "-l- (hnenwNuknw; yprXny -li, -lo, -le, -l, XlSwrl -leb)",
+   "type": "suffix",
+   "function": "Determiner / definite article on common nouns. The vowel letter after f depends on what follows: -fy before the copula or at clause end, -fq inside a noun phrase (possessors, appositions, before genitive -w), -ft before plural -o.",
+   "evidence": "Proper names do not take it (2 of 1,999 NAME tokens: one in the T0019 list where f follows every item, one in the fragment 'NAME fy kwgtby'), but common nouns in the same possessor slot do: 'xaqotb NAME stbkjtfyrq' vs 'xaqotb bhybtmbtfq stbkjtfyrq' and 'xaqotb btjtgtfq oft stbkjtfyrq'. It is written apart in 'NAME ktbt f' (115 times 'ktbt f'). It is optional on predicates (kfy-rq vs kfy-fy-rq). The same stems show the shapes side by side: btjvt-fq / btjvt-fy-rq, btaqnt-fq / btaqnt-fy-rq, nayay-fq / nayay-fy-rq / nayay-fto, ubt-fq / ubt-fy-rq, bkmbt-fy-rq / bkmbt-fto / bkmbt-fqw, wk-ft / wk-fy-rq. Some labels end in -fy with no copula (htfkyu X ebnt fy; ... btnt fy). 42 word types end in -fyrq, 62 in -fq, 31 in -fto.",
+   "stems": [
+    "tedxe",
+    "tdxe",
+    "terike",
+    "yetmde",
+    "kdite",
+    "moke",
+    "Ste",
+    "dbrete",
+    "tmNte",
+    "kroro",
+    "yiroXete",
+    "yeteke",
+    "sm",
+    "mlo",
+    "mete",
+    "Smede",
+    "wte",
+    "pke",
+    "tpoteNte",
+    "tedeqe",
+    "mte",
+    "XlXi",
+    "mrxe",
+    "aSr",
+    "trqlX",
+    "lX"
+   ],
+   "confidence": 4
+  },
+  {
+   "form": "-lowi (= -l- + -o- + -wi)",
+   "type": "suffix",
+   "function": "Determiner + copula: turns a relational noun into the clause predicate, '(the deceased) is the X of [the preceding person or title]'.",
+   "evidence": "2,309 tokens on 42 word types. It always follows a possessor (NAME, title + NAME, or a noun in -fq / -fto) and ends the clause: NAME btjvtfyrq (65 times), NAME btaqntfyrq (90), NAME stbkjtfyrq (447), NAME wkfyrq, NAME ubtfyrq, NAME kyntfyrq. Split spellings show its parts: stbkjtfy rq (86), btaqntfy rq (4), njqbt fy rq (43).",
+   "stems": [
+    "yetmde",
+    "terike",
+    "tedxe",
+    "tdxe",
+    "moke",
+    "sm",
+    "Ste",
+    "dbrete",
+    "kdite",
+    "mlo",
+    "yikidbite",
+    "yeteke",
+    "yiroXete",
+    "tmNte",
+    "kroro",
+    "lX",
+    "pXrste"
+   ],
+   "confidence": 4
+  },
+  {
+   "form": "-li",
+   "type": "suffix",
+   "function": "The determiner in non-final position: marks a common noun that is a possessor, an apposition or a list item inside the noun phrase, not the predicate.",
+   "evidence": "In the possessor slot before the relational noun: bhybtmbt-fq stbkjtfyrq, btjtgt-fq oft stbkjtfyrq, pfpq-fq btbtfqbatfq stbkjtfyrq, bagfp-fq stbkjtfyrq, kbt-fq stbkjtfyrq, xua-fq kavt-fq sqrf rq. As an apposition before the predicate form of the same noun: 'NAME btjvtfq btjvtfyrq' (34) and 'NAME btaqntfq btaqntfyrq' (13). In labels: X uktjtfq (21), rbtfq hntfq (21). Before the genitive: -fqw (19 types).",
+   "stems": [
+    "tpoteNte",
+    "tedeqe",
+    "XlXi",
+    "trqlX",
+    "mte",
+    "aSr",
+    "mrxe",
+    "tedxe",
+    "terike",
+    "kroro",
+    "Smede",
+    "wte",
+    "pke",
+    "Ste",
+    "adb",
+    "antxSxs",
+    "ato"
+   ],
+   "confidence": 3
+  },
+  {
+   "form": "-b-",
+   "type": "suffix",
+   "function": "Plural marker. It appears in the plural determiner -ft-o, the genitive plural -bt-o, the plural copula -ft-o-nrq and the plural-possessor element -(gt)-o-t- in predicates.",
+   "evidence": "Words with -fto / -bto are list items or possessors that a plural predicate refers back to: 'htfkyu fto xhybt fto vahv fto njqbt otw fy'; 'htfkyu xbyfqbto fpraywbtfto fpkyjfqbto vahvm ugtnqbtfto njqbtotbyrqe'. -ftonrq appears only in T0892, the one text that names two people ('gy kypq gyrq xoaqbt hktbt gyrq'), on the terms that are -fyrq in single-person texts (stjvt-ftonrq, btaqnt-ftonrq, staqbt-ftonrq).",
+   "stems": [
+    "-le- (leb)",
+    "-te- (teb)",
+    "-lebkwi",
+    "yetmde-be-",
+    "kdite-be-",
+    "Ste-be-",
+    "qe-be-"
+   ],
+   "confidence": 3
+  },
+  {
+   "form": "-leb",
+   "type": "suffix",
+   "function": "Plural (collective) determiner, the plural of -f-: 'the X-s', mostly on possessors.",
+   "evidence": "31 word types, 180 tokens. It fills the possessor slot that -fq fills elsewhere: bkmbt-fto stbkjtfyrq (13 texts) beside bkmbt-fyrq and bkmbt-fqw; bbm-fto, ujywbt-fto, htjtktbt-fto, bntbyatbt-fto, xbqstbt-fto, uyuymbt-fto + stbkjtfyrq. Plural predicates follow -fto possessors: 'xeb key bkmbtfto njqbtgtotbyrq', 'rnqbt bkmbtfto ubtxgtotbyrq', 'kw uqatkaynt nayayfto ubtotbyrq'. It is written apart in lists: 'htfkyu fto xhybt fto vahv fto'.",
+   "stems": [
+    "tmNte",
+    "ttN",
+    "Sdoste",
+    "pedemete",
+    "tketorete",
+    "atiyete",
+    "SoSoNte",
+    "Sqekite",
+    "kroro",
+    "mror",
+    "kdi",
+    "SS",
+    "br",
+    "qo",
+    "lX",
+    "pilqete"
+   ],
+   "confidence": 3
+  },
+  {
+   "form": "-lebkwi",
+   "type": "suffix",
+   "function": "Plural predicate: plural determiner -fto + a copula with -n- ('they are the X of'), used when the subject is more than one person.",
+   "evidence": "Only 3 tokens, all in T0892, which nominates two people ('gy kypq gyrq xoaqbt hktbt gyrq'). There the filiation and relation terms end in -ftonrq (stjvt-ftonrq, btaqnt-ftonrq, staqbt-ftonrq) where single-person texts have -fyrq (btaqnt-fyrq in 195 texts).",
+   "stems": [
+    "yedxe",
+    "terike",
+    "yerite"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "-(q)e-b-e- / -be- (uk -betowi, -qebetowi, aqebetowi, betewi, bes lo)",
+   "type": "suffix",
+   "function": "Plural possessor ('of these / of them') inside the predicate: '(is) a relative of these'. gt is the deictic (as in gt ... gtrq) and o the plural marker.",
+   "evidence": "Every attestation follows a list or a plural possessor. F1 ends 'xbtgq NAME hga NAME otfyfynt NAME otfyfynt NAME otfyfynt NAME xbtgq NAME stbkjt xgtotbyrq' (86 texts). F3: 'kftntsyw batst ... kftntsyw bnatst ntfr stbkjtotbyrq' (21). F4: 'katogy nbbatfto katogy gyaybto ntfr stbkjt xgtotbyrq' (13), 'bkmbtfto njqbtgtotbyrq' and 'bkmbtfto ubtxgtotbyrq' (13). Labels: 'htwby X htwby e stbkjt otbtrq' (21, two htwby), 'hga NAME NAME stbkjt gtotw fyrq'. Single possessors get plain -fyrq. Written alone it takes the initial x (xgtotbyrq 99); attached it does not (stbkjtgtotbyrq 4, njqbtgtotbyrq 13).",
+   "stems": [
+    "yetmde",
+    "kdite",
+    "Ste"
+   ],
+   "confidence": 3
+  },
+  {
+   "form": "-s (uk -lis; rlyb 's' swueenk rXrwe)",
+   "type": "clitic",
+   "function": "Genitive / linker 'of': ties a title or noun to what follows ('the htaqbt of the xjo, NAME'). Before the determiner f it fuses into b (w + f > b).",
+   "evidence": "The same frames are spelled both ways: 'b jvt RNAME gyat w f NAME' (8) = 'bjvt RNAME gyatb X' (21); 'htaqbt ryu w fto' (4) = 'htaqbt ryubto' (2); 'htfkyu xby fq w fto fp rayw bt fto fp kyj fq w fto' (T0562) = 'htfkyu xbyfqbto fpraywbtfto fpkyjfqbto' (T0010). As -fqw (19 types, written 'fq w' 43 times) it closes a title phrase before a name: 'htaqbt xjofqw NAME' (13 texts), 'htfkyu xjofqw X' (21), 'xkyfp puvwfqw NAME', 'uuqktbt nbntfqw NAME'; compare 'hyfkyu w NAME' or 'hyfkyu w st' (21) beside 'hyfkyu NAME' (14).",
+   "stems": [
+    "adbli",
+    "nbrli",
+    "mlwili",
+    "mesrekeli",
+    "antxSxsli",
+    "XSxsli",
+    "Srireqeteli",
+    "bXeyedli",
+    "ktkeli",
+    "tmNteli",
+    "atoli",
+    "pestoli",
+    "polmoS",
+    "qore",
+    "woS"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "-t- (= lSynh s + l; uk -towi, -teb, qoret, woSto)",
+   "type": "suffix",
+   "function": "Fused genitive + determiner 'of the'. It gives a second predicate ending -b-y-rq ('is the X of the ...') and the plural possessive -bt-o.",
+   "evidence": "The fusion is shown by the spelling pairs under -w. -byrq stands where other nouns have -fyrq: kjt-byrq (86 texts, 'gyat wkft NAME kjtbyrq'), njq-byrq (21), vuvw-fq-byrq (39 tokens), kfq-byrq (13), xaykt-fq-byrq, kptsy-byrq, enjtsy-byrq, kftsy-byrq. -by alone: 'htaqbt ryuby' (21) = 'htaqbt ryu w f(to)'.",
+   "stems": [
+    "mde",
+    "kdi",
+    "xSxsli",
+    "mli",
+    "aromeli",
+    "mXeyo",
+    "nkdeyo",
+    "mleyo",
+    "qore",
+    "woS",
+    "antxSxsli",
+    "atoli",
+    "modli",
+    "qoro"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "-i / -yi (rhhwnyy nkhukq)",
+   "type": "suffix",
+   "function": "Vocative (address) ending on the two invoked divine names and their epithets; -sq after a stem ending in t.",
+   "evidence": "ryu-q is text-initial in 158 of its 178 uses and otherwise mostly recurs right after the last offering wish ('... ouqbnovtw ryuq uyatsq jqntb ...', 13 texts); bare ryu (113 texts) stands before its epithet in the F4 invocation and in non-initial phrases ('ryu ryu kfrqfqw', 'ryu hqfgt bt', 'htaqbt ryuby'). When an epithet follows, the ending moves to each word of the phrase: 'ryu rtbmsqmgtfq uyaq rtbaaq', 'ryu gtbmsqegtfq uyaq gtbaaq'. uyat + sq is written apart ('uyat sq') in 71 texts and joined ('uyatsq') in 87. Caveat: xuyaq also occurs outside the invocation (T0016 family), so -q may partly be lexical.",
+   "stems": [
+    "woS",
+    "Sor",
+    "Sore",
+    "wetNyiNqel",
+    "wetrr",
+    "qetrr",
+    "wetN"
+   ],
+   "confidence": 3
+  },
+  {
+   "form": "-(N)yi bk euelny",
+   "type": "suffix",
+   "function": "Address or dative-like ending on titles in the royal texts ('O king' or 'for the king'), probably the same ending as the invocation -sq.",
+   "evidence": "Kharamadoye has a chain of parallel clauses where the title that opens each clause comes back with -(m)sq after fr: 'gyat kehbtwt fr gyatsq', 'bv keybt wt fr bvmsq', 'ga xaqbtmfqwt fr gamsq', 'wyo vfoq fqwt fr wyomsq', 'vahvt knjyntfqwt fr vahvmsq'. Hamadab lists 'gyatmsq ... hgamsq htwbymsq'. The invocation epithet rtbmsq has the same ending.",
+   "stems": [
+    "qore",
+    "qoreN",
+    "tx",
+    "qr",
+    "sob",
+    "Sob",
+    "xirette",
+    "xrpx",
+    "xrpxe",
+    "pqr",
+    "pesto",
+    "wet"
+   ],
+   "confidence": 1
+  },
+  {
+   "form": "-ye",
+   "type": "suffix",
+   "function": "Ending of personal names and of the place or office specifier after a title (an onomastic or 'of PLACE' ending).",
+   "evidence": "6 of the 17 unmasked fillers of the name slot end in st (hbt yst, x nst, u gy st, xhm ofst, gy tst, fq st), as do names nominated in long texts (bktst, kfqst, htfst, eqst, njqgyatst) and parents' names (xbqstbktst btaqntfyrq, xktmst btjvtfyrq, njqgyayst btjvtfyrq, xnjqst btjvtfyrq). After titles it fills the specifier slot: rykeqbp oabyst (compare rykeqbp unfbt), kftntsyw batst / xbyst / jynyst / gygyst / bnatst / stbtnst, btktsfp gyst, nrb fgyst. Bare / -st pairs: xby / xbyst, bat / batst, kftnt / kftntst, kfq / kfqst, stbtn / stbtnst, gy / gyst. 68 word types end in -st.",
+   "stems": [
+    "pte o",
+    "qo e",
+    "li",
+    "a k",
+    "S qo",
+    "apN bl",
+    "tme",
+    "mli",
+    "pel",
+    "atiyetme",
+    "ameN",
+    "brto",
+    "tre",
+    "ato",
+    "doko",
+    "qoqo",
+    "tkre",
+    "yetek",
+    "mleke",
+    "qo"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "qo / qe",
+   "type": "word",
+   "function": "Demonstrative / deictic 'this (one)' pointing at the person named; with the copula, gy-rq / gt-rq 'this is'.",
+   "evidence": "It brackets the name in the nomination of every long formula ('gy NAME gyrq', gyrq in 135 texts; 'gt hbt yst gtrq', gtrq in 71) and in short frames ('gy vovm X gy htaqbt ryuby', 'gy vovt fp X gy'). It follows a name as an optional apposition, 'NAME gy' (about 100 times, at any NAME position). gy and gt alternate as the vowel letters y and t do in -fy / -ft.",
+   "stems": [
+    "NAME",
+    "wi (qowi, qewi)",
+    "-leb (qoleb)",
+    "-ye (qoye)"
+   ],
+   "confidence": 4
+  },
+  {
+   "form": "p- / b- (rlyb pi-, bi-)",
+   "type": "prefix",
+   "function": "Verbal prefix of the offering-wish verbs, most likely a wish (optative / jussive) mood marker; h- and o- are variants used in different text families.",
+   "evidence": "It occurs only on the clause-final word after the offering nouns xby, xb, xbt, never on nouns: h-quqpt-ntw (39 texts), h-uqva-ntw (33), h-uypt-ntw (21), o-uqpt-ov-t-w (13), o-uqva-ov-t-w (13), o-uqbn-ov-t-w (13), 'oq uqptntw' (13), o-uva-ntw (13). The same verb occurs without it (uptntw, 13). Split spellings isolate it: 'hq uy pt ov bt', 'hq uy pt nt w', 'h uy pt o'.",
+   "stems": [
+    "SiXe",
+    "SoXe",
+    "Sixr",
+    "Sitk",
+    "Sxr",
+    "Strr",
+    "siXe"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "-ke- / -bx-",
+   "type": "suffix",
+   "function": "Verbal suffix between the root and the final ending, perhaps aspect or the plural addressee ('may you two ...'); -ov- is the variant of the F4 family.",
+   "evidence": "They fill the same slot in the same wishes: hquqpt-nt-w vs ouqpt-ov-t-w, huqva-nt-w vs ouqva-ov-t-w. The split spelling 'hq uy pt ov nt w' (T0768) shows both at once, so they are distinct elements.",
+   "stems": [
+    "piSiXe",
+    "pSixr",
+    "pSoXe",
+    "bSiXe",
+    "bSixr",
+    "bSitk",
+    "SXe",
+    "bSxr"
+   ],
+   "confidence": 1
+  },
+  {
+   "form": "-s / -te (xnwt-lukrl)",
+   "type": "suffix",
+   "function": "Final verbal ending (person / number or mood) alternating -w ~ -bt in otherwise identical wishes; a 2nd-person (plural) imperative or optative addressed to the two deities is the likeliest reading.",
+   "evidence": "hquqptntw (39 texts) vs hquqptntbt and huptntbt (4) / huqptntbt; huqvantw vs huqvantbt; split 'hq uy pt ov bt' vs 'hq uy pt nt w'. The wishes are framed by the address to the two deities (ryuq uyatsq opens the text and, in F4, follows the wishes).",
+   "stems": [
+    "piSiXeke",
+    "pSixrke",
+    "pSoXeke",
+    "pSXe ke",
+    "bSiXebx e",
+    "bSixrbx e",
+    "bSitkbx e"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "a- (sbwh-ukueurl lneenw)",
+   "type": "prefix",
+   "function": "Not a grammatical morpheme: a word-initial letter (probably an initial-vowel sign) that marks where a written word starts.",
+   "evidence": "235 word types begin with x; inside a word it appears only where two words are run together (stbkjtfyrqxbtgq, gyrqxby, ubtxgtotbyrq, huqptntbtxb). The same element has x when written alone and none when attached: 'stbkjt xgtotbyrq' (99) vs stbkjtgtotbyrq (4); 'st b kjt xgt otw fy' vs 'st b kjt gt otw fy'; xuyat beside uyat. This makes x a reliable cue for cutting run-together words.",
+   "stems": [
+    "ato",
+    "at",
+    "ate",
+    "aribet",
+    "ateqi",
+    "aqebetowi",
+    "apote",
+    "adblis",
+    "aSore"
+   ],
+   "confidence": 4
+  },
+  {
+   "form": "yet- (bk mde)",
+   "type": "prefix",
+   "function": "Derivational prefix forming the general kin term stbkjt ('relative') from kjt (narrower relation, perhaps 'descendant / child').",
+   "evidence": "kjt occurs on its own (16 texts) and with other endings (kjt-byrq in 86 texts, kjtw, kjtwf, 'kjt fr'), while stbkjt is the commonest word (1,403 tokens of stbkjtfyrq in 236 texts). Split spellings mark a boundary before kjt: 'stb kjt fy rq' (7) and 'st b kjt gt otw fy' (7).",
+   "stems": [
+    "mde"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "lX",
+   "type": "word",
+   "function": "Postposed qualifier (adjective-like, e.g. 'great / chief') after a title or noun; it can itself be determined and predicated.",
+   "evidence": "It follows titles and nouns: 'btkts fp' (9) / btktsfp (74 tokens), bktsfp (33), bbmfp (13), xhybtfp, 'RNAME gyatfp', ujabtfp, 'gy vovt fp X gy' (21). It takes the determiner and copula like a noun: 'xotwst njqbt fpfyrq' (33), fpfto (4), 'btktsnjq fp joatbtfyrq'.",
+   "stems": [
+    "temey",
+    "tmey",
+    "ttN",
+    "apote",
+    "qore",
+    "Sdrte",
+    "xbxe",
+    "temeykdi"
+   ],
+   "confidence": 2
+  },
+  {
+   "form": "kelw",
+   "type": "word",
+   "function": "List-closing quantifier or conjunction ('all of these / together') before a summarising, usually plural, predicate.",
+   "evidence": "58 tokens. It stands right before plural-possessor predicates after lists: '... kftntsyw bnatst ntfr stbkjtotbyrq' (21), '... katogy gyaybto ntfr stbkjt xgtotbyrq' (13), 'kftntsyw h kftntsyw h ntfr st b kjt otw fy', and after counted items: '... btntbq 59 stj bfb 16 ntfr sqnqjoqbtfyrq' (13), 'w 10 ntfr xvqjt'.",
+   "stems": [],
+   "confidence": 2
+  },
+  {
+   "form": "-N",
+   "type": "suffix",
+   "function": "Derivational suffix on titles and nouns; meaning unclear (perhaps an adjectival or collective form).",
+   "evidence": "Pairs vahv / vahvm (8 / 69 texts), gyat / gyatm (118 / 9), vovt / vovtm (21 / 9), bv / bvm, xat / xatm. It stands before the address ending -sq (vahvmsq, gyatmsq, bvmsq, rtbmsq).",
+   "stems": [
+    "xrpx",
+    "qore",
+    "xbxe",
+    "xbx",
+    "tx",
+    "are",
+    "wet",
+    "arite"
+   ],
+   "confidence": 1
+  }
+ ],
+ "word_classes": [
+  {
+   "form": "yetmde (yetmdelowi, yetmdelo wi, yetmde)",
+   "class": "relational noun (kin term)",
+   "note": "The commonest word (1,403 tokens of stbkjtfyrq). Head of the DESCRIPTION slot 'TITLE NAME stbkjtfyrq' = '(the deceased) is a relative of TITLE NAME'; built from kjt with stb-."
+  },
+  {
+   "form": "tedxe (tedxelowi, tedxeli; yXnllukq tdxe, tdxelowi)",
+   "class": "relational noun (filiation)",
+   "note": "FILIATION slot, right after the nomination; bjvt fills the same slot with the same ending (45 texts). Probably the mother ('born of'): three parent names before it contain njq (njqgyayst, xnjqst, njqotjtrtbtf), none before btaqnt."
+  },
+  {
+   "form": "terike (terikelowi, terikeli)",
+   "class": "relational noun (filiation)",
+   "note": "The other FILIATION term (195 texts), probably the father: its holder twice carries an office title (xhybt xoast, htwby fpst)."
+  },
+  {
+   "form": "mde (mdetowi)",
+   "class": "relational noun",
+   "note": "Second relation type in F1, 'gyat wkft NAME kjtbyrq' ('is a kjt [descendant?] of the court official NAME'); root of stbkjt."
+  },
+  {
+   "form": "kdite (kditelowi, kdite lo wi, kditeqebetowi)",
+   "class": "relational noun",
+   "note": "Third relation term, the usual predicate of the short frames ('vahvm hvaw bt X njqbt fy rq')."
+  },
+  {
+   "form": "sm, Ste, dbrete (smlowi, Stelowi, dbretelowi)",
+   "class": "relational nouns",
+   "note": "Further relation predicates in F2 ('haue htftnfqx NAME wkfyrq', 'NAME ubtfyrq', 'btktsnjq fp joatbtfyrq'); wk also in the court title gyat wk-ft."
+  },
+  {
+   "form": "mokelowi",
+   "class": "predicate noun (status or kin term) used as an apposition",
+   "note": "Follows any NAME as an optional apposition ('NAME kyntfyrq', 94 times) and forms a one-word label ('X kyntfyrq')."
+  },
+  {
+   "form": "mete (mete l)",
+   "class": "noun (epithet)",
+   "note": "Optional apposition after a name, 'NAME ktbt f' (92), with the determiner written apart; also inside names (otnt ktbt, bgy ktbt f)."
+  },
+  {
+   "form": "NAME",
+   "class": "proper noun (person, masked)",
+   "note": "Fills the deceased slot (gy NAME gyrq), the parent slots (before btjvt / btaqnt) and the holder slots (after a title, before stbkjtfyrq). Never takes the determiner -f-."
+  },
+  {
+   "form": "pte oye, apN blye, mh witr, mlitr ide, mli tewen, tNlxe aror, msxte trobit, Swe ibr, x lonk, dteqox qo, beke mete, kdi qebts, a kye, S qo ye, qo eye, li ye, tqo mete l",
+   "class": "proper nouns (unmasked personal names)",
+   "note": "Each fills X in all 21 short frames and the nomination slot of the long formulas, exactly like NAME; several end in -st."
+  },
+  {
+   "form": "RNAME",
+   "class": "proper noun (royal name)",
+   "note": "Followed by the title gyat ('bjvt RNAME gyatb X', 'RNAME gyatfp')."
+  },
+  {
+   "form": "woS (woSi)",
+   "class": "proper noun (deity 1)",
+   "note": "First addressee of the INVOCATION; with the address ending -q."
+  },
+  {
+   "form": "Sore / Sor (Soreyi, Sore yi, Sori)",
+   "class": "proper noun (deity 2)",
+   "note": "Second addressee of the INVOCATION."
+  },
+  {
+   "form": "wetNyiNqeli, wetrri (qetNyinqeli, qetrri)",
+   "class": "divine epithets",
+   "note": "Follow ryu and uya in the F4 family; each ends in the address ending -q."
+  },
+  {
+   "form": "qo / qe (qowi, qewi)",
+   "class": "demonstrative pronoun (deictic)",
+   "note": "'this (one)'; opens and, with -rq, closes the NOMINATION: 'gy X gyrq' = 'this is X'."
+  },
+  {
+   "form": "womnitX, aribet, Smlo, ateqi, atiyete, pqr, beloloke",
+   "class": "titles (office ranks)",
+   "note": "Each opens a DESCRIPTION clause or a list item in F1 and stands before a name or a specifier."
+  },
+  {
+   "form": "qore (qoret, qore smle, qorelX, qoreN)",
+   "class": "title (royal)",
+   "note": "The title after RNAME; in the court title 'gyat wk-ft' ('the wk of the gyat')."
+  },
+  {
+   "form": "pesto, pelmoS / polmoS, mlekeyos, mrebqo / mrbqo, temey, tmey, perite, xrpxN, xbxN / xbxe, apote, SSimete",
+   "class": "titles",
+   "note": "Precede names in relation clauses and short frames; htaqbt takes a genitive complement ('htaqbt xjofqw NAME', 'htaqbt ryuby')."
+  },
+  {
+   "form": "kiSri, plSn, SlXS, sNte",
+   "class": "titles",
+   "note": "Head the TITLE + NAME label texts ('hfue X', 'nquaq X')."
+  },
+  {
+   "form": "Sklte, brtoye, wetemtr, yete kemxr, tpoteNteli, tedeqeli ble, pxrs te / pXrste, treye, atoye, dokoye, qoqoye, tkreye, yetekye",
+   "class": "specifiers (probably place names or offices)",
+   "note": "Fill the slot between a title and the relation term when no personal name is given."
+  },
+  {
+   "form": "ato, at, ate",
+   "class": "nouns (offerings; objects of the wish verbs)",
+   "note": "OFFERING WISH slot. Each selects its own verb root: xby + -pt- (111 clauses), xb + -va- (68), xbt + -bn- (14)."
+  },
+  {
+   "form": "mXe / mxe / mXo",
+   "class": "adjective or quantifier",
+   "note": "Follows the offering noun (xby kpt, xb kvt), so modifiers follow their head; also predicated in 'X kptrqba'."
+  },
+  {
+   "form": "piSiXekes, pSixrkes, pSoXekes, bSiXebxes, bSixrbxes, bSitkbxes, SXekes, pSXekete",
+   "class": "verbs (wish / optative)",
+   "note": "The only finite verbs of the funerary texts; always clause-final after their object: object - modifier - verb (SOV)."
+  },
+  {
+   "form": "lX",
+   "class": "adjective (postposed qualifier)",
+   "note": "After titles (btktsfp, gyatfp); can carry -fyrq or -fto itself."
+  },
+  {
+   "form": "kelw",
+   "class": "quantifier / conjunction",
+   "note": "Closes a list before the summarising plural predicate."
+  },
+  {
+   "form": "1, 2, 4, 5, 6, 10, 12, 16, 34, 59",
+   "class": "numerals",
+   "note": "Follow the counted noun: eoafqw 1, otfbyat 1, htee 5, jy 6, rt w 12, btntbq 59, bfb 16, xoa 32 njq 135."
+  },
+  {
+   "form": "penn",
+   "class": "noun (counted; perhaps age in years)",
+   "note": "Always followed by a numeral ('htee 5 eq st btnt fy', 'htee 34')."
+  },
+  {
+   "form": "nbrlis, belebeltor, beltore, areqis, ames",
+   "class": "nouns (inventory or offering items)",
+   "note": "Each followed by '1' in the nquaq list frame and in F4."
+  },
+  {
+   "form": "kroro, Smedeli, mXewitr, Sq kdi",
+   "class": "predicate nouns or epithets",
+   "note": "Form one-line labels after a name ('X nayay'); nayay also takes -fq, -fyrq and -fto, so it is a noun."
+  },
+  {
+   "form": "wi, lo, l (swueenk ry ynXrwren sbwhy)",
+   "class": "clitics written apart",
+   "note": "rq is the copula (313 free tokens), fy and f the determiner (fy 214, f 426); their free spelling is the main evidence that -fyrq = -f- + -y- + -rq."
+  }
+ ]
+}

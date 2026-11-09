@@ -13,3 +13,6 @@ Started 2026-11-08 22:54 PST; budget ends about 03:50.
 - Y_f0 synthetic: aa9198cc40161c373 · Y_f1 synthetic: a6878dc1f8df5ece8
 - F_recall open recall: a6fba23c58d3d882d
 - D1 Hamadab: a6d17b6b9c680f711 · D3 Philae: abc9ea093b4c9df77
+- C2_cloze: a620596670a74ac7f
+- K2_morph clean grammar: ab5a211af9f478921
+- N_open natural experiment: aa96cdb30379c861e

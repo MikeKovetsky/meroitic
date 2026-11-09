@@ -226,5 +226,37 @@
    "xb",
    "kbt"
   ]
+ },
+ {
+  "run": "Y_f1",
+  "k": 28,
+  "correct": 21,
+  "p": 0.0,
+  "answered": 28,
+  "confident": 13,
+  "confident_correct": 13,
+  "right_words": [
+   "yowi",
+   "pira",
+   "fakmu",
+   "wuti",
+   "dultu",
+   "gun",
+   "resdo",
+   "dapuk",
+   "zura",
+   "kikrira",
+   "kunalir",
+   "doze",
+   "hiza",
+   "paso",
+   "ne",
+   "wepak",
+   "sutu",
+   "zu",
+   "wu",
+   "fokla",
+   "haltuto"
+  ]
  }
 ]

@@ -16,7 +16,7 @@ SKIP = {"NAME", "RNAME"}
 
 
 def load():
-    return [json.loads(l) for l in open(ROOT / "data/corpus.jsonl")]
+    return [json.loads(l) for l in open(ROOT / "data/corpus_v2.jsonl")]
 
 
 def seen_contexts(train):
@@ -112,7 +112,7 @@ Write JSON to `{out}` (and repeat it in your final message):
 def build():
     corpus = load()
     train, test, items = split(corpus)
-    d = BLIND / "C_cloze"
+    d = BLIND / "C2_cloze"
     d.mkdir(parents=True, exist_ok=True)
     trainblock = "\n".join(f"{r['id']}: {r['text']}" for r in train)
     (d / "task.md").write_text(TASK.format(n=len(test), m=len(items), out=d / "answer.json",
