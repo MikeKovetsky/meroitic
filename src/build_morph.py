@@ -1,11 +1,11 @@
 """Blind morphology task (the Kober test): the scrambled corpus only; the
 solver lists the bound morphemes and proposes what each one does."""
-import json, sys
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from build_tasks import BLIND, SEED, corpus_block, load_corpus   # noqa: E402
-from scramble import make_map                                    # noqa: E402
+from build_tasks import BLIND, SEED, corpus_block, fresh, load_corpus   # noqa: E402
+from scramble import make_map                                           # noqa: E402
 
 TASK = """# Task: work out the grammar of an unknown language
 
@@ -32,8 +32,7 @@ Write your answer as JSON to `{out}` (and repeat it in your final message):
 """
 
 if __name__ == "__main__":
-    m = make_map(SEED)
+    fresh(["K_morph"])
     d = BLIND / "K_morph"
-    d.mkdir(parents=True, exist_ok=True)
-    (d / "task.md").write_text(TASK.format(out=d / "answer.json", corpus=corpus_block(load_corpus(), m)))
+    (d / "task.md").write_text(TASK.format(out=d / "answer.json", corpus=corpus_block(load_corpus(), make_map(SEED))))
     print(d / "task.md", len((d / "task.md").read_text()))

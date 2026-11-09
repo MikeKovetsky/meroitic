@@ -8,8 +8,12 @@ Conditions (same folds, same instructions):
 Each task: a glossary of the other fold's words, then K test words and the K
 meanings shuffled; the solver assigns them one to one.
 Blind task folders go outside the repo; answer keys stay in runs/keys/.
+Corpus lines are tagged L0000, L0001, ... in corpus order, never with the
+corpus ids, which name the royal inscriptions (hamadab, tanyidamani, ...).
+A folder that already holds a task is never rebuilt: its answers are scored
+against the keys saved with it.
 """
-import collections, json, random, re, sys
+import collections, json, random, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -26,6 +30,24 @@ SEED = 7
 
 def load_corpus():
     return [json.loads(l) for l in open(ROOT / "data/corpus.jsonl")]
+
+
+def fresh(runs):
+    """Create the runs' blind folders; exit, writing nothing, if any already holds a task."""
+    taken = [r for r in runs if (BLIND / r / "task.md").exists()]
+    if taken:
+        sys.exit(f"{BLIND} already holds {', '.join(taken)}: their answers are scored against the saved keys. "
+                 "Move those folders (and their keys) away to rebuild.")
+    for r in runs:
+        (BLIND / r).mkdir(parents=True, exist_ok=True)
+
+
+def save_keys(keys):
+    """Add these runs' keys to runs/keys/step0.json, keeping every other run's."""
+    p = ROOT / "runs/keys/step0.json"
+    old = json.load(open(p)) if p.exists() else {}
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({**old, **keys}, indent=1))
 
 
 def eligible(corpus, min_freq):
@@ -52,11 +74,10 @@ def eligible(corpus, min_freq):
 
 def corpus_block(corpus, m=None, width=100):
     out = []
-    for r in corpus:
-        t = r["text"] if m is None else text(r["text"], m)
-        ws = t.split()
+    for n, r in enumerate(corpus):
+        ws = (r["text"] if m is None else text(r["text"], m)).split()
         for k in range(0, len(ws), width):
-            tag = r["id"] if len(ws) <= width else f"{r['id']}.{k // width + 1}"
+            tag = f"L{n:04d}" if len(ws) <= width else f"L{n:04d}.{k // width + 1}"
             out.append(f"{tag}: {' '.join(ws[k:k + width])}")
     return "\n".join(out)
 
@@ -91,28 +112,26 @@ Write your answer as JSON to `{out}` (and also put the same JSON in your final m
 
 confidence is 1 (guess) to 5 (sure). Every word once, every meaning once.
 """
+CONDITIONS = ["R", "S", "S0", "M"]
 
 
 def build(min_freq=2, folds=2):
+    fresh([f"{c}_f{f}" for f in range(folds) for c in CONDITIONS])
     corpus = load_corpus()
     items = eligible(corpus, min_freq)
-    rng = random.Random(SEED)
-    rng.shuffle(items)
-    fold_of = {i: n % folds for n, i in enumerate(range(len(items)))}
+    random.Random(SEED).shuffle(items)
     m = make_map(SEED)
     keys = {}
-    (ROOT / "runs/keys").mkdir(parents=True, exist_ok=True)
     for f in range(folds):
-        test = [items[i] for i in range(len(items)) if fold_of[i] == f]
-        given = [items[i] for i in range(len(items)) if fold_of[i] != f]
+        test = items[f::folds]
+        given = [it for i, it in enumerate(items) if i % folds != f]
         meanings = [t["gloss"] for t in test]
         random.Random(SEED + f).shuffle(meanings)
-        for cond in ["R", "S", "S0", "M"]:
+        for cond in CONDITIONS:
             scr = cond.startswith("S")
             sp = (lambda w: word(w, m)) if scr else (lambda w: w)
             run = f"{cond}_f{f}"
             d = BLIND / run
-            d.mkdir(parents=True, exist_ok=True)
             if cond == "M":
                 what = "words from the Meroitic language of ancient Kush (Sudan), in an ASCII transliteration (x and X are the two h signs, S is the s sign, N is the n-tilde sign)"
                 spelling = "No corpus is provided: answer from what you know."
@@ -137,10 +156,10 @@ def build(min_freq=2, folds=2):
                 body += "\n## Corpus\n\n" + corpus_block(corpus, m if scr else None) + "\n"
             (d / "task.md").write_text(body)
             keys[run] = {sp(t["form"]): t["gloss"] for t in test}
-    json.dump(keys, open(ROOT / "runs/keys/step0.json", "w"), indent=1)
+    save_keys(keys)
     json.dump(m, open(ROOT / "runs/keys/scramble_map.json", "w"))
     json.dump(items, open(ROOT / "runs/keys/items.json", "w"), indent=1)
-    print(f"eligible {len(items)}; per fold {[sum(1 for i in fold_of.values() if i == f) for f in range(folds)]}")
+    print(f"eligible {len(items)}; per fold {[len(items[f::folds]) for f in range(folds)]}")
     for p in sorted(BLIND.glob("*/task.md")):
         print(p, len(p.read_text()))
 
