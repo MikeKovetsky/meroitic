@@ -87,13 +87,14 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
 ## Leads for specialists
 
 From `data/discovery/philae.md` (14 items: 1 established, 6 published, 7 new), `funerary.md` (30: 8, 19, 3) and
-`hamadab.md`. "New" means no prior proposal turned up in the searches listed there; Rilly 2007, Hintze 1979 and the
-printed REM were not searchable.
+`hamadab.md`. "New" means no prior proposal turned up in the searches listed there; Rilly 2007, Hintze 1979,
+Hofmann 1981, Griffith 1917 and the printed REM were not searchable.
 
 1. NEW. The Faras stela REM 0129 gives the same title chain, in the same order, as the envoy Sasan in the Demotic
    graffito Ph. 416: `qoreñ`, `kroro`, "great envoy to Rome".
 2. NEW. Bekemete's label REM 0098, "begotten by a general of the water", settles Ph. 417: the title is his father's.
-3. NEW. `wi` before a numeral marks a total (Tanyidamani: `mk lte wi 12` after twelve items counted "1").
+3. NEW, though partly anticipated: Hofmann 1981 (not seen) found a sum of the counts in REM 1003 l. 25. `wi` before
+   a numeral marks a total (Tanyidamani: `mk lte wi 12` after twelve items counted "1").
 4. NEW. The closing totals 1,626 and 1,032 on REM 1003 count animals (`asr`), not people.
 5. NEW. `plSn` ("high priest", Millet) may be Egyptian pꜣ mr-šn, the lesonis.
 6. NEW. With an epithet, the vocative `-i` moves to the end of the god's phrase (Osiris is `Sori`, never `Soreyi`,
