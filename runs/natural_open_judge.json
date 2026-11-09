@@ -1,0 +1,142 @@
+{
+  "judgments": [
+    {
+      "word": "asr",
+      "published": "meat, animal",
+      "first": "cattle, livestock (taken as booty)",
+      "first_same": true,
+      "any_same": true,
+      "why": "Borderline, accepted: 'meat, animal' names the animal kept or killed for meat, which is what livestock is, so the candidate names the same beasts at the same level; it does not cover the 'meat' (flesh) sense, and 'cattle' alone would be too narrow."
+    },
+    {
+      "word": "kdite",
+      "published": "sister",
+      "first": "sister",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is identical."
+    },
+    {
+      "word": "mte",
+      "published": "child",
+      "first": "child (son or daughter)",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is the same; the parenthesis only spells out 'child'."
+    },
+    {
+      "word": "tre",
+      "published": "offer",
+      "first": "give, offer (donate)",
+      "first_same": true,
+      "any_same": true,
+      "why": "The candidate names 'offer' outright, and 'give, donate' are direct synonyms in an offering context."
+    },
+    {
+      "word": "mkdi",
+      "published": "goddess",
+      "first": "goddess",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is identical."
+    },
+    {
+      "word": "ar",
+      "published": "boy, son",
+      "first": "take, seize, capture",
+      "first_same": false,
+      "any_same": true,
+      "why": "The first candidate is the verb 'take', a different concept; the second candidate, 'boy, male child', matches 'boy, son'."
+    },
+    {
+      "word": "are",
+      "published": "take, receive (seize)",
+      "first": "take, receive (accept)",
+      "first_same": true,
+      "any_same": true,
+      "why": "The head gloss 'take, receive' is the same; only the parenthetical nuance differs."
+    },
+    {
+      "word": "xlbi",
+      "published": "bull, ox",
+      "first": "bull",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is the same ('bull')."
+    },
+    {
+      "word": "ns",
+      "published": "sacrifice",
+      "first": "each, every (distributive)",
+      "first_same": false,
+      "any_same": false,
+      "why": "None of the candidates ('each, every', 'people, inhabitants', 'booty, spoils') is or implies 'sacrifice'."
+    },
+    {
+      "word": "tbo",
+      "published": "two, second",
+      "first": "two, both",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is the same ('two')."
+    },
+    {
+      "word": "yireqw",
+      "published": "south",
+      "first": "south, southward",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is the same ('south')."
+    },
+    {
+      "word": "kelw",
+      "published": "and, also",
+      "first": "also, likewise, too",
+      "first_same": true,
+      "any_same": true,
+      "why": "The gloss is the same ('also'), and 'likewise, too' are direct synonyms."
+    },
+    {
+      "word": "SSor",
+      "published": "scribe",
+      "first": "a priestly or temple official (title)",
+      "first_same": false,
+      "any_same": true,
+      "why": "A priestly or temple official is a broader, different office, not 'scribe' (the task's own example); the second candidate is 'scribe'."
+    },
+    {
+      "word": "perite",
+      "published": "agent (administrator)",
+      "first": "agent (an official title)",
+      "first_same": true,
+      "any_same": true,
+      "why": "The head gloss 'agent' as an official title is the same; the second candidate, 'steward, administrator', also matches."
+    },
+    {
+      "word": "pXrs",
+      "published": "Faras (Pachoras)",
+      "first": "Faras (Pakhoras), a town in Lower Nubia",
+      "first_same": true,
+      "any_same": true,
+      "why": "It is the same place; Pakhoras is the same Greek name in another transliteration."
+    },
+    {
+      "word": "tkk",
+      "published": "plunder, pillage",
+      "first": "booty, goods (possessions)",
+      "first_same": false,
+      "any_same": true,
+      "why": "Borderline, first not accepted: 'plunder, pillage' names the act of looting, while 'booty, goods (possessions)' names the things taken, and 'goods, possessions' widens that to property in general; the second candidate, 'plunder, carry off', matches."
+    },
+    {
+      "word": "tebwe",
+      "published": "Abaton (Philae)",
+      "first": "the Abaton (Bigeh island, beside Philae)",
+      "first_same": true,
+      "any_same": true,
+      "why": "It is the same place: the Abaton is the sanctuary on Bigeh island, opposite Philae."
+    }
+  ],
+  "first_total": 13,
+  "any_total": 16
+}

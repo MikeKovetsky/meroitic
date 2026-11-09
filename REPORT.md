@@ -22,8 +22,9 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
    imperative and determiner only as a second reading or a hedged guess, genitive as "at/of"), and got 2 wrong
    (plural, copula) (`YK_morph`, `runs/yk_morph_scored.json`).
 4. **The texts fill gaps in its memory.** For the 17 published words it could not recall, reading the corpus took
-   it to the published meaning on the first guess for 14 and within three guesses for 16 (`N_open`,
-   `runs/natural_open_scored.json`, judged by me against the key; the table is below so anyone can re-judge).
+   it to the published meaning on the first guess for 13 and within three guesses for 16 (`N_open`, judged by an
+   independent agent in `runs/natural_open_judge.json`; my own looser call in `runs/natural_open_scored.json` gave
+   14, the difference being "booty" for "plunder").
 5. **It restores lost words better than an n-gram restorer, also where nothing can be copied.** Of 120 masked words
    in 60 held-out inscriptions it restored 84 on the first guess; an n-gram restorer counting the same texts got 35
    (exact McNemar p ≈ 3×10⁻¹³). On the 62 masks with no parallel in the task (no run of 12+ letters around the word,
@@ -53,7 +54,7 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
 | Matching, scrambled corpus | `S_f0/1` | 35/35 | not blind: the task files carried inscription names; runs said they decoded Meroitic |
 | Matching, scrambled, no corpus | `S0_f0/1` | 35/35 | cipher broken from the glossary |
 | Open recall, 82 words | `F_recall` | 50 right, 1 partial, 1 wrong, 30 unknown | memory |
-| Natural experiment, 17 unrecalled words | `N_open` | 14/17 first guess, 16/17 top three | mostly clean |
+| Natural experiment, 17 unrecalled words | `N_open` | 13/17 first guess, 16/17 top three (independent judge) | mostly clean |
 | Synthetic language, matching | `Y_f0/1` | 41/52; confidence 4–5: 24/24 | clean |
 | Synthetic language, grammar | `YK_morph` | 8/8 endings found; functions 3 right, 2 partly, 3 wrong | clean |
 | Grammar, scrambled real corpus | `K_morph`, `K2_morph` | `K2_morph`: of 26 published grammar items, 14 right, 6 partly, 6 missed (`runs/k2_morph_scored.json`) | recognised Meroitic |
@@ -77,7 +78,7 @@ answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw
 | kelw | and, also | also, likewise | right |
 | are | take, receive | take, receive | right |
 | asr | meat, animal | cattle, livestock | right |
-| tkk | plunder | booty, goods | right |
+| tkk | plunder | booty, goods (2nd: plunder) | top three (judge); right (my call) |
 | tre | offer | give, offer | right |
 | ar | boy, son | take, seize (2nd: boy) | top three |
 | SSor | scribe | temple official (2nd: scribe) | top three |

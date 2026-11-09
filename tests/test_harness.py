@@ -283,6 +283,16 @@ def test_reported_synthetic_numbers():
     assert [i["form"] for i in k2["items"]] == gold
     assert {v: count(k2["items"], v) for v in ("right", "partly", "missed")} == k2["totals"]
 
+
+def test_natural_experiment_judge_adds_up():
+    j = json.load(open(ROOT / "runs/natural_open_judge.json"))
+    key = json.load(open(ROOT / "runs/keys/natural_open.json"))
+    first = {a["word"]: a["candidates"][0] for a in json.load(open(ROOT / "runs/answers/N_open.json"))["answers"]}
+    assert sorted(x["word"] for x in j["judgments"]) == sorted(key)
+    assert all(x["published"] == key[x["word"]] and x["first"] == first[x["word"]] for x in j["judgments"])
+    assert (j["first_total"], j["any_total"]) == (sum(x["first_same"] for x in j["judgments"]),
+                                                  sum(x["any_same"] for x in j["judgments"])) == (13, 16)
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")]
     failed = 0
