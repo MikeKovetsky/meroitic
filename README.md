@@ -28,13 +28,16 @@ This file describes the methods.
 
 ## Data
 
+Data without an open licence is not in this repo: it stays on the author's machine, listed in `.gitignore`, and the
+scripts rebuild what can be rebuilt.
+
 | Source | What | In this repo |
 |---|---|---|
-| Otten & Anastasopoulos, ALP 2025, [Meroitic-Corpus](https://github.com/Joshua-Otten/Meroitic-Corpus) | the only machine-readable corpus (18,090 lines) | not committed (no licence stated); clone it to `data/otten/` |
+| Otten & Anastasopoulos, ALP 2025, [Meroitic-Corpus](https://github.com/Joshua-Otten/Meroitic-Corpus) | the only machine-readable corpus (18,090 lines) | not committed (no licence stated): clone it to `data/otten/`; the cleaned corpora (`data/corpus*.jsonl`) and the task files that embed them (`runs/tasks/`) are rebuilt locally, not committed |
 | Griffith, *Meroitic Inscriptions* I–II (1911–12) and Garstang/Sayce/Griffith, *Meroë* (1911), archive.org | printed Meroitic type, public domain | `data/expansion/griffith_*.jsonl`, read by the model |
-| Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | `data/rilly2003/`, extracted from the scans for private research; **don't publish** |
+| Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/` |
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
-| Starostin's GLD, IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | `data/nes/` |
+| Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | quoted only in short excerpts |
 
 ## Methods
@@ -150,6 +153,10 @@ at doubtful-sign marks, a copy detector that missed copies, and rules applied ou
 them; each fix changed a reported number, and the report shows the corrected one. Tests: `tests/`.
 
 ## Reproduce
+
+The corpus rebuilds from Otten's repo with the commands below. Two things don't: the corpus snapshot several later
+runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before the review's fixes to `src/corpus.py`), and anything
+that reads Rilly's lexicon or the NES word lists; those need the files kept locally.
 
 ```bash
 git clone https://github.com/Joshua-Otten/Meroitic-Corpus data/otten
