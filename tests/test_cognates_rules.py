@@ -107,7 +107,7 @@ def test_same_sound_yields_where_every_row_says_otherwise():
                           ("d", "F", "nubian"), ("b", "M", "nubian"), ("b", "F", "nyima"), ("t", "M", "taman"),
                           ("k", "F", "nubian"), ("w", "M", "nara")]:
         assert cr.reflexes(mer, pos, grp)[mer][0] == 1.0, (mer, pos, grp)      # stated, or no row says otherwise
-    assert cr.align("dime", seg("tim"), "nobiin") < cr.align("dime", seg("ti"), "nobiin") + 0.5
+    assert abs(cr.align("dime", seg("tim"), "nobiin") - (1.0 + 0.25 + pf) / 2) < 1e-12    # d~t, i~i, final m~m
 
 
 def test_segments_handle_each_spelling():

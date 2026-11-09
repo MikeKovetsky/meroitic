@@ -19,8 +19,8 @@ data/nes/sound_correspondences.tsv ("T<n>" = its n-th data row) predict for a Me
    consonants one reflex). Vowels weigh little, since the script hardly writes them. The score is
    the total over the number of Meroitic consonants.
 
-validate() repeats the cognates.py shuffle test with this scorer and with raw similarity on the same
-words, lists and variants, and adds precision at the top.
+run() repeats the cognates.py shuffle test with this scorer and with raw similarity on the same words,
+lists and variants, and adds precision at the top and ranks (ties broken at random for both scorers).
 
   python3 -I src/cognates_rules.py [shuffles]
 """
