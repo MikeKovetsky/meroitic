@@ -123,3 +123,38 @@ Rilly 2007, FHN commentary) it cannot tell a rediscovery from a discovery.
 2. The model as an analyst whose high-confidence readings go to a specialist, low-confidence ones not.
 3. A cognate test with Rilly's sound correspondences over his 2003 thesis appendix (about 200 series).
 4. The leads above sent to Claude Rilly, Stefan Hallof, Henriette Ashby or Joshua Otten.
+
+
+## Waves 2 and 3 (2026-11-09 morning)
+
+After "are you giving up?", four more lines of attack, then data.
+
+1. **Calibrated readings of unknown words** (`runs/unknown/`, three independent runs, 29 words): 93 readings, 70 at
+   confidence 3 or below. Readings agreed at 4+ by two runs are all structural: the Osiris and Isis epithets
+   (`wetrri`, `wetNyiNqeli`, meaning unknown), `tmNteleb` "those in TmN", `mlolo` "was good", `brtoye` a name. The
+   corpus shows what kind of word something is (title, kin term, place, counted item), almost never what it means.
+2. **Sound-law cognate engine** (`src/cognates_rules.py`, reviewed; `data/discovery/cognates_rules.md`): on all
+   accepted words p = 0.017, but that comes from the words Rilly built the rules from (p = 0.0005); on held-out
+   words p = 0.49. No candidate cognates were earned.
+3. **Reading inscriptions from photographs** (`data/discovery/vision.md`): 0 of about 80 signs on the worn Hamadab
+   stela; on a clean British Museum stela, 3 of about 30 words. It can't check readings on stones.
+4. **Tanyidamani stela REM 1044** (`data/discovery/tanyidamani.md`): an interlinear and a plain-English outline
+   (titles, two campaigns, offerings to twelve gods, people and animals given to Amun). Its 7 NEW claims: 1 already
+   published, 6 weakened (`data/discovery/verification.md`). With the first round, 0 of 14 "new" claims survived.
+5. **Rilly's 2003 lexicon** (HAL tel-04793700) read from its 304 scanned pages by six agents: 937 entries
+   (`data/rilly2003/`, private).
+6. **Meaning test at scale against Rilly** (`src/lexique.py`, judged independently in `runs/lexique_judge.json`):
+   - recall from memory: 27 of 65 SAME (as judged 28 of 68); all 19 answers at confidence 4–5 SAME;
+   - from the corpus, for the words recall missed: first guess 13 of 35, any of three 20 of 35, after removing six
+     targets the glossary gave away and three non-test items (as judged: 20 of 44 and 28 of 44);
+   - `python3 -I src/lexique.py judged` prints both versions with the judge's borderline ranges.
+7. **Calibration across all tests:** every answer given at confidence 4–5 was right: 46 of 46 on the synthetic
+   language (two runs), 7 of 7 and 19 of 19 in recall-then-corpus tests, 2 of 2 corrected corpus answers.
+8. **Reading Griffith's printed type** (`data/expansion/printed_type_test.md`): 95.6% sign accuracy against FHN on 12
+   texts (482 of 504), 99.6% against what Griffith printed; Karanòg's hand copies are untested.
+9. **Corpus expansion** (`data/expansion/griffith_*.jsonl`, `src/expand.py`): 152 inscriptions transcribed from
+   *Meroitic Inscriptions* I–II and *Meroë*; 29 are partial (left out), 37 were already in the corpus or repeat
+   another Griffith text, 86 are new: `data/corpus_v3.jsonl` has 748 texts and 19,066 words (+5%). The duplicate
+   test is strict (a short label inside a longer text counts as present), so the gain is a lower bound.
+10. **Review:** the review of `src/lexique.py` and `src/expand.py` was stopped partway on Mike's word to push; its
+    edits are included and pass the tests.
