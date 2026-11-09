@@ -7,9 +7,15 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 
 import cognates_rules as cr   # noqa: E402
+from local_only import needs, run   # noqa: E402
+
+# local-only (README, Data): Rilly's correspondences and the word lists without an open licence
+RULES_TSV = "data/nes/sound_correspondences.tsv"
+LISTS = [f"data/nes/{l}.tsv" for l in ("old_nubian", "nobiin", "kenzi", "dongolawi", "midob", "birgid", "hill_nubian",
+                                         "nara", "taman", "nyima", "proto_nes")]
 
 SL = cr.Slot
 
@@ -66,6 +72,7 @@ def tsv_rows():
 
 
 def test_rules_keep_their_rows_positions():
+    needs(RULES_TSV)
     rows, pf = tsv_rows(), cr.POS_FACTOR
     cited = [r[5] for r in cr.RULES] + [t[-1] for t in cr.TWO.values()] + [d[3] for d in cr.DROPS.values()]
     assert all(1 <= n <= len(rows) for ns in cited for n in ns)                  # every T<n> is a row
@@ -213,6 +220,7 @@ def test_rank_median_is_the_middle():
 
 
 def test_validation_words_leave_out_loans_names_and_circular_lists():
+    needs(*LISTS)
     words, left = cr.gold_words()
     forms = {f for f, _, _ in words}
     assert not forms & set(cr.LOANS) and {f for f, _ in left} >= set(cr.LOANS)
@@ -233,14 +241,4 @@ def test_lists_need_both_tests():
 
 
 if __name__ == "__main__":
-    tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")]
-    failed = 0
-    for name, fn in tests:
-        try:
-            fn()
-            print("ok  ", name)
-        except Exception as e:      # noqa: BLE001 - report every failing check, then exit non-zero
-            failed += 1
-            print("FAIL", name, type(e).__name__, e)
-    print(f"{len(tests) - failed}/{len(tests)} passed")
-    sys.exit(1 if failed else 0)
+    run([(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")])

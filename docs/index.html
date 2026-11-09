@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Meroitic with Opus 5.5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Meroitic&display=swap">
+<style>
+/* Layout: one reading column; tables and the result strips scroll inside their own boxes. */
+:root {
+  --bg: #f3f4f1; --surface: #fbfbf9; --fg: #171a1e; --muted: #59606b; --rule: #d6dad3;
+  --accent: #1d6670; --accent-soft: #d8e9ea; --ochre: #9a5f0c; --ochre-soft: #f3e4cc;
+  --good: #2c7a4b; --bad: #9e3434; --bar: #c9d3d0;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --script: "Noto Sans Meroitic", "Segoe UI Historic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111417; --surface: #171b1f; --fg: #e4e7ea; --muted: #9ba3ad; --rule: #2b3137;
+  --accent: #5fb4bd; --accent-soft: #1d3437; --ochre: #dba451; --ochre-soft: #3a2d18;
+  --good: #63c08a; --bad: #e08080; --bar: #34404a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111417; --surface: #171b1f; --fg: #e4e7ea; --muted: #9ba3ad; --rule: #2b3137;
+  --accent: #5fb4bd; --accent-soft: #1d3437; --ochre: #dba451; --ochre-soft: #3a2d18;
+  --good: #63c08a; --bad: #e08080; --bar: #34404a; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px }
+main { max-width: 820px; margin: 0 auto; display: grid; gap: 56px }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.2; margin: 0 }
+h1 { font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 650; letter-spacing: -0.01em }
+h2 { font-size: 1.6rem; font-weight: 650 }
+h3 { font-size: 1.1rem; font-weight: 650 }
+p { margin: 0; max-width: 68ch }
+a { color: var(--accent) }
+code, .tr { font-family: var(--mono); font-size: 0.88em }
+.tr { color: var(--accent) }
+section { display: grid; gap: 18px }
+.eyebrow { font: 600 0.75rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+
+header { padding-top: 48px; display: grid; gap: 18px }
+.script { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; padding: 18px 0 4px; border-bottom: 1px solid var(--rule) }
+.word { display: grid; gap: 2px }
+.word .glyphs { font-family: var(--script); font-size: 2.1rem; line-height: 1.3; direction: rtl; color: var(--fg) }
+.word .gloss { font-size: 0.8rem; color: var(--muted) }
+.lede { font-size: 1.15rem; max-width: 62ch }
+.meta { font-size: 0.85rem; color: var(--muted) }
+
+ol.answers { margin: 0; padding-left: 1.4em; display: grid; gap: 12px; max-width: 70ch }
+ol.answers li::marker { font-family: var(--display); font-weight: 650; color: var(--accent) }
+
+.tests { display: grid; gap: 14px }
+.test { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 8px 20px; align-items: start; padding: 14px 0; border-top: 1px solid var(--rule) }
+.test:last-child { border-bottom: 1px solid var(--rule) }
+.test .name { font-weight: 600 }
+.test .name small { display: block; font-weight: 400; color: var(--muted); font-size: 0.82rem; line-height: 1.45 }
+.strip { display: grid; gap: 6px; min-width: 0 }
+.row { display: grid; grid-template-columns: 6.6rem minmax(0, 1fr) 4.6rem; gap: 10px; align-items: center; font-size: 0.85rem }
+.row .lab { color: var(--muted) }
+.track { height: 12px; background: var(--bar); border-radius: 2px; position: relative; overflow: hidden }
+.fill { position: absolute; inset: 0 auto 0 0; background: var(--accent) }
+.fill.base { background: var(--muted) }
+.fill.flag { background: var(--ochre) }
+.row .val { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.8rem }
+.verdict { font-size: 0.85rem; color: var(--muted); grid-column: 2 }
+.chip { display: inline-block; font: 600 0.68rem/1 var(--body); letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; vertical-align: 2px }
+.chip.mem { background: var(--ochre-soft); color: var(--ochre) }
+.chip.clean { background: var(--accent-soft); color: var(--accent) }
+.chip.void { background: var(--bar); color: var(--fg) }
+.chip.new { background: var(--ochre-soft); color: var(--ochre) }
+.chip.pub { background: var(--accent-soft); color: var(--accent) }
+.chip.neg { background: var(--bar); color: var(--fg) }
+
+.leads { display: grid; gap: 0 }
+.lead { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 4px 18px; padding: 14px 0; border-top: 1px solid var(--rule) }
+.lead:last-child { border-bottom: 1px solid var(--rule) }
+.lead .where { font-size: 0.8rem; color: var(--muted) }
+.lead p { font-size: 0.95rem }
+
+.tablebox { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface) }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; min-width: 560px }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top }
+th { font-weight: 600; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase }
+tr:last-child td { border-bottom: 0 }
+td.num { font-variant-numeric: tabular-nums; font-family: var(--mono); white-space: nowrap }
+.ok { color: var(--good) } .miss { color: var(--bad) }
+
+ul.plain { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; max-width: 70ch }
+.quote { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; color: var(--muted); font-size: 0.95rem; max-width: 64ch }
+footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; border-top: 1px solid var(--rule); padding-top: 18px }
+
+@media (max-width: 620px) {
+  .test, .lead { grid-template-columns: minmax(0, 1fr) }
+  .verdict { grid-column: 1 }
+  .row { grid-template-columns: 5.4rem minmax(0, 1fr) 4.2rem }
+}
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">Overnight trial · 8–9 November 2026</div>
+  <h1>Reading Meroitic with Opus 5.5</h1>
+  <div class="script" aria-label="Meroitic cursive examples">
+    <div class="word"><span class="glyphs">𐦳𐦣𐦫𐦡</span><span class="gloss"><span class="tr">qore</span> ruler</span></div>
+    <div class="word"><span class="glyphs">𐦠𐦶</span><span class="gloss"><span class="tr">ato</span> water</span></div>
+    <div class="word"><span class="glyphs">𐦥𐦣𐦯</span><span class="gloss"><span class="tr">wos</span> Isis</span></div>
+    <div class="word"><span class="glyphs">𐦠𐦦𐦫</span><span class="gloss"><span class="tr">abr</span> man</span></div>
+    <div class="word"><span class="glyphs">𐦲𐦷𐦢</span><span class="gloss"><span class="tr">kdi</span> woman</span></div>
+  </div>
+  <p class="lede">Meroitic, the language of ancient Kush, can be read aloud but is mostly not understood. Over a night and a morning, about 60 Opus 5.5 subagents tested what the model already knows, what it can work out from the texts alone, what new leads it finds for specialists, and whether it can grow the corpus.</p>
+  <p class="meta">Corpus: Otten &amp; Anastasopoulos's public corpus (ALP 2025), cleaned. Answer key: 82 published word meanings and 26 grammatical endings, each sourced. Code, prompts and every answer file are in the local repo <code>~/repos/mike/meroitic</code>.</p>
+</header>
+
+<section>
+  <div class="eyebrow">Did we find anything new?</div>
+  <h2>No decipherment. New: the public corpus is mostly copies, 86 texts are newly machine-readable, and a test that works</h2>
+  <ol class="answers">
+    <li><strong>The public Meroitic corpus is mostly copies.</strong> The only machine-readable corpus is a file of 18,090 lines that holds 662 different texts or phrases: each is repeated, about 27 times on average, with only a person's name changed. The short label <span class="tr">tdxe mlEqErebr qEret ___</span> appears 198 times, once with each of 198 names. Counting words in the file counts the same texts over and over, and some titles come out about 100 times too frequent. The paper describes the name swapping (871 examples made into 17,257); the released file does not say it is that version. We recovered the swapped name lists from the data and undid it.</li>
+    <li><strong>86 texts missing from that corpus are now machine-readable.</strong> Opus reads the Meroitic type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against the modern edition. It transcribed 152 of his inscriptions; 86 were not in the corpus. His hand copies (88.8%) and photographs of the stones are beyond it.</li>
+    <li><strong>Scrambling the script doesn't hide it from a frontier model.</strong> From a 17-word glossary of letter-swapped Meroitic and no texts, it broke the cipher and matched all 35 test words. From the scrambled texts with neutral labels, it recognised the opening <span class="tr">Wos-i Sorey-i</span> ("O Isis, O Osiris") and read the script from there. Tests of AI decipherment on known-but-undeciphered scripts have to assume the model has read the literature.</li>
+    <li><strong>A test that works, and what it shows.</strong> On a synthetic twin language with every word invented, it recovered 41 and 43 of 52 meanings on two runs, where chance is about 2. On real words it could not recall, the corpus got it to Rilly's meaning for 13 of 35, and 20 within three guesses.</li>
+    <li><strong>Its confidence is a usable filter.</strong> In every test, all 74 answers it gave at confidence 4 or 5 were right. At confidence 1 or 2, about a third were.</li>
+    <li><strong>It restores lost words about twice as well as statistics.</strong> Where a masked word has no parallel anywhere in the texts, it restored 48% on the first guess; an n-gram model restored 26%.</li>
+    <li><strong>What did not hold up.</strong> None of the 14 "new" readings its discovery runs proposed survived a check designed to prove them wrong: 3 were already in print, 11 weakened, 2 partial leads remain. With open word lists, Meroitic shows no resemblance to Nubian beyond the 20 or so word series Rilly built his sound laws from.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="eyebrow">What a Meroitic epitaph says</div>
+  <h2>The part that is already read</h2>
+  <p>Most of the corpus is funerary texts built on one formula, and that formula is understood. This is the epitaph of a woman called Adeliye, as Rilly reads it (Rilly &amp; de Voogt 2012, p. 92). Hyphens mark the endings; the article <span class="tr">-l</span>, the copula <span class="tr">-o</span> and the plural <span class="tr">-leb</span> are the pieces the blind runs rebuilt.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Meroitic</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tr">wos-i sorey-i</span></td><td>O Isis! O Osiris!</td></tr>
+        <tr><td><span class="tr">qo adeliye-qowi</span></td><td>This is Adeliye.</td></tr>
+        <tr><td><span class="tr">apily tedḫe-lowi, telepol terike-lowi</span></td><td>Apilaye (her mother) bore her; Telepula (her father) begot her.</td></tr>
+        <tr><td><span class="tr">pqr-leb yetmde-lo, peseto-leb yetmde-lowi</span></td><td>She was a relative of princes, a relative of viceroys.</td></tr>
+        <tr><td><span class="tr">mlomrse nlotet-lowi</span></td><td>She was a native of Nalote.</td></tr>
+        <tr><td><span class="tr">ato mẖe pso-ẖe-kete</span></td><td>Abundant water, may you pour it for her.</td></tr>
+        <tr><td><span class="tr">at mẖe ps-ḫr-kete</span></td><td>Abundant bread, may you give it to her.</td></tr>
+        <tr><td><span class="tr">ḫ-mlo-l p-ẖol-kete</span></td><td>A good meal, may you grant it to her.</td></tr>
+        <tr><td><span class="tr">mlo-lo</span></td><td>She was good.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>What remains dark is everything outside formulas like this: the royal stelae, the long temple texts, and most titles and verbs.</p>
+</section>
+
+<section>
+  <div class="eyebrow">The tests</div>
+  <h2>Each test, its condition, and what it measures</h2>
+  <p>Every score below compares one model answer file with a key the model never saw. <span class="chip clean">clean</span> means memory could not have supplied the answer. <span class="chip mem">memory</span> means the model knew or recognised the material. <span class="chip void">confounded</span> means a flaw in the setup decided the result.</p>
+  <div class="tests">
+    <div class="test">
+      <div class="name">Pair 35 words with 35 meanings <small>Four conditions: memory only, the real corpus, a letter-scrambled corpus, and scrambled with no corpus. Two folds each.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">memory only</span><span class="track"><span class="fill flag" style="width:100%"></span></span><span class="val">35/35</span></div>
+        <div class="row"><span class="lab">real corpus</span><span class="track"><span class="fill flag" style="width:100%"></span></span><span class="val">35/35</span></div>
+        <div class="row"><span class="lab">scrambled</span><span class="track"><span class="fill flag" style="width:100%"></span></span><span class="val">35/35</span></div>
+        <div class="row"><span class="lab">no corpus</span><span class="track"><span class="fill flag" style="width:100%"></span></span><span class="val">35/35</span></div>
+        <div class="row"><span class="lab">chance</span><span class="track"><span class="fill base" style="width:5.7%"></span></span><span class="val">≈2/35</span></div>
+      </div>
+      <p class="verdict"><span class="chip mem">memory</span> The scrambled runs said they decoded the letters back to Meroitic.</p>
+    </div>
+    <div class="test">
+      <div class="name">Open recall of 82 published words <small>No options to choose from; "unknown" allowed.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">right</span><span class="track"><span class="fill flag" style="width:61%"></span></span><span class="val">50/82</span></div>
+        <div class="row"><span class="lab">unknown</span><span class="track"><span class="fill base" style="width:36.6%"></span></span><span class="val">30/82</span></div>
+        <div class="row"><span class="lab">wrong, partial</span><span class="track"><span class="fill base" style="width:2.4%"></span></span><span class="val">2/82</span></div>
+      </div>
+      <p class="verdict"><span class="chip mem">memory</span> Among the unknowns: <span class="tr">kdite</span> sister, <span class="tr">mte</span> child, <span class="tr">ssor</span> scribe, <span class="tr">ḫlbi</span> bull, <span class="tr">kelw</span> and.</p>
+    </div>
+    <div class="test">
+      <div class="name">Recover the 17 unrecalled words from the texts <small>Open answers, three guesses each, scored against the published meanings.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">first guess</span><span class="track"><span class="fill" style="width:76.5%"></span></span><span class="val">13/17</span></div>
+        <div class="row"><span class="lab">in top three</span><span class="track"><span class="fill" style="width:94.1%"></span></span><span class="val">16/17</span></div>
+      </div>
+      <p class="verdict"><span class="chip clean">mostly clean</span> Scored by an independent judge. Context can still jog memory and general knowledge: it placed <span class="tr">tebwe</span> as the Abaton because the texts pair it with Philae. The one word with no match is <span class="tr">ns</span> "sacrifice".</p>
+    </div>
+    <div class="test">
+      <div class="name">Synthetic language, matching <small>1,003 texts and 16,000 words generated with invented vocabulary and endings; 52 usable test words over two folds.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">all answers</span><span class="track"><span class="fill" style="width:78.8%"></span></span><span class="val">41/52</span></div>
+        <div class="row"><span class="lab">confidence 4–5</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">24/24</span></div>
+        <div class="row"><span class="lab">chance</span><span class="track"><span class="fill base" style="width:3.8%"></span></span><span class="val">≈2/52</span></div>
+      </div>
+      <p class="verdict"><span class="chip clean">clean</span> A second independent run scored 43 of 52, again with every confidence 4–5 answer right (22 of 22). The misses are pairs the generator made identical in context (brother and sister, three titles). The review dropped 4 of the 56 original test words: two never appear in the texts, one appears once, and one is spelled like an ending.</p>
+    </div>
+    <div class="test">
+      <div class="name">Synthetic language, grammar <small>The same blind grammar task, on the invented language, scored against the generator's 8 endings.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">endings found</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">8/8</span></div>
+        <div class="row"><span class="lab">function right</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="val">2/8</span></div>
+        <div class="row"><span class="lab">partly right</span><span class="track"><span class="fill base" style="width:50%"></span></span><span class="val">4/8</span></div>
+      </div>
+      <p class="verdict"><span class="chip clean">clean</span> It cut every word at the right places and laid out all seven text types, down to which verb goes with which offering. It named the "to" ending and the past tense exactly. The vocative, imperative and article came only as second readings or hedged guesses, and the genitive as "at/of". It took the plural for an object marker (the generator added plurals at random) and the copula for "of".</p>
+    </div>
+    <div class="test">
+      <div class="name">Grammar, scrambled real corpus <small>No meanings given; scored against 26 published endings.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">right</span><span class="track"><span class="fill flag" style="width:53.8%"></span></span><span class="val">14/26</span></div>
+        <div class="row"><span class="lab">partly right</span><span class="track"><span class="fill base" style="width:23.1%"></span></span><span class="val">6/26</span></div>
+      </div>
+      <p class="verdict"><span class="chip mem">memory</span> It recovered the article <span class="tr">-l</span> and plural <span class="tr">-leb</span>, genitive <span class="tr">-s</span>, locative <span class="tr">-te</span>, vocative <span class="tr">-i</span>, <span class="tr">qo</span> "this", the copulas <span class="tr">-lowi</span> and <span class="tr">-kwi</span>, the wish prefix <span class="tr">p-</span>, the plural "to them" ending, and the rule that the a-sign only starts words. It also recognised the language, so this can't count as blind.</p>
+    </div>
+    <div class="test">
+      <div class="name">Restore masked words in unseen texts <small>60 families of near-copies held out whole, 120 masks. Scored here: the 62 masks with no parallel anywhere in the task (no run of 12+ letters around the word occurs elsewhere).</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">Opus 5.5</span><span class="track"><span class="fill" style="width:48.4%"></span></span><span class="val">30/62</span></div>
+        <div class="row"><span class="lab">n-gram</span><span class="track"><span class="fill base" style="width:25.8%"></span></span><span class="val">16/62</span></div>
+      </div>
+      <p class="verdict"><span class="chip clean">clean</span> First guesses only; exact McNemar p ≈ 0.001. Over all 120 masks, including words with a parallel somewhere, it was 84 against 35. Two earlier versions scored 94% and 93% but are void: the model found leftover name-swap copies and restored from them. The task let it use what it knows of Meroitic formulas, as an epigrapher would.</p>
+    </div>
+    <div class="test">
+      <div class="name">Do Meroitic words resemble their Nubian-family equivalents? <small>Form similarity to same-meaning words in 10 Northern East Sudanic lists, against 1,000 shuffles.</small></div>
+      <div class="strip">
+        <div class="row"><span class="lab">with Rilly's forms</span><span class="track"><span class="fill flag" style="width:99.6%"></span></span><span class="val">p=0.004</span></div>
+        <div class="row"><span class="lab">independent lists</span><span class="track"><span class="fill base" style="width:88.5%"></span></span><span class="val">p=0.12</span></div>
+      </div>
+      <p class="verdict"><span class="chip void">inconclusive</span> The signal depends on Rilly's reconstructions, which were built partly from Meroitic. Raw string similarity over open word lists can't settle the family question; a proper test needs his sound correspondences applied to the full comparison series. (Bars show 1 − p.)</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Day two</div>
+  <h2>Everything else that was tried</h2>
+  <p>The first night measured the model. The second morning tried to push the decipherment itself, then turned to the data.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Attempt</th><th>Result</th><th>Reading</th></tr></thead>
+      <tbody>
+        <tr><td>Read 29 unknown words, three independent runs</td><td>Agreement at high confidence only on structure: two divine epithets, <span class="tr">tmNteleb</span> "those in TmN", <span class="tr">mlolo</span> "was good", a name</td><td>The corpus shows what kind of word, rarely what it means</td></tr>
+        <tr><td>Nubian cognates scored by Rilly's sound laws</td><td>p = 0.017 on all words, p = 0.49 on words the rules weren't built from</td><td class="miss">No independent signal</td></tr>
+        <tr><td>Read inscriptions from photographs</td><td>0 of about 80 signs on a worn stela; 3 of about 30 words on a clean one</td><td class="miss">Can't</td></tr>
+        <tr><td>Interlinear of the Tanyidamani stela</td><td>A plain outline: titles, two campaigns, offerings to twelve gods, people and animals given to Amun</td><td>Its 7 "new" claims: 0 survived</td></tr>
+        <tr><td>Extract Rilly's 2003 lexicon from 304 scanned pages</td><td>937 entries</td><td class="ok">Done (kept private)</td></tr>
+        <tr><td>Meanings of 65 Rilly-glossed words</td><td>Memory 27 right; the corpus then got 13 of the 35 it couldn't recall, 20 within three guesses</td><td>After removing 6 targets a glossary gave away</td></tr>
+        <tr><td>Read Griffith's printed type</td><td>95.6% of signs against the modern edition; 152 inscriptions read, 86 new</td><td class="ok">Corpus +86 texts, +5% words</td></tr>
+        <tr><td>Read Griffith's hand copies (Karanòg)</td><td>88.8% of signs; errors in names and rare titles, mostly unflagged</td><td class="miss">Below the bar; not transcribed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Leads for specialists</div>
+  <h2>What the discovery runs proposed, and what survived a second check</h2>
+  <p>Three runs read the funerary texts, the Hamadab stela and the Philae inscriptions, searched the literature, and labelled 7 ideas as new. A fourth run then tried to prove each one wrong, with harder searches in English, French and German, the FHN commentary and Millet's 1968 glossary. None survived as a clean new finding: 2 were already published and 5 were weakened. The model finds real patterns, but where the key books are print-only it cannot tell a rediscovery from a discovery.</p>
+  <div class="leads">
+    <div class="lead"><div class="where"><span class="chip new">open</span><br>Tanyidamani</div><p><span class="tr">wi</span> before a numeral marks a total: <span class="tr">mk lte wi 12</span> follows exactly twelve items each counted "1". Hofmann 1981 already found that <span class="tr">wi 3348</span> on REM 1003 is the sum of the men and women counted; the Tanyidamani case may be new. Check Hintze 1960.</p></div>
+    <div class="lead"><div class="where"><span class="chip new">open</span><br>funerary</div><p>Rilly has published one address ending <span class="tr">-i</span> placed after the pair "Isis + Osiris". The corpus suggests the same for "god + epithet": Osiris is never <span class="tr">Soreyi</span> before an epithet in 11 texts. But Isis keeps her <span class="tr">-i</span> before an epithet in one family. Check Rilly &amp; de Voogt 2012, p. 155, and Heyler 1964.</p></div>
+    <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Philae</div><p>The proposal that the Faras stela REM 0129 repeats envoy Sasan's title chain from Ph. 416 fails. A word masked as a name there is really the title <span class="tr">womnis</span>, so the stela lists five or more titles. FHN III already pairs REM 0129 with Sasan, and the order matches ordinary rank order.</p></div>
+    <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Philae</div><p>The proposal that "general of the water" in Ph. 417 belongs to Bekemete's father was already made: Griffith 1911 set Ph. 417 beside REM 0098, and Török 2009 reportedly gives the father the title.</p></div>
+    <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Hamadab</div><p>The proposal that the totals 1,626 and 1,032 on REM 1003 count animals fails: the related stela REM 1041 counts 1,032 men (<span class="tr">abr wi 1032</span>).</p></div>
+    <div class="lead"><div class="where"><span class="chip pub">published</span><br>funerary</div><p>The title <span class="tr">plSn</span> from Egyptian <em>pꜣ mr-šn</em>, the lesonis: already in FHN III and Ashby 2016.</p></div>
+    <div class="lead"><div class="where"><span class="chip pub">published</span><br>three runs</div><p><span class="tr">penn</span> as a numbered year: Millet 1968 already reads <span class="tr">penn 34</span> as "regnal year 34". Three runs rediscovered it independently, which at least shows the pattern is plain in the texts.</p></div>
+    <div class="lead"><div class="where"><span class="chip pub">published</span><br>Philae</div><p>Supported here: <span class="tr">tebwe</span> is the Abaton (Bigeh), not Thebes (Griffith 1911, Ashby 2016), and <span class="tr">ste</span> can name a man, so Rilly's "tutor" fits better than "mother".</p></div>
+    <div class="lead"><div class="where"><span class="chip neg">negative</span><br>Hamadab</div><p>REM 1003, the British Museum stela, contains nothing that can be checked against the war with Rome: no Roman place names, and no number that matches a Roman figure. This agrees with Rilly 2014, who places the war in the twin stela REM 1039.</p></div>
+  </div>
+  <p class="meta">Full write-ups with evidence lines and searches: <code>data/discovery/funerary.md</code>, <code>philae.md</code>, <code>hamadab.md</code>, and the adversarial check <code>verification.md</code>.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Corrections found along the way</div>
+  <h2>Problems in the data and the received picture</h2>
+  <ul class="plain">
+    <li><strong>The public corpus is padded.</strong> Its 18,090 lines repeat each text with person names swapped from two pools (178 private names, 11 royal). Undone, it is 662 texts and about 18,100 words; the funerary part is 442 distinct texts in 306 families. The three royal narratives were also in it twice. Word counts from the raw file overstate some titles about 100-fold.</li>
+    <li><strong>"Arme = Rome" is withdrawn.</strong> Rilly wrote in 2014 that <span class="tr">armil</span> and <span class="tr">armeyose</span> "have nothing to do with Rome". The Romans appear as <span class="tr">Tmey</span> in REM 1039, and <span class="tr">Arome</span> (Rome) is attested only in 3rd-century texts.</li>
+    <li><strong>The "Hamadab stela" file is REM 1003</strong>, the British Museum stela EA 1650, also called the Akinidad stela. Its eroded twin in Khartoum is REM 1039.</li>
+    <li><strong>Glossary traps.</strong> On the war stela, <span class="tr">kdise</span> means "each woman", not "sister", and <span class="tr">wi</span> before a number is not "brother".</li>
+  </ul>
+</section>
+
+<section>
+  <div class="eyebrow">What it would take</div>
+  <h2>Where a model helps from here</h2>
+  <ul class="plain">
+    <li><strong>Data first.</strong> Hallof's 2024 corpus edition and the REM volumes exist only in print. A clean digital corpus with REM numbers, line breaks and doubtful signs marked would do more than any model upgrade.</li>
+    <li><strong>Use it as a tireless analyst, scored on held-out material.</strong> The synthetic test shows its confidence is well calibrated on clean data. Its high-confidence readings of unknown words are worth a specialist's time; its low-confidence ones are not.</li>
+    <li><strong>A real cognate test.</strong> Apply Rilly's sound correspondences to the full comparison series in his 2003 thesis appendix (about 200 series), not raw string similarity.</li>
+    <li><strong>Pair it with a specialist from the start.</strong> The two open leads, and any future "new" label, need someone with Rilly 2007, Hintze and the REM volumes on the shelf: Claude Rilly (CNRS), Stefan Hallof, Henriette Ashby or Joshua Otten.</li>
+    <li><strong>Digitize the reference shelf too.</strong> Its false "new" labels came from print-only sources it could not search: Millet 1968, Hofmann 1981, FHN commentary pages. Searchable copies of those would have caught them.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>Methods, data, code and every answer file: <a href="https://github.com/MikeKovetsky/meroitic">the meroitic repo</a>. Every claim names its run in <code>REPORT.md</code>.</span>
+  <span>Three independent full code reviews checked the scripts. They fixed leaks, a wrong p-value method, a weak baseline, a corpus bug and sound rules applied too loosely, and corrected several reported numbers; 44 tests guard those fixes. A fourth review was stopped partway to push the repo.</span>
+</footer>
+</main>

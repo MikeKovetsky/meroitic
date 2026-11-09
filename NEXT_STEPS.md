@@ -1,61 +1,88 @@
 # Next steps
 
-Written 2026-11-09, after two days of runs. Ordered by what they would change; each says why, how, the cost and
-what "done" looks like. Results so far: [`REPORT.md`](REPORT.md); methods: [`README.md`](README.md).
+Written 2026-11-09 after two days of runs, and revised the same day after the plan was checked against Otten's paper
+and the sources. Results so far: [`REPORT.md`](REPORT.md); methods: [`README.md`](README.md).
 
-## A. Grow the corpus (the binding constraint)
+The goal from here: an openly licensed and larger Meroitic corpus, an honest method for testing AI on undeciphered
+scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
+looks like.
 
-1. **Karanòg by consensus transcription** (about 150 funerary texts, the largest single gain).
-   - Why: the corpus lacks the whole Karanòg cemetery; one reader reads Griffith's hand copies at 88.8% (91.1% on
-     clearly drawn signs), with errors in names and rare titles and most of them unflagged
-     (`data/expansion/hand_copy_test.md`).
-   - How: two independent readers per text; every sign where they disagree, and every 3-shaped (m, ẖ, s, q) and
-     long-tailed sign, goes to a third look beside a sheet of this scribe's forms; then check each rare word against
-     the spellings Rilly cites with that REM number (Karanòg N = REM 0200+N) in `data/rilly2003/`.
-   - Test first: score the consensus pipeline on Kar. 47, 77, 78 and 121 with fresh agents. The bar is 95% of
-     signs; a rule sheet built from those four texts' errors overfits them, so state that, or hold one text out.
-   - Cost: about 1 hour for the test, 2 to 3 hours for 150 texts with 3 readers each. Done: `griffith_karanog.jsonl`,
-     merged by `src/expand.py`, with the measured accuracy in its notes.
-2. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): same pipeline
-   once Karanòg passes.
-3. **FHN's modern transliterations** (about 30 texts, `/private/tmp/claude-501/expansion/survey/fhn/` holds the OCR):
-   clean modern readings, the quickest gain. FHN is "all rights reserved": fine for this private analysis, not for
+## A. Share
+
+1. **Write to Joshua Otten** (George Mason University) with an offer, not a complaint.
+   - Why: [his paper](https://aclanthology.org/2025.alp-1.11/) names the blocker himself ("If more Meroitic examples
+     could be gathered and made machine-readable, then we could expand our corpus"; "Eventually we will need an OCR
+     model for the Meroitic REM texts"), and it describes the name-swap padding openly (871 examples swapped up to
+     17,257). What it leaves out is that the released file is the padded version.
+   - Offer: the 152 Griffith inscriptions (CC BY 4.0, with source page and REM number), the reading method with its
+     measured accuracy, and the scripts that undo the padding (`src/pool.py` and the three after it).
+   - Ask: a note in his repository that `mero-corpus.txt` is the padded version, and the 871 originals beside it.
+     [The open issue there](https://github.com/Joshua-Otten/Meroitic-Corpus/issues/1) asks for a licence and a
+     provenance line for the same reason.
+   - He is also the route to Claude Rilly, whom the paper thanks "for his thorough review and advice".
+2. **Send the two open leads** with that message, for Rilly or another specialist (Stefan Hallof, Henriette Ashby):
+   - `wi` before a numeral marks a total: in the Tanyidamani stela, `mk lte wi 12` follows exactly twelve items
+     each counted "1" (Hofmann 1981 found a sum on REM 1003; check Hintze 1960 first);
+   - the vocative `-i` placed at the end of "god + epithet" (Osiris is never `Soreyi` before an epithet in 11 texts;
+     Rilly published the "Isis + Osiris" case; check Rilly & de Voogt 2012, p. 155, and Heyler 1964).
+   Any future "new" claim goes through the adversarial check first (`data/discovery/verification.md` shows how),
+   and through Rilly's lexicon in `data/rilly2003/`.
+3. **Write to So Miyagawa** (University of Tsukuba), whose
+   [project from 2026](https://tiar.centers.tsukuba.ac.jp/en/fellow/1911/) applies language models to Meroitic: the
+   blind-test findings (README, What's new, 3 and 4) are the part most useful to him.
+4. **A paper venue exists but has no open call:** the Ancient Language Processing workshop published Otten's paper
+   (editions in 2023 and 2025). No call for a next edition was found on 2026-11-09.
+
+## B. Grow the open corpus
+
+5. **Karanòg, checked against Griffith's own printed indexes** (about 150 funerary texts, the largest single gain).
+   - Why: one reader reads Griffith's hand copies at 88.8% (`data/expansion/hand_copy_test.md`), with the errors in
+     names, rare titles and closing formulas. Griffith's Indexes A to C
+     ([pp. 95–122](https://archive.org/details/karangmeroitic00grifuoft/page/n125)) print every name, title and
+     descriptive phrase of every Karanòg text a second time, in Meroitic type, tagged with the text's number and the
+     word's role (name of the deceased, of the mother, of the father, title, place). The model reads that type at
+     99.6% against the print (measured on Griffith's other volumes, not on these indexes).
+   - How: transcribe the indexes (28 pages of type) into one table: word, role, text numbers. Read each hand copy
+     as before, then replace or confirm every name, title and phrase from the table.
+   - Test first: Kar. 47, 77, 78 and 121 against FHN with fresh agents. The bar is 95% of signs. Four texts are a
+     small test, and FHN prints no other Karanòg text.
+   - Before starting: the page images are in `/private/tmp/claude-501/expansion/`, which macOS empties on restart.
+     Copy them to a folder listed in `.gitignore`, or download them again from archive.org
+     (`data/expansion/README.md` has the item ids).
+   - Cost: about 1 hour for the test, 2 to 3 hours for 150 texts. Done: `griffith_karanog.jsonl`, merged by
+     `src/expand.py`, with the measured accuracy in its notes.
+6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
+   check every word against the page image. The cheapest texts that can be published.
+7. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
+   pipeline once it passes. Check first whether that article has indexes like Karanòg's.
+8. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
+   [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, REM 0001 to 1278:
+   about 1,280 inscriptions against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
+   drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
+   a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
    republishing.
-4. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca printed in Latin letters): OCR, then check every word
-   against the page image.
-5. **A glyph classifier for Griffith's type** (23 forms): would replace agent reading for the remaining printed
-   texts and cut the cost to near zero; the 12 scored texts in `runs/work/griffith/` are its test set.
-6. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
-   same thing; and relax `src/expand.py`'s duplicate test, which counts a short label inside a longer text as
-   present (the +86 texts are a lower bound).
+9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):
+   clean modern readings for private analysis only (FHN is "all rights reserved").
+10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
+    same thing; and relax `src/expand.py`'s duplicate test, which counts a short label inside a longer text as
+    present (the +86 texts are a lower bound).
+11. **A glyph classifier for Griffith's type** (23 forms) would cut the cost of the remaining printed texts, not
+    raise their accuracy (reading is already at 99.6% against the print); the 12 scored texts in
+    `runs/work/griffith/` are its test set. Low priority.
 
-## B. Re-run the measurements cleanly
+## C. Measurements
 
-7. **Rebuild and rerun the corpus meaning test** with the fixed builder (`src/lexique.py` now refuses a glossary
-   that gives a target away) instead of removing leaked items afterwards; judge again. Cost: about 40 minutes.
-8. **Does more data help?** Rerun the same test on `corpus_v3` (and on a corpus with Karanòg once it exists) and
-   compare with `corpus_v2`: the cleanest answer to whether the bottleneck is data.
-9. **Finish the stopped review** of `src/lexique.py` and `src/expand.py` (stopped on Mike's word to push), and add
-   `tests/test_lexique.py`.
-10. **A second synthetic language** with a different generator (other formula types, number-conditioned plurals) to
+12. **Rebuild and rerun the corpus meaning test** with the fixed builder (`src/lexique.py` leaves out of the
+    glossary a word that gives a target away) instead of removing leaked items afterwards; judge again. About 40
+    minutes.
+13. **Does more data help?** Not by comparing `corpus_v2` with `corpus_v3`: a 5% change over about 35 test words
+    is too small to show. A learning curve on the synthetic language would show it (25%, 50%, 100% and 200% of the
+    corpus), but `synth.corpus()` has its size fixed at 1,000 texts, and with 52 test words a run it needs three or
+    more runs per size. Optional: under the corpus goal the answer would not change the plan.
+14. **A second synthetic language** with a different generator (other formula types, number-conditioned plurals) to
     check that the 79–83% matching rate isn't an artefact of one design.
 
-## C. Specialists
+## D. Parked
 
-11. **Tell Joshua Otten** (George Mason University) that the public Meroitic-Corpus is padded with name-swapped
-    copies: 18,090 lines are 662 distinct texts (`src/pool.py` shows the two swap pools).
-12. **Send the two open leads** to a specialist (Claude Rilly, CNRS; Stefan Hallof; Henriette Ashby):
-    - `wi` before a numeral marks a total: in the Tanyidamani stela, `mk lte wi 12` follows exactly twelve items
-      each counted "1" (Hofmann 1981 found a sum on REM 1003; check Hintze 1960 first);
-    - the vocative `-i` placed at the end of "god + epithet" (Osiris is never `Soreyi` before an epithet in 11 texts;
-      Rilly published the "Isis + Osiris" case; check Rilly & de Voogt 2012, p. 155, and Heyler 1964).
-    Any future "new" claim goes through the adversarial check first (`data/discovery/verification.md` shows how),
-    and now also through Rilly's lexicon in `data/rilly2003/`.
-
-## D. Lower priority
-
-13. **Cognates:** the sound-law engine found no signal on held-out words. A real test needs more independent NES
+15. **Cognates:** the sound-law engine found no signal on held-out words. A real test needs more independent NES
     vocabulary (culture and kin words are missing for most languages) rather than a better scorer.
-14. **Publishing:** the repo is private because `data/rilly2003/` is an extraction of Rilly's thesis and
-    `data/corpus*.jsonl` derive from a corpus with no licence. A public version would drop `data/rilly2003/`,
-    `runs/tasks/` and the derived corpora, or get permission first.

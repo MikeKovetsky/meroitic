@@ -2,19 +2,21 @@
 
 Night of 2026-11-08/09, 22:54 to about 01:00 PST, Opus 5.5 subagents. Every number names the run it comes from;
 answers are in `runs/answers/`, keys in `runs/keys/`, the task file each run saw in `runs/tasks/`, the code in `src/`
-(reviewed: `review-fix`, full tier, CLEAN at `7404ee8`, with 15 tests in `tests/test_harness.py`).
+(reviewed: README, Methods 13; checks in `tests/`).
 
 ## Did we find anything new?
 
 **We did not decipher anything.** No new reading of Meroitic survived checking (0 of 14 claimed, two partial leads
 open). What is new, with the run behind each claim:
 
-1. **The public corpus is mostly copies.** Otten & Anastasopoulos's released file is their name-swap augmentation:
-   each real text repeated with only a person's name changed (the label `tdxe mlEqErebr qEret ___` appears 198 times,
+1. **The public corpus is mostly copies.** Otten & Anastasopoulos's released file is their name-swap augmentation
+   (the paper: 871 example texts and phrases swapped up to 17,257; the repository does not say the file is that
+   version): each text or phrase repeated with only a person's name changed (the label `tdxe mlEqErebr qEret ___` appears 198 times,
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **86 texts missing from the public corpus are now machine-readable.** Griffith's printed Meroitic type read at
+2. **152 inscriptions are machine-readable under an open licence, 86 of them missing from the public corpus.**
+   Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
    Hand copies: 88.8% (`hand_copy_test.md`), below the bar. Photographs: almost nothing (`data/discovery/vision.md`).

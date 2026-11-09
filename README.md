@@ -1,24 +1,28 @@
 # Meroitic with Opus 5.5
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
-the data and the method: the public corpus turned out to be mostly copies, 86 texts missing from it are now
-machine-readable, the obvious way to blind a test of AI on an undeciphered script (scramble the letters) turned out
+the data and the method: the public corpus turned out to be mostly copies, 152 inscriptions are now
+machine-readable under an open licence (86 of them missing from that corpus), the obvious way to blind a test of AI on an undeciphered script (scramble the letters) turned out
 not to work, and we built a test that does.
 
 ## What's new
 
-1. **The public Meroitic corpus is mostly copies.** The only machine-readable corpus (Otten & Anastasopoulos, ALP
-   2025) looks like 18,090 inscriptions but holds 662 different ones: each real text is repeated, about 27 times on
-   average, with only a person's name changed. For example, the short label `tdxe mlEqErebr qEret ___` appears 198
+1. **The public Meroitic corpus is mostly copies.** The only machine-readable corpus
+   ([Otten & Anastasopoulos, ALP 2025](https://aclanthology.org/2025.alp-1.11/)) is a file of 18,090 lines that holds
+   662 different texts or phrases: each one is repeated, about 27 times on average, with only a person's name changed. For example, the short label `tdxe mlEqErebr qEret ___` appears 198
    times, once with each of 198 names (`…aplXye`, `…pqebete`, `…msxte trEbit`, …). Anyone counting words in the file
-   counts the same inscription over and over: some titles come out about 100 times more frequent than they are. The
-   paper says it added name-swapped copies to train its word vectors; the file on GitHub doesn't say it is that
-   padded version rather than the original texts. `src/pool.py` recovers the two swap pools (178 private and 11 royal
+   counts the same text over and over: some titles come out about 100 times more frequent than they are. The paper
+   says so itself: it collected 871 example texts and phrases (those quoted in Millet 1968 and Rilly 2007, Lobban's
+   word list and three royal narratives) and swapped names to make 17,257 for training word vectors. What the paper
+   does not say is that the file on GitHub is that padded version: the repository has no note about it and no
+   unpadded file. Our 662 is lower than the paper's 871 because, with names masked, examples that differ only in a
+   name count once (not checked against the 871, which are not published). `src/pool.py` recovers the two swap pools (178 private and 11 royal
    names) from the data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
-2. **86 Meroitic texts missing from the public corpus are now machine-readable.** The model reads the Meroitic cursive type printed in
-   Griffith's 1911–12 editions at 95.6% sign accuracy against the modern edition (99.6% against what Griffith
-   printed). It transcribed 152 inscriptions from *Meroitic Inscriptions* I–II and *Meroë*; 86 are not in the
-   public corpus (+5% words, `data/expansion/`). It can't do the same for Griffith's hand copies (88.8%) or for
+2. **152 inscriptions are now machine-readable under an open licence, 86 of them missing from the public corpus.**
+   The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
+   the modern edition (99.6% against what Griffith printed). It transcribed 152 inscriptions from *Meroitic
+   Inscriptions* I–II and *Meroë*, public-domain editions, each row with its source page, site, object and REM number
+   (`data/expansion/`, CC BY 4.0: [`LICENSE-DATA.md`](LICENSE-DATA.md)); 86 are not in the public corpus (+5% words). It can't do the same for Griffith's hand copies (88.8%) or for
    photographs of the stones (almost nothing).
 3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
    re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
@@ -50,7 +54,8 @@ frontier language model (Claude Opus 5.5, run as about 60 independent subagents)
 make it more understandable?
 
 Results, with every number traced to its run: [`REPORT.md`](REPORT.md). What to do next: [`NEXT_STEPS.md`](NEXT_STEPS.md).
-The illustrated summary page: [`docs/report.html`](docs/report.html). This file describes the data and the methods.
+The illustrated summary page: <https://mikekovetsky.github.io/meroitic/> (source: `docs/report.html`). This file
+describes the data and the methods.
 
 ## Data
 
@@ -59,12 +64,12 @@ scripts rebuild what can be rebuilt.
 
 | Source | What | In this repo |
 |---|---|---|
-| Otten & Anastasopoulos, ALP 2025, [Meroitic-Corpus](https://github.com/Joshua-Otten/Meroitic-Corpus) | the only machine-readable corpus (18,090 lines) | not committed (no licence stated): clone it to `data/otten/`; the cleaned corpora (`data/corpus*.jsonl`) and the task files that embed them (`runs/tasks/`) are rebuilt locally, not committed |
+| Otten & Anastasopoulos, ALP 2025, [Meroitic-Corpus](https://github.com/Joshua-Otten/Meroitic-Corpus) | the only machine-readable corpus (18,090 lines): example texts and phrases quoted in Millet 1968 and Rilly 2007, Lobban's word list and three royal narratives, padded with name-swapped copies | not committed (no licence stated): clone it to `data/otten/`; the cleaned corpora (`data/corpus*.jsonl`) and the task files that embed them (`runs/tasks/`) are rebuilt locally, not committed |
 | Griffith, *Meroitic Inscriptions* I–II (1911–12) and Garstang/Sayce/Griffith, *Meroë* (1911), archive.org | printed Meroitic type, public domain | `data/expansion/griffith_*.jsonl`, read by the model |
-| Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/` |
+| Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/`. The lexicon test's answer key (`runs/keys/lexique_*.json`, `runs/lexique_judge.json`) gives 68 of its glosses in English paraphrase |
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
-| *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | quoted only in short excerpts |
+| *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against (`data/expansion/pilot.jsonl`, the scoring scripts in `runs/work/`); otherwise short excerpts |
 
 ## Methods
 
@@ -116,7 +121,8 @@ established or probable in Rilly's 2003 lexicon that occur in 2+ texts (`src/lex
 cross-references and ambiguous spellings excluded). Answers are scored by an independent judge agent against the
 published meaning: SAME, TYPE (right kind of word only), WRONG, UNKNOWN (`runs/lexique_judge.json`). A late check
 (`python3 -I src/lexique.py judged`) found that the corpus tasks' glossary gave six targets away (`qore` "ruler" listed
-while `qor-o`, `qorise`, `qorene` and `qorode` were targets; `mk` and `kdi` for `mkdi`; `mlo` for `smlo`) and that three
+while `qor-o`, `qorise`, `qorene` and `qorode` were targets; `mk`, glossed "god, and very probably goddess", for
+`mkdi`; `mlo` for `smlo`) and that three
 items shouldn't have been test words; the report gives the corrected numbers, and the builder now refuses such pairs.
 
 ### 6. Restoration (`src/cloze.py`, `src/cloze_families.py`)
@@ -165,8 +171,9 @@ are separated from places where Griffith's 1911 reading differs from the modern 
 
 Five agents transcribed Griffith's printed inscriptions sign by sign into standard transliteration and the corpus
 spelling, marking uncertain signs, with the REM number (REM 0001–0137 follow Griffith's numbers). `src/expand.py`
-drops texts already in the corpus (half or more of their word trigrams in one corpus text) and writes
-`data/corpus_v3.jsonl`.
+drops texts already in the corpus (half or more of a text's letter 6-grams occur in one corpus text, or a corpus
+text with masked names spells all of it) and writes `data/corpus_v3.jsonl`. Griffith printed only part of 29 of the
+152 texts; those are left out.
 
 ### 13. Review
 
@@ -180,28 +187,47 @@ them; each fix changed a reported number, and the report shows the corrected one
 
 ## Reproduce
 
-The corpus rebuilds from Otten's repo with the commands below. Two things don't: the corpus snapshot several later
-runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before the review's fixes to `src/corpus.py`), and anything
-that reads Rilly's lexicon or the NES word lists; those need the files kept locally.
+From a clone of this repository and Otten's corpus, with nothing else:
 
 ```bash
 git clone https://github.com/Joshua-Otten/Meroitic-Corpus data/otten
 python3 -I src/pool.py && python3 -I src/dedup.py && python3 -I src/collapse.py && python3 -I src/corpus.py && python3 -I src/clean_v2.py
-python3 -I src/score.py --answers runs/answers
-python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json
 python3 -I src/expand.py
-python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py
+python3 -I src/score.py --answers runs/answers
+python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 ```
+
+The second line prints `texts 662; tokens 18075` at its end (`data/corpus_v2.jsonl`), and the third ends
+`corpus_v3 748 texts 19066 words (+5%)`. The tests print `skip` for each check that reads a local-only file and
+end `passed`.
+
+Three things need files that are kept locally (Data, above), so they don't run from a clone:
+
+- `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
+  restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
+  the review's fixes to `src/corpus.py`, so it can't be rebuilt);
+- `python3 -I src/lexique.py judged` reads Rilly's lexicon;
+- `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge.
-- `data/`: cleaned corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`), answer keys, word lists, leads, discovery
-  write-ups, the Griffith transcriptions, Rilly's lexicon (private).
+- `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
+- `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
+  corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`), the word lists and Rilly's lexicon are local-only.
 - `runs/`: prompts, the task each blind run saw, its answers, keys and scores; `runs/work/` holds the agents'
   working files (transcription scripts, timestamped blind readings).
-- `docs/report.html`: the summary page's source.
+- `docs/report.html`: the summary page's source; `docs/index.html` is the same page as GitHub Pages serves it
+  (`python3 -I tests/test_harness.py pages` rebuilds it).
+- `LICENSE` (MIT, the code) and `LICENSE-DATA.md` (CC BY 4.0, the data and write-ups, with what is excepted).
 - `REPORT.md`: the results. `NEXT_STEPS.md`: what to do next.
+
+## Licence
+
+The code is under the MIT licence ([`LICENSE`](LICENSE)). The Griffith transcriptions, the answer keys, the runs and
+the write-ups are under CC BY 4.0 ([`LICENSE-DATA.md`](LICENSE-DATA.md)), which also lists the third-party material
+that keeps its own terms: the Wiktionary list (CC BY-SA 4.0), the readings quoted from *Fontes Historiae Nubiorum*
+and the glosses paraphrased from Rilly's lexicon.
 
 ## Limits
 

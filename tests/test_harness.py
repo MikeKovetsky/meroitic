@@ -6,9 +6,12 @@ import contextlib, io, itertools, json, math, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 
 import build_extra, build_tasks, clean_v2, cloze, cloze_families, cognates, corpus, score, synth   # noqa: E402
+from local_only import needs, run   # noqa: E402
+
+SNAPSHOT, TASKS = "data/corpus_v2_c3_snapshot.jsonl", "runs/tasks"      # local-only: README, Data
 
 
 def brute_p(answer, key, c):
@@ -98,6 +101,7 @@ def test_spelling_keeps_words_whole():
 
 
 def test_each_narrative_once():
+    needs("data/corpus.jsonl")
     rows = [json.loads(l) for l in open(ROOT / "data/corpus.jsonl")]
     nar = {r["id"]: r["text"] for r in rows if r["src"] == "narrative"}
     assert sorted(nar) == ["hamadab", "kharamadoye", "tanyidamani"]
@@ -158,6 +162,7 @@ def test_cognate_forms_keep_their_vowels():
 
 
 def test_swap_partners_file_is_stable():
+    needs("data/swap_partners.json")
     keys = list(json.loads((ROOT / "data/swap_partners.json").read_text()))
     assert keys == sorted(keys)
 
@@ -167,6 +172,7 @@ def c3_rebuild():
 
 
 def test_restoration_tasks_rebuild_as_run():
+    needs(SNAPSHOT, TASKS)
     train, test, items = cloze.split(cloze.load())
     assert cloze.task_text(train, test, items) == (ROOT / "runs/tasks/C2_cloze.md").read_text()
     assert {f"{it['text']}{it['mask']}": it["answer"] for it in items} == json.load(open(ROOT / "runs/keys/cloze.json"))
@@ -176,11 +182,13 @@ def test_restoration_tasks_rebuild_as_run():
 
 
 def test_extra_tasks_rebuild_as_run():
+    needs(SNAPSHOT, TASKS)
     for name, fn in build_extra.BUILDERS.items():
         assert fn(build_extra.BLIND / name) == (ROOT / f"runs/tasks/{name}.md").read_text(), name
 
 
 def test_extra_check_flags_a_changed_task():
+    needs(SNAPSHOT, TASKS)
     old = build_extra.SAVED
     with tempfile.TemporaryDirectory() as d:
         build_extra.SAVED = Path(d)
@@ -196,6 +204,7 @@ def test_extra_check_flags_a_changed_task():
 
 
 def test_saved_key_is_never_rebuilt():
+    needs(SNAPSHOT)
     old = cloze_families.KEY, cloze_families.NGRAM, cloze_families.SAVED_TASK, cloze_families.BLIND
     with tempfile.TemporaryDirectory() as d:
         key = Path(d) / "key.json"
@@ -264,6 +273,7 @@ def test_null_guess_scores_as_wrong():
 
 
 def test_reported_restoration_numbers():
+    needs(SNAPSHOT)
     par = cloze_families.parallels()
     saved = json.load(open(cloze_families.COPIES))
     assert sorted(k for k in par if par[k]) == saved["with_parallel"]
@@ -293,15 +303,18 @@ def test_natural_experiment_judge_adds_up():
     assert (j["first_total"], j["any_total"]) == (sum(x["first_same"] for x in j["judgments"]),
                                                   sum(x["any_same"] for x in j["judgments"])) == (13, 16)
 
+
+def test_pages_index_is_the_report():
+    """docs/index.html is what GitHub Pages serves: docs/report.html (the summary page's source, a fragment)
+    behind the document head a browser needs. Rebuild: python3 -I tests/test_harness.py pages"""
+    assert (ROOT / "docs/index.html").read_text() == PAGE_HEAD + (ROOT / "docs/report.html").read_text()
+
+
+PAGE_HEAD = ('<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
+             '<meta name="viewport" content="width=device-width, initial-scale=1">\n')
+
 if __name__ == "__main__":
-    tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")]
-    failed = 0
-    for name, fn in tests:
-        try:
-            fn()
-            print("ok  ", name)
-        except Exception as e:      # noqa: BLE001 - report every failing check, then exit non-zero
-            failed += 1
-            print("FAIL", name, type(e).__name__, e)
-    print(f"{len(tests) - failed}/{len(tests)} passed")
-    sys.exit(1 if failed else 0)
+    if sys.argv[1:] == ["pages"]:
+        (ROOT / "docs/index.html").write_text(PAGE_HEAD + (ROOT / "docs/report.html").read_text())
+        sys.exit()
+    run([(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")])
