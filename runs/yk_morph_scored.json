@@ -1,18 +1,19 @@
 {
- "rule": "Each generator ending (runs/keys/synth_language.json) against the blind answer's proposed function; judged by the orchestrator, every line checkable against runs/answers/YK_morph.json.",
+ "rule": "Each generator ending (runs/keys/synth_language.json; its uses in src/synth.py) against the function the blind answer proposes (runs/answers/YK_morph.json, quoted). right: the answer's main reading is what the generator does with it; partly: that function is named only as an alternative or inside a hedged guess, or the main reading is a neighbouring one; wrong: not named.",
  "endings": [
-  {"ending": "-bi", "true": "locative", "proposed": "allative 'to' (before go / offer)", "verdict": "right"},
-  {"ending": "-i", "true": "vocative", "proposed": "dative or vocative of the addressees", "verdict": "right"},
-  {"ending": "-zo", "true": "past", "proposed": "past or perfective", "verdict": "right"},
-  {"ending": "-ra", "true": "imperative", "proposed": "non-past (present or prescriptive)", "verdict": "partly"},
-  {"ending": "-ne", "true": "genitive", "proposed": "locative 'at/of' a place", "verdict": "partly"},
-  {"ending": "-mu", "true": "determiner", "proposed": "unclear", "verdict": "wrong"},
-  {"ending": "-du", "true": "plural (added at random in dedications)", "proposed": "direct-object marker", "verdict": "wrong"},
-  {"ending": "-fako", "true": "copula 'is'", "proposed": "genitive 'of'", "verdict": "wrong"}
+  {"ending": "-bi", "true": "locative, used only before 'offer' (to the temple or house) and 'go' (to a place)", "proposed": "Allative case, destination 'to X'.", "verdict": "right"},
+  {"ending": "-i", "true": "vocative, on the two gods that open an epitaph", "proposed": "Most likely dative/benefactive of the divine recipients ('to/for Su, Nu'); vocative is possible.", "verdict": "partly"},
+  {"ending": "-zo", "true": "past", "proposed": "Verb ending for past/perfective (completed, narrated events).", "verdict": "right"},
+  {"ending": "-ra", "true": "imperative", "proposed": "Verb ending for non-past: present/habitual ..., possibly prescriptive (jussive) mood.", "verdict": "partly"},
+  {"ending": "-ne", "true": "genitive", "proposed": "Locative case for places and place-like proper names: 'at/in/of X'.", "verdict": "partly"},
+  {"ending": "-mu", "true": "determiner, used only on a head noun after a genitive (the offering of the temple, the temple of a god)", "proposed": "Unclear ... Best guess: it marks a noun headed by a preceding -ne phrase as the possessed/definite thing or goal ('the yu of Su') (confidence 1).", "verdict": "partly"},
+  {"ending": "-du", "true": "plural (added at random in dedications)", "proposed": "Accusative or direct-object marker ... (it occurs with '1' 17 times, so it is not a plural).", "verdict": "wrong"},
+  {"ending": "-fako", "true": "copula 'is'", "proposed": "Genitive (possessive/relational 'of') case of person-phrases.", "verdict": "wrong"}
  ],
  "free_words": [
-  {"word": "ma", "true": "and", "proposed": "and", "verdict": "right"},
-  {"word": "fo", "true": "two", "proposed": "postposition 'with'", "verdict": "wrong"}
+  {"word": "ma", "true": "and", "proposed": "Coordinating conjunction 'and'.", "verdict": "right"},
+  {"word": "fo", "true": "two", "proposed": "Postposition or adverb, probably 'with/together with'.", "verdict": "wrong"}
  ],
+ "totals": {"endings": {"right": 2, "partly": 4, "wrong": 2}, "free_words": {"right": 1, "wrong": 1}},
  "segmentation": "All 8 endings found as separate morphemes; all seven text types and their slots identified; verb-object selection (pour with water and milk, give with bread and beer) found with no exception."
 }

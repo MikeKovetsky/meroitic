@@ -271,6 +271,18 @@ def test_reported_restoration_numbers():
     assert [r[:4] for r in rows] == [("all masks", 120, 84, 35), ("with a parallel", 58, 54, 19), ("no parallel", 62, 30, 16)]
     assert cloze.score(ROOT / "runs/cloze_ngram.json") == (40, 45, 88, 0)
 
+
+def test_reported_synthetic_numbers():
+    assert synth.usable_score() == (41, 52, 24, 24)
+    yk = json.load(open(ROOT / "runs/yk_morph_scored.json"))
+    count = lambda rows, v: sum(r["verdict"] == v for r in rows)
+    assert {v: count(yk["endings"], v) for v in ("right", "partly", "wrong")} == yk["totals"]["endings"] == \
+        {"right": 2, "partly": 4, "wrong": 2}
+    k2 = json.load(open(ROOT / "runs/k2_morph_scored.json"))
+    gold = [g["form"] for g in json.load(open(ROOT / "data/gold_morphology.json"))]
+    assert [i["form"] for i in k2["items"]] == gold
+    assert {v: count(k2["items"], v) for v in ("right", "partly", "missed")} == k2["totals"]
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")]
     failed = 0

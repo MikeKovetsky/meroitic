@@ -1,0 +1,32 @@
+{
+ "rule": "Each of the 26 published grammar items (data/gold_morphology.json) against the blind answer runs/answers/K2_morph.json, read in real spelling (src/unscramble.py; its morphemes, word classes and formulas). right: the answer's main reading is the published function; partly: the item is found but its function is named only in part, or given to a neighbouring segment; missed: not found. The run recognised Meroitic (it says so), so this measures memory as much as inference.",
+ "items": [
+  {"form": "-l", "published": "singular determiner (article)", "proposed": "-l: Determiner, singular (a definite article 'the').", "verdict": "right"},
+  {"form": "-leb", "published": "plural determiner", "proposed": "-leb: Plural determiner ('the' + plural).", "verdict": "right"},
+  {"form": "-b-", "published": "plural marker inside the determiner and pronouns", "proposed": "-b-: Plural marker, found inside longer endings.", "verdict": "right"},
+  {"form": "-se", "published": "genitive 'of'", "proposed": "-s: Genitive or relational postposition 'of'.", "verdict": "right"},
+  {"form": "(juxtaposition)", "published": "synthetic genitive: possessor + determiner + head noun", "proposed": "-li: Determiner in its linking (non-final) form ... (a possessor before a kin noun).", "verdict": "partly"},
+  {"form": "-te", "published": "locative 'in, at'", "proposed": "-te: Locative or origin 'in, at, from (a place)'.", "verdict": "right"},
+  {"form": "-yte", "published": "directional locative in 'from X to Y'", "proposed": "", "verdict": "missed"},
+  {"form": "-ke", "published": "local postposition in 'from X to Y'", "proposed": "", "verdict": "missed"},
+  {"form": "-i", "published": "vocative on divine names", "proposed": "-i: Vocative (address) on the invoked divine names.", "verdict": "right"},
+  {"form": "-o", "published": "copula, singular, after the determiner (-l-o)", "proposed": "-lowi built from article + -o (predicative) + -wi (copula); -lo: 'is the', a short copula.", "verdict": "partly"},
+  {"form": "-lowi", "published": "-l + -o + -wi, 'he/she is the ...'", "proposed": "-lowi: Copula with determiner, singular: 'is (the) ...'; built from article + predicative + copula.", "verdict": "right"},
+  {"form": "-wi", "published": "emphatic marker after the singular copula", "proposed": "-wi: Copula 'is' (predicative or assertive).", "verdict": "partly"},
+  {"form": "-kwi", "published": "copula, plural", "proposed": "-lebkwi: Plural copula with determiner: 'they are (the) ...'.", "verdict": "right"},
+  {"form": "qo-wi", "published": "'this is N'", "proposed": "qo: Demonstrative 'this'. It serves as the nominator ('this is NAME').", "verdict": "right"},
+  {"form": "-ḫ(e)", "published": "verbal dative 'to him/her', inside the verb", "proposed": "'to him/her' put on the final ending -kes; Xe read as the verb root.", "verdict": "partly"},
+  {"form": "-bḫ(e)", "published": "verbal dative plural 'to them'", "proposed": "-bxes: Plural counterpart ...: plural beneficiaries ('to them').", "verdict": "right"},
+  {"form": "-te (imperative)", "published": "imperative singular ending", "proposed": "", "verdict": "missed"},
+  {"form": "-kete", "published": "plural imperative/optative ending, addressed to Isis and Osiris", "proposed": "-kes (-ke te / -kete): Final person and number ending: singular beneficiary ('to him/her'), with the two invoked gods as subject ('may you give').", "verdict": "partly"},
+  {"form": "p-", "published": "verbal prefix of benediction verbs, possibly optative", "proposed": "p- (pi-): Verbal prefix of the benediction verbs: optative or jussive mood ('may ...').", "verdict": "right"},
+  {"form": "ps-", "published": "p- + s-element; the s-element's function unknown", "proposed": "Si / So / S: Constant verbal element after the prefix, probably the verb itself ('give').", "verdict": "partly"},
+  {"form": "-w", "published": "accusative/dative on nouns (rare)", "proposed": "", "verdict": "missed"},
+  {"form": "m-", "published": "negative marker", "proposed": "", "verdict": "missed"},
+  {"form": "-se (each)", "published": "distributive 'each'", "proposed": "", "verdict": "missed"},
+  {"form": "tedḫe", "published": "born of (mother)", "proposed": "tedxe: Parent slot 1, probably 'born of' (the mother).", "verdict": "right"},
+  {"form": "terike", "published": "begotten by (father)", "proposed": "terike: Parent slot 2, probably 'begotten by' (the father).", "verdict": "right"},
+  {"form": "yetmde", "published": "'a relative of'", "proposed": "yetmde: The general relation term ...: 'relative of'.", "verdict": "right"}
+ ],
+ "totals": {"right": 14, "partly": 6, "missed": 6}
+}

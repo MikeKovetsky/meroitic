@@ -7,12 +7,16 @@ know any meaning in advance. The matching test is then built exactly like the
 real one: half the meanings given, the other half to match, and only words
 that stand alone in the corpus at least twice are tested. A word spelled like
 an ending (here cow and the genitive are both "ne") is not tested either.
+
+  python3 src/synth.py          # build the Y tasks (new folders only)
+  python3 src/synth.py score    # the Y runs' score on the words the corpus shows
 """
 import collections, json, random, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from build_tasks import BLIND, HEAD, fresh, save_keys   # noqa: E402  (same instructions as the real test)
+import score                                            # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 rng = random.Random(2026)
@@ -219,5 +223,18 @@ def build(folds=2, seed=7):
     print(texts[0][:200]); print(texts[700][:200]); print(texts[-1][:300])
 
 
+def usable_score(answers=ROOT / "runs/answers"):
+    """Y_f0 + Y_f1 scored on the test words the saved corpus shows (testable()):
+    (right, words, right at confidence 4-5, words at confidence 4-5)."""
+    pool = set(testable([t for t in (ROOT / "data/synth_corpus.txt").read_text().split("\n") if t]))
+    keys = json.load(open(ROOT / "runs/keys/step0.json"))
+    rows = [score.score(run, {w: m for w, m in keys[run].items() if m in pool}, answers / f"{run}.json")
+            for run in ("Y_f0", "Y_f1")]
+    return tuple(sum(r[f] for r in rows) for f in ("correct", "k", "confident_correct", "confident"))
+
+
 if __name__ == "__main__":
-    build()
+    if sys.argv[1:] == ["score"]:
+        print("right {}/{}; confidence 4-5: {}/{}".format(*usable_score()))
+    else:
+        build()
