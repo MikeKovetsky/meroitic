@@ -59,6 +59,13 @@ looks like.
      (`data/expansion/README.md` has the item ids).
    - Cost: about 1 hour for the test, 2 to 3 hours for 150 texts. Done: `griffith_karanog.jsonl`, merged by
      `src/expand.py`, with the measured accuracy in its notes.
+   - **Status, 2026-11-10: the test passed and 19 of the 152 texts are read**
+     ([`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). Fresh readers who could not see
+     FHN reached 98.2% of signs on the four test texts (90.5% from the hand copies alone). The check now uses
+     three printed sources, not one: the indexes, Griffith's table of names and parentage (pp. 87–94) and his
+     tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts. Left to do: the other
+     133 texts (46 page scans to fetch from archive.org, about 11 million subagent tokens), then the merge by
+     `src/expand.py`. The estimate above was too low: a page of hand copies takes a reader about an hour.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
