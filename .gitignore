@@ -3,6 +3,8 @@ __pycache__/
 .DS_Store
 
 # Restricted data: kept locally, never committed (no licence, or copyrighted). See README, Data.
+# data/sources/: downloaded scans and the texts typed from them (Meroitic Newsletter, Karanog page images)
+data/sources/
 data/rilly2003
 data/corpus.jsonl
 data/corpus_v2.jsonl
