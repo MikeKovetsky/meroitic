@@ -2,14 +2,17 @@
 
   python3 -I mnl_build.py <repo root> <harvest dir> <out.jsonl>
 
-Reads the readers' raw files (harvest/M*/out/texts.jsonl for the issues of 1972-2003, harvest/P*/out/reading.txt
-and harvest/T*/reading.txt for the 1971 printout), and writes one row per text and edition:
+Reads the readers' raw files (harvest/M*/out/texts.jsonl for the issues of 1977-2003, harvest/P*/out/reading.txt
+and harvest/T*/out/reading.txt for the 1971 printout), and writes one row per text and edition:
 
-  id, rem, file, pdf_page, printed_page, site, object, complete, kind ("printout" or "print"),
+  id, rem, source, file, pdf_page, printed_page, site, object, complete, kind ("printout" or "print"),
   lines (as typed from the page), text_corpus (the corpus spelling: s = the se sign, S = plain s, N = ne,
-  x and X the two h signs, o; lost signs as dots), words, round_letters (printout only: how many look-alike
+  x and X the two h signs, o; lost signs as dots), round_letters (printout only: how many look-alike
   O/Q/D letters were settled by the reader's choice, by a spelling rule, by a corpus word, by the model),
-  line_ends, notes.
+  line_ends, spelling, has_translation, notes, words, broken_words.
+
+It also reads data/corpus_v3.jsonl and the page lists in data/sources/mnl/readings/inventory/, and stops with a
+message when one of them is absent (they are kept locally: README, Data).
 
 Nothing here is checked against a second edition except where the test report says so.
 """
@@ -33,7 +36,7 @@ LOST = "…"          # one lost stretch of unknown length, inside the working t
 PAREN_RESTORES = {"MeroNews18", "MeroNews21", "MeroNews22"}   # the typewritten issues put the editor's restorations in round brackets
 
 
-# ---------------------------------------------------------------- the printed issues (1972-2003)
+# ---------------------------------------------------------------- the printed issues (1977-2003)
 
 def strip_line_numbers(lines):
     """Take the edition's own line numbers off the front of the lines."""
@@ -165,7 +168,6 @@ def printout_items(text):
     t = re.sub(r"\(\(\s*\)\)", "~", text)                            # (()) a gap of unknown length, touching what it breaks
     t = re.sub(r"[*()]", "", t)
     t = re.sub(r",{2,}", " ", t).replace(",", " ")
-    table = {"S": "se", "Z": "s", "J": "N", "V": "te", "U": "to", "G": "x", "X": "X"}
     items = []
     for chunk in t.split():
         if re.fullmatch(r"~+", chunk):
@@ -191,7 +193,7 @@ def printout_items(text):
                 elif ch == "C":                        # not a letter of the code: a stray continuation mark
                     continue
                 else:
-                    w.append((table.get(ch, ch.lower()), None))
+                    w.append((S.HEYLER.get(ch, ch.lower()), None))
             if w:
                 items.append(("w", w))
     return items
@@ -251,16 +253,23 @@ def group_printout(rows):
 # ---------------------------------------------------------------- main
 
 def main():
+    if len(sys.argv) < 4:
+        sys.exit(__doc__)
     ROOT, HARVEST, OUT = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    inventory = [ROOT / f"data/sources/mnl/readings/inventory/{L}.json" for L in "ABCD"]
+    S.need(ROOT / "data/corpus_v3.jsonl", HARVEST, *inventory)
+    printed, printout = sorted(HARVEST.glob("M*/out/texts.jsonl")), sorted(HARVEST.glob("[PT]*/out/reading.txt"))
+    if not printed and not printout:
+        sys.exit(f"no readings in {HARVEST}: it should hold M*/out/texts.jsonl, P*/out/reading.txt or T*/out/reading.txt")
     inv = {}
-    for L in "ABCD":
-        for t in json.loads((ROOT / f"data/sources/mnl/readings/inventory/{L}.json").read_text())["texts"]:
+    for path in inventory:
+        for t in json.loads(path.read_text())["texts"]:
             m = re.search(r"REM\s*(\d{4})", str(t["id"]))
             if m and "MeroNews6" in str(t["file"]):
                 inv.setdefault(m.group(1), t)
     model = R.Model(R.corpus_words(ROOT))
     out = []
-    for path in sorted(HARVEST.glob("M*/out/texts.jsonl")):
+    for path in printed:
         for line in path.read_text().splitlines():
             if not line.strip():
                 continue
@@ -273,7 +282,7 @@ def main():
                         "lines": r["lines"], "text_corpus": text, "line_ends": ends, "spelling": r.get("spelling", ""),
                         "has_translation": r.get("has_translation", False), "notes": r.get("notes", "")})
     rows = []
-    for path in sorted(HARVEST.glob("[PT]*/out/reading.txt")):
+    for path in printout:
         rows += read_printout(path)
     rows.sort(key=lambda p: int(p[0][1:]))                 # stable: page order, the readers' order within a page
     for key, lines in group_printout(rows):

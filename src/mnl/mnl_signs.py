@@ -2,13 +2,26 @@
 
 One sign per item: the syllable signs are "se", "te", "to" and "N" (ne), the two h signs are "x" and "X",
 "s" is the plain s sign. A word boundary is the item "|". Numerals and gap marks are left out.
+
+need() is the check every tool makes first: its inputs stay on the author's machine.
 """
 import difflib
 import re
+import sys
 import unicodedata
 from collections import defaultdict
+from pathlib import Path
 
 SYLL = ("se", "te", "to", "ne")
+
+
+def need(*paths):
+    """Stop with a message, not a traceback, unless every path exists. The readers' typing, data/corpus_v3.jsonl
+    and Otten's files are not in the public repo (README, Data)."""
+    missing = [str(p) for p in paths if not Path(p).exists()]
+    if missing:
+        sys.exit(f"missing {', '.join(missing)}: the Newsletter readings, data/corpus_v3.jsonl and Otten's files are "
+                 "kept locally, not in the public repo (README, Data; data/expansion/newsletter_reading.md)")
 
 
 def tokens(plain):
@@ -150,6 +163,10 @@ def heyler_lines(texts):
     return out
 
 
+# Heyler's capitals that stand for another sign; every other capital is its own letter, lowered
+HEYLER = {"S": "se", "Z": "s", "J": "N", "V": "te", "U": "to", "G": "x", "X": "X"}
+
+
 def heyler(text, g="x", x="X"):
     """A text line in Heyler's capital-letter code (Newsletter 5 and 6), after heyler_lines(), to plain
     letters.
@@ -161,7 +178,7 @@ def heyler(text, g="x", x="X"):
     t = re.sub(r",{2,}", " ", t).replace(",", " ")
     t = re.sub(r"[0-9]+", " ", t)
     t = re.sub(r"[^A-Z# ]", "", t)
-    table = {"S": "se", "Z": "s", "J": "N", "V": "te", "U": "to", "G": g, "X": x, "C": ""}
+    table = {**HEYLER, "G": g, "X": x, "C": ""}
     return "".join(table.get(c, c.lower()) for c in t)
 
 

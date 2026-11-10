@@ -2,13 +2,18 @@
 
   python3 -I src/mnl/test_mnl.py
 """
+import json
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
 import mnl_build as B  # noqa: E402
 import mnl_dedupe as D  # noqa: E402
+import mnl_score as M  # noqa: E402
 import mnl_signs as S  # noqa: E402
 import mnl_round as R  # noqa: E402
 
@@ -119,6 +124,64 @@ class Printout(unittest.TestCase):
         model = R.Model([tuple("abr")])
         text, how, alts, ran_over = B.printout_text(model, ["ABR,, AR(MLE/MTI/(MLI/MLI)", ")KG,, WI,,", "KDI,,"])
         self.assertEqual((text, alts, ran_over), ("abr armlekx wi kdi", 1, 1))
+
+
+class Alignment(unittest.TestCase):
+    def test_each_kind_of_difference_is_counted_once(self):
+        self.assertEqual(M.align(list("abxde"), list("abcd")),
+                         [("=", 0, 0), ("=", 1, 1), ("s", 2, 2), ("=", 3, 3), ("i", 4, None)])
+        self.assertEqual(M.align(list("acd"), list("abcd")), [("=", 0, 0), ("d", None, 1), ("=", 1, 2), ("=", 2, 3)])
+
+    def test_free_ends_leave_out_what_only_one_side_runs_on_into(self):
+        self.assertEqual(M.align(list("bcd"), list("abcdef"), free_ref_ends=True), [("=", 0, 1), ("=", 1, 2), ("=", 2, 3)])
+        self.assertEqual(M.align(list("xxabcyy"), list("abc"), free_read_ends=True), [("=", 2, 0), ("=", 3, 1), ("=", 4, 2)])
+
+
+def tool(*args):
+    """Run one of the tools as a user does; returns its exit code and what it printed on stderr."""
+    cmd = ["bash"] if args[0].endswith(".sh") else [sys.executable, "-I"]
+    p = subprocess.run(cmd + [str(HERE / args[0]), *args[1:]], capture_output=True, text=True)
+    return p.returncode, p.stderr
+
+
+class Stops(unittest.TestCase):
+    """Without their arguments, or without their local-only inputs (README, Data), the tools stop with a message."""
+
+    def test_without_arguments_each_tool_gives_its_usage(self):
+        for name in ("mnl_build.py", "mnl_dedupe.py", "mnl_corpus.py", "mnl_score.py", "mnl_round.py", "round_tab2.py",
+                     "rebuild.sh"):
+            code, err = tool(name)
+            with self.subTest(name):
+                self.assertEqual(code, 1)
+                self.assertIn("usage: bash rebuild.sh" if name == "rebuild.sh" else f"python3 -I {name}", err)
+                self.assertNotIn("Traceback", err)
+
+    def test_without_the_local_files_each_tool_names_them(self):
+        with tempfile.TemporaryDirectory() as d:
+            for args in [("mnl_build.py", d, f"{d}/raw", f"{d}/out.jsonl"), ("mnl_dedupe.py", d, f"{d}/t.jsonl"),
+                         ("mnl_corpus.py", d, f"{d}/t.jsonl", f"{d}/c.jsonl"), ("mnl_score.py", "pair", f"{d}/a.txt", f"{d}/b.txt"),
+                         ("mnl_round.py", "test", d, f"{d}/r.txt", f"{d}/f.txt"), ("round_tab2.py", f"{d}/r.txt", f"{d}/f.txt", "p1"),
+                         ("rebuild.sh", d, f"{d}/out")]:
+                code, err = tool(*args)
+                with self.subTest(args[0]):
+                    self.assertEqual(code, 1)
+                    self.assertTrue(err.startswith("missing "), err)
+                    self.assertIn(f"{d}/r.txt" if args[0] == "round_tab2.py" else
+                                  f"{d}/a.txt" if args[0] == "mnl_score.py" else f"{d}/data/corpus_v3.jsonl", err)
+                    self.assertNotIn("Traceback", err)
+
+    def test_a_harvest_folder_without_readings_is_not_zero_texts(self):
+        with tempfile.TemporaryDirectory() as d:
+            inventory = Path(d, "data/sources/mnl/readings/inventory")
+            inventory.mkdir(parents=True)
+            for L in "ABCD":
+                (inventory / f"{L}.json").write_text('{"texts": []}')
+            Path(d, "data/corpus_v3.jsonl").write_text(json.dumps({"id": "T1", "src": "funerary", "text": "abr"}) + "\n")
+            Path(d, "raw").mkdir()
+            code, err = tool("mnl_build.py", d, f"{d}/raw", f"{d}/out.jsonl")
+            self.assertEqual(code, 1)
+            self.assertTrue(err.startswith(f"no readings in {d}/raw"), err)
+            self.assertFalse(Path(d, "out.jsonl").exists())
 
 
 class RoundLetters(unittest.TestCase):

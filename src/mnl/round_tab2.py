@@ -9,6 +9,9 @@ import mnl_signs as S
 import mnl_round as R
 from mnl_score import align, heyler_rows, split
 
+if len(sys.argv) < 4:
+    sys.exit(__doc__)
+S.need(*sys.argv[1:3])
 pages = sys.argv[3].split(",")
 ref, _ = split(S.tokens(S.fhn(Path(sys.argv[2]).read_text())))
 ref0 = ["0" if t in "oqd" else t for t in ref]

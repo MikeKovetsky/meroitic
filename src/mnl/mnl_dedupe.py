@@ -24,6 +24,9 @@ import json, re, sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mnl_signs as S  # noqa: E402
+
 N, COMMON, COMMON_CORPUS, MIN = 6, 4, 20, 6
 
 
@@ -94,7 +97,10 @@ def editions(rows, skeletons, formulae=frozenset()):
 
 
 def main():
+    if len(sys.argv) < 3:
+        sys.exit(__doc__)
     ROOT, PATH = Path(sys.argv[1]), Path(sys.argv[2])
+    S.need(ROOT / "data/corpus_v3.jsonl", ROOT / "data/otten/Data/MilletExamples.txt", PATH)
     sys.path.insert(0, str(ROOT / "src"))
     import expand as E
     corpus = [json.loads(l) for l in (ROOT / "data/corpus_v3.jsonl").read_text().splitlines()]

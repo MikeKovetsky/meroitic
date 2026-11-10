@@ -9,14 +9,21 @@ The result holds readings from articles still in copyright: it stays local, like
 import json, re, sys
 from pathlib import Path
 
-ROOT, TEXTS, OUT = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
-sys.path.insert(0, str(ROOT / "src"))
-import expand as E  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mnl_signs as S  # noqa: E402
 
 
 def main():
+    if len(sys.argv) < 4:
+        sys.exit(__doc__)
+    ROOT, TEXTS, OUT = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    S.need(ROOT / "data/corpus_v3.jsonl", TEXTS)
+    sys.path.insert(0, str(ROOT / "src"))
+    import expand as E
     base = [json.loads(l) for l in (ROOT / "data/corpus_v3.jsonl").read_text().splitlines()]
     rows = [json.loads(l) for l in TEXTS.read_text().splitlines()]
+    if not all("new" in r for r in rows):
+        sys.exit(f"{TEXTS} has rows without the field 'new': run mnl_dedupe.py on it first")
     added, seen = [], {r["id"] for r in base}
     for r in rows:
         if not r["new"]:

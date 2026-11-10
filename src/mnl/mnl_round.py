@@ -12,7 +12,11 @@ the base rates). This module chooses among o, q and d for each such letter:
 Every letter settled this way is reported with how it was settled: "rule", "word" (the chosen word occurs in
 the corpus) or "model" (only the 4-gram model spoke).
 
-  python3 -I mnl_round.py test <repo root> <reading.txt> <otten FHN file>      (leaves the long narratives out of the model)
+  python3 -I mnl_round.py test <repo root> <reading.txt> <otten FHN file> [p05,p06,...] [--quick] [--lm=0.3]
+
+The test mode scores a test reading after settling its round letters, with the three long narratives left out of
+the model. With a list of pages, each page is aligned on its own against the reference; --quick takes the quick
+reader's prior; --lm sets the model's weight.
 """
 import json, math, re, sys
 from collections import Counter, defaultdict
@@ -23,9 +27,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import mnl_signs as S  # noqa: E402
 
 VOWELISH = {"e", "i", "o", "se", "te", "to", "N"}
-# what a typed round letter turned out to be in the blind test. QUICK: a reader who typed from the strips
-# (Tanyidamani pages, 324 round letters). CAREFUL: a reader who enlarged each line and went by the shape
-# (5 pages of both stelae, 199 round letters).
+# what a typed round letter turned out to be in the blind test (round_tab2.py), so these priors and LM_WEIGHT
+# were set on the test pages themselves. QUICK: a reader who typed from the strips (the eight Tanyidamani pages).
+# CAREFUL: readers who enlarged each line and went by the shape.
 QUICK = {
     "Q?": {"o": 0.45, "q": 0.29, "d": 0.26},
     "D": {"d": 0.77, "o": 0.21, "q": 0.02},
@@ -113,7 +117,6 @@ def parse(text):
     t = re.sub(r"[*().]", "", text)
     t = re.sub(r",{2,}", " ", t).replace(",", " ")
     t = re.sub(r"[0-9]+", " ", t)
-    table = {"S": "se", "Z": "s", "J": "N", "V": "te", "U": "to", "G": "x", "X": "X"}
     words = []
     for chunk in t.split():
         w = []
@@ -126,7 +129,7 @@ def parse(text):
             elif ch == "C":                          # not a letter of the code: a stray continuation mark
                 continue
             else:
-                w.append((table.get(ch, ch.lower()), None))
+                w.append((S.HEYLER.get(ch, ch.lower()), None))
         if w:
             words.append(w)
     return words
@@ -190,10 +193,11 @@ def settle(model, word):
 
 
 def main():
-    if sys.argv[1] != "test":
+    if len(sys.argv) < 5 or sys.argv[1] != "test":
         sys.exit(__doc__)
     from mnl_score import align, heyler_rows, split
     root, reading, ref_path = sys.argv[2:5]
+    S.need(Path(root) / "data/corpus_v3.jsonl", reading, ref_path)
     pages = sys.argv[5].split(",") if len(sys.argv) > 5 and not sys.argv[5].startswith("--") else None
     if "--quick" in sys.argv:
         PRIOR.clear(); PRIOR.update(QUICK)

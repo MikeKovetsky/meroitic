@@ -1,12 +1,13 @@
 """Score a blind reading against a reference text, sign by sign.
 
-  python3 -I mnl_score.py heyler <reading.txt> <otten file> [--pages p05,p06] [--swap-h]
+  python3 -I mnl_score.py heyler <reading.txt> <otten file> [--pages p05,p06] [--swap-h] [--fold-round]
   python3 -I mnl_score.py millet <reading.txt> <otten FHN file> <otten Millet-thesis file>
   python3 -I mnl_score.py pair   <reading A> <reading B>            (two readings of the same pages)
   python3 -I mnl_score.py three  <reading A> <reading B> <otten file>
 
 A reading line is "page | inscription | segment | text" (heyler) or "entry | text" (millet).
-Word boundaries are scored apart from the signs.
+Word boundaries are scored apart from the signs. --swap-h reads Heyler's G and X the other way round;
+--fold-round counts the printer's look-alike round letters (o, q, d) as one sign.
 """
 import re
 import sys
@@ -23,10 +24,12 @@ def align(read, ref, free_read_ends=False, free_ref_ends=False):
 
     free_read_ends: reading may have extra signs before and after the reference (not counted).
     free_ref_ends: the reference may run on before and after the reading (not counted).
+    The callers use one of the two at a time.
     """
     n, m = len(read), len(ref)
     prev = [0 if free_ref_ends else j for j in range(m + 1)]
     back = [bytearray(m + 1) for _ in range(n + 1)]      # 0 diag, 1 up (reading-only sign), 2 left (ref-only sign)
+    last_col = [prev[m]]                                  # the cost of ending at each reading sign, for free_read_ends
     for j in range(1, m + 1):
         back[0][j] = 2
     for i in range(1, n + 1):
@@ -47,15 +50,14 @@ def align(read, ref, free_read_ends=False, free_ref_ends=False):
                 cur[j] = l
                 bi[j] = 2
         prev = cur
+        last_col.append(cur[m])
     # end point
     i, j = n, m
     if free_ref_ends:
         j = min(range(m + 1), key=lambda k: prev[k])
     ops = []
     if free_read_ends:
-        # recompute the best end row for the full reference: rerun cheaply by tracking the last column
-        col = _last_column(read, ref, free_ref_ends)
-        i = min(range(n + 1), key=lambda k: col[k])
+        i = min(range(n + 1), key=lambda k: last_col[k])
     while i > 0 or j > 0:
         if i == 0 and free_ref_ends:
             break
@@ -73,23 +75,6 @@ def align(read, ref, free_read_ends=False, free_ref_ends=False):
             j -= 1
     ops.reverse()
     return ops
-
-
-def _last_column(read, ref, free_ref_ends):
-    n, m = len(read), len(ref)
-    prev = [0 if free_ref_ends else j for j in range(m + 1)]
-    col = [prev[m]]
-    for i in range(1, n + 1):
-        cur = [0] + [0] * m
-        ri = read[i - 1]
-        for j in range(1, m + 1):
-            d = prev[j - 1] + (ri != ref[j - 1])
-            u = prev[j] + 1
-            l = cur[j - 1] + 1
-            cur[j] = d if d <= u and d <= l else (u if u <= l else l)
-        prev = cur
-        col.append(cur[m])
-    return col
 
 
 def split(toks):
@@ -160,8 +145,14 @@ def report(name, ops, read, ref, read_ends, ref_ends, page_of=None):
     return c
 
 
+FILES = {"heyler": 2, "millet": 3, "pair": 2, "three": 3}      # how many files each mode reads
+
+
 def main():
-    mode = sys.argv[1]
+    mode = sys.argv[1] if len(sys.argv) > 1 else ""
+    if mode not in FILES or len(sys.argv) < 2 + FILES[mode]:
+        sys.exit(__doc__)
+    S.need(*sys.argv[2:2 + FILES[mode]])
     if mode == "heyler":
         pages = None
         if "--pages" in sys.argv:
