@@ -96,7 +96,9 @@ def rows(readings=None):
         leaf = re.search(r"(\d+)", parts[0].get("page", ""))
         page = f"p. {int(leaf.group(1)) - 15} (leaf n{leaf.group(1)})" if leaf else ""
         caption = re.sub(r"^\s*(Kar|Sh)\.\s*\d+\.?\s*", "", parts[0].get("caption", "")).strip()
-        diff = sum(changed(a["reading"], b["reading"]) for a, b in zip(first, parts)) if len(first) == len(parts) else None
+        paired = len(first) == len(parts) and all((a["text"], a.get("part")) == (b["text"], b.get("part"))
+                                                  for a, b in zip(first, parts))
+        diff = sum(changed(a["reading"], b["reading"]) for a, b in zip(first, parts)) if paired else None
         notes = [f"Read from Griffith's hand copy by Claude Opus 5.5 (pack {t['pack']}), then checked against the "
                  f"words he prints in type (names table, Indexes A to C, formula tables): {sum(o.get('entries') or 0 for o in parts)} "
                  f"printed entries placed" + (f", {diff} signs changed by the check" if diff is not None else "") + ".",

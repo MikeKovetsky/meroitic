@@ -76,8 +76,10 @@ def test_rows_join_parts_and_skip_unchecked_packs():
                  {"text": "Sh. 4", "part": "", "page": "leaf_190", "caption": "Sh. 4. Altar", "labels": [], "reading": "qo : [.]se?"}]
         final = [dict(first[0], entries=2, check_notes=""), dict(first[1], reading="ato mẖe", entries=1, check_notes="formula A"),
                  dict(first[2], entries=0, check_notes="")]
-        write(done, "copy_only.jsonl", first)
-        write(done, "final.jsonl", final)
+        # Kar. 3's parts come back in another order: no count of signs changed rather than a wrong one
+        swapped = [dict(first[0], text="Kar. 3", part=p, caption="Kar. 3. Altar") for p in ("A", "B")]
+        write(done, "copy_only.jsonl", first + swapped)
+        write(done, "final.jsonl", final + [dict(o, entries=0, check_notes="") for o in swapped[::-1]])
         write(done, "kept_against_type.jsonl", [{"text": "Kar. 2", "copy": "sori", "type": "soreyi", "why": "clear"}])
         write(done, "unplaced.jsonl", [{"text": "Sh. 4", "source": "Index A", "reading": "pesto", "why": "lost"}])
         write(open_, "copy_only.jsonl", [dict(first[2], text="Kar. 9")])          # no final.jsonl: not checked yet
@@ -90,8 +92,9 @@ def test_rows_join_parts_and_skip_unchecked_packs():
             assert "'Kar. 39 b'" in str(e) and "final.jsonl" in str(e), e
         else:
             raise AssertionError("a reading of 'Kar. 39 b' was dropped without an error")
-    assert [r["griffith_no"] for r in rows] == [2, "Sh4"], rows                   # Karanog first, Kar. 9 left out
-    kar, sh = rows
+    assert [r["griffith_no"] for r in rows] == [2, 3, "Sh4"], rows                # Karanog first, Kar. 9 left out
+    kar, kar3, sh = rows
+    assert "signs changed" not in kar3["notes"] and "0 printed entries placed." in kar3["notes"]
     assert kar["rem"] == "0202" and sh["rem"] == "" and kar["site"] == "Karanog" and sh["site"] == "Shablul"
     assert kar["page"] == "p. 129 (leaf n144)" and kar["object"] == "Stela" and sh["object"] == "Altar"
     assert kar["text_std"] == "A: (1)wosi : so(2)reyi | B: ato mẖe"
@@ -212,6 +215,17 @@ def test_reported_karanog_numbers():
         toks, align, fhn, score_fhn.readings([READINGS / p / name for p in ("C09", "C14", "C21")])).values()])))
     assert total("final.jsonl") == (654, 639) and total("copy_only.jsonl") == (654, 582)
     assert "639 of 654 signs right (97.7%)" in K.ACCURACY and "582 (89.0%)" in K.ACCURACY
+
+
+def test_karanog_rows_are_new_to_the_corpus():
+    # README, section 1: none of the 19 is in corpus_v2 or the other Griffith files, by src/expand.py's own test
+    needs("data/corpus_v2.jsonl")
+    import expand
+    known = [expand.skeleton(r["text"]) for r in lines(ROOT / "data/corpus_v2.jsonl")]
+    known += [expand.skeleton(g["text"]) for g in expand.load_griffith() if not g["partial"]]
+    found = [r["griffith_no"] for r in K.rows()
+             if any(expand.present(expand.skeleton(" ".join(expand.words(r["text_corpus"]))), k) for k in known)]
+    assert found == [], found
 
 
 def test_reported_typing_agreement():
