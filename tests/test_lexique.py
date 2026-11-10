@@ -358,6 +358,38 @@ def test_merge_writes_corpus_v3_from_the_griffith_files():
     assert out.splitlines()[-1] == "corpus_v2 1 texts 9 words -> corpus_v3 2 texts 15 words (+67%)"
 
 
+def test_karanog_rows_make_corpus_v5_and_leave_corpus_v3_alone():
+    jsonl = lambda *rows: "".join(json.dumps(r) + "\n" for r in rows)
+    base = {"id": "T1", "src": "funerary", "copies": 3, "text": "woSi Soreyi NAME qowi NAME tedxelowi ato mXe pSoxte"}
+    printed = {"griffith_no": 2, "rem": "0002", "text_corpus": "apedemk qore lw amnp | tNyidmni pwrite"}
+    karanog = [{"griffith_no": 47, "rem": "0247", "text_corpus": "qo xwitrorqo pesto akiNtelo"},
+               {"griffith_no": "Sh4", "rem": "", "text_corpus": "apedemk qore lw amnp tNyidmni pwrite"},     # in corpus_v3
+               {"griffith_no": 48, "rem": "0248", "text_corpus": "qo xwitrorqo pesto akiNtelo"}]             # repeats Kar. 47
+    old = expand.ROOT
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "data/expansion/karanog").mkdir(parents=True)
+        (d / "data/corpus_v2.jsonl").write_text(jsonl(base))
+        (d / "data/expansion/griffith_mi1a.jsonl").write_text(jsonl(printed))
+        expand.ROOT = d
+        try:
+            quiet_out(expand.main)
+            assert not (d / "data/corpus_v5.jsonl").exists()            # no Karanog file: corpus_v3 only
+            (d / "data/expansion/karanog/griffith_karanog.jsonl").write_text(jsonl(*karanog))
+            out = quiet_out(expand.main).splitlines()
+            v3 = [json.loads(l) for l in (d / "data/corpus_v3.jsonl").read_text().splitlines()]
+            v5 = [json.loads(l) for l in (d / "data/corpus_v5.jsonl").read_text().splitlines()]
+        finally:
+            expand.ROOT = old
+    assert [r["id"] for r in v3] == ["T1", "G-mi1a-2"]                   # the sub-folder is not read into corpus_v3
+    assert v5 == v3 + [{"id": "G-karanog-47", "src": "griffith", "rem": "0247", "copies": 1,
+                        "text": "qo xwitrorqo pesto akiNtelo"}]
+    assert "corpus_v2 1 texts 9 words -> corpus_v3 2 texts 15 words (+67%)" in out
+    assert "karanog texts 3: partial 0 (0 words, left out); already present 2 (10 words); new 1 (4 words)" in out
+    assert "already present: G-karanog-Sh4=G-mi1a-2 G-karanog-48=G-karanog-47" in out            # in the file's order
+    assert out[-1] == "corpus_v3 2 texts 15 words -> corpus_v5 3 texts 19 words (+27%)"
+
+
 def test_reported_expansion_numbers():
     needs("data/corpus_v2.jsonl")
     base = [json.loads(l) for l in (ROOT / "data/corpus_v2.jsonl").read_text().splitlines()]

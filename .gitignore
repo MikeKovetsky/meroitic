@@ -10,6 +10,7 @@ data/corpus.jsonl
 data/corpus_v2.jsonl
 data/corpus_v2_c3_snapshot.jsonl
 data/corpus_v3.jsonl
+data/corpus_v5.jsonl
 data/texts.jsonl
 data/swap_partners.json
 data/name_pools.json

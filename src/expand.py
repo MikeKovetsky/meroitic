@@ -14,7 +14,13 @@ stretch standing for any letters, spells all of it with at least half of its
 letters. Griffith's names are not masked (no name list exists for them), so
 each added row says src "griffith".
 
-  python3 src/expand.py          # writes corpus_v3.jsonl and prints the gain
+data/expansion/karanog/griffith_karanog.jsonl holds the Karanog and Shablul texts, read from Griffith's hand
+copies and checked against his printed type (src/karanog.py). They go through the same test against corpus_v3
+and each other, and corpus_v3 with the new ones is written as data/corpus_v5.jsonl. corpus_v3 itself stays as
+it was, because the tests and counts made before the Karanog texts were read are stated against it. (The name
+corpus_v4 is taken: the author's local corpus_v3 plus the Meroitic Newsletter texts, which are in copyright.)
+
+  python3 src/expand.py          # writes corpus_v3.jsonl and corpus_v5.jsonl and prints the gains
 """
 import fnmatch, json, re
 from pathlib import Path
@@ -76,9 +82,10 @@ def present(s, ref):
     return share(s, ref) >= 0.5 or spelled(s, ref)
 
 
-def load_griffith():
+def load_griffith(folder="data/expansion"):
+    """The rows of the griffith_*.jsonl files of a folder (not of its sub-folders), as corpus rows."""
     rows = []
-    for p in sorted((ROOT / "data/expansion").glob("griffith_*.jsonl")):
+    for p in sorted((ROOT / folder).glob("griffith_*.jsonl")):
         part = p.stem.split("_", 1)[1]
         for line in p.read_text().splitlines():
             if not line.strip():
@@ -130,6 +137,19 @@ def main():
     print("already present:", " ".join(f"{g['id']}={b}" for g, b in dupes))
     print(f"corpus_v2 {len(base)} texts {tok(base)} words -> corpus_v3 {len(base) + len(added)} texts "
           f"{tok(base) + tok(added)} words (+{tok(added) / tok(base):.0%})")
+    karanog = load_griffith("data/expansion/karanog")
+    if not karanog:
+        return
+    v3 = base + added
+    k_added, k_dupes, k_partial = merge(v3, karanog)
+    with open(ROOT / "data/corpus_v5.jsonl", "w") as f:
+        for r in v3 + k_added:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"karanog texts {len(karanog)}: partial {len(k_partial)} ({tok(k_partial)} words, left out); "
+          f"already present {len(k_dupes)} ({tok([g for g, _ in k_dupes])} words); new {len(k_added)} ({tok(k_added)} words)")
+    print("already present:", " ".join(f"{g['id']}={b}" for g, b in k_dupes))
+    print(f"corpus_v3 {len(v3)} texts {tok(v3)} words -> corpus_v5 {len(v3) + len(k_added)} texts "
+          f"{tok(v3) + tok(k_added)} words (+{tok(k_added) / tok(v3):.0%})")
 
 
 if __name__ == "__main__":
