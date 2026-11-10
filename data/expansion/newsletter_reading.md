@@ -20,11 +20,14 @@ judged.
    editions' own disagreement: 0 of 21 checked differences in print and 3 of 21 in the printout were typing
    errors (section 4).
 4. **No machine-readable copy of these texts was found online** on 2026-11-09 (GitHub, Hugging Face, Zenodo,
-   web search). They exist in print in Hallof's *Analytisches Wörterbuch des Meroitischen*, volume 7 (2024).
+   web search). 218 of the 256 have a REM number, and Hallof's *Analytisches Wörterbuch des Meroitischen*,
+   volume 7 (2024), prints the transliterations of REM 0001 to 2780 ([`NEXT_STEPS.md`](../../NEXT_STEPS.md),
+   step 7).
 
 ## 2. The method
 
-1. **Strips.** Each PDF page was cut into strips at four times the PDF's size.
+1. **Strips.** Each PDF page was rendered at four times the PDF's size and cut into overlapping strips: two a
+   page for the printed issues, three for the printout.
 2. **Typing.** Readers typed the texts from the strips and nothing else. They were told to copy what the page
    shows, to enlarge doubtful marks, and to mark their own doubt. The two briefs are in
    [`src/mnl/BRIEF_PRINTOUT.md`](../../src/mnl/BRIEF_PRINTOUT.md) and
@@ -40,14 +43,20 @@ judged.
    out) with every corpus text and with Millet's example lines in Otten's repository, and marks second editions
    of one inscription. `src/mnl/mnl_corpus.py` writes the local corpus.
 
-`python3 -I src/mnl/test_mnl.py` tests the scripts on made-up lines. `bash src/mnl/rebuild.sh <repo root>`
-rebuilds the three result files from the readers' typing; it needs the local-only folder `data/sources/mnl/`
-and stops without it.
+`python3 -I src/mnl/test_mnl.py` tests the scripts on made-up lines. `bash src/mnl/rebuild.sh <repo root>
+[out dir]` rebuilds the three result files from the readers' typing, by default into `data/sources/mnl/`, which
+`.gitignore` keeps out of the repo; it needs that local-only folder and stops with a message without it.
+Where the typed texts are present, `python3 -I tests/test_newsletter.py` checks that the rebuild gives the files
+this page counts, that this page's counts and accuracy figures come out of them, and that no typed line is in a
+file git tracks.
 
 ## 3. The accuracy test, done before the harvest
 
-Three inscriptions that Otten's files hold from other editions were typed blind and scored sign by sign
-(`src/mnl/mnl_score.py`).
+Three inscriptions that Otten's files hold from other editions were typed blind and scored sign by sign:
+`src/mnl/mnl_score.py millet` for Kharamadoye (against Otten's FHN file and his file of Millet's thesis),
+`src/mnl/mnl_round.py test` with the list of the reading's pages for the printout (each page aligned on its own
+against Otten's FHN file once the round letters are settled; `--quick` for the quick reader), and
+`src/mnl/mnl_score.py pair` for the two careful readers.
 
 | Text | Source | Reader | Agreement with the other edition |
 |---|---|---|---|
@@ -58,9 +67,16 @@ Three inscriptions that Otten's files hold from other editions were typed blind 
 | Tanyidamani stela, 8 pages | 1971 printout | quick reader | 93.7% of 2,172 signs |
 
 - The two careful readers agree with each other on 97.4% of 623 signs.
+- The agreement counts the other edition's signs. Signs found only in our typing are left out of it: 51 for
+  careful reader 1, 6 (Akinidad) and 32 (Tanyidamani) for careful reader 2, 158 for the quick reader.
 - A quick reader could not tell the printout's round letters apart (76% right after the model's help); readers
-  who enlarged each line got 91% to 96% of them right. The harvest used the careful way.
-- The Abratoye stela (REM 1333, Newsletter 28) was typed twice independently: all 1,293 characters agree.
+  who enlarged each line got 91% to 96% of them right. The priors for what a typed round letter is, and the
+  model's weight, were set on these same test pages, so for the printout the figures are not fully out of sample.
+- The harvest used the careful way, except for the quick reader's eight Tanyidamani pages (PDF pages 23 to 30),
+  which it kept: they hold REM 1042 to 1048, three of them new texts with 19 whole words.
+- The Abratoye stela (REM 1333, Newsletter 28) was typed twice independently: the 1,293 characters agree when
+  the two h signs count as one letter. The first typing wrote every h sign alike, so it does not check which
+  h sign the second typing chose (25 ḫ and 33 ẖ).
 - Not tested: the typewritten issues of 1977 to 1999 (18, 21, 22, 25, 26), which hold 36 of the new texts.
 
 ## 4. Editions compared, and how much of the difference is ours
@@ -76,8 +92,9 @@ pairs, 9,571 signs.
    the faint Tanyidamani pages typed by the quick reader, each a faint G taken for a round letter.
 3. **Where three editions exist,** our typing is rarely the odd one. For Kharamadoye, FHN stands alone 17 times,
    Millet's thesis 12 times and our typing of Millet 2003 four times, and the page prints all four as typed.
-4. **Signs that modern editors exchange:** the second h and s (12 places), e and o (12), l and t (6), the two h
-   signs (6), a and e (5).
+4. **Signs exchanged outside the printout:** e and o (12 places), the second h and s (12, but 10 of them are
+   our test reading of Griffith's Karanòg hand copies against FHN or Carrier), l and t (6), the two h signs (6),
+   a and e (5).
 
 Limits of this check: one reader looked at the scans; the printout figure rests on 21 places.
 
@@ -86,11 +103,14 @@ Limits of this check: one reader looked at the scans; the printout figure rests 
 - **Two leads tested out of sample** ([`../../REPORT.md`](../../REPORT.md), "Leads 1 and 2 on texts they had
   never seen").
 - **A held-out grammar test.** The new texts hold 1,078 word forms the old corpus lacks. Cutting them into a
-  known word plus one of the 30 commonest endings works for 19.2%, but for 21.6% of made-up words of the same
-  shape, so that says nothing. Prediction does better: where many old stems take two endings, giving the second
-  ending to stems seen only with the first predicts 107 forms, of which 4 occur in the new texts (0.5 expected
-  by chance); with looser rules 53 of 1,586 (9.6 expected). The hits are the known determiner and predicate
-  endings (`-lo`, `-lowi`, `-li`, `-leb`). An independent recount gave the same verdicts.
+  known word plus one of the 30 commonest endings works for about 19%, but for about 21% of made-up words of
+  the same shape, so that says nothing. Prediction does better: where many old stems take two endings, giving
+  the second ending to stems seen only with the first predicts 107 to 127 forms, of which 4 occur in the new
+  texts (0.5 to 0.7 expected by chance); with looser rules, chosen after that result, 53 of about 1,600 (about
+  9.5 expected). The four are spelling pairs (`-t` and `-te`, `-is` and `-i`); the looser rules' hits are mostly
+  the known determiner and predicate endings (`-lowi` and `-lo`, `-owi` and `-o`, `-leb` and `-l`). The counts
+  vary a little from run to run: the test's script, kept locally, follows Python's hash order where it breaks
+  a tie for the 30th ending and draws the controls. An independent recount gave the same verdicts.
 - **A blind test on the oracular decrees.** Nine of the new texts open with one formula. A solver that saw
   them with every letter swapped found 12 of the 14 points of structure that Millet (1977), Edwards and Fuller
   (2000) and Rilly (2000) published, and 8 of 20 points of meaning: the same pattern as the other blind tests
@@ -107,5 +127,8 @@ Limits of this check: one reader looked at the scans; the printout figure rests 
 4. Word division at line ends is uncertain where the edition prints no divider there.
 5. Not typed: scraps of fewer than 6 letters, words quoted in commentary, and a few texts whose pages were missed.
 6. Names are not masked in the new texts, unlike the older corpus, so word counts are not like for like.
-7. Known faults not yet fixed: tally strokes read as numbers in six printout texts, and the three faint-G places
-   of section 4.
+7. Known faults not yet fixed: tally strokes read as numbers in six printout texts, a line label read as a
+   number in REM 1019 and REM 1090, a lost last letter in REM 1062, and the three faint-G places of section 4.
+8. The duplicate check joined three texts to texts they are not: the collation of section 4 found that REM 1051
+   and REM 1054, and REM 1059 and REM 1073, are two objects each, and that REM 1085 is not corpus text T0792. So
+   three texts counted as second editions or as already in the corpus are new.
