@@ -67,6 +67,16 @@ looks like.
    drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
    a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
    republishing.
+   - **The complete transliterations exist in print (checked 2026-11-09).** Jochen Hallof, *Analytisches
+     Wörterbuch des Meroitischen*, volume 7, "Dokumente" (J.H. Röll, 2024, SRaT 13.7, ISBN 978-3-89754-629-5):
+     hardcover, 340 pages, 139.00 EUR. [The publisher's free 23-page sample](https://www.lehmanns.de/media/116874085)
+     opens with "Inscriptions REM 0001 to REM 2780" and gives each entry's object, findspot, present location,
+     dating, publication and transliteration with line numbers. No e-book or online version was found.
+     [Lehmanns.de](https://www.lehmanns.de/shop/geisteswissenschaften/68060973-9783897546295-analytisches-woerterbuch-des-meroitischen-analytic-meroitic-dictionary)
+     had one copy and ships within Europe only; Blackwell's was out of stock and Amazon.de did not deliver to the
+     United States; the publisher (info@roell-verlag.de) ships outside Europe at the actual postage, by email order.
+     Reading it would take about 7 million subagent tokens at the rate measured on the Newsletter. It is in
+     copyright: for private analysis unless the author agrees to more.
    - **Found since (2026-11-09):** the scans of the *Meroitic Newsletter* (issues 6 to 30, 1971 to 2003) print
      transliterations with REM numbers: Heyler's 1971 transcription of REM 1001 to 1110, and later editions from
      Qasr Ibrim, Arminna, Shokan, Tabo, Sedeinga and Meroë. 256 texts were typed that day, 185 of them new to the
