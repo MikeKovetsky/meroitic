@@ -245,6 +245,9 @@ read.
   1. Every `wi` + numeral elsewhere in REM (temple inventories, ostraca, REM 1041, REM 1333) should be the
      sum of a complete preceding list. One `wi N` that is not a sum over a complete list refutes H1.
   2. Read the numerals of ll. 16-25 on the FHN II plate and check 1626 and 3348.
+- **Tested on unseen texts, 2026-11-09:** weaker. Griffith 1917 and Heyler 1971 print the same counts and the same
+  3348 as FHN, so the sum is not reproduced, and the new `wi` + numeral cases favour "are" (`verification.md`,
+  claim 3, "Out-of-sample test").
 - **Literature:** searched
   - "Meroitic "wi" numeral total sum Hofmann Akinidad stela 3348";
   - "Meroitic numerals "wi" before numbers "total" Tanyidamani stela gods twelve Hintze OR Rilly OR Hofmann";

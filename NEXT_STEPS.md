@@ -21,13 +21,20 @@ looks like.
      [The open issue there](https://github.com/Joshua-Otten/Meroitic-Corpus/issues/1) asks for a licence and a
      provenance line for the same reason.
    - He is also the route to Claude Rilly, whom the paper thanks "for his thorough review and advice".
-2. **Send the two open leads** with that message, for Rilly or another specialist (Stefan Hallof, Henriette Ashby):
+   - **Done, 2026-11-09:** the email is sent, and
+     [123 of the Griffith texts are offered as a pull request on his repository](https://github.com/Joshua-Otten/Meroitic-Corpus/pull/2).
+2. **Send the two open leads** with that message, for Rilly or another specialist (Jochen Hallof, Solange Ashby):
    - `wi` before a numeral marks a total: in the Tanyidamani stela, `mk lte wi 12` follows exactly twelve items
      each counted "1" (Hofmann 1981 found a sum on REM 1003; check Hintze 1960 first);
    - the vocative `-i` placed at the end of "god + epithet" (Osiris is never `Soreyi` before an epithet in 11 texts;
      Rilly published the "Isis + Osiris" case; check Rilly & de Voogt 2012, p. 155, and Heyler 1964).
    Any future "new" claim goes through the adversarial check first (`data/discovery/verification.md` shows how),
    and through Rilly's lexicon in `data/rilly2003/`.
+   - **Status, 2026-11-09:** both went to Otten in this wording. The same evening they were tested on 185 texts
+     they had never seen ([`REPORT.md`](REPORT.md), "Leads 1 and 2 on texts they had never seen"). The second held,
+     9 of 9. The first got weaker: the `wi` number on REM 1003 is not the sum of its counts, and at Tabo `wi` stands
+     before one numeral after another. Reword the first before it goes to anyone else: the Tanyidamani sum is real,
+     the meaning "total" is not shown, and "X are N" fits better.
 3. **Write to So Miyagawa** (University of Tsukuba), whose
    [project from 2026](https://tiar.centers.tsukuba.ac.jp/en/fellow/1911/) applies language models to Meroitic: the
    blind-test findings (README, What's new, 3 and 4) are the part most useful to him.
@@ -60,6 +67,11 @@ looks like.
    drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
    a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
    republishing.
+   - **Found since (2026-11-09):** the scans of the *Meroitic Newsletter* (issues 6 to 30, 1971 to 2003) print
+     transliterations with REM numbers: Heyler's 1971 transcription of REM 1001 to 1110, and later editions from
+     Qasr Ibrim, Arminna, Shokan, Tabo, Sedeinga and Meroë. 256 texts were typed that day, 185 of them new to the
+     corpus. They are kept on the author's machine, for analysis and for checking readings like FHN: the articles
+     are in copyright.
 8. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
    pipeline once it passes. Check first whether that article has indexes like Karanòg's.
 9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):

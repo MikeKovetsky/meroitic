@@ -97,12 +97,13 @@ The discovery runs (`data/discovery/philae.md`, `funerary.md`, `hamadab.md`) lab
 searches. A separate run then tried to prove each wrong, with harder searches in English, French and German, the FHN
 commentary and Millet's 1968 glossary (`data/discovery/verification.md`). None survived as a clean new finding:
 
-1. OPEN, partly. `wi` before a numeral marks a total. Hofmann 1981 (via FHN II p. 722) already found that
-   `wi 3348` on REM 1003 sums the men and women; the Tanyidamani case (`mk lte wi 12` after exactly twelve items
-   counted "1") may be new. Check Hintze 1960.
-2. OPEN, partly. Rilly published one vocative `-i` after the pair "Isis + Osiris" (Rilly 2007 p. 297; Dotawo 7).
-   The extension to "god + epithet" (Osiris never `Soreyi` before an epithet, 11 texts) may be new, but Isis keeps
-   her `-i` before an epithet in one family. Check Rilly & de Voogt 2012 p. 155 and Heyler 1964.
+1. WEAKENED further on unseen texts (see below). `wi` before a numeral marks a total. FHN II (p. 722) reports that
+   Hofmann 1981 found `wi 3348` on REM 1003 to be the sum of the men and women; the Tanyidamani case (`mk lte wi 12`
+   after exactly twelve items counted "1") may be new. Check Hintze 1960.
+2. OPEN, and confirmed on unseen texts (see below). Rilly published one vocative `-i` after the pair "Isis +
+   Osiris" (Rilly 2007 p. 297; Dotawo 7). The extension to "god + epithet" (Osiris never `Soreyi` before an epithet,
+   11 texts) may be new, but Isis keeps her `-i` before an epithet in one family. Check Rilly & de Voogt 2012 p. 155
+   and Heyler 1964.
 3. WEAKENED. REM 0129 and Sasan's titles (Ph. 416): a word masked as a name is the title `womnis`, so REM 0129
    lists five or more titles; FHN III p. 1008 already pairs the two; the order is ordinary rank order.
 4. WEAKENED. Bekemete's father as "general of the water": Griffith 1911 (Karanòg p. 21) already set Ph. 417 beside
@@ -117,6 +118,39 @@ commentary and Millet's 1968 glossary (`data/discovery/verification.md`). None s
 The lesson: the model finds real patterns, but where the key literature is print-only (Millet 1968, Hofmann 1981,
 Rilly 2007, FHN commentary) it cannot tell a rediscovery from a discovery.
 
+### Leads 1 and 2 on texts they had never seen
+
+On 2026-11-09, after the leads were written down, 256 texts were typed from the scans of the *Meroitic Newsletter*
+(issues 6 to 30, 1971 to 2003); 185 of them are not in the corpus. The readings come from articles in copyright, so
+they are kept on the author's machine and are not in this repository. Both leads were then tested on those texts,
+with the predictions written first, and a second count was made independently. The two counts gave the same
+verdicts (details: `data/discovery/verification.md`, claims 3 and 6).
+
+**Lead 1, `wi` before a numeral marks a total: weaker.**
+
+- The one sum that can be checked fails. On REM 1003 the six counts of men and women add up to 648 (747 at most,
+  allowing for one doubtful count), and the number after `wi` is 3348. Griffith 1917 (JEA 4), Heyler's 1971
+  transcription (Newsletter 6) and FHN II all print these numbers, so Hofmann's addition rests on readings none of
+  them gives. Otten's file of the stela lacks the line with 3348.
+- No new text has a whole list before `wi` + numeral, so no new sum could be tested.
+- In the accounts from Tabo (REM 1347, Jacquet-Gordon, Newsletter 29) `wi` stands before a numeral on line after
+  line, once before a count of 1 (`wi 1`), and once it is written as one word with its noun (`seb[e]wi 270`).
+  Rilly's edition of the Obelisk of Meroë (REM 1361, Newsletter 29) also writes `abrwi` as one word before the
+  men's 1032(?), and the women's count after it has no `wi`. This fits `wi` as a copula, "X are N" (Hallof 2022,
+  for REM 1138), better than "total".
+- The Tanyidamani sum stands as arithmetic, but small numbers beside runs of 1s add up by chance about as often:
+  the texts with three or more numbers hold 10 such sums, against 8.7 expected when each text's numbers are
+  shuffled.
+
+**Lead 2, the vocative at the end of "god + epithet": holds, 9 of 9.**
+
+- In the texts new to the corpus, 9 invocations have the Osiris epithet, all after `Sori` or `aSori` and none after
+  `Soreyi`. 12 have the Isis epithet, all after `woS` and none after `woSi`. All 40 cases of `woSi` stand before
+  Osiris without an epithet.
+- Two texts put `mklX` in the place of Osiris before the epithet (REM 1062, REM 1067), which the lead does not
+  cover.
+- The count cannot tell a moved vocative from two fixed formulas, one short and one long, each copied whole.
+
 ## Corrections found along the way
 
 - Rilly withdrew "arme = Rome" in 2014; the Romans are `Tmey` in REM 1039, and `Arome` is 3rd century.
@@ -128,7 +162,7 @@ Rilly 2007, FHN commentary) it cannot tell a rediscovery from a discovery.
 1. A clean digital corpus (Hallof 2024, REM) with REM numbers, lines and doubtful signs.
 2. The model as an analyst whose high-confidence readings go to a specialist, low-confidence ones not.
 3. A cognate test with Rilly's sound correspondences over his 2003 thesis appendix (about 200 series).
-4. The leads above sent to Claude Rilly, Stefan Hallof, Henriette Ashby or Joshua Otten.
+4. The leads above sent to Claude Rilly, Jochen Hallof, Solange Ashby or Joshua Otten.
 
 
 ## Waves 2 and 3 (2026-11-09 morning)

@@ -20,6 +20,9 @@ None of the seven stands as a clean new finding. The nearest to new are the Tany
 then `mk lte wi 12`) and the extension in 6 from "Isis + Osiris" to "god + epithet". Both still need checks in print:
 Hintze 1960 for 3, and Rilly 2007, Rilly & de Voogt 2012 (p. 155) and Heyler 1964 for 6.
 
+**Update, the evening of 2026-11-09.** Claims 3 and 6 were tested on 185 texts that were typed after this check and
+had no part in it (see "Out-of-sample test" under each claim). Claim 3 got weaker. Claim 6 held.
+
 ## Sources used in this run
 
 Local copies, read in full text (they were fetched earlier this session; page numbers are the printed ones):
@@ -167,6 +170,35 @@ Summe Hintze meroitisch Zahlzeichen wi"; full text of FHN II and *Dotawo* 7 for 
 
 **What would settle it:** Hofmann 1981, pp. 288-326, and Hintze 1960 on the Tanyidamani god list.
 
+**Out-of-sample test, 2026-11-09.** The predictions were written first, from the tests named in `tanyidamani.md` H1
+and `hamadab.md` H1. The new texts are 185 inscriptions typed from the scans of the *Meroitic Newsletter*; they are
+kept on the author's machine, because the articles are in copyright. A fresh agent recounted everything without
+seeing the first count, and the verdicts agree.
+
+1. **REM 1003 does not add up in any edition.** Griffith 1917 (JEA 4, pp. 166-173), Heyler's 1971 transcription
+   (Newsletter 6) and FHN II give the same six counts: 32 and 135, 100 and 100, 58 and 223. Griffith prints the
+   second women's count with an unclear middle sign, and Rilly reads it 1[.]2. The counts sum to 648, or 747 at
+   most. The number after `wi` in l. 25 is 3348 in all three; Griffith adds "(?)". So point 1 under "Literature"
+   stands only as FHN's report of Hofmann: the printed numbers do not reproduce her addition. Point 1 under "Corpus
+   check" is explained too: Otten's file skips from one `wwikewi` to the next and loses `kdeyek abrik wi 3348`.
+2. **No new `wi` + numeral follows a whole list.** The cases are the Obelisk of Meroë again (REM 1361B in Rilly's
+   2002 edition, Newsletter 29: `abrwi` 1032(?), then `kdi` 2673, where Hintze had read 2623), the accounts from
+   Tabo (REM 1347A to C, Jacquet-Gordon, Newsletter 29: `wi 1`, `wi 21(?)`, `wi 9`, `wi 400`, `seb[e]wi 270`,
+   `wi 18(?)70`) and one line of a wooden tablet from Qasr Ibrim (REM 1163).
+3. **The distribution is against "total".** At Tabo `wi` + numeral comes on three lines running, after different
+   words, and once before a count of 1. Twice `wi` is written as one word with its noun (`abrwi`, `seb[e]wi`). On
+   the Obelisk it stands before the first of two counts, not after them. The copula reading ("X are N", Hallof
+   2022) covers all of this; "total" does not.
+4. **Sums of small numbers are cheap.** In the 19 texts with three or more numbers, a number equals the sum of a
+   run beside it 10 times, and shuffling each text's numbers gives 8.7. Six of the ten are in REM 1044, among runs
+   of 1s and 3s. The same holds for `pteno 3` before three items of 1 (`tanyidamani.md`, H3): no new case.
+5. **The test was partly too easy.** A prediction that needs a list preserved whole can hardly fail on broken
+   accounts. The sharper form is: `wi` + numeral never stands before the first item of a list or as a count of 1.
+   Both happen.
+
+**Verdict after the test: WEAKENED further.** The Tanyidamani sum is real. That `wi` means "total" is not shown, and
+"are" fits the new texts better.
+
 ## Claim 4. The closing 1,626 and 1,032 of REM 1003 count animals
 
 **Verdict: WEAKENED.** No published proposal was found, but the strongest parallel goes the other way.
@@ -199,6 +231,12 @@ full text of FHN II, Rilly 2016, *Dotawo* 7 and Lipiński 2011 for `asr`, cattle
 
 **What would settle it:** Zach 2017; the FHN II plate of REM 1041 to confirm `abr wi 1032`; Hofmann 1981, p. 326, for which
 numbers make 3348.
+
+**Update, 2026-11-09.** Two more editions of the REM 1041 passage were read that evening. Heyler's 1971
+transcription (Newsletter 6) has `abr wi 1032 kdi 2623`, as FHN does. Rilly's 2002 edition of the monument (REM
+1361B, Newsletter 29) writes `abrwi` as one word, says the units of the men's count may be 2, 3 or 4, and reads the
+women's count as 2673 where Hintze read 2623. So `abr wi 1032` is confirmed as a reading, with a doubt on its last
+digit.
 
 ## Claim 5. `plsn` comes from Egyptian pꜣ mr-šn, "the lesonis"
 
@@ -260,6 +298,21 @@ invocation Wos Sori épithètes Isis Osiris vocatif -i Rilly formule funéraire"
 épitaphes méroïtiques Revue d'égyptologie 16"; "Rilly La langue du royaume de Méroé vocatif -i Isis Osiris un seul
 suffixe épithètes qetneyineqeli p. 297"; full text of *Dotawo* 7, Rilly 2016, Rilly 2022 (BSFE) and the Rilly & de Voogt
 excerpt.
+
+**Out-of-sample test, 2026-11-09.** On the same 185 new texts as for claim 3, with the prediction written first: no
+`Soreyi` directly before `wetrri`/`qetrri`.
+
+1. **It holds, 9 of 9.** Nine invocations have the Osiris epithet: eight after `Sori`, one after `aSori`. `Soreyi`
+   (39 cases) and `aSoreyi` (3) never stand before it.
+2. **The Isis exception did not recur.** Twelve invocations have the Isis epithet, all after `woS`. All 40 cases of
+   `woSi` stand before Osiris without an epithet.
+3. **Two texts put `mklX` in Osiris's place** before `wetrri` (REM 1062, REM 1067), as REM 0129's benediction does
+   (point 4 above). The claim does not cover these.
+4. **What it cannot show.** The new texts come from the same families of funerary formulae, and two fixed
+   formulas copied whole would give exactly these counts. `Sori` itself ends in `-i`.
+
+**Verdict after the test:** the distribution is confirmed on unseen texts. The mechanism is still Rilly's, and still
+not separable from fixed formulas.
 
 ## Claim 7. `penn` is a counted time unit in datelines (numbers up to 34), not "day"
 

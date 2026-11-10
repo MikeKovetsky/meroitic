@@ -467,6 +467,8 @@ could not be read.
 - **Confidence:** 5 that 12 sums the list; 3 that `wi` itself means "total".
 - **Test:** every `wi` + numeral elsewhere (REM 1138, REM 1041 `abr wi 1032`) should sum a complete list; a `wi N`
   over a list that does not add up refutes "total" and leaves "are".
+- **Tested on unseen texts, 2026-11-09:** weaker. REM 1003's `wi` number is not the sum of its counts in any
+  edition, and the new cases favour "are" (`verification.md`, claim 3, "Out-of-sample test").
 
 ### H2. The god list includes the Theban triad: `Mno`/`Mne` Amun, `Mt` Mut, `Aqedise` Khonsu (l. 8-11)
 
@@ -489,6 +491,8 @@ could not be read.
 - **Confidence:** 3.
 - **Test:** another list where a word + numeral is followed by items whose numbers add up to it. A `pteno N` whose
   items do not sum to N refutes it.
+- **Tested on unseen texts, 2026-11-09:** no new case, and sums of small numbers turn up by chance about as often
+  (`verification.md`, claim 3, "Out-of-sample test", point 4).
 
 ### H4. Every `i-…-to` verb has the 1st-person prefix: `i-` = `e-` "I", `-to` tense or aspect
 
