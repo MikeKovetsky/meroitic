@@ -19,6 +19,9 @@ SOURCE = "Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg (Griffith
 SIGN = re.compile(r"se|te|to|[aeioywbpmnñrlḫẖskqtd]")
 CORPUS = {"s": "S", "se": "s", "ñ": "N", "ḫ": "x", "ẖ": "X"}        # README, the corpus spelling
 SITES = {"Kar": "Karanog", "Sh": "Shablul"}
+# measured by runs/work/karanog/score_fhn.py on the four texts FHN III prints (data/expansion/karanog/README.md)
+ACCURACY = ("Measured accuracy of the method, on the four Karanog texts that FHN III prints (Kar. 47, 77, 78 and the "
+            "spout of 121): 639 of 654 signs right (97.7%) after the check, 582 (89.0%) from the hand copies alone.")
 
 
 def number(text):
@@ -27,28 +30,30 @@ def number(text):
     return (m.group(1), int(m.group(2))) if m else None
 
 
-def signs(reading):
-    """The signs of a reading in order; a lost sign is '.'. Line numbers, dividers and query marks are not signs."""
-    t = re.sub(r"\(\d+\)", "", reading).replace("[.]", "\x00")
+def marked(reading):
+    """The reading with a NUL for each lost sign and each sign in square brackets (a restoration: lost, as in the
+    other Griffith files), and '|' for each line number, which parts two signs but not two words."""
+    t = re.sub(r"\(\d+\)", "|", reading).replace("[.]", "\x00")
+    return re.sub(r"\[([^\]]*)\]", lambda m: "\x00" * len(SIGN.findall(m.group(1))), t)
+
+
+def tokens(t):
     return ["." if m.group(0) == "\x00" else m.group(0) for m in re.finditer(r"\x00|" + SIGN.pattern, t)]
 
 
-def to_corpus(reading):
-    """A reading in the corpus spelling: words apart by one space, a dot for each lost sign.
+def signs(reading):
+    """The signs of a reading in order; a lost or restored sign is '.'. Line numbers, dividers and query marks are
+    not signs, but they stand between two: "arwt(14)e" is t and e, not the te sign, and "s?e" is s and e."""
+    return tokens(marked(reading))
 
-    A divider and a gap both end a word; a line number inside a word does not. Signs inside square brackets
-    are restorations and become dots, as in the other Griffith files.
+
+def to_corpus(reading):
+    """A reading in the corpus spelling: words apart by one space, a dot for each lost or restored sign.
+
+    A divider and a gap both end a word; a line number inside a word does not.
     """
-    t = re.sub(r"\(\d+\)", "", reading)
-    t = t.replace("[.]", "\x00")
-    t = re.sub(r"\[([^\]]*)\]", lambda m: "\x00" * len(SIGN.findall(m.group(1))), t)
-    words = []
-    for chunk in re.split(r"[\s:]+", t):
-        w = "".join("." if m.group(0) == "\x00" else CORPUS.get(m.group(0), m.group(0))
-                    for m in re.finditer(r"\x00|" + SIGN.pattern, chunk))
-        if w:
-            words.append(w)
-    return " ".join(words)
+    words = ("".join(CORPUS.get(s, s) for s in tokens(chunk)) for chunk in re.split(r"[\s:]+", marked(reading)))
+    return " ".join(w for w in words if w)
 
 
 def changed(before, after):
@@ -75,9 +80,11 @@ def rows(readings=None):
                           ("kept_against_type.jsonl", "kept"), ("unplaced.jsonl", "unplaced")):
             for o in load(pack, name):
                 n = number(o.get("text"))
-                if n:
-                    by_text[n][key].append(o)
-                    by_text[n]["pack"] = pack.name
+                if n is None:                          # a reading that names no inscription would be lost
+                    raise ValueError(f"{pack / name}: text {o.get('text')!r} is not 'Kar. N' or 'Sh. N' "
+                                     f"(a part's letter goes in 'part')")
+                by_text[n][key].append(o)
+                by_text[n]["pack"] = pack.name
     out = []
     for (site, no) in sorted(by_text, key=lambda k: (k[0] != "Kar", k[1])):
         t = by_text[(site, no)]
@@ -92,7 +99,8 @@ def rows(readings=None):
         diff = sum(changed(a["reading"], b["reading"]) for a, b in zip(first, parts)) if len(first) == len(parts) else None
         notes = [f"Read from Griffith's hand copy by Claude Opus 5.5 (pack {t['pack']}), then checked against the "
                  f"words he prints in type (names table, Indexes A to C, formula tables): {sum(o.get('entries') or 0 for o in parts)} "
-                 f"printed entries placed" + (f", {diff} signs changed by the check" if diff is not None else "") + "."]
+                 f"printed entries placed" + (f", {diff} signs changed by the check" if diff is not None else "") + ".",
+                 ACCURACY]
         if len(parts) > 1:
             notes.append("Parts as labelled on the copy: " + "; ".join(
                 f"{o.get('part') or '(main)'}" + (f" ({', '.join(o['labels'])})" if o.get("labels") else "") for o in parts) + ".")

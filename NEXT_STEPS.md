@@ -61,7 +61,7 @@ looks like.
      `src/expand.py`, with the measured accuracy in its notes.
    - **Status, 2026-11-10: the test passed and 19 of the 152 texts are read**
      ([`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). Fresh readers who could not see
-     FHN reached 98.2% of signs on the four test texts (90.5% from the hand copies alone). The check now uses
+     FHN reached 97.7% of signs on the four test texts (89.0% from the hand copies alone). The check now uses
      three printed sources, not one: the indexes, Griffith's table of names and parentage (pp. 87–94) and his
      tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts. Left to do: the other
      133 texts (46 page scans to fetch from archive.org, about 11 million subagent tokens), then the merge by

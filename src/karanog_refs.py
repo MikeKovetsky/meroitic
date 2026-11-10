@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REFS = ROOT / "data/expansion/karanog/refs"
 TOK = re.compile(r"Kar\.\s*(?:graff|Ostr)\.|Kar\.|Sh\.|Inscr\.|Mero[eë]|\bcf\.|\bsee\b|\bpp?\.|\bCh\.|\bPl\.|\bnote\b|;"
-                 r"|\d+\s?[ab]?\b(?:\s?[-–]\s?\d+)?(?:/\d+)?")
+                 r"|(?<=, )[a-d]\b(?:/\d+)?|\d+\s?[a-d]?\b(?:\s?[-–]\s?\d+)?(?:/\d+)?")
 LAST = {"Kar": 132, "Sh": 20}                    # the numbers Griffith gives
 
 
@@ -30,33 +30,37 @@ def parse_refs(refs):
 
     cf is true after "cf." (a comparison, not an occurrence). A form printed inside the entry (typed in braces)
     has its own typed object, so reading stops at the first brace. Page, chapter and note numbers, graffiti,
-    ostraca and other publications are skipped, and so is the figure in a label such as "form D 2" or "n. A 2". "118-20" is a short range; a wide one such as "Kar. 19-89" is two
-    monuments of one person, and both are flagged "pair".
+    ostraca and other publications are skipped, and so is the figure in a label such as "form D 2" or "n. A 2".
+    After "p." one number is a page, after "pp." every number up to the next "Kar." or "Sh.". "118-20" is a short
+    range; a wide one such as "Kar. 19-89" is two monuments of one person, and both are flagged "pair". A letter
+    alone after a comma is another part of the number before it: "101 a, b, c", "31 a/15, b/14".
     """
     s = re.sub(r"\([^)]*\)", " ", refs.split("{")[0])
     s = re.sub(r"\b(form\s+[A-J]|n\.\s*[A-C]{1,3})\s*\d\b", " ", s)
-    site, cf, skip, out = None, False, False, []
+    site, cf, skip, last, out = None, False, "", None, []     # skip: "" none, "one" number, "all" numbers
     for m in TOK.finditer(s):
         t = m.group(0)
         if t.startswith("Kar.") and t != "Kar.":       # graffiti and ostraca have numbers of their own
-            site, skip = None, True
+            site, skip, last = None, "all", None
         elif t in ("Kar.", "Sh."):
-            site, skip = t[:-1], False
+            site, skip, last = t[:-1], "", None
         elif t.startswith(("Inscr", "Mero")):
-            site, skip = None, True
+            site, skip, last = None, "all", None
         elif t == "cf.":
             cf = True
-        elif t in ("see", "p.", "pp.", "Ch.", "Pl.", "note"):
-            skip = True
+        elif t == "pp.":                          # "see pp. 24, 55": pages, all of them
+            skip, last = "all", None
+        elif t in ("see", "p.", "Ch.", "Pl.", "note"):
+            skip, last = skip or "one", None
         elif t == ";":
             cf = False
         elif t[0].isdigit():
-            if skip and site is None:
+            if skip == "all" or (skip and site is None):
                 continue
             if skip:                              # "see p. 81": one number, then back to the site
-                skip = False
+                skip = ""
                 continue
-            mm = re.fullmatch(r"(\d+)\s?([ab])?(?:\s?[-–]\s?(\d+))?(?:/(\d+))?", t)
+            mm = re.fullmatch(r"(\d+)\s?([a-d])?(?:\s?[-–]\s?(\d+))?(?:/(\d+))?", t)
             a, part, b, line = int(mm.group(1)), mm.group(2) or "", mm.group(3), mm.group(4)
             st = site or "Kar"
             if st == "Sh" and a > LAST["Sh"]:     # "Sh. 1, 2, 9. Later 64/23": the list goes on with Karanog
@@ -69,6 +73,9 @@ def parse_refs(refs):
             else:
                 nums = [(a, "")]
             out += [(st, n, part if len(nums) == 1 else "", cf, line, flag) for n, flag in nums if 1 <= n <= LAST[st]]
+            last = (st, a) if len(nums) == 1 and 1 <= a <= LAST[st] else None
+        elif last and re.fullmatch(r"[a-d](?:/\d+)?", t):     # "b/14" after "31 a/15": Kar. 31 b, line 14
+            out.append((last[0], last[1], t[0], cf, t[2:] or None, ""))
     return out
 
 
@@ -117,7 +124,7 @@ def tables(objs):
     for o in objs:
         if o["kind"] in ("formula", "name"):
             tid = text_id(o.get("text"))
-            targets = [(tid[0], tid[1], tid[2], False, None, "")] if tid and tid[1] <= LAST[tid[0]] else []
+            targets = [(tid[0], tid[1], tid[2], False, None, "")] if tid and 1 <= tid[1] <= LAST[tid[0]] else []
         else:
             targets = parse_refs(o.get("refs", ""))
         if not targets:
