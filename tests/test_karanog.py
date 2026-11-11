@@ -130,6 +130,7 @@ def test_an_inscription_read_twice_takes_the_settled_reading():
         write(pack, "copy_only.jsonl", [obj("Kar. 2", "wosi : kore"), obj("Kar. 3", "ato mḫe")])
         write(pack, "final.jsonl", [obj("Kar. 2", "wosi : qore", entries=2, check_notes="names table"),
                                     obj("Kar. 3", "ato mẖe", entries=1, check_notes="")])
+        write(pack, "kept_against_type.jsonl", [{"text": "Kar. 2", "copy": "wosi", "type": "woSi", "why": "clear"}])
         # the second reader's own reading is not the row's: only what it settled is
         write(second, "final.jsonl", [obj("Kar. 2", "wosi : qere", entries=2, check_notes="")])
         once = K.rows(root / "readings", root / "no_refs", root / "second")
@@ -154,6 +155,9 @@ def test_an_inscription_read_twice_takes_the_settled_reading():
             and "0 for the first reading, 1 for the second, 0 for neither and 0 left open; 1 sign of the first reader's row changed."
             in kar2["notes"]), kar2["notes"]
     assert "names table" in kar2["notes"] and "the e is hatched" in kar2["notes"]
+    # what the first reader kept against the type is its own: settling may have overruled it
+    assert "Copy kept against the type: wosi (type: woSi)." in once[0]["notes"]
+    assert "Copy kept against the type by the first reader: wosi (type: woSi)." in kar2["notes"]
     assert kar3 == once[1] and "second time" not in kar3["notes"]               # read once: as before
 
 

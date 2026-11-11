@@ -284,11 +284,12 @@ def rows(readings=None, refs=None, second=None):
         if len(parts) > 1:
             notes.append("Parts as labelled on the copy: " + "; ".join(
                 f"{o.get('part') or '(main)'}" + (f" ({', '.join(o['labels'])})" if o.get("labels") else "") for o in parts) + ".")
+        who = "" if both is None else " by the first reader"     # read twice: settling may have overruled these
         if t["kept"]:
-            notes.append("Copy kept against the type: " + "; ".join(
+            notes.append(f"Copy kept against the type{who}: " + "; ".join(
                 f"{k.get('copy', '')} (type: {k.get('type', '')})" for k in t["kept"]) + ".")
         if t["unplaced"]:
-            notes.append("Printed entries not found in the copy: " + "; ".join(
+            notes.append(f"Printed entries not found in the copy{who}: " + "; ".join(
                 f"{u.get('reading', '')} ({u.get('source', '')})" for u in t["unplaced"]) + ".")
         uniform = [x for x in (
             closed and f"{count(closed, 'gap')} between words {'is' if closed == 1 else 'are'} closed where his formula tables print one word",
