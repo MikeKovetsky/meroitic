@@ -32,9 +32,11 @@ Cite as: Mike Kovetsky, *Meroitic with Opus 5.5* (2026), <https://github.com/Mik
 Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
 
 - `data/nes/meroitic_wiktionary.tsv` comes from Wiktionary: CC BY-SA 4.0, share-alike.
-- `data/discovery/egyptian_candidates.tsv` holds lemma numbers and lemma forms, unchanged, from two works under
-  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), so the file is under CC BY-SA 4.0,
-  share-alike (the search picked which forms stand in it):
+- `data/discovery/egyptian_candidates.tsv` and `data/discovery/egyptian_candidates_vowels.tsv` hold lemma numbers
+  and lemma forms, unchanged, from two works under
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), so both files are under CC BY-SA 4.0,
+  share-alike (the search picked which forms stand in them; the second file holds forms of the Coptic lexicon
+  only):
   - [*Thesaurus Linguae Aegyptiae*, Demotic sentences, corpus v18, premium](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium),
     v1.1, 2024, ed. by Tonio Sebastian Richter and Daniel A. Werning on behalf of the Berlin-Brandenburgische
     Akademie der Wissenschaften and Hans-Werner Fischer-Elfert and Peter Dils on behalf of the Sächsische Akademie

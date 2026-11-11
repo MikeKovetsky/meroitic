@@ -56,6 +56,56 @@ def test_coptic_letters():
     assert all(c in E.EGY for c in E.coptic("".join(E.COP) + E.VOWELS))
 
 
+def test_letters_with_vowels():
+    # Meroitic: the written e, i and o stay; a is written at the start only, and that is the 0
+    assert E.meroitic("pelmoS", True) == "pelmos" and E.meroitic("ant", True) == "0nt"
+    assert E.meroitic("apote", True) == "0pote" and E.meroitic("erike", True) == "0erike"
+    assert E.meroitic("kiSri", True) == "kisri" and E.meroitic("qelile", True) == "qelile"
+    assert E.headword("Pẖome", True) == "pXome" and E.headword("a[..]te", True) == ""
+    assert (E.consonants("pelmos"), E.consonants("0erike"), E.consonants("")) == (4, 3, 0)
+    assert all(c in E.MER + E.VOWELS_M for c in E.meroitic("abdeiklmnopqrstwxyNSX", True))
+    # Coptic: each vowel as its class, a doubled one once; the glides and the mark of the start are as without
+    assert E.coptic("ⲗⲉⲙⲏⲏϣⲉ", True) == "lemeSe" and E.coptic("ⲗⲁϣⲁⲛⲉ", True) == "laSane"
+    assert E.coptic("ϩⲟⲛⲧ", True) == "hont" and E.coptic("ⲣⲏⲧ", True) == "ret"
+    assert E.coptic("ⲟⲩⲱϣⲧ", True) == "woSt" and E.coptic("ⲉⲓⲟⲟⲣ", True) == "yor"
+    assert E.coptic("ⲟⲩⲥⲓⲣⲉ", True) == "Aosire" and E.coptic("ⲕⲁⲓⲥⲁⲣ", True) == "kaisar"
+    assert E.coptic("ⲛⲟⲩⲃ", True) == "nob" and E.coptic("ⲏⲥⲉ", True) == "Aese"
+    assert all(c in E.EGY + E.VOWELS_E for c in E.coptic("".join(E.COP) + E.VOWELS, True))
+    # without its vowels a string is the consonant string
+    for form in ("ⲗⲉⲙⲏⲏϣⲉ", "ⲟⲩⲱϣⲧ", "ⲉⲓⲟⲟⲣ", "ⲟⲩⲥⲓⲣⲉ", "ⲕⲁⲓⲥⲁⲣ", "ⲁⲩⲱ", "ⲣ̄ⲣⲟ", "ⲉⲓⲱⲧ", "ⲟⲩⲟⲉⲓⲛ"):
+        assert "".join(c for c in E.coptic(form, True) if c not in E.VOWELS_E) == E.coptic(form), form
+
+
+def test_the_model_with_vowels():
+    mer, egy = E.MER + E.VOWELS_M, E.EGY + E.VOWELS_E
+    for e in egy:
+        row = E.neutral(e, mer)
+        assert math.isclose(sum(row.values()), 1.0) and set(row) == set(mer) | {""}, e
+    assert E.neutral("e", mer)["e"] > E.neutral("e", mer)["i"] > E.neutral("e", mer)["p"]   # itself, a vowel, the rest
+    assert E.neutral("a", mer)["e"] == E.neutral("a", mer)["o"] > E.neutral("a", mer)["p"]  # no a inside a word
+    assert E.neutral("e", mer)[""] > E.neutral("t", mer)[""]                                # a vowel drops easily
+    md = E.model(None, mer, egy)
+    stay = 1 - sum(math.exp(v) for v in md["add"].values())
+    assert all(math.isclose(sum(math.exp(v) for v in md["out"][e].values()), stay) for e in egy)
+    # the build's model is what it was: the consonant alphabets, and no vowel in it
+    assert E.model() == E.model(None, E.MER, E.EGY) and set(E.model()["add"]) == set(E.MER)
+    assert E.train([("plms", ["lmS"])]) == E.train([("plms", ["lmS"])], mer=E.MER, egy=E.EGY)
+    # vowels are counted like any letter: here ⲏ and ⲉ always give e, and ⲁ always drops
+    md = E.train([("pelmes", ["lemeS"]), ("ret", ["raet"]), ("mes", ["maes"])], mer=mer, egy=egy)
+    assert md["out"]["e"]["e"] > E.model(None, mer, egy)["out"]["e"]["e"]
+    assert md["out"]["a"][""] > E.model(None, mer, egy)["out"]["a"][""]
+    assert E.score("pelmes", "lemeS", md) > E.score("pelmes", "lomoS", md) > E.score("pelmes", "tomoS", md)
+    # the letter strings to search are chosen by name
+    pool = [dict(entry("a", ["lmS"]), voiced=["lemeS"]), dict(entry("b", ["lmS"]), voiced=["lomoS"])]
+    trie = E.Trie(list(enumerate(pool)), "voiced")
+    assert E.place("pelmes", [0], trie, md, pool, "voiced")[0] == 1
+    assert E.place("pelmes", [1], trie, md, pool, "voiced")[0] == 2
+    assert E.place("plms", [0], E.Trie(list(enumerate(pool))), E.model(), pool)[0] == 2     # consonants: a tie
+    items = [{"word": "plms", "voiced": "pelmes", "sources": [0]}, {"word": "rt", "voiced": "", "sources": [1]}]
+    assert E.pairs(items, pool, (), "voiced", "voiced") == [("pelmes", ["lemeS"])]
+    assert E.pairs(items, pool) == [("plms", ["lmS"]), ("rt", ["lmS"])]
+
+
 def test_the_starting_table_and_the_model_are_chances():
     for e in E.EGY:
         row = E.neutral(e)
@@ -179,6 +229,35 @@ def test_made_up_words():
     assert starts.count("0") > 0.8 * len(starts)
 
 
+def test_made_up_words_with_vowels():
+    words = ["pelmos", "0nt", "0pote", "kisri", "perite", "tewiseti", "yirewke", "qelile", "0rebetke", "qorene",
+             "mlo", "xrpxne", "0tepedemo"] * 3
+    made = E.made_up(words, n=15, seed=3, longest=11, least=3)
+    assert sorted(made) == list(range(E.SHORTEST, 12)) and made == E.made_up(words, n=15, seed=3, longest=11, least=3)
+    for k, ws in made.items():
+        assert len(ws) == 15 and all(len(w) == k or (k == 11 and len(w) >= k) for w in ws)
+        assert all(E.consonants(w) >= 3 and set(w) <= set(E.MER + E.VOWELS_M) for w in ws)
+    assert any(set(w) & set(E.VOWELS_M) for ws in made.values() for w in ws)
+    # the build's made-up words are unchanged: no least number of consonants, the build's lengths
+    plain = ["plms", "0nt", "0pt", "ksr", "prt", "twst", "yrwk", "xrpx", "mlkdn", "0rbtk", "qrn", "wyk"] * 3
+    assert E.made_up(plain, n=20, seed=3) == E.made_up(plain, n=20, seed=3, longest=E.LONGEST, least=0)
+
+
+def test_the_list_of_the_vowel_search():
+    hit = {"id": "ccl:C1", "form": "ⲣⲏⲧ", "meaning": "a title", "score": -1.0}
+    rows = [{"piece": "bbb", "kind": "title", "letters": "bebe", "texts": 2, "mentions_egyptian": False,
+             "spelled_like": "", "vowels": {"chance": 0.5, "hits": [hit]}},
+            {"piece": "aaa", "kind": "noun", "letters": "0ro", "texts": 1, "mentions_egyptian": False,
+             "spelled_like": "aro", "vowels": {"chance": 0.01, "hits": [dict(hit, id="ccl:C2")]}},
+            {"piece": "ccc", "kind": "verb", "letters": "ker", "texts": 9, "mentions_egyptian": True,
+             "spelled_like": "", "vowels": {"chance": 0.5, "hits": [hit]}}]
+    lines = [l.split("\t") for l in E.public_vowel_list(rows).splitlines()]
+    assert {len(c) for c in lines} == {8} and lines[0][0] == "piece"
+    assert [c[0] for c in lines[1:]] == ["aaa", "ccc", "bbb"]            # best first, then the more texts
+    assert lines[1][3:] == ["spelled like aro", "0ro", "0.010", "ccl:C2", "ⲣⲏⲧ"] and lines[2][3] == "yes"
+    assert "a title" not in E.public_vowel_list(rows)                    # no meaning of the dictionary
+
+
 def test_chance_and_the_bar_for_many_tries():
     assert E.chance(-1.0, [-3, -2, -1, -0.5]) == 3 / 5          # two reach it, and the word itself
     assert E.chance(0.0, [-3, -2]) == 1 / 3 and E.chance(-9, [-3, -2]) == 1.0
@@ -295,9 +374,10 @@ def test_the_pages_tables_are_the_result_file():
     page = PAGE.read_text(encoding="utf-8").replace("**", "")
     rows = [json.loads(l) for l in (ROOT / LOCAL[1]).read_text(encoding="utf-8").splitlines()]
     shown = 0
+    second = page.split("\n## 2. ")[1].split("\n## 3. ")[0]       # section 5 has a table of its own
     for r in rows:
         name = r["headword"].split(" (")[0]
-        line = next((l for l in page.splitlines() if l.startswith(f"| `{name}` |")), None)
+        line = next((l for l in second.splitlines() if l.startswith(f"| `{name}` |")), None)
         if "all" not in r or line is None:
             continue
         shown += 1
@@ -391,6 +471,115 @@ def test_the_public_list_is_the_result_file():
     # no meaning of either dictionary is in it: the match columns hold chances, lemma numbers and lemma forms
     meanings = {h["meaning"] for r in searched.values() for name in ("narrow", "wide") for h in r[name]["hits"]} - {""}
     assert not meanings & {cell for c in lines[1:] for cell in c[4:]}
+
+
+# ------------------------------------------------------------------------------------- with vowels (local)
+
+VOWEL_FILES = ("data/sources/egyptian/out/vowel_figures.json", "data/sources/egyptian/out/vowel_test.jsonl",
+               "data/sources/egyptian/out/vowel_candidates.jsonl")
+
+
+def test_reported_vowel_search():
+    needs(*VOWEL_FILES)
+    f = json.loads((ROOT / VOWEL_FILES[0]).read_text(encoding="utf-8"))
+    assert f["pool"] == {"coptic": 11283, "kinds": {"noun": 7139, "verb": 2946, "adjective": 448}}
+    t = f["test"]
+    assert (t["loans"], t["moved_up"], t["moved_down"]) == (13, 9, 3)
+    assert t["all"]["consonants"] == {"in_scope": 13, "top1": 1, "top3": 3, "top5": 4, "top10": 7}
+    assert t["all"]["vowels"] == {"in_scope": 13, "top1": 2, "top3": 4, "top5": 7, "top10": 9}
+    assert (t["words"]["loans"], t["words"]["consonants"]["top5"], t["words"]["vowels"]["top5"]) == (8, 3, 6)
+    assert (t["names"]["loans"], t["names"]["consonants"]["top5"], t["names"]["vowels"]["top5"]) == (5, 1, 1)
+    assert t["chance"] == {"compared": 11, "at_most_0.05": 1}
+    assert f["native"] == {"words": 64, "at_most_0.05": {"adjective+noun": 5, "noun": 5, "verb": 3},
+                           "at_most_0.2": {"adjective+noun": 18, "noun": 19, "verb": 17}}
+    u = f["unknown"]
+    assert (u["searched"], u["new"], u["at_most_0.05"], u["expected_by_chance"]) == (278, 241, 18, 12.1)
+    assert (u["as_many_by_chance"], u["passing_q_0.2"], u["fewest_at_the_smallest_chance_to_pass"]) == (0.06, 0, 5)
+    # the figures are the result files' own
+    rows = [json.loads(l) for l in (ROOT / VOWEL_FILES[2]).read_text(encoding="utf-8").splitlines()]
+    test = [json.loads(l) for l in (ROOT / VOWEL_FILES[1]).read_text(encoding="utf-8").splitlines()]
+    assert f["test"] == E.vowel_figures([], test, {}, rows, 64)["test"]
+    assert f["unknown"] == E.vowel_figures([], test, {}, rows, 64)["unknown"]
+    aside = collections.Counter("like" if r["spelled_like"] and not r["mentions_egyptian"] else r["mentions_egyptian"]
+                                for r in rows)
+    assert aside == {False: 241, True: 32, "like": 5}
+    # the bar of the first section: five best by consonants (wide pool), five best with vowels, and either
+    needs(*LOCAL)
+    first = {r["headword"]: r for r in map(json.loads, (ROOT / LOCAL[1]).read_text(encoding="utf-8").splitlines())}
+    words = [h for h, r in first.items() if r["kind"] in ("title", "noun", "verb")]
+    by_consonants = {h for h in words if "wide" in first[h] and (first[h]["wide"]["place"] or 99) <= 5}
+    with_vowels = {r["headword"] for r in test if r["kind"] in ("title", "noun", "verb") and r["vowels"] <= 5}
+    assert (len(words), len(by_consonants), len(with_vowels), len(by_consonants | with_vowels)) == (14, 4, 6, 8)
+    # the page's section 5 says these numbers
+    flat = " ".join(PAGE.read_text(encoding="utf-8").split())
+    words_for = {9: "Nine", 3: "three"}
+    for text in (f'{t["all"]["consonants"]["top5"]} of 13 by consonants, {t["all"]["vowels"]["top5"]} of 13 with vowels',
+                 f'Among the ten best: {t["all"]["consonants"]["top10"]} and {t["all"]["vowels"]["top10"]}',
+                 f'{words_for[t["moved_up"]]} loans move up, {words_for[t["moved_down"]]} move down',
+                 f'With vowels, {len(with_vowels)} of the 14', f'by consonants it was {len(by_consonants)}',
+                 f'hold the source for {len(by_consonants | with_vowels)} of the 14',
+                 f'for {t["chance"]["at_most_0.05"]} of the {t["chance"]["compared"]} loans compared',
+                 f'{f["native"]["at_most_0.05"]["noun"]} beat the 5% bar among the nouns',
+                 f'{f["native"]["at_most_0.2"]["noun"]} beat a 20% bar',
+                 f'{u["searched"]} titles, nouns, verbs and adjectives were searched',
+                 f'{u["searched"] - u["new"]} are set aside', f'which leaves {u["new"]}',
+                 f'| Pieces whose best match beats the 5% bar | {u["at_most_0.05"]} |',
+                 f'| How often chance alone gives {u["at_most_0.05"]} or more, by the made-up words | {u["as_many_by_chance"]:.0%} |',
+                 f'for 7 of the 13 loans that have a Coptic source, against 4 by consonants alone',
+                 f'for 6 of the 14 titles, nouns and verbs of the bar'):
+        assert text in flat, text
+
+
+def test_the_vowel_test_gives_the_reported_places():
+    """The test of the vowel search again, from the Coptic lexicon: both columns of the page's table."""
+    needs(*VOWEL_FILES, *WORDS)
+    pool = E.coptic_pool()
+    for e in pool:                                   # without its vowels a string is the consonant string
+        assert {"".join(c for c in v if c not in E.VOWELS_E) for v in e["voiced"]} == set(e["codes"]), e["id"]
+    nouns = [(k, e) for k, e in enumerate(pool) if "noun" in e["kinds"]]
+    voiced, bare = E.Trie(nouns, "voiced"), E.Trie(nouns)
+    items = [it for it in E.known(pool) if it["sources"] and it["voiced"]]
+    saved = [json.loads(l) for l in (ROOT / VOWEL_FILES[1]).read_text(encoding="utf-8").splitlines()]
+    assert [it["headword"] for it in items] == [r["headword"] for r in saved] and len(items) == 13
+    mer, egy = E.MER + E.VOWELS_M, E.EGY + E.VOWELS_E
+    page = PAGE.read_text(encoding="utf-8")
+    for it, r in zip(items, saved):
+        md = E.train(E.pairs(items, pool, it["sources"], "voiced", "voiced"), mer=mer, egy=egy)
+        plain = E.train(E.pairs(items, pool, it["sources"]))
+        got = (E.place(it["word"], it["sources"], bare, plain, pool)[0],
+               E.place(it["voiced"], it["sources"], voiced, md, pool, "voiced")[0])
+        assert got == (r["consonants"], r["vowels"]) and r["of"] == voiced.size == 7139, it["headword"]
+        name = it["headword"].split(" (")[0]
+        fifth = page.split("\n## 5. ")[1].split("\n## 6. ")[0]
+        line = next(l for l in fifth.splitlines() if l.startswith(f"| `{name}` | "))
+        assert line.rstrip().endswith(f"| {got[0]} | {got[1]} |"), line
+    assert {r["headword"]: r["vowels"] for r in saved} == {
+        "ant": 5, "Asori": 2, "kisri": 3, "pelmos": 16, "perite": 5, "Pẖome": 8, "plsn": 1, "qelile": 5,
+        "tewiseti": 1, "Wos": 192, "yirewke": 35, "Atri": 13, "Beke": 6}
+
+
+def test_the_vowel_list_and_the_second_check():
+    needs(*VOWEL_FILES, "data/sources/egyptian/out/check_vowels.json", "data/sources/egyptian/check_vowels_key.json",
+          "data/sources/egyptian/check_key.json")
+    rows = [json.loads(l) for l in (ROOT / VOWEL_FILES[2]).read_text(encoding="utf-8").splitlines()]
+    assert E.PUBLIC_VOWELS.read_text(encoding="utf-8") == E.public_vowel_list(rows)
+    lines = [l.split("\t") for l in E.PUBLIC_VOWELS.read_text(encoding="utf-8").splitlines()]
+    assert len(lines) == 279 and all(c[6].startswith("ccl:") for c in lines[1:])
+    meanings = {h["meaning"] for r in rows for h in r["vowels"]["hits"]} - {""}
+    assert not meanings & {cell for c in lines[1:] for cell in c}
+    # the second pack: the pieces that beat the bar and were not in the first pack, and six decoys
+    key = json.loads((ROOT / "data/sources/egyptian/check_vowels_key.json").read_text(encoding="utf-8"))
+    seen = {a["piece"] for a in json.loads((ROOT / "data/sources/egyptian/check_key.json").read_text(encoding="utf-8")).values()}
+    low = {r["piece"] for r in rows if r["vowels"]["chance"] <= E.BAR and not (r["mentions_egyptian"] or r["spelled_like"])}
+    assert (len(low), len(low & seen)) == (18, 9)
+    assert {a["piece"] for a in key.values() if not a["decoy"]} == low - seen
+    assert sum(a["decoy"] for a in key.values()) == 6 and all(a["chance"] >= 0.5 for a in key.values() if a["decoy"])
+    assert not {a["piece"] for a in key.values()} & seen
+    c = json.loads((ROOT / "data/sources/egyptian/out/check_vowels.json").read_text(encoding="utf-8"))
+    assert (c["items"], c["best"], c["decoys"], c["answered_by_both"], c["same_verdict"]) == (15, 9, 6, 15, 15)
+    for reader in ("reader1", "reader2"):
+        assert c["readers"][reader] == {"answered": 15, "best": {"no": 9}, "decoys": {"no": 6}}
+    assert c["fits_for_both"] == c["known_for_both"] == []
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

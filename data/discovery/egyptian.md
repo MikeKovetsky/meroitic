@@ -29,7 +29,12 @@ for the loans whose source is known, each one hidden in turn, then for the piece
    `Amni`), and the checkers recognised 5 more among the 33 they read (`prSn` for `plsn`, `petmoS` for `pelmos`).
    And the Demotic list holds graffiti of Meroitic officials at Philae that spell Meroitic titles in Demotic
    (`qrnyꜣ` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`).
-6. **Not done.** The step named two more Egyptian parallels, and both are still open. The oracular decrees were
+6. **Comparing the vowels too ranks better and decides nothing new** (section 5, added after the question whether
+   spelling would do more than consonants). On the Coptic entries, the true source is among the five best for 7 of
+   the 13 loans that have a Coptic source, against 4 by consonants alone, and for 6 of the 14 titles, nouns and
+   verbs of the bar. But the best match of a known loan still does not stand out from made-up words (1 of 11),
+   and the pieces without a meaning stay at chance.
+7. **Not done.** The step named two more Egyptian parallels, and both are still open. The oracular decrees were
    not compared, because neither list holds Egyptian texts of that kind. The people whom the Philae graffiti and
    the Meroitic texts both name were not matched, because the Demotic file comes as single sentences without their
    texts and the older Meroitic corpus masks its names. An earlier run set six groups of Meroitic texts from Philae
@@ -42,7 +47,7 @@ The answer key is the 35 entries of Rilly's 2003 lexicon that he holds as establ
 independent readers both took as borrowings into Meroitic: 14 titles, nouns and verbs and 21 names. For 24 of
 them the source word stands in the lists (11 and 13). Each was searched with a model trained on the other loans
 only. "Place" is the number of candidates that score as well as the true source or better, so ties count
-against it. "Narrow" is the pool of the word's own kind, "wide" adds the neighbouring kinds (section 5).
+against it. "Narrow" is the pool of the word's own kind, "wide" adds the neighbouring kinds (section 6).
 
 | Meroitic | Kind | Source in the lists | Place, narrow | Place, wide | Place, all 16,943 |
 |---|---|---|---|---|---|
@@ -84,7 +89,7 @@ titles holds many, and three or four consonants cannot single out one word among
 changed more on the way: `peseto` and `sꜣ-nsw` share one consonant.
 
 **Is the best match better than chance?** For each loan, the score of its best candidate was compared with the
-best scores of 300 made-up words of the same length (section 5). A loan "beats the bar" when at most 5% of the
+best scores of 300 made-up words of the same length (section 6). A loan "beats the bar" when at most 5% of the
 made-up words do as well.
 
 | Group | Loans compared | Beat the bar, narrow | Beat the bar, wide |
@@ -160,7 +165,71 @@ half of the made-up words equal.
 The checkers have read the literature, as every model has, so a "known" verdict leans on memory as well as on the
 pack. What the decoys show is that they did not accept look-alikes.
 
-## 5. Method
+## 5. The same search with the vowels compared
+
+Sections 2 to 4 compare consonants only. This run, made the same day, compares the written vowels too. The Demotic
+list writes none, so it is on the Coptic entries alone: a Meroitic word keeps its e, i and o (a is written at the
+start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ and ⲏ; ⲓ and ⲉⲓ; ⲟ, ⲱ and ⲟⲩ), and the
+model counts a vowel like any other letter. A title or a noun is searched among the 7,139 Coptic nouns, a verb
+among the 2,946 verbs.
+
+**The test.** 13 of the known loans have a Coptic source: 8 titles and nouns, and 5 names whose source the
+lexicon lists as a noun. Each was hidden in turn, as before. "Consonants" is the same search in the same pool
+without the vowels, with a model trained on the same 13 loans, so the two columns differ in the vowels only (and
+differ from section 2, where the pool also holds the Demotic lemmata).
+
+| Meroitic | Coptic source | Place by consonants | Place with vowels |
+|---|---|---|---|
+| `plsn` | ⲗⲁϣⲁⲛⲉ | 1 | 1 |
+| `tewiseti` | ⲟⲩⲁϣⲧⲉ, ⲟⲩⲱϣⲧ | 2 | 1 |
+| `Asori` | ⲟⲩⲥⲓⲣⲉ | 3 | 2 |
+| `kisri` | ⲕⲁⲓⲥⲁⲣ | 4 | 3 |
+| `ant` | ϩⲟⲛⲧ | 6 | 5 |
+| `perite` | ⲣⲏⲧ | 13 | 5 |
+| `qelile` | ⲕⲗⲁⲗ | 14 | 5 |
+| `Beke` | ⲃⲏϭ | 11 | 6 |
+| `Pẖome` | ⲁϩⲱⲙ | 17 | 8 |
+| `Atri` | ϩⲁⲑⲱⲣ | 9 | 13 |
+| `pelmos` | ⲗⲉⲙⲏⲏϣⲉ | 6 | 16 |
+| `yirewke` | ⲉⲓⲟⲟⲣ, ⲉⲓⲉⲣⲟ | 159 | 35 |
+| `Wos` | ⲏⲥⲉ | 108 | 192 |
+
+Among the five best of 7,139 nouns: 4 of 13 by consonants, 7 of 13 with vowels. Among the ten best: 7 and 9. Nine
+loans move up, three move down (`Atri`, `pelmos` and `Wos`, whose vowels changed on the way into Meroitic) and
+one stays.
+
+**Against the bar of section 1.** With vowels, 6 of the 14 titles, nouns and verbs have their source among the
+five best; by consonants it was 4. The two searches find different loans: the five best of both together, up to
+ten candidates a loan, hold the source for 8 of the 14. That is ten candidates and not five, so the bar is not
+reached.
+
+**Against chance.** The best match of a known loan beats the best matches of 95% of made-up words for 1 of the 11
+loans compared (`pelmos`, with a word that is not its source). The made-up words are a lenient yardstick here: of
+the 64 Meroitic words with an accepted meaning and no Egyptian link, 5 beat the 5% bar among the nouns where 3 are
+expected, and 19 beat a 20% bar where 13 are expected. A real Meroitic word fits Coptic vowels a little better
+than a made-up one, loan or not.
+
+**The pieces without a meaning.** 278 titles, nouns, verbs and adjectives were searched (names are left out: the
+Coptic lexicon holds few). 37 are set aside as in section 3, which leaves 241.
+
+| | With vowels, Coptic entries |
+|---|---|
+| Pieces whose best match beats the 5% bar | 18 |
+| Expected by chance (5% of 241, by the made-up words) | 12 |
+| Expected at the rate of the 64 native words (5 of 64) | 19 |
+| How often chance alone gives 18 or more, by the made-up words | 6% |
+| Pieces that pass the bar for 241 tries | 0 (it needs five pieces at the smallest chance) |
+
+So 18 is what words that are not loans give. Every searched piece is in
+[`egyptian_candidates_vowels.tsv`](egyptian_candidates_vowels.tsv).
+
+**The check.** Nine of the 18 had been in the first pack (`prSn`, `petmoS`, `pertese` and `stol` among them: the
+forms of known loans of section 4). The other nine went to two new checkers, blind, with six decoys. Both
+answered "no candidate is supported" for all 15: no new source, no decoy accepted. Two of the nine are titles in
+-ose that the search set beside Greek loans in Coptic that end in -ⲟⲥ (`mseqorose` beside the word for a cook
+or butcher); the checkers found nothing in the contexts to support them.
+
+## 6. Method
 
 1. **The pools.** 5,660 lemmata of the TLA's 13,383 Demotic sentences, each with the kinds its tokens are tagged
    as (a tenth of the tokens or more: 310 titles, 251 gods, 277 places, 1,249 persons), and the 11,283 entries of
@@ -193,12 +262,13 @@ pack. What the decoys show is that they did not accept look-alikes.
 - The scorer is simple. A better one might move single places; it would not change that a pool of thousands holds
   many words with the same three consonants.
 
-## 6. Files
+## 7. Files
 
 | File | What | Where |
 |---|---|---|
 | `src/egyptian.py`, `tests/test_egyptian.py` | the search and its checks | public |
 | [`egyptian_candidates.tsv`](egyptian_candidates.tsv) | the 442 searched pieces, best match and chance in both pools | public, CC BY-SA 4.0 (it holds lemma numbers and forms of the two lists) |
+| [`egyptian_candidates_vowels.tsv`](egyptian_candidates_vowels.tsv) | the 278 pieces of the vowel search, best match and chance | public, CC BY-SA 4.0 (lemma numbers and forms of the Coptic lexicon) |
 | [`egyptian_brief.md`](egyptian_brief.md) | the checkers' brief | public |
 | the two word lists | `Comprehensive_Coptic_Lexicon-v1.2-2020.xml` from [KELLIA's dictionary](https://github.com/KELLIA/dictionary) and `train.jsonl` from [the TLA's Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium), both CC BY-SA 4.0 | local, `data/sources/egyptian/` |
 | the answer key, the result files, the checkers' pack and answers | drawn from Rilly's lexicon and the gloss file | local, `data/sources/egyptian/` |
@@ -208,11 +278,13 @@ the entry of ⲗⲁϣⲁⲛⲉ; put another number in its place). A `tla:` numbe
 Linguae Aegyptiae, without the `tla:`: [d2527 is `mr-šn`](https://thesaurus-linguae-aegyptiae.de/lemma/d2527) (the
 site asks for a short browser check first).
 
-To rebuild, with the local files in place: `python3 -I src/egyptian.py build` (about four minutes), then
-`check` and `merge` for the checkers' pack and answers.
+To rebuild, with the local files in place: `python3 -I src/egyptian.py build` (about three minutes), then
+`check` and `merge` for the checkers' pack and answers; `vowels` (about eleven minutes), then `check vowels` and
+`merge vowels` for section 5.
 
-## 7. Cost
+## 8. Cost
 
 The two readers of the answer key took 364,923 subagent tokens, the two checkers 249,072 and one web check about
-8,000: about 0.62 million in all, against about 1 million estimated beforehand, and the review comes on top. The
-search itself is plain Python and runs in four minutes.
+8,000: about 0.62 million, against about 1 million estimated beforehand; its review took 401,989 more. The vowel
+run of section 5 added 139,936 for its two checkers, against about 0.5 million estimated with its review. The
+search itself is plain Python: three minutes by consonants, eleven with vowels.

@@ -15,7 +15,8 @@ a part of a word that has no accepted meaning. For each piece you get:
   (`tla:`, with its word classes and up to two sentences with their German translation) or a Coptic dictionary entry
   (`ccl:`, with an English meaning, and the Greek word when it is a Greek loan in Coptic).
 
-The search knows only letters. It compared consonants and ignored vowels, so most of its matches are look-alikes by
+The search knows only letters. It compared consonants and ignored vowels (a second, smaller pack comes from a run
+that compared the written vowels too, on the Coptic entries only), so most of its matches are look-alikes by
 chance: assume a match is chance until the piece's kind and contexts give you a reason to think otherwise. Some of the
 pieces in the pack were put there with matches that are known to be poor. You are not told which.
 

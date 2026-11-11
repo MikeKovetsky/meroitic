@@ -60,7 +60,9 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      and verbs, though for all 10 names of gods, places and people that have a source among the Demotic names of
      their kind it is among the three best. For the 383 pieces without a meaning it gives nothing above chance, and
      two blind checkers found no new source among its 33 best matches
-     ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)). The step's two other Egyptian parallels, the
+     ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)). Comparing the written vowels too, on the Coptic
+     entries, ranks the true source better (among the five best for 7 of 13 loans, against 4) and leaves both
+     answers as they are. The step's two other Egyptian parallels, the
      oracular decrees and the people the Philae graffiti name in Demotic, are not done yet.
 8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
@@ -256,8 +258,10 @@ lexicon that two independent readers took as accepted borrowings; each is search
 others, among the entries of its own kind and then with the neighbouring kinds added (titles with nouns). A match
 counts only as far as it beats the best matches of made-up words of the same length; the 64 words with an
 accepted meaning and no Egyptian link beat that bar about as often as chance would (0 to 5 times, where 3 are
-expected). The best matches for the unknown pieces went to two blind checkers with unmarked decoys. The word
-lists, the key and the result files are local-only; the page, the brief and the list of candidates are public
+expected). The best matches for the unknown pieces went to two blind checkers with unmarked decoys. A second run
+(`vowels`) compares the written vowels as well, on the Coptic entries only, since Demotic writes none, and keeps
+the consonant figures of the same pool beside its own. The word lists, the key and the result files are
+local-only; the page, the brief and the two lists of candidates are public
 ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
 
 ## Reproduce
@@ -288,7 +292,7 @@ Five things need files that are kept locally (Data, above), so they don't run fr
 - `python3 -I src/lexique.py judged` (and the lexicon test's other commands) reads Rilly's lexicon;
 - `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences;
 - `python3 -I src/coverage.py first` (and `build`) reads Rilly's lexicon, `corpus_v5` and the analysts' answers;
-- `python3 -I src/egyptian.py first` (and `build`) reads the two Egyptian word lists, Rilly's lexicon and the
+- `python3 -I src/egyptian.py first` (and `build`, `vowels`) reads the two Egyptian word lists, Rilly's lexicon and the
   answer key drawn from it.
 
 ## Layout

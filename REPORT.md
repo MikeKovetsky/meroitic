@@ -314,3 +314,11 @@ After "are you giving up?", four more lines of attack, then data.
    sample of sentences, not a dictionary; the key, its readers and the checkers go back to one lexicon and one
    model family. Cost: about 0.62 million subagent tokens before the review (364,923 for the key's two readers,
    249,072 for the two checkers, about 8,000 for a web check).
+9. **With the vowels compared too** (added the same day, on the Coptic entries only, since Demotic writes no
+   vowels): the true source is among the five best of 7,139 Coptic nouns for 7 of the 13 loans that have a Coptic
+   source, against 4 by consonants in the same pool; nine loans move up and three down. Of the 14 titles, nouns
+   and verbs of the bar, 6 have their source among the five best with vowels (4 by consonants; 8 in the five best
+   of both searches together, which is ten candidates a loan). Against chance nothing changes: the best match of
+   a known loan beats 95% of made-up words for 1 of 11, and of 241 pieces without a meaning 18 beat the 5% bar,
+   where the made-up words predict 12 and the rate of 64 native words predicts 19. Two more blind checkers read
+   the nine best matches that were new, with six decoys, and said no to all 15 (139,936 subagent tokens).

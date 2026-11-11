@@ -197,6 +197,9 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       source among the Demotic names of their kind it is among the three best. Of the 383 unknown pieces searched,
       22 and 26 beat the 5% bar where 19 are expected by chance, and two blind checkers found no new source among
       the 33 best matches. Sound alone does not tell a loan from a look-alike in a pool of thousands.
+    - **With the vowels compared too** (the Coptic entries only): the true source is among the five best for 7
+      of 13 loans against 4, so a vowel-aware search is the better tool once a word is known to be a loan. It
+      does not find loans: 18 of 241 unknown pieces beat the 5% bar, as many as words that are not loans give.
     - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
       people named in both the Philae graffiti and the Meroitic texts.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
@@ -228,3 +231,9 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
 20. **Left open by the map itself:** the lexicon is the state of 2003 (Rilly's 2016 list accepts `pqr`, `wide`,
     `nbr` and `sr`, which it holds as proposals); 1,657 leftover words have one analyst only; a word with two
     accepted entries is not disambiguated; and the older corpus divides words unevenly.
+21. **Spelling variants inside Meroitic.** The Egyptian search stumbled on at least 16 pieces of the map's list
+    that are spellings or forms of known words (`prSn` for `plsn`, `petmoS` for `pelmos`). Searched for on
+    purpose, each piece would be compared with the about 800 entries of the lexicon, a pool small enough for a
+    search by letters to work (step 17), and the spellings Rilly lists as variants are the test: hide each and see
+    whether the search brings it back to its entry. Each hit that two checkers confirm moves a piece of the map
+    to a known word.
