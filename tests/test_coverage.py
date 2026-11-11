@@ -359,6 +359,12 @@ def test_reported_coverage():
     assert a["by"] == {"lookup": 11374, "analyst": 1918}
     assert (a["translated_on_a_choice"], a["title_or_epithet_only"], a["by_one_analyst"], a["by_a_spelling_variant"],
             a["with_open_grammar"]) == (1376, 995, 464, 694, {"analyst": 840, "lookup": 70})
+    # the lookup's translated words whose ending the lexicon has no suffix entry for (section 4)
+    unlisted = collections.Counter(
+        g["parts"][1]["form"] for _, gs in glossed for g in gs
+        if g["level"] in C.TRANSLATED and g["by"] == "lookup" and g["parts"][1:] and g["parts"][1]["entry"] == "ending"
+        and not any(e["affix"] == "suffix" for e in affixes.get(g["parts"][1]["form"], [])))
+    assert (sum(unlisted.values()), set(unlisted)) == (109, {"lis", "se", "yi", "tel", "teli", "b", "bx"})
     assert (once["texts"], once["words"], once["translated"]) == (608, 8786, 5266)  # 59.9%
     assert once["levels"] == {"meaning": 2720, "grammar": 1013, "name": 1390, "number": 143, "hypothesis": 1424,
                               "kind": 669, "unknown": 1165, "lost": 262}

@@ -149,7 +149,9 @@ The draft translation of a text is this line of glosses, word by word, not Engli
    - 995 are titles or epithets whose entry says no more than "a priestly title of …";
    - 694 are read through a spelling variant that the analyst asserts (`Sore` for `Sori`);
    - 910 have an ending or a prefix whose function is open: 840 in the analysts' cuts, and 70 that the lookup
-     cut into a stem and an ending (`-ye`, `-w`, `-wi`, `-kete`) whose entries give it no accepted function.
+     cut into a stem and an ending (`-ye`, `-w`, `-wi`, `-kete`) whose entries give it no accepted function;
+   - 109 more take an ending that the lexicon has no suffix entry for (`-lis`, `-se`, `-yi`, `-tel`, `-teli`,
+     `-b`, `-bx`), so whether its function is open is not known.
 4. **What it cannot show.** No specialist has checked a line. The analysts are one model family, and the model
    has read the literature, though the brief forbids raising a confidence above 3 on memory alone. The lexicon is
    the state of 2003. A word with two accepted entries (`at`, bread or priest) is counted as translated without
