@@ -20,7 +20,9 @@ Done since this plan was written:
 4. **Four smaller tests** on the new texts (a held-out grammar test, the oracular decrees read blind, Meeks's 1973
    word list against Rilly 2003, and a collation of editions): section 5 of the Newsletter page.
 5. **Step 1, outreach:** Otten has the email and the pull request; Rilly, Hallof (through Beinlich) and Smith were
-   asked on 2026-11-09 for typed texts. No reply had come by 2026-11-10.
+   asked on 2026-11-09 for typed texts. On the evening of 2026-11-10 the pull request had no comment yet, and
+   Otten had added Meroitic–Egyptian word lists to his repository that day (his first commit there since 2024).
+   The mailbox was last checked on the evening of 2026-11-09: no reply then.
 
 Next, in this order:
 
