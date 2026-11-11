@@ -185,6 +185,19 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
 17. **Egyptian parallels for the titles and the counted things** in the list: borrowed titles, the oracular
     decrees (an Egyptian kind of text) and the Philae graffiti that name the same people in Demotic. Test the
     method first on known loans held out.
+    - **Status, 2026-11-11:** the answer key is built. Two independent readers went through the 207 entries of
+      the lexicon that mention Egyptian, Demotic, Coptic, Greek or Latin and agreed on 198: 69 are borrowings into
+      Meroitic for both readers (35 of them with an accepted meaning, 33 with the source word printed: 19 names
+      and 14 titles, nouns and verbs), 49 are Meroitic names in Egyptian or Greek letters, and the rest are
+      rejected or mention the language for another reason. The table is local, like the lexicon.
+    - The search side is found, not yet fetched: the Coptic lexicon of
+      [KELLIA's dictionary](https://github.com/KELLIA/dictionary) (`Comprehensive_Coptic_Lexicon-v1.2-2020.xml`,
+      12.3 MB; CC BY-SA 4.0 according to coptic-dictionary.org; vowels and English meanings) and the TLA's
+      [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium)
+      (`train.jsonl`, 7.3 MB, CC BY-SA 4.0; lemma forms, no lemma meanings). The search is to be mechanical (a
+      scorer has not read the literature) and tested by leaving each known loan out in turn.
+    - Otten's `bilingual_dicts` (added 2026-11-10) pair words by meaning for his alignment experiments
+      (`qEr` with `nswt`); they are not loans.
 18. **A Nubian comparison that uses the kind of each word.** The list says what kind of word half the unknown
     pieces are (670 of 1,336: title, kin term, verb, counted thing); matching each only against Nubian words of
     that kind cuts the chance look-alikes that sank the cognate test (D 15). It needs a larger Nubian word list
