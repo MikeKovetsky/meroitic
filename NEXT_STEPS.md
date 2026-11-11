@@ -22,7 +22,7 @@ Done since this plan was written:
 5. **Step 1, outreach:** Otten has the email and the pull request; Rilly, Hallof (through Beinlich) and Smith were
    asked on 2026-11-09 for typed texts. On the evening of 2026-11-10 the pull request had no comment yet, and
    Otten had added Meroitic–Egyptian word lists to his repository that day (his first commit there since 2024).
-   The mailbox was last checked on the evening of 2026-11-09: no reply then.
+   The mailbox, checked the same evening, held no reply and no bounce from any of the four.
 
 Next, in this order:
 
