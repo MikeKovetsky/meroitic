@@ -96,7 +96,7 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
 
 <main>
 <header>
-  <div class="eyebrow">Overnight trial · 8–9 November 2026</div>
+  <div class="eyebrow">Three-day trial · 8–10 November 2026</div>
   <h1>Reading Meroitic with Opus 5.5</h1>
   <div class="script" aria-label="Meroitic cursive examples">
     <div class="word"><span class="glyphs">𐦳𐦣𐦫𐦡</span><span class="gloss"><span class="tr">qore</span> ruler</span></div>
@@ -105,16 +105,16 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
     <div class="word"><span class="glyphs">𐦠𐦦𐦫</span><span class="gloss"><span class="tr">abr</span> man</span></div>
     <div class="word"><span class="glyphs">𐦲𐦷𐦢</span><span class="gloss"><span class="tr">kdi</span> woman</span></div>
   </div>
-  <p class="lede">Meroitic, the language of ancient Kush, can be read aloud but is mostly not understood. Over a night and a morning, about 60 Opus 5.5 subagents tested what the model already knows, what it can work out from the texts alone, what new leads it finds for specialists, and whether it can grow the corpus.</p>
+  <p class="lede">Meroitic, the language of ancient Kush, can be read aloud but is mostly not understood. Over a night and a morning, about 60 Opus 5.5 subagents tested what the model already knows, what it can work out from the texts alone, what new leads it finds for specialists, and whether it can grow the corpus. A third day read 151 more inscriptions from hand copies and tested the open leads on texts the model had never seen.</p>
   <p class="meta">Corpus: Otten &amp; Anastasopoulos's public corpus (ALP 2025), cleaned. Answer key: 82 published word meanings and 26 grammatical endings, each sourced. Code, prompts and every answer file are in <a href="https://github.com/MikeKovetsky/meroitic">the meroitic repo</a>.</p>
 </header>
 
 <section>
   <div class="eyebrow">Did we find anything new?</div>
-  <h2>No decipherment. New: the public corpus is mostly copies, 152 inscriptions are machine-readable under an open licence, and a test that works</h2>
+  <h2>No decipherment. New: the public corpus is mostly copies, 303 inscriptions are machine-readable under an open licence, and a test that works</h2>
   <ol class="answers">
     <li><strong>The public Meroitic corpus is mostly copies.</strong> The only machine-readable corpus is a file of 18,090 lines that holds 662 different texts or phrases: each is repeated, about 27 times on average, with only a person's name changed. The short label <span class="tr">tdxe mlEqErebr qEret ___</span> appears 198 times, once with each of 198 names. Counting words in the file counts the same texts over and over, and some titles come out about 100 times too frequent. The paper describes the name swapping (871 examples made into 17,257); the released file does not say it is that version. We recovered the swapped name lists from the data and undid it.</li>
-    <li><strong>152 inscriptions are now machine-readable under an open licence, 86 of them missing from that corpus.</strong> Opus reads the Meroitic type printed in Griffith's public-domain editions of 1911–12 at 95.6% sign accuracy against the modern edition, measured on 12 cursive texts; about a third of the rows are in hieroglyphic type and were not scored. It transcribed 152 of his inscriptions, each with its source page, under CC BY 4.0; 86 were not in the corpus. His hand copies (88.8%) and photographs of the stones are beyond it.</li>
+    <li><strong>303 inscriptions are now machine-readable under an open licence, 234 of them missing from that corpus.</strong> Opus reads the Meroitic type printed in Griffith's public-domain editions of 1911–12 at 95.6% sign accuracy against the modern edition, measured on 12 cursive texts; about a third of the rows are in hieroglyphic type and were not scored. It transcribed 152 of his inscriptions, each with its source page, under CC BY 4.0; 86 were not in the corpus. His hand copies of the Karanòg and Shablûl epitaphs it reads at 89% on their own, which is not enough. But the same book prints most of their words again in type, and with each reading checked against those pages it reaches 97.7% on the four texts that have a modern edition: 151 more inscriptions, 148 of them not in the corpus. Photographs of the stones are beyond it.</li>
     <li><strong>Scrambling the script doesn't hide it from a frontier model.</strong> From a 17-word glossary of letter-swapped Meroitic and no texts, it broke the cipher and matched all 35 test words. From the scrambled texts with neutral labels, it recognised the opening <span class="tr">Wos-i Sorey-i</span> ("O Isis, O Osiris") and read the script from there. Tests of AI decipherment on known-but-undeciphered scripts have to assume the model has read the literature.</li>
     <li><strong>A test that works, and what it shows.</strong> On a synthetic twin language with every word invented, it recovered 41 and 43 of 52 meanings on two runs, where chance is about 2. On real words it could not recall, the corpus got it to Rilly's meaning for 13 of 35, and 20 within three guesses.</li>
     <li><strong>Its confidence is a usable filter.</strong> In every test, all 74 answers it gave at confidence 4 or 5 were right. At confidence 1 or 2, about a third were.</li>
@@ -239,19 +239,40 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
         <tr><td>Extract Rilly's 2003 lexicon from 304 scanned pages</td><td>937 entries</td><td class="ok">Done (kept private)</td></tr>
         <tr><td>Meanings of 65 Rilly-glossed words</td><td>Memory 27 right; the corpus then got 13 of the 35 it couldn't recall, 20 within three guesses</td><td>After removing 6 targets a glossary gave away</td></tr>
         <tr><td>Read Griffith's printed type</td><td>95.6% of signs against the modern edition; 152 inscriptions read, 86 new</td><td class="ok">Corpus +86 texts, +5% words</td></tr>
-        <tr><td>Read Griffith's hand copies (Karanòg)</td><td>88.8% of signs; errors in names and rare titles, mostly unflagged</td><td class="miss">Below the bar; not transcribed</td></tr>
+        <tr><td>Read Griffith's hand copies (Karanòg)</td><td>88.8% of signs; errors in names and rare titles, mostly unflagged</td><td class="miss">Below the bar on their own (see day three)</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section>
+  <div class="eyebrow">Day three</div>
+  <h2>More text, and tests on texts the model had never seen</h2>
+  <p>The evening of the second day and the third day went to data: two printed sources of Meroitic text that no one had made machine-readable, and tests on what they added.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Attempt</th><th>Result</th><th>Reading</th></tr></thead>
+      <tbody>
+        <tr><td>Read Griffith's Karanòg hand copies, then check each reading against his printed type</td><td>The same book prints most words again in type: a table of names, three indexes and tables of the closing formulae (48 pages, typed first). 97.7% of signs on the four texts with a modern edition; 89.0% before the check</td><td class="ok">151 inscriptions read; corpus +148 texts, +14% words</td></tr>
+        <tr><td>Type the texts printed in the <em>Meroitic Newsletter</em> (1971–2003)</td><td>256 texts, 185 new to the corpus. 97.6% of signs on clean print and 94% to 97% on a 1971 computer printout, against other editions</td><td>In copyright: the texts stay private; the method and scripts are public</td></tr>
+        <tr><td>Test the two open leads on the 185 unseen texts</td><td><span class="tr">wi</span> as "total": the one sum that can be checked fails. The vocative after "god + epithet": 9 of 9</td><td>One weaker, one held (below)</td></tr>
+        <tr><td>Line up every inscription held in two or three editions</td><td>The editions agree on 96.2% of 9,571 signs</td><td>Of 42 differences checked on the scans, 3 were our typing</td></tr>
+        <tr><td>Build the unseen texts' new words from old stems and endings</td><td>About 19% can be built, but so can about 21% of made-up words. Predicting new forms from pairs of endings: 53 of about 1,600 came true, where about 9.5 were expected</td><td>The known endings carry over; nothing new</td></tr>
+        <tr><td>Nine oracular decrees, every letter swapped</td><td>12 of 14 published points of structure found, 8 of 20 points of meaning</td><td>Form can be worked out; meaning mostly not</td></tr>
+        <tr><td>A 1973 list of "known" Meroitic words against Rilly's 2003 lexicon</td><td>Of 50 meanings marked best established, 41 were unchanged thirty years later; of 66 marked doubtful, 8</td><td>The specialists' own doubts were well placed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="meta">Details: <code>data/expansion/karanog/README.md</code> and <code>data/expansion/newsletter_reading.md</code>.</p>
+</section>
+
+<section>
   <div class="eyebrow">Leads for specialists</div>
   <h2>What the discovery runs proposed, and what survived a second check</h2>
-  <p>Three runs read the funerary texts, the Hamadab stela and the Philae inscriptions, searched the literature, and labelled 7 ideas as new. A fourth run then tried to prove each one wrong, with harder searches in English, French and German, the FHN commentary and Millet's 1968 glossary. None survived as a clean new finding: 2 were already published and 5 were weakened. The model finds real patterns, but where the key books are print-only it cannot tell a rediscovery from a discovery.</p>
+  <p>Three runs read the funerary texts, the Hamadab stela and the Philae inscriptions, searched the literature, and labelled 7 ideas as new. A fourth run then tried to prove each one wrong, with harder searches in English, French and German, the FHN commentary and Millet's 1968 glossary. None survived as a clean new finding: 2 were already published and 5 were weakened. The model finds real patterns, but where the key books are print-only it cannot tell a rediscovery from a discovery. The two leads left open were then tested on 185 texts typed afterwards, which played no part in finding them: one got weaker and one held.</p>
   <div class="leads">
-    <div class="lead"><div class="where"><span class="chip new">open</span><br>Tanyidamani</div><p><span class="tr">wi</span> before a numeral marks a total: <span class="tr">mk lte wi 12</span> follows exactly twelve items each counted "1". Hofmann 1981 already found that <span class="tr">wi 3348</span> on REM 1003 is the sum of the men and women counted; the Tanyidamani case may be new. Check Hintze 1960.</p></div>
-    <div class="lead"><div class="where"><span class="chip new">open</span><br>funerary</div><p>Rilly has published one address ending <span class="tr">-i</span> placed after the pair "Isis + Osiris". The corpus suggests the same for "god + epithet": Osiris is never <span class="tr">Soreyi</span> before an epithet in 11 texts. But Isis keeps her <span class="tr">-i</span> before an epithet in one family. Check Rilly &amp; de Voogt 2012, p. 155, and Heyler 1964.</p></div>
+    <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Tanyidamani</div><p><span class="tr">wi</span> before a numeral marks a total: <span class="tr">mk lte wi 12</span> follows exactly twelve items each counted "1". That sum stands, but the reading got weaker on unseen texts. On REM 1003 the counts of men and women add up to 648 (747 at most) and the number after <span class="tr">wi</span> is 3348 in every edition we hold, so the sum Hofmann 1981 reported there could not be reproduced. In the Tabo accounts <span class="tr">wi</span> stands before one numeral after another, once before a count of 1. "X are N" (Hallof 2022) fits better than "total".</p></div>
+    <div class="lead"><div class="where"><span class="chip new">held</span><br>funerary</div><p>Rilly has published one address ending <span class="tr">-i</span> placed after the pair "Isis + Osiris". The corpus suggests the same for "god + epithet": Osiris is never <span class="tr">Soreyi</span> before an epithet in 11 texts. But Isis keeps her <span class="tr">-i</span> before an epithet in one family. On the unseen texts it held: 9 of 9 for Osiris and 12 of 12 for Isis. The count cannot tell a moved vocative from two fixed formulas, each copied whole. Check Rilly &amp; de Voogt 2012, p. 155, and Heyler 1964.</p></div>
     <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Philae</div><p>The proposal that the Faras stela REM 0129 repeats envoy Sasan's title chain from Ph. 416 fails. A word masked as a name there is really the title <span class="tr">womnis</span>, so the stela lists five or more titles. FHN III already pairs REM 0129 with Sasan, and the order matches ordinary rank order.</p></div>
     <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Philae</div><p>The proposal that "general of the water" in Ph. 417 belongs to Bekemete's father was already made: Griffith 1911 set Ph. 417 beside REM 0098, and Török 2009 reportedly gives the father the title.</p></div>
     <div class="lead"><div class="where"><span class="chip neg">weakened</span><br>Hamadab</div><p>The proposal that the totals 1,626 and 1,032 on REM 1003 count animals fails: the related stela REM 1041 counts 1,032 men (<span class="tr">abr wi 1032</span>).</p></div>
@@ -278,16 +299,16 @@ footer { font-size: 0.82rem; color: var(--muted); display: grid; gap: 6px; borde
   <div class="eyebrow">What it would take</div>
   <h2>Where a model helps from here</h2>
   <ul class="plain">
-    <li><strong>Data first.</strong> Hallof's 2024 corpus edition exists only in print, and the REM volumes online give photographs and drawings, not text (as Otten's paper describes them). A clean digital corpus with REM numbers, line breaks and doubtful signs marked would do more than any model upgrade.</li>
+    <li><strong>Data first.</strong> Hallof's 2024 corpus edition exists only in print, and the REM volumes online give photographs and drawings, not text (as Otten's paper describes them). A clean digital corpus with REM numbers, line breaks and doubtful signs marked would do more than any model upgrade. Two printed sources were read here on the third day: Griffith's Karanòg (151 texts, public) and the <em>Meroitic Newsletter</em> (256 texts, in copyright, kept private).</li>
     <li><strong>Use it as a tireless analyst, scored on held-out material.</strong> The synthetic test shows its confidence is well calibrated on clean data. Its high-confidence readings of unknown words are worth a specialist's time; its low-confidence ones are not.</li>
     <li><strong>A real cognate test.</strong> Apply Rilly's sound correspondences to the full comparison series in his 2003 thesis appendix (about 200 series), not raw string similarity.</li>
-    <li><strong>Pair it with a specialist from the start.</strong> The two open leads, and any future "new" label, need someone with Rilly 2007, Hintze and the REM volumes on the shelf: Claude Rilly (CNRS), Stefan Hallof, Henriette Ashby or Joshua Otten.</li>
+    <li><strong>Pair it with a specialist from the start.</strong> The lead that held, and any future "new" label, need someone with Rilly 2007, Hintze and the REM volumes on the shelf: Claude Rilly (CNRS), Jochen Hallof, Solange Ashby or Joshua Otten.</li>
     <li><strong>Digitize the reference shelf too.</strong> Its false "new" labels came from print-only sources it could not search: Millet 1968, Hofmann 1981, FHN commentary pages. Searchable copies of those would have caught them.</li>
   </ul>
 </section>
 
 <footer>
   <span>Methods, data, code and every answer file: <a href="https://github.com/MikeKovetsky/meroitic">the meroitic repo</a>. Every claim names its run in <code>REPORT.md</code>.</span>
-  <span>Four independent full code reviews checked the scripts. They fixed leaks, a wrong p-value method, a weak baseline, a corpus bug and sound rules applied too loosely, and corrected several reported numbers; the checks in <code>tests/</code> guard those fixes.</span>
+  <span>Eight independent full code reviews checked the scripts. They fixed leaks, a wrong p-value method, a weak baseline, a corpus bug, sound rules applied too loosely and a scorer that counted too kindly, and corrected several reported numbers; the checks in <code>tests/</code> guard those fixes.</span>
 </footer>
 </main>

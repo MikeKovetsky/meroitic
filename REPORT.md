@@ -15,12 +15,15 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **152 inscriptions are machine-readable under an open licence, 86 of them missing from the public corpus.**
+2. **303 inscriptions are machine-readable under an open licence, 234 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
    The test covered cursive type only; the 48 rows in hieroglyphic type were not scored.
-   Hand copies: 88.8% (`hand_copy_test.md`), below the bar. Photographs: almost nothing (`data/discovery/vision.md`).
+   Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
+   once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
+   and Shablûl inscriptions are transcribed too, 148 of them new, +14% words (Day three, below).
+   Photographs: almost nothing (`data/discovery/vision.md`).
 3. **Scrambled-script blind tests fail on a frontier model.** From a 17-word glossary of letter-swapped Meroitic and
    no texts it matched 35 of 35 meanings by breaking the cipher (`S0_f0`, `S0_f1`); from the scrambled corpus with
    neutral labels it recognised "O Isis, O Osiris" and read the script (`K2_morph`).
@@ -194,7 +197,8 @@ After "are you giving up?", four more lines of attack, then data.
    texts (482 of 504), 99.6% against what Griffith printed. Griffith's hand copies (Karanòg, about 150 epitaphs)
    fail the bar: 581 of 654 signs (88.8%; 91.1% on signs the copy shows clearly) on the four texts FHN prints, with
    the errors in names, rare titles and closing formulas, and most of them not flagged "?" by the reader
-   (`data/expansion/hand_copy_test.md`). Karanòg was therefore not transcribed.
+   (`data/expansion/hand_copy_test.md`). Karanòg was therefore not transcribed that day; it was on the next, by
+   another method (Day three, below).
 9. **Corpus expansion** (`data/expansion/griffith_*.jsonl`, `src/expand.py`): 152 inscriptions transcribed from
    *Meroitic Inscriptions* I–II and *Meroë*; 29 are partial (left out), 37 were already in the corpus or repeat
    another Griffith text, 86 are new: `data/corpus_v3.jsonl` has 748 texts and 19,066 words (+5%). The duplicate
@@ -202,3 +206,27 @@ After "are you giving up?", four more lines of attack, then data.
 10. **Review:** the review of `src/lexique.py` and `src/expand.py`, stopped partway on Mike's word to push, was
     finished before the repo was shared; `tests/test_lexique.py` checks both files, and none of the numbers above
     changed.
+
+## Day three (2026-11-10): Karanòg, and tests on the Newsletter texts
+
+1. **Karanòg and Shablûl** (`data/expansion/karanog/README.md`, `src/karanog_refs.py`, `src/karanog.py`): Griffith
+   prints most words of every inscription a second time in type (a table of names, three indexes and tables of the
+   closing formulae: 48 pages, typed by twelve readers, 3,550 entries). Each hand copy was read on its own and then
+   checked against its entries. On the four texts FHN prints, fresh readers who could not see FHN reached 639 of
+   654 signs (97.7%), and 582 (89.0%) before the check. All 151 inscriptions that have a hand copy are read:
+   16,437 signs and 2,775 words. The check changed 2,405 of the 16,759 signs first read (14.4%).
+2. **Corpus** (`src/expand.py`): 148 of the 151 are new by the duplicate test, and `data/corpus_v5.jsonl` has 896
+   texts and 21,818 words (+14%); `corpus_v3` is unchanged. The three held back (Kar. 63, Kar. 66, Sh. 17) share
+   their formulae with an older text and are not copies of it.
+3. **The Meroitic Newsletter** (`data/expansion/newsletter_reading.md`, `src/mnl/`): 256 texts typed on 2026-11-09,
+   185 of them new, kept locally because the articles are in copyright. 97.6% of signs on clean print, 94% to 97%
+   on the 1971 printout. Lined up with other editions of the same inscriptions, 96.2% of 9,571 signs agree; of 42
+   differences checked on the scans, 3 were typing errors.
+4. **Tests on those texts** (section 5 of the same page): the two leads (above); a held-out grammar test (cutting
+   new words into known stems and endings works no better than on made-up words; predictions from pairs of endings
+   came true 53 times in about 1,600, where about 9.5 were expected); nine oracular decrees read blind (12 of 14
+   published points of structure, 8 of 20 of meaning); Meeks's 1973 word list against Rilly 2003 (41 of 50 "best
+   established" meanings unchanged, 8 of 66 doubtful ones).
+5. **Review:** four more full reviews, two of the Newsletter tools and two of the Karanòg scripts and rows. Among
+   their fixes: a scorer that let extra signs go free (97.7%, not 98.2%), page numbers and footnote marks read as
+   inscription numbers, and an editor's "(sic)" counted as two signs.

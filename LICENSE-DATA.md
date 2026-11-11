@@ -15,6 +15,12 @@ Cite as: Mike Kovetsky, *Meroitic with Opus 5.5* (2026), <https://github.com/Mik
   only part of the text. The readings are Griffith's, transcribed by a language model at a measured 95.6% sign
   accuracy against the modern edition (`data/expansion/printed_type_test.md`): cite Griffith for the reading and this
   repository for the transcription.
+- **The Karanòg transcriptions**, `data/expansion/karanog/`: 151 inscriptions read from the hand copies in
+  Griffith's *Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg* (1911), which is in the public domain,
+  and checked against the words he prints in type in the same book, at a measured 97.7% sign accuracy on the four
+  texts a modern edition prints (`data/expansion/karanog/README.md`). With them: the 48 typed reference pages and
+  the readers' files. The readings are Griffith's: cite Griffith for the reading and this repository for the
+  transcription.
 - The answer keys compiled from cited publications (`data/gold_lexicon.json`, `data/gold_morphology.json`), the
   synthetic corpus (`data/synth_corpus.txt`) and the transliteration map.
 - The write-ups: `README.md`, `REPORT.md`, `NEXT_STEPS.md`, `data/discovery/`, `data/leads/`, the `.md` files under

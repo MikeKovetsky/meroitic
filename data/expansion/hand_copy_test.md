@@ -3,6 +3,10 @@
 Work of 2026-11-09, 10:56 to 11:40 PST, by Claude Opus 5.5. Page images are in `/private/tmp/claude-501/expansion/karanog/`
 and scripts, crops and readings in `/private/tmp/claude-501/handcopy_scripts/` (neither is in the repo).
 
+**Update, 2026-11-10:** the hand copies were read after all, by adding a check against the words Griffith prints in
+type in the same book: 97.7% of signs on the same four texts, and all 151 inscriptions transcribed
+([`karanog/README.md`](karanog/README.md)). The verdict below is for reading the copies on their own.
+
 ## 1. Answer first
 
 **No, not at 95%.** On the four Karanòg texts that FHN III prints in modern transliteration (Kar. 47, 77, 78 and 121 =

@@ -2,6 +2,10 @@
 
 Work of 2026-11-09, about 75 minutes. Downloads are in `/private/tmp/claude-501/expansion/` (not in the repo).
 
+**Update, 2026-11-10:** Karanòg has since been read in full ([`karanog/README.md`](karanog/README.md)), and the
+texts printed in the *Meroitic Newsletter* have been typed ([`newsletter_reading.md`](newsletter_reading.md)). The
+survey below stands as written on 2026-11-09.
+
 ## Answer first
 
 1. **Cut, said first:** the pilot did not transcribe 20 inscriptions sign by sign. Griffith printed no Latin text for

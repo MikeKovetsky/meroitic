@@ -12,7 +12,7 @@ looks like.
 Done since this plan was written:
 
 1. **Step 5, Karanòg:** see its status below. The method passed its test and all 151 texts that have a hand copy
-   are read, checked and built.
+   are read, checked and built. Reviewed and published on 2026-11-10.
 2. **Step 7, the Meroitic Newsletter:** 256 texts typed and kept locally; the method, the scripts and the measured
    accuracy are public in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md).
 3. **Step 2, the two leads,** tested on texts they had never seen: the first got weaker, the second held
@@ -24,21 +24,20 @@ Done since this plan was written:
 
 Next, in this order:
 
-1. **Publish Karanòg:** an independent review of the whole change, then the push.
-2. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
-3. **Make the Karanòg rows uniform:** word division follows each reader's judgment where a copy runs words
+1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
+2. **Make the Karanòg rows uniform:** word division follows each reader's judgment where a copy runs words
    together, and readers settled a few disputed signs differently (d against n in one formula word, m against ẖ
    in the title `slẖs`). Griffith's formula tables and his English forms of the names in the catalogue
    (pp. 54–78) can settle most of these without a new reading.
-4. **A second reader for the weakest texts:** the 15 or so that are heavily hatched (Kar. 30, 36, 45, 102, 112,
+3. **A second reader for the weakest texts:** the 15 or so that are heavily hatched (Kar. 30, 36, 45, 102, 112,
    Sh. 2, Sh. 17 and others), and the names from the first half of the names table, which was typed less well.
    The same reader can check the two printed entries that no reader saw, Kar. 17 `sotnkel` and Kar. 111
    `tewideqowi` (section 7 of the Karanòg page).
-5. **Step 10, the duplicate test:** it counts a short funerary text as present when another text shares its
+4. **Step 10, the duplicate test:** it counts a short funerary text as present when another text shares its
    formulae. Leave formula 6-grams out, as `src/mnl/mnl_dedupe.py` does.
-6. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
-7. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
-8. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
+5. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
+6. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
+7. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
    "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout; three
    Newsletter texts wrongly marked as duplicates.
 
