@@ -41,8 +41,10 @@ Done since this plan was written:
    legible texts in full, and the 1,336 pieces without an accepted meaning are ranked by the texts they block, each
    with its kind where the texts show one. Section E says what it is for.
 8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
-   step 17 of section E: a negative result. A search by sound finds the known names of gods and places but only
-   4 of 14 known borrowed titles and nouns, and gives nothing above chance for the pieces without a meaning.
+   the first part of step 17 of section E: a negative result. A search by sound finds the known names of gods,
+   places and people but only 4 of 14 known borrowed titles, nouns and verbs, and gives nothing above chance for
+   the pieces without a meaning. The step's two other parallels, the oracular decrees and the Philae graffiti,
+   are still open.
 
 Next, in this order:
 
@@ -191,7 +193,7 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     - **The search for borrowed words is done (2026-11-11), with a negative result**
       ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)):
       a search by sound puts the true source among the five best candidates for 4 of the 14 known borrowed
-      titles, nouns and verbs (the bar was most of them), though for all 10 names of gods and places with a
+      titles, nouns and verbs (the bar was most of them), though for all 10 names of gods, places and people with a
       source among the Demotic names of their kind it is among the three best. Of the 383 unknown pieces searched,
       22 and 26 beat the 5% bar where 19 are expected by chance, and two blind checkers found no new source among
       the 33 best matches. Sound alone does not tell a loan from a look-alike in a pool of thousands.
@@ -199,9 +201,10 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       people named in both the Philae graffiti and the Meroitic texts.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
       `ꜣrbtgꜥyꜣ` for `arebetke`, `wygy` for Wayekiye). Reading those sentences beside the Meroitic titles is
-      the parallel that carries meaning; it needs the names of the older corpus unmasked. And 16 pieces of the
-      coverage map's list are forms of words the lexicon already links to Egyptian (`prSn` for `plsn`, `petmoS`
-      for `pelmos`): the map could count them.
+      the parallel that carries meaning; it needs the names of the older corpus unmasked, and it can start from
+      the six groups of Philae texts that [`data/discovery/philae.md`](data/discovery/philae.md) already sets side
+      by side. And at least 16 pieces of the coverage map's list are forms of words the lexicon already links to
+      Egyptian (`prSn` for `plsn`, `petmoS` for `pelmos`): the map could count them.
     - **The answer key:** two independent readers went through the 207 entries of
       the lexicon that mention Egyptian, Demotic, Coptic, Greek or Latin and agreed on 198: 69 are borrowings into
       Meroitic for both readers (35 of them with an accepted meaning, 33 with the source word printed: 19 names
@@ -209,8 +212,8 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       rejected or mention the language for another reason. The table is local, like the lexicon.
     - The search side, fetched on 2026-11-11 and kept locally: the Coptic lexicon of
       [KELLIA's dictionary](https://github.com/KELLIA/dictionary) (`Comprehensive_Coptic_Lexicon-v1.2-2020.xml`,
-      12.3 MB; CC BY-SA 4.0 according to coptic-dictionary.org; vowels and English meanings) and the TLA's
-      [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium)
+      12.3 MB; CC BY-SA 4.0 as coptic-dictionary.org and the file's own header say; vowels and English meanings)
+      and the TLA's [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium)
       (`train.jsonl`, 7.3 MB, CC BY-SA 4.0; lemma forms, no lemma meanings).
     - Otten's `bilingual_dicts` (added 2026-11-10) pair words by meaning for his alignment experiments
       (`qEr` with `nswt`); they are not loans.

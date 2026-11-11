@@ -39,7 +39,7 @@ open). What is new, with the run behind each claim:
    were built from (held-out p = 0.49, `src/cognates_rules.py`); REM 1003 holds nothing checkable against the Roman
    war (as Rilly 2014); no "new" reading survived the adversarial check (`data/discovery/verification.md`). A
    search by sound alone for Egyptian sources gives nothing above chance for the pieces without a meaning, and
-   finds 4 of 14 known borrowed titles and nouns (Day four, afternoon, below).
+   finds 4 of 14 known borrowed titles, nouns and verbs (Day four, afternoon, below).
 
 8. **About 60% of the running words can be translated today, word by word.** 13,292 of the 21,977 words of
    `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
@@ -290,22 +290,27 @@ After "are you giving up?", four more lines of attack, then data.
    word lists (5,660 Demotic lemmata of the TLA's sentences, 11,283 entries of the Comprehensive Coptic Lexicon)?
 2. **The test on known loans, each hidden in turn.** The key is 35 accepted borrowings of Rilly's lexicon (14
    titles, nouns and verbs, 21 names); the source of 24 stands in the lists. Titles, nouns and verbs: the true
-   source is among the five best candidates of its kind for 4 of 14 (`plsn`, `ḫrpḫe`, `pelmos`, `kisri`) and among
-   the ten best for 6; the bar set before the run was most of the 14. Names: among the three best for all 10 that
-   have a source among the Demotic names of their kind, first for 7.
+   source is among the five best candidates for 4 of 14 when titles and nouns are searched together (`plsn`,
+   `ḫrpḫe`, `pelmos`, `kisri`; 2 among the words of their own kind alone) and among the ten best for 6; the bar
+   set before the run was most of the 14. Names: among the three best for all 10 that have a source among the
+   Demotic names of their kind, first for 7.
 3. **Against chance:** the best match of a known title or noun beats the best matches of 95% of made-up words for
    2 of 11 loans (wide pool) and for none (narrow pool). A match in sound does not tell a loan from a look-alike.
 4. **The unknown pieces:** of 383 searched, 22 and 26 beat the 5% bar (narrow and wide pool) where 19 are expected
-   by chance; none passes the bar for 383 tries.
+   by chance, and chance alone gives as many or more 28% and 7% of the time. None passes the bar for 383 tries,
+   but with 300 made-up words no chance is below 1 in 301, so that bar could pass a piece only with six others at
+   that floor.
 5. **The check:** two blind checkers read the 33 best matches with 12 unmarked decoys and agreed on all 45: no new
    source, every decoy rejected, five matches are forms of loans already known (`prSn`, `petmoS`, `pertese`,
    `stol`, `menote`) and one (`aribet`) is the Meroitic title `arebetke` as a Philae graffito spells it.
-6. **By-products:** 16 pieces of the coverage map's list are forms of words the lexicon already links to Egyptian;
-   the Demotic list holds graffiti of Meroitic officials (`qrnyꜣ` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`), and
-   the search puts both first among the titles.
+6. **By-products:** at least 16 pieces of the coverage map's list are forms of words the lexicon already links to
+   Egyptian (11 spelled like one, 5 more that the checkers recognised); the Demotic list holds graffiti of
+   Meroitic officials (`qrnyꜣ` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`), and the search puts both first among the
+   titles.
 7. **Not done:** the oracular decrees (neither list holds Egyptian texts of that kind) and the people named in
    both the graffiti and the Meroitic texts (the Demotic file is single sentences, and the older corpus masks
    names).
 8. **Limits:** the source entries of the 24 loans were picked by hand; the Demotic list is the vocabulary of a
    sample of sentences, not a dictionary; the key, its readers and the checkers go back to one lexicon and one
-   model family. Cost: 0.61 million subagent tokens before the review.
+   model family. Cost: about 0.62 million subagent tokens before the review (364,923 for the key's two readers,
+   249,072 for the two checkers, about 8,000 for a web check).

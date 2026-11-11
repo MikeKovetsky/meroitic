@@ -32,10 +32,17 @@ Cite as: Mike Kovetsky, *Meroitic with Opus 5.5* (2026), <https://github.com/Mik
 Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
 
 - `data/nes/meroitic_wiktionary.tsv` comes from Wiktionary: CC BY-SA 4.0, share-alike.
-- `data/discovery/egyptian_candidates.tsv` holds lemma numbers and lemma forms from the Demotic sentences of the
-  *Thesaurus Linguae Aegyptiae* (Berlin-Brandenburg and Saxon Academies) and from the *Comprehensive Coptic
-  Lexicon* (Burns, Feder, John, Kupreyev and others, v1.2, 2020), both CC BY-SA 4.0: the file is under
-  CC BY-SA 4.0, share-alike.
+- `data/discovery/egyptian_candidates.tsv` holds lemma numbers and lemma forms, unchanged, from two works under
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), so the file is under CC BY-SA 4.0,
+  share-alike (the search picked which forms stand in it):
+  - [*Thesaurus Linguae Aegyptiae*, Demotic sentences, corpus v18, premium](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium),
+    v1.1, 2024, ed. by Tonio Sebastian Richter and Daniel A. Werning on behalf of the Berlin-Brandenburgische
+    Akademie der Wissenschaften and Hans-Werner Fischer-Elfert and Peter Dils on behalf of the Sächsische Akademie
+    der Wissenschaften zu Leipzig;
+  - *Comprehensive Coptic Lexicon: Including Loanwords from Ancient Greek*, v1.2, 2020, by Dylan Michael Burns,
+    Frank Feder, Katrin John, Maxim Kupreyev and others (Berlin-Brandenburgische Akademie der Wissenschaften and
+    Freie Universität Berlin), doi:10.17169/refubium-27566, from [KELLIA's dictionary](https://github.com/KELLIA/dictionary);
+    the licence is the one its own TEI header states.
 - Readings quoted from *Fontes Historiae Nubiorum* II–III (Eide, Hägg, Pierce and Török, Bergen 1996–98, all rights
   reserved) as ground truth for the reading tests: about twenty short texts, each with its REM number, in
   `data/expansion/pilot.jsonl` (four), `data/expansion/printed_type_test.md`, `data/expansion/hand_copy_test.md` and

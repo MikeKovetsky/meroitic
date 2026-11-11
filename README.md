@@ -57,10 +57,11 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    - The British Museum's Hamadab stela (REM 1003) holds nothing checkable against the Roman war, as Rilly said in 2014.
    - A search by sound alone does not find the Egyptian word behind a Meroitic title or noun. Tested on the known
      loans, each hidden in turn, it puts the true source among the five best candidates for 4 of 14 titles, nouns
-     and verbs, though for all 10 names of gods and places that have a source among the Demotic names of their
-     kind it is among the three best. For the 383 pieces without a meaning it gives nothing above chance, and two
-     blind checkers found no new source among its 33 best matches
-     ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
+     and verbs, though for all 10 names of gods, places and people that have a source among the Demotic names of
+     their kind it is among the three best. For the 383 pieces without a meaning it gives nothing above chance, and
+     two blind checkers found no new source among its 33 best matches
+     ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)). The step's two other Egyptian parallels, the
+     oracular decrees and the people the Philae graffiti name in Demotic, are not done yet.
 8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
    name, a number or a word with an accepted meaning or function (59.9% with near-copies counted once), 17% have a
@@ -94,7 +95,7 @@ what can be rebuilt.
 | Griffith, *Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg* (1911), [archive.org](https://archive.org/details/karangmeroitic00grifuoft) | 151 funerary texts as hand copies, public domain; most of their words printed again in type in the same book | `data/expansion/karanog/`: the texts read by the model and checked against that type (`griffith_karanog.jsonl`), the 48 typed reference pages, and [how it was done and measured](data/expansion/karanog/README.md) |
 | *Meroitic Newsletter* 1–30 (1968–2003), scans at meroiticnewsletter.org | printed transliterations with REM numbers: 256 texts typed, 188 of them new to the corpus; the articles are in copyright | not committed: the method, the scripts (`src/mnl/`) and the measured accuracy are in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md) |
 | Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/`. The lexicon test's answer key (`runs/keys/lexique_*.json`, `runs/lexique_judge.json`) gives 68 of its glosses in English paraphrase |
-| The TLA's [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium) and the [Comprehensive Coptic Lexicon](https://github.com/KELLIA/dictionary) v1.2, both CC BY-SA 4.0 | 5,660 Demotic lemmata with their word classes and 11,283 Coptic entries with meanings: the pools of the Egyptian search | not committed: download both to `data/sources/egyptian/`; the list of candidates (`data/discovery/egyptian_candidates.tsv`, CC BY-SA 4.0) holds lemma numbers and forms |
+| The TLA's [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium) and the [Comprehensive Coptic Lexicon](https://github.com/KELLIA/dictionary) v1.2, both CC BY-SA 4.0 | 5,660 Demotic lemmata with their word classes and 11,283 Coptic entries with meanings: the pools of the Egyptian search | not committed: download them to `data/sources/egyptian/demotic/train.jsonl` and `data/sources/egyptian/coptic/Comprehensive_Coptic_Lexicon-v1.2-2020.xml`; the list of candidates (`data/discovery/egyptian_candidates.tsv`, CC BY-SA 4.0) holds lemma numbers and forms |
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
@@ -252,10 +253,11 @@ A scorer that knows only letters: Meroitic, Demotic and Coptic words are reduced
 alphabet, and an Egyptian word becomes a Meroitic one letter by letter (kept, changed, dropped, or with the article
 p or t in front), with chances counted from the aligned known loans. The answer key is the 35 entries of Rilly's
 lexicon that two independent readers took as accepted borrowings; each is searched with a model trained on the
-others, among the entries of its own kind. A match counts only as far as it beats the best matches of made-up
-words of the same length, and the 64 words with an accepted meaning and no Egyptian link confirm that yardstick.
-The best matches for the unknown pieces went to two blind checkers with unmarked decoys. The word lists, the key
-and the result files are local-only; the page, the brief and the list of candidates are public
+others, among the entries of its own kind and then with the neighbouring kinds added (titles with nouns). A match
+counts only as far as it beats the best matches of made-up words of the same length; the 64 words with an
+accepted meaning and no Egyptian link beat that bar about as often as chance would (0 to 5 times, where 3 are
+expected). The best matches for the unknown pieces went to two blind checkers with unmarked decoys. The word
+lists, the key and the result files are local-only; the page, the brief and the list of candidates are public
 ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
 
 ## Reproduce
