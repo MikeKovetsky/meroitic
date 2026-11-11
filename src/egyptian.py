@@ -36,7 +36,7 @@ on words whose source is known measure what its hits on unknown words are worth 
    classes), and keeps the consonant figures of the same pool beside them.
 
 Both word lists, the answer key (drawn from Rilly's lexicon) and the result files are local
-(data/sources/egyptian/). The public files are the page and the list of candidates.
+(data/sources/egyptian/). The public files are the page and the two lists of candidates.
 """
 import collections, csv, json, math, random, re, sys, unicodedata
 import xml.etree.ElementTree as ET
@@ -112,7 +112,8 @@ RILLY = {"3": "ꜣ", "ʿ": "ꜥ", "ᶜ": "ꜥ", "ͨ": "ꜥ", "ʾ": "ꜣ", "ỉ":
 
 def meroitic(spelling, vowels=False):
     """The search's letters of a word in the corpus spelling: consonants, and 0 for a vowel at the start.
-    With `vowels`, the written e, i and o stay where they stand (a is written at the start only)."""
+    With `vowels`, the written e, i and o stay where they stand (a is written at the start only); the signs N (ne)
+    and s (se) count as n and s, so their e is not written out."""
     s = re.sub(r"[^a-zA-Z]", "", spelling)
     out = ["0"] if s[:1].lower() in tuple("aeio") else []
     for c in s:
@@ -735,19 +736,26 @@ def figures(pool, test, calm, others, rows, plain):
     return out
 
 
+# the first columns of both public lists, and what they hold for a piece
+PIECE_HEAD = ["piece", "kind", "texts (near-copies once)",
+              "set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is "
+              "spelled like an entry linked to Egyptian"]
+
+
+def piece_cells(r):
+    aside = "yes" if r["mentions_egyptian"] else f'spelled like {r["spelled_like"]}' if r["spelled_like"] else "no"
+    return [r["piece"], r["kind"], str(r["texts"]), aside]
+
+
 def public_list(rows):
     """The public list: each searched piece with its best match among the words of its kind, narrow and wide.
     It holds lemma numbers and forms of the two word lists and no meaning of either, nor any gloss of the lexicon."""
-    head = ["piece", "kind", "texts (near-copies once)",
-            "set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is "
-            "spelled like an entry linked to Egyptian",
-            "narrow: chance", "narrow: best match", "narrow: its form", "wide: chance", "wide: best match",
-            "wide: its form"]
+    head = PIECE_HEAD + ["narrow: chance", "narrow: best match", "narrow: its form", "wide: chance",
+                         "wide: best match", "wide: its form"]
     lines = ["\t".join(head)]
     searched = [r for r in rows if "narrow" in r]
     for r in sorted(searched, key=lambda r: (min(r["narrow"]["chance"], r["wide"]["chance"]), -r["texts"], r["piece"])):
-        cells = [r["piece"], r["kind"], str(r["texts"]),
-                 "yes" if r["mentions_egyptian"] else f'spelled like {r["spelled_like"]}' if r["spelled_like"] else "no"]
+        cells = piece_cells(r)
         for name in ("narrow", "wide"):
             hit = r[name]["hits"][0]
             cells += [f'{r[name]["chance"]:.3f}', hit["id"], hit["form"]]
@@ -764,12 +772,12 @@ def vowels():
     """The test, the comparison and the search once more with the vowels compared, on the Coptic entries.
 
     Everything is as in build(), but for the letter strings ("voiced": the consonants and the written vowels), the
-    two alphabets, and the pools: a word is searched among the Coptic entries of VOWEL_SCOPE. Beside each place
-    of the test stands the place that the consonants alone give in the same pool, with a model trained on the same
-    loans, so that the two differ in the vowels only."""
-    for p in (COPTIC,):
-        if not p.exists():
-            sys.exit(f"no {p.relative_to(ROOT)}: the two word lists are kept locally (data/discovery/egyptian.md)")
+    two alphabets, the made-up words (counted by all their letters, up to VOWEL_LONGEST, each with SHORTEST
+    consonants or more) and the pools: a word is searched among the Coptic entries of VOWEL_SCOPE. Beside each
+    place of the test stands the place that the consonants alone give in the same pool, with a model trained on
+    the same loans, so that the two differ in the vowels only."""
+    if not COPTIC.exists():
+        sys.exit(f"no {COPTIC.relative_to(ROOT)}: the two word lists are kept locally (data/discovery/egyptian.md)")
     pool = coptic_pool()
     mer, egy = MER + VOWELS_M, EGY + VOWELS_E
     sets = sorted({frozenset(v) for v in VOWEL_SCOPE.values()}, key=sorted)
@@ -790,12 +798,12 @@ def vowels():
     for it in items:
         s = frozenset(VOWEL_SCOPE.get(it["kind"], {"noun"}))
         md = train(pairs(items, pool, it["sources"], "voiced", "voiced"), mer=mer, egy=egy)
-        plain = train(pairs(items, pool, it["sources"]))
+        by_consonants = train(pairs(items, pool, it["sources"]))
         n, _ = place(it["voiced"], it["sources"], tr[s], md, pool, "voiced")
         best = search(it["voiced"], tr[s], md)[0]
         row = {"headword": it["headword"], "kind": it["kind"], "letters": it["voiced"],
                "source": [pool[k]["id"] for k in it["sources"]], "of": tr[s].size,
-               "consonants": place(it["word"], it["sources"], bare[s], plain, pool)[0],
+               "consonants": place(it["word"], it["sources"], bare[s], by_consonants, pool)[0],
                "vowels": n, "best_id": pool[best[1]]["id"]}
         if consonants(it["voiced"]) >= SHORTEST:
             row["chance"] = chance_of(it["voiced"], s, md, {})
@@ -834,13 +842,14 @@ def vowel_figures(pool, test, calm, rows, plain):
 
     words = [r for r in test if r["kind"] not in C.NAME_KINDS]
     names = [r for r in test if r["kind"] in C.NAME_KINDS]
+    both = [r for r in test if r["vowels"] and r["consonants"]]       # a source outside the pool has no place
     compared = [r["chance"] for r in test if "chance" in r]
     fresh = [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"])]
     below = sum(r["vowels"]["chance"] <= BAR for r in fresh)
     return {
         "pool": {"coptic": len(pool), "kinds": dict(collections.Counter(k for e in pool for k in e["kinds"]).most_common())},
-        "test": {"loans": len(test), "moved_up": sum(r["vowels"] < r["consonants"] for r in test),
-                 "moved_down": sum(r["vowels"] > r["consonants"] for r in test),
+        "test": {"loans": len(test), "moved_up": sum(r["vowels"] < r["consonants"] for r in both),
+                 "moved_down": sum(r["vowels"] > r["consonants"] for r in both),
                  "all": {"consonants": tops(test, "consonants"), "vowels": tops(test, "vowels")},
                  "words": {"loans": len(words), "consonants": tops(words, "consonants"), "vowels": tops(words, "vowels")},
                  "names": {"loans": len(names), "consonants": tops(names, "consonants"), "vowels": tops(names, "vowels")},
@@ -859,17 +868,10 @@ def vowel_figures(pool, test, calm, rows, plain):
 def public_vowel_list(rows):
     """The public list of the vowel search: each searched piece with its best match among the Coptic entries of
     its kind. Like the first list it holds lemma numbers and forms, no meaning and no gloss."""
-    head = ["piece", "kind", "texts (near-copies once)",
-            "set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is "
-            "spelled like an entry linked to Egyptian",
-            "letters compared", "chance", "best match", "its form"]
-    lines = ["\t".join(head)]
+    lines = ["\t".join(PIECE_HEAD + ["letters compared", "chance", "best match", "its form"])]
     for r in sorted(rows, key=lambda r: (r["vowels"]["chance"], -r["texts"], r["piece"])):
         hit = r["vowels"]["hits"][0]
-        lines.append("\t".join([
-            r["piece"], r["kind"], str(r["texts"]),
-            "yes" if r["mentions_egyptian"] else f'spelled like {r["spelled_like"]}' if r["spelled_like"] else "no",
-            r["letters"], f'{r["vowels"]["chance"]:.3f}', hit["id"], hit["form"]]))
+        lines.append("\t".join(piece_cells(r) + [r["letters"], f'{r["vowels"]["chance"]:.3f}', hit["id"], hit["form"]]))
     return "\n".join(lines) + "\n"
 
 
@@ -877,11 +879,11 @@ def public_vowel_list(rows):
 
 GLOSSES = ROOT / "data/sources/coverage/glosses.jsonl"      # the coverage map's gloss file, local only
 CHECK = HERE / "check"
-CHECK_VOWELS = HERE / "check_vowels"                        # the second pack: the vowel search's best matches
-DECOYS_VOWELS = 6
+CHECK_VOWELS = HERE / "check_vowels"                        # the second pack: from the vowel search
 BRIEF = ROOT / "data/discovery/egyptian_brief.md"
 DECOYS = 12                   # pieces whose best match is poor, mixed into the pack unmarked; a piece goes to
                               # the checkers when its best match beats the bar (BAR)
+DECOYS_VOWELS = 6             # the same for the second pack
 
 
 def contexts(spellings, texts, n=3, side=5):
@@ -911,12 +913,41 @@ def samples(ids, n=2):
     return out
 
 
+def where(path):
+    """A path as the messages show it: from the repo's root when it is inside the repo."""
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
+def write_pack(folder, files, brief):
+    """Write a pack's files ({path: text}) and its BRIEF.md; True when written.
+
+    A folder that holds the checkers' answers (reader*.jsonl) is not written again: its files must be what this
+    build gives, or the build stops, so that answers never stand beside another pack; and its BRIEF.md stays the
+    brief those checkers read."""
+    answered = sorted(p.name for p in folder.glob("reader*.jsonl"))
+    if answered:
+        changed = [where(p) for p, text in files.items() if not p.exists() or p.read_text(encoding="utf-8") != text]
+        if changed:
+            sys.exit(f"{where(folder)} holds the checkers' answers ({', '.join(answered)}), and this build would "
+                     f"change {', '.join(changed)}: move the answers away before a new pack is built")
+        return False
+    folder.mkdir(parents=True, exist_ok=True)
+    for p, text in files.items():
+        p.write_text(text, encoding="utf-8")
+    (folder / "BRIEF.md").write_text(brief, encoding="utf-8")
+    return True
+
+
 def check_pack(with_vowels=False):
     """Write the checkers' pack: the pieces whose best match beats the bar, and decoys, in one shuffled list.
-    `with_vowels`: the second pack, of the vowel search's best matches that the first pack did not hold."""
+    `with_vowels`: the second pack, of the vowel search's pieces that beat the bar and that the first pack did not
+    hold (a piece the first pack held stays out of it, even when its best match with vowels is another word)."""
     if with_vowels:
+        first = HERE / "check_key.json"
+        if not first.exists():
+            sys.exit(f"no {where(first)}: the second pack leaves out the pieces of the first, so `check` comes first")
         rows = [json.loads(l) for l in (OUT / "vowel_candidates.jsonl").read_text(encoding="utf-8").splitlines()]
-        seen = {a["piece"] for a in json.loads((HERE / "check_key.json").read_text(encoding="utf-8")).values()}
+        seen = {a["piece"] for a in json.loads(first.read_text(encoding="utf-8")).values()}
         fresh = [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"]) and r["piece"] not in seen]
         low = lambda r: r["vowels"]["chance"]   # noqa: E731
         names, folder, keyfile, n_decoys = ("vowels",), CHECK_VOWELS, HERE / "check_vowels_key.json", DECOYS_VOWELS
@@ -938,7 +969,6 @@ def check_pack(with_vowels=False):
     hits = {r["piece"]: list({h["id"]: h for name in names for h in r[name]["hits"][:3]}.values())
             for r in items}
     said = samples({h["id"] for hs in hits.values() for h in hs})
-    folder.mkdir(parents=True, exist_ok=True)
     pack, answer = [], {}
     for k, r in enumerate(items, 1):
         ident = f"P{k:02d}"
@@ -951,10 +981,13 @@ def check_pack(with_vowels=False):
             "candidates": [{"id": h["id"], "form": h["form"], "kinds": pool[h["id"]]["kinds"],
                             "meaning": h["meaning"], "greek": pool[h["id"]].get("greek", ""),
                             "sentences": said.get(h["id"], [])} for h in hits[r["piece"]]]})
-    (folder / "pack.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in pack))
-    keyfile.write_text(json.dumps(answer, ensure_ascii=False, indent=1))
-    (folder / "BRIEF.md").write_text(BRIEF.read_text(encoding="utf-8"))
-    print(f"{len(pack)} items ({len(best)} best matches, {len(decoys)} decoys) in {folder.relative_to(ROOT)}")
+    files = {folder / "pack.jsonl": "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in pack),
+             keyfile: json.dumps(answer, ensure_ascii=False, indent=1)}
+    if write_pack(folder, files, BRIEF.read_text(encoding="utf-8")):
+        print(f"{len(pack)} items ({len(best)} best matches, {len(decoys)} decoys) in {where(folder)}")
+    else:
+        print(f"{where(folder)} holds the checkers' answers, and its pack and key are what this build gives: "
+              "left as they are")
 
 
 VERDICTS = ("known", "fits", "no")

@@ -320,5 +320,7 @@ After "are you giving up?", four more lines of attack, then data.
    and verbs of the bar, 6 have their source among the five best with vowels (4 by consonants; 8 in the five best
    of both searches together, which is ten candidates a loan). Against chance nothing changes: the best match of
    a known loan beats 95% of made-up words for 1 of 11, and of 241 pieces without a meaning 18 beat the 5% bar,
-   where the made-up words predict 12 and the rate of 64 native words predicts 19. Two more blind checkers read
-   the nine best matches that were new, with six decoys, and said no to all 15 (139,936 subagent tokens).
+   where the made-up words predict 12 and the rate of 64 native words in each piece's pool predicts 18. Two more
+   blind checkers read the nine of the 18 that the first pack did not hold, with six decoys, and said no to all 15
+   (139,936 subagent tokens); two pieces of the first pack (`mtr`, `tmNte`) have a best match with vowels that no
+   checker was shown.

@@ -256,6 +256,13 @@ def test_the_list_of_the_vowel_search():
     assert [c[0] for c in lines[1:]] == ["aaa", "ccc", "bbb"]            # best first, then the more texts
     assert lines[1][3:] == ["spelled like aro", "0ro", "0.010", "ccl:C2", "ⲣⲏⲧ"] and lines[2][3] == "yes"
     assert "a title" not in E.public_vowel_list(rows)                    # no meaning of the dictionary
+    # the test's figures: a loan moves only when both searches place its source
+    test = [{"headword": "a", "kind": "title", "consonants": 3, "vowels": 1},
+            {"headword": "b", "kind": "god name", "consonants": None, "vowels": 4},
+            {"headword": "c", "kind": "noun", "consonants": 2, "vowels": 5, "chance": 0.01}]
+    t = E.vowel_figures([], test, {}, rows, 64)["test"]
+    assert (t["moved_up"], t["moved_down"], t["chance"]) == (1, 1, {"compared": 1, "at_most_0.05": 1})
+    assert (t["all"]["consonants"]["in_scope"], t["all"]["vowels"]["in_scope"], t["names"]["loans"]) == (2, 3, 1)
 
 
 def test_chance_and_the_bar_for_many_tries():
@@ -287,11 +294,12 @@ def test_the_kinds_of_the_pools():
 
 
 def test_the_checkers_answers_are_read_against_the_decoys():
-    old = E.HERE, E.CHECK, E.OUT
+    old = E.HERE, E.CHECK, E.CHECK_VOWELS, E.OUT
     with tempfile.TemporaryDirectory() as tmp:
         E.HERE = Path(tmp)
-        E.CHECK, E.OUT = E.HERE / "check", E.HERE / "out"
+        E.CHECK, E.CHECK_VOWELS, E.OUT = E.HERE / "check", E.HERE / "check_vowels", E.HERE / "out"
         E.CHECK.mkdir()
+        E.CHECK_VOWELS.mkdir()
         E.OUT.mkdir()
         try:
             key = {"P01": {"piece": "a", "decoy": False, "chance": 0.01}, "P02": {"piece": "b", "decoy": True, "chance": 0.9},
@@ -304,16 +312,45 @@ def test_the_checkers_answers_are_read_against_the_decoys():
                    {"id": "P03", "verdict": "maybe"}]
             (E.CHECK / "reader1.jsonl").write_text("\n".join(map(json.dumps, one)) + '\nnot json\n[1]\n{"id": ["P02"], "verdict": "no"}\n')
             (E.CHECK / "reader2.jsonl").write_text("\n".join(map(json.dumps, two)) + "\n")
+            # the second pack: its own key, folder and result file, and nothing of the first
+            (E.HERE / "check_vowels_key.json").write_text(json.dumps({"P01": {"piece": "d", "decoy": True, "chance": 0.7}}))
+            for name in ("reader1", "reader2"):
+                (E.CHECK_VOWELS / f"{name}.jsonl").write_text(json.dumps({"id": "P01", "verdict": "no"}) + "\n")
             with contextlib.redirect_stdout(io.StringIO()):
                 E.check_merge()
+                E.check_merge(with_vowels=True)
             got = json.loads((E.OUT / "check.json").read_text())
+            second = json.loads((E.OUT / "check_vowels.json").read_text())
         finally:
-            E.HERE, E.CHECK, E.OUT = old
+            E.HERE, E.CHECK, E.CHECK_VOWELS, E.OUT = old
     assert (got["items"], got["best"], got["decoys"]) == (3, 2, 1)
     assert got["readers"]["reader1"] == {"answered": 3, "best": {"fits": 1, "known": 1}, "decoys": {"no": 1}}
     assert got["readers"]["reader2"] == {"answered": 2, "best": {"fits": 1}, "decoys": {"fits": 1}}
     assert got["answered_by_both"] == 2 and got["same_verdict"] == 1
     assert [x["piece"] for x in got["fits_for_both"]] == ["a"] and got["known_for_both"] == []
+    assert (second["items"], second["best"], second["decoys"], second["same_verdict"]) == (1, 0, 1, 1)
+    assert second["readers"]["reader1"] == {"answered": 1, "best": {}, "decoys": {"no": 1}}
+
+
+def test_a_pack_with_answers_is_never_replaced():
+    with tempfile.TemporaryDirectory() as tmp:
+        folder, key = Path(tmp) / "check", Path(tmp) / "check_key.json"
+        files = {folder / "pack.jsonl": '{"id": "P01"}\n', key: '{"P01": {}}'}
+        assert E.write_pack(folder, files, "brief one")                      # a new pack: written, with its brief
+        assert (folder / "BRIEF.md").read_text() == "brief one" and key.read_text() == '{"P01": {}}'
+        assert E.write_pack(folder, files, "brief two") and (folder / "BRIEF.md").read_text() == "brief two"
+        (folder / "reader1.jsonl").write_text('{"id": "P01", "verdict": "no"}\n')
+        # with answers beside it: the same pack is left as it is, and so is the brief the checkers read
+        assert not E.write_pack(folder, files, "brief three")
+        assert (folder / "BRIEF.md").read_text() == "brief two"
+        # another pack or key stops the build, and nothing is written
+        for changed in ({**files, key: '{"P01": {"decoy": true}}'}, {**files, folder / "pack.jsonl": "{}\n"}):
+            try:
+                E.write_pack(folder, changed, "brief four")
+                raise AssertionError("write_pack replaced a pack that holds answers")
+            except SystemExit as e:
+                assert "reader1.jsonl" in str(e)
+            assert all(p.read_text() == text for p, text in files.items()) and (folder / "BRIEF.md").read_text() == "brief two"
 
 
 # ------------------------------------------------------------------------------ the reported numbers (local)
@@ -434,7 +471,7 @@ def test_the_hidden_test_gives_the_reported_places():
 
 
 def test_what_the_model_counted_from_the_loans():
-    """Section 5 of the page, point 3: the alignments the final model was counted from (the last of the three
+    """Section 6 of the page, point 3: the alignments the final model was counted from (the last of the three
     rounds aligns with the model of the second)."""
     needs(*LOCAL, *WORDS)
     pool = E.pools()
@@ -528,6 +565,12 @@ def test_reported_vowel_search():
                  f'for 7 of the 13 loans that have a Coptic source, against 4 by consonants alone',
                  f'for 6 of the 14 titles, nouns and verbs of the bar'):
         assert text in flat, text
+    # what the native words predict, each piece in its own pool
+    native = f["native"]["at_most_0.05"]
+    expected = sum(native["+".join(sorted(E.VOWEL_SCOPE[r["kind"]]))] / f["native"]["words"]
+                   for r in rows if not (r["mentions_egyptian"] or r["spelled_like"]))
+    assert (f'pool ({native["noun"]} of 64 among the nouns, {native["verb"]} of 64 among the verbs) | '
+            f'{round(expected)} |') in flat
 
 
 def test_the_vowel_test_gives_the_reported_places():
@@ -580,6 +623,18 @@ def test_the_vowel_list_and_the_second_check():
     for reader in ("reader1", "reader2"):
         assert c["readers"][reader] == {"answered": 15, "best": {"no": 9}, "decoys": {"no": 6}}
     assert c["fits_for_both"] == c["known_for_both"] == []
+    # the pieces of the first pack whose best match with vowels no checker was shown, as the page says
+    packs = ("data/sources/egyptian/check/pack.jsonl", "data/sources/egyptian/check_vowels/pack.jsonl")
+    needs(*packs)
+    shown = collections.defaultdict(set)
+    for pack, keyfile in zip(packs, ("check_key.json", "check_vowels_key.json")):
+        answer = json.loads((ROOT / "data/sources/egyptian" / keyfile).read_text(encoding="utf-8"))
+        for item in map(json.loads, (ROOT / pack).read_text(encoding="utf-8").splitlines()):
+            shown[answer[item["id"]]["piece"]] |= {h["id"] for h in item["candidates"]}
+    unseen = sorted(r["piece"] for r in rows if r["piece"] in low and r["vowels"]["hits"][0]["id"] not in shown[r["piece"]])
+    assert unseen == ["mtr", "tmNte"] and set(unseen) <= seen
+    flat = " ".join(PAGE.read_text(encoding="utf-8").split())
+    assert "two (`mtr` and `tmNte`) have a best match with vowels that the first checkers were not shown" in flat
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

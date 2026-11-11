@@ -169,8 +169,12 @@ pack. What the decoys show is that they did not accept look-alikes.
 
 Sections 2 to 4 compare consonants only. This run, made the same day, compares the written vowels too. The Demotic
 list writes none, so it is on the Coptic entries alone: a Meroitic word keeps its e, i and o (a is written at the
-start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ and ⲏ; ⲓ and ⲉⲓ; ⲟ, ⲱ and ⲟⲩ), and the
-model counts a vowel like any other letter. A title or a noun is searched among the 7,139 Coptic nouns, a verb
+start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ and ⲏ; ⲓ and ⲉⲓ; ⲟ, ⲱ, ⲟⲩ and ⲩ), and
+the model counts a vowel like any other letter. The e of the signs ne and se is compared only where the spelling
+writes it as a letter of its own: the corpus spelling writes the two signs as N and (in most texts) s, which count
+as n and s, and a headword is taken in a corpus spelling that writes ne as N and se as s and e. The made-up words
+are drawn as in section 6, from the headwords with their vowels: 300 of each length from 3 to 12 letters, vowels
+counted, each with three consonants or more. A title or a noun is searched among the 7,139 Coptic nouns, a verb
 among the 2,946 verbs.
 
 **The test.** 13 of the known loans have a Coptic source: 8 titles and nouns, and 5 names whose source the
@@ -216,7 +220,7 @@ Coptic lexicon holds few). 37 are set aside as in section 3, which leaves 241.
 |---|---|
 | Pieces whose best match beats the 5% bar | 18 |
 | Expected by chance (5% of 241, by the made-up words) | 12 |
-| Expected at the rate of the 64 native words (5 of 64) | 19 |
+| Expected at the rate of the 64 native words in each piece's pool (5 of 64 among the nouns, 3 of 64 among the verbs) | 18 |
 | How often chance alone gives 18 or more, by the made-up words | 6% |
 | Pieces that pass the bar for 241 tries | 0 (it needs five pieces at the smallest chance) |
 
@@ -227,7 +231,9 @@ So 18 is what words that are not loans give. Every searched piece is in
 forms of known loans of section 4). The other nine went to two new checkers, blind, with six decoys. Both
 answered "no candidate is supported" for all 15: no new source, no decoy accepted. Two of the nine are titles in
 -ose that the search set beside Greek loans in Coptic that end in -ⲟⲥ (`mseqorose` beside the word for a cook
-or butcher); the checkers found nothing in the contexts to support them.
+or butcher); the checkers found nothing in the contexts to support them. Of the nine that had been in the first
+pack, two (`mtr` and `tmNte`) have a best match with vowels that the first checkers were not shown (ⲙⲁⲧⲣ and
+ⲙⲛⲧ): no checker has read these two matches.
 
 ## 6. Method
 
@@ -236,7 +242,8 @@ or butcher); the checkers found nothing in the contexts to support them.
    the Comprehensive Coptic Lexicon, Greek loans in Coptic included. The Demotic lemmata have no meanings.
 2. **One alphabet.** Every form is reduced to its consonants: a Meroitic word to its consonants and a mark for a
    vowel at the start; a Demotic lemma with and without its bracketed and dotted endings; a Coptic entry in each
-   dialect form, with ϩ as h, ϣ as š and the glides read from ⲟⲩ and ⲉⲓ. Vowels are not compared.
+   dialect form, with ϩ as h, ϣ as š and the glides read from ⲟⲩ and ⲉⲓ. Vowels are not compared (section 5
+   compares them).
 3. **The model.** An Egyptian word becomes a Meroitic one letter by letter: a letter is kept, changed or dropped,
    and a letter may be added. The chances start from a neutral table (a consonant most often stays what it is,
    h, ꜣ, y and w drop easily) and are counted again from the aligned known loans, three rounds. The Egyptian word
@@ -269,9 +276,9 @@ or butcher); the checkers found nothing in the contexts to support them.
 | `src/egyptian.py`, `tests/test_egyptian.py` | the search and its checks | public |
 | [`egyptian_candidates.tsv`](egyptian_candidates.tsv) | the 442 searched pieces, best match and chance in both pools | public, CC BY-SA 4.0 (it holds lemma numbers and forms of the two lists) |
 | [`egyptian_candidates_vowels.tsv`](egyptian_candidates_vowels.tsv) | the 278 pieces of the vowel search, best match and chance | public, CC BY-SA 4.0 (lemma numbers and forms of the Coptic lexicon) |
-| [`egyptian_brief.md`](egyptian_brief.md) | the checkers' brief | public |
+| [`egyptian_brief.md`](egyptian_brief.md) | the checkers' brief (the sentence on the second pack was added for its checkers) | public |
 | the two word lists | `Comprehensive_Coptic_Lexicon-v1.2-2020.xml` from [KELLIA's dictionary](https://github.com/KELLIA/dictionary) and `train.jsonl` from [the TLA's Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium), both CC BY-SA 4.0 | local, `data/sources/egyptian/` |
-| the answer key, the result files, the checkers' pack and answers | drawn from Rilly's lexicon and the gloss file | local, `data/sources/egyptian/` |
+| the answer key, the result files, the checkers' two packs and their answers | drawn from Rilly's lexicon and the gloss file | local, `data/sources/egyptian/` |
 
 A `ccl:` number opens in the [Coptic Dictionary Online](https://coptic-dictionary.org/entry/C1725) (the link is
 the entry of ⲗⲁϣⲁⲛⲉ; put another number in its place). A `tla:` number opens as a lemma of the Thesaurus
@@ -280,7 +287,8 @@ site asks for a short browser check first).
 
 To rebuild, with the local files in place: `python3 -I src/egyptian.py build` (about three minutes), then
 `check` and `merge` for the checkers' pack and answers; `vowels` (about eleven minutes), then `check vowels` and
-`merge vowels` for section 5.
+`merge vowels` for section 5. A pack whose folder holds the checkers' answers is not written again: `check`
+compares it with what the build gives and stops if it would change.
 
 ## 8. Cost
 
