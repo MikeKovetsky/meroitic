@@ -58,8 +58,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
 8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
    name, a number or a word with an accepted meaning or function (59.9% with near-copies counted once), 17% have a
-   proposal only, 10% are known by their kind only and 12% are unknown. Every word is translated in 85 of 608
-   texts. The 1,292 pieces without an accepted meaning are listed with their kind and the texts they block
+   proposal only, 10% are known by their kind only and 12% are unknown. Every legible word is translated in 82 of
+   605 texts. The 1,336 pieces without an accepted meaning are listed with their kind and the texts they block
    ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
 
 ## The question
@@ -229,12 +229,13 @@ counted as two signs, and formula words that the uniform rows still divided two 
 
 Every word of `corpus_v5` gets a gloss, a level and a confidence. A word that is a spelling of an entry of Rilly's
 lexicon takes that entry, alone or as a stem with a known ending; masked names, numbers and the names of Griffith's
-Karanòg tables are settled the same way. The 1,887 words this leaves went to nineteen independent analysts with
+Karanòg tables are settled the same way. The 1,887 words this leaves went to seventeen independent analysts with
 their contexts and the lexicon as a table: each cut the word into parts (an entry, a name, a number or an unknown
 piece) and named its kind, and the script kept an answer only if its parts spell the word and its entries exist.
-The 230 most frequent were analysed twice; where the two differ in level, the lower stands. A word counts as
-translated when its parts are names, numbers or entries Rilly holds as established or probable. Near-copies of a
-text are counted once in the headline and in the ranking of what blocks most texts. The gloss file leans on the
+Two more analysed 230 of the most frequent a second time; where the two differ in level, the lower stands. A word
+counts as translated when the parts that are words of their own are names, numbers or entries Rilly holds as
+established or probable, and an analyst's cut has a confidence of 4 or 5. Near-copies of a text are counted once
+in the headline and in the ranking of what blocks most texts. The gloss file leans on the
 lexicon and is local-only; the counts, the brief and the list of unknown pieces are public
 ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
 

@@ -41,7 +41,7 @@ open). What is new, with the run behind each claim:
 
 8. **About 60% of the running words can be translated today, word by word.** 13,292 of the 21,977 words of
    `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
-   with near-copies counted once); every word is translated in 85 of 608 texts (Day four, below;
+   with near-copies counted once); every legible word is translated in 82 of 605 texts (Day four, below;
    `data/discovery/coverage.md`).
 
 The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
@@ -262,18 +262,20 @@ After "are you giving up?", four more lines of attack, then data.
    unknown and 262 have a lost sign. With near-copies counted once (608 texts, 8,786 words) it is 59.9%.
 2. **By part:** the older corpus 59.3%, Karanòg and Shablûl 74.1%, Griffith's other volumes 41.9%. By different
    words instead of running words: 1,105 of 3,160 (35.0%).
-3. **Texts:** every word is translated in 85 of the 608 texts and one piece is missing in 124 more; the median text
-   is 68.8% translated.
+3. **Texts:** of the 608 texts, 605 have a word that is not lost; every such word is translated in 82 of them and
+   one piece is missing in 124 more; the median text has 68.8% of its legible words translated.
 4. **How:** the lookup alone translates 11,374 words (51.8%) and leaves 1,887 different words. Nineteen analysts
    cut and classified those (2.63 million subagent tokens), which adds 1,918 words. No answer failed the script's
    check that the parts spell the word and the entries exist.
-5. **Two analysts** on the 230 most frequent leftover words: the same level for 194 (84%), the same on translated
-   or not for 218 (95%). Of the 66 the first called translated the second did so for 58.
-6. **What blocks:** 1,292 pieces have no accepted meaning (345 with a proposal, 152 known by kind, 795 unknown);
-   624 have a kind. The verbs of the benedictions lead: `ḫr` stands in 116 texts and alone blocks 11, `ẖol` in 70.
-   100 pieces stand in five texts or more.
+5. **Two analysts** on 230 of the most frequent leftover words (the 52 left last, `Sklte` and `mokelowi` among
+   them, had one): the same level for 194 (84%), the same on translated or not for 218 (95%). Of the 66 the first
+   called translated the second did so for 58.
+6. **What blocks:** 1,336 pieces have no accepted meaning: 302 headwords of the lexicon (126 with a proposal, 157
+   known by kind, 19 with neither) and 1,034 letters that no entry explains (777 unknown pieces, 257 words cut into
+   known parts by an analyst who was not sure of the cut); 670 have a kind. The verbs of the benedictions lead:
+   `ḫr` stands in 116 texts and alone blocks 11, `ẖol` in 70. 96 pieces stand in five texts or more.
 7. **Checked against a later source:** of the 39 words Rilly's 2016 overview lists as translated, the typed lexicon
    holds 34 at an accepted level; counting the other four it has (`pqr`, `wide`, `nbr`, `sr`) as accepted would
-   move 209 words, to 61.4%.
+   move 186 words, to 61.3%.
 8. **Limits:** word by word is not understanding: verb endings are mostly unexplained. No specialist has checked
    a line, the analysts are one model family, and the lexicon is the state of 2003.

@@ -37,9 +37,9 @@ Done since this plan was written:
      different texts.
 
 7. **The translation coverage map** (2026-11-11, [`data/discovery/coverage.md`](data/discovery/coverage.md)):
-   every word of `corpus_v5` glossed from Rilly's lexicon. 60.5% of the running words are translated, 85 of 608
-   texts in full, and the 1,292 pieces without an accepted meaning are ranked by the texts they block, each with
-   its kind where the texts show one. Section E says what it is for.
+   every word of `corpus_v5` glossed from Rilly's lexicon. 60.5% of the running words are translated, 82 of 605
+   legible texts in full, and the 1,336 pieces without an accepted meaning are ranked by the texts they block, each
+   with its kind where the texts show one. Section E says what it is for.
 
 Next, in this order:
 
@@ -185,12 +185,12 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
 17. **Egyptian parallels for the titles and the counted things** in the list: borrowed titles, the oracular
     decrees (an Egyptian kind of text) and the Philae graffiti that name the same people in Demotic. Test the
     method first on known loans held out.
-18. **A Nubian comparison that uses the kind of each word.** The list says what kind of word each unknown piece is
-    (title, kin term, verb, counted thing); matching it only against Nubian words of that kind cuts the chance
-    look-alikes that sank the cognate test (D 15). It needs a larger Nubian word list with culture and kin words:
-    Reinisch's *Die Nuba-Sprache* (1879) and Lepsius's *Nubische Grammatik* (1880) are public domain and on
-    archive.org, untyped.
-19. **More texts.** 947 of the 1,292 pieces stand in one text or none once near-copies are set aside, so context
+18. **A Nubian comparison that uses the kind of each word.** The list says what kind of word half the unknown
+    pieces are (670 of 1,336: title, kin term, verb, counted thing); matching each only against Nubian words of
+    that kind cuts the chance look-alikes that sank the cognate test (D 15). It needs a larger Nubian word list
+    with culture and kin words: Reinisch's *Die Nuba-Sprache* (1879) and Lepsius's *Nubische Grammatik* (1880)
+    are public domain and on archive.org, untyped.
+19. **More texts.** 995 of the 1,336 pieces stand in a single text once near-copies are set aside, so context
     cannot place them; Hallof's volume 7 (step 7 above) would triple the texts.
 20. **Left open by the map itself:** the lexicon is the state of 2003 (Rilly's 2016 list accepts `pqr`, `wide`,
     `nbr` and `sr`, which it holds as proposals); 1,657 leftover words have one analyst only; a word with two
