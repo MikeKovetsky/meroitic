@@ -3,7 +3,7 @@ compare_readers.py): on made-up readings and entries, and the numbers data/expan
 
   python3 -I tests/test_karanog.py
 """
-import json, re, sys, tempfile
+import collections, json, re, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -150,8 +150,8 @@ def test_an_inscription_read_twice_takes_the_settled_reading():
     assert kar2["text_std"] == "wosi : qere?" and kar2["text_corpus"] == "woSi qere" and kar2["uncertain"] == 1
     # the note still counts the first reader's own check (k to q), then says what the second reading changed (o to e)
     assert "2 printed entries placed, 1 signs changed by the check." in kar2["notes"]
-    assert ("(second_reading/S144): the two checked readings differed at 1 places" in kar2["notes"]
-            and "0 for the first reading, 1 for the second, 0 for neither and 0 left open; 1 signs of the first reader's row changed."
+    assert ("(second_reading/S144): the two checked readings differed at 1 place," in kar2["notes"]
+            and "0 for the first reading, 1 for the second, 0 for neither and 0 left open; 1 sign of the first reader's row changed."
             in kar2["notes"]), kar2["notes"]
     assert "names table" in kar2["notes"] and "the e is hatched" in kar2["notes"]
     assert kar3 == once[1] and "second time" not in kar3["notes"]               # read once: as before
@@ -205,6 +205,11 @@ def test_formula_words_are_divided_as_griffith_divides_them():
     w = lambda *words: [tuple(K.tokens(x)) for x in words]
     pairs = K.phrases(entries)
     assert pairs == [tuple(w("ato", "mẖe")), tuple(w("mẖe", "psoẖekete")), tuple(w("at", "mẖe")), tuple(w("mẖe", "psiḫr"))], pairs
+    # a pair twice in one entry is one pair, so that it counts one inscription once towards EVERYWHERE
+    assert K.phrases([entry("formula F (table)", "tedḫe lowi : tedḫe lowi")]) == [tuple(w("tedḫe", "lowi")), tuple(w("lowi", "tedḫe"))]
+    # the words printed as one: of every entry K.printed() keeps, or of the formula tables only
+    assert set(w("pisiplete", "pesto", "l")) <= K.whole(entries) and not set(w("pisiplete", "pesto")) & K.whole(entries, formula=True)
+    assert set(w("pisi", "plete", "psiḫr")) <= K.whole(entries, formula=True) and not set(w("dole", "nsedokel")) & K.whole(entries)
     show = lambda ws: " ".join("".join(x) for x in ws)
     part = lambda text: (show(K.divided(K.words_of(text), pairs)[0]), K.divided(K.words_of(text), pairs)[1])
     assert part("atomẖe psoẖekete") == ("ato mẖe psoẖekete", 1)
@@ -213,6 +218,20 @@ def test_formula_words_are_divided_as_griffith_divides_them():
     assert part("atmẖepsiḫrkte") == ("at mẖe psiḫrkte", 2)                       # but not after the second
     assert part("ato mẖe pisiplete pestol") == ("ato mẖe pisiplete pestol", 0)   # already parted, or no pair
     assert part("at[.]mẖe") == ("at.mẖe", 0)                                     # a lost sign between: not the pair
+
+
+def test_formula_words_printed_as_one_are_joined_across_gaps_only():
+    show = lambda ws: " ".join("".join(x) for x in ws)
+    # a divider parts two runs; a gap, a line end or a line number inside a word does not
+    assert [[("".join(x)) for x in r] for r in K.runs("ḫm lol : ẖol(7)kte (8)ato mẖe")] == [["ḫm", "lol"], ["ẖolkte", "ato", "mẖe"]]
+    assert K.words_of("ḫm lol : ẖol(7)kte (8)ato mẖe") == [w for r in K.runs("ḫm lol : ẖol(7)kte (8)ato mẖe") for w in r]
+    whole = {tuple(K.tokens(x)) for x in ("ḫmlol", "siwi", "siwiwil", "psoẖte")}
+    join = lambda text: (show(K.joined(K.runs(text), whole)[0]), K.joined(K.runs(text), whole)[1])
+    assert join("ḫm lol : ẖolkte") == ("ḫmlol ẖolkte", 1)
+    assert join("ḫ (11)mlol") == ("ḫmlol", 1)                                    # parted at the end of a line
+    assert join("si wi : temkeñ : si wi wi l") == ("siwi temkeñ siwiwil", 4)     # the longest run first
+    assert join("psoẖ : te") == ("psoẖ te", 0)                                   # the stone's divider stays
+    assert join("ḫmlol ẖolkte") == ("ḫmlol ẖolkte", 0)                           # nothing to join
 
 
 def test_the_title_read_two_ways_is_spelled_one_way():
@@ -229,21 +248,29 @@ def test_rows_part_formula_words_and_leave_the_reading_alone():
         (root / "refs").mkdir()
         obj = lambda n, reading: {"text": f"Kar. {n}", "part": "", "page": "leaf_144", "caption": f"Kar. {n}. Altar", "labels": [],
                                   "reading": reading, "entries": 1, "check_notes": ""}
-        final = [obj(1, "wosi : slms : atomẖe : psoẖte"), obj(2, "wosi : atmẖe")]
+        final = [obj(1, "wosi : slms : atomẖe : psoẖte ḫm lol"), obj(2, "wosi : atmẖe"), obj(3, "wosi : atomẖe"),
+                 obj(4, "wosi : atomẖe")]
         write(root / "C01", "copy_only.jsonl", final)
         write(root / "C01", "final.jsonl", final)
-        write(root / "refs", "Kar_001.jsonl", [{"source": "formula A (table)", "reading": "ato mẖe psoẖte", "compare_only": False}])
-        one, two = K.rows(root, root / "refs")
+        entry = lambda source, reading: {"source": source, "reading": reading, "compare_only": False}
+        write(root / "refs", "Kar_001.jsonl", [entry("formula A (table)", "ato mẖe psoẖte"), entry("formula C (table)", "ḫmlol : ẖolkete")])
+        write(root / "refs", "Kar_004.jsonl", [entry("Index C", "atomẖe")])        # Kar. 4's own type has the word whole
+        one, two, three, four = K.rows(root, root / "refs")
         old = K.EVERYWHERE
         K.EVERYWHERE = 1                      # a pair printed apart for one inscription is parted in every row
         try:
-            everywhere = K.rows(root, root / "refs")[1]
+            everywhere = K.rows(root, root / "refs")
         finally:
             K.EVERYWHERE = old
-    assert one["text_std"] == "wosi : slms : atomẖe : psoẖte" and one["text_corpus"] == "woSi SlXS ato mXe pSoXte"
-    assert "1 word boundary is Griffith's, from his formula tables and 1 word read slms is written slẖs" in one["notes"]
+    assert one["text_std"] == "wosi : slms : atomẖe : psoẖte ḫm lol" and one["text_corpus"] == "woSi SlXS ato mXe pSoXte xmlol"
+    assert ("text_corpus differs from the reading: 1 gap between words is closed where his formula tables print one word, "
+            "1 word boundary is Griffith's, from his formula tables and 1 word read slms is written slẖs") in one["notes"], one["notes"]
     assert two["text_corpus"] == "woSi atmXe" and "text_corpus differs" not in two["notes"]     # no entry of its own
-    assert everywhere["text_corpus"] == "woSi atmXe"                                             # (at, mẖe) is no pair of Kar. 1
+    assert (three["text_corpus"], four["text_corpus"]) == ("woSi atomXe", "woSi atomXe")        # (ato, mẖe): one inscription only
+    # with EVERYWHERE at 1, Kar. 1's pair parts Kar. 3 too, but not Kar. 4, whose own type prints the word whole;
+    # (at, mẖe) is no pair of Kar. 1, and the ḫmlol joined in Kar. 1 is not cut again by its pair (ḫmlol, ẖolkete)
+    assert [r["text_corpus"] for r in everywhere] == ["woSi SlXS ato mXe pSoXte xmlol", "woSi atmXe", "woSi ato mXe", "woSi atomXe"]
+    assert "1 word boundary is Griffith's" in everywhere[2]["notes"] and "text_corpus differs" not in everywhere[3]["notes"]
 
 
 def test_references_name_inscriptions():
@@ -339,7 +366,7 @@ def test_reported_karanog_numbers():
     # data/expansion/karanog/README.md, sections 1, 2 and 4, and NEXT_STEPS.md, step 5
     rows = K.rows()
     words = sum(len([w for w in r["text_corpus"].split() if w.strip(".")]) for r in rows)
-    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16440, 2915)
+    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16440, 2911)
     objs = R.typed()
     per, _ = R.tables(objs)
     assert (len(objs), sum(o["typist"] == "QA" for o in objs), len(per), sum(map(len, per.values()))) == (2722, 4, 152, 3550)
@@ -396,7 +423,7 @@ def test_karanog_rows_are_new_to_the_corpus():
     added, dupes, partial = expand.merge(v3, karanog, among=False, own_letters=True)
     assert len(added) == 151 and not dupes and not partial, dupes
     tok = lambda rows: sum(len(r["text"].split()) for r in rows)
-    assert (len(v3), tok(v3)) == (748, 19066) and (len(v3) + len(added), tok(v3) + tok(added)) == (899, 21981)
+    assert (len(v3), tok(v3)) == (748, 19066) and (len(v3) + len(added), tok(v3) + tok(added)) == (899, 21977)
     assert [g["id"] for g, _ in expand.merge(v3, karanog, among=False)[1]] == ["G-karanog-63", "G-karanog-66", "G-karanog-Sh17"]
 
 
@@ -416,6 +443,11 @@ def test_reported_second_reading_numbers():
         return out
     assert totals("copy_only.jsonl") == {"damaged": (1708, 2036), "random": (823, 926), "control": (226, 244), "all": (2757, 3206)}
     assert totals("final.jsonl") == {"damaged": (1999, 2061), "random": (939, 948), "control": (242, 245), "all": (3180, 3254)}
+    # for all 53 pages: the damaged ones at their rate, the other 46 at the random pages' rate, weighted by signs
+    signs = C.page_signs("final.jsonl")
+    est, damaged, other = C.whole_set(totals("final.jsonl"), group, signs)
+    assert (len(signs), damaged, other, f"{est:.1%}") == (53, 2061, 14376, "98.8%")
+    assert f"{C.whole_set(totals('copy_only.jsonl'), group, C.page_signs('copy_only.jsonl'))[0]:.1%}" == "88.3%"
     rows = C.compare("final.jsonl")
     assert len(rows) == 31 and sum(d == 0 for _, _, _, d, _, _ in rows) == 10
     # the places where the two checked readings differ, and how the second reader settled them
@@ -437,6 +469,44 @@ def test_reported_second_reading_numbers():
     score = lambda path: score_fhn.score(toks, align, fhn, score_fhn.readings([path]))["0277"][:2]
     assert [score(p) for p in (READINGS / "C14/final.jsonl", C.SECOND / "S171/final.jsonl", C.SECOND / "S171/settled.jsonl")] \
         == [(134, 128), (134, 127), (134, 128)]
+    # both readers differ from FHN at the same six places, the second at one more: three different signs, a d that
+    # FHN has not, an e that the readings have not, and a sign lost in the readings
+    places = lambda path: [op[:3] for op in align(toks(score_fhn.clean(score_fhn.readings([path])["0277"])), toks(fhn["0277"]))[1]
+                           if op[0] in ("sub", "ins", "del")]
+    six = places(READINGS / "C14/final.jsonl")
+    assert six == [("ins", "d", "-"), ("del", "-", "e"), ("sub", "e", "t"), ("sub", "s", "H"), ("del", "-", "i"), ("sub", "b", "m")], six
+    assert places(C.SECOND / "S171/settled.jsonl") == six and sorted(places(C.SECOND / "S171/final.jsonl")) == sorted(six + [("sub", "o", "i")])
+    # at five of them the readings have what Griffith prints for Kar. 77: smede(?)li, ps(?)te, ḫblol, ḫdḫdiye, ps[.]ḫrkete
+    printed = {e["reading"] for e in K.entries("Kar", 77, K.KAR / "refs/by_inscription")}
+    assert {"smede(?)li", "ḫblol", "ḫdḫdiye"} <= printed and any("ps(?)te" in e for e in printed) and any("ps[.]ḫrkete" in e for e in printed)
+
+
+def test_reported_uniform_rows():
+    # data/expansion/karanog/README.md, section 5: what the formula tables and the one spelling change in text_corpus
+    rows = K.rows()
+    got = lambda pat: [(r["griffith_no"], int(re.search(pat, r["notes"]).group(1))) for r in rows if re.search(pat, r["notes"])]
+    parted, closed, respelt = got(r"(\d+) word boundar"), got(r"(\d+) gaps? between words"), got(r"(\d+) words? read slms")
+    assert (sum(k for _, k in parted), len(parted), sum(k for _, k in closed), [n for n, _ in closed]) == (144, 77, 7, [9, 119, 132, "Sh7"])
+    assert respelt == [(11, 2), (84, 1)]
+    refs = K.KAR / "refs/by_inscription"
+    held = collections.Counter(p for r in rows for p in K.phrases(K.entries(*number(r), refs)))
+    every = {" ".join("".join(w) for w in p): k for p, k in held.items() if k >= K.EVERYWHERE}
+    assert len(every) == 17 and [every[p] for p in ("ato mẖe", "at mẖe", "mẖe psḫrkete")] == [97, 83, 21], every
+    words = lambda r: r["text_corpus"].split()
+    together = {w: [r["griffith_no"] for r in rows if any(w in x for x in words(r))] for w in ("atomXe", "atmXe", "atomxe", "atmxe", "atoXme")}
+    assert together == {"atomXe": [], "atmXe": [], "atomxe": [], "atmxe": [], "atoXme": ["Sh3"]}, together
+    pair = lambda a, b: sum(any(x == a and y == b for x, y in zip(words(r), words(r)[1:])) for r in rows)
+    assert (pair("ato", "mXe"), pair("at", "mXe")) == (92, 91)
+    # the formula word yidotedikte: d in every row, one word in four rows and two in two (Kar. 99's yidoteni is its plural)
+    yid = [(r["griffith_no"], [w for w in words(r) if re.fullmatch(r"y?idote(dikte|nikte)?|dikte|nikte", w)]) for r in rows]
+    assert [(n, ws) for n, ws in yid if ws] == [(18, ["yidotedikte"]), (25, ["yidote", "dikte"]), (27, ["yidotedikte"]),
+                                                (78, ["yidotedikte"]), (100, ["yidote", "dikte"]), (125, ["idotedikte"])]
+
+
+def number(row):
+    """(site, number) of a row of griffith_karanog.jsonl."""
+    no = row["griffith_no"]
+    return ("Kar", no) if isinstance(no, int) else ("Sh", int(no[2:]))
 
 
 def test_reported_typing_agreement():

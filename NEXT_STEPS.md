@@ -26,12 +26,15 @@ Done since this plan was written:
 6. **A quality pass on the Karanòg rows** (the same evening; sections 5 and 6 of the Karanòg page):
    - **A second reader for eleven of the 53 pages:** the seven most damaged, three drawn at random and the page of
      Kar. 77. After the check the two readers agree on 3,180 of 3,254 signs (97.7%; 97.0% on the damaged pages,
-     99.1% on the random ones). The 56 differing places were settled against the copy and the type, which changed
-     26 signs of the rows.
-   - **Uniform rows:** the closing formulae are divided into words as Griffith's formula tables divide them, in
-     every row, and the title `slẖs` has one spelling. The d or n of `yidotedikte` is d in every row now.
-   - **The duplicate test** no longer takes shared formulae for a copy: all 151 Karanòg texts are in `corpus_v5`,
-     and the three Newsletter texts wrongly marked as duplicates are back (188 new).
+     99.1% on the random ones), which gives 98.8% for all 53 pages, weighted by page. The 56 differing places
+     were settled against the copy and the type, which changed 26 signs of the rows.
+   - **Uniform rows:** the closing formulae are divided into words as Griffith's formula tables divide them, but
+     for a few rows where the stone has a divider or the typed table differs in a sign, and the title `slẖs` has
+     one spelling. The d or n of `yidotedikte` is d in every row now.
+   - **The duplicate tests:** the Karanòg one no longer takes shared formulae for a copy, so all 151 texts are in
+     `corpus_v5`. The Newsletter one already left the formulae out; its three texts wrongly marked as duplicates
+     are back (188 new) because `src/mnl/mnl_dedupe.py` now names the three pairs that the collation found to be
+     different texts.
 
 Next, in this order:
 
@@ -40,8 +43,10 @@ Next, in this order:
 3. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
 4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
    no reader (Kar. 17 `sotnkel` and Kar. 111 `tewideqowi`, section 9 of the Karanòg page); word division outside
-   the closing formulae still follows each reader; and the names table, the weakest of the typed pages, has a
-   second typing for its first page only.
+   the closing formulae still follows each reader, and so does a formula word parted by a divider on the stone;
+   the readers' corrections to the typed pages (`ref_corrections.jsonl`) are not yet put into the tables, which is
+   why `yidote dikte` stays two words in two rows (the tables are typed with n); and the names table, the weakest
+   of the typed pages, has a second typing for its first page only.
 5. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
    "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout.
 
@@ -103,9 +108,9 @@ Next, in this order:
        from the hand copies alone).
      - The check uses three printed sources, not one: the indexes, Griffith's table of names and parentage
        (pp. 87–94) and his tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts.
-     - The result: 16,440 signs and 2,915 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
+     - The result: 16,440 signs and 2,911 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
        placed 3,468 printed entries and changed 2,405 of the 16,759 signs first read (14.4%).
-     - `src/expand.py` merges all 151 into a new `corpus_v5`: 899 texts and 21,981 words, against 748 and 19,066
+     - `src/expand.py` merges all 151 into a new `corpus_v5`: 899 texts and 21,977 words, against 748 and 19,066
        in `corpus_v3`, which stays as it was. Three short texts (Kar. 63, Kar. 66, Sh. 17) were held back at first
        as "already present"; that was the formula overlap of step 10, and for these rows the test now leaves the
        letter groups of the formulae out.

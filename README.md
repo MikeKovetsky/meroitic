@@ -198,12 +198,14 @@ closing formulae. Readers typed those 48 pages, read each hand copy on its own, 
 against the printed entries for that inscription (`src/karanog_refs.py`, `src/karanog.py`,
 [`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). On the four texts FHN prints, fresh
 readers who could not see FHN reached 97.7% of signs. Eleven pages (31 inscriptions) were then read again by a
-second reader: the two checked readings agree on 97.7% of signs, and the 56 places where they differ were settled
-against the copy and the type. `src/karanog.py` divides the closing formulae into words as Griffith's tables do,
-in every row. `src/expand.py` tests the 151 texts against `corpus_v3` but not against each other, as they are
-separate inscriptions that share their formulae, and leaves the letter groups of those formulae out of the
-comparison. It finds all 151 new and writes them with `corpus_v3` as `data/corpus_v5.jsonl` (899 texts, 21,981
-words); `corpus_v3` itself is left as it was.
+second reader: the two checked readings agree on 97.7% of signs there (98.8% for all 53 pages, weighting the
+seven most damaged and the three drawn at random by the pages they stand for), and the 56 places where they
+differ were settled against the copy and the type. `src/karanog.py` divides the closing formulae into words as
+Griffith's tables do, but for a few rows where the stone has a divider or the typed table differs in a sign.
+`src/expand.py` tests the 151 texts against `corpus_v3` but not against each other, as they are separate
+inscriptions that share their formulae, and leaves the letter groups of those formulae out of the comparison. It
+finds all 151 new and writes them with `corpus_v3` as `data/corpus_v5.jsonl` (899 texts, 21,977 words);
+`corpus_v3` itself is left as it was.
 
 ### 13. Review
 
@@ -212,10 +214,10 @@ reasoning, and fixed what it found (four full reviews; the fourth, of `src/lexiq
 stopped partway on Mike's word so the repo could be pushed, and finished before it was shared). They found and fixed
 answer leaks, a Monte Carlo p-value printed as 0.0, a baseline that saw less than the solver, a corpus bug that split
 words at doubtful-sign marks, a copy detector that missed copies, and rules applied outside the positions Rilly gives
-them; each fix changed a reported number, and the report shows the corrected one. Four more full reviews followed
-on 2026-11-09 and 10, two of the Newsletter tools and two of the Karanòg scripts and rows; they fixed, among other
-things, a scorer that let extra signs go free, references misread as inscription numbers, and an editor's "(sic)"
-counted as two signs. Tests: `tests/`.
+them; each fix changed a reported number, and the report shows the corrected one. Five more full reviews followed
+on 2026-11-09 and 10, two of the Newsletter tools and three of the Karanòg scripts and rows; they fixed, among other
+things, a scorer that let extra signs go free, references misread as inscription numbers, an editor's "(sic)"
+counted as two signs, and formula words that the uniform rows still divided two ways. Tests: `tests/`.
 
 ## Reproduce
 
@@ -232,7 +234,7 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
 `corpus_v2 662 texts 18075 words -> corpus_v3 748 texts 19066 words (+5%)` and ends
-`corpus_v3 748 texts 19066 words -> corpus_v5 899 texts 21981 words (+15%)`. The tests print `skip` for each
+`corpus_v3 748 texts 19066 words -> corpus_v5 899 texts 21977 words (+15%)`. The tests print `skip` for each
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 

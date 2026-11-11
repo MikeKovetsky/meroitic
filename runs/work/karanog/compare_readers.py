@@ -7,9 +7,11 @@ reader's (copy_only.jsonl from the copy alone, final.jsonl after the check again
 says how the pages were chosen. For every inscription read twice this prints the signs of the first reading
 that the second also has: the first reading's signs less the edit distance between the two, the measure
 score_fhn.py uses against FHN (a sign only one reader has counts against it). Lost signs are left out of the
-signs and counted apart, because the two readers estimate a hatched stretch each in their own way.
+signs and counted apart, because the two readers estimate a hatched stretch each in their own way. The last line
+of each part gives the figure for all 53 pages: the seven damaged pages, all read twice, at their own rate, and
+the other 46 at the rate of the three drawn at random, each weighted by its signs of the first reading.
 """
-import collections, json, sys
+import collections, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -86,6 +88,25 @@ def groups(second_dir=None):
     return {f"S{leaf}": g for g in ("damaged", "random", "control") for leaf in pick[g]}
 
 
+def page_signs(name, readings=None):
+    """{leaf: the signs of the first reading on that page, lost signs left out} for one kind of file."""
+    out = collections.Counter()
+    for pack in sorted(p for p in (readings or K.KAR / "readings").iterdir() if p.is_dir()):
+        for o in K.load(pack, name):
+            out[re.search(r"(\d+)", o["page"]).group(1)] += len(read([o["reading"]])[0])
+    return out
+
+
+def whole_set(total, group, signs):
+    """(the agreement for all pages, signs of the damaged pages, signs of the others): the damaged pages at their
+    own rate, since every one of them was read twice, and the others at the rate of the pages drawn at random.
+    total is {group: (signs the second reader has, signs of the first reading)}, signs is page_signs()."""
+    damaged = sum(n for leaf, n in signs.items() if group.get(f"S{leaf}") == "damaged")
+    other = sum(signs.values()) - damaged
+    rate = lambda g: total[g][0] / total[g][1]
+    return (damaged * rate("damaged") + other * rate("random")) / (damaged + other), damaged, other
+
+
 def main():
     group = groups()
     for name, title in (("copy_only.jsonl", "hand copy alone"), ("final.jsonl", "after the check against the type")):
@@ -100,6 +121,10 @@ def main():
         for g in ("damaged", "random", "control", "all"):
             if total[g][1]:
                 print(f"  {g.upper()}: {total[g][0]} of {total[g][1]} ({total[g][0] / total[g][1]:.1%})")
+        signs = page_signs(name)
+        est, damaged, other = whole_set(total, group, signs)
+        print(f"  ALL {len(signs)} PAGES: {est:.1%} (the damaged pages, {damaged} signs, at their rate; the other "
+              f"{len(signs) - sum(g == 'damaged' for g in group.values())}, {other} signs, at the random pages' rate)")
     if "--differences" in sys.argv:
         out = Path(sys.argv[sys.argv.index("--differences") + 1])
         diff = differences()

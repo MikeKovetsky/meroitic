@@ -13,11 +13,13 @@ Eleven pages were then read again by a second reader in the same two steps (data
 
 text_std is the reading, untouched. text_corpus is made uniform in two ways, so that the same word is
 spelled and divided alike in every row (data/expansion/karanog/README.md, section 5):
-  - the closing formulae are divided as Griffith divides them: where his formula tables print two words of that
-    inscription's formula apart ("ato mẖe") and the reading has them run together as the stone does ("atomẖe"),
-    they are parted (divided()). A pair the tables print apart for 20 inscriptions or more is parted in every
-    row. His indexes are not used for this: there he also sets endings apart from their words ("pesto l"), which
-    is analysis, not word division;
+  - the closing formulae are divided as Griffith divides them. Where his formula tables print as one word of that
+    inscription what the reading parts only at a gap ("ḫm lol" where he prints "ḫmlol"), the parts are joined
+    (joined()); a divider is the stone's and stays. Where the tables print two words apart ("ato mẖe") and the
+    reading has them run together as the stone does ("atomẖe"), they are parted (divided()). A pair the tables
+    print apart for 5 inscriptions or more is parted in every row, unless that inscription's own entries print it
+    as one word. His indexes are not used for this: there he also sets endings apart from their words
+    ("pesto l"), which is analysis, not word division;
   - the title that two readers read slms is slẖs, as in the other rows: Griffith writes it shalkhash (ONE_SPELLING).
 
   python3 -I src/karanog.py            # writes the file and prints the counts
@@ -34,11 +36,12 @@ MARK = re.compile(r"\(\d+\)|\(sic\)")             # a line number of the stone; 
 CORPUS = {"s": "S", "se": "s", "ñ": "N", "ḫ": "x", "ẖ": "X"}        # README, the corpus spelling
 SITES = {"Kar": "Karanog", "Sh": "Shablul"}
 PAIR = 5        # two words that Griffith prints apart are parted in a reading when they have this many signs together
-EVERYWHERE = 20  # a pair that the formula tables print apart for this many inscriptions is parted in every row
+EVERYWHERE = 5   # a pair that the formula tables print apart for this many inscriptions is parted in every row
+JOIN = 4         # the most words that joined() makes one: Griffith's siwiwil, which a reading has as "si wi wi l"
 # A word that readers settled two ways, and the spelling text_corpus gives it: the start of the word as read, the
 # start as it is written. slẖs: 11 rows have ẖ and 2 have m, where the hand's 3-shaped signs cannot be told
-# apart; Griffith's catalogue writes the title "shalkhash" thirteen times and never with m, and Indexes B and C
-# print ẖ.
+# apart; Griffith's catalogue writes the title "shalkhash" thirteen times and never with m. (As typed, Indexes B and
+# C print ẖ and Index A m; README, section 5, says what the readers saw in the type.)
 ONE_SPELLING = {("s", "l", "m", "s"): ("s", "l", "ẖ", "s")}
 # measured by runs/work/karanog/score_fhn.py on the four texts FHN III prints (data/expansion/karanog/README.md)
 ACCURACY = ("Measured accuracy of the method, on the four Karanog texts that FHN III prints (Kar. 47, 77, 78 and the "
@@ -75,27 +78,65 @@ def signs(reading):
     return tokens(marked(reading))
 
 
+def runs(reading):
+    """The words of a reading in runs that no divider parts: [[word, ...], ...], each word a list of signs. A gap
+    (a space, the end of a line) ends a word but not a run; a line number inside a word ends neither."""
+    out = []
+    for stretch in marked(reading).split(":"):
+        ws = [w for w in (tokens(chunk) for chunk in re.split(r"\s+", stretch)) if w]
+        if ws:
+            out.append(ws)
+    return out
+
+
 def words_of(reading):
     """The words of a reading, each a list of signs. A divider and a gap both end a word; a line number inside a
     word does not."""
-    return [w for w in (tokens(chunk) for chunk in re.split(r"[\s:]+", marked(reading))) if w]
+    return [w for run in runs(reading) for w in run]
+
+
+def printed(entries):
+    """[(source, words)] of the entries of one inscription whose words can be taken as Griffith's division, each
+    word a tuple of signs. An entry that holds brackets of Griffith's (a restoration, an optional letter) is left
+    out, and so is one kept for comparison only; his "(?)" and a typist's "?" are dropped."""
+    out = []
+    for e in entries:
+        text = e["reading"].replace("(?)", "").replace("?", "")
+        if not e.get("compare_only") and not re.search(r"[()\[\]]", text):
+            out.append((e["source"], [tuple(w) for w in words_of(text)]))
+    return out
+
+
+def whole(entries, formula=False):
+    """The words that the entries of one inscription print as one word (with formula, the formula tables' only)."""
+    return {w for source, ws in printed(entries) if source.startswith("formula") or not formula for w in ws}
 
 
 def phrases(entries):
     """The pairs of words that Griffith prints apart, side by side, in the formula tables' entries for one
-    inscription: [(first, second)], each a tuple of signs. An entry that holds brackets of Griffith's (a
-    restoration, an optional letter) gives none; his "(?)" and a typist's "?" are dropped. A pair that another
+    inscription: [(first, second)], each a tuple of signs, of the entries that printed() keeps. A pair that another
     entry of the inscription prints as one word is no pair (a gap in the table's type, not a word end)."""
-    out, whole = [], set()
-    for e in entries:
-        text = e["reading"].replace("(?)", "").replace("?", "")
-        if e.get("compare_only") or re.search(r"[()\[\]]", text):
-            continue
-        ws = [tuple(w) for w in words_of(text)]
-        whole |= set(ws)
-        if e["source"].startswith("formula"):
-            out += [(a, b) for a, b in zip(ws, ws[1:]) if len(a) + len(b) >= PAIR and (a, b) not in out]
-    return [(a, b) for a, b in out if a + b not in whole]
+    out = {}                                           # a dict for its order: each pair once
+    for source, ws in printed(entries):
+        if source.startswith("formula"):
+            out.update(dict.fromkeys((a, b) for a, b in zip(ws, ws[1:]) if len(a) + len(b) >= PAIR))
+    return [(a, b) for a, b in out if a + b not in whole(entries)]
+
+
+def joined(runs_, whole_words):
+    """The words of runs_, joined where Griffith prints as one word what only gaps part in the reading: two to JOIN
+    words of one run whose signs together are a word of whole_words ("ḫm lol" is "ḫmlol" when the formula tables
+    print ḫmlol); and how many gaps that closed. A divider parts two runs, and is the stone's: it stays."""
+    out, closed = [], 0
+    for run in runs_:
+        i = 0
+        while i < len(run):
+            j = next((j for j in range(min(len(run), i + JOIN), i + 1, -1)
+                      if tuple(s for w in run[i:j] for s in w) in whole_words), i + 1)
+            out.append([s for w in run[i:j] for s in w])
+            closed += j - i - 1
+            i = j
+    return out, closed
 
 
 def divided(words, pairs):
@@ -130,6 +171,11 @@ def one_spelling(words):
 
 def spell(words):
     return " ".join("".join(CORPUS.get(s, s) for s in w) for w in words)
+
+
+def count(n, noun):
+    """'1 place', '3 places'."""
+    return f"{n} {noun}{'' if n == 1 else 's'}"
 
 
 def to_corpus(reading):
@@ -196,7 +242,8 @@ def rows(readings=None, refs=None, second=None):
                                      f"neither signs nor marks: {o['reading']!r}")
                 by_text[n][key].append(o)
                 by_text[n]["pack"] = pack.name
-    pairs = {n: phrases(entries(n[0], n[1], refs)) for n in by_text}
+    entries_of = {n: entries(n[0], n[1], refs) for n in by_text}
+    pairs = {n: phrases(es) for n, es in entries_of.items()}
     held = collections.Counter(p for ps in pairs.values() for p in ps)
     common = [p for p, k in held.items() if k >= EVERYWHERE]
     out = []
@@ -209,7 +256,10 @@ def rows(readings=None, refs=None, second=None):
         parts = checked if both is None else both      # read twice: the settled reading is the row's
         label = lambda o: f"{o['part']}: " if o.get("part") else ""
         std = " | ".join(label(o) + o["reading"].strip() for o in parts)
-        words, parted = divided([w for o in parts for w in words_of(o["reading"])], pairs[(site, no)] + common)
+        es = entries_of[(site, no)]
+        words, closed = joined([r for o in parts for r in runs(o["reading"])], whole(es, formula=True))
+        own = whole(es)                                # a pair this inscription prints as one word is not parted
+        words, parted = divided(words, pairs[(site, no)] + [(a, b) for a, b in common if a + b not in own])
         words, respelt = one_spelling(words)
         corpus = spell(words)
         sg = [s for o in parts for s in signs(o["reading"])]
@@ -226,10 +276,11 @@ def rows(readings=None, refs=None, second=None):
         if both is not None:
             took = collections.Counter(d.get("verdict") for d in decided)
             notes.append(f"Read a second time by another reader (second_reading/{pack2}): the two checked readings differed at "
-                         f"{len(decided)} places, which the second reader settled against the copy and the type, "
+                         f"{count(len(decided), 'place')}, which the second reader settled against the copy and the type, "
                          f"{took['first']} for the first reading, {took['second']} for the second, {took['other']} for neither and "
-                         f"{took['open']} left open; {sum(changed(a['reading'], b['reading']) for a, b in zip(checked, parts))} "
-                         f"signs of the first reader's row changed.")
+                         f"{took['open']} left open; "
+                         f"{count(sum(changed(a['reading'], b['reading']) for a, b in zip(checked, parts)), 'sign')} "
+                         f"of the first reader's row changed.")
         if len(parts) > 1:
             notes.append("Parts as labelled on the copy: " + "; ".join(
                 f"{o.get('part') or '(main)'}" + (f" ({', '.join(o['labels'])})" if o.get("labels") else "") for o in parts) + ".")
@@ -239,11 +290,13 @@ def rows(readings=None, refs=None, second=None):
         if t["unplaced"]:
             notes.append("Printed entries not found in the copy: " + "; ".join(
                 f"{u.get('reading', '')} ({u.get('source', '')})" for u in t["unplaced"]) + ".")
-        if parted or respelt:
-            notes.append("text_corpus differs from the reading: " + " and ".join(filter(None, [
-                parted and f"{parted} word {'boundary is' if parted == 1 else 'boundaries are'} Griffith's, from his formula tables",
-                respelt and f"{respelt} {'word' if respelt == 1 else 'words'} read slms {'is' if respelt == 1 else 'are'} written "
-                            f"slẖs, as Griffith's shalkhash"])) + ".")
+        uniform = [x for x in (
+            closed and f"{count(closed, 'gap')} between words {'is' if closed == 1 else 'are'} closed where his formula tables print one word",
+            parted and f"{parted} word {'boundary is' if parted == 1 else 'boundaries are'} Griffith's, from his formula tables",
+            respelt and f"{count(respelt, 'word')} read slms {'is' if respelt == 1 else 'are'} written slẖs, as Griffith's shalkhash") if x]
+        if uniform:
+            notes.append("text_corpus differs from the reading: " + (", ".join(uniform[:-1]) + " and " if uniform[1:] else "")
+                         + uniform[-1] + ".")
         notes += [o[k].strip() for k, objs in (("check_notes", checked), ("settled_notes", both or [])) for o in objs
                   if (o.get(k) or "").strip()]
         out.append({"source": SOURCE, "item": ITEM, "griffith_no": no if site == "Kar" else f"Sh{no}",

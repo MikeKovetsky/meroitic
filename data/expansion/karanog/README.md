@@ -8,8 +8,8 @@ Shablûl and Karanòg* (1911, public domain),
 ## 1. Answer first
 
 1. **All 151 inscriptions that have a hand copy are read:** Kar. 1 to 132 and Sh. 1 to 19, with 16,440 signs and
-   2,915 words (Griffith gives no copy of Sh. 20). They are in [`griffith_karanog.jsonl`](griffith_karanog.jsonl).
-   `src/expand.py` adds all 151 to the corpus as `corpus_v5`: 899 texts and 21,981 words, against 748 and
+   2,911 words (Griffith gives no copy of Sh. 20). They are in [`griffith_karanog.jsonl`](griffith_karanog.jsonl).
+   `src/expand.py` adds all 151 to the corpus as `corpus_v5`: 899 texts and 21,977 words, against 748 and
    19,066 in `corpus_v3`, which stays as it was. Its duplicate test used to hold back three short texts (Kar. 63,
    Kar. 66, Sh. 17) that share half their letter groups with an older text through the closing formulae; for
    these rows it now leaves out the groups of six letters that 20 or more corpus texts share, and finds no copy.
@@ -33,15 +33,20 @@ Shablûl and Karanòg* (1911, public domain),
 4. **What made the difference** is that Griffith printed most words of every inscription a second time, in clean
    type, in the same book. The check against those pages changed 2,405 of the 16,759 signs first read (14.4%; a
    lost sign counts as one).
-5. **Two readers agree on 97.7% of signs.** Eleven of the 53 pages (31 inscriptions) were read again by a second
-   reader who saw nothing of the first reading. After the check the second reading has 3,180 of the first
-   reading's 3,254 signs (97.7%): 97.0% on the seven most damaged pages and 99.1% on three pages drawn at random.
-   From the hand copies alone the two agree on 86.0%. The 56 places where they differed were then settled against
-   the copy and the type, which changed 26 signs of the first reader's rows (0.8%); section 6. This figure and the
-   97.7% of point 2 are two measures that happen to come out alike: this one says how far a second reader gets the
-   same signs, that one how far a reading matches a modern edition.
+5. **Two readers agree on 97.7% of signs on the eleven pages read twice, which gives 98.8% for all 53.** Eleven
+   of the 53 pages (31 inscriptions) were read again by a second reader who saw nothing of the first reading.
+   After the check the second reading has 3,180 of the first reading's 3,254 signs (97.7%): 97.0% on the seven
+   most damaged pages and 99.1% on three pages drawn at random. For the whole set that is 98.8%: the seven
+   damaged pages, all of them read twice, at their own rate, and the other 46 at the rate of the three drawn from
+   them, each weighted by its signs (2,061 and 14,376). The figure for the 46 rests on three pages and nine
+   differing places. From the hand copies alone the two agree on 86.0% on the eleven pages (88.3% for all 53).
+   The 56 places where they differed were then settled against the copy and the type, which changed 26 signs of
+   the first reader's rows (0.8%); section 6. The 97.7% here and the 97.7% of point 2 are two measures that
+   happen to come out alike: this one says how far a second reader gets the same signs, that one how far a
+   reading matches a modern edition.
 6. **The rows are uniform where Griffith decides:** the closing formulae are divided into words as his formula
-   tables divide them in every row, and the title `slẖs` has one spelling (section 5).
+   tables divide them, but for a few rows where the stone has a divider or the typed table and the reading differ
+   in a sign, and the title `slẖs` has one spelling (section 5).
 
 ## 2. The method
 
@@ -153,19 +158,34 @@ are places where Griffith's indexes disagree with each other and one of them agr
 1. **The closing formulae are divided as his formula tables divide them.** The stones often run the words of a
    formula together (`atomẖe`), and one reader kept that while another took the division from the type
    (`ato mẖe`). Where the formula tables print two words of an inscription's own formula apart and the reading
-   has them as one, the row parts them. A pair that the tables print apart for 20 inscriptions or more is parted
-   in every row: `ato mẖe` (97 inscriptions), `at mẖe` (83) and `mẖe psḫrkete` (21). This adds 141 word
-   boundaries in 77 rows; no row now has `atomẖe` or `atmẖe` (91 and 90 rows have the two words). The indexes are
-   not used for this, because there Griffith also sets endings apart from their words (`pesto l`), which is
-   analysis and not word division. A pair that he prints as one word anywhere for that inscription is left alone.
+   has them as one, the row parts them. A pair that the tables print apart for 5 inscriptions or more is parted
+   in every row (17 pairs, among them `ato mẖe` for 97 inscriptions, `at mẖe` for 83 and `mẖe psḫrkete` for
+   21), unless that inscription's own entries print it as one word. The other way round, where the formula tables
+   print as one word what the reading parts only at a gap or the end of a line (`ḫm lol`, where they print
+   `ḫmlol`), the row joins it. Together this adds 144 word boundaries in 77 rows and closes 7 gaps in 4 rows
+   (Kar. 9, 119, 132 and Sh. 7). No row now has `atomẖe` or `atmẖe`, nor the same with ḫ; 92 and 91 rows have
+   `ato mẖe` and `at mẖe`. The indexes are not used for this, because there Griffith also sets endings apart from
+   their words (`pesto l`), which is analysis and not word division.
 2. **The title `slẖs` has one spelling.** Two rows (Kar. 11 and Kar. 84, three words) had `slms`, where the hand's
    3-shaped signs cannot be told apart. Griffith's catalogue writes the title "shalkhash" thirteen times and never
-   with m, and Indexes B and C print ẖ, so these are written `slẖs` like the other rows.
+   with m, so these are written `slẖs` like the eleven other rows that have the whole title. His type is less
+   clear: as typed, Index A has `slms` and Indexes B and C `slẖs`, and of the readers who looked at the printed
+   strips, three saw ẖ in Index A and the reader of Kar. 11 saw m in Index C for that text.
 
 Each row whose `text_corpus` differs from its reading in this way says so in its notes, with the counts. What is
-not made uniform: word division outside the closing formulae (`yidotedikte` is one word in four rows and
-`yidote dikte` in two, as the copies have it), the count of lost signs in a hatched stretch, and `pqrl` against
-`pqorl`, which is Griffith's own variation.
+not made uniform:
+
+- formula words that the stone parts with a divider: `psoẖ : te` (Kar. 14 and 60), `m : ẖe` (Kar. 67),
+  `psoẖe : kete` (Kar. 91) and `psi : ḫrkete` (Kar. 97). Griffith prints them whole in his prose or another
+  entry, but a divider is the stone's, so it stays.
+- `yidotedikte`, a word of formulae C and E: one word in four rows (Kar. 125 has `idotedikte`) and `yidote dikte`
+  in two (Kar. 25 and 100). The tables print it as one word, but as typed with n (`yidotenikte`), so the join
+  finds no match. Four readers who looked at the printed strips saw d there, and one saw n.
+- Sh. 3 `atoẖme`, whose settled reading has ẖm where its table prints `mẖ(?)e`; and Kar. 83 and Sh. 2 `amẖe`
+  (the tables print `a[to] mẖe` and `a mẖe`): `a` and `mẖe` are four signs together, fewer than a pair needs
+  (five).
+- Word division outside the closing formulae, which follows each reader; the count of lost signs in a hatched
+  stretch; and `pqrl` against `pqorl`, which is Griffith's own variation.
 
 ## 6. Eleven pages read twice
 
@@ -203,21 +223,26 @@ at the copy and the type again at each, and gave a verdict:
 
 The evidence was the copy alone at 25 places, the type alone at 6 and both at 25. The settled readings
 (`settled.jsonl`, with `decisions.jsonl` for each place) are the rows of these 31 inscriptions. They differ from
-the first reader's checked readings in 26 of 3,254 signs (0.8%). One of the 26 is the disputed sign of the
-formula word `yidotedikte` in Kar. 100, d and not n, so that every row now has d.
+the first reader's checked readings in 26 of 3,254 signs (0.8%). One of the 26 lies outside the 56 places: in
+Kar. 43 the second reader changed to e an l that both readings have, and its notes, which the row carries, say
+why. Another is the disputed sign of the formula word `yidotedikte` in Kar. 100, d and not n, so that every row
+now has d.
 
 **What this says about the other 120 inscriptions.** Where two readers differed and the place could be decided,
 the first reader was wrong at 19 places of 45. On the three random pages the two readings differ at 9 places in
 948 signs: five went to the first reader, one to the second and three stayed open. So a second reading of an
 ordinary page would change few signs of a row; on a badly hatched page it changes more (on the seven damaged
-pages the readings differ at 45 places, of which 18 went against the first reader and 8 stayed open). It says
+pages the readings differ at 45 places, of which 18 went against the first reader and 8 stayed open). Weighted
+by page, the two readers would agree on about 98.8% of the signs of all 53 pages (section 1, point 5). It says
 nothing of signs that both readers get wrong in the same way.
 
 **The control shows that limit.** Against FHN the first reader has 128 of the 134 signs of Kar. 77 right, the
-second reader 127, and the settled reading 128: settling changed nothing there. Both readers differ from FHN in
-the same three signs, and each time they have what Griffith prints in type (`smede(?)li`, `ps(?)te`, `ḫblol`)
-where the modern edition reads otherwise (`Smedtli`, `ph̲te`, `ḫ*mlol`). Two readers who agree have recovered
-Griffith's reading, not necessarily the stone.
+second reader 127, and the settled reading 128: settling changed nothing there. Both readers differ from FHN at
+the same six places, and the second reader at one more. At five of the six they have what Griffith prints in
+type: three signs (`smede(?)li`, `ps(?)te`, `ḫblol`, where the modern edition reads `Smedtli`, `ph̲te`,
+`ḫ*mlol`), the d of `ḫdḫdiye`, and the lost sign of `ps[.]ḫrkete`. The sixth, an e that FHN has and both
+readings lack, is in a word with no printed entry for Kar. 77. Two readers who agree have recovered Griffith's
+reading, not necessarily the stone.
 
 ## 7. Limits
 
@@ -235,14 +260,16 @@ Griffith's reading, not necessarily the stone.
    pages, so an error in the typing that neither caught is in both readings. And the reader who settled the
    differences was the second reader itself, not a third: it decided for the first reading more often than for
    its own (26 against 17), but it was no neutral judge.
-6. **Word division outside the closing formulae follows each reader's judgment** (section 5).
+6. **Word division outside the closing formulae follows each reader's judgment,** and so does that of a formula
+   word in a few rows: where the stone has a divider, and `yidote dikte` in two rows (section 5).
 7. **Names are not masked** (no name list exists for these texts), as in the other Griffith files.
 8. **Shablûl rows will have no REM number** until the numbering is checked; Karanòg N is REM 0200 + N (FHN III).
 9. **Readers did not all check alike.** The brief says to look at the printed strip wherever an entry and the
    copy differ. Several readers report that they did so for the names table only and took index and formula
    entries as typed. The two signs that readers had settled differently are now the same in every row: d in the
-   formula word `yidotedikte` (the typed formula tables have n there, which the readers who looked at the strips
-   corrected) and ẖ in the title `slẖs` (sections 5 and 6).
+   formula word `yidotedikte` (the typed formula tables have n there; four readers who looked at the strips saw
+   d and one saw n, and the second reader of Kar. 100 settled it as d) and, in `text_corpus`, ẖ in the title
+   `slẖs` (sections 5 and 6).
 10. **Outages.** The machine lost its network three times during the second day's run. Every reader was cut off at
    least once and went on from its own record of the work; no reading was redone.
 11. **One line left out.** The first line of Kar. 113 is an Egyptian name in Demotic, which Griffith gives in

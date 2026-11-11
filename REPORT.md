@@ -215,30 +215,34 @@ After "are you giving up?", four more lines of attack, then data.
    closing formulae: 48 pages, typed by twelve readers, 3,550 entries). Each hand copy was read on its own and then
    checked against its entries. On the four texts FHN prints, fresh readers who could not see FHN reached 639 of
    654 signs (97.7%), and 582 (89.0%) before the check. All 151 inscriptions that have a hand copy are read:
-   16,440 signs and 2,915 words. The check changed 2,405 of the 16,759 signs first read (14.4%).
+   16,440 signs and 2,911 words. The check changed 2,405 of the 16,759 signs first read (14.4%).
 2. **Corpus** (`src/expand.py`): all 151 are new by the duplicate test, and `data/corpus_v5.jsonl` has 899
-   texts and 21,981 words (+15%); `corpus_v3` is unchanged. The test at first held back three short texts
+   texts and 21,977 words (+15%); `corpus_v3` is unchanged. The test at first held back three short texts
    (Kar. 63, Kar. 66, Sh. 17) that share their closing formulae with an older text; it now leaves the letter
    groups of the formulae out of the comparison for these rows.
 3. **A second reader** (the same evening; section 6 of the Karanòg page): eleven of the 53 pages, the seven most
    damaged, three drawn at random and the page of Kar. 77, were read again by a reader who saw nothing of the
    first reading. After the check the two agree on 3,180 of 3,254 signs (97.7%; 97.0% on the damaged pages, 99.1%
-   on the random ones; 86.0% from the hand copies alone). The second reader then settled the 56 differing places
-   against the copy and the type: 26 for the first reading, 17 for its own, 2 for neither, 11 left open. That
-   changed 26 signs of the rows (0.8%). On Kar. 77 both readers differ from FHN in the same three signs, each
-   time with what Griffith prints: two readers who agree have recovered Griffith's reading, not necessarily the
-   stone.
+   on the random ones; 86.0% from the hand copies alone). Weighted by the pages each group stands for, that is
+   98.8% for all 53 pages, the 46 ordinary ones resting on three pages. The second reader then settled the 56
+   differing places against the copy and the type: 26 for the first reading, 17 for its own, 2 for neither, 11
+   left open. That changed 26 signs of the rows (0.8%). On Kar. 77 both readers differ from FHN at the same six
+   places, at five of them with what Griffith prints: two readers who agree have recovered Griffith's reading,
+   not necessarily the stone.
 4. **Uniform rows** (section 5 of the same page): the closing formulae are divided into words as Griffith's
-   formula tables divide them (141 word boundaries added in 77 rows), and the title `slẖs` has one spelling.
+   formula tables divide them (144 word boundaries added in 77 rows, 7 gaps closed in 4), but for a few rows where
+   the stone has a divider or the typed table differs in a sign, and the title `slẖs` has one spelling.
 5. **The Meroitic Newsletter** (`data/expansion/newsletter_reading.md`, `src/mnl/`): 256 texts typed on 2026-11-09,
-   188 of them new (185 as first counted), kept locally because the articles are in copyright. 97.6% of signs on clean print, 94% to 97%
-   on the 1971 printout. Lined up with other editions of the same inscriptions, 96.2% of 9,571 signs agree; of 42
-   differences checked on the scans, 3 were typing errors.
+   188 of them new (185 as first counted), kept locally because the articles are in copyright. 97.6% of signs on
+   clean print, 94% to 97% on the 1971 printout. Lined up with other editions of the same inscriptions, 96.2% of
+   9,571 signs agree; of 42 differences checked on the scans, 3 were typing errors.
 6. **Tests on those texts** (section 5 of the same page): the two leads (above); a held-out grammar test (cutting
    new words into known stems and endings works no better than on made-up words; predictions from pairs of endings
    came true 53 times in about 1,600, where about 9.5 were expected); nine oracular decrees read blind (12 of 14
    published points of structure, 8 of 20 of meaning); Meeks's 1973 word list against Rilly 2003 (41 of 50 "best
    established" meanings unchanged, 8 of 66 doubtful ones).
-7. **Review:** four more full reviews, two of the Newsletter tools and two of the Karanòg scripts and rows. Among
+7. **Review:** five more full reviews, two of the Newsletter tools and three of the Karanòg scripts and rows. Among
    their fixes: a scorer that let extra signs go free (97.7%, not 98.2%), page numbers and footnote marks read as
-   inscription numbers, and an editor's "(sic)" counted as two signs.
+   inscription numbers, an editor's "(sic)" counted as two signs, and formula words that the uniform rows still
+   divided two ways (Griffith's one word left parted at a gap, and pairs he prints apart for five to nineteen
+   inscriptions left run together).
