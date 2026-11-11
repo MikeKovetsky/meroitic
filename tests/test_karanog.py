@@ -20,6 +20,7 @@ READINGS = ROOT / "data/expansion/karanog/readings"
 def test_number_takes_karanog_and_shablul_only():
     assert K.number("Kar. 47") == ("Kar", 47) and K.number(" Sh. 6 ") == ("Sh", 6)
     assert K.number("Inscr. 94") is None and K.number("Kar. 47 b") is None and K.number(None) is None
+    assert K.number("Kar. 39 b", part_ok=True) == ("Kar", 39) and K.number("Kar. 39 x", part_ok=True) is None
 
 
 def test_signs_are_counted_as_signs():
@@ -197,7 +198,7 @@ def test_reported_karanog_numbers():
     # data/expansion/karanog/README.md, sections 1, 2 and 4, and NEXT_STEPS.md, step 5
     rows = K.rows()
     words = sum(len([w for w in r["text_corpus"].split() if w.strip(".")]) for r in rows)
-    assert (len(rows), sum(r["signs"] for r in rows), words) == (19, 2170, 342)
+    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16441, 2775)
     objs = R.typed()
     per, _ = R.tables(objs)
     assert (len(objs), sum(o["typist"] == "QA" for o in objs), len(per), sum(map(len, per.values()))) == (2722, 4, 152, 3545)
@@ -208,7 +209,7 @@ def test_reported_karanog_numbers():
     count = lambda name: sum(len(K.load(p, name)) for p in packs)
     assert (sum(len(K.signs(o["reading"])) for o in first), sum(K.changed(a["reading"], b["reading"]) for a, b in zip(first, final)),
             sum(o["entries"] for o in final), count("kept_against_type.jsonl"), count("ref_corrections.jsonl"),
-            count("unplaced.jsonl")) == (2195, 237, 492, 33, 14, 39)
+            count("unplaced.jsonl")) == (16763, 2405, 3468, 230, 66, 84)
     # the measured accuracy, by the first test's measure (signs right = FHN's signs less the edit distance)
     toks, align, fhn = score_fhn.first_test(ROOT)
     total = lambda name: tuple(map(sum, zip(*[r[:2] for r in score_fhn.score(
@@ -218,14 +219,16 @@ def test_reported_karanog_numbers():
 
 
 def test_karanog_rows_are_new_to_the_corpus():
-    # README, section 1: none of the 19 is in corpus_v2 or the other Griffith files, by src/expand.py's own test
+    # README, section 1: by src/expand.py's own test all but three of the 151 are new to corpus_v2 and the other
+    # Griffith files (corpus_v3), and corpus_v5 has the size the README and NEXT_STEPS.md give
     needs("data/corpus_v2.jsonl")
     import expand
-    known = [expand.skeleton(r["text"]) for r in lines(ROOT / "data/corpus_v2.jsonl")]
-    known += [expand.skeleton(g["text"]) for g in expand.load_griffith() if not g["partial"]]
-    found = [r["griffith_no"] for r in K.rows()
-             if any(expand.present(expand.skeleton(" ".join(expand.words(r["text_corpus"]))), k) for k in known)]
-    assert found == [], found
+    v3 = lines(ROOT / "data/corpus_v2.jsonl")
+    v3 += expand.merge(v3, expand.load_griffith())[0]
+    added, dupes, partial = expand.merge(v3, expand.load_griffith("data/expansion/karanog"), among=False)
+    assert [g["id"] for g, _ in dupes] == ["G-karanog-63", "G-karanog-66", "G-karanog-Sh17"] and not partial, dupes
+    tok = lambda rows: sum(len(r["text"].split()) for r in rows)
+    assert (len(v3), tok(v3)) == (748, 19066) and (len(v3) + len(added), tok(v3) + tok(added)) == (896, 21818)
 
 
 def test_reported_typing_agreement():

@@ -315,6 +315,8 @@ def test_merge_keeps_whole_new_texts_once():
     added, dupes, partial = expand.merge(base, griffith)
     assert [g["id"] for g in added] == ["G2"] and [(g["id"], hit) for g, hit in dupes] == [("G1", "T1"), ("G3", "G2")]
     assert [g["id"] for g in partial] == ["G4"] and not any("partial" in g for g in added + partial)
+    added, dupes, _ = expand.merge(base, griffith, among=False)                       # new texts are not compared
+    assert [g["id"] for g in added] == ["G2", "G3"] and [(g["id"], hit) for g, hit in dupes] == [("G1", "T1")]
     assert all("partial" in g for g in griffith)            # the caller's rows are left as they were
 
 
@@ -364,7 +366,7 @@ def test_karanog_rows_make_corpus_v5_and_leave_corpus_v3_alone():
     printed = {"griffith_no": 2, "rem": "0002", "text_corpus": "apedemk qore lw amnp | tNyidmni pwrite"}
     karanog = [{"griffith_no": 47, "rem": "0247", "text_corpus": "qo xwitrorqo pesto akiNtelo"},
                {"griffith_no": "Sh4", "rem": "", "text_corpus": "apedemk qore lw amnp tNyidmni pwrite"},     # in corpus_v3
-               {"griffith_no": 48, "rem": "0248", "text_corpus": "qo xwitrorqo pesto akiNtelo"}]             # repeats Kar. 47
+               {"griffith_no": 48, "rem": "0248", "text_corpus": "qo xwitrorqo pesto akiNtelo"}]             # same words as Kar. 47
     old = expand.ROOT
     with tempfile.TemporaryDirectory() as d:
         d = Path(d)
@@ -382,12 +384,13 @@ def test_karanog_rows_make_corpus_v5_and_leave_corpus_v3_alone():
         finally:
             expand.ROOT = old
     assert [r["id"] for r in v3] == ["T1", "G-mi1a-2"]                   # the sub-folder is not read into corpus_v3
-    assert v5 == v3 + [{"id": "G-karanog-47", "src": "griffith", "rem": "0247", "copies": 1,
-                        "text": "qo xwitrorqo pesto akiNtelo"}]
+    # two Karanog numbers are two inscriptions, however alike: both go in; the one that is in corpus_v3 does not
+    assert v5 == v3 + [{"id": f"G-karanog-{n}", "src": "griffith", "rem": f"02{n}", "copies": 1,
+                        "text": "qo xwitrorqo pesto akiNtelo"} for n in (47, 48)]
     assert "corpus_v2 1 texts 9 words -> corpus_v3 2 texts 15 words (+67%)" in out
-    assert "karanog texts 3: partial 0 (0 words, left out); already present 2 (10 words); new 1 (4 words)" in out
-    assert "already present: G-karanog-Sh4=G-mi1a-2 G-karanog-48=G-karanog-47" in out            # in the file's order
-    assert out[-1] == "corpus_v3 2 texts 15 words -> corpus_v5 3 texts 19 words (+27%)"
+    assert "karanog texts 3: partial 0 (0 words, left out); already present 1 (6 words); new 2 (8 words)" in out
+    assert "already present: G-karanog-Sh4=G-mi1a-2" in out
+    assert out[-1] == "corpus_v3 2 texts 15 words -> corpus_v5 4 texts 23 words (+53%)"
 
 
 def test_reported_expansion_numbers():

@@ -7,6 +7,39 @@ The goal from here: an openly licensed and larger Meroitic corpus, an honest met
 scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
 looks like.
 
+## Where things stand (2026-11-10, evening)
+
+Done since this plan was written:
+
+1. **Step 5, Karanòg:** see its status below. The method passed its test and all 151 texts that have a hand copy
+   are read, checked and built.
+2. **Step 7, the Meroitic Newsletter:** 256 texts typed and kept locally; the method, the scripts and the measured
+   accuracy are public in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md).
+3. **Step 2, the two leads,** tested on texts they had never seen: the first got weaker, the second held
+   ([`REPORT.md`](REPORT.md)).
+4. **Four smaller tests** on the new texts (a held-out grammar test, the oracular decrees read blind, Meeks's 1973
+   word list against Rilly 2003, and a collation of editions): section 5 of the Newsletter page.
+5. **Step 1, outreach:** Otten has the email and the pull request; Rilly, Hallof (through Beinlich) and Smith were
+   asked on 2026-11-09 for typed texts. No reply had come by 2026-11-10.
+
+Next, in this order:
+
+1. **Publish Karanòg:** an independent review of the whole change, then the push.
+2. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
+3. **Make the Karanòg rows uniform:** word division follows each reader's judgment where a copy runs words
+   together, and readers settled a few disputed signs differently (d against n in one formula word, m against ẖ
+   in the title `slẖs`). Griffith's formula tables and his English forms of the names in the catalogue
+   (pp. 54–78) can settle most of these without a new reading.
+4. **A second reader for the weakest texts:** the 15 or so that are heavily hatched (Kar. 30, 36, 45, 102, 112,
+   Sh. 2, Sh. 17 and others), and the names from the first half of the names table, which was typed less well.
+5. **Step 10, the duplicate test:** it counts a short funerary text as present when another text shares its
+   formulae. Leave formula 6-grams out, as `src/mnl/mnl_dedupe.py` does.
+6. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
+7. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
+8. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
+   "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout; three
+   Newsletter texts wrongly marked as duplicates.
+
 ## A. Share
 
 1. **Write to Joshua Otten** (George Mason University) with an offer, not a complaint.
@@ -59,13 +92,19 @@ looks like.
      (`data/expansion/README.md` has the item ids).
    - Cost: about 1 hour for the test, 2 to 3 hours for 150 texts. Done: `griffith_karanog.jsonl`, merged by
      `src/expand.py`, with the measured accuracy in its notes.
-   - **Status, 2026-11-10: the test passed and 19 of the 152 texts are read**
-     ([`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). Fresh readers who could not see
-     FHN reached 97.7% of signs on the four test texts (89.0% from the hand copies alone). The check now uses
-     three printed sources, not one: the indexes, Griffith's table of names and parentage (pp. 87–94) and his
-     tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts. Left to do: the other
-     133 texts (46 page scans to fetch from archive.org, about 11 million subagent tokens), then the merge by
-     `src/expand.py`. The estimate above was too low: a page of hand copies takes a reader about an hour.
+   - **Status, 2026-11-10, evening: done for all 151 texts that have a hand copy**
+     ([`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). Griffith gives no copy of Sh. 20.
+     - The test passed: fresh readers who could not see FHN reached 97.7% of signs on the four test texts (89.0%
+       from the hand copies alone).
+     - The check uses three printed sources, not one: the indexes, Griffith's table of names and parentage
+       (pp. 87–94) and his tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts.
+     - The result: 16,441 signs and 2,775 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
+       placed 3,468 printed entries and changed 2,405 of the 16,763 signs first read (14.3%).
+     - `src/expand.py` merges them into a new `corpus_v5`: 896 texts and 21,818 words, against 748 and 19,066 in
+       `corpus_v3`, which stays as it was. Three short texts (Kar. 63, Kar. 66, Sh. 17) are held back as "already
+       present"; that is the formula overlap of step 10, not three real copies.
+     - The estimate above was too low: a page of hand copies takes a reader about an hour, and typing the
+       reference pages and reading all the copies cost about 14 million subagent tokens.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is

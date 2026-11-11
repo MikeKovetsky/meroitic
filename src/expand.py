@@ -16,7 +16,8 @@ each added row says src "griffith".
 
 data/expansion/karanog/griffith_karanog.jsonl holds the Karanog and Shablul texts, read from Griffith's hand
 copies and checked against his printed type (src/karanog.py). They go through the same test against corpus_v3
-and each other, and corpus_v3 with the new ones is written as data/corpus_v5.jsonl. corpus_v3 itself stays as
+(not against each other: each number is an inscription of its own, and funerary texts share most of their
+wording), and corpus_v3 with the new ones is written as data/corpus_v5.jsonl. corpus_v3 itself stays as
 it was, because the tests and counts made before the Karanog texts were read are stated against it. (The name
 corpus_v4 is taken: the author's local corpus_v3 plus the Meroitic Newsletter texts, which are in copyright.)
 
@@ -105,8 +106,11 @@ def load_griffith(folder="data/expansion"):
     return rows
 
 
-def merge(base, griffith):
-    """(added, already present as (row, id of the text it matches), partial): what corpus_v3 takes."""
+def merge(base, griffith, among=True):
+    """(added, already present as (row, id of the text it matches), partial): what the next corpus takes.
+
+    With among=False a new text is tested against base only, not against the new texts before it: for texts that
+    are known to be different inscriptions and share most of their wording (funerary formulae)."""
     refs = [(r["id"], skeleton(r["text"])) for r in base]
     added, dupes, partial = [], [], []
     for g in griffith:
@@ -120,7 +124,8 @@ def merge(base, griffith):
             dupes.append((g, hit))
         else:
             added.append(g)
-            refs.append((g["id"], s))
+            if among:
+                refs.append((g["id"], s))
     return added, dupes, partial
 
 
@@ -141,7 +146,8 @@ def main():
     if not karanog:
         return
     v3 = base + added
-    k_added, k_dupes, k_partial = merge(v3, karanog)
+    # each Karanog number is an inscription of its own: two of them that share their formulae are not one text
+    k_added, k_dupes, k_partial = merge(v3, karanog, among=False)
     with open(ROOT / "data/corpus_v5.jsonl", "w") as f:
         for r in v3 + k_added:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")

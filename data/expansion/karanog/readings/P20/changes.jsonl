@@ -1,0 +1,32 @@
+{"text": "Kar. 111", "part": "", "before": "s?sorlito", "after": "ssorlito", "entry": {"source": "Index A/B/C", "reading": "ssorlito"}, "reason": "type confirms s"}
+{"text": "Kar. 111", "part": "", "before": "yo?ke (2)s?i n", "after": "yoke(2)mln", "entry": {"source": "names table A", "reading": "yokemln : to"}, "reason": "3-shape is m, hooked 4 is l; type"}
+{"text": "Kar. 111", "part": "", "before": "(3)a?ḫmḫpste", "after": "(3)ato mḫ ps?te", "entry": {"source": "formula A (table)", "reading": "ato mḫ ps(?)te"}, "reason": "type reads to for the c-shaped second sign; Griffith's (?) on s"}
+{"text": "Kar. 111", "part": "", "before": "sr(4)spsilkl", "after": "sr(4)ẖ psilke", "entry": {"source": "formula F (table)", "reading": "s?rẖ(?) psilke"}, "reason": "3 with cross-stroke is ẖ; last S-shape e not l"}
+{"text": "Kar. 111", "part": "", "before": "at?t?m(5)ḫe?l?pt[.]a?", "after": "attẖ(5)ḫll pt[.]ke", "entry": {"source": "formula G (table)", "reading": "attẖḫll ptke"}, "reason": "3 is ẖ; the two S-shapes are l l; final S + long-tailed sign is k e, not a"}
+{"text": "Kar. 112", "part": "", "before": "(3)lo[.] a[.]r[.]m?[.](4)lito", "after": "(3)lo[.] a[.]r[.]m[.](4)lito", "entry": {"source": "Index A", "reading": "ar[o]me(?)lito"}, "reason": "m confirmed; hatched slots kept"}
+{"text": "Kar. 112", "part": "", "before": "bo?(5)nlts", "after": "w?o?m?(5)nits", "entry": {"source": "Index A/B", "reading": "womnitẖ / [w(?)om]nits"}, "reason": "first three signs are Griffith's restored wom; the 4-like sign is i"}
+{"text": "Kar. 112", "part": "", "before": "(6)yeseẖy?(7)r b?e", "after": "(6)yeseqo(7)r be", "entry": {"source": "Index A/C", "reading": "yeseqorbe"}, "reason": "3 + two strokes = q o; b confirmed"}
+{"text": "Kar. 112", "part": "", "before": "(8)yel?m(9)dlo", "after": "(8)yetm(9)dlo", "entry": {"source": "Index C", "reading": "yetmdelo"}, "reason": "sign after e is t without its dot"}
+{"text": "Kar. 112", "part": "", "before": "a m?[.] (10)telis", "after": "a m[.] (10)telis", "entry": {"source": "names table B", "reading": "am[.]telis"}, "reason": "m confirmed"}
+{"text": "Kar. 112", "part": "", "before": "woñ? (13)t", "after": "woñ (13)t", "entry": {"source": "names table C", "reading": "woñt"}, "reason": "ñ confirmed"}
+{"text": "Kar. 113", "part": "", "before": "b?p?b?w?ot? ob?o?ḫ? ", "after": "(dropped)", "entry": {"source": "names table A (person 1)", "reading": "P-šr-Mr? sy P-a·ṭe-'S (italic)"}, "reason": "Griffith gives line 1 as an Egyptian name in Demotic, not Meroitic"}
+{"text": "Kar. 113", "part": "", "before": "ses?l?dol?s?", "after": "semldolẖ?", "entry": {"source": "names table A (person 2), Index C", "reading": "semldolẖ?"}, "reason": "3 after se is m; last 3 is ẖ (with typist's doubt)"}
+{"text": "Kar. 114", "part": "", "before": "sns(3)ye", "after": "s?ns(3)ye", "entry": {"source": "names table A", "reading": "s(?)nsyeqowi"}, "reason": "Griffith's (?) on the first s"}
+{"text": "Kar. 114", "part": "", "before": "yetresli", "after": "yetremli", "entry": {"source": "names table B, Index C", "reading": "yetremli"}, "reason": "type prints ')' = m"}
+{"text": "Kar. 114", "part": "", "before": "tbiḫesye", "after": "tbiḫemye", "entry": {"source": "names table C", "reading": "tb?iḫemye"}, "reason": "type prints ')' = m"}
+{"text": "Kar. 115", "part": "", "before": "kpot(3)wl?qowi", "after": "mpot(3)we?qowi", "entry": {"source": "names table A, Index C", "reading": "mpotwe(?)qowi"}, "reason": "first sign m (smooth 3 with descender), not k; small sign is e (?)"}
+{"text": "Kar. 115", "part": "", "before": "(4)m?ẖ?", "after": "(4)ẖe", "entry": {"source": "formula A", "reading": "ato : ẖe : pisoẖekete"}, "reason": "Griffith: ẖe alone; the ')' is e"}
+{"text": "Kar. 115", "part": "", "before": "sol : k?[.](6)te", "after": "ẖol : k[.](6)te", "entry": {"source": "formula C", "reading": "ḫmlol : ẖolk[e(?)]te"}, "reason": "3 is ẖ; k confirmed"}
+{"text": "Kar. 116", "part": "", "before": "pesetol?", "after": "pesetol", "entry": {"source": "Index A/C", "reading": "pesetol"}, "reason": "l confirmed"}
+{"text": "Kar. 116", "part": "", "before": "snpt", "after": "mnpt", "entry": {"source": "Index A/B/C", "reading": "mnpt"}, "reason": "3-shape is m"}
+{"text": "Kar. 116", "part": "", "before": "sol[.]", "after": "ẖol[.]", "entry": {"source": "formula C", "reading": "ḫmlol : ẖol▒"}, "reason": "3 is ẖ"}
+{"text": "Kar. 117", "part": "", "before": "nlk[.](3)d", "after": "nlki(3)d", "entry": {"source": "names table A", "reading": "nlkidqowi"}, "reason": "hatched sign is i in the type"}
+{"text": "Kar. 117", "part": "", "before": "tes?eyli", "after": "temeyli", "entry": {"source": "names table C", "reading": "temeyli"}, "reason": "3 is m"}
+{"text": "Kar. 117", "part": "", "before": "ẖ?dipi?eoyi", "after": "kdipoloyi", "entry": {"source": "names table B", "reading": "kdipoloy?i"}, "reason": "first sign k; flagged stroke o; S-shape l"}
+{"text": "Kar. 117", "part": "", "before": "(5)ant : snpt", "after": "(5)ant : mnpt", "entry": {"source": "Index A/B", "reading": "ant mnpt : yetmdelowi"}, "reason": "3 is m"}
+{"text": "Kar. 117", "part": "", "before": "(6)snte : snpt", "after": "(6)snte : mnpt", "entry": {"source": "Index A/B", "reading": "snte : mnpt"}, "reason": "3 is m"}
+{"text": "Kar. 117", "part": "", "before": "(9)s?rtowi", "after": "(9)mrtowi", "entry": {"source": "Index A/B/C", "reading": "mlo : mrtowi"}, "reason": "3 is m"}
+{"text": "Kar. 117", "part": "", "before": "ato : mẖe", "after": "ato mẖe", "entry": {"source": "formula A (table)", "reading": "ato mẖe : psiẖ :"}, "reason": "copy re-checked: no divider between ato and mẖe"}
+{"text": "Kar. 117", "part": "", "before": "sol?(11)te", "after": "ẖol[.](11)te", "entry": {"source": "formula C", "reading": "ḫmlol : ẖolkte"}, "reason": "3 is ẖ; the hatching before te is a lost sign (Griffith's k)"}
+{"text": "Kar. 117", "part": "", "before": "nseñ?okel : ñ?ole", "after": "nsedokel : dole", "entry": {"source": "formula E", "reading": "nsedokel : dole : ẖolkte"}, "reason": "crossed sign is d"}
+{"text": "Kar. 117", "part": "", "before": "so(12)lkte?", "after": "ẖo(12)lkte", "entry": {"source": "formula E/C", "reading": "ẖolkte"}, "reason": "3 is ẖ; te confirmed"}

@@ -24,9 +24,10 @@ ACCURACY = ("Measured accuracy of the method, on the four Karanog texts that FHN
             "spout of 121): 639 of 654 signs right (97.7%) after the check, 582 (89.0%) from the hand copies alone.")
 
 
-def number(text):
-    """'Kar. 39' -> ('Kar', 39); None for anything else."""
-    m = re.fullmatch(r"\s*(Kar|Sh)\.\s*(\d+)\s*", text or "")
+def number(text, part_ok=False):
+    """'Kar. 39' -> ('Kar', 39); None for anything else. With part_ok, 'Kar. 39 b' is Kar. 39 too: a reader's
+    note on a place may name the part, a reading may not (its part has its own field)."""
+    m = re.fullmatch(r"\s*(Kar|Sh)\.\s*(\d+)\s*" + (r"(?:[a-d]\s*)?" if part_ok else ""), text or "")
     return (m.group(1), int(m.group(2))) if m else None
 
 
@@ -79,7 +80,7 @@ def rows(readings=None):
         for name, key in (("final.jsonl", "final"), ("copy_only.jsonl", "first"),
                           ("kept_against_type.jsonl", "kept"), ("unplaced.jsonl", "unplaced")):
             for o in load(pack, name):
-                n = number(o.get("text"))
+                n = number(o.get("text"), part_ok=key in ("kept", "unplaced"))
                 if n is None:                          # a reading that names no inscription would be lost
                     raise ValueError(f"{pack / name}: text {o.get('text')!r} is not 'Kar. N' or 'Sh. N' "
                                      f"(a part's letter goes in 'part')")
