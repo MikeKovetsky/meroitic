@@ -39,6 +39,11 @@ open). What is new, with the run behind each claim:
    were built from (held-out p = 0.49, `src/cognates_rules.py`); REM 1003 holds nothing checkable against the Roman
    war (as Rilly 2014); no "new" reading survived the adversarial check (`data/discovery/verification.md`).
 
+8. **About 60% of the running words can be translated today, word by word.** 13,292 of the 21,977 words of
+   `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
+   with near-copies counted once); every word is translated in 85 of 608 texts (Day four, below;
+   `data/discovery/coverage.md`).
+
 The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
 memory, `M_f0/1`); asked openly it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong) and said
 "unknown" to 30 (`F_recall`); a natural experiment on the 17 it could not recall got 13 right on the first guess
@@ -246,3 +251,29 @@ After "are you giving up?", four more lines of attack, then data.
    inscription numbers, an editor's "(sic)" counted as two signs, and formula words that the uniform rows still
    divided two ways (Griffith's one word left parted at a gap, and pairs he prints apart for five to nineteen
    inscriptions left run together).
+
+## Day four (2026-11-11): how much can be translated
+
+`src/coverage.py`, `tests/test_coverage.py`; the page is [`data/discovery/coverage.md`](data/discovery/coverage.md).
+
+1. **The figure.** Every word of the 899 texts was glossed from Rilly's 2003 lexicon. 13,292 of 21,977 words
+   (60.5%) are translated: 6,955 have an accepted meaning, 1,968 an accepted function, 4,106 are names and 263
+   numbers. 3,704 (16.9%) have a proposal only, 2,099 (9.6%) are known by their kind only, 2,620 (11.9%) are
+   unknown and 262 have a lost sign. With near-copies counted once (608 texts, 8,786 words) it is 59.9%.
+2. **By part:** the older corpus 59.3%, Karanòg and Shablûl 74.1%, Griffith's other volumes 41.9%. By different
+   words instead of running words: 1,105 of 3,160 (35.0%).
+3. **Texts:** every word is translated in 85 of the 608 texts and one piece is missing in 124 more; the median text
+   is 68.8% translated.
+4. **How:** the lookup alone translates 11,374 words (51.8%) and leaves 1,887 different words. Nineteen analysts
+   cut and classified those (2.63 million subagent tokens), which adds 1,918 words. No answer failed the script's
+   check that the parts spell the word and the entries exist.
+5. **Two analysts** on the 230 most frequent leftover words: the same level for 194 (84%), the same on translated
+   or not for 218 (95%). Of the 66 the first called translated the second did so for 58.
+6. **What blocks:** 1,292 pieces have no accepted meaning (345 with a proposal, 152 known by kind, 795 unknown);
+   624 have a kind. The verbs of the benedictions lead: `ḫr` stands in 116 texts and alone blocks 11, `ẖol` in 70.
+   100 pieces stand in five texts or more.
+7. **Checked against a later source:** of the 39 words Rilly's 2016 overview lists as translated, the typed lexicon
+   holds 34 at an accepted level; counting the other four it has (`pqr`, `wide`, `nbr`, `sr`) as accepted would
+   move 209 words, to 61.4%.
+8. **Limits:** word by word is not understanding: verb endings are mostly unexplained. No specialist has checked
+   a line, the analysts are one model family, and the lexicon is the state of 2003.

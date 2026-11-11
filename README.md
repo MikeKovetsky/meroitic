@@ -55,6 +55,12 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      ([`REPORT.md`](REPORT.md)). Where the key books are print-only, the model can't tell a
      rediscovery from a discovery.
    - The British Museum's Hamadab stela (REM 1003) holds nothing checkable against the Roman war, as Rilly said in 2014.
+8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
+   was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
+   name, a number or a word with an accepted meaning or function (59.9% with near-copies counted once), 17% have a
+   proposal only, 10% are known by their kind only and 12% are unknown. Every word is translated in 85 of 608
+   texts. The 1,292 pieces without an accepted meaning are listed with their kind and the texts they block
+   ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
 
 ## The question
 
@@ -219,6 +225,19 @@ on 2026-11-09 and 10, two of the Newsletter tools and three of the Karanòg scri
 things, a scorer that let extra signs go free, references misread as inscription numbers, an editor's "(sic)"
 counted as two signs, and formula words that the uniform rows still divided two ways. Tests: `tests/`.
 
+### 14. How much can be translated today (`src/coverage.py`)
+
+Every word of `corpus_v5` gets a gloss, a level and a confidence. A word that is a spelling of an entry of Rilly's
+lexicon takes that entry, alone or as a stem with a known ending; masked names, numbers and the names of Griffith's
+Karanòg tables are settled the same way. The 1,887 words this leaves went to nineteen independent analysts with
+their contexts and the lexicon as a table: each cut the word into parts (an entry, a name, a number or an unknown
+piece) and named its kind, and the script kept an answer only if its parts spell the word and its entries exist.
+The 230 most frequent were analysed twice; where the two differ in level, the lower stands. A word counts as
+translated when its parts are names, numbers or entries Rilly holds as established or probable. Near-copies of a
+text are counted once in the headline and in the ranking of what blocks most texts. The gloss file leans on the
+lexicon and is local-only; the counts, the brief and the list of unknown pieces are public
+([`data/discovery/coverage.md`](data/discovery/coverage.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -230,6 +249,7 @@ python3 -I src/expand.py
 python3 -I src/score.py --answers runs/answers
 python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
+python3 -I tests/test_coverage.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -238,17 +258,19 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Three things need files that are kept locally (Data, above), so they don't run from a clone:
+Four things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
   the review's fixes to `src/corpus.py`, so it can't be rebuilt);
 - `python3 -I src/lexique.py judged` (and the lexicon test's other commands) reads Rilly's lexicon;
-- `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences.
+- `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences;
+- `python3 -I src/coverage.py first` (and `build`) reads Rilly's lexicon, `corpus_v5` and the analysts' answers.
 
 ## Layout
 
-- `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge.
+- `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
+  and the translation coverage map (`coverage.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
   corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`), the word lists and Rilly's lexicon are local-only.

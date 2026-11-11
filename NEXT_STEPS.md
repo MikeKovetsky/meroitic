@@ -36,6 +36,11 @@ Done since this plan was written:
      are back (188 new) because `src/mnl/mnl_dedupe.py` now names the three pairs that the collation found to be
      different texts.
 
+7. **The translation coverage map** (2026-11-11, [`data/discovery/coverage.md`](data/discovery/coverage.md)):
+   every word of `corpus_v5` glossed from Rilly's lexicon. 60.5% of the running words are translated, 85 of 608
+   texts in full, and the 1,292 pieces without an accepted meaning are ranked by the texts they block, each with
+   its kind where the texts show one. Section E says what it is for.
+
 Next, in this order:
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
@@ -170,3 +175,23 @@ Next, in this order:
 
 15. **Cognates:** the sound-law engine found no signal on held-out words. A real test needs more independent NES
     vocabulary (culture and kin words are missing for most languages) rather than a better scorer.
+
+## E. Toward translation
+
+The coverage map (point 7 above) turns "closer to a translation" into a number and a list. What moves the number:
+
+16. **The verbs of the benedictions first.** `ḫr` and `ẖol` stand in 116 and 70 texts, and Rilly gives each a
+    proposal only. An accepted meaning for `ḫr` alone would complete 11 texts.
+17. **Egyptian parallels for the titles and the counted things** in the list: borrowed titles, the oracular
+    decrees (an Egyptian kind of text) and the Philae graffiti that name the same people in Demotic. Test the
+    method first on known loans held out.
+18. **A Nubian comparison that uses the kind of each word.** The list says what kind of word each unknown piece is
+    (title, kin term, verb, counted thing); matching it only against Nubian words of that kind cuts the chance
+    look-alikes that sank the cognate test (D 15). It needs a larger Nubian word list with culture and kin words:
+    Reinisch's *Die Nuba-Sprache* (1879) and Lepsius's *Nubische Grammatik* (1880) are public domain and on
+    archive.org, untyped.
+19. **More texts.** 947 of the 1,292 pieces stand in one text or none once near-copies are set aside, so context
+    cannot place them; Hallof's volume 7 (step 7 above) would triple the texts.
+20. **Left open by the map itself:** the lexicon is the state of 2003 (Rilly's 2016 list accepts `pqr`, `wide`,
+    `nbr` and `sr`, which it holds as proposals); 1,657 leftover words have one analyst only; a word with two
+    accepted entries is not disambiguated; and the older corpus divides words unevenly.
