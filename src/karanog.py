@@ -7,6 +7,19 @@ closing formulae (final.jsonl; the typed pages are in data/expansion/karanog/ref
 checked readings into rows shaped like the other data/expansion/griffith_*.jsonl files: one row per
 inscription, the reading as written (text_std) and in the corpus spelling (text_corpus).
 
+Eleven pages were then read again by a second reader in the same two steps (data/expansion/karanog/second_reading/
+<pack>/), who settled each place where the two checked readings differed against the copy and the type
+(settled.jsonl, decisions.jsonl; README.md, section 6). For those inscriptions the settled reading is the row's.
+
+text_std is the reading, untouched. text_corpus is made uniform in two ways, so that the same word is
+spelled and divided alike in every row (data/expansion/karanog/README.md, section 5):
+  - the closing formulae are divided as Griffith divides them: where his formula tables print two words of that
+    inscription's formula apart ("ato mẖe") and the reading has them run together as the stone does ("atomẖe"),
+    they are parted (divided()). A pair the tables print apart for 20 inscriptions or more is parted in every
+    row. His indexes are not used for this: there he also sets endings apart from their words ("pesto l"), which
+    is analysis, not word division;
+  - the title that two readers read slms is slẖs, as in the other rows: Griffith writes it shalkhash (ONE_SPELLING).
+
   python3 -I src/karanog.py            # writes the file and prints the counts
 """
 import collections, difflib, json, re
@@ -20,6 +33,13 @@ SIGN = re.compile(r"se|te|to|[aeioywbpmnñrlḫẖskqtd]")
 MARK = re.compile(r"\(\d+\)|\(sic\)")             # a line number of the stone; Griffith's "sic" by a sign
 CORPUS = {"s": "S", "se": "s", "ñ": "N", "ḫ": "x", "ẖ": "X"}        # README, the corpus spelling
 SITES = {"Kar": "Karanog", "Sh": "Shablul"}
+PAIR = 5        # two words that Griffith prints apart are parted in a reading when they have this many signs together
+EVERYWHERE = 20  # a pair that the formula tables print apart for this many inscriptions is parted in every row
+# A word that readers settled two ways, and the spelling text_corpus gives it: the start of the word as read, the
+# start as it is written. slẖs: 11 rows have ẖ and 2 have m, where the hand's 3-shaped signs cannot be told
+# apart; Griffith's catalogue writes the title "shalkhash" thirteen times and never with m, and Indexes B and C
+# print ẖ.
+ONE_SPELLING = {("s", "l", "m", "s"): ("s", "l", "ẖ", "s")}
 # measured by runs/work/karanog/score_fhn.py on the four texts FHN III prints (data/expansion/karanog/README.md)
 ACCURACY = ("Measured accuracy of the method, on the four Karanog texts that FHN III prints (Kar. 47, 77, 78 and the "
             "spout of 121): 639 of 654 signs right (97.7%) after the check, 582 (89.0%) from the hand copies alone.")
@@ -55,13 +75,66 @@ def signs(reading):
     return tokens(marked(reading))
 
 
-def to_corpus(reading):
-    """A reading in the corpus spelling: words apart by one space, a dot for each lost or restored sign.
+def words_of(reading):
+    """The words of a reading, each a list of signs. A divider and a gap both end a word; a line number inside a
+    word does not."""
+    return [w for w in (tokens(chunk) for chunk in re.split(r"[\s:]+", marked(reading))) if w]
 
-    A divider and a gap both end a word; a line number inside a word does not.
-    """
-    words = ("".join(CORPUS.get(s, s) for s in tokens(chunk)) for chunk in re.split(r"[\s:]+", marked(reading)))
-    return " ".join(w for w in words if w)
+
+def phrases(entries):
+    """The pairs of words that Griffith prints apart, side by side, in the formula tables' entries for one
+    inscription: [(first, second)], each a tuple of signs. An entry that holds brackets of Griffith's (a
+    restoration, an optional letter) gives none; his "(?)" and a typist's "?" are dropped. A pair that another
+    entry of the inscription prints as one word is no pair (a gap in the table's type, not a word end)."""
+    out, whole = [], set()
+    for e in entries:
+        text = e["reading"].replace("(?)", "").replace("?", "")
+        if e.get("compare_only") or re.search(r"[()\[\]]", text):
+            continue
+        ws = [tuple(w) for w in words_of(text)]
+        whole |= set(ws)
+        if e["source"].startswith("formula"):
+            out += [(a, b) for a, b in zip(ws, ws[1:]) if len(a) + len(b) >= PAIR and (a, b) not in out]
+    return [(a, b) for a, b in out if a + b not in whole]
+
+
+def divided(words, pairs):
+    """words, parted wherever the two words of a pair stand run together inside one of them, before the first and
+    between the two; and how many boundaries that added. "atomẖe" with the pair (ato, mẖe) is "ato mẖe", and
+    "psoẖatmḫe" with (at, mḫe) is "psoẖ at mḫe". Nothing is cut after the second word: it may be the start of a
+    longer one ("pisiḫrkte" where another part of the monument has "pisiḫr"). Words the reading already parts
+    stay as they are."""
+    out, added = [], 0
+    for w in words:
+        cuts = set()
+        for a, b in pairs:
+            both = list(a + b)
+            for i in range(len(w) - len(both) + 1):
+                if w[i:i + len(both)] == both:
+                    cuts |= {i, i + len(a)} - {0}
+        added += len(cuts)
+        edges = [0] + sorted(cuts) + [len(w)]
+        out += [w[i:j] for i, j in zip(edges, edges[1:])]
+    return out, added
+
+
+def one_spelling(words):
+    """words with each ONE_SPELLING start replaced; and how many words changed."""
+    out, n = [], 0
+    for w in words:
+        new = next((list(to) + w[len(frm):] for frm, to in ONE_SPELLING.items() if tuple(w[:len(frm)]) == frm), w)
+        n += new != w
+        out.append(new)
+    return out, n
+
+
+def spell(words):
+    return " ".join("".join(CORPUS.get(s, s) for s in w) for w in words)
+
+
+def to_corpus(reading):
+    """A reading in the corpus spelling: words apart by one space, a dot for each lost or restored sign."""
+    return spell(words_of(reading))
 
 
 def changed(before, after):
@@ -76,9 +149,36 @@ def load(pack, name):
     return [json.loads(l) for l in p.read_text().splitlines() if l.strip()] if p.exists() else []
 
 
-def rows(readings=None):
+def entries(site, no, refs):
+    """The printed entries of one inscription (refs/by_inscription/, written by src/karanog_refs.py), or []."""
+    p = refs / f"{site}_{no:03d}.jsonl"
+    return [json.loads(l) for l in p.read_text().splitlines() if l.strip()] if p.exists() else []
+
+
+def twice(second):
+    """{(site, number): (pack, the settled objects, the decisions)} for the inscriptions that a second reader read
+    as well and whose differences from the first reading it then settled (second_reading/<pack>/settled.jsonl,
+    decisions.jsonl; data/expansion/karanog/README.md, section 6)."""
+    out = {}
+    for pack in sorted(p for p in second.iterdir() if p.is_dir()) if second.exists() else []:
+        decisions = collections.defaultdict(list)
+        for d in load(pack, "decisions.jsonl"):
+            decisions[number(d["text"], part_ok=True)].append(d)
+        objs = collections.defaultdict(list)
+        for o in load(pack, "settled.jsonl"):
+            if number(o.get("text")) is None or stray(o["reading"]):
+                raise ValueError(f"{pack / 'settled.jsonl'}: {o.get('text')!r} names no inscription, or its reading holds "
+                                 f"{stray(o['reading'])!r}: {o['reading']!r}")
+            objs[number(o["text"])].append(o)
+        out.update({n: (pack.name, os, decisions[n]) for n, os in objs.items()})
+    return out
+
+
+def rows(readings=None, refs=None, second=None):
     """One row per inscription, in Griffith's order."""
     readings = readings or KAR / "readings"
+    refs = refs or KAR / "refs/by_inscription"
+    again = twice(second or KAR / "second_reading")
     by_text = collections.defaultdict(lambda: {"final": [], "first": [], "kept": [], "unplaced": [], "pack": ""})
     for pack in sorted(p for p in readings.iterdir() if p.is_dir()):
         final = load(pack, "final.jsonl")
@@ -96,24 +196,40 @@ def rows(readings=None):
                                      f"neither signs nor marks: {o['reading']!r}")
                 by_text[n][key].append(o)
                 by_text[n]["pack"] = pack.name
+    pairs = {n: phrases(entries(n[0], n[1], refs)) for n in by_text}
+    held = collections.Counter(p for ps in pairs.values() for p in ps)
+    common = [p for p, k in held.items() if k >= EVERYWHERE]
     out = []
     for (site, no) in sorted(by_text, key=lambda k: (k[0] != "Kar", k[1])):
         t = by_text[(site, no)]
-        parts, first = t["final"], t["first"]
+        checked, first = t["final"], t["first"]        # the first reader's reading after the check, and before it
+        pack2, both, decided = again.get((site, no), ("", None, []))
+        if both is not None and [(o["text"], o.get("part", "")) for o in both] != [(o["text"], o.get("part", "")) for o in checked]:
+            raise ValueError(f"second_reading/{pack2}/settled.jsonl: the parts of {site}. {no} are not the first reader's")
+        parts = checked if both is None else both      # read twice: the settled reading is the row's
         label = lambda o: f"{o['part']}: " if o.get("part") else ""
         std = " | ".join(label(o) + o["reading"].strip() for o in parts)
-        corpus = " ".join(filter(None, (to_corpus(o["reading"]) for o in parts)))
+        words, parted = divided([w for o in parts for w in words_of(o["reading"])], pairs[(site, no)] + common)
+        words, respelt = one_spelling(words)
+        corpus = spell(words)
         sg = [s for o in parts for s in signs(o["reading"])]
         leaf = re.search(r"(\d+)", parts[0].get("page", ""))
         page = f"p. {int(leaf.group(1)) - 15} (leaf n{leaf.group(1)})" if leaf else ""
         caption = re.sub(r"^\s*(Kar|Sh)\.\s*\d+\.?\s*", "", parts[0].get("caption", "")).strip()
-        paired = len(first) == len(parts) and all((a["text"], a.get("part")) == (b["text"], b.get("part"))
-                                                  for a, b in zip(first, parts))
-        diff = sum(changed(a["reading"], b["reading"]) for a, b in zip(first, parts)) if paired else None
+        paired = len(first) == len(checked) and all((a["text"], a.get("part")) == (b["text"], b.get("part"))
+                                                    for a, b in zip(first, checked))
+        diff = sum(changed(a["reading"], b["reading"]) for a, b in zip(first, checked)) if paired else None
         notes = [f"Read from Griffith's hand copy by Claude Opus 5.5 (pack {t['pack']}), then checked against the "
-                 f"words he prints in type (names table, Indexes A to C, formula tables): {sum(o.get('entries') or 0 for o in parts)} "
+                 f"words he prints in type (names table, Indexes A to C, formula tables): {sum(o.get('entries') or 0 for o in checked)} "
                  f"printed entries placed" + (f", {diff} signs changed by the check" if diff is not None else "") + ".",
                  ACCURACY]
+        if both is not None:
+            took = collections.Counter(d.get("verdict") for d in decided)
+            notes.append(f"Read a second time by another reader (second_reading/{pack2}): the two checked readings differed at "
+                         f"{len(decided)} places, which the second reader settled against the copy and the type, "
+                         f"{took['first']} for the first reading, {took['second']} for the second, {took['other']} for neither and "
+                         f"{took['open']} left open; {sum(changed(a['reading'], b['reading']) for a, b in zip(checked, parts))} "
+                         f"signs of the first reader's row changed.")
         if len(parts) > 1:
             notes.append("Parts as labelled on the copy: " + "; ".join(
                 f"{o.get('part') or '(main)'}" + (f" ({', '.join(o['labels'])})" if o.get("labels") else "") for o in parts) + ".")
@@ -123,7 +239,13 @@ def rows(readings=None):
         if t["unplaced"]:
             notes.append("Printed entries not found in the copy: " + "; ".join(
                 f"{u.get('reading', '')} ({u.get('source', '')})" for u in t["unplaced"]) + ".")
-        notes += [o["check_notes"].strip() for o in parts if (o.get("check_notes") or "").strip()]
+        if parted or respelt:
+            notes.append("text_corpus differs from the reading: " + " and ".join(filter(None, [
+                parted and f"{parted} word {'boundary is' if parted == 1 else 'boundaries are'} Griffith's, from his formula tables",
+                respelt and f"{respelt} {'word' if respelt == 1 else 'words'} read slms {'is' if respelt == 1 else 'are'} written "
+                            f"slẖs, as Griffith's shalkhash"])) + ".")
+        notes += [o[k].strip() for k, objs in (("check_notes", checked), ("settled_notes", both or [])) for o in objs
+                  if (o.get(k) or "").strip()]
         out.append({"source": SOURCE, "item": ITEM, "griffith_no": no if site == "Kar" else f"Sh{no}",
                     "rem": f"{200 + no:04d}" if site == "Kar" else "", "page": page, "object": caption,
                     "site": SITES[site], "text_std": std, "text_corpus": corpus,

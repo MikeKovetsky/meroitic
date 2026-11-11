@@ -360,6 +360,31 @@ def test_merge_writes_corpus_v3_from_the_griffith_files():
     assert out.splitlines()[-1] == "corpus_v2 1 texts 9 words -> corpus_v3 2 texts 15 words (+67%)"
 
 
+def test_own_letters_leave_the_formulae_out():
+    sk = expand.skeleton
+    formula = "ato mXe pSoXekete at mXe pSixrkete"
+    base = [{"id": f"T{k}", "text": f"woSi Soreyi qo NAME qowi {formula}"} for k in range(3)]
+    base.append({"id": "T9", "text": f"woSi Soreyi mlitrqide qowi tedxelowi {formula}"})
+    refs = [sk(r["text"]) for r in base]
+    common = expand.formulae(refs, common=3)
+    assert sk("atemxe")[:6] in common and "mlitrq" not in common          # held by 4 texts, and by 1
+    assert expand.formulae(refs, common=5) == set()
+    row = lambda rid, text: {"id": rid, "src": "griffith", "text": text, "partial": False}
+    short = row("K1", f"woSi Soreyi melikdiye qowi {formula}")           # another person, the same benedictions
+    copy = row("K2", f"woSi Soreyi mlitrqide qowi tedxelowi {formula}")  # T9 again
+    bare = row("K3", f"woSi Soreyi {formula}")                           # nothing but formulae
+    old = expand.COMMON
+    expand.COMMON = 3
+    try:
+        added, dupes, _ = expand.merge(base, [short, copy, bare], among=False)
+        assert [g["id"] for g in added] == [] and len(dupes) == 3             # by all letters, all three look present
+        added, dupes, _ = expand.merge(base, [short, copy, bare], among=False, own_letters=True)
+    finally:
+        expand.COMMON = old
+    assert [g["id"] for g in added] == ["K1", "K3"] and [(g["id"], hit) for g, hit in dupes] == [("K2", "T9")]
+    assert expand.share(sk(bare["text"]), refs[3], common) == 0.0          # no letters of its own: shares nothing
+
+
 def test_karanog_rows_make_corpus_v5_and_leave_corpus_v3_alone():
     jsonl = lambda *rows: "".join(json.dumps(r) + "\n" for r in rows)
     base = {"id": "T1", "src": "funerary", "copies": 3, "text": "woSi Soreyi NAME qowi NAME tedxelowi ato mXe pSoxte"}

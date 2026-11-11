@@ -17,17 +17,19 @@ each added row says src "griffith".
 data/expansion/karanog/griffith_karanog.jsonl holds the Karanog and Shablul texts, read from Griffith's hand
 copies and checked against his printed type (src/karanog.py). They go through the same test against corpus_v3
 (not against each other: each number is an inscription of its own, and funerary texts share most of their
-wording), and corpus_v3 with the new ones is written as data/corpus_v5.jsonl. corpus_v3 itself stays as
+wording; and on their own letters only, the formulae left out), and corpus_v3 with the new ones is written as
+data/corpus_v5.jsonl. corpus_v3 itself stays as
 it was, because the tests and counts made before the Karanog texts were read are stated against it. (The name
 corpus_v4 is taken: the author's local corpus_v3 plus the Meroitic Newsletter texts, which are in copyright.)
 
   python3 src/expand.py          # writes corpus_v3.jsonl and corpus_v5.jsonl and prints the gains
 """
-import fnmatch, json, re
+import collections, fnmatch, json, re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 N = 6
+COMMON = 20        # a 6-gram that this many corpus texts hold is formula, not a text's own letters (as src/mnl/mnl_dedupe.py)
 # rows whose notes say in other words that Griffith printed only part of the text: 50 one row of a formula
 # table, 58 the cartouche of (a) only, 59 and 60 their opening words or the parents' names in English only,
 # 128 only the groups his commentary quotes
@@ -64,9 +66,16 @@ def grams(s):
     return g or set(stretches(s))
 
 
-def share(s, ref):
-    """Share of s's grams that occur in the skeleton ref."""
-    gs, parts = grams(s), stretches(ref)
+def formulae(refs, common=COMMON):
+    """The 6-grams that `common` or more of the skeletons hold: the funerary formulae, which every epitaph shares."""
+    held = collections.Counter(g for ref in refs for g in {p[i:i + N] for p in stretches(ref) for i in range(len(p) - N + 1)})
+    return {g for g, n in held.items() if n >= common}
+
+
+def share(s, ref, skip=frozenset()):
+    """Share of s's grams that occur in the skeleton ref; grams in skip (the formulae) are left out of the count,
+    and a text with no other gram shares nothing."""
+    gs, parts = grams(s) - skip, stretches(ref)
     if not gs:
         return 0.0
     rg = {p[i:i + N] for p in parts for i in range(len(p) - N + 1)}
@@ -79,8 +88,8 @@ def spelled(s, ref):
     return "#" in ref and own * 2 >= len(s) - s.count("#") and fnmatch.fnmatchcase(s, ref.replace("#", "?*"))
 
 
-def present(s, ref):
-    return share(s, ref) >= 0.5 or spelled(s, ref)
+def present(s, ref, skip=frozenset()):
+    return share(s, ref, skip) >= 0.5 or spelled(s, ref)
 
 
 def load_griffith(folder="data/expansion"):
@@ -106,12 +115,15 @@ def load_griffith(folder="data/expansion"):
     return rows
 
 
-def merge(base, griffith, among=True):
+def merge(base, griffith, among=True, own_letters=False):
     """(added, already present as (row, id of the text it matches), partial): what the next corpus takes.
 
     With among=False a new text is tested against base only, not against the new texts before it: for texts that
-    are known to be different inscriptions and share most of their wording (funerary formulae)."""
+    are known to be different inscriptions and share most of their wording (funerary formulae). With
+    own_letters=True the test counts only a text's own letters: the 6-grams that COMMON or more texts of base hold
+    are left out, so that a short epitaph is not taken for a copy of another that ends in the same benedictions."""
     refs = [(r["id"], skeleton(r["text"])) for r in base]
+    skip = formulae([ref for _, ref in refs], COMMON) if own_letters else frozenset()
     added, dupes, partial = [], [], []
     for g in griffith:
         g = dict(g)
@@ -119,7 +131,7 @@ def merge(base, griffith, among=True):
             partial.append(g)
             continue
         s = skeleton(g["text"])
-        hit = next((rid for rid, ref in refs if present(s, ref)), None)
+        hit = next((rid for rid, ref in refs if present(s, ref, skip)), None)
         if hit:
             dupes.append((g, hit))
         else:
@@ -146,8 +158,9 @@ def main():
     if not karanog:
         return
     v3 = base + added
-    # each Karanog number is an inscription of its own: two of them that share their formulae are not one text
-    k_added, k_dupes, k_partial = merge(v3, karanog, among=False)
+    # each Karanog number is an inscription of its own: two of them that share their formulae are not one text,
+    # and one that shares only formulae with a corpus text is not a copy of it
+    k_added, k_dupes, k_partial = merge(v3, karanog, among=False, own_letters=True)
     with open(ROOT / "data/corpus_v5.jsonl", "w") as f:
         for r in v3 + k_added:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")

@@ -23,25 +23,27 @@ Done since this plan was written:
    asked on 2026-11-09 for typed texts. On the evening of 2026-11-10 the pull request had no comment yet, and
    Otten had added Meroitic–Egyptian word lists to his repository that day (his first commit there since 2024).
    The mailbox, checked the same evening, held no reply and no bounce from any of the four.
+6. **A quality pass on the Karanòg rows** (the same evening; sections 5 and 6 of the Karanòg page):
+   - **A second reader for eleven of the 53 pages:** the seven most damaged, three drawn at random and the page of
+     Kar. 77. After the check the two readers agree on 3,180 of 3,254 signs (97.7%; 97.0% on the damaged pages,
+     99.1% on the random ones). The 56 differing places were settled against the copy and the type, which changed
+     26 signs of the rows.
+   - **Uniform rows:** the closing formulae are divided into words as Griffith's formula tables divide them, in
+     every row, and the title `slẖs` has one spelling. The d or n of `yidotedikte` is d in every row now.
+   - **The duplicate test** no longer takes shared formulae for a copy: all 151 Karanòg texts are in `corpus_v5`,
+     and the three Newsletter texts wrongly marked as duplicates are back (188 new).
 
 Next, in this order:
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
-2. **Make the Karanòg rows uniform:** word division follows each reader's judgment where a copy runs words
-   together, and readers settled a few disputed signs differently (d against n in one formula word, m against ẖ
-   in the title `slẖs`). Griffith's formula tables and his English forms of the names in the catalogue
-   (pp. 54–78) can settle most of these without a new reading.
-3. **A second reader for the weakest texts:** the 15 or so that are heavily hatched (Kar. 30, 36, 45, 102, 112,
-   Sh. 2, Sh. 17 and others), and the names from the first half of the names table, which was typed less well.
-   The same reader can check the two printed entries that no reader saw, Kar. 17 `sotnkel` and Kar. 111
-   `tewideqowi` (section 7 of the Karanòg page).
-4. **Step 10, the duplicate test:** it counts a short funerary text as present when another text shares its
-   formulae. Leave formula 6-grams out, as `src/mnl/mnl_dedupe.py` does.
-5. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
-6. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
-7. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
-   "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout; three
-   Newsletter texts wrongly marked as duplicates.
+2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
+3. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
+4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
+   no reader (Kar. 17 `sotnkel` and Kar. 111 `tewideqowi`, section 9 of the Karanòg page); word division outside
+   the closing formulae still follows each reader; and the names table, the weakest of the typed pages, has a
+   second typing for its first page only.
+5. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
+   "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout.
 
 ## A. Share
 
@@ -101,11 +103,14 @@ Next, in this order:
        from the hand copies alone).
      - The check uses three printed sources, not one: the indexes, Griffith's table of names and parentage
        (pp. 87–94) and his tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts.
-     - The result: 16,437 signs and 2,775 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
+     - The result: 16,440 signs and 2,915 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
        placed 3,468 printed entries and changed 2,405 of the 16,759 signs first read (14.4%).
-     - `src/expand.py` merges them into a new `corpus_v5`: 896 texts and 21,818 words, against 748 and 19,066 in
-       `corpus_v3`, which stays as it was. Three short texts (Kar. 63, Kar. 66, Sh. 17) are held back as "already
-       present"; that is the formula overlap of step 10, not three real copies.
+     - `src/expand.py` merges all 151 into a new `corpus_v5`: 899 texts and 21,981 words, against 748 and 19,066
+       in `corpus_v3`, which stays as it was. Three short texts (Kar. 63, Kar. 66, Sh. 17) were held back at first
+       as "already present"; that was the formula overlap of step 10, and for these rows the test now leaves the
+       letter groups of the formulae out.
+     - Eleven pages were read a second time and the rows made uniform the same evening ("Where things stand",
+       point 6).
      - The estimate above was too low: a page of hand copies takes a reader about an hour, and typing the
        reference pages and reading all the copies cost about 14 million subagent tokens.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
@@ -128,7 +133,7 @@ Next, in this order:
      copyright: for private analysis unless the author agrees to more.
    - **Found since (2026-11-09):** the scans of the *Meroitic Newsletter* (issues 6 to 30, 1971 to 2003) print
      transliterations with REM numbers: Heyler's 1971 transcription of REM 1001 to 1110, and later editions from
-     Qasr Ibrim, Arminna, Shokan, Tabo, Sedeinga and Meroë. 256 texts were typed that day, 185 of them new to the
+     Qasr Ibrim, Arminna, Shokan, Tabo, Sedeinga and Meroë. 256 texts were typed that day, 188 of them new to the
      corpus. They are kept on the author's machine, for analysis and for checking readings like FHN: the articles
      are in copyright.
 8. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
@@ -137,7 +142,8 @@ Next, in this order:
    clean modern readings for private analysis only (FHN is "all rights reserved").
 10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
     same thing; and relax `src/expand.py`'s duplicate test, which counts a short label inside a longer text as
-    present (the +86 texts are a lower bound).
+    present (the +86 texts are a lower bound). For the Karanòg rows the test leaves the formulae out since
+    2026-11-10; the older Griffith rows are still tested the old way.
 11. **A glyph classifier for Griffith's type** (23 forms) would cut the cost of the remaining printed texts, not
     raise their accuracy (reading is already at 99.6% against the print); the 12 scored texts in
     `runs/work/griffith/` are its test set. Low priority.

@@ -2,7 +2,7 @@
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
 the data and the method: the public corpus turned out to be mostly copies, 303 inscriptions are now machine-readable
-under an open licence (234 of them missing from that corpus), the obvious way to blind a test of AI on an
+under an open licence (237 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
 ## What's new
@@ -21,7 +21,7 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    662 is lower than the paper's 871, probably because, with names masked, examples that differ only in a name count
    once; that was not checked. `src/pool.py` recovers the two swap pools (178 private and 11 royal names) from the
    data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
-2. **303 inscriptions are now machine-readable under an open licence, 234 of them missing from the public corpus.**
+2. **303 inscriptions are now machine-readable under an open licence, 237 of them missing from the public corpus.**
    The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
    the modern edition (99.6% against what Griffith printed), measured on 12 texts. The test covered cursive type
    only: about a third of the rows (48) are in hieroglyphic type, read with Griffith's sign table and not scored.
@@ -31,8 +31,9 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    [`LICENSE-DATA.md`](LICENSE-DATA.md)); 86 are not in the public corpus (+5% words). Griffith's hand copies it
    reads at 89% on their own, which is not enough. But his Karanòg volume prints most words of every inscription
    again in type, and with each reading checked against those pages it reaches 97.7% on the four texts that have a
-   modern edition: 151 more inscriptions ([`data/expansion/karanog/`](data/expansion/karanog/README.md)), 148 of
-   them not in the public corpus (+14% words). It can't read photographs of the stones (almost nothing).
+   modern edition: 151 more inscriptions ([`data/expansion/karanog/`](data/expansion/karanog/README.md)), none of
+   them in the public corpus (+15% words). A second reader of eleven of the 53 pages got 97.7% of the same signs.
+   It can't read photographs of the stones (almost nothing).
 3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
    re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
    scrambled corpus with neutral labels, it recognised the opening formula "O Isis, O Osiris" and read the script from
@@ -79,7 +80,7 @@ what can be rebuilt.
 | Otten & Anastasopoulos, ALP 2025, [Meroitic-Corpus](https://github.com/Joshua-Otten/Meroitic-Corpus) | the only machine-readable corpus (18,090 lines): example texts and phrases quoted in Millet 1968 and Rilly 2007, Lobban's word list and three royal narratives, padded with name-swapped copies | not committed (no licence stated): clone it to `data/otten/`; the cleaned corpora (`data/corpus*.jsonl`) and the task files that embed them (`runs/tasks/`) are rebuilt locally, not committed |
 | Griffith, *Meroitic Inscriptions* I–II (1911–12) and Garstang/Sayce/Griffith, *Meroë* (1911), archive.org | printed Meroitic type, public domain | `data/expansion/griffith_*.jsonl`, read by the model |
 | Griffith, *Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg* (1911), [archive.org](https://archive.org/details/karangmeroitic00grifuoft) | 151 funerary texts as hand copies, public domain; most of their words printed again in type in the same book | `data/expansion/karanog/`: the texts read by the model and checked against that type (`griffith_karanog.jsonl`), the 48 typed reference pages, and [how it was done and measured](data/expansion/karanog/README.md) |
-| *Meroitic Newsletter* 1–30 (1968–2003), scans at meroiticnewsletter.org | printed transliterations with REM numbers: 256 texts typed, 185 of them new to the corpus; the articles are in copyright | not committed: the method, the scripts (`src/mnl/`) and the measured accuracy are in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md) |
+| *Meroitic Newsletter* 1–30 (1968–2003), scans at meroiticnewsletter.org | printed transliterations with REM numbers: 256 texts typed, 188 of them new to the corpus; the articles are in copyright | not committed: the method, the scripts (`src/mnl/`) and the measured accuracy are in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md) |
 | Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/`. The lexicon test's answer key (`runs/keys/lexique_*.json`, `runs/lexique_judge.json`) gives 68 of its glosses in English paraphrase |
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
@@ -196,10 +197,13 @@ the same book prints most of their words a second time in type: a table of names
 closing formulae. Readers typed those 48 pages, read each hand copy on its own, and then checked the reading
 against the printed entries for that inscription (`src/karanog_refs.py`, `src/karanog.py`,
 [`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). On the four texts FHN prints, fresh
-readers who could not see FHN reached 97.7% of signs. `src/expand.py` tests the 151 texts against `corpus_v3`
-but not against each other, as they are separate inscriptions that share their formulae, and writes `corpus_v3`
-with the 148 it finds new as `data/corpus_v5.jsonl` (896 texts, 21,818 words); `corpus_v3` itself is left as it
-was.
+readers who could not see FHN reached 97.7% of signs. Eleven pages (31 inscriptions) were then read again by a
+second reader: the two checked readings agree on 97.7% of signs, and the 56 places where they differ were settled
+against the copy and the type. `src/karanog.py` divides the closing formulae into words as Griffith's tables do,
+in every row. `src/expand.py` tests the 151 texts against `corpus_v3` but not against each other, as they are
+separate inscriptions that share their formulae, and leaves the letter groups of those formulae out of the
+comparison. It finds all 151 new and writes them with `corpus_v3` as `data/corpus_v5.jsonl` (899 texts, 21,981
+words); `corpus_v3` itself is left as it was.
 
 ### 13. Review
 
@@ -228,7 +232,7 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
 `corpus_v2 662 texts 18075 words -> corpus_v3 748 texts 19066 words (+5%)` and ends
-`corpus_v3 748 texts 19066 words -> corpus_v5 896 texts 21818 words (+14%)`. The tests print `skip` for each
+`corpus_v3 748 texts 19066 words -> corpus_v5 899 texts 21981 words (+15%)`. The tests print `skip` for each
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 

@@ -1,5 +1,5 @@
-"""Checks for the Karanog scripts (src/karanog.py, src/karanog_refs.py, runs/work/karanog/score_fhn.py): on
-made-up readings and entries, and the numbers data/expansion/karanog/README.md reports.
+"""Checks for the Karanog scripts (src/karanog.py, src/karanog_refs.py, runs/work/karanog/score_fhn.py and
+compare_readers.py): on made-up readings and entries, and the numbers data/expansion/karanog/README.md reports.
 
   python3 -I tests/test_karanog.py
 """
@@ -11,7 +11,7 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests"), str(ROOT / "runs/work/ka
 
 import karanog as K   # noqa: E402
 import karanog_refs as R   # noqa: E402
-import compare_typings, score_fhn   # noqa: E402
+import compare_readers, compare_typings, score_fhn   # noqa: E402
 from local_only import needs, run   # noqa: E402
 
 READINGS = ROOT / "data/expansion/karanog/readings"
@@ -88,11 +88,11 @@ def test_rows_join_parts_and_skip_unchecked_packs():
         write(done, "kept_against_type.jsonl", [{"text": "Kar. 2", "copy": "sori", "type": "soreyi", "why": "clear"}])
         write(done, "unplaced.jsonl", [{"text": "Sh. 4", "source": "Index A", "reading": "pesto", "why": "lost"}])
         write(open_, "copy_only.jsonl", [dict(first[2], text="Kar. 9")])          # no final.jsonl: not checked yet
-        rows = K.rows(root)
+        rows = K.rows(root, root / "no_refs")
         # a reading that names no inscription stops the build: it would otherwise be left out without a word
         write(open_, "final.jsonl", [dict(final[2], text="Kar. 39 b")])
         try:
-            K.rows(root)
+            K.rows(root, root / "no_refs")
         except ValueError as e:
             assert "'Kar. 39 b'" in str(e) and "final.jsonl" in str(e), e
         else:
@@ -100,7 +100,7 @@ def test_rows_join_parts_and_skip_unchecked_packs():
         # so does a reading that holds something tokens() would drop, such as a note in brackets
         write(open_, "final.jsonl", [dict(final[2], text="Kar. 9", reading="qo : se (copy blurred)")])
         try:
-            K.rows(root)
+            K.rows(root, root / "no_refs")
         except ValueError as e:
             assert "Kar. 9" in str(e) and "(copy blurred)" in str(e) and "final.jsonl" in str(e), e
         else:
@@ -119,8 +119,131 @@ def test_rows_join_parts_and_skip_unchecked_packs():
     assert all(K.ACCURACY in r["notes"] for r in rows)                          # the measured accuracy, in each row
 
 
+def test_an_inscription_read_twice_takes_the_settled_reading():
+    obj = lambda text, reading, **more: dict({"text": text, "part": "", "page": "leaf_144", "caption": f"{text}. Stela", "labels": [],
+                                              "reading": reading}, **more)
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        pack, second = root / "readings/C01", root / "second/S144"
+        pack.mkdir(parents=True)
+        second.mkdir(parents=True)
+        write(pack, "copy_only.jsonl", [obj("Kar. 2", "wosi : kore"), obj("Kar. 3", "ato mḫe")])
+        write(pack, "final.jsonl", [obj("Kar. 2", "wosi : qore", entries=2, check_notes="names table"),
+                                    obj("Kar. 3", "ato mẖe", entries=1, check_notes="")])
+        # the second reader's own reading is not the row's: only what it settled is
+        write(second, "final.jsonl", [obj("Kar. 2", "wosi : qere", entries=2, check_notes="")])
+        once = K.rows(root / "readings", root / "no_refs", root / "second")
+        write(second, "settled.jsonl", [obj("Kar. 2", "wosi : qere?", entries=2, check_notes="names table", settled_notes="the e is hatched")])
+        write(second, "decisions.jsonl", [{"text": "Kar. 2", "first": "o", "second": "e", "chosen": "e?", "verdict": "second",
+                                           "evidence": "copy", "why": "a hook"}])
+        kar2, kar3 = K.rows(root / "readings", root / "no_refs", root / "second")
+        # settled parts that are not the first reader's parts stop the build, and so does a note inside a settled reading
+        for bad, word in ((obj("Kar. 2", "wosi", part="A"), "parts of Kar. 2"), (obj("Kar. 2", "wosi (blurred)"), "(blurred)")):
+            write(second, "settled.jsonl", [bad])
+            try:
+                K.rows(root / "readings", root / "no_refs", root / "second")
+            except ValueError as e:
+                assert word in str(e) and "settled.jsonl" in str(e), e
+            else:
+                raise AssertionError(f"a settled file with {word} was built without an error")
+    assert [r["text_std"] for r in once] == ["wosi : qore", "ato mẖe"] and "second time" not in once[0]["notes"]
+    assert kar2["text_std"] == "wosi : qere?" and kar2["text_corpus"] == "woSi qere" and kar2["uncertain"] == 1
+    # the note still counts the first reader's own check (k to q), then says what the second reading changed (o to e)
+    assert "2 printed entries placed, 1 signs changed by the check." in kar2["notes"]
+    assert ("(second_reading/S144): the two checked readings differed at 1 places" in kar2["notes"]
+            and "0 for the first reading, 1 for the second, 0 for neither and 0 left open; 1 signs of the first reader's row changed."
+            in kar2["notes"]), kar2["notes"]
+    assert "names table" in kar2["notes"] and "the e is hatched" in kar2["notes"]
+    assert kar3 == once[1] and "second time" not in kar3["notes"]               # read once: as before
+
+
+def test_two_readers_are_compared_sign_by_sign():
+    C = compare_readers
+    assert C.distance(list("wosi"), list("wosi")) == 0 and C.distance(list("wosi"), list("wesiy")) == 2
+    assert C.distance([], list("ab")) == 2 and C.distance(["te", "l"], ["t", "e", "l"]) == 2
+    # lost signs are counted apart: each reader estimates a hatched stretch in its own way
+    assert C.read(["wo[.][.]si", "(2)ato : m[.]"]) == (["w", "o", "s", "i", "a", "to", "m"], 3)
+    obj = lambda text, reading, part="": {"text": text, "part": part, "reading": reading}
+    first = {("Kar", 2): ["wosi : qore", "ato m[.]e"], ("Sh", 4): ["pesto"]}
+    with tempfile.TemporaryDirectory() as tmp:
+        second = Path(tmp)
+        (second / "S144").mkdir()
+        (second / "S190").mkdir()
+        (second / "pick.json").write_text(json.dumps({"damaged": ["144"], "random": ["190"], "control": []}))
+        write(second / "S144", "final.jsonl", [obj("Kar. 2", "wosi : (2)qere", "A"), obj("Kar. 2", "ato? m[.][.]ḫe", "B")])
+        write(second / "S190", "final.jsonl", [obj("Sh. 4", "pesto")])
+        rows = C.compare("final.jsonl", first, second)
+        diff = C.differences(first, second)
+        assert C.groups(second) == {"S144": "damaged", "S190": "random"}
+        write(second / "S190", "final.jsonl", [obj("Sh. 5", "pesto")])           # a text nobody read first
+        try:
+            C.compare("final.jsonl", first, second)
+        except ValueError as e:
+            assert "('Sh', 5) has no first reading" in str(e), e
+        else:
+            raise AssertionError("a second reading of a text with no first reading was compared")
+    # Kar. 2: 12 signs of the first reading (8 and 4; to is one sign); o read e, and a ḫ that only the second reader has,
+    # are 2 apart; a query mark, a line number and a part's letter are no difference; lost signs 1 and 2
+    assert rows == [("S144", ("Kar", 2), 12, 2, 1, 2), ("S190", ("Sh", 4), 4, 0, 0, 0)], rows
+    assert diff == [{"pack": "S144", "text": "Kar. 2", "first": "o", "second": "e", "before": "wosiq", "after": "reatome"},
+                    {"pack": "S144", "text": "Kar. 2", "first": "", "second": "ḫ", "before": "oreatom", "after": "e"}], diff
+
+
 def named(refs):
     return [(site, n, part, cf, flag) for site, n, part, cf, line, flag in R.parse_refs(refs)]
+
+
+def test_formula_words_are_divided_as_griffith_divides_them():
+    entry = lambda source, reading, **kw: dict({"source": source, "reading": reading, "compare_only": False}, **kw)
+    entries = [entry("formula A (table)", "ato m(?)ẖe : psoẖekete"),           # his query and the divider are no signs
+               entry("formula B (table)", "at mẖe psiḫr"),
+               entry("formula C (table)", "pisi plete"), entry("Index C", "pisiplete"),   # a gap in the type, not a word end
+               entry("formula E (table)", "ḫ[rp]ḫ dole"),                        # a restoration: no pair from this entry
+               entry("formula A (table)", "ab cd"),                              # four signs together: too short
+               entry("Index A", "pesto l akiñtelowi"),                           # an index sets endings apart: not used
+               entry("formula B (table)", "nsedokel dole", compare_only=True)]
+    w = lambda *words: [tuple(K.tokens(x)) for x in words]
+    pairs = K.phrases(entries)
+    assert pairs == [tuple(w("ato", "mẖe")), tuple(w("mẖe", "psoẖekete")), tuple(w("at", "mẖe")), tuple(w("mẖe", "psiḫr"))], pairs
+    show = lambda ws: " ".join("".join(x) for x in ws)
+    part = lambda text: (show(K.divided(K.words_of(text), pairs)[0]), K.divided(K.words_of(text), pairs)[1])
+    assert part("atomẖe psoẖekete") == ("ato mẖe psoẖekete", 1)
+    assert part("atomẖepsoẖekete atmẖe") == ("ato mẖe psoẖekete at mẖe", 3)
+    assert part("psoẖatmẖe") == ("psoẖ at mẖe", 2)                               # cut before the first word too
+    assert part("atmẖepsiḫrkte") == ("at mẖe psiḫrkte", 2)                       # but not after the second
+    assert part("ato mẖe pisiplete pestol") == ("ato mẖe pisiplete pestol", 0)   # already parted, or no pair
+    assert part("at[.]mẖe") == ("at.mẖe", 0)                                     # a lost sign between: not the pair
+
+
+def test_the_title_read_two_ways_is_spelled_one_way():
+    words = [K.tokens(x) for x in ("slms", "slmsleb", "slẖs", "islms", "slm")]
+    out, n = K.one_spelling(words)
+    assert (["".join(x) for x in out], n) == (["slẖs", "slẖsleb", "slẖs", "islms", "slm"], 2)
+    assert K.spell(out[:2]) == "SlXS SlXSleb"
+
+
+def test_rows_part_formula_words_and_leave_the_reading_alone():
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        (root / "C01").mkdir()
+        (root / "refs").mkdir()
+        obj = lambda n, reading: {"text": f"Kar. {n}", "part": "", "page": "leaf_144", "caption": f"Kar. {n}. Altar", "labels": [],
+                                  "reading": reading, "entries": 1, "check_notes": ""}
+        final = [obj(1, "wosi : slms : atomẖe : psoẖte"), obj(2, "wosi : atmẖe")]
+        write(root / "C01", "copy_only.jsonl", final)
+        write(root / "C01", "final.jsonl", final)
+        write(root / "refs", "Kar_001.jsonl", [{"source": "formula A (table)", "reading": "ato mẖe psoẖte", "compare_only": False}])
+        one, two = K.rows(root, root / "refs")
+        old = K.EVERYWHERE
+        K.EVERYWHERE = 1                      # a pair printed apart for one inscription is parted in every row
+        try:
+            everywhere = K.rows(root, root / "refs")[1]
+        finally:
+            K.EVERYWHERE = old
+    assert one["text_std"] == "wosi : slms : atomẖe : psoẖte" and one["text_corpus"] == "woSi SlXS ato mXe pSoXte"
+    assert "1 word boundary is Griffith's, from his formula tables and 1 word read slms is written slẖs" in one["notes"]
+    assert two["text_corpus"] == "woSi atmXe" and "text_corpus differs" not in two["notes"]     # no entry of its own
+    assert everywhere["text_corpus"] == "woSi atmXe"                                             # (at, mẖe) is no pair of Kar. 1
 
 
 def test_references_name_inscriptions():
@@ -216,7 +339,7 @@ def test_reported_karanog_numbers():
     # data/expansion/karanog/README.md, sections 1, 2 and 4, and NEXT_STEPS.md, step 5
     rows = K.rows()
     words = sum(len([w for w in r["text_corpus"].split() if w.strip(".")]) for r in rows)
-    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16437, 2775)
+    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16440, 2915)
     objs = R.typed()
     per, _ = R.tables(objs)
     assert (len(objs), sum(o["typist"] == "QA" for o in objs), len(per), sum(map(len, per.values()))) == (2722, 4, 152, 3550)
@@ -262,16 +385,58 @@ def test_reported_pack_table():
 
 
 def test_karanog_rows_are_new_to_the_corpus():
-    # README, section 1: by src/expand.py's own test all but three of the 151 are new to corpus_v2 and the other
-    # Griffith files (corpus_v3), and corpus_v5 has the size the README and NEXT_STEPS.md give
+    # README, section 1: by src/expand.py's test all 151 are new to corpus_v2 and the other Griffith files
+    # (corpus_v3), and corpus_v5 has the size the README and NEXT_STEPS.md give. Without the formulae left out
+    # (own_letters) the test takes three short texts for copies of older ones, as it did until 2026-11-10.
     needs("data/corpus_v2.jsonl")
     import expand
     v3 = lines(ROOT / "data/corpus_v2.jsonl")
     v3 += expand.merge(v3, expand.load_griffith())[0]
-    added, dupes, partial = expand.merge(v3, expand.load_griffith("data/expansion/karanog"), among=False)
-    assert [g["id"] for g, _ in dupes] == ["G-karanog-63", "G-karanog-66", "G-karanog-Sh17"] and not partial, dupes
+    karanog = expand.load_griffith("data/expansion/karanog")
+    added, dupes, partial = expand.merge(v3, karanog, among=False, own_letters=True)
+    assert len(added) == 151 and not dupes and not partial, dupes
     tok = lambda rows: sum(len(r["text"].split()) for r in rows)
-    assert (len(v3), tok(v3)) == (748, 19066) and (len(v3) + len(added), tok(v3) + tok(added)) == (896, 21818)
+    assert (len(v3), tok(v3)) == (748, 19066) and (len(v3) + len(added), tok(v3) + tok(added)) == (899, 21981)
+    assert [g["id"] for g, _ in expand.merge(v3, karanog, among=False)[1]] == ["G-karanog-63", "G-karanog-66", "G-karanog-Sh17"]
+
+
+def test_reported_second_reading_numbers():
+    # data/expansion/karanog/README.md, section 6: eleven pages read by two readers
+    C = compare_readers
+    group = C.groups()
+    assert sorted(group) == sorted(p.name for p in C.SECOND.iterdir() if p.is_dir()) and len(group) == 11
+    assert [sum(g == k for g in group.values()) for k in ("damaged", "random", "control")] == [7, 3, 1]
+
+    def totals(name):
+        out = {}
+        for pack, _, n, d, _, _ in C.compare(name):
+            for g in (group[pack], "all"):
+                right, signs = out.get(g, (0, 0))
+                out[g] = (right + n - d, signs + n)
+        return out
+    assert totals("copy_only.jsonl") == {"damaged": (1708, 2036), "random": (823, 926), "control": (226, 244), "all": (2757, 3206)}
+    assert totals("final.jsonl") == {"damaged": (1999, 2061), "random": (939, 948), "control": (242, 245), "all": (3180, 3254)}
+    rows = C.compare("final.jsonl")
+    assert len(rows) == 31 and sum(d == 0 for _, _, _, d, _, _ in rows) == 10
+    # the places where the two checked readings differ, and how the second reader settled them
+    diff = C.differences()
+    again = K.twice(C.SECOND)
+    decided = [d for _, _, ds in again.values() for d in ds]
+    assert len(diff) == len(decided) == 56 and len(again) == 31 and len({d["text"] for d in diff}) == 21
+    assert [sum(d["verdict"] == v for d in decided) for v in ("first", "second", "other", "open")] == [26, 17, 2, 11]
+    assert [sum(d["evidence"] == e for d in decided) for e in ("copy", "type", "both")] == [25, 6, 25]
+    by_group = lambda g: [sum(d["verdict"] == v for pack, _, ds in again.values() if group[pack] == g for d in ds)
+                          for v in ("first", "second", "other", "open")]
+    assert (by_group("damaged"), by_group("random"), by_group("control")) == ([19, 16, 2, 8], [5, 1, 0, 3], [2, 0, 0, 0])
+    # what settling changed in the first reader's rows, by the measure of the comparison
+    first, settled = C.first_readings("final.jsonl"), {n: [o["reading"] for o in objs] for n, (_, objs, _) in again.items()}
+    assert sum(C.distance(C.read(first[n])[0], C.read(parts)[0]) for n, parts in settled.items()) == 26
+    assert sum(len(C.read(first[n])[0]) for n in settled) == 3254
+    # the control, Kar. 77, against FHN: first reader, second reader, settled reading
+    toks, align, fhn = score_fhn.first_test(ROOT)
+    score = lambda path: score_fhn.score(toks, align, fhn, score_fhn.readings([path]))["0277"][:2]
+    assert [score(p) for p in (READINGS / "C14/final.jsonl", C.SECOND / "S171/final.jsonl", C.SECOND / "S171/settled.jsonl")] \
+        == [(134, 128), (134, 127), (134, 128)]
 
 
 def test_reported_typing_agreement():

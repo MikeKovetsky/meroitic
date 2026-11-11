@@ -40,13 +40,13 @@ def test_reported_newsletter_numbers():
     v3, v4 = words("data/corpus_v3.jsonl"), words(f"{MNL}/corpus_v4.jsonl")
     # the page, section 1
     assert (len(rs), Counter(r["kind"] for r in rs)) == (256, {"printout": 110, "print": 146})
-    assert (len(new), sum(r["words"] for r in new)) == (185, 2690)
+    assert (len(new), sum(r["words"] for r in new)) == (188, 2713)
     assert (sum(bool(r["in_corpus"]) for r in rs), sum(bool(r["same_as"]) and not r["in_corpus"] for r in rs),
-            sum(not r["in_corpus"] and not r["same_as"] and r["words"] == 0 for r in rs)) == (9, 11, 51)
-    assert (len(v4), sum(v4), len(v3), sum(v3)) == (933, 22531, 748, 19066)
+            sum(not r["in_corpus"] and not r["same_as"] and r["words"] == 0 for r in rs)) == (7, 10, 51)
+    assert (len(v4), sum(v4), len(v3), sum(v3)) == (936, 22556, 748, 19066)
     assert sum(bool(r["rem"]) for r in rs) == 218
     # sections 3 and 6
-    assert sum(r["file"] in TYPEWRITTEN for r in new) == 36
+    assert sum(r["file"] in TYPEWRITTEN for r in new) == 37
     assert sum("worked out from the order" in r["notes"] for r in rs if r["kind"] == "printout") == 59
     quick = [r for r in rs if "first test without enlarging" in r["notes"]]
     assert [r["rem"] for r in quick] == [str(n) for n in range(1042, 1049)]

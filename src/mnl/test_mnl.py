@@ -242,6 +242,25 @@ class Editions(unittest.TestCase):
         D.editions(rows, ["", "", ""])
         self.assertEqual([r["same_as"] for r in rows], ["REM 1361A and the rest of that edition (Meroitic Newsletter (2002))", "", ""])
 
+    def test_a_pair_looked_at_and_found_to_be_two_inscriptions_stays_two(self):
+        # one number read on the page, one worked out from the order: the test alone would take them for one text
+        pair = lambda a, b: [row(f"REM {a}", 1971, a, "MeroNews6", NAME, kind="printout", idents=(a,)),
+                             row(f"REM {b}", 1971, b, "MeroNews6", NAME + ["ghijkl"], kind="printout", idents=(f"~{b}",), words=9)]
+        rows = pair("2010", "2011")
+        D.editions(rows, ["", ""])
+        self.assertEqual(rows[0]["same_as"], "REM 2011 (Meroitic Newsletter (1971))")
+        for a, b in (("1051", "1054"), ("1059", "1073")):
+            rows = pair(a, b)
+            D.editions(rows, ["", ""])
+            self.assertEqual([r["same_as"] for r in rows], ["", ""])
+
+    def test_a_corpus_text_a_row_is_known_not_to_be_is_passed_over(self):
+        refs = [("T0792", set(NAME)), ("T0001", set(NAME[:2]))]
+        self.assertEqual(D.best_match(row("REM 2012", 1977, "2012", "MeroNews18", NAME), refs), (1.0, "T0792"))
+        share, rid = D.best_match(row("REM 1085", 1977, "1085", "MeroNews18", NAME), refs)
+        self.assertEqual((round(share, 2), rid), (0.33, "T0001"))
+        self.assertEqual(D.best_match(row("REM 1085", 1977, "1085", "MeroNews18", NAME), refs[:1]), (0.0, ""))
+
     def test_an_inscription_with_one_edition_in_the_corpus_is_in_the_corpus(self):
         rows = [row("REM 2008", 1971, "2008", "MeroNews6", NAME, in_corpus="T0001"), row("REM 2008", 1977, "2008", "MeroNews18", NAME)]
         D.editions(rows, ["", ""])

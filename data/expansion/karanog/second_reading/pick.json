@@ -1,0 +1,5 @@
+{"damaged": ["153", "156", "159", "160", "173", "180", "190"],
+ "random": ["157", "167", "192"],
+ "control": ["171"],
+ "seed": 20261110,
+ "how": "damaged: the seven pages (leaves of the archive.org scan) with the most lost signs and query marks in the rows of 2026-11-10; random: three of the other 46 pages, drawn with Python's random.Random(20261110).sample over the sorted leaf numbers; control: the page of Kar. 77, which FHN III prints, added to see whether settling the two readings makes a row better"}

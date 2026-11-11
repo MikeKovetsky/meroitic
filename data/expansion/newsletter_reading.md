@@ -12,9 +12,11 @@ judged.
 1. **256 texts were typed** from the scans: 110 from Heyler's 1971 computer printout of REM 1001 to 1110
    (Newsletter 6) and 146 from the printed issues of 1977 to 2003 (Qasr Ibrim, Arminna, Shokan, Tabo, Sedeinga,
    Meroë and others).
-2. **185 are new to the corpus**, 2,690 whole words. 9 were already in it, 11 are a second edition of another
-   typed text, and 51 hold no whole word. With them the local corpus has 933 texts and 22,531 words, against
-   748 and 19,066 in `corpus_v3`.
+2. **188 are new to the corpus**, 2,713 whole words. 7 were already in it, 10 are a second edition of another
+   typed text, and 51 hold no whole word. With them the local corpus has 936 texts and 22,556 words, against
+   748 and 19,066 in `corpus_v3`. The first count, on 2026-11-09, was 185: the duplicate check had joined three
+   texts to texts they are not (section 6, item 8). The tests of section 5 and the test of the two leads ran on
+   those 185.
 3. **Measured accuracy:** 97.6% of signs on clean print and 94% to 97% on the 1971 printout, against other
    editions of the same inscriptions (section 3). A later check on the scans found that most of that gap is the
    editions' own disagreement: 0 of 21 checked differences in print and 3 of 21 in the printout were typing
@@ -77,7 +79,7 @@ against Otten's FHN file once the round letters are settled; `--quick` for the q
 - The Abratoye stela (REM 1333, Newsletter 28) was typed twice independently: the 1,293 characters agree when
   the two h signs count as one letter. The first typing wrote every h sign alike, so it does not check which
   h sign the second typing chose (25 ḫ and 33 ẖ).
-- Not tested: the typewritten issues of 1977 to 1999 (18, 21, 22, 25, 26), which hold 36 of the new texts.
+- Not tested: the typewritten issues of 1977 to 1999 (18, 21, 22, 25, 26), which hold 37 of the new texts.
 
 ## 4. Editions compared, and how much of the difference is ours
 
@@ -99,6 +101,8 @@ pairs, 9,571 signs.
 Limits of this check: one reader looked at the scans; the printout figure rests on 21 places.
 
 ## 5. What the new texts were used for
+
+These tests ran on the 185 texts of the first count.
 
 - **Two leads tested out of sample** ([`../../REPORT.md`](../../REPORT.md), "Leads 1 and 2 on texts they had
   never seen").
@@ -129,6 +133,7 @@ Limits of this check: one reader looked at the scans; the printout figure rests 
 6. Names are not masked in the new texts, unlike the older corpus, so word counts are not like for like.
 7. Known faults not yet fixed: tally strokes read as numbers in six printout texts, a line label read as a
    number in REM 1019 and REM 1090, a lost last letter in REM 1062, and the three faint-G places of section 4.
-8. The duplicate check joined three texts to texts they are not: the collation of section 4 found that REM 1051
-   and REM 1054, and REM 1059 and REM 1073, are two objects each, and that REM 1085 is not corpus text T0792. So
-   three texts counted as second editions or as already in the corpus are new.
+8. The duplicate check had joined three texts to texts they are not: the collation of section 4 found that REM
+   1051 and REM 1054, and REM 1059 and REM 1073, are two objects each, and that REM 1085 is not corpus text T0792.
+   Since 2026-11-10 `src/mnl/mnl_dedupe.py` names these three pairs as exceptions, and the three texts count as
+   new (188, not 185). The files of the first count are kept beside the new ones.

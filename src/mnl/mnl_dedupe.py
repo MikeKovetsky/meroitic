@@ -17,7 +17,8 @@ Fields added to each row:
               another edition of the same inscription ("<corpus id> (as <row id>, <source>)"), or ""
   share       the row's own share
   same_as     the row kept for this inscription when it is printed more than once, or "". Two rows whose
-              pages give two different REM numbers are two inscriptions, however alike their texts.
+              pages give two different REM numbers are two inscriptions, however alike their texts, and so
+              are the pairs in TWO_INSCRIPTIONS.
   new         true when in_corpus and same_as are empty and the row has at least one whole word
 """
 import json, re, sys
@@ -51,6 +52,21 @@ def page_rem(r):
 # text that Newsletter 29 edits as REM 1041A-B and REM 1361A-D.
 RENUMBERED = {"1041": "1361"}
 
+# Texts that the tests below take for one and that are not. Each was looked at in the collation of 2026-11-10
+# (data/expansion/newsletter_reading.md, section 4): two objects that open with the same Apedemak formula (REM 1051
+# and 1054), two epitaphs with the same invocation and benedictions, ten pages apart in the printout (REM 1059 and
+# 1073), and a short epitaph whose benedictions, in the same spelling, end a long corpus text of other people
+# (REM 1085 and corpus text T0792, which is line 1213 of Millet's examples).
+TWO_INSCRIPTIONS = {frozenset(("1051", "1054")), frozenset(("1059", "1073"))}
+NOT_THE_CORPUS_TEXT = {"1085": {"T0792", "Millet's examples, line 1213"}}     # the corpus text and its source line
+
+
+def best_match(r, refs):
+    """(share, id) of the reference that holds most of the row's distinctive 6-grams ("_g"); a corpus text the row
+    is known not to be is passed over."""
+    apart = NOT_THE_CORPUS_TEXT.get(r["rem"][:4], ())
+    return max(((len(r["_g"] & gs) / len(r["_g"]), rid) for rid, gs in refs if rid not in apart), default=(0.0, ""))
+
 
 def editions(rows, skeletons, formulae=frozenset()):
     """Mark each row printed more than once (same_as): keep the later issue, then the longer text, except where
@@ -73,6 +89,8 @@ def editions(rows, skeletons, formulae=frozenset()):
             o = rows[k]
             if page_rem(r) and page_rem(o) and page_rem(r) != page_rem(o):
                 continue                                   # two numbers on the pages: two inscriptions
+            if frozenset((r["rem"][:4], o["rem"][:4])) in TWO_INSCRIPTIONS:
+                continue                                   # looked at: two inscriptions
             shared = len(own[i] & own[k])
             a = shared / len(own[i]) if own[i] else 0
             b = shared / len(own[k]) if own[k] else 0
@@ -126,7 +144,7 @@ def main():
         r["tested"] = len(r["_g"]) >= MIN
         r["in_corpus"], r["share"] = "", 0.0
         if r["tested"]:
-            share, rid = max((len(r["_g"] & gs) / len(r["_g"]), rid) for rid, gs in refs)
+            share, rid = best_match(r, refs)
             r["share"] = round(share, 2)
             if share >= 0.5:
                 r["in_corpus"] = rid

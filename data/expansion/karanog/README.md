@@ -7,12 +7,12 @@ Shablûl and Karanòg* (1911, public domain),
 
 ## 1. Answer first
 
-1. **All 151 inscriptions that have a hand copy are read:** Kar. 1 to 132 and Sh. 1 to 19, with 16,437 signs and
-   2,775 words (Griffith gives no copy of Sh. 20). They are in [`griffith_karanog.jsonl`](griffith_karanog.jsonl).
-   `src/expand.py` adds 148 of them to the corpus as `corpus_v5`: 896 texts and 21,818 words, against 748 and
-   19,066 in `corpus_v3`, which stays as it was. It holds back three short texts (Kar. 63, Kar. 66, Sh. 17) as
-   already present; they are not copies, they share half their letter groups with an older text through the
-   formulae (`NEXT_STEPS.md`, step 10).
+1. **All 151 inscriptions that have a hand copy are read:** Kar. 1 to 132 and Sh. 1 to 19, with 16,440 signs and
+   2,915 words (Griffith gives no copy of Sh. 20). They are in [`griffith_karanog.jsonl`](griffith_karanog.jsonl).
+   `src/expand.py` adds all 151 to the corpus as `corpus_v5`: 899 texts and 21,981 words, against 748 and
+   19,066 in `corpus_v3`, which stays as it was. Its duplicate test used to hold back three short texts (Kar. 63,
+   Kar. 66, Sh. 17) that share half their letter groups with an older text through the closing formulae; for
+   these rows it now leaves out the groups of six letters that 20 or more corpus texts share, and finds no copy.
 2. **Measured accuracy: 97.7% of signs** on the four Karanòg texts that FHN III prints (Kar. 47, 77, 78 and the
    spout of 121), read by fresh readers who could not see FHN. From the hand copies alone the same readers had
    89.0%, as the first test's single reader had 88.8%. The bar set in `NEXT_STEPS.md` was 95%. The measure is the
@@ -33,6 +33,15 @@ Shablûl and Karanòg* (1911, public domain),
 4. **What made the difference** is that Griffith printed most words of every inscription a second time, in clean
    type, in the same book. The check against those pages changed 2,405 of the 16,759 signs first read (14.4%; a
    lost sign counts as one).
+5. **Two readers agree on 97.7% of signs.** Eleven of the 53 pages (31 inscriptions) were read again by a second
+   reader who saw nothing of the first reading. After the check the second reading has 3,180 of the first
+   reading's 3,254 signs (97.7%): 97.0% on the seven most damaged pages and 99.1% on three pages drawn at random.
+   From the hand copies alone the two agree on 86.0%. The 56 places where they differed were then settled against
+   the copy and the type, which changed 26 signs of the first reader's rows (0.8%); section 6. This figure and the
+   97.7% of point 2 are two measures that happen to come out alike: this one says how far a second reader gets the
+   same signs, that one how far a reading matches a modern edition.
+6. **The rows are uniform where Griffith decides:** the closing formulae are divided into words as his formula
+   tables divide them in every row, and the title `slẖs` has one spelling (section 5).
 
 ## 2. The method
 
@@ -63,8 +72,8 @@ book print their words in Meroitic type, each with the number of the inscription
    kept and the place is listed ([`readings/BRIEF_step2.md`](readings/BRIEF_step2.md)).
 4. **The rows.** `src/karanog.py` turns the checked readings into rows like the other
    `data/expansion/griffith_*.jsonl` files: `text_std` as read (with line numbers, `?`, `[.]` and Griffith's
-   `(sic)`), `text_corpus` in the corpus spelling, and notes that say what the check did and give the measured
-   accuracy.
+   `(sic)`), `text_corpus` in the corpus spelling (section 5), and notes that say what the check did and give the
+   measured accuracy. For the 31 inscriptions read twice the row holds the settled reading (section 6).
 
 Blindness: every reader worked in a folder of its own and was told to open nothing else and not to use the web.
 FHN's texts were on the machine and are in this repo; nothing but the instruction kept a reader from them.
@@ -136,7 +145,81 @@ k, e against l, te against o + l, and d against ñ. The 230 places where the cop
 divider the type leaves out, `-lo` in the copy where an index prints `-lowi`, `pqorl` against `pqrl`. Several
 are places where Griffith's indexes disagree with each other and one of them agrees with the copy.
 
-## 5. Limits
+## 5. One word division and one spelling
+
+`text_std` is the reading as the reader wrote it and is never changed. `text_corpus` is made uniform by
+`src/karanog.py` in two things that Griffith himself decides:
+
+1. **The closing formulae are divided as his formula tables divide them.** The stones often run the words of a
+   formula together (`atomẖe`), and one reader kept that while another took the division from the type
+   (`ato mẖe`). Where the formula tables print two words of an inscription's own formula apart and the reading
+   has them as one, the row parts them. A pair that the tables print apart for 20 inscriptions or more is parted
+   in every row: `ato mẖe` (97 inscriptions), `at mẖe` (83) and `mẖe psḫrkete` (21). This adds 141 word
+   boundaries in 77 rows; no row now has `atomẖe` or `atmẖe` (91 and 90 rows have the two words). The indexes are
+   not used for this, because there Griffith also sets endings apart from their words (`pesto l`), which is
+   analysis and not word division. A pair that he prints as one word anywhere for that inscription is left alone.
+2. **The title `slẖs` has one spelling.** Two rows (Kar. 11 and Kar. 84, three words) had `slms`, where the hand's
+   3-shaped signs cannot be told apart. Griffith's catalogue writes the title "shalkhash" thirteen times and never
+   with m, and Indexes B and C print ẖ, so these are written `slẖs` like the other rows.
+
+Each row whose `text_corpus` differs from its reading in this way says so in its notes, with the counts. What is
+not made uniform: word division outside the closing formulae (`yidotedikte` is one word in four rows and
+`yidote dikte` in two, as the copies have it), the count of lost signs in a hatched stretch, and `pqrl` against
+`pqorl`, which is Griffith's own variation.
+
+## 6. Eleven pages read twice
+
+**How the pages were chosen** ([`second_reading/pick.json`](second_reading/pick.json)): the seven pages with the
+most lost signs and query marks in the rows; three of the other 46 drawn at random with a fixed seed; and the
+page of Kar. 77, which FHN III prints, as a control. Each page went to a new reader with the briefs and files of
+the first run and none of its results: step 1 from the copy alone, step 2 the check against the type
+([`second_reading/<pack>/`](second_reading/), pack S and the leaf number).
+
+**The measure** is the one used against FHN: the signs of the first reading less the edit distance between the
+two readings, so a sign only one reader has counts against it. Lost signs are left out and counted apart
+(`runs/work/karanog/compare_readers.py`).
+
+| Pages | Inscriptions | Signs of the first reading | Second reader has, hand copy alone | Signs, after the check | Second reader has, after the check |
+|---|---|---|---|---|---|
+| The seven most damaged | 22 | 2,036 | 1,708 (83.9%) | 2,061 | 1,999 (97.0%) |
+| Three at random | 7 | 926 | 823 (88.9%) | 948 | 939 (99.1%) |
+| Control (Kar. 76, 77) | 2 | 244 | 226 (92.6%) | 245 | 242 (98.8%) |
+| All eleven | 31 | 3,206 | 2,757 (86.0%) | 3,254 | 3,180 (97.7%) |
+
+- Ten of the 31 inscriptions came out the same sign for sign after the check; none did from the copies alone.
+- The weakest are short, badly hatched texts: Kar. 80 (20 of 27 signs), Kar. 43 (47 of 59) and Kar. 81 (86 of 98).
+- The readers count lost signs alike in the sum (198 and 195) but differently in 15 of the 31 inscriptions.
+
+**Settling** ([`readings/BRIEF_step3.md`](readings/BRIEF_step3.md)). The second reader then received the first
+reading and the list of the 56 places where the two checked readings differ in a sign (in 21 inscriptions), looked
+at the copy and the type again at each, and gave a verdict:
+
+| Verdict | Places |
+|---|---|
+| The first reading is right | 26 |
+| The second reading is right | 17 |
+| Neither is right | 2 |
+| The copy and the type do not decide (the first reading stands, with a `?`) | 11 |
+
+The evidence was the copy alone at 25 places, the type alone at 6 and both at 25. The settled readings
+(`settled.jsonl`, with `decisions.jsonl` for each place) are the rows of these 31 inscriptions. They differ from
+the first reader's checked readings in 26 of 3,254 signs (0.8%). One of the 26 is the disputed sign of the
+formula word `yidotedikte` in Kar. 100, d and not n, so that every row now has d.
+
+**What this says about the other 120 inscriptions.** Where two readers differed and the place could be decided,
+the first reader was wrong at 19 places of 45. On the three random pages the two readings differ at 9 places in
+948 signs: five went to the first reader, one to the second and three stayed open. So a second reading of an
+ordinary page would change few signs of a row; on a badly hatched page it changes more (on the seven damaged
+pages the readings differ at 45 places, of which 18 went against the first reader and 8 stayed open). It says
+nothing of signs that both readers get wrong in the same way.
+
+**The control shows that limit.** Against FHN the first reader has 128 of the 134 signs of Kar. 77 right, the
+second reader 127, and the settled reading 128: settling changed nothing there. Both readers differ from FHN in
+the same three signs, and each time they have what Griffith prints in type (`smede(?)li`, `ps(?)te`, `ḫblol`)
+where the modern edition reads otherwise (`Smedtli`, `ph̲te`, `ḫ*mlol`). Two readers who agree have recovered
+Griffith's reading, not necessarily the stone.
+
+## 7. Limits
 
 1. **Four texts and 654 signs** carry the accuracy figure, and FHN prints no other Karanòg text. Kar. 47, the
    longest of the four, has no closing formulae and is covered by 79 printed entries; a text with a long
@@ -145,40 +228,47 @@ are places where Griffith's indexes disagree with each other and one of them agr
    copies, with their own corrections. Where Griffith misread the stone, so do these rows.
 3. **The notes on the hand** given to the readers were written during the first test on these same four texts,
    so the "hand copy alone" column is not fully independent. The check against the type is.
-4. **One reader a text.** No inscription was read by two readers, and the 147 texts without an FHN edition have
-   no outside check at all. The weakest are the heavily hatched ones (among them Kar. 30, 36, 45, 102, 112, Sh. 2
-   and Sh. 17), where the number of lost signs is a reader's estimate.
-5. **Word division follows each reader's judgment.** Where a copy runs words together (`atomẖe`), one reader kept
-   it and another took Griffith's division from the type (`ato mẖe`). The rows are not yet uniform in this.
-6. **Names are not masked** (no name list exists for these texts), as in the other Griffith files.
-7. **Shablûl rows will have no REM number** until the numbering is checked; Karanòg N is REM 0200 + N (FHN III).
-8. **Readers did not all check alike.** The brief says to look at the printed strip wherever an entry and the
+4. **One reader for 120 of the 151 texts.** Thirty-one were read twice (section 6); the 147 texts without an FHN
+   edition have no outside check at all. The weakest are the heavily hatched ones (among them Kar. 30, 36, 45,
+   102, 112, Sh. 2 and Sh. 17), where the number of lost signs is a reader's estimate.
+5. **The second reading is not a second opinion on Griffith.** Both readers checked against the same typed
+   pages, so an error in the typing that neither caught is in both readings. And the reader who settled the
+   differences was the second reader itself, not a third: it decided for the first reading more often than for
+   its own (26 against 17), but it was no neutral judge.
+6. **Word division outside the closing formulae follows each reader's judgment** (section 5).
+7. **Names are not masked** (no name list exists for these texts), as in the other Griffith files.
+8. **Shablûl rows will have no REM number** until the numbering is checked; Karanòg N is REM 0200 + N (FHN III).
+9. **Readers did not all check alike.** The brief says to look at the printed strip wherever an entry and the
    copy differ. Several readers report that they did so for the names table only and took index and formula
-   entries as typed. And readers settled a few disputed signs differently: d or n in the formula word
-   `yidotedikte`, m or ẖ in the title `slẖs`. The rows are not uniform in these.
-9. **Outages.** The machine lost its network three times during the second day's run. Every reader was cut off at
+   entries as typed. The two signs that readers had settled differently are now the same in every row: d in the
+   formula word `yidotedikte` (the typed formula tables have n there, which the readers who looked at the strips
+   corrected) and ẖ in the title `slẖs` (sections 5 and 6).
+10. **Outages.** The machine lost its network three times during the second day's run. Every reader was cut off at
    least once and went on from its own record of the work; no reading was redone.
-10. **One line left out.** The first line of Kar. 113 is an Egyptian name in Demotic, which Griffith gives in
+11. **One line left out.** The first line of Kar. 113 is an Egyptian name in Demotic, which Griffith gives in
     italics; its reader took it out of the Meroitic reading (`changes.jsonl` of pack P20).
-11. **Three texts are held back from `corpus_v5`** by the duplicate test (section 1), wrongly.
+12. **Two printed entries were checked by no reader,** the second readers included: Kar. 17 `sotnkel` and
+    Kar. 111 `tewideqowi` (section 9). Their pages were not among the eleven.
 
-## 6. Cost
+## 8. Cost
 
-About 14 million subagent tokens: 3.8 million for typing the 48 reference pages, 0.4 million for the second typing
-of four of them, and about 10 million for the 53 pages of hand copies (about 190,000 a page for both steps). A
-reader needs about an hour a page for step 1 and five to ten minutes for step 2.
+About 14 million subagent tokens for the first run: 3.8 million for typing the 48 reference pages, 0.4 million
+for the second typing of four of them, and about 10 million for the 53 pages of hand copies (about 190,000 a page
+for both steps). A reader needs about an hour a page for step 1 and five to ten minutes for step 2. The second
+reading of eleven pages took 3.4 million more (about 310,000 a page for the three steps).
 
-## 7. Files, and how to rebuild
+## 9. Files, and how to rebuild
 
 ```
 python3 -I src/karanog_refs.py     # refs/typed/ and refs/second_typing/ -> refs/by_inscription/, refs/all_refs.jsonl
-python3 -I src/karanog.py          # readings/<pack>/ -> griffith_karanog.jsonl
+python3 -I src/karanog.py          # readings/<pack>/ and second_reading/<pack>/ -> griffith_karanog.jsonl
 python3 -I tests/test_karanog.py   # checks for the scripts, and the numbers in this file
 python3 -I runs/work/karanog/score_fhn.py . "after the check" data/expansion/karanog/readings/C09/final.jsonl \
     data/expansion/karanog/readings/C14/final.jsonl data/expansion/karanog/readings/C21/final.jsonl
 python3 -I runs/work/karanog/score_fhn.py . "hand copy alone" data/expansion/karanog/readings/C09/copy_only.jsonl \
     data/expansion/karanog/readings/C14/copy_only.jsonl data/expansion/karanog/readings/C21/copy_only.jsonl
 python3 -I runs/work/karanog/compare_typings.py   # section 3
+python3 -I runs/work/karanog/compare_readers.py   # section 6: the two readers, inscription by inscription
 ```
 
 `score_fhn.py` scores against Carrier too where his texts are on the machine (`data/sources/mnl/`, kept locally).
@@ -187,6 +277,10 @@ python3 -I runs/work/karanog/compare_typings.py   # section 3
   `refs/second_typing/QA/`: the four pages typed twice.
 - `readings/<pack>/`: `copy_only.jsonl` (step 1, frozen), `final.jsonl` (after the check), `changes.jsonl`,
   `kept_against_type.jsonl`, `unplaced.jsonl`, `ref_corrections.jsonl`.
+- `second_reading/<pack>/`: the second reader's files of the same names for one page, and `settled.jsonl` (the
+  first reader's objects with the settled places put in) and `decisions.jsonl` (one line a differing place: both
+  readings, the signs chosen, the verdict, the evidence and why). `second_reading/pick.json` says how the pages
+  were chosen.
 - The page scans are not in the repo: leaves n144 to n196 of the archive.org item, 3132 x 4094 px. The PDF of the
   same item shows the hand copies too blurred for this (hatching and dots are lost); the type pages were read
   from it.
