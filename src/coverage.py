@@ -27,7 +27,7 @@ the kind of word is known: a title, a name, a verb of the benedictions); unknown
 The gloss file leans on Rilly's lexicon and stays local (data/sources/coverage/). The public files are the
 counts and the list of words without a meaning, each with its kind and the texts it blocks.
 """
-import collections, json, re, sys
+import collections, json, re, statistics, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -224,8 +224,13 @@ def lookup(tok, prev, words, affixes, printed=None):
                 best = (key, stem, end)
     if best:
         _, stem, end = best
-        return of_entries(tok, words[stem], ending=end,
-                          parts=[{"form": stem, "entry": words[stem][0]["headword"]}, {"form": end, "entry": "ending"}])
+        g = of_entries(tok, words[stem], ending=end,
+                       parts=[{"form": stem, "entry": words[stem][0]["headword"]}, {"form": end, "entry": "ending"}])
+        # as for an analyst's cut, an ending whose function is open does not lower the level; the gloss records it
+        # when the lexicon has the ending and gives none of its entries an accepted function
+        owners = [e for e in affixes.get(end, []) if e["affix"] == "suffix"]
+        g["open_grammar"] = bool(owners) and not any(e["level"] in TRANSLATED for e in owners)
+        return g
     by = griffith_name(tok, printed)
     if by:
         end = next((e for e in ("qowi", "qo") if tok.endswith(e) and len(tok) > len(e) + 2), "")
@@ -253,7 +258,8 @@ def group(row):
 def distinct(rows, share=0.8):
     """The texts left when near-copies are counted once: going from the longest text down, a text is a copy when
     `share` or more of its runs of three words stand in one text already kept. (The older corpus holds families
-    of such copies; the largest, 86 texts, is about a third of its words.)"""
+    of such copies; one of them, the 86 texts that hold "aribet yete kemxr yetmdelowi", is about a third of its
+    words.)"""
     tri = lambda t: {tuple(t[i:i + 3]) for i in range(len(t) - 2)} or {tuple(t)}
     kept, index = [], collections.defaultdict(set)
     for r in sorted(rows, key=lambda r: -len(r["text"].split())):
@@ -333,9 +339,10 @@ def write_packs(out, residue, es, per=110, again=0, more=False):
     table = lexicon_table(es)
     made, first = [], 0
     if more:
-        old = sorted(p for p in out.iterdir() if p.is_dir() and p.name.startswith("A"))
+        old = sorted(p for p in out.iterdir() if p.is_dir() and re.fullmatch(r"A\d+", p.name))
         have = {json.loads(l)["word"] for p in old for l in (p / "words.jsonl").read_text().splitlines() if l.strip()}
-        residue, again, first = [w for w in residue if w["word"] not in have], 0, len(old)
+        # numbered after the highest pack, not after the count: a gap must not make a new pack overwrite an old one
+        residue, again, first = [w for w in residue if w["word"] not in have], 0, max((int(p.name[1:]) for p in old), default=0)
     for letter, words in (("A", residue), ("B", residue[:again])):
         for k in range(0, len(words), per):
             pack = out / f"{letter}{k // per + 1 + (first if letter == 'A' else 0):03d}"
@@ -356,20 +363,25 @@ def check(a, word, heads):
         return "no parts"
     if "".join(p["form"] for p in parts) != word:
         return "the parts do not spell the word"
-    bad = [p.get("entry") for p in parts if p.get("entry") not in SPECIAL and p.get("entry") not in heads]
+    if not all(isinstance(p.get("entry"), str) for p in parts):
+        return "a part without an entry"
+    bad = [p["entry"] for p in parts if p["entry"] not in SPECIAL and p["entry"] not in heads]
     if bad:
         return f"not an entry of the lexicon: {bad[0]!r}"
-    if a.get("kind") not in KINDS:
+    if not isinstance(a.get("kind"), str) or a["kind"] not in KINDS:
         return f"not a kind: {a.get('kind')!r}"
-    if a.get("confidence") not in (1, 2, 3, 4, 5):
+    if type(a.get("confidence")) is not int or a["confidence"] not in (1, 2, 3, 4, 5):
         return "confidence is not 1 to 5"
+    if not all(isinstance(a.get(k), (str, type(None))) for k in ("gloss", "evidence", "recalled")):
+        return "gloss, evidence or recalled is not text"
     return ""
 
 
 def content(part, heads):
-    """Is a part a word of its own (a stem, a name, a number, an unknown piece), not an ending or a beginning?"""
+    """Is a part a word of its own (a stem, a name, a number, an unknown piece), not an ending or a beginning?
+    ("ending" is the lookup's ending of a stem.)"""
     e = heads.get(part["entry"])
-    return e is None or e["kind"] != "function word"
+    return part["entry"] != "ending" and (e is None or e["kind"] != "function word")
 
 
 def settle(a, heads):
@@ -475,18 +487,23 @@ def gloss_texts(rows, words, affixes, analysed=None, refs=KAR_REFS):
 
 
 def blockers(g, heads):
-    """The pieces of a word that keep it from being translated: an entry without an accepted meaning under its
-    headword, an unknown piece under its letters. [] for a translated or a lost word."""
+    """The pieces of a word that keep it from being translated, as [(piece, entry)]: an entry without an accepted
+    meaning under its headword, an unknown piece under its letters (entry None). An ending or a beginning blocks
+    only a word that has nothing else, since it does not lower the level of a word with a stem (settle); a word
+    whose stems are all known stands untranslated because its cut is unsure, and blocks under its own letters.
+    [] for a translated or a lost word."""
     if g["level"] in TRANSLATED or g["level"] == "lost":
         return []
-    out = [[], []]                                  # the parts that are words of their own, then the others
+    stems, ends = [], []
     for p in g["parts"]:
         e = heads.get(p["entry"])
         if e is not None and e["level"] not in TRANSLATED:
-            out[not content(p, heads)].append(e["headword"])
+            (stems if content(p, heads) else ends).append((e["headword"], e))
         elif p["entry"] == "?":
-            out[0].append(p["form"])
-    return out[0] or out[1] or [g["form"]]
+            stems.append((p["form"], None))
+    if any(content(p, heads) for p in g["parts"]):
+        ends = []
+    return stems or ends or [(g["form"], None)]
 
 
 def figures(glossed):
@@ -507,63 +524,86 @@ def figures(glossed):
         part = [(r, gs) for r, gs in glossed
                 if name == "all" or group(r) == name or (name == "near-copies counted once" and r["id"] in once)]
         levels = collections.Counter(g["level"] for _, gs in part for g in gs)
-        n = sum(levels.values())
-        done = sum(levels[l] for l in TRANSLATED)
-        open_ = sum(1 for _, gs in part for g in gs if g["level"] in TRANSLATED and g.get("open"))
-        vague = sum(1 for _, gs in part for g in gs if g["level"] == "meaning" and g.get("vague"))
-        mine = [g for _, gs in part for g in gs if g["level"] in TRANSLATED and g["by"] == "analyst"]
-        out[name] = {"texts": len(part), "words": n, "levels": {l: levels[l] for l in LEVELS},
-                     "translated": done, "translated_on_a_choice": open_, "title_or_epithet_only": vague,
+        done = [g for _, gs in part for g in gs if g["level"] in TRANSLATED]
+        mine = [g for g in done if g["by"] == "analyst"]
+        out[name] = {"texts": len(part), "words": sum(levels.values()), "levels": {l: levels[l] for l in LEVELS},
+                     "translated": len(done), "translated_on_a_choice": sum(bool(g.get("open")) for g in done),
+                     "title_or_epithet_only": sum(g["level"] == "meaning" and bool(g.get("vague")) for g in done),
                      "by_one_analyst": sum(not g.get("twice") for g in mine),
                      "by_a_spelling_variant": sum(bool(g.get("variant")) for g in mine),
-                     "with_open_grammar": sum(bool(g.get("open_grammar")) for g in mine),
-                     "by": dict(collections.Counter(g["by"] for _, gs in part for g in gs if g["level"] in TRANSLATED))}
+                     "with_open_grammar": dict(collections.Counter(g["by"] for g in done if g.get("open_grammar"))),
+                     "by": dict(collections.Counter(g["by"] for g in done))}
     return out
 
 
 def ranking(glossed, heads):
     """The pieces without an accepted meaning, the one that blocks most texts first:
-    [{piece, kind, level, words, texts, alone, all_texts, forms}]. texts counts near-copies once (distinct());
-    alone counts those texts in which it is the only piece still untranslated (lost words apart), so that its
-    meaning would complete them; words and all_texts count every text. The second value counts the texts
-    themselves, near-copies once: how many have no such piece, and how many have one."""
-    seen = collections.defaultdict(lambda: {"words": 0, "texts": set(), "all": set(), "alone": 0,
+    [{piece, is, kind, level, words, texts, alone, all_texts, forms}]. A piece is a headword of the lexicon or
+    letters that no entry explains (is), and the two stay apart when they are spelled alike. Its kind is the
+    lexicon's for a headword that has one, otherwise what the analysts named for the words it stands in; its level
+    is that of those words (most often), and for a headword the lexicon's own when that is higher. texts counts
+    near-copies once (distinct()); alone counts those texts in which it is the only piece still untranslated (lost
+    words apart), so that its meaning would complete them; words and all_texts count every text. The second value
+    counts the texts themselves, near-copies once: how many have a word that is not lost (legible), how many of
+    those have no such piece and how many have one, and the median share of their legible words translated."""
+    seen = collections.defaultdict(lambda: {"words": 0, "texts": set(), "all": set(), "alone": 0, "entry": None,
                                             "forms": collections.Counter(), "kinds": collections.Counter(),
                                             "levels": collections.Counter()})
     once = {r["id"] for r in distinct([r for r, _ in glossed])}
     whole = one = 0
+    shares = []
     for r, gs in glossed:
         here = collections.Counter()
         for g in gs:
-            for b in blockers(g, heads):
-                s = seen[b]
+            for b, e in blockers(g, heads):
+                s = seen[b, e is not None]
+                s["entry"] = e
                 s["words"] += 1
                 s["all"].add(r["id"])
                 if r["id"] in once:
                     s["texts"].add(r["id"])
                 s["forms"][g["form"]] += 1
                 s["levels"][g["level"]] += 1
-                e = heads.get(b)
-                kind = (e["kind"] if e is not None and len(g["parts"]) > 1 else g["kind"]) or (e["kind"] if e else "")
+                own = e["kind"] if e is not None else ""
+                kind = (own or g["kind"]) if len(g["parts"]) > 1 else (g["kind"] or own)
                 if kind == "two words written as one":      # the kind of the whole, not of this piece
-                    kind = e["kind"] if e else ""
+                    kind = own
                 s["kinds"][kind or "unknown"] += 1
-                here[b] += 1
-        if r["id"] in once:
+                here[b, e is not None] += 1
+        read = [g for g in gs if g["level"] != "lost"]
+        if r["id"] in once and read:
             whole += not here
+            shares.append(sum(g["level"] in TRANSLATED for g in read) / len(read))
             if len(here) == 1:
                 one += 1
                 seen[next(iter(here))]["alone"] += 1
-    rows = [{"piece": b, "kind": s["kinds"].most_common(1)[0][0], "level": s["levels"].most_common(1)[0][0],
-             "words": s["words"], "texts": len(s["texts"]), "alone": s["alone"], "all_texts": len(s["all"]),
-             "forms": [f for f, _ in s["forms"].most_common(4)]} for b, s in seen.items()]
-    rows.sort(key=lambda x: (-x["texts"], -x["words"], x["piece"]))
-    return rows, {"texts": len(once), "no_blocker": whole, "one_blocker": one}
+    rows = []
+    for (b, is_entry), s in seen.items():
+        level = s["levels"].most_common(1)[0][0]
+        if is_entry:
+            level = min(level, s["entry"]["level"], key=RANK.get)
+        rows.append({"piece": b, "is": "headword" if is_entry else "letters", "kind": s["kinds"].most_common(1)[0][0],
+                     "level": level, "words": s["words"], "texts": len(s["texts"]), "alone": s["alone"],
+                     "all_texts": len(s["all"]), "forms": [f for f, _ in s["forms"].most_common(4)]})
+    rows.sort(key=lambda x: (-x["texts"], -x["words"], x["piece"], x["is"]))
+    return rows, {"texts": len(once), "legible": len(shares), "no_blocker": whole, "one_blocker": one,
+                  "median": statistics.median(shares) if shares else 0.0}
 
 
 def draft(gs):
     """The word-by-word line of a text."""
     return " ".join(g["gloss"] if g["level"] != "unknown" else f"<{g['form']}>" for g in gs)
+
+
+COLUMNS = ("piece", "headword or letters", "kind", "level", "texts (near-copies once)", "texts it alone blocks",
+           "words", "all texts", "spellings")
+
+
+def public_list(ranked):
+    """The public list of the pieces without an accepted meaning: counts and corpus spellings, no gloss."""
+    rows = [[r["piece"], r["is"], r["kind"], r["level"], str(r["texts"]), str(r["alone"]), str(r["words"]),
+             str(r["all_texts"]), " ".join(r["forms"])] for r in ranked]
+    return "".join("\t".join(cells) + "\n" for cells in [list(COLUMNS)] + rows)
 
 
 def write(glossed, ranked, figs, texts_by, report, out=OUT, public=None):
@@ -578,10 +618,7 @@ def write(glossed, ranked, figs, texts_by, report, out=OUT, public=None):
     (out / "figures.json").write_text(json.dumps({"figures": figs, "texts": texts_by, "analysts": report},
                                                  ensure_ascii=False, indent=1) + "\n")
     if public:
-        lines = ["piece\tkind\tlevel\ttexts (near-copies once)\ttexts it alone blocks\twords\tall texts\tspellings"]
-        lines += ["\t".join([r["piece"], r["kind"], r["level"], str(r["texts"]), str(r["alone"]), str(r["words"]),
-                             str(r["all_texts"]), " ".join(r["forms"])]) for r in ranked]
-        public.write_text("\n".join(lines) + "\n")
+        public.write_text(public_list(ranked))
 
 
 def show(figs, texts_by=None):
@@ -593,12 +630,13 @@ def show(figs, texts_by=None):
         print("   " + ", ".join(f"{l} {f['levels'][l]} ({f['levels'][l] / n:.1%})" for l in LEVELS))
     if texts_by:
         t = texts_by
-        print(f"texts with every word translated (lost words apart; near-copies counted once): {t['no_blocker']} of "
-              f"{t['texts']}; with one piece missing: {t['one_blocker']}")
+        print(f"texts, near-copies counted once: {t['texts']}, {t['legible']} with a word that is not lost; of those, "
+              f"every such word translated in {t['no_blocker']}, one piece missing in {t['one_blocker']}; "
+              f"the median text {t['median']:.1%} translated")
 
 
 def main(argv):
-    if len(argv) < 2 or argv[1] not in ("first", "packs", "build"):
+    if len(argv) < 2 or argv[1] not in ("first", "packs", "build") or (argv[1] != "first" and len(argv) < 3):
         sys.exit(__doc__)
     es = lexicon()
     words, affixes, heads = index(es)
@@ -631,8 +669,8 @@ def main(argv):
           f"answers dropped {len(report['dropped'])}; words without an answer {len(report['missing'])}")
     a = figs["all"]
     print(f"of the {a['translated']} translated words: by an analyst {a['by'].get('analyst', 0)} (by one analyst alone "
-          f"{a['by_one_analyst']}; through a spelling variant {a['by_a_spelling_variant']}; with an ending or "
-          f"beginning of open function {a['with_open_grammar']})")
+          f"{a['by_one_analyst']}; through a spelling variant {a['by_a_spelling_variant']}); with an ending or "
+          f"beginning of open function {sum(a['with_open_grammar'].values())} ({a['with_open_grammar']})")
     print(f"pieces without an accepted meaning: {len(ranked)}; the first: "
           + ", ".join(f"{r['piece']} ({r['kind']}, {r['texts']} texts)" for r in ranked[:12]))
 
