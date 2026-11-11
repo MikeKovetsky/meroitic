@@ -186,14 +186,15 @@ text's letter 6-grams occur in one such text, or one with masked names or lost s
 alike first) and writes `data/corpus_v3.jsonl`. Griffith printed only part of 29 of the 152 texts; those are left
 out.
 
-The Karanòg and Shablûl inscriptions exist only as Griffith's hand copies, which one reader gets 89% right. But
+Griffith gives the Karanòg and Shablûl inscriptions only as hand copies, which one reader gets 89% right. But
 the same book prints most of their words a second time in type: a table of names, three indexes and tables of the
 closing formulae. Readers typed those 48 pages, read each hand copy on its own, and then checked the reading
 against the printed entries for that inscription (`src/karanog_refs.py`, `src/karanog.py`,
 [`data/expansion/karanog/README.md`](data/expansion/karanog/README.md)). On the four texts FHN prints, fresh
-readers who could not see FHN reached 97.7% of signs. `src/expand.py` adds the 151 texts to `corpus_v3` as
-`data/corpus_v5.jsonl` (896 texts, 21,818 words), testing each against `corpus_v3` but not against the other
-Karanòg texts, which are separate inscriptions that share their formulae; `corpus_v3` itself is left as it was.
+readers who could not see FHN reached 97.7% of signs. `src/expand.py` tests the 151 texts against `corpus_v3`
+but not against each other, as they are separate inscriptions that share their formulae, and writes `corpus_v3`
+with the 148 it finds new as `data/corpus_v5.jsonl` (896 texts, 21,818 words); `corpus_v3` itself is left as it
+was.
 
 ### 13. Review
 
@@ -219,8 +220,9 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
 `corpus_v2 662 texts 18075 words -> corpus_v3 748 texts 19066 words (+5%)` and ends
-`corpus_v3 748 texts 19066 words -> corpus_v5 896 texts 21818 words (+14%)`. The tests print `skip` for each check that reads a local-only file, and
-each file's last line counts the checks passed and skipped; none fails.
+`corpus_v3 748 texts 19066 words -> corpus_v5 896 texts 21818 words (+14%)`. The tests print `skip` for each
+check that reads a local-only file, and each file's last line counts the checks passed and skipped
+(`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
 Three things need files that are kept locally (Data, above), so they don't run from a clone:
 

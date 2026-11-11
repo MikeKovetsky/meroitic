@@ -26,9 +26,9 @@ def first_test(root):
 
 
 def clean(reading):
-    """A reading without line numbers, lost signs and query marks, each of which parts two signs: "arwt(14)e" is
-    t and e, and "s?e" is s and e, not the te and se signs."""
-    return re.sub(r"\(\d+\)|\[\.\]|\?", " ", reading)
+    """A reading without line numbers, Griffith's "(sic)", lost signs and query marks, each of which parts two
+    signs: "arwt(14)e" is t and e, and "s?e" is s and e, not the te and se signs."""
+    return re.sub(r"\(\d+\)|\(sic\)|\[\.\]|\?", " ", reading)
 
 
 def readings(files):

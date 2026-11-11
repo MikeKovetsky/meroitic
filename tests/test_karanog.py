@@ -3,7 +3,7 @@ made-up readings and entries, and the numbers data/expansion/karanog/README.md r
 
   python3 -I tests/test_karanog.py
 """
-import json, sys, tempfile
+import json, re, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +31,9 @@ def test_signs_are_counted_as_signs():
     assert K.signs("pe(6)seto") == ["p", "e", "se", "to"]
     # a restoration in square brackets is not read from the copy: lost, as in the other Griffith files
     assert K.signs("ḫ[rp]ḫñ") == ["ḫ", ".", ".", "ḫ", "ñ"]
+    # Griffith's "(sic)" by a sign is not the signs s and i (Kar. 84, Sh. 2), and it parts two signs too
+    assert K.signs("ted(sic)ḫe") == ["te", "d", "ḫ", "e"] and K.signs("t(sic)e") == ["t", "e"]
+    assert K.stray("(1)wosi : s?o(2)r[.]e(sic)yi [r : p]") == "" and K.stray("wosi (c) š-") == "(c)š-"
 
 
 def test_corpus_spelling():
@@ -41,8 +44,9 @@ def test_corpus_spelling():
     assert K.to_corpus("ato mẖe : psiḫrkete") == "ato mXe pSixrkete"
     # a line number inside a word does not split it; a divider and a gap do
     assert K.to_corpus("ye(16)tmdelo(17)wi") == "yetmdelowi"
-    assert K.to_corpus("nb(13)r : wñ(14)li") == "nbr wNli"
+    assert K.to_corpus("nb(13)r : wñ(14)li") == "nbr wNli" and K.to_corpus("wosi:sori") == "woSi Sori"
     assert K.to_corpus("psos?e(7)kete") == "pSoSekete"                           # s? then e: the s sign
+    assert K.to_corpus("(4)ted(sic)ḫe?l?owi : a(sic)mẖe") == "tedxelowi amXe"      # Kar. 84, Sh. 2
     # lost signs are dots, query marks go, restored signs in square brackets are blanked
     assert K.to_corpus("ted?[.]ḫ?elowi") == "ted.xelowi"
     assert K.to_corpus("ḫ[rp]ḫñ") == "x..xN" and K.to_corpus("ab[r : p]") == "ab.."
@@ -93,6 +97,14 @@ def test_rows_join_parts_and_skip_unchecked_packs():
             assert "'Kar. 39 b'" in str(e) and "final.jsonl" in str(e), e
         else:
             raise AssertionError("a reading of 'Kar. 39 b' was dropped without an error")
+        # so does a reading that holds something tokens() would drop, such as a note in brackets
+        write(open_, "final.jsonl", [dict(final[2], text="Kar. 9", reading="qo : se (copy blurred)")])
+        try:
+            K.rows(root)
+        except ValueError as e:
+            assert "Kar. 9" in str(e) and "(copy blurred)" in str(e) and "final.jsonl" in str(e), e
+        else:
+            raise AssertionError("a reading with a note in it was built without an error")
     assert [r["griffith_no"] for r in rows] == [2, 3, "Sh4"], rows                # Karanog first, Kar. 9 left out
     kar, kar3, sh = rows
     assert "signs changed" not in kar3["notes"] and "0 printed entries placed." in kar3["notes"]
@@ -145,6 +157,9 @@ def test_references_name_inscriptions():
     # a form printed inside the entry has its own object: its numbers are not the head word's
     assert named("Kar. 7, 130. {pḫkete} Kar. 93, see p. 48") == [("Kar", 7, "", False, ""), ("Kar", 130, "", False, "")]
     assert named("Kar. 15 (man), cf. 21 ♂; Kar. 30") == [("Kar", 15, "", False, ""), ("Kar", 21, "", True, ""), ("Kar", 30, "", False, "")]
+    # a footnote mark is not part of the number (Index A, womnitẖ)
+    assert named("title of C, Kar. 72, 75¹") == [("Kar", 72, "", False, ""), ("Kar", 75, "", False, "")]
+    assert named("Sh. 5 ♂ ¹") == [("Sh", 5, "", False, "")]
     assert R.text_id("Kar. 39 b") == ("Kar", 39, "b") and R.text_id("Sh. 1") == ("Sh", 1, "") and R.text_id("Inscr. 94/12") is None
 
 
@@ -158,9 +173,11 @@ def test_typed_pages_are_repaired_and_tabled():
         write(refs / "typed/N1", "ref_pdf103.jsonl", [name("ref_pdf103", "Kar. 1", "B", "sriiye"), name("ref_pdf103", "Kar. 6", "B", "tẖiye")])
         write(refs / "typed/N2", "ref_pdf107.jsonl", [name("ref_pdf107", "Kar. 72", "A", "tiiye")])           # not N1: left alone
         write(refs / "second_typing/QA", "ref_pdf103.jsonl", [name("ref_pdf103", "Kar. 1", "B", "srbiye"), name("ref_pdf103", "Kar. 6", "B", "tmiye")])
-        write(refs / "typed/I1", "ref_pdf111.jsonl", [
-            {"page": "ref_pdf111", "kind": "index", "index": "A", "reading": "ant : boqḫw", "supplied": "", "refs": "Kar. 47 ♂, cf. 121", "gloss": "", "notes": ""},
-            {"page": "ref_pdf111", "kind": "index", "index": "A", "reading": "aqel", "supplied": "", "refs": "Kar. graff. 22", "gloss": "", "notes": ""}])
+        index = lambda reading, refs: {"page": "ref_pdf111", "kind": "index", "index": "A", "reading": reading, "supplied": "",
+                                       "refs": refs, "gloss": "", "notes": ""}
+        # "ib." is the inscription the entry above names (Index C: tewide n. BB. Kar. 111, tewideqowi n. A. ib.)
+        write(refs / "typed/I1", "ref_pdf111.jsonl", [index("ant : boqḫw", "Kar. 47 ♂, cf. 121"), index("aqel", "Kar. graff. 22"),
+                                                      index("aqelowi", "ib."), index("tewide", "Kar. 111"), index("tewideqowi", "ib.")])
         write(refs / "typed/F1", "ref_pdf059.jsonl", [
             {"page": "ref_pdf059", "kind": "formula", "formula": "A", "text": "Kar. 1", "reading": "ato mẖe", "where": "table", "notes": ""},
             {"page": "ref_pdf059", "kind": "formula", "formula": "A", "text": "Kar. 133", "reading": "ato mẖe", "where": "table", "notes": ""},
@@ -174,9 +191,10 @@ def test_typed_pages_are_repaired_and_tabled():
     assert [r for _, r, _ in got[("Kar", 6)]] == ["tẖiye", "tmiye"], got[("Kar", 6)]
     assert [r for _, r, _ in got[("Kar", 72)]] == ["tiiye"]
     assert got[("Kar", 47)] == [("Index A", "ant : boqḫw", False)] and got[("Kar", 121)] == [("Index A", "ant : boqḫw", True)]
+    assert got[("Kar", 111)] == [("Index A", "tewide", False), ("Index A", "tewideqowi", False)]
     assert ("formula A (table)", "ato mẖe", False) in got[("Kar", 1)]
     assert ("Kar", 133) not in per and ("Sh", 0) not in per
-    assert sorted(o.get("text") or o["reading"] for o in none) == ["Inscr. 137", "Kar. 133", "Sh. 0", "aqel"]
+    assert sorted(o.get("text") or o["reading"] for o in none) == ["Inscr. 137", "Kar. 133", "Sh. 0", "aqel", "aqelowi"]
     assert "corrected to 'bi'" in next(o for o in objs if o["reading"] == "srbiye")["notes"]
 
 
@@ -198,10 +216,10 @@ def test_reported_karanog_numbers():
     # data/expansion/karanog/README.md, sections 1, 2 and 4, and NEXT_STEPS.md, step 5
     rows = K.rows()
     words = sum(len([w for w in r["text_corpus"].split() if w.strip(".")]) for r in rows)
-    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16441, 2775)
+    assert (len(rows), sum(r["signs"] for r in rows), words) == (151, 16437, 2775)
     objs = R.typed()
     per, _ = R.tables(objs)
-    assert (len(objs), sum(o["typist"] == "QA" for o in objs), len(per), sum(map(len, per.values()))) == (2722, 4, 152, 3545)
+    assert (len(objs), sum(o["typist"] == "QA" for o in objs), len(per), sum(map(len, per.values()))) == (2722, 4, 152, 3550)
     assert min(map(len, per.values())) >= 2
     packs = [p for p in sorted(READINGS.iterdir()) if p.is_dir()]
     first = [o for p in packs for o in K.load(p, "copy_only.jsonl")]
@@ -209,13 +227,38 @@ def test_reported_karanog_numbers():
     count = lambda name: sum(len(K.load(p, name)) for p in packs)
     assert (sum(len(K.signs(o["reading"])) for o in first), sum(K.changed(a["reading"], b["reading"]) for a, b in zip(first, final)),
             sum(o["entries"] for o in final), count("kept_against_type.jsonl"), count("ref_corrections.jsonl"),
-            count("unplaced.jsonl")) == (16763, 2405, 3468, 230, 66, 84)
+            count("unplaced.jsonl")) == (16759, 2405, 3468, 230, 66, 84)
     # the measured accuracy, by the first test's measure (signs right = FHN's signs less the edit distance)
     toks, align, fhn = score_fhn.first_test(ROOT)
     total = lambda name: tuple(map(sum, zip(*[r[:2] for r in score_fhn.score(
         toks, align, fhn, score_fhn.readings([READINGS / p / name for p in ("C09", "C14", "C21")])).values()])))
     assert total("final.jsonl") == (654, 639) and total("copy_only.jsonl") == (654, 582)
     assert "639 of 654 signs right (97.7%)" in K.ACCURACY and "582 (89.0%)" in K.ACCURACY
+
+
+def test_reported_pack_table():
+    # data/expansion/karanog/README.md, section 4: one row a pack, as the readers' files give it, and the total
+    table = {}
+    for line in (K.KAR / "README.md").read_text().splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) == 7 and re.fullmatch(r"[CP]\d\d|All", cells[0]):
+            table[cells[0]] = cells[1:]
+    span = lambda site, ns: f"{site}. {ns[0]}" + (f", {ns[1]}" if len(ns) == 2 else f" to {ns[-1]}" if ns[1:] else "")
+    num = lambda cell: int(cell.split()[0].replace(",", ""))
+    total = [0] * 5
+    for p in sorted(p for p in READINGS.iterdir() if p.is_dir()):
+        first, final = K.load(p, "copy_only.jsonl"), K.load(p, "final.jsonl")
+        texts = sorted({K.number(o["text"]) for o in final}, key=lambda t: (t[0] != "Kar", t[1]))
+        sites = {s: [n for t, n in texts if t == s] for s in ("Kar", "Sh")}
+        assert all(ns == list(range(ns[0], ns[-1] + 1)) for ns in sites.values() if ns), p.name
+        got = [sum(len(K.signs(o["reading"])) for o in first), sum(K.changed(a["reading"], b["reading"]) for a, b in zip(first, final)),
+               sum(o["entries"] for o in final), len(K.load(p, "kept_against_type.jsonl")), len(K.load(p, "ref_corrections.jsonl"))]
+        row = table.pop(p.name)
+        assert (row[0], [num(c) for c in row[1:]]) == (", ".join(span(s, ns) for s, ns in sites.items() if ns), got), p.name
+        total = [t + g for t, g in zip(total, got)]
+    row = table.pop("All")
+    assert [num(c) for c in row] == [len(K.rows())] + total and f"({total[1] / total[0]:.1%})" in row[2], row
+    assert not table, table                                                      # no row for a pack that is not there
 
 
 def test_karanog_rows_are_new_to_the_corpus():
@@ -244,6 +287,7 @@ def test_score_counts_extra_signs_and_parts_signs_at_marks():
     toks, align, _ = score_fhn.first_test(ROOT)
     assert toks(score_fhn.clean("psos?e(7)kete")) == ["p", "s", "o", "s", "e", "k", "e", "te"]   # s? e, not se
     assert toks(score_fhn.clean("arwt(14)e [.]se?")) == ["a", "r", "w", "t", "e", "se"]
+    assert toks(score_fhn.clean("ted(sic)lowi")) == ["te", "d", "l", "o", "w", "i"]         # Griffith's sic
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "final.jsonl"
         write(Path(tmp), f.name, [{"text": "Kar. 47", "part": "", "reading": "(1)wosi : sor(2)eyi"},

@@ -7,7 +7,7 @@ Shablûl and Karanòg* (1911, public domain),
 
 ## 1. Answer first
 
-1. **All 151 inscriptions that have a hand copy are read:** Kar. 1 to 132 and Sh. 1 to 19, with 16,441 signs and
+1. **All 151 inscriptions that have a hand copy are read:** Kar. 1 to 132 and Sh. 1 to 19, with 16,437 signs and
    2,775 words (Griffith gives no copy of Sh. 20). They are in [`griffith_karanog.jsonl`](griffith_karanog.jsonl).
    `src/expand.py` adds 148 of them to the corpus as `corpus_v5`: 896 texts and 21,818 words, against 748 and
    19,066 in `corpus_v3`, which stays as it was. It holds back three short texts (Kar. 63, Kar. 66, Sh. 17) as
@@ -31,7 +31,7 @@ Shablûl and Karanòg* (1911, public domain),
    2001; in copyright, kept locally, so only the count is given) the checked readings have 598 of 609 signs right
    (98.2%), by the same measure.
 4. **What made the difference** is that Griffith printed most words of every inscription a second time, in clean
-   type, in the same book. The check against those pages changed 2,405 of the 16,763 signs first read (14.3%; a
+   type, in the same book. The check against those pages changed 2,405 of the 16,759 signs first read (14.4%; a
    lost sign counts as one).
 
 ## 2. The method
@@ -52,7 +52,7 @@ book print their words in Meroitic type, each with the number of the inscription
    inscription, so its file is empty. `src/karanog_refs.py` adds the 4 names cells where the second typing
    (section 3) differs from the first, 2,722 objects in all ([`refs/all_refs.jsonl`](refs/all_refs.jsonl)), works
    out which inscriptions each object names and writes one table per inscription
-   ([`refs/by_inscription/`](refs/by_inscription/)): 3,545 entries, at least two for each of the 152 inscriptions.
+   ([`refs/by_inscription/`](refs/by_inscription/)): 3,550 entries, at least two for each of the 152 inscriptions.
 2. **Step 1, the copy alone.** A reader gets one or two page scans, Griffith's sign table and the notes on the
    hand from the first test, and reads every inscription sign by sign from enlarged crops. The file is then made
    read-only ([`readings/BRIEF_step1.md`](readings/BRIEF_step1.md)). No typed reference was in a reader's folder
@@ -62,8 +62,9 @@ book print their words in Meroitic type, each with the number of the inscription
    Griffith's considered reading of the same signs; where the copy clearly shows something else, the copy is
    kept and the place is listed ([`readings/BRIEF_step2.md`](readings/BRIEF_step2.md)).
 4. **The rows.** `src/karanog.py` turns the checked readings into rows like the other
-   `data/expansion/griffith_*.jsonl` files: `text_std` as read (with line numbers, `?` and `[.]`),
-   `text_corpus` in the corpus spelling, and notes that say what the check did and give the measured accuracy.
+   `data/expansion/griffith_*.jsonl` files: `text_std` as read (with line numbers, `?`, `[.]` and Griffith's
+   `(sic)`), `text_corpus` in the corpus spelling, and notes that say what the check did and give the measured
+   accuracy.
 
 Blindness: every reader worked in a folder of its own and was told to open nothing else and not to use the web.
 FHN's texts were on the machine and are in this repo; nothing but the instruction kept a reader from them.
@@ -112,7 +113,7 @@ One further reader typed four of the 48 pages a second time without seeing the f
 | P13 | Kar. 67 to 72 | 799 | 140 | 187 | 8 | 1 |
 | P14 | Kar. 73 to 75 | 312 | 56 | 63 | 8 | 3 |
 | C14 | Kar. 76 to 79 | 618 | 74 | 143 | 9 | 1 |
-| P15 | Kar. 80 to 85 | 528 | 92 | 99 | 11 | 0 |
+| P15 | Kar. 80 to 85 | 526 | 92 | 99 | 11 | 0 |
 | P16 | Kar. 86 to 90 | 672 | 89 | 127 | 5 | 0 |
 | P17 | Kar. 91 to 97 | 756 | 75 | 156 | 7 | 1 |
 | P18 | Kar. 98 to 102 | 680 | 102 | 137 | 10 | 2 |
@@ -121,11 +122,11 @@ One further reader typed four of the 48 pages a second time without seeing the f
 | P21 | Kar. 118 to 120 | 282 | 32 | 49 | 5 | 2 |
 | C21 | Kar. 121 to 123 | 273 | 15 | 54 | 6 | 1 |
 | P22 | Kar. 124 to 128 | 734 | 119 | 190 | 13 | 2 |
-| P23 | Kar. 129 to 132, Sh. 1 to 3 | 681 | 97 | 142 | 8 | 6 |
+| P23 | Kar. 129 to 132, Sh. 1 to 3 | 679 | 97 | 142 | 8 | 6 |
 | P24 | Sh. 4 to 7 | 523 | 41 | 104 | 5 | 2 |
 | P25 | Sh. 8 to 13 | 532 | 68 | 95 | 8 | 8 |
 | P26 | Sh. 14 to 19 | 545 | 67 | 107 | 7 | 3 |
-| All | 151 | 16,763 | 2,405 (14.3%) | 3,468 | 230 | 66 |
+| All | 151 | 16,759 | 2,405 (14.4%) | 3,468 | 230 | 66 |
 
 Signs first read count a lost sign as one; the signs changed are, for each stretch where the two readings differ,
 the longer side (`changed()` in `src/karanog.py`).
@@ -138,8 +139,8 @@ are places where Griffith's indexes disagree with each other and one of them agr
 ## 5. Limits
 
 1. **Four texts and 654 signs** carry the accuracy figure, and FHN prints no other Karanòg text. Kar. 47, the
-   longest, has no closing formulae and is covered by 79 printed entries; a text with a long unparalleled name is
-   covered less.
+   longest of the four, has no closing formulae and is covered by 79 printed entries; a text with a long
+   unparalleled name is covered less.
 2. **Agreement with FHN mostly measures how well Griffith's reading was recovered.** FHN and Carrier follow his
    copies, with their own corrections. Where Griffith misread the stone, so do these rows.
 3. **The notes on the hand** given to the readers were written during the first test on these same four texts,
@@ -192,7 +193,12 @@ python3 -I runs/work/karanog/compare_typings.py   # section 3
 - The readers of the first five packs (C01 to C21) received `refs/by_inscription/` as it stood before two fixes
   to `src/karanog_refs.py` (it then took the numbers of ostraca, "form D 2", footnotes and the second page of
   "see pp. 45, 48" for inscription numbers). All 26 wrong entries this gave them are among the 39 they reported as
-  not placeable. The other 24 packs received the corrected tables, which are the ones here.
+  not placeable. The other 24 packs received the corrected tables, which are the ones here but for five entries.
+- Five index entries were added to the tables after the check, so no reader saw them: `src/karanog_refs.py`
+  took no number from "Kar. 72, 75¹" (a footnote mark) or from "ib." (the inscription of the entry above). Three
+  of the five words were in the readers' tables through another entry: Kar. 55 `sqdyeqowi` (names table),
+  Kar. 75 `womnitẖ` (Index C) and Kar. 124 `smle` (Indexes A and B). Two were checked by no reader: Kar. 17
+  `sotnkel` and Kar. 111 `tewideqowi` (the reader of Kar. 111 found no `tewide` in that copy either).
 - The 4 names cells from the second typing were added to the tables after the check, so no reader saw them:
   Kar. 6 `tmiye` and `(mli)tmide`, Kar. 8 `ḫdokẖ(?)liqowi` and `ñbeyrosmi`. The readings have `tmiye`,
   `m(7)litmide` and `ñbeyrosmi`, and `ḫdokm?(3)liqowi` where the second typing has ẖ(?).

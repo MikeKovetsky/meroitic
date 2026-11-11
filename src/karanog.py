@@ -17,6 +17,7 @@ KAR = ROOT / "data/expansion/karanog"
 ITEM = "karangmeroitic00grifuoft"
 SOURCE = "Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg (Griffith 1911)"
 SIGN = re.compile(r"se|te|to|[aeioywbpmnñrlḫẖskqtd]")
+MARK = re.compile(r"\(\d+\)|\(sic\)")             # a line number of the stone; Griffith's "sic" by a sign
 CORPUS = {"s": "S", "se": "s", "ñ": "N", "ḫ": "x", "ẖ": "X"}        # README, the corpus spelling
 SITES = {"Kar": "Karanog", "Sh": "Shablul"}
 # measured by runs/work/karanog/score_fhn.py on the four texts FHN III prints (data/expansion/karanog/README.md)
@@ -33,13 +34,19 @@ def number(text, part_ok=False):
 
 def marked(reading):
     """The reading with a NUL for each lost sign and each sign in square brackets (a restoration: lost, as in the
-    other Griffith files), and '|' for each line number, which parts two signs but not two words."""
-    t = re.sub(r"\(\d+\)", "|", reading).replace("[.]", "\x00")
+    other Griffith files), and '|' for each line number and each "(sic)", which part two signs but not two words."""
+    t = MARK.sub("|", reading).replace("[.]", "\x00")
     return re.sub(r"\[([^\]]*)\]", lambda m: "\x00" * len(SIGN.findall(m.group(1))), t)
 
 
 def tokens(t):
     return ["." if m.group(0) == "\x00" else m.group(0) for m in re.finditer(r"\x00|" + SIGN.pattern, t)]
+
+
+def stray(reading):
+    """What a reading holds besides signs, lost signs, line numbers, "(sic)", dividers, gaps and query marks.
+    tokens() would drop it without a word ("(sic)" was once read as the signs s and i), so rows() stops on it."""
+    return re.sub(r"\x00|\||[\s:?]|" + SIGN.pattern, "", marked(reading))
 
 
 def signs(reading):
@@ -84,6 +91,9 @@ def rows(readings=None):
                 if n is None:                          # a reading that names no inscription would be lost
                     raise ValueError(f"{pack / name}: text {o.get('text')!r} is not 'Kar. N' or 'Sh. N' "
                                      f"(a part's letter goes in 'part')")
+                if key in ("final", "first") and stray(o["reading"]):
+                    raise ValueError(f"{pack / name}: the reading of {o['text']} holds {stray(o['reading'])!r}, "
+                                     f"neither signs nor marks: {o['reading']!r}")
                 by_text[n][key].append(o)
                 by_text[n]["pack"] = pack.name
     out = []

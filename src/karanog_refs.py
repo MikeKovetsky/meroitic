@@ -33,9 +33,11 @@ def parse_refs(refs):
     ostraca and other publications are skipped, and so is the figure in a label such as "form D 2" or "n. A 2".
     After "p." one number is a page, after "pp." every number up to the next "Kar." or "Sh.". "118-20" is a short
     range; a wide one such as "Kar. 19-89" is two monuments of one person, and both are flagged "pair". A letter
-    alone after a comma is another part of the number before it: "101 a, b, c", "31 a/15, b/14".
+    alone after a comma is another part of the number before it: "101 a, b, c", "31 a/15, b/14". A footnote mark
+    is not part of a number: "Kar. 72, 75¹" names 75.
     """
     s = re.sub(r"\([^)]*\)", " ", refs.split("{")[0])
+    s = re.sub(r"[⁰¹²³⁴⁵⁶⁷⁸⁹]+", " ", s)
     s = re.sub(r"\b(form\s+[A-J]|n\.\s*[A-C]{1,3})\s*\d\b", " ", s)
     site, cf, skip, last, out = None, False, "", None, []     # skip: "" none, "one" number, "all" numbers
     for m in TOK.finditer(s):
@@ -119,14 +121,22 @@ def typed(refs=None):
 
 
 def tables(objs):
-    """{(site, number): [entry, ...]} and the objects that name no inscription."""
-    per, none = collections.defaultdict(list), []
+    """{(site, number): [entry, ...]} and the objects that name no inscription.
+
+    An index entry whose references are only "ib." (ibidem: "tewide n. BB. Kar. 111, tewideqowi n. A. ib.") is
+    of the inscription that the index entry before it names last.
+    """
+    per, none, above = collections.defaultdict(list), [], []
     for o in objs:
         if o["kind"] in ("formula", "name"):
             tid = text_id(o.get("text"))
             targets = [(tid[0], tid[1], tid[2], False, None, "")] if tid and 1 <= tid[1] <= LAST[tid[0]] else []
+        elif re.fullmatch(r"\s*ib\.\s*", o.get("refs") or ""):
+            targets = [t[:4] + (None, t[5]) for t in above[-1:]]
         else:
             targets = parse_refs(o.get("refs", ""))
+        if o["kind"] == "index":
+            above = targets
         if not targets:
             none.append(o)
         source = {"formula": f"formula {o.get('formula')} ({o.get('where')})",

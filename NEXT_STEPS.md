@@ -32,6 +32,8 @@ Next, in this order:
    (pp. 54–78) can settle most of these without a new reading.
 4. **A second reader for the weakest texts:** the 15 or so that are heavily hatched (Kar. 30, 36, 45, 102, 112,
    Sh. 2, Sh. 17 and others), and the names from the first half of the names table, which was typed less well.
+   The same reader can check the two printed entries that no reader saw, Kar. 17 `sotnkel` and Kar. 111
+   `tewideqowi` (section 7 of the Karanòg page).
 5. **Step 10, the duplicate test:** it counts a short funerary text as present when another text shares its
    formulae. Leave formula 6-grams out, as `src/mnl/mnl_dedupe.py` does.
 6. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
@@ -98,8 +100,8 @@ Next, in this order:
        from the hand copies alone).
      - The check uses three printed sources, not one: the indexes, Griffith's table of names and parentage
        (pp. 87–94) and his tables of the closing formulae (pp. 42–53). All 48 pages are typed, for all 152 texts.
-     - The result: 16,441 signs and 2,775 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
-       placed 3,468 printed entries and changed 2,405 of the 16,763 signs first read (14.3%).
+     - The result: 16,437 signs and 2,775 words in `data/expansion/karanog/griffith_karanog.jsonl`. The check
+       placed 3,468 printed entries and changed 2,405 of the 16,759 signs first read (14.4%).
      - `src/expand.py` merges them into a new `corpus_v5`: 896 texts and 21,818 words, against 748 and 19,066 in
        `corpus_v3`, which stays as it was. Three short texts (Kar. 63, Kar. 66, Sh. 17) are held back as "already
        present"; that is the formula overlap of step 10, not three real copies.
