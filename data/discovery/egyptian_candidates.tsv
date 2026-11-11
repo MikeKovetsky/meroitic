@@ -1,4 +1,4 @@
-piece	kind	texts (near-copies once)	already linked to Egyptian in the lexicon	narrow: chance	narrow: best match	narrow: its form	wide: chance	wide: best match	wide: its form
+piece	kind	texts (near-copies once)	set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is spelled like an entry linked to Egyptian	narrow: chance	narrow: best match	narrow: its form	wide: chance	wide: best match	wide: its form
 Tmne	place name	5	no	0.003	tla:dm6608	Tꜣ-mn	0.020	tla:dm1600	Ta-mn
 Arme	place name	2	yes	0.003	tla:d3842	Hrm(e)	0.033	tla:d3842	Hrm(e)
 pkrtr	title	1	no	0.003	tla:dm6094	qrṱr	0.017	ccl:C9533	ⲕⲣⲁⲧⲏⲣ

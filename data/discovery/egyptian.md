@@ -9,25 +9,32 @@ for the loans whose source is known, each one hidden in turn, then for the piece
 ## 1. Answer first
 
 1. **For titles and nouns, no.** The bar was set before the run: the true source among the five best candidates
-   for most of the 14 known loans that are titles, nouns or verbs. The search reached it for 4 of the 14 (6 are
-   among the ten best), and 3 of the 14 have no source in the two lists at all.
-2. **For the names of gods and places, yes.** When a name is searched among the Demotic names of its own kind,
-   the true source is among the three best for all 10 names that have one there, and first for 7.
+   for most of the 14 known loans that are titles, nouns or verbs. The search reached it for 4 of the 14 when
+   titles and nouns are searched together (the wide pool) and for 2 among the words of their own kind alone (6 and
+   5 are among the ten best), and 3 of the 14 have no source in the two lists at all.
+2. **For the names of gods, places and people, yes.** When a name is searched among the Demotic names of its own
+   kind, the true source is among the three best for all 10 names that have one there (seven gods, two places and
+   a person), and first for 7.
 3. **A good match in sound does not tell a loan from a look-alike.** The best match of a known title or noun is
    better than the best match of 95% of made-up Meroitic words for 2 of 11 loans in the wide pool and for none in
    the narrow one. A real loan mostly looks no more Egyptian than a made-up word does.
 4. **No piece without a meaning has an Egyptian candidate that stands above chance.** Of the 383 pieces searched,
-   22 (narrow pool) and 26 (wide pool) beat the 5% bar, where 19 are expected by chance, and none passes the bar
-   that allows for 383 tries. Two independent checkers read the 33 best matches blind, mixed with 12 decoys: they
-   found no new source, rejected every decoy and agreed on all 45.
-5. **What the search did find is old.** 16 pieces of the list are spellings or forms of words that the lexicon
-   already links to Egyptian, as a loan or as a proposal (`prSn` for `plsn`, `petmoS` for `pelmos`, `amn` for
-   `Amni`), and the Demotic list holds graffiti of Meroitic officials at Philae that spell Meroitic titles in
-   Demotic (`qrny` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`).
-6. **Not done.** The step named two more Egyptian parallels. The oracular decrees were not compared, because
-   neither list holds Egyptian texts of that kind. The people whom the Philae graffiti and the Meroitic texts both
-   name were not matched, because the Demotic file comes as single sentences without their texts and the older
-   Meroitic corpus masks its names.
+   22 (narrow pool) and 26 (wide pool) beat the 5% bar, where 19 are expected by chance: chance alone gives as
+   many or more 28% and 7% of the time. None passes the bar that allows for 383 tries, but that bar could hardly
+   pass one: with 300 made-up words no chance is below 1 in 301, while the bar asks the best piece for 1 in 1,915,
+   so a piece could pass it only with six others at that floor. Two independent checkers read the 33 best matches
+   blind, mixed with 12 decoys: they found no new source, rejected every decoy and agreed on all 45.
+5. **What the search did find is old.** At least 16 pieces of the list are spellings or forms of words that the
+   lexicon already links to Egyptian, as a loan or as a proposal: 11 are spelled like such a word (`amn` for
+   `Amni`), and the checkers recognised 5 more among the 33 they read (`prSn` for `plsn`, `petmoS` for `pelmos`).
+   And the Demotic list holds graffiti of Meroitic officials at Philae that spell Meroitic titles in Demotic
+   (`qrnyꜣ` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`).
+6. **Not done.** The step named two more Egyptian parallels, and both are still open. The oracular decrees were
+   not compared, because neither list holds Egyptian texts of that kind. The people whom the Philae graffiti and
+   the Meroitic texts both name were not matched, because the Demotic file comes as single sentences without their
+   texts and the older Meroitic corpus masks its names. An earlier run set six groups of Meroitic texts from Philae
+   and the Dodecaschoenus beside Demotic and Greek ones, from the editions and the literature
+   ([`philae.md`](philae.md)); this search adds nothing to that.
 
 ## 2. The test on the known loans
 
@@ -95,22 +102,30 @@ Two smaller sets, not part of the bar:
   it among the five best for 4 and for 2 (`amero` with the Demotic `ꜥmr`, a baker of Isis at Philae, is first
   among the titles). This says that the search often sees what a scholar's eye saw, not that the proposals are
   right.
-- **Meroitic words written in Egyptian letters.** 30 entries are Meroitic names and titles that Egyptian texts
-  spell. Three of those spellings stand in the pools, and the search puts all three among the five best
+- **Meroitic words written in Egyptian letters.** 30 entries are Meroitic names, titles and nouns that Egyptian
+  texts spell. Three of those spellings stand in the pools, and the search puts all three among the five best
   (`ꜣrbtgꜥyꜣ` for `arebetke` and `qrnyꜣ` for `qorene` are first among the titles).
 
 ## 3. The pieces without a meaning
 
 The coverage map lists 1,336 pieces without an accepted meaning. 608 of them have a kind that the pools know (a
-title, a noun, a name, a verb, an adjective). 166 of those were not searched: 165 have fewer than three consonants,
-so that anything fits them, and one (`2w`) is a number with a letter. Of the 442 searched, 59 are already linked to Egyptian in the lexicon (48 are entries that
-mention it, 11 are spelled like such an entry), which leaves 383.
+title, a noun, a name, a verb, an adjective). 166 of those were not searched: 165 have fewer than three letters as
+the search writes them (consonants, and one mark for a vowel at the start), so that anything fits them, and one
+(`2w`) is a number with a letter. Of the 442 searched, 59 are set aside: 48 are entries of the lexicon that
+mention Egyptian, Demotic, Coptic, Greek or Latin (as a source, a proposal, a spelling in Egyptian letters, a
+rejected link or for another reason), and 11 are spelled like an entry that the lexicon links to Egyptian. That
+leaves 383.
 
 | | Narrow pool | Wide pool |
 |---|---|---|
 | Pieces whose best match beats the 5% bar | 22 | 26 |
 | Expected by chance (5% of 383) | 19 | 19 |
+| How often chance alone gives as many or more | 28% | 7% |
 | Pieces that pass the bar for 383 tries (Benjamini and Hochberg, a fifth of the passes allowed to be chance) | 0 | 0 |
+
+The last row says little here. The chance of a piece cannot be smaller than 1 in 301 (it counts the piece among
+300 made-up words), while that bar asks the best of 383 pieces for 1 in 1,915: a piece could pass it only together
+with six others at that floor. The answer of section 1 rests on the row above it.
 
 The made-up words are a fair yardstick: the 64 Meroitic words that have an accepted meaning and no Egyptian link
 beat the 5% bar 0 to 5 times, depending on the pool, where 3 are expected.
@@ -156,9 +171,9 @@ pack. What the decoys show is that they did not accept look-alikes.
 3. **The model.** An Egyptian word becomes a Meroitic one letter by letter: a letter is kept, changed or dropped,
    and a letter may be added. The chances start from a neutral table (a consonant most often stays what it is,
    h, ꜣ, y and w drop easily) and are counted again from the aligned known loans, three rounds. The Egyptian word
-   may carry its article p or t; how often is counted from the same loans. What it learned from the 24 loans:
-   Egyptian h and ḥ give a Meroitic vowel at the start or nothing, š gives s, n drops in one case of five, and a
-   fifth of the loans carry the article p.
+   may carry its article p or t; how often is counted from the same loans. What it counted from the 24 loans:
+   Egyptian h and ḥ (one letter for the search) give the mark of a vowel at the start all 4 times, š gives s all
+   3 times, n is dropped 2 times in 7, and 4 loans carry the article p and 1 the article t.
 4. **The test.** A loan is searched with a model trained without it and without any loan that shares its source.
 5. **Pools by kind.** Narrow and wide: a title among the Demotic titles, then among titles and nouns; a god,
    place or person among the Demotic names of that kind, then among all names; a noun among nouns, then nouns and
@@ -189,13 +204,15 @@ pack. What the decoys show is that they did not accept look-alikes.
 | the answer key, the result files, the checkers' pack and answers | drawn from Rilly's lexicon and the gloss file | local, `data/sources/egyptian/` |
 
 A `ccl:` number opens in the [Coptic Dictionary Online](https://coptic-dictionary.org/entry/C1725) (the link is
-the entry of ⲗⲁϣⲁⲛⲉ; put another number in its place). A `tla:` number is a lemma of the
-[Thesaurus Linguae Aegyptiae](https://thesaurus-linguae-aegyptiae.de/).
+the entry of ⲗⲁϣⲁⲛⲉ; put another number in its place). A `tla:` number opens as a lemma of the Thesaurus
+Linguae Aegyptiae, without the `tla:`: [d2527 is `mr-šn`](https://thesaurus-linguae-aegyptiae.de/lemma/d2527) (the
+site asks for a short browser check first).
 
 To rebuild, with the local files in place: `python3 -I src/egyptian.py build` (about four minutes), then
 `check` and `merge` for the checkers' pack and answers.
 
 ## 7. Cost
 
-The two readers of the answer key took 364,923 subagent tokens, the two checkers 249,072. The search itself is
-plain Python and runs in four minutes.
+The two readers of the answer key took 364,923 subagent tokens, the two checkers 249,072 and one web check about
+8,000: about 0.62 million in all, against about 1 million estimated beforehand, and the review comes on top. The
+search itself is plain Python and runs in four minutes.

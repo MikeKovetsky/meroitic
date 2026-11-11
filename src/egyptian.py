@@ -85,6 +85,8 @@ KEY_KIND = {"other": "noun"}  # the readers' kinds that the coverage map does no
 MADE_UP = 300                 # made-up words of each length that a best match is compared with
 LONGEST = 8                   # words of this many letters or more are compared together
 SEED = 17
+BAR = 0.05                    # a best match beats the bar when at most this share of made-up words do as well
+FDR = 0.2                     # the bar for many tries: at most this share of the pieces passing it are chance
 # Rilly's Egyptian transliteration -> the TLA's, for finding a printed source word in the pools
 RILLY = {"3": "ꜣ", "ʿ": "ꜥ", "ᶜ": "ꜥ", "ͨ": "ꜥ", "ʾ": "ꜣ", "ỉ": "ꞽ", "i": "ꞽ", "j": "y", "ś": "s", "ḳ": "q",
          "ṭ": "ṱ", "ı": "ꞽ"}
@@ -320,16 +322,21 @@ def train(pairs, rounds=3):
             code = max(codes, key=lambda c: (score(word, c, md), c))
             a, ops = align(word, code, md)
             counts["article"][a] += 1
-            for k, (e, m) in enumerate(ops):
-                if k < len(a):
-                    continue                 # the article's own letter is the article, not a sound match
-                counts["add" if not e else "out"][m if not e else (e, m)] += 1
+            used = 0                         # Egyptian letters aligned so far; the first len(a) are the article
+            for e, m in ops:
+                if not e:
+                    counts["add"][m] += 1    # a Meroitic letter added, also when it comes before the article
+                    continue
+                used += 1
+                if used > len(a):            # the article's own letter is the article, not a sound match
+                    counts["out"][(e, m)] += 1
         md = model(counts)
     return md
 
 
 def search(word, trie, md, top=1, floor=None):
-    """The best pool entries for a word: [(score, entry number)], best first, one row an entry.
+    """The best pool entries for a word: [(score, entry number)], best first and ties by entry number, one row an
+    entry: what scoring every entry would give.
 
     With `floor`, every entry that scores `floor` or better instead. A branch is left as soon as no word below
     it can reach the bar: a row's best cell bounds every score under it.
@@ -346,7 +353,9 @@ def search(word, trie, md, top=1, floor=None):
                         if s > found.get(k, -math.inf):
                             found[k] = s
                     if floor is None and len(found) > 4 * top:
-                        keep = sorted(found.items(), key=lambda kv: -kv[1])[:top]
+                        # ties by entry number, as in the final ranking: an entry left out here has `top` entries
+                        # ranked above it, so it could not be among the best
+                        keep = sorted(found.items(), key=lambda kv: (-kv[1], kv[0]))[:top]
                         bar[0] = keep[-1][1]
                         found.clear()
                         found.update(keep)
@@ -465,11 +474,22 @@ def headwords():
     return out
 
 
-def passing(chances, q=0.2):
+def passing(chances, q=FDR):
     """How many of the chances pass Benjamini and Hochberg's bar: at most a share q of those passing are
     expected to be chance."""
     ranked = sorted(chances)
     return max([k + 1 for k, p in enumerate(ranked) if p <= q * (k + 1) / len(ranked)], default=0)
+
+
+def as_many(k, n, p=BAR):
+    """The chance that k or more of n words beat a bar that each beats with chance p."""
+    return sum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k, n + 1))
+
+
+def fewest_to_pass(n, q=FDR, made=MADE_UP):
+    """How many of n pieces must sit at the smallest chance there is, 1 / (made + 1), before Benjamini and
+    Hochberg's bar lets any of them pass: a single piece never can when q / n is smaller than that."""
+    return math.ceil(n / (q * (made + 1)) - 1e-12)
 
 
 # ----------------------------------------------------------------------------------------------- commands
@@ -630,7 +650,7 @@ def build():
 
     fig = figures(pool, test, calm, others, rows, len(plain))
     (OUT / "figures.json").write_text(json.dumps(fig, ensure_ascii=False, indent=1) + "\n")
-    write_public(rows)
+    PUBLIC.write_text(public_list(rows), encoding="utf-8")
     print(json.dumps(fig, ensure_ascii=False, indent=1))
 
 
@@ -639,7 +659,7 @@ def figures(pool, test, calm, others, rows, plain):
         got = [r[name]["place"] for r in rs if name in r and r[name]["place"]]
         return {"in_scope": len(got), **{f"top{k}": sum(p <= k for p in got) for k in (1, 3, 5, 10)}}
 
-    def beats(rs, name, bar=0.05):
+    def beats(rs, name, bar=BAR):
         got = [r[name]["chance"] for r in rs if name in r and "chance" in r[name]]
         return {"compared": len(got), "at_most_0.05": sum(c <= bar for c in got)}
 
@@ -648,6 +668,7 @@ def figures(pool, test, calm, others, rows, plain):
     words = [r for r in test if r["kind"] not in C.NAME_KINDS]
     searched = [r for r in rows if "narrow" in r]
     fresh = [r for r in searched if not (r["mentions_egyptian"] or r["spelled_like"])]
+    below = {name: sum(r[name]["chance"] <= BAR for r in fresh) for name in ("narrow", "wide")}
     out = {
         "pool": {"entries": len(pool), "demotic": sum(e["id"].startswith("tla:") for e in pool),
                  "coptic": sum(e["id"].startswith("ccl:") for e in pool),
@@ -659,7 +680,7 @@ def figures(pool, test, calm, others, rows, plain):
                  "words": {"loans": len(words), "with_source": sum("all" in r for r in words),
                            "narrow": tops(words, "narrow"), "wide": tops(words, "wide"), "all": tops(words, "all"),
                            "chance_narrow": beats(words, "narrow"), "chance_wide": beats(words, "wide")}},
-        "native": {"words": plain, "at_most_0.05": {s: sum(c <= 0.05 for c in v) for s, v in calm.items()},
+        "native": {"words": plain, "at_most_0.05": {s: sum(c <= BAR for c in v) for s, v in calm.items()},
                    "at_most_0.2": {s: sum(c <= 0.2 for c in v) for s, v in calm.items()}},
         "others": {label: {"words": len(rs),
                            **{name: {"in_scope": sum(r[name] is not None for r in rs),
@@ -669,18 +690,23 @@ def figures(pool, test, calm, others, rows, plain):
                    for rs in [[r for r in others if r["label"] == label]]},
         "unknown": {"pieces": len(rows), "searched": len(searched), "too_short": len(rows) - len(searched),
                     "new": len(fresh),
-                    **{name: {"at_most_0.05": sum(r[name]["chance"] <= 0.05 for r in fresh),
-                              "expected_by_chance": round(0.05 * len(fresh), 1),
+                    **{name: {"at_most_0.05": below[name], "expected_by_chance": round(BAR * len(fresh), 1),
+                              "as_many_by_chance": round(as_many(below[name], len(fresh)), 3),
                               "passing_q_0.2": passing([r[name]["chance"] for r in fresh])}
                        for name in ("narrow", "wide")},
+                    "smallest_chance": round(1 / (MADE_UP + 1), 5), "first_step_q_0.2": round(FDR / len(fresh), 6),
+                    "fewest_at_the_smallest_chance_to_pass": fewest_to_pass(len(fresh)),
                     "by_kind": dict(collections.Counter(r["kind"] for r in searched).most_common())},
     }
     return out
 
 
-def write_public(rows):
-    """The public list: each searched piece with its best match among the words of its kind, narrow and wide."""
-    head = ["piece", "kind", "texts (near-copies once)", "already linked to Egyptian in the lexicon",
+def public_list(rows):
+    """The public list: each searched piece with its best match among the words of its kind, narrow and wide.
+    It holds lemma numbers and forms of the two word lists and no meaning of either, nor any gloss of the lexicon."""
+    head = ["piece", "kind", "texts (near-copies once)",
+            "set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is "
+            "spelled like an entry linked to Egyptian",
             "narrow: chance", "narrow: best match", "narrow: its form", "wide: chance", "wide: best match",
             "wide: its form"]
     lines = ["\t".join(head)]
@@ -692,7 +718,7 @@ def write_public(rows):
             hit = r[name]["hits"][0]
             cells += [f'{r[name]["chance"]:.3f}', hit["id"], hit["form"]]
         lines.append("\t".join(cells))
-    PUBLIC.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return "\n".join(lines) + "\n"
 
 
 # ------------------------------------------------------------------------------------------------ the check
@@ -700,8 +726,8 @@ def write_public(rows):
 GLOSSES = ROOT / "data/sources/coverage/glosses.jsonl"      # the coverage map's gloss file, local only
 CHECK = HERE / "check"
 BRIEF = ROOT / "data/discovery/egyptian_brief.md"
-DECOYS = 12                   # pieces whose best match is poor, mixed into the pack unmarked
-BAR = 0.05                    # a piece goes to the checkers when its best match beats this chance
+DECOYS = 12                   # pieces whose best match is poor, mixed into the pack unmarked; a piece goes to
+                              # the checkers when its best match beats the bar (BAR)
 
 
 def contexts(spellings, texts, n=3, side=5):
@@ -782,7 +808,7 @@ def check_merge():
                 a = json.loads(line)
             except ValueError:
                 continue
-            if isinstance(a, dict) and a.get("id") in answer and a.get("verdict") in VERDICTS:
+            if isinstance(a, dict) and isinstance(a.get("id"), str) and a["id"] in answer and a.get("verdict") in VERDICTS:
                 got.setdefault(a["id"], a)
         readers[path.stem] = got
     real = [i for i, a in answer.items() if not a["decoy"]]
