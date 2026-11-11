@@ -37,7 +37,9 @@ open). What is new, with the run behind each claim:
    16 (26%) for an n-gram model, exact McNemar p ≈ 0.001 (`C3_cloze`, `src/cloze_families.py copies`).
 7. **Negative results.** No Meroitic–Nubian lexical signal with open word lists beyond the words Rilly's sound laws
    were built from (held-out p = 0.49, `src/cognates_rules.py`); REM 1003 holds nothing checkable against the Roman
-   war (as Rilly 2014); no "new" reading survived the adversarial check (`data/discovery/verification.md`).
+   war (as Rilly 2014); no "new" reading survived the adversarial check (`data/discovery/verification.md`). A
+   search by sound alone for Egyptian sources gives nothing above chance for the pieces without a meaning, and
+   finds 4 of 14 known borrowed titles and nouns (Day four, afternoon, below).
 
 8. **About 60% of the running words can be translated today, word by word.** 13,292 of the 21,977 words of
    `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
@@ -279,3 +281,31 @@ After "are you giving up?", four more lines of attack, then data.
    move 186 words, to 61.3%.
 8. **Limits:** word by word is not understanding: verb endings are mostly unexplained. No specialist has checked
    a line, the analysts are one model family, and the lexicon is the state of 2003.
+
+## Day four, afternoon (2026-11-11): Egyptian sources by sound
+
+`src/egyptian.py`, `tests/test_egyptian.py`; the page is [`data/discovery/egyptian.md`](data/discovery/egyptian.md).
+
+1. **The question:** can a scorer that knows only letters find the Egyptian word behind a Meroitic one in two open
+   word lists (5,660 Demotic lemmata of the TLA's sentences, 11,283 entries of the Comprehensive Coptic Lexicon)?
+2. **The test on known loans, each hidden in turn.** The key is 35 accepted borrowings of Rilly's lexicon (14
+   titles, nouns and verbs, 21 names); the source of 24 stands in the lists. Titles, nouns and verbs: the true
+   source is among the five best candidates of its kind for 4 of 14 (`plsn`, `ḫrpḫe`, `pelmos`, `kisri`) and among
+   the ten best for 6; the bar set before the run was most of the 14. Names: among the three best for all 10 that
+   have a source among the Demotic names of their kind, first for 7.
+3. **Against chance:** the best match of a known title or noun beats the best matches of 95% of made-up words for
+   2 of 11 loans (wide pool) and for none (narrow pool). A match in sound does not tell a loan from a look-alike.
+4. **The unknown pieces:** of 383 searched, 22 and 26 beat the 5% bar (narrow and wide pool) where 19 are expected
+   by chance; none passes the bar for 383 tries.
+5. **The check:** two blind checkers read the 33 best matches with 12 unmarked decoys and agreed on all 45: no new
+   source, every decoy rejected, five matches are forms of loans already known (`prSn`, `petmoS`, `pertese`,
+   `stol`, `menote`) and one (`aribet`) is the Meroitic title `arebetke` as a Philae graffito spells it.
+6. **By-products:** 16 pieces of the coverage map's list are forms of words the lexicon already links to Egyptian;
+   the Demotic list holds graffiti of Meroitic officials (`qrnyꜣ` for `qorene`, `ꜣrbtgꜥyꜣ` for `arebetke`), and
+   the search puts both first among the titles.
+7. **Not done:** the oracular decrees (neither list holds Egyptian texts of that kind) and the people named in
+   both the graffiti and the Meroitic texts (the Demotic file is single sentences, and the older corpus masks
+   names).
+8. **Limits:** the source entries of the 24 loans were picked by hand; the Demotic list is the vocabulary of a
+   sample of sentences, not a dictionary; the key, its readers and the checkers go back to one lexicon and one
+   model family. Cost: 0.61 million subagent tokens before the review.

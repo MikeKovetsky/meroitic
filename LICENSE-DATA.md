@@ -32,6 +32,10 @@ Cite as: Mike Kovetsky, *Meroitic with Opus 5.5* (2026), <https://github.com/Mik
 Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
 
 - `data/nes/meroitic_wiktionary.tsv` comes from Wiktionary: CC BY-SA 4.0, share-alike.
+- `data/discovery/egyptian_candidates.tsv` holds lemma numbers and lemma forms from the Demotic sentences of the
+  *Thesaurus Linguae Aegyptiae* (Berlin-Brandenburg and Saxon Academies) and from the *Comprehensive Coptic
+  Lexicon* (Burns, Feder, John, Kupreyev and others, v1.2, 2020), both CC BY-SA 4.0: the file is under
+  CC BY-SA 4.0, share-alike.
 - Readings quoted from *Fontes Historiae Nubiorum* II–III (Eide, Hägg, Pierce and Török, Bergen 1996–98, all rights
   reserved) as ground truth for the reading tests: about twenty short texts, each with its REM number, in
   `data/expansion/pilot.jsonl` (four), `data/expansion/printed_type_test.md`, `data/expansion/hand_copy_test.md` and

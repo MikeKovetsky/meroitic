@@ -1,0 +1,443 @@
+piece	kind	texts (near-copies once)	already linked to Egyptian in the lexicon	narrow: chance	narrow: best match	narrow: its form	wide: chance	wide: best match	wide: its form
+Tmne	place name	5	no	0.003	tla:dm6608	Tꜣ-mn	0.020	tla:dm1600	Ta-mn
+Arme	place name	2	yes	0.003	tla:d3842	Hrm(e)	0.033	tla:d3842	Hrm(e)
+pkrtr	title	1	no	0.003	tla:dm6094	qrṱr	0.017	ccl:C9533	ⲕⲣⲁⲧⲏⲣ
+pqrtr	title	1	yes	0.003	tla:dm6094	qrṱr	0.017	tla:dm6094	qrṱr
+smt	title	5	yes	0.040	tla:dm1265	smꜣty	0.007	tla:d6011	šm(.t)
+arebetke	title	1	yes	0.007	tla:dm552	ꜣrbtgꜥyꜣ	0.080	tla:dm552	ꜣrbtgꜥyꜣ
+menote	god name	1	no	0.007	tla:d2485	Mnṱ	0.020	tla:d2485	Mnṱ
+tmot	verb	6	no	0.010	tla:d7302	tmṱ	0.010	tla:d7302	tmṱ
+smle	title	3	no	0.455	tla:d4975	sꜣ-mr=f	0.010	ccl:C5892	ϣⲙⲟⲩⲗ
+smlo	title	2	no	0.455	tla:d4975	sꜣ-mr=f	0.010	ccl:C5892	ϣⲙⲟⲩⲗ
+Smle	title	1	no	0.455	tla:d4975	sꜣ-mr=f	0.010	ccl:C5892	ϣⲙⲟⲩⲗ
+mrm	numeral or measure	1	no	0.010	ccl:C2010	ⲙⲣⲱⲙ	0.010	ccl:C2010	ⲙⲣⲱⲙ
+petmoS	title	1	no	0.279	tla:dm5894	sẖ-mšꜥ	0.010	ccl:C10258	ⲡⲟⲧⲁⲙⲟⲥ
+semle	noun	1	no	0.010	ccl:C5892	ϣⲙⲟⲩⲗ	0.010	ccl:C5892	ϣⲙⲟⲩⲗ
+syete	place name	1	no	0.010	tla:dm5151	Syt	0.083	tla:dm5151	Syt
+armeyose	noun	2	yes	0.013	ccl:C11195	ϩⲣⲱⲙⲁⲓⲟⲥ	0.013	ccl:C11195	ϩⲣⲱⲙⲁⲓⲟⲥ
+arpto	god name	1	no	0.013	tla:dm4240	Ḥr-pyt	0.047	tla:dm1704	Ḥr-pyt
+sekesekine	title	1	no	0.535	tla:dm2102	sq-snṯr	0.013	ccl:C9113	ⲍⲩⲅⲓⲥⲕⲟⲛ
+temte	title	1	no	0.150	tla:dm1265	smꜣty	0.013	tla:dm4113	tm.t
+trose	adjective	11	yes	0.017	ccl:C4530	ⲧⲱⲣϣ	0.040	ccl:C815	ⲑⲉⲣϣ
+ssime	title	1	no	0.498	tla:d5745	stm	0.017	tla:d5607	sšm
+mreperi	title	4	yes	0.020	tla:d2512	mr-pr-wr	0.329	tla:d2512	mr-pr-wr
+mento	person name	1	no	0.199	tla:dm6809	Mns	0.020	tla:d2485	Mnṱ
+mniti	person name	1	no	0.199	tla:dm6809	Mns	0.020	tla:d2485	Mnṱ
+pelmetreyose	title	1	yes	0.086	tla:dm4910	ḥm-nṯr-(n-)Ꜣs.t	0.020	ccl:C8184	ⲁⲗⲗⲟⲧⲣⲓⲟⲛ
+pertese	title	1	no	0.023	tla:dm5010	rd-(n-)Ꜣs.t	0.020	ccl:C10038	ⲡⲁⲣⲁⲇⲉⲓⲥⲟⲥ
+terekete	place name	2	no	0.023	tla:dm7311	Tꜣ-ꜥrkṱ	0.050	tla:dm7311	Tꜣ-ꜥrkṱ
+aribet	title	1	no	0.023	tla:dm593	wr-ꞽꜣbṱ	0.063	ccl:C6794	ϩⲣⲃⲱⲧ
+prSn	title	1	no	0.023	tla:dm281	wr-swnw	0.033	ccl:C10145	ⲡⲉⲣⲓⲥⲟⲛ
+Adenodor	place name	1	no	0.027	tla:d410	Ꞽwn.t-tꜣ-nṯr.t	0.056	tla:dm3317	ꞽt-nṯr.w
+tpoto	verb	1	spelled like tpete	0.027	ccl:C4430	ⲧⲁⲡⲧ	0.027	ccl:C4430	ⲧⲁⲡⲧ
+dmkte	verb	2	no	0.030	ccl:C1403	ϫⲉⲙⲕⲁϯ	0.030	ccl:C1403	ϫⲉⲙⲕⲁϯ
+armte	god name	1	yes	0.030	tla:dm747	Ḥr-mdn	0.130	tla:dm747	Ḥr-mdn
+phrstel	place name	1	no	0.030	tla:d3577	Rsn(.t)	0.272	tla:d3577	Rsn(.t)
+tmNte	title	1	no	0.030	tla:dm5020	rd-(n-)Mnṱ	0.176	ccl:C4298	ⲧⲱⲙ ⲛϩⲏⲧ
+plete	verb	3	no	0.033	ccl:C8619	ⲃⲗⲁⲡⲧⲉⲓ	0.033	ccl:C8619	ⲃⲗⲁⲡⲧⲉⲓ
+arom	person name	1	spelled like Arome	0.150	tla:dm2663	Ḥr-Mn	0.033	tla:d3842	Hrm(e)
+amn	god name	2	spelled like Amni	0.037	tla:d505	Ꞽmn	0.140	tla:d505	Ꞽmn
+stol	title	1	no	0.346	tla:dm6785	šwṱ.t	0.037	ccl:C5777	ϣⲁⲑⲱⲗ
+tkereketmS	noun	1	no	0.037	ccl:C10989	ⲭⲣⲏⲥⲙⲟⲥ	0.037	ccl:C10989	ⲭⲣⲏⲥⲙⲟⲥ
+kttre	title	4	no	0.365	tla:d730	ꞽt-nṯr	0.040	ccl:C9238	ⲕⲁⲑⲉⲇⲣⲁ
+mtr	noun	4	no	0.040	tla:d2800	mtr(e.t)	0.040	tla:d2800	mtr(e.t)
+amero	title	2	yes	0.040	tla:d970	ꜥmr	0.169	ccl:C6644	ϩⲁⲙⲏⲣ
+ameri	title	1	spelled like amero	0.040	tla:d970	ꜥmr	0.169	ccl:C6644	ϩⲁⲙⲏⲣ
+aSore	god name	1	spelled like Asori	0.086	tla:d1502	Wsꞽr	0.047	tla:d3920	ḥ.t-sre.w
+dkretri	title	6	no	0.050	tla:dm6094	qrṱr	0.113	ccl:C8550	ⲁⲩⲧⲟⲕⲣⲁⲧⲱⲣ
+aretwte	title	2	no	0.050	tla:dm1146	wr-Ḏḥwty	0.332	tla:dm2378	ꞽrte(.t)
+trri	benediction verb	1	no	0.050	ccl:C4519	ⲧⲣⲣⲉ	0.050	ccl:C4519	ⲧⲣⲣⲉ
+tloli	noun	4	yes	0.053	ccl:C4257	ⲧⲉⲗⲏⲗ	0.053	ccl:C4257	ⲧⲉⲗⲏⲗ
+mror	noun	4	no	0.056	ccl:C2002	ⲙⲣⲣⲉ	0.056	ccl:C2002	ⲙⲣⲣⲉ
+terite	noun	3	yes	0.056	tla:d7371	trt	0.056	tla:d7371	trt
+Kobble (?)	place name	1	yes	0.056	tla:d1703	Bbl	0.282	tla:d1703	Bbl
+ptroti	god name	7	yes	0.133	tla:dm3870	Tꜣ-rꜥ-št.t	0.060	tla:d8315	Ta-rṱ
+bwteli	place name	1	no	0.060	tla:dm562	Byṱl	0.306	tla:dm562	Byṱl
+ptri	noun	1	no	0.060	ccl:C10161	ⲡⲉⲧⲣⲁ	0.060	ccl:C10161	ⲡⲉⲧⲣⲁ
+mesen	title	3	no	0.063	tla:d4079	ḥm-šn(ꜣ)	0.093	tla:dm5594	msn
+Sores	god name	1	no	0.641	tla:dm5000	ꜣs.t-wry(.t)	0.063	tla:dm3391	ꜣs.t-rš(y)
+lxeketes	verb	1	no	0.063	ccl:C9590	ⲗⲁⲕⲧⲓⲍⲉ	0.063	ccl:C9590	ⲗⲁⲕⲧⲓⲍⲉ
+meremteblide	person name	1	no	0.066	tla:dm7306	mr-mw.ṱ=f	0.090	tla:dm7306	mr-mw.ṱ=f
+meremtebolide	person name	1	no	0.066	tla:dm7306	mr-mw.ṱ=f	0.090	tla:dm7306	mr-mw.ṱ=f
+atmi	verb	4	yes	0.073	tla:d4345	ḥtm	0.073	tla:d4345	ḥtm
+abrse	title	3	no	0.146	tla:dm5204	wꜥb.t-(n-)ꜣrsynꜣ	0.073	ccl:C11076	ϩⲉⲃⲣⲁⲓⲟⲥ
+arette	god name	3	yes	0.073	tla:dm7174	wr-wꜣḏ.ty	0.216	tla:dm6446	Wrts
+aberse	noun	1	no	0.073	ccl:C11076	ϩⲉⲃⲣⲁⲓⲟⲥ	0.073	ccl:C11076	ϩⲉⲃⲣⲁⲓⲟⲥ
+mlne	title	1	no	0.488	tla:d2527	mr-šn	0.073	ccl:C1870	ⲙⲓⲟⲗⲱⲛ
+mloN	adjective	1	no	0.777	ccl:C2204	ⲙⲏⲏϣⲉ ⲛ-	0.076	ccl:C1870	ⲙⲓⲟⲗⲱⲛ
+Akine	place name	6	yes	0.382	tla:dm2195	Ḥr-ḥgn	0.080	tla:d4306	Ḥkn(e).t
+mleyose	title	3	no	0.498	tla:d2522	mr-ḥs	0.080	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+mdewetye	place name	1	no	0.551	tla:d2767	Mdy	0.080	tla:dm1908	Mꜣꜥ-ḏḥwty
+woSnSqo	person name	1	no	0.080	tla:dm2200	Snsg	0.100	tla:dm2200	Snsg
+sdrte	noun	5	yes	0.083	tla:d5761	sḏr.t	0.083	tla:d5761	sḏr.t
+qesto	place name	1	no	0.083	tla:d725	ꞽkšy.t	0.296	tla:dm2427	qy-šw.ty
+tNye	person name	1	no	0.286	tla:dm3344	Ta-nꜣ-ꜥ.wy.w	0.086	tla:d7327	Tny
+teketin	noun	11	no	0.090	ccl:C8157	ⲁⲕⲣⲁⲧⲟⲛ	0.090	ccl:C8157	ⲁⲕⲣⲁⲧⲟⲛ
+Arere	place name	1	yes	0.598	tla:d3905	Ḥ.t-wr.t	0.093	tla:dm257	Ḥr-Rꜥ
+iror	person name	1	no	0.100	tla:dm2295	Ꜥrr	0.093	tla:dm257	Ḥr-Rꜥ
+teqride	person name	3	no	0.100	tla:dm5749	Qrḏ	0.133	tla:dm5749	Qrḏ
+qoriti	place name	1	no	0.309	tla:dm279	Nꜣy=w-qrḏ	0.106	tla:dm5749	Qrḏ
+tsmereh	person name	1	no	0.362	tla:dm5838	Ta-swr	0.106	tla:d5895	šw-mre
+pnqose	title	2	no	0.439	tla:d5360	sngns	0.110	ccl:C10126	ⲡⲉⲛⲁⲅⲓⲥ
+tetelitreli	title	1	no	0.425	tla:d730	ꞽt-nṯr	0.110	tla:d7382	tltyle.t
+tkreye	person name	1	no	0.110	tla:dm6839	Kry	0.143	tla:dm6839	Kry
+Aritene	god name	5	yes	0.116	tla:dm747	Ḥr-mdn	0.243	tla:dm272	ꜣrsyn(ꜣ.t)
+abso (?)	title	1	no	0.116	tla:dm4971	wꜥb-(n-)Ꜣs.t	0.286	ccl:C6467	ϩⲩⲃϣ
+ames	noun	2	no	0.120	ccl:C5701	ϩⲁⲙϣⲉ	0.120	ccl:C5701	ϩⲁⲙϣⲉ
+arwtl	person name	1	no	0.120	tla:dm3539	Ḥr-wty	0.150	tla:dm3539	Ḥr-wty
+Sxini	verb	3	no	0.126	tla:d5522	sḫn(y)	0.126	tla:d5522	sḫn(y)
+etes	verb	1	no	0.126	ccl:C11102	ϩⲉⲧⲁⲍⲉ	0.126	ccl:C11102	ϩⲉⲧⲁⲍⲉ
+pmete	person name	2	no	0.130	tla:dm1833	Pa-mnṱ	0.176	tla:dm1833	Pa-mnṱ
+bersowi	noun	1	no	0.130	ccl:C532	ⲃⲣⲉϣⲏⲩ	0.130	ccl:C532	ⲃⲣⲉϣⲏⲩ
+tkereXetmS	noun	1	no	0.130	ccl:C10989	ⲭⲣⲏⲥⲙⲟⲥ	0.136	ccl:C10989	ⲭⲣⲏⲥⲙⲟⲥ
+wtotrse	noun	1	no	0.130	ccl:C8553	ⲁⲩⲧⲟⲧⲉⲗⲏⲥ	0.130	ccl:C8553	ⲁⲩⲧⲟⲧⲉⲗⲏⲥ
+Wrose	place name	3	yes	0.565	tla:dm622	Rw.t-ꞽs.t	0.133	tla:dm1922	Wrše
+mlewye	title	1	no	0.140	tla:d2506	mr-ꜥ.wy	0.751	tla:d2506	mr-ꜥ.wy
+areqebr	title	3	no	0.143	tla:dm555	ꜣrghrwe	0.219	ccl:C8470	ⲁⲣⲭⲏⲡⲣⲉⲥⲃⲩⲧⲉⲣⲟⲥ
+treN	person name	1	no	0.143	tla:dm5372	Twryn	0.196	tla:dm5372	Twryn
+mlekye	title	2	no	0.661	tla:dm614	mr-kꜣ.t	0.146	ccl:C11160	ϩⲟⲙⲟⲗⲟⲅⲓⲁ
+tneyine	epithet	2	no	0.721	tla:d5506	sh̭yꜣnꜣ	0.146	ccl:C8872	ⲉⲑⲁⲛⲓⲟⲛ
+pyeSi	person name	1	no	0.146	tla:dm6804	Pꜣy-Ꜣs.t	0.203	tla:dm6804	Pꜣy-Ꜣs.t
+rstl	place name	1	no	0.150	tla:d3577	Rsn(.t)	0.532	tla:d3577	Rsn(.t)
+Adere	place name	5	yes	0.153	tla:d1224	Wꜣḏ-wr	0.359	tla:dm1756	Ḥtr
+belimetye	person name	2	no	0.156	tla:dm2042	Bl-sṱy	0.199	tla:dm2042	Bl-sṱy
+mleke	title	5	no	0.176	tla:dm614	mr-kꜣ.t	0.159	ccl:C1873	ⲙⲟⲗⲟⲭ
+-kror	person name	3	no	0.159	tla:dm6516	Qrr	0.213	tla:dm6516	Qrr
+ptenowi	person name	1	no	0.159	tla:dm2048	Ta-nꜣ	0.186	tla:dm2048	Ta-nꜣ
+bedewitel	place name	1	no	0.166	tla:dm562	Byṱl	0.581	tla:dm562	Byṱl
+womnise	title	4	no	0.169	tla:d4084	ḥm.t-nsw	0.575	ccl:C5613	ⲙⲁ ⲛⲱϣ
+qoret	noun	3	no	0.169	tla:d6412	qrṱ.t	0.169	tla:d6412	qrṱ.t
+qorete	noun	2	no	0.169	tla:d6412	qrṱ.t	0.169	tla:d6412	qrṱ.t
+qorte	noun	1	no	0.169	tla:d6412	qrṱ.t	0.169	tla:d6412	qrṱ.t
+Aqedise	epithet	4	yes	0.907	tla:d4084	ḥm.t-nsw	0.176	ccl:C9911	ⲟⲅⲇⲟⲁⲥ
+atolit	noun	3	no	0.176	ccl:C304	ⲁϭⲟⲗⲧⲉ	0.179	ccl:C304	ⲁϭⲟⲗⲧⲉ
+adlito	noun	1	no	0.176	ccl:C304	ⲁϭⲟⲗⲧⲉ	0.179	ccl:C304	ⲁϭⲟⲗⲧⲉ
+apette	noun	1	no	0.176	tla:dm1161	ꜥfṱ.t	0.179	tla:dm1161	ꜥfṱ.t
+mXeyo	title	1	no	0.176	tla:d839	ꜥꜣ-(n-)mḫy	0.701	tla:d2646	mḫy(.t)
+mnpti	god name	1	no	0.176	tla:d508	Ꞽmn-ꞽpy	0.449	tla:dm7436	ym-(n-)Qbṱ
+lks	noun	4	no	0.179	ccl:C1623	ⲗⲱⲕϣ	0.179	ccl:C1623	ⲗⲱⲕϣ
+Ssmti	title	1	no	0.492	tla:dm1265	smꜣty	0.179	ccl:C3926	ϣⲟⲥⲙⲉⲥ
+mseẖto	title	1	no	0.395	tla:dm5100	sẖ-ꞽt	0.179	tla:d2692	msh̭ṱ
+qomlise	epithet	2	yes	0.781	tla:d6884	gl-šr	0.186	ccl:C8131	ⲁⲓⲭⲙⲁⲗⲱⲥⲓⲁ
+axboroteN	noun	1	no	0.186	ccl:C9910	ⲟⲃⲣⲩⲍⲟⲛ	0.193	ccl:C9910	ⲟⲃⲣⲩⲍⲟⲛ
+tewiNye	name	1	no	0.193	tla:d7707	Ḏꜥny	0.193	tla:d7707	Ḏꜥny
+wetemtr	person name	1	no	0.193	tla:dm3551	Wsr-mꜣꜥ.t-Rꜥ	0.236	tla:dm3551	Wsr-mꜣꜥ.t-Rꜥ
+xmXelli	noun	1	no	0.193	tla:d4506	ḫm-ẖl	0.196	tla:d4506	ḫm-ẖl
+arse	noun	1	no	0.196	tla:dm1411	ḥrš	0.196	tla:dm1411	ḥrš
+aroteN	person name	1	spelled like Aritene	0.203	tla:dm272	ꜣrsyn(ꜣ.t)	0.243	tla:dm272	ꜣrsyn(ꜣ.t)
+pesyto	title	1	no	0.302	tla:dm6785	šwṱ.t	0.203	tla:d5069	syt
+toqoye	name	1	no	0.203	tla:dm2275	Tyqy	0.203	tla:dm2275	Tyqy
+alle	noun	1	no	0.206	tla:d4252	ḥll(e)	0.206	tla:d4252	ḥll(e)
+pqebete	title	1	no	0.435	tla:d5229	sbṱ	0.209	tla:d6294	qb(ꜣ).t
+penn	noun	24	yes	0.216	ccl:C2855	ⲡⲉⲛⲛⲉ	0.216	ccl:C2855	ⲡⲉⲛⲛⲉ
+atos	title	3	no	0.326	tla:d22	ꜣysws	0.216	ccl:C6951	ϩⲟⲧⲥ
+Sotn	person name	1	no	0.216	tla:dm6080	Ssn	0.272	tla:dm6080	Ssn
+ponni	title	1	no	0.645	tla:dm4954	wꜥb-(n-)Mn	0.216	ccl:C2855	ⲡⲉⲛⲛⲉ
+smrso : kroro	title	1	no	0.216	tla:dm4897	ḥm-nṯr-(n-)Skr	0.688	ccl:C1322	ⲙⲁⲥ ⲛⲕⲣⲟⲩⲣ
+tepeyetmite	name	1	no	0.216	tla:dm2454	Pꜣ-tꜣ-mḥṱ	0.216	tla:dm2454	Pꜣ-tꜣ-mḥṱ
+Slotey	place name	1	no	0.223	tla:dm448	Šd(y)	0.355	tla:dm5517	Šty
+nbr	noun	11	yes	0.226	ccl:C2440	ⲛⲟⲃⲣⲟⲩ	0.226	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
+SipeSiye	person name	1	no	0.229	tla:dm6218	Tꜣ-špšy.t	0.276	tla:dm6218	Tꜣ-špšy.t
+mlekeyose	title	2	no	0.751	tla:d2522	mr-ḥs	0.233	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+Arrese	place name	1	no	0.555	tla:dm6650	Pr-ꜥ.wy-Ꜣwrys	0.233	tla:dm7151	Ḥr-mr-ꜣs.t
+mlkeyose	title	1	no	0.751	tla:d2522	mr-ḥs	0.233	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+mdos	title	1	no	0.555	tla:d4084	ḥm.t-nsw	0.236	ccl:C9778	ⲙⲏⲇⲟⲥ
+areqis	noun	1	no	0.239	ccl:C8421	ⲁⲣⲅⲟⲥ	0.243	ccl:C8421	ⲁⲣⲅⲟⲥ
+iliNqo	person name	1	no	0.243	tla:dm5556	Hlnqws	0.289	tla:dm5556	Hlnqws
+drp	verb	1	no	0.246	tla:d7786	ḏrp	0.246	tla:d7786	ḏrp
+Tketore	place name	3	no	0.372	tla:dm353	tꜣ-nṯr	0.252	tla:d58	ꜣwtwgrt(w)r
+wrtḫn	title	3	yes	0.252	tla:dm281	wr-swnw	0.585	ccl:C8574	ⲁϩⲟⲣⲁⲧⲟⲛ
+Srbi	god name	1	no	0.252	tla:dm2386	Wsꞽr-Bẖ	0.482	tla:dm6711	Šꜥ-rd.wy.ṱ=f
+pedelmotbr	title	1	no	0.425	tla:d2516	mr-mr.t-yꜥr	0.252	ccl:C519	ⲙⲛⲧⲃⲣⲣⲉ
+xbxeNkdi	title	2	no	0.894	tla:dm4962	wꜥb-(n-)H̱nm	0.269	ccl:C6429	ϩⲱⲃ ⲛϭⲓϫ
+ḫirette	god name	2	yes	0.269	tla:d3448	Rꜥ(.t)-tꜣ.wy	0.641	tla:d3448	Rꜥ(.t)-tꜣ.wy
+arosd	title	1	yes	0.269	tla:dm7128	ḥry-sẖ	0.326	tla:d4193	Ḥr-št
+SSimeleb	title	1	no	0.272	tla:d4975	sꜣ-mr=f	0.761	ccl:C7860	ϣⲥϭⲉⲣⲱⲃ
+Sdose	place name	3	no	0.478	tla:dm448	Šd(y)	0.276	tla:dm6613	Ꜣs.t-ꞽ.ꞽr-dy-s
+qesw	place name	1	no	0.548	tla:d6928	Gs	0.276	tla:dm2427	qy-šw.ty
+Simlo	place name	10	yes	0.279	tla:dm3417	Šm	0.419	tla:d5895	šw-mre
+Atoẖe	place name	2	spelled like atẖe	0.279	tla:d3924	Ḥ.t-(n-)tꜣ-ꞽḥ.t	0.628	tla:d3924	Ḥ.t-(n-)tꜣ-ꞽḥ.t
+mXeyot	title	1	no	0.608	tla:dm2939	ḥm-Ny.t	0.279	tla:d2646	mḫy(.t)
+tislke	noun	1	no	0.279	ccl:C5818	ϣⲗⲁⲕ	0.279	ccl:C5818	ϣⲗⲁⲕ
+krte	noun	2	no	0.282	ccl:C9403	ⲕⲉⲣⲁⲧⲥⲉ	0.282	ccl:C9403	ⲕⲉⲣⲁⲧⲥⲉ
+tereki	noun	2	no	0.282	ccl:C10692	ⲧⲁⲣⲁⲭⲏ	0.282	ccl:C10692	ⲧⲁⲣⲁⲭⲏ
+pXrse	place name	1	no	0.282	tla:d2094	Prs	0.342	tla:dm7254	Ḥr-sꜣ
+yeroteke	title	1	no	0.777	tla:d1466	wrṱ	0.282	ccl:C9206	ⲓⲉⲣⲁϯⲕⲟⲛ
+pqr	title	36	no	0.289	tla:d6401	qrnyꜣ	0.578	tla:d6384	qr
+SNmdet	title	1	no	0.399	tla:dm1452	wr-nmṱy(.t)	0.292	ccl:C2320	ϣⲁⲛⲙⲁϧⲧ
+mrde	title	1	no	0.296	tla:dm2889	mr-nṯr	0.651	ccl:C5564	ⲙⲁ ⲛⲱⲣϫ
+temkeN	noun	1	no	0.296	ccl:C9788	ⲙⲏⲭⲁⲛⲏ	0.296	ccl:C9788	ⲙⲏⲭⲁⲛⲏ
+amoke	title	2	no	0.302	tla:d4057	ḥm	0.542	ccl:C85	ⲁⲙⲟⲕ
+arkedni	noun	1	no	0.306	ccl:C11153	ϩⲟⲗⲟⲕⲟⲧⲧⲓⲛⲟⲥ	0.316	ccl:C11153	ϩⲟⲗⲟⲕⲟⲧⲧⲓⲛⲟⲥ
+eqelbxe	verb	1	no	0.306	ccl:C8871	ⲉⲅⲗⲁⲃⲉ	0.306	ccl:C8871	ⲉⲅⲗⲁⲃⲉ
+wkdiwikete	verb	1	no	0.306	ccl:C8029	ϭⲟϫϭϫ	0.306	ccl:C8029	ϭⲟϫϭϫ
+mlomrse	title	16	no	0.319	tla:d2517	mr-mšꜥ	0.309	ccl:C8212	ⲁⲙⲙⲟⲣⲁⲓⲟⲥ
+kdimloye	noun	1	no	0.309	ccl:C9226	ⲕⲁⲇⲙⲓⲁ	0.319	ccl:C9226	ⲕⲁⲇⲙⲓⲁ
+msXx	title	1	no	0.309	tla:d2525	mr-sẖ	0.654	tla:d2699	mšyḫ
+abero	title	1	no	0.425	tla:dm4980	wꜥb-(n-)Ḥ.t-ḥr	0.312	tla:dm7656	hbr
+anese	noun	1	no	0.316	ccl:C11093	ϩⲉⲛⲁⲥ	0.316	ccl:C11093	ϩⲉⲛⲁⲥ
+brtre	name	1	no	0.319	tla:d628	ꞽr.t-Rꜥ	0.319	tla:d628	ꞽr.t-Rꜥ
+kdisbetowi	kin term	1	no	0.319	ccl:C9913	ⲟⲓⲕⲟⲇⲉⲥⲡⲟⲧⲏⲥ	0.336	ccl:C9913	ⲟⲓⲕⲟⲇⲉⲥⲡⲟⲧⲏⲥ
+qrkili	name	1	no	0.319	tla:dm7307	Krkrw	0.319	tla:dm7307	Krkrw
+yitylesyi	person name	1	no	0.319	tla:dm5042	Ḏḥwty-rsy	0.379	tla:dm5042	Ḏḥwty-rsy
+bereke	title	1	no	0.402	tla:d1749	brḥ	0.322	ccl:C8642	ⲃⲣⲁⲭⲩ
+mdekr	title	1	no	0.442	tla:dm2800	mꜣꜥ-nṯr	0.326	ccl:C1289	ⲙⲉⲧⲕⲟⲩⲣ
+mlotoN	name	1	no	0.326	tla:dm273	mr-sn	0.326	tla:dm273	mr-sn
+tnbelile	person name	1	no	0.336	tla:dm5304	Ta-nfr	0.395	tla:dm5304	Ta-nfr
+nps	god name	1	no	0.525	tla:dm2706	Nꜣ-nfr-s.t	0.339	tla:d1365	Wn-bs
+etreteyqo	person name	1	no	0.581	tla:dm1609	Ḏḥwty-ꞽ.ꞽr-dy-s	0.346	tla:dm5596	Ḥ.t-nṯr-Sbk
+pxtotN	noun	1	no	0.346	ccl:C4350	ϯⲧⲱⲛ	0.359	ccl:C4350	ϯⲧⲱⲛ
+temey (2)	noun	12	no	0.349	tla:d9223	tmy	0.349	tla:d9223	tmy
+temey (1)	title	2	no	0.352	tla:dm4322	smwḥy	0.349	tla:d9223	tmy
+pteno	noun	1	no	0.349	ccl:C1004	ⲉⲡⲓⲧⲛ	0.349	ccl:C1004	ⲉⲡⲓⲧⲛ
+Xboye	person name	1	no	0.874	tla:dm1558	Ꞽby	0.352	tla:d4455	Ḫb(y)
+ayot	title	1	no	0.352	tla:dm6910	ḥry-ḥ.t	0.425	tla:d3755	hyt
+pXope	person name	1	no	0.365	tla:dm1731	Pꜣ-ḥp	0.462	tla:dm1731	Pꜣ-ḥp
+tdxiNtror	person name	1	no	0.379	tla:dm6138	Ta-tw-nꜣ-nṯr.w	0.365	tla:dm5018	nṯr-wr
+aritewil	noun	3	no	0.369	tla:dm5035	ḥr-(n-)tw	0.385	tla:dm5035	ḥr-(n-)tw
+Dbre	place name	3	no	0.372	tla:d7716	Ḏw-(pꜣ)-rꜥ	0.651	tla:dm1001	Ṯꜣy-nfr
+teliS	person name	1	no	0.372	tla:dm1580	Ta-ršy	0.475	tla:dm1580	Ta-ršy
+sqte	title	2	no	0.375	tla:d5575	sẖ-qdy	0.445	tla:d6188	škṱ
+mtotiwxne	god name	1	no	0.375	tla:dm3311	m-ꞽt.ṱ=f	0.777	tla:dm2344	Mnṱ-sw=f
+imlotror	person name	1	no	0.379	tla:dm6006	Ḥmꜣ-ḏrṱ	0.442	tla:dm6006	Ḥmꜣ-ḏrṱ
+yetmet	title	2	no	0.382	tla:dm5516	wḥy-(n-)tꜣ-mre(.t)	0.794	tla:d6666	qtm(ꜣ.t)
+drte	noun	1	no	0.382	tla:d6975	ḏr.t	0.382	tla:d6975	ḏr.t
+apotebese	title	1	no	0.598	tla:dm4889	ḥm-nṯr-(n-)Bꜣs.tt	0.385	ccl:C9027	ⲉⲡⲓⲧⲣⲟⲡⲟⲥ
+tlt	noun	7	yes	0.389	ccl:C8172	ⲁⲗⲏⲑⲉⲓⲁ	0.389	ccl:C8172	ⲁⲗⲏⲑⲉⲓⲁ
+treql	noun	1	no	0.392	ccl:C7604	ⲣⲁϭⲱⲗ	0.395	ccl:C7604	ⲣⲁϭⲱⲗ
+SSiXete	title	2	no	0.395	tla:dm5100	sẖ-ꞽt	0.588	ccl:C6876	ϣⲥⲛϩⲏⲧ
+ntk	verb	1	yes	0.395	ccl:C2706	ⲛⲟⲩϫⲕ	0.395	ccl:C2706	ⲛⲟⲩϫⲕ
+nXror	person name	1	no	0.399	tla:dm1892	Nfr-(pꜣ-)rꜥ	0.482	tla:dm1892	Nfr-(pꜣ-)rꜥ
+ptlteb	noun	1	no	0.399	ccl:C8172	ⲁⲗⲏⲑⲉⲓⲁ	0.415	ccl:C8172	ⲁⲗⲏⲑⲉⲓⲁ
+Skl	place name	9	no	0.601	tla:dm2787	Sꜣkꜣ	0.402	tla:d5665	Skr
+abeleqebr	title	1	no	0.684	tla:dm7251	wꜥb.t-(n-)Glwptr	0.402	ccl:C6453	ϩⲃⲟⲣⲃⲣ
+arbxteke	verb	1	no	0.402	ccl:C557	ⲉⲓⲣⲉ ⲛⲃⲟⲧⲉ	0.402	ccl:C557	ⲉⲓⲣⲉ ⲛⲃⲟⲧⲉ
+mStrqoye	person name	1	no	0.402	tla:dm3391	ꜣs.t-rš(y)	0.475	tla:dm3391	ꜣs.t-rš(y)
+tniqo	person name	1	no	0.575	tla:dm1837	Nꜣ-kꜣ.w	0.402	tla:d1010	ꜥnq.t
+mXewitr	title	5	no	0.405	tla:dm2800	mꜣꜥ-nṯr	0.957	tla:dm2800	mꜣꜥ-nṯr
+qyise	epithet	1	no	0.678	tla:dm6765	qse.t	0.405	tla:dm7451	qys.t
+tereqe	verb	1	no	0.405	ccl:C4492	ⲧⲁⲣⲕⲟ	0.405	ccl:C4492	ⲧⲁⲣⲕⲟ
+pwide	adjective	2	yes	0.409	tla:dm7494	wḏꜣ	0.777	ccl:C9213	ⲓⲟⲩⲇⲁⲓ
+nibelilto	place name	1	no	0.409	tla:d577	Ꞽnb-ḥḏ	0.548	tla:d3144	nbṱ
+ptkiN	person name	1	no	0.415	tla:dm3003	Pnysgyn	0.498	tla:dm3003	Pnysgyn
+qbne	god name	2	yes	0.555	tla:dm522	qbḥ.t	0.422	tla:dm4074	Gꜣbꜣ-ꜥꜣ-n
+qntk	title	1	no	0.767	tla:dm4375	wꜥb-nty-ꜥq	0.422	ccl:C3419	ϭⲓⲛⲥⲱⲕ
+yerote	title	1	no	0.422	tla:d1466	wrṱ	0.754	ccl:C8884	ⲉⲓⲣⲉⲱⲥ
+mdek	title	3	no	0.757	tla:dm614	mr-kꜣ.t	0.425	tla:d2837	mṯk
+mesreke	noun	8	no	0.429	ccl:C2878	ⲙⲁⲥⲡⲟⲣⲕ	0.435	ccl:C2878	ⲙⲁⲥⲡⲟⲣⲕ
+arkiwl	person name	1	no	0.429	tla:dm1727	Hrgls	0.502	tla:dm1727	Hrgls
+ansyi	title	1	no	0.435	tla:dm6353	ḥm-wsy	0.738	ccl:C2645	ⲛⲟⲩϩ ⲛϣⲓⲉⲓⲱϩⲉ
+Sotnkel	person name	1	no	0.767	tla:dm6080	Ssn	0.439	tla:dm2784	š-tꜣ-nṯr
+arede	noun	1	no	0.442	ccl:C6839	ϩⲁⲣⲁϫ	0.442	ccl:C6839	ϩⲁⲣⲁϫ
+brtrl	name	1	no	0.442	tla:dm1579	Ꞽr.t=w-r.r=w	0.442	tla:dm1579	Ꞽr.t=w-r.r=w
+bleli	person name	2	no	0.445	tla:dm1972	Pꜣ-ꜥlꜥl	0.548	tla:dm1972	Pꜣ-ꜥlꜥl
+trq	title	2	no	0.847	tla:dm614	mr-kꜣ.t	0.445	ccl:C4871	ⲧⲣⲟϭ
+qesN	noun	1	no	0.445	ccl:C7981	ϭⲱϣⲉⲛ	0.445	ccl:C7981	ϭⲱϣⲉⲛ
+blyeSo	name	1	no	0.449	tla:dm1688	Pylyns	0.449	tla:dm1688	Pylyns
+yetmetl	person name	1	no	0.449	tla:dm2000	Ny.t-m-ḥꜣ.t	0.518	tla:dm2000	Ny.t-m-ḥꜣ.t
+bereqedo(li)	title	1	no	0.811	tla:dm7188	ḥry-gwṱ	0.452	tla:d1752	brkt(.t)
+ntdxr	person name	1	no	0.718	tla:dm6075	Pꜣ-ḏd-ḥr	0.452	tla:d410	Ꞽwn.t-tꜣ-nṯr.t
+Akile	place name	3	no	0.724	tla:dm4382	Ḥq	0.462	tla:dm2044	Hgr
+litxrer	person name	1	no	0.462	tla:dm1579	Ꞽr.t=w-r.r=w	0.542	tla:dm1579	Ꞽr.t=w-r.r=w
+qtile	noun	1	no	0.462	ccl:C1462	ⲕⲁⲧⲟⲩⲗⲓ	0.462	ccl:C1462	ⲕⲁⲧⲟⲩⲗⲓ
+atqometel	person name	1	no	0.465	tla:d58	ꜣwtwgrt(w)r	0.538	tla:d58	ꜣwtwgrt(w)r
+apmlo	person name	1	no	0.468	tla:dm1638	Ḥp-mn	0.551	tla:dm1638	Ḥp-mn
+atbelw	noun	1	no	0.468	ccl:C5197	ⲟⲩⲱϯ ⲉⲃⲟⲗ	0.485	ccl:C5197	ⲟⲩⲱϯ ⲉⲃⲟⲗ
+Sorkxror	person name	1	no	0.658	tla:dm1577	Ꞽr.t-Ḥr-r.r=w	0.475	tla:dm6101	Wsꞽr-Mr-wr
+Sirlmroke	title	1	no	0.585	tla:d4975	sꜣ-mr=f	0.478	ccl:C3715	ⲥⲣⲟⲙⲣⲙ
+mSenkelowi	person name	1	no	0.478	tla:dm7409	Mn-kꜣ-Rꜥ	0.551	tla:dm7409	Mn-kꜣ-Rꜥ
+bkelo	person name	1	spelled like Bkeli	0.482	tla:dm5478	Pꜣ-gyl	0.605	tla:dm5478	Pꜣ-gyl
+atepedemo	title	4	no	0.485	tla:d4344	ḥtpꜥy	0.807	ccl:C6933	ϩⲧⲟⲙⲧⲙ
+tnide	verb	1	no	0.485	ccl:C7051	ϯ ⲛϫⲁⲓⲉ	0.485	ccl:C7051	ϯ ⲛϫⲁⲓⲉ
+asr	noun	3	spelled like Asori	0.488	ccl:C262	ⲁϣⲓⲣⲁ	0.488	ccl:C262	ⲁϣⲓⲣⲁ
+ameli	god name	1	no	0.488	tla:dm7694	Ḥmy	0.498	tla:dm5860	Ꜥwmꜣylw
+snn	god name	1	yes	0.492	tla:dm2392	sn.t-nṯr	0.488	tla:dm1344	Šn-ꜥnḫ
+nxbr	noun	4	no	0.498	tla:dm5290	ꜥnḫ-pr-ꜥꜣ	0.505	tla:dm5290	ꜥnḫ-pr-ꜥꜣ
+kdibe	noun	1	no	0.498	ccl:C8020	ϭⲱϫⲃ	0.498	ccl:C8020	ϭⲱϫⲃ
+nxbre	noun	1	no	0.498	tla:dm5290	ꜥnḫ-pr-ꜥꜣ	0.505	tla:dm5290	ꜥnḫ-pr-ꜥꜣ
+tebiSilXlowi	person name	1	no	0.498	tla:d8355	Tꜣ-šr.t-Hry=w	0.561	tla:d8355	Tꜣ-šr.t-Hry=w
+wrs	noun	1	no	0.498	tla:d1444	wrš	0.498	tla:d1444	wrš
+berxil	name	1	no	0.502	tla:dm5262	Bw-rḫ=f	0.502	tla:dm5262	Bw-rḫ=f
+itey	verb	1	spelled like Atiye	0.502	tla:dm129	ḥḏ(y)	0.502	tla:dm129	ḥḏ(y)
+tmeyyeS	noun	1	no	0.502	ccl:C10742	ⲧⲓⲙⲓⲱⲧⲏⲥ	0.512	ccl:C10742	ⲧⲓⲙⲓⲱⲧⲏⲥ
+smlowi	kin term	15	no	0.512	ccl:C5892	ϣⲙⲟⲩⲗ	0.518	ccl:C5892	ϣⲙⲟⲩⲗ
+mseqorose	title	2	no	0.880	tla:dm4910	ḥm-nṯr-(n-)Ꜣs.t	0.512	ccl:C9720	ⲙⲁⲥⲧⲓⲅⲝ
+ipxetelo	place name	1	no	0.568	tla:d447	Ꞽbt	0.512	tla:dm3554	ꜥ(ꜣ)-pḥṱ
+seber	person name	1	no	0.512	tla:dm6568	Sbwrs	0.628	tla:dm6568	Sbwrs
+Yerwdode	place name	1	no	0.518	tla:d2006	Pr-Wꜣḏ(y).t	0.847	tla:dm7174	wr-wꜣḏ.ty
+aḫro	noun	4	no	0.525	ccl:C279	ⲁϧⲱⲓⲣⲓ	0.525	ccl:C279	ⲁϧⲱⲓⲣⲓ
+sobḫe	title	1	no	0.525	tla:d5229	sbṱ	0.784	tla:dm7867	sbḥ(ꜣ)
+beylowi	person name	1	no	0.528	tla:dm5859	Wylw	0.608	tla:dm5859	Wylw
+emekwdq	title	1	no	0.528	tla:d4081	ḥm-ḏy	0.947	ccl:C8216	ⲁⲙⲩⲅⲇⲁⲗⲟⲛ
+Steqeteb	kin term	2	no	0.532	ccl:C6119	ϣⲁⲧⲟⲟⲛⲧϥ	0.542	ccl:C6119	ϣⲁⲧⲟⲟⲛⲧϥ
+xmll	noun	1	no	0.532	ccl:C1869	ⲙⲟⲩⲗⲱⲗ	0.538	ccl:C1869	ⲙⲟⲩⲗⲱⲗ
+womnitẖ	title	7	no	0.535	tla:d494	ꞽmy-wnw.t	0.721	tla:dm7299	ꜥ.wy-n-tẖy
+xror	title	1	no	0.535	tla:dm2176	ḥry-ꞽry-ꜥꜣ.w	0.598	tla:d4865	ẖrr(.t)
+mtese	verb	1	no	0.542	ccl:C6138	ⲙⲛⲧϣⲁⲩ	0.542	ccl:C6138	ⲙⲛⲧϣⲁⲩ
+ssemri	title	3	yes	0.545	tla:d4975	sꜣ-mr=f	0.844	ccl:C3926	ϣⲟⲥⲙⲉⲥ
+qeSk	place name	1	no	0.548	tla:d6928	Gs	0.844	tla:d6928	Gs
+qeyte	place name	1	no	0.548	tla:d725	ꞽkšy.t	0.811	tla:dm5343	Qrys
+ademeqolowi	person name	1	no	0.561	tla:dm5860	Ꜥwmꜣylw	0.621	tla:dm5860	Ꜥwmꜣylw
+mẖeli : arose	title	1	no	0.791	tla:d2527	mr-šn	0.561	tla:dm1313	ẖl-rse
+nobow	noun	1	yes	0.561	tla:d3131	nbw	0.561	tla:d3131	nbw
+ylsni	verb	1	no	0.561	ccl:C989	ⲓⲱⲥ (ⲛ-)	0.561	ccl:C989	ⲓⲱⲥ (ⲛ-)
+Slxs	title	1	no	0.571	tla:d5569	sẖ-nsw	0.565	ccl:C5813	ϣⲟⲗⲥ
+kmom	person name	1	no	0.568	tla:dm6468	Gm-mys	0.668	tla:dm6468	Gm-mys
+mrebqo	title	2	no	0.571	tla:dm614	mr-kꜣ.t	0.887	ccl:C5358	ⲙⲁⲣⲟⲩⲟϭⲉ
+kemxr	person name	1	no	0.578	tla:dm1793	Km-nfr	0.641	tla:dm1793	Km-nfr
+wetneyineqeli	epithet	12	no	0.721	tla:dm2827	ṯꜣy-nṯr.w	0.585	ccl:C8872	ⲉⲑⲁⲛⲓⲟⲛ
+Ḫsḫseli	god name	2	yes	0.585	tla:dm2379	Ḫnsw-Šw	0.721	tla:dm5219	Ḫꜣꜥ=w-s-(n-)wsꞽr
+Sibwiye	name	1	no	0.585	tla:dm6584	Ns-nb-ꜥy	0.585	tla:dm6584	Ns-nb-ꜥy
+Siqye	place name	1	no	0.585	tla:dm448	Šd(y)	0.867	tla:dm448	Šd(y)
+lXSmlowoto	title	1	no	0.585	tla:dm1265	smꜣty	0.811	ccl:C9648	ⲗⲟⲅⲓⲥⲙⲟⲥ
+xitkkete	benediction verb	1	no	0.598	ccl:C9321	ⲕⲁⲧⲁⲅⲅⲓⲍⲉ	0.598	ccl:C9321	ⲕⲁⲧⲁⲅⲅⲓⲍⲉ
+doSbd	noun	1	no	0.601	tla:d7828	ḏsf(ꜣ).t	0.608	tla:d7828	ḏsf(ꜣ).t
+wetrri	epithet	7	no	0.638	tla:d1598	wṯs-rꜥ	0.608	ccl:C4224	ⲧⲕⲟⲩⲣ
+xrpx	title	3	spelled like ḫrpḫe	0.774	tla:d3477	rpꜥy	0.608	tla:dm1398	ḫrp
+ntepokl	person name	1	no	0.608	tla:dm1013	Mnt-bl	0.678	tla:dm1013	Mnt-bl
+qorisew	title	1	no	0.671	tla:dm281	wr-swnw	0.608	tla:dm7953	qrš
+attḫ	noun	6	no	0.611	tla:d4356	ḥtt	0.615	tla:d4356	ḥtt
+nptek	place name	1	no	0.658	tla:d1365	Wn-bs	0.611	tla:d3144	nbṱ
+qorelik	noun	1	no	0.611	tla:dm252	qrl	0.615	tla:dm252	qrl
+mkl	noun	1	no	0.615	ccl:C1970	ⲙⲁⲛϭⲁⲗⲉ	0.621	ccl:C1970	ⲙⲁⲛϭⲁⲗⲉ
+atepoke	noun	3	yes	0.618	tla:d4331	ḥtp(.t)	0.621	tla:d4331	ḥtp(.t)
+mXli	adjective	1	no	0.678	ccl:C419	ⲛⲃⲟⲗ	0.618	ccl:C2280	ⲙⲁϧⲟⲩⲗ
+xrpN	title	1	no	0.618	tla:dm4844	ḥry-Nw.t	0.754	ccl:C2365	ⲣⲉϥⲛⲁⲓ
+xrpeN	title	1	no	0.618	tla:dm4844	ḥry-Nw.t	0.754	ccl:C2365	ⲣⲉϥⲛⲁⲓ
+kdito	kin term	2	no	0.621	tla:d6713	gyḏ(.t)	0.628	tla:d6713	gyḏ(.t)
+mlome	person name	1	no	0.621	tla:dm7522	M-mw.t	0.718	tla:dm7522	M-mw.t
+qebts	person name	3	no	0.877	tla:d6558	Kbḏ(e)	0.628	tla:d6575	Kfṱey
+Nkdỵṭẹ	place name	1	no	0.628	tla:d725	ꞽkšy.t	0.668	tla:dm1985	Ns-ꞽ.ꞽr-dy-s
+qorkelw	noun	1	no	0.628	ccl:C7905	ⲕⲣⲕⲏⲟⲩ	0.638	ccl:C7905	ⲕⲣⲕⲏⲟⲩ
+dtsXro	person name	1	no	0.631	tla:dm5214	Tꜣ-sn(.t-n-)Ḥr	0.651	tla:d7036	tꜣ-tsr(.t)
+reNdpp	person name	1	no	0.631	tla:dm1734	Ḥr-nḏ-ꞽt=f	0.701	tla:dm574	Ḥr-nḏ-ꞽt=f
+ksbne	epithet	3	yes	0.748	tla:dm4987	bꜣk-(n-)Sbk	0.635	ccl:C5760	ϣⲃⲓⲛ
+wlikidbte	verb	1	no	0.635	ccl:C1407	ⲉⲣⲕⲁⲧϩⲏⲧ	0.635	ccl:C1407	ⲉⲣⲕⲁⲧϩⲏⲧ
+Amod	place name	4	no	0.897	tla:d2767	Mdy	0.638	tla:dm747	Ḥr-mdn
+atoliteb	noun	2	no	0.645	ccl:C8109	ⲁⲑⲗⲏⲧⲏⲥ	0.654	ccl:C8109	ⲁⲑⲗⲏⲧⲏⲥ
+kditebetowi	kin term	1	no	0.648	ccl:C9913	ⲟⲓⲕⲟⲇⲉⲥⲡⲟⲧⲏⲥ	0.678	ccl:C9913	ⲟⲓⲕⲟⲇⲉⲥⲡⲟⲧⲏⲥ
+tepke	title	1	no	0.701	tla:d4344	ḥtpꜥy	0.651	ccl:C352	ⲧⲁⲓⲃⲉⲕⲉ
+xlmwi	noun	1	no	0.651	ccl:C5340	ⲟⲩϩⲟⲗⲙⲟⲟⲩ	0.658	ccl:C5340	ⲟⲩϩⲟⲗⲙⲟⲟⲩ
+mleqerebr	person name	1	no	0.937	tla:dm52	Nfr-ꞽb-Rꜥ	0.654	tla:d2519	Mr-nfr
+mselẖse	title	2	no	0.658	tla:dm4204	mr-ḫꜣs.t	0.847	ccl:C5016	ⲟⲩⲁⲙⲥⲁⲣⲝ
+Dqri	place name	2	no	0.757	tla:d7716	Ḏw-(pꜣ)-rꜥ	0.661	tla:dm5327	Ta-hqr
+ywid	epithet	1	no	0.907	tla:dm4245	yꜥy	0.661	ccl:C9213	ⲓⲟⲩⲇⲁⲓ
+mrxe	noun	4	no	0.664	ccl:C1884	ⲙⲟⲩⲗϧ	0.674	ccl:C1884	ⲙⲟⲩⲗϧ
+elxte	benediction verb	2	no	0.664	ccl:C195	ⲁⲣⲓⲣⲉ	0.664	ccl:C195	ⲁⲣⲓⲣⲉ
+krorl	title	1	no	0.767	tla:dm6094	qrṱr	0.664	ccl:C1323	ⲕⲣⲟⲩⲣ
+kedebx	verb	2	no	0.668	ccl:C8018	ϭⲱϫⲃ	0.668	ccl:C8018	ϭⲱϫⲃ
+kedebxe	verb	1	no	0.668	ccl:C8018	ϭⲱϫⲃ	0.668	ccl:C8018	ϭⲱϫⲃ
+amolẖ	title	1	no	0.671	tla:d839	ꜥꜣ-(n-)mḫy	0.681	ccl:C11157	ϩⲟⲙⲓⲗⲓⲁ
+kdiqoreye	person name	1	no	0.678	tla:dm7461	Ta-qly	0.738	tla:dm7461	Ta-qly
+qoroteb	noun	1	no	0.678	tla:dm2322	qrṱy	0.684	tla:dm2322	qrṱy
+qorteb	noun	1	no	0.678	tla:dm2322	qrṱy	0.684	tla:dm2322	qrṱy
+yeredeb	title	1	no	0.681	tla:dm5174	ḥry-ṯnf	0.850	ccl:C6825	ϩⲣⲟⲩϫⲃ
+nkdeyose	title	1	no	0.990	tla:dm2846	ꜥ(ꜣ)-n-ẖdby(.t)	0.684	ccl:C8228	ⲁⲛⲁⲅⲕⲁⲓⲟⲥ
+brtrye	name	1	no	0.688	tla:dm1675	Ꞽr.t=w-rḏ	0.688	tla:dm1675	Ꞽr.t=w-rḏ
+eked	verb	1	no	0.688	ccl:C1439	ϩⲓⲕⲱⲧⲉ	0.688	ccl:C1439	ϩⲓⲕⲱⲧⲉ
+mtewwi	person name	1	no	0.850	tla:dm2136	Smꜣ-tꜣ.wy	0.688	tla:dm7155	Mṱwlꜣ
+toliteb	name	1	no	0.688	tla:dm1365	Ḥḏ-tb	0.688	tla:dm1365	Ḥḏ-tb
+xlbe	noun	1	no	0.688	tla:d4595	ḫlp(e.t)	0.698	tla:d4595	ḫlp(e.t)
+mokeye	person name	1	no	0.691	tla:dm7170	Mn-ky-Rꜥ	0.811	tla:dm7170	Mn-ky-Rꜥ
+qoredek	title	1	yes	0.694	tla:dm6094	qrṱr	0.844	ccl:C10970	ⲭⲟⲣⲇⲏ
+adblelx	noun	1	no	0.698	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ	0.731	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
+adblelxe	noun	1	no	0.698	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ	0.731	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
+plXn	title	1	no	0.864	tla:d5463	sḥn	0.698	ccl:C5455	ⲱⲗ ⲉϩⲟⲩⲛ
+mSkel	person name	1	no	0.701	tla:dm6791	Mslk	0.767	tla:dm6791	Mslk
+yesqor	person name	1	no	0.711	tla:dm6706	Ꜣskrꜣ	0.771	tla:dm6706	Ꜣskrꜣ
+dotedi	benediction verb	7	no	0.714	ccl:C4482	ϫⲓⲧⲟⲟⲧ⸗	0.714	ccl:C4482	ϫⲓⲧⲟⲟⲧ⸗
+Xrmx	noun	1	no	0.714	tla:dm2382	ẖ.t-rmṯ	0.724	tla:dm2382	ẖ.t-rmṯ
+bxeb	verb	1	no	0.714	tla:d4459	ḫbḫb	0.714	tla:d4459	ḫbḫb
+aroẖe	verb	1	no	0.718	tla:d4238	ḥrḥ	0.718	tla:d4238	ḥrḥ
+aḫr	verb	1	no	0.718	ccl:C6357	ϩⲉ ⲉϩⲣⲁⲓ	0.718	ccl:C6357	ϩⲉ ⲉϩⲣⲁⲓ
+xtebeme	title	1	no	0.718	tla:dm4954	wꜥb-(n-)Mn	0.910	tla:d4636	ḫtm
+keqye	place name	1	no	0.721	tla:d1805	Bqy	0.924	tla:d1805	Bqy
+ydḫno	verb	1	yes	0.721	ccl:C833	ⲉⲓ (ⲉϫⲛ-)	0.721	ccl:C833	ⲉⲓ (ⲉϫⲛ-)
+wkite	title	2	no	0.880	tla:d1466	wrṱ	0.724	ccl:C646	ⲉⲕⲧⲉ
+srq	verb	1	no	0.724	ccl:C5863	ϣⲱⲗϭ	0.724	ccl:C5863	ϣⲱⲗϭ
+tewwi-	verb	2	no	0.728	ccl:C4162	ⲧⲟⲩⲓⲟⲩ	0.728	ccl:C4162	ⲧⲟⲩⲓⲟⲩ
+edxN	noun	1	no	0.728	ccl:C11111	ϩⲏⲇⲟⲛⲏ	0.738	ccl:C11111	ϩⲏⲇⲟⲛⲏ
+xml	noun	1	no	0.728	tla:d4506	ḫm-ẖl	0.738	tla:d4506	ḫm-ẖl
+kinli	place name	1	no	0.731	tla:d6810	Gnm.t	0.910	tla:dm1022	Kꜣ-nfr
+xrpxte	verb	1	no	0.731	ccl:C11070	ϩⲁⲣⲡⲁⲍⲉ	0.731	ccl:C11070	ϩⲁⲣⲡⲁⲍⲉ
+Boqḫw	place name	2	no	0.738	tla:d1805	Bqy	0.927	tla:dm3104	nb-qꜣe
+xmomole	noun	1	no	0.744	tla:d4506	ḫm-ẖl	0.751	tla:d4506	ḫm-ẖl
+xmyl	noun	1	no	0.744	tla:d4506	ḫm-ẖl	0.751	tla:d4506	ḫm-ẖl
+Selele	place name	3	yes	0.894	tla:d712	Ꞽšr	0.748	tla:dm6807	Slꜣ
+xreSyeqo	name	1	no	0.748	tla:dm7131	Ḥr-šy	0.748	tla:dm7131	Ḥr-šy
+xrosiyeqo	name	1	no	0.748	tla:dm7131	Ḥr-šy	0.748	tla:dm7131	Ḥr-šy
+yntke	noun	4	yes	0.751	ccl:C4187	ϫⲓⲛⲧⲁⲕⲟ	0.757	ccl:C4187	ϫⲓⲛⲧⲁⲕⲟ
+beleki	person name	1	no	0.844	tla:dm1831	Brnygꜣ(.t)	0.751	tla:dm1182	Pylq
+Adonili	place name	2	no	0.754	tla:dm1332	Ḥ.t-nsw	0.940	tla:dm1794	Ḥrd-ꜥnḫ
+xll	noun	1	no	0.761	ccl:C6583	ϧⲉⲗϧⲱⲗ	0.771	ccl:C6583	ϧⲉⲗϧⲱⲗ
+yNhn	person name	1	no	0.761	tla:dm5977	Qnn	0.847	tla:dm5977	Qnn
+H̱lite	place name	4	no	0.764	tla:d2340	mylṱ	0.784	tla:dm6126	Hꜥlene.t
+mdemdese	noun	3	no	0.764	ccl:C2080	ⲙⲟⲉⲓⲧ ⲙⲙⲟⲟϣⲉ	0.767	ccl:C2080	ⲙⲟⲉⲓⲧ ⲙⲙⲟⲟϣⲉ
+xrtedxelowi	person name	1	no	0.807	tla:dm1876	H̱rd-ꜥnḫ	0.767	tla:d3583	Rsṯꜣw
+diyXo	verb	1	no	0.771	tla:d7609	ṯꜣy-ẖn	0.771	tla:d7609	ṯꜣy-ẖn
+yerSxini	verb	2	no	0.774	ccl:C968	ⲉⲓⲱⲣⲙ (ⲉϩⲟⲩⲛ)	0.774	ccl:C968	ⲉⲓⲱⲣⲙ (ⲉϩⲟⲩⲛ)
+pdẖose	epithet	4	no	0.777	tla:d5569	sẖ-nsw	0.864	ccl:C5657	ϫⲁⲓⲟϩⲥ
+xteri	title	2	no	0.824	tla:dm717	wr	0.777	tla:dm7810	ḥtr
+dmbe	noun	1	no	0.777	ccl:C788	ϫⲙⲡⲏⲓ	0.784	ccl:C788	ϫⲙⲡⲏⲓ
+bliye	person name	1	no	0.781	tla:dm1558	Ꞽby	0.794	tla:dm451	wly
+blye	person name	1	no	0.781	tla:dm1558	Ꞽby	0.794	tla:dm451	wly
+sedew	adjective	1	no	0.827	ccl:C5693	ϣⲁⲓⲱⲟⲩ	0.781	tla:d5722	sṯꜣ.ṱ
+yiroẖe	verb	11	no	0.784	ccl:C972	ⲉⲓⲱⲣϩ	0.784	ccl:C972	ⲉⲓⲱⲣϩ
+kdke	title	3	yes	0.817	tla:dm6187	gwṱ-gwg	0.784	ccl:C9372	ⲕⲁⲧⲟⲭⲏ
+SXekes	benediction verb	1	no	0.784	ccl:C10556	ⲥⲧⲟⲓⲭⲉⲓ	0.784	ccl:C10556	ⲥⲧⲟⲓⲭⲉⲓ
+kditebkwi	kin term	1	no	0.784	tla:d7687	ḏ(y).t-bk(.t)	0.801	tla:d7687	ḏ(y).t-bk(.t)
+mXeyeos	title	1	no	0.787	tla:dm4204	mr-ḫꜣs.t	0.844	ccl:C9689	ⲙⲁⲕⲁⲣⲓⲟⲥ
+twd	verb	5	no	0.791	tla:d7156	twt(w)	0.791	tla:d7156	twt(w)
+Sqekiteleb	place name	2	no	0.801	tla:dm3535	Sgntn	0.791	tla:dm1000	Sbk-ḥtp
+Nmlo	place name	1	no	0.860	tla:d6810	Gnm.t	0.791	tla:dm1885	Ꜥn-m-ḥr
+dokoye	person name	1	no	0.801	tla:dm2275	Tyqy	0.887	tla:dm2275	Tyqy
+Qerbe	place name	2	no	0.924	tla:d2025	Pr-bnw	0.807	tla:dm5749	Qrḏ
+aẖrrb	title	2	no	0.807	tla:dm2041	ḥry-by	0.970	tla:d4828	ẖr-rnp.t
+yitkite	place name	3	no	0.817	tla:dm7311	Tꜣ-ꜥrkṱ	0.850	tla:dm4819	Ꜣyskyns
+atqolXl	person name	1	no	0.817	tla:d58	ꜣwtwgrt(w)r	0.887	tla:d58	ꜣwtwgrt(w)r
+mXloke	title	1	no	0.817	tla:dm614	mr-kꜣ.t	0.880	ccl:C2280	ⲙⲁϧⲟⲩⲗ
+wyekite	noun	1	yes	0.831	ccl:C8797	ⲇⲓⲟⲓⲕⲏⲧⲏⲥ	0.844	ccl:C8797	ⲇⲓⲟⲓⲕⲏⲧⲏⲥ
+mkedo	god name	1	no	0.841	tla:d2379	Mw.t	0.847	tla:d2767	Mdy
+mqolteqye	person name	1	no	0.841	tla:dm1681	Mwskyꜣn	0.900	tla:dm1681	Mwskyꜣn
+semekeke	title	1	no	0.847	tla:dm4322	smwḥy	0.884	ccl:C10671	ⲥⲱⲙⲁⲧⲓⲕⲏ
+kdibedewetel	person name	1	no	0.934	tla:dm1109	Pꜣ-dy-wsꞽr	0.850	tla:dm562	Byṱl
+kedebxeky	verb	1	no	0.850	tla:d1821	bky	0.850	tla:d1821	bky
+qetelxe	place name	1	no	0.854	tla:d6556	Qblw	0.957	tla:dm2086	Ꜣgꜥthe
+XtoXe	noun	2	no	0.860	tla:d7442	tẖtẖ	0.874	tla:d7442	tẖtẖ
+kditelewi	kin term	1	no	0.864	tla:d6969	gḏwḏꜣ	0.877	tla:d6969	gḏwḏꜣ
+mqol	person name	1	no	0.864	tla:dm7409	Mn-kꜣ-Rꜥ	0.934	tla:dm7409	Mn-kꜣ-Rꜥ
+xbxe	title	3	no	0.957	tla:d1650	by	0.867	ccl:C6300	ⳉⲃⲉⳉⲓⲧ
+kdeyoNqo	person name	1	no	0.867	tla:dm1108	Ṯꜣy-n.ꞽm=w	0.904	tla:dm1108	Ṯꜣy-n.ꞽm=w
+mkilw	noun	1	no	0.867	ccl:C9835	ⲙⲟⲭⲗⲟⲥ	0.880	ccl:C9835	ⲙⲟⲭⲗⲟⲥ
+mklw	noun	1	no	0.867	ccl:C9835	ⲙⲟⲭⲗⲟⲥ	0.880	ccl:C9835	ⲙⲟⲭⲗⲟⲥ
+nweliqo	person name	1	no	0.870	tla:dm1837	Nꜣ-kꜣ.w	0.920	tla:dm1837	Nꜣ-kꜣ.w
+xlod	person name	1	no	0.874	tla:d6423	Qlwḏ	0.934	tla:d6423	Qlwḏ
+kedtd	verb	1	no	0.890	ccl:C8029	ϭⲟϫϭϫ	0.890	ccl:C8029	ϭⲟϫϭϫ
+roSlleb	noun	1	no	0.890	ccl:C1573	ⲣⲉϥⲗⲓⲃⲉ	0.900	ccl:C1573	ⲣⲉϥⲗⲓⲃⲉ
+Siwiwi	noun	1	no	0.894	tla:d5130	swnw	0.897	tla:d5130	swnw
+bekelXli	person name	1	no	0.894	tla:dm5712	Qll	0.927	tla:dm5712	Qll
+yetolXye	person name	1	no	0.897	tla:dm5427	Nb.t-tẖy	0.894	tla:dm682	Ny.t-rsy
+mlowi	noun	8	yes	0.907	ccl:C1654	ⲗⲟⲟⲙⲉ	0.910	ccl:C1654	ⲗⲟⲟⲙⲉ
+qeswi	kin term	2	no	0.910	tla:d6466	qš(e)	0.914	tla:d6466	qš(e)
+yetre	verb	1	no	0.917	tla:d4349	ḥtr	0.917	tla:d4349	ḥtr
+yotre	verb	1	no	0.917	tla:d4349	ḥtr	0.917	tla:d4349	ḥtr
+qoqoye	person name	1	no	0.963	tla:dm3534	Gꜥy	0.924	tla:d1805	Bqy
+yeteke	verb	5	no	0.927	ccl:C4195	ϫⲓⲧⲱⲕ	0.927	ccl:C4195	ϫⲓⲧⲱⲕ
+Wyeki	noun	1	yes	0.934	tla:d875	ꜥyq	0.937	tla:d875	ꜥyq
+axN	noun	1	no	0.934	tla:d3817	hn	0.937	tla:d3817	hn
+kdilX	noun	1	no	0.937	tla:d7814	ḏlḫ	0.944	tla:d7814	ḏlḫ
+lXye	title	1	no	0.937	tla:dm6229	ꜥhy	0.970	tla:d4699	ẖy
+yelbi	noun	1	no	0.940	ccl:C7168	ϫⲟⲗⲃⲓ	0.944	ccl:C7168	ϫⲟⲗⲃⲓ
+yelebi	noun	1	no	0.940	ccl:C7168	ϫⲟⲗⲃⲓ	0.944	ccl:C7168	ϫⲟⲗⲃⲓ
+yerki	verb	1	no	0.953	ccl:C7351	ϫⲁⲣⲕ⸗	0.953	ccl:C7351	ϫⲁⲣⲕ⸗
+yidxlsni	verb	1	no	0.953	ccl:C6575	ϯϩⲗⲟⲥⲧⲛ	0.953	ccl:C6575	ϯϩⲗⲟⲥⲧⲛ
+qyitXl	epithet	1	no	0.957	tla:dm7128	ḥry-sẖ	0.990	tla:d6259	qy(.t)
+yetolxe	noun	1	no	0.970	tla:d780	ylh̭	0.977	tla:d780	ylh̭
+yikid	noun	3	no	0.973	ccl:C9213	ⲓⲟⲩⲇⲁⲓ	0.977	ccl:C9213	ⲓⲟⲩⲇⲁⲓ
+yemli	person name	1	no	0.973	tla:dm5860	Ꜥwmꜣylw	0.987	tla:dm5860	Ꜥwmꜣylw
+Xlikmlo	person name	1	no	0.980	tla:dm5734	Pꜣ-ꜥẖm-lwꜣ	0.990	tla:dm5734	Pꜣ-ꜥẖm-lwꜣ
+ẖẖll	noun	1	no	0.980	ccl:C659	ⲉⲓⲉϩⲉⲗⲟⲟⲗⲉ	0.990	ccl:C659	ⲉⲓⲉϩⲉⲗⲟⲟⲗⲉ
+reNlX	title	1	no	0.983	tla:dm584	ḥry-mnḫ	0.997	tla:d8317	ḥr-ꜥnḫ.t
+H̱lẖili	god name	5	no	0.987	tla:dm6911	Ḥr-ꜣḫ.ty	0.993	tla:dm6540	H̱l-ꜥꜣ
+yemoqe	verb	2	no	0.990	ccl:C5010	ⲟⲩⲉⲙϭⲓ	0.990	ccl:C5010	ⲟⲩⲉⲙϭⲓ
+yedxbx	verb	1	no	0.993	tla:d7425	tḫb	0.993	tla:d7425	tḫb

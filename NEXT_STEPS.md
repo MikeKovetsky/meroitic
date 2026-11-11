@@ -40,6 +40,9 @@ Done since this plan was written:
    every word of `corpus_v5` glossed from Rilly's lexicon. 60.5% of the running words are translated, 82 of 605
    legible texts in full, and the 1,336 pieces without an accepted meaning are ranked by the texts they block, each
    with its kind where the texts show one. Section E says what it is for.
+8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
+   step 17 of section E: a negative result. A search by sound finds the known names of gods and places but only
+   4 of 14 known borrowed titles and nouns, and gives nothing above chance for the pieces without a meaning.
 
 Next, in this order:
 
@@ -185,24 +188,38 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
 17. **Egyptian parallels for the titles and the counted things** in the list: borrowed titles, the oracular
     decrees (an Egyptian kind of text) and the Philae graffiti that name the same people in Demotic. Test the
     method first on known loans held out.
-    - **Status, 2026-11-11:** the answer key is built. Two independent readers went through the 207 entries of
+    - **The search for borrowed words is done (2026-11-11), with a negative result**
+      ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)):
+      a search by sound puts the true source among the five best candidates for 4 of the 14 known borrowed
+      titles, nouns and verbs (the bar was most of them), though for all 10 names of gods and places with a
+      source among the Demotic names of their kind it is among the three best. Of the 383 unknown pieces searched,
+      22 and 26 beat the 5% bar where 19 are expected by chance, and two blind checkers found no new source among
+      the 33 best matches. Sound alone does not tell a loan from a look-alike in a pool of thousands.
+    - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
+      people named in both the Philae graffiti and the Meroitic texts.
+    - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
+      `ꜣrbtgꜥyꜣ` for `arebetke`, `wygy` for Wayekiye). Reading those sentences beside the Meroitic titles is
+      the parallel that carries meaning; it needs the names of the older corpus unmasked. And 16 pieces of the
+      coverage map's list are forms of words the lexicon already links to Egyptian (`prSn` for `plsn`, `petmoS`
+      for `pelmos`): the map could count them.
+    - **The answer key:** two independent readers went through the 207 entries of
       the lexicon that mention Egyptian, Demotic, Coptic, Greek or Latin and agreed on 198: 69 are borrowings into
       Meroitic for both readers (35 of them with an accepted meaning, 33 with the source word printed: 19 names
       and 14 titles, nouns and verbs), 49 are Meroitic names in Egyptian or Greek letters, and the rest are
       rejected or mention the language for another reason. The table is local, like the lexicon.
-    - The search side is found, not yet fetched: the Coptic lexicon of
+    - The search side, fetched on 2026-11-11 and kept locally: the Coptic lexicon of
       [KELLIA's dictionary](https://github.com/KELLIA/dictionary) (`Comprehensive_Coptic_Lexicon-v1.2-2020.xml`,
       12.3 MB; CC BY-SA 4.0 according to coptic-dictionary.org; vowels and English meanings) and the TLA's
       [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium)
-      (`train.jsonl`, 7.3 MB, CC BY-SA 4.0; lemma forms, no lemma meanings). The search is to be mechanical (a
-      scorer has not read the literature) and tested by leaving each known loan out in turn.
+      (`train.jsonl`, 7.3 MB, CC BY-SA 4.0; lemma forms, no lemma meanings).
     - Otten's `bilingual_dicts` (added 2026-11-10) pair words by meaning for his alignment experiments
       (`qEr` with `nswt`); they are not loans.
 18. **A Nubian comparison that uses the kind of each word.** The list says what kind of word half the unknown
     pieces are (670 of 1,336: title, kin term, verb, counted thing); matching each only against Nubian words of
-    that kind cuts the chance look-alikes that sank the cognate test (D 15). It needs a larger Nubian word list
-    with culture and kin words: Reinisch's *Die Nuba-Sprache* (1879) and Lepsius's *Nubische Grammatik* (1880)
-    are public domain and on archive.org, untyped.
+    that kind cuts the chance look-alikes that sank the cognate test (D 15). Step 17 shows how far that goes: a
+    pool of a few hundred words of one kind was small enough (the names of gods), a pool of thousands was not.
+    It needs a larger Nubian word list with culture and kin words: Reinisch's *Die Nuba-Sprache* (1879) and
+    Lepsius's *Nubische Grammatik* (1880) are public domain and on archive.org, untyped.
 19. **More texts.** 995 of the 1,336 pieces stand in a single text once near-copies are set aside, so context
     cannot place them; Hallof's volume 7 (step 7 above) would triple the texts.
 20. **Left open by the map itself:** the lexicon is the state of 2003 (Rilly's 2016 list accepts `pqr`, `wide`,

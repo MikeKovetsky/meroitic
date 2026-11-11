@@ -55,6 +55,12 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      ([`REPORT.md`](REPORT.md)). Where the key books are print-only, the model can't tell a
      rediscovery from a discovery.
    - The British Museum's Hamadab stela (REM 1003) holds nothing checkable against the Roman war, as Rilly said in 2014.
+   - A search by sound alone does not find the Egyptian word behind a Meroitic title or noun. Tested on the known
+     loans, each hidden in turn, it puts the true source among the five best candidates for 4 of 14 titles, nouns
+     and verbs, though for all 10 names of gods and places that have a source among the Demotic names of their
+     kind it is among the three best. For the 383 pieces without a meaning it gives nothing above chance, and two
+     blind checkers found no new source among its 33 best matches
+     ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
 8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
    name, a number or a word with an accepted meaning or function (59.9% with near-copies counted once), 17% have a
@@ -88,6 +94,7 @@ what can be rebuilt.
 | Griffith, *Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg* (1911), [archive.org](https://archive.org/details/karangmeroitic00grifuoft) | 151 funerary texts as hand copies, public domain; most of their words printed again in type in the same book | `data/expansion/karanog/`: the texts read by the model and checked against that type (`griffith_karanog.jsonl`), the 48 typed reference pages, and [how it was done and measured](data/expansion/karanog/README.md) |
 | *Meroitic Newsletter* 1–30 (1968–2003), scans at meroiticnewsletter.org | printed transliterations with REM numbers: 256 texts typed, 188 of them new to the corpus; the articles are in copyright | not committed: the method, the scripts (`src/mnl/`) and the measured accuracy are in [`data/expansion/newsletter_reading.md`](data/expansion/newsletter_reading.md) |
 | Rilly 2003, *Lexique méroïtique* (thesis vol. II, HAL [tel-04793700](https://hal.science/tel-04793700)) | the fullest open lexicon, 937 entries | not committed (copyrighted): extracted from the scans for private analysis; `src/lexique.py` needs it in `data/rilly2003/`. The lexicon test's answer key (`runs/keys/lexique_*.json`, `runs/lexique_judge.json`) gives 68 of its glosses in English paraphrase |
+| The TLA's [Demotic sentences](https://huggingface.co/datasets/thesaurus-linguae-aegyptiae/tla-demotic-v18-premium) and the [Comprehensive Coptic Lexicon](https://github.com/KELLIA/dictionary) v1.2, both CC BY-SA 4.0 | 5,660 Demotic lemmata with their word classes and 11,283 Coptic entries with meanings: the pools of the Egyptian search | not committed: download both to `data/sources/egyptian/`; the list of candidates (`data/discovery/egyptian_candidates.tsv`, CC BY-SA 4.0) holds lemma numbers and forms |
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
@@ -239,6 +246,18 @@ in the headline and in the ranking of what blocks most texts. The gloss file lea
 lexicon and is local-only; the counts, the brief and the list of unknown pieces are public
 ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
 
+### 15. Egyptian words behind Meroitic ones (`src/egyptian.py`)
+
+A scorer that knows only letters: Meroitic, Demotic and Coptic words are reduced to their consonants in one
+alphabet, and an Egyptian word becomes a Meroitic one letter by letter (kept, changed, dropped, or with the article
+p or t in front), with chances counted from the aligned known loans. The answer key is the 35 entries of Rilly's
+lexicon that two independent readers took as accepted borrowings; each is searched with a model trained on the
+others, among the entries of its own kind. A match counts only as far as it beats the best matches of made-up
+words of the same length, and the 64 words with an accepted meaning and no Egyptian link confirm that yardstick.
+The best matches for the unknown pieces went to two blind checkers with unmarked decoys. The word lists, the key
+and the result files are local-only; the page, the brief and the list of candidates are public
+([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -250,7 +269,7 @@ python3 -I src/expand.py
 python3 -I src/score.py --answers runs/answers
 python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
-python3 -I tests/test_coverage.py
+python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -259,19 +278,21 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Four things need files that are kept locally (Data, above), so they don't run from a clone:
+Five things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
   the review's fixes to `src/corpus.py`, so it can't be rebuilt);
 - `python3 -I src/lexique.py judged` (and the lexicon test's other commands) reads Rilly's lexicon;
 - `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences;
-- `python3 -I src/coverage.py first` (and `build`) reads Rilly's lexicon, `corpus_v5` and the analysts' answers.
+- `python3 -I src/coverage.py first` (and `build`) reads Rilly's lexicon, `corpus_v5` and the analysts' answers;
+- `python3 -I src/egyptian.py first` (and `build`) reads the two Egyptian word lists, Rilly's lexicon and the
+  answer key drawn from it.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
-  and the translation coverage map (`coverage.py`).
+  the translation coverage map (`coverage.py`) and the search for Egyptian sources (`egyptian.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
   corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`), the word lists and Rilly's lexicon are local-only.
@@ -286,8 +307,8 @@ Four things need files that are kept locally (Data, above), so they don't run fr
 
 The code is under the MIT licence ([`LICENSE`](LICENSE)). The Griffith transcriptions, the answer keys, the runs and
 the write-ups are under CC BY 4.0 ([`LICENSE-DATA.md`](LICENSE-DATA.md)), which also lists the third-party material
-that keeps its own terms: the Wiktionary list (CC BY-SA 4.0), the readings quoted from *Fontes Historiae Nubiorum*
-and the glosses paraphrased from Rilly's lexicon.
+that keeps its own terms: the Wiktionary list and the list of Egyptian candidates (CC BY-SA 4.0), the readings
+quoted from *Fontes Historiae Nubiorum* and the glosses paraphrased from Rilly's lexicon.
 
 ## Limits
 
