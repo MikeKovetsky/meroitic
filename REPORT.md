@@ -390,4 +390,5 @@ After "are you giving up?", four more lines of attack, then data.
     controls and 12 decoys; a pack hides the words the map finds a piece in, not every word that holds its letters
     (three items); no specialist has read a confirmed piece.
 15. **Cost:** 1,269,219 subagent tokens for the checkers in two passes (657,132 and 612,087), against about 0.7
-    million quoted for one pass with a second allowed for; the review comes on top.
+    million quoted for one pass with a second allowed for, and 425,616 for the review (about 0.45 million
+    quoted): 1,694,835 in all.

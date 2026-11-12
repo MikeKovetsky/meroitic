@@ -358,5 +358,7 @@ not written again: `check` stops if it would change them.
 
 The search itself is plain Python and used no subagent. The checkers took 1,269,219 subagent tokens in two
 passes of six runs each, about three minutes a run: 657,132 for the first pass, which was set aside, and 612,087
-for the second. The quote was about 0.7 million for one pass, with a second pass allowed for. The review is
-counted here once it has run.
+for the second. The quote was about 0.7 million for one pass, with a second pass allowed for. The independent
+review took 425,616 subagent tokens and 38 minutes, against about 0.45 million quoted; it found the three items of
+section 5 and changed no result. That is 1,694,835 subagent tokens in all, against about 1.15 million quoted for
+one pass and the review and about 1.8 million once the second pass was agreed.
