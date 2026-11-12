@@ -270,9 +270,10 @@ the padding of the older corpus left behind its mask ("mokelowi", "mete l") is p
 signs counts as three letters when one of them is the sign se or ne and Rilly holds the entry as established
 (`smlowi`, "is the wife of"); two or three neighbouring words are one word written apart when one of them has
 one or two letters and the whole also stands written as one elsewhere (`wo Si` for `woSi`); and a piece that two
-blind checkers took for a spelling of a word with an accepted meaning takes that meaning, as do three forms of
-"sister" that a reader of the families of Karanòg read so. The corrected map is written beside the first one,
-whose list the Egyptian and the variants searches read.
+blind checkers took for a spelling of a word with an accepted meaning takes that meaning (all but `mXeyot` and
+`yetmetl`, whose packs showed a word with their letters), as do three forms of "sister" that a reader of the
+families of Karanòg read so. The corrected map is written beside the first one, whose list the Egyptian and the
+variants searches read.
 
 ### 15. Egyptian words behind Meroitic ones (`src/egyptian.py`)
 

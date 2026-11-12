@@ -412,8 +412,8 @@ After "are you giving up?", four more lines of attack, then data.
    [`data/discovery/coverage.md`](data/discovery/coverage.md)): the rest of a masked name left by the padding of
    the older corpus (`moke` falls from 27 texts to 6, which hold its four real passages and excerpts of them), a
    stem of two signs (`smlowi`, "is the wife of", 81 words), a word written apart (65 places), and the spellings
-   of known words that two blind checkers confirmed (52 words), with three forms of "sister" that the kin reader
-   read so (4 words). 321 words move: 13,292 to 13,613 of 21,977 (60.5% to 61.9%; with near-copies counted once
+   of known words that two blind checkers confirmed (52 words, without `mXeyot` and `yetmetl`, whose packs showed
+   a word with their letters), with three forms of "sister" that the kin reader read so (4 words). 321 words move: 13,292 to 13,613 of 21,977 (60.5% to 61.9%; with near-copies counted once
    59.9% to 61.6%), 82 to 106 complete texts, 1,336 to 1,306 pieces without an accepted meaning. The 94 words of
    the first rule are names recognised, not meanings found.
 5. **Two earlier claims of this project do not hold** and carry a note where they stand: that the w and q at

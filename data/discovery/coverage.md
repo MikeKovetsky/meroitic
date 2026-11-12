@@ -252,7 +252,9 @@ The 321 words that were not translated before are the whole gain, from 13,292 to
 4. **A spelling of a known word.** The pieces that two blind checkers both took for a spelling or a form of a
    word with an accepted meaning ([`variants.md`](variants.md), section 6), without the two whose pack showed a
    hint (`mXeyot`, `yetmetl`): 52 words, `tedxli` (13) and `bedewitel` (7) first. The variants page counts 54 for
-   the same pieces; the other two are the `smlo` of rule 2. The rule also takes three forms of `kdise` "sister"
+   the same pieces; the other two are the `smlo` of rule 2. With `mXeyot` and `yetmetl`, which the check's stated
+   rule confirms too, the rule would take 5 words more: 13,618 running words (62.0%), 5,413 with near-copies
+   counted once. The rule also takes three forms of `kdise` "sister"
    that the checkers did not confirm and that the correction was asked to count: `kdito` (2 words), `kdisbetowi`
    and `kditebkwi`, in four Karanòg texts. The reader who rebuilt the families of Karanòg read them so (one
    reader, not blind; the report is local), and the analysts had cut each into `kdi` or `kdise` and endings

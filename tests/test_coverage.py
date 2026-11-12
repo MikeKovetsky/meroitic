@@ -617,6 +617,15 @@ def test_reported_corrections():
     # the set-apart variants are not among the corrections, and the list as first built is untouched
     assert not any(g["form"] in C.SET_APART and g.get("corrected") for t in lines for g in t["glosses"])
     assert len(C.PUBLIC.read_text().splitlines()) == 1337
+    # with the two set apart, as the check's stated rule allows, the figure the page gives
+    rows_ = [l.split("\t") for l in C.VARIANTS.read_text(encoding="utf-8").splitlines()[1:]]
+    both = {**C.known_spellings(), **{(p, False): (w.split(" / ")[0], C.CHECKED) for p, _, w, *_ in rows_ if p in C.SET_APART}}
+    assert len(both) == len(C.known_spellings()) + 2
+    *_, again = built()
+    C.correct(again, words, affixes, heads, known=both)
+    f2 = C.figures(again)
+    assert (f2["all"]["translated"], f2["near-copies counted once"]["translated"]) == (13618, 5413)
+    assert f"{13618 / 21977:.1%}" == "62.0%" and "5 words more: 13,618 running words (62.0%), 5,413" in " ".join(PAGE.read_text().split())
     # section 7 of the page: its two tables and its counts
     t = page_tables()
     after = {r[0]: r[1:] for r in t["", "As first built", "After the corrections"]}
