@@ -68,6 +68,14 @@ Done since this plan was written:
     289 inscriptions; `corpus_v6` holds 548 with real names, and the public table 563 with every reading's
     source and licence. The matching rule missed its bar (45 of 54 known pairs), so numbers decide before
     letters; of the 17 doubtful matches the readers settled all but 3.
+13. **Analysts on the unread spellings of the clean corpus** (2026-11-12,
+    [`data/discovery/v6_readers.md`](data/discovery/v6_readers.md)): 930 spellings read, 139 running words more
+    translated, 52.7% from 51.3%. About half of what was expected: the unread words are pieces of words and
+    single words of obscure texts.
+14. **The same people in Demotic, Greek and Meroitic** (2026-11-12,
+    [`data/discovery/demotic.md`](data/discovery/demotic.md)), the last open part of step 17: four people carry
+    titles in two languages and the titles line up as the lexicon says; the editors' 125 equations add no
+    meaning that is new and sure.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -223,11 +231,12 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     - **With the vowels compared too** (the Coptic entries only): the true source is among the five best for 7
       of 13 loans against 4, so a vowel-aware search is the better tool once a word is known to be a loan. It
       does not find loans: 13 of 241 unknown pieces beat the 5% bar, where chance gives 12.
-    - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
-      people named in both the Philae graffiti and the Meroitic texts. For the second, *Fontes Historiae Nubiorum*
-      III is held locally since 2026-11-12: it prints 22 Demotic graffiti in translation, among them those of
-      Wayekiye and his family, beside the Meroitic texts of Wayekiye, Abratoye and Makheye, and its comments
-      name who is who.
+    - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind).
+    - **The people named in both the Philae graffiti and the Meroitic texts: done (2026-11-12)**
+      ([`data/discovery/demotic.md`](data/discovery/demotic.md)), from the 22 Demotic graffiti and two Greek
+      inscriptions that *Fontes Historiae Nubiorum* III prints in translation. Four people have a title in both:
+      `perite` is the Demotic "agent" for two, `peseto` "the king's son" and the Greek `psentes` for one, `kroro`
+      the Demotic `3krre` for one. It confirms; it adds no meaning that is new and sure.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
       `ꜣrbtgꜥyꜣ` for `arebetke`, `wygy` for Wayekiye). Reading those sentences beside the Meroitic titles is
       the parallel that carries meaning; it needs the names of the older corpus unmasked, and it can start from
@@ -324,8 +333,8 @@ days, not hours. The costs are estimates from what the runs so far cost.
       and the expert check counted again (60.0% and 71.4% on the inscriptions that were in the corpus, against
       62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens. Reviewed at the
       full tier (523,726 subagent tokens).
-    - **What it leaves for later:** 966 words of the new inscriptions (and 47 of the others) have no analyst (a
-      run like the coverage map's first, to be quoted); nine Gebel Adda inscriptions are held only as a text layer
+    - **What it leaves for later:** 966 words of the new inscriptions (and 47 of the others) had no analyst;
+      they were read the same day ([the readers' page](data/discovery/v6_readers.md) gives what that changed); nine Gebel Adda inscriptions are held only as a text layer
       of Millet 2005 and could be typed; 8 texts quoted by Millet 1968 are not identified, one of which may be
       Griffith's Meroë 27 or 28; 3 doubtful matches are not settled; the kind of text is not known for 112
       inscriptions; and word division still follows each edition.

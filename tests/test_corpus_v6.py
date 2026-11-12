@@ -600,17 +600,17 @@ def numbers_not_in_the_tables(text, more=()):
 def test_readme_report_and_next_steps_quote_the_tables():
     """What README, REPORT and NEXT_STEPS say about corpus_v6 is what the page's tables say."""
     readme = (ROOT / "README.md").read_text()
-    item = readme[readme.index("11. **The corpus keyed by inscription"):readme.index("## The question")]
+    item = readme[readme.index("11. **The corpus keyed by inscription"):readme.index("12. **Analysts on the spellings")]
     assert not numbers_not_in_the_tables(item), numbers_not_in_the_tables(item)
-    method = readme[readme.index("### 18. One inscription once"):readme.index("## Reproduce")]
+    method = readme[readme.index("### 18. One inscription once"):readme.index("### 19. Analysts on the unread spellings")]
     assert not numbers_not_in_the_tables(method, ["18"]), numbers_not_in_the_tables(method, ["18"])
     listed = readme[readme.index("Since 2026-11-12 the readings are also listed"):readme.index("## Methods")]
     assert not numbers_not_in_the_tables(listed), numbers_not_in_the_tables(listed)
     report = (ROOT / "REPORT.md").read_text()
-    day = report[report.index("## Day five, afternoon (2026-11-12): one inscription once"):]
+    day = report[report.index("## Day five, afternoon (2026-11-12): one inscription once"):report.index("## Day five, evening")]
     assert not numbers_not_in_the_tables(day), numbers_not_in_the_tables(day)
     steps = (ROOT / "NEXT_STEPS.md").read_text()
-    point = steps[steps.index("12. **The corpus keyed by inscription**"):steps.index("Next, in this order")]
+    point = steps[steps.index("12. **The corpus keyed by inscription**"):steps.index("13. **Analysts on the unread spellings")]
     assert not numbers_not_in_the_tables(point), numbers_not_in_the_tables(point)
     status = steps[steps.index("    - **Status, 2026-11-12: built**"):steps.index("23. **F2.")]
     assert not numbers_not_in_the_tables(status), numbers_not_in_the_tables(status)

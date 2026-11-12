@@ -1,0 +1,102 @@
+{
+ "before": {
+  "texts": 548,
+  "words": 10290,
+  "translated": 5280,
+  "share": 0.5131,
+  "levels": {
+   "meaning": 2932,
+   "grammar": 682,
+   "name": 1427,
+   "number": 239,
+   "hypothesis": 1283,
+   "kind": 580,
+   "unknown": 1931,
+   "lost": 1216
+  }
+ },
+ "after": {
+  "texts": 548,
+  "words": 10290,
+  "translated": 5419,
+  "share": 0.5266,
+  "levels": {
+   "meaning": 2989,
+   "grammar": 687,
+   "name": 1504,
+   "number": 239,
+   "hypothesis": 1496,
+   "kind": 653,
+   "unknown": 1506,
+   "lost": 1216
+  }
+ },
+ "by_part": {
+  "before": {
+   "Griffith's other volumes": {
+    "words": 1216,
+    "translated": 511
+   },
+   "Karanog and Shablul (Griffith 1911)": {
+    "words": 2902,
+    "translated": 2201
+   },
+   "Otten's files with real names (Millet 1968, the three narratives)": {
+    "words": 2594,
+    "translated": 1273
+   },
+   "the Meroitic Newsletter": {
+    "words": 3578,
+    "translated": 1295
+   }
+  },
+  "after": {
+   "Griffith's other volumes": {
+    "words": 1216,
+    "translated": 517
+   },
+   "Karanog and Shablul (Griffith 1911)": {
+    "words": 2902,
+    "translated": 2201
+   },
+   "Otten's files with real names (Millet 1968, the three narratives)": {
+    "words": 2594,
+    "translated": 1277
+   },
+   "the Meroitic Newsletter": {
+    "words": 3578,
+    "translated": 1424
+   }
+  }
+ },
+ "newly_translated": {
+  "words": 139,
+  "meaning": 59,
+  "grammar": 3,
+  "name": 77,
+  "number": 0
+ },
+ "still_not_analysed": 0,
+ "answers": {
+  "spellings": 930,
+  "translated": 125,
+  "levels": {
+   "meaning": 55,
+   "grammar": 2,
+   "name": 68,
+   "hypothesis": 194,
+   "kind": 61,
+   "unknown": 550
+  },
+  "dropped": 0,
+  "missing": 0,
+  "read_twice": 110,
+  "same_level": 92,
+  "same_translated_or_not": 105,
+  "translated_by": {
+   "second": 25,
+   "first": 22,
+   "both": 21
+  }
+ }
+}

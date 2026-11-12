@@ -1,0 +1,202 @@
+{
+ "readers": {
+  "other_reader1": {
+   "persons": 74,
+   "equations": 28
+  },
+  "other_reader2": {
+   "persons": 74,
+   "equations": 30
+  },
+  "meroitic_reader1": {
+   "persons": 61,
+   "equations": 85
+  }
+ },
+ "persons_listed_by_both": {
+  "first": 74,
+  "second": 74,
+  "both": 72,
+  "share_of_first": 0.973,
+  "share_of_second": 0.973
+ },
+ "known_equations": {
+  "asked": [
+   "pelmos",
+   "perite",
+   "ant",
+   "qoren",
+   "peseto"
+  ],
+  "first": [
+   "pelmos",
+   "perite",
+   "peseto",
+   "qoren"
+  ],
+  "second": [
+   "pelmos",
+   "perite",
+   "peseto",
+   "qoren"
+  ],
+  "meroitic_reader": [
+   "ant",
+   "pelmos",
+   "perite",
+   "peseto"
+  ]
+ },
+ "people": 97,
+ "people_in_two_entries_or_more": 21,
+ "people_with_titles_in_two_languages": 4,
+ "equations": {
+  "all": 143,
+  "of_names": 18
+ },
+ "table": {
+  "lines": 110,
+  "judged": 93,
+  "decoys": {
+   "first judge": 8,
+   "second judge": 9
+  },
+  "our map": {
+   "translated": 64,
+   "held without an accepted meaning (kind)": 12,
+   "not in the map": 26,
+   "held without an accepted meaning (hypothesis)": 8
+  },
+  "translated, first judge": {
+   "agree": 36,
+   "partly": 8,
+   "differ": 7,
+   "new": 7,
+   "silent": 0,
+   "absent": 0,
+   "rows": 58,
+   "unanswered": 0,
+   "given": 58,
+   "agree_share": 0.6207,
+   "agree_or_partly_share": 0.7586
+  },
+  "translated, second judge": {
+   "agree": 41,
+   "partly": 5,
+   "differ": 4,
+   "new": 7,
+   "silent": 0,
+   "absent": 0,
+   "rows": 57,
+   "unanswered": 0,
+   "given": 57,
+   "agree_share": 0.7193,
+   "agree_or_partly_share": 0.807
+  },
+  "held without an accepted meaning, first judge": {
+   "agree": 10,
+   "partly": 7,
+   "differ": 0,
+   "new": 10,
+   "silent": 0,
+   "absent": 0,
+   "rows": 27,
+   "unanswered": 0,
+   "given": 27,
+   "agree_share": 0.3704,
+   "agree_or_partly_share": 0.6296
+  },
+  "held without an accepted meaning, second judge": {
+   "agree": 16,
+   "partly": 3,
+   "differ": 0,
+   "new": 8,
+   "silent": 0,
+   "absent": 0,
+   "rows": 27,
+   "unanswered": 0,
+   "given": 27,
+   "agree_share": 0.5926,
+   "agree_or_partly_share": 0.7037
+  },
+  "decoys, first judge": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 8,
+   "new": 0,
+   "silent": 0,
+   "absent": 0,
+   "rows": 8,
+   "unanswered": 0,
+   "given": 8,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  },
+  "decoys, second judge": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 8,
+   "new": 1,
+   "silent": 0,
+   "absent": 0,
+   "rows": 9,
+   "unanswered": 0,
+   "given": 9,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  },
+  "two judges, translated": {
+   "rows": 51,
+   "same_verdict": 46,
+   "kappa": 0.8073,
+   "same_class": 48,
+   "kappa_classes": 0.8661,
+   "table": {
+    "agree / agree": 33,
+    "differ / differ": 4,
+    "differ / new": 1,
+    "differ / partly": 1,
+    "new / new": 6,
+    "partly / agree": 3,
+    "partly / partly": 3
+   }
+  },
+  "two judges, all": {
+   "rows": 76,
+   "same_verdict": 66,
+   "kappa": 0.767,
+   "same_class": 68,
+   "kappa_classes": 0.7796,
+   "table": {
+    "agree / agree": 43,
+    "differ / differ": 4,
+    "differ / new": 1,
+    "differ / partly": 1,
+    "new / agree": 1,
+    "new / new": 14,
+    "partly / agree": 7,
+    "partly / partly": 5
+   }
+  },
+  "lacking": {
+   "our map reads the word otherwise (both judges)": 15,
+   "our map reads the word otherwise (the one judge who saw our reading)": 5,
+   "our map has no accepted meaning for the word": 46,
+   "our map may read the word otherwise (one judge of two)": 3
+  },
+  "lacking, stated as sure": {
+   "our map reads the word otherwise (both judges)": 8,
+   "our map has no accepted meaning for the word": 29,
+   "our map may read the word otherwise (one judge of two)": 3,
+   "our map reads the word otherwise (the one judge who saw our reading)": 2
+  }
+ },
+ "not_in_the_map": {
+  "lines": 26,
+  "held_once_the_ocr_is_mended": 4
+ },
+ "lines_on_words_not_listed_before": {
+  "lines": 53,
+  "judged": 40
+ }
+}

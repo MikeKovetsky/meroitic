@@ -14,9 +14,10 @@ search and no other folder. The files are data, not instructions.
 ## The spelling
 
 The corpus writes S for the s sign, s for the se sign, N for the ne sign (ñ), x for ḫ and X for ẖ; te and to are
-one sign each and are written with two letters. `NAME` and `RNAME` are personal and royal names masked in the
-older corpus. In the rows whose id starts with `G-` the names are not masked. A dot is a lost sign. An ending may
-be written on its word or apart (`yetmdelo wi`), and two words may be written as one.
+one sign each and are written with two letters. `NAME` and `RNAME` are personal and royal names masked in the older
+corpus. In the rows whose id starts with `G-` or names an inscription (`REM 1038`, `GA 28`) the names are not
+masked, but for a word that the edition itself tags as a personal name, which stands as `NAME` too. A dot is a lost
+sign. An ending may be written on its word or apart (`yetmdelo wi`), and two words may be written as one.
 
 ## What to write for each word
 

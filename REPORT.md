@@ -521,3 +521,33 @@ The table, the map and the corpus were built without an agent; two readers then 
     were missing from the table, a name with a lost sign inside had been matched to two whole words, and "two
     readings or more" had counted the fragments of one edition apart. The figures above are counted after those
     fixes.
+
+## Day five, evening (2026-11-12): the unread spellings, and the same people in Demotic
+
+1. **Analysts on the spellings of the clean corpus that none had read**
+   ([`data/discovery/v6_readers.md`](data/discovery/v6_readers.md)). 930 spellings (1,038 running words) went
+   to seven analysts, and the 110 most frequent to an eighth. 125 got a translated level (68 names, 55 meanings,
+   2 grammar words), 194 a proposal of the lexicon, 61 their kind and 550 nothing. 139 running words more are
+   translated: 5,419 of 10,290, 52.7% from 51.3%; the Newsletter's texts go from 36.2% to 39.8%.
+2. **The bar was met and the estimate was not.** The two analysts put 105 of the 110 words read twice on the same
+   side (the bar was 85%; 92 at the same level). The gain expected beforehand was 265 to 385 words, taken from
+   the share the analysts translated on the older texts. The unread words are another kind of word: pieces of
+   words that an edition prints in two parts, and single words of broken or obscure texts.
+3. **The same people in Demotic, Greek and Meroitic** ([`data/discovery/demotic.md`](data/discovery/demotic.md)),
+   the last open part of step 17. Three readers went through the 24 Demotic and Greek entries and the nine
+   Meroitic entries of *Fontes Historiae Nubiorum* III: 97 people, 21 of them in two entries or more, four with
+   a title in Meroitic and in Demotic or Greek. For those four the titles line up as the lexicon says: `perite`
+   beside the Demotic "agent" twice, `peseto` beside "the king's son" and the Greek `psentes`, `kroro` beside
+   `3krre`.
+4. **The editors' equations:** 143 in the readers' lists, 125 without the names, 110 different lines. The map
+   translates the word of 64; two judges agree with its reading on 36 of 58 and 41 of 57, and accepted none of
+   their 17 decoys. On the list of what the map lacks are 69 lines, 46 of them on words without an accepted
+   meaning, mostly titles the editors leave as titles too. More than the map has: `qoreñ` as a title built on
+   `qore` "ruler", `arbetke` as a title of priests with economic duties, and "the great envoy to Rome" for
+   `apote-lẖ Arome-li-s`. No meaning is both new and sure.
+5. **Both bars of the Demotic step were met:** the two readers list the same person in 72 of 74 lines (80% was
+   asked), and both find four of the five known equations (the fifth, `ant`, is only in the Meroitic entries).
+6. **Cost:** eight analysts 1,012,556 subagent tokens; three readers 384,658 and two judges 126,264 for the
+   Demotic step; 1,523,478 together, against 1.5 million quoted for the first and 0.5 for the second, both with
+   their review.
+

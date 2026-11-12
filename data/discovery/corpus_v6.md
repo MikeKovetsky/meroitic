@@ -271,7 +271,8 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
    counts as one lost word where its pieces were read as words; and the rest of a swapped name is gone.
 3. **The inscriptions new to the corpus are at 35.9%:** 842 of their 3,704 words are lost, and 966 are spellings
    that no analyst has seen and that have only the lookup (47 more such words are in the other inscriptions,
-   1,013 in 912 spellings in all). Reading those spellings is what the build left undone on purpose; the lost
+   1,013 in 912 spellings in all). Reading those spellings is what the build left undone on purpose (the
+   analysts have read them since: [the readers' page](v6_readers.md) gives what changed); the lost
    words are the state of the texts. The new inscriptions are 209 of the Newsletter's texts and 50 of
    Griffith's rows that `corpus_v5` left out.
 4. **The check against the two editions holds:** on the 1,005 judged rows that still stand in `corpus_v6`, the

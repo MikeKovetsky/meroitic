@@ -111,6 +111,23 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     missed the bar set for it (the right partner for 45 of 54 known pairs, where 90% was asked), so numbers
     decide before letters, and the 17 doubtful matches went to two readers. Both passed their own test (12 of 12 known lines, 12 of 12 decoys); 13 of their matches are taken,
     one line matches nothing and 3 are not settled ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
+12. **Analysts on the spellings nobody had read add 1.4 points, half of what was expected.** The clean corpus
+    had 930 spellings (1,038 running words) that only the lookup had seen, most of them in the Newsletter's
+    texts. Eight analysts read them, 110 of them twice: 125 spellings got a translated level (68 names, 55
+    meanings, 2 grammar words), and 550 got nothing. 139 running words more are translated, 5,419 of 10,290
+    (52.7%, from 51.3%). The two analysts put 105 of the 110 words read twice on the same side, above the bar of
+    85%. The gain expected beforehand was 265 to 385 words: the unread words turned out to be pieces of words
+    printed in two parts, and single words of broken or obscure texts
+    ([`data/discovery/v6_readers.md`](data/discovery/v6_readers.md)).
+13. **The same people in Demotic, Greek and Meroitic: four of them carry titles in two languages, and the titles
+    line up as the lexicon says.** *Fontes Historiae Nubiorum* III prints 22 Demotic graffiti and two Greek
+    inscriptions of the families whose Meroitic epitaphs the corpus holds. Three readers listed the people (97,
+    21 of them in two entries or more) and the 125 places where the editors set a Meroitic word beside a word of
+    another language or give it a meaning. `perite` stands where the Demotic has "agent" for two people, `peseto`
+    where it has "the king's son" and the Greek `psentes` for one, `kroro` where it has `3krre` for one. Two
+    judges agree with the map's reading on 36 of 58 and 41 of 57 of the lines whose word it translates. No
+    meaning is both new and sure; what the map lacks is mostly titles the editors leave as titles too
+    ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
 
 ## The question
 
@@ -375,6 +392,28 @@ inscription is preferred by a fixed order, with the numerals another edition sho
 analyst or judge, and `src/v6/public.py` writes the public table, the map of the old ids and the tables of the
 page ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
 
+### 19. Analysts on the unread spellings of the clean corpus (`src/v6/readers.py`)
+
+The recount of step 18 ran without a new analyst, so the spellings that `corpus_v5` does not have stood with the
+lookup alone. `src/v6/readers.py packs` takes the words the lookup leaves on `corpus_v6`, without the words an
+edition tags as personal names and without those a pack of the first run holds, and writes them into packs like
+those of step 14, numbered after them and kept in a folder of their own; the most frequent go into one more pack
+for a second analyst. `count` runs the corrected map of `corpus_v6` twice, with the first run's answers alone and
+with the new ones added, and reports what moved. The bar on the two analysts' agreement and the gain expected
+were written down before the run ([`data/discovery/v6_readers.md`](data/discovery/v6_readers.md)).
+
+### 20. The same people in two scripts (`src/demotic.py`)
+
+The entries of *Fontes Historiae Nubiorum* III are cut from the volume's text layer at the headings that
+continue its numbering. Two readers take the 24 Demotic and Greek entries and one the nine Meroitic entries of
+the same families; each lists the people an entry's ancient text names, with their titles, their kin and whom
+the editors take for the same person elsewhere, and every place where the editors set a Meroitic word beside a
+Demotic, Greek or Egyptian one. `merge` joins the lines into people (the same name in the editors' English, or
+the editors' own identification, matched by the consonants of the name) and checks two bars written before the
+run: how many person lines both readers list, and whether both find the known equations. The equations go
+through the lookup and the judges' table of step 17, each judge with decoys of its own
+([`data/discovery/demotic.md`](data/discovery/demotic.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -388,6 +427,7 @@ python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && p
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py
+python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -396,7 +436,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Eight things need files that are kept locally (Data, above), so they don't run from a clone:
+Ten things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -412,14 +452,18 @@ Eight things need files that are kept locally (Data, above), so they don't run f
   the coverage map's gloss file, Rilly's lexicon and the judges' answers;
 - `python3 -I src/v6/build.py` (then `src/v6/recount.py` and `src/v6/public.py`; `src/v6/readings.py test` for the
   bar) reads Otten's files, `corpus_v5`, the Newsletter texts, the two editions' text layers, and for the recount
-  Rilly's lexicon, the analysts' answers and the judges' answers.
+  Rilly's lexicon, the analysts' answers and the judges' answers;
+- `python3 -I src/v6/readers.py count` reads Rilly's lexicon, `corpus_v6` and the analysts' answers of both runs;
+- `python3 -I src/demotic.py merge` (and `packs`, `table`, `count`) reads the text layer of FHN III, the readers'
+  and judges' answers, Rilly's lexicon and the coverage map's gloss file.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
   the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`), the search
-  for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`)
-  and the corpus keyed by inscription (`v6/`).
+  for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
+  the corpus keyed by inscription and its analysts (`v6/`) and the same people in Demotic, Greek and Meroitic
+  (`demotic.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,
