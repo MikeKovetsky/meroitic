@@ -53,7 +53,7 @@ def load_answers(path, ids):
         elif row in out:
             problems.append(f"line {n}: {row} answered twice (first answer kept)")
         else:
-            out[row] = {"verdict": verdict, "expert": str(a.get("expert", ""))[:120], "doubt": a.get("doubt") is True}
+            out[row] = {"verdict": verdict, "expert": str(a.get("expert") or "")[:120], "doubt": a.get("doubt") is True}
     problems += [f"no answer for {i}" for i in sorted(ids - set(out))]
     return out, problems
 

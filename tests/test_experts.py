@@ -106,7 +106,7 @@ def test_answers_are_checked():
             json.dumps({"row": "M1-002", "verdict": "maybe", "expert": "", "doubt": False}),    # no such verdict
             json.dumps({"row": "M9-001", "verdict": "agree", "expert": "", "doubt": False}),    # no such row
             "not json",
-            json.dumps({"row": "M1-003", "verdict": "silent", "doubt": "true"}),                # doubt must be true
+            json.dumps({"row": "M1-003", "verdict": "silent", "expert": None, "doubt": "true"}), # doubt must be true
             json.dumps({"row": ["M1-004"], "verdict": "agree"}),                                # not a row id
         ]) + "\n", encoding="utf-8-sig")                                                       # with a BOM
         got, bad = T.load_answers(p, {"M1-001", "M1-002", "M1-003", "M1-004"})
