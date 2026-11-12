@@ -34,13 +34,14 @@ The corrections (`correct`). Later work found words that the map counts wrongly,
 The map as first built stays as it was, because two searches read its list (src/egyptian.py, src/variants.py).
 1. The rest of a masked name. The older corpus was padded with copies in which names were swapped; a name of
    several words left its other words behind the mask: "mokelowi" and "mete l" directly after NAME are such a
-   rest and count as a name.
+   rest and count as a name. A name leaves one rest: the mokelowi of "NAME mete l mokelowi" is the frame's own.
 2. A stem of two signs. The lookup asks a stem for three letters, but the signs se and ne are two letters each
    in Rilly's spelling: smlowi is sem "wife" with -lowi. Only for an entry Rilly holds as established.
 3. A word written apart. Two or three neighbours, one of them of one or two letters, that together spell a word
    the lookup translates, when that word also stands written as one in other texts: wo Si is woSi, "O Isis".
 4. A spelling of a known word. The pieces that two blind checkers both took for a spelling or a form of a word
-   with an accepted meaning (data/discovery/variants.md), without the two whose pack showed a hint.
+   with an accepted meaning (data/discovery/variants.md), without the two whose pack showed a hint; and three
+   forms of kdise "sister" that a reader of the families of Karanog read so (SISTER).
 """
 import collections, json, re, statistics, sys
 from pathlib import Path
@@ -64,14 +65,24 @@ RANK = {"meaning": 0, "grammar": 0, "name": 0, "number": 0, "hypothesis": 1, "ki
 CONFIDENCE = {"established": 5, "probable": 4, "hypothesis": 2}
 SURE = 4                      # an analyst's cut counts from this confidence up (the scale of runs/unknown/)
 # The corrections. What the padding of the older corpus left directly after a masked name: Millet marks "amxye
-# mokelowi" as one personal name (MilletExamples.txt, l. 1142), and "tqo mete l" is one of the swapped-in names
-# of several words (clean_v2.FILLERS); the name's first word was masked and the rest stayed, in the same frames.
+# mokelowi" and "yetmetN-mete-l", "Yetmetne the younger", as personal names (MilletExamples.txt, l. 1142 and 120;
+# "tqo mete l" is in clean_v2.FILLERS); the first word was masked and the rest stayed, in the same frames. A name
+# leaves one rest: where "NAME mete l" or "NAME mokelowi" stands before mokelowi, that mokelowi is the frame's own
+# word, of the second passage of GA 19 A ("tni mEkelEwi : xteri", l. 1141; Millet does not mark it as a name).
+# Where a name of one word stood in that slot (T0051), the rule cannot tell the frame's word from a rest.
 NAME_TAILS = (("mokelowi",), ("mete", "l"))
 MASKED = ("NAME", "RNAME")
 SYLLABLE_SIGNS = "sN"         # the signs se and ne: one sign in the corpus spelling, two letters in Rilly's
 FRAGMENT = 2                  # a word of this many letters or fewer can be a piece of its neighbour written apart
 WRITTEN = 2                   # ... when the two together stand as one word in this many texts or more
 SET_APART = ("mXeyot", "yetmetl")   # confirmed variants whose pack showed a word holding their letters (variants.md)
+CHECKED = "two blind checkers (data/discovery/variants.md)"
+# Rule 4 also takes the forms of kdise "sister" that the correction was asked to count (data/sources/notes/
+# PROGRESS.md, entry 43, local) and the checkers did not confirm. The reader who rebuilt the families of Karanog
+# read them so (data/sources/dig/kin/REPORT.md, section 6, local), and the analysts cut each into kdi or kdise and
+# endings without being sure of the endings.
+SISTER = {"kdito": "kdise", "kdisbetowi": "kdise", "kditebkwi": "kdise"}
+FAMILIES = "the reader who rebuilt the families of Karanog (one reader, not blind)"
 # Rilly's category -> the kind of word, the first that fits
 CATEGORY_KIND = (("anthroponyme", "person name"), ("nom de personne", "person name"), ("toponyme", "place name"),
                  ("nom de lieu", "place name"), ("ethnonyme", "people name"), ("théonyme", "god name"),
@@ -220,10 +231,10 @@ def griffith_name(tok, printed):
     return ""
 
 
-def lookup(tok, prev, words, affixes, printed=None, short=False):
+def lookup(tok, prev, words, affixes, printed=None, two_signs=False):
     """The gloss of one word by lookup alone, or None for a word left to the analysts. prev is the word before it
     in the text: wi after a word in -lo or -qo is the particle of -lowi and qowi, written apart. printed is what
-    Griffith prints for the word's inscription (griffith_entries), for a Karanog row. short (the corrections):
+    Griffith prints for the word's inscription (griffith_entries), for a Karanog row. two_signs (the corrections):
     a stem of two signs counts as three letters when one of them is the sign se or ne."""
     if tok in ("NAME", "RNAME"):
         return gloss(tok, "name", 5, "NAME", "a name, masked in the corpus", kind="person name")
@@ -245,8 +256,8 @@ def lookup(tok, prev, words, affixes, printed=None, short=False):
     best = None
     for end in L.SUFFIXES[1:]:
         stem = tok[:-len(end)]
-        # short: two signs, one of them se or ne, and an entry Rilly holds as established (a short stem must be sure)
-        long = len(stem) >= 3 or (short and len(stem) == 2 and any(c in SYLLABLE_SIGNS for c in stem)
+        # two_signs: one of them se or ne, and an entry Rilly holds as established (a short stem must be sure)
+        long = len(stem) >= 3 or (two_signs and len(stem) == 2 and any(c in SYLLABLE_SIGNS for c in stem)
                                   and stem in words and words[stem][0]["confidence"] == CONFIDENCE["established"])
         if tok.endswith(end) and long and stem in words and words[stem][0]["level"] not in ("kind", "unknown"):
             e = words[stem][0]
@@ -630,21 +641,20 @@ def fixed(g, rule, **change):
 
 
 def name_tails(r, gs):
-    """Rule 1: in the older corpus, the rest of a masked name of several words, directly after the mask (or after
-    another such rest), is part of the name. Returns the number of words set right."""
+    """Rule 1: in the older corpus, the rest of a masked name of several words, directly after the mask, is part
+    of the name. A name leaves one rest, so a word after a rest is not one (NAME_TAILS). Returns the number of
+    words set right."""
     if group(r) != "the older corpus (names masked)":
         return 0
-    forms, n, i = [g["form"] for g in gs], 0, 1
-    while i < len(gs):
-        behind = forms[i - 1] in MASKED or gs[i - 1].get("corrected") == "the rest of a masked name"
-        t = next((t for t in NAME_TAILS if behind and tuple(forms[i:i + len(t)]) == t), None)
-        for k in range(i, i + len(t or ())):
+    forms, n = [g["form"] for g in gs], 0
+    for i in range(1, len(gs)):
+        t = next((t for t in NAME_TAILS if forms[i - 1] in MASKED and tuple(forms[i:i + len(t)]) == t), ())
+        for k in range(i, i + len(t)):
             gs[k] = fixed(gs[k], "the rest of a masked name", level="name", confidence=4, gloss="NAME",
                           kind="person name", parts=[{"form": forms[k], "entry": "NAME"}],
                           source="the rest of a name of several words, left behind its mask by the padding of the "
                                  "older corpus")
-        n += len(t or ())
-        i += len(t or (None,))
+        n += len(t)
     return n
 
 
@@ -655,7 +665,7 @@ def short_stems(gs, words, affixes):
     for i, g in enumerate(gs):
         if g["level"] in TRANSLATED or g["level"] == "lost" or g.get("corrected"):
             continue
-        new = lookup(g["form"], gs[i - 1]["form"] if i else "", words, affixes, short=True)
+        new = lookup(g["form"], gs[i - 1]["form"] if i else "", words, affixes, two_signs=True)
         if new and new["level"] in TRANSLATED:
             gs[i] = fixed(g, "a stem of two signs", **{k: new[k] for k in ("level", "confidence", "gloss", "kind",
                                                                           "source", "parts")})
@@ -674,10 +684,10 @@ def written_whole(glossed):
 def joins(gs, words, affixes, whole):
     """Rule 3: two or three neighbouring words that are one word written apart. At least one of them is not
     translated, at least one has FRAGMENT letters or fewer, together they spell a word the lookup translates, and
-    that word stands written as one in WRITTEN texts or more. The longer join is tried first. Returns the joins
-    made as [(the words, the joined word)]."""
-    made, i = [], 0
-    while i < len(gs):
+    that word stands written as one in WRITTEN texts or more. The longer join is tried first; the words of a join
+    are corrected, so no later join takes them. Returns the joins made as [(the words, the joined word)]."""
+    made = []
+    for i in range(len(gs)):
         for n in (3, 2):
             part = gs[i:i + n]
             forms = [g["form"] for g in part]
@@ -692,9 +702,7 @@ def joins(gs, words, affixes, whole):
                                       gloss=new["gloss"] if k == 0 else f"(part of {word})", kind=new["kind"],
                                       source=new["source"], parts=new["parts"] if k == 0 else [], joined=word)
                 made.append((" ".join(forms), word))
-                i += n - 1
                 break
-        i += 1
     return made
 
 
@@ -711,31 +719,39 @@ def confirmed_variants(path=VARIANTS):
     return out
 
 
-def spellings(gs, confirmed, heads):
-    """Rule 4: a word whose every blocking piece is a confirmed spelling of a word with an accepted meaning takes
-    that word's meaning."""
+def known_spellings(path=VARIANTS):
+    """What rule 4 takes: {(piece, it is a headword): (the word, who read it so)}, the confirmed variants and the
+    forms of "sister" (SISTER)."""
+    out = {k: (w, CHECKED) for k, w in confirmed_variants(path).items()}
+    out.update({(p, False): (w, FAMILIES) for p, w in SISTER.items()})
+    return out
+
+
+def spellings(gs, known, heads):
+    """Rule 4: a word whose every blocking piece is a known spelling of a word with an accepted meaning takes
+    that word's meaning. known is known_spellings()."""
     n = 0
     for i, g in enumerate(gs):
         blocks = {(b, e is not None) for b, e in blockers(g, heads)}
-        if not blocks or g.get("corrected") or not blocks <= set(confirmed):
+        if not blocks or g.get("corrected") or not blocks <= set(known):
             continue
-        es = [heads[confirmed[b]] for b in sorted(blocks) if confirmed[b] in heads]
-        if not es or any(e["level"] not in TRANSLATED for e in es):
+        es = [(heads[known[b][0]], known[b][1]) for b in sorted(blocks) if known[b][0] in heads]
+        if not es or any(e["level"] not in TRANSLATED for e, _ in es):
             continue
-        e = es[0]
+        e, by = es[0]
         gs[i] = fixed(g, "a spelling of a known word", level=e["level"], confidence=4, kind=e["kind"] or g["kind"],
                       gloss=(short(e["meaning"]) or f"[{e['kind'] or 'no gloss'}]") + f" (a form of {e['headword']})",
-                      source=source(e) + "; the spelling by two blind checkers (data/discovery/variants.md)",
-                      parts=[{"form": g["form"], "entry": e["headword"]}])
+                      source=source(e) + f"; the spelling by {by}", parts=[{"form": g["form"], "entry": e["headword"]}])
         n += 1
     return n
 
 
-def correct(glossed, words, affixes, heads, confirmed=None):
+def correct(glossed, words, affixes, heads, known=None):
     """The map with the four corrections, each word set right once and by the first rule that fits. Changes the
     glosses in place and returns what each rule did: the words it set right in every text, how many of those were
-    not translated before, and the same with near-copies counted once."""
-    confirmed = confirmed_variants() if confirmed is None else confirmed
+    not translated before, and the same with near-copies counted once. known: what rule 4 takes, by default
+    known_spellings()."""
+    known = known_spellings() if known is None else known
     whole = written_whole(glossed)
     once = {r["id"] for r in distinct([r for r, _ in glossed])}
     rules = ("the rest of a masked name", "a stem of two signs", "a word written apart", "a spelling of a known word")
@@ -745,7 +761,7 @@ def correct(glossed, words, affixes, heads, confirmed=None):
         name_tails(r, gs)
         short_stems(gs, words, affixes)
         made.update(joins(gs, words, affixes, whole))
-        spellings(gs, confirmed, heads)
+        spellings(gs, known, heads)
         for g in gs:
             if g.get("corrected"):
                 new = g["was"]["level"] not in TRANSLATED and g["level"] in TRANSLATED

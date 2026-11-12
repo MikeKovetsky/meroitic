@@ -345,7 +345,7 @@ Literature checks were run by me and by two research subagents. The reports name
 2. **Isis behaves the same way.** She is bare woS in 10 of 11 epithet families, against woSi in 19 families with the short invocation. The exception is T0005.
 3. **It fits Meroitic grammar.** Meroitic marks a phrase once at its end: the article is a "group boundary marker" ([R16] p. 8).
 4. **The two epithets share their opening.** Both begin wet-/qet-, and the w/q choice tends to match within a text (w…w in T0002 and T0005; q…q in T0023). That suggests a shared element wet-/qet- + stem (NyiNqe-l, rr).
-   - **Correction, 2026-11-11:** that the w/q choice tends to match is not shown. With the words read as written together, the two epithets stand in 57 texts of the corpus and open with the same letter in 38, but most of those texts are copies of one another: with near-copies counted once it is 5 of 9. That both begin wet-/qet- stands; the matching rests on too few texts.
+   - **Correction, 2026-11-11: the matching fails a count on the whole corpus.** With the words read as written together, the two epithets stand in 57 texts of the corpus and open with the same letter in 38, but most of those texts are copies of one another: with near-copies counted once it is 5 of 9, so a tendency to match is not shown. That both begin wet-/qet- stands; the matching rests on too few texts.
 
 **Confidence:** 3 for the distribution, 2 for the phrase-final vocative, 1 for any meaning.
 

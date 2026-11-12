@@ -57,6 +57,7 @@ axi	letters	verb	hypothesis	7	0	7	7	axi axideSxiniaxi axilowi
 dotedi	headword	benediction verb	kind	7	0	7	7	yidotedikte pSidotedikete yidotediyekes yidoteni
 wetrri	headword	epithet	kind	6	0	39	39	wetrri Soriwetrri
 do (1)	headword	noun	hypothesis	6	0	20	12	do
+moke	headword	kin term	unknown	6	2	13	10	mokelowi amXyemokelowi
 dete	headword	unknown	unknown	6	0	12	7	dete dteqo detelxe detete
 tr	headword	adjective	hypothesis	6	0	12	12	mStr mlowitr tr
 tmot	headword	verb	kind	6	0	10	6	tmot
@@ -74,7 +75,6 @@ sdrte	headword	noun	kind	5	0	15	11	Sdrte Sdrete SdrtelX
 asy	headword	unknown	unknown	5	0	12	12	aSy asy
 twd	headword	verb	hypothesis	5	0	11	11	twd twdto ytwdsni
 Aritene	headword	god name	hypothesis	5	0	9	7	ariteN ariteNl ariteNyose ariteNlise
-moke	headword	kin term	unknown	5	1	9	8	mokelowi amXyemokelowi
 q	letters	unknown	unknown	5	1	9	8	q
 -bto	headword	function word	hypothesis	5	0	8	8	bto sbto
 kid	headword	verb	kind	5	1	8	6	kid kidketel yikidbite
@@ -295,7 +295,6 @@ elxte	letters	benediction verb	hypothesis	2	0	2	2	elxte
 erk	headword	unknown	hypothesis	2	0	2	2	erk
 ese	letters	unknown	unknown	2	0	2	2	ese
 iple	letters	unknown	unknown	2	0	2	2	iple
-kdito	letters	kin term	hypothesis	2	0	2	2	kdito
 kedebx	letters	verb	hypothesis	2	0	2	2	kedebx
 leteye	letters	unknown	unknown	2	0	2	2	leteye
 lito	letters	function word	hypothesis	2	0	2	2	lito
@@ -834,8 +833,6 @@ kdem	letters	unknown	unknown	1	0	1	1	kdem
 kdibe	letters	noun	hypothesis	1	0	1	1	kdibe
 kdilX	letters	noun	hypothesis	1	0	1	1	kdilX
 kdimloye	letters	noun	hypothesis	1	0	1	1	kdimloye
-kdisbetowi	letters	kin term	hypothesis	1	0	1	1	kdisbetowi
-kditebkwi	letters	kin term	hypothesis	1	0	1	1	kditebkwi
 kdkex	letters	unknown	unknown	1	0	1	1	kdkex
 ke	letters	adjective	unknown	1	0	1	1	kedotl
 keNydi	letters	unknown	unknown	1	0	1	1	keNydi

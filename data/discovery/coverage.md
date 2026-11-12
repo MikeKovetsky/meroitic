@@ -5,7 +5,7 @@ Rilly's 2003 lexicon, first by lookup and then, for the words the lookup leaves,
 The numbers below are checked by `tests/test_coverage.py`.
 
 **Corrected the same day (section 7):** 13,613 of the 21,977 running words (61.9%) are translated, 61.6% with
-near-copies counted once, and every legible word is translated in 107 of 605 texts. Sections 1 to 6 give the map
+near-copies counted once, and every legible word is translated in 106 of 605 texts. Sections 1 to 6 give the map
 as first built (60.5%); its list is the one the two later searches read ([Egyptian sources](egyptian.md),
 [spelling variants](variants.md)).
 
@@ -172,7 +172,7 @@ The draft translation of a text is this line of glosses, word by word, not Engli
 | `data/discovery/coverage_unknown.tsv` | the 1,336 pieces without an accepted meaning: headword or letters, kind, level, texts, words, spellings | public |
 | `data/sources/coverage/glosses.jsonl` | every text word by word: gloss, level, confidence, source (Rilly's page), parts, and a draft line | local |
 | `data/sources/coverage/packs/` | the analysts' packs and answers | local |
-| `data/discovery/coverage_unknown_corrected.tsv` | the 1,309 pieces left after the corrections of section 7, in the same columns | public |
+| `data/discovery/coverage_unknown_corrected.tsv` | the 1,306 pieces left after the corrections of section 7, in the same columns | public |
 | `data/sources/coverage/corrected/` | the gloss file, the ranked list and the figures after the corrections; each corrected word keeps what it was | local |
 
 The gloss file and the analysts' answers lean on Rilly's lexicon, which has no open licence, so they stay on the
@@ -202,51 +202,84 @@ that read it still rebuild; the corrected map is written beside it.
 | | As first built | After the corrections |
 |---|---|---|
 | Running words translated, all 899 texts | 13,292 of 21,977 (60.5%) | 13,613 (61.9%) |
-| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,409 (61.6%) |
-| Texts with every legible word translated | 82 of 605 | 107 |
-| Texts with one piece missing | 124 | 121 |
+| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,411 (61.6%) |
+| Texts with every legible word translated | 82 of 605 | 106 |
+| Texts with one piece missing | 124 | 122 |
 | The median text | 68.8% | 72.7% |
-| Pieces without an accepted meaning | 1,336 | 1,309 |
+| Pieces without an accepted meaning | 1,336 | 1,306 |
 
 | Rule | Words set right | Not translated before | The same, near-copies counted once |
 |---|---|---|---|
-| 1. The rest of a masked name | 282 | 98 | 96 and 24 |
+| 1. The rest of a masked name | 278 | 94 | 94 and 22 |
 | 2. A stem of two signs | 83 | 83 | 18 and 18 |
 | 3. A word written apart | 146 | 88 | 107 and 68 |
-| 4. A spelling of a known word | 52 | 52 | 33 and 33 |
+| 4. A spelling of a known word | 56 | 56 | 37 and 37 |
 
 The 321 words that were not translated before are the whole gain, from 13,292 to 13,613.
 
 1. **The rest of a masked name.** The older corpus was padded with copies of its texts in which the names were
    swapped. A swapped-in name of several words left its other words behind the mask. `mokelowi` is one: Millet
    marks "amxye mokelowi" as a single personal name, and the padded file holds the word in 490 of its 18,090
-   lines. `mete l` is the other, from the name "tqo mete l"; it stands in the same frames. Directly after a
-   masked name both now count as part of the name. This is why `moke` stood so high in section 2: it falls from
-   27 texts (alone in 11) to 5 (alone in 1). The 98 words gained here are names recognised, not meanings found,
-   and one of the four real passages of `moke` goes with the copies made from it.
+   lines. `mete l` is the other: Millet marks "yetmetN-mete-l", "Yetmetne the younger", as a name, and
+   "tqo mete l" was swapped in too; it stands in the same frames. Directly after a masked name both now count as
+   part of the name. A name leaves one rest, so a `mokelowi` after "NAME mokelowi" or "NAME mete l" is not one: it
+   is the word of the second passage of GA 19 A, which Millet writes "tni mEkelEwi" and does not mark as a name.
+   - This is why `moke` stood so high in section 2: it falls from 27 texts (alone in 11) to 6 (alone in 2), and
+     from the 6th place of the list to the 59th.
+   - The six hold the four real passages, in three inscriptions (GA 19 A twice, GA 19 B and REM 1057), and
+     three excerpts that counting near-copies once does not catch: one of GA 19 B, and the two that `moke` blocks
+     alone, copies of the second passage of GA 19 A with other names swapped in (T0905, T0992).
+   - In one copy of GA 19 A (T0051, a near-copy of T0303) a name of one word stands before that passage's
+     `mokelowi`, and the rule takes it for a rest.
+   - The 94 words gained here are names recognised, not meanings found.
 2. **A stem of two signs.** The lookup asks a stem for three letters. The signs se and ne are one sign each in
    the corpus spelling but two letters in Rilly's, so `sem` "wife" is spelled with two signs and its form
-   `smlowi`, "is the wife of", was left out: 81 words, and 2 of `smlo`. The rule holds only for an entry that
-   Rilly gives as established.
+   `smlowi`, "is the wife of", was left out: 81 words. The rule holds only for an entry that Rilly gives as
+   established, and in the corpus it changes no word but `smlowi` and `smlo` (2 words). For `smlo` the analyst
+   and both blind checkers of the variants search named the title `smlo` instead; it counts as translated either
+   way.
 3. **A word written apart.** Two or three neighbouring words are read as one when at least one of them has one or
    two letters, they spell a word the lookup translates, and that word also stands written as one in two texts or
    more. It makes 65 places of 25 different kinds: `ye tmdelowi` (17), `ye t mde` (7), `wo Si` for `woSi`, "O
-   Isis" (6), `yet mde lo` (6). These joins are made by rule and no reader has checked them; single cases may be
-   wrong (`wi t` twice, `S Sor` once).
+   Isis" (6), `yet mde lo` (6). The joins are made by rule. The reviewer of the correction read all 25 kinds in
+   their contexts, as one reader and not a specialist:
+   - 15 kinds (51 places) read as one word written apart, among them `wo Si` and `wi Si` before `Soreyi` or
+     `Soriyi` ("O Isis, O Osiris"), `pe stol yetmdelo` and `m Xe` in "bread, plenty".
+   - One is probably wrong. In T1014 (`ate mXe pi S te`) the rule reads `S te` as `Ste` "mother", but the S there
+     is a piece of the verb of the blessing, as the crossword reader of the six reports also says.
+   - 9 kinds (13 places) could not be judged from the texts: `l w` (4), `wi t` (2), `S Sor`, `a to`, `l e`,
+     `m te`, `no b`, `qo re` and `xl bi`.
 4. **A spelling of a known word.** The pieces that two blind checkers both took for a spelling or a form of a
    word with an accepted meaning ([`variants.md`](variants.md), section 6), without the two whose pack showed a
    hint (`mXeyot`, `yetmetl`): 52 words, `tedxli` (13) and `bedewitel` (7) first. The variants page counts 54 for
-   the same pieces; the other two are the `smlo` of rule 2.
+   the same pieces; the other two are the `smlo` of rule 2. The rule also takes three forms of `kdise` "sister"
+   that the checkers did not confirm and that the correction was asked to count: `kdito` (2 words), `kdisbetowi`
+   and `kditebkwi`, in four Karanòg texts. The reader who rebuilt the families of Karanòg read them so (one
+   reader, not blind; the report is local), and the analysts had cut each into `kdi` or `kdise` and endings
+   without being sure of the endings. That makes 56 words.
 
 **What is still wrong and not corrected.**
 
 1. The corpus itself is unchanged: it still holds the padded frames as texts ("NAME mokelowi"), so the counts of
    texts include them.
-2. Other fragments stay in the list: `Si` in 10 texts (pieces of other words, among them the verb of the
-   blessings written in several parts), `wo-` in 5, and three forms of "sister" (`kdito`, `kdisbetowi`,
-   `kditebkwi`).
-3. A count of texts in the older corpus overstates the evidence, because its texts are copies with the names
+2. The padding left a third rest that rule 1 does not take: `qo`, of the swapped-in names "dteqox qo" and
+   "tmeye-qo", stands after a mask in 99 texts. "NAME qo" is also a real way of naming someone, and `qo` counts as
+   translated either way, so the figure does not move.
+3. Other fragments stay in the list. `Si` stands in 10 texts (pieces of other words, among them the verb of the
+   blessings written in several parts) and `wo-` in 5. `md` and `q` stand where the older corpus moves a word's
+   boundary by a letter or two (`tboyet md ebetowipqr` for `tbo yetmdebetowi pqr`, `mStr q qo` for Griffith's
+   `mStrq qo`), which a join of whole words cannot mend. `n-` (7 texts) is never the `n-` of `n-lw` "before",
+   as the crossword reader notes, and `n` and `y` are letters that an analyst left unexplained inside a longer
+   word (`kditebetowin`, `pqry`).
+4. 15 entries of the lexicon count as translated although their meaning makes them a variant of a word that has
+   no accepted meaning itself (`kroro`, `qetrri`, `Kine`, `qetneyineqeli` and others; found by the variants
+   search). 160 running words of the corrected map rest on them: the 152 of the first build and the 8 of
+   `qe trri`, which rule 3 joins into `qetrri`.
+
+**What the numbers mean.**
+
+1. A count of texts in the older corpus overstates the evidence, because its texts are copies with the names
    swapped: `teke` stands in 55 of the 899 texts but in 11 different contexts of five words.
-4. "A proposal only" (section 1) covers two things. Of the 383 pieces at that level, 126 are headwords of the
-   lexicon; 101 of them list a proposal by an author, and 87 of those are content words. The other 257 are words
+2. "A proposal only" (section 1) covers two things. Of the 383 pieces at that level, 126 are headwords of the
+   lexicon; 101 of them list a proposal by an author, and 86 of those are content words. The other 257 are words
    that an analyst cut into known parts without being sure.

@@ -38,7 +38,7 @@ Done since this plan was written:
 
 7. **The translation coverage map** (2026-11-11, [`data/discovery/coverage.md`](data/discovery/coverage.md)):
    every word of `corpus_v5` glossed from Rilly's lexicon. After four corrections made the same day (point 10),
-   61.9% of the running words are translated, 107 of 605 legible texts in full, and 1,309 pieces without an
+   61.9% of the running words are translated, 106 of 605 legible texts in full, and 1,306 pieces without an
    accepted meaning are ranked by the texts they block, each with its kind where the texts show one (60.5%, 82
    texts and 1,336 pieces as first built). Section E says what it is for.
 8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
@@ -54,8 +54,8 @@ Done since this plan was written:
 10. **Six ways of finding meanings, and the map corrected** (2026-11-11, [`REPORT.md`](REPORT.md), Day four,
     night). Six agents dug into the ways that need no new source; none found a new meaning, and each named
     sources we do not hold as its limit. What they found wrong in the map is corrected (section 7 of the
-    coverage page): the padding's leftovers after masked names, `smlowi`, words written apart, and the confirmed
-    spellings.
+    coverage page): the padding's leftovers after masked names, `smlowi`, words written apart, the confirmed
+    spellings and three forms of "sister". What it leaves wrong is listed there too.
 
 Next, in this order:
 
@@ -262,13 +262,15 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       running words (60.5% to 60.7%; 54 without `mXeyot` and `yetmetl`, whose packs showed a word with the piece's
       letters and its gloss). Both named the right entry for 6 of 12 known variants and accepted a
       look-alike for 1 of 12, so the list is fairly safe and short of what is there.
-    - **Open:** `smlowi` (81 running words): both checkers take it for a known word, one for `sem` with `-lowi`,
-      one for the title `smlo` with `-wi`. The list of the 48 is
-      [`data/discovery/variants_confirmed.tsv`](data/discovery/variants_confirmed.tsv); the coverage map has not
-      taken them yet.
+    - **Open in the check:** `smlowi` (81 running words): both checkers take it for a known word, one for `sem`
+      with `-lowi`, one for the title `smlo` with `-wi`. The list of the 48 is
+      [`data/discovery/variants_confirmed.tsv`](data/discovery/variants_confirmed.tsv). The corrected coverage map
+      (point 10) takes 24 of the 26 with an accepted meaning, all but `mXeyot` and `yetmetl`, and reads `smlowi` as
+      `sem` "wife" by its own rule.
     - **Next in this step:** the pieces that block the most texts could go to a checker with their three best
       candidates whatever their chance: the right entry is among the three best for 96% of the hidden variants,
       short ones included, and the bar cannot be beaten by a word of three or four letters.
     - **What the coverage map could take from it:** 15 entries count as translated in the map although their
       meaning makes them a variant of a word that has no accepted meaning itself (`kroro`, `qetrri`, `Kine`,
-      `qetneyineqeli` and others); 152 running words rest on them. The map's numbers are unchanged.
+      `qetneyineqeli` and others); 152 running words rest on them. The corrected map still counts them, and 160
+      of its words rest on them (section 7 of the coverage page).
