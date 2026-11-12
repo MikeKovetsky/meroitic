@@ -324,5 +324,5 @@ After "are you giving up?", four more lines of attack, then data.
    of the 13 the first checkers had already been shown the best match; two more blind checkers read the other six
    with six decoys and said no to all 12. A first run of this item left out the e of the sign ne (18 pieces under
    the bar, a checkers' pass of 15 items, all "no"); the review found it, and the numbers here are after the fix.
-   Cost: 139,936 subagent tokens for the first run's checkers, 446,695 for the review, 133,211 for the corrected
-   run's checkers.
+   Cost: 139,936 subagent tokens for the first run's checkers, 508,760 for the review in two rounds and 133,211
+   for the corrected run's checkers: about 0.78 million, against about 0.5 million estimated.

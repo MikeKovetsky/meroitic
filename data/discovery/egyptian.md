@@ -295,7 +295,7 @@ compares it with what the build gives and stops if it would change.
 
 The two readers of the answer key took 364,923 subagent tokens, the two checkers 249,072 and one web check about
 8,000: about 0.62 million, against about 1 million estimated beforehand; its review took 401,989 more. The vowel
-run of section 5 was estimated at about 0.5 million with its review and took more: 139,936 for the two checkers
-of its first run, 446,695 for the review that found the slip in it, and 133,211 for the two checkers of the
-corrected run, about 0.72 million before the reviewer's last look. The search itself is plain Python: three
-minutes by consonants, eleven with vowels.
+run of section 5 was estimated at about 0.5 million with its review and took about 0.78 million: 139,936 for the
+two checkers of its first run, 508,760 for its review in two rounds (the first found the slip), and 133,211 for
+the two checkers of the corrected run. The search itself is plain Python: three minutes by consonants, eleven
+with vowels.
