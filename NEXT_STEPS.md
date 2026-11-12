@@ -49,7 +49,7 @@ Done since this plan was written:
    step 21 of section E. The search brings 187 of 242 hidden variants back to their own entry (77%), but its
    test missed the bar, because only 105 (43%) stand out from made-up words. Two blind checkers confirmed 48 of
    the 105 matches of unknown pieces that beat the bar, 29 of them new; 26 would move 59 running words of the
-   coverage map (60.5% to 60.7%).
+   coverage map (60.5% to 60.7%; 54 without two whose packs showed a word with their own letters glossed).
 
 Next, in this order:
 
@@ -250,7 +250,8 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       be nobody's variant beat it as often (8 of 76). Letters rank the candidates; they do not decide.
     - **The check:** two blind checkers confirmed 48 of the 105 matches under the bar, 19 of them pairs the
       lexicon links itself and 29 new. 26 of the new ones are a word with an accepted meaning and would move 59
-      running words (60.5% to 60.7%). Both named the right entry for 6 of 12 known variants and accepted a
+      running words (60.5% to 60.7%; 54 without `mXeyot` and `yetmetl`, whose packs showed a word with the piece's
+      letters and its gloss). Both named the right entry for 6 of 12 known variants and accepted a
       look-alike for 1 of 12, so the list is fairly safe and short of what is there.
     - **Open:** `smlowi` (81 running words): both checkers take it for a known word, one for `sem` with `-lowi`,
       one for the title `smlo` with `-wi`. The list of the 48 is
@@ -260,5 +261,5 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       candidates whatever their chance: the right entry is among the three best for 96% of the hidden variants,
       short ones included, and the bar cannot be beaten by a word of three or four letters.
     - **What the coverage map could take from it:** 15 entries count as translated in the map although their
-      meaning only says "variant of" a word that has no accepted meaning itself (`kroro`, `qetrri`, `Kine`,
+      meaning makes them a variant of a word that has no accepted meaning itself (`kroro`, `qetrri`, `Kine`,
       `qetneyineqeli` and others); 152 running words rest on them. The map's numbers are unchanged.

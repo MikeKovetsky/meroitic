@@ -50,7 +50,8 @@ open). What is new, with the run behind each claim:
    match, but only 105 (43%, the bar was half) with a match that stands out from made-up words: no word of three
    or four letters can. On the pieces without a meaning the letters alone decide nothing; two blind checkers
    confirmed 48 of the 105 matches under the bar, 29 of them new, and 26 would move 59 running words of the
-   coverage map, to 60.7% (Day four, evening, below; `data/discovery/variants.md`).
+   coverage map, to 60.7%, or 54 without two whose packs showed a word with their own letters glossed (Day four,
+   evening, below; `data/discovery/variants.md`).
 
 The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
 memory, `M_f0/1`); asked openly it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong) and said
@@ -367,13 +368,16 @@ After "are you giving up?", four more lines of attack, then data.
    in three packs, with 24 listed variants whose answer is known: 12 with the right entry among the candidates
    and 12 decoys with it taken out. The checkers gave the same verdict on 116 of the 129 items. Both said "the
    same word" and named one candidate for 48 matches: 19 of the 23 pairs that the lexicon links itself, and 29
-   new ones.
+   new ones. For two of the new ones (`mXeyot`, `yetmetl`) the pack showed a word that holds the piece's letters,
+   which the map cuts otherwise and counts as translated, with its gloss, and for `yetmetl` both checkers cite
+   it; without them 46 are confirmed.
 10. **How far to trust it.** Both checkers named the right entry for 6 of the 12 controls (7 and 8 each), and
     both accepted a look-alike for 1 of the 12 decoys (`amnpte` as `Amnp` with `-te`). A confirmation is fairly
     safe; a "no" says little.
 11. **What it would move.** 26 of the 29 new pieces are a word with an accepted meaning. They would move 59
     running words of the coverage map, from 13,292 to 13,351 of 21,977 (60.5% to 60.7%; with near-copies counted
-    once 59.9% to 60.4%), and complete five more texts. The largest are `tedxli` for `te-dḫe-l` (13 words),
+    once 59.9% to 60.4%), and complete five more texts; without `mXeyot` and `yetmetl`, 54 words, still 60.7%.
+    The largest are `tedxli` for `te-dḫe-l` (13 words),
     `bedewitel` for `Medewi` with `-tel` (7) and `beke` (5). The map's own numbers are not changed.
 12. **Not confirmed:** `smlowi`, which stands in 81 running words. Both checkers take it for a known word, one
     for `sem` with `-lowi` and one for the title `smlo` with `-wi`.
@@ -383,6 +387,7 @@ After "are you giving up?", four more lines of attack, then data.
     six fresh checkers read all 129 items again; 45 pieces are confirmed in both passes.
 14. **Limits:** one scholar's list of variants is both the training and the test; the model counts from the
     headword to the variant only; letters cannot judge a short piece; the checkers' error rates rest on 12
-    controls and 12 decoys; no specialist has read a confirmed piece.
+    controls and 12 decoys; a pack hides the words the map finds a piece in, not every word that holds its letters
+    (three items); no specialist has read a confirmed piece.
 15. **Cost:** 1,269,219 subagent tokens for the checkers in two passes (657,132 and 612,087), against about 0.7
     million quoted for one pass with a second allowed for; the review comes on top.

@@ -28,14 +28,16 @@ checked by `tests/test_variants.py`.
 5. **Two blind checkers confirm 48 of the 105 matches that beat the bar, 29 of them new.** Each match was read
    by two independent checkers who saw the piece's contexts and the candidates, and no other reader's guess. Both
    said "the same word" and named the same candidate for 48. 19 of those are among the 23 pairs that the lexicon
-   links itself; the other 29 are new, and for 26 of them the word has an accepted meaning.
+   links itself; the other 29 are new, and for 26 of them the word has an accepted meaning. For two of the new
+   ones, `mXeyot` and `yetmetl`, the pack showed a word that holds the piece's letters, with the gloss the map gives
+   it (section 5); without them 46 are confirmed.
 6. **The check is careful and misses a lot.** Mixed into the packs were 24 listed variants whose answer is known.
    Of the 12 shown with all their candidates, both checkers named the right entry for 6. Of the 12 shown with
    the right entry taken out, both accepted a look-alike for 1. So a confirmation is fairly safe, and a "no"
    says little.
 7. **The 26 would move 59 running words of the coverage map** (section 6): from 13,292 to 13,351 of 21,977, which
    is 60.5% to 60.7%, and with near-copies counted once from 59.9% to 60.4%. Five more texts would be complete.
-   The map's own numbers are not changed here.
+   Without `mXeyot` and `yetmetl` it is 54 running words, still 60.7%. The map's own numbers are not changed here.
 8. **The largest candidate is not confirmed.** `smlowi` stands in 81 running words. Both checkers take it for a
    known word, but one reads `sem` with `-lowi` and the other the title `smlo` with `-wi`.
 9. **What the listed variants show about Meroitic spelling** (section 3): almost all of it is vowels. An `e` is
@@ -74,6 +76,10 @@ matches of the pool (section 7).
 
 Against the bar: part 1 needed 162 and has 187, so it is reached. Part 2 needed 121 and has 105, so it is not
 reached. The test as a whole did not succeed.
+
+A variant's chance counts the variant itself among the made-up words (section 7, point 6), as in the Egyptian
+search. So `Atwete`, a variant of `Twete` that 50 of the 1,000 made-up words equal, counts as not standing out.
+By the bar's own words (at most 5% of made-up words as good) it stands out, and part 2 has 106, still short of 121.
 
 1. **The length decides.** Letters are counted as the search writes them: the consonants, the written vowels
    `e`, `i` and `o`, and one mark for a vowel at the start. No hidden variant of three or four letters beats the
@@ -182,7 +188,16 @@ of each word under it; the lexicon's entry when the piece is itself a headword; 
 each with its entries, the letters that differ, how often the listed variants show each change, and up to two
 contexts of the candidate word. Under a word a pack shows only what the coverage map counts as translated or
 what the lookup took from the lexicon. A reading that an analyst of the map only guessed at shows as `?`, and so
-does every word that holds the piece. No item says what kind of word the piece is.
+does every word that the map finds the piece in, and every word that is a spelling of a control or a decoy, bare
+or as the first part of a word the map cuts. No item says what kind of word the piece is.
+
+**Three items showed a word with their own letters, glossed.** That rule goes by how the map cuts a word, so a word
+that holds the piece's letters, but that the map cuts otherwise and counts as translated, kept its gloss. Beside
+`mXeyot` the pack showed `mXeyotowi`, which the map cuts as `mẖeyose` with two endings; neither checker cites it.
+In a candidate's context for `yetmetl` it showed `yetmetlXl`, which the map reads as the name Yetmet with `lẖ` and
+`-l`; both checkers cite it. Beside the decoy `ateqi` it showed `yetmdelowiateqi`, whose gloss names `ateqi`. No
+other item shows a gloss under a word that holds its own letters. This was found after the packs were read, so
+they stay as they were, and the counts below give both: `mXeyot` and `yetmetl` are among the 48 confirmed.
 
 **The items with a known answer.** All 24 are listed variants that stand in the texts, shown as if they were
 pieces, with the candidates the search gave when they were hidden. The 12 controls keep those candidates, so the
@@ -202,7 +217,8 @@ look-alike.
 The two checkers gave the same verdict on 116 of the 129 items, and on 96 of the 105 matches.
 
 1. **Confirmed: 48.** A piece is confirmed when both checkers say it is the same word and name entries of one
-   candidate. For 8 of the 48 that candidate is the search's second or third, not its first.
+   candidate. For 8 of the 48 that candidate is the search's second or third, not its first. Without `mXeyot` and
+   `yetmetl` (above) it is 46, and 24 of the new ones have an accepted meaning.
 2. **19 of the 48 are pairs the lexicon links itself** (`arebetke` and `arbetke`, `pkrtr` and `pqrtr`). They
    show that the checkers read the entries; they are no finds, and none of them has an accepted meaning.
 3. **29 are new.** 26 are a word with an accepted meaning (the table in section 6). Three are a word without
@@ -214,7 +230,8 @@ The two checkers gave the same verdict on 116 of the 129 items, and on 96 of the
    of the 12 true spellings, and both together for 6.
 5. **The decoys.** Both checkers accepted one look-alike: `amnpte` as `Amnp` with the ending `-te`, where the
    lexicon lists `Amnpte` as a spelling of `Mnpte`. For four decoys both named the true word although it was not
-   among the candidates. The checkers have read the literature, as every model has.
+   among the candidates. The checkers have read the literature, as every model has, and for one of the four,
+   `ateqi`, the pack showed the word by name (above).
 6. **`smlowi` is the one piece on which both say "the same word" and differ on which:** `sem` with `-lowi`, or
    the title `smlo` with `-wi`. It is not counted as confirmed. Two other readers of this project, who worked from
    the texts the same day and did not see these packs, read it as `sem` with `-lowi` (their reports are kept
@@ -239,7 +256,9 @@ with an accepted meaning. Counted on the map's gloss file, without changing the 
 | Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,303 (60.4%) |
 | Texts with every legible word translated | 82 of 605 | 87 |
 
-That is 59 running words, 37 with near-copies counted once. The 26 pieces:
+That is 59 running words, 37 with near-copies counted once. Without `mXeyot` and `yetmetl` (section 5) it is 54
+and 35, still 60.7% of all running words and 60.3% with near-copies counted once, and the same five texts. The 26
+pieces:
 
 | Piece | The word, for both checkers | Ending | Letters that differ | Running words it would move |
 |---|---|---|---|---|
@@ -300,8 +319,9 @@ That is 59 running words, 37 with near-copies counted once. The 26 pieces:
 6. **Chance.** 1,000 made-up words of each length from 3 to 12 letters (12 and more together), built letter by
    letter as letters follow one another in the pool's headwords (seed 17). A word's chance is the share of the
    made-up words of its length whose best match is as good as its own, counting the word itself.
-7. **A match with an accepted meaning.** The entry's level in the coverage map is a translated one. An entry that
-   only sends to another ("variant of ...") counts when the entry it sends to counts.
+7. **A match with an accepted meaning.** The entry's level in the coverage map is a translated one. An entry whose
+   meaning makes it a variant of another entry, or sends to one ("variant of ...", "see ..."), counts only when
+   that entry counts, also when the meaning says more (`mloyose`, `Dk`).
 
 **Limits.**
 
@@ -314,6 +334,8 @@ That is 59 running words, 37 with near-copies counted once. The 26 pieces:
 - The made-up words are too easy a yardstick for long words (section 4, point 2).
 - The checkers and the analysts of the coverage map are one model family, and the model has read the literature.
 - The checkers' error rates rest on 12 controls and 12 decoys. One decoy more or less changes them a good deal.
+- A pack hides the words that the map finds a piece in, not every word that holds its letters (section 5: three
+  items).
 - No specialist has read a confirmed piece.
 
 ## 8. Files

@@ -79,7 +79,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    not already link to a word, 82 beat the made-up words where 57 are expected, but known words that are nobody's
    variant beat them as often, so two blind checkers read all 105 matches under the bar, the 23 that the lexicon
    links itself included. Both confirmed 48, and 29 of those are new. 26 are a word with an accepted meaning and
-   would move 59 running words of the coverage map, from 60.5% to 60.7%. The check is careful and misses a lot:
+   would move 59 running words of the coverage map, from 60.5% to 60.7% (54 words, still 60.7%, without the two
+   whose packs showed a word with the piece's letters and its gloss). The check is careful and misses a lot:
    of 12 listed variants shown as if they were unknown, both checkers named the right entry for 6, and of 12
    shown with the right entry taken out, both accepted a look-alike for 1
    ([`data/discovery/variants.md`](data/discovery/variants.md)).
@@ -290,7 +291,9 @@ same length, and the words with an accepted meaning that the lexicon links to no
 to see what that yardstick is worth. Every match that beats the bar is packed for two blind checkers with 24
 listed variants whose answer is known: 12 with the right entry among the candidates, and 12 decoys with it taken
 out. A pack shows under a word only what the coverage map counts as translated or what the lookup took from the
-lexicon, never an analyst's guess, and nothing under a word that holds the piece. A piece is confirmed when both
+lexicon, never an analyst's guess, and nothing under a word that the map finds the piece in (three items still
+showed a word with their own letters that the map cuts otherwise, and the page also gives the count without the
+two of them that were confirmed). A piece is confirmed when both
 checkers say it is the same word and name one candidate; the script then counts, on the map's gloss file, the
 running words that would move, and leaves the map as it is. The lexicon, the gloss file and the result files are
 local-only; the page, the brief, the list of every searched piece with its best match and the list of the
