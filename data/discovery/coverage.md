@@ -286,3 +286,8 @@ The 326 words that were not translated before are the whole gain, from 13,292 to
 2. "A proposal only" (section 1) covers two things. Of the 383 pieces at that level, 126 are headwords of the
    lexicon; 101 of them list a proposal by an author, and 86 of those are content words. The other 257 are words
    that an analyst cut into known parts without being sure.
+
+**Cost of the corrections.** No analyst was used: the rules are plain code. The independent review took 525,377
+subagent tokens and 54 minutes, against about 0.5 million tokens and one hour estimated for the whole step, which
+took about an hour and a quarter. The six agents whose reports the corrections rest on took 2.27 million tokens
+earlier the same day.

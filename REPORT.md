@@ -423,3 +423,5 @@ After "are you giving up?", four more lines of attack, then data.
    place its holder has it in (`data/discovery/philae.md`, H7).
 6. **Not checked against the literature, so not claimed:** that the relatives of an epitaph are listed in order
    of generation; that `tḫ` is "receive" rather than "give"; that a suffix -(t)k marks nouns counted together.
+7. **Cost of the corrections:** no analysts; the review took 525,377 subagent tokens and 54 minutes, against
+   about 0.5 million and one hour estimated.
