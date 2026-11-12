@@ -295,25 +295,25 @@ def test_prefer():
 
 
 def test_numerals():
-    text = "pesto krinkror l pesto Ntewitror l pesto mlotoN ye l pesto brtoye l qore s l"
-    later = "pestokrinkror 1 pesto Ntewitror 1 pestomlotoye 1"
+    text = "pesto abdkror l pesto Nkebtror l pesto mlabN ye l pesto drtoye l qore s l"
+    later = "pestoabdkror 1 pesto Nkebtror 1 pestomlabye 1"
     fixed, what = B.numerals(text, [later])
     # the list goes on: an l before "pesto" follows the confirmed ones; an l before another word is left
-    assert fixed == "pesto krinkror 1 pesto Ntewitror 1 pesto mlotoN ye 1 pesto brtoye l qore s l"
+    assert fixed == "pesto abdkror 1 pesto Nkebtror 1 pesto mlabN ye 1 pesto drtoye l qore s l"
     assert [w[3] for w in what] == [B.ANOTHER, B.ANOTHER, "by analogy"]
-    # REM 0101: the letters before the l are read across a short word ("tebwetel xe l"), and any other edition
-    # may show the numeral, an older one too (Otten typed the numeral 1 as l)
-    rem101 = "aritewil l woS pil qetelxe l woS tebwetel xe l tdbto"
+    # the letters before the l are read across a short word ("tebwetel xe l"), and any other edition may show
+    # the numeral, an older one too (Otten typed the numeral 1 as l); here Griffith's REM 0101, with l for 1
+    rem101 = "arite wil l woS pilqetel xe l woS tebwetel xe l tdbto"
     griffith = "arite wil 1 woS pilqetel xe 1 woS tebwetel xe 1 tdbto 2"
-    assert B.numerals(rem101, [griffith])[0] == "aritewil 1 woS pil qetelxe 1 woS tebwetel xe 1 tdbto"
+    assert B.numerals(rem101, [griffith])[0] == "arite wil 1 woS pilqetel xe 1 woS tebwetel xe 1 tdbto"
     # two other editions that disagree: one with the letter l keeps it, two numerals that differ settle nothing
-    assert B.numerals(rem101, [griffith, "aritewil l woS 2"])[0].startswith("aritewil l woS")
+    assert B.numerals(rem101, [griffith, "arite wil l woS 2"])[0].startswith("arite wil l woS")
     assert B.numerals("ab aritewil l", ["aritewil 1 x", "aritewil 2 y"]) == ("ab aritewil l", [])
-    one, what = B.numerals("pesto krinkror l pesto mlotoN ye l pesto", [later])    # one confirmed: no analogy
-    assert one == "pesto krinkror 1 pesto mlotoN ye l pesto" and len(what) == 1
-    kept, what = B.numerals(text, [later + " pestobrtoyel"])                 # the later edition keeps a letter l
-    assert "mlotoN ye l pesto brtoye l" in kept and len(what) == 2
-    assert B.numerals(text, ["pesto krinkror pesto"]) == (text, [])           # no numeral in the other reading
+    one, what = B.numerals("pesto abdkror l pesto mlabN ye l pesto", [later])    # one confirmed: no analogy
+    assert one == "pesto abdkror 1 pesto mlabN ye l pesto" and len(what) == 1
+    kept, what = B.numerals(text, [later + " pestodrtoyel"])                 # the later edition keeps a letter l
+    assert "mlabN ye l pesto drtoye l" in kept and len(what) == 2
+    assert B.numerals(text, ["pesto abdkror pesto"]) == (text, [])           # no numeral in the other reading
     assert B.numerals("abcd 12 l", ["abcd 12 1"]) == ("abcd 12 l", [])        # an l after a numeral is left
     assert B.stream("pesto 12 smlo") == "peseto12semlo"                         # the reduced spelling writes se
 
