@@ -4,7 +4,7 @@ Built on 2026-11-11 with `src/coverage.py`: every word of the 899 texts of `corp
 Rilly's 2003 lexicon, first by lookup and then, for the words the lookup leaves, by Claude Opus 5.5 analysts.
 The numbers below are checked by `tests/test_coverage.py`.
 
-**Corrected the same day (section 7):** 13,613 of the 21,977 running words (61.9%) are translated, 61.6% with
+**Corrected the same day (section 7):** 13,618 of the 21,977 running words (62.0%) are translated, 61.6% with
 near-copies counted once, and every legible word is translated in 106 of 605 texts. Sections 1 to 6 give the map
 as first built (60.5%); its list is the one the two later searches read ([Egyptian sources](egyptian.md),
 [spelling variants](variants.md)).
@@ -172,7 +172,7 @@ The draft translation of a text is this line of glosses, word by word, not Engli
 | `data/discovery/coverage_unknown.tsv` | the 1,336 pieces without an accepted meaning: headword or letters, kind, level, texts, words, spellings | public |
 | `data/sources/coverage/glosses.jsonl` | every text word by word: gloss, level, confidence, source (Rilly's page), parts, and a draft line | local |
 | `data/sources/coverage/packs/` | the analysts' packs and answers | local |
-| `data/discovery/coverage_unknown_corrected.tsv` | the 1,306 pieces left after the corrections of section 7, in the same columns | public |
+| `data/discovery/coverage_unknown_corrected.tsv` | the 1,304 pieces left after the corrections of section 7, in the same columns | public |
 | `data/sources/coverage/corrected/` | the gloss file, the ranked list and the figures after the corrections; each corrected word keeps what it was | local |
 
 The gloss file and the analysts' answers lean on Rilly's lexicon, which has no open licence, so they stay on the
@@ -201,21 +201,21 @@ that read it still rebuild; the corrected map is written beside it.
 
 | | As first built | After the corrections |
 |---|---|---|
-| Running words translated, all 899 texts | 13,292 of 21,977 (60.5%) | 13,613 (61.9%) |
-| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,411 (61.6%) |
+| Running words translated, all 899 texts | 13,292 of 21,977 (60.5%) | 13,618 (62.0%) |
+| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,413 (61.6%) |
 | Texts with every legible word translated | 82 of 605 | 106 |
 | Texts with one piece missing | 124 | 122 |
 | The median text | 68.8% | 72.7% |
-| Pieces without an accepted meaning | 1,336 | 1,306 |
+| Pieces without an accepted meaning | 1,336 | 1,304 |
 
 | Rule | Words set right | Not translated before | The same, near-copies counted once |
 |---|---|---|---|
 | 1. The rest of a masked name | 278 | 94 | 94 and 22 |
 | 2. A stem of two signs | 83 | 83 | 18 and 18 |
 | 3. A word written apart | 146 | 88 | 107 and 68 |
-| 4. A spelling of a known word | 56 | 56 | 37 and 37 |
+| 4. A spelling of a known word | 61 | 61 | 39 and 39 |
 
-The 321 words that were not translated before are the whole gain, from 13,292 to 13,613.
+The 326 words that were not translated before are the whole gain, from 13,292 to 13,618.
 
 1. **The rest of a masked name.** The older corpus was padded with copies of its texts in which the names were
    swapped. A swapped-in name of several words left its other words behind the mask. `mokelowi` is one: Millet
@@ -249,16 +249,17 @@ The 321 words that were not translated before are the whole gain, from 13,292 to
      is a piece of the verb of the blessing, as the crossword reader of the six reports also says.
    - 9 kinds (13 places) could not be judged from the texts: `l w` (4), `wi t` (2), `S Sor`, `a to`, `l e`,
      `m te`, `no b`, `qo re` and `xl bi`.
-4. **A spelling of a known word.** The pieces that two blind checkers both took for a spelling or a form of a
-   word with an accepted meaning ([`variants.md`](variants.md), section 6), without the two whose pack showed a
-   hint (`mXeyot`, `yetmetl`): 52 words, `tedxli` (13) and `bedewitel` (7) first. The variants page counts 54 for
-   the same pieces; the other two are the `smlo` of rule 2. With `mXeyot` and `yetmetl`, which the check's stated
-   rule confirms too, the rule would take 5 words more: 13,618 running words (62.0%), 5,413 with near-copies
-   counted once. The rule also takes three forms of `kdise` "sister"
-   that the checkers did not confirm and that the correction was asked to count: `kdito` (2 words), `kdisbetowi`
-   and `kditebkwi`, in four Karanòg texts. The reader who rebuilt the families of Karanòg read them so (one
-   reader, not blind; the report is local), and the analysts had cut each into `kdi` or `kdise` and endings
-   without being sure of the endings. That makes 56 words.
+4. **A spelling of a known word.** The 26 pieces that two blind checkers both took for a spelling or a form of a
+   word with an accepted meaning ([`variants.md`](variants.md), section 6): 57 words, `tedxli` (13) and
+   `bedewitel` (7) first. The variants page counts 59 for the same pieces; the other two are the `smlo` of rule 2.
+   For two of the pieces, `mXeyot` (4 words) and `yetmetl` (1), the pack showed a word that holds their letters,
+   with its gloss (variants.md, section 5); the variants page counts them among the confirmed, and their gloss
+   here says so. Without them the map would hold 5 words fewer: 13,613 running words (61.9%), 5,411 with
+   near-copies counted once. The rule also takes three forms of `kdise` "sister" that the checkers did not
+   confirm and that the correction was asked to count: `kdito` (2 words), `kdisbetowi` and `kditebkwi`, in four
+   Karanòg texts. The reader who rebuilt the families of Karanòg read them so (one reader, not blind; the report
+   is local), and the analysts had cut each into `kdi` or `kdise` and endings without being sure of the endings.
+   That makes 61 words.
 
 **What is still wrong and not corrected.**
 

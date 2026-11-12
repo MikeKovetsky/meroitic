@@ -40,8 +40,8 @@ The map as first built stays as it was, because two searches read its list (src/
 3. A word written apart. Two or three neighbours, one of them of one or two letters, that together spell a word
    the lookup translates, when that word also stands written as one in other texts: wo Si is woSi, "O Isis".
 4. A spelling of a known word. The pieces that two blind checkers both took for a spelling or a form of a word
-   with an accepted meaning (data/discovery/variants.md), without the two whose pack showed a hint; and three
-   forms of kdise "sister" that a reader of the families of Karanog read so (SISTER).
+   with an accepted meaning (data/discovery/variants.md; for two of them the pack showed a hint, HINTED); and
+   three forms of kdise "sister" that a reader of the families of Karanog read so (SISTER).
 """
 import collections, json, re, statistics, sys
 from pathlib import Path
@@ -75,8 +75,11 @@ MASKED = ("NAME", "RNAME")
 SYLLABLE_SIGNS = "sN"         # the signs se and ne: one sign in the corpus spelling, two letters in Rilly's
 FRAGMENT = 2                  # a word of this many letters or fewer can be a piece of its neighbour written apart
 WRITTEN = 2                   # ... when the two together stand as one word in this many texts or more
-SET_APART = ("mXeyot", "yetmetl")   # confirmed variants whose pack showed a word holding their letters (variants.md)
 CHECKED = "two blind checkers (data/discovery/variants.md)"
+# two of the 48 pieces the checkers confirmed: their pack showed a word that holds their letters, with its gloss
+# (variants.md, section 5). The variants page counts them among the confirmed, so rule 4 takes them, and says so
+HINTED = ("mXeyot", "yetmetl")
+HINT = ", whose pack showed a word that holds the piece's letters"
 # Rule 4 also takes the forms of kdise "sister" that the correction was asked to count (data/sources/notes/
 # PROGRESS.md, entry 43, local) and the checkers did not confirm. The reader who rebuilt the families of Karanog
 # read them so (data/sources/dig/kin/REPORT.md, section 6, local), and the analysts cut each into kdi or kdise and
@@ -708,21 +711,21 @@ def joins(gs, words, affixes, whole):
 
 def confirmed_variants(path=VARIANTS):
     """The pieces that two blind checkers took for a spelling or a form of a word with an accepted meaning:
-    {(piece, it is a headword): the word}, without the two set apart."""
+    {(piece, it is a headword): the word}."""
     out = {}
     if not path.exists():
         return out
     lines = [l.split("\t") for l in path.read_text(encoding="utf-8").splitlines()[1:] if l.strip()]
     for piece, is_, word, accepted, *_ in lines:
-        if accepted == "yes" and piece not in SET_APART:
+        if accepted == "yes":
             out[piece, is_ == "headword"] = word.split(" / ")[0]
     return out
 
 
 def known_spellings(path=VARIANTS):
-    """What rule 4 takes: {(piece, it is a headword): (the word, who read it so)}, the confirmed variants and the
-    forms of "sister" (SISTER)."""
-    out = {k: (w, CHECKED) for k, w in confirmed_variants(path).items()}
+    """What rule 4 takes: {(piece, it is a headword): (the word, who read it so)}, the confirmed variants (with
+    HINT for the two of HINTED) and the forms of "sister" (SISTER)."""
+    out = {k: (w, CHECKED + (HINT if k[0] in HINTED else "")) for k, w in confirmed_variants(path).items()}
     out.update({(p, False): (w, FAMILIES) for p, w in SISTER.items()})
     return out
 

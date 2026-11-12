@@ -66,9 +66,9 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      oracular decrees and the people the Philae graffiti name in Demotic, are not done yet.
 8. **About 62% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts. After four corrections made the same day,
-   13,613 of 21,977 words (61.9%) are a name, a number or a word with an accepted meaning or function (61.6% with
+   13,618 of 21,977 words (62.0%) are a name, a number or a word with an accepted meaning or function (61.6% with
    near-copies counted once); 16% have a proposal only, 9% are known by their kind only and 11% are unknown.
-   Every legible word is translated in 106 of 605 texts. The 1,306 pieces without an accepted meaning are listed
+   Every legible word is translated in 106 of 605 texts. The 1,304 pieces without an accepted meaning are listed
    with their kind and the texts they block. The map as first built gave 60.5%, 82 texts and 1,336 pieces; the
    difference is words it counted wrongly, not meanings found
    ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
@@ -270,9 +270,9 @@ the padding of the older corpus left behind its mask ("mokelowi", "mete l") is p
 signs counts as three letters when one of them is the sign se or ne and Rilly holds the entry as established
 (`smlowi`, "is the wife of"); two or three neighbouring words are one word written apart when one of them has
 one or two letters and the whole also stands written as one elsewhere (`wo Si` for `woSi`); and a piece that two
-blind checkers took for a spelling of a word with an accepted meaning takes that meaning (all but `mXeyot` and
-`yetmetl`, whose packs showed a word with their letters), as do three forms of "sister" that a reader of the
-families of Karanòg read so. The corrected map is written beside the first one, whose list the Egyptian and the
+blind checkers took for a spelling of a word with an accepted meaning takes that meaning (for two of them,
+`mXeyot` and `yetmetl`, the pack showed a word with their letters, and their gloss says so), as do three forms
+of "sister" that a reader of the families of Karanòg read so. The corrected map is written beside the first one, whose list the Egyptian and the
 variants searches read.
 
 ### 15. Egyptian words behind Meroitic ones (`src/egyptian.py`)

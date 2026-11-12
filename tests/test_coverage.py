@@ -539,27 +539,31 @@ def test_a_confirmed_spelling_of_a_known_word():
         confirmed = C.confirmed_variants(path)
         known = C.known_spellings(path)
         assert C.confirmed_variants(Path(tmp) / "none.tsv") == {}
-    assert confirmed == {("atoo", False): "ato", ("pqr", True): "Wos"}          # accepted only, mXeyot set apart
-    # rule 4 takes the checkers' list and the forms of "sister", each with who read it so
-    assert known == {("atoo", False): ("ato", C.CHECKED), ("pqr", True): ("Wos", C.CHECKED),
+    assert confirmed == {("atoo", False): "ato", ("mXeyot", False): "mẖe", ("pqr", True): "Wos"}   # accepted only
+    # rule 4 takes the checkers' list and the forms of "sister", each with who read it so; the two whose pack showed
+    # a word holding their letters are taken and say so
+    assert known == {("atoo", False): ("ato", C.CHECKED), ("mXeyot", False): ("mẖe", C.CHECKED + C.HINT),
+                     ("pqr", True): ("Wos", C.CHECKED),
                      **{(p, False): ("kdise", C.FAMILIES) for p in ("kdito", "kdisbetowi", "kditebkwi")}}
     known[("zzz", False)] = ("aribet", C.CHECKED)                    # a form of a word with no accepted meaning
     sister = [raw("kdise", "sister", "established", "substantif")]
     words, affixes, heads = C.index(C.lexicon(RAW + sister))
-    analysed = {w: C.settle(answer(w, [(w, "?")]), heads) for w in ("atoo", "arbt", "zzz", "kdito")}
+    analysed = {w: C.settle(answer(w, [(w, "?")]), heads) for w in ("atoo", "arbt", "zzz", "kdito", "mXeyot")}
     analysed["atoozzz"] = C.settle(answer("atoozzz", [("atoo", "?"), ("zzz", "?")]), heads)
     analysed["atooqqq"] = C.settle(answer("atooqqq", [("atoo", "?"), ("qqq", "?")]), heads)
-    got, report = corrected_texts([("T1", "atoo arbt atoozzz pqr NAME kdito zzz atooqqq")], sister, analysed=analysed,
-                                  known=known)
+    got, report = corrected_texts([("T1", "atoo arbt atoozzz pqr NAME kdito zzz atooqqq mXeyot")], sister,
+                                  analysed=analysed, known=known)
     g = got["T1"]
-    assert [x["level"] for x in g] == ["meaning", "unknown", "unknown", "name", "name", "meaning", "unknown", "unknown"]
+    assert [x["level"] for x in g] == ["meaning", "unknown", "unknown", "name", "name", "meaning", "unknown", "unknown",
+                                       "meaning"]
     assert not g[2].get("corrected") and not g[6].get("corrected")       # aribet has no accepted meaning to give
     assert not g[7].get("corrected")                                     # qqq is no known piece
     assert g[0]["gloss"] == "water (a form of ato)" and g[0]["corrected"] == "a spelling of a known word"
-    assert "two blind checkers" in g[0]["source"] and g[0]["was"]["level"] == "unknown"
+    assert "two blind checkers" in g[0]["source"] and g[0]["was"]["level"] == "unknown" and C.HINT not in g[0]["source"]
     assert g[3]["gloss"] == "Isis (a form of Wos)"                               # a headword of the list
     assert g[5]["gloss"] == "sister (a form of kdise)" and C.FAMILIES in g[5]["source"] and "checkers" not in g[5]["source"]
-    assert report["a spelling of a known word"]["words"] == 3                    # atoozzz and atooqqq stay open
+    assert g[8]["gloss"] == "abundant (a form of mẖe)" and g[8]["source"].endswith(C.CHECKED + C.HINT)
+    assert report["a spelling of a known word"]["words"] == 4                    # atoozzz and atooqqq stay open
 
 
 def test_reported_corrections():
@@ -568,24 +572,24 @@ def test_reported_corrections():
     done = C.correct(glossed, words, affixes, heads)
     rules = {rule: tuple(c.values()) for rule, c in done.items() if rule != "joins"}
     assert rules == {"the rest of a masked name": (278, 94, 94, 22), "a stem of two signs": (83, 83, 18, 18),
-                     "a word written apart": (146, 88, 107, 68), "a spelling of a known word": (56, 56, 37, 37)}
+                     "a word written apart": (146, 88, 107, 68), "a spelling of a known word": (61, 61, 39, 39)}
     assert (len(done["joins"]), sum(n for _, _, n in done["joins"])) == (25, 65)
     assert done["joins"][:4] == [["ye tmdelowi", "yetmdelowi", 17], ["ye t mde", "yetmde", 7], ["wo Si", "woSi", 6],
                                  ["yet mde lo", "yetmdelo", 6]]
     f = C.figures(glossed)
     a, once = f["all"], f["near-copies counted once"]
-    assert (a["translated"], once["translated"]) == (13613, 5411)                  # 61.9% and 61.6%
-    assert a["translated"] - 13292 == sum(r[1] for r in rules.values()) == 321
-    assert a["levels"] == {"meaning": 6977, "grammar": 1956, "name": 4417, "number": 263, "hypothesis": 3517,
+    assert (a["translated"], once["translated"]) == (13618, 5413)                  # 62.0% and 61.6%
+    assert a["translated"] - 13292 == sum(r[1] for r in rules.values()) == 326
+    assert a["levels"] == {"meaning": 6981, "grammar": 1956, "name": 4418, "number": 263, "hypothesis": 3512,
                            "kind": 2073, "unknown": 2512, "lost": 262}
-    assert a["by"] == {"lookup": 11152, "analyst": 1898, "correction": 563}
+    assert a["by"] == {"lookup": 11152, "analyst": 1898, "correction": 568}
     part = lambda name: f[name]["translated"]
     assert (part("the older corpus (names masked)"), part("Karanog and Shablul (Griffith 1911)"),
-            part("Griffith's other volumes"), f["different words"]["translated"]) == (10990, 2203, 420, 1142)
+            part("Griffith's other volumes"), f["different words"]["translated"]) == (10994, 2204, 420, 1144)
     ranked, texts_by = C.ranking(glossed, heads)
     assert f"{texts_by.pop('median'):.1%}" == "72.7%"
     assert texts_by == {"texts": 608, "legible": 605, "no_blocker": 106, "one_blocker": 122}
-    assert len(ranked) == 1306 and [r["piece"] for r in ranked[:4]] == ["ḫr", "ẖol", "ye- (2)", "pqr"]
+    assert len(ranked) == 1304 and [r["piece"] for r in ranked[:4]] == ["ḫr", "ẖol", "ye- (2)", "pqr"]
     by = {(r["piece"], r["is"]): r for r in ranked}
     moke = by["moke", "headword"]
     assert (moke["texts"], moke["alone"], moke["words"]) == (6, 2, 13)             # 27, 11 and 107 as first built
@@ -611,21 +615,21 @@ def test_reported_corrections():
     written = json.loads((C.CORRECTED / "figures.json").read_text())
     assert written["figures"] == f and written["analysts"]["corrections"] == done
     lines = [json.loads(l) for l in (C.CORRECTED / "glosses.jsonl").read_text().splitlines()]
-    assert len(lines) == 899 and sum(t["translated"] for t in lines) == 13613
+    assert len(lines) == 899 and sum(t["translated"] for t in lines) == 13618
     assert [t["glosses"] for t in lines] == [gs for _, gs in glossed]
-    assert sum(bool(g.get("corrected")) for t in lines for g in t["glosses"]) == 563
-    # the set-apart variants are not among the corrections, and the list as first built is untouched
-    assert not any(g["form"] in C.SET_APART and g.get("corrected") for t in lines for g in t["glosses"])
+    assert sum(bool(g.get("corrected")) for t in lines for g in t["glosses"]) == 568
+    # the two whose pack showed a hint are taken, and their gloss says so; the list as first built is untouched
+    hinted = [g for t in lines for g in t["glosses"] if g["form"] in C.HINTED]
+    assert len(hinted) == 5 and all(g["corrected"] == "a spelling of a known word" and C.HINT in g["source"] for g in hinted)
     assert len(C.PUBLIC.read_text().splitlines()) == 1337
-    # with the two set apart, as the check's stated rule allows, the figure the page gives
-    rows_ = [l.split("\t") for l in C.VARIANTS.read_text(encoding="utf-8").splitlines()[1:]]
-    both = {**C.known_spellings(), **{(p, False): (w.split(" / ")[0], C.CHECKED) for p, _, w, *_ in rows_ if p in C.SET_APART}}
-    assert len(both) == len(C.known_spellings()) + 2
+    # without the two, the figure the page gives
+    strict = {k: v for k, v in C.known_spellings().items() if k[0] not in C.HINTED}
+    assert len(strict) == len(C.known_spellings()) - 2
     *_, again = built()
-    C.correct(again, words, affixes, heads, known=both)
+    C.correct(again, words, affixes, heads, known=strict)
     f2 = C.figures(again)
-    assert (f2["all"]["translated"], f2["near-copies counted once"]["translated"]) == (13618, 5413)
-    assert f"{13618 / 21977:.1%}" == "62.0%" and "5 words more: 13,618 running words (62.0%), 5,413" in " ".join(PAGE.read_text().split())
+    assert (f2["all"]["translated"], f2["near-copies counted once"]["translated"]) == (13613, 5411)
+    assert "5 words fewer: 13,613 running words (61.9%), 5,411" in " ".join(PAGE.read_text().split())
     # section 7 of the page: its two tables and its counts
     t = page_tables()
     after = {r[0]: r[1:] for r in t["", "As first built", "After the corrections"]}
@@ -633,7 +637,7 @@ def test_reported_corrections():
     assert after["Running words translated, near-copies counted once"] == ("5,266 of 8,786 (59.9%)", share(once["translated"], once["words"]))
     assert after["Texts with every legible word translated"] == ("82 of 605", "106")
     assert after["Texts with one piece missing"] == ("124", "122") and after["The median text"] == ("68.8%", "72.7%")
-    assert after["Pieces without an accepted meaning"] == ("1,336", "1,306")
+    assert after["Pieces without an accepted meaning"] == ("1,336", "1,304")
     shown = t["Rule", "Words set right", "Not translated before", "The same, near-copies counted once"]
     assert [tuple(map(str, (r[1], r[2]))) + (r[3],) for r in shown] == [
         (str(c[0]), str(c[1]), f"{c[2]} and {c[3]}") for c in rules.values()]
@@ -661,7 +665,7 @@ def test_reported_corrections():
     page = " ".join(PAGE.read_text().split())
     for text in ("101 of them list a proposal by an author, and 86 of those are content words",
                  "stands in 55 of the 899 texts but in 11 different contexts", "65 places", "25 different",
-                 "falls from 27 texts (alone in 11) to 6 (alone in 2)", "That makes 56 words",
+                 "falls from 27 texts (alone in 11) to 6 (alone in 2)", "That makes 61 words",
                  "160 running words of the corrected map rest on them"):
         assert text in page, text
     # the 160: words the corrected map counts as translated through an entry that is a variant of a word without an

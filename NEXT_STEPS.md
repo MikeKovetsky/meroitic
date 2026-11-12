@@ -38,7 +38,7 @@ Done since this plan was written:
 
 7. **The translation coverage map** (2026-11-11, [`data/discovery/coverage.md`](data/discovery/coverage.md)):
    every word of `corpus_v5` glossed from Rilly's lexicon. After four corrections made the same day (point 10),
-   61.9% of the running words are translated, 106 of 605 legible texts in full, and 1,306 pieces without an
+   62.0% of the running words are translated, 106 of 605 legible texts in full, and 1,304 pieces without an
    accepted meaning are ranked by the texts they block, each with its kind where the texts show one (60.5%, 82
    texts and 1,336 pieces as first built). Section E says what it is for.
 8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
@@ -265,8 +265,8 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     - **Open in the check:** `smlowi` (81 running words): both checkers take it for a known word, one for `sem`
       with `-lowi`, one for the title `smlo` with `-wi`. The list of the 48 is
       [`data/discovery/variants_confirmed.tsv`](data/discovery/variants_confirmed.tsv). The corrected coverage map
-      (point 10) takes 24 of the 26 with an accepted meaning, all but `mXeyot` and `yetmetl`, and reads `smlowi` as
-      `sem` "wife" by its own rule.
+      (point 10) takes all 26 with an accepted meaning, saying of `mXeyot` and `yetmetl` that their packs showed a
+      hint, and reads `smlowi` as `sem` "wife" by its own rule.
     - **Next in this step:** the pieces that block the most texts could go to a checker with their three best
       candidates whatever their chance: the right entry is among the three best for 96% of the hidden variants,
       short ones included, and the bar cannot be beaten by a word of three or four letters.
