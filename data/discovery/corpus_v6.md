@@ -238,15 +238,6 @@ Texts with a legible word: 507 of 538 in `corpus_v6` (605 of 608 in `corpus_v5`,
 
 Not carried over: 111 of the 1,115 judged rows (95 because the word is spelled or divided otherwise in the preferred reading; 16 because the map's level is name).
 
-### The cost in subagent tokens
-
-| Run | Subagent tokens | Running time |
-|---|---|---|
-| Reader 1 of the doubtful matches | 126,699 | 1 min 11 s |
-| Reader 2 of the doubtful matches | 126,366 | 1 min 8 s |
-| All 2 runs | 253,065 | |
-| Quoted before the runs (readers, a reader for kind and site, the review) | 900,000 | |
-
 <!-- end of the tables -->
 
 ## 5. What the recount shows
@@ -306,7 +297,6 @@ Not carried over: 111 of the 1,115 judged rows (95 because the word is spelled o
 | `data/inscriptions.jsonl` | every inscription: numbers, site, kind, readings with source and licence; texts of open readings only | public |
 | `data/inscriptions_map.tsv` | every id of `corpus_v5`: what it is, its inscription, the shares both ways, who settled it | public |
 | `data/discovery/corpus_v6_figures.json` | the counts | public |
-| `data/discovery/corpus_v6_cost.json` | the agent runs with their tokens and time | public |
 | `data/corpus_v6.jsonl` | one row per inscription with a typed reading | local |
 | `data/sources/v6/` | the table with all texts, the source lines, the readers' pack, key and answers, the recount | local |
 
@@ -320,6 +310,19 @@ python3 -I tests/test_corpus_v6.py
 The first three lines need the local files (README, Data). The tests run on made-up rows and on the public
 files, and skip the checks that read local ones.
 
-**Cost.** The table, the map, the corpus and both recounts were built without an agent. The two readers cost
-253,065 subagent tokens together and ran for a little over a minute each. The last table of section 4 lists
-every run beside what was quoted.
+**Cost.** The table, the map, the corpus and both recounts were built without an agent. The figures below are
+the subagent tokens and running times that the task notifications report; they are written by hand, and they
+are the only numbers on this page that no script counts.
+
+<!-- cost: by hand, from the task notifications -->
+
+| Run | Subagent tokens | Running time |
+|---|---|---|
+| Reader 1 of the doubtful matches | 126,699 | 1 min 11 s |
+| Reader 2 of the doubtful matches | 126,366 | 1 min 8 s |
+| Both readers | 253,065 | |
+
+Quoted before the runs: about 300,000 for the two readers, 100,000 for a reader of kind and site (not run) and
+500,000 for the review.
+
+<!-- end of the cost -->

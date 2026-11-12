@@ -426,16 +426,20 @@ def test_page_tables():
 
 # numbers the page's text may state without a count behind them: dates and times, years of editions, REM numbers
 # and pages it names, the thresholds of the rule and of the bars, and the numbers of steps and sections
+COST = ("<!-- cost: by hand, from the task notifications -->", "<!-- end of the cost -->")
 STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544", "0101", "362", "370",
           "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0"}       # 4.0: the licence CC BY 4.0
 
 
 def test_page_text_quotes_the_tables():
-    """Every number in the page's text stands in the tables that src/v6/public.py writes (or in STATED)."""
+    """Every number in the page's text stands in the tables that src/v6/public.py writes (or in STATED). The
+    cost of the agent runs is the one part written by hand, between its own marks."""
     import re
     page = U.PAGE.read_text()
     block = page[page.index(U.BEGIN):page.index(U.END)]
     text = page[:page.index(U.BEGIN)] + page[page.index(U.END):]
+    assert text.count(COST[0]) == 1 and text.count(COST[1]) == 1
+    text = text[:text.index(COST[0])] + text[text.index(COST[1]):]
     text = re.sub(r"```.*?```", " ", text, flags=re.S)                        # the commands
     number = re.compile(r"\d{4}-\d\d-\d\d|\d\d:\d\d|\d[\d,]*(?:\.\d+)?%?")
     tidy = lambda t: t.rstrip(",")
@@ -451,6 +455,7 @@ def numbers_not_in_the_tables(text, more=()):
     number = re.compile(r"\d{4}-\d\d-\d\d|\d\d:\d\d|\d[\d,]*(?:\.\d+)?%?")
     tidy = lambda t: t.rstrip(",")
     known = {tidy(t) for t in number.findall(page[page.index(U.BEGIN):page.index(U.END)])} | STATED | set(more)
+    known |= {tidy(t) for t in number.findall(page[page.index(COST[0]):page.index(COST[1])])}     # the cost, by hand
     return sorted(t for t in {tidy(t) for t in number.findall(text)} if t not in known and not (t.isdigit() and int(t) < 10))
 
 

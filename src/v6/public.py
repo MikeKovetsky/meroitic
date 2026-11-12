@@ -22,7 +22,6 @@ TABLE = ROOT / "data/inscriptions.jsonl"
 MAP = ROOT / "data/inscriptions_map.tsv"
 FIGURES = ROOT / "data/discovery/corpus_v6_figures.json"
 PAGE = ROOT / "data/discovery/corpus_v6.md"
-COST = ROOT / "data/discovery/corpus_v6_cost.json"        # written by hand from the task notifications
 BEGIN, END = "<!-- tables: written by src/v6/public.py -->", "<!-- end of the tables -->"
 MAP_COLUMNS = ("corpus_v5 id", "words", "what it is", "copy", "inscription", "reading", "page of Millet 1968",
                "share of the text in the other", "share of the other in the text", "own runs shared", "compared with",
@@ -196,17 +195,8 @@ def tables(f):
             f"| of them with the map's meaning | {e5['agree']} ({pct(e5['agree'], e5['given'])}) | {e6['agree']} ({pct(e6['agree'], e6['given'])}) |",
             "",
             f"Not carried over: {exp['not_carried']} of the {exp['corpus_v5']['rows']:,} judged rows ("
-            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ").", ""]
-    cost = f.get("cost")
-    if cost:
-        runs = cost["runs"]
-        out += ["### The cost in subagent tokens", "", "| Run | Subagent tokens | Running time |", "|---|---|---|"]
-        out += [f"| {r['what'][0].upper() + r['what'][1:]} | {r['subagent_tokens']:,} | {r['seconds'] // 60} min {r['seconds'] % 60} s |"
-                for r in runs]
-        out += [f"| All {len(runs)} runs | {sum(r['subagent_tokens'] for r in runs):,} | |",
-                f"| Quoted before the runs (readers, a reader for kind and site, the review) | {sum(cost['quoted'].values()):,} | |",
-                ""]
-    return "\n".join(out + [END])
+            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ").", "", END]
+    return "\n".join(out)
 
 
 def main(argv):
@@ -277,7 +267,6 @@ def main(argv):
     figs["bars"] = bars
     recount = json.loads((LOCAL / "recount.json").read_text())
     figs["coverage"], figs["experts"] = recount["coverage"], recount["experts"]
-    figs["cost"] = json.loads(COST.read_text()) if COST.exists() else None
     readers = LOCAL / "readers" / "figures.json"
     figs["readers"] = json.loads(readers.read_text()) if readers.exists() else None
     FIGURES.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n")

@@ -555,28 +555,6 @@
    "the map's level is name": 16
   }
  },
- "cost": {
-  "note": "Subagent tokens and running time of every agent run for corpus_v6, as the task notifications report them.",
-  "quoted": {
-   "readers": 300000,
-   "kind_and_site": 100000,
-   "review": 500000
-  },
-  "runs": [
-   {
-    "what": "reader 1 of the doubtful matches",
-    "date": "2026-11-12",
-    "subagent_tokens": 126699,
-    "seconds": 71
-   },
-   {
-    "what": "reader 2 of the doubtful matches",
-    "date": "2026-11-12",
-    "subagent_tokens": 126366,
-    "seconds": 68
-   }
-  ]
- },
  "readers": {
   "reader1": {
    "known": 12,
