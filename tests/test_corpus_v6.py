@@ -338,6 +338,10 @@ def test_decide():
     doubt = cand("doubtful", 0.5, 0.05, 8, "ed:1", "g1")
     assert B.decide(long, [doubt], [])[0] == "pending"                        # a long line without a home: a reader
     assert B.decide(short, [doubt], [])[0] == "phrase"                        # a phrase whichever text it is from
+    assert B.decide(short, [doubt], [])[3].startswith("a doubtful match that was not read")
+    rivals = [cand("sure", 0.9, 0.8, 40, "ed:1", "g1"), cand("doubtful", 0.5, 0.3, 30, "ed:2", "g2")]
+    assert B.decide(reading("otten:4", "tmeye"), rivals, [])[:2] == ("phrase", None)        # too short to read
+    assert B.decide(reading("otten:4", "tmeye"), rivals, [])[3].startswith("a sure match with a second inscription")
     assert B.decide(short, [cand("doubtful", 0.5, 0.4, 8, "ed:1", "g1")], [])[0] == "pending"   # it may be a reading
     tiny = reading("otten:3", "tmeyeqowi")
     assert B.decide(tiny, [cand("doubtful", 0.5, 0.4, 8, "ed:1", "g1")], [])[0] == "phrase"     # too short to read

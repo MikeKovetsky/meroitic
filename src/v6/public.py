@@ -133,7 +133,8 @@ def tables(f):
            f"{f['lines'].get('unidentified', 0)} inscriptions not identified, {f['lines'].get('pending', 0)} with a doubtful "
            f"match that is not settled.",
            f"- The example phrases: {ph['in_one_text']} are a part of one held text or stand whole in it, "
-           f"{ph['in_several']} stand whole in several, {ph['doubtful']} have a doubtful match that was not read, "
+           f"{ph['in_several']} stand whole in several, {ph['doubtful']} have a match that was not read ({ph['doubtful_and_rival']} "
+           f"of them a sure one with a second inscription close behind, the rest doubtful), "
            f"{ph['set_aside']} was taken by the readers for a text of one inscription and is set aside because the rule "
            f"matches it surely with another, and {ph['nothing']} match nothing held.",
            read,
@@ -286,11 +287,12 @@ def main(argv):
     phrases = [l for l in rows("lines.jsonl") if l["class"] == "phrase"]
     figs["phrases"] = {"in_one_text": sum(bool(l["inscription"]) for l in phrases),
                        "in_several": sum(not l["inscription"] and "held texts" in l["by"] for l in phrases),
-                       "doubtful": sum(l["by"].startswith("a doubtful match") for l in phrases),
+                       "doubtful": sum(l["by"].startswith(("a doubtful match", "a sure match with a second")) for l in phrases),
                        "set_aside": sum(l["by"].startswith("set aside") for l in phrases),
                        "nothing": sum(not l["inscription"] and (l["by"].startswith("matches nothing held") or l["by"].startswith("no letters"))
                                       for l in phrases)}
     assert sum(figs["phrases"].values()) == len(phrases), "a phrase of a kind the page does not count"
+    figs["phrases"]["doubtful_and_rival"] = sum(l["by"].startswith("a sure match with a second") for l in phrases)
     every = rows("lines.jsonl")
     figs["settled"] = {"readings": sum(l["class"] == "reading" and l["by"] == B.READ for l in every),
                        "phrases": sum(l["class"] == "phrase" and l["by"] == B.READ for l in every),

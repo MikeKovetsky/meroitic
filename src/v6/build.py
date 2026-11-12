@@ -298,7 +298,8 @@ def decide(x, cands, whole_in, held=None, loose=()):
         return ("pending", None, loose[0], "") if loose and len(x["letters"]) >= OWN_TEXT else ("", None, None, "")
     if len(x["letters"]) >= OWN_TEXT or (len(x["letters"]) >= READABLE and any(c[2] >= DOUBT_SHARE or c[6] >= READING for c in cands[:3])):
         return "pending", None, cands[0], ""
-    return "phrase", None, cands[0], "a doubtful match that was not read: a phrase whichever text it is from"
+    why = "a sure match with a second inscription close behind" if sure else "a doubtful match"
+    return "phrase", None, cands[0], f"{why} that was not read: a phrase whichever text it is from"
 
 
 def settle(decision, cands, verdict, group_of):
