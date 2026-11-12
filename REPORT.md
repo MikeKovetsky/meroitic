@@ -513,8 +513,9 @@ The table, the map and the corpus were built without an agent; two readers then 
 9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,005 still stand in
    `corpus_v6`; on those the editions give the map's meaning for 71.4% of the words they translate (267 of 374;
    it was 276 of 397, 69.5%).
-10. **Cost:** the two readers took 253,065 subagent tokens together. The estimate in `NEXT_STEPS.md` was 2 to 4
-    million for this piece.
+10. **Cost:** the two readers took 253,065 subagent tokens together and the review 523,726 (65 min 28 s), 776,791
+    in all, against a quote of about 300,000 and 500,000. The estimate in `NEXT_STEPS.md` was 2 to 4 million
+    for this piece.
 11. **What the review changed:** a second printing of one Newsletter text had been lost under the key of the
     first, Millet's segmented analysis of REM 0101 had been taken for its reading, the 15 texts of FHN no. 267
     were missing from the table, a name with a lost sign inside had been matched to two whole words, and "two

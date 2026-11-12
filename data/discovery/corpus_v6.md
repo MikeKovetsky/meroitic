@@ -346,6 +346,8 @@ are the only numbers on this page that no script counts.
 | Reader 1 of the doubtful matches | 126,699 | 1 min 11 s |
 | Reader 2 of the doubtful matches | 126,366 | 1 min 8 s |
 | Both readers | 253,065 | |
+| The review of the scripts, the tests and the pages (one fresh reviewer, full tier) | 523,726 | 65 min 28 s |
+| All three runs | 776,791 | |
 
 Quoted before the runs: about 300,000 for the two readers, 100,000 for a reader of kind and site (not run) and
 500,000 for the review.
