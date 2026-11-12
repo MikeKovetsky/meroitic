@@ -56,8 +56,102 @@ def test_packs_are_numbered_after_the_old_ones_and_written_once():
             raise AssertionError("the packs were written a second time")
 
 
+def test_the_count_writes_to_a_folder_of_its_own():
+    import packs as P                                  # the readers of the doubtful matches: their figures are public
+    assert X.OUT not in (P.OUT, X.R.OUT, X.R.OUT / "coverage", X.NEW, X.R.PACKS, X.C.OUT, X.C.CORRECTED)
+    assert X.PUBLIC != X.R.ROOT / "data/discovery/corpus_v6_figures.json"
+
+
+def test_pieces_joined_without_the_limit_on_length():
+    e = X.C.entry({"headword": "abcdef", "meaning_en": "a made-up thing", "status": "established",
+                   "category": "substantif", "page_printed": 1})
+    words, affixes, _ = X.C.index([e])
+    texts = [("T1", "abc def zz"), ("T2", "abcdef zz"), ("T3", "abcdef")]
+    glossed = X.C.gloss_texts([{"id": i, "text": t} for i, t in texts], words, affixes)
+    assert [g["level"] for _, gs in glossed for g in gs][:2] == ["unknown", "unknown"]
+    assert X.C.joins(list(glossed[0][1]), words, affixes, X.C.written_whole(glossed)) == []   # pieces of 3 letters
+    assert X.longer_joins(glossed, words, affixes) == 2 and glossed[0][1][0]["level"] == "unknown"   # not applied
+    one = X.C.gloss_texts([{"id": "T1", "text": "abc def"}, {"id": "T2", "text": "abcdef"}], words, affixes)
+    assert X.longer_joins(one, words, affixes) == 0          # the word stands written as one in one text only
+
+
 def page():
     return re.sub(r"\s+", " ", PAGE.read_text(encoding="utf-8"))
+
+
+# numbers a text may state without a figure behind them: dates, the REM numbers it names, the bar and the gain
+# expected beforehand, the cost by hand, and what the review replaced
+STATED = {"2026-11-12", "1039", "1333", "1361", "85%", "265", "385", "1,012,556", "133,497", "125,907", "130,241",
+          "119,048", "126,556", "127,513", "121,712", "128,082", "12"}
+ANALYSTS = (133497, 125907, 130241, 119048, 126556, 127513, 121712, 128082)   # the cost, by hand
+EXPECTED = (265, 385)                                                         # the gain told beforehand
+NUMBER = re.compile(r"\d{4}-\d\d-\d\d|\d[\d,]*(?:\.\d+)?%?")
+
+
+def numbers(text, stated=()):
+    """The numbers of a text, outside its code blocks, that are neither below 10 nor stated."""
+    found = {t.rstrip(",") for t in NUMBER.findall(re.sub(r"```.*?```", " ", text, flags=re.S))}
+    return {t for t in found if t not in stated and not (t.isdigit() and int(t) < 10)}
+
+
+def known(f):
+    """Every number of the figures file and of the clean corpus's unread words, as a text writes it, and what the
+    pages draw from them."""
+    out = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, int) and not isinstance(x, bool):
+            out.update({str(x), f"{x:,}"})
+        elif isinstance(x, float):
+            out.add(f"{x:.1%}")
+    walk(f)
+    v6 = json.loads((ROOT / "data/discovery/corpus_v6_figures.json").read_text())["coverage"]["not_analysed"]
+    walk({k: v6[k] for k in ("words", "spellings")})
+    a, n = f["answers"], f["newly_translated"]
+    for part in f["by_part"].values():
+        walk({k: v["translated"] / v["words"] for k, v in part.items()})
+    walk({"same side": a["same_translated_or_not"] / a["read_twice"]})
+    out.add(f"{n['words'] / f['after']['words'] * 100:.1f}")                    # the points gained
+    return out
+
+
+def between(text, start, end="\n\n"):
+    """The text from start (which stands once) to end, or to the text's end, its spaces as one."""
+    assert text.count(start) == 1, start
+    rest = text[text.index(start):]
+    return re.sub(r"\s+", " ", rest[:rest.index(end)] if end in rest else rest)
+
+
+def test_the_summaries_quote_the_figures():
+    """README, REPORT, NEXT_STEPS and the summary page say of this step what the figures file says."""
+    f = json.loads(FIGURES.read_text(encoding="utf-8"))
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    report = (ROOT / "REPORT.md").read_text(encoding="utf-8")
+    steps = (ROOT / "NEXT_STEPS.md").read_text(encoding="utf-8")
+    html = (ROOT / "docs/report.html").read_text(encoding="utf-8")
+    parts = {"README, item 12": between(readme, "12. **Analysts on the spellings nobody had read", "13. **The same"),
+             "README, step 19": between(readme, "### 19. Analysts on the unread spellings", "### 20."),
+             "REPORT": between(report, "## Day five, evening", "3. **The same people in Demotic"),
+             "REPORT, cost": between(report, "6. **Cost:** eight analysts", "7. **What the review changed:** the join"),
+             "NEXT_STEPS, point 13": between(steps, "13. **Analysts on the unread spellings", "14. **The same"),
+             "the summary page": between(html, "<tr><td>Have eight analysts read", "</tr>")}
+    stated = STATED | {"12", "13", "14", "18", "19", "1.5", "0.5", "2.0", "384,658", "126,264",
+                       "1,523,478"}                             # items and steps; the quote; the other step's cost
+    for name, text in parts.items():
+        odd = numbers(text, stated) - known(f)
+        assert not odd, (name, sorted(odd))
+    a, b, n = f["answers"], f["before"], f["newly_translated"]
+    words = f"{a['spellings']} spellings ({a['running_words']:,} running words)"
+    assert words in parts["README, item 12"] and words in parts["REPORT"]
+    assert f"{b['translated'] + n['words']:,} of {b['words']:,}" in parts["REPORT"]
+    assert f"{n['words']} running words more" in parts["NEXT_STEPS, point 13"]
+    assert f"expected beforehand was {EXPECTED[0]} to {EXPECTED[1]} words" in parts["README, item 12"]
+    assert f"eight analysts {sum(ANALYSTS):,} subagent tokens" in parts["REPORT, cost"]
+    review = between(report, "7. **What the review changed:** the join")
+    assert f"gives {f['longer_joins']} words, not the 12 counted by hand" in review
 
 
 def test_reported_numbers():
@@ -80,8 +174,19 @@ def test_reported_numbers():
     assert (f"for {x['same_translated_or_not']} of {x['read_twice']} ({x['same_translated_or_not'] / x['read_twice']:.1%}), "
             f"and give {x['same_level']} the same level") in text
     assert x["same_translated_or_not"] / x["read_twice"] >= 0.85                 # the bar of the run
-    assert f"the {x['spellings']} spellings (" in text and f"it is {n['words']}, about half the lower figure" in text
+    assert f"the {x['spellings']} spellings ({x['running_words']:,} running words)" in text
+    assert f"was {EXPECTED[0]} to {EXPECTED[1]} words; it is {n['words']}, about half the lower figure" in text
+    assert 0.45 <= n["words"] / EXPECTED[0] <= 0.55
     assert f["still_not_analysed"] == 0
+    v6 = json.loads((ROOT / "data/discovery/corpus_v6_figures.json").read_text())["coverage"]["not_analysed"]
+    assert f"built with {v6['words']:,} of its words, in {v6['spellings']} spellings, that no analyst had seen" in text
+    assert f"({v6['spellings']} and {v6['words']:,} are counted after the map's corrections)" in text
+    assert f"without its limit on length, would translate {f['longer_joins']} words more" in text
+    assert (f"eight analysts, {sum(ANALYSTS):,} subagent tokens (" + ", ".join(f"{t:,}" for t in ANALYSTS[:6]) +
+            f" and {ANALYSTS[6]:,} on the seven packs, {ANALYSTS[7]:,} on the second reading)") in text
+    assert f"is counted by `src/v6/readers.py` and gives {f['longer_joins']}" in text
+    assert numbers(PAGE.read_text(encoding="utf-8"), STATED) <= known(f), \
+        sorted(numbers(PAGE.read_text(encoding="utf-8"), STATED) - known(f))
 
 
 def test_public_figures_are_what_the_local_files_give():

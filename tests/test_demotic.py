@@ -22,8 +22,8 @@ LOCAL = ("data/sources/fhn-text/pages.txt", "data/sources/demotic/answers/other_
          "data/sources/coverage/corrected/glosses.jsonl")
 
 
-def person(entry, name, language="Demotic", titles=(), same_as=(), reader="r1"):
-    return {"entry": entry, "language": language, "person": name, "name_in_text": "", "role": "",
+def person(entry, name, language="Demotic", titles=(), same_as=(), reader="r1", in_text=""):
+    return {"entry": entry, "language": language, "person": name, "name_in_text": in_text, "role": "",
             "titles": [{"title": t, "original": o} for t, o in titles], "same_as": list(same_as), "reader": reader}
 
 
@@ -31,6 +31,11 @@ def test_plain_and_bare():
     assert D.plain("Wayekiye (A)") == "wayekiyea" and D.plain("qoreñ") == "qoren" and D.plain("Paêse") == "paese"
     assert D.bare("Wygy3") == "wg" and D.bare("Wyekiye") == "wk"
     assert D.bare("Abratoeis") == "brts" and D.bare("Brtoye") == "brt"
+    assert [D.namesake(n) for n in ("Wayekiye (A)", "Hornakhtyotef II", "Hornakhtyotef (I)", "Wayekiye A")] == \
+        ["A", "II", "I", "A"]
+    assert [D.namesake(n) for n in ("Mtewwi (Manitawawi)", "Tsône the elder", "Taêse", "Wygy3", "NN")] == [""] * 5
+    assert D.alike("Hornakhtyotef I", "Hornakhtyotef (II)") == 1.0          # the letter is weighed apart, not here
+    assert D.alike("P3-šr-n-t3-snt", "Sosen") < D.SAME_NAME <= D.alike("Harendotes", "Hr-nd-it=f")
 
 
 def test_a_readers_file_is_read_with_care():
@@ -87,6 +92,57 @@ def test_people_are_joined_by_name_and_by_the_editors():
     assert by["Abratoye"]["titles"]["Meroitic"] == [("270", "King's Son", "peseto")]
 
 
+def test_the_editors_identification_is_not_stretched():
+    folk = D.people([
+        person("232", "Hornakhtyotef (I)", same_as=["249 Hornakhtyotef I"]),   # (I) is not in 249: no line to join
+        person("249", "Hornakhtyotef (II)"),
+        person("231", "Pshentsône", same_as=["232 P3-šr-n-t3-snt"]),             # named in 232's comments only
+        person("232", "Sosen", in_text="Ssn"),
+        person("250", "Weyegeye", same_as=["245 Wygy3"]),                         # the spelling of the ancient text
+        person("245", "Wayekiye (A)", in_text="Wygy3"),
+        person("252", "Wayekiye (B)", same_as=["245 Wayekiye"])])               # a namesake of another letter
+    entries = sorted(p["entries"] for p in folk)
+    assert entries == [["231"], ["232"], ["232"], ["245", "250"], ["249"], ["252"]], entries
+    one = D.people([person("245", "Wayekiye (A)"), person("246", "Wyekiye", "Meroitic", same_as=["245 Wayekiye A"])])
+    assert [p["entries"] for p in one] == [["245", "246"]]                    # the same letter, written otherwise
+
+
+def test_the_ocr_and_a_readers_two_spellings_in_one():
+    assert D.mended("Akiri") == ["Akiñ"] and D.mended("mete") == []
+    assert D.mended("ttri qorise") == ["ttñ qorise", "ttri qoñse", "ttñ qoñse"]           # each place on its own
+    assert D.apart("mete/mte") == ["mete", "mte"] and D.apart("st(e)mdese") == ["stemdese", "stmdese"]
+    assert D.apart("pesto/peseto Akiri-te") == ["pesto Akiri-te", "peseto Akiri-te"] and D.apart("qore") == []
+    held = {"meaning": {"level": "meaning", "gloss": "an office"}, "hypothesis": {"level": "hypothesis", "gloss": "?"}}
+    in_map = {D.K.M.spellings(w)[0]: held[level] for w, level in (("ttñ", "meaning"), ("qorise", "meaning"),
+                                                                   ("mte", "meaning"), ("Akiñ-te", "hypothesis"),
+                                                                   ("pesto", "meaning"))}
+    m = ({}, {}, in_map)                                       # an empty lexicon: only the map's own words are held
+    assert D.misread("ttri qorise", "FHN III", m) and not D.two_in_one("ttri qorise", "FHN III", m)
+    assert not D.misread("ttñ qorise", "FHN III", m)                         # held as written: not an artefact
+    both = ({}, {}, {**in_map, D.K.M.spellings("ttri")[0]: held["meaning"]})
+    assert not D.misread("ttri", "FHN III", both) and D.misread("ttri", "FHN III", m)   # held as written, and mended
+    either = ({}, {}, {**in_map, D.K.M.spellings("ñ/qe")[0]: held["meaning"], D.K.M.spellings("qe")[0]: held["meaning"]})
+    assert D.misread("ri/qe", "FHN III", either) and not D.two_in_one("ri/qe", "FHN III", either)   # counted once
+    assert D.two_in_one("mete/mte", "FHN III", m) and not D.misread("mete/mte", "FHN III", m)
+    assert D.two_in_one("pesto/peseto Akiri-te", "FHN III", m)             # two spellings, and the OCR's ñ
+    assert not D.misread("hbhri", "FHN III", m) and not D.two_in_one("mreperi/mrepero", "FHN III", m)
+    assert D.cut_short("a loan from Demotic t") and D.cut_short("Isis / title related to Demotic p")
+    assert not D.cut_short("Isis +i") and not D.cut_short("great envoy, chief envoy / ") and not D.cut_short("")
+
+
+def test_packs_and_the_table_are_never_written_again():
+    for make, answer in ((D.packs, "other_reader1.jsonl"), (D.table, "meanings_judge1.jsonl")):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "answers").mkdir()
+            (Path(d) / "answers" / answer).write_text("{}\n")
+            try:
+                make(Path(d))
+            except SystemExit as e:
+                assert "not writing" in str(e)
+            else:
+                raise AssertionError(f"{make.__name__} wrote its packs over answers")
+
+
 def test_names_are_left_out_of_the_judges_lines():
     eqs = [{"entry": "245", "meroitic": "qoreñ", "other": "qrny", "meaning": "a title", "doubt": True, "reader": "r1"},
            {"entry": "232", "meroitic": "Wyekiye", "other": "Wygy3", "meaning": "personal name Wayekiye", "doubt": False, "reader": "r1"}]
@@ -112,7 +168,7 @@ def test_reported_numbers():
     assert f"That gives {f['people']} people, {f['people_in_two_entries_or_more']} of them in two entries or more" in text
     assert f["people_with_titles_in_two_languages"] == 4 and "Four have a title in a Meroitic text" in text
     e, t = f["equations"], f["table"]
-    assert f"list {e['all']} equations; {e['of_names']} only set two spellings" in text
+    assert f"list {e['all']} equations; {e['of_names']} are left out as names" in text
     assert f"The other {e['all'] - e['of_names']} are {t['lines']} different lines" in text
     for label, key in (("translated", "translated"), ("a proposal only (hypothesis)", "held without an accepted meaning (hypothesis)"),
                        ("the kind only", "held without an accepted meaning (kind)"), ("not in the map", "not in the map")):
@@ -132,9 +188,119 @@ def test_reported_numbers():
         assert f"{label} | {lack[key]} | {sure[key]} |" in text, label
     assert f"| all | {sum(lack.values())} | {sum(sure.values())} |" in text
     n = f["not_in_the_map"]
-    assert f"{n['held_once_the_ocr_is_mended']} of the {n['lines']} lines \"not in the map\"" in text
+    ocr, two = n["held_once_the_ocr_is_mended"], n["held_once_two_spellings_are_read_apart"]
+    assert (f"{ocr + two} of the {n['lines']} lines \"not in the map\" are words the map holds: {ocr} misread by the "
+            f"OCR") in text and f"and {two} that a reader wrote as two spellings in one" in text
+    assert f"And {f['readings_cut_short']} of our readings reached the judges cut short" in text
     assert f"**The editors set {e['all'] - e['of_names']} Meroitic words or phrases" in text
     assert f"For the {t['our map']['translated']} different lines whose word our map translates" in text
+    assert f"so {f['people'] - 2} people became {f['people']}" in text           # what the review changed
+    assert "the example line of the readers' brief" in text and '"meroitic": "qoreñ"' in D.BRIEF   # the bar's caveat
+    readers, judges = (136380, 138439, 109839), (62952, 63312)                   # the cost, by hand
+    assert (f"three readers {sum(readers):,} subagent tokens ({readers[0]:,}, {readers[1]:,} and {readers[2]:,}), two "
+            f"judges {sum(judges):,} ({judges[0]:,} and {judges[1]:,})") in text
+    assert numbers(PAGE.read_text(encoding="utf-8"), PAGE_STATED) <= known(f), \
+        sorted(numbers(PAGE.read_text(encoding="utf-8"), PAGE_STATED) - known(f))
+
+
+# numbers a text may state without a figure behind them: entries and dates it names, the bar and its quote, the
+# cost by hand, and the figures the review replaced
+ENTRIES = {"229", "231", "244", "246", "247", "249", "252", "253", "254", "260", "261", "264", "265", "267", "270",
+           "271", "291", "306"}
+PAGE_STATED = ENTRIES | {"2026-11-12", "17", "80%", "5.5", "136,380", "138,439", "109,839", "384,658", "62,952",
+                         "63,312", "126,264", "97"}
+NUMBER = re.compile(r"\d{4}-\d\d-\d\d|\d[\d,]*(?:\.\d+)?%?")
+
+
+def numbers(text, stated=()):
+    """The numbers of a text, outside its code blocks, that are neither below 10 nor stated."""
+    found = {t.rstrip(",") for t in NUMBER.findall(re.sub(r"```.*?```", " ", text, flags=re.S))}
+    return {t for t in found if t not in stated and not (t.isdigit() and int(t) < 10)}
+
+
+def known(f):
+    """Every number the figures file holds, as a text writes it, and the sums the page draws from it."""
+    out = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+        elif isinstance(x, bool) or x is None or isinstance(x, str):
+            return
+        elif isinstance(x, int):
+            out.update({str(x), f"{x:,}"})
+        else:
+            out.update({f"{x:.1%}", f"{x:.2f}"})
+    walk(f)
+    t, e = f["table"], f["equations"]
+    n = f["not_in_the_map"]
+    out.update({str(e["all"] - e["of_names"]), str(sum(t["decoys"].values())), str(sum(t["lacking"].values())),
+                str(sum(t["lacking, stated as sure"].values())),
+                str(len(D.OTHER["Demotic"])), str(len(D.OTHER["Demotic"]) + len(D.OTHER["Greek"])),
+                str(n["held_once_the_ocr_is_mended"] + n["held_once_two_spellings_are_read_apart"])})
+    return out
+
+
+def between(text, start, end="\n\n"):
+    """The text from start (which stands once) to end, or to the text's end."""
+    assert text.count(start) == 1, start
+    rest = text[text.index(start):]
+    return rest[:rest.index(end)] if end in rest else rest
+
+
+def test_the_summaries_quote_the_figures():
+    """README, REPORT, NEXT_STEPS and the summary page say of this step what the figures file says."""
+    f = json.loads(FIGURES.read_text(encoding="utf-8"))
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    report = (ROOT / "REPORT.md").read_text(encoding="utf-8")
+    steps = (ROOT / "NEXT_STEPS.md").read_text(encoding="utf-8")
+    html = (ROOT / "docs/report.html").read_text(encoding="utf-8")
+    parts = {"README, item 13": between(readme, "13. **The same people in Demotic", "## The question"),
+             "README, step 20": between(readme, "### 20. The same people in two scripts", "## Reproduce"),
+             "REPORT": between(report, "3. **The same people in Demotic, Greek and Meroitic**", "6. **Cost:**"),
+             "REPORT, review": between(report, "7. **What the review changed:** the join"),
+             "NEXT_STEPS, point 14": between(steps, "14. **The same people in Demotic", "Next, in this order"),
+             "NEXT_STEPS, step 17": between(steps, "    - **The people named in both the Philae graffiti",
+                                            "    - **What it leaves:** the Demotic list"),
+             "the summary page": between(html, "<tr><td>Read the 22 Demotic graffiti", "</tr>")}
+    parts = {k: re.sub(r"\s+", " ", v) for k, v in parts.items()}
+    # the numbers of items, points and steps; the bar; what the review replaced; the readers' step (test_v6_readers)
+    stated = ENTRIES | {"2026-11-12", "13", "14", "17", "20", "80%", "97", "11", "12"}
+    for name, text in parts.items():
+        odd = numbers(text, stated) - known(f)
+        assert not odd, (name, sorted(odd))
+    people = f"{f['people']} people"
+    assert all(people in parts[k] or f"({f['people']}, " in parts[k] for k in ("README, item 13", "REPORT",
+                                                                              "the summary page"))
+    t = f["table"]
+    assert (f"{sum(t['lacking'].values())} lines, {t['lacking']['our map has no accepted meaning for the word']} of "
+            "them on words without an accepted meaning") in parts["REPORT"]
+    n = f["not_in_the_map"]
+    assert f"; {n['held_once_the_ocr_is_mended'] + n['held_once_two_spellings_are_read_apart']} of those are words" \
+        in parts["REPORT"]
+    cost = between(report, "6. **Cost:** eight analysts", "7. **What the review changed:**")
+    analysts, readers, judges = 1012556, 384658, 126264
+    assert (f"eight analysts {analysts:,} subagent tokens; three readers {readers:,} and two judges {judges:,} for the "
+            f"Demotic step; {analysts + readers + judges:,} together before the review") in re.sub(r"\s+", " ", cost)
+
+
+def test_a_number_out_of_turn_is_not_a_heading():
+    pages = {56: "190 Philae. Before the sources begin.",
+             57: "186 Philae. The first entry of the sources.\nSome text.\n"
+                 "260 Philae is named here, in a line of entry 186.\n972 Fontes Historiae Nubiorum III\n",
+             58: "(187) Dakka. The second entry.\nMore text.\n189 Philae. A heading that skips one number.\n"
+                 "188 Philae. A cross-reference that goes back.\n"}
+    with tempfile.TemporaryDirectory() as d:
+        layer = Path(d) / "pages.txt"
+        layer.write_text("".join(f"\x0c=== page {n} ===\n{t}" for n, t in pages.items()), encoding="utf-8")
+        text = D.entries(layer)
+    assert sorted(text) == [186, 187, 189]
+    assert "260 Philae is named here" in text[186] and "972 Fontes" in text[186] and "190 Philae" not in text[186]
+    assert text[187].startswith("(187) Dakka") and "188 Philae" in text[189]
 
 
 def test_the_volume_is_cut_at_its_headings():
@@ -155,6 +321,8 @@ def test_public_figures_are_what_the_local_files_give():
     folk, lines, _ = D.merge()
     assert len(D.in_two(folk)) == figs["people_with_titles_in_two_languages"]
     assert sorted(p["names"][0] for p in D.in_two(folk)) == ["Abratoye", "Beke", "Bekemete", "Manitawawi"]
+    assert all(len({D.namesake(n) for n in p["names"]} - {""}) <= 1 for p in folk)      # no two namesakes in one
+    assert not any({"Pshentsône", "Sosen"} <= set(p["names"]) for p in folk)             # generations 1 and 4
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

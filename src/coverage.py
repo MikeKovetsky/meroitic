@@ -695,18 +695,20 @@ def written_whole(glossed):
     return out
 
 
-def joins(gs, words, affixes, whole):
+def joins(gs, words, affixes, whole, fragment=FRAGMENT):
     """Rule 3: two or three neighbouring words that are one word written apart. At least one of them is not
-    translated, at least one has FRAGMENT letters or fewer, together they spell a word the lookup translates, and
-    that word stands written as one in WRITTEN texts or more. The longer join is tried first; the words of a join
-    are corrected, so no later join takes them. Returns the joins made as [(the words, the joined word)]."""
+    translated, at least one has `fragment` letters or fewer (FRAGMENT; None: any length), together they spell a
+    word the lookup translates, and that word stands written as one in WRITTEN texts or more. The longer join is
+    tried first; the words of a join are corrected, so no later join takes them. Returns the joins made as
+    [(the words, the joined word)]."""
     made = []
     for i in range(len(gs)):
         for n in (3, 2):
             part = gs[i:i + n]
             forms = [g["form"] for g in part]
             if (len(part) < n or not all(PLAIN.fullmatch(f) for f in forms) or any(g.get("corrected") for g in part)
-                    or all(g["level"] in TRANSLATED for g in part) or min(map(len, forms)) > FRAGMENT):
+                    or all(g["level"] in TRANSLATED for g in part)
+                    or (fragment is not None and min(map(len, forms)) > fragment)):
                 continue
             word = "".join(forms)
             new = lookup(word, gs[i - 1]["form"] if i else "", words, affixes) if whole[word] >= WRITTEN else None

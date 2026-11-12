@@ -534,20 +534,29 @@ The table, the map and the corpus were built without an agent; two readers then 
    the share the analysts translated on the older texts. The unread words are another kind of word: pieces of
    words that an edition prints in two parts, and single words of broken or obscure texts.
 3. **The same people in Demotic, Greek and Meroitic** ([`data/discovery/demotic.md`](data/discovery/demotic.md)),
-   the last open part of step 17. Three readers went through the 24 Demotic and Greek entries and the nine
-   Meroitic entries of *Fontes Historiae Nubiorum* III: 97 people, 21 of them in two entries or more, four with
-   a title in Meroitic and in Demotic or Greek. For those four the titles line up as the lexicon says: `perite`
-   beside the Demotic "agent" twice, `peseto` beside "the king's son" and the Greek `psentes`, `kroro` beside
-   `3krre`.
+   a part of step 17 (its oracular decrees stay open). Three readers went through the 24 Demotic and Greek
+   entries and the nine Meroitic entries of *Fontes Historiae Nubiorum* III: 99 people, 21 of them in two entries
+   or more, four with a title in Meroitic and in Demotic or Greek. Where the two texts give the same office, the
+   titles line up with the lexicon: `perite` beside the Demotic "agent" twice and `peseto` beside "the king's
+   son" and the Greek `psentes`, the words the lexicon derives them from, and `kroro` beside `3krre`, the same
+   title of unknown meaning.
 4. **The editors' equations:** 143 in the readers' lists, 125 without the names, 110 different lines. The map
    translates the word of 64; two judges agree with its reading on 36 of 58 and 41 of 57, and accepted none of
    their 17 decoys. On the list of what the map lacks are 69 lines, 46 of them on words without an accepted
-   meaning, mostly titles the editors leave as titles too. More than the map has: `qoreñ` as a title built on
+   meaning, mostly titles the editors leave as titles too; 9 of those are words the map holds, spelled otherwise
+   by the OCR or written by a reader as two spellings in one. More than the map has: `qoreñ` as a title built on
    `qore` "ruler", `arbetke` as a title of priests with economic duties, and "the great envoy to Rome" for
    `apote-lẖ Arome-li-s`. No meaning is both new and sure.
-5. **Both bars of the Demotic step were met:** the two readers list the same person in 72 of 74 lines (80% was
-   asked), and both find four of the five known equations (the fifth, `ant`, is only in the Meroitic entries).
+5. **Both bars of the Demotic step were met, and the hope of a meaning or two added was not:** the two readers
+   list the same person in 72 of 74 lines (80% was asked), and both find four of the five known equations (the
+   fifth, `ant`, is only in the Meroitic entries; one of the four, `qoreñ`, was the example line of their brief).
 6. **Cost:** eight analysts 1,012,556 subagent tokens; three readers 384,658 and two judges 126,264 for the
-   Demotic step; 1,523,478 together, against 1.5 million quoted for the first and 0.5 for the second, both with
-   their review.
+   Demotic step; 1,523,478 together before the review, against 2.0 million quoted for the two with their review
+   (1.5 for the first and 0.5 for the second).
+7. **What the review changed:** the join of person lines had made one person of two namesakes (Hornakhtyotef I
+   and II) and of two men of the first and the fourth generation of one family (Pshentsône and Sosen): 99
+   people, not 97. The rule for the OCR's ñ had missed a phrase with a true "ri" in it (5 lines, not 4), and 4
+   lines written as two spellings in one were not named. The joining without the limit on length gives 11 words,
+   not the 12 counted by hand. And `src/v6/readers.py count` had written its figures over those of the readers of
+   the clean corpus's doubtful matches, whose local folder it shared.
 

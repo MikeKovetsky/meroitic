@@ -6,7 +6,8 @@
 Local only (Rilly's lexicon, corpus_v6, the analysts' answers). The packs are those of src/coverage.py: words.jsonl,
 lexicon.tsv, BRIEF.md, and the analyst's analysis.jsonl. They are numbered after the packs of the first run and
 kept in a folder of their own, so that the map of corpus_v5 is rebuilt from the same answers as before. `count`
-leaves the figures of src/v6/recount.py as they are and writes its own beside them.
+leaves the figures of src/v6/recount.py as they are and writes its own in a folder of its own (OUT, not the
+folder of src/v6/packs.py, whose figures src/v6/public.py publishes).
 """
 import collections
 import json
@@ -19,7 +20,7 @@ import coverage as C   # noqa: E402
 import recount as R    # noqa: E402
 
 NEW = ROOT / "data/sources/v6/packs"
-OUT = ROOT / "data/sources/v6/readers"
+OUT = ROOT / "data/sources/v6/analysts"
 PUBLIC = ROOT / "data/discovery/corpus_v6_readers.json"
 PER, TWICE = 133, 110                  # words in a pack; the most frequent words read by a second analyst
 
@@ -35,10 +36,16 @@ def masked(rows):
     return out
 
 
+def packed(folder, letters="AB"):
+    """The words of the packs of a folder whose name starts with one of letters, as the packs hold them (word,
+    count, texts, contexts), pack by pack."""
+    return [json.loads(l) for p in (sorted(folder.iterdir()) if folder.exists() else ())
+            if p.is_dir() and p.name[:1] in letters for l in (p / "words.jsonl").read_text().splitlines() if l.strip()]
+
+
 def held(*folders):
     """The words that a pack of the folders holds already."""
-    return {json.loads(l)["word"] for f in folders if f.exists() for p in sorted(f.iterdir()) if p.is_dir()
-            for l in (p / "words.jsonl").read_text().splitlines() if l.strip()}
+    return {w["word"] for f in folders for w in packed(f)}
 
 
 def unread(rows, words, affixes, have):
@@ -71,6 +78,17 @@ def side(g):
     return g["level"] in C.TRANSLATED
 
 
+def longer_joins(glossed, words, affixes):
+    """How many words more the map's third correction (a word written apart) would translate without its limit on
+    the length of a piece: counted on a copy of each text of the corrected map, not applied."""
+    whole, n = C.written_whole(glossed), 0
+    for _, gs in glossed:
+        copy = list(gs)
+        C.joins(copy, words, affixes, whole, fragment=None)
+        n += sum(not side(a) and side(b) for a, b in zip(gs, copy))
+    return n
+
+
 def count(corpus, old=R.PACKS, new=NEW):
     """The corrected map of corpus_v6 with the answers of the first run alone and with the new answers added:
     (glossed with them, figures). An answer of the first run stands where both hold a word."""
@@ -92,8 +110,10 @@ def count(corpus, old=R.PACKS, new=NEW):
         moved.update(y["level"] for x, y in zip(a, b) if not side(x) and side(y))
     figs["newly_translated"] = {"words": sum(moved.values()), **{l: moved[l] for l in C.TRANSLATED}}
     figs["still_not_analysed"] = sum(g["by"] == "nobody" for _, gs in maps["after"] for g in gs)
+    figs["longer_joins"] = longer_joins(maps["after"], words, affixes)
     levels = collections.Counter(g["level"] for g in more.values())
-    figs["answers"] = {"spellings": len(more), "translated": sum(side(g) for g in more.values()),
+    figs["answers"] = {"spellings": len(more), "running_words": sum(w["count"] for w in packed(new, "A")),
+                       "translated": sum(side(g) for g in more.values()),
                        "levels": {l: levels[l] for l in C.LEVELS if levels[l]},
                        "dropped": len(report["dropped"]), "missing": len(report["missing"]),
                        "read_twice": report["twice"], "same_level": report["same_level"],

@@ -77,8 +77,10 @@
   "number": 0
  },
  "still_not_analysed": 0,
+ "longer_joins": 11,
  "answers": {
   "spellings": 930,
+  "running_words": 1038,
   "translated": 125,
   "levels": {
    "meaning": 55,

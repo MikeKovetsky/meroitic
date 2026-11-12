@@ -13,9 +13,9 @@ text layer is an OCR (untrusted data: python3 -I).
 """
 import collections
 import difflib
+import itertools
 import json
 import pathlib
-import random
 import re
 import sys
 import unicodedata
@@ -24,7 +24,6 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src" / "experts")]
 import close as K                                      # noqa: E402
 import prepare as P                                    # noqa: E402
-import tally as T                                      # noqa: E402
 
 OUT = ROOT / "data/sources/demotic"
 FIRST_PAGE = 57                                        # the PDF page where the sources begin
@@ -36,7 +35,8 @@ MEROITIC = (246, 247, 264, 267, 268, 269, 270, 271, 291)
 READERS = {"other": ("other_reader1", "other_reader2"), "meroitic": ("meroitic_reader1",)}
 PUBLIC = ROOT / "data/discovery/demotic_figures.json"
 KNOWN = ("pelmos", "perite", "ant", "qoren", "peseto")   # equations of the editors that both readers should find
-SAME_NAME = 0.5                                        # how alike two spellings of a name must be (bare consonants)
+SAME_NAME = 0.6                                        # how alike two spellings of a name must be (bare consonants)
+NAMESAKE = re.compile(r"\s*\(?\b([IVX]+|[A-Z])\)?\s*$")  # the editors' letter or number for namesakes, at the end
 
 BRIEF = """# People and their titles in {what}: a list from one printed edition
 
@@ -78,9 +78,9 @@ many equation lines you wrote.
 """
 
 
-def entries():
+def entries(path=P.FHN):
     """{entry number: its text}, cut at the headings that continue the volume's numbering."""
-    pg = P.pages(P.FHN)
+    pg = P.pages(path)
     body = "\n".join(pg[n] for n in sorted(pg) if n >= FIRST_PAGE)
     heads, last = [], NUMBERS[0] - 1
     for m in re.finditer(r"^\(?(\d{3})\)? [A-Z][^\n]{6,}$", body, re.M):
@@ -171,12 +171,29 @@ def bare(name):
     return re.sub(r"[aeiouy0-9]", "", plain(name))
 
 
+def namesake(name):
+    """The editors' letter or number for a namesake at the end of a name ("Wayekiye (A)", "Hornakhtyotef II"),
+    or ""."""
+    m = NAMESAKE.search(str(name))
+    return m.group(1) if m else ""
+
+
+def alike(a, b):
+    """How alike two spellings of a name are: their consonants, without the namesake's letter or number."""
+    return difflib.SequenceMatcher(None, bare(NAMESAKE.sub("", a)), bare(NAMESAKE.sub("", b))).ratio()
+
+
 def people(persons):
     """The persons of all entries joined into people: two lines are one person when they carry the same name in
     the editors' English (with its letter for namesakes), or when the editors say so (`same_as`: an entry and the
-    name there, matched to the line of that entry whose name is most alike, at least SAME_NAME). Each person:
-    the names, the entries, and the titles by language as (entry, title, original)."""
+    name there, matched to the line of that entry whose name in the editors' English or in the ancient text is
+    most alike, at least SAME_NAME, and never to a line whose letter or number for namesakes is not the one the
+    reference, or else the person, carries). Each person: the names, the entries, and the titles by language as
+    (entry, title, original)."""
     nodes = sorted({(p["entry"], plain(p["person"])) for p in persons})
+    names = collections.defaultdict(set)
+    for p in persons:
+        names[p["entry"], plain(p["person"])] |= {p["person"], p["name_in_text"]} - {""}
     parent = {n: n for n in nodes}
 
     def find(n):
@@ -202,8 +219,11 @@ def people(persons):
             m = re.match(r"\s*\(?(\d{3})\)?\s*(.*)", ref)
             if not m or m.group(1) not in by_entry:
                 continue
-            there = max(by_entry[m.group(1)], key=lambda n: difflib.SequenceMatcher(None, bare(m.group(2)), bare(n[1])).ratio())
-            if difflib.SequenceMatcher(None, bare(m.group(2)), bare(there[1])).ratio() >= SAME_NAME:
+            name, mark = m.group(2), namesake(m.group(2)) or namesake(p["person"])
+            score = {n: max(alike(name, x) for x in names[n]) for n in by_entry[m.group(1)]
+                     if not (mark and any(namesake(x) not in ("", mark) for x in names[n]))}
+            there = max(score, key=score.get, default=None)
+            if there is not None and score[there] >= SAME_NAME:
                 join(here, there)
     out = collections.defaultdict(lambda: {"names": set(), "entries": set(), "titles": collections.defaultdict(set)})
     for p in persons:
@@ -227,13 +247,14 @@ def in_two(folk):
 
 
 def is_name(e):
-    """An equation that only sets two spellings of a name side by side."""
+    """An equation taken for a name: its meaning has the word "name" ("personal name", "a woman's name",
+    "Napata (place name)"). The rule is the word, so a meaning that says "not a name" is taken too."""
     return bool(re.search(r"\bname\b", e["meaning"].lower()))
 
 
 def found(equations):
     """The equations as the lines src/experts/close.py takes: the Meroitic word and the meaning the editors give
-    it. Names set beside names are left out."""
+    it. The equations taken for names (is_name) are left out."""
     return [{"source": "FHN III", "entries": [e["entry"]], "word": e["meroitic"], "meaning": e["meaning"],
              "doubt": e["doubt"], "from": e["reader"]} for e in equations if not is_name(e)]
 
@@ -274,13 +295,50 @@ def table(folder=OUT):
           dict(collections.Counter(r["our map"] for r in rows)))
 
 
+def mended(word):
+    """The word with the OCR's "ri" or "ii" read as the letter ñ, which the scan's text layer often gives so
+    (Akiri for Akiñ, ttri for ttñ), at one place or more: every choice, since a ri can be a ri (ttri qorise)."""
+    spots = [m.span() for m in re.finditer(r"ri|ii", word)]
+    out = []
+    for k in range(1, len(spots) + 1):
+        for chosen in itertools.combinations(spots, k):
+            w = word
+            for a, b in reversed(chosen):
+                w = w[:a] + "ñ" + w[b:]
+            out.append(w)
+    return out
+
+
+def apart(word):
+    """The spellings of a word or phrase in which a reader wrote two spellings as one: "mete/mte" is mete or mte,
+    "st(e)mdese" is stemdese or stmdese. [] when it holds neither."""
+    choices = []
+    for tok in word.split():
+        opts = []
+        for o in tok.split("/"):
+            opts += [re.sub(r"\((\w+)\)", r"\1", o), re.sub(r"\(\w+\)", "", o)] if re.search(r"\(\w+\)", o) else [o]
+        choices.append(list(dict.fromkeys(opts)))
+    return [w for w in (" ".join(c) for c in itertools.product(*choices)) if w != word]
+
+
 def misread(word, source, m):
-    """Whether a word or phrase that the map does not hold is held once the OCR's "ri" or "ii" is read as the
-    letter ñ, which the scan's text layer often gives so (Akiri for Akiñ, hrphri for ḫrpḫñ)."""
-    if K.held(word, source, m)[0] != "not in the map":
-        return False
-    mended = re.sub(r"ri|ii", "ñ", word)
-    return mended != word and K.held(mended, source, m)[0] != "not in the map"
+    """Whether a word or phrase that the map does not hold is held once the OCR's misread ñ is read right."""
+    held = lambda w: K.held(w, source, m)[0] != "not in the map"
+    return not held(word) and any(held(w) for w in mended(word))
+
+
+def two_in_one(word, source, m):
+    """Whether a word or phrase that the map does not hold, and not for the OCR's ñ alone, is held once a
+    reader's two spellings in one are read apart (each with the OCR's ñ read right or not)."""
+    held = lambda w: K.held(w, source, m)[0] != "not in the map"
+    return (not held(word) and not misread(word, source, m)
+            and any(held(w) for a in apart(word) for w in [a] + mended(a)))
+
+
+def cut_short(reading):
+    """Whether a part of our reading ends in a word of one letter: a gloss cut at a bracket inside a word ("a loan
+    from Demotic t" for t(3)-wšt.t), so that the judge does not see the word it names."""
+    return any(re.search(r"\s[A-Za-z]$", part.split(" +")[0].strip()) for part in reading.split(" / "))
 
 
 def count(folder=OUT, before=K.FOLDER / "meanings_rows.jsonl"):
@@ -299,8 +357,12 @@ def count(folder=OUT, before=K.FOLDER / "meanings_rows.jsonl"):
     figs["table"] = {k: v for k, v in table_figs.items() if k != "problems"}
     m = K.our_map()
     absent = [r for r in lines.values() if r["our map"] == "not in the map"]
-    figs["not_in_the_map"] = {"lines": len(absent), "held_once_the_ocr_is_mended": sum(misread(r["word"], r["source"], m) for r in absent)}
+    figs["not_in_the_map"] = {"lines": len(absent),
+                              "held_once_the_ocr_is_mended": sum(misread(r["word"], r["source"], m) for r in absent),
+                              "held_once_two_spellings_are_read_apart":
+                                  sum(two_in_one(r["word"], r["source"], m) for r in absent)}
     figs["lines_on_words_not_listed_before"] = {"lines": len(fresh), "judged": sum(bool(r["row"]) for r in fresh)}
+    figs["readings_cut_short"] = sum(cut_short(r["ours"]) for r in lines.values() if r["row"])
     return figs
 
 

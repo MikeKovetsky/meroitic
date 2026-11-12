@@ -44,8 +44,8 @@ Done since this plan was written:
 8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
    the first part of step 17 of section E: a negative result. A search by sound finds the known names of gods,
    places and people but only 4 of 14 known borrowed titles, nouns and verbs, and gives nothing above chance for
-   the pieces without a meaning. The step's two other parallels, the oracular decrees and the Philae graffiti,
-   are still open.
+   the pieces without a meaning. Of the step's two other parallels, the oracular decrees are still open and the
+   Philae graffiti are done (point 14).
 9. **The search for spellings of known words** (2026-11-11, [`data/discovery/variants.md`](data/discovery/variants.md)),
    step 21 of section E. The search brings 187 of 242 hidden variants back to their own entry (77%), but its
    test missed the bar, because only 105 (43%) stand out from made-up words. Two blind checkers confirmed 48 of
@@ -73,9 +73,9 @@ Done since this plan was written:
     translated, 52.7% from 51.3%. About half of what was expected: the unread words are pieces of words and
     single words of obscure texts.
 14. **The same people in Demotic, Greek and Meroitic** (2026-11-12,
-    [`data/discovery/demotic.md`](data/discovery/demotic.md)), the last open part of step 17: four people carry
-    titles in two languages and the titles line up as the lexicon says; the editors' 125 equations add no
-    meaning that is new and sure.
+    [`data/discovery/demotic.md`](data/discovery/demotic.md)), a part of step 17: four people carry titles in two
+    languages, and where the two texts give the same office the titles line up with the lexicon; the editors' 125
+    equations add no meaning that is new and sure.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -334,10 +334,11 @@ days, not hours. The costs are estimates from what the runs so far cost.
       62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens. Reviewed at the
       full tier (523,726 subagent tokens).
     - **What it leaves for later:** 966 words of the new inscriptions (and 47 of the others) had no analyst;
-      they were read the same day ([the readers' page](data/discovery/v6_readers.md) gives what that changed); nine Gebel Adda inscriptions are held only as a text layer
-      of Millet 2005 and could be typed; 8 texts quoted by Millet 1968 are not identified, one of which may be
-      Griffith's Meroë 27 or 28; 3 doubtful matches are not settled; the kind of text is not known for 112
-      inscriptions; and word division still follows each edition.
+      they were read the same day ([the readers' page](data/discovery/v6_readers.md) gives what that changed);
+      nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and could be typed; 8 texts
+      quoted by Millet 1968 are not identified, one of which may be Griffith's Meroë 27 or 28; 3 doubtful matches
+      are not settled; the kind of text is not known for 112 inscriptions; and word division still follows each
+      edition.
 23. **F2. A lexicon with a source and a status for every meaning.**
     - Why: "translated" in the map means that one lexicon of 2003 accepts the meaning. The check of 2026-11-12
       shows what that hides: two other scholars agree for 85% of the words outside `yetmde` and `qo`, and differ

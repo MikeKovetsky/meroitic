@@ -62,8 +62,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      two blind checkers found no new source among its 33 best matches
      ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)). Comparing the written vowels too, on the Coptic
      entries, ranks the true source better (among the five best for 7 of 13 loans, against 4) and leaves both
-     answers as they are. The step's two other Egyptian parallels, the
-     oracular decrees and the people the Philae graffiti name in Demotic, are not done yet.
+     answers as they are. Of the step's two other Egyptian parallels, the oracular decrees are not done yet; the
+     people the Philae graffiti name in Demotic are (item 13).
 8. **About 62% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
    was glossed from Rilly's 2003 lexicon, by lookup and then by analysts. After four corrections made the same day,
    13,618 of 21,977 words (62.0%) are a name, a number or a word with an accepted meaning or function (61.6% with
@@ -119,15 +119,16 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     85%. The gain expected beforehand was 265 to 385 words: the unread words turned out to be pieces of words
     printed in two parts, and single words of broken or obscure texts
     ([`data/discovery/v6_readers.md`](data/discovery/v6_readers.md)).
-13. **The same people in Demotic, Greek and Meroitic: four of them carry titles in two languages, and the titles
-    line up as the lexicon says.** *Fontes Historiae Nubiorum* III prints 22 Demotic graffiti and two Greek
-    inscriptions of the families whose Meroitic epitaphs the corpus holds. Three readers listed the people (97,
-    21 of them in two entries or more) and the 125 places where the editors set a Meroitic word beside a word of
-    another language or give it a meaning. `perite` stands where the Demotic has "agent" for two people, `peseto`
-    where it has "the king's son" and the Greek `psentes` for one, `kroro` where it has `3krre` for one. Two
-    judges agree with the map's reading on 36 of 58 and 41 of 57 of the lines whose word it translates. No
-    meaning is both new and sure; what the map lacks is mostly titles the editors leave as titles too
-    ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
+13. **The same people in Demotic, Greek and Meroitic: four of them carry titles in two languages, and where the
+    two texts give the same office the titles line up with the lexicon.** *Fontes Historiae Nubiorum* III prints
+    22 Demotic graffiti and two Greek inscriptions from Philae, Dakka and Maharraqa, among them those of the
+    families whose Meroitic epitaphs the corpus holds. Three readers listed the people (99, 21 of them in two
+    entries or more) and the 125 places where the editors set a Meroitic word beside a word of another language or
+    give it a meaning. `perite` stands where the Demotic has "agent" for two people and `peseto` where it has "the
+    king's son" and the Greek `psentes` for one, the words the lexicon derives them from; `kroro` stands where the
+    Demotic writes the same title, of unknown meaning, as `3krre` for one. Two judges agree with the map's reading
+    on 36 of 58 and 41 of 57 of the lines whose word it translates. No meaning is both new and sure; what the map
+    lacks is mostly titles the editors leave as titles too ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
 
 ## The question
 
@@ -159,7 +160,7 @@ what can be rebuilt.
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
-| Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
+| Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map; and FHN III's Demotic and Greek graffiti, read beside its Meroitic texts | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), the judges' packs and answers in `data/sources/expert/`, and the readers' and judges' packs and answers of the Demotic step in `data/sources/demotic/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only, `demotic_figures.json` counts and five title words |
 
 Since 2026-11-12 the readings are also listed by inscription: [`data/inscriptions.jsonl`](data/inscriptions.jsonl)
 has one row for each of the 563 inscriptions the project holds a reading of, with its REM or edition number, site,
@@ -409,9 +410,10 @@ continue its numbering. Two readers take the 24 Demotic and Greek entries and on
 the same families; each lists the people an entry's ancient text names, with their titles, their kin and whom
 the editors take for the same person elsewhere, and every place where the editors set a Meroitic word beside a
 Demotic, Greek or Egyptian one. `merge` joins the lines into people (the same name in the editors' English, or
-the editors' own identification, matched by the consonants of the name) and checks two bars written before the
-run: how many person lines both readers list, and whether both find the known equations. The equations go
-through the lookup and the judges' table of step 17, each judge with decoys of its own
+the editors' own identification, matched by the consonants of the name as the editors or the ancient text write
+it, and never to a namesake with another letter or number) and checks two bars written before the run: how many
+person lines both readers list, and whether both find the known equations. The equations go through the lookup
+and the judges' table of step 17, each judge with decoys of its own
 ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
 
 ## Reproduce
@@ -455,7 +457,8 @@ Ten things need files that are kept locally (Data, above), so they don't run fro
   Rilly's lexicon, the analysts' answers and the judges' answers;
 - `python3 -I src/v6/readers.py count` reads Rilly's lexicon, `corpus_v6` and the analysts' answers of both runs;
 - `python3 -I src/demotic.py merge` (and `packs`, `table`, `count`) reads the text layer of FHN III, the readers'
-  and judges' answers, Rilly's lexicon and the coverage map's gloss file.
+  and judges' answers, Rilly's lexicon, the coverage map's gloss file and the lines of the check against the two
+  editions.
 
 ## Layout
 
