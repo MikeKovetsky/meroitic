@@ -25,11 +25,20 @@ checked by `tests/test_variants.py`.
    links with nothing beat the same bar 8 times in 76, and 6 times in 24 from seven letters up: at their rate
    about 104 pieces would beat it. Different words that share a part (two royal names ending in `-demni`, a word
    and its genitive) look as close as two spellings of one word.
-5. **So the checkers decide, and they have not run yet.** All 105 matches that beat the bar (the 82 and the 23
-   that the lexicon links itself) are packed for two independent blind checkers, with 24 listed variants whose
-   answer is known: 12 controls and 12 decoys. Section 5 and section 6 (how many running words the confirmed
-   pieces would move in the coverage map) wait for that run.
-6. **What the listed variants show about Meroitic spelling** (section 3): almost all of it is vowels. An `e` is
+5. **Two blind checkers confirm 48 of the 105 matches that beat the bar, 29 of them new.** Each match was read
+   by two independent checkers who saw the piece's contexts and the candidates, and no other reader's guess. Both
+   said "the same word" and named the same candidate for 48. 19 of those are among the 23 pairs that the lexicon
+   links itself; the other 29 are new, and for 26 of them the word has an accepted meaning.
+6. **The check is careful and misses a lot.** Mixed into the packs were 24 listed variants whose answer is known.
+   Of the 12 shown with all their candidates, both checkers named the right entry for 6. Of the 12 shown with
+   the right entry taken out, both accepted a look-alike for 1. So a confirmation is fairly safe, and a "no"
+   says little.
+7. **The 26 would move 59 running words of the coverage map** (section 6): from 13,292 to 13,351 of 21,977, which
+   is 60.5% to 60.7%, and with near-copies counted once from 59.9% to 60.4%. Five more texts would be complete.
+   The map's own numbers are not changed here.
+8. **The largest candidate is not confirmed.** `smlowi` stands in 81 running words. Both checkers take it for a
+   known word, but one reads `sem` with `-lowi` and the other the title `smlo` with `-wi`.
+9. **What the listed variants show about Meroitic spelling** (section 3): almost all of it is vowels. An `e` is
    left out or added (133 times in 307 variants), `e`, `i` and `o` stand for one another (73 times), and the
    vowel at the start comes and goes (`Amni`, `Mni`: 42 times). Among consonants the listed variants show
    `l` for `n`, `t` for `s` and `d`, `q` for `w` and `k` for `ḫ`, four or five times each. They never show `r`
@@ -163,21 +172,113 @@ by letters, not as a list of finds.
 
 ## 5. The check of the best matches
 
-Not run yet. The packs are built (`python3 -I src/variants.py check`): 129 items in three packs, for two
-independent checkers each. They hold the 105 pieces whose best match beats the bar and 24 items whose answer is
-known, unmarked. All 24 are listed variants that stand in the texts, shown as if they were pieces, with the
-candidates the search gave when they were hidden. The 12 controls keep those candidates, so the entry that lists
-the variant is among them when the search found it. The 12 decoys have that entry taken out, and every entry the
-lexicon links with it, so that whatever candidate a checker accepts for a decoy is a look-alike. A checker gets the piece's
-contexts with its own gloss hidden, the three best candidates with their entries, the letters that differ and how
-often the listed variants show each change, and two contexts of each candidate
-([the brief](variants_brief.md)). A piece is confirmed when both checkers say it is the same word and name
-entries of one candidate.
+All 105 pieces whose best match beats the bar went to the checkers: the 82, and the 23 that the lexicon links
+itself. They were mixed with 24 items whose answer is known, unmarked, which makes 129 items in three packs. Each
+pack was read by two Claude Opus 5.5 checkers, each on its own, in a folder that held the pack and
+[the brief](variants_brief.md) and nothing else.
+
+**What a checker saw.** The piece and the number of texts it stands in; up to three contexts, with what is known
+of each word under it; the lexicon's entry when the piece is itself a headword; and the three best candidates,
+each with its entries, the letters that differ, how often the listed variants show each change, and up to two
+contexts of the candidate word. Under a word a pack shows only what the coverage map counts as translated or
+what the lookup took from the lexicon. A reading that an analyst of the map only guessed at shows as `?`, and so
+does every word that holds the piece. No item says what kind of word the piece is.
+
+**The items with a known answer.** All 24 are listed variants that stand in the texts, shown as if they were
+pieces, with the candidates the search gave when they were hidden. The 12 controls keep those candidates, so the
+entry that lists the variant is among them when the search found it. The 12 decoys have that entry taken out,
+and every entry the lexicon links with it, so that whatever candidate a checker accepts for a decoy is a
+look-alike.
+
+| | Checker 1 | Checker 2 | Both |
+|---|---|---|---|
+| The 105 matches: the same word as a candidate | 51 | 55 | 48 with one candidate, 1 with two |
+| The 105 matches: another known word | 2 | 1 | 1 |
+| The 105 matches: no | 52 | 49 | 46 |
+| The 12 controls: the right entry named | 7 | 8 | 6 |
+| The 12 decoys: a look-alike accepted | 1 | 1 | 1 |
+| The 12 decoys: the true word named all the same | 4 | 5 | 4 |
+
+The two checkers gave the same verdict on 116 of the 129 items, and on 96 of the 105 matches.
+
+1. **Confirmed: 48.** A piece is confirmed when both checkers say it is the same word and name entries of one
+   candidate. For 8 of the 48 that candidate is the search's second or third, not its first.
+2. **19 of the 48 are pairs the lexicon links itself** (`arebetke` and `arbetke`, `pkrtr` and `pqrtr`). They
+   show that the checkers read the entries; they are no finds, and none of them has an accepted meaning.
+3. **29 are new.** 26 are a word with an accepted meaning (the table in section 6). Three are a word without
+   one, so two unknowns become one: `mlNtel` is `mlne` with `-tel`, `tmNte` is `Tmne` with `-te`, and the
+   headword `yeroteke` is `yerote` with `-ke`.
+4. **The controls.** Both checkers named the right entry for 6 of 12. For a seventh, `qetNyiNli`, both named
+   `qetneyineqeli`, an entry that the lexicon itself gives as a variant of the right one. The other five have thin
+   contexts, and at least one checker said so and answered no. So each checker named the right entry for 7 or 8
+   of the 12 true spellings, and both together for 6.
+5. **The decoys.** Both checkers accepted one look-alike: `amnpte` as `Amnp` with the ending `-te`, where the
+   lexicon lists `Amnpte` as a spelling of `Mnpte`. For four decoys both named the true word although it was not
+   among the candidates. The checkers have read the literature, as every model has.
+6. **`smlowi` is the one piece on which both say "the same word" and differ on which:** `sem` with `-lowi`, or
+   the title `smlo` with `-wi`. It is not counted as confirmed. Two other readers of this project, who worked from
+   the texts the same day and did not see these packs, read it as `sem` with `-lowi` (their reports are kept
+   locally). That is support from outside this check; the check itself leaves the choice open.
+
+**An earlier pass, set aside.** The first packs were not blind. A context could show the map's analyst's guess
+under a word that holds the piece itself, inside the item (17 of the 105 matches) or under the same word in
+another item of the same pack (15 more), and each item named the kind of word: the analyst's label for a piece,
+the true word's kind for a control or a decoy. That pass confirmed 53 matches, `smlowi` among them, with both
+checkers citing the guessed gloss; both were right on 10 of 12 controls and accepted the same decoy. Its packs
+and answers are kept locally and counted nowhere. 45 pieces are confirmed in both passes, and 104 of the 129
+items got the same two verdicts both times.
 
 ## 6. What the confirmed pieces would move in the coverage map
 
-Not counted yet: it follows the check. The count will not change the coverage map's own numbers (60.5% of
-running words translated); it says what they would become.
+A running word moves to "translated" when every piece that keeps it from being translated is confirmed as a word
+with an accepted meaning. Counted on the map's gloss file, without changing the map:
+
+| | Now | With the 26 confirmed pieces |
+|---|---|---|
+| Running words translated, all 899 texts | 13,292 of 21,977 (60.5%) | 13,351 (60.7%) |
+| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,303 (60.4%) |
+| Texts with every legible word translated | 82 of 605 | 87 |
+
+That is 59 running words, 37 with near-copies counted once. The 26 pieces:
+
+| Piece | The word, for both checkers | Ending | Letters that differ | Running words it would move |
+|---|---|---|---|---|
+| `tedxli` | `te-dḫe-l` | | e dropped | 13 |
+| `bedewitel` | `Medewi` | -tel | b for m | 7 |
+| `beke` | `Beke` | | | 5 |
+| `akdiyetedxelowi` | `dḫe` | -lowi | k added, d added, i added, y added, t added, e added | 4 |
+| `kditelewi` | `kdise` | -lowi | e for o | 4 |
+| `mXeyot` | `mẖeyose` | | t for s | 4 |
+| `eked` | `ked` | | 0 for y | 2 |
+| `smlo` | `smlo (1)` | | | 2 |
+| `SNmdet` | `snmdese` | | t for s | 1 |
+| `SSimeleb` | `ssimete` | -leb | t dropped, e dropped | 1 |
+| `Sirlmroke` | `siremroke` | | e dropped, l added | 1 |
+| `Sorkxror` | `Sorkror` | | x added | 1 |
+| `aberse` | `abr` | -se | e added | 1 |
+| `dtedxelowi` | `te-dḫe-l` | -qowi | d added, q dropped | 1 |
+| `ipxetelo` | `Ipḫe` | -teli | o for i | 1 |
+| `kditebetowi` | `kdise` | -lowi | b for l, e added, t added | 1 |
+| `mXeyeos` | `mẖeyose` | | e added | 1 |
+| `mdewetye` | `Mdewe` | -ye | t added | 1 |
+| `menote` | `Amnote` | | e added | 1 |
+| `pXrse` | `Pẖrse` | | | 1 |
+| `qoriti` | `Qoreti` | | i for e | 1 |
+| `tedxellwi` | `te-dḫe-l` | -lowi | o dropped | 1 |
+| `terekelo` | `t-erike-l` | | e for i, o added | 1 |
+| `xrpeN` | `ḫrpḫne` | | e for x | 1 |
+| `xrpxte` | `ḫrpḫe` | -te | e dropped | 1 |
+| `yetmetl` | `yetmetne` | | l for n, e dropped | 1 |
+
+1. **The ending and the letters are the search's, not the checkers'.** They say how the search lined the piece
+   up with the word (`0` is the mark for a vowel at the start). A checker who confirms the word may cut the piece
+   otherwise: both read `dtedxelowi` as `tedxelowi` with a stray `d` before it, where the search took the ending
+   for `-qowi`, and both read `akdiyetedxelowi` as a mother's name written together with `tedxelowi`.
+2. **Three pieces are spelled like an entry letter for letter** (`beke`, `smlo`, `pXrse`). The map's analysts had
+   cut or read them otherwise, without being sure, so they stood on the list.
+3. **All 48 confirmed pieces** are in [`variants_confirmed.tsv`](variants_confirmed.tsv), forms only.
+4. **Not in the count:** `smlowi` (81 running words, section 5), and the true spellings that the check missed.
+   By the controls that is about as many again.
 
 ## 7. Method
 
@@ -212,6 +313,8 @@ running words translated); it says what they would become.
   could be searched but hardly stand out.
 - The made-up words are too easy a yardstick for long words (section 4, point 2).
 - The checkers and the analysts of the coverage map are one model family, and the model has read the literature.
+- The checkers' error rates rest on 12 controls and 12 decoys. One decoy more or less changes them a good deal.
+- No specialist has read a confirmed piece.
 
 ## 8. Files
 
@@ -219,9 +322,10 @@ running words translated); it says what they would become.
 |---|---|---|
 | `src/variants.py`, `tests/test_variants.py` | the search and its checks | public |
 | [`variants_candidates.tsv`](variants_candidates.tsv) | the 1,210 searched pieces: best match (headword and spelling), ending, letters that differ, chance | public (forms, no gloss) |
+| [`variants_confirmed.tsv`](variants_confirmed.tsv) | the 48 pieces that both checkers confirmed, each with the word it is a spelling or a form of | public (forms, no gloss) |
 | [`variants_brief.md`](variants_brief.md) | the checkers' brief | public |
 | Rilly's lexicon, the gloss file of the coverage map | the pool and the contexts | local, `data/rilly2003/`, `data/sources/coverage/` |
-| the result files, the checkers' packs and key | drawn from the lexicon and the gloss file | local, `data/sources/variants/` |
+| the result files, the checkers' packs, their answers and the key; the first pass that was set aside | drawn from the lexicon and the gloss file | local, `data/sources/variants/` |
 
 To rebuild, with the local files in place: `python3 -I src/variants.py build` (about nine minutes the first time,
 most of it the 10,000 made-up words; under a minute afterwards, while the kept scores still fit the pool and the
@@ -230,5 +334,7 @@ not written again: `check` stops if it would change them.
 
 ## 9. Cost
 
-The search itself is plain Python and used no subagent. The checkers and the review are counted here once they
-have run.
+The search itself is plain Python and used no subagent. The checkers took 1,269,219 subagent tokens in two
+passes of six runs each, about three minutes a run: 657,132 for the first pass, which was set aside, and 612,087
+for the second. The quote was about 0.7 million for one pass, with a second pass allowed for. The review is
+counted here once it has run.

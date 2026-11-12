@@ -641,47 +641,60 @@ def places(texts, heads):
     return out
 
 
-def contexts(spots, texts, n=3, side=4, masked=True):
-    """Up to n places, each from another text, with the words around and the map's gloss of each, word for word
-    (a gloss that names two senses with " / " between them has "; " there). With `masked`, the word itself and
-    every word spelled like it show no gloss: a checker must not read another reader's guess."""
+def said(g):
+    """What a pack shows under a word of a context: the map's gloss when the map counts the word as translated or
+    the lookup gave it (the lexicon's own meaning, proposal or kind), and "?" for an analyst's reading that the
+    map does not count as translated. A checker must not read another reader's guess: the first packs showed
+    those, and with them the analyst's guess for the very piece under another item's words."""
+    if g["level"] not in C.TRANSLATED and g.get("by") != "lookup":
+        return "?"
+    return str(g.get("gloss") or "").replace(" / ", "; ")[:26].strip(" /") or "?"
+
+
+def secret(g, forms):
+    """Is a word one of `forms`, bare or as the first part of a word the map cuts?"""
+    return g["form"] in forms or bool(g.get("parts")) and g["parts"][0]["form"] in forms
+
+
+def contexts(spots, texts, n=3, side=4, hide=frozenset(), masked=True):
+    """Up to n places with different words around them, each from another text: the words, and under them what
+    is known of each (said()), word for word (a gloss that names two senses with " / " between them has "; "
+    there). The words of `hide` show no gloss, and with `masked` the word itself shows none."""
     out, seen = [], set()
     for i, j in spots:
         t = texts[i]
-        if t["id"] in seen:
-            continue
-        seen.add(t["id"])
-        form = t["glosses"][j]["form"]
         near = list(enumerate(t["glosses"]))[max(0, j - side):j + side + 1]
-        out.append({"text": t["id"], "words": " ".join(f"[{g['form']}]" if k == j else g["form"] for k, g in near),
-                    "glosses": " / ".join("?" if masked and g["form"] == form
-                                          else str(g.get("gloss") or "?")[:26].replace(" / ", "; ").strip()
-                                          for _, g in near)})
+        words_ = " ".join(f"[{g['form']}]" if k == j else g["form"] for k, g in near)
+        if t["id"] in seen or words_ in seen:
+            continue
+        seen |= {t["id"], words_}
+        out.append({"text": t["id"], "words": words_,
+                    "glosses": " / ".join("?" if masked and k == j or secret(g, hide) else said(g) for k, g in near)})
         if len(out) == n:
             break
     return out
 
 
-def stands(spellings, texts):
-    """Where a word of the lexicon stands in the texts: the words that are one of its spellings, bare or as the
-    first part of a word the map cuts. [(text number, word number)]"""
+def stands(spellings, texts, hide=frozenset()):
+    """Where a word of the lexicon stands in the texts by the lookup's own account: the words that are one of its
+    spellings, bare or with an ending. A word of `hide` is no such place. [(text number, word number)]"""
     return [(i, j) for i, t in enumerate(texts) for j, g in enumerate(t["glosses"])
-            if g["form"] in spellings or (g.get("parts") and g["parts"][0]["form"] in spellings)]
+            if g.get("by") == "lookup" and secret(g, spellings) and not secret(g, hide)]
 
 
 def shown(hit, by_head, md_counts, texts, hide=frozenset()):
     """A candidate as a checker sees it: the entries of the match, the spelling that fits, the ending, each letter
     that differs with how often the listed variants show it, and two places where the word stands. `hide` are
-    corpus spellings whose places are not shown: a control's own, which the lexicon lists under its entry."""
+    the words that show no gloss anywhere in the item and are no place of a candidate: the item's own."""
     out, add, seen = md_counts
     diff = [{"what": differs([d]), "in the listed variants": f"{out[d[0], d[1]]} of {seen[d[0]]} {d[0]}" if d[0]
              else f"{add[d[1]]} added"} for d in hit["differences"]]
-    spellings = set().union(*(by_head[h]["spellings"] for h in hit["entries"])) - hide
+    spellings = set().union(*(by_head[h]["spellings"] for h in hit["entries"]))
     return {"entries": [{"headword": h, "kind": by_head[h]["kind"], "status": by_head[h]["status"],
                          "accepted": by_head[h]["accepted"], "meaning": by_head[h]["meaning"][:260]}
                         for h in hit["entries"]],
             "spelling": hit["spelling"], "ending": "-" + hit["ending"] if hit["ending"] else "", "differences": diff,
-            "contexts": contexts(stands(spellings, texts), texts, n=2, masked=False)}
+            "contexts": contexts(stands(spellings, texts, hide), texts, n=2, hide=hide, masked=False)}
 
 
 def pack_draw(rows, test):
@@ -721,7 +734,7 @@ def known_items(known, items, entries, pairs, endings, texts):
             hits = [h for h in hits if not set(h["entries"]) & set(it["owners"])
                     and not any(linked(o, h, by_head) for o in it["owners"])][:TOP]
         made.append({"what": what, "piece": texts[spots[0][0]]["glosses"][spots[0][1]]["form"],
-                     "letters": it["letters"], "kind": by_head[it["owners"][0]]["kind"] or "unknown",
+                     "letters": it["letters"],
                      "texts": len({texts[i]["id"] for i, _ in spots}), "spots": spots, "hits": hits,
                      "counts": counted(without(pairs, it), md), "owners": it["owners"],
                      "chance": row["listed"]["chance"], "hide": spellings})
@@ -730,7 +743,12 @@ def known_items(known, items, entries, pairs, endings, texts):
 
 def check_pack():
     """Write the checkers' packs: every piece whose best match beats the bar, the controls and the decoys
-    (known_items()), in one shuffled list cut into packs of at most PER_PACK items; and the key (local)."""
+    (known_items()), in one shuffled list cut into packs of at most PER_PACK items; and the key (local).
+
+    An item holds the piece, the number of texts it stands in, its contexts, the lexicon's entry when the piece
+    is a headword, and its candidates. It does not say what kind of word the piece is: for a piece that is the
+    map's analysts' label, and a control or a decoy would have to borrow its true word's. No context of the item
+    shows a gloss under one of the item's own words, nor under a word of a control or a decoy (said(), secret())."""
     raw = L.load()
     entries = words(raw)
     by_head = {e["headword"]: e for e in entries}
@@ -744,10 +762,14 @@ def check_pack():
     at = places(texts, heads)
     best, known, rnd = pack_draw(rows, test)
     made = known_items(known, items, entries, pairs, endings, texts)
+    # the words of the items whose answer is known show no gloss in any item: the map has them translated
+    known_words = set().union(*(m["hide"] for m in made))
     counts = counted(pairs, md)
     for r in best:
-        made.append({"what": "best", "piece": r["piece"], "letters": r["letters"], "kind": r["kind"],
-                     "texts": r["texts"], "spots": at.get((r["piece"], r["headword"]), []), "hits": r["hits"],
+        spots = at.get((r["piece"], r["headword"]), [])
+        made.append({"what": "best", "piece": r["piece"], "letters": r["letters"],
+                     "texts": r["texts"], "spots": spots, "hits": r["hits"],
+                     "hide": {texts[i]["glosses"][j]["form"] for i, j in spots},
                      "counts": counts, "headword": r["headword"], "chance": r["chance"], "linked": r["linked"]})
     made.sort(key=lambda m: (m["what"], m["piece"], m["letters"]))
     rnd.shuffle(made)
@@ -759,10 +781,11 @@ def check_pack():
         answer[ident] = {"piece": m["piece"], "headword": bool(m.get("headword")), "what": m["what"],
                          "chance": m["chance"], "best": m["hits"][0]["entries"], "owners": m.get("owners", []),
                          "linked": bool(m.get("linked"))}
-        pack.append({"id": ident, "piece": m["piece"], "kind": m["kind"], "texts": m["texts"],
-                     "contexts": contexts(m["spots"], texts),
+        hide = m["hide"] | known_words
+        pack.append({"id": ident, "piece": m["piece"], "texts": m["texts"],
+                     "contexts": contexts(m["spots"], texts, hide=hide),
                      "lexicon": {"headword": e["headword"], "status": e["status"], "text": e["text"][:500]} if e else None,
-                     "candidates": [shown(h, by_head, m["counts"], texts, m.get("hide", frozenset())) for h in m["hits"]]})
+                     "candidates": [shown(h, by_head, m["counts"], texts, hide) for h in m["hits"]]})
     files = {KEYFILE: json.dumps(answer, ensure_ascii=False, indent=1)}
     n = math.ceil(len(pack) / PER_PACK)
     for k in range(n):
@@ -814,6 +837,9 @@ def check_merge():
             readers[name].update(got)
     out = {"items": len(answer), **{w: sum(a["what"] == w for a in answer.values()) for w in ("best", "decoy", "control")},
            "readers": {}}
+    by_head = {e["headword"]: e for e in words()} if any(a["what"] == "decoy" for a in answer.values()) else {}
+    spelled = {i: set().union(*(by_head[o]["head"] | {x for v in by_head[o]["listed"] for x in v["strings"]}
+                                for o in a["owners"])) for i, a in answer.items() if a["what"] == "decoy"}
 
     def right(i, a):
         """A control is answered right by `same` with the candidate that holds an entry listing the variant."""
@@ -821,9 +847,10 @@ def check_merge():
         return a["verdict"] == "same" and k is not None and bool(set(cands[i][k]) & set(answer[i]["owners"]))
 
     def recognised(i, a):
-        """A decoy is recognised by `other` with a word that lists the variant, which its candidates do not hold."""
-        return a["verdict"] == "other" and C.bare(a.get("candidate") or "").lower() in {
-            C.bare(o).lower() for o in answer[i]["owners"]}
+        """A decoy is recognised by `other` with the word that lists the variant, or with one of that word's
+        spellings (the decoy's own among them), in the lexicon's letters or the corpus's."""
+        named = re.split(r"[\s(,]", (a.get("candidate") or "").strip(), maxsplit=1)[0]
+        return a["verdict"] == "other" and bool((strings(named) | {E.meroitic(named, True)}) & spelled[i])
 
     for name, got in sorted(readers.items()):
         out["readers"][name] = {

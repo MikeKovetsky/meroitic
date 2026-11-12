@@ -10,9 +10,10 @@ a part of a word that has no accepted meaning. The search asked of each piece: i
 with an ending, of a word that Claude Rilly's lexicon of 2003 already has? For each piece you get:
 
 - `piece`: its letters in the corpus's spelling (`S` is the sign s, lowercase `s` the sign se, `N` the sign ne, `x`
-  and `X` the two h signs), the `kind` of word it is thought to be, and in how many `texts` it stands;
+  and `X` the two h signs), and in how many `texts` it stands;
 - `contexts`: up to three places where it stands, each from another text. The word that holds the piece is in square
-  brackets. Under the words stands what is known of each (`?` is unknown); the piece's own word always shows `?`;
+  brackets. Under the words stands what is known of each, word for word, with ` / ` between them: `?` is a word that
+  is unknown or only guessed at, and the piece's own word always shows `?`;
 - `lexicon`: what the lexicon says about the piece, when the piece is itself one of its headwords (one without an
   accepted meaning);
 - `candidates`: up to three words of the lexicon that the search put first, the best first. Each has its `entries`

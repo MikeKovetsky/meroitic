@@ -46,9 +46,10 @@ Done since this plan was written:
    the pieces without a meaning. The step's two other parallels, the oracular decrees and the Philae graffiti,
    are still open.
 9. **The search for spellings of known words** (2026-11-11, [`data/discovery/variants.md`](data/discovery/variants.md)),
-   step 21 of section E: built and tested, the check not yet run. The search brings 187 of 242 hidden variants
-   back to their own entry (77%), but its test missed the bar, because only 105 (43%) stand out from made-up
-   words. 105 matches of unknown pieces are packed for two blind checkers.
+   step 21 of section E. The search brings 187 of 242 hidden variants back to their own entry (77%), but its
+   test missed the bar, because only 105 (43%) stand out from made-up words. Two blind checkers confirmed 48 of
+   the 105 matches of unknown pieces that beat the bar, 29 of them new; 26 would move 59 running words of the
+   coverage map (60.5% to 60.7%).
 
 Next, in this order:
 
@@ -241,16 +242,23 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     search by letters to work (step 17), and the spellings Rilly lists as variants are the test: hide each and see
     whether the search brings it back to its entry. Each hit that two checkers confirm moves a piece of the map
     to a known word.
-    - **Built and tested (2026-11-11), the check not yet run**
-      ([`data/discovery/variants.md`](data/discovery/variants.md)). The bar, set before the run: two thirds of
+    - **Done (2026-11-11)** ([`data/discovery/variants.md`](data/discovery/variants.md)). The bar, set before the run: two thirds of
       the hidden variants back to their own entry as the single best match, and half of them with a match that
       stands out from made-up words. 187 of 242 come back (77%, reached; 232 among the three best), 105 stand out
       as well (43%, not reached): a word of three or four letters cannot stand out, and none of the 93 does.
     - **On the pieces:** 82 of 1,140 beat the 5% bar where made-up words predict 57, but words that are known to
       be nobody's variant beat it as often (8 of 76). Letters rank the candidates; they do not decide.
-    - **Next in this step:** the two blind checkers on the 105 matches under the bar. After that, the pieces
-      that block the most texts could go to a checker with their three best candidates whatever their chance:
-      the right entry is among the three best for 96% of the hidden variants, short ones included.
+    - **The check:** two blind checkers confirmed 48 of the 105 matches under the bar, 19 of them pairs the
+      lexicon links itself and 29 new. 26 of the new ones are a word with an accepted meaning and would move 59
+      running words (60.5% to 60.7%). Both named the right entry for 6 of 12 known variants and accepted a
+      look-alike for 1 of 12, so the list is fairly safe and short of what is there.
+    - **Open:** `smlowi` (81 running words): both checkers take it for a known word, one for `sem` with `-lowi`,
+      one for the title `smlo` with `-wi`. The list of the 48 is
+      [`data/discovery/variants_confirmed.tsv`](data/discovery/variants_confirmed.tsv); the coverage map has not
+      taken them yet.
+    - **Next in this step:** the pieces that block the most texts could go to a checker with their three best
+      candidates whatever their chance: the right entry is among the three best for 96% of the hidden variants,
+      short ones included, and the bar cannot be beaten by a word of three or four letters.
     - **What the coverage map could take from it:** 15 entries count as translated in the map although their
       meaning only says "variant of" a word that has no accepted meaning itself (`kroro`, `qetrri`, `Kine`,
       `qetneyineqeli` and others); 152 running words rest on them. The map's numbers are unchanged.

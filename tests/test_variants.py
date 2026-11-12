@@ -225,36 +225,58 @@ def test_the_lexicon_s_own_links():
 
 
 def texts_of(*rows):
-    """A gloss file of made-up texts: each row is (id, [(form, level, gloss, parts)])."""
+    """A gloss file of made-up texts: each row is (id, [(form, level, gloss, parts)]), or with "lookup" as a
+    fifth value for a word the lookup glossed (the others are an analyst's)."""
     return [{"id": i, "text": " ".join(w[0] for w in ws),
-             "glosses": [{"form": f, "level": lv, "gloss": gl, "kind": "", "by": "analyst",
-                          "parts": [{"form": pf, "entry": pe} for pf, pe in parts]} for f, lv, gl, parts in ws]}
+             "glosses": [{"form": w[0], "level": w[1], "gloss": w[2], "kind": "", "by": (w[4:] or ["analyst"])[0],
+                          "parts": [{"form": pf, "entry": pe} for pf, pe in w[3]]} for w in ws]}
             for i, ws in rows]
 
 
 TEXTS = texts_of(
-    ("T1", [("ant", "meaning", "priest", [("ant", "at")]), ("prSn", "unknown", "a guess", [("prSn", "?")]),
+    ("T1", [("ant", "meaning", "priest", [("ant", "at")], "lookup"), ("prSn", "unknown", "a guess", [("prSn", "?")]),
             ("Mnp", "name", "Amanap", [("Mnp", "NAME")])]),
-    ("T2", [("prSn", "unknown", "another guess", [("prSn", "?")]), ("qore", "meaning", "ruler", [("qore", "qore")])]),
-    ("T3", [("plSn", "meaning", "administrator / steward", [("plSn", "plsn")]), ("xyz", "unknown", "", [("xyz", "?")]),
-            ("prSnli", "unknown", "", [("prSn", "?"), ("li", "ending")])]))
+    ("T2", [("prSn", "unknown", "another guess", [("prSn", "?")]), ("qore", "meaning", "ruler", [("qore", "qore")], "lookup")]),
+    ("T3", [("plSn", "meaning", "administrator / steward", [("plSn", "plsn")], "lookup"),
+            ("xyz", "hypothesis", "a third guess", [("xyz", "?")]),
+            ("prSnli", "hypothesis", "administrator (plsn?) +li", [("prSn", "?"), ("li", "ending")])]),
+    ("T4", [("ant", "meaning", "priest", [("ant", "at")], "lookup"), ("prSn", "unknown", "a guess", [("prSn", "?")]),
+            ("Mnp", "name", "Amanap", [("Mnp", "NAME")])]),
+    ("T5", [("plSnlowi", "meaning", "administrator +lowi", [("plSn", "plsn"), ("lowi", "ending")], "lookup"),
+            ("prSnli", "hypothesis", "administrator (plsn?) +li", [("prSn", "?"), ("li", "ending")]),
+            ("pqr", "hypothesis", "prince (?)", [("pqr", "pqr")], "lookup")]),
+    ("T6", [("plSnli", "hypothesis", "administrator (?) +li", [("plSn", "plsn"), ("li", "ending")])]))
 
 
 def test_the_contexts_do_not_show_a_guess():
     heads = C.index(C.lexicon(LEXICON))[2]
     at = V.places(TEXTS, heads)
-    assert at["prSn", False] == [(0, 1), (1, 0), (2, 2)] and at["xyz", False] == [(2, 1)]
-    got = V.contexts(at["prSn", False], TEXTS)
+    assert at["prSn", False] == [(0, 1), (1, 0), (2, 2), (3, 1), (4, 1)] and at["xyz", False] == [(2, 1)]
+    own = {TEXTS[i]["glosses"][j]["form"] for i, j in at["prSn", False]}
+    assert own == {"prSn", "prSnli"}
+    got = V.contexts(at["prSn", False], TEXTS, hide=own)
+    # each from another text, and no two with the same words around (T4 is T1 again)
     assert [c["text"] for c in got] == ["T1", "T2", "T3"]
     assert got[0] == {"text": "T1", "words": "ant [prSn] Mnp", "glosses": "priest / ? / Amanap"}
     assert got[1]["glosses"] == "? / ruler"                            # the piece's own word shows no gloss
-    assert all("guess" not in c["glosses"] for c in got)
-    assert len(V.contexts(at["prSn", False], TEXTS, n=2)) == 2
-    # a candidate's own contexts keep their glosses: its meaning is in the pack anyway
-    spots = V.stands({"plSn"}, TEXTS)
-    assert spots == [(2, 0)]
-    # one gloss a word, also for a gloss that names two senses
-    assert V.contexts(spots, TEXTS, masked=False)[0]["glosses"] == "administrator; steward / ? / ?"
+    # an analyst's reading that the map does not count as translated is "?", the piece's or a neighbour's
+    assert got[2] == {"text": "T3", "words": "plSn xyz [prSnli]", "glosses": "administrator; steward / ? / ?"}
+    assert len(V.contexts(at["prSn", False], TEXTS, n=2, hide=own)) == 2
+    last = V.contexts([(4, 1)], TEXTS, hide=own)[0]
+    assert last["glosses"] == "administrator +lowi / ? / prince (?)"   # the lexicon's own proposal is shown
+    g = lambda level, by, gloss="x": {"form": "w", "level": level, "by": by, "gloss": gloss, "parts": []}   # noqa: E731
+    assert [V.said(g("meaning", "analyst")), V.said(g("hypothesis", "analyst")), V.said(g("kind", "analyst")),
+            V.said(g("hypothesis", "lookup")), V.said(g("unknown", "nobody")), V.said(g("name", "lookup", ""))] \
+        == ["x", "?", "?", "x", "?", "?"]
+    # a candidate's places are words the lookup glossed with it, bare or with an ending, never the item's own
+    assert V.stands({"plSn"}, TEXTS) == [(2, 0), (4, 0)]               # not T6: an analyst's cut, not the lookup's
+    assert V.stands({"plSn"}, TEXTS, hide={"plSnlowi"}) == [(2, 0)]
+    assert V.stands({"plSn"}, TEXTS, hide={"plSn"}) == []
+    # one gloss a word, also for a gloss that names two senses; the word in brackets keeps its gloss here
+    assert V.contexts(V.stands({"plSn"}, TEXTS), TEXTS, masked=False)[0]["glosses"] == "administrator; steward / ? / ?"
+    # in another item's context a word of this item shows no gloss either
+    assert V.contexts([(4, 0)], TEXTS, hide={"pqr"}, masked=False)[0]["glosses"] == "administrator +lowi / ? / ?"
+    assert V.secret({"form": "plSnli", "parts": [{"form": "plSn"}]}, {"plSn"}) and not V.secret({"form": "x", "parts": []}, {"plSn"})
 
 
 def result(piece, chance, entries, headword=False, linked=False):
@@ -479,9 +501,13 @@ def test_a_candidate_as_the_checker_sees_it():
                                "meaning": "a meaning"}]
     assert (got["spelling"], got["ending"]) == ("plsn", "-se")
     assert got["differences"] == [{"what": "r for l", "in the listed variants": "0 of 4 l"}]
-    assert [c["text"] for c in got["contexts"]] == ["T3"] and got["contexts"][0]["glosses"].startswith("administrator")
-    # a control's own spelling is not shown among its candidate's places
+    assert [c["text"] for c in got["contexts"]] == ["T3", "T5"]
+    assert got["contexts"][0]["glosses"].startswith("administrator") and "[plSnlowi]" in got["contexts"][1]["words"]
+    assert got["contexts"][1]["glosses"] == "administrator +lowi / ? / prince (?)"
+    # the item's own words are no place of a candidate and show no gloss beside one
     assert V.shown(hit, by_head, V.counted(pairs, md), TEXTS, hide={"plSn"})["contexts"] == []
+    hidden = V.shown(hit, by_head, V.counted(pairs, md), TEXTS, hide={"pqr", "plSnlowi"})["contexts"]
+    assert [c["text"] for c in hidden] == ["T3"]
     added = V.shown(V.found("plsnee", us, E.Trie(list(enumerate(us))), md)[0], by_head, V.counted(pairs, md), TEXTS)
     assert {"what": "e added", "in the listed variants": "4 added"} in added["differences"]
 
@@ -806,21 +832,181 @@ def test_the_packs_hold_every_match_that_beats_the_bar():
             else:
                 assert not shown & set(a["owners"]) and len(V.E.meroitic(a["piece"], True)) >= 5, i
     # nothing in an item says what it is, and the piece's own word never shows a gloss
-    assert all(set(x) == {"id", "piece", "kind", "texts", "contexts", "lexicon", "candidates"} for x in items)
-    for x in items:
-        for c in x["contexts"]:
-            k = next(n for n, w in enumerate(c["words"].split()) if w.startswith("["))
-            assert c["glosses"].split(" / ")[k] == "?", x["id"]
-    # the draw is the one the result files give: the first hidden variants of the shuffled order that qualify
-    b, known, _ = V.pack_draw(rows, list(test.values()))
-    assert [(r["piece"], r["headword"]) for r in b] == sorted(under)
+    assert all(set(x) == {"id", "piece", "texts", "contexts", "lexicon", "candidates"} for x in items)
+    texts = {t["id"]: t for t in V.glossed()}
+    at = V.places(list(texts.values()), C.index(C.lexicon())[2])
+    # the words of the controls and decoys: every corpus spelling of the variants they are
     needs(*WORDS, "data/sources/coverage/glosses.jsonl")
     entries = V.words()
     pairs, hidden = V.cases(entries)
+    b, known, _ = V.pack_draw(rows, list(test.values()))
     made = V.known_items(known, hidden, entries, pairs, V.ending_chances(V.ending_counts()), V.glossed())
+    known_words = set().union(*(m["hide"] for m in made))
+    assert all(m["piece"] in m["hide"] and m["hide"] == set().union(*(L.corpus_spellings(v) for v in
+               next(h for h in hidden if h["letters"] == m["letters"])["variants"])) for m in made)
+    def glossed_as(c):
+        """The gloss entries of the words of a context, found again in its text."""
+        t, words = texts[c["text"]], c["words"].replace("[", "").replace("]", "").split()
+        forms = [g["form"] for g in t["glosses"]]
+        k = next(k for k in range(len(forms)) if forms[k:k + len(words)] == words)
+        return t["glosses"][k:k + len(words)]
+
+    for x in items:
+        a = key[x["id"]]
+        own = {list(texts.values())[i]["glosses"][j]["form"] for i, j in at.get((a["piece"], a["headword"]), [])} \
+            if a["what"] == "best" else set()
+        hide = own | known_words
+        assert a["what"] != "best" or x["piece"] == a["piece"]
+        for c in x["contexts"]:
+            # under each word what the map knows of it (said()); nothing under the piece's own word, under
+            # another word of the item, or under a word of a control or a decoy
+            target = next(n for n, w in enumerate(c["words"].split()) if w.startswith("["))
+            want = ["?" if n == target or V.secret(g, hide) else V.said(g) for n, g in enumerate(glossed_as(c))]
+            assert c["glosses"].split(" / ") == want and want[target] == "?", x["id"]
+        for cand in x["candidates"]:
+            for c in cand["contexts"]:
+                gs = glossed_as(c)
+                target = next(n for n, w in enumerate(c["words"].split()) if w.startswith("["))
+                assert c["glosses"].split(" / ") == ["?" if V.secret(g, hide) else V.said(g) for g in gs], x["id"]
+                # a candidate's place is a word the lookup glossed, and never one of the item's own words
+                assert any(g.get("by") == "lookup" and not V.secret(g, hide) for g in gs if g["form"] == c["words"].split()[target].strip("[]")), x["id"]
+    # so no analyst's guess is anywhere in the packs: every gloss shown is the lookup's or a translated word's
+    shown = [g for x in items for c in x["contexts"] + [ctx for cand in x["candidates"] for ctx in cand["contexts"]]
+             for g, text in zip(glossed_as(c), c["glosses"].split(" / ")) if text != "?"]
+    assert len(shown) > 2000 and all(g["level"] in C.TRANSLATED or g.get("by") == "lookup" for g in shown)
+    # the draw is the one the result files give: the first hidden variants of the shuffled order that qualify
+    assert [(r["piece"], r["headword"]) for r in b] == sorted(under)
     assert sorted((m["what"], m["piece"], m["owners"], m["hits"][0]["entries"]) for m in made) \
         == sorted((a["what"], a["piece"], a["owners"], a["best"]) for a in key.values() if a["what"] != "best")
-    assert "129 items in three packs" in page() and "12 decoys" in page() and "12 controls" in page()
+    assert "which makes 129 items in three packs" in page() and "The 12 decoys" in page() and "The 12 controls" in page()
+
+
+def test_reported_check_and_what_it_would_move():
+    needs(*LOCAL, *CHECKED, "data/sources/variants/check")
+    out = json.loads((ROOT / CHECKED[1]).read_text(encoding="utf-8"))
+    key = json.loads((ROOT / CHECKED[0]).read_text(encoding="utf-8"))
+    confirmed = [json.loads(l) for l in (ROOT / CHECKED[2]).read_text(encoding="utf-8").splitlines()]
+    text = page()
+    got = {}
+    for q in sorted((ROOT / "data/sources/variants/check").glob("pack*/reader*.jsonl")):
+        for l in q.read_text(encoding="utf-8").splitlines():
+            a = json.loads(l)
+            got.setdefault(a["id"], {})[q.stem] = a
+    # every item answered by both, each with a verdict of the brief
+    assert set(got) == set(key) and all(set(v) == {"reader1", "reader2"} for v in got.values())
+    assert all(a["verdict"] in V.VERDICTS for v in got.values() for a in v.values())
+    assert (out["items"], out["best"], out["control"], out["decoy"], out["answered_by_both"]) == (129, 105, 12, 12, 129)
+    verdicts = lambda r, what: collections.Counter(got[i][r]["verdict"] for i, a in key.items() if a["what"] == what)   # noqa: E731
+    both = lambda what, v: sum(got[i]["reader1"]["verdict"] == got[i]["reader2"]["verdict"] == v   # noqa: E731
+                               for i, a in key.items() if a["what"] == what)
+    r1, r2 = out["readers"]["reader1"], out["readers"]["reader2"]
+    assert r1["best"] == dict(verdicts("reader1", "best")) == {"same": 51, "no": 52, "other": 2}
+    assert r2["best"] == dict(verdicts("reader2", "best")) == {"same": 55, "no": 49, "other": 1}
+    assert (both("best", "same"), both("best", "other"), both("best", "no")) == (49, 1, 46)
+    assert out["same_verdict"] == sum(v["reader1"]["verdict"] == v["reader2"]["verdict"] for v in got.values()) == 116
+    assert 49 + 1 + 46 == 96 and "on 116 of the 129 items, and on 96 of the 105 matches" in text
+    # the page's table of the check
+    rows = table("| | Checker 1 | Checker 2 | Both |")
+    assert [[number(c) for c in r[1:]] for r in rows] == [
+        [51, 55, 48], [2, 1, 1], [52, 49, 46], [r1["controls_right"], r2["controls_right"], out["controls_right_for_both"]],
+        [r1["decoy"]["same"], r2["decoy"]["same"], out["same_for_both"]["decoy"]],
+        [r1["decoys_recognised"], r2["decoys_recognised"], 4]]
+    assert rows[0][3] == "48 with one candidate, 1 with two" and [r[0] for r in rows[3:]] == [
+        "The 12 controls: the right entry named", "The 12 decoys: a look-alike accepted",
+        "The 12 decoys: the true word named all the same"]
+    assert (r1["controls_right"], r2["controls_right"], out["controls_right_for_both"]) == (7, 8, 6)
+    assert (r1["decoy"].get("same"), r2["decoy"].get("same"), out["same_for_both"]["decoy"]) == (1, 1, 1)
+    assert (r1["decoys_recognised"], r2["decoys_recognised"]) == (4, 5)
+    decoy = next(i for i, a in key.items() if a["what"] == "decoy" and got[i]["reader1"]["verdict"] == "same")
+    assert key[decoy]["piece"] == "amnpte" and key[decoy]["owners"] == ["Mnpte"]
+    assert [got[decoy][r]["candidate"] for r in ("reader1", "reader2")] == ["Amnp", "Amnp"]
+    # confirmed: both say `same` and name entries of one candidate
+    assert out["confirmed"] == len(confirmed) == out["same_for_both"]["best"] == 48
+    assert out["same_for_both_but_another_candidate"] == [next(i for i, a in key.items() if a["piece"] == "smlowi")]
+    smlowi = got[out["same_for_both_but_another_candidate"][0]]
+    assert [smlowi[r]["candidate"] for r in ("reader1", "reader2")] == ["sem", "smlo (1)"]
+    assert "one reads sem with -lowi and the other the title smlo with -wi" in text
+    for c in confirmed:
+        a, b = (got[c["id"]][r] for r in ("reader1", "reader2"))
+        assert a["verdict"] == b["verdict"] == "same" and key[c["id"]]["what"] == "best", c["piece"]
+        assert {a["candidate"], b["candidate"]} <= set(c["entries"]), c["piece"]
+    linked = [c for c in confirmed if c["linked"]]
+    new = [c for c in confirmed if not c["linked"]]
+    accepted = [c for c in new if c["accepted"]]
+    assert (len(linked), len(new), len(accepted), sum(c["accepted"] for c in linked)) == (19, 29, 26, 0)
+    assert sum(a["linked"] for a in key.values() if a["what"] == "best") == 23
+    assert sorted(c["piece"] for c in new if not c["accepted"]) == ["mlNtel", "tmNte", "yeroteke"]
+    assert "confirm 48 of the 105 matches that beat the bar, 29 of them new" in text
+    assert "19 of those are among the 23 pairs" in text and "for 26 of them the word has an accepted meaning" in text
+    # for 8 the candidate the checkers name is not the search's first
+    rows_ = {(r["piece"], r["headword"]): r for r in lines(2)}
+    hit = lambda c: next(h for h in rows_[c["piece"], c["headword"]]["hits"] if set(h["entries"]) & set(c["entries"]))   # noqa: E731
+    assert sum(hit(c) is not rows_[c["piece"], c["headword"]]["hits"][0] for c in confirmed) == 8
+    assert "For 8 of the 48 that candidate is the search's second or third" in text
+    # what the confirmed pieces would move, counted on the gloss file with the map's own rule for what blocks a word
+    m = out["moved"]
+    assert (m["confirmed"], m["with_an_accepted_meaning"], m["words"], m["words_once"], m["texts_completed_once"]) \
+        == (48, 26, 59, 37, 5)
+    assert (m["translated_now"], m["all_words"], m["translated_now_once"], m["all_words_once"]) == (13292, 21977, 5266, 8786)
+    again = V.moved([dict(c) for c in confirmed])
+    assert again == m and sum(m["by_piece"].values()) == 59 and len(m["by_piece"]) == 26
+    pct = lambda a, b: f"{100 * a / b:.1f}%"   # noqa: E731
+    assert (pct(13292, 21977), pct(13292 + 59, 21977), pct(5266, 8786), pct(5266 + 37, 8786)) == ("60.5%", "60.7%", "59.9%", "60.4%")
+    moved = table("| | Now | With the 26 confirmed pieces |")
+    assert [r[1:] for r in moved] == [["13,292 of 21,977 (60.5%)", "13,351 (60.7%)"], ["5,266 of 8,786 (59.9%)", "5,303 (60.4%)"],
+                                      ["82 of 605", "87"]]
+    assert "That is 59 running words, 37 with near-copies counted once" in text
+    assert "from 13,292 to 13,351 of 21,977, which is 60.5% to 60.7%" in text and "from 59.9% to 60.4%" in text
+    # the table of the 26: the word both name, the search's ending and letters for it, the words it would move
+    want = [[c["piece"], " / ".join(c["entries"]), "-" + hit(c)["ending"] if hit(c)["ending"] else "",
+             V.differs(hit(c)["differences"]), str(m["by_piece"][c["piece"]])]
+            for c in sorted(accepted, key=lambda c: (-m["by_piece"][c["piece"]], c["piece"]))]
+    assert table("| Piece | The word, for both checkers |") == want
+    letter_for_letter = sorted(r[0] for r in want if not r[2] and not r[3])
+    assert letter_for_letter == ["beke", "pXrse", "smlo"] and "(beke, smlo, pXrse)" in text
+    # smlowi is the piece that would have moved most, and is not among them
+    assert rows_["smlowi", False]["words"] == 81 and "smlowi" not in m["by_piece"] and "smlowi stands in 81 running words" in text
+    # the public list of the confirmed pieces is the result file, forms only
+    listed = (ROOT / "data/discovery/variants_confirmed.tsv").read_text(encoding="utf-8")
+    assert listed == V.confirmed_list(confirmed) and len(listed.splitlines()) == 49
+    assert [l.split("\t")[0] for l in listed.splitlines()[1:]] == sorted(c["piece"] for c in confirmed)
+    # the cost on the page is the sum of the runs
+    assert 657132 + 612087 == 1269219 and "1,269,219 subagent tokens" in text and "657,132 for the first pass" in text
+
+
+def test_the_first_pass_is_set_aside_and_counted_nowhere():
+    first = "data/sources/variants/superseded/first_pass"
+    needs(*LOCAL, *CHECKED, first, "data/sources/variants/check")
+    old_key = json.loads((ROOT / first / "check_key.json").read_text(encoding="utf-8"))
+    key = json.loads((ROOT / CHECKED[0]).read_text(encoding="utf-8"))
+    # the same items under the same numbers, shown otherwise
+    assert {i: (a["piece"], a["what"], a["owners"]) for i, a in old_key.items()} \
+        == {i: (a["piece"], a["what"], a["owners"]) for i, a in key.items()}
+    old_items = [json.loads(l) for q in sorted((ROOT / first / "check").glob("pack*/pack.jsonl"))
+                 for l in q.read_text(encoding="utf-8").splitlines()]
+    assert len(old_items) == 129 and all("kind" in x for x in old_items)
+
+    def answers(folder):
+        got = {}
+        for q in sorted((ROOT / folder).glob("pack*/reader*.jsonl")):
+            for l in q.read_text(encoding="utf-8").splitlines():
+                a = json.loads(l)
+                got.setdefault(a["id"], {})[q.stem] = a["verdict"]
+        return got
+
+    old, new = answers(first + "/check"), answers("data/sources/variants/check")
+    assert len(old) == len(new) == 129
+    assert sum(sorted(old[i].values()) == sorted(new[i].values()) for i in key) == 104
+    was = json.loads((ROOT / first / "check.json").read_text(encoding="utf-8"))
+    assert (was["confirmed"], was["controls_right_for_both"], was["same_for_both"]["decoy"], was["moved"]["words"]) == (53, 10, 1, 151)
+    then = {json.loads(l)["piece"] for l in (ROOT / first / "confirmed.jsonl").read_text(encoding="utf-8").splitlines()}
+    now = {json.loads(l)["piece"] for l in (ROOT / CHECKED[2]).read_text(encoding="utf-8").splitlines()}
+    assert len(then & now) == 45 and "smlowi" in then - now
+    text = page()
+    assert "That pass confirmed 53 matches, smlowi among them" in text and "right on 10 of 12 controls" in text
+    assert "45 pieces are confirmed in both passes, and 104 of the 129 items got the same two verdicts" in text
+    # the first packs did show a guess under a piece's own word; the page gives the counts
+    assert "inside the item (17 of the 105 matches)" in text and "(15 more)" in text
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

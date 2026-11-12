@@ -48,8 +48,9 @@ open). What is new, with the run behind each claim:
 9. **A search by letters finds the entry of a hidden spelling variant 77% of the time, and its test still missed
    the bar.** 187 of 242 variants listed in Rilly's lexicon come back to their own entry as the single best
    match, but only 105 (43%, the bar was half) with a match that stands out from made-up words: no word of three
-   or four letters can. On the pieces without a meaning the letters alone decide nothing, and the checkers have
-   not run yet (Day four, evening, below; `data/discovery/variants.md`).
+   or four letters can. On the pieces without a meaning the letters alone decide nothing; two blind checkers
+   confirmed 48 of the 105 matches under the bar, 29 of them new, and 26 would move 59 running words of the
+   coverage map, to 60.7% (Day four, evening, below; `data/discovery/variants.md`).
 
 The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
 memory, `M_f0/1`); asked openly it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong) and said
@@ -362,9 +363,26 @@ After "are you giving up?", four more lines of attack, then data.
 8. **The examples that started the step:** `pertese` beats the bar as `perite` with `-se`; `prSn` and `petmoS`
    have the right entry as their best match and do not beat the bar (`r` and `t` for `l` are in no listed
    variant); `amn` has three letters.
-9. **The check has not run.** All 105 matches under the bar (the 82 and the 23 among the 70) are packed in three
-   packs for two blind checkers each, with 24 listed variants whose answer is known: 12 with the right entry
-   among the candidates and 12 decoys with it taken out. The confirmed list and the words it would move in the
-   coverage map follow that run.
-10. **Limits:** one scholar's list of variants is both the training and the test; the model counts from the
-    headword to the variant only; letters cannot judge a short piece.
+9. **The check.** All 105 matches under the bar (the 82 and the 23 among the 70) went to two blind checkers,
+   in three packs, with 24 listed variants whose answer is known: 12 with the right entry among the candidates
+   and 12 decoys with it taken out. The checkers gave the same verdict on 116 of the 129 items. Both said "the
+   same word" and named one candidate for 48 matches: 19 of the 23 pairs that the lexicon links itself, and 29
+   new ones.
+10. **How far to trust it.** Both checkers named the right entry for 6 of the 12 controls (7 and 8 each), and
+    both accepted a look-alike for 1 of the 12 decoys (`amnpte` as `Amnp` with `-te`). A confirmation is fairly
+    safe; a "no" says little.
+11. **What it would move.** 26 of the 29 new pieces are a word with an accepted meaning. They would move 59
+    running words of the coverage map, from 13,292 to 13,351 of 21,977 (60.5% to 60.7%; with near-copies counted
+    once 59.9% to 60.4%), and complete five more texts. The largest are `tedxli` for `te-dḫe-l` (13 words),
+    `bedewitel` for `Medewi` with `-tel` (7) and `beke` (5). The map's own numbers are not changed.
+12. **Not confirmed:** `smlowi`, which stands in 81 running words. Both checkers take it for a known word, one
+    for `sem` with `-lowi` and one for the title `smlo` with `-wi`.
+13. **A first pass was set aside.** Its packs could show, under a word that holds the piece, the guess of the
+    coverage map's analyst (in 17 of the 105 items, and for 15 more under the same word in another item), and
+    each item named the kind of word. It confirmed 53 matches, `smlowi` among them. The packs were repaired and
+    six fresh checkers read all 129 items again; 45 pieces are confirmed in both passes.
+14. **Limits:** one scholar's list of variants is both the training and the test; the model counts from the
+    headword to the variant only; letters cannot judge a short piece; the checkers' error rates rest on 12
+    controls and 12 decoys; no specialist has read a confirmed piece.
+15. **Cost:** 1,269,219 subagent tokens for the checkers in two passes (657,132 and 612,087), against about 0.7
+    million quoted for one pass with a second allowed for; the review comes on top.
