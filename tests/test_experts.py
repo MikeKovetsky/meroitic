@@ -740,6 +740,18 @@ def test_the_rows_and_the_table_are_the_ones_the_judges_read():
     assert table == [json.loads(l) for l in (U.FOLDER / "meanings_rows.jsonl").open(encoding="utf-8")]
 
 
+def test_what_the_page_says_of_the_judges_and_the_list():
+    """Sections 2 and 5: four judges of the packs, three of them one pack each and a second judge on the third;
+    four lines of the list for the ending -te, three of them the editions' "in"."""
+    needs(*LOCAL)
+    judges = sorted(p.stem for p in (U.FOLDER / "answers").glob("judge*_*.jsonl"))
+    assert judges == ["judge1_A", "judge1_B", "judge1_C", "judge2_C"]
+    assert f"{NUMBER[len(judges)]} Claude Opus 5.5 agents" in page() and "a second judge got the third pack again" in page()
+    te = [l for l in csv.DictReader((U.FOLDER / "lacking.tsv").open(encoding="utf-8"), delimiter="\t") if l["word"] == "-te"]
+    inside = sum(bool(re.search(r"\bin\b", l["the expert's meaning"])) for l in te)
+    assert f"(`-te`, {NUMBER[len(te)]} lines, {NUMBER[inside]} of them the editions' \"in\"" in page()
+
+
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
 
 if __name__ == "__main__":
