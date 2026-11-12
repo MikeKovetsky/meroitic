@@ -112,13 +112,16 @@ RILLY = {"3": "ꜣ", "ʿ": "ꜥ", "ᶜ": "ꜥ", "ͨ": "ꜥ", "ʾ": "ꜣ", "ỉ":
 
 def meroitic(spelling, vowels=False):
     """The search's letters of a word in the corpus spelling: consonants, and 0 for a vowel at the start.
-    With `vowels`, the written e, i and o stay where they stand (a is written at the start only); the signs N (ne)
-    and s (se) count as n and s, so their e is not written out."""
+    With `vowels`, the written e, i and o stay where they stand (a is written at the start only), and the sign N
+    (ne) writes its e. (The corpus's s is the sign se in the funerary and Griffith rows but the sign s in the royal
+    narratives, so its e is left to a reading that knows the text.)"""
     s = re.sub(r"[^a-zA-Z]", "", spelling)
     out = ["0"] if s[:1].lower() in tuple("aeio") else []
-    for c in s:
+    for k, c in enumerate(s):
         if c.lower() not in "aeio":
             out.append({"S": "s", "N": "n", "X": "X"}.get(c, c.lower()))
+            if vowels and c == "N" and s[k + 1:k + 2] != "e":
+                out.append("e")
         elif vowels and c.lower() in VOWELS_M:
             out.append(c.lower())
     return "".join(c for c in out if c in MER + VOWELS_M)
@@ -947,8 +950,12 @@ def check_pack(with_vowels=False):
         if not first.exists():
             sys.exit(f"no {where(first)}: the second pack leaves out the pieces of the first, so `check` comes first")
         rows = [json.loads(l) for l in (OUT / "vowel_candidates.jsonl").read_text(encoding="utf-8").splitlines()]
-        seen = {a["piece"] for a in json.loads(first.read_text(encoding="utf-8")).values()}
-        fresh = [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"]) and r["piece"] not in seen]
+        answer = json.loads(first.read_text(encoding="utf-8"))
+        shown = collections.defaultdict(set)         # the candidates the first checkers saw for each piece
+        for item in map(json.loads, (CHECK / "pack.jsonl").read_text(encoding="utf-8").splitlines()):
+            shown[answer[item["id"]]["piece"]] |= {c["id"] for c in item["candidates"]}
+        fresh = [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"])
+                 and r["vowels"]["hits"][0]["id"] not in shown[r["piece"]]]
         low = lambda r: r["vowels"]["chance"]   # noqa: E731
         names, folder, keyfile, n_decoys = ("vowels",), CHECK_VOWELS, HERE / "check_vowels_key.json", DECOYS_VOWELS
     else:

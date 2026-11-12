@@ -199,7 +199,7 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       the 33 best matches. Sound alone does not tell a loan from a look-alike in a pool of thousands.
     - **With the vowels compared too** (the Coptic entries only): the true source is among the five best for 7
       of 13 loans against 4, so a vowel-aware search is the better tool once a word is known to be a loan. It
-      does not find loans: 18 of 241 unknown pieces beat the 5% bar, as many as words that are not loans give.
+      does not find loans: 13 of 241 unknown pieces beat the 5% bar, where chance gives 12.
     - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
       people named in both the Philae graffiti and the Meroitic texts.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,

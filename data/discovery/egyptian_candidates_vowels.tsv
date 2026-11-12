@@ -1,279 +1,279 @@
 piece	kind	texts (near-copies once)	set aside: its entry in the lexicon mentions Egyptian, Demotic, Coptic, Greek or Latin, or it is spelled like an entry linked to Egyptian	letters compared	chance	best match	its form
-tloli	noun	4	yes	tloli	0.003	ccl:C4259	ⲧⲗⲟⲩⲗⲉ
-pelmetreyose	title	1	yes	pelmetreyose	0.003	ccl:C8608	ⲃⲉⲣⲉⲧⲁⲣⲓⲟⲥ
-stol	title	1	no	stol	0.003	ccl:C6110	ϣⲧⲟⲩⲗ
-trri	benediction verb	1	no	trri	0.003	ccl:C4519	ⲧⲣⲣⲉ
-prSn	title	1	no	prsn	0.007	ccl:C3231	ⲣⲱϣⲛ
-petmoS	title	1	no	petmos	0.010	ccl:C10258	ⲡⲟⲧⲁⲙⲟⲥ
-armeyose	noun	2	yes	0rmeyose	0.013	ccl:C11195	ϩⲣⲱⲙⲁⲓⲟⲥ
-pkrtr	title	1	no	pkrtr	0.013	ccl:C9533	ⲕⲣⲁⲧⲏⲣ
-ponni	title	1	no	ponni	0.013	ccl:C2855	ⲡⲉⲛⲛⲉ
+armeyose	noun	2	yes	0rmeyose	0.003	ccl:C11195	ϩⲣⲱⲙⲁⲓⲟⲥ
+tloli	noun	4	yes	tloli	0.007	ccl:C4259	ⲧⲗⲟⲩⲗⲉ
+pelmetreyose	title	1	yes	pelmetreyose	0.007	ccl:C8608	ⲃⲉⲣⲉⲧⲁⲣⲓⲟⲥ
+petmoS	title	1	no	petmos	0.007	ccl:C10258	ⲡⲟⲧⲁⲙⲟⲥ
+trri	benediction verb	1	no	trri	0.007	ccl:C4519	ⲧⲣⲣⲉ
+sekesekine	title	1	no	sekesekine	0.010	ccl:C9113	ⲍⲩⲅⲓⲥⲕⲟⲛ
+stol	title	1	no	stol	0.013	ccl:C6110	ϣⲧⲟⲩⲗ
 lks	noun	4	no	lks	0.017	ccl:C9610	ⲗⲉⲝⲓⲥ
-pertese	title	1	no	pertese	0.017	ccl:C10097	ⲡⲁⲣⲑⲟⲥ
-trose	adjective	11	yes	trose	0.020	ccl:C10535	ⲥⲧⲁⲩⲣⲟⲥ
-sekesekine	title	1	no	sekesekin	0.020	ccl:C9113	ⲍⲩⲅⲓⲥⲕⲟⲛ
-ptri	noun	1	no	ptri	0.027	ccl:C10787	ⲧⲣⲓⲙⲏⲥⲓⲟⲛ
-mtr	noun	4	no	mtr	0.037	ccl:C2141	ⲙⲁⲧⲣ
-abso (?)	title	1	no	0bso	0.037	ccl:C6464	ϩⲃⲥⲱ
-tmNte	title	1	no	tmnte	0.037	ccl:C1960	ⲙⲛⲧ
-mleyose	title	3	no	mleyose	0.040	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
-terite	noun	3	yes	terite	0.043	ccl:C7365	ϫⲉⲣⲏⲧ
-tereki	noun	2	no	tereki	0.043	ccl:C9944	ⲟⲣⲅⲏ
-tetelitreli	title	1	no	tetelitreli	0.043	ccl:C4268	ⲧⲗϯⲗⲉ
-mseqorose	title	2	no	mseqorose	0.047	ccl:C9678	ⲙⲁⲅⲓⲣⲟⲥ
-mesen	title	3	no	mesen	0.050	ccl:C2056	ⲙⲟⲥⲛⲉ
-pqrtr	title	1	yes	pqrtr	0.050	ccl:C9533	ⲕⲣⲁⲧⲏⲣ
+prSn	title	1	no	prsn	0.017	ccl:C3231	ⲣⲱϣⲛ
+ponni	title	1	no	ponni	0.023	ccl:C2855	ⲡⲉⲛⲛⲉ
+tmNte	title	1	no	tmnete	0.023	ccl:C1966	ⲙⲛⲟⲟⲧⲉ
+pertese	title	1	no	pertese	0.027	ccl:C10097	ⲡⲁⲣⲑⲟⲥ
+pkrtr	title	1	no	pkrtr	0.027	ccl:C9533	ⲕⲣⲁⲧⲏⲣ
+mtr	noun	4	no	mtr	0.030	ccl:C2141	ⲙⲁⲧⲣ
+tereki	noun	2	no	tereki	0.030	ccl:C9944	ⲟⲣⲅⲏ
+ptri	noun	1	no	ptri	0.033	ccl:C10787	ⲧⲣⲓⲙⲏⲥⲓⲟⲛ
+trose	adjective	11	yes	trose	0.037	ccl:C10535	ⲥⲧⲁⲩⲣⲟⲥ
+terite	noun	3	yes	terite	0.040	ccl:C7365	ϫⲉⲣⲏⲧ
+abso (?)	title	1	no	0bso	0.053	ccl:C6464	ϩⲃⲥⲱ
+mleyose	title	3	no	mleyose	0.056	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+mrm	numeral or measure	1	no	mrm	0.056	ccl:C2010	ⲙⲣⲱⲙ
+tetelitreli	title	1	no	tetelitreli	0.056	ccl:C4268	ⲧⲗϯⲗⲉ
+mlekeyose	title	2	no	mlekeyose	0.060	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+mseqorose	title	2	no	mseqorose	0.060	ccl:C9678	ⲙⲁⲅⲓⲣⲟⲥ
 tpoto	verb	1	spelled like tpete	tpoto	0.060	ccl:C6286	ϯϥⲱⲧⲉ
-teketin	noun	11	no	teketin	0.063	ccl:C11153	ϩⲟⲗⲟⲕⲟⲧⲧⲓⲛⲟⲥ
-temte	title	1	no	temte	0.063	ccl:C4325	ⲧⲱⲙⲧ
-mlekeyose	title	2	no	mlekeyose	0.066	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
-ameri	title	1	spelled like amero	0meri	0.070	ccl:C8203	ⲁⲙⲉⲣⲓ
-mrm	numeral or measure	1	no	mrm	0.070	ccl:C2010	ⲙⲣⲱⲙ
-smt	title	5	yes	smt	0.073	ccl:C3557	ⲥⲙⲟⲧ
-apotebese	title	1	no	0potebese	0.083	ccl:C8220	ⲁⲙⲫⲓⲧⲁⲡⲟⲥ
-tmot	verb	6	no	tmot	0.086	ccl:C2192	ⲙⲟⲩⲟⲩⲧ
-arebetke	title	1	yes	0rebetke	0.086	ccl:C6794	ϩⲣⲃⲱⲧ
-pqebete	title	1	no	pqebete	0.086	ccl:C7577	ϭⲁⲃⲱⲧ
-qorte	noun	1	no	qorte	0.086	ccl:C7877	ϭⲟⲣⲧⲉ
-wtotrse	noun	1	no	wtotrse	0.086	ccl:C10728	ⲧⲉⲧⲣⲁⲥ
-dkretri	title	6	no	dkretri	0.093	ccl:C7311	ϫⲣϫⲣⲉ
-areqebr	title	3	no	0reqebr	0.096	ccl:C8470	ⲁⲣⲭⲏⲡⲣⲉⲥⲃⲩⲧⲉⲣⲟⲥ
-alle	noun	1	no	0lle	0.096	ccl:C6551	ϩⲗⲗⲟ
-ayot	title	1	no	0yot	0.096	ccl:C6888	ϩⲓⲉⲓⲧ
-qorete	noun	2	no	qorete	0.103	ccl:C7877	ϭⲟⲣⲧⲉ
-tkereketmS	noun	1	no	tkereketms	0.106	ccl:C10928	ⲭⲁⲗⲕⲓⲧⲉⲱⲥ
-Aqedise	epithet	4	yes	0qedise	0.110	ccl:C9923	ⲟⲕⲧⲟⲏⲥ
-areqis	noun	1	no	0reqis	0.110	ccl:C9037	ⲉⲣⲅⲓⲥ
-plete	verb	3	no	plete	0.113	ccl:C1705	ⲗⲱⲧⲉ
-ames	noun	2	no	0mes	0.116	ccl:C6647	ϩⲙⲥ
-pnqose	title	2	no	pnqose	0.116	ccl:C10217	ⲡⲛⲉⲩⲙⲁⲧⲓⲕⲟⲥ
-tkereXetmS	noun	1	no	tkereXetms	0.120	ccl:C5486	ⲣⲉϥϯⲱⲙⲥ
-aribet	title	1	no	0ribet	0.123	ccl:C6794	ϩⲣⲃⲱⲧ
-smle	title	3	no	smle	0.126	ccl:C5892	ϣⲙⲟⲩⲗ
-Smle	title	1	no	smle	0.126	ccl:C5892	ϣⲙⲟⲩⲗ
-amero	title	2	yes	0mero	0.130	ccl:C8203	ⲁⲙⲉⲣⲓ
-mlkeyose	title	1	no	mlkeyose	0.130	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
-bersowi	noun	1	no	bersowi	0.140	ccl:C532	ⲃⲣⲉϣⲏⲩ
-qorisew	title	1	no	qorisew	0.140	ccl:C9522	ⲕⲟⲩⲣⲓⲥ
-pteno	noun	1	no	pteno	0.153	ccl:C4337	ⲧⲏⲛⲉ
-krte	noun	2	no	krte	0.166	ccl:C7877	ϭⲟⲣⲧⲉ
-mdos	title	1	no	mdos	0.166	ccl:C9778	ⲙⲏⲇⲟⲥ
-dotedi	benediction verb	7	no	dotedi	0.186	ccl:C4609	ϫⲓⲧⲱⲧⲉ
-qoret	noun	3	no	qoret	0.186	ccl:C7875	ϭⲉⲣⲏⲧ
-dmkte	verb	2	no	dmkte	0.189	ccl:C1403	ϫⲉⲙⲕⲁϯ
-tereqe	verb	1	no	tereqe	0.189	ccl:C4492	ⲧⲁⲣⲕⲟ
-axboroteN	noun	1	no	0xboroten	0.193	ccl:C8346	ⲁⲡⲉⲣⲁⲛⲧⲟⲛ
+smt	title	5	yes	smt	0.066	ccl:C3557	ⲥⲙⲟⲧ
+mesen	title	3	no	mesen	0.066	ccl:C2056	ⲙⲟⲥⲛⲉ
+apotebese	title	1	no	0potebese	0.073	ccl:C8220	ⲁⲙⲫⲓⲧⲁⲡⲟⲥ
+pqrtr	title	1	yes	pqrtr	0.076	ccl:C9533	ⲕⲣⲁⲧⲏⲣ
+ameri	title	1	spelled like amero	0meri	0.086	ccl:C8203	ⲁⲙⲉⲣⲓ
+temte	title	1	no	temte	0.086	ccl:C4325	ⲧⲱⲙⲧ
+qorete	noun	2	no	qorete	0.093	ccl:C7877	ϭⲟⲣⲧⲉ
+areqis	noun	1	no	0reqis	0.093	ccl:C9037	ⲉⲣⲅⲓⲥ
+pnqose	title	2	no	pnqose	0.096	ccl:C10217	ⲡⲛⲉⲩⲙⲁⲧⲓⲕⲟⲥ
+teketin	noun	11	no	teketin	0.100	ccl:C11153	ϩⲟⲗⲟⲕⲟⲧⲧⲓⲛⲟⲥ
+qorte	noun	1	no	qorte	0.103	ccl:C7877	ϭⲟⲣⲧⲉ
+plete	verb	3	no	plete	0.106	ccl:C1705	ⲗⲱⲧⲉ
+axboroteN	noun	1	no	0xborotene	0.106	ccl:C8346	ⲁⲡⲉⲣⲁⲛⲧⲟⲛ
+tkereketmS	noun	1	no	tkereketms	0.110	ccl:C10928	ⲭⲁⲗⲕⲓⲧⲉⲱⲥ
+tmot	verb	6	no	tmot	0.116	ccl:C2192	ⲙⲟⲩⲟⲩⲧ
+aribet	title	1	no	0ribet	0.116	ccl:C6794	ϩⲣⲃⲱⲧ
+arebetke	title	1	yes	0rebetke	0.120	ccl:C6794	ϩⲣⲃⲱⲧ
+pqebete	title	1	no	pqebete	0.120	ccl:C7577	ϭⲁⲃⲱⲧ
+temkeN	noun	1	no	temkene	0.120	ccl:C9788	ⲙⲏⲭⲁⲛⲏ
+wtotrse	noun	1	no	wtotrse	0.120	ccl:C10728	ⲧⲉⲧⲣⲁⲥ
+dkretri	title	6	no	dkretri	0.130	ccl:C7311	ϫⲣϫⲣⲉ
+tkereXetmS	noun	1	no	tkereXetms	0.133	ccl:C5486	ⲣⲉϥϯⲱⲙⲥ
+amero	title	2	yes	0mero	0.136	ccl:C8203	ⲁⲙⲉⲣⲓ
+areqebr	title	3	no	0reqebr	0.140	ccl:C8470	ⲁⲣⲭⲏⲡⲣⲉⲥⲃⲩⲧⲉⲣⲟⲥ
+dotedi	benediction verb	7	no	dotedi	0.146	ccl:C4609	ϫⲓⲧⲱⲧⲉ
+alle	noun	1	no	0lle	0.146	ccl:C6551	ϩⲗⲗⲟ
+ayot	title	1	no	0yot	0.146	ccl:C6888	ϩⲓⲉⲓⲧ
+ames	noun	2	no	0mes	0.153	ccl:C6647	ϩⲙⲥ
+tereqe	verb	1	no	tereqe	0.156	ccl:C4492	ⲧⲁⲣⲕⲟ
+pteno	noun	1	no	pteno	0.159	ccl:C4337	ⲧⲏⲛⲉ
+Aqedise	epithet	4	yes	0qedise	0.166	ccl:C9923	ⲟⲕⲧⲟⲏⲥ
+bersowi	noun	1	no	bersowi	0.166	ccl:C532	ⲃⲣⲉϣⲏⲩ
+qorisew	title	1	no	qorisew	0.166	ccl:C9522	ⲕⲟⲩⲣⲓⲥ
+mlkeyose	title	1	no	mlkeyose	0.169	ccl:C9792	ⲙⲓⲗⲓⲟⲥ
+dmkte	verb	2	no	dmkte	0.173	ccl:C1403	ϫⲉⲙⲕⲁϯ
+smle	title	3	no	smle	0.186	ccl:C5892	ϣⲙⲟⲩⲗ
+Smle	title	1	no	smle	0.186	ccl:C5892	ϣⲙⲟⲩⲗ
+qoret	noun	3	no	qoret	0.193	ccl:C7875	ϭⲉⲣⲏⲧ
 bereke	title	1	no	bereke	0.193	ccl:C8642	ⲃⲣⲁⲭⲩ
 aberse	noun	1	no	0berse	0.196	ccl:C9203	ⲓⲃⲉⲣⲟⲥ
-mleke	title	5	no	mleke	0.203	ccl:C9812	ⲙⲟⲗⲟⲭⲏ
-atolit	noun	3	no	0tolit	0.206	ccl:C304	ⲁϭⲟⲗⲧⲉ
-yeroteke	title	1	no	yeroteke	0.213	ccl:C9206	ⲓⲉⲣⲁϯⲕⲟⲛ
-pwide	adjective	2	yes	pwide	0.229	ccl:C5345	ⲟⲩⲉⲓϫⲉ
-drp	verb	1	no	drp	0.233	ccl:C7357	ϫⲱⲣⲡ
-kttre	title	4	no	kttre	0.236	ccl:C9238	ⲕⲁⲑⲉⲇⲣⲁ
-semle	noun	1	no	semle	0.236	ccl:C5892	ϣⲙⲟⲩⲗ
-mesreke	noun	8	no	mesreke	0.243	ccl:C2050	ⲙⲉⲥⲟⲣⲏ
-temkeN	noun	1	no	temken	0.243	ccl:C8700	ⲇⲁⲓⲙⲱⲛ
-penn	noun	24	yes	penn	0.249	ccl:C2855	ⲡⲉⲛⲛⲉ
-ntk	verb	1	yes	ntk	0.252	ccl:C2706	ⲛⲟⲩϫⲕ
-Steqeteb	kin term	2	no	steqeteb	0.256	ccl:C6119	ϣⲁⲧⲟⲟⲛⲧϥ
-arede	noun	1	no	0rede	0.259	ccl:C6840	ϩⲣⲱϫⲉ
-qtile	noun	1	no	qtile	0.266	ccl:C9368	ⲕⲁⲧⲓⲗⲁ
-abeleqebr	title	1	no	0beleqebr	0.276	ccl:C6453	ϩⲃⲟⲣⲃⲣ
-arse	noun	1	no	0rse	0.282	ccl:C5141	ⲟⲩⲣϣⲉ
-bereqedo(li)	title	1	no	bereqedo	0.282	ccl:C1627	ⲗⲟⲩⲕⲟϫⲓ
-qoredek	title	1	yes	qoredek	0.292	ccl:C10970	ⲭⲟⲣⲇⲏ
-mreperi	title	4	yes	mreperi	0.296	ccl:C4516	ⲧⲣⲉⲡⲉⲣⲓ
-atos	title	3	no	0tos	0.299	ccl:C8874	ⲉⲑⲟⲥ
+atolit	noun	3	no	0tolit	0.203	ccl:C304	ⲁϭⲟⲗⲧⲉ
+mleke	title	5	no	mleke	0.206	ccl:C9812	ⲙⲟⲗⲟⲭⲏ
+krte	noun	2	no	krte	0.209	ccl:C7877	ϭⲟⲣⲧⲉ
+drp	verb	1	no	drp	0.213	ccl:C7357	ϫⲱⲣⲡ
+mdos	title	1	no	mdos	0.213	ccl:C9778	ⲙⲏⲇⲟⲥ
+abeleqebr	title	1	no	0beleqebr	0.216	ccl:C6453	ϩⲃⲟⲣⲃⲣ
+mesreke	noun	8	no	mesreke	0.226	ccl:C2050	ⲙⲉⲥⲟⲣⲏ
+SNmdet	title	1	no	snemdet	0.226	ccl:C2320	ϣⲁⲛⲙⲁϧⲧ
+pwide	adjective	2	yes	pwide	0.233	ccl:C5345	ⲟⲩⲉⲓϫⲉ
+ntk	verb	1	yes	ntk	0.246	ccl:C2706	ⲛⲟⲩϫⲕ
+semle	noun	1	no	semle	0.249	ccl:C5892	ϣⲙⲟⲩⲗ
+kttre	title	4	no	kttre	0.252	ccl:C9238	ⲕⲁⲑⲉⲇⲣⲁ
+yeroteke	title	1	no	yeroteke	0.256	ccl:C9206	ⲓⲉⲣⲁϯⲕⲟⲛ
+penn	noun	24	yes	penn	0.272	ccl:C2855	ⲡⲉⲛⲛⲉ
+qoredek	title	1	yes	qoredek	0.276	ccl:C10970	ⲭⲟⲣⲇⲏ
+mreperi	title	4	yes	mreperi	0.279	ccl:C4516	ⲧⲣⲉⲡⲉⲣⲓ
+arede	noun	1	no	0rede	0.279	ccl:C6840	ϩⲣⲱϫⲉ
+atos	title	3	no	0tos	0.286	ccl:C8874	ⲉⲑⲟⲥ
+Steqeteb	kin term	2	no	steqeteb	0.286	ccl:C6119	ϣⲁⲧⲟⲟⲛⲧϥ
+arse	noun	1	no	0rse	0.286	ccl:C5141	ⲟⲩⲣϣⲉ
+mlne	title	1	no	mlne	0.286	ccl:C9735	ⲙⲉⲗⲁⲛ
+etes	verb	1	no	0etes	0.289	ccl:C11102	ϩⲉⲧⲁⲍⲉ
+qtile	noun	1	no	qtile	0.296	ccl:C9368	ⲕⲁⲧⲓⲗⲁ
+anese	noun	1	no	0nese	0.299	ccl:C154	ⲁⲛⲁϣ
 SSiXete	title	2	no	ssiXete	0.306	ccl:C6876	ϣⲥⲛϩⲏⲧ
-tmeyyeS	noun	1	no	tmeyyes	0.306	ccl:C10686	ⲧⲁⲙⲓⲁⲥ
+tmeyyeS	noun	1	no	tmeyyes	0.309	ccl:C10686	ⲧⲁⲙⲓⲁⲥ
 tislke	noun	1	no	tislke	0.312	ccl:C5818	ϣⲗⲁⲕ
-amoke	title	2	no	0moke	0.319	ccl:C85	ⲁⲙⲟⲕ
+sqte	title	2	no	sqte	0.316	ccl:C3927	ⲥϣⲟⲧ
 mlekye	title	2	no	mlekye	0.319	ccl:C11160	ϩⲟⲙⲟⲗⲟⲅⲓⲁ
-mloN	adjective	1	no	mlon	0.326	ccl:C1870	ⲙⲓⲟⲗⲱⲛ
-abrse	title	3	no	0brse	0.329	ccl:C770	ⲉϥⲣⲁⲥⲟⲩ
-sqte	title	2	no	sqte	0.329	ccl:C3927	ⲥϣⲟⲧ
-SNmdet	title	1	no	snmdet	0.329	ccl:C2320	ϣⲁⲛⲙⲁϧⲧ
-kdisbetowi	kin term	1	no	kdisbetowi	0.336	ccl:C8713	ⲇⲉⲥⲡⲟⲧⲉⲓⲁ
-sdrte	noun	5	yes	sdrte	0.339	ccl:C10564	ⲥⲧⲣⲁⲧⲉⲓⲁ
-drte	noun	1	no	drte	0.339	ccl:C7368	ϫⲣϫ
-eqelbxe	verb	1	no	0eqelbxe	0.339	ccl:C8871	ⲉⲅⲗⲁⲃⲉ
-etes	verb	1	no	0etes	0.339	ccl:C11102	ϩⲉⲧⲁⲍⲉ
-mseẖto	title	1	no	mseXto	0.342	ccl:C6919	ⲙⲁⲥ ⲛϩⲧⲟ
-mlne	title	1	no	mln	0.346	ccl:C9735	ⲙⲉⲗⲁⲛ
-aritewil	noun	3	no	0ritewil	0.349	ccl:C11192	ϩⲣⲏⲧⲱⲣ
-kdibe	noun	1	no	kdibe	0.349	ccl:C8027	ϭⲁϫⲓϥ
-nbr	noun	11	yes	nbr	0.355	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
-qorkelw	noun	1	no	qorkelw	0.359	ccl:C1153	ⲕⲟⲗⲕⲉⲗ
-anese	noun	1	no	0nse	0.372	ccl:C5504	ⲱⲛϣ
-kditelewi	kin term	1	no	kditelewi	0.372	ccl:C9238	ⲕⲁⲑⲉⲇⲣⲁ
-atepedemo	title	4	no	0tepedemo	0.375	ccl:C8854	ⲉⲃⲇⲟⲙⲏⲥ
-lxeketes	verb	1	no	lxeketes	0.385	ccl:C9590	ⲗⲁⲕⲧⲓⲍⲉ
-mẖeli : arose	title	1	no	mXelirose	0.385	ccl:C11133	ϩⲓⲙⲉⲣⲟⲥ
-qomlise	epithet	2	yes	qomlise	0.389	ccl:C10949	ⲭⲉⲓⲙⲁⲣⲣⲟⲥ
-qesN	noun	1	no	qesn	0.389	ccl:C9120	ⲍⲱⲟⲛ
-pqr	title	36	no	pqr	0.392	ccl:C10990	ⲭⲣⲏⲥⲧⲏⲣⲓⲟⲛ
-trq	title	2	no	trq	0.392	ccl:C4871	ⲧⲣⲟϭ
-aroẖe	verb	1	no	0roXe	0.395	ccl:C6833	ϩⲁⲣⲉϩ
-tnide	verb	1	no	tnide	0.399	ccl:C8276	ⲁⲛⲉⲭⲉ
-wkdiwikete	verb	1	no	wkdiwikete	0.405	ccl:C5188	ⲟⲩⲟⲧⲟⲩⲉⲧ
-pdẖose	epithet	4	no	pdXose	0.409	ccl:C10688	ⲧⲁⲝⲓⲥ
-abero	title	1	no	0bero	0.409	ccl:C633	ⲉⲃⲣⲁ
-kditebetowi	kin term	1	no	kditebetowi	0.409	ccl:C9319	ⲕⲁⲧⲁⲃⲉⲧⲟⲥ
-temey (2)	noun	12	no	temey	0.412	ccl:C4312	ⲧⲁⲙⲓⲟ
-temey (1)	title	2	no	temey	0.412	ccl:C4312	ⲧⲁⲙⲓⲟ
-semekeke	title	1	no	semekeke	0.425	ccl:C10605	ⲥⲩⲛⲁⲅⲱⲅⲏ
-ptlteb	noun	1	no	ptlteb	0.429	ccl:C4141	ⲧⲃⲧⲃ
-pedelmotbr	title	1	no	pedelmotbr	0.435	ccl:C9490	ⲕⲟⲗⲩⲙⲃⲏⲑⲣⲁ
-treql	noun	1	no	treql	0.435	ccl:C7604	ⲣⲁϭⲱⲗ
-yerSxini	verb	2	no	yersxini	0.439	ccl:C10329	ⲡⲣⲟⲥⲕⲩⲛⲉⲓ
-tlt	noun	7	yes	tlt	0.445	ccl:C1703	ⲗⲁⲧ
-mdek	title	3	no	mdek	0.445	ccl:C2342	ⲙⲟⲩϫϭ
-ssemri	title	3	yes	ssemri	0.455	ccl:C5908	ϣⲟⲩⲙⲁⲣⲉ
-mXloke	title	1	no	mXloke	0.455	ccl:C9812	ⲙⲟⲗⲟⲭⲏ
-yeredeb	title	1	no	yeredeb	0.468	ccl:C6825	ϩⲣⲟⲩϫⲃ
-SXekes	benediction verb	1	no	sXekes	0.472	ccl:C10556	ⲥⲧⲟⲓⲭⲉⲓ
-nkdeyose	title	1	no	nkdeyose	0.472	ccl:C8228	ⲁⲛⲁⲅⲕⲁⲓⲟⲥ
-ssime	title	1	no	ssime	0.472	ccl:C3925	ⲥⲱϣⲙ
-mdemdese	noun	3	no	mdemdese	0.475	ccl:C8840	ⲇⲩⲙⲟⲧⲏⲥ
-tewwi-	verb	2	no	tewwi	0.475	ccl:C238	ⲁⲩ
-wkite	title	2	no	wkite	0.495	ccl:C8047	ⲁⲅⲁⲑⲟⲛ
-pesyto	title	1	no	pesyto	0.498	ccl:C5994	ϣⲡⲓⲉⲉⲧⲉ
-qorelik	noun	1	no	qorelik	0.505	ccl:C11267	ϭⲟⲗⲗⲉ
-sobḫe	title	1	no	sobxe	0.508	ccl:C3379	ⲥⲱⲃϩ
-wrs	noun	1	no	wrs	0.508	ccl:C201	ⲁⲣⲟϣ
-SSimeleb	title	1	no	ssimeleb	0.512	ccl:C7860	ϣⲥϭⲉⲣⲱⲃ
-ywid	epithet	1	no	ywid	0.512	ccl:C9213	ⲓⲟⲩⲇⲁⲓ
-wetrri	epithet	7	no	wetrri	0.522	ccl:C3137	ⲣⲁⲁⲣ
-xteri	title	2	no	xteri	0.525	ccl:C6945	ϩⲁⲧⲣⲉ
-tepke	title	1	no	tepke	0.525	ccl:C2810	ⲡⲁⲕⲉ
-xitkkete	benediction verb	1	no	xitkkete	0.525	ccl:C6979	ϩⲓ ⲧⲟⲟⲧ⸗
-asr	noun	3	spelled like Asori	0sr	0.532	ccl:C226	ⲁⲥⲏⲣ
-qorteb	noun	1	no	qorteb	0.532	ccl:C6814	ϩⲟⲣⲧϥ
-Sxini	verb	3	no	sxini	0.538	ccl:C3537	ⲥⲙⲓⲛⲉ
-eked	verb	1	no	0eked	0.538	ccl:C5671	ⲱϭⲧ
-atepoke	noun	3	yes	0tepoke	0.545	ccl:C5581	ⲉⲧⲡⲱ
-yetmet	title	2	no	yetmet	0.551	ccl:C4323	ⲧⲙⲉⲧ
-xmXelli	noun	1	no	xmXelli	0.551	ccl:C1161	ϩⲁⲙⲕⲗⲗⲉ
-kedebxe	verb	1	no	kedebxe	0.565	ccl:C1426	ⲕⲱⲧⲉ (ⲉⲡⲁϩⲟⲩ)
-womnise	title	4	no	womnise	0.571	ccl:C11213	ϩⲩⲙⲛⲟⲥ
-aretwte	title	2	no	0retwte	0.571	ccl:C6842	ϩⲣⲟϫⲣϫ
-adlito	noun	1	no	0dlito	0.571	ccl:C75	ⲁⲗⲓϫⲓ
-yiroẖe	verb	11	no	yiroXe	0.575	ccl:C3238	ϫⲓⲣⲟⲩϩⲉ
-mXeyeos	title	1	no	mXeyeos	0.575	ccl:C9689	ⲙⲁⲕⲁⲣⲓⲟⲥ
-srq	verb	1	no	srq	0.585	ccl:C5817	ϣⲱⲗⲕ
-elxte	benediction verb	2	no	0elxte	0.588	ccl:C195	ⲁⲣⲓⲣⲉ
+wetneyineqeli	epithet	12	no	wetneyineqeli	0.326	ccl:C7620	ϭⲓⲛϭⲟⲓⲗⲉ
+nbr	noun	11	yes	nbr	0.326	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
+bereqedo(li)	title	1	no	bereqedo	0.329	ccl:C1627	ⲗⲟⲩⲕⲟϫⲓ
+drte	noun	1	no	drte	0.329	ccl:C7368	ϫⲣϫ
+kditelewi	kin term	1	no	kditelewi	0.329	ccl:C9238	ⲕⲁⲑⲉⲇⲣⲁ
+qorkelw	noun	1	no	qorkelw	0.336	ccl:C1153	ⲕⲟⲗⲕⲉⲗ
+atepedemo	title	4	no	0tepedemo	0.342	ccl:C8854	ⲉⲃⲇⲟⲙⲏⲥ
+abrse	title	3	no	0brse	0.342	ccl:C770	ⲉϥⲣⲁⲥⲟⲩ
+amoke	title	2	no	0moke	0.342	ccl:C85	ⲁⲙⲟⲕ
+trq	title	2	no	trq	0.342	ccl:C4871	ⲧⲣⲟϭ
+pqr	title	36	no	pqr	0.352	ccl:C10990	ⲭⲣⲏⲥⲧⲏⲣⲓⲟⲛ
+sdrte	noun	5	yes	sdrte	0.355	ccl:C10564	ⲥⲧⲣⲁⲧⲉⲓⲁ
+mẖeli : arose	title	1	no	mXelirose	0.359	ccl:C11133	ϩⲓⲙⲉⲣⲟⲥ
+eqelbxe	verb	1	no	0eqelbxe	0.365	ccl:C8871	ⲉⲅⲗⲁⲃⲉ
+kdibe	noun	1	no	kdibe	0.365	ccl:C8027	ϭⲁϫⲓϥ
+mseẖto	title	1	no	mseXto	0.365	ccl:C6919	ⲙⲁⲥ ⲛϩⲧⲟ
+aroẖe	verb	1	no	0roXe	0.369	ccl:C6833	ϩⲁⲣⲉϩ
+qomlise	epithet	2	yes	qomlise	0.372	ccl:C10949	ⲭⲉⲓⲙⲁⲣⲣⲟⲥ
+tnide	verb	1	no	tnide	0.372	ccl:C8276	ⲁⲛⲉⲭⲉ
+mloN	adjective	1	no	mlone	0.375	ccl:C1870	ⲙⲓⲟⲗⲱⲛ
+tlt	noun	7	yes	tlt	0.385	ccl:C1703	ⲗⲁⲧ
+wkdiwikete	verb	1	no	wkdiwikete	0.389	ccl:C5188	ⲟⲩⲟⲧⲟⲩⲉⲧ
+lxeketes	verb	1	no	lxeketes	0.405	ccl:C9590	ⲗⲁⲕⲧⲓⲍⲉ
+pdẖose	epithet	4	no	pdXose	0.412	ccl:C10688	ⲧⲁⲝⲓⲥ
+kdisbetowi	kin term	1	no	kdisbetowi	0.412	ccl:C8713	ⲇⲉⲥⲡⲟⲧⲉⲓⲁ
+tneyine	epithet	2	no	tneyine	0.419	ccl:C8872	ⲉⲑⲁⲛⲓⲟⲛ
+qesN	noun	1	no	qesne	0.422	ccl:C9120	ⲍⲱⲟⲛ
+aritewil	noun	3	no	0ritewil	0.425	ccl:C11192	ϩⲣⲏⲧⲱⲣ
+yeredeb	title	1	no	yeredeb	0.425	ccl:C6825	ϩⲣⲟⲩϫⲃ
+abero	title	1	no	0bero	0.429	ccl:C633	ⲉⲃⲣⲁ
+ptlteb	noun	1	no	ptlteb	0.435	ccl:C4141	ⲧⲃⲧⲃ
+temey (2)	noun	12	no	temey	0.439	ccl:C4312	ⲧⲁⲙⲓⲟ
+temey (1)	title	2	no	temey	0.439	ccl:C4312	ⲧⲁⲙⲓⲟ
+mdek	title	3	no	mdek	0.442	ccl:C2342	ⲙⲟⲩϫϭ
+kditebetowi	kin term	1	no	kditebetowi	0.449	ccl:C9319	ⲕⲁⲧⲁⲃⲉⲧⲟⲥ
+treql	noun	1	no	treql	0.455	ccl:C7604	ⲣⲁϭⲱⲗ
+wrs	noun	1	no	wrs	0.458	ccl:C201	ⲁⲣⲟϣ
+mXloke	title	1	no	mXloke	0.462	ccl:C9812	ⲙⲟⲗⲟⲭⲏ
+tewwi-	verb	2	no	tewwi	0.465	ccl:C238	ⲁⲩ
+ssemri	title	3	yes	ssemri	0.468	ccl:C5908	ϣⲟⲩⲙⲁⲣⲉ
+pedelmotbr	title	1	no	pedelmotbr	0.475	ccl:C9490	ⲕⲟⲗⲩⲙⲃⲏⲑⲣⲁ
+semekeke	title	1	no	semekeke	0.475	ccl:C10605	ⲥⲩⲛⲁⲅⲱⲅⲏ
+ssime	title	1	no	ssime	0.478	ccl:C3925	ⲥⲱϣⲙ
+asr	noun	3	spelled like Asori	0sr	0.482	ccl:C226	ⲁⲥⲏⲣ
+yerSxini	verb	2	no	yersxini	0.488	ccl:C10329	ⲡⲣⲟⲥⲕⲩⲛⲉⲓ
+wkite	title	2	no	wkite	0.498	ccl:C8047	ⲁⲅⲁⲑⲟⲛ
+nkdeyose	title	1	no	nkdeyose	0.498	ccl:C8228	ⲁⲛⲁⲅⲕⲁⲓⲟⲥ
+mdemdese	noun	3	no	mdemdese	0.502	ccl:C8840	ⲇⲩⲙⲟⲧⲏⲥ
+SXekes	benediction verb	1	no	sXekes	0.508	ccl:C10556	ⲥⲧⲟⲓⲭⲉⲓ
+pesyto	title	1	no	pesyto	0.512	ccl:C5994	ϣⲡⲓⲉⲉⲧⲉ
+qorelik	noun	1	no	qorelik	0.518	ccl:C11267	ϭⲟⲗⲗⲉ
+sobḫe	title	1	no	sobxe	0.518	ccl:C3379	ⲥⲱⲃϩ
+ywid	epithet	1	no	ywid	0.518	ccl:C9213	ⲓⲟⲩⲇⲁⲓ
+Sxini	verb	3	no	sxini	0.535	ccl:C3537	ⲥⲙⲓⲛⲉ
+xteri	title	2	no	xteri	0.535	ccl:C6945	ϩⲁⲧⲣⲉ
+eked	verb	1	no	0eked	0.535	ccl:C5671	ⲱϭⲧ
+tepke	title	1	no	tepke	0.535	ccl:C2810	ⲡⲁⲕⲉ
+SSimeleb	title	1	no	ssimeleb	0.542	ccl:C7860	ϣⲥϭⲉⲣⲱⲃ
+wetrri	epithet	7	no	wetrri	0.545	ccl:C3137	ⲣⲁⲁⲣ
+atepoke	noun	3	yes	0tepoke	0.555	ccl:C5581	ⲉⲧⲡⲱ
+qorteb	noun	1	no	qorteb	0.555	ccl:C6814	ϩⲟⲣⲧϥ
+xmXelli	noun	1	no	xmXelli	0.558	ccl:C1161	ϩⲁⲙⲕⲗⲗⲉ
+kedebxe	verb	1	no	kedebxe	0.561	ccl:C1426	ⲕⲱⲧⲉ (ⲉⲡⲁϩⲟⲩ)
+srq	verb	1	no	srq	0.568	ccl:C5817	ϣⲱⲗⲕ
+xitkkete	benediction verb	1	no	xitkkete	0.581	ccl:C6979	ϩⲓ ⲧⲟⲟⲧ⸗
+womnise	title	4	no	womnise	0.585	ccl:C11213	ϩⲩⲙⲛⲟⲥ
+aretwte	title	2	no	0retwte	0.585	ccl:C6842	ϩⲣⲟϫⲣϫ
+yetmet	title	2	no	yetmet	0.585	ccl:C4323	ⲧⲙⲉⲧ
 kditebkwi	kin term	1	no	kditebkwi	0.588	ccl:C4421	ϫⲓϯⲡⲉ
-mdekr	title	1	no	mdekr	0.588	ccl:C1289	ⲙⲉⲧⲕⲟⲩⲣ
-arkedni	noun	1	no	0rkedni	0.598	ccl:C8455	ⲁⲣⲭⲁⲓⲟⲛ
-yerote	title	1	no	yerote	0.605	ccl:C708	ⲉⲣⲱⲧⲉ
-mrde	title	1	no	mrde	0.608	ccl:C2015	ⲙⲟⲣⲧ
-xror	title	1	no	xror	0.608	ccl:C6806	ϩⲣⲏⲣ
-atoliteb	noun	2	no	0toliteb	0.611	ccl:C304	ⲁϭⲟⲗⲧⲉ
-womnitẖ	title	7	no	womnitX	0.625	ccl:C669	ⲉⲙⲛⲧ
-Siwiwi	noun	1	no	siwiwi	0.635	ccl:C3859	ⲥⲏⲟⲩⲓ
-apette	noun	1	no	0pette	0.635	ccl:C181	ⲁⲡⲟⲟⲩⲧⲉ
+mXeyeos	title	1	no	mXeyeos	0.591	ccl:C9689	ⲙⲁⲕⲁⲣⲓⲟⲥ
+mdekr	title	1	no	mdekr	0.595	ccl:C1289	ⲙⲉⲧⲕⲟⲩⲣ
+pxtotN	noun	1	no	pxtotne	0.605	ccl:C7509	ⲡⲉⲧϩⲓϫⲛ-
+mrde	title	1	no	mrde	0.611	ccl:C2015	ⲙⲟⲣⲧ
+xror	title	1	no	xror	0.611	ccl:C6806	ϩⲣⲏⲣ
+yiroẖe	verb	11	no	yiroXe	0.618	ccl:C3238	ϫⲓⲣⲟⲩϩⲉ
+arkedni	noun	1	no	0rkedni	0.621	ccl:C8455	ⲁⲣⲭⲁⲓⲟⲛ
+atoliteb	noun	2	no	0toliteb	0.628	ccl:C304	ⲁϭⲟⲗⲧⲉ
+elxte	benediction verb	2	no	0elxte	0.631	ccl:C195	ⲁⲣⲓⲣⲉ
+adlito	noun	1	no	0dlito	0.638	ccl:C75	ⲁⲗⲓϫⲓ
 krorl	title	1	no	krorl	0.638	ccl:C9455	ⲕⲗⲏⲣⲟⲛⲟⲙⲟⲥ
-qoroteb	noun	1	no	qoroteb	0.641	ccl:C9507	ⲕⲟⲣⲓⲛⲑⲟⲥ
-yelebi	noun	1	no	yelebi	0.645	ccl:C7168	ϫⲟⲗⲃⲓ
-doSbd	noun	1	no	dosbd	0.664	ccl:C8716	ⲇⲉⲥⲡⲱⲧⲁ
-yerki	verb	1	no	yerki	0.664	ccl:C8457	ⲁⲣⲭⲉⲓ
-yeteke	verb	5	no	yeteke	0.668	ccl:C9772	ⲙⲉⲧⲉⲭⲉ
-ksbne	epithet	3	yes	ksbn	0.668	ccl:C5763	ϣⲃⲱⲛ
-mror	noun	4	no	mror	0.671	ccl:C2315	ⲙⲟⲩϧⲣⲏⲣ
-tneyine	epithet	2	no	tnyin	0.681	ccl:C8872	ⲉⲑⲁⲛⲓⲟⲛ
-pxtotN	noun	1	no	pxtotn	0.684	ccl:C7509	ⲡⲉⲧϩⲓϫⲛ-
-xll	noun	1	no	xll	0.684	ccl:C6545	ϩⲗⲟⲗ
-wetneyineqeli	epithet	12	no	wetnyinqeli	0.688	ccl:C7620	ϭⲓⲛϭⲟⲓⲗⲉ
-mlowi	noun	8	yes	mlowi	0.688	ccl:C103	ⲁⲙⲣⲉ
-mrxe	noun	4	no	mrxe	0.691	ccl:C2028	ⲙⲣⲱϩⲉ
-nxbre	noun	1	no	nxbre	0.691	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
-dmbe	noun	1	no	dmbe	0.694	ccl:C788	ϫⲙⲡⲏⲓ
-twd	verb	5	no	twd	0.701	ccl:C5344	ⲟⲩⲱϫⲉ
-aḫro	noun	4	no	0xro	0.701	ccl:C279	ⲁϧⲱⲓⲣⲓ
-smlo	title	2	no	smlo	0.708	ccl:C5908	ϣⲟⲩⲙⲁⲣⲉ
-nobow	noun	1	yes	nobow	0.711	ccl:C2432	ⲛⲟⲃⲉ
-mtese	verb	1	no	mtese	0.718	ccl:C2035	ⲙⲓⲥⲉ
-wyekite	noun	1	yes	wyekite	0.721	ccl:C8797	ⲇⲓⲟⲓⲕⲏⲧⲏⲥ
-mkl	noun	1	no	mkl	0.724	ccl:C9686	ⲙⲁⲕⲁⲣⲓⲁ
-yotre	verb	1	no	yotre	0.728	ccl:C6943	ϩⲱⲧⲣ
-qeswi	kin term	2	no	qeswi	0.734	ccl:C1373	ⲕⲁⲓⲥⲉ
-Ssmti	title	1	no	ssmti	0.734	ccl:C6184	ϣⲉϣⲟⲧⲉ
-qntk	title	1	no	qntk	0.738	ccl:C7796	ϭⲛⲁⲧ
-ansyi	title	1	no	0nsyi	0.748	ccl:C6851	ϩⲁⲥⲓⲉ
-atmi	verb	4	yes	0tmi	0.751	ccl:C1787	ϯⲙⲉⲓ
-kdke	title	3	yes	kdke	0.751	ccl:C9372	ⲕⲁⲧⲟⲭⲏ
-wlikidbte	verb	1	no	wlikidbte	0.754	ccl:C11269	ϯⲁⲗⲏⲅⲓⲑⲁⲓ
-yemoqe	verb	2	no	yemoqe	0.757	ccl:C1838	ⲙⲓⲕⲉ
-itey	verb	1	spelled like Atiye	0itey	0.757	ccl:C8126	ⲁⲓⲧⲉⲓ
-smlowi	kin term	15	no	smlowi	0.761	ccl:C3202	ⲥⲃⲣⲟⲟⲩⲉ
-wrtḫn	title	3	yes	wrtxn	0.761	ccl:C9949	ⲟⲣⲑⲟⲛ
-kedebx	verb	2	no	kedebx	0.761	ccl:C8018	ϭⲱϫⲃ
-mrebqo	title	2	no	mrebqo	0.777	ccl:C5358	ⲙⲁⲣⲟⲩⲟϭⲉ
-mXeyot	title	1	no	mXeyot	0.777	ccl:C2049	ⲙⲉⲥⲓⲱϯ
+ksbne	epithet	3	yes	ksbne	0.641	ccl:C5763	ϣⲃⲱⲛ
+doSbd	noun	1	no	dosbd	0.654	ccl:C8716	ⲇⲉⲥⲡⲱⲧⲁ
+edxN	noun	1	no	0edxne	0.654	ccl:C11111	ϩⲏⲇⲟⲛⲏ
+xll	noun	1	no	xll	0.654	ccl:C6545	ϩⲗⲟⲗ
+womnitẖ	title	7	no	womnitX	0.658	ccl:C669	ⲉⲙⲛⲧ
+yerote	title	1	no	yerote	0.664	ccl:C708	ⲉⲣⲱⲧⲉ
+twd	verb	5	no	twd	0.674	ccl:C5344	ⲟⲩⲱϫⲉ
+qoroteb	noun	1	no	qoroteb	0.674	ccl:C9507	ⲕⲟⲣⲓⲛⲑⲟⲥ
+mlowi	noun	8	yes	mlowi	0.684	ccl:C103	ⲁⲙⲣⲉ
+mror	noun	4	no	mror	0.684	ccl:C2315	ⲙⲟⲩϧⲣⲏⲣ
+mrxe	noun	4	no	mrxe	0.684	ccl:C2028	ⲙⲣⲱϩⲉ
+Siwiwi	noun	1	no	siwiwi	0.684	ccl:C3859	ⲥⲏⲟⲩⲓ
+dmbe	noun	1	no	dmbe	0.688	ccl:C788	ϫⲙⲡⲏⲓ
+yerki	verb	1	no	yerki	0.688	ccl:C8457	ⲁⲣⲭⲉⲓ
+aḫro	noun	4	no	0xro	0.691	ccl:C279	ⲁϧⲱⲓⲣⲓ
+apette	noun	1	no	0pette	0.691	ccl:C181	ⲁⲡⲟⲟⲩⲧⲉ
+nxbre	noun	1	no	nxbre	0.694	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
+yelebi	noun	1	no	yelebi	0.694	ccl:C7168	ϫⲟⲗⲃⲓ
+smlo	title	2	no	smlo	0.701	ccl:C5908	ϣⲟⲩⲙⲁⲣⲉ
+mkl	noun	1	no	mkl	0.701	ccl:C9686	ⲙⲁⲕⲁⲣⲓⲁ
+nobow	noun	1	yes	nobow	0.718	ccl:C2432	ⲛⲟⲃⲉ
+qntk	title	1	no	qntk	0.721	ccl:C7796	ϭⲛⲁⲧ
+yeteke	verb	5	no	yeteke	0.724	ccl:C9772	ⲙⲉⲧⲉⲭⲉ
+atmi	verb	4	yes	0tmi	0.724	ccl:C1787	ϯⲙⲉⲓ
+kdke	title	3	yes	kdke	0.728	ccl:C9372	ⲕⲁⲧⲟⲭⲏ
+wyekite	noun	1	yes	wyekite	0.728	ccl:C8797	ⲇⲓⲟⲓⲕⲏⲧⲏⲥ
+qeswi	kin term	2	no	qeswi	0.731	ccl:C1373	ⲕⲁⲓⲥⲉ
+Ssmti	title	1	no	ssmti	0.731	ccl:C6184	ϣⲉϣⲟⲧⲉ
+mtese	verb	1	no	mtese	0.731	ccl:C2035	ⲙⲓⲥⲉ
+yotre	verb	1	no	yotre	0.741	ccl:C6943	ϩⲱⲧⲣ
+ansyi	title	1	no	0nsyi	0.744	ccl:C6851	ϩⲁⲥⲓⲉ
+wlikidbte	verb	1	no	wlikidbte	0.748	ccl:C11269	ϯⲁⲗⲏⲅⲓⲑⲁⲓ
+xlbe	noun	1	no	xlbe	0.748	ccl:C6569	ϩⲗⲡⲉ
+wrtḫn	title	3	yes	wrtxn	0.754	ccl:C9949	ⲟⲣⲑⲟⲛ
+itey	verb	1	spelled like Atiye	0itey	0.764	ccl:C8126	ⲁⲓⲧⲉⲓ
+bxeb	verb	1	no	bxeb	0.771	ccl:C6424	ϩⲱⲃ
 yelbi	noun	1	no	yelbi	0.777	ccl:C7168	ϫⲟⲗⲃⲓ
-xlbe	noun	1	no	xlbe	0.781	ccl:C6569	ϩⲗⲡⲉ
-amolẖ	title	1	no	0molX	0.784	ccl:C11157	ϩⲟⲙⲓⲗⲓⲁ
-bxeb	verb	1	no	bxeb	0.784	ccl:C6424	ϩⲱⲃ
-mlewye	title	1	no	mlewye	0.784	ccl:C1827	ⲙⲟⲩⲓⲏ
-adblelxe	noun	1	no	0dblelxe	0.794	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
-yetre	verb	1	no	yetre	0.794	ccl:C6943	ϩⲱⲧⲣ
-mlomrse	title	16	no	mlomrse	0.797	ccl:C9744	ⲙⲉⲗⲟⲅⲣⲁⲫⲟⲥ
-yntke	noun	4	yes	yntke	0.807	ccl:C879	ⲉⲓⲁ ⲛⲧⲟⲟⲩ
-Sirlmroke	title	1	no	sirlmroke	0.814	ccl:C3715	ⲥⲣⲟⲙⲣⲙ
-edxN	noun	1	no	0edxn	0.817	ccl:C8117	ⲁⲓⲇⲟⲓⲟⲛ
-mXewitr	title	5	no	mXewitr	0.821	ccl:C9804	ⲙⲓⲧⲣⲁ
-xtebeme	title	1	no	xtebeme	0.821	ccl:C460	ⲃⲟⲙ
-kedtd	verb	1	no	kedtd	0.824	ccl:C8029	ϭⲟϫϭϫ
-mXli	adjective	1	no	mXli	0.831	ccl:C2280	ⲙⲁϧⲟⲩⲗ
-plXn	title	1	no	plXn	0.831	ccl:C5455	ⲱⲗ ⲉϩⲟⲩⲛ
-nxbr	noun	4	no	nxbr	0.834	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
-ylsni	verb	1	no	ylsni	0.834	ccl:C989	ⲓⲱⲥ (ⲛ-)
-xlmwi	noun	1	no	xlmwi	0.837	ccl:C6563	ϩⲁⲗⲙⲓ
-sedew	adjective	1	no	sedew	0.841	ccl:C6225	ϣⲱϫⲉ
-mselẖse	title	2	no	mselXse	0.850	ccl:C5016	ⲟⲩⲁⲙⲥⲁⲣⲝ
+amolẖ	title	1	no	0molX	0.781	ccl:C11157	ϩⲟⲙⲓⲗⲓⲁ
+smlowi	kin term	15	no	smlowi	0.787	ccl:C3202	ⲥⲃⲣⲟⲟⲩⲉ
+adblelxe	noun	1	no	0dblelxe	0.791	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
+mXli	adjective	1	no	mXli	0.797	ccl:C2280	ⲙⲁϧⲟⲩⲗ
+plXn	title	1	no	plXn	0.797	ccl:C5455	ⲱⲗ ⲉϩⲟⲩⲛ
+yntke	noun	4	yes	yntke	0.801	ccl:C879	ⲉⲓⲁ ⲛⲧⲟⲟⲩ
+mlomrse	title	16	no	mlomrse	0.804	ccl:C9744	ⲙⲉⲗⲟⲅⲣⲁⲫⲟⲥ
+nxbr	noun	4	no	nxbr	0.811	ccl:C2440	ⲛⲟⲃⲣⲟⲩ
+yetre	verb	1	no	yetre	0.811	ccl:C6943	ϩⲱⲧⲣ
+mrebqo	title	2	no	mrebqo	0.814	ccl:C5358	ⲙⲁⲣⲟⲩⲟϭⲉ
+mXewitr	title	5	no	mXewitr	0.817	ccl:C9804	ⲙⲓⲧⲣⲁ
+xtebeme	title	1	no	xtebeme	0.817	ccl:C460	ⲃⲟⲙ
+mXeyot	title	1	no	mXeyot	0.821	ccl:C2049	ⲙⲉⲥⲓⲱϯ
+sedew	adjective	1	no	sedew	0.827	ccl:C6225	ϣⲱϫⲉ
+mlewye	title	1	no	mlewye	0.831	ccl:C1827	ⲙⲟⲩⲓⲏ
+xlmwi	noun	1	no	xlmwi	0.831	ccl:C6563	ϩⲁⲗⲙⲓ
+xbxeNkdi	title	2	no	xbxenekdi	0.834	ccl:C6429	ϩⲱⲃ ⲛϭⲓϫ
+yemoqe	verb	2	no	yemoqe	0.834	ccl:C1838	ⲙⲓⲕⲉ
+xrpeN	title	1	no	xrpene	0.834	ccl:C475	ⲉⲓⲉⲣⲃⲟⲟⲛⲉ
+Sirlmroke	title	1	no	sirlmroke	0.837	ccl:C3715	ⲥⲣⲟⲙⲣⲙ
+arbxteke	verb	1	no	0rbxteke	0.837	ccl:C365	ⲉⲣⲃⲟⲕⲓ
+kedtd	verb	1	no	kedtd	0.837	ccl:C8029	ϭⲟϫϭϫ
+xml	noun	1	no	xml	0.837	ccl:C6506	ϩⲙϩⲁⲗ
+mselẖse	title	2	no	mselXse	0.841	ccl:C5016	ⲟⲩⲁⲙⲥⲁⲣⲝ
+kedebx	verb	2	no	kedebx	0.847	ccl:C8018	ϭⲱϫⲃ
 arosd	title	1	yes	0rosd	0.850	ccl:C201	ⲁⲣⲟϣ
-kdito	kin term	2	no	kdito	0.864	ccl:C7530	ϫⲓϫⲱⲓ
-atbelw	noun	1	no	0tbelw	0.864	ccl:C4107	ⲧⲃⲏⲗ
-xml	noun	1	no	xml	0.874	ccl:C6506	ϩⲙϩⲁⲗ
-arbxteke	verb	1	no	0rbxteke	0.877	ccl:C365	ⲉⲣⲃⲟⲕⲓ
-xmomole	noun	1	no	xmomole	0.887	ccl:C10932	ⲭⲁⲙⲉⲙⲉⲗⲟⲛ
-yetolxe	noun	1	no	yetolxe	0.887	ccl:C7197	ϫⲱⲗϩ
-kdimloye	noun	1	no	kdimloye	0.890	ccl:C10949	ⲭⲉⲓⲙⲁⲣⲣⲟⲥ
-kedebxeky	verb	1	no	kedebxeky	0.897	ccl:C1426	ⲕⲱⲧⲉ (ⲉⲡⲁϩⲟⲩ)
-qyise	epithet	1	no	qyise	0.897	ccl:C8143	ⲁⲕⲁⲕⲓⲁⲥ
-Wyeki	noun	1	yes	wyeki	0.904	ccl:C4948	ⲟⲩⲟⲉⲓⲉ
-adblelx	noun	1	no	0dblelx	0.907	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
-xmll	noun	1	no	xmll	0.907	ccl:C9830	ⲙⲟⲩⲗⲗⲁ
-XtoXe	noun	2	no	XtoXe	0.924	ccl:C6953	ϩⲧⲟⲟⲩⲉ
-mXeyo	title	1	no	mXeyo	0.924	ccl:C1827	ⲙⲟⲩⲓⲏ
-ẖẖll	noun	1	no	XXll	0.924	ccl:C1541	ϩⲓⲁⲗⲗⲁ
-xbxeNkdi	title	2	no	xbxenkdi	0.930	ccl:C6429	ϩⲱⲃ ⲛϭⲓϫ
-mkilw	noun	1	no	mkilw	0.930	ccl:C9794	ⲙⲓⲗⳇ
-Slxs	title	1	no	slxs	0.934	ccl:C5813	ϣⲟⲗⲥ
-roSlleb	noun	1	no	roslleb	0.934	ccl:C1722	ϭⲓⲥⲗⲁⲩⲟ
-aḫr	verb	1	no	0xr	0.937	ccl:C6759	ϩⲱⲣ
-diyXo	verb	1	no	diyXo	0.937	ccl:C6407	ϫⲉⲙϩⲟ
-attḫ	noun	6	no	0ttx	0.940	ccl:C6952	ϩϯⲧ
-smrso : kroro	title	1	no	smrsokroro	0.940	ccl:C1322	ⲙⲁⲥ ⲛⲕⲣⲟⲩⲣ
-xrpx	title	3	spelled like ḫrpḫe	xrpx	0.944	ccl:C6319	ϧⲟⲣⲡⲥ
-xrpN	title	1	no	xrpn	0.944	ccl:C6319	ϧⲟⲣⲡⲥ
-Xrmx	noun	1	no	Xrmx	0.950	ccl:C6801	ϩⲣⲙⲁⲛ
-kdilX	noun	1	no	kdilX	0.950	ccl:C7689	ϭⲗϩ
-xrpeN	title	1	no	xrpen	0.950	ccl:C6319	ϧⲟⲣⲡⲥ
-xrpxte	verb	1	no	xrpxte	0.950	ccl:C6278	ⲣϥⲛⲧ
-axN	noun	1	no	0xn	0.967	ccl:C6672	ϩⲓⲛ
-mklw	noun	1	no	mklw	0.967	ccl:C9835	ⲙⲟⲭⲗⲟⲥ
-emekwdq	title	1	no	0emekwdq	0.970	ccl:C9067	ⲉⲩⲇⲟⲕⲓⲁ
-lXSmlowoto	title	1	no	lXsmlowoto	0.970	ccl:C11159	ϩⲟⲙⲟⲗⲟⲅⲏⲧⲏⲥ
-qyitXl	epithet	1	no	qyitXl	0.973	ccl:C8040	ϭⲁϭⲉⲧⲟⲗ
-yikid	noun	3	no	yikid	0.977	ccl:C1850	ⲙⲁⲕⲟⲧ
-yidxlsni	verb	1	no	yidxlsni	0.980	ccl:C842	ⲉⲓ (ⲉⲃⲟⲗ ϩⲛ-)
+ylsni	verb	1	no	ylsni	0.850	ccl:C989	ⲓⲱⲥ (ⲛ-)
+kdito	kin term	2	no	kdito	0.860	ccl:C7530	ϫⲓϫⲱⲓ
+kdimloye	noun	1	no	kdimloye	0.867	ccl:C10949	ⲭⲉⲓⲙⲁⲣⲣⲟⲥ
+xmomole	noun	1	no	xmomole	0.870	ccl:C10932	ⲭⲁⲙⲉⲙⲉⲗⲟⲛ
+kedebxeky	verb	1	no	kedebxeky	0.877	ccl:C1426	ⲕⲱⲧⲉ (ⲉⲡⲁϩⲟⲩ)
+Wyeki	noun	1	yes	wyeki	0.884	ccl:C4948	ⲟⲩⲟⲉⲓⲉ
+yetolxe	noun	1	no	yetolxe	0.884	ccl:C7197	ϫⲱⲗϩ
+qyise	epithet	1	no	qyise	0.890	ccl:C8143	ⲁⲕⲁⲕⲓⲁⲥ
+adblelx	noun	1	no	0dblelx	0.894	ccl:C7015	ϩⲁϥⲗⲉⲗⲉ
+aḫr	verb	1	no	0xr	0.897	ccl:C6759	ϩⲱⲣ
+XtoXe	noun	2	no	XtoXe	0.900	ccl:C6953	ϩⲧⲟⲟⲩⲉ
+mXeyo	title	1	no	mXeyo	0.900	ccl:C1827	ⲙⲟⲩⲓⲏ
+mkilw	noun	1	no	mkilw	0.900	ccl:C9794	ⲙⲓⲗⳇ
+xmll	noun	1	no	xmll	0.900	ccl:C9830	ⲙⲟⲩⲗⲗⲁ
+ẖẖll	noun	1	no	XXll	0.910	ccl:C1541	ϩⲓⲁⲗⲗⲁ
+Slxs	title	1	no	slxs	0.914	ccl:C5813	ϣⲟⲗⲥ
+atbelw	noun	1	no	0tbelw	0.914	ccl:C4107	ⲧⲃⲏⲗ
+attḫ	noun	6	no	0ttx	0.917	ccl:C6952	ϩϯⲧ
+kdilX	noun	1	no	kdilX	0.920	ccl:C7689	ϭⲗϩ
+smrso : kroro	title	1	no	smrsokroro	0.920	ccl:C1322	ⲙⲁⲥ ⲛⲕⲣⲟⲩⲣ
+xrpN	title	1	no	xrpne	0.920	ccl:C6319	ϧⲟⲣⲡⲥ
+xrpx	title	3	spelled like ḫrpḫe	xrpx	0.924	ccl:C6319	ϧⲟⲣⲡⲥ
+roSlleb	noun	1	no	roslleb	0.927	ccl:C1722	ϭⲓⲥⲗⲁⲩⲟ
+diyXo	verb	1	no	diyXo	0.930	ccl:C6407	ϫⲉⲙϩⲟ
+Xrmx	noun	1	no	Xrmx	0.934	ccl:C6801	ϩⲣⲙⲁⲛ
+axN	noun	1	no	0xne	0.934	ccl:C929	ⲉⲓⲛⲉ
+mklw	noun	1	no	mklw	0.957	ccl:C9835	ⲙⲟⲭⲗⲟⲥ
+yikid	noun	3	no	yikid	0.960	ccl:C1850	ⲙⲁⲕⲟⲧ
+emekwdq	title	1	no	0emekwdq	0.960	ccl:C9067	ⲉⲩⲇⲟⲕⲓⲁ
+qyitXl	epithet	1	no	qyitXl	0.970	ccl:C8040	ϭⲁϭⲉⲧⲟⲗ
+lXSmlowoto	title	1	no	lXsmlowoto	0.973	ccl:C11159	ϩⲟⲙⲟⲗⲟⲅⲏⲧⲏⲥ
+reNlX	title	1	no	renelX	0.973	ccl:C1876	ⲣⲉϥⲙⲗⲁϧ
+yidxlsni	verb	1	no	yidxlsni	0.973	ccl:C842	ⲉⲓ (ⲉⲃⲟⲗ ϩⲛ-)
+xrpxte	verb	1	no	xrpxte	0.977	ccl:C6278	ⲣϥⲛⲧ
+msXx	title	1	no	msXx	0.980	ccl:C2067	ⲙⲥⲁϩ
 xbxe	title	3	no	xbxe	0.983	ccl:C6326	ϧⲁϧ
-lXye	title	1	no	lXye	0.983	ccl:C1724	ⲗⲁϣⲓⲉ
-msXx	title	1	no	msXx	0.983	ccl:C2067	ⲙⲥⲁϩ
-xmyl	noun	1	no	xmyl	0.983	ccl:C6506	ϩⲙϩⲁⲗ
+lXye	title	1	no	lXye	0.987	ccl:C1724	ⲗⲁϣⲓⲉ
+xmyl	noun	1	no	xmyl	0.987	ccl:C6506	ϩⲙϩⲁⲗ
 ydḫno	verb	1	yes	ydxno	0.997	ccl:C6296	ϫⲓⳉⲛⲟⲟϥ
 aẖrrb	title	2	no	0Xrrb	1.000	ccl:C5546	ⲱⲣⲉⲃ
-reNlX	title	1	no	renlX	1.000	ccl:C1876	ⲣⲉϥⲙⲗⲁϧ
 yedxbx	verb	1	no	yedxbx	1.000	ccl:C6327	ϧⲱϧ

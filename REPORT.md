@@ -319,8 +319,10 @@ After "are you giving up?", four more lines of attack, then data.
    source, against 4 by consonants in the same pool; nine loans move up and three down. Of the 14 titles, nouns
    and verbs of the bar, 6 have their source among the five best with vowels (4 by consonants; 8 in the five best
    of both searches together, which is ten candidates a loan). Against chance nothing changes: the best match of
-   a known loan beats 95% of made-up words for 1 of 11, and of 241 pieces without a meaning 18 beat the 5% bar,
-   where the made-up words predict 12 and the rate of 64 native words in each piece's pool predicts 18. Two more
-   blind checkers read the nine of the 18 that the first pack did not hold, with six decoys, and said no to all 15
-   (139,936 subagent tokens); two pieces of the first pack (`mtr`, `tmNte`) have a best match with vowels that no
-   checker was shown.
+   a known loan beats 95% of made-up words for 1 of 11, and of 241 pieces without a meaning 13 beat the 5% bar,
+   where the made-up words predict 12 and the rate of 64 native words in each piece's pool predicts 8. For seven
+   of the 13 the first checkers had already been shown the best match; two more blind checkers read the other six
+   with six decoys and said no to all 12. A first run of this item left out the e of the sign ne (18 pieces under
+   the bar, a checkers' pass of 15 items, all "no"); the review found it, and the numbers here are after the fix.
+   Cost: 139,936 subagent tokens for the first run's checkers, 446,695 for the review, 133,211 for the corrected
+   run's checkers.

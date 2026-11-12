@@ -64,6 +64,10 @@ def test_letters_with_vowels():
     assert E.headword("Pẖome", True) == "pXome" and E.headword("a[..]te", True) == ""
     assert (E.consonants("pelmos"), E.consonants("0erike"), E.consonants("")) == (4, 3, 0)
     assert all(c in E.MER + E.VOWELS_M for c in E.meroitic("abdeiklmnopqrstwxyNSX", True))
+    # the sign ne (N) writes its e, once; without vowels it is n as before
+    assert E.meroitic("tmNte", True) == "tmnete" and E.meroitic("mleNe", True) == "mlene"
+    assert E.meroitic("N", True) == "ne" and E.meroitic("tmNte") == "tmnt"
+    assert E.headword("qorene", True) == "qorene" and E.headword("ḫrpḫne", True) == "xrpxne"
     # Coptic: each vowel as its class, a doubled one once; the glides and the mark of the start are as without
     assert E.coptic("ⲗⲉⲙⲏⲏϣⲉ", True) == "lemeSe" and E.coptic("ⲗⲁϣⲁⲛⲉ", True) == "laSane"
     assert E.coptic("ϩⲟⲛⲧ", True) == "hont" and E.coptic("ⲣⲏⲧ", True) == "ret"
@@ -537,11 +541,11 @@ def test_reported_vowel_search():
     assert (t["words"]["loans"], t["words"]["consonants"]["top5"], t["words"]["vowels"]["top5"]) == (8, 3, 6)
     assert (t["names"]["loans"], t["names"]["consonants"]["top5"], t["names"]["vowels"]["top5"]) == (5, 1, 1)
     assert t["chance"] == {"compared": 11, "at_most_0.05": 1}
-    assert f["native"] == {"words": 64, "at_most_0.05": {"adjective+noun": 5, "noun": 5, "verb": 3},
-                           "at_most_0.2": {"adjective+noun": 18, "noun": 19, "verb": 17}}
+    assert f["native"] == {"words": 64, "at_most_0.05": {"adjective+noun": 2, "noun": 2, "verb": 3},
+                           "at_most_0.2": {"adjective+noun": 16, "noun": 17, "verb": 17}}
     u = f["unknown"]
-    assert (u["searched"], u["new"], u["at_most_0.05"], u["expected_by_chance"]) == (278, 241, 18, 12.1)
-    assert (u["as_many_by_chance"], u["passing_q_0.2"], u["fewest_at_the_smallest_chance_to_pass"]) == (0.06, 0, 5)
+    assert (u["searched"], u["new"], u["at_most_0.05"], u["expected_by_chance"]) == (278, 241, 13, 12.1)
+    assert (u["as_many_by_chance"], u["passing_q_0.2"], u["fewest_at_the_smallest_chance_to_pass"]) == (0.43, 0, 5)
     # the figures are the result files' own
     rows = [json.loads(l) for l in (ROOT / VOWEL_FILES[2]).read_text(encoding="utf-8").splitlines()]
     test = [json.loads(l) for l in (ROOT / VOWEL_FILES[1]).read_text(encoding="utf-8").splitlines()]
@@ -620,31 +624,35 @@ def test_the_vowel_list_and_the_second_check():
     assert len(lines) == 279 and all(c[6].startswith("ccl:") for c in lines[1:])
     meanings = {h["meaning"] for r in rows for h in r["vowels"]["hits"]} - {""}
     assert not meanings & {cell for c in lines[1:] for cell in c}
-    # the second pack: the pieces that beat the bar and were not in the first pack, and six decoys
+    # the second pack: the pieces that beat the bar with a best match the first checkers were not shown, and
+    # six decoys
     key = json.loads((ROOT / "data/sources/egyptian/check_vowels_key.json").read_text(encoding="utf-8"))
-    seen = {a["piece"] for a in json.loads((ROOT / "data/sources/egyptian/check_key.json").read_text(encoding="utf-8")).values()}
-    low = {r["piece"] for r in rows if r["vowels"]["chance"] <= E.BAR and not (r["mentions_egyptian"] or r["spelled_like"])}
-    assert (len(low), len(low & seen)) == (18, 9)
-    assert {a["piece"] for a in key.values() if not a["decoy"]} == low - seen
-    assert sum(a["decoy"] for a in key.values()) == 6 and all(a["chance"] >= 0.5 for a in key.values() if a["decoy"])
-    assert not {a["piece"] for a in key.values()} & seen
-    c = json.loads((ROOT / "data/sources/egyptian/out/check_vowels.json").read_text(encoding="utf-8"))
-    assert (c["items"], c["best"], c["decoys"], c["answered_by_both"], c["same_verdict"]) == (15, 9, 6, 15, 15)
-    for reader in ("reader1", "reader2"):
-        assert c["readers"][reader] == {"answered": 15, "best": {"no": 9}, "decoys": {"no": 6}}
-    assert c["fits_for_both"] == c["known_for_both"] == []
-    # the pieces of the first pack whose best match with vowels no checker was shown, as the page says
-    packs = ("data/sources/egyptian/check/pack.jsonl", "data/sources/egyptian/check_vowels/pack.jsonl")
-    needs(*packs)
+    first = json.loads((ROOT / "data/sources/egyptian/check_key.json").read_text(encoding="utf-8"))
+    needs("data/sources/egyptian/check/pack.jsonl", "data/sources/egyptian/check_vowels/pack.jsonl")
     shown = collections.defaultdict(set)
-    for pack, keyfile in zip(packs, ("check_key.json", "check_vowels_key.json")):
-        answer = json.loads((ROOT / "data/sources/egyptian" / keyfile).read_text(encoding="utf-8"))
-        for item in map(json.loads, (ROOT / pack).read_text(encoding="utf-8").splitlines()):
-            shown[answer[item["id"]]["piece"]] |= {h["id"] for h in item["candidates"]}
-    unseen = sorted(r["piece"] for r in rows if r["piece"] in low and r["vowels"]["hits"][0]["id"] not in shown[r["piece"]])
-    assert unseen == ["mtr", "tmNte"] and set(unseen) <= seen
+    for item in map(json.loads, (ROOT / "data/sources/egyptian/check/pack.jsonl").read_text(encoding="utf-8").splitlines()):
+        shown[first[item["id"]]["piece"]] |= {h["id"] for h in item["candidates"]}
+    low = {r["piece"]: r for r in rows
+           if r["vowels"]["chance"] <= E.BAR and not (r["mentions_egyptian"] or r["spelled_like"])}
+    unseen = {p for p, r in low.items() if r["vowels"]["hits"][0]["id"] not in shown[p]}
+    assert (len(low), len(unseen)) == (13, 6)
+    assert sorted(unseen) == ["lks", "mtr", "ponni", "ptri", "tereki", "tmNte"]
+    assert {a["piece"] for a in key.values() if not a["decoy"]} == unseen
+    assert sum(a["decoy"] for a in key.values()) == 6 and all(a["chance"] >= 0.5 for a in key.values() if a["decoy"])
+    # every best match that beats the bar has been before a checker, in one pack or the other
+    second = collections.defaultdict(set)
+    for item in map(json.loads, (ROOT / "data/sources/egyptian/check_vowels/pack.jsonl").read_text(encoding="utf-8").splitlines()):
+        second[key[item["id"]]["piece"]] |= {h["id"] for h in item["candidates"]}
+    assert all(r["vowels"]["hits"][0]["id"] in shown[p] | second[p] for p, r in low.items())
+    c = json.loads((ROOT / "data/sources/egyptian/out/check_vowels.json").read_text(encoding="utf-8"))
+    assert (c["items"], c["best"], c["decoys"], c["answered_by_both"], c["same_verdict"]) == (12, 6, 6, 12, 12)
+    for reader in ("reader1", "reader2"):
+        assert c["readers"][reader] == {"answered": 12, "best": {"no": 6}, "decoys": {"no": 6}}
+    assert c["fits_for_both"] == c["known_for_both"] == []
     flat = " ".join(PAGE.read_text(encoding="utf-8").split())
-    assert "two (`mtr` and `tmNte`) have a best match with vowels that the first checkers were not shown" in flat
+    for text in ("For seven of the 13, the first checkers had already been shown",
+                 "`lks`, `mtr`, `ponni`, `ptri`, `tereki` and `tmNte`", 'for all 12: no new source, no decoy accepted'):
+        assert text in flat, text
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

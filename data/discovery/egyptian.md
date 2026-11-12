@@ -170,9 +170,10 @@ pack. What the decoys show is that they did not accept look-alikes.
 Sections 2 to 4 compare consonants only. This run, made the same day, compares the written vowels too. The Demotic
 list writes none, so it is on the Coptic entries alone: a Meroitic word keeps its e, i and o (a is written at the
 start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ and ⲏ; ⲓ and ⲉⲓ; ⲟ, ⲱ, ⲟⲩ and ⲩ), and
-the model counts a vowel like any other letter. The e of the signs ne and se is compared only where the spelling
-writes it as a letter of its own: the corpus spelling writes the two signs as N and (in most texts) s, which count
-as n and s, and a headword is taken in a corpus spelling that writes ne as N and se as s and e. The made-up words
+the model counts a vowel like any other letter. The sign ne writes its e. The e of the sign se is compared only
+where the spelling writes it as a letter of its own: a headword is taken in a spelling that writes se as s and e,
+but in a piece taken from the texts the corpus's s is the sign se in the funerary texts and in Griffith's rows and
+the plain s in the royal narratives, so it counts as s. The made-up words
 are drawn as in section 6, from the headwords with their vowels: 300 of each length from 3 to 12 letters (12 and
 more together), vowels counted, each with three consonants or more. A title or a noun is searched among the 7,139
 Coptic nouns, a verb among the 2,946 verbs.
@@ -208,32 +209,32 @@ ten candidates a loan, hold the source for 8 of the 14. That is ten candidates a
 reached.
 
 **Against chance.** The best match of a known loan beats the best matches of 95% of made-up words for 1 of the 11
-loans compared (`pelmos`, with a word that is not its source). The made-up words are a lenient yardstick here: of
-the 64 Meroitic words with an accepted meaning and no Egyptian link, 5 beat the 5% bar among the nouns where 3 are
-expected, and 19 beat a 20% bar where 13 are expected. A real Meroitic word fits Coptic vowels a little better
-than a made-up one, loan or not.
+loans compared (`pelmos`, with a word that is not its source). The made-up words are a fair yardstick at that
+bar: of the 64 Meroitic words with an accepted meaning and no Egyptian link, 2 beat the 5% bar among the nouns
+where 3 are expected. They are a little lenient further up, where 17 beat a 20% bar and 13 are expected.
 
 **The pieces without a meaning.** 278 titles, nouns, verbs and adjectives were searched (names are left out: the
 Coptic lexicon holds few). 37 are set aside as in section 3, which leaves 241.
 
 | | With vowels, Coptic entries |
 |---|---|
-| Pieces whose best match beats the 5% bar | 18 |
+| Pieces whose best match beats the 5% bar | 13 |
 | Expected by chance (5% of 241, by the made-up words) | 12 |
-| Expected at the rate of the 64 native words in each piece's pool (5 of 64 among the nouns, 3 of 64 among the verbs) | 18 |
-| How often chance alone gives 18 or more, by the made-up words | 6% |
+| Expected at the rate of the 64 native words in each piece's pool (2 of 64 among the nouns, 3 of 64 among the verbs) | 8 |
+| How often chance alone gives 13 or more, by the made-up words | 43% |
 | Pieces that pass the bar for 241 tries | 0 (it needs five pieces at the smallest chance) |
 
-So 18 is what words that are not loans give. Every searched piece is in
+So 13 is what chance gives. Every searched piece is in
 [`egyptian_candidates_vowels.tsv`](egyptian_candidates_vowels.tsv).
 
-**The check.** Nine of the 18 had been in the first pack (`prSn`, `petmoS`, `pertese` and `stol` among them: the
-forms of known loans of section 4). The other nine went to two new checkers, blind, with six decoys. Both
-answered "no candidate is supported" for all 15: no new source, no decoy accepted. Two of the nine are titles in
--ose that the search set beside Greek loans in Coptic that end in -ⲟⲥ (`mseqorose` beside the word for a cook
-or butcher); the checkers found nothing in the contexts to support them. Of the nine that had been in the first
-pack, two (`mtr` and `tmNte`) have a best match with vowels that the first checkers were not shown (ⲙⲁⲧⲣ and
-ⲙⲛⲧ): no checker has read these two matches.
+**The check.** For seven of the 13, the first checkers had already been shown the word that is the best match
+with vowels (`prSn`, `petmoS`, `pertese` and `stol` among them: the forms of known loans of section 4). The other
+six went to two new checkers, blind, with six decoys: `lks`, `mtr`, `ponni`, `ptri`, `tereki` and `tmNte`. Both
+answered "no candidate is supported" for all 12: no new source, no decoy accepted.
+
+An earlier run of this section left out the e of the sign ne. It had 18 pieces under the bar, and its two
+checkers said no to nine of them and to six decoys. The review found the slip; the numbers above are after the
+fix, and the earlier pack and its answers are kept locally and counted nowhere.
 
 ## 6. Method
 
@@ -294,5 +295,7 @@ compares it with what the build gives and stops if it would change.
 
 The two readers of the answer key took 364,923 subagent tokens, the two checkers 249,072 and one web check about
 8,000: about 0.62 million, against about 1 million estimated beforehand; its review took 401,989 more. The vowel
-run of section 5 added 139,936 for its two checkers, against about 0.5 million estimated with its review. The
-search itself is plain Python: three minutes by consonants, eleven with vowels.
+run of section 5 was estimated at about 0.5 million with its review and took more: 139,936 for the two checkers
+of its first run, 446,695 for the review that found the slip in it, and 133,211 for the two checkers of the
+corrected run, about 0.72 million before the reviewer's last look. The search itself is plain Python: three
+minutes by consonants, eleven with vowels.
