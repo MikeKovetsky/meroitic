@@ -276,19 +276,21 @@ def neutral(e, mer=MER):
     return p
 
 
-def model(counts=None, mer=MER, egy=EGY):
-    """Log chances from the counts of aligned loans, on top of the neutral table, for the two alphabets."""
+def model(counts=None, mer=MER, egy=EGY, articles=ARTICLES, start=neutral):
+    """Log chances from the counts of aligned loans, on top of the neutral table, for the two alphabets.
+    `articles` are the letter strings a source word may carry in front, and `start` gives the starting chances of
+    one source letter; src/variants.py passes its own, the search for Egyptian words leaves both as they are."""
     c = counts or {"out": collections.Counter(), "add": collections.Counter(), "article": collections.Counter()}
     out = {}
     for e in egy:
         n = sum(k for (x, _), k in c["out"].items() if x == e)
-        out[e] = {m: math.log((c["out"][(e, m)] + STRENGTH * p) / (n + STRENGTH)) for m, p in neutral(e, mer).items()}
+        out[e] = {m: math.log((c["out"][(e, m)] + STRENGTH * p) / (n + STRENGTH)) for m, p in start(e, mer).items()}
     added, kept = sum(c["add"].values()), sum(c["out"].values())
     p_add = (added + 1.0) / (added + kept + 10.0)
     add = {m: math.log(p_add * (c["add"][m] + 2.0 / len(mer)) / (added + 2.0)) for m in mer}
     stay = math.log(1 - p_add)
     n = sum(c["article"].values())
-    article = {a: math.log((c["article"][a] + 1.0) / (n + len(ARTICLES))) for a in ARTICLES}
+    article = {a: math.log((c["article"][a] + 1.0) / (n + len(articles))) for a in articles}
     return {"out": {e: {m: v + stay for m, v in row.items()} for e, row in out.items()}, "add": add,
             "article": article}
 
@@ -311,9 +313,10 @@ def first_row(word, md):
 
 
 def score(word, code, md):
-    """The best log chance that the Egyptian letters `code`, alone or with an article, give the Meroitic word."""
+    """The best log chance that the Egyptian letters `code`, alone or with an article, give the Meroitic word.
+    The articles are the model's: ARTICLES, unless the model was made with others."""
     best = -math.inf
-    for a in ARTICLES:
+    for a in md["article"]:
         row = first_row(word, md)
         for e in a + code:
             row = step(row, e, word, md)
@@ -324,7 +327,7 @@ def score(word, code, md):
 def align(word, code, md):
     """The best alignment: (article, [(Egyptian letter or "", Meroitic letter or "")])."""
     best = None
-    for a in ARTICLES:
+    for a in md["article"]:
         full = a + code
         rows = [first_row(word, md)]
         for e in full:
@@ -347,9 +350,9 @@ def align(word, code, md):
     return best[1], best[2]
 
 
-def train(pairs, rounds=3, mer=MER, egy=EGY):
+def train(pairs, rounds=3, mer=MER, egy=EGY, articles=ARTICLES, start=neutral):
     """The model counted from known loans: pairs of (Meroitic letters, the letter strings of the true source)."""
-    md = model(None, mer, egy)
+    md = model(None, mer, egy, articles, start)
     for _ in range(rounds):
         counts = {"out": collections.Counter(), "add": collections.Counter(), "article": collections.Counter()}
         for word, codes in pairs:
@@ -364,7 +367,7 @@ def train(pairs, rounds=3, mer=MER, egy=EGY):
                 used += 1
                 if used > len(a):            # the article's own letter is the article, not a sound match
                     counts["out"][(e, m)] += 1
-        md = model(counts, mer, egy)
+        md = model(counts, mer, egy, articles, start)
     return md
 
 
@@ -400,7 +403,7 @@ def search(word, trie, md, top=1, floor=None):
             if max(new) + bonus >= bar[0]:
                 walk(child, new, bonus)
 
-    for a in ARTICLES:
+    for a in md["article"]:
         row = first_row(word, md)
         for e in a:
             row = step(row, e, word, md)
@@ -1018,11 +1021,10 @@ def check_pack(with_vowels=False):
 VERDICTS = ("known", "fits", "no")
 
 
-def check_merge(with_vowels=False):
-    """Read the checkers' answers (check/reader*.jsonl) against the key of decoys; write check.json.
-    `with_vowels`: the second pack's (check_vowels/, check_vowels.json)."""
-    folder, stem = (CHECK_VOWELS, "check_vowels") if with_vowels else (CHECK, "check")
-    answer = json.loads((HERE / f"{stem}_key.json").read_text(encoding="utf-8"))
+def answers(folder, ids, verdicts=VERDICTS):
+    """Each checker's usable answers in a pack's folder: {the stem of its reader*.jsonl: {item id: answer}}. A line
+    that is not JSON, names no item of `ids` or gives no verdict of `verdicts` is left out, and the first answer
+    to an item stands."""
     readers = {}
     for path in sorted(folder.glob("reader*.jsonl")):
         got = {}
@@ -1031,9 +1033,18 @@ def check_merge(with_vowels=False):
                 a = json.loads(line)
             except ValueError:
                 continue
-            if isinstance(a, dict) and isinstance(a.get("id"), str) and a["id"] in answer and a.get("verdict") in VERDICTS:
+            if isinstance(a, dict) and isinstance(a.get("id"), str) and a["id"] in ids and a.get("verdict") in verdicts:
                 got.setdefault(a["id"], a)
         readers[path.stem] = got
+    return readers
+
+
+def check_merge(with_vowels=False):
+    """Read the checkers' answers (check/reader*.jsonl) against the key of decoys; write check.json.
+    `with_vowels`: the second pack's (check_vowels/, check_vowels.json)."""
+    folder, stem = (CHECK_VOWELS, "check_vowels") if with_vowels else (CHECK, "check")
+    answer = json.loads((HERE / f"{stem}_key.json").read_text(encoding="utf-8"))
+    readers = answers(folder, answer)
     real = [i for i, a in answer.items() if not a["decoy"]]
     decoy = [i for i, a in answer.items() if a["decoy"]]
     out = {"items": len(answer), "best": len(real), "decoys": len(decoy), "readers": {}}

@@ -45,6 +45,11 @@ open). What is new, with the run behind each claim:
    `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
    with near-copies counted once); every legible word is translated in 82 of 605 texts (Day four, below;
    `data/discovery/coverage.md`).
+9. **A search by letters finds the entry of a hidden spelling variant 77% of the time, and its test still missed
+   the bar.** 187 of 242 variants listed in Rilly's lexicon come back to their own entry as the single best
+   match, but only 105 (43%, the bar was half) with a match that stands out from made-up words: no word of three
+   or four letters can. On the pieces without a meaning the letters alone decide nothing, and the checkers have
+   not run yet (Day four, evening, below; `data/discovery/variants.md`).
 
 The night's first answers, kept as run: the model already knows the published vocabulary (35/35 matching from
 memory, `M_f0/1`); asked openly it answered 52 of 82 published words (50 right, 1 partly right, 1 wrong) and said
@@ -326,3 +331,39 @@ After "are you giving up?", four more lines of attack, then data.
    the bar, a checkers' pass of 15 items, all "no"); the review found it, and the numbers here are after the fix.
    Cost: 139,936 subagent tokens for the first run's checkers, 508,760 for the review in two rounds and 133,211
    for the corrected run's checkers: about 0.78 million, against about 0.5 million estimated.
+
+## Day four, evening (2026-11-11): spellings of known words among the unknown pieces
+
+`src/variants.py`, `tests/test_variants.py`; the page is [`data/discovery/variants.md`](data/discovery/variants.md).
+
+1. **The question:** which of the 1,336 pieces without an accepted meaning are another spelling of a word of
+   Rilly's lexicon, or such a word with an ending? The pool is the lexicon's 688 words (655 different headword
+   spellings, 1,067 letter strings with the listed variants), small enough for a search by letters.
+2. **The model counts and assumes nothing.** It starts flat and counts the alternations on the 307 variants the
+   lexicon lists: an `e` left out or added 133 times, one vowel for another 73 times, the vowel at the start
+   coming or going 42 times; among consonants `l` for `n` and `t` for `s` five times each, `t` for `d`, `q` for
+   `w` and `k` for `ḫ` four times each. No listed variant has `r` for `l`.
+3. **The bar, set before the first run:** at least two thirds of the hidden variants come back to their own entry
+   as the single best match, and at least half do so with a match that at most 5% of made-up words of the same
+   length equal.
+4. **The test missed it.** Of 242 hidden variants, 187 (77%) come back as the single best match, so the first
+   part is reached, and 232 (96%) are among the three best. But 105 (43%) stand out as well, so the second part
+   is not reached. By length: none of 93 with three or four letters, 59 of 92 with five or six, 46 of 57 with
+   seven or more. Of 1,000 made-up words of three letters, 350 are a spelling of the lexicon letter for letter.
+   With the entry's other variants hidden too, 178 come back (74%).
+5. **When a match stands out it is right:** 105 times in 118, and 12 of the other 13 went to an entry that the
+   lexicon itself links with the right one, or tied with it (counted after the run).
+6. **The unknown pieces:** 1,210 searched (126 are too short or hold a lost sign). 70 are headwords that the
+   lexicon links with their best match itself. Of the other 1,140, 82 beat the 5% bar where the made-up words
+   predict 57 (chance gives as many 0.08% of the time); none passes the bar for 1,140 tries.
+7. **A second yardstick takes the excess away.** Of 76 words with an accepted meaning that the lexicon links
+   with nothing, 8 beat the same bar (6 of the 24 with seven letters or more): different words that share a part,
+   such as two royal names in `-demni`. At their rate the 1,140 pieces would give about 104.
+8. **The examples that started the step:** `pertese` beats the bar as `perite` with `-se`; `prSn` and `petmoS`
+   have the right entry as their best match and do not beat the bar (`r` and `t` for `l` are in no listed
+   variant); `amn` has three letters.
+9. **The check has not run.** All 105 matches under the bar (the 82 and the 23 among the 70) are packed in three
+   packs with 12 decoys and 12 listed variants whose answer is known, for two blind checkers each. The confirmed
+   list and the words it would move in the coverage map follow that run.
+10. **Limits:** one scholar's list of variants is both the training and the test; the model counts from the
+    headword to the variant only; letters cannot judge a short piece.

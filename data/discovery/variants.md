@@ -1,0 +1,232 @@
+# Which pieces without a meaning are spellings of known words?
+
+Built on 2026-11-11 with `src/variants.py`. The [coverage map](coverage.md) lists 1,336 pieces of Meroitic without
+an accepted meaning. A scorer that knows only letters compared each of them with the words of Claude Rilly's 2003
+lexicon, to find the pieces that are another spelling of a known word, or a known word with an ending. It was
+tested first on the spelling variants that the lexicon itself lists, each hidden in turn. The numbers below are
+checked by `tests/test_variants.py`.
+
+## 1. Answer first
+
+1. **The test missed its bar.** The bar was set before the first run and has two parts. The search brings 187 of
+   the 242 hidden variants back to their own entry as the single best match (77%; the bar was two thirds, so this
+   part is reached). But only 105 of the 242 (43%) come back with a match that stands out from made-up words (the
+   bar was half, so this part is not reached).
+2. **Why: a short word cannot stand out.** None of the 93 hidden variants of three or four letters beats the
+   made-up words, although 61 of them come back to the right entry. Of 1,000 made-up words of three letters, 350
+   are a spelling of the lexicon letter for letter, so no match of a real word can be rarer than that. From five
+   letters up, 105 of 149 hidden variants come back and stand out (70%).
+3. **As a ranking the search is good.** The right entry is among the three best for 232 of the 242 (96%). When a
+   match beats the made-up words, it is the right entry 105 times in 118 (89%), and 12 of the other 13 went to
+   an entry that the lexicon itself links with the right one, or tied with it.
+4. **On the pieces without a meaning, the letters alone do not decide.** 1,210 pieces were searched. 70 are
+   headwords that the lexicon links with their best match itself. Of the other 1,140, 82 beat the 5% bar where
+   the made-up words predict 57 (chance alone gives as many 0.08% of the time). But real words that the lexicon
+   links with nothing beat the same bar 8 times in 76, and 6 times in 24 from seven letters up: at their rate
+   about 104 pieces would beat it. Different words that share a part (two royal names ending in `-demni`, a word
+   and its genitive) look as close as two spellings of one word.
+5. **So the checkers decide, and they have not run yet.** All 105 matches that beat the bar (the 82 and the 23
+   that the lexicon links itself) are packed for two independent blind checkers, with 12 decoys and 12 listed
+   variants whose answer is known. Section 5 and section 6 (how many running words the confirmed pieces would
+   move in the coverage map) wait for that run.
+6. **What the listed variants show about Meroitic spelling** (section 3): almost all of it is vowels. An `e` is
+   left out or added (133 times in 307 variants), `e`, `i` and `o` stand for one another (73 times), and the
+   vowel at the start comes and goes (`Amni`, `Mni`: 42 times). Among consonants the listed variants show
+   `l` for `n`, `t` for `s` and `d`, `q` for `w` and `k` for `ḫ`, four or five times each. They never show `r`
+   for `l`, which is why the search does not rate `prSn` as a spelling of `plsn` (section 4).
+
+## 2. The test on the hidden variants
+
+**The bar, set before the first run.** The test counts every variant that Rilly lists under a word of the lexicon
+proper, that has three letters or more as the search writes it, and that is not spelled like its own headword.
+The test succeeds only if both parts hold:
+
+1. The search brings at least two thirds of them back to their own entry as the single best match. A tie with
+   another entry is a miss.
+2. For at least half of them, the own entry is the single best match and at most 5% of made-up words of the same
+   length get a match as good.
+
+**The result.** 194 entries of the lexicon list 311 variants. 4 are spelled like their headword once marks and
+capitals are set aside, which leaves 307 pairs of a variant and its headword: 268 under words and 39 under
+endings and prefixes. All 307 train the model. Those under words that have three letters or more are 242
+different spellings, and those are the hidden variants. Each was struck from the whole lexicon (an entry that has
+it as its headword goes too), the model was trained on the rest, and the variant was searched among the 655
+matches of the pool (section 7).
+
+| Hidden variants | How many | Own entry is the single best match | Own entry among the three best | The best match beats the 5% bar | Both: single best match and beats the bar |
+|---|---|---|---|---|---|
+| All | 242 | 187 (77%) | 232 (96%) | 118 | 105 (43%) |
+| 3 or 4 letters | 93 | 61 | 86 | 0 | 0 |
+| 5 or 6 letters | 92 | 77 | 89 | 64 | 59 |
+| 7 letters or more | 57 | 49 | 57 | 54 | 46 |
+| Marked as uncertain by Rilly (`mle (?)`) | 26 | 15 | 23 | 6 | 5 |
+| Not marked | 216 | 172 | 209 | 112 | 100 |
+| Stricter: the entry's other variants hidden too | 242 | 178 | 223 | 109 | 92 |
+
+Against the bar: part 1 needed 162 and has 187, so it is reached. Part 2 needed 121 and has 105, so it is not
+reached. The test as a whole did not succeed.
+
+1. **The length decides.** Letters are counted as the search writes them: the consonants, the written vowels
+   `e`, `i` and `o`, and one mark for a vowel at the start. No hidden variant of three or four letters beats the
+   bar, and it could not: 350 of the 1,000 made-up words of three letters and 63 of those of four letters are a
+   spelling of the lexicon letter for letter (467 and 244 when an ending may follow), and no match is better
+   than that. Of five letters it is 18 (100 with an ending), of six letters 1 (27).
+2. **The 55 misses.** 24 went to an entry that the lexicon itself links with the right one, or tied with it:
+   the lexicon gives many variants an entry of their own (`asente` says "see `snte`"), and the search found that
+   entry. This count was made after the run and is not part of the bar. The other 31 are mostly short
+   (`mke` for `mk` went to `meke`, `tre` for `tr` to `Atri`).
+3. **The stricter row** hides every other variant of the entry as well and leaves its pairs out of the training,
+   so the variant has only the headword to come back to: 178 of 242 (74%).
+4. **One shortcut.** The made-up words were searched once, in the whole pool with the model trained on all 307
+   pairs, not once for each hidden variant in the pool without it. For a sample of 30 hidden variants the made-up
+   words were searched again as the variant itself was (`python3 -I src/variants.py sample`): the chance is the
+   same for 21, differs by at most 0.011 for the other 9 (11 made-up words in 1,000), and no variant changes
+   sides of the 5% bar.
+
+## 3. What the listed variants show
+
+The model starts flat: a letter stays with a chance of 0.80, drops with 0.10, and the other 0.10 is spread evenly
+over all other letters. It holds no groups of like letters. What it then counts on the 307 aligned pairs (1,484
+letters of the headwords, and 132 letters added in the variants):
+
+| The variant has | Times | Out of |
+|---|---|---|
+| no `e` where the headword has one | 67 | 342 `e` |
+| an `e` that the headword does not have | 66 | 132 added letters |
+| no vowel at the start where the headword has one (`Mni` for `Amni`) | 21 | 58 |
+| a vowel at the start that the headword does not have (`asr` for `sr`) | 21 | 132 added letters |
+| `e` for `i` | 21 | 99 `i` |
+| `o` for `e` | 19 | 342 `e` |
+| an `i` that the headword does not have | 19 | 132 added letters |
+| no `i` where the headword has one | 15 | 99 `i` |
+| `i` for `e` | 14 | 342 `e` |
+| a vowel at the start for `y` (`esebe` for `yesebe`) | 14 | 47 `y` |
+| `e` for `o` | 11 | 88 `o` |
+| no `o` where the headword has one | 7 | 88 `o` |
+| `i` for `o` | 7 | 88 `o` |
+| `l` for `n` | 5 | 79 `n` |
+| `t` for `s` | 5 | 77 `s` |
+| `t` for `d` | 4 | 63 `d` |
+| `q` for `w` | 4 | 36 `w` |
+| `k` for `ḫ` | 4 | 39 `ḫ` |
+
+No variant has `r` for `l` or `l` for `r` (64 `l` and 89 `r` in the headwords), and none has `t` for `l`.
+
+**Endings.** A piece may be an entry with one of the 25 endings of `lexique.SUFFIXES`. How often each stands was
+counted on the 654 different words of the corpus that the coverage map's lookup explains as an entry or as an
+entry with an ending: 402 are bare, 34 have `-l`, 27 `-li`, 24 `-lowi`, 22 `-te`, 20 `-lo`, 16 `-leb`, 15 `-se`
+and the other 17 endings 94 together.
+
+## 4. The pieces without a meaning
+
+Of the 1,336 pieces, 126 were not searched: 124 have one or two letters, so anything fits them, and 2 hold a
+digit or a lost sign. Of the 1,210 searched, 963 are letters that no entry explains and 247 are headwords of the
+lexicon without an accepted meaning. A headword is compared with every word but itself and the entries spelled
+like it.
+
+**Set aside: 70 headwords that the lexicon links with their best match itself.** One of the two entries lists a
+spelling of the other, or sends to it in its text ("variant of", "see"). 23 of them beat the bar. They are no
+finds, but they go to the checkers with the rest.
+
+| The other 1,140 pieces | Searched | Beat the 5% bar | Expected by the made-up words (5%) | Expected at the rate of real words (below) |
+|---|---|---|---|---|
+| 3 or 4 letters | 443 | 2 | 22 | 0 |
+| 5 or 6 letters | 398 | 29 | 20 | 29 |
+| 7 letters or more | 299 | 51 | 15 | 75 |
+| All | 1,140 | 82 | 57 | 104 |
+
+1. **Against made-up words there is an excess:** 82 where 57 are expected, which chance alone gives 0.08% of the
+   time. None passes the bar that allows for 1,140 tries (Benjamini and Hochberg, a fifth of the passes allowed
+   to be chance): it asks for six pieces at the smallest chance there is, 1 in 1,001.
+2. **Against real words there is none.** 91 words of the lexicon have an accepted meaning, list no variant, send
+   to no other entry and share no spelling with one. For 15 of them the lexicon still links the word with its
+   best match. Of the other 76, 8 beat the 5% bar where 4 are expected: none of 25 with three or four letters, 2
+   of 27 with five or six, and 6 of 24 with seven or more. These are different words that share a part: the royal
+   names `Tkidemni` and `Tktidmni`, `Teqoridemni` and `Tmelọrdeamni`, or `Amniterese` beside `Amnitore`. At their
+   rate the 1,140 pieces would give about 104, more than the 82 found. 24 words are few to take a rate from, so
+   the last column is rough, but it says what the checkers have to tell apart: one word spelled two ways, and two
+   words built alike.
+3. **What the 82 are:** 70 are letters and 12 are headwords; 43 would carry an ending; for 46 the best match has
+   an accepted meaning, so a confirmed piece would count as translated. The 82 pieces stand in 375 running
+   words.
+4. **The examples that started this step** (the pieces that the checkers of the
+   [Egyptian search](egyptian.md) recognised by eye). `pertese` beats the bar as `perite` with the ending `-se`
+   and an `i` left out. `prSn` and `petmoS` have the right entry, `plsn` and `pelmos`, as their best match, but
+   do not beat the bar: no listed variant has `r` or `t` for `l`, and `prSn` has four letters. `amn` has `Amni`
+   as its best match and three letters. `menote` beats the bar with another word first and `Amnote`, the word
+   those checkers named, second. `stol` is the end of a longer word, which a search for spellings does not look
+   for.
+
+Every searched piece is in [`variants_candidates.tsv`](variants_candidates.tsv) with its best match, the ending,
+the letters that differ and the share of made-up words that do as well. Read it as a list of look-alikes ranked
+by letters, not as a list of finds.
+
+## 5. The check of the best matches
+
+Not run yet. The packs are built (`python3 -I src/variants.py check`): 129 items in three packs, for two
+independent checkers each. They hold the 105 pieces whose best match beats the bar, 12 decoys (pieces whose best
+match at least half of the made-up words equal) and 12 controls (listed variants that stand in the texts, shown
+as if they were pieces, with the candidates the search gave when they were hidden). A checker gets the piece's
+contexts with its own gloss hidden, the three best candidates with their entries, the letters that differ and how
+often the listed variants show each change, and two contexts of each candidate
+([the brief](variants_brief.md)). A piece is confirmed when both checkers say it is the same word and name
+entries of one candidate.
+
+## 6. What the confirmed pieces would move in the coverage map
+
+Not counted yet: it follows the check. The count will not change the coverage map's own numbers (60.5% of
+running words translated); it says what they would become.
+
+## 7. Method
+
+1. **The pool.** The lexicon proper has 804 entries: 688 words and 116 endings, prefixes and infixes. The pool is
+   the 688 words. An ending is too short to search for, and a word's level in the coverage map does not hang on
+   its endings. Entries whose headwords have the same letters are one match (`tk (1)` to `tk (4)`), since letters
+   cannot tell them apart: that gives 655 matches with 1,067 letter strings (headwords and listed variants; the
+   signs se and ne are read both ways).
+2. **The letters.** Consonants, the written vowels `e`, `i` and `o`, and one mark for a vowel at the start, as in
+   the vowel run of the Egyptian search. An `a` inside a word is not written in Meroitic.
+3. **The model** is the Egyptian search's (`egyptian.model`, `train`, `score`, the trie search), with Meroitic
+   letters on both sides and the flat starting table of section 3. A headword's spelling becomes the variant's
+   letter by letter: a letter stays, changes or drops, and a letter may be added. Three rounds of aligning and
+   counting.
+4. **An ending** is to an entry what the article is to an Egyptian word in that search: letters of the source that
+   are not the word's own. Every word is read from its end, so that the ending comes first.
+5. **Hiding.** A hidden variant is struck from every variant list, and an entry that has it as its headword goes
+   with all it lists. The model is trained without every pair that has the hidden spelling on either side.
+6. **Chance.** 1,000 made-up words of each length from 3 to 12 letters (12 and more together), built letter by
+   letter as letters follow one another in the pool's headwords (seed 17). A word's chance is the share of the
+   made-up words of its length whose best match is as good as its own, counting the word itself.
+7. **A match with an accepted meaning.** The entry's level in the coverage map is a translated one. An entry that
+   only sends to another ("variant of ...") counts when the entry it sends to counts.
+
+**Limits.**
+
+- The test set and the training set are one scholar's list of what is a variant. A change that Rilly never lists
+  (`r` for `l`) is unknown to the model.
+- The model counts in one direction, from the headword to the variant. Which of two spellings is the headword is
+  the lexicon's choice.
+- Letters cannot judge a short piece: 124 pieces were too short to search, and the 443 of three or four letters
+  could be searched but hardly stand out.
+- The made-up words are too easy a yardstick for long words (section 4, point 2).
+- The checkers and the analysts of the coverage map are one model family, and the model has read the literature.
+
+## 8. Files
+
+| File | What | Where |
+|---|---|---|
+| `src/variants.py`, `tests/test_variants.py` | the search and its checks | public |
+| [`variants_candidates.tsv`](variants_candidates.tsv) | the 1,210 searched pieces: best match (headword and spelling), ending, letters that differ, chance | public (forms, no gloss) |
+| [`variants_brief.md`](variants_brief.md) | the checkers' brief | public |
+| Rilly's lexicon, the gloss file of the coverage map | the pool and the contexts | local, `data/rilly2003/`, `data/sources/coverage/` |
+| the result files, the checkers' packs and key | drawn from the lexicon and the gloss file | local, `data/sources/variants/` |
+
+To rebuild, with the local files in place: `python3 -I src/variants.py build` (about nine minutes the first time,
+most of it the 10,000 made-up words; under a minute afterwards, while the kept scores still fit the pool and the
+model), then `check` for the packs and `merge` for the checkers' answers. Packs whose folder holds answers are
+not written again: `check` stops if it would change them.
+
+## 9. Cost
+
+The search itself is plain Python and used no subagent. The checkers and the review are counted here once they
+have run.

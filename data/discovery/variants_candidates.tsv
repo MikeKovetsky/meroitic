@@ -1,0 +1,1211 @@
+piece	headword or letters	kind	texts (near-copies once)	letters compared	chance	best match	its spelling	ending	letters that differ	the match has an accepted meaning	the lexicon links the two itself
+wetneyineqeli	headword	epithet	12	wetneyineqeli	0.0010	qetneyineqeli	qetneyineqeli		w for q	no	yes
+mlekeyose	headword	title	2	mlekeyose	0.0010	mlkeyose	mlkeyose		e added	no	yes
+terekete	letters	place name	2	terekete	0.0010	tereki	tereki	-te	e for i	no	no
+arebetke	headword	title	1	0rebetke	0.0010	arbetke	0rbetke		e added	no	yes
+kditelewi	letters	kin term	1	kditelewi	0.0010	kdite	kdite	-lowi	e for o	yes	no
+mlkeyose	headword	title	1	mlkeyose	0.0010	mlekeyose	mlekeyose		e dropped	no	yes
+pXrse	letters	place name	1	pXrse	0.0010	Pẖrse	pXrse			yes	no
+pkrtr	headword	title	1	pkrtr	0.0010	pqrtr	pkrtr			no	yes
+tedxellwi	letters	filiation word	1	tedxellwi	0.0010	te-dḫe-l	tedxel	-lowi	o dropped	yes	no
+terekelo	letters	filiation word	1	terekelo	0.0010	tereki	tereki	-lo	e for i	no	no
+smlo	letters	title	2	smlo	0.0020	Simlo	smlo			yes	no
+ḫirette	headword	god name	2	xirette	0.0020	arette	xirette			no	yes
+yeroteke	headword	title	1	yeroteke	0.0020	yerote	yerote	-ke		no	no
+terekelise	letters	filiation word	1	terekelise	0.0030	tereki	tereki	-lis	e for i, e added	no	no
+dkretri	headword	title	6	dkretri	0.0040	dekretri	dekretri		e dropped	no	yes
+kdibedewetel	letters	person name	1	kdibedewetel	0.0040	kdimdḫe	kdimdxe	-tel	b for m, e added, e for x, w added	no	no
+mSenkelowi	letters	person name	1	msenkelowi	0.0040	mesen	msen	-lowi	k added, e added	no	no
+tepke	headword	title	1	tepke	0.0040	tipke	tepke			no	yes
+mleyose	headword	title	3	mleyose	0.0050	mloyose	mloyose		e for o	no	yes
+SNmdet	letters	title	1	snemdet	0.0050	snmdese	snemdes		t for s	yes	no
+Sirlmroke	letters	title	1	sirlmroke	0.0050	siremroke	siremroke		e dropped, l added	yes	no
+ademeqolowi	letters	person name	1	0demeqolowi	0.0050	yemoqe	yemoqe	-lowi	0 for y, d added, e for o, o for e	no	no
+Aqedise	headword	epithet	4	0qedise	0.0060	Aqodise	0qodise		e for o	no	yes
+qorete	headword	noun	2	qorete	0.0060	Qoreti	qoreti		e for i	yes	no
+atmetN	letters	unknown	1	0tmetne	0.0060	yetmetne	yetmetne		0 for y, e dropped	yes	no
+bedewitel	letters	place name	1	bedewitel	0.0060	Medewi	medewi	-tel	b for m	yes	no
+teriS	letters	unknown	1	teris	0.0070	terite	teris			no	no
+tedxli	letters	filiation word	7	tedxli	0.0080	te-dḫe-l	tedxeli		e dropped	yes	no
+ipxetelo	letters	place name	1	0ipxetelo	0.0080	Ipḫe	0ipxe	-teli	o for i	yes	no
+atepoke	headword	noun	3	0tepoke	0.0090	yetepoke	yetepoke		0 for y, e dropped	no	yes
+aretwte	headword	title	2	0retwte	0.0090	artwte	0rtwte		e added	no	yes
+mXeyeos	letters	title	1	mXeyeos	0.0090	mẖeyose	mXeyos		e added	yes	no
+mlNtel	letters	unknown	1	mlnetel	0.0090	mlne	mlne	-tel		no	no
+ssemri	headword	title	3	ssemri	0.0100	ssmri	ssmri		e added	no	yes
+wyekite	headword	noun	1	wyekite	0.0100	Wyeki	wyeki	-te		no	no
+eteliyetelowi	letters	unknown	1	0eteliyetelowi	0.0110	Twete	0twete	-lowi	e added, e added, l added, i added, y for w	no	no
+tetelitreli	letters	title	1	tetelitreli	0.0110	te-dḫe-l	tedxeli	-teli	t for d, x dropped, r added	yes	no
+Arere	headword	place name	1	0rere	0.0120	Adere	0rere			no	yes
+aroẖe	headword	verb	1	0roXe	0.0120	yiroẖe	0roXe			no	yes
+dtedxelowi	letters	filiation word	1	dtedxelowi	0.0120	t-dḫe	tdxe	-lowi	d added, e added	yes	no
+menote	letters	god name	1	menote	0.0120	menete	menete		o for e	no	no
+tmNte	letters	title	1	tmnete	0.0120	Tmne	tmne	-te		no	no
+smlowi	letters	kin term	15	smlowi	0.0140	sem	sm	-lowi		yes	no
+ameri	headword	title	1	0meri	0.0140	amero	0meri			no	yes
+SqoSkinlo	letters	unknown	1	sqoskinlo	0.0160	sekesekine	skeskine	-lo	q for k, o for e, e dropped	no	no
+etktetewi	letters	unknown	1	0etktetewi	0.0170	yitkite	yitkite	-wi	0 for y, e for i, t added, e for i	no	no
+mXeyot	letters	title	1	mXeyot	0.0180	mẖeyose	mXeyos		t for s	yes	no
+tebiSilXlowi	letters	person name	1	tebisilXlowi	0.0180	apote-lẖ	0potelX	-lowi	0 dropped, t added, e added, b for p, i for o, s for t, i for e	yes	no
+yetmetl	letters	person name	1	yetmetl	0.0180	yetmetne	yetmetne		l for n, e dropped	yes	no
+armeyose	headword	noun	2	0rmeyose	0.0190	ameyose	0meyose		r added	no	no
+eked	letters	verb	1	0eked	0.0190	ked	yeked		0 for y	yes	no
+wkete	letters	unknown	1	wkete	0.0200	wkite	wkite		e for i	no	no
+aSore	letters	god name	1	0sore	0.0210	Asori	0sori		e for i	yes	no
+mdemdese	headword	noun	3	mdemdese	0.0230	sdemdese	sdemdese		m for s	yes	no
+qomlise	headword	epithet	2	qomlise	0.0230	womnise	womnise		q for w, l for n	no	no
+aroteN	letters	person name	1	0rotene	0.0230	Aritene	0ritene		o for i	no	no
+pertese	letters	title	1	pertese	0.0230	perite	perite	-se	i dropped	yes	no
+yesebe	headword	function word	2	yesebe	0.0240	esebe	0esebe		y for 0	no	yes
+aberse	letters	noun	1	0berse	0.0240	abrse	0brse		e added	no	no
+etewwite	letters	unknown	1	0etewwite	0.0240	atewi	0tewi	-te	e added, w added	yes	no
+qorisew	letters	title	1	qorisew	0.0240	qorise	qorise	-w		yes	no
+qoriti	letters	place name	1	qoriti	0.0240	Qoreti	qoreti		i for e	yes	no
+arette	headword	god name	3	0rette	0.0250	aretwte	0retwte		w dropped	no	no
+mselẖse	headword	title	2	mselXse	0.0250	metelẖse	metelXse		e dropped, s for t	no	yes
+tmeteke	letters	unknown	1	tmeteke	0.0250	tmite	tmite	-ke	e for i	no	no
+qelowi	letters	function word	1	qelowi	0.0260	qe (1)	qe	-lowi		yes	no
+Sorkxror	letters	person name	1	sorkxror	0.0280	Sorkror	sorkror		x added	yes	no
+ekete	letters	unknown	1	0ekete	0.0280	eqete	0eqete		k for q	no	no
+mlewye	headword	title	1	mlewye	0.0280	mlekye	mlekye		w for k	no	no
+xrpeN	letters	title	1	xrpene	0.0280	ḫrpḫne	xrpxne		e for x	yes	no
+qoret	letters	noun	3	qoret	0.0290	qorete	qorete		e dropped	no	no
+prite	letters	unknown	1	prite	0.0290	perite	perite		e dropped	yes	no
+qorte	headword	noun	1	qorte	0.0290	qorete	qorete		e dropped	no	no
+tNye	letters	person name	1	tneye	0.0290	tneyi	tneyi		e for i	no	no
+yeredeb	headword	title	1	yeredeb	0.0300	aredeb	0redeb		y for 0, e added	no	yes
+xrtedxelowi	letters	person name	1	xrtedxelowi	0.0310	ḫrpḫe	xrpxe	-lowi	t added, e added, d for p	yes	no
+atepedemo	headword	title	4	0tepedemo	0.0320	Pedeme	pedemo		0 added, t added, e added	yes	no
+edeke	letters	unknown	1	0edeke	0.0320	yedeyke	yedeyke		0 for y, y dropped	no	no
+kditebkwi	letters	kin term	1	kditebkwi	0.0320	kdite	kdite	-lebkwi	l dropped, e dropped	yes	no
+terek	letters	filiation word	1	terek	0.0320	tereki	tereki		i dropped	no	no
+mokeye	letters	person name	1	mokeye	0.0340	moke	moke	-ye		no	no
+tereqe	letters	verb	1	tereqe	0.0350	yereqe	yereqe		t for y	yes	no
+yetetke	letters	unknown	1	yetetke	0.0350	yeteke	yeteke		t added	no	no
+mseqorose	headword	title	2	mseqorose	0.0360	sqorise	sqorese		m added, e added, o for e	yes	no
+erewese	letters	unknown	1	0erewese	0.0360	yireqe (1)	yireke	-se	0 for y, e for i, w for k	yes	no
+atpete	letters	unknown	1	0tpete	0.0370	tpete	tpete		0 added	no	no
+aperNtitewi	letters	unknown	1	0pernetitewi	0.0380	perite	perite	-wi	0 added, n added, e added, t added	yes	no
+bikeleb	letters	unknown	1	bikeleb	0.0380	Beke	beke	-leb	i for e	yes	no
+Sqekiteleb	letters	place name	2	sqekiteleb	0.0390	sqorise	sqorise	-leb	e for o, k for r, t for s	yes	no
+mdewetye	letters	place name	1	mdewetye	0.0390	Mdewe	mdewe	-ye	t added	yes	no
+pelmetreyose	headword	title	1	pelmetreyose	0.0390	pelmos	pelmos		e added, t added, r added, e added, y added, e added	yes	no
+kditebetowi	letters	kin term	1	kditebetowi	0.0400	kdite	kdite	-lowi	b for l, e added, t added	yes	no
+beke	letters	title	4	beke	0.0410	Beke	beke			yes	no
+tepeyetmite	letters	name	1	tepeyetmite	0.0410	atepedemo	0tepedemo	-te	0 dropped, y for d, t added, i for o	no	no
+SSimeleb	letters	title	1	ssimeleb	0.0420	ssimete	ssimete	-leb	t dropped, e dropped	yes	no
+mleke	headword	title	5	mleke	0.0450	mlekye	mlekye		y dropped	no	yes
+tiso	headword	verb	3	tiso	0.0450	yeso	tiso			no	yes
+erk	headword	unknown	2	0erk	0.0450	yerki	0erk			no	yes
+akdiyetedxelowi	letters	filiation word	1	0kdiyetedxelowi	0.0450	kdimdḫe	kdimdxe	-lowi	0 added, y for m, e added, t added, e added	no	no
+ekedeto	letters	unknown	1	0ekedeto	0.0460	ked	yeked	-te	0 for y, e added, o for e	yes	no
+tkteketi	letters	unknown	1	tkteketi	0.0470	tkite	tkite	-kete	i dropped, i for e	yes	no
+keteli	letters	unknown	1	keteli	0.0490	ke (1)	ke	-teli		no	no
+sor	headword	noun	1	sor	0.0490	Asori	sor			yes	yes
+qoroteb	letters	noun	1	qoroteb	0.0500	qorete	qorete	-b	o for e	no	no
+xrpxte	letters	verb	1	xrpxte	0.0500	ḫrpḫe	xrpxe	-te	e dropped	yes	no
+aleqese	headword	function word	5	0leqese	0.0509	Aleke (1) / aleke (2)	0leke	-se	q for k	no	no
+aboteli	letters	unknown	1	0boteli	0.0509	apote	0pote	-li	b for p	yes	no
+qorteb	letters	noun	1	qorteb	0.0509	qorte	qorte	-b		no	no
+yeteke	headword	verb	5	yeteke	0.0519	yet (2)	yete	-ke		no	no
+yetmet	letters	title	2	yetmet	0.0529	yetmde	yetmede		t for d, e dropped	yes	no
+mnpti	letters	god name	1	mnpti	0.0529	Mnpte	mnpte		i for e	yes	no
+tpote	letters	unknown	1	tpote	0.0529	tpete	tpete		o for e	no	no
+wkdiwikete	letters	verb	1	wkdiwikete	0.0569	kdke	kdwe	-kete	w added, i added, i for e	no	no
+kdito	letters	kin term	2	kdito	0.0599	kdite	kdite		o for e	yes	no
+mtese	headword	verb	1	mtese	0.0599	mdese	mdese		t for d	yes	no
+pqrtr	headword	title	1	pqrtr	0.0599	pkrtr	pkrtr		q for k	no	yes
+temte	letters	title	1	temte	0.0599	semte	semte		t for s	no	no
+tsdrte	headword	unknown	1	tsdrte	0.0599	sdrte	sdrte		t added	no	yes
+yeSdSlowi	letters	unknown	1	yesdslowi	0.0619	Sdose	sdes	-lowi	y added, e added, e dropped	no	no
+yltetekewi	letters	unknown	1	yltetekewi	0.0619	yeteke	yeteke	-wi	l added, t added	no	no
+atqometel	letters	person name	1	0tqometel	0.0629	atqo	0tqo	-tel	m added, e added	yes	no
+moke	headword	kin term	27	moke	0.0639	amoke	0moke		0 dropped	no	no
+Srbe	letters	unknown	1	srbe	0.0639	Srbi	srbi		e for i	no	no
+teweteb	letters	unknown	1	teweteb	0.0639	Twete	twete	-b	e added	no	no
+xlbe	letters	noun	1	xlbe	0.0639	ḫlbi	xlbi		e for i	yes	no
+leke	letters	unknown	1	leke	0.0649	Aleke (1) / aleke (2)	0leke		0 dropped	no	no
+mdedewi	letters	unknown	1	mdedewi	0.0649	Medewi	medewi		d added	yes	no
+Arrese	headword	place name	1	0rrese	0.0659	Adere	0rere	-se	e dropped	no	no
+plete	headword	verb	3	plete	0.0669	pl (2)	ple	-te		no	yes
+Sores	letters	god name	1	sores	0.0679	sqorise	sqores		q dropped	yes	no
+tedeqeli	letters	unknown	1	tedeqeli	0.0679	sedew	sedew	-li	t for s, q for w, e added	no	no
+sebe	headword	noun	3	sebe	0.0689	asebe	0sebe		0 dropped	no	no
+mesen	headword	title	3	mesen	0.0699	msen	msen		e added	no	yes
+SoSoNte	letters	unknown	1	sosonete	0.0699	Ṭọseni	toseni	-te	s for t, o for e, e for i	no	no
+qoredek	headword	title	1	qoredek	0.0699	qorode	qorode	-ke	e for o, e dropped	yes	no
+mod	headword	place name	3	mod	0.0729	Amod	mod			no	yes
+arkedni	letters	noun	1	0rkedni	0.0729	Arkḫtni	0rkxtni		e for x, d for t	yes	no
+eqeter	letters	unknown	1	0eqeter	0.0729	eqete	0eqete		r added	no	no
+qoleye	letters	unknown	1	qoleye	0.0729	qoli	qoli	-ye	e for i	yes	no
+ete	letters	unknown	1	0ete	0.0749	yet (2)	yete		0 for y	no	no
+areketo	letters	unknown	1	0reketo	0.0759	Ar (1) / ar (2)	0re	-kete	o for e	yes	no
+eteliye	letters	unknown	1	0eteliye	0.0759	yet (2)	yete	-lowi	0 for y, i for o, y for w, e for i	no	no
+qese	letters	function word	1	qese	0.0769	aqese	0qese		0 dropped	yes	no
+semle	letters	noun	1	semle	0.0769	Simlo	simlo		e for i, e for o	no	no
+xrpx	letters	title	3	xrpx	0.0789	ḫrpḫe	xrpxe		e dropped	yes	no
+mlekye	headword	title	2	mlekye	0.0799	mleke	mleke	-ye	e dropped	no	yes
+-kene	headword	function word	11	kene	0.0809	Akine	kine		e for i	no	no
+wete	headword	title	3	wete	0.0819	awete	0wete		0 dropped	no	yes
+mse	headword	title	3	mse	0.0829	mte	mse			yes	yes
+armte	headword	god name	1	0rmte	0.0829	Arme	0rm	-te		no	yes
+sem	letters	noun	1	sem	0.0829	sem	sem			yes	no
+tneyine	headword	epithet	2	tneyine	0.0839	tneyi	tneyi	-te	n for t	no	no
+peleklia	letters	unknown	1	pelekli	0.0849	Pilqe	pelq	-li	e added, k for q	yes	no
+abryeterikelowi	letters	filiation word	1	0bryeterikelowi	0.0899	arwtere (?)	0rwtere	-lowi	b added, y for w, e added, i added, k added	no	no
+meremteblide	letters	person name	1	meremteblide	0.0899	yeredeb	yeredeb	-li	m for y, m added, t for d, d added, e added	no	no
+atre	letters	unknown	1	0tre	0.0909	Atri	0tri		e for i	yes	no
+pesyto	letters	title	1	pesyto	0.0909	peseto	peseto		y for e	yes	no
+smle	letters	title	3	smle	0.0929	Simlo	smlo		e for o	yes	no
+Smle	letters	title	1	smle	0.0929	Simlo	smlo		e for o	yes	no
+tereqebte	letters	unknown	1	tereqebte	0.0929	yeredeb	yeredeb	-te	t for y, q for d	no	no
+ynkteketo	letters	unknown	1	ynkteketo	0.0929	yntke	yntke	-te	k added, e added, o for e	no	no
+mesreke	letters	noun	8	mesreke	0.0939	msemreke	msmreke		e added, m dropped	no	no
+ber (1)	headword	verb	1	ber	0.0939	abr	ber			yes	yes
+teqelelxw	letters	unknown	1	teqelelxw	0.0939	teqelo	teqelo	-lowi	e for o, x for o, i dropped	no	no
+tewi	letters	unknown	3	tewi	0.0969	atewi	0tewi		0 dropped	yes	no
+arekili	letters	unknown	1	0rekili	0.0969	yerki	yerki	-li	0 for y, e dropped, e added	no	no
+erli	letters	unknown	1	0erli	0.0999	Ar (1) / ar (2)	0er	-li		yes	no
+xtedeketeti	letters	unknown	2	xtedeketeti	0.1009	aḫide	0xide	-kete	0 dropped, t added, e for i, t added, i added	yes	no
+edxN	letters	noun	1	0edxne	0.1019	ydḫno	ydxno		0 for y, e added, e for o	no	no
+temey (2)	headword	noun	12	temey	0.1049	tmey	tmey		e added	no	yes
+SSiXete	letters	title	2	ssiXete	0.1049	ssimete	ssimete		X for m	yes	no
+temey (1)	headword	title	2	temey	0.1049	tmey	tmey		e added	no	yes
+atere	letters	unknown	1	0tere	0.1049	Adere	0dere		t for d	no	no
+amoke	headword	title	2	0moke	0.1059	amoqe	0moqe		k for q	no	yes
+mleqerebr	letters	person name	1	mleqerebr	0.1059	mdqorbr	mdqorbr		l for d, e added, e for o, e added	no	no
+yemoqe	headword	verb	2	yemoqe	0.1069	amoke	0moqe		y for 0, e added	no	no
+bereke	headword	title	1	bereke	0.1079	Bero	bero	-ke	e for o	no	no
+yere-	headword	function word	1	yere	0.1159	yer	yeri		e for i	yes	no
+Tketore	headword	place name	3	tketore	0.1179	teter	tetere		k added, o for e	yes	no
+aqqibese	letters	function word	1	0qqibese	0.1199	aqebese	0qobese		q added, i for o	yes	no
+syete	letters	place name	1	syete	0.1199	Sye	sye	-te		yes	no
+Akile	headword	place name	3	0kile	0.1219	Akine	0kine		l for n	no	no
+eqetedlbxi	letters	unknown	1	0eqetedlbxi	0.1219	eqete	0eqete	-bx	d added, l added, i added	no	no
+mli	headword	title	4	mli	0.1229	mlo	mli			yes	yes
+armesye	letters	unknown	1	0rmesye	0.1229	armeyose	0rmeyos	-ye	y dropped, o dropped	no	no
+etreteyqo	letters	person name	1	0etreteyqo	0.1239	yerote	yerote	-qo	0 for y, t added, e for o, y added	no	no
+xrpN	letters	title	1	xrpne	0.1239	ḫrpḫne	xrpxne		x dropped	yes	no
+terite	headword	noun	3	terite	0.1259	yerote	yerote		t for y, i for o	no	no
+Xliterwi	letters	unknown	1	Xliterwi	0.1259	H̱lite	Xlite	-wi	r added	no	no
+bere	letters	unknown	1	bere	0.1259	Bero	bero		e for o	no	no
+arom	letters	person name	1	0rom	0.1269	Arome	0rome		e dropped	yes	no
+abrse	headword	title	3	0brse	0.1279	abr	0br	-se		yes	no
+atNN	letters	unknown	1	0tnene	0.1279	tneyine	tneine		0 added, i dropped	no	no
+amote	letters	unknown	1	0mote	0.1289	Amnote	0monte		n dropped	yes	no
+atbelw	letters	noun	1	0tbelw	0.1289	atbo	0tbo	-lw	e for o	no	no
+nete	headword	noun	3	nete	0.1299	Note	note		e for o	yes	no
+qorelik	letters	noun	1	qorelik	0.1299	qore	qore	-li	k added	yes	no
+qeren	letters	unknown	1	qeren	0.1319	qorene	qorene		e for o, e dropped	yes	no
+apotebese	letters	title	1	0potebese	0.1379	apote	0pote	-se	b added, e added	yes	no
+teliS	letters	person name	1	telis	0.1379	te (1)	te	-lis		no	no
+troXe	letters	unknown	1	troXe	0.1379	yiroẖe	yroXe		t for y	no	no
+tewiNye	letters	name	1	tewineye	0.1409	tneyine	tneine	-ye	n dropped, w added	no	no
+aleqe	letters	unknown	2	0leqe	0.1429	Aleke (1) / aleke (2)	0leke		q for k	no	no
+belimetye	letters	person name	2	belimetye	0.1439	pelmos	pelmos	-ye	b for p, i added, e for o, t for s	yes	no
+esetesi	letters	unknown	1	0esetesi	0.1439	asente	0sente	-se	e added, n dropped, i for e	yes	no
+Smedeli	letters	unknown	4	smedeli	0.1469	semte	smte	-li	e added, d for t	no	no
+tsmereh	letters	person name	1	tsmere	0.1469	ssemri	ssmri		t for s, e added, e for i	no	no
+kdeyoNqo	letters	person name	1	kdeyoneqo	0.1479	nkdeyose	nkdeyose	-qo	n dropped, n for s	no	no
+Simlo	headword	place name	10	simlo	0.1489	smlo (1) / Smlo (2)	smlo		i added	yes	yes
+atbe	letters	unknown	3	0tbe	0.1489	atbo	0tbo		e for o	no	no
+ilolto	letters	unknown	1	0ilolto	0.1489	Yilo	yilo	-lo	0 for y, t added	no	no
+kdisbetowi	letters	kin term	1	kdisbetowi	0.1489	kdise	kdis	-lowi	b for l, e added, t added	yes	no
+dokoye	letters	person name	1	dokoye	0.1499	doke	doke	-ye	o for e	no	no
+abSe	letters	unknown	1	0bse	0.1508	abso (?)	0bso		e for o	no	no
+arbxteke	letters	verb	1	0rbxteke	0.1508	arbetke	0rbetke		x for e, e added	no	no
+aterepe	letters	unknown	1	0terepe	0.1508	Aborepi	0borepe		t for b, e for o	yes	no
+xmll	letters	noun	1	xmll	0.1508	ḫmlol	xmlol		o dropped	yes	no
+nkdeyose	headword	title	1	nkdeyose	0.1528	Nkdỵṭẹ	nkdyte		e added, o added, s for t	no	yes
+apette	letters	noun	1	0pette	0.1538	apote	0pote	-te	e for o, e dropped	yes	no
+wide	headword	noun	8	wide	0.1558	wido	wido		e for o	no	no
+xbxeNkdi	letters	title	2	xbxenekdi	0.1578	ḫbḫne	xbxne	-kete	e added, e dropped, d for t, i for e	yes	no
+leteye	letters	unknown	2	leteye	0.1588	nete	nete	-ye	l for n	no	no
+atoliteb	letters	noun	2	0toliteb	0.1598	ato	0to	-leb	i added, t added	yes	no
+artxnoke	letters	unknown	1	0rtxnoke	0.1598	wrtḫn	wrtxn	-ke	0 for w, o added	no	no
+bereqedo(li)	headword	title	1	bereqedo	0.1598	bereke	bereke	-te	q for k, d for t, o for e	no	yes
+-kror	headword	person name	3	kror	0.1608	akroro	kroro		o dropped	no	yes
+atolit	letters	noun	3	0tolit	0.1608	ato	0to	-lis	t for s	yes	no
+ibereqo	letters	unknown	1	0ibereqo	0.1618	itebereke	0itebereke		t dropped, e dropped, q for k, o for e	no	no
+tereki	headword	noun	2	tereki	0.1628	yerki	yerki		t for y, e added	no	no
+kinli	letters	place name	1	kinli	0.1628	Akine	0kin	-li	0 dropped	no	no
+erbele	letters	unknown	1	0erbele	0.1648	arb	0rb	-li	e added, e added, e for i	no	no
+qete	letters	unknown	1	qete	0.1678	wete	wete		q for w	no	no
+abero	letters	title	1	0bero	0.1698	Bero	bero		0 added	no	no
+tepede	letters	unknown	1	tepede	0.1718	tpete	tpete		e added, d for t	no	no
+-ketese	headword	function word	1	ketese	0.1738	Aqedise	qedise		k for q, t for d, e for i	no	no
+adete	letters	unknown	1	0dete	0.1738	dete	dete		0 added	no	no
+bkelo	letters	person name	1	bkelo	0.1748	Bkeli	bkeli		o for i	yes	no
+sdrte	headword	noun	5	sdrte	0.1778	tsdrte	tsdrte		t dropped	no	yes
+artxnki	letters	unknown	1	0rtxnki	0.1778	wrtḫn	wrtxn	-ke	0 for w, i for e	no	no
+kdiqoreye	letters	person name	1	kdiqoreye	0.1778	Tqoroye	tqoroye		k added, d for t, i added, e for o	yes	no
+mdos	headword	title	1	mdos	0.1778	mdese	mdes		o for e	yes	no
+mento	letters	person name	1	mento	0.1778	menete	menete		e dropped, o for e	no	no
+Mit	headword	god name	1	mit	0.1798	Mt	mit			no	yes
+eqetxe	letters	unknown	1	0eqetxe	0.1808	eqete	0eqete		x added	no	no
+abrite	letters	unknown	1	0brite	0.1828	abrse	0brse		i added, t for s	no	no
+qedi	headword	title	2	qedi	0.1848	wedi	wedi		q for w	no	no
+kele	letters	unknown	1	kele	0.1848	Akile	0kile		0 dropped, e for i	no	no
+tqe	headword	title	1	tqe	0.1848	tqi	tqe			yes	yes
+Akine	headword	place name	6	0kine	0.1858	Kine	kine		0 added	no	yes
+Sdose	headword	place name	3	sdose	0.1858	sdẖose	sdXose		X dropped	no	no
+awete	headword	unknown	1	0wete	0.1858	wete	wete		0 added	no	yes
+yiroẖe	headword	verb	11	yiroXe	0.1878	aroẖe	0roXe		y for 0, i added	no	yes
+Slxs	letters	title	1	slxs	0.1878	slẖs	slXs		x for X	yes	no
+eyke	letters	unknown	1	0eyke	0.1888	yeyk	yeyk		0 for y, e added	no	no
+skle	letters	unknown	1	skle	0.1908	Skl	skl		e added	no	no
+yeSorli	letters	unknown	1	yesorli	0.1908	yeso	yeso	-li	r added	no	no
+aritewil	letters	noun	3	0ritewil	0.1918	yeroteke	yeroteke	-l	0 for y, e dropped, i for o, w for k, i for e	no	no
+bereqob	letters	unknown	1	bereqob	0.1918	bereke	bereke	-b	q for k, o for e	no	no
+sxe	letters	unknown	1	sxe	0.1948	sḫi	sxe			yes	no
+boteli	letters	unknown	1	boteli	0.1958	bqo	bqo	-teli	q dropped	no	no
+krte	letters	noun	2	krte	0.1968	*kr (1) / kr (2)	kr	-te		no	no
+skte	letters	unknown	1	skte	0.1968	sqte	sqte		k for q	no	no
+tennietilw	letters	unknown	1	tennietilw	0.1968	yinnidte	yinnidte	-lw	t for y, e for i, e for d, i for e	no	no
+wkite	headword	title	2	wkite	0.1978	wyekite	wyekite		y dropped, e dropped	no	yes
+Nkdỵṭẹ	headword	place name	1	nkdyte	0.1978	nkdeyose	nkdeyose		e dropped, o dropped, t for s	no	yes
+drte	letters	noun	1	drte	0.1978	Dr	dr	-te		no	no
+krorl	letters	title	1	krorl	0.1978	akroro	kroro	-l	o dropped	no	no
+amero	headword	title	2	0mero	0.1988	ameri	0meri		o for i	no	yes
+pXete	letters	unknown	1	pXete	0.1988	pẖo	pXo	-te	e for o	no	no
+qeyte	letters	place name	1	qeyte	0.1988	weyite	weyite		q for w, i dropped	no	no
+dmte	letters	unknown	1	dmte	0.2008	dm	dm	-te		yes	no
+nloli	letters	unknown	1	nloli	0.2018	tloli	tloli		n for t	no	no
+sekesekine	headword	title	1	sekesekine	0.2018	teketin	teketin		s for t, s for t, e added, k added, e added	no	no
+dote	letters	benediction verb	2	dote	0.2028	dete	dete		o for e	no	no
+deto	letters	unknown	1	deto	0.2028	dete	dete		o for e	no	no
+teritibre	letters	unknown	1	teritibre	0.2038	terite	terite	-b	i for e, r added, e added	no	no
+aSoyi	letters	unknown	1	0soyi	0.2048	yeso	0so	-yi		no	no
+retel	letters	unknown	1	retel	0.2048	Ar (1) / ar (2)	0re	-tel	0 dropped	yes	no
+meremtebolide	letters	person name	1	meremtebolide	0.2058	mdemdese	mdemdese	-li	e added, r for d, t for d, b for s, o for e, d added, e added	no	no
+doke	headword	unknown	3	doke	0.2068	Dek	deke		o for e	no	no
+boke	letters	title	2	boke	0.2068	Beke	beke		o for e	yes	no
+tmlteke	letters	unknown	1	tmlteke	0.2088	mleke	mleke		t added, t added	no	no
+txno	letters	unknown	1	txno	0.2098	ydḫno	dxno		t for d	no	no
+asr	headword	noun	3	0sr	0.2118	sr	0sr			no	yes
+sewide	letters	unknown	1	sewide	0.2128	sewi	sewi	-te	d for t	no	no
+teno	letters	noun	1	teno	0.2128	Tene	tene		o for e	yes	no
+toN	letters	noun	1	tone	0.2128	Tene	tene		o for e	yes	no
+-se-lw	headword	function word	1	selw	0.2138	slw	slw		e added	yes	yes
+trri	letters	benediction verb	1	trri	0.2138	wetrri	wtrri		w dropped	no	no
+qorkelw	letters	noun	1	qorkelw	0.2148	qore	qore	-lw	k added	yes	no
+wos	letters	god name	2	wos	0.2158	Wos	wos			yes	no
+eqetid	letters	unknown	1	0eqetid	0.2158	eqete	0eqete		i for e, d added	no	no
+yisextete	letters	unknown	1	yisextete	0.2158	Amnisḫeto	mnisxte	-te	y for m, n dropped, e added	yes	no
+tedxte	letters	filiation word	1	tedxte	0.2168	t-dḫe	tdxe	-te	e added, e dropped	yes	no
+pikedelwi	letters	unknown	1	pikedelwi	0.2178	pke	pke	-teli	i added, d for t, w added	yes	no
+Arme	headword	place name	2	0rme	0.2198	Arome	0rome		o dropped	yes	no
+sqte	headword	title	2	sqte	0.2198	sq	sq	-te		no	no
+Sirele	letters	unknown	1	sirele	0.2198	Asori	sori	-li	i for o, e for i, e for i	yes	no
+kedebxe	letters	verb	1	kedebxe	0.2198	ked	ked	-bx	e added, e added	yes	no
+ekte	letters	unknown	1	0ekte	0.2208	eqete	0eqete		k for q, e dropped	no	no
+pxemlo	letters	unknown	1	pxemlo	0.2208	Pẖome	pXeme	-lo	x for X, e dropped	yes	no
+tkreye	letters	person name	1	tkreye	0.2208	Tqoroye	tqoroye		k for q, o dropped, e for o	yes	no
+yitkite	headword	place name	3	yitkite	0.2238	tkite	tkite		y added, i added	yes	no
+phrstel	letters	place name	1	prstel	0.2238	Pẖrse	pXrs	-tel	X dropped	yes	no
+tlete	letters	unknown	1	tlete	0.2238	tleyi	tleyi		t for y, e for i	no	no
+imloke	letters	unknown	1	0imloke	0.2248	mleke	mleke		0 added, i added, o for e	no	no
+etes	letters	verb	1	0etes	0.2258	atos	0tos		e added, e for o	no	no
+iplemketo	letters	unknown	1	0iplemketo	0.2258	Apedemk	0pdemk	-te	i added, l for d, e added, o for e	yes	no
+tpoto	letters	verb	1	tpoto	0.2258	tpete	tpete		o for e, o for e	no	no
+mlowi	headword	noun	8	mlowi	0.2268	mlo	mlo	-wi		yes	no
+areN	letters	unknown	1	0rene	0.2268	Aritene	0rtene		t dropped	no	no
+mniti	letters	person name	1	mniti	0.2268	Amnote	mnote		i for o, i for e	yes	no
+tqoye	letters	unknown	1	tqoye	0.2268	atqo	0tqo	-ye	0 dropped	yes	no
+bekelXli	letters	person name	1	bekelXli	0.2278	Bkeli	bkeli	-li	e added, X for i	yes	no
+dewite	letters	unknown	1	dewite	0.2278	dekte	dekte		w for k, i added	no	no
+tete	letters	unknown	3	tete	0.2288	sete	sete		t for s	no	no
+Xoli	letters	place name	1	Xoli	0.2288	ẖe (1)	Xo	-li		yes	no
+Aritene	headword	god name	5	0ritene	0.2308	arette	0rette		i for e, e added, n for t	no	no
+tetewi	letters	unknown	1	tetewi	0.2318	detetewi	detetewi		d dropped, e dropped	no	no
+yerote	headword	title	1	yerote	0.2318	yer	yeri	-te	o for i	yes	no
+ipxto	letters	unknown	1	0ipxto	0.2328	Ipḫe	0ipxe	-te	e dropped, o for e	yes	no
+nobow	headword	noun	1	nobow	0.2328	nobo	nobo	-w		yes	no
+kedebx	letters	verb	2	kedebx	0.2338	ked	ked	-bx	e added	yes	no
+teli	letters	unknown	1	teli	0.2338	te (1)	te	-li		no	no
+eptereqe	letters	unknown	1	0eptereqe	0.2348	petedew	petedew		0 added, e added, e dropped, r for d, q for w, e added	no	no
+berwi	headword	unknown	3	berwi	0.2368	abr	ber	-wi		yes	no
+arede	headword	noun	1	0rede	0.2368	aredeb	0redeb		b dropped	no	no
+seber	headword	person name	1	seber	0.2368	Sobore	sobore		e for o, e for o, e dropped	yes	no
+yesqor	letters	person name	1	yesqor	0.2378	wosqer	wosqer		y for w, e for o, o for e	no	no
+wetrri	headword	epithet	7	wetrri	0.2388	qetrri	qetrri		w for q	no	yes
+tedeqe	letters	unknown	1	tedeqe	0.2418	sedew	sedew		t for s, q for w, e added	no	no
+qeswi	letters	kin term	2	qeswi	0.2428	Qes	qes	-wi		yes	no
+mkedo	letters	god name	1	mkedo	0.2438	mkdi	mkde		e added, o for e	yes	no
+yisemeniye	letters	unknown	1	yisemeniye	0.2438	Ṭọseni	toseni	-ye	y for t, i for o, m added, e added	no	no
+teke	headword	verb	15	teke	0.2448	Dek	deke		t for d	no	no
+areqi	letters	unknown	1	0reqi	0.2448	yireqe (1)	0ireqe		i dropped, i for e	yes	no
+tklwi	letters	unknown	1	tklwi	0.2448	tḫ (1) / tḫ (2)	tk	-lowi	o dropped	yes	no
+adxite	letters	unknown	1	0dxite	0.2458	dḫe	0edxe	-te	e dropped, i for e	yes	no
+trodeb	letters	unknown	1	trodeb	0.2458	yeredeb	yeredeb		t for y, e dropped, o for e	no	no
+lemlo	letters	unknown	1	lemlo	0.2478	Nmlo	nmlo		l for n, e added	no	no
+pqebete	letters	title	1	pqebete	0.2478	aqebese	0qebese		p for 0, t for s	yes	no
+petmoS	letters	title	1	petmos	0.2498	pelmos	pelmos		t for l	yes	no
+sete	headword	verb	4	sete	0.2517	set	set		e added	yes	no
+xtekkeSdeStel	letters	unknown	1	xtekkesdestel	0.2537	Ḫsḫseli	xsexseli	-tel	t for s, k for x, k added, e added, d added, s for l, i dropped	no	no
+xtekkeSdestel	letters	unknown	1	xtekkesdestel	0.2537	Ḫsḫseli	xsexseli	-tel	t for s, k for x, k added, e added, d added, s for l, i dropped	no	no
+aro	letters	unknown	1	0ro	0.2557	Ar (1) / ar (2)	0ro			yes	no
+aro	headword	epithet	1	0ro	0.2557	Ar (1) / ar (2)	0ro			yes	yes
+keskeyi	letters	unknown	1	keskeyi	0.2557	kdke	ktke	-yi	e added, s for t	yes	no
+mroNl	letters	unknown	1	mronel	0.2557	mro	mro	-tel	n for t	no	no
+yisxtete	letters	unknown	1	yisxtete	0.2587	Amnisḫeto	mnisxte	-te	y for m, n dropped	yes	no
+anoS	letters	unknown	1	0nos	0.2617	anese	0nes		o for e	no	no
+mtewwi	letters	person name	1	mtewwi	0.2617	Mdewe	mdewi		t for d, w added	yes	no
+yeseboẖe	headword	unknown	6	yeseboXe	0.2627	yesebe	yesebe	-ye	o for e, X for y	no	no
+abeleqebr	letters	title	1	0beleqebr	0.2627	areqebr	0reqebr		b for r, l added, e added	no	no
+litereqe	letters	unknown	1	litereqe	0.2627	yereqe	yereqe		l added, i added, t for y	yes	no
+womnise	headword	title	4	womnise	0.2647	womnitẖ	womnitX		s for t, e for X	no	yes
+etepnk	letters	unknown	1	0etepnk	0.2647	atepoke	yetepoke		0 for y, n for o, e dropped	no	no
+yismeniye	letters	unknown	1	yismeniye	0.2647	Ṭọseni	toseni	-ye	y for t, i for o, m added	no	no
+lbrete	letters	unknown	1	lbrete	0.2657	nbr	nbr	-te	l for n, e added	no	no
+anese	headword	noun	1	0nese	0.2667	ano	0no	-se	e for o	no	no
+mloN	letters	adjective	1	mlone	0.2667	mlne	mlne		o added	no	no
+nptek	letters	place name	1	nptek	0.2667	Npte	npte	-ke	e dropped	yes	no
+qesto	letters	place name	1	qesto	0.2667	Qes	qes	-te	o for e	yes	no
+amot	letters	unknown	1	0mot	0.2687	Amod	0mod		t for d	no	no
+tike	letters	benediction verb	1	tike	0.2687	teke	teke		i for e	no	no
+bersowi	letters	noun	1	bersowi	0.2727	abr	ber	-lowi	s for l	yes	no
+wido	headword	unknown	4	wido	0.2767	wide	wide		o for e	no	no
+smeti	letters	unknown	2	smeti	0.2777	semte	smte		e added, i for e	no	no
+txeNye	letters	unknown	1	txeneye	0.2777	ydḫno	dxno	-ye	t for d, e added, e for o	no	no
+inweto	letters	unknown	1	0inweto	0.2787	Indo	0indo		w added, e added, t for d	no	no
+qlite	letters	unknown	1	qlite	0.2797	qoli	qoli	-te	o dropped	yes	no
+ptpotekiye	letters	unknown	1	ptpotekiye	0.2807	ptroti	ptroti	-ye	p for r, e added, k added	no	no
+-kete	headword	function word	7	kete	0.2827	ke (1)	ke	-te		no	no
+deti	letters	unknown	1	deti	0.2827	dete	dete		i for e	no	no
+itrek	letters	unknown	1	0itrek	0.2827	yireqe (1)	yireke		0 for y, t added, e dropped	yes	no
+telo	letters	unknown	1	telo	0.2827	te (1)	te	-lo		no	no
+pdẖose	headword	epithet	4	pdXose	0.2837	sdẖose	sdXose		p for s	no	no
+dete	headword	unknown	6	dete	0.2847	d	de	-te		no	no
+kdimloye	letters	noun	1	kdimloye	0.2847	kdi	kdi	-lowi	m added, y for w, e for i	yes	no
+mẖeli : arose	headword	title	1	mXelirose	0.2857	mẖeyose	mXeyose		l added, i added, r for y	yes	no
+beylowi	letters	person name	1	beylowi	0.2907	abr	ber	-lowi	y for r	yes	no
+ames	letters	noun	2	0mes	0.2937	Ams	0ms		e added	yes	no
+yexoyke	letters	unknown	2	yexoyke	0.2937	yedeyke	yedeyke		x for d, o for e	no	no
+txNye	letters	unknown	1	txneye	0.2957	ydḫno	dxno	-ye	t for d, e for o	no	no
+trose	headword	adjective	11	trose	0.2967	tr	tre	-se	o for e	yes	no
+xreSyeqo	letters	name	1	xresyeqo	0.2967	arette	xirette	-qo	i dropped, s for t, y for t	no	no
+bereknwi	letters	unknown	1	bereknwi	0.2997	bereke	bereke	-wi	n for e	no	no
+Siwiwi	letters	noun	1	siwiwi	0.3017	sewi	sewi	-wi	i for e	no	no
+wese	headword	unknown	5	wese	0.3027	wse	wse		e added	no	no
+yoto	letters	noun	4	yoto	0.3027	ato	yeto		o for e	yes	no
+ese	letters	unknown	2	0ese	0.3057	yeso	yeso		0 for y, e for o	no	no
+xbxe	letters	title	3	xbxe	0.3067	ḫbḫne	xbxne		n dropped	yes	no
+tinNke	letters	unknown	1	tinneke	0.3117	tneyine	tneine	-ke	i added, e dropped, i dropped	no	no
+yiretwi	letters	unknown	1	yiretwi	0.3117	yerote	yerote	-wi	i for e, e for o, e dropped	no	no
+abenbk	letters	unknown	1	0benbk	0.3137	Abin	0bin	-bx	e for i, k for x	no	no
+ntepokl	letters	person name	1	ntepokl	0.3147	atepoke	0tepoke	-l	n for 0, e dropped	no	no
+artde	letters	unknown	1	0rtde	0.3157	arette	0rette		e dropped, d for t	no	no
+artroti	letters	unknown	1	0rtroti	0.3157	ptroti	ptroti		0 added, r for p	no	no
+tese	letters	function word	2	tese	0.3167	tiso	tiso		e for i, e for o	no	no
+pide	letters	unknown	1	pide	0.3187	pwide	pwide		w dropped	no	no
+yedxi	letters	unknown	1	yedxi	0.3227	dḫe	0edxe		y for 0, i for e	yes	no
+ado	headword	noun	7	0do	0.3257	ad	0do			no	yes
+bwteli	letters	place name	1	bwteli	0.3267	Bkeli	bkeli		w for k, t added	yes	no
+wite	letters	noun	1	wite	0.3277	wide	wide		t for d	no	no
+temkeN	letters	noun	1	temkene	0.3297	Tmne	tmne		e added, k added, e added	no	no
+akitkto	letters	unknown	1	0kitkto	0.3307	yitkite	yitkite		0 for y, k added, i dropped, o for e	no	no
+arpto	letters	god name	1	0rpto	0.3307	arbte	0rbte		p for b, o for e	no	no
+mlotoN	letters	name	1	mlotone	0.3307	mleyose	mloyose		t for y, n for s	no	no
+Atoẖe	headword	place name	2	0toXe	0.3317	atẖe	0tXe		o added	yes	no
+ameli	letters	god name	1	0meli	0.3317	Amni	0mni		e added, l for n	yes	no
+mXeyo	letters	title	1	mXeyo	0.3317	mẖeyose	mXeyos		s dropped	yes	no
+senbote	letters	unknown	1	senbote	0.3327	senete	senete		b added, o for e	yes	no
+abesye	letters	unknown	1	0besye	0.3337	aqebese	0qebes	-ye	q dropped, e dropped	yes	no
+ittmito	letters	unknown	1	0ittmito	0.3337	atmi	0tmi	-te	i added, t added, o for e	no	no
+Adonili	headword	place name	2	0donili	0.3347	ad	0do	-teli	n for t, i for e	no	no
+roSlleb	letters	noun	1	roslleb	0.3347	arosd	0rosd	-leb	0 dropped, l for d	no	no
+amre	letters	unknown	1	0mre	0.3357	ameri	0meri		e dropped, e for i	no	no
+aribet	headword	title	1	0ribet	0.3357	arbte	0rbte		i added, e added, e dropped	no	no
+imliN	letters	unknown	1	0imline	0.3377	mlne	mlne		0 added, i added, i added	no	no
+ambeli	letters	unknown	1	0mbeli	0.3387	Amnb	0mnb	-li	n dropped, e added	yes	no
+womnitẖ	headword	title	7	womnitX	0.3397	womnise	womnis		t for s, X added	no	yes
+Steqeteb	letters	kin term	2	steqeteb	0.3407	sqte	sqte	-b	t added, e added, e added	no	no
+toliteb	letters	name	1	toliteb	0.3407	Tolkte	tolkte	-b	i for k	yes	no
+xitkkete	letters	benediction verb	1	xitkkete	0.3407	aḫide	0xid	-kete	0 dropped, t for d, k added	yes	no
+yikid	letters	noun	3	yikid	0.3447	ked	yeked		i for e, i for e	yes	no
+nide	letters	unknown	1	nide	0.3447	nwide	nwide		w dropped	no	no
+Siwi	letters	noun	1	siwi	0.3457	sewi	sewi		i for e	no	no
+yerki	headword	verb	1	yerki	0.3457	yireqe (1)	yireke		e for i, e dropped, i for e	yes	no
+apese	letters	unknown	1	0pese	0.3487	apote	0pote		e for o, s for t	yes	no
+debese	letters	unknown	1	debese	0.3487	adb	db	-se	e added, e added	yes	no
+ansyi	headword	title	1	0nsyi	0.3497	anese	0nes	-yi	e dropped	no	no
+Ssmti	letters	title	1	ssmti	0.3506	ssimete	ssimete		i dropped, e dropped, i for e	yes	no
+yntke	headword	noun	4	yntke	0.3516	ntke (1) / ntke (2)	ntke		y added	yes	no
+dmkte	letters	verb	2	dmkte	0.3516	dm	dm	-kete	e dropped	yes	no
+likel	letters	unknown	1	likel	0.3516	Aleke (1) / aleke (2)	0leke	-l	0 dropped, i for e	no	no
+yetre	letters	verb	1	yetre	0.3526	teter	tetere		y for t, e dropped	yes	no
+bel	letters	unknown	1	bel	0.3536	Abel	0bel		0 dropped	no	no
+tbo	headword	numeral or measure	12	tbo	0.3546	atbo	0tbo		0 dropped	no	yes
+tXe	letters	unknown	1	tXe	0.3566	atẖe	0tXe		0 dropped	yes	no
+ydḫno	headword	verb	1	ydxno	0.3566	dḫno	dxno		y added	no	yes
+tme	headword	adjective	2	tme	0.3576	atmi	tmi		e for i	no	no
+klkeli	letters	unknown	1	klkeli	0.3576	kle	kle	-li	k added	no	no
+ssime	letters	title	1	ssime	0.3576	ssimete	ssimete		t dropped, e dropped	yes	no
+pedelmotbr	letters	title	1	pedelmotbr	0.3586	Pedeme	pedemo	-b	l added, t added, r added	yes	no
+semekeke	headword	title	1	semekeke	0.3606	msemreke	msemreke	-ke	m dropped, r dropped	no	no
+tkereketmS	letters	noun	1	tkereketms	0.3606	ateqere	0teqere	-kes	0 dropped, e dropped, k for q, t added, m added	no	no
+-kese	headword	function word	4	kese	0.3626	ke (1)	ke	-se		no	no
+ponni	headword	title	1	ponni	0.3626	penn	penn	-i	o for e	no	no
+pqode	letters	unknown	1	pqode	0.3626	pwide	pwide		q for w, o for i	no	no
+tnbelile	letters	person name	1	tnbelile	0.3636	dtbolne	dtbolne		t for d, n for t, e for o, i added, l for n	no	no
+wwikelo	letters	unknown	1	wwikelo	0.3636	Wke	wke	-lo	w added, i added	no	no
+tqo	letters	person name	4	tqo	0.3646	atqo	0tqo		0 dropped	yes	no
+ed	letters	unknown	1	0ed	0.3646	yed	yed		0 for y	no	no
+yotkto	letters	unknown	1	yotkto	0.3666	yitkite	yitkite		o for i, i dropped, o for e	no	no
+Sorieyiorye	letters	unknown	1	sorieyiorye	0.3676	Sorkror	sorkror	-ye	i for k, e added, y for r, i added	yes	no
+Dek	headword	place name	2	dek	0.3686	dik	dik		e for i	yes	no
+kde	letters	noun	1	kde	0.3686	kdi	kdi		e for i	yes	no
+areqis	letters	noun	1	0reqis	0.3706	yireqe (1)	0ireqe	-s	i dropped, i for e	yes	no
+bleli	letters	person name	2	bleli	0.3716	pl (2)	ple	-li	b for p	no	no
+byeke	letters	unknown	1	byeke	0.3726	Beke	beke		y added	yes	no
+eno	letters	unknown	1	0eno	0.3736	ano	0no		e added	no	no
+stedebte	letters	unknown	1	stedebte	0.3736	sedew	sedew	-te	t added, b for w	no	no
+xmXelli	letters	noun	1	xmXelli	0.3736	ḫmlol	xmlol	-li	X for l, e for o	yes	no
+smt	headword	title	5	smt	0.3756	semte	smte		e dropped	no	no
+ani	letters	person name	1	0ni	0.3756	yini	yni		0 for y	no	no
+wtotrse	letters	noun	1	wtotrse	0.3756	teter	teter	-se	w added, o for e, e dropped	yes	no
+Selele	headword	place name	3	selele	0.3766	qelile	qelile		s for q, e for i	yes	no
+tdomN	letters	unknown	1	tdomne	0.3766	Adomn	0domn		0 dropped, t added, e added	yes	no
+teqride	letters	person name	3	teqride	0.3796	Dqri	dqri	-te	t for d, e added, d for t	no	no
+ntk	headword	verb	1	ntk	0.3796	ntke (1) / ntke (2)	ntke		e dropped	yes	no
+erbxi	letters	unknown	1	0erbxi	0.3816	Ar (1) / ar (2)	0er	-bx	i added	yes	no
+mro	headword	adjective	1	mro	0.3816	amero	mero		e dropped	no	no
+ptrsli	letters	unknown	1	ptrsli	0.3816	Pẖrse	pXrs	-li	t for X	yes	no
+tye	letters	verb	1	tye	0.3816	Atiye	0tye		0 dropped	yes	no
+ysbox	letters	unknown	1	ysbox	0.3816	yeseboẖe	yesboXe		e dropped, x for X, e dropped	no	no
+lqoli	letters	function word	1	lqoli	0.3866	qoli	qoli		l added	yes	no
+yedxbx	letters	verb	1	yedxbx	0.3886	dḫe	0edxe	-bx	y for 0, e dropped	yes	no
+arse	letters	noun	1	0rse	0.3896	Ar (1) / ar (2)	0r	-se		yes	no
+doqe	letters	person name	1	doqe	0.3896	doke	doke		q for k	no	no
+trek	letters	unknown	1	trek	0.3896	tereki	tereki		e dropped, i dropped	no	no
+bXemi	letters	unknown	1	bXemi	0.3906	Pẖome	pXeme		b for p, i for e	yes	no
+deqe	letters	unknown	1	deqe	0.3906	Dek	deke		q for k	no	no
+dewe	letters	noun	1	dewe	0.3906	Dek	deke		w for k	no	no
+yetolXye	letters	person name	1	yetolXye	0.3906	apote-lẖ	0potelX	-ye	y for 0, p dropped, e for o, o for e	yes	no
+eqe-	headword	function word	11	0eqe	0.3926	Beqe	beqe		0 for b	yes	no
+idNte	letters	unknown	1	0idnete	0.3936	yini	yini	-te	0 for y, d added, e for i	no	no
+idktey	letters	unknown	1	0idktey	0.3936	yitkite	yitkite	-ye	0 for y, d for t, i dropped, e dropped	no	no
+yinitxebto	letters	unknown	1	yinitxebto	0.3936	Amnisḫeto	0mnisxeto		y for 0, i for m, t for s, b added	yes	no
+tewwi-	headword	verb	2	tewwi	0.3956	atewi	0tewi		0 dropped, w added	yes	no
+ptpotekye	letters	unknown	1	ptpotekye	0.3966	ptroti	ptroti	-ye	p for r, e for i, k added	no	no
+wetllo	letters	unknown	1	wetllo	0.3966	wedi	wet	-lo	l added	no	no
+wlbxetel	letters	unknown	1	wlbxetel	0.3966	mnebḫe	mnebxe	-tel	w for m, l for n, e dropped	no	no
+tek	letters	unknown	2	tek	0.3986	teke	teke		e dropped	no	no
+diket	letters	unknown	2	diket	0.3996	di	di	-kete	e dropped	no	no
+keNydi	letters	unknown	1	keneydi	0.4006	Akine	kine	-yi	e for i, d added	no	no
+xteri	letters	title	2	xteri	0.4016	Asori	0seri		x for 0, t for s	yes	no
+enoqe	letters	unknown	1	0enoqe	0.4026	ano	0no	-qo	e added, e for o	no	no
+imlotror	letters	person name	1	0imlotror	0.4026	Amnitore	0mnitore		i added, l for n, o for i, r added, e dropped	yes	no
+penn	headword	noun	24	penn	0.4036	ponni	ponni		e for o, i dropped	no	no
+msye	letters	unknown	2	msye	0.4036	Ms	ms	-ye		yes	no
+lXye	letters	title	1	lXye	0.4036	lẖ	lX	-ye		yes	no
+pXe	letters	unknown	1	pXe	0.4046	pẖo	pXo		e for o	no	no
+teyi	letters	title	1	teyi	0.4046	tneyi	tneyi		n dropped	no	no
+teketin	headword	noun	11	teketin	0.4056	sekesekine	sekeskine		t for s, t for s, k dropped, e dropped	no	no
+penylito	letters	unknown	1	penylito	0.4056	ponni	ponni	-te	e for o, y added, l for n, o for e	no	no
+Nbe	letters	unknown	1	nebe	0.4066	nobo	nobo		e for o, e for o	yes	no
+seb (1)	headword	unknown	3	seb	0.4076	sebe	sebe		e dropped	no	no
+eqelbxe	letters	verb	1	0eqelbxe	0.4086	qoli	qol	-bx	0 added, e added, e for o, e added	yes	no
+eqxwN	letters	unknown	1	0eqxwne	0.4086	Boqḫw	boqxw	-te	0 for b, e for o, n for t	no	no
+nbto	letters	unknown	1	nbto	0.4086	Npte	npto		b for p	yes	no
+beN	letters	place name	3	bene	0.4096	ḫbḫne	xbene		x dropped	yes	no
+tomlo	letters	unknown	1	tomlo	0.4096	Simlo	simlo		t for s, o for i	no	no
+edeto	letters	unknown	1	0edeto	0.4106	yed	yed	-te	0 for y, e added, o for e	no	no
+mdekr	headword	title	1	mdekr	0.4106	mdek	mdek		r added	no	yes
+wedi	headword	function word	2	wedi	0.4126	wido	wido		e for i, i for o	no	no
+mkilw	letters	noun	1	mkilw	0.4136	mk	mke	-lw	i for e	yes	no
+atrXli	letters	unknown	1	0trXli	0.4156	ariẖlo	0riXlo		t added, i dropped, i for o	no	no
+-nte	headword	function word	3	nte	0.4176	nete	nete		e dropped	no	no
+ide	letters	verb	1	0ide	0.4176	wide	wide		0 for w	no	no
+ten	letters	unknown	1	ten	0.4176	Tene	tene		e dropped	yes	no
+tllw	letters	unknown	1	tllw	0.4176	tl	tl	-lw		no	no
+qer	headword	title	7	qer	0.4186	qor	qor		e for o	yes	no
+aroqi	letters	unknown	1	0roqi	0.4186	Ar (1) / ar (2)	0ro	-qo	i for o	yes	no
+mklw	letters	noun	1	mklw	0.4186	mk	mk	-lw		yes	no
+tbe	letters	unknown	1	tbe	0.4186	tbo	tbo		e for o	no	no
+kdke	headword	title	3	kdke	0.4206	ktke	ktke		d for t	yes	yes
+belilidt	letters	unknown	1	belilidt	0.4256	beliloke	beliloke	-te	i for o, d for k, e dropped, e dropped	yes	no
+msqeto	letters	unknown	1	msqeto	0.4256	mseẖto	msXto		q for X, e added	no	no
+tklw	letters	unknown	1	tklw	0.4256	tḫ (1) / tḫ (2)	tk	-lw		yes	no
+eyi	letters	function word	2	0eyi	0.4276	ayi	0yi		e added	no	no
+ewkenki	letters	unknown	1	0ewkenki	0.4276	Akine	0kin	-ke	e added, w added, e for i, i for e	no	no
+wse	headword	noun	9	wse	0.4286	wese	wese		e dropped	no	no
+wte	headword	noun	9	wte	0.4286	wete	wete		e dropped	no	yes
+wdi	letters	unknown	1	wdi	0.4296	wedi	wedi		e dropped	no	no
+Yerwdode	headword	place name	1	yerwdode	0.4306	yerote	yerote		w added, d added, d for t	no	no
+edeteq	letters	unknown	1	0edeteq	0.4306	yedeyke	yedeyke		0 for y, t for y, e added, q for k, e dropped	no	no
+mkl	letters	noun	1	mkl	0.4306	mk	mk	-l		yes	no
+yitki	letters	unknown	1	yitki	0.4306	yitkite	yitkite		t dropped, e dropped	no	no
+brmeteyetmdelowi	letters	unknown	1	brmeteyetmdelowi	0.4336	yetmde	yetmde	-lowi	b added, r added, m added, e added, t added, e added	yes	no
+pXrsteaxdeye	letters	unknown	1	pXrstexdeye	0.4336	Pẖrse	pXrse	-ye	t added, x added, d added, e added	yes	no
+qyise	letters	epithet	1	qyise	0.4346	qowi	qwi	-se	y for w	yes	no
+dole	headword	adjective	12	dole	0.4366	do (1) / do (2)	do	-li	e for i	no	no
+mri	letters	title	1	mri	0.4386	mro	mro		i for o	no	no
+Wyeki	headword	noun	1	wyeki	0.4396	wyekite	wyekite		t dropped, e dropped	no	no
+apile	letters	unknown	1	0pile	0.4396	Pilqe	pilqe		0 added, q dropped	yes	no
+yinitxe	letters	unknown	2	yinitxe	0.4436	yini	yini	-te	x added	no	no
+Silw	letters	unknown	1	silw	0.4446	slw	slw		i added	yes	no
+Strye	letters	unknown	1	strye	0.4446	sdrte	sdrte		t for d, y for t	no	no
+nkeyi	letters	unknown	1	nkeyi	0.4446	nk	nk	-yi	e added	no	no
+Amod	headword	place name	4	0mod	0.4476	mod	mod		0 added	no	yes
+xroqe	letters	unknown	1	xroqe	0.4476	aḫreke	0xreke		0 dropped, o for e, q for k	no	no
+bele	letters	noun	9	bele	0.4486	Abel	0bel		0 dropped, e added	no	no
+Sqke	letters	unknown	1	sqke	0.4486	sq	sq	-ke		no	no
+aye	letters	unknown	1	0ye	0.4505	ayi	0yi		e for i	no	no
+webxlit	letters	unknown	1	webxlit	0.4505	ḫbḫne	xbxli	-te	w added, e for x, e dropped	yes	no
+ayekenl	letters	unknown	2	0yekenl	0.4525	Akine	0kin	-l	y added, e added, e for i	no	no
+Qerbe	headword	place name	2	qerbe	0.4535	qer	qer	-b	e added	no	no
+-yte	headword	function word	1	yte	0.4535	yet (2)	yete		e dropped	no	no
+mrok	letters	unknown	1	mrok	0.4535	mreke	mreke		o for e, e dropped	no	no
+treN	letters	person name	1	trene	0.4535	Tene	tene		r added	yes	no
+amedlerens	letters	unknown	1	0medlerens	0.4545	Amniterese	0mniteres		n dropped, e for i, d for t, l added, n added	yes	no
+keqye	letters	place name	1	keqye	0.4575	kek	kek	-ye	q for k	no	no
+xdose	letters	unknown	1	xdose	0.4575	ad	0do	-se	x for 0	no	no
+xeNl	letters	unknown	1	xenel	0.4575	ḫbḫne	xbene	-l	b dropped	yes	no
+amn	letters	god name	2	0mn	0.4625	Amni	0mni		i dropped	yes	no
+kdibe	letters	noun	1	kdibe	0.4625	kdi	kdi	-b	e added	yes	no
+mkiN	letters	unknown	1	mkine	0.4625	Akine	kine		m added	no	no
+tmeyyeS	letters	noun	1	tmeyyes	0.4625	temey (1) / temey (2)	tmey	-lis	y for l, e for i	no	no
+aSode	letters	unknown	1	0sode	0.4635	yeso	0so	-te	d for t	no	no
+rote	letters	unknown	1	rote	0.4635	Ar (1) / ar (2)	0ro	-te	0 dropped	yes	no
+imre	letters	unknown	1	0imre	0.4645	ameri	0meri		i added, e dropped, e for i	no	no
+ase	headword	noun	7	0se	0.4665	yeso	0so		e for o	no	no
+tbi	letters	unknown	2	tbi	0.4665	tbo	tbo		i for o	no	no
+mXelidt	letters	unknown	1	mXelidt	0.4665	mẖe	mXe	-lis	d added, t for s	yes	no
+sSermibleb	letters	unknown	1	ssermibleb	0.4685	ssemri	ssemri	-leb	r added, i added, b for r, i dropped	no	no
+qoye	letters	unknown	4	qoye	0.4695	qo	qo	-ye		yes	no
+tmeyeq	letters	unknown	1	tmeyeq	0.4695	temey (1) / temey (2)	tmey	-qo	e added, o dropped	no	no
+klikelo	letters	unknown	1	klikelo	0.4725	Aleke (1) / aleke (2)	0leke	-lo	0 dropped, k added, i for e	no	no
+berxil	letters	name	1	berxil	0.4755	berwi	berwi	-l	x for w	no	no
+qoqoye	letters	person name	1	qoqoye	0.4755	qo	qo	-qowi	y for w, e for i	yes	no
+atmi	headword	verb	4	0tmi	0.4765	tmi	tmi		0 added	no	yes
+ade	letters	place name	1	0de	0.4765	ad	0do		e for o	no	no
+lxeketes	letters	verb	1	lxeketes	0.4765	eqete	0eqete	-s	l added, x for 0, k for q	no	no
+brtrye	letters	name	1	brtrye	0.4785	pqrtr	pqrtr	-ye	b for p, q dropped	no	no
+dtweti	letters	unknown	1	dtweti	0.4785	Twete	twete		d added, i for e	no	no
+pike	letters	noun	1	pike	0.4805	pke	pke		i added	yes	no
+pmete	letters	person name	2	pmete	0.4815	permete	permete		e dropped, r dropped	no	no
+ẖol	headword	verb	70	Xol	0.4845	ẖe (1)	Xo	-l		yes	no
+brtoye	letters	unknown	3	brtoye	0.4845	abrse	0brse	-ye	0 dropped, t for s, o for e	no	no
+SobNti	letters	unknown	1	sobneti	0.4845	sobḫe	sobxe	-te	n for x, i for e	no	no
+nriteqs	letters	unknown	1	nriteqs	0.4845	trtekese	trtekes		n for t, i added, q for k, e dropped	yes	no
+ot	letters	unknown	1	0ot	0.4845	ayot	0yot		0 dropped, 0 for y	no	no
+Stqo	letters	unknown	4	stqo	0.4855	set	st	-qo		yes	no
+ede	letters	verb	1	0ede	0.4855	yed	yed		0 for y, e added	no	no
+nteN	letters	unknown	1	ntene	0.4855	ttne	ttne		n for t, e added	yes	no
+beleki	letters	person name	1	beleki	0.4865	mleke	mleke		b for m, e added, i for e	no	no
+mqolteqye	letters	person name	1	mqolteqye	0.4865	mklte	mklte	-qowi	q for k, o added, o dropped, y for w, e for i	no	no
+yelebi	letters	noun	1	yelebi	0.4865	ayi	0yi	-leb	0 dropped, e for i, i added	no	no
+abenbidpete	letters	unknown	1	0benbidpete	0.4885	Mnpte	0mnptete		b for m, e added, b for p, i added, d for t, p added	yes	no
+steSw	letters	unknown	1	stesw	0.4885	Sdose	sdes	-w	t for d	no	no
+itwdto	letters	unknown	1	0itwdto	0.4895	twd	twd	-te	0 added, i added, o for e	no	no
+Adere	headword	place name	5	0dere	0.4905	Ar (1) / ar (2)	0ere		d added	yes	no
+mreperi	headword	title	4	mreperi	0.4905	Brebri	brebri		m for b, p for b, e added	yes	no
+tepbote	letters	unknown	1	tepbote	0.4905	tepke	tepke	-te	b for k, o for e	no	no
+wNli	letters	unknown	2	wneli	0.4915	wte	wte	-li	n for t	no	no
+Sowte	letters	unknown	1	sowte	0.4915	sewi	sewi	-te	o for e, i dropped	no	no
+iliNqo	letters	person name	1	0ilineqo	0.4915	Akine	0kine	-qo	i added, l for k	no	no
+lbr	letters	unknown	1	lbr	0.4915	nbr	nbr		l for n	no	no
+ite	letters	noun	1	0ite	0.4925	yet (2)	yete		0 for y, i for e	no	no
+yiqte	letters	unknown	1	yiqte	0.4925	eqete	0eqete		y for 0, i for e, e dropped	no	no
+Wrose	headword	place name	3	wrose	0.4935	wri	wri	-se	o for i	no	no
+treql	letters	noun	1	treql	0.4935	srq	srq	-l	t for s, e added	no	no
+trq	letters	title	2	trq	0.4945	srq	srq		t for s	no	no
+stk	letters	unknown	1	stk	0.4945	sdk	sdk		t for d	no	no
+wrs	letters	noun	1	wrs	0.4945	Wrose	wros		o dropped	no	no
+noke	letters	unknown	1	noke	0.4965	no	no	-ke		no	no
+qesN	letters	noun	1	qesne	0.4965	Qes	qes	-te	n for t	yes	no
+atos	headword	title	3	0tos	0.4975	ato	0to	-s		yes	no
+reke	letters	noun	3	reke	0.4995	Dek	deke		r for d	no	no
+aromri	letters	unknown	1	0romri	0.5005	Arome	0rome		r added, i for e	yes	no
+mXli	letters	adjective	1	mXli	0.5015	mẖe	mXe	-li	e dropped	yes	no
+prtedse	letters	unknown	1	prtedse	0.5015	perite	perite	-se	e dropped, i dropped, d added	yes	no
+tilyeyki	letters	unknown	1	tilyeyki	0.5015	tleyi	tleyi		i added, y added, k added	no	no
+Mso	headword	name	5	mso	0.5025	mse	mse		o for e	yes	no
+arkiwl	letters	person name	1	0rkiwl	0.5025	yerki	yerki	-l	0 for y, e dropped, w added	no	no
+pede	letters	unknown	1	pede	0.5025	pwide	pwide		w dropped, e for i	no	no
+yiteb	letters	unknown	1	yiteb	0.5065	yet (2)	yete	-b	i for e	no	no
+wel	letters	unknown	1	wel	0.5075	we	we	-l		no	no
+aqtoye	letters	unknown	3	0qtoye	0.5085	eqete	0eqete	-ye	e dropped, e dropped, o for e	no	no
+sob	headword	noun	2	sob	0.5085	seb (1) / seb (2)	seb		o for e	no	no
+torebre	letters	unknown	1	torebre	0.5085	Brebri	brebri		t added, o for b, e for i	yes	no
+yetolxe	letters	noun	1	yetolxe	0.5085	ato	yeto	-li	x added, e for i	yes	no
+areqebr	headword	title	3	0reqebr	0.5095	yireqe (1)	0ireqe	-b	i dropped, r added	yes	no
+SXekes	letters	benediction verb	1	sXekes	0.5095	atẖe	0tXe	-kes	0 dropped, s for t	yes	no
+eqetx	letters	unknown	1	0eqetx	0.5095	eqete	0eqete		x for e	no	no
+ipxpx	letters	unknown	1	0ipxpx	0.5095	Ipḫe	0ipxe	-bx	e dropped, p for b	yes	no
+xmomole	letters	noun	1	xmomole	0.5095	ḫmlol	xmlole		o added, m for l	yes	no
+Sibwiye	letters	name	1	sibwiye	0.5105	Tebwe	tebwe	-ye	s for t, i for e, i for e	yes	no
+mXloke	letters	title	1	mXloke	0.5105	mẖe	mXo	-ke	l added	yes	no
+wdeplke	letters	unknown	1	wdeplke	0.5105	kdeylk	kdeylk		w for k, p for y, e added	no	no
+xmNimlislw	letters	unknown	1	xmneimlislw	0.5125	Amni	0mni	-lis	x for 0, e added, m added, l added, w added	yes	no
+wlbrte	letters	unknown	1	wlbrte	0.5155	nbr	nbr	-te	w added, l for n	no	no
+tesk	letters	unknown	1	tesk	0.5165	deseke	deske		t for d, e dropped	yes	no
+xrimli	letters	unknown	1	xrimli	0.5165	Arome	0rome	-li	x for 0, i for o, e dropped	yes	no
+mret	letters	unknown	1	mret	0.5195	Mre	mre	-te	e dropped	no	no
+yedet	letters	unknown	2	yedet	0.5215	yed	yed	-te	e added, e dropped	no	no
+deqeb	letters	unknown	1	deqeb	0.5225	Dek	deke	-b	q for k	no	no
+artibkle	letters	unknown	1	0rtibkle	0.5245	aredeb	0redeb	-li	e dropped, t for d, i for e, k added, e for i	no	no
+eki	letters	unknown	1	0eki	0.5245	Wyeki	wyeki		w dropped, 0 for y	no	no
+kteteqoSk	letters	unknown	1	kteteqosk	0.5265	kdite	kdite	-kes	t for d, e for i, q for k, o for e, k added	yes	no
+bNyoSit	letters	unknown	1	bneyosit	0.5275	bnebeseni	bnebesni	-te	y for b, o for e, n dropped, e dropped	no	no
+eqetxN	letters	unknown	1	0eqetxne	0.5275	wrtḫn	wretxn		0 for w, e added, q for r, e added	no	no
+ipk	letters	unknown	1	0ipk	0.5275	Ipḫe	0ipxe		k for x, e dropped	yes	no
+tkto	letters	unknown	1	tkto	0.5275	tkite	tkite		i dropped, o for e	yes	no
+dtrep	letters	unknown	1	dtrep	0.5285	drp	drp		t added, e added	no	no
+ari-	headword	noun	2	0ri	0.5295	Ar (1) / ar (2)	0ro		i for o	yes	no
+bXe	letters	noun	2	bXe	0.5295	boẖe	boXe		o dropped	no	no
+arwito	letters	unknown	1	0rwito	0.5295	berwi	berwi	-te	0 for b, e dropped, o for e	no	no
+itey	letters	verb	1	0itey	0.5295	Atiye	0tiye		i added, e for i, e dropped	yes	no
+mseẖto	headword	title	1	mseXto	0.5295	mselẖse	mselXse		l dropped, t for s, o for e	no	yes
+mwetre	letters	unknown	1	mwetre	0.5295	mtr	mtr		w added, e added, e added	no	no
+pelxelq	letters	unknown	1	pelxelq	0.5305	Pilqe	pelqe	-lw	x for q, q for w	yes	no
+deqo	letters	unknown	1	deqo	0.5315	d	de	-qo		no	no
+kkte	letters	unknown	1	kkte	0.5325	kek	kek	-te	e dropped	no	no
+troy	letters	unknown	1	troy	0.5335	trose	trot		y for t	no	no
+bnebeseni	headword	unknown	2	bnebeseni	0.5345	Amnbse	0mnbse	-te	0 dropped, b for m, e added, e added, n for t, i for e	yes	no
+blyeSo	letters	name	1	blyeso	0.5355	mleyose	mleyose		b for m, e dropped, e for o, o for e	no	no
+ati	letters	unknown	2	0ti	0.5365	ato	0to		i for o	yes	no
+apeNsebo	letters	unknown	1	0penesebo	0.5365	pnqose	pnqose	-b	0 added, e added, q dropped, e for o, o added	no	no
+xrosiyeqo	letters	name	1	xrosiyeqo	0.5365	arette	xirette	-qo	i dropped, o for e, s for t, i added, y for t	no	no
+tet	letters	benediction verb	1	tet	0.5385	set	set		t for s	no	no
+mxte	letters	unknown	1	mxte	0.5405	mḫe	mxe	-te	e dropped	yes	no
+-bete-	headword	function word	5	bete	0.5425	mete	mete		b for m	yes	no
+txN	letters	unknown	1	txne	0.5435	ydḫno	dxno		t for d, e for o	no	no
+Slotey	letters	place name	1	slotey	0.5455	senete	snete	-ye	l for n, o for e, e dropped	yes	no
+weple	letters	unknown	1	weple	0.5455	pl (2)	ple		w added, e added	no	no
+Siqye	headword	place name	1	siqye	0.5465	sq	sq	-ye	i added	no	no
+toqoye	letters	name	1	toqoye	0.5475	atqo	0tqo	-ye	0 dropped, o added	yes	no
+ter	letters	unknown	1	ter	0.5495	tr	tr		e added	no	no
+tesont	letters	unknown	1	tesont	0.5495	Ṭọseni	toseni	-te	e for o, o for e, i dropped, e dropped	no	no
+yeso	headword	function word	9	yeso	0.5504	ato	yeto		s for t	yes	no
+tloli	headword	noun	4	tloli	0.5504	Selele	slele		t for s, o for e, i for e	no	no
+dodoli	letters	unknown	1	dodoli	0.5504	do (1) / do (2)	do	-teli	d for t, o for e	no	no
+weyi	letters	unknown	1	weyi	0.5504	we	we	-yi		no	no
+yedo	letters	unknown	1	yedo	0.5504	ato	yeto		d for t	yes	no
+leto	letters	unknown	1	leto	0.5514	noto	noto		l for n, e for o	no	no
+nmero	letters	unknown	1	nmero	0.5514	amero	0mero		n for 0	no	no
+tle	letters	verb	1	tle	0.5514	tl	tl		e added	no	no
+nibelilto	letters	place name	1	nibelilto	0.5524	Nmlo	nmlo	-lo	i added, b for m, e added, i for o, t added	no	no
+qereXtwwi	letters	unknown	1	qereXtwwi	0.5534	Qoreti	qoreti		e for o, X added, w added, w added	yes	no
+sberxi	letters	unknown	1	sberxi	0.5534	seber	sber	-li	x for l	no	no
+tislke	letters	noun	1	tislke	0.5534	Ṭọseni	tosni	-ke	i for o, l for n, i dropped	no	no
+tnide	letters	verb	1	tnide	0.5574	Tnte	tnte		i added, d for t	no	no
+ptenowi	letters	person name	1	ptenowi	0.5594	peseto	peseto	-wi	e dropped, t for s, n for t	yes	no
+swit	letters	unknown	1	swit	0.5594	sewi	swi	-te	e dropped	no	no
+yini	headword	unknown	5	yini	0.5614	yni	yni		i added	no	yes
+Sli	letters	unknown	1	sli	0.5614	s	s	-li		no	no
+xtkelo	letters	unknown	1	xtkelo	0.5614	kdke	ktke	-lo	x for k	yes	no
+iple	letters	unknown	2	0iple	0.5624	pl (2)	ple		0 added, i added	no	no
+dblilx	letters	unknown	1	dblilx	0.5624	dbli	dbli	-li	x for i	no	no
+debNqo	letters	unknown	1	debneqo	0.5634	Dmn	dmn	-qo	e added, b for m, e added	no	no
+qebts	letters	person name	3	qebts	0.5644	aqebese	0qebes		0 dropped, e dropped, t added	yes	no
+XtoXe	letters	noun	2	XtoXe	0.5644	Atoẖe	0toXe		X for 0	no	no
+sbetelebsadkelis	letters	unknown	1	sbetelebsdkelis	0.5644	metelẖse	metelXse	-lis	s added, b for m, e added, b for X, d added, k added	no	no
+mes	letters	unknown	2	mes	0.5654	Ms	ms		e added	yes	no
+able	letters	unknown	1	0ble	0.5664	Abel	0bel		e dropped, e added	no	no
+bowidlo	letters	unknown	1	bowidlo	0.5664	pwide	pwide	-lo	b for p, o added, e dropped	no	no
+stol	letters	title	1	stol	0.5674	sete	ste	-l	o for e	yes	no
+weN	letters	unknown	1	wene	0.5684	Akine	kine		w for k, e for i	no	no
+yerSxini	letters	verb	2	yersxini	0.5694	wrtḫn	wrtxn	-i	y for w, e added, s for t, i added	no	no
+SipeSiye	letters	person name	1	sipesiye	0.5694	splose	splose	-ye	i added, l dropped, e for o, i for e	no	no
+Sqeki	letters	unknown	1	sqeki	0.5694	Sqlki	sqlki		e for l	no	no
+bwike	letters	unknown	1	bwike	0.5694	Beke	beke		w added, i for e	yes	no
+Soye	letters	person name	1	soye	0.5724	Siye	siye		o for i	yes	no
+H̱lẖili	headword	god name	5	XlXili	0.5744	slẖ	slXi	-li	X for s	yes	no
+Nye	letters	unknown	2	neye	0.5744	nete	nete		y for t	no	no
+moste	letters	unknown	1	moste	0.5744	ameyose	0meyos	-te	0 dropped, e dropped, y dropped	no	no
+ptlteb	letters	noun	1	ptlteb	0.5744	plete	plete	-b	t added, e dropped	no	no
+wekid	letters	unknown	1	wekid	0.5744	kid	kid		w added, e added	no	no
+nle	letters	unknown	1	nle	0.5764	n-lw	nl		e added	yes	no
+snsli	letters	unknown	1	snsli	0.5764	senete	snte	-li	s for t, e dropped	yes	no
+sxse	letters	unknown	1	sxse	0.5824	sḫi	sxe	-se	e dropped	yes	no
+bliye	letters	person name	1	bliye	0.5834	mli	mli	-ye	b for m	yes	no
+tniqo	letters	person name	1	tniqo	0.5834	yini	yni	-qo	t for y	no	no
+yebye	letters	unknown	2	yebye	0.5844	Tebwe	tebwe		y for t, y for w	yes	no
+akli	letters	unknown	1	0kli	0.5844	Ayk	0yk	-li	0 dropped, 0 for y	no	no
+axmo	letters	unknown	1	0xmo	0.5854	atḫmo	0txmo		t dropped	no	no
+SSe	letters	unknown	1	sse	0.5864	ss	ss		e added	no	no
+mrXdtose	letters	unknown	1	mrXdtose	0.5874	mseẖto	msXto	-se	r for s, d added	no	no
+etSto	letters	unknown	1	0etsto	0.5894	atos	0tos	-te	e added, o dropped, o for e	no	no
+adblelxe	letters	noun	1	0dblelxe	0.5904	dbli	dbli	-li	0 added, e for i, x added, e for i	no	no
+lte	letters	unknown	1	lte	0.5904	l (2)	l	-te		yes	no
+lek	letters	unknown	1	lek	0.5914	Aleke (1) / aleke (2)	0leke		0 dropped, e dropped	no	no
+lke	letters	unknown	1	lke	0.5914	Aleke (1) / aleke (2)	0leke		0 dropped, e dropped	no	no
+aqen	letters	unknown	1	0qen	0.5924	Akine	0kin		q for k, e for i	no	no
+mki	letters	noun	1	mki	0.5924	mk	mke		i for e	yes	no
+deb	letters	noun	1	deb	0.5934	adb	db		e added	yes	no
+qesw	letters	place name	1	qesw	0.5934	Qes	qes	-w		yes	no
+axboroteN	letters	noun	1	0xborotene	0.5944	Aborepi	0borepe	-te	0 added, x for 0, o for e, t for p, n for t	yes	no
+eye	letters	unknown	2	0eye	0.5954	ayi	0yi		e added, e for i	no	no
+lito	letters	function word	2	lito	0.5954	noto	noto		l for n, i for o	no	no
+sbwi	letters	unknown	1	sbwi	0.5964	seb (1) / seb (2)	sb	-wi		no	no
+woSnSqo	letters	person name	1	wosnsqo	0.5984	womnise	womnis	-qo	s for m, i dropped	no	no
+Xtelalos	letters	unknown	1	Xtellos	0.6034	ẖol	Xol	-lis	t added, e for o, o for i	no	no
+brtrl	letters	name	1	brtrl	0.6054	pqrtr	pqrtr	-l	b for p, q dropped	no	no
+Xrto	letters	unknown	1	Xrto	0.6064	ẖr	Xr	-te	o for e	yes	no
+qetelxe	letters	place name	1	qetelxe	0.6064	qe (1)	qe	-teli	x added, e for i	yes	no
+ydke	letters	unknown	1	ydke	0.6064	yiwdke	yiwdke		i dropped, w dropped	no	no
+aḫr	headword	verb	1	0xr	0.6094	aḫro	0xro		o dropped	no	no
+pXope	letters	person name	1	pXope	0.6094	Pẖome	pXome		p for m	yes	no
+pxe	letters	unknown	1	pxe	0.6094	pḫ	px		e added	no	no
+toẖ	headword	verb	1	toX	0.6094	Atoẖe	0toXe		0 dropped, e dropped	no	no
+Nket	letters	unknown	1	neket	0.6104	no	no	-kete	e for o, e dropped	no	no
+qdte	letters	unknown	1	qdte	0.6114	kdite	kdite		q for k, i dropped	yes	no
+eSxiniye	letters	unknown	1	0esxiniye	0.6124	ydḫno	ydxno	-ye	0 for y, e added, s for d, i added, i for o	no	no
+msedelN	letters	unknown	1	msedelne	0.6124	mse	mse	-teli	d for t, n added, e for i	yes	no
+aripe	letters	unknown	1	0ripe	0.6134	aribet	0ribet		p for b, t dropped	no	no
+qrkili	letters	name	1	qrkili	0.6144	wri	wri	-li	q for w, k added	no	no
+SSto	letters	unknown	1	ssto	0.6154	ss	ss	-te	o for e	no	no
+Stto	letters	unknown	1	stto	0.6154	set	st	-te	o for e	yes	no
+ptri	letters	noun	1	ptri	0.6154	Petr	petr	-i	e dropped	no	no
+qtile	letters	noun	1	qtile	0.6154	qedi	qedi	-li	e dropped, t for d, e for i	no	no
+trotiXi	letters	unknown	1	trotiXi	0.6154	trose	trot	-li	i added, X for l	no	no
+Tmne	headword	place name	5	tmne	0.6164	Mne	mne		t added	yes	no
+kid	headword	verb	5	kid	0.6164	ked	ked		i for e	yes	no
+slo	letters	function word	1	slo	0.6164	s	s	-lo		no	no
+tolw	letters	unknown	1	tolw	0.6164	ato	0to	-lw	0 dropped	yes	no
+elxte	letters	benediction verb	2	0elxte	0.6174	ld	0eld	-te	x for d	no	no
+attomi	letters	unknown	1	0ttomi	0.6174	atmi	0tmi		t added, o added	no	no
+likidbte	letters	unknown	1	likidbte	0.6174	Nkdỵṭẹ	nkdyte		l for n, i added, i added, b for y	no	no
+yemli	letters	person name	1	yemli	0.6174	Amni	0mni		y for 0, e added, l for n	yes	no
+ptmkide	letters	unknown	2	ptmkide	0.6184	Apedemk	pdemk	-te	t for d, e dropped, i added, d for t	yes	no
+Xlo	letters	noun	1	Xlo	0.6184	ẖe (1)	X	-lo		yes	no
+mibemi	letters	unknown	1	mibemi	0.6184	Mesemi	mesemi		i for e, b for s	yes	no
+pwore	letters	unknown	1	pwore	0.6184	pwide	pwide		o for i, r for d	no	no
+tes	letters	unknown	1	tes	0.6184	atos	0tos		0 dropped, e for o	no	no
+ywito	letters	unknown	1	ywito	0.6184	awete	0wete		y for 0, i for e, o for e	no	no
+-neyi	headword	function word	1	neyi	0.6194	tneyi	tneyi		t dropped	no	no
+Xewi	letters	name	1	Xewi	0.6194	ẖe (1)	Xe	-wi		yes	no
+mtey	letters	unknown	1	mtey	0.6214	mte	mte	-ye	e dropped	yes	no
+dotedi	headword	benediction verb	7	dotedi	0.6234	detetewi	detetewi		o for e, d for t, e dropped, w dropped	no	no
+tero	letters	unknown	1	tero	0.6234	tr	tre		e added, o for e	yes	no
+yitylesyi	letters	person name	1	yitylesyi	0.6234	ytise	ytis	-yi	i added, y added, l added, e for i	no	no
+mSkel	letters	person name	1	mskel	0.6244	mse	mse	-l	k added	yes	no
+medo	headword	title	3	medo	0.6264	mde	mde		e added, o for e	no	no
+txbo	letters	unknown	1	txbo	0.6264	atḫmo	0txmo		0 dropped, b for m	no	no
+esxte	letters	unknown	1	0esxte	0.6274	sḫi	sxe	-te	0 added, e added, e dropped	yes	no
+mStrqoye	letters	person name	1	mstrqoye	0.6274	mtr	mtr	-qowi	s for t, t added, y for w, e for i	no	no
+yek	letters	unknown	1	yek	0.6304	yeyk	yeyk		y dropped	no	no
+iror	letters	person name	1	0iror	0.6314	Adere	0rere		i added, o for e, e dropped	no	no
+bede	letters	unknown	1	bede	0.6334	bdye	bdye		e added, y dropped	no	no
+dlwi	letters	unknown	1	dlwi	0.6334	d	d	-lowi	o dropped	no	no
+yinSi	letters	unknown	1	yinsi	0.6354	yini	yini	-se	i dropped, i for e	no	no
+tox	letters	unknown	1	tox	0.6364	toẖ	toX		x for X	no	no
+arwtl	letters	person name	1	0rwtl	0.6374	aretwte	0rtwte	-l	t dropped, e dropped	no	no
+pwide	headword	adjective	2	pwide	0.6384	nwide	nwide		p for n	no	no
+qoet	letters	unknown	1	qoet	0.6384	wedi	qet		o for e, e added	no	no
+deqeni-	headword	unknown	1	deqeni	0.6394	Adeqetli	0deqetli		0 dropped, n for t, l dropped	yes	no
+nweliqo	letters	person name	1	nweliqo	0.6394	Bkeli	bkeli	-qo	n for b, w for k	yes	no
+dito	letters	unknown	1	dito	0.6404	dete	dete		i for e, o for e	no	no
+yod	letters	unknown	1	yod	0.6404	yed	yed		o for e	no	no
+yet (2)	headword	noun	17	yet	0.6414	ato	yeto		o dropped	yes	no
+wsi	letters	unknown	1	wsi	0.6414	wse	wse		i for e	no	no
+kle	headword	verb	3	kle	0.6424	Akile	0kile		0 dropped, i dropped	no	no
+Srireqe	letters	unknown	1	srireqe	0.6424	yireqe (1)	yireqe		s for y, r added	yes	no
+yes	letters	unknown	1	yes	0.6424	yeso	yeso		o dropped	no	no
+mdek	headword	title	3	mdek	0.6444	mde	mde	-ke	e dropped	no	no
+awSo	letters	unknown	2	0wso	0.6444	yeso	0so		w added	no	no
+sbw	letters	unknown	1	sbw	0.6464	Sbk (?)	sbk		w for k	no	no
+yiti	letters	noun	2	yiti	0.6474	ato	yeto		i for e, i for o	yes	no
+kye	letters	unknown	4	kye	0.6484	ky	ky		e added	no	no
+mlome	letters	person name	1	mlome	0.6484	mlowi	mlowi		m for w, e for i	no	no
+yelbi	letters	noun	1	yelbi	0.6484	yel	yel	-b	i added	no	no
+kse	letters	unknown	1	kse	0.6494	ke (1)	k	-se		no	no
+mtwye	letters	unknown	1	mtwye	0.6503	Mt	mt	-ye	w added	no	no
+ndeye	letters	unknown	1	ndeye	0.6503	Indo	0indo	-ye	0 dropped, i dropped, e for o	no	no
+Sotnkel	letters	person name	1	sotnkel	0.6513	soni	soni	-l	t added, k added, e for i	yes	no
+lxte	letters	function word	1	lxte	0.6533	lẖ	lX	-te	x for X	yes	no
+eS	letters	function word	3	0es	0.6543	As	0s		e added	yes	no
+dse	letters	noun	1	dse	0.6543	d	d	-se		no	no
+es	letters	unknown	1	0es	0.6543	As	0s		e added	yes	no
+yotre	letters	verb	1	yotre	0.6543	teter	tetere		y for t, o for e, e dropped	yes	no
+best	letters	unknown	1	best	0.6573	peseto	pesti		b for p, i dropped	yes	no
+sobḫe	headword	title	1	sobxe	0.6573	yeso	0so	-bx	0 dropped, e added	no	no
+pqe	letters	unknown	1	pqe	0.6613	pke	pke		q for k	yes	no
+kebe	letters	unknown	1	kebe	0.6623	kb	kb		e added, e added	no	no
+Sime	letters	unknown	1	sime	0.6643	sem	sem		i for e, e added	yes	no
+lolo	letters	unknown	1	lolo	0.6643	no	no	-lo	l for n	no	no
+tkereXetmS	letters	noun	1	tkereXetms	0.6643	qoresem	qoresem	-s	t added, k for q, e for o, X for s, t added	yes	no
+qeSk	letters	place name	1	qesk	0.6653	Qes	qes	-ke	e dropped	yes	no
+sedew	headword	adjective	1	sedew	0.6653	sdk	sdk		e added, e added, w for k	no	no
+iye	letters	verb	1	0iye	0.6663	Atiye	0tiye		t dropped	yes	no
+tiy	letters	unknown	1	tiy	0.6663	Atiye	0tiye		0 dropped, e dropped	yes	no
+ayosesbi	letters	unknown	1	0yosesbi	0.6673	yesebe	yesebe		0 added, o for e, s added, i for e	no	no
+tmot	headword	verb	6	tmot	0.6693	tmite	tmite		o for i, e dropped	no	no
+pteno	letters	noun	1	pteno	0.6693	peseto	peseto		e dropped, t for s, n for t	yes	no
+Snswe	letters	unknown	1	snswe	0.6703	senete	snte		s for t, w added	yes	no
+abepd	letters	unknown	1	0bepd	0.6703	Bobd	bobd		0 added, e for o, p for b	no	no
+brtre	letters	name	1	brtre	0.6703	pqrtr	pqrtr		b for p, q dropped, e added	no	no
+aSodi	letters	unknown	1	0sodi	0.6723	Asori	0sori		d for r	yes	no
+abli	letters	unknown	1	0bli	0.6723	Abel	0bel	-i	e dropped	no	no
+adlito	letters	noun	1	0dlito	0.6723	dole	doli	-te	0 added, o dropped, o for e	no	no
+kedebxeky	letters	verb	1	kedebxeky	0.6723	ked	ked	-bx	e added, e added, k added, y added	yes	no
+teirrpxl	letters	unknown	1	teirrpxl	0.6723	ḫrpḫne	xrpxl		t added, e for x, i added, r added	yes	no
+tkt	letters	unknown	1	tkt	0.6753	tkite	tkite		i dropped, e dropped	yes	no
+mde	headword	verb	24	mde	0.6763	medo	medo		e dropped, e for o	no	no
+bese	letters	function word	1	bese	0.6763	abso (?)	0bso		0 dropped, e added, e for o	no	no
+emo	letters	unknown	1	0emo	0.6763	yemoqe	yemoqe		0 for y, q dropped, e dropped	no	no
+tdxseN	letters	unknown	1	tdxsene	0.6783	sdẖose	sdXose	-te	t for s, x for X, o dropped, n for t	no	no
+aḫro	headword	noun	4	0xro	0.6803	aḫr	0xr		o added	no	no
+weXoke	letters	unknown	1	weXoke	0.6803	ẖe (1)	Xo	-ke	w added, e added	yes	no
+pxiNl	letters	unknown	2	pxinel	0.6823	pḫ	px	-tel	i added, n for t	no	no
+rite	letters	kin term	1	rite	0.6823	wri	wri	-te	w dropped	no	no
+dNxno	letters	unknown	1	dnexno	0.6843	ydḫno	dxno		n added, e added	no	no
+idi	letters	unknown	1	0idi	0.6843	Indo	0indo		n dropped, i for o	no	no
+yeyk	headword	function word	1	yeyk	0.6853	Ayk	0yk		y for 0, e added	no	no
+elbto	letters	unknown	1	0elbto	0.6863	abso (?)	0bso		e added, l added, t for s	no	no
+mdeybe	letters	unknown	1	mdeybe	0.6863	Mdewe	mdewe	-b	y for w, e dropped, e added	yes	no
+pSrtoS	letters	unknown	1	psrtos	0.6863	peseto	pesto	-s	e dropped, r added	yes	no
+H̱lite	headword	place name	4	Xlite	0.6883	ẖe (1)	X	-lis	t for s, e added	yes	no
+atom	letters	unknown	1	0tom	0.6893	Adomn	0domn		t for d, n dropped	yes	no
+kdkex	letters	unknown	1	kdkex	0.6893	kdke	kdke		x added	no	no
+tnideb	letters	unknown	1	tnideb	0.6903	Tnte	tnte	-b	i added, d for t	no	no
+eqepi	letters	unknown	1	0eqepi	0.6913	eqete	0eqete		p for t, i for e	no	no
+elw	letters	unknown	2	0elw	0.6923	yel	yel	-w	0 for y	no	no
+kelbo	letters	function word	1	kelbo	0.6923	ḫlbi	xlbi		k for x, e added, o for i	yes	no
+txnke	letters	unknown	1	txnke	0.6933	ydḫno	dxno	-ke	t for d, o dropped	no	no
+yedk	letters	unknown	1	yedk	0.6933	yed	yed	-ke	e dropped	no	no
+mlomrse	headword	title	16	mlomrse	0.6943	mlowose	mlowose		m for w, r for o	no	no
+kSdk	letters	unknown	1	ksdk	0.6953	sdk	sdk		k added	no	no
+ritkto	letters	unknown	1	ritkto	0.6963	yitkite	yitkite		r for y, i dropped, o for e	no	no
+yiXlXite	letters	unknown	1	yiXlXite	0.6963	H̱lẖili	XlXili		y added, i added, t for l, e for i	no	no
+aXotoN	letters	unknown	1	0Xotone	0.6973	Aritene	0ritene		X for r, o for i, o for e	no	no
+wetemtr	letters	person name	1	wetemtr	0.6973	mtr	mtr		w added, e added, t added, e added	no	no
+atoo	letters	noun	1	0too	0.6983	ato	0to		o added	yes	no
+yeqe	letters	unknown	1	yeqe	0.6983	teqi	teqi		y for t, e for i	yes	no
+smSti	letters	unknown	1	smsti	0.7013	smt	smt	-te	s for t, i for e	no	no
+bose	letters	unknown	1	bose	0.7023	bqo	bqo	-se	q dropped	no	no
+aqewrt	letters	unknown	1	0qewrt	0.7043	qorte	qorte		0 added, e for o, w added, e dropped	no	no
+werk	letters	unknown	1	werk	0.7063	yerki	0erk		0 dropped, w added	no	no
+ptpoto	letters	unknown	1	ptpoto	0.7073	ptroti	ptroti		p for r, o for i	no	no
+tendti	letters	unknown	1	tendti	0.7073	senete	sente		t for s, d added, i for e	yes	no
+Nwi	letters	unknown	1	newi	0.7083	atewi	0tewi		0 dropped, n for t	yes	no
+yewi	letters	unknown	1	yewi	0.7083	atewi	0tewi		0 dropped, y for t	yes	no
+wlikidbte	letters	verb	1	wlikidbte	0.7093	Nkdỵṭẹ	nkdyte		w added, l for n, i added, i added, b for y	no	no
+yebe	letters	unknown	1	yebe	0.7093	yesebe	yesbe		s dropped	no	no
+niye	letters	person name	2	niye	0.7103	no	no	-ye	i for o	no	no
+amXye	letters	unknown	1	0mXye	0.7103	mẖe	mXe	-ye	0 added, e dropped	yes	no
+epxwN	letters	unknown	1	0epxwne	0.7103	Ipḫe	0ipxe	-te	e for i, e dropped, w added, n for t	yes	no
+morl	letters	unknown	1	morl	0.7123	Amod	mod	-l	r for d	no	no
+Dor	headword	place name	1	dor	0.7133	Adere	0der		0 dropped, o for e	no	yes
+apnewke	letters	unknown	1	0pnewke	0.7133	pn	pn	-ke	0 added, e added, w added	no	no
+xirl	letters	unknown	1	xirl	0.7133	ḫr	xr	-l	i added	no	no
+adblelx	letters	noun	1	0dblelx	0.7143	dbli	dbli	-li	0 added, e for i, x for i	no	no
+nps	letters	god name	1	nps	0.7143	Npte	npt		s for t	yes	no
+ek	letters	unknown	2	0ek	0.7153	yeyk	yeyk		0 for y, y dropped	no	no
+atqolXl	letters	person name	1	0tqolXl	0.7163	amolẖ	0molX	-l	t added, q for m	no	no
+ptroti	headword	god name	7	ptroti	0.7213	Petr	petr	-te	e dropped, o added, i for e	no	no
+Skl	headword	place name	9	skl	0.7223	ske	ske	-l	e dropped	no	no
+-bto	headword	function word	5	bto	0.7223	abso (?)	0bso		0 dropped, t for s	no	no
+ble	letters	unknown	2	ble	0.7223	pl (2)	ple		b for p	no	no
+SSi	letters	unknown	1	ssi	0.7223	ss	ss	-i		no	no
+lye	letters	unknown	1	lye	0.7223	l (2)	l	-ye		yes	no
+mlne	headword	title	1	mlne	0.7243	Mne	mne		l added	yes	no
+kttre	headword	title	4	kttre	0.7253	teter	tetere		k added, e dropped, e dropped	yes	no
+aqee	letters	unknown	1	0qee	0.7253	aqese	0qese		s dropped	yes	no
+beni	letters	person name	1	beni	0.7253	Abin	0bin	-i	0 dropped, e for i	no	no
+yqol	letters	unknown	1	yqol	0.7253	qoli	qol		y added	yes	no
+SkelnxeN	letters	unknown	1	skelnxene	0.7313	sekesekine	skeskine		l added, n for s, x for k, e for i	no	no
+nki	letters	unknown	1	nki	0.7323	nk	nk	-i		no	no
+bxemi	letters	unknown	1	bxemi	0.7343	Pẖome	pXeme		b for p, x for X, i for e	yes	no
+blye	letters	person name	1	blye	0.7353	Abel	0bel	-ye	0 dropped, e dropped	no	no
+ptkiN	letters	person name	1	ptkine	0.7353	pke	pki	-te	t added, n for t	yes	no
+alle	letters	noun	1	0lle	0.7363	yel	yel	-li	0 for y, e dropped, e for i	no	no
+irxhi	letters	unknown	1	0irxi	0.7363	yiroẖe	yiroXe		0 for y, o dropped, x for X, i for e	no	no
+yibx	letters	unknown	1	yibx	0.7363	ayi	0yi	-bx	0 dropped	no	no
+mrde	headword	title	1	mrde	0.7373	mr	mr	-te	d for t	no	no
+akidd	letters	unknown	1	0kidd	0.7393	aḫide	0xid		k for x, d added	yes	no
+nspiniNte	letters	unknown	1	nspininete	0.7433	ns per	nsper	-kete	i for e, n for r, i added, n for k	yes	no
+n-betw	headword	function word	1	nbetw	0.7443	nobow	nobow		o dropped, e for o, t added	no	no
+ywid	headword	epithet	1	ywid	0.7453	wid	wid		y added	no	no
+ptSide	letters	unknown	1	ptside	0.7473	pwide	pwide		t added, s for w	no	no
+ptside	letters	unknown	1	ptside	0.7473	pwide	pwide		t added, s for w	no	no
+adt	letters	unknown	1	0dt	0.7483	dt	dt		0 added	no	no
+rte	letters	unknown	1	rte	0.7483	Ar (1) / ar (2)	0r	-te	0 dropped	yes	no
+qryonew	letters	unknown	1	qryonew	0.7493	qorene	qorene	-w	o dropped, y added, o for e	yes	no
+smrso : kroro	headword	title	1	smrsokroro	0.7493	Sorkror	sorkror		m for o, s added, o added, o added	yes	no
+bki	letters	unknown	1	bki	0.7522	pke	pki		b for p	yes	no
+-tni-	headword	person name	3	tni	0.7532	yini	yni		t for y	no	no
+irxto	letters	unknown	1	0irxto	0.7532	worḫtḫ	worxtx		0 for w, i for o, o for x	no	no
+tqN	letters	unknown	1	tqne	0.7542	Twete	twte		q for w, n for t	no	no
+axlSte	letters	unknown	1	0xlste	0.7552	alose	0los	-te	0 added, x for 0, o dropped	yes	no
+-ror	headword	function word	1	ror	0.7572	Dor	dor		r for d	no	no
+Adenodor	headword	place name	1	0denodor	0.7592	ydḫno	ydxno	-te	0 for y, e for x, d for t, o for e, r added	no	no
+mpde	letters	unknown	1	mpde	0.7592	Mnpte	mnpte		n dropped, d for t	yes	no
+xtebeme	letters	title	1	xtebeme	0.7632	asebe	0sebe		x for 0, t for s, m added, e added	no	no
+pnqose	headword	title	2	pnqose	0.7642	Pilqe	pilqo	-se	i dropped, n for l	yes	no
+mror	headword	noun	4	mror	0.7662	mro	mro		r added	no	no
+xll	letters	noun	1	xll	0.7662	ḫlẖl	xlXl		X dropped	yes	no
+lXSmlowoto	letters	title	1	lXsmlowoto	0.7672	Simlo	smlo	-kete	l added, X added, w for k, o for e, o for e	yes	no
+tlt	headword	noun	7	tlt	0.7682	Tnte	tnte		l for n, e dropped	no	no
+axN	letters	noun	1	0xne	0.7682	ḫbḫne	xbxne		x dropped, 0 for b	yes	no
+trens	letters	unknown	1	trens	0.7692	trose	trot	-s	e for o, n for t	no	no
+ymope	letters	unknown	1	ymope	0.7712	yemoqe	yemoqe		e dropped, p for q	no	no
+ano	headword	adjective	2	0no	0.7722	no	no		0 added	no	yes
+yel	headword	verb	1	yel	0.7722	Yilo	yilo		e for i, o dropped	no	no
+ayol	letters	unknown	1	0yol	0.7742	yel	yel		0 added, o for e	no	no
+mded	letters	unknown	1	mded	0.7752	mde	mde		d added	no	no
+tdxiNtror	letters	person name	1	tdxinetror	0.7802	ydḫno	ydxno	-te	t for y, i added, e for o, r added, o for e, r added	no	no
+betekno	letters	unknown	1	betekno	0.7822	mtekdi	metekdi		b for m, n for d, o for i	yes	no
+dmbe	letters	noun	1	dmbe	0.7822	dm	dm	-b	e added	yes	no
+kpelw	letters	unknown	1	kpelw	0.7822	kb	kb	-lw	p for b, e added	no	no
+mqol	letters	person name	1	mqol	0.7822	qoli	qol		m added	yes	no
+molk	letters	unknown	1	molk	0.7832	mleke	mlke		o added, e dropped	no	no
+-bte	headword	function word	9	bte	0.7842	mte	mte		b for m	yes	no
+axe	letters	unknown	2	0xe	0.7842	ḫe (1)	xe		0 added	no	no
+ayot	headword	title	1	0yot	0.7842	yet (2)	yet		0 added, o for e	no	no
+bod	letters	person name	1	bod	0.7842	Amod	mod		b for m	no	no
+kedd	letters	unknown	1	kedd	0.7842	ked	ked		d added	yes	no
+bqo	headword	verb	10	bqo	0.7852	Beqe	beqe		e dropped, o for e	yes	no
+mrebqo	headword	title	2	mrebqo	0.7852	Mre	mre	-qo	b added	no	no
+oybeq	letters	unknown	1	0oybeq	0.7852	ayebqo	0yebqo		o added, e dropped, e added, o dropped	no	no
+wiXsye	letters	unknown	1	wiXsye	0.7852	Wis	wis	-ye	X added	yes	no
+tblb	letters	unknown	1	tblb	0.7862	tbo	tbo	-leb	o dropped, e dropped	no	no
+mrxe	letters	noun	4	mrxe	0.7872	mḫe	mxe		r added	yes	no
+kelt	letters	unknown	1	kelt	0.7872	qente	qente		k for q, l for n, e dropped	no	no
+eyksni	letters	unknown	1	0eyksni	0.7892	yeyk	yeyk	-se	0 for y, n added, i for e	no	no
+sxto	letters	unknown	1	sxto	0.7892	sḫi	sxe	-te	e dropped, o for e	yes	no
+wlto	letters	unknown	1	wlto	0.7902	wle	wle	-te	e dropped, o for e	yes	no
+tinnki	letters	unknown	1	tinnki	0.7912	snn	snn	-ke	t for s, i added, i for e	no	no
+yed	headword	noun	5	yed	0.7922	yet (2)	yet		d for t	no	no
+emekwdq	letters	title	1	0emekwdq	0.7932	Mkedeke	mkedke		0 added, e added, e added, e dropped, w added, q for k, e dropped	yes	no
+meX	letters	unknown	1	meX	0.7932	mẖe	mXe		e added, e dropped	yes	no
+mxrloseN	letters	unknown	1	mxrlosene	0.7932	mroso	mroso	-te	x added, l added, e for o, n for t	no	no
+Sitkemo	letters	unknown	1	sitkemo	0.7952	atḫmo	0txmo		s for 0, i added, k for x, e added	no	no
+pso	headword	title	1	pso	0.7952	abso (?)	0bso		0 dropped, p for b	no	no
+arosd	headword	title	1	0rosd	0.7962	Wrose	wros		0 for w, d added	no	no
+wst	letters	unknown	1	wst	0.7962	Wos	ws	-te	e dropped	yes	no
+bili	letters	unknown	2	bili	0.7982	Abin	0bin	-li	0 dropped, n dropped	no	no
+tretox	letters	unknown	1	tretox	0.7982	trose	trot	-bx	e for o, o for b	no	no
+attiw	letters	unknown	1	0ttiw	0.8032	Btiwe	btiwe		0 for b, t added, e dropped	no	no
+roskl	letters	unknown	1	roskl	0.8032	deseke	deske	-l	r for d, o for e, e dropped	yes	no
+Sek	letters	unknown	1	sek	0.8042	ske	ske		e added, e dropped	no	no
+mebrs	letters	unknown	1	mebrs	0.8062	abrse	0brs		m for 0, e added	no	no
+tey	letters	unknown	1	tey	0.8062	Atiye	0tiye		0 dropped, e for i, e dropped	yes	no
+Sotn	letters	person name	1	sotn	0.8072	soni	soni		t added, i dropped	yes	no
+tdbto	letters	unknown	1	tdbto	0.8072	adb	db	-te	t added, o for e	yes	no
+bik	letters	unknown	1	bik	0.8092	Beke	beke		i for e, e dropped	yes	no
+Sxini	letters	verb	3	sxini	0.8102	sḫi	sxi	-te	n for t, i for e	yes	no
+yekk	letters	unknown	1	yekk	0.8102	tkk	tkk		y for t, e added	yes	no
+dikpe	letters	unknown	1	dikpe	0.8122	dik	dik	-b	p for b, e added	yes	no
+qti	letters	noun	8	qti	0.8132	qedi	qedi		e dropped, t for d	no	no
+itnk	letters	unknown	1	0itnk	0.8142	Snk	snk		0 added, i added, t for s	no	no
+kdiqoroyetedxelowi	letters	unknown	1	kdiqoroyetedxelowi	0.8142	Tqoroye	tqoroye	-lowi	k added, d for t, i added, t added, e added, d added, x added, e added	yes	no
+tit	letters	unknown	1	tit	0.8142	ti	ti	-te	e dropped	no	no
+ibtd	letters	unknown	1	0ibtd	0.8162	Bobd	bobd		0 for b, i for o, t added	no	no
+wople	letters	unknown	1	wople	0.8162	pl (2)	ple		w added, o added	no	no
+riqo	letters	unknown	1	riqo	0.8182	wri	wri	-qo	w dropped	no	no
+Ḫsḫseli	headword	god name	2	xsxseli	0.8192	Ḫs	xs	-teli	x added, s for t	yes	no
+wdto	letters	unknown	1	wdto	0.8192	wid	wid	-te	i dropped, o for e	no	no
+arikelaxoSbo	letters	unknown	1	0rikelxosbo	0.8212	Arikḫror	0rikxror	-b	e added, l added, r dropped, s for r, o added	yes	no
+mXewitr	letters	title	5	mXewitr	0.8222	mẖe	mXe	-wi	t added, r added	yes	no
+Xttkyeto	letters	unknown	1	Xttkyeto	0.8222	Nptdḫeto	nptdxeto		n dropped, X for p, t for d, k for x, y added	no	no
+Nro	letters	unknown	1	nero	0.8232	Bero	bero		n for b	no	no
+plw	letters	unknown	2	plw	0.8242	pl (2)	pl	-w		no	no
+ame	letters	unknown	1	0me	0.8242	Amni	0mni		n dropped, e for i	yes	no
+art	letters	unknown	1	0rt	0.8242	Ar (1) / ar (2)	0r	-te	e dropped	yes	no
+trw	letters	unknown	1	trw	0.8242	tr	tr	-w		no	no
+eSxini	letters	unknown	2	0esxini	0.8262	sḫi	sxi	-te	0 added, e added, n for t, i for e	yes	no
+aqqe	letters	unknown	1	0qqe	0.8272	qowi	qwi		0 added, q for w, e for i	yes	no
+loXe	letters	unknown	1	loXe	0.8282	boẖe	boXe		l for b	no	no
+nexe	letters	title	1	nexe	0.8322	tḫ (1) / tḫ (2)	txe		n for t, e added	no	no
+xrim	letters	unknown	1	xrim	0.8322	Arome	0rome		x for 0, i for o, e dropped	yes	no
+abe	letters	unknown	1	0be	0.8332	Abin	0bin		e for i, n dropped	no	no
+woSp	letters	unknown	1	wosp	0.8332	Wos	wos	-b	p for b	yes	no
+tsl	letters	unknown	8	tsl	0.8372	ss	ss	-l	t for s	no	no
+irxxi	letters	unknown	1	0irxxi	0.8372	worḫtḫ	worxtx	-i	0 for w, i for o, t dropped	no	no
+lbkte	letters	unknown	1	lbkte	0.8402	Sbk (?)	sbk	-te	l for s	no	no
+romri	letters	unknown	1	romri	0.8402	Arome	0rome		0 dropped, r added, i for e	yes	no
+prSn	letters	title	1	prsn	0.8412	plsn	plsn		r for l	yes	no
+tebnreq	letters	unknown	1	tebnreq	0.8412	itebereke	0itebereke		0 dropped, i dropped, n for e, q for k, e dropped	no	no
+abso (?)	headword	title	1	0bso	0.8442	pso	pso		0 added, b for p	no	no
+wey	letters	unknown	2	wey	0.8462	wedi	wet		y for t	no	no
+alwi	letters	unknown	1	0lwi	0.8462	yel	yel	-wi	0 for y, e dropped	no	no
+kdilX	letters	noun	1	kdilX	0.8462	kdi	kdi	-li	X for i	yes	no
+yikxe	letters	unknown	1	yikxe	0.8462	Ipḫe	0ipxe		y for 0, k for p	yes	no
+pyeSi	letters	person name	1	pyesi	0.8511	peseto	pesti		y added, t dropped	yes	no
+metq	letters	unknown	1	metq	0.8521	Mit	mit	-qo	e for i, o dropped	no	no
+plXn	letters	title	1	plXn	0.8521	plsn	plsn		X for s	yes	no
+yidxlsni	letters	verb	1	yidxlsni	0.8521	ydḫno	ydxno		i added, l added, s added, i for o	no	no
+pti	letters	unknown	1	pti	0.8531	pso	pso		t for s, i for o	no	no
+axle	letters	unknown	1	0xle	0.8551	ḫ (3)	x	-li	0 added, e for i	no	no
+yeSw	letters	unknown	1	yesw	0.8551	yeso	yeso	-w	o dropped	no	no
+tedipxide	letters	unknown	1	tedipxide	0.8561	te-dḫe-l	tedxeli		i added, p added, i for e, d for l, e for i	yes	no
+appoye	letters	unknown	1	0ppoye	0.8581	apote	0pote		p added, y for t	yes	no
+iblp	letters	unknown	1	0iblp	0.8581	Amnp	0mnp		i added, b for m, l for n	yes	no
+tepi	letters	unknown	1	tepi	0.8581	atepoke	0tepoqe		0 dropped, i for o, q dropped, e dropped	no	no
+kmok	letters	unknown	1	kmok	0.8591	moke	moke		k added, e dropped	no	no
+xror	letters	title	1	xror	0.8591	Adere	0rere		x for 0, o for e, e dropped	no	no
+pro	letters	unknown	2	pro	0.8611	Bero	bero		p for b, e dropped	no	no
+mey	letters	unknown	1	mey	0.8611	temey (1) / temey (2)	tmey		t dropped	no	no
+mtr	headword	noun	4	mtr	0.8621	mr	mr		t added	no	no
+xlmwi	letters	noun	1	xlmwi	0.8641	ḫ (3)	x	-lowi	m for o	no	no
+toxktw	letters	unknown	1	toxktw	0.8661	Tolkte	tolkte	-w	x for l, e dropped	yes	no
+kedtd	letters	verb	1	kedtd	0.8711	ked	ked	-te	e dropped, d added	yes	no
+ntme	letters	unknown	1	ntme	0.8711	ntke (1) / ntke (2)	ntke		m for k	yes	no
+ptrq	letters	unknown	1	ptrq	0.8711	Petr	petr	-qo	e dropped, o dropped	no	no
+Nmlo	headword	place name	1	nmlo	0.8721	Simlo	smlo		n for s	yes	no
+ylsni	letters	verb	1	ylsni	0.8731	plsn	plsn	-i	y for p	yes	no
+iddne	letters	unknown	1	0iddne	0.8751	ydḫno	ydxno		0 for y, i added, d for x, e for o	no	no
+wrewxe	letters	unknown	1	wrewxe	0.8751	wrtḫn	wretxn		w for t, n dropped, e added	no	no
+apmlo	letters	person name	1	0pmlo	0.8761	Arme	0rm	-lo	p for r	no	no
+dNtro	letters	unknown	1	dnetro	0.8761	Mnitore	mnitore		d for m, e for i, o dropped, o for e	yes	no
+qoplto	letters	unknown	1	qoplto	0.8761	qoli	qol	-te	p added, o for e	yes	no
+yiwl	letters	unknown	3	yiwl	0.8771	Yilo	yilo		w added, o dropped	no	no
+Srbi	headword	god name	1	srbi	0.8771	sr	sr	-b	i added	no	no
+Stq	letters	unknown	1	stq	0.8771	sq	sq		t added	no	no
+nmre	letters	unknown	1	nmre	0.8771	yenmde	yenmde		y dropped, e dropped, r for d	yes	no
+yidty	letters	unknown	2	yidty	0.8781	yed	yed	-te	i for e, y for e	no	no
+ḫwi	headword	unknown	1	xwi	0.8781	ḫ (3)	x	-wi		no	no
+qeper	letters	unknown	2	qeper	0.8801	seber	seber		q for s, p for b	no	no
+kdem	letters	unknown	1	kdem	0.8801	kdi	kdi		e for i, m added	yes	no
+mol	letters	benediction verb	1	mol	0.8811	Amnote	mno	-l	n dropped	yes	no
+tnokedd	letters	unknown	1	tnokedd	0.8811	teneke	teneke		e dropped, o for e, d added, d added	yes	no
+xrqibliq	letters	unknown	1	xrqibliq	0.8811	areqebr	0reqebr	-lowi	x for 0, e dropped, i for e, r dropped, i for o, q for w, i dropped	no	no
+attḫ	headword	noun	6	0ttx	0.8821	t-dḫe	tdxe		0 added, t for d, e dropped	yes	no
+Xto	letters	unknown	1	Xto	0.8821	ẖe (1)	X	-te	o for e	yes	no
+diXode	letters	unknown	1	diXode	0.8821	dotedi	dotedi		i for o, X for t, o for e, e for i	no	no
+mrtxe	letters	unknown	1	mrtxe	0.8831	mrde	mrde		t for d, x added	no	no
+tbkid	letters	unknown	1	tbkid	0.8841	tbqo	tbqo		k for q, i for o, d added	yes	no
+syt	letters	unknown	1	syt	0.8851	set	set		y for e	no	no
+yNhn	letters	person name	1	ynen	0.8851	tneyine	tneine		y for t, i dropped, e dropped	no	no
+nlo	letters	unknown	2	nlo	0.8861	no	no	-lo	o dropped	no	no
+Sns	letters	unknown	1	sns	0.8861	senete	snte		s for t, e dropped	yes	no
+ret	letters	unknown	1	ret	0.8861	arede	0rede		0 dropped, t for d, e dropped	no	no
+rstl	letters	place name	1	rstl	0.8861	arosd	0rosd	-l	0 dropped, o dropped, t for d	no	no
+stn	letters	unknown	1	stn	0.8861	ttne	ttne		s for t, e dropped	yes	no
+wwi	letters	unknown	1	wwi	0.8881	we	wi		w added	yes	no
+itxxi	letters	unknown	1	0itxxi	0.8891	atḫmo	0txmo		i added, x for m, i for o	no	no
+asy	headword	unknown	5	0sy	0.8911	ansyi	0nsyi		n dropped, i dropped	no	no
+twd	headword	verb	5	twd	0.8911	Twete	twte		d for t, e dropped	no	no
+lolN	letters	unknown	1	lolne	0.8911	ponni	ponni		l for p, l for n, e for i	no	no
+npletno	letters	unknown	1	npletno	0.8911	Npte	npto		l added, e added, n added	yes	no
+nxbre	letters	noun	1	nxbre	0.8911	nbr	nbr		x added, e added	no	no
+ksbne	headword	epithet	3	ksbne	0.8921	ḫlbine	xlbene		k for x, s for l, e dropped	yes	no
+elx	letters	unknown	1	0elx	0.8931	ld	0eld		x for d	no	no
+msqNidyi	letters	unknown	1	msqneidyi	0.8931	sqte	sqte	-yi	m added, n for t, i added, d added	no	no
+lomde	letters	unknown	1	lomde	0.8941	mde	mde		l added, o added	no	no
+yewey	letters	unknown	1	yewey	0.8941	ked	yeked		w for k, y for d	yes	no
+mStrq	letters	unknown	3	mstrq	0.8951	srq	srq		m added, t added	no	no
+Numbor	letters	unknown	1	nembor	0.8971	nbr	nbr		e added, m added, o added	no	no
+kek	headword	unknown	1	kek	0.8991	ke (1)	ke	-ke	e dropped	no	no
+reNlX	letters	title	1	renelX	0.8991	apote-lẖ	0potelX		0 dropped, r for p, e for o, n for t	yes	no
+wbrxmlo	letters	unknown	1	wbrxmlo	0.9001	Brme	brme	-lo	w added, x added, e dropped	no	no
+mtotiwxne	letters	god name	1	mtotiwxne	0.9011	attḫ	0tetx	-te	m for 0, o for e, i added, w added, n for t	no	no
+Xboye	letters	person name	1	Xboye	0.9031	*sbo	sbo	-ye	X for s	no	no
+stxN	letters	unknown	1	stxne	0.9041	ydḫno	ydxno		s for y, t for d, e for o	no	no
+nmrolde	letters	unknown	1	nmrolde	0.9061	Nmlo	nmlo	-li	r for l, d added, e for i	no	no
+rpt	letters	unknown	1	rpt	0.9071	arbte	0rbte		0 dropped, p for b, e dropped	no	no
+bye	letters	person name	2	bye	0.9081	bdye	bdye		d dropped	no	no
+eqexm	letters	unknown	1	0eqexm	0.9081	Boqḫw	boqxw		0 for b, e for o, e added, m for w	no	no
+bxeb	letters	verb	1	bxeb	0.9101	mḫe	mxe	-b	b for m	yes	no
+yilk	letters	unknown	1	yilk	0.9101	Yilo	yilo	-ke	o dropped, e dropped	no	no
+iXlXto	letters	unknown	1	0iXlXto	0.9121	H̱lite	Xlite		0 added, i added, X for i, o for e	no	no
+lit	letters	unknown	3	lit	0.9161	alose	0los		0 dropped, i for o, t for s	yes	no
+pom	letters	unknown	1	pom	0.9161	Pẖome	pXome		X dropped, e dropped	yes	no
+kemxr	letters	person name	1	kemxr	0.9171	mḫeri	mxeri		k added, e added, e dropped, i dropped	no	no
+drp	headword	verb	1	drp	0.9181	bedrp	bedrp		b dropped, e dropped	no	no
+woSwXe	letters	unknown	1	woswXe	0.9181	Wos	wos	-wi	X added, e for i	yes	no
+kep	letters	unknown	1	kep	0.9191	kb	kb		e added, p for b	no	no
+wri	headword	verb	1	wri	0.9191	wedi	wedi		e dropped, r for d	no	no
+ibln	letters	unknown	1	0ibln	0.9201	Abin	0bin		i added, i dropped, l added	no	no
+qntk	headword	title	1	qntk	0.9201	qente	qente	-ke	e dropped, e dropped, e dropped	no	yes
+litxrer	letters	person name	1	litxrer	0.9221	Arikḫror	0rikxror		0 dropped, l for r, t for k, e for o	yes	no
+Dbre	headword	place name	3	dbre	0.9261	Dqri	dqri		b for q, e for i	no	no
+qbne	headword	god name	2	qbne	0.9261	ksbne	ksbne		q for k, s dropped	no	no
+Xlikmlo	letters	person name	1	Xlikmlo	0.9261	H̱lite	Xlite	-lo	k added, m for t, e dropped	no	no
+axi	letters	verb	8	0xi	0.9271	aḫide	0xid		d dropped	yes	no
+nwt	letters	unknown	1	nwt	0.9271	ant	0nt		0 dropped, w added	yes	no
+snn	headword	god name	1	snn	0.9271	senete	snte		n for t, e dropped	yes	no
+ywi	letters	unknown	1	ywi	0.9271	ywid	ywid		d dropped	no	no
+nxbr	letters	noun	4	nxbr	0.9291	nbr	nbr		x added	no	no
+lroN	letters	unknown	1	lrone	0.9301	qorene	qorene		l for q, o dropped, o for e	yes	no
+mmri	letters	unknown	1	mmri	0.9301	mro	mro		m added, i for o	no	no
+Seyix	letters	unknown	1	seyix	0.9311	sewi	sewi		y for w, x added	no	no
+knmre	letters	unknown	1	knmre	0.9311	kttre	kttre		n for t, m for t	no	no
+knw	letters	unknown	1	knw	0.9311	kdke	ktwe		n for t, e dropped	no	no
+lks	headword	noun	4	lks	0.9321	nk	nk	-s	l for n	no	no
+nii	letters	benediction verb	1	nii	0.9321	no	no	-i	i for o	no	no
+xiwr	letters	unknown	1	xiwr	0.9321	ḫr	xr		i added, w added	no	no
+sxN	letters	unknown	1	sxne	0.9331	sḫi	sxe	-te	e dropped, n for t	yes	no
+Dqri	headword	place name	2	dqri	0.9341	wri	wri		d added, q for w	no	no
+Sox	letters	unknown	1	sox	0.9341	sobḫe	sobxe		b dropped, e dropped	no	no
+btwd	letters	unknown	1	btwd	0.9351	twd	twd		b added	no	no
+itnkk	letters	unknown	1	0itnkk	0.9351	Snk	snk	-ke	0 added, i added, t for s, e dropped	no	no
+qyitXl	letters	epithet	1	qyitXl	0.9351	weyite	weyite	-l	q for w, e dropped, X for e	no	no
+srq	headword	verb	1	srq	0.9351	sr	sr	-qo	o dropped	no	no
+Kobble (?)	headword	place name	1	kobble	0.9361	qoleb	qoleb	-li	k for q, b for l, e dropped, e for i	yes	no
+amolẖ	headword	title	1	0molX	0.9361	Amnote	0monte		l for n, X for t, e dropped	yes	no
+nmrok	letters	unknown	1	nmrok	0.9361	mreke	mreke		n added, o for e, e dropped	no	no
+npbix	letters	unknown	1	npbix	0.9361	Npte	npt	-bx	t dropped, i added	yes	no
+lky	letters	unknown	1	lky	0.9381	ky	ky		l added	no	no
+mrm	letters	numeral or measure	1	mrm	0.9381	mr	mr		m added	no	no
+aym	letters	unknown	1	0ym	0.9411	atmi	0tmi		y for t, i dropped	no	no
+borXtedx	letters	unknown	1	borXtedx	0.9431	boẖe	boXe	-bx	r added, t added, d for b	no	no
+lktd	letters	unknown	1	lktd	0.9461	lks	lks		t for s, d added	no	no
+pxtotN	letters	noun	1	pxtotne	0.9471	pẖo	pXo	-te	x for X, t added, n added	no	no
+Sno	letters	unknown	1	sno	0.9481	soni	soni		o dropped, o for i	yes	no
+iplemX	letters	unknown	1	0iplemX	0.9500	Apedemk	0pdemk		i added, l for d, X for k	yes	no
+kempl	letters	unknown	1	kempl	0.9520	Kobble (?)	kobble		e for o, m for b, p for b, e dropped	no	no
+pibr	letters	unknown	1	pibr	0.9520	Bobd	bobd		p for b, i for o, r for d	no	no
+mmo	letters	unknown	1	mmo	0.9530	mẖe	mXo		m for X	yes	no
+pbo	letters	noun	1	pbo	0.9540	pẖo	pXo		b for X	no	no
+akw	letters	unknown	2	0kw	0.9550	Ayk	0yk	-w	0 dropped, 0 for y	no	no
+Xdo	letters	unknown	1	Xdo	0.9550	ẖe (1)	Xo		d added	yes	no
+yXNx	letters	unknown	1	yXnex	0.9550	Amnḫe	0mnx		y for 0, X for m, e added	no	no
+apreqn	letters	unknown	1	0preqn	0.9560	abrik	0brik	-te	p for b, e for i, q for k, n for t, e dropped	yes	no
+nir	letters	unknown	1	nir	0.9590	nbr	nbr		i for b	no	no
+rtey	letters	unknown	1	rtey	0.9590	Aritene	0rtene		0 dropped, n dropped, y for e	no	no
+boẖe	headword	person name	2	boXe	0.9610	aroẖe	0roXe		0 dropped, b for r	no	no
+Xslmli	letters	unknown	1	Xslmli	0.9610	ẖẖll	XXll	-i	s for X, m added	no	no
+alex	letters	unknown	1	0lex	0.9610	lẖ	lX		0 added, e added, x for X	yes	no
+nlem	letters	unknown	1	nlem	0.9610	n-lw	nl		e added, m added	yes	no
+mrxi	letters	unknown	1	mrxi	0.9650	mḫe	mxe		r added, i for e	yes	no
+xlod	letters	person name	1	xlod	0.9650	ḫ (3)	x	-lo	d added	no	no
+beyotwdy	letters	unknown	1	beyotwdy	0.9660	ameyose	0meyos	-te	0 dropped, b for m, t for s, w added, d for t, y for e	no	no
+ayi	headword	unknown	1	0yi	0.9670	ato	0to		y for t, i for o	yes	no
+pẖo	headword	title	2	pXo	0.9680	Pẖome	pXome		m dropped, e dropped	yes	no
+ixXtto	letters	unknown	1	0ixXtto	0.9700	aḫide	0xid	-te	i added, X for i, t for d, o for e	yes	no
+ntmlipy	letters	unknown	1	ntmlipy	0.9710	Nmlo	nmlo	-b	t added, i for o, p for b, y added	no	no
+yonpxto	letters	unknown	1	yonpxto	0.9710	Npte	npto		y added, o added, x added	yes	no
+pbx	letters	unknown	3	pbx	0.9750	pn	pn	-bx	n dropped	no	no
+sqtdon	letters	unknown	1	sqtdon	0.9760	sqte	sqte	-te	d added, o for e, n for t, e dropped	no	no
+teriqqdr	letters	unknown	1	teriqqdr	0.9760	serewḫtḫ	serewxtx		t for s, i for e, q for w, q for x, d for t, r for x	no	no
+wrtḫn	headword	title	3	wrtxn	0.9770	worḫtḫ	worxtx	-te	o dropped, x dropped, n for t, e dropped	no	no
+ketp	letters	unknown	1	ketp	0.9770	ked	ked	-b	t for d, p for b	yes	no
+nxreds	letters	unknown	1	nxreds	0.9770	arede	0rede	-s	n added, x for 0, e dropped	no	no
+xmyl	letters	noun	1	xmyl	0.9770	ḫmlol	xmlol		y for l, o dropped	yes	no
+ẖẖll	headword	noun	1	XXll	0.9770	ẖol	Xol	-l	X for o	no	no
+nbr	headword	noun	11	nbr	0.9780	abr	0br		n for 0	yes	no
+aẖrrb	headword	title	2	0Xrrb	0.9780	ẖr	Xr	-b	0 added, r added	yes	no
+nnw	letters	unknown	1	nnw	0.9780	ntk	ntk		n for t, w for k	no	no
+xml	letters	noun	1	xml	0.9780	ḫmlol	xmlol		o dropped, l dropped	yes	no
+doSbd	letters	noun	1	dosbd	0.9800	dot	dot	-b	s for t, d added	yes	no
+pyk	headword	unknown	1	pyk	0.9800	pke	pke		y added, e dropped	yes	no
+nmoSd	letters	unknown	2	nmosd	0.9810	tmot	tmot		n for t, s for t, d added	no	no
+nni	letters	unknown	2	nni	0.9840	ponni	ponni		p dropped, o dropped	no	no
+msXx	letters	title	1	msXx	0.9860	mseẖto	msXto		x for t, o dropped	no	no
+Xpl	letters	unknown	1	Xpl	0.9870	ẖol	Xol		p for o	no	no
+bmki	letters	unknown	1	bmki	0.9870	pke	pki		b for p, m added	yes	no
+diyXo	letters	verb	1	diyXo	0.9870	di	di	-ye	X added, o for e	no	no
+keẖ	headword	verb	1	keX	0.9870	kek	kek		X for k	no	no
+kwt	letters	unknown	1	kwt	0.9870	wedi	wet		k added, e dropped	no	no
+pidtd	letters	unknown	1	pidtd	0.9870	petedew	petedew		i for e, d added, e dropped, e dropped, w dropped	no	no
+pmxeq	letters	unknown	1	pmxeq	0.9880	mḫe	mxe	-qo	p added, o dropped	yes	no
+em	letters	unknown	1	0em	0.9890	Amni	0mni		e added, n dropped, i dropped	yes	no
+Boqḫw	headword	place name	2	boqxw	0.9910	Beqe	beqe	-lw	o for e, e dropped, x for l	yes	yes
+pqr	headword	title	36	pqr	0.9940	pwrite (1) / pwrite (2)	pwrit		q for w, i dropped, t dropped	yes	no
+Xrmx	letters	noun	1	Xrmx	0.9940	ẖr	Xr	-bx	m for b	yes	no
+nXror	letters	person name	1	nXror	0.9940	mror	mror		n for m, X added	no	no
+pnkk	letters	unknown	1	pnkk	0.9940	pn	pn	-ke	e dropped, k added	no	no
+reNdpp	letters	person name	1	renedpp	0.9940	Adenodor	0denodor		0 dropped, r for d, e for o, p for o, p for r	no	no
+dtsXro	letters	person name	1	dtsXro	0.9960	dt	dt	-se	X added, r added, o for e	no	no
+txrn	letters	unknown	1	txrn	0.9960	ydḫno	dxno		t for d, r added, o dropped	no	no
+yXi	letters	unknown	1	yXi	0.9960	atẖe	0tXe		0 dropped, y for t, i for e	yes	no
+ntdxr	letters	person name	1	ntdxr	0.9970	t-dḫe	tdxe		n added, e dropped, r added	yes	no
+Xniy	letters	unknown	1	Xniy	0.9990	yini	yni	-ye	X for y, e dropped	no	no
+kmom	letters	person name	1	kmom	0.9990	Amod	mod		k added, m for d	no	no
+nXSt	letters	unknown	1	nXst	0.9990	ns	ns	-te	X added, e dropped	yes	no
+llyn	letters	unknown	1	llyn	1.0000	n-lw	nl	-yi	l for n, n for i	yes	no

@@ -70,6 +70,15 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    proposal only, 10% are known by their kind only and 12% are unknown. Every legible word is translated in 82 of
    605 texts. The 1,336 pieces without an accepted meaning are listed with their kind and the texts they block
    ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
+9. **A search by letters ranks the spellings of a known word well, and cannot say by itself which unknown pieces
+   are one.** Each of the 242 spelling variants that Rilly's lexicon lists under a word was hidden in turn. The
+   search brings 187 (77%) back to their own entry as the single best match and 232 (96%) among the three best.
+   The bar set before the run also asked half of them to stand out from made-up words, and only 105 (43%) do:
+   a word of three or four letters cannot, since a made-up word that short is too often a word of the lexicon
+   letter for letter. So the test missed its bar. Of the 1,140 pieces without a meaning that the lexicon does
+   not already link to a word, 82 beat the made-up words where 57 are expected, but known words that are nobody's
+   variant beat them as often. The 105 matches under the bar are packed for two blind checkers, who have not run
+   yet ([`data/discovery/variants.md`](data/discovery/variants.md)).
 
 ## The question
 
@@ -264,6 +273,21 @@ the consonant figures of the same pool beside its own. The word lists, the key a
 local-only; the page, the brief and the two lists of candidates are public
 ([`data/discovery/egyptian.md`](data/discovery/egyptian.md)).
 
+### 16. Spellings of known words among the unknown pieces (`src/variants.py`)
+
+The same scorer turned on Meroitic itself: each piece of the coverage map's list is compared, vowels included,
+with the 688 words of Rilly's lexicon (655 different headword spellings), and may carry one of the 25 known
+endings, which the search takes as the Egyptian search takes an article, on words read from their end. The model
+starts flat, with no groups of like letters, and counts which letters alternate on the 307 spelling variants that
+the lexicon lists under its entries. The test hides each listed variant of a word in turn, everywhere in the
+lexicon, trains on the rest and asks for the entry that lists it as the single best match. The bar was written
+down before the first run. A match counts only as far as it beats the best matches of 1,000 made-up words of the
+same length, and the words with an accepted meaning that the lexicon links to nothing go through the same search,
+to see what that yardstick is worth. Every match that beats the bar is packed for two blind checkers with 12
+decoys and 12 listed variants whose answer is known. The lexicon, the gloss file and the result files are
+local-only; the page, the brief and the list of every searched piece with its best match are public
+([`data/discovery/variants.md`](data/discovery/variants.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -275,7 +299,7 @@ python3 -I src/expand.py
 python3 -I src/score.py --answers runs/answers
 python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
-python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py
+python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -284,7 +308,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Five things need files that are kept locally (Data, above), so they don't run from a clone:
+Six things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -293,12 +317,15 @@ Five things need files that are kept locally (Data, above), so they don't run fr
 - `python3 -I src/cognates_rules.py` reads the NES word lists and Rilly's sound correspondences;
 - `python3 -I src/coverage.py first` (and `build`) reads Rilly's lexicon, `corpus_v5` and the analysts' answers;
 - `python3 -I src/egyptian.py first` (and `build`, `vowels`) reads the two Egyptian word lists, Rilly's lexicon and the
-  answer key drawn from it.
+  answer key drawn from it;
+- `python3 -I src/variants.py first` (and `build`, `sample`, `check`, `merge`) reads Rilly's lexicon, `corpus_v5`
+  and the coverage map's gloss file.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
-  the translation coverage map (`coverage.py`) and the search for Egyptian sources (`egyptian.py`).
+  the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`) and the search
+  for spellings of known words (`variants.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
   corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`), the word lists and Rilly's lexicon are local-only.
