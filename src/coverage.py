@@ -7,6 +7,9 @@
                                                          only the words no pack of <dir> holds yet
   python3 -I src/coverage.py build <dir> [--public]      merge the analysts' answers in <dir>; write the gloss
                                                          file, the ranked list and the figures
+  python3 -I src/coverage.py correct <dir> [--public]    the same map with the corrections (below), written
+                                                         beside the first: corrected/ and the list
+                                                         coverage_unknown_corrected.tsv
 
 Every word of data/corpus_v5.jsonl gets a gloss, a level and a confidence (data/discovery/coverage.md):
 
@@ -26,6 +29,18 @@ the kind of word is known: a title, a name, a verb of the benedictions); unknown
 
 The gloss file leans on Rilly's lexicon and stays local (data/sources/coverage/). The public files are the
 counts and the list of words without a meaning, each with its kind and the texts it blocks.
+
+The corrections (`correct`). Later work found words that the map counts wrongly, and four rules set them right.
+The map as first built stays as it was, because two searches read its list (src/egyptian.py, src/variants.py).
+1. The rest of a masked name. The older corpus was padded with copies in which names were swapped; a name of
+   several words left its other words behind the mask: "mokelowi" and "mete l" directly after NAME are such a
+   rest and count as a name.
+2. A stem of two signs. The lookup asks a stem for three letters, but the signs se and ne are two letters each
+   in Rilly's spelling: smlowi is sem "wife" with -lowi. Only for an entry Rilly holds as established.
+3. A word written apart. Two or three neighbours, one of them of one or two letters, that together spell a word
+   the lookup translates, when that word also stands written as one in other texts: wo Si is woSi, "O Isis".
+4. A spelling of a known word. The pieces that two blind checkers both took for a spelling or a form of a word
+   with an accepted meaning (data/discovery/variants.md), without the two whose pack showed a hint.
 """
 import collections, json, re, statistics, sys
 from pathlib import Path
@@ -38,6 +53,9 @@ CORPUS = ROOT / "data/corpus_v5.jsonl"
 KAR_REFS = ROOT / "data/expansion/karanog/refs/by_inscription"
 OUT = ROOT / "data/sources/coverage"                       # local only
 PUBLIC = ROOT / "data/discovery/coverage_unknown.tsv"
+CORRECTED = OUT / "corrected"                               # local only: the map after the corrections
+PUBLIC_CORRECTED = ROOT / "data/discovery/coverage_unknown_corrected.tsv"
+VARIANTS = ROOT / "data/discovery/variants_confirmed.tsv"   # the confirmed spellings of known words (variants.py)
 BRIEF = ROOT / "data/discovery/coverage_brief.md"
 
 TRANSLATED = ("meaning", "grammar", "name", "number")
@@ -45,6 +63,15 @@ LEVELS = TRANSLATED + ("hypothesis", "kind", "unknown", "lost")
 RANK = {"meaning": 0, "grammar": 0, "name": 0, "number": 0, "hypothesis": 1, "kind": 2, "unknown": 3}
 CONFIDENCE = {"established": 5, "probable": 4, "hypothesis": 2}
 SURE = 4                      # an analyst's cut counts from this confidence up (the scale of runs/unknown/)
+# The corrections. What the padding of the older corpus left directly after a masked name: Millet marks "amxye
+# mokelowi" as one personal name (MilletExamples.txt, l. 1142), and "tqo mete l" is one of the swapped-in names
+# of several words (clean_v2.FILLERS); the name's first word was masked and the rest stayed, in the same frames.
+NAME_TAILS = (("mokelowi",), ("mete", "l"))
+MASKED = ("NAME", "RNAME")
+SYLLABLE_SIGNS = "sN"         # the signs se and ne: one sign in the corpus spelling, two letters in Rilly's
+FRAGMENT = 2                  # a word of this many letters or fewer can be a piece of its neighbour written apart
+WRITTEN = 2                   # ... when the two together stand as one word in this many texts or more
+SET_APART = ("mXeyot", "yetmetl")   # confirmed variants whose pack showed a word holding their letters (variants.md)
 # Rilly's category -> the kind of word, the first that fits
 CATEGORY_KIND = (("anthroponyme", "person name"), ("nom de personne", "person name"), ("toponyme", "place name"),
                  ("nom de lieu", "place name"), ("ethnonyme", "people name"), ("théonyme", "god name"),
@@ -193,10 +220,11 @@ def griffith_name(tok, printed):
     return ""
 
 
-def lookup(tok, prev, words, affixes, printed=None):
+def lookup(tok, prev, words, affixes, printed=None, short=False):
     """The gloss of one word by lookup alone, or None for a word left to the analysts. prev is the word before it
     in the text: wi after a word in -lo or -qo is the particle of -lowi and qowi, written apart. printed is what
-    Griffith prints for the word's inscription (griffith_entries), for a Karanog row."""
+    Griffith prints for the word's inscription (griffith_entries), for a Karanog row. short (the corrections):
+    a stem of two signs counts as three letters when one of them is the sign se or ne."""
     if tok in ("NAME", "RNAME"):
         return gloss(tok, "name", 5, "NAME", "a name, masked in the corpus", kind="person name")
     if tok.isdigit():
@@ -217,7 +245,10 @@ def lookup(tok, prev, words, affixes, printed=None):
     best = None
     for end in L.SUFFIXES[1:]:
         stem = tok[:-len(end)]
-        if tok.endswith(end) and len(stem) >= 3 and stem in words and words[stem][0]["level"] not in ("kind", "unknown"):
+        # short: two signs, one of them se or ne, and an entry Rilly holds as established (a short stem must be sure)
+        long = len(stem) >= 3 or (short and len(stem) == 2 and any(c in SYLLABLE_SIGNS for c in stem)
+                                  and stem in words and words[stem][0]["confidence"] == CONFIDENCE["established"])
+        if tok.endswith(end) and long and stem in words and words[stem][0]["level"] not in ("kind", "unknown"):
             e = words[stem][0]
             key = (RANK[e["level"]], -e["confidence"], -len(stem))
             if best is None or key < best[0]:
@@ -590,6 +621,143 @@ def ranking(glossed, heads):
                   "median": statistics.median(shares) if shares else 0.0}
 
 
+# ---------------------------------------------------------------------------------------- the corrections
+
+def fixed(g, rule, **change):
+    """A gloss set right by one of the corrections: what it was stays in `was`."""
+    return dict(g, by="correction", corrected=rule, was={"level": g["level"], "gloss": g["gloss"], "by": g["by"]},
+                **change)
+
+
+def name_tails(r, gs):
+    """Rule 1: in the older corpus, the rest of a masked name of several words, directly after the mask (or after
+    another such rest), is part of the name. Returns the number of words set right."""
+    if group(r) != "the older corpus (names masked)":
+        return 0
+    forms, n, i = [g["form"] for g in gs], 0, 1
+    while i < len(gs):
+        behind = forms[i - 1] in MASKED or gs[i - 1].get("corrected") == "the rest of a masked name"
+        t = next((t for t in NAME_TAILS if behind and tuple(forms[i:i + len(t)]) == t), None)
+        for k in range(i, i + len(t or ())):
+            gs[k] = fixed(gs[k], "the rest of a masked name", level="name", confidence=4, gloss="NAME",
+                          kind="person name", parts=[{"form": forms[k], "entry": "NAME"}],
+                          source="the rest of a name of several words, left behind its mask by the padding of the "
+                                 "older corpus")
+        n += len(t or ())
+        i += len(t or (None,))
+    return n
+
+
+def short_stems(gs, words, affixes):
+    """Rule 2: a word the map leaves untranslated, which the lookup translates once a stem of two signs with se
+    or ne counts as three letters."""
+    n = 0
+    for i, g in enumerate(gs):
+        if g["level"] in TRANSLATED or g["level"] == "lost" or g.get("corrected"):
+            continue
+        new = lookup(g["form"], gs[i - 1]["form"] if i else "", words, affixes, short=True)
+        if new and new["level"] in TRANSLATED:
+            gs[i] = fixed(g, "a stem of two signs", **{k: new[k] for k in ("level", "confidence", "gloss", "kind",
+                                                                          "source", "parts")})
+            n += 1
+    return n
+
+
+def written_whole(glossed):
+    """In how many texts each plain word stands, written as one word."""
+    out = collections.Counter()
+    for _, gs in glossed:
+        out.update({g["form"] for g in gs if PLAIN.fullmatch(g["form"])})
+    return out
+
+
+def joins(gs, words, affixes, whole):
+    """Rule 3: two or three neighbouring words that are one word written apart. At least one of them is not
+    translated, at least one has FRAGMENT letters or fewer, together they spell a word the lookup translates, and
+    that word stands written as one in WRITTEN texts or more. The longer join is tried first. Returns the joins
+    made as [(the words, the joined word)]."""
+    made, i = [], 0
+    while i < len(gs):
+        for n in (3, 2):
+            part = gs[i:i + n]
+            forms = [g["form"] for g in part]
+            if (len(part) < n or not all(PLAIN.fullmatch(f) for f in forms) or any(g.get("corrected") for g in part)
+                    or all(g["level"] in TRANSLATED for g in part) or min(map(len, forms)) > FRAGMENT):
+                continue
+            word = "".join(forms)
+            new = lookup(word, gs[i - 1]["form"] if i else "", words, affixes) if whole[word] >= WRITTEN else None
+            if new and new["level"] in TRANSLATED:
+                for k, g in enumerate(part):
+                    gs[i + k] = fixed(g, "a word written apart", level=new["level"], confidence=new["confidence"],
+                                      gloss=new["gloss"] if k == 0 else f"(part of {word})", kind=new["kind"],
+                                      source=new["source"], parts=new["parts"] if k == 0 else [], joined=word)
+                made.append((" ".join(forms), word))
+                i += n - 1
+                break
+        i += 1
+    return made
+
+
+def confirmed_variants(path=VARIANTS):
+    """The pieces that two blind checkers took for a spelling or a form of a word with an accepted meaning:
+    {(piece, it is a headword): the word}, without the two set apart."""
+    out = {}
+    if not path.exists():
+        return out
+    lines = [l.split("\t") for l in path.read_text(encoding="utf-8").splitlines()[1:] if l.strip()]
+    for piece, is_, word, accepted, *_ in lines:
+        if accepted == "yes" and piece not in SET_APART:
+            out[piece, is_ == "headword"] = word.split(" / ")[0]
+    return out
+
+
+def spellings(gs, confirmed, heads):
+    """Rule 4: a word whose every blocking piece is a confirmed spelling of a word with an accepted meaning takes
+    that word's meaning."""
+    n = 0
+    for i, g in enumerate(gs):
+        blocks = {(b, e is not None) for b, e in blockers(g, heads)}
+        if not blocks or g.get("corrected") or not blocks <= set(confirmed):
+            continue
+        es = [heads[confirmed[b]] for b in sorted(blocks) if confirmed[b] in heads]
+        if not es or any(e["level"] not in TRANSLATED for e in es):
+            continue
+        e = es[0]
+        gs[i] = fixed(g, "a spelling of a known word", level=e["level"], confidence=4, kind=e["kind"] or g["kind"],
+                      gloss=(short(e["meaning"]) or f"[{e['kind'] or 'no gloss'}]") + f" (a form of {e['headword']})",
+                      source=source(e) + "; the spelling by two blind checkers (data/discovery/variants.md)",
+                      parts=[{"form": g["form"], "entry": e["headword"]}])
+        n += 1
+    return n
+
+
+def correct(glossed, words, affixes, heads, confirmed=None):
+    """The map with the four corrections, each word set right once and by the first rule that fits. Changes the
+    glosses in place and returns what each rule did: the words it set right in every text, how many of those were
+    not translated before, and the same with near-copies counted once."""
+    confirmed = confirmed_variants() if confirmed is None else confirmed
+    whole = written_whole(glossed)
+    once = {r["id"] for r in distinct([r for r, _ in glossed])}
+    rules = ("the rest of a masked name", "a stem of two signs", "a word written apart", "a spelling of a known word")
+    report = {rule: {"words": 0, "newly_translated": 0, "words_once": 0, "newly_translated_once": 0} for rule in rules}
+    made = collections.Counter()
+    for r, gs in glossed:
+        name_tails(r, gs)
+        short_stems(gs, words, affixes)
+        made.update(joins(gs, words, affixes, whole))
+        spellings(gs, confirmed, heads)
+        for g in gs:
+            if g.get("corrected"):
+                new = g["was"]["level"] not in TRANSLATED and g["level"] in TRANSLATED
+                c = report[g["corrected"]]
+                c["words"] += 1
+                c["newly_translated"] += new
+                c["words_once"] += r["id"] in once
+                c["newly_translated_once"] += new and r["id"] in once
+    report["joins"] = [[a, b, n] for (a, b), n in sorted(made.items(), key=lambda x: (-x[1], x[0]))]
+    return report
+
+
 def draft(gs):
     """The word-by-word line of a text."""
     return " ".join(g["gloss"] if g["level"] != "unknown" else f"<{g['form']}>" for g in gs)
@@ -636,7 +804,7 @@ def show(figs, texts_by=None):
 
 
 def main(argv):
-    if len(argv) < 2 or argv[1] not in ("first", "packs", "build") or (argv[1] != "first" and len(argv) < 3):
+    if len(argv) < 2 or argv[1] not in ("first", "packs", "build", "correct") or (argv[1] != "first" and len(argv) < 3):
         sys.exit(__doc__)
     es = lexicon()
     words, affixes, heads = index(es)
@@ -657,9 +825,19 @@ def main(argv):
         return
     analysed, report = analyses(folder, heads)
     glossed = gloss_texts(rows, words, affixes, analysed)
+    if argv[1] == "correct":
+        report["corrections"] = correct(glossed, words, affixes, heads)
     figs = figures(glossed)
     ranked, texts_by = ranking(glossed, heads)
-    write(glossed, ranked, figs, texts_by, report, public=PUBLIC if "--public" in argv else None)
+    if argv[1] == "correct":
+        write(glossed, ranked, figs, texts_by, report, out=CORRECTED,
+              public=PUBLIC_CORRECTED if "--public" in argv else None)
+        for rule, c in report["corrections"].items():
+            if rule != "joins":
+                print(f"corrected, {rule}: {c['words']} words, {c['newly_translated']} of them not translated "
+                      f"before (near-copies once: {c['words_once']}, {c['newly_translated_once']})")
+    else:
+        write(glossed, ranked, figs, texts_by, report, public=PUBLIC if "--public" in argv else None)
     show(figs, texts_by)
     by = report["translated_by"]
     print(f"analysts: {report['analysed']} words analysed; twice {report['twice']}, at the same level "

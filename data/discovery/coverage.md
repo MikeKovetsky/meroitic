@@ -4,6 +4,11 @@ Built on 2026-11-11 with `src/coverage.py`: every word of the 899 texts of `corp
 Rilly's 2003 lexicon, first by lookup and then, for the words the lookup leaves, by Claude Opus 5.5 analysts.
 The numbers below are checked by `tests/test_coverage.py`.
 
+**Corrected the same day (section 7):** 13,613 of the 21,977 running words (61.9%) are translated, 61.6% with
+near-copies counted once, and every legible word is translated in 107 of 605 texts. Sections 1 to 6 give the map
+as first built (60.5%); its list is the one the two later searches read ([Egyptian sources](egyptian.md),
+[spelling variants](variants.md)).
+
 ## 1. Answer first
 
 1. **About 60% of the running words can be translated today.** Of the corpus's 21,977 words, 13,292 (60.5%) are a
@@ -162,11 +167,13 @@ The draft translation of a text is this line of glosses, word by word, not Engli
 | File | What it holds | Where |
 |---|---|---|
 | `src/coverage.py` | the lookup, the packs for the analysts, the merge, the figures and the ranked list | public |
-| `tests/test_coverage.py` | 18 checks: the method on a made-up lexicon, and the numbers and tables of this page | public |
+| `tests/test_coverage.py` | 23 checks: the method on a made-up lexicon, and the numbers and tables of this page | public |
 | `data/discovery/coverage_brief.md` | the analysts' brief | public |
 | `data/discovery/coverage_unknown.tsv` | the 1,336 pieces without an accepted meaning: headword or letters, kind, level, texts, words, spellings | public |
 | `data/sources/coverage/glosses.jsonl` | every text word by word: gloss, level, confidence, source (Rilly's page), parts, and a draft line | local |
 | `data/sources/coverage/packs/` | the analysts' packs and answers | local |
+| `data/discovery/coverage_unknown_corrected.tsv` | the 1,309 pieces left after the corrections of section 7, in the same columns | public |
+| `data/sources/coverage/corrected/` | the gloss file, the ranked list and the figures after the corrections; each corrected word keeps what it was | local |
 
 The gloss file and the analysts' answers lean on Rilly's lexicon, which has no open licence, so they stay on the
 author's machine like the lexicon itself (README, Data). With those files in place:
@@ -174,6 +181,7 @@ author's machine like the lexicon itself (README, Data). With those files in pla
 ```
 python3 -I src/coverage.py first                                       # the lookup alone
 python3 -I src/coverage.py build data/sources/coverage/packs --public  # the merge, the figures, the lists
+python3 -I src/coverage.py correct data/sources/coverage/packs --public  # the same with the corrections (section 7)
 python3 -I tests/test_coverage.py
 ```
 
@@ -183,3 +191,62 @@ Nineteen analyst runs took 2.63 million subagent tokens. Eighteen ran side by si
 until between 10:36 and 10:39; the last (the 52 words) ran from about 10:43 to 10:46. The whole build took about
 25 minutes, from about 10:27 to the commit at 10:52, against a quote of about 2 hours and 2 to 3 million tokens.
 The main session's own tokens are not counted here.
+
+## 7. The corrections
+
+Work done after the first build found words that the map counts wrongly: six agents that dug into ways of finding
+meanings, and the search for spelling variants ([`variants.md`](variants.md)). Four rules set those words right
+(`python3 -I src/coverage.py correct`). The map as first built is kept, with its list, so that the two searches
+that read it still rebuild; the corrected map is written beside it.
+
+| | As first built | After the corrections |
+|---|---|---|
+| Running words translated, all 899 texts | 13,292 of 21,977 (60.5%) | 13,613 (61.9%) |
+| Running words translated, near-copies counted once | 5,266 of 8,786 (59.9%) | 5,409 (61.6%) |
+| Texts with every legible word translated | 82 of 605 | 107 |
+| Texts with one piece missing | 124 | 121 |
+| The median text | 68.8% | 72.7% |
+| Pieces without an accepted meaning | 1,336 | 1,309 |
+
+| Rule | Words set right | Not translated before | The same, near-copies counted once |
+|---|---|---|---|
+| 1. The rest of a masked name | 282 | 98 | 96 and 24 |
+| 2. A stem of two signs | 83 | 83 | 18 and 18 |
+| 3. A word written apart | 146 | 88 | 107 and 68 |
+| 4. A spelling of a known word | 52 | 52 | 33 and 33 |
+
+The 321 words that were not translated before are the whole gain, from 13,292 to 13,613.
+
+1. **The rest of a masked name.** The older corpus was padded with copies of its texts in which the names were
+   swapped. A swapped-in name of several words left its other words behind the mask. `mokelowi` is one: Millet
+   marks "amxye mokelowi" as a single personal name, and the padded file holds the word in 490 of its 18,090
+   lines. `mete l` is the other, from the name "tqo mete l"; it stands in the same frames. Directly after a
+   masked name both now count as part of the name. This is why `moke` stood so high in section 2: it falls from
+   27 texts (alone in 11) to 5 (alone in 1). The 98 words gained here are names recognised, not meanings found,
+   and one of the four real passages of `moke` goes with the copies made from it.
+2. **A stem of two signs.** The lookup asks a stem for three letters. The signs se and ne are one sign each in
+   the corpus spelling but two letters in Rilly's, so `sem` "wife" is spelled with two signs and its form
+   `smlowi`, "is the wife of", was left out: 81 words, and 2 of `smlo`. The rule holds only for an entry that
+   Rilly gives as established.
+3. **A word written apart.** Two or three neighbouring words are read as one when at least one of them has one or
+   two letters, they spell a word the lookup translates, and that word also stands written as one in two texts or
+   more. It makes 65 places of 25 different kinds: `ye tmdelowi` (17), `ye t mde` (7), `wo Si` for `woSi`, "O
+   Isis" (6), `yet mde lo` (6). These joins are made by rule and no reader has checked them; single cases may be
+   wrong (`wi t` twice, `S Sor` once).
+4. **A spelling of a known word.** The pieces that two blind checkers both took for a spelling or a form of a
+   word with an accepted meaning ([`variants.md`](variants.md), section 6), without the two whose pack showed a
+   hint (`mXeyot`, `yetmetl`): 52 words, `tedxli` (13) and `bedewitel` (7) first. The variants page counts 54 for
+   the same pieces; the other two are the `smlo` of rule 2.
+
+**What is still wrong and not corrected.**
+
+1. The corpus itself is unchanged: it still holds the padded frames as texts ("NAME mokelowi"), so the counts of
+   texts include them.
+2. Other fragments stay in the list: `Si` in 10 texts (pieces of other words, among them the verb of the
+   blessings written in several parts), `wo-` in 5, and three forms of "sister" (`kdito`, `kdisbetowi`,
+   `kditebkwi`).
+3. A count of texts in the older corpus overstates the evidence, because its texts are copies with the names
+   swapped: `teke` stands in 55 of the 899 texts but in 11 different contexts of five words.
+4. "A proposal only" (section 1) covers two things. Of the 383 pieces at that level, 126 are headwords of the
+   lexicon; 101 of them list a proposal by an author, and 87 of those are content words. The other 257 are words
+   that an analyst cut into known parts without being sure.

@@ -64,11 +64,13 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
      entries, ranks the true source better (among the five best for 7 of 13 loans, against 4) and leaves both
      answers as they are. The step's two other Egyptian parallels, the
      oracular decrees and the people the Philae graffiti name in Demotic, are not done yet.
-8. **About 60% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
-   was glossed from Rilly's 2003 lexicon, by lookup and then by analysts: 13,292 of 21,977 words (60.5%) are a
-   name, a number or a word with an accepted meaning or function (59.9% with near-copies counted once), 17% have a
-   proposal only, 10% are known by their kind only and 12% are unknown. Every legible word is translated in 82 of
-   605 texts. The 1,336 pieces without an accepted meaning are listed with their kind and the texts they block
+8. **About 62% of the corpus's running words can be translated today, word by word.** Every word of the 899 texts
+   was glossed from Rilly's 2003 lexicon, by lookup and then by analysts. After four corrections made the same day,
+   13,613 of 21,977 words (61.9%) are a name, a number or a word with an accepted meaning or function (61.6% with
+   near-copies counted once); 16% have a proposal only, 9% are known by their kind only and 11% are unknown.
+   Every legible word is translated in 107 of 605 texts. The 1,309 pieces without an accepted meaning are listed
+   with their kind and the texts they block. The map as first built gave 60.5%, 82 texts and 1,336 pieces; the
+   difference is words it counted wrongly, not meanings found
    ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
 9. **A search by letters ranks the spellings of a known word well, and cannot say by itself which unknown pieces
    are one.** Each of the 242 spelling variants that Rilly's lexicon lists under a word was hidden in turn. The
@@ -262,6 +264,14 @@ established or probable, and an analyst's cut has a confidence of 4 or 5. Near-c
 in the headline and in the ranking of what blocks most texts. The gloss file leans on the
 lexicon and is local-only; the counts, the brief and the list of unknown pieces are public
 ([`data/discovery/coverage.md`](data/discovery/coverage.md)).
+
+Four corrections follow the first build (`correct`), each a rule: the rest of a masked name of several words that
+the padding of the older corpus left behind its mask ("mokelowi", "mete l") is part of the name; a stem of two
+signs counts as three letters when one of them is the sign se or ne and Rilly holds the entry as established
+(`smlowi`, "is the wife of"); two or three neighbouring words are one word written apart when one of them has
+one or two letters and the whole also stands written as one elsewhere (`wo Si` for `woSi`); and a piece that two
+blind checkers took for a spelling of a word with an accepted meaning takes that meaning. The corrected map is
+written beside the first one, whose list the Egyptian and the variants searches read.
 
 ### 15. Egyptian words behind Meroitic ones (`src/egyptian.py`)
 

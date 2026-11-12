@@ -37,9 +37,10 @@ Done since this plan was written:
      different texts.
 
 7. **The translation coverage map** (2026-11-11, [`data/discovery/coverage.md`](data/discovery/coverage.md)):
-   every word of `corpus_v5` glossed from Rilly's lexicon. 60.5% of the running words are translated, 82 of 605
-   legible texts in full, and the 1,336 pieces without an accepted meaning are ranked by the texts they block, each
-   with its kind where the texts show one. Section E says what it is for.
+   every word of `corpus_v5` glossed from Rilly's lexicon. After four corrections made the same day (point 10),
+   61.9% of the running words are translated, 107 of 605 legible texts in full, and 1,309 pieces without an
+   accepted meaning are ranked by the texts they block, each with its kind where the texts show one (60.5%, 82
+   texts and 1,336 pieces as first built). Section E says what it is for.
 8. **The search for Egyptian sources** (2026-11-11, [`data/discovery/egyptian.md`](data/discovery/egyptian.md)),
    the first part of step 17 of section E: a negative result. A search by sound finds the known names of gods,
    places and people but only 4 of 14 known borrowed titles, nouns and verbs, and gives nothing above chance for
@@ -50,6 +51,11 @@ Done since this plan was written:
    test missed the bar, because only 105 (43%) stand out from made-up words. Two blind checkers confirmed 48 of
    the 105 matches of unknown pieces that beat the bar, 29 of them new; 26 would move 59 running words of the
    coverage map (60.5% to 60.7%; 54 without two whose packs showed a word with their own letters glossed).
+10. **Six ways of finding meanings, and the map corrected** (2026-11-11, [`REPORT.md`](REPORT.md), Day four,
+    night). Six agents dug into the ways that need no new source; none found a new meaning, and each named
+    sources we do not hold as its limit. What they found wrong in the map is corrected (section 7 of the
+    coverage page): the padding's leftovers after masked names, `smlowi`, words written apart, and the confirmed
+    spellings.
 
 Next, in this order:
 
@@ -235,7 +241,10 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     cannot place them; Hallof's volume 7 (step 7 above) would triple the texts.
 20. **Left open by the map itself:** the lexicon is the state of 2003 (Rilly's 2016 list accepts `pqr`, `wide`,
     `nbr` and `sr`, which it holds as proposals); 1,657 leftover words have one analyst only; a word with two
-    accepted entries is not disambiguated; and the older corpus divides words unevenly.
+    accepted entries is not disambiguated; and the older corpus divides words unevenly. The corrections of
+    2026-11-11 treat two leftovers of the padding in the map (`mokelowi` and `mete l` after a masked name) but
+    not in the corpus, which still holds the padded frames as texts: removing them there would change the counts
+    of texts and words that every result since rests on.
 21. **Spelling variants inside Meroitic.** The Egyptian search stumbled on at least 16 pieces of the map's list
     that are spellings or forms of known words (`prSn` for `plsn`, `petmoS` for `pelmos`). Searched for on
     purpose, each piece would be compared with the about 800 entries of the lexicon, a pool small enough for a

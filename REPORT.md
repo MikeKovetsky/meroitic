@@ -41,10 +41,11 @@ open). What is new, with the run behind each claim:
    search by sound alone for Egyptian sources gives nothing above chance for the pieces without a meaning, and
    finds 4 of 14 known borrowed titles, nouns and verbs (Day four, afternoon, below).
 
-8. **About 60% of the running words can be translated today, word by word.** 13,292 of the 21,977 words of
-   `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established or probable (59.9%
-   with near-copies counted once); every legible word is translated in 82 of 605 texts (Day four, below;
-   `data/discovery/coverage.md`).
+8. **About 62% of the running words can be translated today, word by word.** After four corrections, 13,613 of
+   the 21,977 words of `corpus_v5` are a name, a number or a word that Rilly's 2003 lexicon holds as established
+   or probable (61.6% with near-copies counted once); every legible word is translated in 107 of 605 texts. As
+   first built the map gave 13,292 words (60.5%) and 82 texts; the difference is words it counted wrongly, not
+   meanings found (Day four, below; `data/discovery/coverage.md`).
 9. **A search by letters finds the entry of a hidden spelling variant 77% of the time, and its test still missed
    the bar.** 187 of 242 variants listed in Rilly's lexicon come back to their own entry as the single best
    match, but only 105 (43%, the bar was half) with a match that stands out from made-up words: no word of three
@@ -392,3 +393,31 @@ After "are you giving up?", four more lines of attack, then data.
 15. **Cost:** 1,269,219 subagent tokens for the checkers in two passes (657,132 and 612,087), against about 0.7
     million quoted for one pass with a second allowed for, and 425,616 for the review (about 0.45 million
     quoted): 1,694,835 in all.
+
+## Day four, night (2026-11-11): six ways of finding meanings, and the map corrected
+
+1. **Six agents dug into six ways of finding meanings from the local data**: testing the proposals that exist,
+   kin terms through the families of Karanòg, the blessings against the Egyptian funerary wishes, titles through
+   the Demotic graffiti, counted nouns by their numbers, and a consistency search for the frequent pieces. None
+   found a meaning that is not already in Rilly's lexicon or its listed proposals (2.27 million subagent tokens;
+   the reports are local).
+2. **Why:** read from their contexts alone, 27 words of known meaning gave the right kind of word 26 times and
+   the meaning 4 times, each time for a word that stands opposite a known partner (north and south, mother and
+   father). One reader, not blind; taken as a measure of the method's reach, not as a result.
+3. **What they did show** and what was then checked on the corpus: `ḫr` takes bread and nothing else as its
+   object; the prefix written ps- or y- stands on `ḫr` in 91 of 93 texts and on `ẖol` in 4 of 56 (which has a
+   bare p- in 16); `dole` follows "the good sacrifice" in all 7 cases of the blessings; `atmi` stands before 12
+   after "do 6" where two recipients are named. All are readings that the literature already holds.
+4. **Errors in the coverage map**, corrected by four rules (`python3 -I src/coverage.py correct`; section 7 of
+   [`data/discovery/coverage.md`](data/discovery/coverage.md)): the rest of a masked name left by the padding of
+   the older corpus (`moke` falls from 27 texts to 5), a stem of two signs (`smlowi`, "is the wife of", 81
+   words), a word written apart (65 places), and the spellings of known words that two blind checkers confirmed
+   (52 words). 321 words move: 13,292 to 13,613 of 21,977 (60.5% to 61.9%; with near-copies counted once 59.9%
+   to 61.6%), 82 to 107 complete texts, 1,336 to 1,309 pieces without an accepted meaning. The 98 words of the
+   first rule are names recognised, not meanings found.
+5. **Two earlier claims of this project do not hold** and carry a note where they stand: that the w and q at
+   the head of the two divine epithets tend to match within a text is not shown (5 of 9 texts with near-copies
+   counted once; `data/discovery/funerary.md`), and `womnise` as the title "prince of Takompso" does not fit the
+   place its holder has it in (`data/discovery/philae.md`, H7).
+6. **Not checked against the literature, so not claimed:** that the relatives of an epitaph are listed in order
+   of generation; that `tḫ` is "receive" rather than "give"; that a suffix -(t)k marks nouns counted together.

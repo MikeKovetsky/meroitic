@@ -288,6 +288,10 @@ Confidence runs from 1 (a guess with one support) to 5 (near certain). The label
 - **Corpus.** `womn-` tokens have 441 hits, nearly all `womnitX` in copies of one long list
   (`womnitX Sklte NAME yetmdelowi`). The title is followed by a place there too, which fits a place-bound
   office.
+- **Tested on 2026-11-11, and weakened.** If `womnise` were the "prince of Takompso" of the Demotic, its place
+  should be Takompso. Manitawawi's is Philae (REM 0097) and Abratoye's is Akiñ. The Demotic sentences of the TLA
+  name a second holder of that Demotic title, Patahutresi, "qorene of Isis, agent of Isis, prophet of Isis,
+  prince of the land (Ta)kompso", so the title went with those offices; nothing ties it to `womnise`.
 
 ### H8. `Mni-se mte` "child of Amun" is a title or epithet
 

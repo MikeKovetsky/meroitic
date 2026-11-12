@@ -455,6 +455,163 @@ def test_reported_check_against_rillys_2016_list():
     assert (up["translated"] - f["translated"], f"{up['translated'] / up['words']:.1%}") == (186, "61.3%")
 
 
+# --------------------------------------------------------------------------------------- the corrections
+
+def corrected_texts(texts, more=(), analysed=None, confirmed=None):
+    es = C.lexicon(RAW + list(more))
+    words, affixes, heads = C.index(es)
+    rows = [{"id": i, "text": t} for i, t in texts]
+    glossed = C.gloss_texts(rows, words, affixes, analysed)
+    report = C.correct(glossed, words, affixes, heads, confirmed=confirmed or {})
+    return {r["id"]: gs for r, gs in glossed}, report
+
+
+def test_the_rest_of_a_masked_name():
+    got, report = corrected_texts([("T1", "NAME mokelowi ato"), ("T2", "ato mokelowi"),
+                                   ("T3", "RNAME mete l mokelowi NAME mokelowi mokelowi"),
+                                   ("G-karanog-1", "NAME mokelowi"), ("T4", "NAME mete ato")])
+    levels = lambda i: [g["level"] for g in got[i]]
+    assert levels("T1") == ["name", "name", "meaning"]
+    assert levels("T2") == ["meaning", "unknown"]                     # not behind a mask: the word itself
+    assert levels("T3") == ["name"] * 7                               # a rest behind a rest is one too
+    assert levels("G-karanog-1") == ["name", "unknown"]               # only the older corpus was padded
+    assert levels("T4") == ["name", "unknown", "meaning"]             # "mete" without its "l" is not the rest
+    g = got["T1"][1]
+    assert (g["by"], g["corrected"], g["kind"], g["gloss"]) == ("correction", "the rest of a masked name", "person name", "NAME")
+    assert g["was"] == {"level": "unknown", "gloss": "<mokelowi>", "by": "nobody"} and "padding" in g["source"]
+    assert report["the rest of a masked name"] == {"words": 6, "newly_translated": 6, "words_once": 6,
+                                                   "newly_translated_once": 6}
+
+
+def test_a_stem_of_two_signs():
+    more = [raw("sem", "wife", "established", "substantif"), raw("mse", "child", "probable", "substantif"),
+            raw("at", "bread", "established", "substantif")]
+    words, affixes, heads = C.index(C.lexicon(RAW + more))
+    assert "sm" in words and "ms" in words                            # se is one sign: sem is spelled sm
+    assert C.lookup("smlowi", "", words, affixes) is None             # the lookup asks a stem for three letters
+    g = C.lookup("smlowi", "", words, affixes, short=True)
+    assert (g["level"], g["gloss"], [p["form"] for p in g["parts"]]) == ("meaning", "wife +lowi", ["sm", "lowi"])
+    assert C.lookup("mslowi", "", words, affixes, short=True) is None     # only an established entry
+    assert C.lookup("atlowi", "", words, affixes, short=True) is None     # two signs without se or ne
+    assert C.lookup("yetmdelowi", "", words, affixes, short=True)["gloss"] == "nephew, niece +lowi"
+    got, report = corrected_texts([("T1", "NAME smlowi mslowi ato")], more)
+    assert [g["level"] for g in got["T1"]] == ["name", "meaning", "unknown", "meaning"]
+    assert got["T1"][1]["corrected"] == "a stem of two signs" and "corrected" not in got["T1"][3]
+    assert report["a stem of two signs"]["words"] == report["a stem of two signs"]["newly_translated"] == 1
+
+
+def test_a_word_written_apart():
+    texts = [("T1", "ye tmdelowi ato"), ("T2", "yetmdelowi"), ("T3", "yetmdelowi ato"), ("T4", "at o"),
+             ("T5", "yetm delowi"), ("T6", "mX e"), ("T7", "ato lo"), ("T8", "ye t mdelowi"), ("T9", "ye NAME")]
+    got, report = corrected_texts(texts)
+    g = got["T1"]
+    assert [x["level"] for x in g] == ["meaning"] * 3 and g[0]["gloss"] == "nephew, niece +lowi"
+    assert g[1]["gloss"] == "(part of yetmdelowi)" and g[0]["joined"] == g[1]["joined"] == "yetmdelowi"
+    assert g[0]["corrected"] == "a word written apart" and "corrected" not in g[2]
+    assert [x["level"] for x in got["T4"]] == ["meaning", "meaning"]            # ato stands whole in two texts
+    assert [x["level"] for x in got["T5"]] == ["unknown", "unknown"]            # no piece of one or two letters
+    assert [x["level"] for x in got["T6"]] == ["unknown", "unknown"]            # mXe stands whole in no text
+    assert not any(x.get("corrected") for x in got["T7"])                       # both are translated already
+    assert [x.get("joined") for x in got["T8"]] == ["yetmdelowi"] * 3           # three neighbours
+    assert [x["level"] for x in got["T9"]] == ["unknown", "name"]               # a mask is no neighbour to join
+    assert report["joins"] == [["at o", "ato", 1], ["ye t mdelowi", "yetmdelowi", 1], ["ye tmdelowi", "yetmdelowi", 1]]
+    assert report["a word written apart"]["words"] == 7 and report["a word written apart"]["newly_translated"] == 7
+
+
+def test_a_confirmed_spelling_of_a_known_word():
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "confirmed.tsv"
+        path.write_text("piece\thead\tword\taccepted\tlinked\tchance\n"
+                        "atoo\tletters\tato\tyes\tno\t0.0100\n" "arbt\tletters\taribet\tno\tno\t0.0100\n"
+                        "mXeyot\tletters\tmẖe\tyes\tno\t0.0100\n" "pqr\theadword\tWos / ato\tyes\tyes\t0.0100\n")
+        confirmed = C.confirmed_variants(path)
+        assert C.confirmed_variants(Path(tmp) / "none.tsv") == {}
+    assert confirmed == {("atoo", False): "ato", ("pqr", True): "Wos"}          # accepted only, mXeyot set apart
+    es, words, affixes, heads = made_up()
+    analysed = {w: C.settle(answer(w, [(w, "?")]), heads) for w in ("atoo", "arbt", "zzz")}
+    analysed["atoozzz"] = C.settle(answer("atoozzz", [("atoo", "?"), ("zzz", "?")]), heads)
+    got, report = corrected_texts([("T1", "atoo arbt atoozzz pqr NAME")], analysed=analysed, confirmed=confirmed)
+    g = got["T1"]
+    assert [x["level"] for x in g] == ["meaning", "unknown", "unknown", "name", "name"]
+    assert g[0]["gloss"] == "water (a form of ato)" and g[0]["corrected"] == "a spelling of a known word"
+    assert "two blind checkers" in g[0]["source"] and g[0]["was"]["level"] == "unknown"
+    assert g[3]["gloss"] == "Isis (a form of Wos)"                               # a headword of the list
+    assert report["a spelling of a known word"]["words"] == 2                    # atoozzz has another piece open
+
+
+def test_reported_corrections():
+    rows, words, affixes, heads, report, glossed = built()
+    needs("data/sources/coverage/corrected/glosses.jsonl")
+    done = C.correct(glossed, words, affixes, heads)
+    rules = {rule: tuple(c.values()) for rule, c in done.items() if rule != "joins"}
+    assert rules == {"the rest of a masked name": (282, 98, 96, 24), "a stem of two signs": (83, 83, 18, 18),
+                     "a word written apart": (146, 88, 107, 68), "a spelling of a known word": (52, 52, 33, 33)}
+    assert (len(done["joins"]), sum(n for _, _, n in done["joins"])) == (25, 65)
+    assert done["joins"][:4] == [["ye tmdelowi", "yetmdelowi", 17], ["ye t mde", "yetmde", 7], ["wo Si", "woSi", 6],
+                                 ["yet mde lo", "yetmdelo", 6]]
+    f = C.figures(glossed)
+    a, once = f["all"], f["near-copies counted once"]
+    assert (a["translated"], once["translated"]) == (13613, 5409)                  # 61.9% and 61.6%
+    assert a["translated"] - 13292 == sum(r[1] for r in rules.values()) == 321
+    assert a["levels"] == {"meaning": 6973, "grammar": 1956, "name": 4421, "number": 263, "hypothesis": 3521,
+                           "kind": 2073, "unknown": 2508, "lost": 262}
+    assert a["by"] == {"lookup": 11152, "analyst": 1898, "correction": 563}
+    part = lambda name: f[name]["translated"]
+    assert (part("the older corpus (names masked)"), part("Karanog and Shablul (Griffith 1911)"),
+            part("Griffith's other volumes"), f["different words"]["translated"]) == (10994, 2199, 420, 1139)
+    ranked, texts_by = C.ranking(glossed, heads)
+    assert f"{texts_by.pop('median'):.1%}" == "72.7%"
+    assert texts_by == {"texts": 608, "legible": 605, "no_blocker": 107, "one_blocker": 121}
+    assert len(ranked) == 1309 and [r["piece"] for r in ranked[:4]] == ["ḫr", "ẖol", "ye- (2)", "pqr"]
+    by = {(r["piece"], r["is"]): r for r in ranked}
+    moke = by["moke", "headword"]
+    assert (moke["texts"], moke["alone"], moke["words"]) == (5, 1, 9)              # 27, 11 and 107 as first built
+    assert ("smlowi", "letters") not in by and by["Si", "letters"]["texts"] == 10 and by["wo-", "headword"]["texts"] == 5
+    # the corrected list and gloss file are what the script writes
+    assert C.PUBLIC_CORRECTED.read_text() == C.public_list(ranked)
+    lines = [json.loads(l) for l in (C.CORRECTED / "glosses.jsonl").read_text().splitlines()]
+    assert len(lines) == 899 and sum(t["translated"] for t in lines) == 13613
+    assert sum(bool(g.get("corrected")) for t in lines for g in t["glosses"]) == 563
+    # the set-apart variants are not among the corrections, and the list as first built is untouched
+    assert not any(g["form"] in C.SET_APART and g.get("corrected") for t in lines for g in t["glosses"])
+    assert len(C.PUBLIC.read_text().splitlines()) == 1337
+    # section 8 of the page: its two tables and its counts
+    t = page_tables()
+    after = {r[0]: r[1:] for r in t["", "As first built", "After the corrections"]}
+    assert after["Running words translated, all 899 texts"] == ("13,292 of 21,977 (60.5%)", share(a["translated"], a["words"]))
+    assert after["Running words translated, near-copies counted once"] == ("5,266 of 8,786 (59.9%)", share(once["translated"], once["words"]))
+    assert after["Texts with every legible word translated"] == ("82 of 605", "107")
+    assert after["Texts with one piece missing"] == ("124", "121") and after["The median text"] == ("68.8%", "72.7%")
+    assert after["Pieces without an accepted meaning"] == ("1,336", "1,309")
+    shown = t["Rule", "Words set right", "Not translated before", "The same, near-copies counted once"]
+    assert [tuple(map(str, (r[1], r[2]))) + (r[3],) for r in shown] == [
+        (str(c[0]), str(c[1]), f"{c[2]} and {c[3]}") for c in rules.values()]
+    # what the page says of the list: the hypothesis pieces, and how copies swell the counts of texts
+    raw_ = {e["headword"]: e for e in C.L.load() if e.get("page_pdf", 0) < C.L.REJECTED_FROM}
+    first, _ = C.ranking(built()[-1], heads)
+    hyp = [r for r in first if r["level"] == "hypothesis" and r["is"] == "headword"]
+    named = [r for r in hyp if raw_[r["piece"]].get("proposals")]
+    content = [r for r in named if C.kind_of(raw_[r["piece"]].get("category")) != "function word"]
+    assert (len(hyp), len(named), len(content)) == (126, 101, 87)
+    teke = [(r["id"], " ".join(w[max(0, i - 2):i + 3])) for r in rows for w in [r["text"].split()]
+            for i, x in enumerate(w) if x.startswith(("teke", "yeteke"))]
+    assert (len({i for i, _ in teke}), len({c for _, c in teke})) == (55, 11)
+    # the note in funerary.md: the two epithets of the invocation, and the letter each opens with
+    import re
+    def opening(rs):
+        pairs = [(a.group(1), b.group(1)) for r in rs for t in [r["text"].replace(" ", "")]
+                 for a, b in [(re.search(r"([wq])etNyiNqeli", t), re.search(r"([wq])etrri", t))] if a and b]
+        return len(pairs), sum(x == y for x, y in pairs)
+    kept = {r["id"] for r in C.distinct(rows)}
+    assert (opening(rows), opening([r for r in rows if r["id"] in kept])) == ((57, 38), (9, 5))
+    note = " ".join((ROOT / "data/discovery/funerary.md").read_text().split())
+    assert "stand in 57 texts of the corpus and open with the same letter in 38" in note and "it is 5 of 9" in note
+    page = " ".join(PAGE.read_text().split())
+    for text in ("101 of them list a proposal by an author, and 87 of those are content words",
+                 "stands in 55 of the 899 texts but in 11 different contexts", "65 places", "25 different"):
+        assert text in page, text
+
+
 def test_the_brief_names_every_kind():
     brief = C.BRIEF.read_text()
     assert all(f"`{k}`" in brief for k in C.KINDS)
