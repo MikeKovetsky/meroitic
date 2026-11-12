@@ -51,6 +51,10 @@ Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
   the scoring scripts under `runs/work/`, some of them quoted again in `data/discovery/`.
 - Glosses from Claude Rilly's *Lexique méroïtique* (2003 thesis, HAL tel-04793700), paraphrased in English for 68
   words as the answer key of the lexicon test: `runs/keys/lexique_*.json` and `runs/lexique_judge.json`.
+- Single words with the meaning an edition gives them, quoted on `data/discovery/experts.md` from N. B. Millet,
+  "The Meroitic Inscriptions from Gebel Adda" (*Journal of the Society for the Study of Egyptian Antiquities* 32,
+  2005), from *Fontes Historiae Nubiorum* III and from Rilly's lexicon. The two files beside that page,
+  `experts_figures.json` and `experts_words.tsv`, hold counts and word forms only and are under CC BY 4.0.
 - Short quotations from other publications in the write-ups, each cited where it stands.
 
 Other data without an open licence is not in this repository: the README's Data section lists what is kept out.

@@ -1,0 +1,461 @@
+{
+ "texts": {
+  "held by both": 31,
+  "Millet 2005": 23,
+  "FHN III": 8
+ },
+ "words": {
+  "in the texts": 1174,
+  "judged": 1115,
+  "masked names, not judged": 46,
+  "lost, not judged": 13,
+  "decoys": 36,
+  "judged, Millet 2005": 589,
+  "judged, FHN III": 526
+ },
+ "translated": {
+  "all": {
+   "agree": 276,
+   "partly": 62,
+   "differ": 49,
+   "new": 10,
+   "silent": 125,
+   "absent": 15,
+   "rows": 537,
+   "unanswered": 0,
+   "given": 397,
+   "agree_share": 0.6952,
+   "agree_or_partly_share": 0.8514
+  },
+  "meaning": {
+   "agree": 158,
+   "partly": 57,
+   "differ": 17,
+   "new": 9,
+   "silent": 82,
+   "absent": 3,
+   "rows": 326,
+   "unanswered": 0,
+   "given": 241,
+   "agree_share": 0.6556,
+   "agree_or_partly_share": 0.8921
+  },
+  "grammar": {
+   "agree": 17,
+   "partly": 2,
+   "differ": 26,
+   "new": 0,
+   "silent": 29,
+   "absent": 4,
+   "rows": 78,
+   "unanswered": 0,
+   "given": 45,
+   "agree_share": 0.3778,
+   "agree_or_partly_share": 0.4222
+  },
+  "name": {
+   "agree": 96,
+   "partly": 3,
+   "differ": 6,
+   "new": 1,
+   "silent": 14,
+   "absent": 8,
+   "rows": 128,
+   "unanswered": 0,
+   "given": 106,
+   "agree_share": 0.9057,
+   "agree_or_partly_share": 0.934
+  },
+  "number": {
+   "agree": 5,
+   "partly": 0,
+   "differ": 0,
+   "new": 0,
+   "silent": 0,
+   "absent": 0,
+   "rows": 5,
+   "unanswered": 0,
+   "given": 5,
+   "agree_share": 1.0,
+   "agree_or_partly_share": 1.0
+  },
+  "Millet 2005": {
+   "agree": 156,
+   "partly": 49,
+   "differ": 30,
+   "new": 8,
+   "silent": 54,
+   "absent": 10,
+   "rows": 307,
+   "unanswered": 0,
+   "given": 243,
+   "agree_share": 0.642,
+   "agree_or_partly_share": 0.8436
+  },
+  "FHN III": {
+   "agree": 120,
+   "partly": 13,
+   "differ": 19,
+   "new": 2,
+   "silent": 71,
+   "absent": 5,
+   "rows": 230,
+   "unanswered": 0,
+   "given": 154,
+   "agree_share": 0.7792,
+   "agree_or_partly_share": 0.8636
+  },
+  "agree_with_doubt": 19
+ },
+ "not translated": {
+  "all": {
+   "agree": 96,
+   "partly": 23,
+   "differ": 20,
+   "new": 72,
+   "silent": 330,
+   "absent": 1,
+   "rows": 542,
+   "unanswered": 0,
+   "given": 211,
+   "agree_share": 0.455,
+   "agree_or_partly_share": 0.564
+  },
+  "hypothesis": {
+   "agree": 73,
+   "partly": 17,
+   "differ": 17,
+   "new": 7,
+   "silent": 120,
+   "absent": 0,
+   "rows": 234,
+   "unanswered": 0,
+   "given": 114,
+   "agree_share": 0.6404,
+   "agree_or_partly_share": 0.7895
+  },
+  "kind": {
+   "agree": 23,
+   "partly": 6,
+   "differ": 3,
+   "new": 11,
+   "silent": 84,
+   "absent": 0,
+   "rows": 127,
+   "unanswered": 0,
+   "given": 43,
+   "agree_share": 0.5349,
+   "agree_or_partly_share": 0.6744
+  },
+  "unknown": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 0,
+   "new": 54,
+   "silent": 126,
+   "absent": 1,
+   "rows": 181,
+   "unanswered": 0,
+   "given": 54,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  }
+ },
+ "groups": {
+  "yetmde": {
+   "agree": 6,
+   "partly": 54,
+   "differ": 0,
+   "new": 0,
+   "silent": 0,
+   "absent": 0,
+   "rows": 60,
+   "unanswered": 0,
+   "given": 60,
+   "agree_share": 0.1,
+   "agree_or_partly_share": 1.0
+  },
+  "qo": {
+   "agree": 11,
+   "partly": 3,
+   "differ": 19,
+   "new": 0,
+   "silent": 7,
+   "absent": 1,
+   "rows": 41,
+   "unanswered": 0,
+   "given": 33,
+   "agree_share": 0.3333,
+   "agree_or_partly_share": 0.4242
+  },
+  "other": {
+   "agree": 259,
+   "partly": 5,
+   "differ": 30,
+   "new": 10,
+   "silent": 118,
+   "absent": 14,
+   "rows": 436,
+   "unanswered": 0,
+   "given": 304,
+   "agree_share": 0.852,
+   "agree_or_partly_share": 0.8684
+  }
+ },
+ "other differences": {
+  "the numeral 1 typed as the letter l": 8,
+  "a name or a piece of a word read as a word": 11,
+  "our map has only the kind of word": 10,
+  "another meaning or identification": 16
+ },
+ "decoys": {
+  "judge1": {
+   "agree": 1,
+   "partly": 1,
+   "differ": 20,
+   "new": 0,
+   "silent": 14,
+   "absent": 0,
+   "rows": 36,
+   "unanswered": 0,
+   "given": 22,
+   "agree_share": 0.0455,
+   "agree_or_partly_share": 0.0909
+  },
+  "judge2": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 7,
+   "new": 0,
+   "silent": 2,
+   "absent": 0,
+   "rows": 9,
+   "unanswered": 0,
+   "given": 7,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  }
+ },
+ "two judges": {
+  "judge2": {
+   "all rows": {
+    "rows": 372,
+    "same_verdict": 361,
+    "kappa": 0.9594,
+    "same_class": 361,
+    "kappa_classes": 0.9548,
+    "table": {
+     "absent / absent": 7,
+     "agree / absent": 1,
+     "agree / agree": 152,
+     "agree / differ": 2,
+     "agree / partly": 1,
+     "agree / silent": 1,
+     "differ / absent": 2,
+     "differ / agree": 1,
+     "differ / differ": 43,
+     "new / new": 29,
+     "partly / agree": 2,
+     "partly / partly": 38,
+     "silent / agree": 1,
+     "silent / silent": 92
+    }
+   },
+   "translated, decoys left out": {
+    "rows": 203,
+    "same_verdict": 197,
+    "kappa": 0.9554,
+    "same_class": 197,
+    "kappa_classes": 0.9511,
+    "table": {
+     "absent / absent": 7,
+     "agree / agree": 105,
+     "agree / differ": 1,
+     "agree / partly": 1,
+     "agree / silent": 1,
+     "differ / absent": 2,
+     "differ / differ": 26,
+     "new / new": 4,
+     "partly / partly": 27,
+     "silent / agree": 1,
+     "silent / silent": 28
+    }
+   },
+   "translated, by this judge": {
+    "agree": 106,
+    "partly": 28,
+    "differ": 27,
+    "new": 4,
+    "silent": 29,
+    "absent": 9,
+    "rows": 203,
+    "unanswered": 0,
+    "given": 165,
+    "agree_share": 0.6424,
+    "agree_or_partly_share": 0.8121
+   },
+   "translated, by the first judge on the same rows": {
+    "agree": 108,
+    "partly": 27,
+    "differ": 28,
+    "new": 4,
+    "silent": 29,
+    "absent": 7,
+    "rows": 203,
+    "unanswered": 0,
+    "given": 167,
+    "agree_share": 0.6467,
+    "agree_or_partly_share": 0.8084
+   }
+  }
+ },
+ "new in the held texts": {
+  "all": 58,
+  "a personal name": 30,
+  "a piece of another word": 8,
+  "a place or a people": 6,
+  "a word": 14,
+  "a word, marked as unsure": 12
+ },
+ "meanings": {
+  "lines from the readers": 180,
+  "lines": 167,
+  "judged": 146,
+  "decoys": {
+   "first judge": 15,
+   "second judge": 15
+  },
+  "our map": {
+   "translated": 103,
+   "held without an accepted meaning (kind)": 13,
+   "not in the map": 22,
+   "held without an accepted meaning (hypothesis)": 24,
+   "held without an accepted meaning (unknown)": 5
+  },
+  "translated, first judge": {
+   "agree": 55,
+   "partly": 17,
+   "differ": 13,
+   "new": 5,
+   "silent": 0,
+   "absent": 0,
+   "rows": 90,
+   "unanswered": 0,
+   "given": 90,
+   "agree_share": 0.6111,
+   "agree_or_partly_share": 0.8
+  },
+  "translated, second judge": {
+   "agree": 57,
+   "partly": 15,
+   "differ": 13,
+   "new": 7,
+   "silent": 0,
+   "absent": 0,
+   "rows": 92,
+   "unanswered": 0,
+   "given": 92,
+   "agree_share": 0.6196,
+   "agree_or_partly_share": 0.7826
+  },
+  "held without an accepted meaning, first judge": {
+   "agree": 20,
+   "partly": 8,
+   "differ": 5,
+   "new": 8,
+   "silent": 0,
+   "absent": 0,
+   "rows": 41,
+   "unanswered": 0,
+   "given": 41,
+   "agree_share": 0.4878,
+   "agree_or_partly_share": 0.6829
+  },
+  "held without an accepted meaning, second judge": {
+   "agree": 18,
+   "partly": 9,
+   "differ": 3,
+   "new": 9,
+   "silent": 0,
+   "absent": 0,
+   "rows": 39,
+   "unanswered": 0,
+   "given": 39,
+   "agree_share": 0.4615,
+   "agree_or_partly_share": 0.6923
+  },
+  "decoys, first judge": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 14,
+   "new": 1,
+   "silent": 0,
+   "absent": 0,
+   "rows": 15,
+   "unanswered": 0,
+   "given": 15,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  },
+  "decoys, second judge": {
+   "agree": 0,
+   "partly": 0,
+   "differ": 15,
+   "new": 0,
+   "silent": 0,
+   "absent": 0,
+   "rows": 15,
+   "unanswered": 0,
+   "given": 15,
+   "agree_share": 0.0,
+   "agree_or_partly_share": 0.0
+  },
+  "two judges, translated": {
+   "rows": 79,
+   "same_verdict": 74,
+   "kappa": 0.8884,
+   "same_class": 76,
+   "kappa_classes": 0.9199,
+   "table": {
+    "agree / agree": 47,
+    "agree / partly": 2,
+    "differ / differ": 11,
+    "differ / partly": 1,
+    "new / new": 5,
+    "partly / agree": 1,
+    "partly / differ": 1,
+    "partly / partly": 11
+   }
+  },
+  "two judges, all": {
+   "rows": 116,
+   "same_verdict": 109,
+   "kappa": 0.9012,
+   "same_class": 112,
+   "kappa_classes": 0.9297,
+   "table": {
+    "agree / agree": 64,
+    "agree / partly": 3,
+    "differ / differ": 14,
+    "differ / new": 1,
+    "differ / partly": 1,
+    "new / new": 12,
+    "partly / agree": 1,
+    "partly / differ": 1,
+    "partly / partly": 19
+   }
+  },
+  "lacking": {
+   "our map reads the word otherwise (both judges)": 29,
+   "our map has no accepted meaning for the word": 64,
+   "our map reads the word otherwise (the one judge who saw our reading)": 9,
+   "our map may read the word otherwise (one judge of two)": 3
+  },
+  "lacking, stated as sure": {
+   "our map reads the word otherwise (both judges)": 15,
+   "our map has no accepted meaning for the word": 26,
+   "our map reads the word otherwise (the one judge who saw our reading)": 4,
+   "our map may read the word otherwise (one judge of two)": 3
+  }
+ }
+}

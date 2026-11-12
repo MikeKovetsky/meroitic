@@ -9,6 +9,11 @@ near-copies counted once, and every legible word is translated in 106 of 605 tex
 as first built (60.5%); its list is the one the two later searches read ([Egyptian sources](egyptian.md),
 [spelling variants](variants.md)).
 
+**Checked against two printed editions the next day ([the check](experts.md)):** in the 31 texts that Millet 2005
+or *Fontes Historiae Nubiorum* III also print, the edition gives a meaning to 397 of the 537 words the map counts
+as translated, and the same meaning as the map to 276 of them (69.5%; 85.2% outside two words on which the
+lexicon and the editions differ). "Translated" below means translated by one lexicon.
+
 ## 1. Answer first
 
 1. **About 60% of the running words can be translated today.** Of the corpus's 21,977 words, 13,292 (60.5%) are a
@@ -157,7 +162,12 @@ The draft translation of a text is this line of glosses, word by word, not Engli
      cut into a stem and an ending (`-ye`, `-w`, `-wi`, `-kete`) whose entries give it no accepted function;
    - 109 more take an ending that the lexicon has no suffix entry for (`-lis`, `-se`, `-yi`, `-tel`, `-teli`,
      `-b`, `-bx`), so whether its function is open is not known.
-4. **What it cannot show.** No specialist has checked a line. The analysts are one model family, and the model
+4. **What two printed editions say** ([the check of 2026-11-12](experts.md)). Where Millet 2005 or *Fontes
+   Historiae Nubiorum* III gives a word of the 31 shared texts a meaning, it is the map's meaning for 276 of 397
+   words (69.5%). Most of the rest is `yetmde` and `qo`, which Rilly reads otherwise than the two editions; the
+   check also found the numeral 1 typed as the letter `l` in one text of the older corpus, and eleven names or
+   pieces of words that the map reads as words.
+5. **What it cannot show.** No specialist has checked a line. The analysts are one model family, and the model
    has read the literature, though the brief forbids raising a confidence above 3 on memory alone. The lexicon is
    the state of 2003. A word with two accepted entries (`at`, bread or priest) is counted as translated without
    choosing between them. Word division in the older corpus is uneven, so some "words" are halves of words.

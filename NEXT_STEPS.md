@@ -56,8 +56,14 @@ Done since this plan was written:
     sources we do not hold as its limit. What they found wrong in the map is corrected (section 7 of the
     coverage page): the padding's leftovers after masked names, `smlowi`, words written apart, the confirmed
     spellings and three forms of "sister". What it leaves wrong is listed there too.
+11. **The map checked against two printed editions** (2026-11-12, [`data/discovery/experts.md`](data/discovery/experts.md)).
+    In the 31 inscriptions that Millet's Gebel Adda article (2005) or *Fontes Historiae Nubiorum* III also print,
+    the edition gives a meaning to 397 of the 537 words the map counts as translated, and the map's meaning to
+    276 of them (69.5%; 85.2% outside `yetmde` and `qo`, which Rilly reads otherwise than both editions). The
+    check found the numeral 1 typed as `l` in one text of the older corpus and eleven names read as words, and
+    almost no meaning the map lacks. Both editions are kept locally. Section F draws the consequence.
 
-Next, in this order:
+Next, in this order (the small steps; the four big pieces are in section F):
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
 2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
@@ -212,7 +218,10 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       of 13 loans against 4, so a vowel-aware search is the better tool once a word is known to be a loan. It
       does not find loans: 13 of 241 unknown pieces beat the 5% bar, where chance gives 12.
     - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
-      people named in both the Philae graffiti and the Meroitic texts.
+      people named in both the Philae graffiti and the Meroitic texts. For the second, *Fontes Historiae Nubiorum*
+      III is held locally since 2026-11-12: it prints 22 of the Demotic graffiti in translation beside the
+      Meroitic texts of the same people (the family of Wayekiye, Abratoye, Makheye), and its comments name who
+      is who.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
       `ꜣrbtgꜥyꜣ` for `arebetke`, `wygy` for Wayekiye). Reading those sentences beside the Meroitic titles is
       the parallel that carries meaning; it needs the names of the older corpus unmasked, and it can start from
@@ -244,7 +253,9 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     accepted entries is not disambiguated; and the older corpus divides words unevenly. The corrections of
     2026-11-11 treat two leftovers of the padding in the map (`mokelowi` and `mete l` after a masked name) but
     not in the corpus, which still holds the padded frames as texts: removing them there would change the counts
-    of texts and words that every result since rests on.
+    of texts and words that every result since rests on. The check of 2026-11-12 added two faults of the same
+    kind: the numeral 1 typed as `l` in the epitaph of Makheye, eight times over, and names the older corpus did
+    not mark as names. Piece F1 below is the remedy for all of them.
 21. **Spelling variants inside Meroitic.** The Egyptian search stumbled on at least 16 pieces of the map's list
     that are spellings or forms of known words (`prSn` for `plsn`, `petmoS` for `pelmos`). Searched for on
     purpose, each piece would be compared with the about 800 entries of the lexicon, a pool small enough for a
@@ -274,3 +285,67 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       meaning makes them a variant of a word that has no accepted meaning itself (`kroro`, `qetrri`, `Kine`,
       `qetneyineqeli` and others); 152 running words rest on them. The corrected map still counts them, and 160
       of its words rest on them (section 7 of the coverage page).
+
+## F. The next big pieces (defined 2026-11-12)
+
+Steps 1 to 21 are single runs. After five days, what limits every result is not a missing run but four things
+in the structure of the project: the corpus the numbers are counted on, the single lexicon behind every meaning,
+tests that live in separate scripts, and the lack of anything a reader can read. Each piece below is a build of
+days, not hours. The costs are estimates from what the runs so far cost.
+
+22. **F1. One inscription once: a corpus keyed by inscription, with real names and a source for every text.**
+    - Why: every figure is counted on `corpus_v5`, and 662 of its 899 texts are Otten's file, with names masked
+      and name-swapped copies (608 texts and 8,786 of the 21,977 words are left when near-copies count once). Found
+      in it so far: leftovers of the padding read as words, a numeral typed as a letter in a text that stands
+      eight times, names not marked as names, uneven word division, decree lines tagged as funerary. Each was
+      patched in the map; none is fixed in the corpus (step 20).
+    - What: one row per inscription, with its REM or edition number, site and kind; under it every reading we
+      hold (Otten's line, Griffith's print, the Karanòg copies, the Newsletter, Millet 2005, FHN) with its source
+      and licence; and one preferred reading with real names and one rule of word division. The old ids map to it.
+    - How: match readings by shared runs of letters, as `src/experts/prepare.py` does, confirm each match by a
+      reader who sees both, and restore names from the editions that print them.
+    - Done: every text of `corpus_v5` is mapped to an inscription or marked as an example phrase from a grammar;
+      a `corpus_v6` in which no inscription stands twice; the coverage map and the check against the editions
+      counted again on it. Measured by: inscriptions, the share with a REM number, with real names, with two
+      readings, and under an open licence.
+    - Cost: 2 to 4 million subagent tokens and one to two days. Hallof's volume 7 (step 7) would complete it;
+      without it the piece covers what is in hand.
+    - Comes first: F2 to F4 are all counted on it.
+23. **F2. A lexicon with a source and a status for every meaning.**
+    - Why: "translated" in the map means that one lexicon of 2003 accepts the meaning. The check of 2026-11-12
+      shows what that hides: two other scholars agree for 85% of the words outside `yetmde` and `qo`, and differ
+      on those two, on `mete`, on `peseto`. And the lexicon is in copyright, so the map's readings cannot be
+      published or reused.
+    - What: a table of words with their spellings (the confirmed variants of step 21 included), their kind, and
+      for every meaning the scholars who state it, with page, and a status: agreed by two independent scholars,
+      stated by one, disputed, or proposed. The meanings are worded here and cited, not copied, so the table can
+      be public.
+    - Sources in hand: Griffith 1911–12 (public domain), Rilly 2003, FHN III, Millet 2005, Rilly's 2016 overview.
+      Worth adding: FHN's index volume and volume II, and Rilly and de Voogt 2012.
+    - Done: every entry the map uses has a status; the map gives two figures, "translated by one lexicon" and
+      "agreed by two scholars"; the table is published under CC BY.
+    - Cost: 2 to 3 million subagent tokens.
+24. **F3. One harness: the test of a model on a language nobody reads.**
+    - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
+      judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in
+      pages, not in code: a bar set before the run, made-up words as the measure of chance, two blind judges,
+      decoys that neither echo the answer nor stand beside it. Nobody can run "the Meroitic test" on another
+      model.
+    - What: one package with the tasks (hidden meanings with names masked, hidden spellings, hidden loans,
+      restoration, the synthetic twin language), one protocol, one report, and the same run on two models or more.
+    - Done: one command produces the report from a clone for the tasks whose data is public, and skips the rest;
+      a table of models; a write-up fit for the Ancient Language Processing workshop (step 4).
+    - Cost: 1 to 2 million subagent tokens to build, and 3 to 5 million for each model's run.
+25. **F4. Whole texts, translated and scored.**
+    - Why: the map is word by word. "106 of 605 texts complete" is not one translated text, and a visitor of the
+      project sees none. The check gives the way to score a translation: against a printed rendering, word by
+      word, by judges who see both.
+    - What: for each inscription a line-by-line translation built from F2's table, with the status of every word
+      shown and the open words left open; scored against Millet's 20 renderings and Griffith's own translations
+      where they exist; a page per text for the 303 texts whose source is in the public domain.
+    - Done: the texts with a full rendering counted, their agreement with the printed renderings measured, and
+      the pages public.
+    - Cost: 2 to 4 million subagent tokens. Needs F1 and F2.
+
+The order: F1, then F2, then F3 and F4 side by side. Outside the four, the path through people stays open in
+section A: a specialist's reading of one page would be worth more than any of these runs.

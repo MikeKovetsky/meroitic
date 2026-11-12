@@ -86,6 +86,17 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    of 12 listed variants shown as if they were unknown, both checkers named the right entry for 6, and of 12
    shown with the right entry taken out, both accepted a look-alike for 1
    ([`data/discovery/variants.md`](data/discovery/variants.md)).
+10. **Two printed editions give the map's meaning for 70% of the words they translate, and for 85% outside two
+    words on which scholars differ.** The coverage map takes every meaning from one lexicon. For the 31
+    inscriptions that Millet's article on Gebel Adda (2005) or *Fontes Historiae Nubiorum* III (1998) also
+    print, independent judges compared our reading of each word with the edition's. Of the 537 words the map
+    counts as translated there, the edition gives a meaning to 397 and the map's meaning to 276 (69.5%). Most of
+    the gap is two words: `yetmde`, "nephew, niece" in the lexicon and "relative" in both editions, and `qo`,
+    "this one" against Millet's "the noble". Outside them it is 259 of 304 (85.2%). On a quarter of the words the
+    editions are silent. The check found a numeral typed as a letter in the older corpus and eleven names read
+    as words, and almost no meaning that the map lacks: of 167 meanings the editions give, the sure ones missing
+    from the map are titles left untranslated, proposals the lexicon already holds, and a handful of others
+    ([`data/discovery/experts.md`](data/discovery/experts.md)).
 
 ## The question
 
@@ -117,6 +128,7 @@ what can be rebuilt.
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
+| Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 49 and 12 entries on Meroitic texts with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/`, and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
 
 ## Methods
 
@@ -311,6 +323,22 @@ running words that would move, and leaves the map as it is. The lexicon, the glo
 local-only; the page, the brief, the list of every searched piece with its best match and the list of the
 confirmed pieces are public ([`data/discovery/variants.md`](data/discovery/variants.md)).
 
+### 17. The map against two printed editions (`src/experts/`)
+
+The coverage map has one source of meanings, so its figure was set beside two others: Millet's edition of the
+Gebel Adda inscriptions (2005) and the entries on Meroitic texts in *Fontes Historiae Nubiorum* III (1998). An
+entry is matched to a corpus text by the runs of five letters the two share, counted in both directions, and the
+pairs are then read side by side (31 texts). A pack gives a judge the edition's printed entry and, beside it, our
+words in order with our reading of each; the judge marks every word agree, partly, differ, new, silent or absent
+and notes the edition's meaning. One judge reads each of three packs and a second reads one of them again. A
+tenth of the readings with a meaning are swapped for another word's, unmarked, and left out of every figure: they
+measure how lenient a judge is. A second pass lists every meaning the editions give at all (two readers), looks
+each word up as the map does, and has two judges compare the meanings; there each judge sees decoys of its own
+in place of our reading, on different lines, drawn so that a decoy shares no content word with our reading or
+with the edition's meaning. The editions, the packs and the answers are local-only; the page, the figures and a
+list of the words with their verdicts, without readings, are public
+([`data/discovery/experts.md`](data/discovery/experts.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -323,6 +351,7 @@ python3 -I src/score.py --answers runs/answers
 python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
+python3 -I tests/test_experts.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -331,7 +360,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Six things need files that are kept locally (Data, above), so they don't run from a clone:
+Seven things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -342,13 +371,15 @@ Six things need files that are kept locally (Data, above), so they don't run fro
 - `python3 -I src/egyptian.py first` (and `build`, `vowels`) reads the two Egyptian word lists, Rilly's lexicon and the
   answer key drawn from it;
 - `python3 -I src/variants.py first` (and `build`, `sample`, `check`, `merge`) reads Rilly's lexicon, `corpus_v5`
-  and the coverage map's gloss file.
+  and the coverage map's gloss file;
+- `python3 -I src/experts/tally.py` (and the other scripts of `src/experts/`) reads the two editions' text layers,
+  the coverage map's gloss file, Rilly's lexicon and the judges' answers.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
-  the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`) and the search
-  for spellings of known words (`variants.py`).
+  the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`), the search
+  for spellings of known words (`variants.py`) and the check of the map against two printed editions (`experts/`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
   corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`), the word lists and Rilly's lexicon are local-only.
@@ -364,7 +395,8 @@ Six things need files that are kept locally (Data, above), so they don't run fro
 The code is under the MIT licence ([`LICENSE`](LICENSE)). The Griffith transcriptions, the answer keys, the runs and
 the write-ups are under CC BY 4.0 ([`LICENSE-DATA.md`](LICENSE-DATA.md)), which also lists the third-party material
 that keeps its own terms: the Wiktionary list and the list of Egyptian candidates (CC BY-SA 4.0), the readings
-quoted from *Fontes Historiae Nubiorum* and the glosses paraphrased from Rilly's lexicon.
+quoted from *Fontes Historiae Nubiorum*, the single words quoted from Millet 2005 and the glosses paraphrased
+from Rilly's lexicon.
 
 ## Limits
 

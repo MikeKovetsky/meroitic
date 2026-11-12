@@ -425,3 +425,40 @@ After "are you giving up?", four more lines of attack, then data.
    of generation; that `tḫ` is "receive" rather than "give"; that a suffix -(t)k marks nouns counted together.
 7. **Cost of the corrections:** no analysts; the review took 525,377 subagent tokens and 54 minutes, against
    about 0.5 million and one hour estimated.
+
+## Day five (2026-11-12): the map against two printed editions
+
+1. **Two sources fetched** and kept locally, both in copyright: Millet's "The Meroitic Inscriptions from Gebel
+   Adda" (JSSEA 32, 2005; 49 entries, 20 with a rendering into English) and *Fontes Historiae Nubiorum* III
+   (1998; twelve entries on Meroitic texts and 22 Demotic graffiti of the same people in translation). 31 of
+   their inscriptions are texts of our corpus, most of them under masked names.
+2. **The question:** the coverage map takes every meaning from Rilly's 2003 lexicon. How often do two other
+   scholars, reading the same inscriptions, give a word the same meaning?
+3. **The answer** ([`data/discovery/experts.md`](data/discovery/experts.md)): of the 537 words the map counts as
+   translated in those texts, the edition gives a meaning to 397 and the map's meaning to 276 (69.5%); the two
+   overlap in part for 62 and differ for 59. Names agree for 90.6%, words with a meaning for 65.6%, grammar words
+   for 37.8%. On 140 words (26.1%) the edition is silent or lacks the word.
+4. **Two words carry most of the gap:** `yetmde` (Rilly's "nephew, niece", both editions' "relative"; 54 places
+   judged "partly") and `qo` (Rilly's "this one", Millet's "the noble"; 22 places). Outside them the map agrees
+   on 259 of 304 words (85.2%). These are differences between scholars: both editions are older than or apart
+   from the lexicon, and the check cannot say who is right.
+5. **Errors of ours that it found:** in the epitaph of Makheye (REM 0544) the numeral 1 after each prince's name
+   is typed as the letter `l` in the older corpus, where the text stands eight times, and the map read it as a
+   word; eleven names or pieces of words were read as words; `mlo` is only "adjective" in the map where both
+   editions read "good". Where our copy has `mete l` or `mokelowi` after a masked name the editions have only a
+   name, which supports the first of the map's corrections.
+6. **Meanings the map lacks:** two readers listed 167 different meanings the editions give. For 64 the map has no
+   accepted meaning for the word (26 stated as sure, mostly titles left untranslated or proposals the lexicon
+   holds), and for 41 it translates the word otherwise by the judges' verdict (22 stated as sure): `yetmde`, `qo`,
+   `peseto` and `ant` again, `mete` ("child" in the map, "little" for Millet), `selele` ("cataract" for FHN after
+   Griffith, a place name in the lexicon), and proposals Millet marks as unsure (`dime` "day", `xlbi` "month").
+7. **How far to trust it:** the judges accepted 1 of the 22 first-run decoys the editions give a meaning for
+   (a near-synonym of our real reading) and none of the 30 of the second design. Two judges gave the same verdict
+   on 361 of 372 words; they are the same model, so that is stability, not proof. One judge read two thirds of
+   the words.
+8. **Three flaws of the method, found before or by the review and fixed:** decoys drawn by kind of word let
+   near-synonyms through; a decoy shown beside its real row can be told by the repeated word; and a draw and a
+   shuffle from one random seed put every decoy at the end of the table.
+9. **Cost:** nine agent runs and four rounds of a reviewer on the local scripts, about 1.02 million subagent
+   tokens and 35 minutes of running, against quotes of about 0.5 and 0.2 million for the two passes (up to 0.8
+   and 0.3).
