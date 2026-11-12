@@ -4,11 +4,12 @@ Built on 2026-11-12. This is piece F1 (step 22) of [`NEXT_STEPS.md`](../../NEXT_
 inscription, with real names and a source for every reading. Every number on this page is written by
 `src/v6/public.py` into the tables of section 4, and the text quotes them from there.
 
-**The result in three sentences.** The 899 texts of `corpus_v5` are 289 inscriptions; more than half of its
-words were copies of a reading with a name swapped. `corpus_v6` holds 548 inscriptions, each once, with real
-names, and 303 of the 563 inscriptions in the table have a reading under an open licence. Counted on it, the
-coverage map translates 60.0% of the words of the inscriptions that were already in the corpus (62.0% on
-`corpus_v5`), and 51.3% with the Newsletter's texts, which no analyst has read yet.
+**The result in three sentences.** The 899 texts of `corpus_v5` hold 289 inscriptions, and more than half of
+its words were copies of a reading with a name swapped; the rest are example phrases and word-list entries.
+`corpus_v6` holds 548 inscriptions, each once, with real names, and 303 of the 563 inscriptions in the table
+have a reading under an open licence. Counted on it, the coverage map translates 60.0% of the words of the
+inscriptions that were already in the corpus (62.0% on `corpus_v5`), and 51.3% with the inscriptions new to the
+corpus, 966 of whose words are spellings no analyst has seen.
 
 ## 1. What was wrong with `corpus_v5`
 
@@ -31,7 +32,8 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
 2. **Every reading held, in one list** (`src/v6/readings.py`): Griffith's printed texts and the checked Karanòg
    copies (public domain, the rows CC BY 4.0), the texts typed from the *Meroitic Newsletter*, the entries of
    Millet 2005 and of *Fontes Historiae Nubiorum* III (text layers, in copyright, used as witnesses and not as
-   typed readings), Otten's three narrative files and his source lines.
+   typed readings), Otten's three narrative files and his source lines. FHN no. 267 prints 15 texts under one
+   number; each is set beside the inscription of its REM number after the matching, and matched with nothing.
 3. **Numbers first.** Two readings that share a number of one numbering (REM, Millet's GA numbers, Griffith's)
    are one inscription. Two readings with two different numbers of one numbering are two inscriptions, however
    alike their letters: 13 pairs of rows of `corpus_v6` look alike in this way, among them a stela and an
@@ -48,14 +50,18 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
    with a name swapped.
 6. **One preferred reading** (`src/v6/build.py`), taken in this order from the typed readings that give the
    whole text (four fifths of the longest one's letters): Otten's narrative file, Otten's source line (Millet
-   1968), Griffith's print or the Karanòg copy, the Newsletter in print, the Newsletter's printout of 1971. This
-   keeps the reading that earlier results were counted on and repairs it; the open reading stands beside it in
-   the table (`open_text`) wherever there is one. Two typed readings of one inscription that share nothing are
-   two parts of it (two sides, two pieces) and are joined.
-   - **Numerals.** A lone `l` is read as a numeral where a later edition of the same inscription has a numeral
-     after the same word, and where the same list goes on. This sets 10 numerals in the epitaph of Makheye
-     (REM 0544), 4 from Newsletter 28 and 6 by analogy. An earlier edition does not overrule a later one:
-     Griffith's numeral 1 against Millet's `l` in REM 0101 is left as Millet has it.
+   1968), Griffith's print or the Karanòg copy, the Newsletter in print, the Newsletter's printout of 1971; then
+   the latest, then the longest. This keeps the reading that earlier results were counted on and repairs it; the
+   open reading stands beside it in the table (`open_text`) wherever there is one. A line that Otten's note marks
+   as the line above in Millet's analysis (segmented, `t` written `s` and `l`: one line, of REM 0101) is listed
+   but never preferred. Two typed readings of one inscription that share nothing are two parts of it (two
+   sides, two pieces) and are joined.
+   - **Numerals.** Otten's typing writes the numeral 1 as the letter `l`: Newsletter 28 shows it in the epitaph
+     of Makheye, and Millet's own translation of the long epitaph of MilletExamples.txt line 489 reads 1 where
+     the line has `l`. So a lone `l` is read as a numeral where another typed edition of the same inscription
+     has a numeral after the same letters, and none has the letter there, and where the same list goes on. This
+     sets 13 numerals: 10 in the epitaph of Makheye (REM 0544), 4 from Newsletter 28 and 6 by analogy, and 3 in
+     REM 0101 from Griffith's print. Where no other edition is held, as for line 489, the `l` stays as typed.
    - **Word division, one rule.** A word is what the edition prints between dividers or spaces. An editor's
      hyphens, which cut a word into morphemes, join. A lost sign stays a dot in the word it breaks, so that a
      broken word is one broken word and not two whole ones. The Karanòg rows keep the division of
@@ -74,16 +80,18 @@ and how many source lines fall in each band.
 2. **Bar A:** at least 90% of the known pairs come out sure or doubtful with the partner as the best match, and
    none has a sure match to another text. The known pairs are the 31 of the expert check, the three Karanòg
    texts that Newsletter 28 and FHN print, the Newsletter rows that an earlier test found in the corpus, and
-   the Newsletter's second editions: 53 in all.
+   the Newsletter's second editions: 54 in all.
 3. **Bar B:** the share of the 151 Karanòg texts, which are 151 different inscriptions, that have a sure match to
    another Karanòg number is reported.
 4. **Bar C (the readers):** each of two readers names the right text for at least 10 of 12 known lines and
    answers "none" for at least 10 of 12 lines whose text was taken out of the candidates.
 
-**Bar A was missed.** The partner is the best match for 44 of the 53 pairs (83.0%). In some of the nine the best
-match is another line of the same text, which Otten's files give more than once; the rest are fragments of a
-few words, which share too few runs to be matched by letters at all. Three pairs have a sure match to another
-text. So the rule alone does not find every pair, and this build does not rely on it alone: numbers decide
+**Bar A was missed.** The partner is the best match for 45 of the 54 pairs (83.3%). Of the nine misses, counted
+with the floor below: in 2 the best match is another line of the same text, which Otten's files give more than
+once; 5 are fragments that share fewer than six own runs with their partner, too few to be matched by letters at
+all; and in 2 a shorter text ranks first, because the rule ranks by the larger of the two shares and most of a
+short text can stand in a long one. Three pairs have a sure match to another text. So the rule alone does not
+find every pair, and this build does not rely on it alone: numbers decide
 wherever there are numbers; a sure match stands only when no second inscription shares half as many runs; the
 pairs read side by side for the expert check stand as read; and every other match that could make a line a
 reading, or leave a long line without a home, went to two readers.
@@ -123,14 +131,14 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 
 - Otten's padded file: 18,090 lines, 17,995 of them different. Equal to a line of his per-scholar files: 340. Such a line with one stretch swapped: 17,446. Near one, with a second small difference: 206. From no such line: 3 (the three narratives, which have files of their own).
 - Source lines in the per-scholar files: 1,159. The 659 texts of the older corpus come from 329 of them.
-- The most copied line: MilletExamples.txt line 433 (GA 28), 52 texts and 4,540 words of `corpus_v5`.
-- Readings held besides Otten's lines: 152 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files.
+- The most copied line: MilletExamples.txt line 433 (GA 28), 52 texts and 4,540 words of `corpus_v5`. The most copied inscription: GA 28, 86 texts and 6,284 words, from 2 source lines.
+- Readings held besides Otten's lines: 152 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files; and 15 texts that FHN III prints under one number (no. 267), each set beside the inscription of its REM number after the matching.
 - Source lines by what they are: 47 readings of an inscription, 906 example phrases, 195 word-list entries, 8 inscriptions not identified, 3 with a doubtful match that is not settled.
 - The example phrases: 311 are a part of one held text or stand whole in it, 166 stand whole in several, 34 have a doubtful match that was not read, 1 was taken by the readers for a text of one inscription and is set aside because the rule matches it surely with another, and 394 match nothing held.
 - Doubtful matches read by two readers: 17 lines. Both gave the same answer for 15 and differ on 2. Both named the same candidate for 14: 13 are used, 4 as the whole text and 9 as a part of it, and 1 is not, because both marked it as a guess. Both answered "none" for 1. Not settled: 3 lines, behind 3 texts and 28 words of `corpus_v5`.
 - The lines the readers settled, as they stand in the build: 3 are readings of an inscription, 9 are example phrases from one, 1 is set aside, and 1 matches nothing and is an inscription of its own.
-- A lone `l` read as a numeral: 10 (4 by a later edition, 6 by analogy), in 1 inscription(s): REM 0544.
-- Words marked as a personal name by Otten's own tags: 90.
+- A lone `l` read as a numeral: 13 (7 by another edition, 6 by analogy), in 2 inscription(s): REM 0101 (3), REM 0544 (10).
+- Words marked as a personal name by Otten's own tags: 87.
 - Inscriptions whose text is in two or more parts: 9.
 - Pairs of rows of `corpus_v6` that the rule takes for a sure match and that carry two different numbers of one numbering: 13 (in 20 rows). Pairs of rows numbered in two different ways (a REM number and a number of Griffith's, Millet's or the Newsletter's, or none) that the rule matches at all: 2, of them surely 0: Meroe 27 and Millet 1968 p. 238-240 (MilletExamples.txt line 286); Meroe 28 and Millet 1968 p. 238-240 (MilletExamples.txt line 286).
 
@@ -142,7 +150,7 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 | with a REM number | 441 | 78.3% |
 | with a typed reading (the rows of `corpus_v6`) | 548 | 97.3% |
 | with real names in the preferred reading | 548 | 97.3% |
-| with two readings or more | 70 | 12.4% |
+| with two readings or more, from two editions or more | 64 | 11.4% |
 | with a reading under an open licence | 303 | 53.8% |
 | with an open reading of the whole text | 274 | 48.7% |
 | whose preferred reading is the open one | 286 | 50.8% |
@@ -150,16 +158,18 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 | typed, without a legible word | 6 | 1.1% |
 | quoted by Millet 1968 and not identified | 8 | 1.4% |
 
+New to the corpus (rows of `corpus_v6` that no text of `corpus_v5` is a reading of): 209 from the Meroitic Newsletter, 50 from Griffith's printed type (rows that `corpus_v5` left out).
+
 ### What the texts of `corpus_v5` turned out to be
 
 | What | Texts | Words | Share of the words |
 |---|---|---|---|
 | A name-swapped copy of a reading | 207 | 11,967 | 54.5% |
 | A name-swapped copy of an example phrase | 123 | 1,599 | 7.3% |
-| A second reading of an inscription already counted | 4 | 144 | 0.7% |
+| A second reading of an inscription already counted | 4 | 181 | 0.8% |
 | An example phrase or a word-list entry | 273 | 1,616 | 7.4% |
 | Not settled by two readers | 3 | 28 | 0.1% |
-| Stands for its inscription | 289 | 6,623 | 30.1% |
+| Stands for its inscription | 289 | 6,586 | 30.0% |
 | All of `corpus_v5` | 899 | 21,977 | |
 
 ### The kinds of text
@@ -172,6 +182,8 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 | Document (ostracon, papyrus, wood, vessel) | 53 |
 | Graffito | 36 |
 | Oracular decree | 7 |
+
+Of the 112 of a kind not known, 72 are held only in the Newsletter's printout of 1971, which states no object for them.
 
 ### The preferred reading, by source
 
@@ -187,12 +199,20 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 
 | | As the bar was written | With the floor of six shared runs |
 |---|---|---|
-| Known pairs | 53 | 53 |
-| The partner is the best match, sure or doubtful | 44 (83.0%) | 44 (83.0%) |
-| of them sure | 29 | 31 |
+| Known pairs | 54 | 54 |
+| The partner is the best match, sure or doubtful | 45 (83.3%) | 45 (83.3%) |
+| of them sure | 30 | 32 |
 | of them doubtful | 15 | 13 |
-| Counting another line of the same text as right | 45 (84.9%) | 46 (86.8%) |
+| Counting another line of the same text as right | 46 (85.2%) | 47 (87.0%) |
 | Pairs with a sure match to another text | 3 | 3 |
+| Missed | 9 | 9 |
+| of them: another line of the same text ranks first | 1 | 2 |
+| of them: fewer than six own runs shared | 2 | 5 |
+| of them: a shorter text ranks first | 6 | 2 |
+| of them: another text ranks first | 0 | 0 |
+| of them: no match | 0 | 0 |
+
+The known pairs: 31 read side by side for the expert check, 6 of the Karanòg texts that Newsletter 28 and FHN print, 7 Newsletter rows that an earlier test found in the corpus, 10 second editions in the Newsletter.
 
 Bar B: 4 of the 151 Karanòg texts have a sure match to another Karanòg number (2.6%).
 
@@ -210,50 +230,54 @@ Bar B: 4 of the 151 Karanòg texts have a sure match to another Karanòg number 
 |---|---|---|---|---|
 | `corpus_v5`, every text (the old figure) | 899 | 21,977 | 13,618 | 62.0% |
 | `corpus_v5`, near-copies counted once (the old figure) | 608 | 8,786 | 5,413 | 61.6% |
-| `corpus_v6`, the inscriptions that were in `corpus_v5` | 289 | 6,573 | 3,942 | 60.0% |
+| `corpus_v6`, the inscriptions that were in `corpus_v5` | 289 | 6,586 | 3,950 | 60.0% |
 | `corpus_v6`, the inscriptions new to the corpus | 259 | 3,704 | 1,330 | 35.9% |
-| `corpus_v6`, all | 548 | 10,277 | 5,272 | 51.3% |
+| `corpus_v6`, all | 548 | 10,290 | 5,280 | 51.3% |
 
 | Level | `corpus_v5` | `corpus_v6`, were in `corpus_v5` | `corpus_v6`, new | `corpus_v6`, all |
 |---|---|---|---|---|
-| meaning | 6,981 | 2,228 | 707 | 2,935 |
-| grammar | 1,956 | 421 | 254 | 675 |
-| name | 4,418 | 1,210 | 216 | 1,426 |
-| number | 263 | 83 | 153 | 236 |
-| hypothesis | 3,512 | 937 | 340 | 1,277 |
-| kind | 2,073 | 436 | 142 | 578 |
-| unknown | 2,512 | 885 | 1,050 | 1,935 |
-| lost | 262 | 373 | 842 | 1,215 |
+| meaning | 6,981 | 2,225 | 707 | 2,932 |
+| grammar | 1,956 | 428 | 254 | 682 |
+| name | 4,418 | 1,211 | 216 | 1,427 |
+| number | 263 | 86 | 153 | 239 |
+| hypothesis | 3,512 | 943 | 340 | 1,283 |
+| kind | 2,073 | 438 | 142 | 580 |
+| unknown | 2,512 | 881 | 1,050 | 1,931 |
+| lost | 262 | 374 | 842 | 1,216 |
 
-Texts with a legible word: 507 of 538 in `corpus_v6` (605 of 608 in `corpus_v5`, near-copies once); every legible word translated in 42 (106); one piece missing in 92 (122). Words whose spelling no analyst has seen: 1,026 in 925 spellings. Words that are a name by the source's own tag: 90.
+Near-copies counted once in both: texts with a legible word, 507 of 538 in `corpus_v6` (605 of 608 in `corpus_v5`); every legible word translated in 42 (106); one piece missing in 92 (122). Words whose spelling no analyst has seen: 1,013 in 912 spellings, 966 of them in the inscriptions new to the corpus and 47 in the others. Words that are a name by the source's own tag: 87. Words written apart that the map joins by its own rule: 108.
 
 ### The check against the two editions, counted again
 
 | | On `corpus_v5` | On the words that still stand in `corpus_v6` |
 |---|---|---|
-| Judged rows | 1,115 | 1,004 |
-| Words the map counts as translated | 537 | 489 |
-| of them given a meaning by the edition | 397 | 373 |
-| of them with the map's meaning | 276 (69.5%) | 267 (71.6%) |
+| Judged rows | 1,115 | 1,005 |
+| Words the map counts as translated | 537 | 490 |
+| of them given a meaning by the edition | 397 | 374 |
+| of them with the map's meaning | 276 (69.5%) | 267 (71.4%) |
 
-Not carried over: 111 of the 1,115 judged rows (95 because the word is spelled or divided otherwise in the preferred reading; 16 because the map's level is name).
+Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of a longer word in the preferred reading; 25 because the word is spelled otherwise in the preferred reading; 15 because the map's level is name).
 
 <!-- end of the tables -->
 
 ## 5. What the recount shows
 
 1. **More than half of the words of `corpus_v5` were copies.** The words of the texts that stand for an
-   inscription are 30.1% of its 21,977 words. One Gebel Adda text, GA 28, stood 52 times.
+   inscription are 30.0% of its 21,977 words. One Gebel Adda text, GA 28, stood 86 times, with 6,284 words,
+   from 2 of Millet's lines.
 2. **The coverage map loses two points on the same inscriptions, and this is the honest figure.** On the 289
    inscriptions that were in `corpus_v5` it translates 60.0% of the words, against 62.0% on `corpus_v5` and
    61.6% with near-copies counted once. Masked names counted as translated in every copy; a broken word now
    counts as one lost word where its pieces were read as words; and the rest of a swapped name is gone.
-3. **The inscriptions new to the corpus are at 35.9%,** because no analyst has read their words: 1,026 words in
-   925 spellings have only the lookup. This is what the build left undone on purpose, not a finding about the
-   texts.
-4. **The check against the two editions holds:** on the 1,004 judged rows that still stand in `corpus_v6`, the
-   editions give the map's meaning for 71.6% of the words they translate (69.5% on `corpus_v5`). 111 judged
-   rows are not carried over, most of them pieces of broken words and rests of swapped names.
+3. **The inscriptions new to the corpus are at 35.9%:** 842 of their 3,704 words are lost, and 966 are spellings
+   that no analyst has seen and that have only the lookup (47 more such words are in the other inscriptions,
+   1,013 in 912 spellings in all). Reading those spellings is what the build left undone on purpose; the lost
+   words are the state of the texts. The new inscriptions are 209 of the Newsletter's texts and 50 of
+   Griffith's rows that `corpus_v5` left out.
+4. **The check against the two editions holds:** on the 1,005 judged rows that still stand in `corpus_v6`, the
+   editions give the map's meaning for 71.4% of the words they translate (69.5% on `corpus_v5`). 110 judged
+   rows are not carried over: 70 are a part of a longer word in the preferred reading (written apart in
+   `corpus_v5`), 25 are spelled otherwise there, and 15 are now names.
 
 ## 6. What `corpus_v6` is not
 
@@ -261,9 +285,9 @@ Not carried over: 111 of the 1,115 judged rows (95 because the word is spelled o
 - The Newsletter's texts and Otten's lines are in copyright or without a licence, so `data/corpus_v6.jsonl` is
   local. The public table (`data/inscriptions.jsonl`) gives every inscription with its numbers, site, kind and
   readings, and the text only of the open readings.
-- The 34 texts of Millet 2005 and the 11 of FHN III are text layers, not typed readings: they confirm matches
-  and are never the preferred reading. Nine Gebel Adda inscriptions are held in no other way and are in the
-  table without a row in the corpus.
+- The 34 texts of Millet 2005, the 11 of FHN III and the 15 of FHN no. 267 are text layers, not typed
+  readings: they confirm matches or stand beside them, and are never the preferred reading. Nine Gebel Adda
+  inscriptions are held in no other way and are in the table without a row in the corpus.
 
 ## 7. What is left open
 
@@ -278,13 +302,14 @@ Not carried over: 111 of the 1,115 judged rows (95 because the word is spelled o
    source is not held (394 of the 906 match nothing held), its words are in no row. They stay in the local list
    of source lines, with Millet's translations where Otten typed them.
 4. **Word division is one rule, not one practice.** Millet's spaces inside a group of words are partly line ends
-   of the stone; the Newsletter sets some texts out by sense units. The coverage map joins 106 words written
+   of the stone; the Newsletter sets some texts out by sense units. The coverage map joins 108 words written
    apart by its own rule; the corpus does not.
-5. **The kind of text is not known for 112 inscriptions,** most of them from the 1971 printout, which gives only
-   REM numbers. The reader quoted for this did not run.
-6. **Names are marked only where Otten's files tag them:** 90 words. The names of the Karanòg rows are known to
-   the coverage map from Griffith's tables, as before; the Newsletter's texts and Griffith's other volumes have
-   no list of names.
+5. **The kind of text is not known for 112 inscriptions,** 72 of them held only in the 1971 printout, which
+   states no object for them. The reader quoted for this did not run.
+6. **Names are marked only where Otten's files tag them:** 87 words. A name is matched letter for letter, a
+   lost sign included, so a spelling that Otten typed otherwise in another line is not marked. The names of the
+   Karanòg rows are known to the coverage map from Griffith's tables, as before; the Newsletter's texts and
+   Griffith's other volumes have no list of names.
 7. **Site and kind are taken from the first source that states them;** two sources that differ (Newsletter 28
    and FHN on REM 0544) are both in the readings of the row.
 8. **One thing the readers showed about Otten's files:** a line can hold two quotations. The build checks this

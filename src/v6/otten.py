@@ -32,6 +32,9 @@ WORKS = {"MilletExamples.txt": "Millet 1968, Meroitic Nubia (thesis), as typed b
          "Kalabsha_Millet.txt": "Millet 1968, Meroitic Nubia (thesis), as typed by Otten",
          "RillyExamples.txt": "Rilly 2007, as typed by Otten",
          "LobbanVocabList.txt": "Lobban's word list, as typed by Otten"}
+AUTHOR = {"MilletExamples.txt": "Millet 1968", "Kalabsha_Millet.txt": "Millet 1968", "RillyExamples.txt": "Rilly 2007",
+          "LobbanVocabList.txt": "Lobban"}
+ANALYSIS = "same as line above"   # Otten's note over a line that gives the line above segmented (MilletExamples 979)
 NARRATIVES = C.NARRATIVES                      # {corpus id: file}: the three royal texts, each a file of its own
 SWAP = 25          # a swapped name is at most this many letters (the longest of Otten's is 18)
 SHARED = 3         # a raw line derives from a source line by a swap when they share this many letters around it
@@ -45,13 +48,15 @@ def key(s):
 
 
 def source_lines(folder=DATA, files=FILES):
-    """[{key, file, line, page, section, mero, translation, tag}] of the per-scholar files: every line that is not
-    a comment, with the page note ("# pg. 114") and the section heading that stand above it."""
+    """[{key, file, line, page, section, mero, translation, tag, note}] of the per-scholar files: every line that
+    is not a comment, with the page note ("# pg. 114") and the section heading that stand above it, and the
+    comment on the line just above it, if any (note: "same as line above, but with segmentation ...")."""
     out = []
     for fn in files:
-        page = section = ""
+        page = section = note = ""
         for n, line in enumerate((folder / fn).read_text(errors="replace").split("\n"), 1):
             if not line.strip():
+                note = ""
                 continue
             if line.startswith("#"):
                 m = re.match(r"#\s*pg\.?\s*([\d/\-, ]*\d)", line)
@@ -61,14 +66,28 @@ def source_lines(folder=DATA, files=FILES):
                     section = "untranslated"
                 elif "TRANSLATED" in line:
                     section = "translated"
+                note = "" if m else line.lstrip("#").strip()
                 continue
             cells = [c.strip() for c in line.split("\t")]
+            above, note = note, ""
             if not key(cells[0]):
                 continue
             out.append({"key": f"{fn}:{n}", "file": fn, "line": n, "page": page, "section": section,
                         "mero": cells[0], "translation": cells[1] if len(cells) > 1 else "",
-                        "tag": cells[2] if len(cells) > 2 else ""})
+                        "tag": cells[2] if len(cells) > 2 else "", "note": above})
     return out
+
+
+def is_analysis(line):
+    """A line that Otten's note marks as the line above in an analysis (segmented, t written s and l): not a
+    reading of the stone."""
+    return (line.get("note") or "").lower().startswith(ANALYSIS)
+
+
+def label(line):
+    """The name of a text known only from a source line: its author and the page or line ("Millet 1968 p. 362-364
+    (MilletExamples.txt line 489)")."""
+    return f"{AUTHOR[line['file']]} p. {line['page'] or '?'} ({line['file']} line {line['line']})"
 
 
 def spellings(line):
@@ -219,19 +238,22 @@ def to_corpus(mero, rilly=False):
     return " ".join(out)
 
 
+def spelled(s):
+    """The letters of a name or of a stretch of words, compared without spaces, hyphens and brackets; a lost sign
+    inside stays one dot, so that a broken name ("li...ye") is not the two words "li ye"."""
+    return re.sub(r"\.+", ".", re.sub(r"[^A-Za-z0-9.]", "", s)).strip(".")
+
+
 def name_words(text, names):
     """The places of the words of a text (in the corpus_v6 spelling) that spell one of the names: [word index].
-    names are letters as key() gives them for the source file; a name of several words marks each of them."""
+    names are spellings of the source file; a name of several words marks each of them."""
     words = text.split()
-    plain = [re.sub(r"[^A-Za-z0-9]", "", w) for w in words]
-    want = {re.sub(r"[^A-Za-z0-9]", "", to_corpus(n)) for n in names}
+    want = {spelled(to_corpus(n)) for n in names}
     want.discard("")
     out = set()
     for i in range(len(words)):
-        acc = ""
         for j in range(i, min(i + 4, len(words))):
-            acc += plain[j]
-            if acc in want:
+            if spelled("".join(words[i:j + 1])) in want:
                 out.update(range(i, j + 1))
     return sorted(out)
 

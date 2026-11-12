@@ -98,18 +98,18 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     the sure ones on words without an accepted meaning in the map are mostly titles left untranslated, phrases
     whose words the map reads the same way, and proposals the lexicon already holds
     ([`data/discovery/experts.md`](data/discovery/experts.md)).
-11. **The corpus keyed by inscription: 899 texts were 289 inscriptions.** Otten's padded file can be undone
+11. **The corpus keyed by inscription: 899 texts held 289 inscriptions.** Otten's padded file can be undone
     exactly from his own per-scholar files: of its 17,995 different lines, 340 are a line of those files and
     17,446 are such a line with one name swapped. Traced that way, 54.5% of the words of `corpus_v5` are copies of
-    a reading with a name swapped, and the texts that stand for an inscription hold 30.1% of them. `corpus_v6`
-    has one row per inscription, with the real names: 548 inscriptions, 259 of them new to the corpus (the
-    Newsletter's texts, kept locally). The table of all 563 inscriptions is public, with every reading's source
-    and licence and the text of the open ones: 441 have a REM number, 70 two readings or more, 303 a reading
-    under an open licence. Counted again on the inscriptions that were already in the corpus, the coverage map
-    translates 60.0% of the words (62.0% before), and the two editions give its meaning for 71.6% of the words
-    they translate (69.5% before). The matching rule missed the bar set for it (the right partner for 44 of 53
-    known pairs, where 90% was asked), so numbers decide before letters, and the 17 doubtful matches went to two
-    readers. Both passed their own test (12 of 12 known lines, 12 of 12 decoys); 13 of their matches are taken,
+    a reading with a name swapped, and the texts that stand for an inscription hold 30.0% of them. `corpus_v6`
+    has one row per inscription, with the real names: 548 inscriptions, 259 of them new to the corpus (209 of the
+    Newsletter's texts, kept locally, and 50 of Griffith's rows that `corpus_v5` left out). The table of all 563
+    inscriptions is public, with every reading's source and licence and the text of the open ones: 441 have a REM
+    number, 64 readings from two editions or more, 303 a reading under an open licence. Counted again on the
+    inscriptions that were already in the corpus, the coverage map translates 60.0% of the words (62.0% before),
+    and the two editions give its meaning for 71.4% of the words they translate (69.5% before). The matching rule
+    missed the bar set for it (the right partner for 45 of 54 known pairs, where 90% was asked), so numbers
+    decide before letters, and the 17 doubtful matches went to two readers. Both passed their own test (12 of 12 known lines, 12 of 12 decoys); 13 of their matches are taken,
     one line matches nothing and 3 are not settled ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
 
 ## The question
@@ -368,9 +368,9 @@ copies, the Newsletter, Millet 2005, FHN III, Otten's narratives and source line
 gives, and compares texts by their runs of five letters, the formulae left out. `src/v6/build.py` makes the
 inscriptions: readings that share a number are one, two different numbers of one numbering are two, and a text
 without a number goes by letters, where a sure match to one inscription stands and a doubtful one goes to two
-readers who see both texts, with known lines and decoys mixed in (`src/v6/packs.py`). A source line is a reading of an inscription, an example phrase from a grammar, or
-an inscription not identified; one reading per inscription is preferred by a fixed order, with a later edition's
-numerals and Otten's name tags. The bar for the rule was written before it was scored, and missed.
+readers who see both texts, with known lines and decoys mixed in (`src/v6/packs.py`). A source line is a
+reading of an inscription, an example phrase from a grammar, or an inscription not identified; one reading per
+inscription is preferred by a fixed order, with the numerals another edition shows and Otten's name tags. The bar for the rule was written before it was scored, and missed.
 `src/v6/recount.py` runs the coverage map and the check against the two editions on the new rows, without a new
 analyst or judge, and `src/v6/public.py` writes the public table, the map of the old ids and the tables of the
 page ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).

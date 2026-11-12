@@ -66,8 +66,9 @@ def coverage(corpus, old_forms, packs=PACKS):
     ranked, texts_by = C.ranking(glossed, heads)
     was = [(r, gs) for r, gs in glossed if r["v5"]]
     new = [(r, gs) for r, gs in glossed if not r["v5"]]
-    nobody = [(g["form"]) for _, gs in glossed for g in gs if g["by"] == "nobody"]
-    unseen = [f for f in nobody if f not in old_forms]
+    nobody = [(g["form"], bool(r["v5"])) for r, gs in glossed for g in gs if g["by"] == "nobody"]
+    unseen = [f for f, _ in nobody if f not in old_forms]
+    unseen_old = sum(in_v5 for f, in_v5 in nobody if f not in old_forms)
     out = {"all": part(figs), "by_part": {k: {"texts": v["texts"], "words": v["words"], "translated": v["translated"],
                                                "share": round(v["translated"] / v["words"], 4)}
                                           for k, v in figs.items() if k in GROUPS.values()},
@@ -79,6 +80,8 @@ def coverage(corpus, old_forms, packs=PACKS):
            "texts": texts_by, "pieces_without_an_accepted_meaning": len(ranked),
            "names_by_the_source": sum(g["source"].startswith("a name, as the source") for _, gs in glossed for g in gs),
            "not_analysed": {"words": len(unseen), "spellings": len(set(unseen)),
+                            "in_new_inscriptions": len(unseen) - unseen_old,
+                            "in_inscriptions_that_were_in_corpus_v5": unseen_old,
                             "unknown_words_seen_before": len(nobody) - len(unseen)},
            "corrections": {k: v for k, v in report["corrections"].items() if k != "joins"}}
     return glossed, ranked, texts_by, figs, report, out
@@ -88,6 +91,18 @@ def align(old, new):
     """{place in old: place in new} for the words that stand in both, in order (the longest matching blocks)."""
     sm = difflib.SequenceMatcher(None, old, new, autojunk=False)
     return {i + k: j + k for i, j, n in sm.get_matching_blocks() for k in range(n)}
+
+
+def unmatched(form, place, places, new):
+    """Why a word of the old text has no place in the new one: the words of the new text between the nearest
+    aligned words around it hold it inside a longer word (written apart in corpus_v5, as one in the preferred
+    reading), or hold other words (spelled otherwise), or none (not in the preferred reading)."""
+    before = max((i for i in places if i < place), default=None)
+    after = min((i for i in places if i > place), default=None)
+    there = new[places[before] + 1 if before is not None else 0:places[after] if after is not None else len(new)]
+    if any(form in w and form != w for w in there):
+        return "the word is a part of a longer word in the preferred reading"
+    return "the word is spelled otherwise in the preferred reading" if there else "the word is not in the preferred reading"
 
 
 def experts(glossed, mapped, v5_text, folder=EXPERT):
@@ -113,7 +128,7 @@ def experts(glossed, mapped, v5_text, folder=EXPERT):
         j = places[tid].get(r["place"])
         if j is None:
             changed.append({"row": r["row"], "text": tid, "form": r["form"],
-                            "why": "the word is spelled or divided otherwise in the preferred reading"})
+                            "why": unmatched(r["form"], r["place"], places[tid], [g["form"] for g in gs])})
         elif gs[j]["level"] != r["level"]:
             changed.append({"row": r["row"], "text": tid, "form": r["form"],
                             "why": f"the map's level is {gs[j]['level']}, it was {r['level']}"})

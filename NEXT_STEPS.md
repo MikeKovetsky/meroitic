@@ -64,9 +64,9 @@ Done since this plan was written:
     read as words, and almost no meaning the map lacks. Both editions are kept locally. Section F draws the
     consequence.
 12. **The corpus keyed by inscription** (2026-11-12, [`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)),
-    piece F1 of section F: built without an agent, then read by two readers. The 899 texts of `corpus_v5` are
+    piece F1 of section F: built without an agent, then read by two readers. The 899 texts of `corpus_v5` hold
     289 inscriptions; `corpus_v6` holds 548 with real names, and the public table 563 with every reading's
-    source and licence. The matching rule missed its bar (44 of 53 known pairs), so numbers decide before
+    source and licence. The matching rule missed its bar (45 of 54 known pairs), so numbers decide before
     letters; of the 17 doubtful matches the readers settled all but 3.
 
 Next, in this order (the small steps; the four big pieces are in section F):
@@ -321,10 +321,10 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - **Status, 2026-11-12: built** ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
       Otten's file is undone from his own per-scholar files, so every older text has a source line with real
       names. Done: the table of 563 inscriptions, the map of all 899 old ids, `corpus_v6` with 548 inscriptions,
-      the coverage map and the expert check counted again (60.0% and 71.6% on the inscriptions that were in the
+      the coverage map and the expert check counted again (60.0% and 71.4% on the inscriptions that were in the
       corpus, against 62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens.
-    - **What it leaves for later:** 1,026 words of the new inscriptions have no analyst (a run like the coverage
-      map's first, to be quoted); nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and
+    - **What it leaves for later:** 966 words of the new inscriptions (and 47 of the others) have no analyst (a
+      run like the coverage map's first, to be quoted); nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and
       could be typed; 8 texts quoted by Millet 1968 are not identified, one of which may be Griffith's Meroë 27
       or 28; 3 doubtful matches are not settled; the kind of text is not known for 112 inscriptions; and word
       division still follows each edition.

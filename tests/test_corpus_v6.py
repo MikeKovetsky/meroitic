@@ -92,6 +92,28 @@ def test_name_words():
     assert O.name_words(text, ["pte.Eye", "tNlxe arEr", "aplXye", "zzz"]) == [3, 5, 6, 8]
     assert O.name_words(text, []) == []
     assert O.name_words("a b", ["a-b"]) == [0, 1]                           # a name written apart in the text
+    # a lost sign inside a name is a sign: "li...ye" is not the two words "li ye", nor "are.ke" the name "areke"
+    assert O.name_words("mrebqo Slotey li ye tmdelowi", ["li...ye (?)"]) == []
+    assert O.name_words("ati.ye tewisti are.ke Xdil", ["areke", "Xdil"]) == [3]
+    assert O.name_words("ames 1 a..kye qoleb", ["a ... kye"]) == [2]        # the same broken name
+    assert O.name_words("...........amSxiye wi", ["amSxiye"]) == [0]       # lost signs before it: the name
+    assert O.spelled("li ... ye") == "li.ye" and O.spelled("..tni...") == "tni"
+
+
+def test_source_lines_and_their_notes():
+    import tempfile
+    with tempfile.TemporaryDirectory() as d:
+        (pathlib.Path(d) / "MilletExamples.txt").write_text(
+            "# pg. 254/255\ntdxe : qE ret l\tthe gloss\n# same as line above, but with segmentation\n"
+            "t-dxe qEre-s-l l\n\n# pg. 256\nwES\n")
+        lines = O.source_lines(pathlib.Path(d), ("MilletExamples.txt",))
+    assert [(l["line"], l["page"], l["note"]) for l in lines] == [
+        (2, "254/255", ""), (4, "254/255", "same as line above, but with segmentation"), (7, "256", "")]
+    assert [O.is_analysis(l) for l in lines] == [False, True, False] and lines[0]["translation"] == "the gloss"
+    rows = R.otten_rows(lines)
+    assert [r["analysis"] for r in rows] == [False, True, False] and "not a reading of the stone" in rows[1]["ref"]
+    assert O.label(lines[2]) == "Millet 1968 p. 256 (MilletExamples.txt line 7)"
+    assert O.label(dict(lines[2], file="RillyExamples.txt", page="")) == "Rilly 2007 p. ? (RillyExamples.txt line 7)"
 
 
 # --- src/v6/readings.py ---
@@ -136,6 +158,65 @@ def test_matches_and_stands_in():
 def test_formulae():
     eds = [reading(f"e{i}", "woSi Soreyi " + w, "griffith") for i, w in enumerate("abcdefgh")]
     assert R.runs("wosis") <= R.formulae(eds, common=8) and not R.formulae(eds, common=9)
+
+
+def test_newsletter_rows_keep_two_printings_apart():
+    import tempfile
+    row = lambda page, same="": {"id": "REM 1154", "rem": "1154", "source": "Meroitic Newsletter 21 (1980)",
+                                 "file": "MeroNews21", "pdf_page": int(page) - 1, "printed_page": page, "site": "Kerma",
+                                 "object": "offering table", "text_corpus": "woSi Soreyi tbteli", "complete": "whole",
+                                 "kind": "print", "same_as": same, "in_corpus": ""}
+    printout = dict(row("5"), id="REM 1001", rem="1001", file="MeroNews6", printed_page="", kind="printout",
+                    in_corpus="Millet's examples, line 629")
+    with tempfile.TemporaryDirectory() as d:
+        p = pathlib.Path(d) / "mnl.jsonl"
+        p.write_text("".join(json.dumps(r) + "\n" for r in
+                             (row("7"), row("17", "REM 1154 (Meroitic Newsletter 21 (1980))"), printout)))
+        rs = R.mnl_rows(p)
+    assert [r["key"] for r in rs] == ["mnl:REM 1154|MeroNews21|p. 7", "mnl:REM 1154|MeroNews21|p. 17", "mnl:REM 1001|MeroNews6"]
+    assert [r["ref"] for r in rs] == ["p. 7", "p. 17", "PDF p. 4"]          # the printout has no printed page
+    assert R.unique(rs) == rs
+    try:
+        R.unique(rs + rs[:1])
+        raise AssertionError("a key that stands twice must stop the build")
+    except SystemExit as e:
+        assert "REM 1154" in str(e)
+    eds = [R.finish(r) for r in rs]
+    g, why = B.by_number(eds)                                                  # the second printing: one inscription
+    assert g.find(rs[0]["key"]) == g.find(rs[1]["key"]) != g.find(rs[2]["key"])
+    pairs = R.known_pairs(eds, [], [], {})
+    assert ("Newsletter second edition", rs[1]["key"], rs[0]["key"]) in pairs
+    assert ("Newsletter row in the corpus", rs[2]["key"], "otten:MilletExamples.txt:629") in pairs
+
+
+FHN_267 = """267 Philae, Meroitic Chamber. The inscriptions of a Meroitic embassy.
+Griffith 1912, 34 ff. REM 0097-0111.
+Introduction to source
+Some words.
+Texts
+PROCESSION I
+REM 0097 (a)
+(1)qo pelmos (2)atolise
+REM0104 (g)
+(1)qo Apmlo qo
+1025
+Fontes Historiae Nubiorum III
+REM 0109(1)
+(1)qo Ms(2)trqoye 10
+Comtnents
+The rooms behind the colonnade.
+"""
+
+
+def test_an_entry_on_several_inscriptions_gives_a_witness_for_each():
+    parts = R.fhn_parts([("267", FHN_267), ("246", "246 Meroe. Text\nText\n(1)abc\nComments\n")])
+    assert [(r["key"], r["ref"], r["numbers"]) for r in parts] == [
+        ("fhn:267:0097", "no. 267 (a)", {"fhn": ["267"], "rem": ["0097"]}),
+        ("fhn:267:0104", "no. 267 (g)", {"fhn": ["267"], "rem": ["0104"]}),
+        ("fhn:267:0109", "no. 267 (1)", {"fhn": ["267"], "rem": ["0109"]})]
+    assert [r["letters"] for r in parts] == ["qopelmosatolise", "qoapmloqo", "qomstrqoye"]   # page lines left out
+    assert all(r["witness"] and r["text"] is None and r["site"] == "Philae, Meroitic Chamber" for r in parts)
+    assert R.fhn_parts([("246", "246 Meroe.\nText\n(1)abc\nComments\n")]) == []      # one text: fhn_rows reads it
 
 
 # --- src/v6/build.py ---
@@ -202,6 +283,8 @@ def test_prefer():
     assert B.prefer([recon, mnl])[0] is mnl
     old = reading("mnl:4", A + " " + B_, "mnl", superseded=True)
     assert B.prefer([old, mnl])[0] is mnl and B.prefer([old])[0] is old
+    analysed = reading("otten:9", A + " " + B_, analysis=True)              # longer, but Millet's analysis of a line
+    assert B.prefer([analysed, otten, griffith])[0] is otten and B.prefer([analysed]) == (None, [], None)
     front, back = reading("mnl:front", "abrtoye kelw amnitore", "mnl"), reading("mnl:back", "qorpiX mdewi yotoli", "mnl")
     best, parts, _ = B.prefer([back, front])                                 # two sides that share nothing: two parts
     assert {best["key"]} | {p["key"] for p in parts} == {"mnl:front", "mnl:back"} and len(parts) == 1
@@ -217,7 +300,15 @@ def test_numerals():
     fixed, what = B.numerals(text, [later])
     # the list goes on: an l before "pesto" follows the confirmed ones; an l before another word is left
     assert fixed == "pesto krinkror 1 pesto Ntewitror 1 pesto mlotoN ye 1 pesto brtoye l qore s l"
-    assert [w[3] for w in what] == ["a later edition", "a later edition", "by analogy"]
+    assert [w[3] for w in what] == [B.ANOTHER, B.ANOTHER, "by analogy"]
+    # REM 0101: the letters before the l are read across a short word ("tebwetel xe l"), and any other edition
+    # may show the numeral, an older one too (Otten typed the numeral 1 as l)
+    rem101 = "aritewil l woS pil qetelxe l woS tebwetel xe l tdbto"
+    griffith = "arite wil 1 woS pilqetel xe 1 woS tebwetel xe 1 tdbto 2"
+    assert B.numerals(rem101, [griffith])[0] == "aritewil 1 woS pil qetelxe 1 woS tebwetel xe 1 tdbto"
+    # two other editions that disagree: one with the letter l keeps it, two numerals that differ settle nothing
+    assert B.numerals(rem101, [griffith, "aritewil l woS 2"])[0].startswith("aritewil l woS")
+    assert B.numerals("ab aritewil l", ["aritewil 1 x", "aritewil 2 y"]) == ("ab aritewil l", [])
     one, what = B.numerals("pesto krinkror l pesto mlotoN ye l pesto", [later])    # one confirmed: no analogy
     assert one == "pesto krinkror 1 pesto mlotoN ye l pesto" and len(what) == 1
     kept, what = B.numerals(text, [later + " pestobrtoyel"])                 # the later edition keeps a letter l
@@ -326,7 +417,13 @@ def test_readers():
 def test_align_and_rows():
     old = "woSi Soreyi qo NAME qowi mokelowi pesto l".split()
     new = "woSi Soreyi qo tmeye qowi pesto 1".split()
-    assert N.align(old, new) == {0: 0, 1: 1, 2: 2, 4: 4, 6: 5}
+    places = N.align(old, new)
+    assert places == {0: 0, 1: 1, 2: 2, 4: 4, 6: 5}
+    assert N.unmatched("NAME", 3, places, new).endswith("spelled otherwise in the preferred reading")
+    assert N.unmatched("mokelowi", 5, places, new).endswith("not in the preferred reading")
+    split = "So ri qetrri qo".split()
+    joined = "Soriqetrri qo".split()
+    assert N.unmatched("ri", 1, N.align(split, joined), joined).endswith("a part of a longer word in the preferred reading")
     rows = N.rows_for_map([{"id": "REM 0247", "reading": "karanog:G-karanog-47", "text": "a b", "names": [1], "v5": ["G-karanog-47"]},
                            {"id": "GA 28", "reading": "otten:MilletExamples.txt:433", "text": "c", "names": [], "v5": []}])
     assert rows[0]["karanog"] == "G-karanog-47" and rows[0]["group"] == N.GROUPS["karanog"] and "karanog" not in rows[1]
@@ -368,10 +465,45 @@ def test_public_row_holds_no_closed_text():
 
 def test_map_table():
     t = U.map_table([{"id": "T0001", "words": 3, "what": "x", "copy": "", "inscription": None, "reading": "otten:1",
-                      "share_of_text": 0.5}])
+                      "share_of_text": 0.5, "share_of_text_all": 0.75, "against": "ed:1"}])
     head, row = t.splitlines()
     assert head.split("\t") == list(U.MAP_COLUMNS) and row.split("\t")[:6] == ["T0001", "3", "x", "", "", "otten:1"]
     assert len(row.split("\t")) == len(U.MAP_COLUMNS)
+    cells = dict(zip(U.MAP_COLUMNS, row.split("\t")))
+    assert cells["share of the text's own runs in the other"] == "0.5" and cells["compared with"] == "ed:1"
+    assert cells["share of the text's runs in the other (all runs, as src/experts/prepare.py)"] == "0.75"
+
+
+def test_shares_of_all_runs_are_those_of_prepare():
+    a, b = R.reduced(A), R.reduced("adilxeyye terikelowi ameqemeteye tedxelowi")
+    sa, sb = B.all_runs(a, b)
+    ra, rb = B.P.runs(a), B.P.runs(b)                                          # src/experts/prepare.py, match()
+    assert (sa, sb) == (round(len(ra & rb) / len(ra), 3), round(len(ra & rb) / len(rb), 3)) and sb == 1.0 > sa
+    assert B.all_runs("", a) == (None, None)
+
+
+def test_rows_alike_across_and_within_a_numbering():
+    rows = [("REM 0219", R.reduced(A)), ("REM 0289", R.reduced(A)), ("Millet 1968 p. 1", R.reduced(A)),
+            ("REM 0001", R.reduced(B_))]
+    systems = {"REM 0219": {"rem", "karanog"}, "REM 0289": {"rem", "karanog"}, "Millet 1968 p. 1": set(), "REM 0001": {"rem"}}
+    same, across = U.alike(rows, systems, frozenset())
+    assert same == [("REM 0219", "REM 0289")]                                 # one numbering, two numbers
+    assert across == [("REM 0219", "Millet 1968 p. 1", "sure"), ("REM 0289", "Millet 1968 p. 1", "sure")]
+
+
+def test_why_a_known_pair_was_missed():
+    size = {"a": 300, "b": 300, "short": 30, "long": 400}
+    s = lambda **k: dict({"verdict": "doubtful", "same_text": False, "shared": 40, "best_key": "long", "b": "b"}, **k)
+    assert R.why_missed(s(same_text=True), size) == R.MISSED[0]
+    assert R.why_missed(s(verdict="", shared=3, best_key=""), size) == R.MISSED[1]
+    assert R.why_missed(s(best_key="short"), size) == R.MISSED[2]
+    assert R.why_missed(s(), size) == R.MISSED[3] and R.why_missed(s(verdict="", best_key=""), size) == R.MISSED[4]
+
+
+def test_editions_of_an_inscription():
+    i = {"readings": [{"work": "Meroitic Newsletter 29 (2002)"}, {"work": "Meroitic Newsletter 29 (2002)"}]}
+    assert B.editions_of(i) == 1                                               # two fragments in one edition
+    assert B.editions_of({"readings": i["readings"] + [{"work": "Fontes Historiae Nubiorum III (1998)"}]}) == 2
 
 
 # --- the published files ---
@@ -385,7 +517,8 @@ def test_published_table():
     assert len(ids) == len(set(ids)) == figs["inscriptions"]["all"]
     assert sum(r["in_corpus_v6"] for r in table) == figs["corpus_v6"]["texts"] == figs["inscriptions"]["with_a_typed_reading"]
     assert sum(bool(r["rem"]) for r in table) == figs["inscriptions"]["with_a_rem_number"]
-    assert sum(len(r["readings"]) >= 2 for r in table) == figs["inscriptions"]["with_two_readings_or_more"]
+    assert sum(B.editions_of(r) >= 2 for r in table) == figs["inscriptions"]["with_readings_from_two_editions_or_more"]
+    assert sum(not r["numbers"] for r in table) == figs["inscriptions"]["not_identified"]
     assert sum(bool(r["open_reading"]) for r in table) == figs["inscriptions"]["with_an_open_reading"]
     assert sum(r["words"] for r in table) == figs["corpus_v6"]["words"]
     open_rows = {}
@@ -428,7 +561,8 @@ def test_page_tables():
 # and pages it names, the thresholds of the rule and of the bars, and the numbers of steps and sections
 COST = ("<!-- cost: by hand, from the task notifications -->", "<!-- end of the cost -->")
 STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544", "0101", "362", "370",
-          "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0"}       # 4.0: the licence CC BY 4.0
+          "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0",       # 4.0: the licence CC BY 4.0
+          "16", "489"}                                                    # GA 13+16; MilletExamples.txt line 489
 
 
 def test_page_text_quotes_the_tables():
@@ -505,6 +639,14 @@ def test_local_build_is_what_is_published():
     for table in B.P.HELD.values():                                          # the pairs read on 2026-11-12 are readings
         for tid in table.values():
             assert held[tid]["class"] == "reading" and held[tid]["inscription"], tid
+    keys = [r["key"] for i in ins for r in i["readings"]]
+    assert len(keys) == len(set(keys))                                       # every reading once, in one inscription
+    assert len([k for k in keys if k.startswith("mnl:REM 1154|")]) == 2      # both printings of Newsletter 21
+    for i in ins:
+        assert not any(r["key"] == i["preferred"] and "not a reading of the stone" in r["ref"] for r in i["readings"]), i["id"]
+        for r in i["readings"]:
+            if r["key"].startswith("fhn:267:"):                               # a witness beside its own REM number
+                assert r["key"].rsplit(":", 1)[1] in i["rem"], (i["id"], r["key"])
 
 
 def test_local_rebuild():

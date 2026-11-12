@@ -485,15 +485,16 @@ The table, the map and the corpus were built without an agent; two readers then 
    files, with real names and the page of Millet's 1968 thesis. Of the 17,995 different lines of the padded file,
    340 are a line of those files letter for letter, 17,446 are such a line with one stretch swapped, and 206 more
    differ in a second small place. The 659 texts of the older corpus come from 329 source lines.
-2. **What `corpus_v5` was:** 289 of its 899 texts stand for an inscription (30.1% of its 21,977 words); 207 are
+2. **What `corpus_v5` was:** 289 of its 899 texts stand for an inscription (30.0% of its 21,977 words); 207 are
    copies of a reading with a name swapped (54.5% of the words), 273 are example phrases from a grammar or
    word-list entries and 123 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
-   text, GA 28, stood 52 times.
-3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (the
-   Newsletter's texts). The table holds 563 inscriptions: 441 with a REM number, 70 with two readings or more,
-   303 with a reading under an open licence, 8 quoted by Millet and not identified.
-4. **The bar for the matching rule was missed:** the right partner is the best match for 44 of 53 known pairs
-   (83.0%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a
+   text, GA 28, stood 86 times (6,284 words, from 2 of Millet's lines).
+3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (209 of
+   the Newsletter's texts and 50 of Griffith's rows that `corpus_v5` left out). The table holds 563 inscriptions:
+   441 with a REM number, 64 with readings from two editions or more, 303 with a reading under an open licence, 8
+   quoted by Millet and not identified.
+4. **The bar for the matching rule was missed:** the right partner is the best match for 45 of 54 known pairs
+   (83.3%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a
    second monument of the same person. So a number decides before letters do, a sure match stands only when it
    is the only one, and 17 doubtful matches went to two readers.
 5. **The readers passed their bar:** each named the right text for 12 of 12 known lines and answered "none" for
@@ -503,13 +504,19 @@ The table, the map and the corpus were built without an agent; two readers then 
 6. **A check caught one of the readers' matches:** a line they placed in the fragment GA 13+16 also holds a
    passage of a long epitaph quoted on the same pages of the thesis, because Otten's line runs two quotations
    together. It is set aside, so that no text stands in two rows.
-7. **The numeral fault is repaired where a later edition shows it:** 10 lone `l` in the epitaph of Makheye (REM
-   0544) are read as the numeral 1, 4 after Newsletter 28 and 6 by analogy in the same list.
+7. **The numeral fault is repaired where another edition shows it:** 13 lone `l` are read as the numeral 1, 10
+   in the epitaph of Makheye (REM 0544; 4 after Newsletter 28 and 6 by analogy in the same list) and 3 in REM 0101
+   after Griffith's print.
 8. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
-   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,026 of their words
+   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 966 of their words
    are spellings no analyst has seen.
-9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,004 still stand in
-   `corpus_v6`; on those the editions give the map's meaning for 71.6% of the words they translate (267 of 373;
+9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,005 still stand in
+   `corpus_v6`; on those the editions give the map's meaning for 71.4% of the words they translate (267 of 374;
    it was 276 of 397, 69.5%).
 10. **Cost:** the two readers took 253,065 subagent tokens together. The estimate in `NEXT_STEPS.md` was 2 to 4
     million for this piece.
+11. **What the review changed:** a second printing of one Newsletter text had been lost under the key of the
+    first, Millet's segmented analysis of REM 0101 had been taken for its reading, the 15 texts of FHN no. 267
+    were missing from the table, a name with a lost sign inside had been matched to two whole words, and "two
+    readings or more" had counted the fragments of one edition apart. The figures above are counted after those
+    fixes.

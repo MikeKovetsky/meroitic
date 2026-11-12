@@ -89,24 +89,33 @@ def griffith_rows(folder, family):
     return out
 
 
+def page_of(r):
+    """Where a Newsletter row stands: its printed page, or the page of the PDF for the 1971 printout, which has
+    no printed page numbers."""
+    return f"p. {r['printed_page']}" if r["printed_page"] else f"PDF p. {r['pdf_page']}"
+
+
 def mnl_rows(path=MNL):
+    rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    # one issue can print a text twice (REM 1154 on pp. 7 and 17 of Newsletter 21): the page tells them apart
+    twice = {k for k, n in collections.Counter((r["id"], r["file"]) for r in rows).items() if n > 1}
     out = []
-    for line in path.read_text().splitlines():
-        r = json.loads(line)
+    for r in rows:
         numbers = {"rem": [rem_of(r["rem"])]} if rem_of(r["rem"]) else {}
         ga = re.match(r"GA (\d+)", r["id"])
         if ga:
             numbers["ga"] = [f"{int(ga.group(1)):02d}"]
         if not numbers:
-            numbers["mnl"] = [r["id"] or f"{r['file']} p. {r['printed_page']}"]
-        out.append({"key": f"mnl:{r['id'] or 'unnumbered'}|{r['file']}", "family": "mnl", "work": r["source"],
-                    "ref": f"p. {r['printed_page']}", "number": r["id"], "numbers": numbers, "site": r["site"],
+            numbers["mnl"] = [r["id"] or f"{r['file']} {page_of(r)}"]
+        key = f"mnl:{r['id'] or 'unnumbered'}|{r['file']}" + (f"|{page_of(r)}" if (r["id"], r["file"]) in twice else "")
+        out.append({"key": key, "family": "mnl", "work": r["source"],
+                    "ref": page_of(r), "number": r["id"], "numbers": numbers, "site": r["site"],
                     "object": r["object"], "text": " ".join(E.words(r["text_corpus"])),
                     "whole": r["complete"] == "whole", "printout": r["kind"] == "printout",
                     "reconstruction": "reconstruction" in r["id"].lower(), "same_as": r["same_as"],
                     # an older reading of a text that a later issue edits again in several numbered pieces
                     "superseded": " and the rest of that edition" in r["same_as"],
-                    "mnl_id": r["id"], "mnl_file": r["file"]})
+                    "in_corpus": r["in_corpus"], "mnl_id": r["id"], "mnl_file": r["file"]})
     return out
 
 
@@ -129,7 +138,16 @@ def millet_rows():
     return out
 
 
+FHN_WORK = "Fontes Historiae Nubiorum III (1998)"
+
+
+def fhn_site(number, block):
+    return block.split("\n")[0].split(".")[0].replace(number, "", 1).strip()
+
+
 def fhn_rows():
+    """One reading for each entry with a section "Text". An entry that prints several inscriptions under one
+    number has "Texts" instead and is read by fhn_parts()."""
     out = []
     for number, block in P.fhn_entries():
         s = P.fhn_letters(block)
@@ -137,10 +155,33 @@ def fhn_rows():
         rems = list(dict.fromkeys(re.findall(r"REM\s+(\d{4}[A-Za-z]?)", head)))
         if not s:
             continue
-        site = block.split("\n")[0].split(".")[0].replace(number, "", 1).strip()
-        out.append({"key": f"fhn:{number}", "family": "fhn", "work": "Fontes Historiae Nubiorum III (1998)",
+        out.append({"key": f"fhn:{number}", "family": "fhn", "work": FHN_WORK,
                     "ref": f"no. {number}", "number": f"FHN {number}", "numbers": {"fhn": [number], "rem": rems},
-                    "site": site, "object": "", "text": None, "letters": s, "whole": None})
+                    "site": fhn_site(number, block), "object": "", "text": None, "letters": s, "whole": None})
+    return out
+
+
+def fhn_parts(entries=None):
+    """The texts of an entry that prints several inscriptions under one number (FHN 267: the fifteen of the
+    Philae chamber, each under its REM number and a letter), one reading each. They are witnesses only: matched
+    with nothing, each is added to the inscription of its REM number after the matching (src/v6/build.py)."""
+    out = []
+    for number, block in (P.fhn_entries() if entries is None else entries):
+        m = re.search(r"^Texts\s*$(.*?)^Com\w*nts\s*$", block, re.M | re.S)       # the layer reads "Comtnents"
+        if not m:
+            continue
+        body = m.group(1)
+        heads = list(re.finditer(r"^REM\s?(\d{4}[A-Za-z]?)\s*\(([^)\s]*)\)\s*$", body, re.M))
+        for k, h in enumerate(heads):
+            part = body[h.end():heads[k + 1].start() if k + 1 < len(heads) else len(body)]
+            part = re.sub(r"\(\d+\)", " ", part)
+            part = "\n".join(l for l in part.split("\n")
+                             if not re.match(r"^(Fontes Historiae|The Sources|PROCESSION\b|\d+\s*$)", l.strip()))
+            rem, letter = h.group(1), h.group(2)
+            out.append({"key": f"fhn:{number}:{rem}", "family": "fhn", "work": FHN_WORK,
+                        "ref": f"no. {number} ({letter})", "number": f"FHN {number} ({letter})",
+                        "numbers": {"fhn": [number], "rem": [rem]}, "site": fhn_site(number, block), "object": "",
+                        "text": None, "letters": P.reduced_expert(part), "whole": None, "witness": True})
     return out
 
 
@@ -155,14 +196,18 @@ def narrative_rows():
 
 
 def otten_rows(lines=None):
-    """A reading for each source line of the per-scholar files, in the spelling of corpus_v6."""
+    """A reading for each source line of the per-scholar files, in the spelling of corpus_v6. A line that Otten's
+    note marks as the line above in Millet's analysis is one ("analysis"), but never the reading to prefer."""
     out = []
     for l in lines if lines is not None else O.source_lines():
         text = O.to_corpus(l["mero"], rilly=l["file"] == "RillyExamples.txt")
+        analysis = O.is_analysis(l)
         out.append({"key": f"otten:{l['key']}", "family": "otten", "work": O.WORKS[l["file"]],
-                    "ref": (f"p. {l['page']}; " if l["page"] else "") + f"{l['file']} line {l['line']}",
+                    "ref": (f"p. {l['page']}; " if l["page"] else "") + f"{l['file']} line {l['line']}"
+                    + ("; the line above as Millet analyses it (segmented, t written s and l), not a reading of "
+                       "the stone" if analysis else ""),
                     "number": "", "numbers": {}, "site": "", "object": "", "text": text, "whole": None,
-                    "line": l})
+                    "line": l, "analysis": analysis})
     return out
 
 
@@ -174,12 +219,27 @@ def finish(r):
     return r
 
 
+def unique(readings):
+    """The readings, when no two share a key: a key that stood twice would keep only one of them."""
+    twice = sorted(k for k, n in collections.Counter(r["key"] for r in readings).items() if n > 1)
+    if twice:
+        raise SystemExit(f"two readings under one key: {twice}")
+    return readings
+
+
 def load(lines=None):
     """(the edition readings, the narratives, the source lines), each a list of readings."""
     editions = (griffith_rows("data/expansion", "griffith") + griffith_rows("data/expansion/karanog", "karanog")
                 + mnl_rows() + millet_rows() + fhn_rows())
-    return ([finish(r) for r in editions], [finish(r) for r in narrative_rows()],
-            [finish(r) for r in otten_rows(lines)])
+    out = ([finish(r) for r in editions], [finish(r) for r in narrative_rows()],
+           [finish(r) for r in otten_rows(lines)])
+    unique([r for part in out for r in part] + witnesses())
+    return out
+
+
+def witnesses():
+    """The readings that are added to their inscription after the matching (fhn_parts)."""
+    return [finish(r) for r in fhn_parts()]
 
 
 def formulae(editions, common=COMMON):
@@ -239,22 +299,20 @@ def known_pairs(editions, narratives, lines, v5_sources):
             key = f"millet2005:{entry}" if source == "millet" else f"fhn:{entry}"
             out.append((f"HELD {source}", ours(tid), key))
     for kar, rem in (("47", "0247"), ("77", "0277"), ("78", "0278")):
-        mnl = next(r["key"] for r in editions if r["family"] == "mnl" and r["numbers"].get("rem") == [rem])
-        fhn = next(r["key"] for r in editions if r["family"] == "fhn" and rem in r["numbers"].get("rem", ()))
-        out.append(("Karanog in Newsletter 28", f"karanog:G-karanog-{kar}", mnl))
+        mnl = next((r["key"] for r in editions if r["family"] == "mnl" and r["numbers"].get("rem") == [rem]), None)
+        fhn = next((r["key"] for r in editions if r["family"] == "fhn" and rem in r["numbers"].get("rem", ())), None)
+        out.append(("Karanog in Newsletter 28", f"karanog:G-karanog-{kar}" if mnl else None, mnl))
         out.append(("Newsletter 28 in FHN", mnl, fhn))
     for r in editions:
         if r["family"] != "mnl":
             continue
-        row = json.loads(next(l for l in MNL.read_text().splitlines()
-                              if json.loads(l)["id"] == r["mnl_id"] and json.loads(l)["file"] == r["mnl_file"]))
-        hit = row["in_corpus"].split(" (as ")[0]
-        if hit and " (as " not in row["in_corpus"]:
+        hit = r["in_corpus"].split(" (as ")[0]
+        if hit and " (as " not in r["in_corpus"]:
             m = re.match(r"Millet's examples, line (\d+)", hit)
             other = f"otten:MilletExamples.txt:{m.group(1)}" if m else ours(hit)
             out.append(("Newsletter row in the corpus", r["key"], other))
-        if row["same_as"]:
-            name = row["same_as"].split(" and the rest of that edition")[0]
+        if r["same_as"]:
+            name = r["same_as"].split(" and the rest of that edition")[0]
             name = re.sub(r" \(Meroitic Newsletter \d+ \(\d{4}\)\)$", "", name)
             kept = [o for o in by_mnl.get(name, []) if o["key"] != r["key"]]
             if kept:
@@ -285,20 +343,41 @@ def score_known(pairs, everything, skip, floor=FLOOR):
     return out
 
 
+MISSED = ("another line of the same text ranks first", "fewer than six own runs shared",
+          "a shorter text ranks first", "another text ranks first", "no match")
+
+
+def why_missed(s, size):
+    """Why the rule missed a known pair (a scored pair whose partner is not its best match): another line of the
+    same text ranks first; the two share fewer than FLOOR own runs (fragments of a few words); a shorter text
+    ranks first (a quotation or a piece that stands in it); another text ranks first; or nothing matches at all.
+    size: {reading key: its number of letters}."""
+    if s["verdict"] and s["same_text"]:
+        return MISSED[0]
+    if s["shared"] < FLOOR:
+        return MISSED[1]
+    if not s["best_key"]:
+        return MISSED[4]
+    return MISSED[2] if size[s["best_key"]] < size[s["b"]] else MISSED[3]
+
+
 def bars(editions, narratives, lines, first):
     """The figures of bars A and B: as the bar was written (no floor) and with the floor."""
     skip = formulae(editions)
     pairs = known_pairs(editions, narratives, lines, first)
     out = {"pairs": len(pairs), "by_kind": dict(collections.Counter(p[0] for p in pairs))}
+    size = {r["key"]: len(r["letters"]) for r in editions + narratives + lines}
     for name, floor in (("as_written", 1), ("with_the_floor", FLOOR)):
         scored = score_known(pairs, editions + narratives + lines, skip, floor)
         ok = [s for s in scored if s["verdict"] and s["best"]]
         ok2 = [s for s in scored if s["verdict"] and (s["best"] or s["same_text"])]
+        why = collections.Counter(why_missed(s, size) for s in scored if not (s["verdict"] and s["best"]))
         out[name] = {"right": len(ok), "sure": sum(s["verdict"] == "sure" for s in ok),
                      "doubtful": sum(s["verdict"] == "doubtful" for s in ok),
                      "right_or_another_line_of_the_same_text": len(ok2),
                      "with_a_sure_other": sum(bool(s["sure_others"]) for s in scored),
                      "with_a_sure_other_of_another_text": sum(bool(s["sure_others_not_same_text"]) for s in scored),
+                     "why_missed": {k: why[k] for k in MISSED},
                      "missed": [{k: s[k] for k in ("what", "a", "b", "verdict", "shared", "best_key")}
                                 for s in scored if not (s["verdict"] and (s["best"] or s["same_text"]))],
                      "scored": scored}
@@ -331,6 +410,7 @@ def main(argv):
                   f"{f['right_or_another_line_of_the_same_text']} ({f['right_or_another_line_of_the_same_text'] / b['pairs']:.1%})")
             print(f"       pairs with a sure match to another text of the partner's family: {f['with_a_sure_other']} "
                   f"(the bar is none); to a text that is not the partner's own: {f['with_a_sure_other_of_another_text']}")
+            print(f"       why the misses were missed: {f['why_missed']}")
             for m in f["missed"]:
                 print("    missed:", m)
         k = b["karanog"]

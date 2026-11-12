@@ -13,7 +13,7 @@
    },
    "a second reading of an inscription already counted": {
     "texts": 4,
-    "words": 144
+    "words": 181
    },
    "an example phrase or a word-list entry": {
     "texts": 273,
@@ -25,7 +25,7 @@
    },
    "stands for its inscription": {
     "texts": 289,
-    "words": 6623
+    "words": 6586
    }
   }
  },
@@ -37,11 +37,15 @@
   "in_two_or_more_parts": 9,
   "with_a_rem_number": 441,
   "with_real_names": 548,
-  "with_two_readings_or_more": 70,
+  "with_readings_from_two_editions_or_more": 64,
   "with_an_open_reading": 303,
   "with_an_open_reading_of_the_whole_text": 274,
   "preferred_reading_is_open": 286,
   "in_corpus_v5": 289,
+  "new_to_the_corpus_by_source": {
+   "mnl": 209,
+   "griffith": 50
+  },
   "not_identified": 8,
   "by_kind": {
    "funerary": 269,
@@ -51,6 +55,7 @@
    "graffito": 36,
    "oracular decree": 7
   },
+  "kind_not_known_and_only_in_the_printout": 72,
   "preferred_by_source": {
    "mnl": 210,
    "karanog": 150,
@@ -61,10 +66,10 @@
  },
  "corpus_v6": {
   "texts": 548,
-  "words": 10277,
-  "words_of_inscriptions_in_corpus_v5": 6573,
-  "name_words_marked": 90,
-  "numerals_set": 10
+  "words": 10290,
+  "words_of_inscriptions_in_corpus_v5": 6586,
+  "name_words_marked": 87,
+  "numerals_set": 13
  },
  "lines": {
   "phrase": 906,
@@ -160,13 +165,18 @@
   "none": 1
  },
  "numerals": {
-  "all": 10,
-  "by_a_later_edition": 4,
+  "all": 13,
+  "by_another_edition": 7,
   "by_analogy": 6,
-  "inscriptions": 1,
+  "inscriptions": 2,
   "where": [
+   "REM 0101",
    "REM 0544"
-  ]
+  ],
+  "by_inscription": {
+   "REM 0101": 3,
+   "REM 0544": 10
+  }
  },
  "otten": {
   "padded_lines": 18090,
@@ -175,6 +185,12 @@
    "words": 4540,
    "inscription": "GA 28",
    "line": "MilletExamples.txt line 433"
+  },
+  "most_copied_inscription": {
+   "inscription": "GA 28",
+   "texts": 86,
+   "words": 6284,
+   "lines": 2
   },
   "source_lines": 1159,
   "raw_lines": 17995,
@@ -193,25 +209,36 @@
    "millet2005": 34,
    "fhn": 11
   },
-  "narratives": 3
+  "narratives": 3,
+  "witnesses": 15,
+  "witness_entries": [
+   "267"
+  ]
  },
  "bars": {
-  "pairs": 53,
+  "pairs": 54,
   "by_kind": {
    "HELD millet": 23,
    "HELD fhn": 8,
    "Karanog in Newsletter 28": 3,
    "Newsletter 28 in FHN": 3,
-   "Newsletter second edition": 9,
+   "Newsletter second edition": 10,
    "Newsletter row in the corpus": 7
   },
   "as_written": {
-   "right": 44,
-   "sure": 29,
+   "right": 45,
+   "sure": 30,
    "doubtful": 15,
-   "right_or_another_line_of_the_same_text": 45,
+   "right_or_another_line_of_the_same_text": 46,
    "with_a_sure_other": 3,
    "with_a_sure_other_of_another_text": 2,
+   "why_missed": {
+    "another line of the same text ranks first": 1,
+    "fewer than six own runs shared": 2,
+    "a shorter text ranks first": 6,
+    "another text ranks first": 0,
+    "no match": 0
+   },
    "missed": [
     {
      "what": "Newsletter row in the corpus",
@@ -280,12 +307,19 @@
    ]
   },
   "with_the_floor": {
-   "right": 44,
-   "sure": 31,
+   "right": 45,
+   "sure": 32,
    "doubtful": 13,
-   "right_or_another_line_of_the_same_text": 46,
+   "right_or_another_line_of_the_same_text": 47,
    "with_a_sure_other": 3,
    "with_a_sure_other_of_another_text": 2,
+   "why_missed": {
+    "another line of the same text ranks first": 2,
+    "fewer than six own runs shared": 5,
+    "a shorter text ranks first": 2,
+    "another text ranks first": 0,
+    "no match": 0
+   },
    "missed": [
     {
      "what": "HELD millet",
@@ -363,18 +397,18 @@
  "coverage": {
   "all": {
    "texts": 548,
-   "words": 10277,
-   "translated": 5272,
-   "share": 0.513,
+   "words": 10290,
+   "translated": 5280,
+   "share": 0.5131,
    "levels": {
-    "meaning": 2935,
-    "grammar": 675,
-    "name": 1426,
-    "number": 236,
-    "hypothesis": 1277,
-    "kind": 578,
-    "unknown": 1935,
-    "lost": 1215
+    "meaning": 2932,
+    "grammar": 682,
+    "name": 1427,
+    "number": 239,
+    "hypothesis": 1283,
+    "kind": 580,
+    "unknown": 1931,
+    "lost": 1216
    }
   },
   "by_part": {
@@ -392,9 +426,9 @@
    },
    "Otten's files with real names (Millet 1968, the three narratives)": {
     "texts": 52,
-    "words": 2581,
-    "translated": 1265,
-    "share": 0.4901
+    "words": 2594,
+    "translated": 1273,
+    "share": 0.4907
    },
    "the Meroitic Newsletter": {
     "texts": 210,
@@ -405,23 +439,23 @@
   },
   "near_copies_once": {
    "texts": 538,
-   "words": 10242,
-   "translated": 5250
+   "words": 10255,
+   "translated": 5258
   },
   "inscriptions_that_were_in_corpus_v5": {
    "texts": 289,
-   "words": 6573,
-   "translated": 3942,
-   "share": 0.5997,
+   "words": 6586,
+   "translated": 3950,
+   "share": 0.5998,
    "levels": {
-    "meaning": 2228,
-    "grammar": 421,
-    "name": 1210,
-    "number": 83,
-    "hypothesis": 937,
-    "kind": 436,
-    "unknown": 885,
-    "lost": 373
+    "meaning": 2225,
+    "grammar": 428,
+    "name": 1211,
+    "number": 86,
+    "hypothesis": 943,
+    "kind": 438,
+    "unknown": 881,
+    "lost": 374
    }
   },
   "inscriptions_new_to_the_corpus": {
@@ -447,11 +481,13 @@
    "one_blocker": 92,
    "median": 0.625
   },
-  "pieces_without_an_accepted_meaning": 2079,
-  "names_by_the_source": 90,
+  "pieces_without_an_accepted_meaning": 2075,
+  "names_by_the_source": 87,
   "not_analysed": {
-   "words": 1026,
-   "spellings": 925,
+   "words": 1013,
+   "spellings": 912,
+   "in_new_inscriptions": 966,
+   "in_inscriptions_that_were_in_corpus_v5": 47,
    "unknown_words_seen_before": 1
   },
   "corrections": {
@@ -468,10 +504,10 @@
     "newly_translated_once": 23
    },
    "a word written apart": {
-    "words": 106,
-    "newly_translated": 73,
-    "words_once": 106,
-    "newly_translated_once": 73
+    "words": 108,
+    "newly_translated": 74,
+    "words_once": 108,
+    "newly_translated_once": 74
    },
    "a spelling of a known word": {
     "words": 33,
@@ -531,28 +567,29 @@
    }
   },
   "corpus_v6": {
-   "rows": 1004,
+   "rows": 1005,
    "decoys": 35,
    "texts": 31,
    "translated": {
     "agree": 267,
-    "partly": 59,
+    "partly": 60,
     "differ": 37,
     "new": 10,
     "silent": 113,
     "absent": 3,
-    "rows": 489,
+    "rows": 490,
     "unanswered": 0,
-    "given": 373,
-    "agree_share": 0.7158,
-    "agree_or_partly_share": 0.874
+    "given": 374,
+    "agree_share": 0.7139,
+    "agree_or_partly_share": 0.8743
    }
   },
-  "carried": 1004,
-  "not_carried": 111,
+  "carried": 1005,
+  "not_carried": 110,
   "why": {
-   "the word is spelled or divided otherwise in the preferred reading": 95,
-   "the map's level is name": 16
+   "the word is a part of a longer word in the preferred reading": 70,
+   "the word is spelled otherwise in the preferred reading": 25,
+   "the map's level is name": 15
   }
  },
  "readers": {

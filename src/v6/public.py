@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(Path(__file__).resolve().parent)]
+import readings as R   # noqa: E402
 
 LOCAL = ROOT / "data/sources/v6"
 TABLE = ROOT / "data/inscriptions.jsonl"
@@ -24,7 +25,9 @@ FIGURES = ROOT / "data/discovery/corpus_v6_figures.json"
 PAGE = ROOT / "data/discovery/corpus_v6.md"
 BEGIN, END = "<!-- tables: written by src/v6/public.py -->", "<!-- end of the tables -->"
 MAP_COLUMNS = ("corpus_v5 id", "words", "what it is", "copy", "inscription", "reading", "page of Millet 1968",
-               "share of the text in the other", "share of the other in the text", "own runs shared", "compared with",
+               "share of the text's own runs in the other", "share of the other's own runs in the text", "own runs shared",
+               "share of the text's runs in the other (all runs, as src/experts/prepare.py)",
+               "share of the other's runs in the text (all runs, as src/experts/prepare.py)", "compared with",
                "settled by")
 
 
@@ -59,8 +62,24 @@ def map_table(mapped):
     for m in mapped:
         lines.append("\t".join(cell(v) for v in (
             m["id"], m["words"], m.get("what"), m.get("copy"), m.get("inscription"), m.get("reading"), m.get("page"),
-            m.get("share_of_text"), m.get("share_of_other"), m.get("shared_runs"), m.get("against"), m.get("by"))))
+            m.get("share_of_text"), m.get("share_of_other"), m.get("shared_runs"), m.get("share_of_text_all"),
+            m.get("share_of_other_all"), m.get("against"), m.get("by"))))
     return "\n".join(lines) + "\n"
+
+
+def alike(letters, systems, skip):
+    """(the pairs of rows that the rule matches surely and that share a way of numbering, so that they carry two
+    different numbers of it; the pairs that share no way of numbering and that the rule matches at all, with the
+    verdict). letters: [(id, letters)] of the rows; systems: {id: the numberings its numbers are in}."""
+    same, across = [], []
+    for n, (a, x) in enumerate(letters):
+        for b, y in letters[n + 1:]:
+            v = R.rule(x, y, skip)[0]
+            if v == "sure" and systems[a] & systems[b]:
+                same.append((a, b))
+            elif v and not systems[a] & systems[b]:
+                across.append((a, b, v))
+    return same, across
 
 
 def pct(a, b):
@@ -72,6 +91,7 @@ def tables(f):
     i, v5, v6, bar, cov, exp = f["inscriptions"], f["corpus_v5"], f["corpus_v6"], f["bars"], f["coverage"], f["experts"]
     n = i["all"]
     o, held, most, tw = f["otten"], f["held"]["edition_readings"], f["otten"]["most_copied"], f["twins"]
+    mi = o["most_copied_inscription"]
     cls = v5["classes"]
     wait = cls.get("not settled by two readers", {"texts": 0, "words": 0})
     rd = f.get("readers")
@@ -90,6 +110,9 @@ def tables(f):
         read = (f"- Doubtful matches waiting for two readers: {f['pending']} lines, behind {wait['texts']} texts and "
                 f"{wait['words']:,} words of `corpus_v5`.")
     num, ph = f["numerals"], f["phrases"]
+    source_names = {"mnl": "the Meroitic Newsletter", "griffith": "Griffith's printed type (rows that `corpus_v5` left out)",
+                    "karanog": "Griffith's Karanòg copies", "otten": "Millet 1968 as Otten typed it",
+                    "otten:narrative": "Otten's narrative files"}
     out = [BEGIN, "", "### The counts the text uses", "",
            f"- Otten's padded file: {o['padded_lines']:,} lines, {o['raw_lines']:,} of them different. Equal to a line of his "
            f"per-scholar files: {o['equal']:,}. Such a line with one stretch swapped: {o['one_stretch_swapped']:,}. Near "
@@ -98,10 +121,13 @@ def tables(f):
            f"- Source lines in the per-scholar files: {o['source_lines']:,}. The {o['texts_traced']} texts of the older "
            f"corpus come from {o['source_lines_behind_them']} of them.",
            f"- The most copied line: {most['line']} ({most['inscription']}), {most['texts']} texts and {most['words']:,} "
-           f"words of `corpus_v5`.",
+           f"words of `corpus_v5`. The most copied inscription: {mi['inscription']}, {mi['texts']} texts and "
+           f"{mi['words']:,} words, from {mi['lines']} source lines.",
            f"- Readings held besides Otten's lines: {held['griffith']} rows of Griffith's print, {held['karanog']} Karanòg "
            f"rows, {held['mnl']} Newsletter rows, {held['millet2005']} texts of Millet 2005, {held['fhn']} entries of "
-           f"FHN III, {f['held']['narratives']} narrative files.",
+           f"FHN III, {f['held']['narratives']} narrative files; and {f['held']['witnesses']} texts that FHN III prints "
+           f"under one number (no. {', '.join(f['held']['witness_entries'])}), each set beside the inscription of its "
+           f"REM number after the matching.",
            f"- Source lines by what they are: {f['lines'].get('reading', 0)} readings of an inscription, "
            f"{f['lines'].get('phrase', 0)} example phrases, {f['lines'].get('word list', 0)} word-list entries, "
            f"{f['lines'].get('unidentified', 0)} inscriptions not identified, {f['lines'].get('pending', 0)} with a doubtful "
@@ -111,8 +137,9 @@ def tables(f):
            f"{ph['set_aside']} was taken by the readers for a text of one inscription and is set aside because the rule "
            f"matches it surely with another, and {ph['nothing']} match nothing held.",
            read,
-           f"- A lone `l` read as a numeral: {num['all']} ({num['by_a_later_edition']} by a later edition, "
-           f"{num['by_analogy']} by analogy), in {num['inscriptions']} inscription(s): {', '.join(num['where'])}.",
+           f"- A lone `l` read as a numeral: {num['all']} ({num['by_another_edition']} by another edition, "
+           f"{num['by_analogy']} by analogy), in {num['inscriptions']} inscription(s): "
+           + ", ".join(f"{k} ({c})" for k, c in num["by_inscription"].items()) + ".",
            f"- Words marked as a personal name by Otten's own tags: {v6['name_words_marked']}.",
            f"- Inscriptions whose text is in two or more parts: {i['in_two_or_more_parts']}.",
            f"- Pairs of rows of `corpus_v6` that the rule takes for a sure match and that carry two different numbers of "
@@ -125,13 +152,15 @@ def tables(f):
            f"| with a REM number | {i['with_a_rem_number']} | {pct(i['with_a_rem_number'], n)} |",
            f"| with a typed reading (the rows of `corpus_v6`) | {i['with_a_typed_reading']} | {pct(i['with_a_typed_reading'], n)} |",
            f"| with real names in the preferred reading | {i['with_real_names']} | {pct(i['with_real_names'], n)} |",
-           f"| with two readings or more | {i['with_two_readings_or_more']} | {pct(i['with_two_readings_or_more'], n)} |",
+           f"| with two readings or more, from two editions or more | {i['with_readings_from_two_editions_or_more']} | {pct(i['with_readings_from_two_editions_or_more'], n)} |",
            f"| with a reading under an open licence | {i['with_an_open_reading']} | {pct(i['with_an_open_reading'], n)} |",
            f"| with an open reading of the whole text | {i['with_an_open_reading_of_the_whole_text']} | {pct(i['with_an_open_reading_of_the_whole_text'], n)} |",
            f"| whose preferred reading is the open one | {i['preferred_reading_is_open']} | {pct(i['preferred_reading_is_open'], n)} |",
            f"| held only as a text layer of Millet 2005 (not typed) | {i['only_a_text_layer']} | {pct(i['only_a_text_layer'], n)} |",
            f"| typed, without a legible word | {i['typed_without_a_legible_word']} | {pct(i['typed_without_a_legible_word'], n)} |",
            f"| quoted by Millet 1968 and not identified | {i['not_identified']} | {pct(i['not_identified'], n)} |",
+           "", "New to the corpus (rows of `corpus_v6` that no text of `corpus_v5` is a reading of): "
+           + ", ".join(f"{c} from {source_names[k]}" for k, c in i["new_to_the_corpus_by_source"].items()) + ".",
            "", "### What the texts of `corpus_v5` turned out to be", "",
            "| What | Texts | Words | Share of the words |", "|---|---|---|---|"]
     for name, c in v5["classes"].items():
@@ -139,6 +168,8 @@ def tables(f):
     out += [f"| All of `corpus_v5` | {v5['texts']} | {v5['words']:,} | |", "",
             "### The kinds of text", "", "| Kind | Inscriptions |", "|---|---|"]
     out += [f"| {k[0].upper() + k[1:]} | {c} |" for k, c in i["by_kind"].items()]
+    out += ["", f"Of the {i['by_kind'].get('not known', 0)} of a kind not known, {i['kind_not_known_and_only_in_the_printout']} are held "
+                f"only in the Newsletter's printout of 1971, which states no object for them."]
     out += ["", "### The preferred reading, by source", "", "| Source | Inscriptions |", "|---|---|"]
     names = {"mnl": "The Meroitic Newsletter (typed by the model, in copyright)",
              "karanog": "Griffith's Karanòg hand copies, checked against his type (open)",
@@ -156,6 +187,14 @@ def tables(f):
             f"| of them doubtful | {a['doubtful']} | {w['doubtful']} |",
             f"| Counting another line of the same text as right | {a['right_or_another_line_of_the_same_text']} ({pct(a['right_or_another_line_of_the_same_text'], bar['pairs'])}) | {w['right_or_another_line_of_the_same_text']} ({pct(w['right_or_another_line_of_the_same_text'], bar['pairs'])}) |",
             f"| Pairs with a sure match to another text | {a['with_a_sure_other']} | {w['with_a_sure_other']} |",
+            f"| Missed | {bar['pairs'] - a['right']} | {bar['pairs'] - w['right']} |"]
+    out += [f"| of them: {why} | {a['why_missed'][why]} | {w['why_missed'][why]} |" for why in a["why_missed"]]
+    kind = bar["by_kind"]
+    out += ["",
+            f"The known pairs: {kind.get('HELD millet', 0) + kind.get('HELD fhn', 0)} read side by side for the expert check, "
+            f"{kind.get('Karanog in Newsletter 28', 0) + kind.get('Newsletter 28 in FHN', 0)} of the Karanòg texts that "
+            f"Newsletter 28 and FHN print, {kind.get('Newsletter row in the corpus', 0)} Newsletter rows that an earlier test "
+            f"found in the corpus, {kind.get('Newsletter second edition', 0)} second editions in the Newsletter.",
             "",
             f"Bar B: {k['with_a_sure_match_to_another_number']} of the {k['texts']} Karanòg texts have a sure match to another "
             f"Karanòg number ({pct(k['with_a_sure_match_to_another_number'], k['texts'])}).",
@@ -181,11 +220,13 @@ def tables(f):
     t5, t6 = cov["corpus_v5"]["texts"], cov["texts"]
     na = cov["not_analysed"]
     out += ["",
-            f"Texts with a legible word: {t6['legible']} of {t6['texts']} in `corpus_v6` ({t5['legible']} of {t5['texts']} in "
-            f"`corpus_v5`, near-copies once); every legible word translated in {t6['no_blocker']} ({t5['no_blocker']}); one "
-            f"piece missing in {t6['one_blocker']} ({t5['one_blocker']}). Words whose spelling no analyst has seen: "
-            f"{na['words']:,} in {na['spellings']:,} spellings. Words that are a name by the source's own tag: "
-            f"{cov['names_by_the_source']}.",
+            f"Near-copies counted once in both: texts with a legible word, {t6['legible']} of {t6['texts']} in `corpus_v6` "
+            f"({t5['legible']} of {t5['texts']} in `corpus_v5`); every legible word translated in {t6['no_blocker']} "
+            f"({t5['no_blocker']}); one piece missing in {t6['one_blocker']} ({t5['one_blocker']}). Words whose spelling no "
+            f"analyst has seen: {na['words']:,} in {na['spellings']:,} spellings, {na['in_new_inscriptions']:,} of them in the "
+            f"inscriptions new to the corpus and {na['in_inscriptions_that_were_in_corpus_v5']:,} in the others. Words that "
+            f"are a name by the source's own tag: {cov['names_by_the_source']}. Words written apart that the map joins by "
+            f"its own rule: {cov['corrections']['a word written apart']['words']}.",
             "", "### The check against the two editions, counted again", "",
             "| | On `corpus_v5` | On the words that still stand in `corpus_v6` |", "|---|---|---|"]
     e5, e6 = exp["corpus_v5"]["translated"], exp["corpus_v6"]["translated"]
@@ -203,7 +244,6 @@ def main(argv):
     if argv[1:]:
         sys.exit(__doc__)
     import build as B
-    import readings as R
     import otten as O
     ins, mapped = rows("inscriptions.jsonl"), rows("map.jsonl")
     corpus = [json.loads(l) for l in (ROOT / "data/corpus_v6.jsonl").read_text().splitlines() if l.strip()]
@@ -229,15 +269,20 @@ def main(argv):
             c["texts"] += 1
             c["words"] += m["words"]
     top = max(copied, key=lambda k: (copied[k]["texts"], k))
+    stood = {}                                     # the texts of corpus_v5 that are a reading of one inscription
+    for m in mapped:
+        if m.get("class") in ("reading", "unidentified") and m.get("inscription"):
+            s = stood.setdefault(m["inscription"], {"texts": 0, "words": 0, "lines": set()})
+            s["texts"] += 1
+            s["words"] += m["words"]
+            s["lines"].add(m["reading"])
+    most = max(stood, key=lambda k: (stood[k]["texts"], k))
     skip = R.formulae(editions)
     letters = [(c["id"], R.reduced(c["text"])) for c in corpus]
-    pairs = [(a, b) for n, (a, x) in enumerate(letters) for b, y in letters[n + 1:] if R.rule(x, y, skip)[0] == "sure"]
-    figs["twins"] = {"pairs": len(pairs), "rows": len({k for pair in pairs for k in pair}), "list": pairs}
-    systems = {i["id"]: set(i["numbers"]) for i in ins}                       # rows that share no way of numbering
-    loose = [(a, b) for n, (a, x) in enumerate(letters) for b, y in letters[n + 1:]
-             if not systems[a] & systems[b] and R.rule(x, y, skip)[0]]
-    figs["twins"]["across_numberings"] = {"pairs": len(loose), "list": loose,
-                                          "sure": sum(R.rule(dict(letters)[a], dict(letters)[b], skip)[0] == "sure" for a, b in loose)}
+    pairs, loose = alike(letters, {i["id"]: set(i["numbers"]) for i in ins}, skip)
+    figs["twins"] = {"pairs": len(pairs), "rows": len({k for pair in pairs for k in pair}), "list": pairs,
+                     "across_numberings": {"pairs": len(loose), "list": [[a, b] for a, b, _ in loose],
+                                           "sure": sum(v == "sure" for _, _, v in loose)}}
     phrases = [l for l in rows("lines.jsonl") if l["class"] == "phrase"]
     figs["phrases"] = {"in_one_text": sum(bool(l["inscription"]) for l in phrases),
                        "in_several": sum(not l["inscription"] and "held texts" in l["by"] for l in phrases),
@@ -252,18 +297,23 @@ def main(argv):
                        "set_aside": sum(l["by"].startswith("set aside") for l in every),
                        "none": sum(l["by"].endswith(B.READ_NONE) for l in every)}
     fixes = [(i["id"], x) for i in ins for x in i["numerals_set"]]
-    figs["numerals"] = {"all": len(fixes), "by_a_later_edition": sum(x[3] == "a later edition" for _, x in fixes),
+    figs["numerals"] = {"all": len(fixes), "by_another_edition": sum(x[3] == B.ANOTHER for _, x in fixes),
                         "by_analogy": sum(x[3] == "by analogy" for _, x in fixes),
-                        "inscriptions": len({k for k, _ in fixes}), "where": sorted({k for k, _ in fixes})}
+                        "inscriptions": len({k for k, _ in fixes}), "where": sorted({k for k, _ in fixes}),
+                        "by_inscription": {k: sum(i == k for i, _ in fixes) for k in sorted({k for k, _ in fixes})}}
     figs["otten"] = {"padded_lines": sum(bool(l.strip()) for l in O.PADDED.read_text().split("\n")),
                      "most_copied": dict(copied[top], line=top.split(":", 1)[1].replace(":", " line ")),
+                     "most_copied_inscription": {"inscription": most, "texts": stood[most]["texts"],
+                                                 "words": stood[most]["words"], "lines": len(stood[most]["lines"])},
                      "source_lines": len(lines), "raw_lines": len(raws), "equal": how.get("equal", 0),
                      "one_stretch_swapped": how.get("swap", 0), "near": how.get("near", 0),
                      "from_no_source_line": len(raws) - len(derived),
                      "texts_traced": sum(bool(v) for v in src.values()),
                      "source_lines_behind_them": len({v[0][0] for v in src.values() if v})}
+    parts = R.witnesses()
     figs["held"] = {"edition_readings": {k: sum(r["family"] == k for r in editions) for k in R.LICENCES if k != "otten"},
-                    "narratives": len(narratives)}
+                    "narratives": len(narratives), "witnesses": len(parts),
+                    "witness_entries": sorted({r["numbers"]["fhn"][0] for r in parts})}
     figs["bars"] = bars
     recount = json.loads((LOCAL / "recount.json").read_text())
     figs["coverage"], figs["experts"] = recount["coverage"], recount["experts"]

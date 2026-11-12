@@ -23,6 +23,8 @@ How an inscription is made (data/discovery/corpus_v6.md has the method and the b
 3. A source line that holds half or more of an inscription's own runs is a reading of it; one that holds less,
    or stands whole in a held text, is an example phrase from a grammar; a line of 40 letters or more that matches
    nothing held is an inscription not identified; the rest are example phrases whose source is not held.
+4. The texts that FHN prints under one number for several inscriptions (no. 267) are witnesses: each joins the
+   inscription of its REM number after the matching, and is matched with nothing.
 """
 import collections
 import json
@@ -48,6 +50,7 @@ DOUBT_SHARE = 0.3    # ... when the line holds this share of an inscription's ow
 WHOLE = 0.8          # a reading with this share of the longest typed reading's letters gives the whole text
 ORDER = ("otten-narrative", "otten", "griffith", "karanog", "mnl-print", "mnl-printout")   # the preferred reading
 SYSTEMS = ("rem", "ga", "griffith", "meroe", "shablul", "karanog", "mnl")
+PRINTOUT = "Meroitic Newsletter 6 (1971)"   # the printout of REM 1001 to 1110: REM numbers and texts, no site
 HELD_BY = "read side by side on 2026-11-12 (src/experts/prepare.py, HELD)"
 READ = "two readers who saw both texts"
 READ_NONE = "two readers who saw both texts: none of the candidates"
@@ -180,31 +183,34 @@ def stream(text):
     return "".join(w if w.isdigit() else R.reduced(w) for w in words(text))
 
 
+ANOTHER = "another edition"
+
+
 def numerals(text, others):
-    """The text with a lone `l` read as the numeral that a later edition of the same inscription has after the same
-    word. others: the texts of the readings from a later edition. Each lone `l` is compared through the last
-    letters of the word before it: the later edition has a numeral there (confirmed), the letter l (kept), or the
+    """The text with a lone `l` read as the numeral that another edition of the same inscription has after the
+    same letters: Otten's typing writes the numeral 1 as the letter l (REM 0544 against Newsletter 28; Millet's
+    own translation of MilletExamples.txt line 489 reads "1" where the line has `l`). others: the texts of the
+    inscription's other typed readings. Each lone `l` is compared through the last five letters before it: another
+    edition has the letter l there (kept: none is changed), the others have one numeral there (confirmed), or the
     place cannot be found (lost or read otherwise). Where two or more are confirmed and none is kept, one that
     cannot be found is read as the numeral 1 too when the word after it is the word after a confirmed one: the
-    same list goes on ("pesto X 1 pesto Y 1"). Returns (text, [(place, word before, numeral, "a later edition"
-    or "by analogy")])."""
+    same list goes on ("pesto X 1 pesto Y 1"). Returns (text, [(place, word before, numeral, "another edition" or
+    "by analogy")])."""
     ws = text.split()
     streams = [stream(o) for o in others if re.search(r"\d", o or "")]
     lone = [i for i in range(1, len(ws)) if ws[i] == "l" and not ws[i - 1].isdigit()]
     confirmed, kept, unknown = [], [], []
     for i in lone:
-        tail = R.reduced(ws[i - 1])[-5:]
-        hit = None
+        tail = R.reduced(" ".join(ws[max(0, i - 3):i]))[-5:]
+        seen = set()
         for s in streams if len(tail) >= 4 else ():
             if re.search(re.escape(tail) + r"l(?!o)", s):
-                hit = "l"
-                break
-            m = re.search(re.escape(tail) + r"(\d+)", s)
-            if m:
-                hit = m.group(1)
-                break
+                seen.add("l")
+            seen.update(re.findall(re.escape(tail) + r"(\d+)", s))
+        digits = seen - {"l"}
+        hit = "l" if "l" in seen else digits.pop() if len(digits) == 1 else None
         (kept if hit == "l" else confirmed if hit else unknown).append((i, hit))
-    fixed = [(i, ws[i - 1], n, "a later edition") for i, n in confirmed]
+    fixed = [(i, ws[i - 1], n, ANOTHER) for i, n in confirmed]
     after = {ws[i + 1] for i, _ in confirmed if i + 1 < len(ws)}
     if len(confirmed) >= 2 and not kept:
         fixed += [(i, ws[i - 1], "1", "by analogy") for i, _ in unknown if i + 1 < len(ws) and ws[i + 1] in after]
@@ -224,10 +230,10 @@ def prefer(rs):
     """(the preferred reading, its further parts, the open reading or None) of an inscription's readings.
 
     Of the typed readings that give the whole text (WHOLE of the longest one's letters; not a part Griffith
-    printed, not a reconstruction), the first in ORDER, then the latest, then the longest. A typed reading that
-    shares nothing with it and with the parts already taken is a further part (the other side of a label, the
-    second piece of a broken table), taken in the same order."""
-    typed = [r for r in rs if r["typed"] and words(r["text"]) and not r.get("reconstruction")]
+    printed, not a reconstruction, not Millet's analysis of a line), the first in ORDER, then the latest, then the
+    longest. A typed reading that shares nothing with it and with the parts already taken is a further part (the
+    other side of a label, the second piece of a broken table), taken in the same order."""
+    typed = [r for r in rs if r["typed"] and words(r["text"]) and not r.get("reconstruction") and not r.get("analysis")]
     typed = [r for r in typed if not r.get("superseded")] or typed
     if not typed:
         return None, [], None
@@ -432,8 +438,7 @@ def build(verdicts=None):
             continue
         other = next((s_ for s_ in seeds if R.rule(x["letters"], s_["letters"], skip)[0] == "sure"), None)
         if other is not None:
-            l = other["line"]
-            decided[x["key"]] = ("phrase", None, m, f"{SET_ASIDE} the text of Millet 1968 p. {l['page'] or '?'} ({l['file']} line {l['line']})")
+            decided[x["key"]] = ("phrase", None, m, f"{SET_ASIDE} the text of {O.label(other['line'])}")
     for key in read_none:                                        # what the readers found stays on the record
         cls, g, m, by = decided[key]
         decided[key] = (cls, g, m, f"{by}; {READ_NONE}")
@@ -446,21 +451,28 @@ def build(verdicts=None):
         cls, g, m, by = decided[x["key"]]
         if cls in ("reading", "unidentified") and g is not None:
             members[g].append(x)
+    # the witnesses (an entry's texts printed under one number, FHN 267): each beside the inscription of its REM
+    # number, or an inscription of its own when no other reading has that number; matched with nothing
+    rem_root = {}
+    for r in editions:
+        for v in r["numbers"].get("rem", ()):
+            rem_root.setdefault(v, group_of(r["key"]))
+    for w in R.witnesses():
+        members[rem_root.get(w["numbers"]["rem"][0], w["key"])].append(w)
+        by_key[w["key"]] = w
     # the names: the spellings of the lines that Otten's files tag as a person's name (ANTHROPONYM, ROYAL NAME, NAME)
     name_spellings = [s for l in lines if l["file"] != "LobbanVocabList.txt" and ("ANTHROPONYM" in l["tag"] or "NAME" in l["tag"])
                       for s in O.spellings(l)]
     inscriptions, id_of = [], {}
     for root, rs in members.items():
         rs = sorted(rs, key=lambda r: (source_rank(r) if r["typed"] else 9, r["key"]))
-        iid = name_of(rs)
-        if not iid:
-            l = next(r["line"] for r in rs if r.get("line"))
-            iid = f"Millet 1968 p. {l['page'] or '?'} ({l['file']} line {l['line']})"
+        iid = name_of(rs) or O.label(next(r["line"] for r in rs if r.get("line")))
         best, parts, open_ = prefer(rs)
         text, fixes, marked = None, [], []
         if best:
-            later = [r["text"] for r in rs if r is not best and r["typed"] and year(r) > year(best) > 0]
-            text, fixes = numerals(" ".join(w for r in [best] + parts for w in words(r["text"])), later)
+            others = [r["text"] for r in rs if r is not best and r not in parts and r["typed"]
+                      and not r.get("analysis") and not r.get("reconstruction")]
+            text, fixes = numerals(" ".join(w for r in [best] + parts for w in words(r["text"])), others)
             if any(r["family"] == "otten" for r in rs):
                 marked = O.name_words(text, name_spellings)
         sites = [r["site"] for r in sorted(rs, key=lambda r: ("griffith karanog fhn millet2005 mnl otten".split().index(r["family"])))
@@ -481,7 +493,7 @@ def build(verdicts=None):
                                "v5": r.get("v5")} for r in rs],
                "_root": root}
         inscriptions.append(ins)
-    order = lambda i: (0 if i["rem"] else 1 if "ga" in i["numbers"] else 2 if not i["id"].startswith("Millet 1968") else 3, i["id"])
+    order = lambda i: (0 if i["rem"] else 1 if "ga" in i["numbers"] else 2 if i["numbers"] else 3, i["id"])
     inscriptions.sort(key=order)
     if len({i["id"] for i in inscriptions}) != len(inscriptions):
         twice = [k for k, n in collections.Counter(i["id"] for i in inscriptions).items() if n > 1]
@@ -512,6 +524,16 @@ WHAT = {"reading": "a reading of an inscription", "phrase": "an example phrase f
         "pending": "not identified: a doubtful match that two readers have not settled"}
 
 
+def all_runs(a, b):
+    """(share of a's runs in b, share of b's runs in a) of two letter strings, every run of five letters counted,
+    the formulae too: the two shares as src/experts/prepare.py (match) computes them. The rule counts own runs."""
+    ra, rb = R.runs(a), R.runs(b)
+    if not ra or not rb:
+        return None, None
+    n = len(ra & rb)
+    return round(n / len(ra), 3), round(n / len(rb), 3)
+
+
 def map_rows(b):
     """Every id of corpus_v5: what it is, of which inscription, and the evidence."""
     lines = {r["key"]: r for r in line_rows(b)}
@@ -527,9 +549,9 @@ def map_rows(b):
         tid, n = r["id"], len(r["text"].split())
         row = {"id": tid, "words": n, "copies": r.get("copies", 1)}
         if tid in by_v5:
-            x = by_v5[tid]
+            x = by_v5[tid]                     # an edition's row is its own text; a narrative is what the rule made it
             cls, g, m, by = b["decided"].get(x["key"], ("reading", None, None, "the row is the edition's own text"))
-            row.update({"class": "reading", "what": WHAT["reading"], "inscription": ins_of_reading.get(x["key"]),
+            row.update({"class": cls, "what": WHAT.get(cls, cls), "inscription": ins_of_reading.get(x["key"]),
                         "reading": x["key"], "by": by, "share_of_text": m[1] if m else None,
                         "share_of_other": m[2] if m else None, "shared_runs": m[3] if m else None,
                         "against": m[4] if m else None, "copy": ""})
@@ -547,6 +569,9 @@ def map_rows(b):
                         "share_of_text": l["share_of_line"], "share_of_other": l["share_of_text"],
                         "shared_runs": l["shared_runs"], "against": l["against"],
                         "copy": "" if first_row.get(src[0][0]) == tid else "a copy of its source line with a name swapped"})
+        if row.get("against"):
+            row["share_of_text_all"], row["share_of_other_all"] = all_runs(b["by_key"][row["reading"]]["letters"],
+                                                                           b["by_key"][row["against"]]["letters"])
         out.append(row)
     # one row of corpus_v5 stands for each inscription: the row of its preferred reading, else its first reading
     stands = {}
@@ -581,6 +606,12 @@ def corpus_rows(b, mapped):
     return out
 
 
+def editions_of(i):
+    """The editions an inscription is read in: the works of its readings, so that the faces, fragments or
+    quotations that one edition prints apart count once."""
+    return len({r["work"] for r in i["readings"]})
+
+
 def measures(b, mapped, corpus):
     ins = b["inscriptions"]
     n = len(ins)
@@ -595,6 +626,7 @@ def measures(b, mapped, corpus):
                "not settled by two readers" if m.get("class") == "pending" else "not traced")
         classes[key].append(m)
     typed = [i for i in ins if i["text"]]
+    source = lambda c: c["reading"].split(":")[0] + (":narrative" if ":narrative:" in c["reading"] else "")
     return {
         "corpus_v5": {"texts": len(mapped), "words": w(mapped),
                       "classes": {k: {"texts": len(v), "words": w(v)} for k, v in sorted(classes.items())}},
@@ -605,16 +637,18 @@ def measures(b, mapped, corpus):
             "typed_without_a_legible_word": sum(not i["text"] and any(r["typed"] for r in i["readings"]) for i in ins),
             "in_two_or_more_parts": sum(bool(i["parts"]) for i in ins),
             "with_a_rem_number": sum(bool(i["rem"]) for i in ins),
-            "with_real_names": len(typed),
-            "with_two_readings_or_more": sum(len(i["readings"]) >= 2 for i in ins),
+            "with_real_names": sum(not any(w in P.MASKED for w in i["text"].split()) for i in typed),
+            "with_readings_from_two_editions_or_more": sum(editions_of(i) >= 2 for i in ins),
             "with_an_open_reading": sum(bool(i["open"]) for i in ins),
             "with_an_open_reading_of_the_whole_text": sum(bool(i["open"]) and i["open_whole"] for i in ins),
             "preferred_reading_is_open": sum(bool(c["open"]) for c in corpus),
             "in_corpus_v5": sum(bool(c["v5"]) for c in corpus),
-            "not_identified": sum(i["id"].startswith("Millet 1968") for i in ins),
+            "new_to_the_corpus_by_source": dict(collections.Counter(source(c) for c in corpus if not c["v5"]).most_common()),
+            "not_identified": sum(not i["numbers"] for i in ins),
             "by_kind": dict(collections.Counter(i["kind"] for i in ins).most_common()),
-            "preferred_by_source": dict(collections.Counter(c["reading"].split(":")[0] + (":narrative" if ":narrative:" in c["reading"] else "")
-                                                             for c in corpus).most_common()),
+            "kind_not_known_and_only_in_the_printout": sum(i["kind"] == "not known" and all(r["work"] == PRINTOUT for r in i["readings"])
+                                                          for i in ins),
+            "preferred_by_source": dict(collections.Counter(source(c) for c in corpus).most_common()),
         },
         "corpus_v6": {"texts": len(corpus), "words": sum(len(c["text"].split()) for c in corpus),
                       "words_of_inscriptions_in_corpus_v5": sum(len(c["text"].split()) for c in corpus if c["v5"]),
@@ -627,10 +661,10 @@ def measures(b, mapped, corpus):
 
 def pending_rows(b):
     out = []
+    skip = R.formulae(b["editions"])
     for x in b["olines"]:
         cls, g, m, by = b["decided"][x["key"]]
         if cls == "pending":
-            skip = R.formulae(b["editions"])
             cands = (candidates(x, b["editions"], b["group_of"], skip)
                      or candidates(x, b["editions"], b["group_of"], skip, floor=LOOSE))[:3]
             out.append({"line": x["key"], "letters": len(x["letters"]),
