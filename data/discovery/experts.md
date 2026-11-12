@@ -18,9 +18,9 @@ are in [`experts_figures.json`](experts_figures.json) and are checked by `tests/
 4. **It found errors in our data.** In one epitaph the numeral 1 was typed as the letter `l` and read as a word;
    eleven names or pieces of words were read as words; and for `mlo` the map holds only "adjective" where both
    editions read "good".
-5. **It found almost no new meaning.** Two readers listed 167 different meanings that the editions give. Those that are stated as
-   sure and missing from the map are titles the editions leave untranslated too, meanings Rilly holds as
-   proposals, and a handful of others (section 5).
+5. **It found almost no new meaning.** Two readers listed 167 different meanings that the editions give. Those
+   stated as sure on words the map has no accepted meaning for are mostly titles the editions leave untranslated
+   too, phrases whose words the map reads the same way, and meanings Rilly holds as proposals (section 5).
 6. **The editions are not a later authority than the lexicon.** One is of 1998, the other was printed in 2005
    from a manuscript its author left unfinished. Where they differ from Rilly 2003, this check cannot say who is
    right.
@@ -32,7 +32,7 @@ are in [`experts_figures.json`](experts_figures.json) and are checked by `tests/
   grammar, name and number.
 - **The editions:**
   - N. B. Millet, "The Meroitic Inscriptions from Gebel Adda", *Journal of the Society for the Study of Egyptian
-    Antiquities* 32 (2005), 1–66: 49 entries, most with a transliteration, a commentary and, for 20, a rendering
+    Antiquities* 32 (2005), 1–66: 46 entries, most with a transliteration, a commentary and, for 20, a rendering
     into English.
   - *Fontes Historiae Nubiorum* III (Eide, Hägg, Pierce and Török, Bergen 1998): twelve entries on Meroitic
     texts, each a transliteration followed by László Török's comments, which translate what can be translated.
@@ -87,8 +87,8 @@ Words the map does not count as translated (542):
 | unknown | 181 | 54 | 0 | 0 | 0 | 54 |
 
 So where the lexicon has only a proposal, the editions side with it about as often as they side with its accepted
-meanings. Most of the 54 "new" verdicts on unknown words are personal names that the older corpus did not
-recognise (section 5).
+meanings. About half of the 54 "new" verdicts on unknown words are personal names that the map did not take for
+names (section 5).
 
 ## 4. What the differences are
 
@@ -105,7 +105,7 @@ non-agreements of the last row, sorted by a rule on the judge's note (`differenc
 
 1. **The numeral 1 typed as the letter `l`: 8.** In the epitaph of Makheye (Faras 44, REM 0544, FHN 271) each
    prince's name is followed by the numeral 1; FHN's comment says so, and the scanned page shows it. Our copy of
-   the older corpus has `l` there, and the map read it as a word. The text stands eight times in that corpus.
+   the older corpus has `l` there, and the map read it as a word. The text stands four times in that corpus.
    The count of translated words does not change, since a numeral counts as translated; the reading does.
 2. **A name or a piece of a word read as a word: 11.** For example the names Atoye and Tareye, read as "water"
    and "to give" with an ending; the name Qoresemye, read as "wife of the king"; the first half of the name of
@@ -163,14 +163,15 @@ What is in it:
    untranslated too ("great womnis"), phrases whose words we read the same way, or meanings the lexicon holds as
    proposals (`ari` "heaven", `pqr` "prince").
 6. **Two artefacts of this table, not errors of the map:** an ending looked up by itself gets the wrong entry
-   (`-te`, four lines: the editions' "in", which the map does read inside words), and one reading reached the
-   judges cut short.
+   (`-te`, four lines, three of them the editions' "in", which the map does read inside words), and one reading
+   reached the judges cut short.
 
 In the 31 texts themselves the first judge found a meaning from the edition for 58 words the map leaves without
-one: 30 personal names, 8 pieces of other words, 6 places or peoples and 14 words, 12 of them proposals the
-edition marks as unsure. The lists with the meanings are local, because they hold the lexicon's glosses and the
-editions' wording; [`experts_words.tsv`](experts_words.tsv) gives every word of the 31 texts with its level and
-the verdicts, without them.
+one. Sorted by a rule on the judge's note (`kind_of` in `src/experts/missing.py`), they are 30 personal names, 8
+pieces of other words, 6 places or peoples and 14 words, 12 of them proposals the edition marks as unsure. The
+lists with the meanings are local, because they hold the lexicon's glosses and the editions' wording;
+[`experts_words.tsv`](experts_words.tsv) gives every word of the 31 texts with its level and the verdicts,
+without them.
 
 ## 6. How far to trust it
 
@@ -189,9 +190,12 @@ the verdicts, without them.
 4. **One judge for two thirds of the words.** Only the third pack had a second judge.
 5. **The editions reached the judges as text layers,** one of them an OCR of a scan with misread letters. A
    judge could mark a word absent that is there.
-6. **Each list of meanings comes from one reader,** so its completeness is not measured, and the judges of the
+6. **One commentary did not reach its judge.** Millet prints one commentary for the two fragments GA55 and GA56,
+   after the text of GA56, and the packs gave it with GA56 only. The words of GA55 were judged without it, and
+   the judge marked every one "silent"; the commentary takes `abrlo`, "man" in the map, for the father's name.
+7. **Each list of meanings comes from one reader,** so its completeness is not measured, and the judges of the
    meanings table compared the reader's wording of the edition, not the print.
-7. **Small and of one kind:** 31 texts, most of them epitaphs. The inscription of Kharamadoye is 234 of the
+8. **Small and of one kind:** 31 texts, most of them epitaphs. The inscription of Kharamadoye is 234 of the
    1,115 words, and FHN translates little of it.
 
 ## 7. Files and rebuild
@@ -204,18 +208,18 @@ the verdicts, without them.
 | `src/experts/close.py` | the second reader's pack, the table of meanings with each judge's decoys, the list of what the map lacks | public |
 | `src/experts/publish.py` | the two public files below | public |
 | `tests/test_experts.py` | the method on made-up rows and answers, and the numbers of this page | public |
-| `experts_figures.json` | every number of this page | public |
+| `experts_figures.json` | every number of this page but the costs | public |
 | `experts_words.tsv` | 694 lines: each word form of the 31 texts with its level and the first judge's verdicts; no readings | public |
 | `data/sources/expert/` | the packs, the answers, the rows with the decoy keys, the lists with readings and meanings | local |
-| `data/sources/jssea/`, `data/sources/fhn/` | the two editions and their text layers | local |
+| `data/sources/jssea/`, `data/sources/fhn/` and `data/sources/jssea-text/`, `data/sources/fhn-text/` | the two editions and their text layers | local |
 
 ```
-python3 -I src/experts/prepare.py match        # the scores behind the table HELD
+python3 -I src/experts/prepare.py match        # the scores behind the table HELD, counted both ways
 python3 -I src/experts/prepare.py packs        # refuses once a judge has answered
-python3 -I src/experts/prepare.py extra
+python3 -I src/experts/prepare.py extra        # refuses once the reader has answered
 python3 -I src/experts/tally.py
 python3 -I src/experts/missing.py
-python3 -I src/experts/close.py reader
+python3 -I src/experts/close.py reader         # refuses once the reader has answered
 python3 -I src/experts/close.py table          # refuses once a judge has answered
 python3 -I src/experts/close.py count
 python3 -I src/experts/publish.py
@@ -226,7 +230,7 @@ The packs go to agents by hand: one agent per pack, told to read only that file 
 
 ## 8. Cost
 
-Nine agent runs and one reviewer of the local scripts: two readers (101,743 and 115,377 subagent tokens), four
+Eight agent runs and one reviewer of the local scripts: two readers (101,743 and 115,377 subagent tokens), four
 judges of the packs (104,505, 119,963, 119,956 and 117,195), two judges of the meanings table (66,846 and
 66,858) and a reviewer that had reached 210,918 after four rounds. Together about 1.02 million tokens and about
 35 minutes of running, in two passes. The review of this page and of the scripts as published is counted in

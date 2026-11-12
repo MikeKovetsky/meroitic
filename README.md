@@ -93,9 +93,10 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     counts as translated there, the edition gives a meaning to 397 and the map's meaning to 276 (69.5%). Most of
     the gap is two words: `yetmde`, "nephew, niece" in the lexicon and "relative" in both editions, and `qo`,
     "this one" against Millet's "the noble". Outside them it is 259 of 304 (85.2%). On a quarter of the words the
-    editions are silent. The check found a numeral typed as a letter in the older corpus and eleven names read
-    as words, and almost no meaning that the map lacks: of 167 meanings the editions give, the sure ones missing
-    from the map are titles left untranslated, proposals the lexicon already holds, and a handful of others
+    editions are silent. The check found a numeral typed as a letter in the older corpus and eleven names or
+    pieces of words read as words, and almost no meaning that the map lacks: of 167 meanings the editions give,
+    the sure ones on words without an accepted meaning in the map are mostly titles left untranslated, phrases
+    whose words the map reads the same way, and proposals the lexicon already holds
     ([`data/discovery/experts.md`](data/discovery/experts.md)).
 
 ## The question
@@ -128,7 +129,7 @@ what can be rebuilt.
 | Rilly, Hintze, Griffith, Millet and others via web sources | the answer key: 82 accepted meanings, 26 grammatical endings, each sourced | `data/gold_lexicon.json`, `data/gold_morphology.json` |
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
-| Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 49 and 12 entries on Meroitic texts with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/`, and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
+| Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
 
 ## Methods
 

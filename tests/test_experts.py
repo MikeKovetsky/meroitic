@@ -6,13 +6,14 @@ The editions' text, our gloss file and the judges' answers are local only, so th
 made-up rows and answers; the checks of the reported numbers read the public figures file, and compare it with
 the local files where those are present.
 """
-import contextlib, csv, io, json, pathlib, re, sys, tempfile
+import collections, contextlib, csv, io, json, pathlib, random, re, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src" / "experts"), str(ROOT / "src"), str(ROOT / "tests")]
 
 import close as K      # noqa: E402
 import missing as M    # noqa: E402
+import prepare as P    # noqa: E402
 import publish as U    # noqa: E402
 import tally as T      # noqa: E402
 from local_only import needs, run   # noqa: E402
@@ -22,8 +23,11 @@ FIGURES = ROOT / "data/discovery/experts_figures.json"
 WORDS = ROOT / "data/discovery/experts_words.tsv"
 LOCAL = ("data/sources/expert/rows.jsonl", "data/sources/expert/figures.json",
          "data/sources/expert/meanings_figures.json", "data/sources/expert/missing_grouped.tsv",
-         "data/sources/expert/answers/judge1_A.jsonl", "data/sources/expert/answers/extractor.jsonl",
-         "data/sources/expert/answers/reader_held.jsonl", "data/rilly2003", "data/sources/coverage/corrected/glosses.jsonl")
+         "data/sources/expert/meanings_rows.jsonl", "data/sources/expert/answers/judge1_A.jsonl",
+         "data/sources/expert/answers/extractor.jsonl", "data/sources/expert/answers/reader_held.jsonl",
+         "data/rilly2003", "data/sources/coverage/corrected/glosses.jsonl", "data/sources/jssea-text/pages.txt",
+         "data/sources/fhn-text/pages.txt")
+NUMBER = dict(enumerate("zero one two three four five six seven eight nine ten eleven twelve".split()))
 
 # --- src/experts/tally.py ---
 def row(i, level, decoy=False, source="millet", pack="A"):
@@ -213,9 +217,19 @@ def found(word, meaning, source="Millet 2005", entries=("GA1",), doubt=False, by
     return {"source": source, "entries": list(entries), "word": word, "meaning": meaning, "doubt": doubt, "from": by}
 
 
+@contextlib.contextmanager
 def stub(table):
-    """Replace close.held by a lookup in a small table {word: (state, reading)}."""
-    K.held = lambda word, source, m: table.get(word, ("not in the map", ""))
+    """close.held replaced by a lookup in a small table {word: (state, reading)} for the length of a with block."""
+    held, K.held = K.held, lambda word, source, m: table.get(word, ("not in the map", ""))
+    try:
+        yield
+    finally:
+        K.held = held
+
+
+def one_judge(rows, seed=K.SEED, share=K.DECOYS):
+    """Decoys for one judge alone: {line id: decoy}."""
+    return K.decoys_by_judge(rows, 1, seed, share)[0]
 
 
 def test_comments_start_at_the_heading():
@@ -226,12 +240,12 @@ def test_comments_start_at_the_heading():
 
 
 def test_lines_are_merged_per_source_word_and_meaning():
-    stub({"pelmos": ("translated", "general, strategos"), "penn": ("held without an accepted meaning (kind)", "[noun]")})
-    rows = K.lines([found("pelmos", "general", entries=["GA4"]),
-                    found("Pelmos", "General", entries=["GA29"], doubt=True, by="reader_held"),     # the same line
-                    found("pelmos", "general", source="FHN III", entries=["246"]),                 # another source
-                    found("pelmos", "strategus", entries=["GA17"]),                                # another meaning
-                    found("penn", "year", doubt=True), found("ktwse", "of the Candace")], None)
+    with stub({"pelmos": ("translated", "general, strategos"), "penn": ("held without an accepted meaning (kind)", "[noun]")}):
+        rows = K.lines([found("pelmos", "general", entries=["GA4"]),
+                        found("Pelmos", "General", entries=["GA29"], doubt=True, by="reader_held"),     # the same line
+                        found("pelmos", "general", source="FHN III", entries=["246"]),                 # another source
+                        found("pelmos", "strategus", entries=["GA17"]),                                # another meaning
+                        found("penn", "year", doubt=True), found("ktwse", "of the Candace")], None)
     assert [r["line"] for r in rows] == ["L001", "L002", "L003", "L004", "L005"]
     first = rows[0]
     assert first["entries"] == ["GA29", "GA4"] and first["doubt"] is False          # unsure only if every mention is
@@ -241,9 +255,10 @@ def test_lines_are_merged_per_source_word_and_meaning():
 
 
 def test_a_reading_of_marks_only_is_not_judged():
-    stub({"x": ("held without an accepted meaning (unknown)", "? / —"), "y": ("translated", "ḫbḫne")})
-    rows = K.lines([found("x", "a thing"), found("y", "a title")], None)
+    with stub({"x": ("held without an accepted meaning (unknown)", "? / —"), "y": ("translated", "ḫbḫne")}):
+        rows = K.lines([found("x", "a thing"), found("y", "a title")], None)
     assert [r["judged"] for r in rows] == [False, True]
+    assert K.held is M.held                                                   # the stub is gone again
 
 
 def test_a_decoy_neither_echoes_our_reading_nor_fits_the_expert():
@@ -253,7 +268,7 @@ def test_a_decoy_neither_echoes_our_reading_nor_fits_the_expert():
         ("great", "big"), ("viceroy", "prince"), ("agent of Isis", "agent"), ("scribe", "writer"),
         ("nephew, niece", "relative")], 1)]
     for seed in range(40):
-        shown = K.with_decoys(rows, seed=seed, share=0.5)
+        shown = one_judge(rows, seed=seed, share=0.5)
         assert len(shown) == 5
         for r in rows:
             if r["line"] in shown:
@@ -267,11 +282,11 @@ def test_a_decoy_neither_echoes_our_reading_nor_fits_the_expert():
             {"line": "L002", "judged": True, "ours": "goddess Isis", "meaning": "lady"},
             {"line": "L003", "judged": True, "ours": "general / water", "meaning": "general of the water"},
             {"line": "L004", "judged": True, "ours": "land / ruler", "meaning": "ruler of the land"}]
-    assert K.with_decoys(pair[:2], share=1.0) == {}                                      # "goddess" echoes "god"
+    assert one_judge(pair[:2], share=1.0) == {}                                          # "goddess" echoes "god"
     one = {"line": "L005", "judged": True, "ours": "viceroy", "meaning": "prince"}       # one word: no reading of one
-    assert K.with_decoys(pair[2:] + [one], share=1.0) == {"L003": "land / ruler", "L004": "general / water"}
-    assert K.with_decoys([r for r in rows if "mother" in r["ours"]], share=1.0) == {}     # no far reading: no decoy
-    assert K.with_decoys(rows + [{"line": "L099", "judged": False, "ours": "", "meaning": "x"}], share=0.0) == {}
+    assert one_judge(pair[2:] + [one], share=1.0) == {"L003": "land / ruler", "L004": "general / water"}
+    assert one_judge([r for r in rows if "mother" in r["ours"]], share=1.0) == {}         # no far reading: no decoy
+    assert one_judge(rows + [{"line": "L099", "judged": False, "ours": "", "meaning": "x"}], share=0.0) == {}
 
 
 def test_each_judge_has_decoys_of_its_own_and_no_line_is_without_a_real_reading():
@@ -317,13 +332,13 @@ def test_decoys_are_spread_through_the_table():
 
 
 def test_count_end_to_end():
-    stub({"pelmos": ("translated", "general, strategos"), "wos": ("translated", "Isis"),
-          "mte": ("translated", "child"), "lh": ("translated", "great"), "kdi": ("translated", "woman"),
-          "ato": ("held without an accepted meaning (hypothesis)", "water?"), "penn": ("not in the map", ""),
-          "ant": ("held without an accepted meaning (kind)", "a title")})
-    lines = K.lines([found("pelmos", "general"), found("wos", "Isis"), found("mte", "second, junior"),
-                     found("lh", "great", doubt=True), found("kdi", "lady"), found("ato", "water"), found("ant", "priest"),
-                     found("penn", "year")], None)
+    with stub({"pelmos": ("translated", "general, strategos"), "wos": ("translated", "Isis"),
+               "mte": ("translated", "child"), "lh": ("translated", "great"), "kdi": ("translated", "woman"),
+               "ato": ("held without an accepted meaning (hypothesis)", "water?"), "penn": ("not in the map", ""),
+               "ant": ("held without an accepted meaning (kind)", "a title")}):
+        lines = K.lines([found("pelmos", "general"), found("wos", "Isis"), found("mte", "second, junior"),
+                         found("lh", "great", doubt=True), found("kdi", "lady"), found("ato", "water"),
+                         found("ant", "priest"), found("penn", "year")], None)
     rows = K.table_rows(lines, seed=1, share=0.0)
     for r in rows:                                          # wos is decoyed for the first judge, kdi for the second
         if r["word"] in ("wos", "kdi", "ant"):
@@ -403,7 +418,63 @@ def test_readers_lines_are_read_with_care():
         ("Millet 2005", "pelmos", ["GA04", "GA29"], False), ("FHN III", "ant", ["246"], False)]
 
 
+# --- src/experts/prepare.py, and the packs ---
+def test_match_counts_the_runs_both_ways():
+    ours = [("T1", P.runs("abcdefghijklmnopqrst")), ("T2", P.runs("abcdefg")), ("T3", P.runs("zzzzzzzz"))]
+    (_, _, best, mine), (_, _, none, held) = P.match([("GA1", "abcdefghij"), ("GA2", "abc")], lambda b: b, ours,
+                                                     {"GA1": "T2", "GA2": "T1"})
+    # six runs of five letters: all in T1, which has 16; three in T2, which has those three only
+    assert best == [(1.0, "T1", 6 / 16), (0.5, "T2", 1.0)] and mine == (0.5, "T2", 1.0)
+    assert none == [] and held is None                                     # shorter than a run: nothing to match
+
+
+def test_an_entry_on_two_inscriptions_goes_whole_to_each():
+    entries = [("GA04", "GA04: A stela\n1: wos\nRENDERING\nO Isis"), ("GA55&GA56", "GA55 & GA56: Two fragments"),
+               ("GA55", "GA55: .25 x .20 m., GA56: .27 x .14 m."), ("GA55", "GA55:\n1: wosi"),
+               ("GA56", "GA56:\n1: arom\nCOMMENTARY\nThe father's name"), ("GA57", "GA57: A stela\nRENDERING\nO Osiris"),
+               ("GA68&69", "GA68 & 69: Two dipinti")]
+    assert [sorted(e) for e, _ in P.millet_parts(entries)] == [["GA04"]] + [["GA55", "GA56"]] * 4 + [["GA57"], ["GA68", "GA69"]]
+    assert P.millet_counts(entries) == (4, 2)                              # entries, with a rendering
+    assert P.numbers("GA13&GA16") == {"GA13", "GA16"} and P.numbers("GA7") == {"GA7"}
+
+
+def test_packs_are_drawn_the_same_in_every_run():
+    sizes = {("fhn", "300"): 30, ("millet", "GA21"): 11, ("millet", "GA37"): 11, ("millet", "GA31"): 16,
+             ("millet", "GA56"): 16, ("millet", "GA41"): 10, ("millet", "GA55"): 10}
+    where, load = P.pack_of(sizes)
+    assert load == [30, 37, 37] and where[("fhn", "300")] == 0              # largest first, each into the lightest
+    assert (where["millet", "GA31"], where["millet", "GA56"], where["millet", "GA21"]) == (1, 2, 1)   # ties by key
+    for seed in range(20):                                                  # whatever order the texts come in
+        keys = list(sizes)
+        random.Random(seed).shuffle(keys)
+        assert P.pack_of({k: sizes[k] for k in keys}) == (where, load)
+
+
+def test_a_pack_with_answers_is_never_replaced():
+    for answered, write in (("judge1_A.jsonl", P.packs), ("extractor.jsonl", P.extra), ("reader_held.jsonl", K.reader),
+                            ("meanings_judge2.jsonl", K.table)):
+        with tempfile.TemporaryDirectory() as d:
+            out = pathlib.Path(d)
+            (out / "answers").mkdir()
+            (out / "answers" / answered).write_text("{}\n", encoding="utf-8")
+            try:
+                write(out)
+            except SystemExit as e:
+                assert "not writing" in str(e), (answered, e)
+            else:
+                raise AssertionError(f"{write.__name__} wrote its pack again over {answered}")
+            assert sorted(p.name for p in out.rglob("*")) == ["answers", answered]
+
+
 # --- src/experts/publish.py and the page ---
+def test_copies_of_a_text():
+    text = "a b c d e f g h i j"
+    glossed = [{"id": "T1", "text": text}, {"id": "T2", "text": text.replace("j", "k")},   # 7 of its 8 runs of three
+               {"id": "T3", "text": "a b c d x y z w v u"},                            # 2 of 8
+               {"id": "T4", "text": text + " k l m n o p q r s t"}]                     # all of T1 in a longer text
+    assert U.copies("T1", glossed) == 3 and U.copies("T3", glossed) == 1
+
+
 def test_groups_by_the_wording_of_our_reading():
     assert U.group_of("nephew, niece +lowi") == U.group_of("(part of yetmdelowi)") == "yetmde"
     assert U.group_of("this one") == U.group_of("this one is") == U.group_of("this is Tnkde") == "qo"
@@ -462,7 +533,7 @@ def test_reported_numbers():
     assert f"for {quiet} of the {a['rows']} words the map counts as translated in these texts ({quiet / a['rows']:.1%})" in text
     assert f"silent on {a['silent']} of the {a['rows']} words, and {a['absent']} are not in its text" in text
     assert f"{t['agree_with_doubt']} of the {a['agree']} agreements" in text and f"overlap in part for {a['partly']} more and differ for {a['differ'] + a['new']}" in text
-    assert f"(hypothesis) {cells(n['hypothesis'])}".replace("(hypothesis) |", "(the lexicon has a proposal) |") in text
+    assert f"| hypothesis (the lexicon has a proposal) {cells(n['hypothesis'])}" in text
     assert f"(only the kind of word is known) {cells(n['kind'])}" in text and f"| unknown {cells(n['unknown'], share=False)}" in text
     assert f"does not count as translated ({n['all']['rows']})" in text
     g = f["groups"]
@@ -505,10 +576,25 @@ def test_reported_numbers():
     pair = m["two judges, translated"]
     assert f"on the {pair['rows']} lines of the meanings table both saw with our reading, on {pair['same_verdict']} ({pair['kappa']:.2f})" in text
     k = f["new in the held texts"]
-    assert (f"for {k['all']} words the map leaves without one: {k['a personal name']} personal names, {k['a piece of another word']} "
-            f"pieces of other words, {k['a place or a people']} places or peoples and {k['a word']} words, {k['a word, marked as unsure']} of them") in text
+    assert f"for {k['all']} words the map leaves without one." in text
+    assert (f"they are {k['a personal name']} personal names, {k['a piece of another word']} pieces of other words, "
+            f"{k['a place or a people']} places or peoples and {k['a word']} words, {k['a word, marked as unsure']} of them") in text
     lines = WORDS.read_text(encoding="utf-8").splitlines()
     assert f"`experts_words.tsv` | {len(lines) - 1} lines" in text
+    # what section 2 says of the editions, and the counts of section 1, 4 and 6 not in a table
+    e = f["editions"]
+    assert (f"1–66: {e['Millet 2005, entries']} entries, most with a transliteration, a commentary and, for "
+            f"{e['Millet 2005, entries with a rendering into English']}, a rendering into English") in text
+    assert f"Bergen 1998): {NUMBER[e['FHN III, entries on Meroitic texts']]} entries on Meroitic texts" in text
+    assert f"The text stands {NUMBER[x['copies in the corpus of the text with the numeral 1 typed as l']]} times" in text
+    assert f"{NUMBER[d[U.DIFFERENCES[1]]]} names or pieces of words were read as words" in text
+    assert f"Kharamadoye is {w['judged, the inscription of Kharamadoye']} of the {w['judged']:,} words" in text
+    table = {(r["word"], r["level"]): r for r in csv.DictReader(WORDS.open(encoding="utf-8"), delimiter="\t")}
+    count = lambda verdict, *forms: sum(int(table[form, level][verdict]) for form, level in forms)   # noqa: E731
+    assert count("differ", ("tebwe", "name"), ("tebwete", "name")) == 4 and "Thebes for FHN (4 places)" in text
+    assert count("partly", ("pilqoyte", "name")) == 2 and "against \"from Philae\" (2)" in text
+    assert count("differ", ("meteli", "meaning")) + count("partly", ("mteli", "meaning")) == 2 and "Millet's \"little\" (2)" in text
+    assert count("differ", ("l", "meaning")) == d[U.DIFFERENCES[0]]
 
 
 def test_public_files_hold_counts_and_word_forms_only():
@@ -533,6 +619,64 @@ def test_public_files_hold_counts_and_word_forms_only():
         assert counts[0] == sum(counts[1:]) and counts[0] > 0, r
 
 
+def test_the_summary_pages_carry_the_figures():
+    """README, REPORT, NEXT_STEPS, the coverage page and the summary page give this check's numbers as the figures
+    file has them."""
+    f = json.loads(FIGURES.read_text(encoding="utf-8"))
+    a, other, g, t = f["translated"]["all"], f["groups"]["other"], f["groups"], f["translated"]
+    held, d, e, m = f["texts"]["held by both"], f["other differences"], f["editions"], f["meanings"]
+    lack, sure = m["lacking"], m["lacking, stated as sure"]
+    otherwise = [k for k in lack if k != "our map has no accepted meaning for the word"]
+    quiet = a["silent"] + a["absent"]
+    four = NUMBER[f["texts"]["copies in the corpus of the text with the numeral 1 typed as l"]]
+    names = f"{NUMBER[d[U.DIFFERENCES[1]]]} names or pieces of words"
+    of = f"the edition gives a meaning to {a['given']}"
+    share, outside = f"{a['agree']} ({a['agree_share']:.1%})", f"{other['agree']} of {other['given']} ({other['agree_share']:.1%})"
+    flat = lambda doc: " ".join((ROOT / doc).read_text(encoding="utf-8").replace("`", "").replace("*", "").split())   # noqa: E731
+    for doc, phrases in {
+        "README.md": [f"give the map's meaning for {a['agree_share']:.0%} of the words they translate, and for "
+                      f"{other['agree_share']:.0%} outside two words", f"For the {held} inscriptions",
+                      f"Of the {a['rows']} words the map counts as translated there, {of} and the map's meaning to {share}",
+                      f"Outside them it is {outside}", f"{names} read as words", f"of {m['lines']} meanings the editions give",
+                      f"| {e['Millet 2005, entries']} and {e['FHN III, entries on Meroitic texts']} entries on inscriptions"],
+        "REPORT.md": [f"2005; {e['Millet 2005, entries']} entries, {e['Millet 2005, entries with a rendering into English']} with a "
+                      f"rendering into English)", f"{NUMBER[e['FHN III, entries on Meroitic texts']]} entries on Meroitic texts",
+                      f"{held} of their inscriptions are texts of our corpus",
+                      f"of the {a['rows']} words the map counts as translated in those texts, {of} and the map's meaning to "
+                      f"{share}; the two overlap in part for {a['partly']} and differ for {a['differ'] + a['new']}",
+                      f"Names agree for {t['name']['agree_share']:.1%}, words with a meaning for {t['meaning']['agree_share']:.1%}, "
+                      f"grammar words for {t['grammar']['agree_share']:.1%}",
+                      f"On {quiet} words ({quiet / a['rows']:.1%}) the edition is silent or lacks the word",
+                      f"{g['yetmde']['partly']} places judged \"partly\"", f"Millet's \"the noble\"; {g['qo']['given'] - g['qo']['agree']} places",
+                      f"the map agrees on {outside.replace(' (', ' words (')}", f"where the text stands {four} times",
+                      f"{names} were read as words", f"two readers listed {m['lines']} different meanings",
+                      f"For {lack['our map has no accepted meaning for the word']} the map has no accepted meaning for the word "
+                      f"({sure['our map has no accepted meaning for the word']} stated as sure",
+                      f"for {sum(lack[k] for k in otherwise)} it translates the word otherwise by the judges' verdict "
+                      f"({sum(sure[k] for k in otherwise)} stated as sure)",
+                      f"accepted {f['decoys']['judge1']['agree']} of the {f['decoys']['judge1']['given']} first-run decoys",
+                      f"none of the {m['decoys']['first judge'] + m['decoys']['second judge']} of the second design",
+                      f"on {f['two judges']['judge2']['all rows']['same_verdict']} of {f['two judges']['judge2']['all rows']['rows']} words"],
+        "NEXT_STEPS.md": [f"In the {held} inscriptions", f"{of} of the {a['rows']} words the map counts as translated, and the "
+                          f"map's meaning to {a['agree']} of them ({a['agree_share']:.1%}; {other['agree_share']:.1%} outside yetmde and qo",
+                          f"{names} read as words", f"a text that stands {four} times, and names",
+                          f"a numeral typed as a letter in a text that stands {four} times",
+                          f"two other scholars agree for {other['agree_share']:.0%} of the words outside yetmde and qo",
+                          f"Millet's {e['Millet 2005, entries with a rendering into English']} renderings"],
+        "data/discovery/coverage.md": [f"in the {held} texts that Millet 2005 or Fontes Historiae Nubiorum III also print, {of} "
+                                       f"of the {a['rows']} words the map counts as translated, and the same meaning as the map "
+                                       f"to {a['agree']} of them ({a['agree_share']:.1%}; {other['agree_share']:.1%} outside two words",
+                                       f"gives a word of the {held} shared texts a meaning, it is the map's meaning for "
+                                       f"{a['agree']} of {a['given']} words ({a['agree_share']:.1%})", f"{names} that the map reads as words"],
+        "docs/report.html": [f"the same {held} inscriptions", f"Of {a['rows']} words the map counts as translated, {of} and "
+                             f"the map's meaning to {share}", f"it is {outside}",
+                             f"The editions are silent on {quiet / a['rows']:.0%} of the words", f"{names} read as words"],
+    }.items():
+        text = flat(doc)
+        for phrase in phrases:
+            assert phrase in text, (doc, phrase)
+
+
 def test_public_files_are_what_the_local_files_give():
     needs(*LOCAL)
     assert U.public_figures() == json.loads(FIGURES.read_text(encoding="utf-8"))
@@ -541,6 +685,59 @@ def test_public_files_are_what_the_local_files_give():
     table = [{k: str(v) for k, v in line.items()} for line in U.words(rows, U.first_judge(rows))]
     assert table == list(csv.DictReader(WORDS.open(encoding="utf-8"), delimiter="\t"))
     assert sum(int(t["places"]) for t in table) == len(rows)
+
+
+def test_the_local_figures_are_what_the_answers_give():
+    """tally.py, missing.py and close.py count, run again on a copy of the rows and the answers, write the local
+    files that publish.py reads, byte for byte."""
+    needs(*LOCAL)
+    with tempfile.TemporaryDirectory() as d:
+        tmp = pathlib.Path(d)
+        (tmp / "answers").mkdir()
+        for name in ("rows.jsonl", "meanings_rows.jsonl"):
+            (tmp / name).write_bytes((U.FOLDER / name).read_bytes())
+        for path in (U.FOLDER / "answers").glob("*.jsonl"):
+            (tmp / "answers" / path.name).write_bytes(path.read_bytes())
+        folder, M.FOLDER = M.FOLDER, tmp
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                T.main(["tally.py", str(tmp)])
+                M.main()
+                K.count(tmp)
+        finally:
+            M.FOLDER = folder
+        for name in ("figures.json", "differences.tsv", "missing_meanings.tsv", "decoys.tsv", "extractor_checked.tsv",
+                     "missing_grouped.tsv", "meanings_checked.tsv", "meanings_decoys.tsv", "lacking.tsv",
+                     "meanings_figures.json"):
+            assert (tmp / name).read_bytes() == (U.FOLDER / name).read_bytes(), name
+
+
+def test_the_rows_and_the_table_are_the_ones_the_judges_read():
+    """The rows with their decoys and the table of meanings with each judge's decoys, drawn again by prepare.py and
+    close.py, are the recorded ones. The packs: each holds as many rows as in the run, which took three pairs of texts
+    of the same size in the order of a set (pack_of); and what the page says of GA55 and of the 54 "new" verdicts."""
+    needs(*LOCAL)
+    recorded = [json.loads(l) for l in (U.FOLDER / "rows.jsonl").open(encoding="utf-8")]
+    rows, key = P.with_decoys(P.rows_of())
+    assert [{**r, "decoy": r["row"] in key, "really": key.get(r["row"])} for r in rows] == \
+        [{k: v for k, v in r.items() if k != "pack"} for r in recorded]
+    sizes = collections.Counter((r["source"], r["entry"]) for r in recorded if r["row"])
+    pack = {(r["source"], r["entry"]): r["pack"] for r in recorded}
+    where, load = P.pack_of(sizes)
+    assert [sum(n for k, n in sizes.items() if pack[k] == "ABC"[i]) for i in range(P.PACKS)] == load
+    assert all(list(sizes.values()).count(sizes[k]) > 1 for k in sizes if pack[k] != "ABC"[where[k]])
+    one = U.first_judge([r for r in recorded if r["row"]])
+    ga55 = [r for r in recorded if r["entry"] == "GA55" and r["row"]]
+    assert {one[r["row"]]["verdict"] for r in ga55} == {"silent"}                     # section 6, item 6
+    assert any(r["form"] == "abrlo" and r["level"] == "meaning" and r["ours"].startswith("man") for r in ga55)
+    unknown = [r for r in recorded if r["row"] and not r["decoy"] and r["level"] == "unknown"
+               and one[r["row"]]["verdict"] == "new"]
+    named = sum(M.kind_of(one[r["row"]]["expert"]) == "a personal name" for r in unknown)
+    reported = json.loads(FIGURES.read_text(encoding="utf-8"))["not translated"]["unknown"]["new"]
+    assert len(unknown) == reported and 0.4 < named / len(unknown) < 0.6                  # section 3: about half
+    found = [a for name in K.READERS for a in K.answers_of(name)]
+    table = [json.loads(json.dumps(r, ensure_ascii=False)) for r in K.table_rows(K.lines(found, K.our_map()))]
+    assert table == [json.loads(l) for l in (U.FOLDER / "meanings_rows.jsonl").open(encoding="utf-8")]
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

@@ -3,8 +3,11 @@
 Local only. Reads the text layers in data/sources/jssea-text and data/sources/fhn-text (untrusted data: run with
 python3 -I) and the corrected map in data/sources/coverage/corrected. Commands:
 
-  match   which of the experts' entries are texts of our corpus, by shared runs of letters
+  match   which of the experts' entries are texts of our corpus, by shared runs of letters counted both ways
   packs   the judges' packs (the experts' words beside our reading of each word), with unmarked decoys
+  extra   the first reader's pack: the entries we do not hold, for a list of the meanings given there
+
+packs and extra refuse to write their pack again once it has been answered.
 """
 import collections
 import json
@@ -35,7 +38,9 @@ PACKS = 3
 # The experts' entries that are texts of our corpus. Chosen from `match` (shared runs of five letters, in both
 # directions) and read side by side on 2026-11-12: at least half of each text's runs are in the other, or our
 # text is a part of a longer entry (GA19, GA28), or a fragment read differently (GA47, GA56, FHN 271). Where the
-# older corpus holds padded copies of a text, the copy with the highest score stands for it.
+# older corpus holds padded copies of a text, a copy with the name masked stands for it, not one with a name
+# swapped in, though a swapped name can share more runs by chance (GA30, GA39); and a longer text that shares
+# only the formulae can score higher than the text itself (GA07, GA57).
 HELD = {
     "millet": {"GA04": "T0083", "GA07": "T0011", "GA19": "T0892", "GA20": "T0282", "GA21": "T0045",
                "GA22": "T0059", "GA24": "T0022", "GA25": "T0792", "GA28": "T0823", "GA29": "T0213",
@@ -60,13 +65,38 @@ def millet_entries():
     """[(name, block)] of the article's headed entries, each block running to the next heading."""
     pg = pages(MILLET)
     body = "\n".join(pg[n] for n in MILLET_PAGES)
-    body = body[:body.rfind("Table 1 - Gebel Adda")]
+    end = body.rfind("Table 1 - Gebel Adda")
+    body = body[:end] if end >= 0 else body
     heads = list(re.finditer(r"^(GA\s?\d+[a-z]?(?:\s?[&+]\s?(?:GA\s?)?\d+)*)\s*:", body, re.M))
     out = []
     for k, h in enumerate(heads):
         end = heads[k + 1].start() if k + 1 < len(heads) else len(body)
         out.append((h.group(1).replace(" ", ""), body[h.start():end].strip()))
     return out
+
+
+def numbers(name):
+    """The inscription numbers a heading names: "GA55&GA56" and "GA68&69" name two."""
+    return frozenset(re.findall(r"GA\d+", name)) | {f"GA{n}" for n in re.findall(r"[&+](\d+)", name)}
+
+
+def millet_parts(entries):
+    """[(the numbers of the entry a block belongs to, block)] for millet_entries(). A heading of one number inside
+    an entry on two starts a part of that entry, not an entry of its own: under "GA55 & GA56" come a line of
+    measures headed "GA55:", the text of each fragment, and one commentary after the text of GA56."""
+    out, entry = [], frozenset()
+    for name, block in entries:
+        if not numbers(name) <= entry:
+            entry = numbers(name)
+        out.append((entry, block))
+    return out
+
+
+def millet_counts(entries):
+    """(entries, entries with a rendering into English) of the article."""
+    parts = millet_parts(entries)
+    return (len({e for e, _ in parts}),
+            len({e for e, block in parts if re.search(r"^RENDERING", block, re.M)}))
 
 
 def millet_letters(block):
@@ -128,29 +158,35 @@ def glossed():
     return [json.loads(l) for l in GLOSSES.open(encoding="utf-8")]
 
 
-def match(entries, letters_of, ours):
-    """For each entry: (name, letters, [(share of its runs found, text id), best two])."""
+def match(entries, letters_of, ours, held=None):
+    """For each entry: (name, letters, the best two texts, the held text), each text as (share of the entry's runs
+    found in it, text id, share of its runs found in the entry), the best by the first share. held = {entry name:
+    text id} of the pairs chosen (None where the entry has none, or no letters)."""
     out = []
     for name, block in entries:
         letters = letters_of(block)
         g = runs(letters)
-        best = sorted(((len(g & r) / len(g), i) for i, r in ours), reverse=True)[:2] if g else []
-        out.append((name, letters, best))
+        score = lambda i, r: (len(g & r) / len(g), i, len(g & r) / len(r) if r else 0.0)   # noqa: E731
+        best = sorted((score(i, r) for i, r in ours), reverse=True)[:2] if g else []
+        mine = (held or {}).get(name)
+        out.append((name, letters, best, next((score(i, r) for i, r in ours if i == mine), None) if g else None))
     return out
 
 
 def matches():
     rows = glossed()
     ours = [(r["id"], runs(reduced_ours(r["text"].split()))) for r in rows]
-    return (match(millet_entries(), millet_letters, ours), match(fhn_entries(), fhn_letters, ours))
+    return (match(millet_entries(), millet_letters, ours, HELD["millet"]),
+            match(fhn_entries(), fhn_letters, ours, HELD["fhn"]))
 
 
 def blocks():
-    """{(source, entry): the expert's words on it}. Millet's entries with one number are joined in the order of
-    the article (GA55 and GA56 share a heading)."""
+    """{(source, entry): the expert's words on it}. An entry on two inscriptions goes whole to each (GA55 and
+    GA56 share a heading and a commentary). The packs of 2026-11-12 were written before this rule: GA55 got the
+    heading, the measures and its own text, not the commentary printed after GA56 (section 6 of the page)."""
     out = collections.defaultdict(list)
-    for name, block in millet_entries():
-        for number in re.findall(r"GA\d+", name) + [f"GA{n}" for n in re.findall(r"[&+](\d+)", name)]:
+    for entry, block in millet_parts(millet_entries()):
+        for number in sorted(entry):
             out["millet", number].append(block)
     for number, block in fhn_entries():
         out["fhn", number].append(block)
@@ -262,6 +298,19 @@ written, reply with one line: the number of rows you wrote and anything in the p
 """
 
 
+def pack_of(sizes, n=PACKS):
+    """({text: pack number}, [rows in each pack]): the texts drawn largest first, each into the lightest pack, and
+    texts of the same size in the order of their keys, so that every run draws the same packs. (The run of
+    2026-11-12 took texts of the same size in the order of a set, which Python shuffles from run to run, for three
+    pairs: rows.jsonl, not a new draw, says which pack each text was in.)"""
+    load, where = [0] * n, {}
+    for k in sorted(sizes, key=lambda k: (-sizes[k], k)):
+        i = load.index(min(load))
+        where[k] = i
+        load[i] += sizes[k]
+    return where, load
+
+
 def packs(out=OUT):
     """Write the packs, the key of the decoys and the table of rows. Refuses to write over a folder that already
     holds a judge's answers."""
@@ -271,13 +320,8 @@ def packs(out=OUT):
     folder.mkdir(parents=True, exist_ok=True)
     rows, key = with_decoys(rows_of())
     text = blocks()
-    order = sorted({(r["source"], r["entry"]) for r in rows},
-                   key=lambda k: -sum(1 for r in rows if (r["source"], r["entry"]) == k and r["row"]))
-    load, where = [0] * PACKS, {}
-    for k in order:                                        # largest first, each into the lightest pack
-        i = load.index(min(load))
-        where[k] = i
-        load[i] += sum(1 for r in rows if (r["source"], r["entry"]) == k and r["row"])
+    sizes = collections.Counter((r["source"], r["entry"]) for r in rows if r["row"])
+    where, load = pack_of({(r["source"], r["entry"]): sizes[r["source"], r["entry"]] for r in rows})
     for i in range(PACKS):
         name = "ABCDEFGH"[i]
         for judge in (1, 2):
@@ -295,7 +339,7 @@ def packs(out=OUT):
                                                         "decoy": r["row"] in key, "really": key.get(r["row"])},
                                                        ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
     judged = [r for r in rows if r["row"]]
-    print("texts:", len(order), "| rows judged:", len(judged), "| per pack:", load, "| decoys:", len(key))
+    print("texts:", len(where), "| rows judged:", len(judged), "| per pack:", load, "| decoys:", len(key))
     print("levels of the judged rows:", dict(collections.Counter(r["level"] for r in judged)))
     for i in range(PACKS):
         f = folder / f"judge1_{'ABCDEFGH'[i]}.md"
@@ -332,7 +376,10 @@ FHN_NOTE = (762, 764)                 # "A General Note to the Meroitic Texts", 
 
 
 def extra(out=OUT):
-    """The pack of everything not held in our corpus, for a list of the meanings the experts give there."""
+    """The pack of everything not held in our corpus, for a list of the meanings the experts give there. Refuses
+    to write it again once the reader has answered."""
+    if (out / "answers" / "extractor.jsonl").exists():
+        raise SystemExit(f"{out}/answers holds the reader's list: not writing its pack again")
     held = set(HELD["millet"])
     parts = [EXTRA]
     pg = pages(MILLET)
@@ -361,11 +408,13 @@ def main(argv):
     if argv[1:] == ["extra"]:
         return extra()
     if argv[1:] == ["match"]:
+        print("each text: the share of the entry's runs found in it / the share of its runs found in the entry")
         for label, found in zip(("Millet 2005", "FHN III"), matches()):
             print(label)
-            for name, letters, best in found:
-                shown = "  ".join(f"{s:.2f} {i}" for s, i in best)
-                print(f"  {name:12} {len(letters):4} letters   {shown}")
+            for name, letters, best, mine in found:
+                shown = "  ".join(f"{s:.2f}/{b:.2f} {i}" for s, i, b in best)
+                held = f"   held: {mine[0]:.2f}/{mine[2]:.2f} {mine[1]}" if mine else ""
+                print(f"  {name:12} {len(letters):4} letters   {shown}{held}")
         return
     raise SystemExit(__doc__)
 

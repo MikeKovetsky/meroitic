@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT / "src"))
 import coverage as C                                   # noqa: E402
 
 FOLDER = ROOT / "data/sources/expert"
+GLOSSES = ROOT / "data/sources/coverage/corrected/glosses.jsonl"
 TRANSLATED = C.TRANSLATED
 
 
@@ -118,14 +119,29 @@ def worst_of(states):
     return next((h for h in states if h != "translated"), "translated")
 
 
-def main():
+def held(word, source, m):
+    """(how our map holds a word or a phrase, our reading of it): each part looked up by status(), the phrase
+    held as worst_of() its parts, the readings with " / " between them. m = (words, affixes, in_map)."""
+    parts = [p for p in re.split(r"\s+", word.strip()) if re.sub(r"[^A-Za-zñ]", "", p)]
+    states = [status(p.strip("-"), *m, source) for p in parts]
+    return worst_of([s[0] for s in states]), " / ".join(s[1] for s in states)[:160]
+
+
+def our_map(path=GLOSSES):
+    """(words, affixes, in_map, seen): the lexicon's index as src/coverage.py builds it, the corrected map's words
+    (each form with a translated reading where the map has one) and how often the map translates each form."""
     words, affixes, _ = C.index(C.lexicon())
     in_map, seen = {}, collections.Counter()
-    for line in (ROOT / "data/sources/coverage/corrected/glosses.jsonl").open(encoding="utf-8"):
+    for line in path.open(encoding="utf-8"):
         for g in json.loads(line)["glosses"]:
             if g["form"] not in in_map or g["level"] in TRANSLATED:
                 in_map[g["form"]] = g
             seen[g["form"]] += g["level"] in TRANSLATED
+    return words, affixes, in_map, seen
+
+
+def main():
+    words, affixes, in_map, seen = our_map()
     out = []
     for line in (FOLDER / "answers/extractor.jsonl").read_text(encoding="utf-8").splitlines():
         try:
@@ -133,12 +149,10 @@ def main():
             word, meaning = str(a["word"]), str(a["meaning"])
         except (ValueError, KeyError, TypeError):
             continue
-        parts = [p for p in re.split(r"[\s]+", word.strip()) if re.sub(r"[^A-Za-zñ]", "", p)]
-        held = [status(p.strip("-"), words, affixes, in_map, str(a.get("source", ""))) for p in parts]
-        worst = worst_of([h[0] for h in held])
+        state, reading = held(word, str(a.get("source", "")), (words, affixes, in_map))
         out.append({"source": str(a.get("source", "")), "entry": str(a.get("entry", "")), "word": word,
                     "the expert's meaning": meaning[:120], "expert unsure": "yes" if a.get("doubt") is True else "",
-                    "our map": worst, "our reading": " / ".join(h[1] for h in held)[:160]})
+                    "our map": state, "our reading": reading})
     with (FOLDER / "extractor_checked.tsv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0]), delimiter="\t", lineterminator="\n")
         w.writeheader()

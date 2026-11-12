@@ -60,8 +60,9 @@ Done since this plan was written:
     In the 31 inscriptions that Millet's Gebel Adda article (2005) or *Fontes Historiae Nubiorum* III also print,
     the edition gives a meaning to 397 of the 537 words the map counts as translated, and the map's meaning to
     276 of them (69.5%; 85.2% outside `yetmde` and `qo`, which Rilly reads otherwise than both editions). The
-    check found the numeral 1 typed as `l` in one text of the older corpus and eleven names read as words, and
-    almost no meaning the map lacks. Both editions are kept locally. Section F draws the consequence.
+    check found the numeral 1 typed as `l` in one text of the older corpus and eleven names or pieces of words
+    read as words, and almost no meaning the map lacks. Both editions are kept locally. Section F draws the
+    consequence.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -219,9 +220,9 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
       does not find loans: 13 of 241 unknown pieces beat the 5% bar, where chance gives 12.
     - **Still open in this step:** the oracular decrees (neither list holds Egyptian texts of that kind) and the
       people named in both the Philae graffiti and the Meroitic texts. For the second, *Fontes Historiae Nubiorum*
-      III is held locally since 2026-11-12: it prints 22 of the Demotic graffiti in translation beside the
-      Meroitic texts of the same people (the family of Wayekiye, Abratoye, Makheye), and its comments name who
-      is who.
+      III is held locally since 2026-11-12: it prints 22 Demotic graffiti in translation, among them those of
+      Wayekiye and his family, beside the Meroitic texts of Wayekiye, Abratoye and Makheye, and its comments
+      name who is who.
     - **What it leaves:** the Demotic list holds graffiti of Meroitic officials at Philae (`qrnyꜣ` for `qorene`,
       `ꜣrbtgꜥyꜣ` for `arebetke`, `wygy` for Wayekiye). Reading those sentences beside the Meroitic titles is
       the parallel that carries meaning; it needs the names of the older corpus unmasked, and it can start from
@@ -254,8 +255,8 @@ The coverage map (point 7 above) turns "closer to a translation" into a number a
     2026-11-11 treat two leftovers of the padding in the map (`mokelowi` and `mete l` after a masked name) but
     not in the corpus, which still holds the padded frames as texts: removing them there would change the counts
     of texts and words that every result since rests on. The check of 2026-11-12 added two faults of the same
-    kind: the numeral 1 typed as `l` in the epitaph of Makheye, eight times over, and names the older corpus did
-    not mark as names. Piece F1 below is the remedy for all of them.
+    kind: the numeral 1 typed as `l` after each prince's name in the epitaph of Makheye, a text that stands four
+    times, and names the older corpus did not mark as names. Piece F1 below is the remedy for all of them.
 21. **Spelling variants inside Meroitic.** The Egyptian search stumbled on at least 16 pieces of the map's list
     that are spellings or forms of known words (`prSn` for `plsn`, `petmoS` for `pelmos`). Searched for on
     purpose, each piece would be compared with the about 800 entries of the lexicon, a pool small enough for a
@@ -297,8 +298,9 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Why: every figure is counted on `corpus_v5`, and 662 of its 899 texts are Otten's file, with names masked
       and name-swapped copies (608 texts and 8,786 of the 21,977 words are left when near-copies count once). Found
       in it so far: leftovers of the padding read as words, a numeral typed as a letter in a text that stands
-      eight times, names not marked as names, uneven word division, decree lines tagged as funerary. Each was
-      patched in the map; none is fixed in the corpus (step 20).
+      four times, names not marked as names, uneven word division, decree lines tagged as funerary. The map
+      patches the padding's leftovers and words written apart, not the rest, and none is fixed in the corpus
+      (step 20).
     - What: one row per inscription, with its REM or edition number, site and kind; under it every reading we
       hold (Otten's line, Griffith's print, the Karanòg copies, the Newsletter, Millet 2005, FHN) with its source
       and licence; and one preferred reading with real names and one rule of word division. The old ids map to it.

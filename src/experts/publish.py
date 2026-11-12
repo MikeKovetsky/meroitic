@@ -3,11 +3,11 @@
   python3 -I src/experts/publish.py
 
 Reads the local results in data/sources/expert/ (rows.jsonl, the first run's answers, figures.json of tally.py,
-missing_grouped.tsv of missing.py, the readers' lists and meanings_figures.json of close.py) and writes two public
-files. They hold counts and word forms only: no reading
-of ours and no meaning of the experts'.
+missing_grouped.tsv of missing.py, the readers' lists and meanings_figures.json of close.py), the corrected map's
+gloss file and the two editions' text layers (for counts only), and writes two public files. They hold counts and
+word forms only: no reading of ours and no meaning of the experts'.
 
-  data/discovery/experts_figures.json   every number the page data/discovery/experts.md gives
+  data/discovery/experts_figures.json   every number the page data/discovery/experts.md gives but its costs
   data/discovery/experts_words.tsv      each word of the 31 texts with our level and the first judge's verdicts
 
 The judges' files are untrusted data: they are read through tally.load_answers only.
@@ -21,11 +21,13 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import close as K                                      # noqa: E402
+import prepare as P                                    # noqa: E402
 import tally as T                                      # noqa: E402
 
 FOLDER = T.FOLDER
 PUBLIC = T.ROOT / "data/discovery"
-MASKED = ("NAME", "RNAME")
+MASKED = P.MASKED
+KHARAMADOYE = "kharamadoye"                            # the corpus id of the longest held text (FHN III 300)
 NOT_AGREED = ("partly", "differ", "new")
 GROUPS = ("yetmde", "qo", "other")
 DIFFERENCES = ("the numeral 1 typed as the letter l", "a name or a piece of a word read as a word",
@@ -67,14 +69,30 @@ def difference_of(r, a):
     return DIFFERENCES[3]
 
 
+def differences(rows, one):
+    """[(row, kind of difference)] for the translated words outside the two groups, decoys left out, whose first
+    judge's verdict is not agree."""
+    return [(r, difference_of(r, one[r["row"]])) for r in rows
+            if not r["decoy"] and r["level"] in T.TRANSLATED and group_of(r["ours"]) == "other"
+            and one.get(r["row"], {}).get("verdict") in NOT_AGREED]
+
+
 def breakdown(rows, one):
     """({group: counts of the translated words in it}, {kind of difference: words}) for the first judge, decoys
     left out."""
     done = [r for r in rows if not r["decoy"] and r["level"] in T.TRANSLATED]
     groups = {g: T.count([r for r in done if group_of(r["ours"]) == g], one) for g in GROUPS}
-    kinds = collections.Counter(difference_of(r, one[r["row"]]) for r in done
-                                if group_of(r["ours"]) == "other" and one.get(r["row"], {}).get("verdict") in NOT_AGREED)
+    kinds = collections.Counter(kind for _, kind in differences(rows, one))
     return groups, {k: kinds[k] for k in DIFFERENCES}
+
+
+def copies(text_id, glossed, share=0.8):
+    """How many texts of the corpus are text_id or a near-copy of it: share or more of the runs of three words of
+    the one stand in the other (the rule by which src/coverage.py's distinct() counts near-copies once)."""
+    tri = lambda t: {tuple(t[i:i + 3]) for i in range(len(t) - 2)} or {tuple(t)}   # noqa: E731
+    mine = tri(next(g["text"] for g in glossed if g["id"] == text_id).split())
+    others = (tri(g["text"].split()) for g in glossed)
+    return sum(1 for o in others if len(o & mine) >= share * min(len(o), len(mine)))
 
 
 def words(rows, one):
@@ -109,15 +127,23 @@ def public_figures(folder=FOLDER):
     second = json.loads((folder / "meanings_figures.json").read_text(encoding="utf-8"))
     groups, kinds = breakdown(rows, one)
     texts = {(r["source"], r["entry"]) for r in rows}
+    numeral = sorted({r["text"] for r, kind in differences(rows, one) if kind == DIFFERENCES[0]})
+    glossed = P.glossed()
+    entries, rendered = P.millet_counts(P.millet_entries())
     return {
+        "editions": {"Millet 2005, entries": entries, "Millet 2005, entries with a rendering into English": rendered,
+                     "FHN III, entries on Meroitic texts": len(P.FHN_ENTRIES)},
         "texts": {"held by both": len(texts), **{label: sum(1 for s, _ in texts if s == source)
-                                                 for source, label in T.SOURCES.items()}},
+                                                 for source, label in T.SOURCES.items()},
+                  "copies in the corpus of the text with the numeral 1 typed as l":
+                      sum(copies(t, glossed) for t in numeral)},
         "words": {"in the texts": len(every), "judged": len(rows),
                   "masked names, not judged": sum(1 for r in every if not r["row"] and r["form"] in MASKED),
                   "lost, not judged": sum(1 for r in every if not r["row"] and r["form"] not in MASKED),
                   "decoys": sum(r["decoy"] for r in rows),
                   **{f"judged, {label}": sum(1 for r in rows if r["source"] == source)
-                     for source, label in T.SOURCES.items()}},
+                     for source, label in T.SOURCES.items()},
+                  "judged, the inscription of Kharamadoye": sum(1 for r in rows if r["text"] == KHARAMADOYE)},
         "translated": first["translated"], "not translated": first["not_translated"],
         "groups": groups, "other differences": kinds,
         "decoys": first["decoys_by_judge"], "two judges": first["two_judges"],

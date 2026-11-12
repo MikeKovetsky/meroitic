@@ -2,13 +2,14 @@
 
   reader   the pack of the experts' comments on the 31 held entries, for a reader that lists every meaning given
   table    the judges' table: each meaning the two readers listed, beside our map's reading of the word; each
-           judge sees a decoy in place of our reading on a tenth of the lines, on different lines (answers/extractor.jsonl and answers/reader_held.jsonl -> packs/meanings_judgeN.md)
+           judge sees a decoy in place of our reading on a tenth of the lines, on different lines
+           (answers/extractor.jsonl and answers/reader_held.jsonl -> packs/meanings_judgeN.md)
   count    the judges' verdicts (answers/meanings_judgeN.jsonl) and the complete list, lacking.tsv
 
-The readers' and judges' files are untrusted data: only their named fields are read.
+reader and table refuse to write their pack again once it has been answered. The readers' and judges' files are
+untrusted data: only their named fields are read.
 """
 import collections
-import csv
 import json
 import pathlib
 import random
@@ -21,7 +22,6 @@ import prepare as P                                    # noqa: E402
 import tally as T                                      # noqa: E402
 
 FOLDER = M.FOLDER
-GLOSSES = M.ROOT / "data/sources/coverage/corrected/glosses.jsonl"
 READERS = ("extractor", "reader_held")
 SEED = 17
 DECOYS = 0.10
@@ -97,6 +97,9 @@ def comments(block):
 
 
 def reader(out=FOLDER):
+    """The second reader's pack. Refuses to write it again once the reader has answered."""
+    if (out / "answers" / "reader_held.jsonl").exists():
+        raise SystemExit(f"{out}/answers holds the second reader's list: not writing its pack again")
     text = P.blocks()
     parts = [READER]
     for source, label in (("millet", "Millet 2005"), ("fhn", "FHN III")):
@@ -109,20 +112,10 @@ def reader(out=FOLDER):
 
 def our_map():
     """(words, affixes, in_map) as src/experts/missing.py loads them: the lexicon's index and the map's own words."""
-    words, affixes, _ = M.C.index(M.C.lexicon())
-    in_map = {}
-    for line in GLOSSES.open(encoding="utf-8"):
-        for g in json.loads(line)["glosses"]:
-            if g["form"] not in in_map or g["level"] in M.TRANSLATED:
-                in_map[g["form"]] = g
-    return words, affixes, in_map
+    return M.our_map()[:3]
 
 
-def held(word, source, m):
-    """(how our map holds a word or a phrase, our reading of it), by the rules of src/experts/missing.py."""
-    parts = [p for p in re.split(r"\s+", word.strip()) if re.sub(r"[^A-Za-zñ]", "", p)]
-    states = [M.status(p.strip("-"), *m, source) for p in parts]
-    return M.worst_of([s[0] for s in states]), " / ".join(s[1] for s in states)[:160]
+held = M.held                                          # (how our map holds a word or a phrase, our reading of it)
 
 
 def source_of(text):
@@ -199,13 +192,6 @@ def decoys_on(chosen, judged, rnd):
         if far:
             shown[r["line"]] = rnd.choice(far)
     return shown
-
-
-def with_decoys(rows, seed=SEED, share=DECOYS):
-    """Decoys (decoys_on) for a tenth of the judged lines."""
-    rnd = random.Random(seed)
-    judged = [r for r in rows if r["judged"]]
-    return decoys_on(rnd.sample(judged, round(len(judged) * share)), judged, rnd)
 
 
 def decoys_by_judge(rows, judges=2, seed=SEED, share=DECOYS):

@@ -1,8 +1,14 @@
 {
+ "editions": {
+  "Millet 2005, entries": 46,
+  "Millet 2005, entries with a rendering into English": 20,
+  "FHN III, entries on Meroitic texts": 12
+ },
  "texts": {
   "held by both": 31,
   "Millet 2005": 23,
-  "FHN III": 8
+  "FHN III": 8,
+  "copies in the corpus of the text with the numeral 1 typed as l": 4
  },
  "words": {
   "in the texts": 1174,
@@ -11,7 +17,8 @@
   "lost, not judged": 13,
   "decoys": 36,
   "judged, Millet 2005": 589,
-  "judged, FHN III": 526
+  "judged, FHN III": 526,
+  "judged, the inscription of Kharamadoye": 234
  },
  "translated": {
   "all": {
