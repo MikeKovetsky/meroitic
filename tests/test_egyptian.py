@@ -203,6 +203,9 @@ def test_the_place_of_a_true_source():
     assert E.place_of_letters("plms", {"lmS"}, title, md) == 2
     assert E.place_of_letters("plms", {"lm"}, title, md) is None       # only the beginning of an entry
     assert E.place_of_letters("plms", {"qqq"}, title, md) is None
+    # the hits as the result files keep them
+    assert E.hit_rows([(-1.23456, 0), (-2.0, 4)], pool) == [{"id": "src", "form": "src", "meaning": "", "score": -1.235},
+                                                           {"id": "tie", "form": "tie", "meaning": "", "score": -2.0}]
 
 
 def test_printed_sources_of_a_key_row():
@@ -227,6 +230,13 @@ def test_made_up_words():
     skewed = E.made_up(["0nt", "0rbtk", "0pt", "0mn", "0ns", "0trs", "0rm", "0sr", "0tmk", "plms"], n=100, seed=3)
     starts = [w[0] for made in skewed.values() for w in made]
     assert starts.count("0") > 0.8 * len(starts)
+    # a word's chance is counted among the made-up words of its length, the longest of them together
+    trie, md = E.Trie(list(enumerate([entry("a", ["lmS"]), entry("b", ["krt"])]))), E.model()
+    fake, cache = {3: ["plm", "krt"], 4: ["plms", "xXwy"]}, {}
+    best = lambda w: E.search(w, trie, md)[0][0]   # noqa: E731
+    assert E.chance_of("plms", trie, md, fake, cache) == E.chance(best("plms"), [best(w) for w in fake[4]]) == 2 / 3
+    assert E.chance_of("krtpp", trie, md, fake, cache) == E.chance(best("krtpp"), [best(w) for w in fake[4]])
+    assert E.chance_of("krt", trie, md, fake, cache) == 2 / 3 and set(cache) == {(trie, 3), (trie, 4)}
 
 
 def test_made_up_words_with_vowels():

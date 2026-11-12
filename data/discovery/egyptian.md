@@ -173,9 +173,9 @@ start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ 
 the model counts a vowel like any other letter. The e of the signs ne and se is compared only where the spelling
 writes it as a letter of its own: the corpus spelling writes the two signs as N and (in most texts) s, which count
 as n and s, and a headword is taken in a corpus spelling that writes ne as N and se as s and e. The made-up words
-are drawn as in section 6, from the headwords with their vowels: 300 of each length from 3 to 12 letters, vowels
-counted, each with three consonants or more. A title or a noun is searched among the 7,139 Coptic nouns, a verb
-among the 2,946 verbs.
+are drawn as in section 6, from the headwords with their vowels: 300 of each length from 3 to 12 letters (12 and
+more together), vowels counted, each with three consonants or more. A title or a noun is searched among the 7,139
+Coptic nouns, a verb among the 2,946 verbs.
 
 **The test.** 13 of the known loans have a Coptic source: 8 titles and nouns, and 5 names whose source the
 lexicon lists as a noun. Each was hidden in turn, as before. "Consonants" is the same search in the same pool

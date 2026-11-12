@@ -8,7 +8,7 @@
   python3 -I src/egyptian.py merge            the checkers' answers against the key of decoys
   python3 -I src/egyptian.py vowels           the same test and search with the vowels compared too, on the
                                               Coptic entries (Demotic writes none); its own result files and list
-  python3 -I src/egyptian.py check vowels     the pack of its best matches that the first pack did not hold
+  python3 -I src/egyptian.py check vowels     the pack of its pieces that beat the bar and were not in the first
   python3 -I src/egyptian.py merge vowels     the checkers' answers to that pack
 
 The question (NEXT_STEPS.md, E 17): can a mechanical search find the Egyptian word behind a Meroitic title or
@@ -551,6 +551,22 @@ def chance(score_, scores):
     return (sum(1 for s in scores if s >= score_ - 1e-9) + 1) / (len(scores) + 1)
 
 
+def chance_of(word, trie, md, fake, cache):
+    """The word's chance in a trie: the share of the made-up words of its length (`fake`, {length: words} from
+    made_up(), the longest together) whose best match is as good as its own. `cache` keeps their best scores for
+    one model."""
+    k = (trie, min(len(word), max(fake)))
+    if k not in cache:
+        cache[k] = [search(w, trie, md)[0][0] for w in fake[k[1]]]
+    return chance(search(word, trie, md)[0][0], cache[k])
+
+
+def hit_rows(hits, pool):
+    """A search's best entries as the result files keep them."""
+    return [{"id": pool[k]["id"], "form": pool[k]["form"], "meaning": pool[k]["meaning"], "score": round(sc, 3)}
+            for sc, k in hits]
+
+
 def unknown():
     """The pieces of the coverage map's list that have a kind the pools know: [(piece, kind, letters, row)].
     A piece that is letters (not a headword) and holds a digit or a lost sign is not a word: no letters."""
@@ -619,13 +635,6 @@ def build():
     fake = made_up(headwords())
     OUT.mkdir(parents=True, exist_ok=True)
 
-    def chance_of(word, s, md, cache):
-        """The share of made-up words of the word's length whose best match in a scope is as good as its own."""
-        k = (s, min(len(word), LONGEST))
-        if k not in cache:
-            cache[k] = [search(w, tr[s], md)[0][0] for w in fake[k[1]]]
-        return chance(search(word, tr[s], md)[0][0], cache[k])
-
     # 3. the test: each known loan with a model trained on the others
     test = []
     for it in items:
@@ -638,7 +647,7 @@ def build():
                 best = search(it["word"], tr[s], md)[0]
                 row[name] = {"place": n, "of": tr[s].size, "score": sc, "best": best[0], "best_id": pool[best[1]]["id"]}
                 if len(it["word"]) >= SHORTEST and name != "all":
-                    row[name]["chance"] = chance_of(it["word"], s, md, cache)
+                    row[name]["chance"] = chance_of(it["word"], tr[s], md, fake, cache)
         test.append(row)
     (OUT / "test.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in test))
 
@@ -652,7 +661,7 @@ def build():
     # words with an accepted meaning that nobody derives from Egyptian: do they look like the made-up words?
     plain = native(key())
     all_scopes = sorted({s for kind in SCOPE for _, s in scopes(kind)}, key=sorted)
-    calm = {"+".join(sorted(s)): sorted(chance_of(w, s, md, cache) for _, _, w in plain) for s in all_scopes}
+    calm = {"+".join(sorted(s)): sorted(chance_of(w, tr[s], md, fake, cache) for _, _, w in plain) for s in all_scopes}
 
     # the proposals of the literature and the Meroitic words written in Egyptian letters
     others = []
@@ -676,10 +685,8 @@ def build():
                "mentions_egyptian": piece in in_key, "spelled_like": same.get(word, "")}
         if len(word) >= SHORTEST:
             for name, s in scopes(kind):
-                hits = search(word, tr[s], md, top=5)
-                row[name] = {"chance": chance_of(word, s, md, cache),
-                             "hits": [{"id": pool[k]["id"], "form": pool[k]["form"], "meaning": pool[k]["meaning"],
-                                       "score": round(sc, 3)} for sc, k in hits]}
+                row[name] = {"chance": chance_of(word, tr[s], md, fake, cache),
+                             "hits": hit_rows(search(word, tr[s], md, top=5), pool)}
         rows.append(row)
     (OUT / "candidates.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
 
@@ -787,12 +794,6 @@ def vowels():
     fake = made_up(headwords(True), longest=VOWEL_LONGEST, least=SHORTEST)
     OUT.mkdir(parents=True, exist_ok=True)
 
-    def chance_of(word, s, md, cache):
-        k = (s, min(len(word), VOWEL_LONGEST))
-        if k not in cache:
-            cache[k] = [search(w, tr[s], md)[0][0] for w in fake[k[1]]]
-        return chance(search(word, tr[s], md)[0][0], cache[k])
-
     # the test: each known loan that has a Coptic source, among the Coptic entries of its kind (a name among nouns)
     test = []
     for it in items:
@@ -806,14 +807,14 @@ def vowels():
                "consonants": place(it["word"], it["sources"], bare[s], by_consonants, pool)[0],
                "vowels": n, "best_id": pool[best[1]]["id"]}
         if consonants(it["voiced"]) >= SHORTEST:
-            row["chance"] = chance_of(it["voiced"], s, md, {})
+            row["chance"] = chance_of(it["voiced"], tr[s], md, fake, {})
         test.append(row)
     (OUT / "vowel_test.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in test))
 
     # everything else with the model trained on every such loan
     md, cache = train(pairs(items, pool, (), "voiced", "voiced"), mer=mer, egy=egy), {}
     plain = [headword(h, True) for h, _, _ in native(key())]
-    calm = {"+".join(sorted(s)): sorted(chance_of(w, s, md, cache) for w in plain) for s in sets}
+    calm = {"+".join(sorted(s)): sorted(chance_of(w, tr[s], md, fake, cache) for w in plain) for s in sets}
     in_key, same = {r["headword"] for r in key()}, linked(key())
     rows = []
     for piece, kind, word, r in unknown():
@@ -825,9 +826,8 @@ def vowels():
         rows.append({"piece": piece, "kind": kind, "letters": voiced, "level": r["level"],
                      "texts": int(r["texts (near-copies once)"]), "headword": head,
                      "mentions_egyptian": piece in in_key, "spelled_like": same.get(word, ""),
-                     "vowels": {"chance": chance_of(voiced, s, md, cache),
-                                "hits": [{"id": pool[k]["id"], "form": pool[k]["form"], "meaning": pool[k]["meaning"],
-                                          "score": round(sc, 3)} for sc, k in search(voiced, tr[s], md, top=5)]}})
+                     "vowels": {"chance": chance_of(voiced, tr[s], md, fake, cache),
+                                "hits": hit_rows(search(voiced, tr[s], md, top=5), pool)}})
     (OUT / "vowel_candidates.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
     fig = vowel_figures(pool, test, calm, rows, len(plain))
     (OUT / "vowel_figures.json").write_text(json.dumps(fig, ensure_ascii=False, indent=1) + "\n")
