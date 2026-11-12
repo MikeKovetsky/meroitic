@@ -560,3 +560,5 @@ The table, the map and the corpus were built without an agent; two readers then 
    not the 12 counted by hand. And `src/v6/readers.py count` had written its figures over those of the readers of
    the clean corpus's doubtful matches, whose local folder it shared.
 
+**The review of these two steps** (full tier) cost 533,937 subagent tokens and 37 minutes, by hand from its task
+notification: 2,057,415 for the two steps with their review, against the 2.0 million quoted.

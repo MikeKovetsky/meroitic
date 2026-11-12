@@ -349,7 +349,9 @@ days, not hours. The costs are estimates from what the runs so far cost.
       stated by one, disputed, or proposed. The meanings are worded here and cited, not copied, so the table can
       be public.
     - Sources in hand: Griffith 1911–12 (public domain), Rilly 2003, FHN III, Millet 2005, Rilly's 2016 overview.
-      Worth adding: FHN's index volume and volume II, and Rilly and de Voogt 2012.
+      FHN's index volume (FHN IV) is in hand since 12 November, local only: its Meroitic indexes gloss 62
+      titles and 51 words. Worth adding: FHN's volume II (not on Zenodo), and later, to check the result,
+      Rilly and de Voogt 2012.
     - Done: every entry the map uses has a status; the map gives two figures, "translated by one lexicon" and
       "agreed by two scholars"; the table is published under CC BY.
     - Cost: 2 to 3 million subagent tokens.
