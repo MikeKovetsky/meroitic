@@ -468,3 +468,10 @@ After "are you giving up?", four more lines of attack, then data.
 9. **Cost:** eight agent runs and four rounds of a reviewer on the local scripts, about 1.02 million subagent
    tokens and 35 minutes of running, against quotes of about 0.5 and 0.2 million for the two passes (up to 0.8
    and 0.3).
+10. **The review of the published scripts and pages:** one fresh reviewer at the full tier, 500,972 subagent
+    tokens and 37 minutes, against about 0.4 million quoted. It corrected facts the pages had wrong (Millet's
+    article has 46 entries, not 49; the epitaph of Makheye stands four times in the older corpus, not eight; the
+    eleven misread words are four names and seven pieces of words; eight agent runs, not nine), made the draw of
+    the packs the same in every run, found the shared commentary of GA55 and GA56, and added nine checks to the
+    26, among them checks that rebuild the local files byte for byte and that pin the numbers of the summary
+    pages.
