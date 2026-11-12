@@ -98,18 +98,19 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     the sure ones on words without an accepted meaning in the map are mostly titles left untranslated, phrases
     whose words the map reads the same way, and proposals the lexicon already holds
     ([`data/discovery/experts.md`](data/discovery/experts.md)).
-11. **The corpus keyed by inscription: 899 texts were 286 inscriptions.** Otten's padded file can be undone
+11. **The corpus keyed by inscription: 899 texts were 289 inscriptions.** Otten's padded file can be undone
     exactly from his own per-scholar files: of its 17,995 different lines, 340 are a line of those files and
     17,446 are such a line with one name swapped. Traced that way, 54.5% of the words of `corpus_v5` are copies of
-    a reading with a name swapped, and the texts that stand for an inscription hold 30.0% of them. `corpus_v6`
-    has one row per inscription, with the real names: 546 inscriptions, 260 of them new to the corpus (the
-    Newsletter's texts, kept locally). The table of all 562 inscriptions is public, with every reading's source
-    and licence and the text of the open ones: 441 have a REM number, 68 two readings or more, 303 a reading
+    a reading with a name swapped, and the texts that stand for an inscription hold 30.1% of them. `corpus_v6`
+    has one row per inscription, with the real names: 548 inscriptions, 259 of them new to the corpus (the
+    Newsletter's texts, kept locally). The table of all 563 inscriptions is public, with every reading's source
+    and licence and the text of the open ones: 441 have a REM number, 70 two readings or more, 303 a reading
     under an open licence. Counted again on the inscriptions that were already in the corpus, the coverage map
     translates 60.0% of the words (62.0% before), and the two editions give its meaning for 71.6% of the words
     they translate (69.5% before). The matching rule missed the bar set for it (the right partner for 44 of 53
-    known pairs, where 90% was asked), so numbers decide before letters, and 17 doubtful matches still wait for
-    two readers ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
+    known pairs, where 90% was asked), so numbers decide before letters, and the 17 doubtful matches went to two
+    readers. Both passed their own test (12 of 12 known lines, 12 of 12 decoys); 13 of their matches are taken,
+    one line matches nothing and 3 are not settled ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
 
 ## The question
 
@@ -144,7 +145,7 @@ what can be rebuilt.
 | Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
 
 Since 2026-11-12 the readings are also listed by inscription: [`data/inscriptions.jsonl`](data/inscriptions.jsonl)
-has one row for each of the 562 inscriptions the project holds a reading of, with its REM or edition number, site,
+has one row for each of the 563 inscriptions the project holds a reading of, with its REM or edition number, site,
 kind and every reading's source and licence, and the text of the readings that are open;
 [`data/inscriptions_map.tsv`](data/inscriptions_map.tsv) says what each of the 899 texts of `corpus_v5` is.
 `data/corpus_v6.jsonl`, one row per inscription with real names, is local like the corpora before it.
@@ -366,8 +367,8 @@ the line with one stretch swapped. `src/v6/readings.py` lists every reading held
 copies, the Newsletter, Millet 2005, FHN III, Otten's narratives and source lines) with the numbers its edition
 gives, and compares texts by their runs of five letters, the formulae left out. `src/v6/build.py` makes the
 inscriptions: readings that share a number are one, two different numbers of one numbering are two, and a text
-without a number goes by letters, where a sure match to one inscription stands and a doubtful one waits for two
-readers (`src/v6/packs.py`). A source line is a reading of an inscription, an example phrase from a grammar, or
+without a number goes by letters, where a sure match to one inscription stands and a doubtful one goes to two
+readers who see both texts, with known lines and decoys mixed in (`src/v6/packs.py`). A source line is a reading of an inscription, an example phrase from a grammar, or
 an inscription not identified; one reading per inscription is preferred by a fixed order, with a later edition's
 numerals and Otten's name tags. The bar for the rule was written before it was scored, and missed.
 `src/v6/recount.py` runs the coverage map and the check against the two editions on the new rows, without a new

@@ -49,6 +49,9 @@ WHOLE = 0.8          # a reading with this share of the longest typed reading's 
 ORDER = ("otten-narrative", "otten", "griffith", "karanog", "mnl-print", "mnl-printout")   # the preferred reading
 SYSTEMS = ("rem", "ga", "griffith", "meroe", "shablul", "karanog", "mnl")
 HELD_BY = "read side by side on 2026-11-12 (src/experts/prepare.py, HELD)"
+READ = "two readers who saw both texts"
+READ_NONE = "two readers who saw both texts: none of the candidates"
+SET_ASIDE = "set aside: two readers took it for a text of this inscription, and the rule matches it surely with"
 
 DECREE = "wtelipkeli"      # the opening formula of the oracular decrees, after the first word (a name or a title)
 KINDS = (
@@ -292,6 +295,21 @@ def decide(x, cands, whole_in, held=None, loose=()):
     return "phrase", None, cands[0], "a doubtful match that was not read: a phrase whichever text it is from"
 
 
+def settle(decision, cands, verdict, group_of):
+    """A pending decision after the two readers: verdict is (the reading key both named or "", whether the line is
+    only a part of that text), or None while they have not settled it. A line both took for the whole text is a
+    reading of that inscription, one they took for a part is an example phrase from it, and one for which both
+    found no candidate matches nothing (and may then be an inscription of its own)."""
+    cls, g, m, by = decision
+    if cls != "pending" or verdict is None:
+        return decision
+    same, part = verdict
+    if not same:
+        return "", None, None, READ_NONE
+    g = group_of(same)
+    return ("phrase" if part else "reading"), g, next((c for c in cands if c[5] == g), None), READ
+
+
 def read_verdicts(path=VERDICTS):
     """{reading key of a line: (the reading key that the two readers both named, or "" when both said none; whether
     both took the line for a part of that text only)} of the doubtful matches that both readers settled alike."""
@@ -364,19 +382,16 @@ def build(verdicts=None):
             v, sa, sb, n = R.rule(x["letters"], y["letters"], skip, floor=1)
             want = (v, sa, sb, n, y["key"], group_of(y["key"]), round(len(x["letters"]) / max(len(y["letters"]), 1), 3))
         loose = candidates(x, editions, group_of, skip, floor=LOOSE) if not cands and len(x["letters"]) >= OWN_TEXT else ()
-        cls, g, m, by = decide(x, cands, whole_in, want, loose)
-        if cls == "pending" and x["key"] in verdicts:
-            same, part = verdicts[x["key"]]
-            if same:
-                g = group_of(same)
-                m = next((c for c in cands if c[5] == g), m)
-                cls, by = ("phrase" if part else "reading"), "two readers who saw both texts"
-            else:
-                cls, by, m = "", "two readers who saw both texts: none of the candidates", None
-        decided[x["key"]] = (cls, g, m, by)
+        d = settle(decide(x, cands, whole_in, want, loose), cands + list(loose), verdicts.get(x["key"]), group_of)
+        if d[3] == READ and d[2] is None:                        # the readers named a text the rule did not offer
+            y = by_key[verdicts[x["key"]][0]]
+            v, sa, sb, n = R.rule(x["letters"], y["letters"], skip, floor=1)
+            d = (d[0], d[1], (v, sa, sb, n, y["key"], d[1], round(len(x["letters"]) / max(len(y["letters"]), 1), 3)), d[3])
+        decided[x["key"]] = d
 
     # what matches nothing held: the long lines are inscriptions of their own, the rest are parts of those or phrases
     loose = [x for x in olines if decided[x["key"]][0] == ""]
+    read_none = {x["key"] for x in loose if decided[x["key"]][3] == READ_NONE}
     seeds = []
     for x in sorted(loose, key=lambda x: (-len(x["letters"]), x["key"])):
         if len(x["letters"]) < OWN_TEXT:
@@ -408,6 +423,20 @@ def build(verdicts=None):
                                  "the rule: a sure match to a line that matches nothing held")
         else:
             decided[x["key"]] = ("phrase", None, None, "matches nothing held")
+    # A line the readers took for the text of an inscription, and that the rule matches surely with a line that is
+    # an inscription of its own: two quotations run together on one line, or a parallel. The readers saw the
+    # candidates of the editions, not that line. It is a phrase of neither, so that no text stands in two rows.
+    for x in olines:
+        cls, g, m, by = decided[x["key"]]
+        if cls != "reading" or by != READ:
+            continue
+        other = next((s_ for s_ in seeds if R.rule(x["letters"], s_["letters"], skip)[0] == "sure"), None)
+        if other is not None:
+            l = other["line"]
+            decided[x["key"]] = ("phrase", None, m, f"{SET_ASIDE} the text of Millet 1968 p. {l['page'] or '?'} ({l['file']} line {l['line']})")
+    for key in read_none:                                        # what the readers found stays on the record
+        cls, g, m, by = decided[key]
+        decided[key] = (cls, g, m, f"{by}; {READ_NONE}")
 
     # the inscriptions: the numbered groups, with the narratives and lines that are readings of them, and the seeds
     members = collections.defaultdict(list)
@@ -480,7 +509,7 @@ def line_rows(b):
 
 WHAT = {"reading": "a reading of an inscription", "phrase": "an example phrase from a grammar, not an inscription",
         "word list": "an entry of a word list, not an inscription", "unidentified": "an inscription not identified",
-        "pending": "not identified: a doubtful match waits for two readers"}
+        "pending": "not identified: a doubtful match that two readers have not settled"}
 
 
 def map_rows(b):
@@ -563,7 +592,7 @@ def measures(b, mapped, corpus):
                "a name-swapped copy of a reading" if m.get("class") in ("reading", "unidentified") else
                "an example phrase or a word-list entry" if m.get("class") in ("phrase", "word list") and not m.get("copy") else
                "a name-swapped copy of an example phrase" if m.get("class") in ("phrase", "word list") else
-               "waits for two readers" if m.get("class") == "pending" else "not traced")
+               "not settled by two readers" if m.get("class") == "pending" else "not traced")
         classes[key].append(m)
     typed = [i for i in ins if i["text"]]
     return {

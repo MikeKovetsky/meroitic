@@ -22,6 +22,7 @@ TABLE = ROOT / "data/inscriptions.jsonl"
 MAP = ROOT / "data/inscriptions_map.tsv"
 FIGURES = ROOT / "data/discovery/corpus_v6_figures.json"
 PAGE = ROOT / "data/discovery/corpus_v6.md"
+COST = ROOT / "data/discovery/corpus_v6_cost.json"        # written by hand from the task notifications
 BEGIN, END = "<!-- tables: written by src/v6/public.py -->", "<!-- end of the tables -->"
 MAP_COLUMNS = ("corpus_v5 id", "words", "what it is", "copy", "inscription", "reading", "page of Millet 1968",
                "share of the text in the other", "share of the other in the text", "own runs shared", "compared with",
@@ -73,7 +74,22 @@ def tables(f):
     n = i["all"]
     o, held, most, tw = f["otten"], f["held"]["edition_readings"], f["otten"]["most_copied"], f["twins"]
     cls = v5["classes"]
-    wait = cls.get("waits for two readers", {"texts": 0, "words": 0})
+    wait = cls.get("not settled by two readers", {"texts": 0, "words": 0})
+    rd = f.get("readers")
+    if rd:
+        read = (f"- Doubtful matches read by two readers: {rd['pending']} lines. Both gave the same answer for "
+                f"{rd['same_answer']} and differ on {rd['differ']}. Both named the same candidate for "
+                f"{rd['same_candidate_as_the_bar_was_written']}: {rd['confirmed']} are used, {rd['confirmed_whole_text']} as "
+                f"the whole text and {rd['confirmed_part']} as a part of it, and {rd['same_answer_but_unsure']} is not, "
+                f"because both marked it as a guess. Both answered \"none\" for {rd['none']}. Not settled: "
+                f"{rd['not_settled']} lines, behind {wait['texts']} texts and {wait['words']:,} words of `corpus_v5`.")
+        st = f["settled"]
+        read += (f"\n- The lines the readers settled, as they stand in the build: {st['readings']} are readings of an "
+                 f"inscription, {st['phrases']} are example phrases from one, {st['set_aside']} is set aside, and "
+                 f"{st['none']} matches nothing and is an inscription of its own.")
+    else:
+        read = (f"- Doubtful matches waiting for two readers: {f['pending']} lines, behind {wait['texts']} texts and "
+                f"{wait['words']:,} words of `corpus_v5`.")
     num, ph = f["numerals"], f["phrases"]
     out = [BEGIN, "", "### The counts the text uses", "",
            f"- Otten's padded file: {o['padded_lines']:,} lines, {o['raw_lines']:,} of them different. Equal to a line of his "
@@ -89,20 +105,22 @@ def tables(f):
            f"FHN III, {f['held']['narratives']} narrative files.",
            f"- Source lines by what they are: {f['lines'].get('reading', 0)} readings of an inscription, "
            f"{f['lines'].get('phrase', 0)} example phrases, {f['lines'].get('word list', 0)} word-list entries, "
-           f"{f['lines'].get('unidentified', 0)} inscriptions not identified, {f['lines'].get('pending', 0)} waiting for readers.",
+           f"{f['lines'].get('unidentified', 0)} inscriptions not identified, {f['lines'].get('pending', 0)} with a doubtful "
+           f"match that is not settled.",
            f"- The example phrases: {ph['in_one_text']} are a part of one held text or stand whole in it, "
-           f"{ph['in_several']} stand whole in several, {ph['doubtful']} have a doubtful match that was not read, and "
-           f"{ph['nothing']} match nothing held.",
-           f"- Doubtful matches waiting for two readers: {f['pending']} lines, behind {wait['texts']} texts and "
-           f"{wait['words']:,} words of `corpus_v5`.",
+           f"{ph['in_several']} stand whole in several, {ph['doubtful']} have a doubtful match that was not read, "
+           f"{ph['set_aside']} was taken by the readers for a text of one inscription and is set aside because the rule "
+           f"matches it surely with another, and {ph['nothing']} match nothing held.",
+           read,
            f"- A lone `l` read as a numeral: {num['all']} ({num['by_a_later_edition']} by a later edition, "
            f"{num['by_analogy']} by analogy), in {num['inscriptions']} inscription(s): {', '.join(num['where'])}.",
            f"- Words marked as a personal name by Otten's own tags: {v6['name_words_marked']}.",
            f"- Inscriptions whose text is in two or more parts: {i['in_two_or_more_parts']}.",
            f"- Pairs of rows of `corpus_v6` that the rule takes for a sure match and that carry two different numbers of "
            f"one numbering: {tw['pairs']} (in {tw['rows']} rows). Pairs of rows numbered in two different ways (a REM "
-           f"number and a number of Griffith's, Millet's or the Newsletter's, or none) that the rule matches at all, "
-           f"surely or doubtfully: {tw['across_numberings']['pairs']}.",
+           f"number and a number of Griffith's, Millet's or the Newsletter's, or none) that the rule matches at all: "
+           f"{tw['across_numberings']['pairs']}, of them surely {tw['across_numberings']['sure']}"
+           + (": " + "; ".join(f"{a} and {b}" for a, b in tw['across_numberings']['list']) if tw['across_numberings']['pairs'] else "") + ".",
            "", "### The measures", "", "| Measure | Count | Share of the inscriptions |", "|---|---|---|",
            f"| Inscriptions | {n} | |",
            f"| with a REM number | {i['with_a_rem_number']} | {pct(i['with_a_rem_number'], n)} |",
@@ -142,7 +160,14 @@ def tables(f):
             "",
             f"Bar B: {k['with_a_sure_match_to_another_number']} of the {k['texts']} Karanòg texts have a sure match to another "
             f"Karanòg number ({pct(k['with_a_sure_match_to_another_number'], k['texts'])}).",
-            "", "### The coverage map, counted again", "",
+            ""]
+    if rd:
+        out += ["### The two readers (bar C)", "", "| | Reader 1 | Reader 2 |", "|---|---|---|",
+                f"| Known lines: the right text named | {rd['reader1']['right']} of {rd['reader1']['known']} | {rd['reader2']['right']} of {rd['reader2']['known']} |",
+                f"| Lines with the text taken out: \"none\" answered | {rd['reader1']['none']} of {rd['reader1']['decoys']} | {rd['reader2']['none']} of {rd['reader2']['decoys']} |",
+                f"| Passes the bar | {'yes' if rd['reader1']['passes'] else 'no'} | {'yes' if rd['reader2']['passes'] else 'no'} |",
+                ""]
+    out += ["### The coverage map, counted again", "",
             "| Counted on | Texts | Words | Translated | Share |", "|---|---|---|---|---|"]
     old, was, new, al = cov["corpus_v5"]["all"], cov["inscriptions_that_were_in_corpus_v5"], cov["inscriptions_new_to_the_corpus"], cov["all"]
     once = cov["corpus_v5"]["near_copies_once"]
@@ -165,19 +190,29 @@ def tables(f):
             "", "### The check against the two editions, counted again", "",
             "| | On `corpus_v5` | On the words that still stand in `corpus_v6` |", "|---|---|---|"]
     e5, e6 = exp["corpus_v5"]["translated"], exp["corpus_v6"]["translated"]
-    out += [f"| Judged words | {exp['corpus_v5']['rows']:,} | {exp['corpus_v6']['rows']:,} |",
+    out += [f"| Judged rows | {exp['corpus_v5']['rows']:,} | {exp['corpus_v6']['rows']:,} |",
             f"| Words the map counts as translated | {e5['rows']} | {e6['rows']} |",
             f"| of them given a meaning by the edition | {e5['given']} | {e6['given']} |",
             f"| of them with the map's meaning | {e5['agree']} ({pct(e5['agree'], e5['given'])}) | {e6['agree']} ({pct(e6['agree'], e6['given'])}) |",
             "",
-            f"Not carried over: {exp['not_carried']} of the {exp['corpus_v5']['rows']:,} judged words ("
-            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ").", "", END]
-    return "\n".join(out)
+            f"Not carried over: {exp['not_carried']} of the {exp['corpus_v5']['rows']:,} judged rows ("
+            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ").", ""]
+    cost = f.get("cost")
+    if cost:
+        runs = cost["runs"]
+        out += ["### The cost in subagent tokens", "", "| Run | Subagent tokens | Running time |", "|---|---|---|"]
+        out += [f"| {r['what'][0].upper() + r['what'][1:]} | {r['subagent_tokens']:,} | {r['seconds'] // 60} min {r['seconds'] % 60} s |"
+                for r in runs]
+        out += [f"| All {len(runs)} runs | {sum(r['subagent_tokens'] for r in runs):,} | |",
+                f"| Quoted before the runs (readers, a reader for kind and site, the review) | {sum(cost['quoted'].values()):,} | |",
+                ""]
+    return "\n".join(out + [END])
 
 
 def main(argv):
     if argv[1:]:
         sys.exit(__doc__)
+    import build as B
     import readings as R
     import otten as O
     ins, mapped = rows("inscriptions.jsonl"), rows("map.jsonl")
@@ -211,14 +246,21 @@ def main(argv):
     systems = {i["id"]: set(i["numbers"]) for i in ins}                       # rows that share no way of numbering
     loose = [(a, b) for n, (a, x) in enumerate(letters) for b, y in letters[n + 1:]
              if not systems[a] & systems[b] and R.rule(x, y, skip)[0]]
-    figs["twins"]["across_numberings"] = {"pairs": len(loose), "list": loose}
+    figs["twins"]["across_numberings"] = {"pairs": len(loose), "list": loose,
+                                          "sure": sum(R.rule(dict(letters)[a], dict(letters)[b], skip)[0] == "sure" for a, b in loose)}
     phrases = [l for l in rows("lines.jsonl") if l["class"] == "phrase"]
     figs["phrases"] = {"in_one_text": sum(bool(l["inscription"]) for l in phrases),
                        "in_several": sum(not l["inscription"] and "held texts" in l["by"] for l in phrases),
                        "doubtful": sum(l["by"].startswith("a doubtful match") for l in phrases),
-                       "nothing": sum(not l["inscription"] and (l["by"] == "matches nothing held" or l["by"].startswith("no letters"))
+                       "set_aside": sum(l["by"].startswith("set aside") for l in phrases),
+                       "nothing": sum(not l["inscription"] and (l["by"].startswith("matches nothing held") or l["by"].startswith("no letters"))
                                       for l in phrases)}
     assert sum(figs["phrases"].values()) == len(phrases), "a phrase of a kind the page does not count"
+    every = rows("lines.jsonl")
+    figs["settled"] = {"readings": sum(l["class"] == "reading" and l["by"] == B.READ for l in every),
+                       "phrases": sum(l["class"] == "phrase" and l["by"] == B.READ for l in every),
+                       "set_aside": sum(l["by"].startswith("set aside") for l in every),
+                       "none": sum(l["by"].endswith(B.READ_NONE) for l in every)}
     fixes = [(i["id"], x) for i in ins for x in i["numerals_set"]]
     figs["numerals"] = {"all": len(fixes), "by_a_later_edition": sum(x[3] == "a later edition" for _, x in fixes),
                         "by_analogy": sum(x[3] == "by analogy" for _, x in fixes),
@@ -235,6 +277,7 @@ def main(argv):
     figs["bars"] = bars
     recount = json.loads((LOCAL / "recount.json").read_text())
     figs["coverage"], figs["experts"] = recount["coverage"], recount["experts"]
+    figs["cost"] = json.loads(COST.read_text()) if COST.exists() else None
     readers = LOCAL / "readers" / "figures.json"
     figs["readers"] = json.loads(readers.read_text()) if readers.exists() else None
     FIGURES.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n")

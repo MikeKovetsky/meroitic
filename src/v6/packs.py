@@ -12,6 +12,10 @@ A match is confirmed when both readers name the same candidate; when both say th
 nothing; when they differ, it stays not identified. A reader who names the right text for fewer than 10 of the
 12 known lines, or fails to answer "none" for fewer than 10 of the 12 with the text taken out, is not used
 (bar C), and then nothing is confirmed. `write` refuses to write the pack again once a reader has answered.
+
+Added after the answers were in, on the cautious side: an answer the two share is used only when both give it a
+sureness of 3 or more (of 5). One line had the same candidate from both at 2, each noting that the name differs;
+merging it would have put a guess into an inscription's readings. The figures give the count both ways.
 """
 import json
 import random
@@ -28,6 +32,7 @@ import readings as R   # noqa: E402
 OUT = ROOT / "data/sources/v6/readers"
 SEED = 22
 KNOWN, DECOYS, PASS = 12, 12, 10
+MIN_SURE = 3        # the sureness (1 to 5) both readers must give an answer they share for it to be used
 LETTERS = "ABC"
 
 BRIEF = """# Is this line a text we already hold?
@@ -181,7 +186,9 @@ def load_answers(path, key):
         if item not in key or item in out or same not in tuple(key[item]["candidates"]) + ("none",):
             problems.append(f"line {n}: unknown item, a second answer, or a candidate the item does not have")
             continue
-        out[item] = {"same_as": same, "part": a.get("part") is True}
+        sure = a.get("sure")
+        out[item] = {"same_as": same, "part": a.get("part") is True,
+                     "sure": sure if isinstance(sure, int) and not isinstance(sure, bool) and 1 <= sure <= 5 else 0}
     problems += [f"no answer for {i}" for i in sorted(set(key) - set(out))]
     return out, problems
 
@@ -196,15 +203,16 @@ def trust(answers, key):
             "passes": right >= min(PASS, len(known)) and none >= min(PASS, len(decoys))}
 
 
-def verdicts(one, two, key):
-    """[{line, same_as, part}] for the pending lines that both readers settled alike: same_as is the reading key
-    both named, or "" when both said none. A line named a part by either reader is a part."""
+def verdicts(one, two, key, min_sure=MIN_SURE):
+    """[{line, same_as, part}] for the pending lines that both readers settled alike, each with a sureness of
+    min_sure or more: same_as is the reading key both named, or "" when both said none. A line named a part by
+    either reader is a part."""
     out = []
     for item, k in key.items():
         if k["kind"] != "pending" or item not in one or item not in two:
             continue
         a, b = one[item], two[item]
-        if a["same_as"] != b["same_as"]:
+        if a["same_as"] != b["same_as"] or min(a.get("sure", 0), b.get("sure", 0)) < min_sure:
             continue
         same = "" if a["same_as"] == "none" else k["candidates"][a["same_as"]]
         out.append({"line": k["line"], "same_as": same, "part": bool(same) and (a["part"] or b["part"])})
@@ -224,8 +232,15 @@ def merge(out=OUT):
     figures["same_answer"] = sum(readers[0][i]["same_as"] == readers[1][i]["same_as"] for i in both)
     used = figures["reader1"]["passes"] and figures["reader2"]["passes"]
     settled = verdicts(readers[0], readers[1], key) if used else []
+    as_written = verdicts(readers[0], readers[1], key, min_sure=0) if used else []
+    figures["differ"] = len(both) - figures["same_answer"]
+    figures["same_candidate_as_the_bar_was_written"] = sum(bool(v["same_as"]) for v in as_written)
     figures["confirmed"] = sum(bool(v["same_as"]) for v in settled)
+    figures["confirmed_whole_text"] = sum(bool(v["same_as"]) and not v["part"] for v in settled)
+    figures["confirmed_part"] = sum(bool(v["same_as"]) and v["part"] for v in settled)
     figures["none"] = sum(not v["same_as"] for v in settled)
+    figures["same_answer_but_unsure"] = len(as_written) - len(settled)
+    figures["not_settled"] = len(pending) - len(settled)
     figures["used"] = used
     (out / "verdicts.jsonl").write_text("".join(json.dumps(v, ensure_ascii=False) + "\n" for v in settled))
     (out / "figures.json").write_text(json.dumps(figures, indent=1) + "\n")

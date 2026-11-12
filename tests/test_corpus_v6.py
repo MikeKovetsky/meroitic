@@ -257,6 +257,19 @@ def test_decide():
     assert B.is_reading(sure) and not B.is_reading(doubt)
 
 
+def test_settle():
+    group = {"ed:1": "g1", "ed:2": "g2"}.get
+    c1, c2 = cand("doubtful", 0.5, 0.4, 8, "ed:1", "g1"), cand("doubtful", 0.4, 0.3, 7, "ed:2", "g2")
+    pending = ("pending", None, c1, "")
+    assert B.settle(pending, [c1, c2], None, group) == pending                # the readers have not settled it
+    assert B.settle(pending, [c1, c2], ("ed:2", False), group) == ("reading", "g2", c2, B.READ)
+    assert B.settle(pending, [c1, c2], ("ed:2", True), group) == ("phrase", "g2", c2, B.READ)
+    assert B.settle(pending, [c1, c2], ("", False), group) == ("", None, None, B.READ_NONE)
+    assert B.settle(pending, [c1], ("ed:2", False), group) == ("reading", "g2", None, B.READ)   # a filler they named
+    sure = ("reading", "g1", c1, "the rule: a sure match to one inscription")
+    assert B.settle(sure, [c1], ("ed:2", False), group) == sure               # only a pending decision is theirs
+
+
 def test_candidates_one_per_inscription():
     eds = [reading("ed:1", A, "griffith"), reading("ed:1b", A, "mnl"), reading("ed:2", B_, "griffith"),
            reading("ed:r", A, "mnl", reconstruction=True)]
@@ -289,20 +302,24 @@ def test_readers():
         p.write_text('{"item": "I01", "same_as": "B", "part": false}\nnot json\n{"item": "I01", "same_as": "A"}\n'
                      '{"item": "I03", "same_as": "C"}\n{"item": "I09", "same_as": "A"}\n{"item": "I02", "same_as": "none", "part": "yes"}\n')
         got, problems = K.load_answers(p, KEY)
-        assert got == {"I01": {"same_as": "B", "part": False}, "I02": {"same_as": "none", "part": False}}
+        assert got == {"I01": {"same_as": "B", "part": False, "sure": 0}, "I02": {"same_as": "none", "part": False, "sure": 0}}
         assert len(problems) == 4 + 3                                          # four bad lines, three items unanswered
         assert K.load_answers(pathlib.Path(d) / "none.jsonl", KEY)[1] == ["no file none.jsonl"]
-    one = {"I01": {"same_as": "B", "part": False}, "I02": {"same_as": "none", "part": False},
-           "I03": {"same_as": "A", "part": False}, "I04": {"same_as": "none", "part": False},
-           "I05": {"same_as": "A", "part": False}}
-    two = dict(one, I03={"same_as": "A", "part": True}, I05={"same_as": "none", "part": False})
+    one = {"I01": {"same_as": "B", "part": False, "sure": 5}, "I02": {"same_as": "none", "part": False, "sure": 5},
+           "I03": {"same_as": "A", "part": False, "sure": 4}, "I04": {"same_as": "none", "part": False, "sure": 3},
+           "I05": {"same_as": "A", "part": False, "sure": 5}}
+    two = dict(one, I03={"same_as": "A", "part": True, "sure": 3}, I05={"same_as": "none", "part": False, "sure": 5})
     t = K.trust(one, KEY)
     assert (t["right"], t["none"], t["passes"]) == (1, 1, True)
-    assert not K.trust(dict(one, I01={"same_as": "A", "part": False}), KEY)["passes"]
+    assert not K.trust(dict(one, I01={"same_as": "A", "part": False, "sure": 5}), KEY)["passes"]
     assert not K.trust({}, KEY)["passes"]
     v = K.verdicts(one, two, KEY)
     assert v == [{"line": "otten:3", "same_as": "ed:4", "part": True},        # a part for either reader is a part
                  {"line": "otten:4", "same_as": "", "part": False}]           # the readers differ on I05: not settled
+    unsure = dict(two, I03={"same_as": "A", "part": True, "sure": 2})         # the same answer, one of them a guess
+    assert [x["line"] for x in K.verdicts(one, unsure, KEY)] == ["otten:4"]
+    assert len(K.verdicts(one, unsure, KEY, min_sure=0)) == 2
+    assert K.verdicts(one, {}, KEY) == []
 
 
 # --- src/v6/recount.py and the rows src/coverage.py takes ---
@@ -448,12 +465,12 @@ def test_readme_report_and_next_steps_quote_the_tables():
     assert not numbers_not_in_the_tables(listed), numbers_not_in_the_tables(listed)
     report = (ROOT / "REPORT.md").read_text()
     day = report[report.index("## Day five, afternoon (2026-11-12): one inscription once"):]
-    assert not numbers_not_in_the_tables(day, ["0.9"]), numbers_not_in_the_tables(day, ["0.9"])   # 0.9 million: the quote
+    assert not numbers_not_in_the_tables(day), numbers_not_in_the_tables(day)
     steps = (ROOT / "NEXT_STEPS.md").read_text()
     point = steps[steps.index("12. **The corpus keyed by inscription**"):steps.index("Next, in this order")]
     assert not numbers_not_in_the_tables(point), numbers_not_in_the_tables(point)
-    status = steps[steps.index("    - **Status, 2026-11-12: built, not finished**"):steps.index("23. **F2.")]
-    assert not numbers_not_in_the_tables(status, ["0.9"]), numbers_not_in_the_tables(status, ["0.9"])
+    status = steps[steps.index("    - **Status, 2026-11-12: built**"):steps.index("23. **F2.")]
+    assert not numbers_not_in_the_tables(status), numbers_not_in_the_tables(status)
 
 
 # --- the local build (skipped without the local files) ---

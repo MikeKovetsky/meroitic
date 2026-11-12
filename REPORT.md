@@ -479,30 +479,37 @@ After "are you giving up?", four more lines of attack, then data.
 ## Day five, afternoon (2026-11-12): one inscription once
 
 The first of the four builds of `NEXT_STEPS.md`, section F ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
-Built without an agent; two readers and the review are still to run.
+The table, the map and the corpus were built without an agent; two readers then read the doubtful matches.
 
 1. **Otten's padding can be undone exactly.** His repository holds the examples before padding in per-scholar
    files, with real names and the page of Millet's 1968 thesis. Of the 17,995 different lines of the padded file,
    340 are a line of those files letter for letter, 17,446 are such a line with one stretch swapped, and 206 more
    differ in a second small place. The 659 texts of the older corpus come from 329 source lines.
-2. **What `corpus_v5` was:** 286 of its 899 texts stand for an inscription (30.0% of its 21,977 words); 207 are
-   copies of a reading with a name swapped (54.5% of the words), 265 are example phrases from a grammar or
-   word-list entries and 102 more are copies of those; 3 are second readings; 36 wait for readers. One Gebel
-   Adda text, GA 28, stood 52 times.
-3. **`corpus_v6`:** 546 inscriptions, each once, with real names; 286 were in `corpus_v5` and 260 are new (the
-   Newsletter's texts). The table holds 562 inscriptions: 441 with a REM number, 68 with two readings or more,
-   303 with a reading under an open licence, 7 quoted by Millet and not identified.
+2. **What `corpus_v5` was:** 289 of its 899 texts stand for an inscription (30.1% of its 21,977 words); 207 are
+   copies of a reading with a name swapped (54.5% of the words), 273 are example phrases from a grammar or
+   word-list entries and 123 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
+   text, GA 28, stood 52 times.
+3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (the
+   Newsletter's texts). The table holds 563 inscriptions: 441 with a REM number, 70 with two readings or more,
+   303 with a reading under an open licence, 8 quoted by Millet and not identified.
 4. **The bar for the matching rule was missed:** the right partner is the best match for 44 of 53 known pairs
    (83.0%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a
    second monument of the same person. So a number decides before letters do, a sure match stands only when it
-   is the only one, and 17 doubtful matches wait for two readers.
-5. **The numeral fault is repaired where a later edition shows it:** 10 lone `l` in the epitaph of Makheye (REM
+   is the only one, and 17 doubtful matches went to two readers.
+5. **The readers passed their bar:** each named the right text for 12 of 12 known lines and answered "none" for
+   12 of 12 lines whose text had been taken out. On the 17 open lines they gave the same answer for 15. 13 of
+   their matches are taken (one more was a guess for both and is left out), one line matches nothing, and 3
+   lines are not settled.
+6. **A check caught one of the readers' matches:** a line they placed in the fragment GA 13+16 also holds a
+   passage of a long epitaph quoted on the same pages of the thesis, because Otten's line runs two quotations
+   together. It is set aside, so that no text stands in two rows.
+7. **The numeral fault is repaired where a later edition shows it:** 10 lone `l` in the epitaph of Makheye (REM
    0544) are read as the numeral 1, 4 after Newsletter 28 and 6 by analogy in the same list.
-6. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
-   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,023 of their words
+8. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
+   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,026 of their words
    are spellings no analyst has seen.
-7. **The check against the two editions counted again:** of the 1,115 judged words, 1,004 still stand in
+9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,004 still stand in
    `corpus_v6`; on those the editions give the map's meaning for 71.6% of the words they translate (267 of 373;
    it was 276 of 397, 69.5%).
-8. **Cost so far:** no subagent tokens. The estimate in `NEXT_STEPS.md` was 2 to 4 million for this piece; the
-   quote for the two readers and the review is about 0.9 million.
+10. **Cost:** the two readers took 253,065 subagent tokens together. The estimate in `NEXT_STEPS.md` was 2 to 4
+    million for this piece.

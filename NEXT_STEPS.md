@@ -64,10 +64,10 @@ Done since this plan was written:
     read as words, and almost no meaning the map lacks. Both editions are kept locally. Section F draws the
     consequence.
 12. **The corpus keyed by inscription** (2026-11-12, [`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)),
-    piece F1 of section F: built without an agent, not yet read by the two readers and not yet reviewed. The 899
-    texts of `corpus_v5` are 286 inscriptions; `corpus_v6` holds 546 with real names, and the public table 562
-    with every reading's source and licence. The matching rule missed its bar (44 of 53 known pairs), so numbers
-    decide before letters and 17 doubtful matches wait for readers.
+    piece F1 of section F: built without an agent, then read by two readers. The 899 texts of `corpus_v5` are
+    289 inscriptions; `corpus_v6` holds 548 with real names, and the public table 563 with every reading's
+    source and licence. The matching rule missed its bar (44 of 53 known pairs), so numbers decide before
+    letters; of the 17 doubtful matches the readers settled all but 3.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -318,16 +318,16 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Cost: 2 to 4 million subagent tokens and one to two days. Hallof's volume 7 (step 7) would complete it;
       without it the piece covers what is in hand.
     - Comes first: F2 to F4 are all counted on it.
-    - **Status, 2026-11-12: built, not finished** ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
+    - **Status, 2026-11-12: built** ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
       Otten's file is undone from his own per-scholar files, so every older text has a source line with real
-      names. Done: the table of 562 inscriptions, the map of all 899 old ids, `corpus_v6` with 546 inscriptions,
+      names. Done: the table of 563 inscriptions, the map of all 899 old ids, `corpus_v6` with 548 inscriptions,
       the coverage map and the expert check counted again (60.0% and 71.6% on the inscriptions that were in the
-      corpus, against 62.0% and 69.5%). No agent has run. Open: two readers for 17 doubtful matches and the
-      review, about 0.9 million subagent tokens together, on Mike's word.
-    - **What it leaves for later:** 1,023 words of the new inscriptions have no analyst (a run like the coverage
-      map's first, to be quoted); ten Gebel Adda inscriptions are held only as a text layer of Millet 2005 and
-      could be typed; 7 texts quoted by Millet 1968 are not identified; the kind of text is not known for 113
-      inscriptions; and word division still follows each edition.
+      corpus, against 62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens.
+    - **What it leaves for later:** 1,026 words of the new inscriptions have no analyst (a run like the coverage
+      map's first, to be quoted); nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and
+      could be typed; 8 texts quoted by Millet 1968 are not identified, one of which may be Griffith's Meroë 27
+      or 28; 3 doubtful matches are not settled; the kind of text is not known for 112 inscriptions; and word
+      division still follows each edition.
 23. **F2. A lexicon with a source and a status for every meaning.**
     - Why: "translated" in the map means that one lexicon of 2003 accepts the meaning. The check of 2026-11-12
       shows what that hides: two other scholars agree for 85% of the words outside `yetmde` and `qo`, and differ
