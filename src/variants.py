@@ -401,8 +401,9 @@ SENDS_ON = (r"(?:variants?(?:\s*\(\?\))?\s+(?:in\s+REM[\s\d,and]+)?of|\bsee(?:\s
 
 def names(text, headword):
     """Does an entry's text send to a headword? Yes when it names it right after words that send on (SENDS_ON):
-    a headword such as `are` or `at` is also an English word, so its mere presence says nothing."""
-    return bool(re.search(SENDS_ON + re.escape(C.bare(headword)) + r"(?![\w-])", text))
+    a headword such as `are` or `at` is also an English word, so its mere presence says nothing. A headword that
+    only begins a longer word with a letter in brackets (`w` in "variant of w(e)tneyiqeli") is not named."""
+    return bool(re.search(SENDS_ON + re.escape(C.bare(headword)) + r"(?![\w-]|\(\w+\)\w)", text))
 
 
 def linked(piece, hit, by_head):
@@ -493,8 +494,9 @@ def build():
 
 def rest_on_a_variant(entries, texts):
     """A by-product for the coverage map, which this file does not change: the entries at a translated level that
-    accept() does not accept (their meaning only sends to an entry without an accepted meaning), and the running
-    words the map counts as translated through one of them. {"entries": [headwords], "words": n}"""
+    accept() does not accept (their meaning makes them a variant of an entry without an accepted meaning, or sends
+    to one, though it may say more, as for `mloyose`), and the running words the map counts as translated through
+    one of them. {"entries": [headwords], "words": n}"""
     weak = {e["headword"] for e in entries if e["level"] in C.TRANSLATED and not e["accepted"]}
     words_ = sum(g["level"] in C.TRANSLATED and any(p["entry"] in weak for p in g["parts"])
                  for t in texts for g in t["glosses"])
@@ -652,7 +654,10 @@ def said(g):
 
 
 def secret(g, forms):
-    """Is a word one of `forms`, bare or as the first part of a word the map cuts?"""
+    """Is a word one of `forms`, bare or as the first part of a word the map cuts? A form that stands later in a
+    cut word (`ateqi` in `yetmdelowiateqi`) is not caught, nor a word that holds a form's letters but that the map
+    cuts otherwise (`mXeyotowi`, cut mXeyo-to-wi, holds `mXeyot`): the packs were read so, and three of their items
+    show such a word with its gloss (data/discovery/variants.md, section 5)."""
     return g["form"] in forms or bool(g.get("parts")) and g["parts"][0]["form"] in forms
 
 
@@ -748,7 +753,8 @@ def check_pack():
     An item holds the piece, the number of texts it stands in, its contexts, the lexicon's entry when the piece
     is a headword, and its candidates. It does not say what kind of word the piece is: for a piece that is the
     map's analysts' label, and a control or a decoy would have to borrow its true word's. No context of the item
-    shows a gloss under one of the item's own words, nor under a word of a control or a decoy (said(), secret())."""
+    shows a gloss under a word that the map finds the piece in, nor under a word of a control or a decoy, a spelling
+    of it bare or as the first part of a cut word (said(), secret(), which says what that leaves)."""
     raw = L.load()
     entries = words(raw)
     by_head = {e["headword"]: e for e in entries}
@@ -791,21 +797,36 @@ def check_pack():
     for k in range(n):
         files[CHECK / f"pack{k + 1:02d}" / "pack.jsonl"] = "".join(
             json.dumps(x, ensure_ascii=False) + "\n" for x in pack[k::n])
+    written = write_packs(files, BRIEF.read_text(encoding="utf-8"))
+    kinds = collections.Counter(a["what"] for a in answer.values())
+    print(f"{len(pack)} items in {n} packs in {E.where(CHECK)}: {kinds['best']} best matches, {kinds['decoy']} "
+          f"decoys, {kinds['control']} controls" + ("" if written else
+                                                   "; the packs hold answers and are as this build gives them"))
+
+
+def write_packs(files, brief):
+    """Write the key and the packs ({path: text}), the brief beside each pack.jsonl; True when written.
+
+    While a pack's folder holds the checkers' answers (reader*.jsonl) nothing is written: the files must be what
+    this build gives, or the build stops, so that answers never stand beside another pack or another key, and the
+    BRIEF.md beside them stays the brief those checkers read. A pack folder that this build would not write stops
+    it too, since check_merge() reads every pack folder."""
     answered = sorted(E.where(q) for q in CHECK.glob("pack*/reader*.jsonl"))
     changed = [E.where(q) for q, text in files.items() if not q.exists() or q.read_text(encoding="utf-8") != text]
     if answered and changed:
         sys.exit(f"{E.where(CHECK)} holds the checkers' answers ({len(answered)} files), and this build would change "
                  f"{', '.join(changed)}: move the answers away before new packs are built")
-    if not answered:
-        for q, text in files.items():
-            q.parent.mkdir(parents=True, exist_ok=True)
-            q.write_text(text, encoding="utf-8")
-            if q.name == "pack.jsonl":
-                (q.parent / "BRIEF.md").write_text(BRIEF.read_text(encoding="utf-8"), encoding="utf-8")
-    kinds = collections.Counter(a["what"] for a in answer.values())
-    print(f"{len(pack)} items in {n} packs in {E.where(CHECK)}: {kinds['best']} best matches, {kinds['decoy']} "
-          f"decoys, {kinds['control']} controls" + ("; the packs hold answers and are as this build gives them"
-                                                   if answered else ""))
+    stale = sorted(E.where(q) for q in CHECK.glob("pack*") if q / "pack.jsonl" not in files)
+    if stale:
+        sys.exit(f"{', '.join(stale)} would stand beside the packs of this build: move them away first")
+    if answered:
+        return False
+    for q, text in files.items():
+        q.parent.mkdir(parents=True, exist_ok=True)
+        q.write_text(text, encoding="utf-8")
+        if q.name == "pack.jsonl":
+            (q.parent / "BRIEF.md").write_text(brief, encoding="utf-8")
+    return True
 
 
 def which(name, candidates):
@@ -822,22 +843,30 @@ def which(name, candidates):
     return loose[0] if len(loose) == 1 else (None, [])
 
 
-def check_merge():
+def check_merge(raw=None):
     """Read the checkers' answers (check/pack*/reader*.jsonl) against the key; write check.json, the confirmed
     list (local, with the checkers' reasons; public, forms only) and what the confirmed list would move in the
-    coverage map. A piece is confirmed when both checkers answer `same` and name entries of one candidate."""
+    coverage map. A piece is confirmed when both checkers answer `same` and name entries of one candidate.
+    A checker's answers count for the items of its own pack. `raw` is the lexicon (lexique.load() when None), read
+    for the spellings of the decoys' true words."""
     answer = json.loads(KEYFILE.read_text(encoding="utf-8"))
-    cands = {}
+    cands, shown = {}, []
     readers = collections.defaultdict(dict)
     for folder in sorted(CHECK.glob("pack*")):
+        ids = []
         for line in (folder / "pack.jsonl").read_text(encoding="utf-8").splitlines():
             x = json.loads(line)
+            ids.append(x["id"])
             cands[x["id"]] = [[e["headword"] for e in c["entries"]] for c in x["candidates"]]
-        for name, got in E.answers(folder, answer, VERDICTS).items():
+        for name, got in E.answers(folder, set(ids), VERDICTS).items():
             readers[name].update(got)
+        shown += ids
+    if sorted(shown) != sorted(answer):
+        sys.exit(f"the packs in {E.where(CHECK)} hold {len(shown)} items and the key {len(answer)}, or other ones: "
+                 "they are not one build of `check`")
     out = {"items": len(answer), **{w: sum(a["what"] == w for a in answer.values()) for w in ("best", "decoy", "control")},
            "readers": {}}
-    by_head = {e["headword"]: e for e in words()} if any(a["what"] == "decoy" for a in answer.values()) else {}
+    by_head = {e["headword"]: e for e in words(raw)} if any(a["what"] == "decoy" for a in answer.values()) else {}
     spelled = {i: set().union(*(by_head[o]["head"] | {x for v in by_head[o]["listed"] for x in v["strings"]}
                                 for o in a["owners"])) for i, a in answer.items() if a["what"] == "decoy"}
 
@@ -874,6 +903,8 @@ def check_merge():
         out["same_for_both"] = {w: sum(answer[i]["what"] == w for i in agree) for w in ("best", "decoy", "control")}
         out["controls_right_for_both"] = sum(right(i, a[i]) and right(i, b[i]) for i in agree
                                              if answer[i]["what"] == "control")
+        out["decoys_recognised_for_both"] = sum(recognised(i, a[i]) and recognised(i, b[i]) for i in both
+                                                if answer[i]["what"] == "decoy")
         out["other_for_both"] = [{"id": i, "piece": answer[i]["piece"], "what": answer[i]["what"],
                                   "candidates": [a[i].get("candidate", ""), b[i].get("candidate", "")]}
                                  for i in both if a[i]["verdict"] == b[i]["verdict"] == "other"]

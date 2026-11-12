@@ -218,6 +218,9 @@ def test_the_lexicon_s_own_links():
     assert V.names("probably a variant of the title tqi", "tqi") and V.names("a variant (?) of mte", "mte")
     assert V.names("a variant in REM 0234, 0249 and 0259 of ant 'priest'", "ant")
     assert V.names("perhaps the same lexeme as the adjective mẖe or mẖo (1)", "mẖe")
+    # a headword that only begins a word with a letter in brackets is not named; a headword so spelled is
+    assert not V.names("variant of w(e)tneyiqeli with a difference", "-w (1)")
+    assert V.names("a variant of ḫbḫl(i), rare", "ḫbḫl(i)") and V.names("see ḫbḫl(i)", "ḫbḫl")
     assert V.linked("wide", {"entries": ["wi"]}, es)                   # the entry sends to its match
     assert V.linked("Mni", {"entries": ["Amni"]}, es)                  # the match lists the piece's spelling
     assert not V.linked("perite", {"entries": ["plsn"]}, es)
@@ -257,6 +260,11 @@ def test_the_contexts_do_not_show_a_guess():
     got = V.contexts(at["prSn", False], TEXTS, hide=own)
     # each from another text, and no two with the same words around (T4 is T1 again)
     assert [c["text"] for c in got] == ["T1", "T2", "T3"]
+    # one context a text, also where the piece stands in it twice with other words around
+    twice = texts_of(("T9", [("prSn", "unknown", "", [("prSn", "?")])]
+                      + [(f"w{k}", "unknown", "", [(f"w{k}", "?")]) for k in range(10)]
+                      + [("prSn", "unknown", "", [("prSn", "?")])]))
+    assert [c["text"] for c in V.contexts([(0, 0), (0, 11)], twice)] == ["T9"]
     assert got[0] == {"text": "T1", "words": "ant [prSn] Mnp", "glosses": "priest / ? / Amanap"}
     assert got[1]["glosses"] == "? / ruler"                            # the piece's own word shows no gloss
     # an analyst's reading that the map does not count as translated is "?", the piece's or a neighbour's
@@ -356,7 +364,7 @@ def merged(key, answers, packs):
                 for reader, lines in answers.get(name, {}).items():
                     (V.CHECK / name / f"{reader}.jsonl").write_text("\n".join(lines) + "\n")
             with contextlib.redirect_stdout(io.StringIO()):
-                V.check_merge()
+                V.check_merge(LEXICON)
             out = json.loads((V.OUT / "check.json").read_text())
             rows = [json.loads(l) for l in (V.OUT / "confirmed.jsonl").read_text().splitlines()]
             return out, rows, V.CONFIRMED.read_text() if V.CONFIRMED.exists() else ""
@@ -412,6 +420,74 @@ def test_the_checkers_answers_are_read_against_the_key():
     out, rows, _ = merged(key, loose, packs)
     assert [(r["piece"], r["entries"]) for r in rows] == [("prSn", ["plsn"]), ("tkel", ["tk (1)", "tk (2)"])]
     assert out["readers"]["reader1"]["controls_right"] == 1 and out["readers"]["reader2"]["controls_right"] == 0
+
+
+def test_a_decoy_is_recognised_by_its_true_word():
+    def item(piece, owners):
+        return {"piece": piece, "headword": False, "what": "decoy", "chance": 0.2, "best": ["plsn"], "owners": owners,
+                "linked": False}
+
+    key = {"V001": item("amnoi", ["Amni"]), "V002": item("tkel", ["tk (1)"]), "V003": item("qorl", ["qore"])}
+    cands = [{"entries": [{"headword": "plsn"}]}]
+    packs = {"pack01": [{"id": i, "candidates": cands} for i in ("V001", "V002")],
+             "pack02": [{"id": "V003", "candidates": cands}]}
+    ans = lambda i, v, c="": json.dumps({"id": i, "verdict": v, "candidate": c, "confidence": 3, "reason": "r"})   # noqa: E731
+    answers = {"pack01": {"reader1": [ans("V001", "other", "Mni"), ans("V002", "other", "tke")],
+                          "reader2": [ans("V001", "other", "Amni (Amun)"), ans("V002", "no")]},
+               "pack02": {"reader1": [ans("V003", "other", "plsn"), ans("V001", "no")], "reader2": [ans("V003", "other", "qor")]}}
+    out, rows, _ = merged(key, answers, packs)
+    # `other` with the word that lists the decoy, by one of its spellings or its headword with a note, recognises
+    # it; another word or `no` does not; and an answer counts for an item of the checker's own pack only (reader1
+    # of pack02 also answered V001, which is in pack01)
+    r1, r2 = out["readers"]["reader1"], out["readers"]["reader2"]
+    assert (r1["decoys_recognised"], r2["decoys_recognised"], out["decoys_recognised_for_both"]) == (2, 2, 1)
+    assert r1["answered"] == 3 and r1["decoy"] == {"other": 3} and rows == []
+    # a key and packs of two builds are not merged
+    for other in ({"pack01": packs["pack01"]}, dict(packs, pack03=packs["pack02"])):
+        try:
+            merged(key, answers, other)
+        except SystemExit as e:
+            assert "not one build" in str(e)
+        else:
+            raise AssertionError(sorted(other))
+
+
+def test_a_pack_with_answers_is_never_replaced():
+    with tempfile.TemporaryDirectory() as tmp:
+        old = V.CHECK
+        V.CHECK = Path(tmp) / "check"
+        try:
+            files = {Path(tmp) / "key.json": "{}\n", V.CHECK / "pack01" / "pack.jsonl": "a\n",
+                     V.CHECK / "pack02" / "pack.jsonl": "b\n"}
+            assert V.write_packs(files, "the brief") is True
+            assert all(q.read_text() == t for q, t in files.items())
+            assert (V.CHECK / "pack02" / "BRIEF.md").read_text() == "the brief"
+            # once a pack holds answers, a build that gives the same files writes nothing, the brief included
+            (V.CHECK / "pack01" / "reader1.jsonl").write_text("{}\n")
+            assert V.write_packs(files, "another brief") is False
+            assert (V.CHECK / "pack01" / "BRIEF.md").read_text() == "the brief"
+            # and a build that would change the key or any pack stops, leaving the files as they were
+            for q in files:
+                try:
+                    V.write_packs({**files, q: "changed\n"}, "the brief")
+                except SystemExit as e:
+                    assert "holds the checkers' answers" in str(e) and V.E.where(q) in str(e)
+                else:
+                    raise AssertionError(q)
+                assert q.read_text() == files[q]
+            # a pack folder that the build would not write stops it, with answers or without
+            (V.CHECK / "pack03").mkdir()
+            for answered in (True, False):
+                if not answered:
+                    (V.CHECK / "pack01" / "reader1.jsonl").unlink()
+                try:
+                    V.write_packs(files, "the brief")
+                except SystemExit as e:
+                    assert "pack03" in str(e) and "would stand beside" in str(e)
+                else:
+                    raise AssertionError(answered)
+        finally:
+            V.CHECK = old
 
 
 def test_what_the_confirmed_list_would_move():
@@ -556,6 +632,12 @@ def test_reported_pool_and_bar():
     assert (math.ceil(V.FOUND * 242), math.ceil(V.STANDS_OUT * 242)) == (162, 121)
     assert "The test missed its bar." in text and "part 1 needed 162 and has 187, so it is reached" in text
     assert "Part 2 needed 121 and has 105, so it is not reached" in text
+    # a chance counts the word itself: a variant that exactly 50 of the 1,000 made-up words equal is under the
+    # bar's words and over the chance of 5%, and there is one, with its own entry first
+    edge = [r for r in lines(1) if round(r["listed"]["chance"] * (V.MADE_UP + 1)) - 1 == 50]
+    assert [(r["variants"], r["owners"], r["listed"]["place"]) for r in edge] == [(["Atwete"], ["Twete"], 1)]
+    assert "So Atwete, a variant of Twete that 50 of the 1,000 made-up words equal, counts as not standing out" in text
+    assert "and part 2 has 106, still short of 121" in text and 105 + 1 < 121
     assert "187 of the 242 hidden variants back to their own entry as the single best match (77%" in text
     assert "only 105 of the 242 (43%)" in text and round(100 * 187 / 242) == 77 and round(100 * 105 / 242) == 43
     assert "232 of the 242 (96%)" in text and "105 times in 118 (89%)" in text and round(100 * 105 / 118) == 89
@@ -910,13 +992,13 @@ def test_reported_check_and_what_it_would_move():
     assert [[number(c) for c in r[1:]] for r in rows] == [
         [51, 55, 48], [2, 1, 1], [52, 49, 46], [r1["controls_right"], r2["controls_right"], out["controls_right_for_both"]],
         [r1["decoy"]["same"], r2["decoy"]["same"], out["same_for_both"]["decoy"]],
-        [r1["decoys_recognised"], r2["decoys_recognised"], 4]]
+        [r1["decoys_recognised"], r2["decoys_recognised"], out["decoys_recognised_for_both"]]]
     assert rows[0][3] == "48 with one candidate, 1 with two" and [r[0] for r in rows[3:]] == [
         "The 12 controls: the right entry named", "The 12 decoys: a look-alike accepted",
         "The 12 decoys: the true word named all the same"]
     assert (r1["controls_right"], r2["controls_right"], out["controls_right_for_both"]) == (7, 8, 6)
     assert (r1["decoy"].get("same"), r2["decoy"].get("same"), out["same_for_both"]["decoy"]) == (1, 1, 1)
-    assert (r1["decoys_recognised"], r2["decoys_recognised"]) == (4, 5)
+    assert (r1["decoys_recognised"], r2["decoys_recognised"], out["decoys_recognised_for_both"]) == (4, 5, 4)
     decoy = next(i for i, a in key.items() if a["what"] == "decoy" and got[i]["reader1"]["verdict"] == "same")
     assert key[decoy]["piece"] == "amnpte" and key[decoy]["owners"] == ["Mnpte"]
     assert [got[decoy][r]["candidate"] for r in ("reader1", "reader2")] == ["Amnp", "Amnp"]
@@ -972,6 +1054,66 @@ def test_reported_check_and_what_it_would_move():
     assert [l.split("\t")[0] for l in listed.splitlines()[1:]] == sorted(c["piece"] for c in confirmed)
     # the cost on the page is the sum of the runs
     assert 657132 + 612087 == 1269219 and "1,269,219 subagent tokens" in text and "657,132 for the first pass" in text
+
+
+def test_three_items_show_a_word_with_their_own_letters():
+    # the packs hide the words the map finds a piece in; a word that holds an item's own letters but that the map
+    # cuts otherwise kept its gloss, and the page names every such item. The candidate's own word in a candidate's
+    # context is shown on purpose and is not counted.
+    needs(*LOCAL, *CHECKED, *WORDS, "data/sources/variants/check")
+    key = json.loads((ROOT / CHECKED[0]).read_text(encoding="utf-8"))
+    items = [json.loads(l) for q in sorted((ROOT / "data/sources/variants/check").glob("pack*/pack.jsonl"))
+             for l in q.read_text(encoding="utf-8").splitlines()]
+    texts = {t["id"]: t for t in V.glossed()}
+    _, hidden = V.cases(V.words())
+    got = {}
+    for x in items:
+        a = key[x["id"]]
+        if a["what"] == "best":
+            own = L.corpus_spellings(a["piece"]) if a["headword"] else {a["piece"]}
+        else:
+            it = next(h for h in hidden if E.meroitic(a["piece"], True) in h["hidden"] | {h["letters"]}
+                      and set(h["owners"]) == set(a["owners"]))
+            own = set().union(*(L.corpus_spellings(v) for v in it["variants"]))
+        for c, candidate in [(c, False) for c in x["contexts"]] + [(c, True) for y in x["candidates"] for c in y["contexts"]]:
+            words = c["words"].split()
+            target = next(n for n, w in enumerate(words) if w.startswith("["))
+            for n, (w, shown) in enumerate(zip(words, c["glosses"].split(" / "))):
+                if shown != "?" and not (candidate and n == target) and any(s in w.strip("[]") for s in own):
+                    got.setdefault((a["piece"], a["what"]), set()).add(w.strip("[]"))
+    assert got == {("mXeyot", "best"): {"mXeyotowi"}, ("yetmetl", "best"): {"yetmetlXl"},
+                   ("ateqi", "decoy"): {"yetmdelowiateqi"}}
+    # the map cuts each otherwise and counts it as translated
+    cut = {g["form"]: g for t in texts.values() for g in t["glosses"] if g["form"] in ("mXeyotowi", "yetmetlXl", "yetmdelowiateqi")}
+    assert [p["form"] for p in cut["mXeyotowi"]["parts"]] == ["mXeyo", "to", "wi"] and cut["mXeyotowi"]["parts"][0]["entry"] == "mẖeyose"
+    assert [p["form"] for p in cut["yetmetlXl"]["parts"]] == ["yetmet", "lX", "l"]
+    assert all(g["level"] in C.TRANSLATED for g in cut.values()) and "ateqi" in cut["yetmdelowiateqi"]["gloss"]
+    # both checkers cite yetmetlXl for yetmetl, neither cites mXeyotowi for mXeyot
+    said = {}
+    for q in sorted((ROOT / "data/sources/variants/check").glob("pack*/reader*.jsonl")):
+        for l in q.read_text(encoding="utf-8").splitlines():
+            a = json.loads(l)
+            said.setdefault(key[a["id"]]["piece"], []).append(a["reason"])
+    assert all("yetmetlXl" in r for r in said["yetmetl"]) and not any("mXeyotowi" in r for r in said["mXeyot"])
+    # both are confirmed; without them the check confirms 46, and 24 new ones with an accepted meaning move 54
+    confirmed = [json.loads(l) for l in (ROOT / CHECKED[2]).read_text(encoding="utf-8").splitlines()]
+    assert {"mXeyot", "yetmetl"} <= {c["piece"] for c in confirmed}
+    rest = V.moved([dict(c) for c in confirmed if c["piece"] not in ("mXeyot", "yetmetl")])
+    assert (rest["confirmed"], rest["with_an_accepted_meaning"], rest["words"], rest["words_once"],
+            rest["texts_completed_once"]) == (46, 24, 54, 35, 5)
+    assert (f"{100 * (13292 + 54) / 21977:.1f}%", f"{100 * (5266 + 35) / 8786:.1f}%") == ("60.7%", "60.3%")
+    text = page()
+    assert "Three items showed a word with their own letters, glossed." in text
+    assert "Beside mXeyot the pack showed mXeyotowi" in text and "neither checker cites it" in text
+    assert "yetmetlXl, which the map reads as the name Yetmet" in text and "both checkers cite it" in text
+    assert "Beside the decoy ateqi it showed yetmdelowiateqi, whose gloss names ateqi" in text
+    assert "without them 46 are confirmed" in text and "Without mXeyot and yetmetl it is 54 running words, still 60.7%" in text
+    assert "it is 54 and 35, still 60.7% of all running words and 60.3% with near-copies counted once" in text
+    assert "it is 46, and 24 of the new ones have an accepted meaning" in text
+    for doc, phrase in (("README.md", "54 words, still 60.7%, without the two"), ("REPORT.md", "without them 46 are confirmed"),
+                        ("REPORT.md", "without mXeyot and yetmetl, 54 words, still 60.7%"),
+                        ("NEXT_STEPS.md", "54 without mXeyot and yetmetl")):
+        assert phrase in " ".join((ROOT / doc).read_text(encoding="utf-8").replace("`", "").split()), (doc, phrase)
 
 
 def test_the_first_pass_is_set_aside_and_counted_nowhere():
