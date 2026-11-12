@@ -173,10 +173,10 @@ start of a word only), a Coptic form keeps its vowels in four classes (ⲁ; ⲉ 
 the model counts a vowel like any other letter. The sign ne writes its e. The e of the sign se is compared only
 where the spelling writes it as a letter of its own: a headword is taken in a spelling that writes se as s and e,
 but in a piece taken from the texts the corpus's s is the sign se in the funerary texts and in Griffith's rows and
-the plain s in the royal narratives, so it counts as s. The made-up words
-are drawn as in section 6, from the headwords with their vowels: 300 of each length from 3 to 12 letters (12 and
-more together), vowels counted, each with three consonants or more. A title or a noun is searched among the 7,139
-Coptic nouns, a verb among the 2,946 verbs.
+the plain s in the royal narratives, so it counts as s. The made-up words are drawn as in section 6, from the
+headwords with their vowels: 300 of each length from 3 to 12 letters (12 and more together), vowels counted, each
+with three consonants or more. A title or a noun is searched among the 7,139 Coptic nouns, a verb among the 2,946
+verbs.
 
 **The test.** 13 of the known loans have a Coptic source: 8 titles and nouns, and 5 names whose source the
 lexicon lists as a noun. Each was hidden in turn, as before. "Consonants" is the same search in the same pool

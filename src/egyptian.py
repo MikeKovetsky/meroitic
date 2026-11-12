@@ -8,7 +8,7 @@
   python3 -I src/egyptian.py merge            the checkers' answers against the key of decoys
   python3 -I src/egyptian.py vowels           the same test and search with the vowels compared too, on the
                                               Coptic entries (Demotic writes none); its own result files and list
-  python3 -I src/egyptian.py check vowels     the pack of its pieces that beat the bar and were not in the first
+  python3 -I src/egyptian.py check vowels     the pack of its best matches that the first checkers were not shown
   python3 -I src/egyptian.py merge vowels     the checkers' answers to that pack
 
 The question (NEXT_STEPS.md, E 17): can a mechanical search find the Egyptian word behind a Meroitic title or
@@ -941,33 +941,51 @@ def write_pack(folder, files, brief):
     return True
 
 
-def check_pack(with_vowels=False):
-    """Write the checkers' pack: the pieces whose best match beats the bar, and decoys, in one shuffled list.
-    `with_vowels`: the second pack, of the vowel search's pieces that beat the bar and that the first pack did not
-    hold (a piece the first pack held stays out of it, even when its best match with vowels is another word)."""
+def not_shown(rows, first_key, first_pack):
+    """The vowel search's rows that the second pack draws from: not set aside, and with a best match that the
+    first checkers were not shown for that piece. `first_key` and `first_pack` are the first pack's key and items."""
+    shown = collections.defaultdict(set)
+    for item in first_pack:
+        shown[first_key[item["id"]]["piece"]] |= {c["id"] for c in item["candidates"]}
+    return [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"])
+            and r["vowels"]["hits"][0]["id"] not in shown[r["piece"]]]
+
+
+def pack_draw(with_vowels=False):
+    """What a pack holds, from the result files: (items in the pack's order, the decoys among them, the result
+    names its candidates come from, the chance each item is ranked by). The first pack: every piece not set aside
+    whose best match beats the bar. The second: every piece of the vowel search whose best match beats the bar and
+    is not a word the first checkers were shown for it (not_shown). Both add decoys, pieces whose best match is
+    poor, drawn with the seed, and shuffle."""
     if with_vowels:
-        first = HERE / "check_key.json"
-        if not first.exists():
-            sys.exit(f"no {where(first)}: the second pack leaves out the pieces of the first, so `check` comes first")
+        first, first_pack = HERE / "check_key.json", CHECK / "pack.jsonl"
+        missing = [where(p) for p in (first, first_pack) if not p.exists()]
+        if missing:
+            sys.exit(f"no {', '.join(missing)}: the second pack leaves out the matches the first checkers were "
+                     "shown, so `check` comes first")
         rows = [json.loads(l) for l in (OUT / "vowel_candidates.jsonl").read_text(encoding="utf-8").splitlines()]
-        answer = json.loads(first.read_text(encoding="utf-8"))
-        shown = collections.defaultdict(set)         # the candidates the first checkers saw for each piece
-        for item in map(json.loads, (CHECK / "pack.jsonl").read_text(encoding="utf-8").splitlines()):
-            shown[answer[item["id"]]["piece"]] |= {c["id"] for c in item["candidates"]}
-        fresh = [r for r in rows if not (r["mentions_egyptian"] or r["spelled_like"])
-                 and r["vowels"]["hits"][0]["id"] not in shown[r["piece"]]]
+        fresh = not_shown(rows, json.loads(first.read_text(encoding="utf-8")),
+                          [json.loads(l) for l in first_pack.read_text(encoding="utf-8").splitlines()])
         low = lambda r: r["vowels"]["chance"]   # noqa: E731
-        names, folder, keyfile, n_decoys = ("vowels",), CHECK_VOWELS, HERE / "check_vowels_key.json", DECOYS_VOWELS
+        names, n_decoys = ("vowels",), DECOYS_VOWELS
     else:
         rows = [json.loads(l) for l in (OUT / "candidates.jsonl").read_text(encoding="utf-8").splitlines()]
         fresh = [r for r in rows if "narrow" in r and not (r["mentions_egyptian"] or r["spelled_like"])]
         low = lambda r: min(r["narrow"]["chance"], r["wide"]["chance"])   # noqa: E731
-        names, folder, keyfile, n_decoys = ("narrow", "wide"), CHECK, HERE / "check_key.json", DECOYS
+        names, n_decoys = ("narrow", "wide"), DECOYS
     best = [r for r in fresh if low(r) <= BAR]
     rnd = random.Random(SEED)
     decoys = rnd.sample(sorted((r for r in fresh if low(r) >= 0.5), key=lambda r: r["piece"]), n_decoys)
     items = best + decoys
     rnd.shuffle(items)
+    return items, decoys, names, low
+
+
+def check_pack(with_vowels=False):
+    """Write the checkers' pack (pack_draw): the pieces whose best match beats the bar, and decoys, in one shuffled
+    list. `with_vowels`: the second pack, from the vowel search."""
+    items, decoys, names, low = pack_draw(with_vowels)
+    folder, keyfile = (CHECK_VOWELS, HERE / "check_vowels_key.json") if with_vowels else (CHECK, HERE / "check_key.json")
     pool = {e["id"]: e for e in pools()}
     texts = [json.loads(l) for l in GLOSSES.read_text(encoding="utf-8").splitlines()]
     spelled = {r["piece"]: set(r["spellings"].split()) | {r["piece"]}
@@ -991,7 +1009,7 @@ def check_pack(with_vowels=False):
     files = {folder / "pack.jsonl": "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in pack),
              keyfile: json.dumps(answer, ensure_ascii=False, indent=1)}
     if write_pack(folder, files, BRIEF.read_text(encoding="utf-8")):
-        print(f"{len(pack)} items ({len(best)} best matches, {len(decoys)} decoys) in {where(folder)}")
+        print(f"{len(pack)} items ({len(pack) - len(decoys)} best matches, {len(decoys)} decoys) in {where(folder)}")
     else:
         print(f"{where(folder)} holds the checkers' answers, and its pack and key are what this build gives: "
               "left as they are")

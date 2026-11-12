@@ -418,6 +418,25 @@ def test_reported_other_sets_and_the_check():
     assert [x["piece"] for x in c["fits_for_both"]] == ["aribet"]
     assert sorted(x["piece"] for x in c["known_for_both"]) == ["menote", "pertese", "petmoS", "prSn", "stol"]
     assert not any(x["decoy"] for x in c["fits_for_both"] + c["known_for_both"])
+    # the first key is what the script draws from the result files today, item by item and in its order
+    needs("data/sources/egyptian/check_key.json")
+    key = json.loads((ROOT / "data/sources/egyptian/check_key.json").read_text(encoding="utf-8"))
+    items, decoys, _, chance_of_item = E.pack_draw()
+    assert [(r["piece"], r in decoys, chance_of_item(r)) for r in items] == [
+        (a["piece"], a["decoy"], a["chance"]) for a in key.values()]
+
+
+def test_the_second_pack_goes_by_the_matches_the_first_checkers_saw():
+    def row(piece, best, aside=False, like=""):
+        return {"piece": piece, "mentions_egyptian": aside, "spelled_like": like,
+                "vowels": {"chance": 0.01, "hits": [{"id": best}, {"id": "q"}]}}
+    rows = [row("a", "x"),                  # its best match was among the first pack's candidates for it: out
+            row("b", "y"),                  # a piece of the first pack whose best match it was not shown: in
+            row("c", "x"),                  # not in the first pack: in, even with a word another piece was shown
+            row("d", "z", aside=True), row("e", "z", like="amn")]               # set aside: out
+    key = {"P01": {"piece": "a"}, "P02": {"piece": "b"}}
+    pack = [{"id": "P01", "candidates": [{"id": "w"}, {"id": "x"}]}, {"id": "P02", "candidates": [{"id": "x"}]}]
+    assert [r["piece"] for r in E.not_shown(rows, key, pack)] == ["b", "c"]
 
 
 def test_the_pages_tables_are_the_result_file():
@@ -639,6 +658,10 @@ def test_the_vowel_list_and_the_second_check():
     assert sorted(unseen) == ["lks", "mtr", "ponni", "ptri", "tereki", "tmNte"]
     assert {a["piece"] for a in key.values() if not a["decoy"]} == unseen
     assert sum(a["decoy"] for a in key.values()) == 6 and all(a["chance"] >= 0.5 for a in key.values() if a["decoy"])
+    # the saved key is what the script draws from the result files today, item by item and in its order
+    items, decoys, _, chance_of_item = E.pack_draw(with_vowels=True)
+    assert [(r["piece"], r in decoys, chance_of_item(r)) for r in items] == [
+        (a["piece"], a["decoy"], a["chance"]) for a in key.values()]
     # every best match that beats the bar has been before a checker, in one pack or the other
     second = collections.defaultdict(set)
     for item in map(json.loads, (ROOT / "data/sources/egyptian/check_vowels/pack.jsonl").read_text(encoding="utf-8").splitlines()):
