@@ -271,16 +271,39 @@ def test_every_match_that_beats_the_bar_goes_to_the_checkers():
             + [result(f"poor{k}", 0.5 + k / 100, ["plsn"]) for k in range(40)]
             + [{"piece": "ab", "headword": False, "kind": "", "level": "unknown", "texts": 1, "words": 1, "letters": "ab"}])
     test = [{"letters": f"v{k}", "listed": {"chance": 0.01 if k % 2 else 0.3}} for k in range(40)]
-    best, decoys, controls, _ = V.pack_draw(rows, test)
+    best, known, _ = V.pack_draw(rows, test)
     # every searched piece at the bar or under it, set aside or not, and nothing else
-    assert {x["row"]["piece"] for x in best} == {f"good{k}" for k in range(30)} | {"edge"}
-    assert len(decoys) == V.DECOYS and all(x["row"]["chance"] >= 0.5 for x in decoys)
-    assert len({x["row"]["piece"] for x in decoys}) == V.DECOYS
-    assert all(x["row"]["listed"]["chance"] <= V.BAR for x in controls) and len(controls) == 20
-    # the same draw every time
-    again = V.pack_draw(rows, test)
-    assert [x["row"]["piece"] for x in decoys] == [x["row"]["piece"] for x in again[1]]
-    assert [x["row"]["letters"] for x in controls] == [x["row"]["letters"] for x in again[2]]
+    assert {r["piece"] for r in best} == {f"good{k}" for k in range(30)} | {"edge"}
+    # the hidden variants, every one, in an order that is the same every time and not the file's
+    assert sorted(r["letters"] for r in known) == sorted(r["letters"] for r in test)
+    assert [r["letters"] for r in known] == [r["letters"] for r in V.pack_draw(rows, test)[1]]
+    assert [r["letters"] for r in known] != sorted(r["letters"] for r in test)
+
+
+def test_the_items_whose_answer_is_known():
+    lex = [raw("pelmos", ["polmos"]), raw("pelmes"), raw("sleqene", ["sleqel"]), raw("sleqete"), raw("sleqe"),
+           raw("yetmde", ["yetmd"]), raw("tereki", ["terek"]), raw("asente", [], "see snte"), raw("snte", ["sente"])]
+    es = V.words(lex)
+    pairs, items = V.cases(es)
+    texts = texts_of(("T1", [("polmoS", "meaning", "general", [("polmoS", "pelmos")]), ("x", "unknown", "", [("x", "?")])]),
+                     ("T2", [("Sleqel", "meaning", "a title", [("Sleqel", "sleqene")])]),
+                     ("T3", [("Sente", "meaning", "a title", [("Sente", "snte")]), ("x", "unknown", "", [("x", "?")])]))
+    rows = [{"letters": i["letters"], "listed": {"chance": 0.01 if i["letters"] == "polmos" else 0.2}} for i in items]
+    made = {m["letters"]: m for m in V.known_items(rows, items, es, pairs, V.ending_chances(ENDINGS), texts)}
+    # a variant that does not stand in the texts is no item (yetmd, terek); nor is one with four letters as a decoy
+    assert set(made) == {"polmos", "sleqel", "sente"}
+    # the control keeps its candidates: the entry that lists it is the first
+    c = made["polmos"]
+    assert c["what"] == "control" and c["piece"] == "polmoS" and c["owners"] == ["pelmos"] and c["texts"] == 1
+    assert c["hits"][0]["entries"] == ["pelmos"] and c["hide"] == {"polmoS"} and c["spots"] == [(0, 0)]
+    # the decoy has it taken out, with every entry the lexicon links with it: only look-alikes are left
+    d = made["sleqel"]
+    assert d["what"] == "decoy" and d["owners"] == ["sleqene"]
+    assert sorted(h["entries"] for h in d["hits"][:2]) == [["sleqe"], ["sleqete"]]
+    assert not any("sleqene" in h["entries"] for h in d["hits"])
+    d = made["sente"]
+    assert d["what"] == "decoy" and not any(set(h["entries"]) & {"snte", "asente"} for h in d["hits"])
+    assert len(d["hits"]) == V.TOP
 
 
 def test_the_public_list_holds_forms_and_no_gloss():
@@ -765,23 +788,38 @@ def test_the_packs_hold_every_match_that_beats_the_bar():
         shown = [[e["headword"] for e in c["entries"]] for c in by_id[i]["candidates"]]
         assert shown == [h["entries"] for h in under[k]["hits"]], k       # its best match first, then the next two
         assert key[i]["best"] == shown[0] and math.isclose(key[i]["chance"], under[k]["chance"])
-    # the decoys are pieces whose best match is poor; the controls are hidden variants that beat the bar
-    poor = {(r["piece"], r["headword"]) for r in rows if "hits" in r and r["chance"] >= 0.5}
-    assert all((a["piece"], a["headword"]) in poor for a in key.values() if a["what"] == "decoy")
+    # the controls and the decoys are hidden variants of the test, shown as letters; a control beat the bar, and
+    # no candidate of a decoy holds an entry that lists it
     test = {r["letters"]: r for r in lines(1)}
+    listing = collections.defaultdict(set)
+    for r in test.values():
+        for o in r["owners"]:
+            listing[o] |= {x for v in r["variants"] for x in V.strings(v)}
     for i, a in key.items():
-        if a["what"] == "control":
-            assert a["owners"] and by_id[i]["lexicon"] is None and a["chance"] <= V.BAR
+        if a["what"] != "best":
+            assert a["owners"] and by_id[i]["lexicon"] is None and not a["headword"], i
+            assert any(V.E.meroitic(a["piece"], True) in listing[o] for o in a["owners"]), i
+            shown = {e["headword"] for c in by_id[i]["candidates"] for e in c["entries"]}
+            assert len(by_id[i]["candidates"]) == V.TOP, i
+            if a["what"] == "control":
+                assert a["chance"] <= V.BAR, i
+            else:
+                assert not shown & set(a["owners"]) and len(V.E.meroitic(a["piece"], True)) >= 5, i
     # nothing in an item says what it is, and the piece's own word never shows a gloss
     assert all(set(x) == {"id", "piece", "kind", "texts", "contexts", "lexicon", "candidates"} for x in items)
     for x in items:
         for c in x["contexts"]:
             k = next(n for n, w in enumerate(c["words"].split()) if w.startswith("["))
             assert c["glosses"].split(" / ")[k] == "?", x["id"]
-    # the draw is the one the result files give
-    b, d, c, _ = V.pack_draw(rows, list(test.values()))
-    assert {(x["row"]["piece"], x["row"]["headword"]) for x in d} == {(a["piece"], a["headword"]) for a in key.values()
-                                                                    if a["what"] == "decoy"}
+    # the draw is the one the result files give: the first hidden variants of the shuffled order that qualify
+    b, known, _ = V.pack_draw(rows, list(test.values()))
+    assert [(r["piece"], r["headword"]) for r in b] == sorted(under)
+    needs(*WORDS, "data/sources/coverage/glosses.jsonl")
+    entries = V.words()
+    pairs, hidden = V.cases(entries)
+    made = V.known_items(known, hidden, entries, pairs, V.ending_chances(V.ending_counts()), V.glossed())
+    assert sorted((m["what"], m["piece"], m["owners"], m["hits"][0]["entries"]) for m in made) \
+        == sorted((a["what"], a["piece"], a["owners"], a["best"]) for a in key.values() if a["what"] != "best")
     assert "129 items in three packs" in page() and "12 decoys" in page() and "12 controls" in page()
 
 

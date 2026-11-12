@@ -283,8 +283,9 @@ the lexicon lists under its entries. The test hides each listed variant of a wor
 lexicon, trains on the rest and asks for the entry that lists it as the single best match. The bar was written
 down before the first run. A match counts only as far as it beats the best matches of 1,000 made-up words of the
 same length, and the words with an accepted meaning that the lexicon links to nothing go through the same search,
-to see what that yardstick is worth. Every match that beats the bar is packed for two blind checkers with 12
-decoys and 12 listed variants whose answer is known. The lexicon, the gloss file and the result files are
+to see what that yardstick is worth. Every match that beats the bar is packed for two blind checkers with 24
+listed variants whose answer is known: 12 with the right entry among the candidates, and 12 decoys with it taken
+out. The lexicon, the gloss file and the result files are
 local-only; the page, the brief and the list of every searched piece with its best match are public
 ([`data/discovery/variants.md`](data/discovery/variants.md)).
 

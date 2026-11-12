@@ -23,8 +23,9 @@ with an ending, of a word that Claude Rilly's lexicon of 2003 already has? For e
 
 The search knows only letters. It finds the entry whose spelling is closest to the piece, so many of its matches
 are look-alikes: two different words that happen to be spelled nearly alike. Assume a match is a look-alike until
-the texts give you a reason to think otherwise. Some pieces in the pack were put there with matches that are known
-to be poor, and for some the right answer is known. You are not told which.
+the texts give you a reason to think otherwise. For some pieces in the pack the right answer is known. For some of
+those it is among the candidates; for others it was taken out, so that every candidate shown is a look-alike. You
+are not told which pieces these are.
 
 ## What to decide for each piece
 

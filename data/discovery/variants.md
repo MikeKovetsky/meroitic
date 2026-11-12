@@ -26,9 +26,9 @@ checked by `tests/test_variants.py`.
    about 104 pieces would beat it. Different words that share a part (two royal names ending in `-demni`, a word
    and its genitive) look as close as two spellings of one word.
 5. **So the checkers decide, and they have not run yet.** All 105 matches that beat the bar (the 82 and the 23
-   that the lexicon links itself) are packed for two independent blind checkers, with 12 decoys and 12 listed
-   variants whose answer is known. Section 5 and section 6 (how many running words the confirmed pieces would
-   move in the coverage map) wait for that run.
+   that the lexicon links itself) are packed for two independent blind checkers, with 24 listed variants whose
+   answer is known: 12 controls and 12 decoys. Section 5 and section 6 (how many running words the confirmed
+   pieces would move in the coverage map) wait for that run.
 6. **What the listed variants show about Meroitic spelling** (section 3): almost all of it is vowels. An `e` is
    left out or added (133 times in 307 variants), `e`, `i` and `o` stand for one another (73 times), and the
    vowel at the start comes and goes (`Amni`, `Mni`: 42 times). Among consonants the listed variants show
@@ -164,9 +164,11 @@ by letters, not as a list of finds.
 ## 5. The check of the best matches
 
 Not run yet. The packs are built (`python3 -I src/variants.py check`): 129 items in three packs, for two
-independent checkers each. They hold the 105 pieces whose best match beats the bar, 12 decoys (pieces whose best
-match at least half of the made-up words equal) and 12 controls (listed variants that stand in the texts, shown
-as if they were pieces, with the candidates the search gave when they were hidden). A checker gets the piece's
+independent checkers each. They hold the 105 pieces whose best match beats the bar and 24 items whose answer is
+known, unmarked. All 24 are listed variants that stand in the texts, shown as if they were pieces, with the
+candidates the search gave when they were hidden. The 12 controls keep those candidates, so the entry that lists
+the variant is among them when the search found it. The 12 decoys have that entry taken out, and every entry the
+lexicon links with it, so that whatever candidate a checker accepts for a decoy is a look-alike. A checker gets the piece's
 contexts with its own gloss hidden, the three best candidates with their entries, the letters that differ and how
 often the listed variants show each change, and two contexts of each candidate
 ([the brief](variants_brief.md)). A piece is confirmed when both checkers say it is the same word and name

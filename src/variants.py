@@ -5,7 +5,8 @@
                                        the local result files and the public list
   python3 -I src/variants.py sample    the check on the test's one shortcut: for 30 hidden variants, the made-up
                                        words searched as the variant itself was (about six minutes)
-  python3 -I src/variants.py check     the checkers' packs: every match that beats the bar, and unmarked decoys
+  python3 -I src/variants.py check     the checkers' packs: every match that beats the bar, and unmarked items
+                                       whose answer is known
   python3 -I src/variants.py merge     the checkers' answers against the key; the confirmed list, and the words
                                        it would move in the coverage map
 
@@ -35,8 +36,9 @@ model, its trie search, its made-up words and its checkers' pack (data/discovery
    words with an accepted meaning that the lexicon calls a variant of nothing go through the same search, to see
    what the made-up words are worth as a yardstick.
 6. The check. Every piece whose best match beats the bar goes to two checkers, mixed with two kinds of unmarked
-   items whose answer is known: pieces whose best match is poor, and listed variants shown as if they were
-   pieces, with the candidates the search gave when they were hidden.
+   items whose answer is known. Both are listed variants shown as if they were pieces, with the candidates the
+   search gave when they were hidden: a control keeps them all, a decoy has the entry that lists it taken out,
+   so that only look-alikes are left.
 
 The lexicon, the gloss file and the result files are local (data/sources/variants/). The public files are the
 page, the brief, the list of every searched piece with its best match (forms, no gloss) and the confirmed list.
@@ -71,8 +73,8 @@ FOUND = 2 / 3
 STANDS_OUT = 1 / 2
 UNSURE = re.compile(r"\?|peut")       # a variant that Rilly marks as uncertain: "mle (?)", "Mn (peut-être)"
 TOP = 3                       # the best matches kept for each piece
-DECOYS = 12                   # pieces whose best match is poor, mixed into the packs unmarked
 CONTROLS = 12                 # listed variants shown as pieces, with the candidates they got when hidden
+DECOYS = 12                   # listed variants shown as pieces, their own entry taken out of the candidates
 PER_PACK = 45                 # items a checker reads in one pack, at most
 VERDICTS = ("same", "other", "no")
 
@@ -683,24 +685,52 @@ def shown(hit, by_head, md_counts, texts, hide=frozenset()):
 
 
 def pack_draw(rows, test):
-    """What the packs hold, from the result files, each item {"row", "what"}: (best, decoys, controls, the random
-    source). Every piece whose best match beats the bar; DECOYS pieces whose best match is poor (at least half of the made-up words
-    equal it); and, for the controls, the listed variants whose best match beat the bar when they were hidden, in
-    a shuffled order (check_pack() takes the first CONTROLS of them that stand in the texts). Drawn with the seed;
-    the last value is the random source, for the shuffle of the whole."""
-    searched = sorted((r for r in rows if "hits" in r), key=lambda r: (r["piece"], r["headword"]))
-    best = [{"row": r, "what": "best"} for r in searched if r["chance"] <= BAR]
+    """What the packs draw from, out of the result files: (every searched piece whose best match beats the bar,
+    the hidden variants of the test in an order shuffled with the seed, the random source for the shuffle of the
+    whole). check_pack() takes the controls and the decoys from the hidden variants in that order."""
+    best = sorted((r for r in rows if "hits" in r and r["chance"] <= BAR), key=lambda r: (r["piece"], r["headword"]))
     rnd = random.Random(SEED)
-    decoys = [{"row": r, "what": "decoy"} for r in rnd.sample([r for r in searched if r["chance"] >= 0.5], DECOYS)]
-    controls = [{"row": r, "what": "control"} for r in sorted(test, key=lambda r: r["letters"])
-                if r["listed"]["chance"] <= BAR]
-    rnd.shuffle(controls)
-    return best, decoys, controls, rnd
+    known = sorted(test, key=lambda r: r["letters"])
+    rnd.shuffle(known)
+    return best, known, rnd
+
+
+def known_items(known, items, entries, pairs, endings, texts):
+    """The items of the packs whose answer is known, each a listed variant that stands in the texts, shown as if
+    it were a piece with the candidates of the search that hid it.
+
+    A control (CONTROLS of them) is one whose best match beat the bar: the entry that lists it is among its
+    candidates if the search found it, and `same` with that entry is the right answer. A decoy (DECOYS of them)
+    has five letters or more, like nearly every match under the bar, and its candidates are the best matches left
+    when every entry that lists it, and every entry the lexicon links with one of those, is taken out: whatever
+    candidate a checker accepts for it is a look-alike."""
+    by_head = {e["headword"]: e for e in entries}
+    hidden = {it["letters"]: it for it in items}
+    made = []
+    for row in known:
+        what = ("control" if row["listed"]["chance"] <= BAR and sum(m["what"] == "control" for m in made) < CONTROLS
+                else "decoy" if len(row["letters"]) >= 5 and sum(m["what"] == "decoy" for m in made) < DECOYS else "")
+        it = hidden[row["letters"]]
+        spellings = set().union(*(L.corpus_spellings(v) for v in it["variants"]))
+        spots = [(i, j) for i, t in enumerate(texts) for j, g in enumerate(t["glosses"]) if g["form"] in spellings]
+        if not what or not spots:
+            continue
+        us, md = units(entries, it["hidden"]), trained(without(pairs, it), endings)
+        hits = found(it["letters"], us, E.Trie(list(enumerate(us))), md, top=TOP + 12 if what == "decoy" else TOP)
+        if what == "decoy":
+            hits = [h for h in hits if not set(h["entries"]) & set(it["owners"])
+                    and not any(linked(o, h, by_head) for o in it["owners"])][:TOP]
+        made.append({"what": what, "piece": texts[spots[0][0]]["glosses"][spots[0][1]]["form"],
+                     "letters": it["letters"], "kind": by_head[it["owners"][0]]["kind"] or "unknown",
+                     "texts": len({texts[i]["id"] for i, _ in spots}), "spots": spots, "hits": hits,
+                     "counts": counted(without(pairs, it), md), "owners": it["owners"],
+                     "chance": row["listed"]["chance"], "hide": spellings})
+    return made
 
 
 def check_pack():
-    """Write the checkers' packs: every piece whose best match beats the bar, the decoys and the controls, in one
-    shuffled list cut into packs of PER_PACK items; and the key (local)."""
+    """Write the checkers' packs: every piece whose best match beats the bar, the controls and the decoys
+    (known_items()), in one shuffled list cut into packs of at most PER_PACK items; and the key (local)."""
     raw = L.load()
     entries = words(raw)
     by_head = {e["headword"]: e for e in entries}
@@ -712,31 +742,11 @@ def check_pack():
     test = [json.loads(l) for l in (OUT / "test.jsonl").read_text(encoding="utf-8").splitlines()]
     texts = glossed()
     at = places(texts, heads)
-    best, decoys, controls, rnd = pack_draw(rows, test)
-
-    # a control: a listed variant that stands in the texts, with the candidates of the search that hid it
-    hidden = {it["letters"]: it for it in items}
-    made = []
-    for c in controls:
-        it = hidden[c["row"]["letters"]]
-        spellings = set().union(*(L.corpus_spellings(v) for v in it["variants"]))
-        spots = [(i, j) for i, t in enumerate(texts) for j, g in enumerate(t["glosses"]) if g["form"] in spellings]
-        if not spots:
-            continue
-        us = units(entries, it["hidden"])
-        md_h = trained(without(pairs, it), endings)
-        hits = found(it["letters"], us, E.Trie(list(enumerate(us))), md_h)
-        made.append({"what": "control", "piece": texts[spots[0][0]]["glosses"][spots[0][1]]["form"],
-                     "letters": it["letters"], "kind": by_head[it["owners"][0]]["kind"] or "unknown",
-                     "texts": len({texts[i]["id"] for i, _ in spots}), "spots": spots, "hits": hits,
-                     "counts": counted(without(pairs, it), md_h), "owners": it["owners"],
-                     "chance": c["row"]["listed"]["chance"], "hide": spellings})
-        if len(made) == CONTROLS:
-            break
+    best, known, rnd = pack_draw(rows, test)
+    made = known_items(known, items, entries, pairs, endings, texts)
     counts = counted(pairs, md)
-    for x in best + decoys:
-        r = x["row"]
-        made.append({"what": x["what"], "piece": r["piece"], "letters": r["letters"], "kind": r["kind"],
+    for r in best:
+        made.append({"what": "best", "piece": r["piece"], "letters": r["letters"], "kind": r["kind"],
                      "texts": r["texts"], "spots": at.get((r["piece"], r["headword"]), []), "hits": r["hits"],
                      "counts": counts, "headword": r["headword"], "chance": r["chance"], "linked": r["linked"]})
     made.sort(key=lambda m: (m["what"], m["piece"], m["letters"]))
@@ -810,12 +820,18 @@ def check_merge():
         k = which(a.get("candidate"), cands[i])[0]
         return a["verdict"] == "same" and k is not None and bool(set(cands[i][k]) & set(answer[i]["owners"]))
 
+    def recognised(i, a):
+        """A decoy is recognised by `other` with a word that lists the variant, which its candidates do not hold."""
+        return a["verdict"] == "other" and C.bare(a.get("candidate") or "").lower() in {
+            C.bare(o).lower() for o in answer[i]["owners"]}
+
     for name, got in sorted(readers.items()):
         out["readers"][name] = {
             "answered": len(got),
             **{w: dict(collections.Counter(got[i]["verdict"] for i, a in answer.items() if a["what"] == w and i in got))
                for w in ("best", "decoy", "control")},
-            "controls_right": sum(right(i, got[i]) for i, a in answer.items() if a["what"] == "control" and i in got)}
+            "controls_right": sum(right(i, got[i]) for i, a in answer.items() if a["what"] == "control" and i in got),
+            "decoys_recognised": sum(recognised(i, got[i]) for i, a in answer.items() if a["what"] == "decoy" and i in got)}
     names = sorted(readers)
     confirmed = []
     if len(names) >= 2:

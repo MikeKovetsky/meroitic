@@ -363,7 +363,8 @@ After "are you giving up?", four more lines of attack, then data.
    have the right entry as their best match and do not beat the bar (`r` and `t` for `l` are in no listed
    variant); `amn` has three letters.
 9. **The check has not run.** All 105 matches under the bar (the 82 and the 23 among the 70) are packed in three
-   packs with 12 decoys and 12 listed variants whose answer is known, for two blind checkers each. The confirmed
-   list and the words it would move in the coverage map follow that run.
+   packs for two blind checkers each, with 24 listed variants whose answer is known: 12 with the right entry
+   among the candidates and 12 decoys with it taken out. The confirmed list and the words it would move in the
+   coverage map follow that run.
 10. **Limits:** one scholar's list of variants is both the training and the test; the model counts from the
     headword to the variant only; letters cannot judge a short piece.
