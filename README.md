@@ -98,6 +98,18 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     the sure ones on words without an accepted meaning in the map are mostly titles left untranslated, phrases
     whose words the map reads the same way, and proposals the lexicon already holds
     ([`data/discovery/experts.md`](data/discovery/experts.md)).
+11. **The corpus keyed by inscription: 899 texts were 286 inscriptions.** Otten's padded file can be undone
+    exactly from his own per-scholar files: of its 17,995 different lines, 340 are a line of those files and
+    17,446 are such a line with one name swapped. Traced that way, 54.5% of the words of `corpus_v5` are copies of
+    a reading with a name swapped, and the texts that stand for an inscription hold 30.0% of them. `corpus_v6`
+    has one row per inscription, with the real names: 546 inscriptions, 260 of them new to the corpus (the
+    Newsletter's texts, kept locally). The table of all 562 inscriptions is public, with every reading's source
+    and licence and the text of the open ones: 441 have a REM number, 68 two readings or more, 303 a reading
+    under an open licence. Counted again on the inscriptions that were already in the corpus, the coverage map
+    translates 60.0% of the words (62.0% before), and the two editions give its meaning for 71.6% of the words
+    they translate (69.5% before). The matching rule missed the bar set for it (the right partner for 44 of 53
+    known pairs, where 90% was asked), so numbers decide before letters, and 17 doubtful matches still wait for
+    two readers ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
 
 ## The question
 
@@ -130,6 +142,12 @@ what can be rebuilt.
 | Starostin's GLD (no licence stated), IDS, ASJP, numerals (CC BY), Rilly 2003 vol. I (HAL) | Nubian, Nara, Taman, Nyima word lists; Rilly's 82 sound correspondences | not committed: `data/nes/README.md` lists every source and how the lists were built; `meroitic_wiktionary.tsv` (CC BY-SA) is included |
 | *Fontes Historiae Nubiorum* II–III (Bergen, all rights reserved) | modern transliterations used as ground truth | the readings of about twenty short texts the reading tests are scored against, each with its REM number (`data/expansion/pilot.jsonl`, `printed_type_test.md` and `hand_copy_test.md` there, the scoring scripts in `runs/work/`); otherwise short excerpts |
 | Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), and the judges' packs and answers in `data/sources/expert/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only |
+
+Since 2026-11-12 the readings are also listed by inscription: [`data/inscriptions.jsonl`](data/inscriptions.jsonl)
+has one row for each of the 562 inscriptions the project holds a reading of, with its REM or edition number, site,
+kind and every reading's source and licence, and the text of the readings that are open;
+[`data/inscriptions_map.tsv`](data/inscriptions_map.tsv) says what each of the 899 texts of `corpus_v5` is.
+`data/corpus_v6.jsonl`, one row per inscription with real names, is local like the corpora before it.
 
 ## Methods
 
@@ -340,6 +358,22 @@ with the edition's meaning. The editions, the packs and the answers are local-on
 list of the words with their verdicts, without readings, are public
 ([`data/discovery/experts.md`](data/discovery/experts.md)).
 
+### 18. One inscription once (`src/v6/`)
+
+`corpus_v5` holds copies, masked names and phrases quoted in a grammar beside inscriptions. `src/v6/otten.py`
+traces each of its older texts to the line of Otten's per-scholar files it was padded from: the line itself, or
+the line with one stretch swapped. `src/v6/readings.py` lists every reading held (Griffith's print, the Karanòg
+copies, the Newsletter, Millet 2005, FHN III, Otten's narratives and source lines) with the numbers its edition
+gives, and compares texts by their runs of five letters, the formulae left out. `src/v6/build.py` makes the
+inscriptions: readings that share a number are one, two different numbers of one numbering are two, and a text
+without a number goes by letters, where a sure match to one inscription stands and a doubtful one waits for two
+readers (`src/v6/packs.py`). A source line is a reading of an inscription, an example phrase from a grammar, or
+an inscription not identified; one reading per inscription is preferred by a fixed order, with a later edition's
+numerals and Otten's name tags. The bar for the rule was written before it was scored, and missed.
+`src/v6/recount.py` runs the coverage map and the check against the two editions on the new rows, without a new
+analyst or judge, and `src/v6/public.py` writes the public table, the map of the old ids and the tables of the
+page ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -352,7 +386,7 @@ python3 -I src/score.py --answers runs/answers
 python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && python3 -I tests/test_lexique.py
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
-python3 -I tests/test_experts.py
+python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -361,7 +395,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Seven things need files that are kept locally (Data, above), so they don't run from a clone:
+Eight things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -374,16 +408,21 @@ Seven things need files that are kept locally (Data, above), so they don't run f
 - `python3 -I src/variants.py first` (and `build`, `sample`, `check`, `merge`) reads Rilly's lexicon, `corpus_v5`
   and the coverage map's gloss file;
 - `python3 -I src/experts/tally.py` (and the other scripts of `src/experts/`) reads the two editions' text layers,
-  the coverage map's gloss file, Rilly's lexicon and the judges' answers.
+  the coverage map's gloss file, Rilly's lexicon and the judges' answers;
+- `python3 -I src/v6/build.py` (then `src/v6/recount.py` and `src/v6/public.py`; `src/v6/readings.py test` for the
+  bar) reads Otten's files, `corpus_v5`, the Newsletter texts, the two editions' text layers, and for the recount
+  Rilly's lexicon, the analysts' answers and the judges' answers.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
   the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`), the search
-  for spellings of known words (`variants.py`) and the check of the map against two printed editions (`experts/`).
+  for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`)
+  and the corpus keyed by inscription (`v6/`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
-- `data/`: answer keys, leads, discovery write-ups and the Griffith transcriptions (`data/expansion/`); the cleaned
-  corpora (`corpus_v2.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`), the word lists and Rilly's lexicon are local-only.
+- `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
+  of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,
+  `corpus_v3.jsonl`, `corpus_v5.jsonl`, `corpus_v6.jsonl`), the word lists and Rilly's lexicon are local-only.
 - `runs/`: prompts, the task each blind run saw, its answers, keys and scores; `runs/work/` holds the agents'
   working files (transcription scripts, timestamped blind readings).
 - `docs/report.html`: the summary page's source; `docs/index.html` is the same page as GitHub Pages serves it

@@ -292,7 +292,10 @@ def texts(path=CORPUS):
 
 
 def group(row):
-    """Which part of the corpus a text is from."""
+    """Which part of the corpus a text is from. A row that names its part itself ("group", as the rows of
+    corpus_v6 do in src/v6/recount.py) keeps it."""
+    if row.get("group"):
+        return row["group"]
     if row["id"].startswith("G-karanog"):
         return "Karanog and Shablul (Griffith 1911)"
     if row["id"].startswith("G-"):
@@ -320,8 +323,9 @@ def distinct(rows, share=0.8):
 
 
 def griffith_entries(row, refs=KAR_REFS):
-    """Griffith's printed entries for a Karanog row, as [(words in the corpus spelling, source, his gloss)]."""
-    m = re.fullmatch(r"G-karanog-(Sh)?(\d+)", row["id"])
+    """Griffith's printed entries for a Karanog row, as [(words in the corpus spelling, source, his gloss)]. The
+    row is known by its id, or by "karanog" where its id is the inscription's (corpus_v6)."""
+    m = re.fullmatch(r"G-karanog-(Sh)?(\d+)", row.get("karanog") or row["id"])
     if not m:
         return []
     import karanog as K
@@ -520,11 +524,18 @@ def analyses(folder, heads):
 # ---------------------------------------------------------------------------------------------- the map
 
 def gloss_texts(rows, words, affixes, analysed=None, refs=KAR_REFS):
-    """[(row, [gloss of each word])]: the lookup, then the analysts' answer, then unknown."""
+    """[(row, [gloss of each word])]: the lookup, then the analysts' answer, then unknown. A word at a place that
+    the row lists under "names" (corpus_v6: a personal name as the source of the reading tags it) is a name, as a
+    masked name is."""
     out = []
     for r in rows:
         toks, gs, printed = r["text"].split(), [], griffith_entries(r, refs)
+        named = set(r.get("names") or ())
         for i, tok in enumerate(toks):
+            if i in named and not tok.isdigit():
+                gs.append(gloss(tok, "name", 5, "NAME", "a name, as the source of the reading tags it",
+                                kind="person name", parts=[{"form": tok, "entry": "NAME"}]))
+                continue
             g = lookup(tok, toks[i - 1] if i else "", words, affixes, printed) or (analysed or {}).get(tok)
             gs.append(g or gloss(tok, "unknown", 0, f"<{tok}>", "not in the lexicon, not analysed", by="nobody"))
         out.append((r, gs))

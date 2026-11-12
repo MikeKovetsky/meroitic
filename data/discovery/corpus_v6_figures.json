@@ -1,0 +1,542 @@
+{
+ "corpus_v5": {
+  "texts": 899,
+  "words": 21977,
+  "classes": {
+   "a name-swapped copy of a reading": {
+    "texts": 207,
+    "words": 11967
+   },
+   "a name-swapped copy of an example phrase": {
+    "texts": 102,
+    "words": 1281
+   },
+   "a second reading of an inscription already counted": {
+    "texts": 3,
+    "words": 132
+   },
+   "an example phrase or a word-list entry": {
+    "texts": 265,
+    "words": 1496
+   },
+   "stands for its inscription": {
+    "texts": 286,
+    "words": 6586
+   },
+   "waits for two readers": {
+    "texts": 36,
+    "words": 515
+   }
+  }
+ },
+ "inscriptions": {
+  "all": 562,
+  "with_a_typed_reading": 546,
+  "only_a_text_layer": 10,
+  "typed_without_a_legible_word": 6,
+  "in_two_or_more_parts": 9,
+  "with_a_rem_number": 441,
+  "with_real_names": 546,
+  "with_two_readings_or_more": 68,
+  "with_an_open_reading": 303,
+  "with_an_open_reading_of_the_whole_text": 274,
+  "preferred_reading_is_open": 287,
+  "in_corpus_v5": 286,
+  "not_identified": 7,
+  "by_kind": {
+   "funerary": 267,
+   "not known": 113,
+   "royal or temple (stela, wall, cartouche, label)": 86,
+   "document (ostracon, papyrus, wood, vessel)": 53,
+   "graffito": 36,
+   "oracular decree": 7
+  },
+  "preferred_by_source": {
+   "mnl": 210,
+   "karanog": 150,
+   "griffith": 137,
+   "otten": 46,
+   "otten:narrative": 3
+  }
+ },
+ "corpus_v6": {
+  "texts": 546,
+  "words": 10250,
+  "words_of_inscriptions_in_corpus_v5": 6542,
+  "name_words_marked": 90,
+  "numerals_set": 10
+ },
+ "lines": {
+  "phrase": 896,
+  "reading": 44,
+  "pending": 17,
+  "unidentified": 7,
+  "word list": 195
+ },
+ "pending": 17,
+ "twins": {
+  "pairs": 13,
+  "rows": 20,
+  "list": [
+   [
+    "REM 0005",
+    "REM 0017"
+   ],
+   [
+    "REM 0005",
+    "REM 0020"
+   ],
+   [
+    "REM 0017",
+    "REM 0020"
+   ],
+   [
+    "REM 0023",
+    "REM 0036"
+   ],
+   [
+    "REM 0023",
+    "REM 0037"
+   ],
+   [
+    "REM 0028",
+    "REM 0032"
+   ],
+   [
+    "REM 0036",
+    "REM 0037"
+   ],
+   [
+    "REM 0051",
+    "REM 0052"
+   ],
+   [
+    "REM 0119",
+    "REM 0120"
+   ],
+   [
+    "REM 0219",
+    "REM 0289"
+   ],
+   [
+    "REM 0220",
+    "REM 0221"
+   ],
+   [
+    "REM 1270",
+    "REM 1332"
+   ],
+   [
+    "REM 1271",
+    "REM 1272"
+   ]
+  ],
+  "across_numberings": {
+   "pairs": 0,
+   "list": []
+  }
+ },
+ "phrases": {
+  "in_one_text": 301,
+  "in_several": 166,
+  "doubtful": 34,
+  "nothing": 395
+ },
+ "numerals": {
+  "all": 10,
+  "by_a_later_edition": 4,
+  "by_analogy": 6,
+  "inscriptions": 1,
+  "where": [
+   "REM 0544"
+  ]
+ },
+ "otten": {
+  "padded_lines": 18090,
+  "most_copied": {
+   "texts": 52,
+   "words": 4540,
+   "inscription": "GA 28",
+   "line": "MilletExamples.txt line 433"
+  },
+  "source_lines": 1159,
+  "raw_lines": 17995,
+  "equal": 340,
+  "one_stretch_swapped": 17446,
+  "near": 206,
+  "from_no_source_line": 3,
+  "texts_traced": 659,
+  "source_lines_behind_them": 329
+ },
+ "held": {
+  "edition_readings": {
+   "griffith": 152,
+   "karanog": 151,
+   "mnl": 256,
+   "millet2005": 34,
+   "fhn": 11
+  },
+  "narratives": 3
+ },
+ "bars": {
+  "pairs": 53,
+  "by_kind": {
+   "HELD millet": 23,
+   "HELD fhn": 8,
+   "Karanog in Newsletter 28": 3,
+   "Newsletter 28 in FHN": 3,
+   "Newsletter second edition": 9,
+   "Newsletter row in the corpus": 7
+  },
+  "as_written": {
+   "right": 44,
+   "sure": 29,
+   "doubtful": 15,
+   "right_or_another_line_of_the_same_text": 45,
+   "with_a_sure_other": 3,
+   "with_a_sure_other_of_another_text": 2,
+   "missed": [
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 1228 (hypothetical reconstruction)|MeroNews25b",
+     "b": "otten:narrative:kharamadoye",
+     "verdict": "sure",
+     "shared": 34,
+     "best_key": "otten:MilletExamples.txt:1283"
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1168|MeroNews27e",
+     "b": "mnl:Shokan 23 verso (F1964/8.148), REM 1168|MeroNews27c",
+     "verdict": "doubtful",
+     "shared": 29,
+     "best_key": "mnl:REM 1009|MeroNews6"
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:GA 47 (MI 353), front|MeroNews30e",
+     "b": "otten:MilletExamples.txt:1312",
+     "verdict": "sure",
+     "shared": 24,
+     "best_key": "otten:MilletExamples.txt:1314"
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 0544|MeroNews28",
+     "b": "otten:MilletExamples.txt:629",
+     "verdict": "doubtful",
+     "shared": 73,
+     "best_key": "otten:MilletExamples.txt:642"
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 1008|MeroNews6",
+     "b": "otten:MilletExamples.txt:286",
+     "verdict": "",
+     "shared": 0,
+     "best_key": ""
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1041|MeroNews6",
+     "b": "mnl:REM 1361A|MeroNews29e",
+     "verdict": "doubtful",
+     "shared": 37,
+     "best_key": "mnl:REM 1041A|MeroNews29e"
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 1044|MeroNews6",
+     "b": "otten:narrative:tanyidamani",
+     "verdict": "sure",
+     "shared": 1306,
+     "best_key": "otten:MilletExamples.txt:851"
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1086|MeroNews6",
+     "b": "mnl:REM 1086|MeroNews18",
+     "verdict": "",
+     "shared": 0,
+     "best_key": ""
+    }
+   ]
+  },
+  "with_the_floor": {
+   "right": 44,
+   "sure": 31,
+   "doubtful": 13,
+   "right_or_another_line_of_the_same_text": 46,
+   "with_a_sure_other": 3,
+   "with_a_sure_other_of_another_text": 2,
+   "missed": [
+    {
+     "what": "HELD millet",
+     "a": "otten:MilletExamples.txt:1337",
+     "b": "millet2005:GA57",
+     "verdict": "",
+     "shared": 3,
+     "best_key": ""
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 0544|MeroNews28",
+     "b": "otten:MilletExamples.txt:629",
+     "verdict": "doubtful",
+     "shared": 73,
+     "best_key": "otten:MilletExamples.txt:904"
+    },
+    {
+     "what": "Newsletter row in the corpus",
+     "a": "mnl:REM 1008|MeroNews6",
+     "b": "otten:MilletExamples.txt:286",
+     "verdict": "",
+     "shared": 0,
+     "best_key": ""
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1041|MeroNews6",
+     "b": "mnl:REM 1361A|MeroNews29e",
+     "verdict": "doubtful",
+     "shared": 37,
+     "best_key": "mnl:REM 1041A|MeroNews29e"
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1085|MeroNews6",
+     "b": "mnl:REM 1085|MeroNews18",
+     "verdict": "",
+     "shared": 1,
+     "best_key": ""
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1086|MeroNews6",
+     "b": "mnl:REM 1086|MeroNews18",
+     "verdict": "",
+     "shared": 0,
+     "best_key": ""
+    },
+    {
+     "what": "Newsletter second edition",
+     "a": "mnl:REM 1087|MeroNews6",
+     "b": "mnl:REM 1087|MeroNews18",
+     "verdict": "",
+     "shared": 4,
+     "best_key": ""
+    }
+   ]
+  },
+  "karanog": {
+   "texts": 151,
+   "with_a_sure_match_to_another_number": 4,
+   "pairs": [
+    [
+     "karanog:G-karanog-19",
+     "karanog:G-karanog-89"
+    ],
+    [
+     "karanog:G-karanog-20",
+     "karanog:G-karanog-21"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "all": {
+   "texts": 546,
+   "words": 10250,
+   "translated": 5256,
+   "share": 0.5128,
+   "levels": {
+    "meaning": 2928,
+    "grammar": 673,
+    "name": 1419,
+    "number": 236,
+    "hypothesis": 1271,
+    "kind": 578,
+    "unknown": 1932,
+    "lost": 1213
+   }
+  },
+  "by_part": {
+   "Griffith's other volumes": {
+    "texts": 137,
+    "words": 1220,
+    "translated": 514,
+    "share": 0.4213
+   },
+   "Karanog and Shablul (Griffith 1911)": {
+    "texts": 150,
+    "words": 2902,
+    "translated": 2201,
+    "share": 0.7584
+   },
+   "Otten's files with real names (Millet 1968, the three narratives)": {
+    "texts": 49,
+    "words": 2550,
+    "translated": 1246,
+    "share": 0.4886
+   },
+   "the Meroitic Newsletter": {
+    "texts": 210,
+    "words": 3578,
+    "translated": 1295,
+    "share": 0.3619
+   }
+  },
+  "near_copies_once": {
+   "texts": 536,
+   "words": 10215,
+   "translated": 5234
+  },
+  "inscriptions_that_were_in_corpus_v5": {
+   "texts": 286,
+   "words": 6542,
+   "translated": 3923,
+   "share": 0.5997,
+   "levels": {
+    "meaning": 2219,
+    "grammar": 418,
+    "name": 1203,
+    "number": 83,
+    "hypothesis": 931,
+    "kind": 436,
+    "unknown": 881,
+    "lost": 371
+   }
+  },
+  "inscriptions_new_to_the_corpus": {
+   "texts": 260,
+   "words": 3708,
+   "translated": 1333,
+   "share": 0.3595,
+   "levels": {
+    "meaning": 709,
+    "grammar": 255,
+    "name": 216,
+    "number": 153,
+    "hypothesis": 340,
+    "kind": 142,
+    "unknown": 1051,
+    "lost": 842
+   }
+  },
+  "texts": {
+   "texts": 536,
+   "legible": 505,
+   "no_blocker": 42,
+   "one_blocker": 93,
+   "median": 0.625
+  },
+  "pieces_without_an_accepted_meaning": 2072,
+  "names_by_the_source": 90,
+  "not_analysed": {
+   "words": 1023,
+   "spellings": 922,
+   "unknown_words_seen_before": 1
+  },
+  "corrections": {
+   "the rest of a masked name": {
+    "words": 0,
+    "newly_translated": 0,
+    "words_once": 0,
+    "newly_translated_once": 0
+   },
+   "a stem of two signs": {
+    "words": 23,
+    "newly_translated": 23,
+    "words_once": 23,
+    "newly_translated_once": 23
+   },
+   "a word written apart": {
+    "words": 106,
+    "newly_translated": 73,
+    "words_once": 106,
+    "newly_translated_once": 73
+   },
+   "a spelling of a known word": {
+    "words": 33,
+    "newly_translated": 33,
+    "words_once": 33,
+    "newly_translated_once": 33
+   }
+  },
+  "corpus_v5": {
+   "all": {
+    "texts": 899,
+    "words": 21977,
+    "translated": 13618,
+    "share": 0.6196,
+    "levels": {
+     "meaning": 6981,
+     "grammar": 1956,
+     "name": 4418,
+     "number": 263,
+     "hypothesis": 3512,
+     "kind": 2073,
+     "unknown": 2512,
+     "lost": 262
+    }
+   },
+   "near_copies_once": {
+    "texts": 608,
+    "words": 8786,
+    "translated": 5413
+   },
+   "texts": {
+    "texts": 608,
+    "legible": 605,
+    "no_blocker": 106,
+    "one_blocker": 122,
+    "median": 0.7272727272727273
+   }
+  }
+ },
+ "experts": {
+  "corpus_v5": {
+   "rows": 1115,
+   "decoys": 36,
+   "texts": 31,
+   "translated": {
+    "agree": 276,
+    "partly": 62,
+    "differ": 49,
+    "new": 10,
+    "silent": 125,
+    "absent": 15,
+    "rows": 537,
+    "unanswered": 0,
+    "given": 397,
+    "agree_share": 0.6952,
+    "agree_or_partly_share": 0.8514
+   }
+  },
+  "corpus_v6": {
+   "rows": 1004,
+   "decoys": 35,
+   "texts": 31,
+   "translated": {
+    "agree": 267,
+    "partly": 59,
+    "differ": 37,
+    "new": 10,
+    "silent": 113,
+    "absent": 3,
+    "rows": 489,
+    "unanswered": 0,
+    "given": 373,
+    "agree_share": 0.7158,
+    "agree_or_partly_share": 0.874
+   }
+  },
+  "carried": 1004,
+  "not_carried": 111,
+  "why": {
+   "the word is spelled or divided otherwise in the preferred reading": 95,
+   "the map's level is name": 16
+  }
+ },
+ "readers": null
+}

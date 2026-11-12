@@ -29,3 +29,6 @@ data/nes/taman.tsv
 data/nes/proto_nes.tsv
 data/nes/sound_correspondences.tsv
 data/nes/sound_correspondences.md
+
+# corpus_v6: built by src/v6/build.py from Otten's files, the Newsletter texts and the open rows (local)
+data/corpus_v6.jsonl
