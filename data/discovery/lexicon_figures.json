@@ -85,7 +85,6 @@
   "with_the_editors_verdict": 97,
   "with_the_editors_reading": 66,
   "only_a_kind": 21,
-  "without_a_status": 417,
   "statuses": {
    "agreed by two scholars": 83,
    "disputed": 22,
@@ -107,6 +106,51 @@
    "judges": 32,
    "editors": 29
   }
+ },
+ "other entries": {
+  "count": 417,
+  "uses": 2234,
+  "stated_by_rilly": {
+   "name": 64,
+   "meaning": 7,
+   "grammar": 6
+  },
+  "proposed_by_level": {
+   "hypothesis": 134,
+   "kind": 182,
+   "unknown": 24
+  },
+  "with_a_proposal_of_another_scholar": 49,
+  "with_the_editors_verdict": 23,
+  "statuses": {
+   "agreed by two scholars": 15,
+   "disputed": 2,
+   "stated by one": 60,
+   "proposed": 340
+  },
+  "statuses_by_use": {
+   "agreed by two scholars": 158,
+   "disputed": 20,
+   "stated by one": 253,
+   "proposed": 1803
+  },
+  "agreed_by": {
+   "editors": 15
+  },
+  "agreed_with_a_dissent": 1,
+  "proposed_with_an_editors_agree": 18,
+  "without_round_three": {
+   "agreed by two scholars": 15,
+   "disputed": 2,
+   "stated by one": 60,
+   "proposed": 340
+  }
+ },
+ "all entries": {
+  "agreed by two scholars": 98,
+  "disputed": 24,
+  "stated by one": 112,
+  "proposed": 360
  },
  "words": {
   "all": 10290,
@@ -157,6 +201,26 @@
    "-to (2)"
   ],
   "agreed_by_two_scholars": 4057
+ },
+ "if_the_editors_had_to_agree_on_two_words_and_most": {
+  "statuses": {
+   "agreed by two scholars": 71,
+   "disputed": 24,
+   "stated by one": 62,
+   "proposed": 20
+  },
+  "entries_that_change": 12,
+  "agreed_by_two_scholars": 3715
+ },
+ "without_round_three": {
+  "statuses": {
+   "agreed by two scholars": 83,
+   "disputed": 22,
+   "stated by one": 52,
+   "proposed": 20
+  },
+  "entries_that_change": [],
+  "agreed_by_two_scholars": 4105
  },
  "with_round_one_alone": {
   "statuses": {

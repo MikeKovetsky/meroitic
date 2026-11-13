@@ -5,7 +5,9 @@
   python3 -I src/lexicon.py check     a sample of the proposals given to Griffith, against his own text
   python3 -I src/lexicon.py round2    round two: each judge's decoyed lines again with the real proposal, and the
                                       writer's pack of the meanings to word anew (item 6)
-  python3 -I src/lexicon.py count     the judges' verdicts, the statuses and the second figure, printed
+  python3 -I src/lexicon.py round3    round three: the proposals on the other entries the map uses and on the
+                                      names, every real line for each judge, beside decoy lines (item 7)
+  python3 -I src/lexicon.py count    the judges' verdicts, the statuses and the second figure, printed
   python3 -I src/lexicon.py public    the same, written: data/discovery/lexicon_figures.json and the table
                                       data/discovery/lexicon_statuses.tsv (headwords, each meaning in words of
                                       our own, statuses, scholars)
@@ -45,6 +47,24 @@ asks, for every entry behind a word the map translates, whether a second scholar
    most LONGEST words, from the lexicon's meaning and the proposals both judges of round one called "same"; a
    meaning that shares COPIED words in a row with the lexicon's meaning or a proposal it records is reworded
    here (REWORDED), and `public` refuses to write one.
+7. Round three, set before its judges answer: a status for every other entry the map uses (those behind no
+   translated word), by the rules of item 3, and the same judging for the names behind translated words, whose
+   proposals rounds one and two did not send (judged3). Every proposal on such an entry that Rilly states
+   (established or probable) as a meaning, a grammar word or a name goes to two judges, and each judge reads
+   every real line, so that every proposal has two real verdicts. Each judge reads DECOYS3 lines more, on real
+   lines different for the two judges: the line's headword and meaning, with the text of a proposal on another
+   entry in place of a proposal (third_round). Round three's proposals rarely quote a bare meaning, so a decoy
+   is no quoted meaning, as in rounds one and two, but a real proposal that both judges of rounds one and two
+   called "same" as its own entry's meaning, which shares no content word and no field of meaning with the line,
+   read together with that meaning (far_from); a field for persons is added for it (FIELDS3). Every line has a
+   new id, so a decoy line looks like a real one. The judges read round one's text, told that a word may be a
+   name (JUDGE3). Bars, as item 2: kappa on "same or not" at least 0.6 on the real lines, and each judge calls at
+   most a tenth of its decoys "same" or "partly". If a bar is missed, the page says so and gives the statuses of
+   round three's entries also without its verdicts (count(): "without_round_three"). Entries Rilly gives as a
+   hypothesis or without a meaning are "proposed", whatever an editor reads. Beside item 3's rule, under which one
+   editor's "agree" on one word is enough, count() gives the second figure under a stricter one (strict()): the
+   editors read at least STRICT words built on the entry the same way, and more of them the same than partly
+   or otherwise.
 
 What the review of 12 November changed, after the judges had answered (the page says so, and count() keeps the
 first count as "as_first_counted"): status() followed item 3 for meanings and grammar words only and called the
@@ -83,6 +103,12 @@ OUT = ROOT / "data/sources/lexicon"
 PUBLIC = ROOT / "data/discovery/lexicon_figures.json"
 TABLE = ROOT / "data/discovery/lexicon_statuses.tsv"
 ROUND2 = OUT / "round2"                               # round two: its packs, key and answers
+ROUND3 = OUT / "round3"                               # round three: its packs, key and answers
+DECOYS3 = 20                                           # round three: the decoy lines each judge reads
+LONGEST_DECOY = 20                                     # round three: the most words a decoy's text may have
+SAYS_SAME = re.compile(r"(?i)\bsame\b|\bidem\b")       # "same sense": a proposal that names no meaning itself
+GLOSS = re.compile(r"(?:^|[\s(])['‘\"“][^'’\"”]{2,60}['’\"”](?=$|[\s,;:.)])")   # a quoted gloss: 'land, desert'
+STRICT = 2                                             # the stricter rule: the editors agree on this many words
 PSEUDO = {"ending", "?", "NAME", "NUMBER"}
 SEED = 23
 DECOYS = 0.10
@@ -129,6 +155,16 @@ purpose. Write one JSON object per line, in the table's order, to `{answers}`:
 | row | word | the dictionary's meaning | the other scholar's proposal |
 |---|---|---|---|
 """
+
+# round three's judges read the same text, told that a word may be a name, with a row id of round three
+JUDGE3 = JUDGE.replace(
+    "Each line of the table below has a Meroitic word (an entry of a dictionary: a word, a stem, or an ending written\n"
+    "with a hyphen), what one dictionary says it means, and what another scholar proposed for it. For each line, say\n"
+    "whether the proposal gives the same meaning as the dictionary:",
+    "Each line of the table below has a Meroitic word (an entry of a dictionary: a word, a stem, an ending written\n"
+    "with a hyphen, or a name, whose meaning is whom or what it names), what one dictionary says it means, and what\n"
+    "another scholar proposed for it. For each line, say whether the proposal gives the same meaning as the\n"
+    "dictionary:").replace('"row": "P0001"', '"row": "R001"')
 
 
 CHECK = """# What did Griffith say? A check of what a later dictionary reports of him
@@ -286,10 +322,17 @@ def judged(e):
     return bool(e["uses_translated"]) and e["status"] in L.GOOD and e["level"] in ("meaning", "grammar")
 
 
-def rows_for_judges(entries):
-    """One row per proposal on an entry that is judged."""
+def judged3(e):
+    """Whether an entry's proposals go to round three (item 7): Rilly states it (established or probable) as a
+    meaning, a grammar word or a name, and rounds one and two did not send it."""
+    return e["status"] in L.GOOD and e["level"] in ("meaning", "grammar", "name") and not judged(e)
+
+
+def rows_for_judges(entries, which=judged):
+    """One row per proposal on an entry that is judged (by rounds one and two, or with which=judged3 by round
+    three)."""
     return [{"id": p["id"], "headword": e["headword"], "meaning": C.short(e["meaning"], 160),
-             "proposal": p["proposal"]} for e in entries if judged(e) for p in e["proposals"]]
+             "proposal": p["proposal"]} for e in entries if which(e) for p in e["proposals"]]
 
 
 # fields of meaning a decoy must not share with the line it stands on, since a judge may rightly call two words of
@@ -300,12 +343,19 @@ FIELDS = {"kin": "mother father brother sister child son daughter nephew niece c
                   "consort royal title envoy agent priest prophet",
           "god": "god goddess divine deity osiris isis amun amanap apedemak"}
 FIELD_STEMS = {name: K.content(words) for name, words in FIELDS.items()}
+# round three's fields: round one's and a field for persons, which round two showed missing ("wife" beside the
+# lexicon's "woman"), and "titles" for ranks: content() drops "title" and "person" as stop words, but not their
+# plurals. A table of its own, so that rounds one and two draw their decoys as their keys hold them.
+FIELDS3 = {**FIELDS, "rank": FIELDS["rank"] + " titles",
+           "person": "woman man men persons people lady girl boy wife husband human someone servant individual "
+                     "adult male female"}
+FIELD_STEMS3 = {name: K.content(words) for name, words in FIELDS3.items()}
 VARIANT = re.compile(r"(?i)\s*(probably |perhaps )?(an? )?(\w+ )?variants? (of|for)\b")
 CLASS_ONLY = re.compile(r"(?i)\b(adjective|noun|verb|compound|loan|suffix|prefix|particle|formula|designate)\b|\*")
 
 
-def fields(text):
-    return {name for name, stems in FIELD_STEMS.items() if K.shares(K.content(text), stems)}
+def fields(text, stems=FIELD_STEMS):
+    return {name for name, s in stems.items() if K.shares(K.content(text), s)}
 
 
 def pool_of(entries):
@@ -456,6 +506,79 @@ def second_round(folder=OUT, out=None, seed=SEED, share=DECOYS):
     return key2
 
 
+def words_in(text):
+    """The words of a text, lowercased, letters only."""
+    return set(re.findall(r"[^\W\d_]+", text.lower()))
+
+
+def decoy_pool3(entries, verdicts):
+    """The texts round three's decoys are drawn from, as (headword, proposal id, text, that entry's meaning):
+    proposals on entries rounds one and two judged that both judges called "same", so that each gives its own
+    entry's meaning, and that quote a gloss (GLOSS), so that the text gives a meaning on another line too. Left
+    out: those of more than LONGEST_DECOY words, those that name their own entry, and those that say "same
+    meaning" without naming one."""
+    out = []
+    for e in entries:
+        if not judged(e):
+            continue
+        for p in e["proposals"]:
+            t = " ".join(p["proposal"].split())
+            if (verdicts.get(p["id"]) == ("same", "same") and len(t.split()) <= LONGEST_DECOY and GLOSS.search(t)
+                    and C.bare(e["headword"]).lower() not in words_in(t) and not SAYS_SAME.search(t)):
+                out.append((e["headword"], p["id"], t, e["meaning"]))
+    return sorted(out, key=lambda x: x[1])
+
+
+def far_from(e, pool, used=()):
+    """The texts of the pool that a decoy line on entry e may carry: not of an entry spelled like e, not naming
+    e, and sharing no content word and no field of meaning (FIELDS3) with e's meaning or any proposal on it, the
+    text read together with the meaning of its own entry, which the judges found it to give."""
+    near = e["meaning"] + " " + " ".join(p["proposal"] for p in e["proposals"])
+    own = C.bare(e["headword"])
+    return [(i, t) for h, i, t, m in pool if i not in used and C.bare(h) != own and own.lower() not in words_in(t)
+            and not K.shares(K.content(t + " " + m), K.content(near))
+            and not fields(t + " " + m, FIELD_STEMS3) & fields(near, FIELD_STEMS3)]
+
+
+def third_round(folder=OUT, out=None, seed=SEED, n=DECOYS3):
+    """Round three's packs (item 7): each judge reads every real line and n lines more, each carrying a decoy:
+    the headword and the lexicon's meaning of a real line, with the text of a proposal on another entry that gives
+    a meaning far from it (far_from) in place of a proposal. Different real lines carry the two judges' decoys,
+    and no text stands twice in a pack. Every line has a new id, R001... in the order of the pack, so that a
+    decoy line looks like a real one. Refuses once answered."""
+    out = out or folder / "round3"
+    if any((out / "answers").glob("judge*.jsonl")):
+        raise SystemExit(f"{out / 'answers'} holds round three's answers: not writing its packs again")
+    entries = [json.loads(l) for l in (folder / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
+    rows, by_head = rows_for_judges(entries, judged3), {e["headword"]: e for e in entries}
+    pool = decoy_pool3(entries, verdicts_of(folder, rounds=2))
+    carriers = random.Random(f"round three carriers {seed}").sample(rows, 2 * n)
+    pick = random.Random(f"round three decoys {seed}")
+    cell = lambda text: " ".join(text.replace("|", "/").split())
+    (out / "packs").mkdir(parents=True, exist_ok=True)
+    (out / "answers").mkdir(exist_ok=True)
+    key3 = {}
+    for j, chosen in (("1", carriers[:n]), ("2", carriers[n:])):
+        used, decoyed = set(), []
+        for r in chosen:
+            far = far_from(by_head[r["headword"]], pool, used)
+            if far:
+                i, t = pick.choice(far)
+                used.add(i)
+                decoyed.append({**r, "proposal": t, "decoy": i})
+        lines = rows + decoyed
+        random.Random(f"round three order {seed} {j}").shuffle(lines)
+        ids = [f"R{k:03d}" for k in range(1, len(lines) + 1)]
+        body = "".join(f"| {l} | {cell(r['headword'])} | {cell(r['meaning'])} | {cell(r['proposal'])} |\n"
+                       for l, r in zip(ids, lines))
+        (out / "packs" / f"judge{j}.md").write_text(
+            JUDGE3.format(answers=f"data/sources/lexicon/round3/answers/judge{j}.jsonl") + body, encoding="utf-8")
+        key3[j] = {"real": {l: r["id"] for l, r in zip(ids, lines) if "decoy" not in r},
+                   "decoys": {l: {"on": r["id"], "from": r["decoy"]} for l, r in zip(ids, lines) if "decoy" in r}}
+    (out / "key.json").write_text(json.dumps(key3, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return key3
+
+
 def meanings_pack(folder=OUT, out=None):
     """The writer's pack: every entry behind a translated word, with the lexicon's meaning and the proposals both
     judges of round one called the same. Refuses once answered."""
@@ -515,32 +638,40 @@ def our_meanings(folder=OUT):
     return {**out, **{h: m for h, m in REWORDED.items() if h in out}}
 
 
+def read_verdicts(f):
+    """{row id: verdict} of an answers file ({} when it is absent); an unknown verdict is kept as written, and a
+    row answered twice keeps its last answer."""
+    out = {}
+    for raw in (f.read_text(encoding="utf-8").splitlines() if f.exists() else []):
+        if raw.strip():
+            a = json.loads(raw)
+            out[a.get("row")] = (a.get("verdict") or "").strip().lower()
+    return out
+
+
 def round_two(folder=OUT):
     """(key, {judge: {row: verdict}}) of round two; (None, {}) before it is answered."""
     k = folder / "round2" / "key.json"
     if not k.exists() or not any((folder / "round2" / "answers").glob("judge*_c.jsonl")):
         return None, {}
-    key2 = json.loads(k.read_text(encoding="utf-8"))
-    out = {}
-    for j in ("1", "2"):
-        mine = {}
-        f = folder / "round2" / "answers" / f"judge{j}_c.jsonl"
-        for raw in (f.read_text(encoding="utf-8").splitlines() if f.exists() else []):
-            if raw.strip():
-                a = json.loads(raw)
-                mine[a.get("row")] = (a.get("verdict") or "").strip().lower()
-        out[j] = mine
-    return key2, out
+    return (json.loads(k.read_text(encoding="utf-8")),
+            {j: read_verdicts(folder / "round2" / "answers" / f"judge{j}_c.jsonl") for j in "12"})
+
+
+def round_three(folder=OUT):
+    """(key, {judge: {line: verdict}}) of round three; (None, {}) before it is answered."""
+    k = folder / "round3" / "key.json"
+    if not k.exists() or not any((folder / "round3" / "answers").glob("judge*.jsonl")):
+        return None, {}
+    return (json.loads(k.read_text(encoding="utf-8")),
+            {j: read_verdicts(folder / "round3" / "answers" / f"judge{j}.jsonl") for j in "12"})
 
 
 def answers(judge, folder=OUT):
-    """{row id: verdict} of a judge, from all their packs; an unknown verdict is kept as written."""
+    """{row id: verdict} of a judge, from all their packs of round one."""
     out = {}
     for pack in sorted((folder / "answers").glob(f"judge{judge}_*.jsonl")):
-        for raw in pack.read_text(encoding="utf-8").splitlines():
-            if raw.strip():
-                a = json.loads(raw)
-                out[a.get("row")] = (a.get("verdict") or "").strip().lower()
+        out.update(read_verdicts(pack))
     return out
 
 
@@ -647,6 +778,48 @@ def bars(agreed, decoys):
             "decoys_accepted": all(d["accepted"] <= BARS["decoys_accepted"] * d["shown"] for d in decoys)}
 
 
+def agreed_words(st, path=GLOSSES):
+    """The running words the map translates as a meaning or a grammar word whose every entry is agreed under st."""
+    n = 0
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        for g in json.loads(raw)["glosses"]:
+            if g["level"] in ("meaning", "grammar"):
+                hs = {p.get("entry") for p in g.get("parts") or []} - PSEUDO - {None}
+                n += bool(hs) and all(st.get(h) == STATUSES[0] for h in hs)
+    return n
+
+
+def strict(e):
+    """The entry with the editors' agreement kept only where they read at least STRICT words built on it the
+    same way, and more of them the same than partly the same or otherwise: the stricter rule reported beside
+    item 3's, under which one editor's "agree" on one word is enough."""
+    ed = e["editors"]
+    yes = ed.get("agree", 0)
+    return {**e, "editors": {**ed, "agree": yes if yes >= STRICT and yes > ed.get("partly", 0) + ed.get("differ", 0)
+                             else 0}}
+
+
+def agreed_how(es, st, verdicts):
+    """{"judges", "editors", "judges and editors": how many of the agreed entries of es are agreed so}."""
+    return dict(collections.Counter(
+        "judges and editors" if j and d else "judges" if j else "editors"
+        for e in es if st[e["headword"]] == STATUSES[0]
+        for j, d in [(bool(agreeing(e, verdicts)), bool(e["editors"].get("agree")))]))
+
+
+def with_a_dissent(es, st, verdicts):
+    """How many agreed entries of es also have a dissent: a proposal both judges call "other", or an editor who
+    reads a word built on it otherwise."""
+    return sum(st[e["headword"]] == STATUSES[0] and bool(dissent(e, verdicts) or e["editors"].get("differ"))
+               for e in es)
+
+
+def tally_of(st, es, uses="uses_translated"):
+    """({status: entries}, {status: their uses}) of es under st."""
+    return ({s: sum(st[e["headword"]] == s for e in es) for s in STATUSES},
+            {s: sum(e[uses] for e in es if st[e["headword"]] == s) for s in STATUSES})
+
+
 def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     """The judges' verdicts against the bars, the statuses, and the map's second figure."""
     entries = entries_of(folder, expert)
@@ -658,7 +831,7 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
             "unknown_verdicts": sum(v not in VERDICTS for v in list(one.values()) + list(two.values()))}
     for j, mine in (("1", one), ("2", two)):
         figs[f"decoys, judge {j}"] = caught([mine.get(r) for r in decoyed[j]])
-    verdicts, first = verdicts_of(folder), verdicts_of(folder, rounds=1)
+    verdicts, first, both = verdicts_of(folder), verdicts_of(folder, rounds=1), verdicts_of(folder, rounds=2)
     pairs = list(first.values())
     figs["two judges"] = {**agreement(pairs), "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs))}
     figs["bars"] = bars(figs["two judges"], [figs[f"decoys, judge {j}"] for j in "12"])
@@ -669,36 +842,63 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
               "unknown_verdicts": sum(v not in VERDICTS for j in "12" for v in again[j].values())}
         for j in "12":
             r2[f"decoys, judge {j}"] = caught([again[j].get(r) for r in key2[j]["decoys"]])
-        r2["all lines"] = agreement(list(verdicts.values()))
+        r2["all lines"] = agreement(list(both.values()))
         r2["bars"] = bars(r2["all lines"], [r2[f"decoys, judge {j}"] for j in "12"])
         figs["round two"] = r2
+    key3, got = round_three(folder)
+    if key3:
+        lines3 = {j: list(key3[j]["real"]) + list(key3[j]["decoys"]) for j in "12"}
+        r3 = {"real_lines": len(key3["1"]["real"]), "decoy_lines": {j: len(key3[j]["decoys"]) for j in "12"},
+              "unanswered": {j: sum(l not in got[j] for l in lines3[j]) for j in "12"},
+              "unknown_verdicts": sum(v not in VERDICTS for j in "12" for v in got[j].values())}
+        for j in "12":
+            r3[f"decoys, judge {j}"] = caught([got[j].get(l) for l in key3[j]["decoys"]])
+        pairs3 = list(third(folder).values())
+        r3["all lines"] = {**agreement(pairs3), "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs3))}
+        r3["bars"] = bars(r3["all lines"], [r3[f"decoys, judge {j}"] for j in "12"])
+        figs["round three"] = r3
     behind = [e for e in entries if e["uses_translated"]]
+    rest = [e for e in entries if not e["uses_translated"]]
     st = {e["headword"]: status(e, verdicts) for e in behind}
     st_first = {e["headword"]: status({**e, "editors": e["first_editors"]}, first, rated=("meaning", "grammar"))
                 for e in behind}
-    strict = editors(expert, leave_out=lambda r, a: misread(r, a) or on_a_piece(r, a))
-    st_piece = {e["headword"]: status({**e, "editors": dict(strict.get(e["headword"], {}))}, verdicts) for e in behind}
+    strict_pieces = editors(expert, leave_out=lambda r, a: misread(r, a) or on_a_piece(r, a))
+    st_piece = {e["headword"]: status({**e, "editors": dict(strict_pieces.get(e["headword"], {}))}, verdicts)
+                for e in behind}
     st_alone = {e["headword"]: status(e, first) for e in behind}     # round one alone, by today's rules
+    st_two = {e["headword"]: status(e, both) for e in behind}        # rounds one and two, without round three
+    st_strict = {e["headword"]: status(strict(e), verdicts) for e in behind}
+    counted, by_use = tally_of(st, behind)
     figs["entries"] = {"used": len(entries), "behind_translated_words": len(behind),
                        "with_a_proposal_of_another_scholar": sum(bool(e["proposals"]) for e in behind),
                        "with_the_editors_verdict": sum(bool(e["editors"]) for e in behind),
                        "with_the_editors_reading": sum(any(e["editors"].get(v) for v in T.GIVEN) for e in behind),
                        "only_a_kind": sum(e["vague"] for e in behind),
-                       "without_a_status": len(entries) - len(behind),
-                       "statuses": {s: sum(v == s for v in st.values()) for s in STATUSES},
-                       "statuses_by_use": {s: sum(e["uses_translated"] for e in behind if st[e["headword"]] == s)
-                                           for s in STATUSES}}
-    figs["entries"]["agreed_with_a_dissent"] = sum(
-        st[e["headword"]] == STATUSES[0] and bool(dissent(e, verdicts) or e["editors"].get("differ")) for e in behind)
-    figs["entries"]["agreed_only_through_an_unnamed_source"] = sorted(
-        e["headword"] for e in behind if st[e["headword"]] == STATUSES[0] and not e["editors"].get("agree")
-        and all(unnamed(p["author"]) for p in agreeing(e, verdicts)))
-    figs["entries"]["agreed_by"] = dict(collections.Counter(
-        "judges and editors" if j and d else "judges" if j else "editors"
-        for e in behind if st[e["headword"]] == STATUSES[0]
-        for j, d in [(bool(agreeing(e, verdicts)), bool(e["editors"].get("agree")))]))
+                       "statuses": counted, "statuses_by_use": by_use,
+                       "agreed_with_a_dissent": with_a_dissent(behind, st, verdicts),
+                       "agreed_only_through_an_unnamed_source": sorted(
+                           e["headword"] for e in behind if st[e["headword"]] == STATUSES[0]
+                           and not e["editors"].get("agree") and all(unnamed(p["author"]) for p in agreeing(e, verdicts))),
+                       "agreed_by": agreed_how(behind, st, verdicts)}
+    st_rest = {e["headword"]: status(e, verdicts) for e in rest}
+    st_rest_two = {e["headword"]: status(e, both) for e in rest}
+    counted, by_use = tally_of(st_rest, rest, "uses")
+    figs["other entries"] = {
+        "count": len(rest), "uses": sum(e["uses"] for e in rest),
+        "stated_by_rilly": dict(collections.Counter(e["level"] for e in rest if st_rest[e["headword"]] != STATUSES[3])),
+        "proposed_by_level": dict(collections.Counter(e["level"] for e in rest if st_rest[e["headword"]] == STATUSES[3])),
+        "with_a_proposal_of_another_scholar": sum(bool(e["proposals"]) for e in rest
+                                                  if st_rest[e["headword"]] != STATUSES[3]),
+        "with_the_editors_verdict": sum(bool(e["editors"]) for e in rest if st_rest[e["headword"]] != STATUSES[3]),
+        "statuses": counted, "statuses_by_use": by_use,
+        "agreed_by": agreed_how(rest, st_rest, verdicts),
+        "agreed_with_a_dissent": with_a_dissent(rest, st_rest, verdicts),
+        "proposed_with_an_editors_agree": sum(st_rest[e["headword"]] == STATUSES[3] and bool(e["editors"].get("agree"))
+                                              for e in rest),
+        "without_round_three": tally_of(st_rest_two, rest)[0]}
+    figs["all entries"] = {s: figs["entries"]["statuses"][s] + counted[s] for s in STATUSES}
     spelled = ends_like(st, behind)
-    words, alone_words, first_words, piece_words, unspelled = collections.Counter(), 0, 0, 0, collections.Counter()
+    words, unspelled = collections.Counter(), collections.Counter()
     for raw in path.read_text(encoding="utf-8").splitlines():
         for g in json.loads(raw)["glosses"]:
             words["all"] += 1
@@ -714,27 +914,33 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
                 words["with an unnamed ending"] += agreed and bool(ends)
                 words["with an unnamed ending no agreed entry spells"] += agreed and any(f not in spelled for f in ends)
                 unspelled.update(f for f in ends if agreed and f not in spelled)
-                alone_words += bool(hs) and all(st_alone.get(h) == STATUSES[0] for h in hs)
-                first_words += bool(hs) and all(st_first.get(h) == STATUSES[0] for h in hs)
-                piece_words += bool(hs) and all(st_piece.get(h) == STATUSES[0] for h in hs)
     figs["words"] = dict(words)
     figs["griffith_check"] = checked(entries, folder)
-    figs["translated_by_one_lexicon"] = words["names and numbers"] + words["meaning or grammar"]
-    figs["agreed_by_two_scholars"] = words["names and numbers"] + words["every entry agreed"]
+    named = words["names and numbers"]
+    figs["translated_by_one_lexicon"] = named + words["meaning or grammar"]
+    figs["agreed_by_two_scholars"] = named + words["every entry agreed"]
     figs["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"] = {
         "agreed_by_two_scholars": figs["agreed_by_two_scholars"] - words["with an unnamed ending no agreed entry spells"],
         "endings": dict(unspelled.most_common())}
     figs["if_an_agreement_on_a_piece_of_a_word_did_not_count"] = {
         "entries_agreed_only_so": sorted(h for h in st if st[h] == STATUSES[0] != st_piece[h]),
-        "agreed_by_two_scholars": words["names and numbers"] + piece_words}
+        "agreed_by_two_scholars": named + agreed_words(st_piece, path)}
+    figs["if_the_editors_had_to_agree_on_two_words_and_most"] = {
+        "statuses": tally_of(st_strict, behind)[0],
+        "entries_that_change": sum(st[h] != st_strict[h] for h in st),
+        "agreed_by_two_scholars": named + agreed_words(st_strict, path)}
+    figs["without_round_three"] = {
+        "statuses": tally_of(st_two, behind)[0],
+        "entries_that_change": sorted(h for h in st if st[h] != st_two[h]),
+        "agreed_by_two_scholars": named + agreed_words(st_two, path)}
     figs["with_round_one_alone"] = {
-        "statuses": {s: sum(v == s for v in st_alone.values()) for s in STATUSES},
-        "entries_that_change": sum(st[h] != st_alone[h] for h in st),
-        "agreed_by_two_scholars": words["names and numbers"] + alone_words}
+        "statuses": tally_of(st_alone, behind)[0],
+        "entries_that_change": sum(st_two[h] != st_alone[h] for h in st),
+        "agreed_by_two_scholars": named + agreed_words(st_alone, path)}
     figs["as_first_counted"] = {
-        "statuses": {s: sum(v == s for v in st_first.values()) for s in STATUSES},
-        "entries_that_change": sum(st[h] != st_first[h] for h in st),
-        "agreed_by_two_scholars": words["names and numbers"] + first_words}
+        "statuses": tally_of(st_first, behind)[0],
+        "entries_that_change": sum(st_two[h] != st_first[h] for h in st),
+        "agreed_by_two_scholars": named + agreed_words(st_first, path)}
     mine = our_meanings(folder)
     if mine:
         figs["meanings"] = {"written": len(mine), "empty": sum(not m for m in mine.values()),
@@ -742,17 +948,28 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
                             "longest_meaning_in_words": max(len(m.split()) for m in mine.values()),
                             "copied_after_rewording": sum(copied(mine[e["headword"]], e) for e in behind
                                                           if mine.get(e["headword"]))}
-    return figs, st
+    return figs, {**st, **st_rest}
 
 
-def verdicts_of(folder=OUT, rounds=2):
+def third(folder=OUT):
+    """{proposal id: (first, second)} of round three: each judge's verdict on the real lines, for the proposals
+    both judges answered; {} before it is answered."""
+    key3, got = round_three(folder)
+    if not key3:
+        return {}
+    real = {j: {key3[j]["real"][l]: v for l, v in got[j].items() if l in key3[j]["real"]} for j in "12"}
+    return {p: (real["1"][p], real["2"][p]) for p in sorted(real["1"]) if p in real["2"]}
+
+
+def verdicts_of(folder=OUT, rounds=3):
     """{row id: (first, second)}: each judge's verdict on the real proposal, for the rows both judges answered so.
-    A judge who saw a decoy on a row in round one has no real verdict on it there: with round two (rounds=2) its
-    verdict of round two is taken, where round two's key shows it the real proposal; with round one alone
-    (rounds=1) the row is left out."""
+    A judge who saw a decoy on a row in round one has no real verdict on it there: with round two (rounds=2 or
+    more) its verdict of round two is taken, where round two's key shows it the real proposal; with round one
+    alone (rounds=1) the row is left out. Round three (rounds=3) adds its own proposals, which the other rounds did
+    not send."""
     key = json.loads((folder / "key.json").read_text(encoding="utf-8"))
     first = {"1": answers(1, folder), "2": answers(2, folder)}
-    key2, again = round_two(folder) if rounds == 2 else (None, {})
+    key2, again = round_two(folder) if rounds >= 2 else (None, {})
 
     def real(j, r):
         if r not in key["decoys"][j]:
@@ -766,7 +983,7 @@ def verdicts_of(folder=OUT, rounds=2):
         a, b = real("1", r), real("2", r)
         if a is not None and b is not None:
             out[r] = (a, b)
-    return out
+    return {**out, **third(folder)} if rounds >= 3 else out
 
 
 def main(argv):
@@ -789,6 +1006,10 @@ def main(argv):
         key2 = second_round()
         meanings_pack()
         print({j: (len(key2[j]["real"]), len(key2[j]["decoys"])) for j in key2}, "lines and decoys; packs in", ROUND2)
+        return
+    if argv[1:] == ["round3"]:
+        key3 = third_round()
+        print({j: (len(key3[j]["real"]), len(key3[j]["decoys"])) for j in key3}, "lines and decoys; packs in", ROUND3)
         return
     if argv[1:] == ["count"]:
         figs, st = count()

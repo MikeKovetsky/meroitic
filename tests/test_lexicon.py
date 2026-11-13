@@ -19,7 +19,8 @@ FIGURES = ROOT / "data/discovery/lexicon_figures.json"
 LOCAL = ("data/rilly2003", "data/sources/v6/analysts/glosses.jsonl", "data/sources/expert/rows.jsonl",
          "data/sources/expert/answers", "data/sources/lexicon/entries.jsonl", "data/sources/lexicon/key.json",
          "data/sources/lexicon/answers", "data/sources/lexicon/round2/key.json",
-         "data/sources/lexicon/round2/answers")
+         "data/sources/lexicon/round2/answers", "data/sources/lexicon/round3/key.json",
+         "data/sources/lexicon/round3/answers")
 AGREED = "agreed by two scholars"
 
 
@@ -156,7 +157,8 @@ def test_count_end_to_end():
             g("mloto", "meaning", ("mlo", "mlo"), ("to", "-to (2)"))]}])
         figs, st = X.count(d / "lex", d / "glosses.jsonl", d / "expert")
         assert st == {"mlo": AGREED, "qo": "disputed", "-li (1)": "stated by one", "-lowi": AGREED, "Wos": AGREED,
-                      "l (2)": "stated by one", "-wi (5)": "proposed", "-to (2)": AGREED}, st
+                      "l (2)": "stated by one", "-wi (5)": "proposed", "-to (2)": AGREED,
+                      "abr": "stated by one"}, st                              # abr: behind no translated word
         assert figs["words"] == {"all": 13, "names and numbers": 2, "meaning or grammar": 10, "every entry agreed": 5,
                                  "with an unnamed ending": 2, "with an unnamed ending no agreed entry spells": 1}
         assert figs["translated_by_one_lexicon"] == 12 and figs["agreed_by_two_scholars"] == 7
@@ -172,6 +174,13 @@ def test_count_end_to_end():
                                                                                "verdicts": {"other": 1}}
         e = figs["entries"]
         assert e["used"] == 9 and e["behind_translated_words"] == 8 and e["with_the_editors_verdict"] == 3
+        o = figs["other entries"]
+        assert o["count"] == 1 and o["statuses"]["stated by one"] == 1 and o["stated_by_rilly"] == {"meaning": 1}
+        assert figs["all entries"] == {AGREED: 4, "disputed": 1, "stated by one": 3, "proposed": 1}
+        assert figs["without_round_three"]["entries_that_change"] == [] and "round three" not in figs
+        # the stricter rule: Wos and -to are agreed through one editor's "agree" on one word
+        strict = figs["if_the_editors_had_to_agree_on_two_words_and_most"]
+        assert strict["entries_that_change"] == 2 and strict["agreed_by_two_scholars"] == 5     # woSmlo and mloto
         assert e["agreed_by"] == {"judges": 2, "editors": 2} and e["agreed_with_a_dissent"] == 0
         assert figs["griffith_check"] is None                                   # not answered
         rows = {r["headword"]: r for r in X.table_rows(X.entries_of(d / "lex", d / "expert"), st, X.verdicts_of(d / "lex"))}
@@ -190,7 +199,7 @@ def test_count_end_to_end():
         figs2, st2 = X.count(d / "lex", d / "glosses.jsonl", d / "expert")
         assert st2["l (2)"] == AGREED and {h for h in st if st[h] != st2[h]} == {"l (2)"}
         assert figs2["agreed_by_two_scholars"] == 8 and figs2["with_round_one_alone"] == {
-            "statuses": {s: sum(v == s for v in st.values()) for s in X.STATUSES}, "entries_that_change": 1,
+            "statuses": {s: sum(v == s for h, v in st.items() if h != "abr") for s in X.STATUSES}, "entries_that_change": 1,
             "agreed_by_two_scholars": 7}
         r2 = figs2["round two"]
         assert r2["decoys, judge 1"] == {"shown": 1, "accepted": 0, "verdicts": {"other": 1}}
@@ -347,6 +356,123 @@ def test_answers_are_read_from_every_pack_of_a_judge():
         assert X.answers(2, Path(d)) == {"P0001": "partly"}
 
 
+def round_three_folder(d):
+    """Made-up rounds one and two, answered, and the entries of round three: rows R... of round three draw their
+    decoys from the proposals both judges of round one called "same"."""
+    es = [entry("qore", "king, ruler", props=[("P01", "'ruler'"), ("P02", "'lord', 'chief'")]),
+          entry("sem", "wife", props=[("P03", "'wife'")]), entry("ato", "water", props=[("P04", "'water'")]),
+          entry("at", "bread", props=[("P05", "'bread'"), ("P06", "the same sense")]),
+          entry("adb", "land", props=[("P07", "'land, desert'"), ("P08", "a noun of adb, 'land'")]),
+          entry("tre", "to give", props=[("P09", "'to give' (accepted as sure)")]),
+          entry("dime", "cow", props=[("P10", "compares Nubian ti")]),
+          entry("kdi", "woman", uses=0, props=[("P20", "'female'"), ("P21", "compares Nubian karri")]),
+          entry("Wos", "Isis", level="name", kind="god name", props=[("P22", "'Isis'")]),
+          entry("Pilqe", "Philae", level="name", kind="place name", uses=0, props=[("P23", "Coptic pilakeh")]),
+          entry("ase", "cow", status="hypothesis", level="hypothesis", uses=0, props=[("P24", "'female child'")])]
+    lines(d / "entries.jsonl", es)
+    first = [p["id"] for e in es if X.judged(e) for p in e["proposals"]]
+    (d / "key.json").write_text(json.dumps({"order": first, "decoys": {"1": {}, "2": {}}}))
+    for j in "12":
+        lines(d / "answers" / f"judge{j}_a.jsonl", [{"row": r, "verdict": "same"} for r in first])
+    return es
+
+
+def test_round_three_reads_every_real_line_beside_decoy_lines():
+    """third_round() (item 7): each judge reads every real line of the entries rounds one and two did not send,
+    and decoy lines of its own, all under new ids; a decoy is a real proposal both judges called "same" that
+    quotes a gloss and stands far from the line, also by the field of persons; it refuses once answered."""
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        es = round_three_folder(d)
+        assert [r["id"] for r in X.rows_for_judges(es, X.judged3)] == ["P20", "P21", "P22", "P23"]
+        pool = X.decoy_pool3(es, X.verdicts_of(d, rounds=2))
+        assert [i for _, i, _, _ in pool] == ["P01", "P02", "P03", "P04", "P05", "P07", "P09"]   # P06 says "same"
+        # P08 names its own entry, P10 quotes no gloss; Wos's P22 was never sent
+        kdi = {e["headword"]: e for e in es}["kdi"]
+        assert "P03" not in [i for i, _ in X.far_from(kdi, pool)]                    # "wife" is no decoy for "woman"
+        assert X.fields("woman") == set() and X.fields("woman", X.FIELD_STEMS3) == {"person"}
+        assert X.fields("wife", X.FIELD_STEMS3) == {"kin", "person"} and X.fields("titles", X.FIELD_STEMS3) == {"rank"}
+        key = X.third_round(d, n=2)
+        assert key == X.third_round(d, d / "again", n=2)                             # the same draw again
+        on = []
+        for j in "12":
+            text = (d / "round3" / "packs" / f"judge{j}.md").read_text(encoding="utf-8")
+            ids = re.findall(r"^\| (R\d{3}) \|", text, re.M)
+            assert ids == [f"R{k:03d}" for k in range(1, 7)] and "P0" not in text.split("|---|")[-1]
+            assert sorted(key[j]["real"].values()) == ["P20", "P21", "P22", "P23"]   # every real line
+            assert len(key[j]["decoys"]) == 2 and set(key[j]["real"]).isdisjoint(key[j]["decoys"])
+            froms = [x["from"] for x in key[j]["decoys"].values()]
+            assert len(set(froms)) == 2 and set(froms) <= {i for _, i, _, _ in pool}
+            on += [x["on"] for x in key[j]["decoys"].values()]
+            assert f"round3/answers/judge{j}.jsonl" in text and "or a name" in text
+        assert len(set(on)) == 4                                                     # different lines for the two
+        lines(d / "round3" / "answers" / "judge1.jsonl", [{"row": "R001", "verdict": "same"}])
+        try:
+            X.third_round(d, n=2)
+        except SystemExit as e:
+            assert "round three's answers" in str(e)
+        else:
+            raise AssertionError("round three's packs were written over its answers")
+
+
+def test_round_three_counts():
+    """verdicts_of() takes round three's verdicts on its real lines, never on a decoy line; count() gives its
+    bars and the statuses of the other entries, and keeps the count without it."""
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        round_three_folder(d / "lex")
+        key = X.third_round(d / "lex", n=2)
+        verdict = {"P20": ("same", "same"), "P21": ("other", "same"), "P22": ("other", "other"), "P23": ("same", "same")}
+        for k, j in enumerate("12"):
+            got = [{"row": l, "verdict": verdict[p][k]} for l, p in key[j]["real"].items()]
+            got += [{"row": l, "verdict": "partly" if j == "2" else "other"} for l in key[j]["decoys"]]
+            lines(d / "lex" / "round3" / "answers" / f"judge{j}.jsonl", got)
+        assert X.third(d / "lex") == verdict and "P20" not in X.verdicts_of(d / "lex", rounds=2)
+        assert X.verdicts_of(d / "lex")["P22"] == ("other", "other")
+        expert_folder(d / "expert", [("M1", "kdi", ["kdi"], False)], [("M1", "agree", "woman")])
+        g = lambda form, level, *parts: {"form": form, "level": level, "parts": [{"form": f, "entry": h} for f, h in parts]}
+        lines(d / "glosses.jsonl", [{"id": "T1", "glosses": [g("qore", "meaning", ("qore", "qore")),
+                                                              g("woS", "name", ("woS", "Wos")),
+                                                              g("kdi", "kind", ("kdi", "kdi"))]}])
+        figs, st = X.count(d / "lex", d / "glosses.jsonl", d / "expert")
+        r3 = figs["round three"]
+        assert r3["real_lines"] == 4 and r3["decoy_lines"] == {"1": 2, "2": 2} and r3["unanswered"] == {"1": 0, "2": 0}
+        assert r3["decoys, judge 1"]["accepted"] == 0 and r3["decoys, judge 2"]["accepted"] == 2
+        assert r3["all lines"]["rows"] == 4 and r3["bars"]["decoys_accepted"] is False
+        assert st["Wos"] == "disputed" and st["kdi"] == AGREED and st["Pilqe"] == AGREED and st["ase"] == "proposed"
+        o = figs["other entries"]
+        assert o["statuses"] == {AGREED: 2, "disputed": 0, "stated by one": 0, "proposed": 1}
+        assert o["without_round_three"] == {AGREED: 1, "disputed": 0, "stated by one": 1, "proposed": 1}
+        assert o["agreed_by"] == {"judges and editors": 1, "judges": 1} and o["proposed_by_level"] == {"hypothesis": 1}
+        assert figs["without_round_three"]["entries_that_change"] == ["Wos"]
+
+
+def test_the_stricter_rule_for_the_editors():
+    """strict(): the editors' "agree" counts when they read at least two words built on the entry the same way
+    and more the same than partly or otherwise; item 3's rule takes one."""
+    keep = lambda **ed: X.strict(entry("a", editors=ed))["editors"]["agree"]
+    assert keep(agree=2) == 2 and keep(agree=3, partly=1, differ=1) == 3
+    assert keep(agree=1) == 0 and keep(agree=6, partly=49) == 0 and keep(agree=2, partly=2) == 0
+    assert X.strict(entry("a", editors={"differ": 1}))["editors"] == {"differ": 1, "agree": 0}
+
+
+def test_round_one_fields_stay_as_drawn():
+    """Round three's field for persons is a table of its own (FIELDS3): round one's fields, with which its key and
+    round two's packs were drawn, are as they were, and round three's judges read round one's text but for a
+    word on names and the row ids."""
+    assert X.FIELDS == {
+        "kin": "mother father brother sister child son daughter nephew niece cousin kinsman relative parent "
+               "wife husband consort born begotten family relation filiation",
+        "rank": "king queen ruler sovereign lord noble prince princess viceroy governor mayor chief official "
+                "consort royal title envoy agent priest prophet",
+        "god": "god goddess divine deity osiris isis amun amanap apedemak"}
+    assert all(X.FIELDS3[k].startswith(v) for k, v in X.FIELDS.items())
+    head, rest = X.JUDGE3.split("dictionary:\n", 1)
+    assert "or a name, whose meaning is whom or what it names" in head and "P0001" not in X.JUDGE3
+    assert rest.replace('"R001"', '"P0001"') == X.JUDGE.split("dictionary:\n", 1)[1]
+    assert head.split("Each line")[0] == X.JUDGE.split("Each line")[0]
+
+
 PAGE = ROOT / "data/discovery/lexicon.md"
 JUDGES = (99371, 101866, 98363, 89296)                     # the cost, by hand from the task notifications
 CHECK = 250976                                             # the check against Griffith, the same
@@ -405,8 +531,9 @@ def test_reported_numbers():
     assert (f"One entry, `-o` ({uses('-o (1)')} uses), is agreed only through a view the lexicon records without a "
             "scholar's name") in text
     assert f"{e['only_a_kind']} of the {e['behind_translated_words']} entries are titles or epithets" in text
-    assert e["without_a_status"] == e["used"] - e["behind_translated_words"]
-    assert f"a status for the {e['without_a_status']} other entries the map uses" in text
+    o = f["other entries"]
+    assert o["count"] == e["used"] - e["behind_translated_words"]
+    assert f"a status for the {o['count']} other entries the map uses" in text
     alone = f["with_round_one_alone"]
     assert (f"With round one alone, {alone['entries_that_change']} entries had another status and the second figure "
             f"was {share(alone['agreed_by_two_scholars'])}.") in text
@@ -634,6 +761,19 @@ def test_round_two_packs_are_what_the_code_writes():
     entries = [json.loads(l) for l in (X.OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
     key = json.loads((X.OUT / "key.json").read_text(encoding="utf-8"))
     assert X.decoys(X.rows_for_judges(entries), entries) == [key["decoys"]["1"], key["decoys"]["2"]]
+
+
+def test_round_three_packs_are_what_the_code_writes():
+    """Round three's packs and key were written before its judges answered: third_round() writes them again byte
+    for byte, into a folder of its own."""
+    needs("data/sources/lexicon/entries.jsonl", "data/sources/lexicon/key.json", "data/sources/lexicon/answers",
+          "data/sources/lexicon/round2/key.json", "data/sources/lexicon/round2/answers",
+          "data/sources/lexicon/round3/key.json", "data/sources/lexicon/round3/packs")
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d) / "round3"
+        X.third_round(X.OUT, out)
+        for f in ("key.json", "packs/judge1.md", "packs/judge2.md"):
+            assert (out / f).read_bytes() == (X.ROUND3 / f).read_bytes(), f
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
