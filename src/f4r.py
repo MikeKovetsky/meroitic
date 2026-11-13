@@ -71,7 +71,7 @@ EXPECTED = {"glosses": (0.55, 0.70), "pilot": (0.50, 0.68), "writer_under_glosse
 LEAD, WRONG_OVER, WRITER_LOSS = 0.05, 0.02, 0.03
 STATUS_ORDER = ("agreed", "stated by one", "disputed", "proposed")
 # subagent tokens of each agent, from the task notifications, by hand after a run
-TOKENS = {}
+TOKENS = {"all:splitters": 1169212}     # 18 agents, one per rendered text, 13 November 2026
 
 
 def name_of(tid):
@@ -519,15 +519,16 @@ def compare(v, units, name, other=REFERENCE):
 
 
 def carried(score, wrong, names):
-    """The reading carried to the held texts by the rule set beforehand (LEAD, WRONG_OVER, WRITER_LOSS)."""
+    """The reading carried to the held texts by the rule set beforehand (LEAD, WRONG_OVER, WRITER_LOSS). The
+    differences are rounded to four places, as the scores are, so that 0.60 - 0.57 is 0.03."""
     if score.get(REFERENCE) is None:
         return None
     ok = [n for n in names if n not in ("decoy", "pilot", REFERENCE, "writer") and score.get(n) is not None
-          and wrong[n] <= wrong[REFERENCE] + WRONG_OVER]
+          and round(wrong[n] - wrong[REFERENCE], 4) <= WRONG_OVER]
     best = max(ok, key=lambda n: (score[n], -names.index(n))) if ok else None
-    if best and score[best] - score[REFERENCE] >= LEAD:
+    if best and round(score[best] - score[REFERENCE], 4) >= LEAD:
         return best
-    if score.get("writer") is not None and score[REFERENCE] - score["writer"] <= WRITER_LOSS:
+    if score.get("writer") is not None and round(score[REFERENCE] - score["writer"], 4) <= WRITER_LOSS:
         return "writer"
     return REFERENCE
 
