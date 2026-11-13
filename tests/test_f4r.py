@@ -584,7 +584,7 @@ def test_the_page_quotes_the_rest_of_its_counts():
             f"({pct(r1b['wrong']['panel'])} against {pct(r1b['wrong']['glosses'])})") in second
     pt = r1b["panel_against_translator"]
     assert (f"The panel's lead over one translator, {100 * (r1b['score']['panel'] - r1b['score']['translator']):.1f} "
-            f"points, is few units: unit by unit the panel is better than the translator on {pair(pt, 'better')} of "
+            f"points, rests on few units: unit by unit the panel is better than the translator on {pair(pt, 'better')} of "
             f"the {r1b['units']['scored']} (first and second judge) and worse on {pair(pt, 'worse')}") in second
     assert f"GA28 holds {r1b['units']['per_text']['GA 28']} of the 75 units" in second
     assert f"GA47 scores 0 for every reading ({r1b['units']['per_text']['GA 47']} units" in second

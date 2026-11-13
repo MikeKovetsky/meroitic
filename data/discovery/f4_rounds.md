@@ -165,9 +165,9 @@ The same readings and units, 14 new judges, the rule on kinship added (13 Novemb
    panel, 15.0 points over the glosses, with fewer wrong units (1.3% against 6.7%).
 
 How far to trust it: these are five texts that had been seen, and the rules of section 3 answer what the pilot
-said of them. The panel's lead over one translator, 2.7 points, is few units: unit by unit the panel is better
-than the translator on 6 and 2 of the 75 (first and second judge) and worse on none. GA28 holds 48 of the 75
-units. GA47 scores 0 for every reading (2 units; our copy of it differs from the reading Millet renders).
+said of them. The panel's lead over one translator, 2.7 points, rests on few units: unit by unit the panel is
+better than the translator on 6 and 2 of the 75 (first and second judge) and worse on none. GA28 holds 48 of the
+75 units. GA47 scores 0 for every reading (2 units; our copy of it differs from the reading Millet renders).
 
 ## 7. The held texts: the design, the bars and the expected scores, set before any of their agents answered
 
