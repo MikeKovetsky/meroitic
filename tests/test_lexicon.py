@@ -17,7 +17,8 @@ from local_only import needs, run   # noqa: E402
 
 FIGURES = ROOT / "data/discovery/lexicon_figures.json"
 LOCAL = ("data/rilly2003", "data/sources/v6/analysts/glosses.jsonl", "data/sources/expert/rows.jsonl",
-         "data/sources/lexicon/key.json", "data/sources/lexicon/answers")
+         "data/sources/expert/answers", "data/sources/lexicon/entries.jsonl", "data/sources/lexicon/key.json",
+         "data/sources/lexicon/answers")
 AGREED = "agreed by two scholars"
 
 
