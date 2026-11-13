@@ -640,3 +640,9 @@ map uses are still open (`NEXT_STEPS.md`, step 23).
    ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md), sections 7 and 8).
 7. **Cost:** five agents, 560,981 subagent tokens (translators 145,118 and 104,696, splitter 99,501, judges
    107,682 and 103,984), against 0.35 million expected, before the review.
+
+**The review of the pilot** (full tier) cost 398,363 subagent tokens and 34 minutes, by hand from its task
+notification: 959,344 for the pilot with its review, past the 0.8 million at which the brief asked to check with
+Mike first. It stated on the page that the baseline hid the analysts' glosses of 4 words the translator saw, counted
+the sizing in the script, and ended not clean on one line: the brief asked the two judges to split Millet's
+renderings themselves, and one blind splitter did it.
