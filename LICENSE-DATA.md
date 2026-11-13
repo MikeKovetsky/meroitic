@@ -58,6 +58,10 @@ Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
   "The Meroitic Inscriptions from Gebel Adda" (*Journal of the Society for the Study of Egyptian Antiquities* 32,
   2005), from *Fontes Historiae Nubiorum* III and from Rilly's lexicon. The two files beside that page,
   `experts_figures.json` and `experts_words.tsv`, hold counts and word forms only and are under CC BY 4.0.
+- Single words of Rilly's lexicon and of the scholars it cites, quoted on `data/discovery/lexicon.md`. The two
+  files beside that page hold no meaning and are under CC BY 4.0: `lexicon_figures.json` holds counts, and
+  `lexicon_statuses.tsv` the headwords with Rilly's page and status, the names of the scholars he cites, our
+  status and counts.
 - Short quotations from other publications in the write-ups, each cited where it stands.
 
 Other data without an open licence is not in this repository: the README's Data section lists what is kept out.

@@ -386,6 +386,7 @@ def test_the_summaries_quote_the_figures():
              "REPORT": between(read("REPORT.md"), "## Day five, night", "6. **Cost:**"),
              "REPORT, review": between(read("REPORT.md"), "7. **What the review changed in the count:**", "\n\n"),
              "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2, first pass", "Next, in this order"),
+             "NEXT_STEPS, F2": between(read("NEXT_STEPS.md"), "    - First pass, 12 November", "24. **F3."),
              "summary page": between(read("docs/report.html"), "<tr><td>Ask of every meaning", "</tr>")}
     w, e = f["words"], f["entries"]
     st = e["statuses"]
