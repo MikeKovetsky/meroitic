@@ -705,13 +705,13 @@ of 186 clean decoy units. The glosses get 58.5%, the writer 69.3%, one translato
 are wrong on 9.2%, 4.4%, 2.8% and 2.3% of the units. The panel's lead over the glosses, 16.4 points, is over the
 bar of 5 set beforehand and inside the 8 to 18 expected. Unit by unit the panel is better than the glosses on 56
 and 55 units and worse on 2 and 2. The gain is largest in places (44.6% to 87.0%) and smallest in relations
-(45.6% to 52.9%).
+(45.6% to 52.9%); the invocations of gods are given by every reading.
 
-**What it does not show.** The panel leads one translator by 1.0 point, which is 2 to 4 units: the editing of
-three into one is not shown to add anything. The writer, who sees no lexicon entry and no parallel, gets 10.8 of
-the 16.4 points: most of the gain is the handbook and the order of a sentence. All 18 renderings are one
-scholar's, from one site. The pages for the 304 open inscriptions are not built, and Griffith's own translations
-are not yet a second rendering.
+**What it does not show.** The panel leads one translator by 1.0 point: unit by unit it is better on 5 and 2 of
+the 218 units and worse on 1 and 1, so the editing of three into one is not shown to add anything. The writer,
+who sees no lexicon entry and no parallel, gets 10.8 of the 16.4 points: most of the gain needs neither. All 18
+renderings are one scholar's, from one site. The pages for the 304 open inscriptions are not built, and
+Griffith's own translations are not yet a second rendering.
 
 **Cost.** 17,879,477 subagent tokens for the day's rounds without three editors whose tokens were not reported:
 the splitters 1,169,212, the handbook 555,173 and its check 1,015,037, round one 3,565,443 and its second

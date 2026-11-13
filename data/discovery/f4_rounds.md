@@ -9,6 +9,10 @@ of them scored once on the renderings that were held back. The script is [`src/f
 The design, the bars, the expected scores and the rule for what is carried on were written here before any agent
 of round one answered (13 November 2026).
 
+**Not built yet** (said after the held texts were scored): the pages for the 304 open inscriptions, and the
+scoring against Griffith's own translations. Step 25 asks for both; this page chooses and scores the way of
+translating that the pages are to be built with.
+
 ## 1. What was asked
 
 Mike's words on 13 November, and how each is taken up:
@@ -16,9 +20,9 @@ Mike's words on 13 November, and how each is taken up:
 | # | His words | Taken as | State |
 |---|---|---|---|
 | 1 | "before we move to translating" | whole texts are translated, not single words glossed | round one below |
-| 2 | "optimize for quality" | the way of translating is chosen by its score and its errors, not by its cost | sections 3 to 5 |
+| 2 | "optimize for quality" | the way of translating is chosen by its score and its errors, not by its cost | sections 4, 6 and 7 |
 | 3 | "and speed of iterations" | one text per agent, all agents of a round side by side, one command per step | section 3 |
-| 4 | "not for tokens" | no design is left out or cut down to save tokens; the cost is reported, not minimised | section 8 |
+| 4 | "not for tokens" | no design is left out or cut down to save tokens; the cost is reported, not minimised | section 9 |
 
 What F4 itself asks (step 25, written on 12 November): each inscription translated line by line from the lexicon
 with a status for every word, the open words left open; scored against Millet's renderings and Griffith's own
@@ -95,10 +99,11 @@ themselves if it is not. If a bar of the judging is missed, the judging is chang
 
 ## 5. Round one, first judging: the order of the readings is clear, the judges' bar is missed
 
-Run on 13 November 2026. The handbook: 124 sourced lines; its four checkers confirmed 80, corrected 43, dropped
-none, and one (the opening sentence) was outside their ranges. The five renderings were cut into 115 units; 38
-are open (1 of them with a translated part, against 17 in the pilot), 77 went to the judges and 75 are scored
-(2 render Meroitic that is not in our copy).
+Run on 13 November 2026. The handbook: 124 sourced lines; its four checkers (section 3 planned one; the lines
+were shared out in four ranges) confirmed 80, corrected 43, dropped none, and one (the opening sentence) was
+outside their ranges. The five renderings were cut into 115 units; 38 are open (1 of them with a translated
+part, against 17 in the pilot), 77 went to the judges and 75 are scored (2 render Meroitic that is not in our
+copy).
 
 | Reading | Expected | Judge 1 | Judge 2 | Mean | Given only | Wrong | Over the glosses |
 |---|---|---|---|---|---|---|---|
@@ -146,7 +151,8 @@ The same readings and units, 14 new judges, the rule on kinship added (13 Novemb
 1. **Both bars are met.** The judges gave the same verdict on 361 of 375 lines (Cohen's kappa 0.94; in GA28
    227 of 240, kappa 0.90), and neither called any of its 72 clean decoy units given or partly.
 2. **Every expectation held, and the writer did better than expected:** it does not lose meaning against the
-   glosses, it gains 6.7 points, because it orders the words into the sentences the handbook describes.
+   glosses, it gains 6.7 points, from the same readings written as sentences by the rules and the handbook (how
+   much each of those adds is not measured).
 3. **The order is the first judging's,** and every score is lower, as expected: the units "she was related to
    X" are now partly for both judges.
 4. **Unit by unit against the glosses** (first and second judge): the panel is better on 22 and 21 of the 75
@@ -159,7 +165,8 @@ The same readings and units, 14 new judges, the rule on kinship added (13 Novemb
    panel, 15.0 points over the glosses, with fewer wrong units (1.3% against 6.7%).
 
 How far to trust it: these are five texts that had been seen, and the rules of section 3 answer what the pilot
-said of them. The panel's lead over one translator, 2.7 points, is 3 to 5 units of 75. GA28 holds 48 of the 75
+said of them. The panel's lead over one translator, 2.7 points, is few units: unit by unit the panel is better
+than the translator on 6 and 2 of the 75 (first and second judge) and worse on none. GA28 holds 48 of the 75
 units. GA47 scores 0 for every reading (2 units; our copy of it differs from the reading Millet renders).
 
 ## 7. The held texts: the design, the bars and the expected scores, set before any of their agents answered
@@ -214,8 +221,9 @@ GA19).
 
 1. **Both bars are met.** The judges gave the same verdict on 807 of 872 lines (Cohen's kappa 0.88), and each
    called 1 of its 186 clean decoy units given or partly (0.5%; the bar is 10%). The decoys score 7.1% over all
-   218 units because nine of them are epitaphs: on the units that share a word with the decoy (an invocation
-   of Isis, a wish for water) a judge is right to credit it, and those units are not in the decoy measure.
+   218 units mostly because nine of them are epitaphs too: but for that one clean unit, the units a judge
+   credits a decoy on share a word with it (an invocation of Isis or Osiris, a wish for water, "the noble"),
+   and those units are not in the decoy measure.
 2. **The panel leads the glosses by 16.4 points, over the bar of 5 and inside what was expected.** By section
    7 this is the result: this way of translating gives meaning that Millet's renderings can see, on texts it
    was not tuned on. The lead on the five tuning texts was 15.0.
@@ -234,16 +242,20 @@ GA19).
 How far to trust it, and what it does not show:
 
 1. **The panel is not shown to beat one translator.** Its lead over the first of its three translators is 1.0
-   point: 2 to 4 units of 218, with four agents a text against one. What carries the result is the translator's
-   design (the rules, the handbook, the parallels), not the editing of three into one.
-2. **Most of the gain is the handbook and the order of a sentence.** The writer sees no lexicon entry and no
-   parallel, only the map's reading of each word and the handbook, and gets 10.8 of the 16.4 points.
+   point, with four agents a text against one: unit by unit the panel is better on 5 and 2 of the 218 units
+   (first and second judge) and worse on 1 and 1. What carries the result is the translator's design (the
+   rules, the handbook, the parallels), not the editing of three into one.
+2. **Most of the gain needs no lexicon entry and no parallel.** The writer sees only the map's reading and
+   status of each word, the rules and the handbook, and gets 10.8 of the 16.4 points; how much each of those
+   adds is not measured.
 3. **One scholar, one site, one kind of text.** All 18 renderings are Millet's, of inscriptions from Gebel
    Adda, 14 of them stelae. A score against them measures agreement with Millet (`yetmde`, `qo`).
 4. **Two judges of one model with one set of instructions** agree; that shows the verdicts are stable.
 5. **Millet is out of the packs only as far as the project's files carry him** (the pilot's page, section 8,
-   item 7). The handbook's compiler and checkers were told not to open his edition; the handbook does not name
-   him, which a check in the script enforces, and it left out seven meanings that rest on him alone.
+   item 7). The handbook's compiler and checkers were told not to open his edition (their instructions:
+   [the compiler's](../../runs/prompts/F4R_handbook_compile.md), [the checkers'](../../runs/prompts/F4R_handbook_check.md));
+   the handbook does not name him, which a check in the script enforces, and by its compiler's report it left out
+   seven meanings that rest on him alone.
 6. **Three of the 13 editors ended with an API error after writing their answers** (a usage limit). Their
    answers are complete and pass the same checks as the others; their tokens were not reported.
 7. **Not done:** the two renderings `corpus_v6` lacks, Griffith's own translations as a second rendering, and
@@ -257,22 +269,24 @@ and its second judging 953,178; the held texts 10,621,434 without three editors 
 translators 1,380,334, translators 4,378,027, ten editors 1,145,844, judges 2,554,462). In all 17,879,477.
 
 Per text of the held round: one translator about 112,000 tokens, the panel with its editor about 450,000. An
-agent that reads one pack costs about 60,000 tokens before it reads a word of it, which is most of a short
-text's cost: the pilot's translator, five texts to an agent, took 29,000 a text.
+agent that reads one pack costs about 60,000 tokens before it reads a word of it (a straight line through the
+113 agents of the held round and the sizes of their packs starts at 58,000), which is most of a short text's
+cost: the pilot's translator, five texts to an agent, took 29,000 a text.
 
 ## 10. Files and commands
 
 | File | What it holds | Where |
 |---|---|---|
 | `src/f4r.py` | the packs, the count, the rule | public |
-| `f4_rounds_figures.json` | every number of this page; no edition text, no lexicon text | public |
+| `f4_rounds_figures.json` | each round's counts and the tokens; no edition text, no lexicon text | public |
+| `runs/prompts/F4R_handbook_*.md` | the instructions the handbook's compiler and its four checkers were given by hand | public |
 | `data/sources/f4r/` | the handbook, the packs, the agents' answers, the keys | local |
 
 ```
 python3 -I src/f4r.py split        # the splitters' packs, all 18 rendered texts
+python3 -I src/f4r.py handbook     # the checkers' verdicts applied to the compiled handbook; no pack without it
 python3 -I src/f4r.py packs r1     # the writer's and the translators' packs
 python3 -I src/f4r.py editors r1   # the editors' packs, once the translators have answered
-python3 -I src/f4r.py handbook    # the checkers' verdicts applied to the compiled handbook
 python3 -I src/f4r.py judges r1    # the judges' packs and the key
 python3 -I src/f4r.py count r1
 python3 -I src/f4r.py public r1    # writes f4_rounds_figures.json
@@ -281,3 +295,4 @@ python3 -I src/f4r.py packs held   # then editors, judges, count and public held
 ```
 
 The packs go to agents by hand: one agent per pack, told to read only that file and to write its answers file.
+The handbook's compiler and its checkers have no pack: their instructions, given by hand, are in `runs/prompts/`.

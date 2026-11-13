@@ -546,6 +546,96 @@ def test_the_page_quotes_the_figures():
         assert f"{total:,}" in cost, rnd
 
 
+def pair(c, key):
+    """A count of both judges as the pages write it: "6 and 2", or "none" when both are 0."""
+    a, b = c["1"].get(key, 0), c["2"].get(key, 0)
+    return "none" if a == b == 0 else f"{a} and {b}"
+
+
+def test_the_page_quotes_the_rest_of_its_counts():
+    """The numbers of sections 5, 6 and 8 that are not in their tables: where the judges part, the units outside
+    our copy, the gain by kind, the panel against the translator, and the rule's verdict on each judging."""
+    public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
+    page = PAGE.read_text(encoding="utf-8")
+    r1, r1b, h = public["r1"], public["r1b"], public["held"]
+    first, second, held = (" ".join(between(page, *SECTIONS[r]).split()) for r in ("r1", "r1b", "held"))
+    # round one, first judging: the bar missed, so nothing is carried; where the judges part
+    a = r1["agreement"]
+    assert r1["bars"]["kappa"] is False and r1["carried"] is None and "nothing is carried on from this judging" in first
+    ga28 = a["per_text"]["GA 28"]
+    rest = [x for t, x in a["per_text"].items() if t != "GA 28"]
+    assert f"GA28 has {ga28['pairs']} of the {a['pairs']} lines and a kappa of {ga28['kappa']:.2f}" in first
+    assert f"the other four texts agree on {sum(x['same'] for x in rest)} of {sum(x['pairs'] for x in rest)} lines" in first
+    assert (f"Of the {a['pairs'] - a['same']} lines judged differently, {a['differing_pairs']['given / partly']} are "
+            f"given against partly") in first and f"the judges' kappa is {a['kappa_credited_or_not']:.2f}" in first
+    assert f"75 are scored ({r1['units']['not_in_copy']} render" in first and r1["units"]["scored"] == 75
+    # round one, second judging
+    one, two = r1b["unit_by_unit"]["1"], r1b["unit_by_unit"]["2"]
+    for name, words in (("panel", "the panel is better on"), ("translator", "the translator better on"),
+                        ("writer", "the writer better on")):
+        c = {"1": one[name], "2": two[name]}
+        assert f"{words} {pair(c, 'better')}" in second and f"worse on {pair(c, 'worse')}" in second, name
+    k, n = r1b["by_kind"], r1b["units"]["by_kind"]
+    assert f"titles ({n['title']} units: glosses {pct(k['title']['glosses'])}, panel {pct(k['title']['panel'])})" in second
+    names = [k["name"][x] for x in ("pilot", "glosses", "writer", "translator", "panel")]
+    assert f"On the {n['name']} units that name a person in a role the readings are close ({pct(min(names))} to {pct(max(names))})" in second
+    assert r1b["carried"] == "panel" and all(r1b["bars"].values())
+    assert (f"{100 * r1b['lead']['panel']:.1f} points over the glosses, with fewer wrong units "
+            f"({pct(r1b['wrong']['panel'])} against {pct(r1b['wrong']['glosses'])})") in second
+    pt = r1b["panel_against_translator"]
+    assert (f"The panel's lead over one translator, {100 * (r1b['score']['panel'] - r1b['score']['translator']):.1f} "
+            f"points, is few units: unit by unit the panel is better than the translator on {pair(pt, 'better')} of "
+            f"the {r1b['units']['scored']} (first and second judge) and worse on {pair(pt, 'worse')}") in second
+    assert f"GA28 holds {r1b['units']['per_text']['GA 28']} of the 75 units" in second
+    assert f"GA47 scores 0 for every reading ({r1b['units']['per_text']['GA 47']} units" in second
+    assert all(x == 0.0 for x in r1b["per_text"]["GA 47"].values())
+    # the held texts
+    u = h["units"]
+    assert (f"{u['open']} are open ({u['open_with_a_translated_part']} of them with a translated part), {u['judged']} "
+            f"went to the judges and {u['scored']} are scored ({u['not_in_copy']} render Meroitic that is not in our "
+            f"copy, {u['not_in_copy_per_text']['GA 19']} of them in GA19)") in held
+    d = h["decoys_measure"]["1"]
+    assert f"({100 * d['accepted'] / d['clean_units']:.1f}%; the bar is {100 * R.BARS['decoys_accepted']:.0f}%)" in held
+    assert f"The lead on the five tuning texts was {100 * r1b['lead']['panel']:.1f}." in held
+    pt = h["panel_against_translator"]
+    assert (f"Its lead over the first of its three translators is "
+            f"{100 * (h['score']['panel'] - h['score']['translator']):.1f} point, with four agents a text against one: "
+            f"unit by unit the panel is better on {pair(pt, 'better')} of the {u['scored']} units (first and second "
+            f"judge) and worse on {pair(pt, 'worse')}.") in held
+    assert f"gets {100 * h['lead']['writer']:.1f} of the {100 * h['lead']['panel']:.1f} points" in held
+    lo, hi = R.EXPECTED_HELD["writer_lead"]
+    assert not lo <= h["lead"]["writer"] <= hi and f"a little more than the {100 * lo:.0f} to {100 * hi:.0f} expected" in held
+    # the handbook's check, as section 5 gives it
+    book = h["handbook"]
+    assert (f"The handbook: {book['sourced']} sourced lines; its four checkers") in first
+    assert f"confirmed {book['confirmed']}, corrected {book['corrected']}, dropped none" in first
+    assert book.get("unsupported", 0) == 0 and book["unchecked"] == 1 and "and one (the opening sentence)" in first
+
+
+def test_what_is_not_built_is_said_plainly():
+    """Step 25 asks for a page per text and for Griffith's own translations as a second rendering; neither is
+    built, and every page and summary of the rounds says so."""
+    read = lambda name: " ".join((ROOT / name).read_text(encoding="utf-8").split())        # noqa: E731
+    page = read("data/discovery/f4_rounds.md")
+    parts = {"page, top": between(page, "**Not built yet**", "## 1. "),
+             "page, section 8": between(page, "7. **Not done:**", "## 9. "),
+             "README": between(read("README.md"), "16. **A translator with a handbook", "## The question"),
+             "REPORT": read("REPORT.md")[read("REPORT.md").index("## Day six (2026-11-13)"):],
+             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "17. **F4, the rounds", "Next, in this order"),
+             "NEXT_STEPS, F4": between(read("NEXT_STEPS.md"), "- **Next in this step now:**", "The order: F1")}
+    for name, text in parts.items():
+        assert "Griffith's own translations" in text and ("not built" in text.lower() or "not done" in text.lower()
+                                                          or "neither is built" in text.lower()), name
+        assert "304" in text or "the pages themselves" in text, name
+    # the next step follows the rule set before the held texts, and cuts no design to save tokens
+    f4 = parts["NEXT_STEPS, F4"]
+    assert "built with the panel" in f4 and "several texts to an agent" not in f4
+    # what the handbook's compiler and checkers were told is public, as the page says
+    for name in ("F4R_handbook_compile.md", "F4R_handbook_check.md"):
+        text = (ROOT / "runs" / "prompts" / name).read_text(encoding="utf-8")
+        assert "Do NOT open anything under `data/sources/jssea`" in text, name
+
+
 def test_the_summaries_quote_the_figures():
     """README, REPORT and NEXT_STEPS say of the rounds what the figures file says."""
     public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
@@ -570,9 +660,16 @@ def test_the_summaries_quote_the_figures():
         assert f"kappa {one['agreement']['kappa']:.2f}" in text or f"kappa was {one['agreement']['kappa']:.2f}" in text, name
         assert f"kappa {b['agreement']['kappa']:.2f}" in text, name
         assert f"{100 * h['lead']['writer']:.1f} of the {100 * h['lead']['panel']:.1f} points" in text, name
+    # the headline gives each number to its own reading
+    assert (f"also on texts it was not tuned on: {pct(score['translator'])} of a scholar's units of meaning against "
+            f"{pct(score['glosses'])}, and a panel of three with an editor {pct(score['panel'])}") in parts["README"]
     report = parts["REPORT"]
     for n in ("glosses", "pilot", "writer", "translator", "panel"):
         assert f"{n} {pct(b['score'][n])}" in report, n
+    pt = h["panel_against_translator"]
+    assert (f"The panel leads one translator by {100 * (score['panel'] - score['translator']):.1f} point: unit by unit "
+            f"it is better on {pair(pt, 'better')} of the {h['units']['scored']} units and worse on "
+            f"{pair(pt, 'worse')}") in report
     c = json.loads(json.dumps(R.TOKENS))
     total = sum(c.values())
     assert f"{total:,} subagent tokens" in report and f"{total:,}" in parts["NEXT_STEPS, F4"]

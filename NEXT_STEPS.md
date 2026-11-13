@@ -94,8 +94,9 @@ Done since this plan was written:
     [`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)). On the 13 renderings of Millet's held back
     (218 units) the glosses get 58.5%, a writer of sentences 69.3%, one translator 73.9% and a panel of three
     with an editor 74.9%, with 9.2%, 4.4%, 2.8% and 2.3% of the units wrong (judges' kappa 0.88; 1 of 186 clean
-    decoy units accepted by each judge). The lead of 16.4 points is over the bar of 5 set beforehand. The panel
-    is not shown to beat one translator.
+    decoy units accepted by each judge). The panel's lead of 16.4 points is over the bar of 5 set beforehand.
+    The panel is not shown to beat one translator. Not built yet: the pages for the 304 open inscriptions, and
+    the scoring against Griffith's own translations.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -434,11 +435,11 @@ days, not hours. The costs are estimates from what the runs so far cost.
       fixed; the lighter step is the "writer" (69.3% on the held texts); a translator with rules, a handbook and
       parallels gets 73.9% and a panel of three with an editor 74.9%, against 58.5% for the glosses. Cost:
       17,879,477 subagent tokens.
-    - **Next in this step now:** the pages for the 304 open inscriptions. One translator costs about 112,000
-      subagent tokens a text (about 34 million for the 304), the panel about 450,000 (about 137 million), and
-      the panel's 1.0 point over one translator is not shown to be a gain. Most of the cost is each agent's
-      fixed part: several texts to an agent would cut it, and that has to be scored on the five tuning texts
-      before it is used. Then Griffith's own translations as a second rendering.
+    - **Next in this step now:** the pages for the 304 open inscriptions, built with the panel, as the rule set
+      before the held texts were run decided (section 7 of the page): about 450,000 subagent tokens a text,
+      about 137 million for the 304 (one translator alone about 112,000 and 34 million; the panel's 1.0 point
+      over it is not shown to be a gain). Then Griffith's own translations as a second rendering. Neither is
+      built yet.
 
 The order: F1, then F2, then F3 and F4 side by side. Outside the four, the path through people stays open in
 section A: a specialist's reading of one page would be worth more than any of these runs.

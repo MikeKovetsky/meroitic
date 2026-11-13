@@ -157,20 +157,21 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     accepted). The translator adds a text a reader can follow and the status of every word; it leaves open what
     the map knows only vaguely, where a vague gloss earns half credit. Scoring all 18 of Millet's renderings the
     corpus holds would cost about 2.1 million subagent tokens ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
-16. **A translator with a handbook beats the map read word by word, also on texts it was not tuned on: 74.9%
-    of a scholar's units of meaning against 58.5%.** After the pilot, several ways of translating were compared
-    on its five texts: the map's glosses in order; a writer that only turns them into sentences; a translator with
-    rules that keep a vague meaning instead of leaving the word open, a handbook of the grammar and of how an
-    epitaph is built (compiled from the sources in hand, each line with its page, and checked line by line), and
-    the other places of the corpus where each word stands; and a panel of three such translators with an editor.
+16. **A translator with a handbook beats the map read word by word, also on texts it was not tuned on: 73.9%
+    of a scholar's units of meaning against 58.5%, and a panel of three with an editor 74.9%.** After the pilot,
+    several ways of translating were compared on its five texts: the map's glosses in order; a writer that only
+    turns them into sentences; a translator with rules that keep a vague meaning instead of leaving the word open,
+    a handbook of the grammar and of how an epitaph is built (compiled from the sources in hand, each line with its
+    page, and checked line by line), and the other places of the corpus where each word stands; and a panel of
+    three such translators with an editor.
     The first judging missed its bar (the judges' kappa 0.58: "related to" against "nephew or niece"), so one rule
     was added and the same readings judged again by new judges (kappa 0.94). The panel was carried to the 13 other
     renderings of Millet's that the corpus holds, held back until then: of 218 units the glosses get 58.5%, the
     writer 69.3%, one translator 73.9% and the panel 74.9%, with 9.2%, 4.4%, 2.8% and 2.3% of the units wrong
     (judges' kappa 0.88; each judge accepted 1 of 186 clean decoy units). The panel is not shown to beat one
-    translator, and the writer alone gets 10.8 of the 16.4 points: most of the gain is the handbook and the
-    order of a sentence. The pages for the 304 open inscriptions are not built yet
-    ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
+    translator, and the writer, who sees no lexicon entry and no parallel, gets 10.8 of the 16.4 points: most of
+    the gain needs neither. Not built yet: the pages for the 304 open inscriptions, and the scoring against
+    Griffith's own translations ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
 
 ## The question
 
@@ -491,15 +492,16 @@ the counts ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
 
 `split` writes one splitter's pack for each of the 18 renderings: the pilot's instructions, but a unit is open
 only when all of it is untranslated. `handbook` applies the checkers' verdicts (confirmed, corrected,
-unsupported) to the handbook its compiler wrote, and no pack is built from a handbook that was not checked or
-that names Millet. `packs` writes, one text to a pack, the writer's pack (the map's reading of each word with
-its status, and the handbook) and three translators' packs (the pilot's materials, the rules, the handbook and
+unsupported) to the handbook its compiler wrote (the instructions both were given by hand are in
+`runs/prompts/F4R_handbook_*.md`), and no pack is built from a handbook that was not checked or that names
+Millet. `packs` writes, one text to a pack, the writer's pack (the map's reading of each word with its status,
+the rules and the handbook) and three translators' packs (the pilot's materials, the rules, the handbook and
 the parallels: up to three other places of the corpus for each word, with the map's readings around it);
 `editors` writes the pack that makes one translation of the three; `judges` gives two judges each text's units,
 at most 20 a pack, beside the readings in an order of their own, with a decoy. A round can judge another
 round's readings again (`r1b`, with the rule on kinship). `count` gives each reading's score, its wrong units,
 its lead over the glosses unit by unit, the judges' agreement, the decoys and the reading carried on by the rule
-set beforehand ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
+set beforehand, none when a bar of the judging is missed ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
 
 ## Reproduce
 
@@ -562,7 +564,7 @@ Twelve things need files that are kept locally (Data, above), so they don't run 
   for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
   the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`) and whole texts translated and scored
-  (`f4.py`).
+  (`f4.py`, the pilot, and `f4r.py`, the rounds).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,
