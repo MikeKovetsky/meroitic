@@ -603,3 +603,8 @@ notification: 1,098,891 for the first pass with its review, against the 1.4 to 1
 they had seen a decoy (143,940 subagent tokens), and a writer worded the 177 meanings anew (100,947; both costs by
 hand from the task notifications). The second judge called 1 of its 4 new decoys "partly", "wife" beside "woman",
 a pair the list of fields does not keep apart: by the letter of the bar (a tenth), round two's decoys fail it.
+
+**The review of round two** (full tier) cost 346,989 subagent tokens and 32 minutes, by hand from its task
+notification. F2 so far: 1,690,767 subagent tokens with its two reviews, within the 1.4 to 1.8 million quoted. F2 is
+not complete: each entry's spellings, the page of each scholar's statement and a status for the other entries the
+map uses are still open (`NEXT_STEPS.md`, step 23).

@@ -465,7 +465,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Ten things need files that are kept locally (Data, above), so they don't run from a clone:
+Eleven things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -485,7 +485,10 @@ Ten things need files that are kept locally (Data, above), so they don't run fro
 - `python3 -I src/v6/readers.py count` reads Rilly's lexicon, `corpus_v6` and the analysts' answers of both runs;
 - `python3 -I src/demotic.py merge` (and `packs`, `table`, `count`) reads the text layer of FHN III, the readers'
   and judges' answers, Rilly's lexicon, the coverage map's gloss file and the lines of the check against the two
-  editions.
+  editions;
+- `python3 -I src/lexicon.py public` (and `layout`, `packs`, `check`, `round2`, `count`) reads Rilly's lexicon, the
+  coverage map's gloss file of the clean corpus, the check against the two editions, the judges' and the writer's
+  answers, and for the check, Griffith's own texts.
 
 ## Layout
 
