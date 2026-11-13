@@ -338,6 +338,8 @@ def test_the_summaries_quote_the_figures():
     total = f"{f['sizing']['pilot_total']:,} subagent tokens"
     assert total in parts["page"] and total in " ".join(read("REPORT.md").split())
     assert f["sizing"]["pilot_total"] == sum(F.TOKENS.values())
+    for k in ("translator_pilot", "translator_pages", "scored_text"):
+        assert f"{f['sizing']['per_text'][k]:,}" in " ".join(read("data/discovery/f4_pilot.md").split()), k
     assert round(f["sizing"]["scored_run"]["total"] / 1e6, 1) == 2.1 and round(f["sizing"]["pages_run"]["translator"] / 1e6, 1) == 5.3
 
 

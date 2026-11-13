@@ -299,6 +299,11 @@
   "judge2": 103984
  },
  "sizing": {
+  "per_text": {
+   "translator_pilot": 29024,
+   "translator_pages": 20939,
+   "scored_text": 91257
+  },
   "rates": {
    "translator_per_word_pilot": 1029,
    "translator_per_word_pages": 1277,

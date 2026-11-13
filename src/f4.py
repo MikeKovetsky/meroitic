@@ -689,7 +689,12 @@ def sizing(figs, tokens, rows, gl, entries=None):
                   "judges": round(per_line * 2 * 3 * units_per_rend_word * rend_words(held))}
     scored_run["total"] = scored_run["translator"] + scored_run["splitter"] + scored_run["judges"]
     pages_run = {"texts": len(open_rows), "words": open_words, "translator": round(per_word_pages * open_words)}
-    return {"rates": {"translator_per_word_pilot": round(per_word_pilot), "translator_per_word_pages": round(per_word_pages),
+    scored_tokens = tokens["translator_pilot"] + tokens["splitter"] + tokens["judge1"] + tokens["judge2"]
+    per_text = {"translator_pilot": round(tokens["translator_pilot"] / len(pilot)),
+                "translator_pages": round(tokens["translator_pages"] / len(pages)),
+                "scored_text": round(scored_tokens / len(pilot))}
+    return {"per_text": per_text,
+            "rates": {"translator_per_word_pilot": round(per_word_pilot), "translator_per_word_pages": round(per_word_pages),
                       "splitter_per_rendering_word": round(per_rend_word), "judge_per_line": round(per_line, 1),
                       "units_per_rendering_word": round(units_per_rend_word, 4)},
             "pilot_total": sum(tokens.values()), "scored_run": scored_run, "pages_run": pages_run}

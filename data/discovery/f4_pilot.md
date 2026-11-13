@@ -70,7 +70,9 @@ of 8 to 60 words with at most a fifth lost (REM 0240, Meroe 27, REM 0209, REM 04
 4. **The splitter** is one agent that sees only Millet's transliteration and rendering of the five texts. It
    cuts each rendering into units of meaning (a person with a role, a relation, a title, a place, an invocation,
    a wish), each with the Meroitic it renders, its kind, Millet's doubt, and whether Millet leaves it
-   untranslated ("open").
+   untranslated ("open"). The task asked the two judges to split the renderings themselves; one blind
+   splitter does it here instead, so that both judges mark the same units and their agreement can be counted
+   unit by unit.
 5. **The judges** are two agents. Each gets every text's rendering, its units that are not open, and three
    readings in an order of its own: the translator's, the baseline, and a decoy, which is the translator's
    reading of a text of the second sample. Each unit and reading gets one verdict: given, partly, wrong or
@@ -165,20 +167,23 @@ The first judge's verdict on the translator is better than on the baseline for 7
 1. **The rule set beforehand says the translator adds readability and not meaning.** Its lead is under 5
    points whichever way the texts are weighed. Its translation is what a visitor can read, with the status of
    every word shown; the baseline is a list of glosses.
-2. **The scored run:** Millet prints 20 renderings and `corpus_v6` holds 18 (549 words of text, 1,627 words
+2. **Per text:** the pilot's translator took 29,024 subagent tokens a text and the pages' translator 20,939;
+   a scored text, with the splitter and both judges, took 91,257. Per word they come to 1,029 and 1,277 tokens:
+   the texts of the pages sample are shorter, and each pack has a fixed part.
+3. **The scored run:** Millet prints 20 renderings and `corpus_v6` holds 18 (549 words of text, 1,627 words
    of rendering). At the pilot's rates (1,029 tokens a word for the translator, 294 a word of rendering for the
    splitter, 588 a line for each judge, 0.18 judged units a word of rendering) the 18 cost about 2.06 million
    subagent tokens: 0.57 for the translator, 0.48 for the splitter, 1.02 for the two judges. The 13 not in
    this pilot need about 1.6 million. The judges agreed on 112 of 114 lines, so a second judge on a sample only
    would save about 0.5 million.
-3. **The pages:** the rows of `corpus_v6` whose reading is open hold 286 texts and 4,118 words (303
+4. **The pages:** the rows of `corpus_v6` whose reading is open hold 286 texts and 4,118 words (303
    inscriptions have an open reading). At the pages translator's rate, 1,277 tokens a word, that is about 5.3
    million subagent tokens (5.6 for 303), above F4's estimate of 2 to 4 million for all of it. Part of the rate
    is each pack's fixed part (instructions and lexicon entries), which larger packs would share; that is not
    measured. By item 1, the pages can be built from the map's readings with a lighter step that writes them as
    sentences and keeps each word's status; its cost and its score need a pilot of their own, on the same five
    texts.
-4. **The scoring itself needs two changes before the full run:** the splitter should not mark a whole unit
+5. **The scoring itself needs two changes before the full run:** the splitter should not mark a whole unit
    open when only a part of it is untranslated, and the judges should be allowed to know that two names of a
    place are one place (section 8, items 4 and 6).
 
