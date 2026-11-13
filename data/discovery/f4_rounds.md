@@ -93,11 +93,48 @@ and the panel whose share of wrong units is at most 2 points above the glosses'.
 glosses is no lead: then the writer is carried if it is within 3 points of the glosses, and the glosses
 themselves if it is not. If a bar of the judging is missed, the judging is changed first.
 
-## 5. The result of round one
+## 5. Round one, first judging: the order of the readings is clear, the judges' bar is missed
+
+Run on 13 November 2026. The handbook: 124 sourced lines; its four checkers confirmed 80, corrected 43, dropped
+none, and one (the opening sentence) was outside their ranges. The five renderings were cut into 115 units; 38
+are open (1 of them with a translated part, against 17 in the pilot), 77 went to the judges and 75 are scored
+(2 render Meroitic that is not in our copy).
+
+| Reading | Expected | Judge 1 | Judge 2 | Mean | Given only | Wrong | Over the glosses |
+|---|---|---|---|---|---|---|---|
+| pilot | 50% to 68% | 70.7% | 68.0% | 69.3% | 53.3% | 4.0% | +2.7 |
+| glosses | 55% to 70% | 68.7% | 64.7% | 66.7% | 50.7% | 6.7% | |
+| writer | at most 3 points under the glosses | 76.7% | 71.3% | 74.0% | 58.7% | 5.3% | +7.3 |
+| translator | 5 points or more over the glosses | 82.7% | 79.3% | 81.0% | 66.7% | 2.0% | +14.3 |
+| panel | not under the translator | 83.3% | 83.3% | 83.3% | 71.3% | 2.0% | +16.7 |
+| decoy | | 0% | 0% | 0% | 0% | | |
+
+1. **The decoys' bar is met:** neither judge called any of its 72 clean decoy units given or partly.
+2. **The agreement's bar is missed:** Cohen's kappa on the four verdicts is 0.58, under the 0.6 set beforehand
+   (the same verdict on 288 of 375 lines). So, by the rule of section 4, nothing is carried on from this
+   judging.
+3. **Where the judges part:** in one text and on one question. GA28 has 240 of the 375 lines and a kappa of
+   0.32; the other four texts agree on 133 of 135 lines. In GA28 the units are "she was related to X", and every
+   reading says "nephew or niece of X" (the lexicon's `yetmde`) where Millet says "related to". One judge of a
+   pack calls that given for all five readings and the other partly, and in other packs the other way round:
+   the instructions call "a kin term of another degree" partly, and say nothing of a kin term where the
+   rendering names none. Of the 87 lines judged differently, 82 are given against partly; on credited (given or
+   partly) against not, the judges' kappa is 0.94.
+4. **Both judges put the readings in the same order:** glosses, pilot, writer, translator, panel. The question
+   they part on touches every reading alike, so it moves the scores and not the order.
+
+**The change to the judging, written before the second judges answered:** one rule more. Where the rendering
+says only that two people are related and the reading names the relation ("nephew or niece of"), or the other
+way round, the verdict is "partly": one of them says more than the other. Everything else stays: the same
+readings, the same units, the same bars, the same rule for what is carried on; 14 new judges, each with an
+order of its own. Expected: the kappa at 0.6 or more; every score lower than above, since those units become
+"partly" for both judges; the same order of the readings.
+
+## 6. Round one, second judging
 
 Not run yet.
 
-## 6. Files and commands
+## 7. Files and commands
 
 | File | What it holds | Where |
 |---|---|---|
@@ -109,9 +146,11 @@ Not run yet.
 python3 -I src/f4r.py split        # the splitters' packs, all 18 rendered texts
 python3 -I src/f4r.py packs r1     # the writer's and the translators' packs
 python3 -I src/f4r.py editors r1   # the editors' packs, once the translators have answered
+python3 -I src/f4r.py handbook    # the checkers' verdicts applied to the compiled handbook
 python3 -I src/f4r.py judges r1    # the judges' packs and the key
 python3 -I src/f4r.py count r1
 python3 -I src/f4r.py public r1    # writes f4_rounds_figures.json
+python3 -I src/f4r.py judges r1b   # the second judging of round one's readings; then count and public r1b
 ```
 
 The packs go to agents by hand: one agent per pack, told to read only that file and to write its answers file.

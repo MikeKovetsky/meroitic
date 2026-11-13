@@ -151,6 +151,28 @@ def test_a_judges_pack():
     assert "whether two names are the\n   same place" in pack and "judge the first" in pack
 
 
+def test_the_second_judging_has_one_rule_more():
+    assert "4. Kinship." not in R.JUDGE_RULES[1] and R.JUDGE_RULES[1] == R.JUDGE
+    two = R.JUDGE_RULES[2]
+    assert two.replace(R.KIN, "").replace("Four rules:", "Three rules:") == R.JUDGE          # nothing else differs
+    assert two.index("3. Judge only by") < two.index("4. Kinship.") < two.index("Write to the file")
+    units = [{"unit": "U01", "kind": "name", "english": "she was related to X", "open": False}]
+    args = ("GA 99", "She was related to X.", units, ["U01"], {"A": "glosses", "B": "decoy"}, {"glosses": "g", "decoy": "d"}, "a.jsonl")
+    assert "4. Kinship." not in R.judge_pack(*args) and "4. Kinship." in R.judge_pack(*args, rules=2)
+    assert "the verdict is\n   \"partly\": one of them says more than the other" in R.judge_pack(*args, rules=2)
+    # the second judging reads the first round's readings, has an order of its own, and no packs but the judges'
+    assert R.source("r1") == "r1" and R.source("r1b") == "r1" and R.ROUNDS["r1b"]["judging"] == 2
+    assert R.ROUNDS["r1b"]["readings"] == R.ROUNDS["r1"]["readings"] and R.ROUNDS["r1b"]["texts"] == R.ROUNDS["r1"]["texts"]
+    orders = [(R.order_of("r1", j, t, NAMES), R.order_of("r1b", j, t, NAMES)) for j in (1, 2) for t in ("GA 28", "GA 41", "GA 53")]
+    assert any(a != b for a, b in orders)
+    for fn in (R.packs, R.editors):
+        try:
+            fn("r1b")
+            raise AssertionError(f"{fn.__name__} wrote packs for a round that judges another's readings")
+        except SystemExit as e:
+            assert "judges the readings of r1" in str(e)
+
+
 def test_the_packs_keep_millet_out_and_say_the_rules():
     m = {"rows": {"T 1": {"site": "Faras", "kind": "funerary"}},
          "gl": {"T 1": [g("wos", "meaning", "Isis", parts=[{"entry": "Wos"}]),
@@ -312,6 +334,9 @@ def test_the_count_of_a_made_up_round():
     assert f["bars"] == {"kappa": True, "decoys_accepted": True}
     assert f["carried"] == "translator"                # the best score, and no more wrong units than the glosses
     assert f["rule"] == {"lead": R.LEAD, "wrong_over": R.WRONG_OVER, "writer_loss": R.WRITER_LOSS}
+    assert f["agreement"]["kappa_credited_or_not"] == 1.0 and f["agreement"]["units_judged_differently"] == 0
+    assert f["agreement"]["per_text"] == {"GA 99": {"pairs": 10, "same": 10, "kappa": None}}       # under 20 lines
+    assert f["of"] == "r1" and f["judging"] == 1
 
 
 def test_two_judges_who_differ():

@@ -1,0 +1,438 @@
+{
+ "r1": {
+  "round": "r1",
+  "of": "r1",
+  "judging": 1,
+  "texts": [
+   "GA 47",
+   "GA 41",
+   "GA 28",
+   "GA 53",
+   "GA 37"
+  ],
+  "readings": [
+   "pilot",
+   "glosses",
+   "writer",
+   "translator",
+   "panel",
+   "decoy"
+  ],
+  "units": {
+   "all": 115,
+   "open": 38,
+   "judged": 77,
+   "not_in_copy": 2,
+   "scored": 75,
+   "open_with_a_translated_part": 1,
+   "by_kind": {
+    "other": 4,
+    "god": 6,
+    "name": 34,
+    "title": 18,
+    "formula": 2,
+    "place": 8,
+    "relation": 3
+   },
+   "per_text": {
+    "GA 47": 2,
+    "GA 41": 7,
+    "GA 28": 48,
+    "GA 53": 13,
+    "GA 37": 5
+   }
+  },
+  "scores": {
+   "1": {
+    "pilot": {
+     "given": 41,
+     "partly": 24,
+     "wrong": 3,
+     "missing": 7,
+     "unanswered": 0,
+     "score": 0.7067,
+     "given_share": 0.5467,
+     "wrong_share": 0.04
+    },
+    "glosses": {
+     "given": 41,
+     "partly": 21,
+     "wrong": 5,
+     "missing": 8,
+     "unanswered": 0,
+     "score": 0.6867,
+     "given_share": 0.5467,
+     "wrong_share": 0.0667
+    },
+    "writer": {
+     "given": 48,
+     "partly": 19,
+     "wrong": 4,
+     "missing": 4,
+     "unanswered": 0,
+     "score": 0.7667,
+     "given_share": 0.64,
+     "wrong_share": 0.0533
+    },
+    "translator": {
+     "given": 52,
+     "partly": 20,
+     "wrong": 1,
+     "missing": 2,
+     "unanswered": 0,
+     "score": 0.8267,
+     "given_share": 0.6933,
+     "wrong_share": 0.0133
+    },
+    "panel": {
+     "given": 53,
+     "partly": 19,
+     "wrong": 1,
+     "missing": 2,
+     "unanswered": 0,
+     "score": 0.8333,
+     "given_share": 0.7067,
+     "wrong_share": 0.0133
+    },
+    "decoy": {
+     "given": 0,
+     "partly": 0,
+     "wrong": 24,
+     "missing": 51,
+     "unanswered": 0,
+     "score": 0.0,
+     "given_share": 0.0,
+     "wrong_share": 0.32
+    }
+   },
+   "2": {
+    "pilot": {
+     "given": 39,
+     "partly": 24,
+     "wrong": 3,
+     "missing": 9,
+     "unanswered": 0,
+     "score": 0.68,
+     "given_share": 0.52,
+     "wrong_share": 0.04
+    },
+    "glosses": {
+     "given": 35,
+     "partly": 27,
+     "wrong": 5,
+     "missing": 8,
+     "unanswered": 0,
+     "score": 0.6467,
+     "given_share": 0.4667,
+     "wrong_share": 0.0667
+    },
+    "writer": {
+     "given": 40,
+     "partly": 27,
+     "wrong": 4,
+     "missing": 4,
+     "unanswered": 0,
+     "score": 0.7133,
+     "given_share": 0.5333,
+     "wrong_share": 0.0533
+    },
+    "translator": {
+     "given": 48,
+     "partly": 23,
+     "wrong": 2,
+     "missing": 2,
+     "unanswered": 0,
+     "score": 0.7933,
+     "given_share": 0.64,
+     "wrong_share": 0.0267
+    },
+    "panel": {
+     "given": 54,
+     "partly": 17,
+     "wrong": 2,
+     "missing": 2,
+     "unanswered": 0,
+     "score": 0.8333,
+     "given_share": 0.72,
+     "wrong_share": 0.0267
+    },
+    "decoy": {
+     "given": 0,
+     "partly": 0,
+     "wrong": 16,
+     "missing": 59,
+     "unanswered": 0,
+     "score": 0.0,
+     "given_share": 0.0,
+     "wrong_share": 0.2133
+    }
+   }
+  },
+  "score": {
+   "pilot": 0.6934,
+   "glosses": 0.6667,
+   "writer": 0.74,
+   "translator": 0.81,
+   "panel": 0.8333,
+   "decoy": 0.0
+  },
+  "given": {
+   "pilot": 0.5333,
+   "glosses": 0.5067,
+   "writer": 0.5867,
+   "translator": 0.6666,
+   "panel": 0.7133,
+   "decoy": 0.0
+  },
+  "wrong": {
+   "pilot": 0.04,
+   "glosses": 0.0667,
+   "writer": 0.0533,
+   "translator": 0.02,
+   "panel": 0.02,
+   "decoy": 0.2666
+  },
+  "lead": {
+   "pilot": 0.0267,
+   "writer": 0.0733,
+   "translator": 0.1433,
+   "panel": 0.1666
+  },
+  "unit_by_unit": {
+   "1": {
+    "pilot": {
+     "same": 65,
+     "better": 6,
+     "worse": 4
+    },
+    "writer": {
+     "same": 65,
+     "better": 10
+    },
+    "translator": {
+     "same": 54,
+     "better": 19,
+     "worse": 2
+    },
+    "panel": {
+     "same": 52,
+     "better": 21,
+     "worse": 2
+    }
+   },
+   "2": {
+    "pilot": {
+     "same": 63,
+     "better": 8,
+     "worse": 4
+    },
+    "writer": {
+     "same": 68,
+     "better": 7
+    },
+    "translator": {
+     "same": 58,
+     "better": 16,
+     "worse": 1
+    },
+    "panel": {
+     "same": 52,
+     "better": 22,
+     "worse": 1
+    }
+   }
+  },
+  "per_text": {
+   "GA 47": {
+    "pilot": 0.0,
+    "glosses": 0.0,
+    "writer": 0.0,
+    "translator": 0.0,
+    "panel": 0.0
+   },
+   "GA 41": {
+    "pilot": 0.7857,
+    "glosses": 0.7857,
+    "writer": 0.9286,
+    "translator": 0.9286,
+    "panel": 0.9286
+   },
+   "GA 28": {
+    "pilot": 0.7396,
+    "glosses": 0.6875,
+    "writer": 0.7605,
+    "translator": 0.8177,
+    "panel": 0.8542
+   },
+   "GA 53": {
+    "pilot": 0.6538,
+    "glosses": 0.6538,
+    "writer": 0.6538,
+    "translator": 0.7692,
+    "panel": 0.7692
+   },
+   "GA 37": {
+    "pilot": 0.5,
+    "glosses": 0.6,
+    "writer": 0.8,
+    "translator": 1.0,
+    "panel": 1.0
+   }
+  },
+  "per_text_mean": {
+   "pilot": 0.5358,
+   "glosses": 0.5454,
+   "writer": 0.6286,
+   "translator": 0.7031,
+   "panel": 0.7104
+  },
+  "by_kind": {
+   "formula": {
+    "pilot": 1.0,
+    "glosses": 1.0,
+    "writer": 1.0,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "god": {
+    "pilot": 1.0,
+    "glosses": 1.0,
+    "writer": 1.0,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "name": {
+    "pilot": 0.75,
+    "glosses": 0.6765,
+    "writer": 0.7206,
+    "translator": 0.7721,
+    "panel": 0.7647
+   },
+   "other": {
+    "pilot": 0.125,
+    "glosses": 0.125,
+    "writer": 0.25,
+    "translator": 0.25,
+    "panel": 0.25
+   },
+   "place": {
+    "pilot": 0.875,
+    "glosses": 0.75,
+    "writer": 0.875,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "relation": {
+    "pilot": 0.3333,
+    "glosses": 0.3333,
+    "writer": 0.6667,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "title": {
+    "pilot": 0.5555,
+    "glosses": 0.6389,
+    "writer": 0.7223,
+    "translator": 0.8055,
+    "panel": 0.9167
+   }
+  },
+  "agreement": {
+   "pairs": 375,
+   "same": 288,
+   "kappa": 0.5758,
+   "kappa_given_or_not": 0.5396,
+   "kappa_credited_or_not": 0.9428,
+   "per_text": {
+    "GA 47": {
+     "pairs": 10,
+     "same": 10,
+     "kappa": null
+    },
+    "GA 41": {
+     "pairs": 35,
+     "same": 34,
+     "kappa": 0.9155
+    },
+    "GA 28": {
+     "pairs": 240,
+     "same": 155,
+     "kappa": 0.3219
+    },
+    "GA 53": {
+     "pairs": 65,
+     "same": 65,
+     "kappa": 1.0
+    },
+    "GA 37": {
+     "pairs": 25,
+     "same": 24,
+     "kappa": 0.9196
+    }
+   },
+   "units_judged_differently": 25
+  },
+  "decoys_measure": {
+   "1": {
+    "clean_units": 72,
+    "accepted": 0,
+    "verdicts": {
+     "wrong": 24,
+     "missing": 48
+    }
+   },
+   "2": {
+    "clean_units": 72,
+    "accepted": 0,
+    "verdicts": {
+     "wrong": 13,
+     "missing": 59
+    }
+   }
+  },
+  "bars": {
+   "kappa": false,
+   "decoys_accepted": true
+  },
+  "bars_set": {
+   "kappa": 0.6,
+   "decoys_accepted": 0.1
+  },
+  "expected": {
+   "glosses": [
+    0.55,
+    0.7
+   ],
+   "pilot": [
+    0.5,
+    0.68
+   ],
+   "writer_under_glosses": 0.03,
+   "translator_lead": 0.05,
+   "panel_over_translator": 0.0,
+   "wrong": 0.05
+  },
+  "rule": {
+   "lead": 0.05,
+   "wrong_over": 0.02,
+   "writer_loss": 0.03
+  },
+  "carried": "panel",
+  "handbook": {
+   "sourced": 124,
+   "unchecked": 1,
+   "corrected": 43,
+   "confirmed": 80,
+   "words": 4273
+  },
+  "tokens": {
+   "all:splitters": 1169212,
+   "all:handbook": 555173,
+   "all:handbook_check": 1015037,
+   "r1:writers": 433229,
+   "r1:translators": 1639408,
+   "r1:editors": 534641,
+   "r1:judges": 958165
+  }
+ }
+}

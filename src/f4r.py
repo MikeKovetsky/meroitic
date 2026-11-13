@@ -62,6 +62,10 @@ LETTERS = "ABCDEFGH"
 ROUNDS = {
     # the five texts of the pilot: every design side by side
     "r1": {"texts": "dev", "readings": ("pilot", "glosses", "writer", "translator", "panel", "decoy")},
+    # the same readings judged again by new judges, after r1's judging missed its bar (kappa 0.58): one rule more,
+    # for a kin term narrower or wider than the rendering's (JUDGE_RULES)
+    "r1b": {"texts": "dev", "of": "r1", "judging": 2,
+            "readings": ("pilot", "glosses", "writer", "translator", "panel", "decoy")},
 }
 REFERENCE = "glosses"            # the reading every other is compared with
 # Set on 2026-11-13, before any agent of round one answered (the judging's bars are the pilot's).
@@ -76,7 +80,11 @@ STATUS_ORDER = ("agreed", "stated by one", "disputed", "proposed")
 # subagent tokens of each agent, from the task notifications, by hand after a run
 TOKENS = {"all:splitters": 1169212,           # 18 agents, one per rendered text, 13 November 2026
           "all:handbook": 555173,              # its compiler
-          "all:handbook_check": 1015037}       # four checkers: 223,808, 257,191, 241,343 and 292,695
+          "all:handbook_check": 1015037,       # four checkers: 223,808, 257,191, 241,343 and 292,695
+          "r1:writers": 433229,                # 5 agents
+          "r1:translators": 1639408,           # 15 agents: 527,088, 553,714 and 558,606 for the three of each text
+          "r1:editors": 534641,                # 5 agents
+          "r1:judges": 958165}                 # 14 agents (two judges, seven packs each)
 
 
 def name_of(tid):
@@ -407,6 +415,22 @@ def check_handbook():
     print(counts)
 
 
+KIN = """4. Kinship. Where the rendering says only that two people are related ("related to", "a relative of") and the
+   reading names the relation ("nephew or niece of", "sister of"), or the other way round, the verdict is
+   "partly": one of them says more than the other. The person named must still be the same.
+"""
+# the judges' instructions by version: 1 as round one's first judges had them; 2 with the rule on kinship, written
+# after their agreement missed its bar on the units "she was related to X" (data/discovery/f4_rounds.md, section 5)
+JUDGE_RULES = {1: JUDGE, 2: JUDGE.replace("\nWrite to the file `{answers}`", KIN + "\nWrite to the file `{answers}`").replace(
+    "Three rules:", "Four rules:")}
+assert JUDGE_RULES[2].count("4. Kinship.") == 1 and "Four rules:" in JUDGE_RULES[2] and "Three rules:" in JUDGE
+
+
+def source(rnd):
+    """The round whose readings a round judges: its own, or the round it names ("of")."""
+    return ROUNDS[rnd].get("of", rnd)
+
+
 def handbook():
     if not (CHECK / "counts.json").exists():
         raise SystemExit("the handbook has not been checked: python3 -I src/f4r.py handbook")
@@ -499,10 +523,11 @@ def chunks(units, size=CHUNK):
     return [judged[i: i + step] for i in range(0, len(judged), step)]
 
 
-def judge_pack(tid, rend, units, chunk, order, readings, answers):
-    """One judge's pack for one text and one chunk of its units. order: {letter: name}; readings: {name: text}."""
+def judge_pack(tid, rend, units, chunk, order, readings, answers, rules=1):
+    """One judge's pack for one text and one chunk of its units. order: {letter: name}; readings: {name: text};
+    rules: the version of the judges' instructions (JUDGE_RULES)."""
     last = LETTERS[len(order) - 1]
-    parts = [JUDGE.format(units=len(chunk), n=len(order), last=last, answers=answers, text=name_of(tid)),
+    parts = [JUDGE_RULES[rules].format(units=len(chunk), n=len(order), last=last, answers=answers, text=name_of(tid)),
              f"\n---\n\n## {name_of(tid)}\n\n### The printed rendering\n\n```\n{rend}\n```\n\n"
              "### The units to judge\n\n| unit | kind | the rendering's words |\n|---|---|---|\n"]
     by = {u["unit"]: u for u in units}
@@ -554,7 +579,7 @@ def readings_of(rnd, ids, m, pages=None):
                 a, f = pilot.get(t), ([] if t in pilot else ["not answered"])
             else:
                 sub = {"writer": "writer", "translator": "translator1", "panel": "editor"}[n]
-                a, f = one_answer(folder(rnd) / "answers" / sub / f"{name_of(t)}.jsonl", t,
+                a, f = one_answer(folder(source(rnd)) / "answers" / sub / f"{name_of(t)}.jsonl", t,
                                   None if n == "writer" else m["gl"])
             if f:
                 faults[(n, t)] = f
@@ -615,7 +640,7 @@ def count(rnd):
     scored = [(t, u) for t, u in judged if key["units"][t][u]["in_copy"]]
     v = {j: verdicts_of(rnd, key, j) for j in (1, 2)}
     every = [u for t in ids for u in units.get(t, [])]
-    figs = {"round": rnd, "texts": ids, "readings": names,
+    figs = {"round": rnd, "of": key.get("of", rnd), "judging": key.get("judging", 1), "texts": ids, "readings": names,
             "units": {"all": len(every), "open": sum(u["open"] for u in every), "judged": len(judged),
                       "not_in_copy": len(judged) - len(scored), "scored": len(scored),
                       "open_with_a_translated_part": sum(u["open"] and F.translated_part(u) for u in every),
@@ -641,6 +666,18 @@ def count(rnd):
                                                                 if key["units"][t][u]["kind"] == k], n)) for j in (1, 2)])
                            for n in real} for k in sorted(figs["units"]["by_kind"])}
     figs["agreement"] = F.judges_agreement(v[1], v[2], scored, names=tuple(real))
+    # not set before round one: where the judges agree and where not, by text, and on credited (given or partly) or not
+    pairs = lambda units: [(v[1][k], v[2][k]) for t, u in units for n in real for k in [(t, u, n)]       # noqa: E731
+                           if k in v[1] and k in v[2]]
+    figs["agreement"]["kappa_credited_or_not"] = F.T.kappa([(a in ("given", "partly"), b in ("given", "partly"))
+                                                            for a, b in pairs(scored)])
+    figs["agreement"]["per_text"] = {}
+    for t in ids:
+        p = pairs([(x, u) for x, u in scored if x == t])
+        figs["agreement"]["per_text"][t] = {"pairs": len(p), "same": sum(a == b for a, b in p),
+                                            "kappa": F.T.kappa(p) if len(p) >= 20 else None}
+    figs["agreement"]["units_judged_differently"] = len({(t, u) for t, u in scored for n in real
+                                                         if v[1].get((t, u, n)) != v[2].get((t, u, n))})
     figs["decoys_measure"] = {}
     for j in (1, 2):
         c = collections.Counter(v[j].get((t, u, "decoy"), "unanswered") for t, u in scored if key["units"][t][u]["clean"])
@@ -652,7 +689,7 @@ def count(rnd):
     figs["carried"] = carried(figs["score"], figs["wrong"], names)
     counts = CHECK / "counts.json"
     figs["handbook"] = json.loads(counts.read_text(encoding="utf-8")) if counts.exists() else {}
-    figs["tokens"] = {k: v for k, v in TOKENS.items() if k.startswith(rnd + ":") or k.startswith("all:")}
+    figs["tokens"] = {k: n for k, n in TOKENS.items() if k.split(":")[0] in (rnd, source(rnd), "all")}
     return figs
 
 
@@ -678,6 +715,8 @@ def split():
 def packs(rnd):
     """The writer's and the translators' packs of a round. Refuses once one of them has answered."""
     base = folder(rnd)
+    if source(rnd) != rnd:
+        raise SystemExit(f"{rnd} judges the readings of {source(rnd)}: it has no packs of its own but the judges'")
     if any((base / "answers").glob("*/*.jsonl")):
         raise SystemExit(f"{base}/answers holds answers: not writing the packs again")
     ids, m, book = sets()[ROUNDS[rnd]["texts"]], materials(), handbook()
@@ -698,6 +737,8 @@ def packs(rnd):
 def editors(rnd):
     """The editors' packs, once the three translators of every text have answered. Refuses once an editor has."""
     base = folder(rnd)
+    if source(rnd) != rnd:
+        raise SystemExit(f"{rnd} judges the readings of {source(rnd)}: it has no packs of its own but the judges'")
     if any((base / "answers" / "editor").glob("*.jsonl")):
         raise SystemExit("an editor has answered: not writing the editors' packs again")
     ids, m, book = sets()[ROUNDS[rnd]["texts"]], materials(), handbook()
@@ -733,7 +774,8 @@ def judges(rnd):
     for t in ids:
         readings[t]["decoy"] = tp[decoys[t]]["translation"]
     ours = {t: P.reduced_ours(m["rows"][t]["text"].split()) for t in ids}
-    key = {"round": rnd, "texts": ids, "readings": names, "decoys": decoys, "decoy_shared_words": shared,
+    key = {"round": rnd, "of": source(rnd), "judging": ROUNDS[rnd].get("judging", 1), "texts": ids, "readings": names,
+           "decoys": decoys, "decoy_shared_words": shared,
            "order": {str(j): {t: order_of(rnd, j, t, names) for t in ids} for j in (1, 2)},
            "chunks": {t: chunks(units[t]) for t in ids},
            "units": {t: {u["unit"]: {"kind": u["kind"], "open": u["open"], "doubt": u["doubt"],
@@ -745,8 +787,11 @@ def judges(rnd):
             for c, chunk in enumerate(key["chunks"][t], 1):
                 rel = f"data/sources/f4r/{rnd}/answers/judge{j}/{name_of(t)}_{c}.jsonl"
                 write(base / "packs" / f"judge{j}_{name_of(t)}_{c}.md",
-                      judge_pack(t, renderings[t], units[t], chunk, key["order"][str(j)][t], readings[t], rel))
+                      judge_pack(t, renderings[t], units[t], chunk, key["order"][str(j)][t], readings[t], rel,
+                                 ROUNDS[rnd].get("judging", 1)))
                 lines += len(chunk) * len(names)
+    for j in (1, 2):
+        (base / "answers" / f"judge{j}").mkdir(parents=True, exist_ok=True)
     write(base / "key.json", json.dumps(key, ensure_ascii=False, indent=1) + "\n")
     print("units:", sum(len(units[t]) for t in ids), "| judged:", sum(len(c) for t in ids for c in key["chunks"][t]),
           "| packs per judge:", sum(len(key["chunks"][t]) for t in ids), "| lines for both judges:", lines,
