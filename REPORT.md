@@ -592,3 +592,6 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
    that the check against the editions found the map misreading (the numeral 1 typed as `l`, names read as
    words): the verb `l` "to give" was disputed only through them. As first counted: 70 agreed, 23 disputed, 59
    stated by one, 25 proposed, and 3,873 words (37.6%).
+
+**The review of F2's first pass** (full tier) cost 459,019 subagent tokens and 44 minutes, by hand from its task
+notification: 1,098,891 for the first pass with its review, against the 1.4 to 1.8 million quoted for all of F2.
