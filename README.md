@@ -212,6 +212,9 @@ kind and every reading's source and licence, and the text of the readings that a
 [`data/inscriptions_map.tsv`](data/inscriptions_map.tsv) says what each of the 899 texts of `corpus_v5` is.
 `data/corpus_v6.jsonl`, one row per inscription with real names, is local like the corpora before it.
 
+Every folder of data the project holds, public or local, is listed in [`data/INDEX.md`](data/INDEX.md): what it
+is, where it came from, the day it was fetched, its size and its rights, and what is not held.
+
 ## Methods
 
 ### 1. Cleaning the corpus

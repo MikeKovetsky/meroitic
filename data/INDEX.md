@@ -1,0 +1,85 @@
+# Index of the data
+
+Everything the project holds, by folder: what it is, where it came from, how big it is, and whether it is in the
+public repository. Counted on 2026-11-13 from the files on disk. "Local" means the folder is listed in
+`.gitignore` and stays on the author's machine, because the material has no open licence or is in copyright
+([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the [README's section "Data"](../README.md#data) say why for each).
+
+## 1. Public, in this repository
+
+| Path | What it holds | Size |
+|---|---|---|
+| `data/inscriptions.jsonl` | One row for each of the 563 inscriptions the project holds a reading of: REM or edition number, site, kind, every reading's source and licence, and the text of the readings that are open (304) | 0.6 MB |
+| `data/inscriptions_map.tsv` | What each of the 899 texts of `corpus_v5` is: an inscription, a part of one, or an example phrase | 0.2 MB |
+| `data/expansion/` | The open transcriptions: Griffith's *Meroitic Inscriptions* I and II and *Meroë* (152 inscriptions), Karanòg and Shablûl (151, with the 48 typed reference pages and the readers' files), the Akinidad stela REM 1003 from Griffith 1917 (`jea/`), and the tests of the reading method | 3.4 MB, 488 files |
+| `data/discovery/` | The pages of each study with their figures files and public tables: the coverage map, the Egyptian and variant searches, the check against two editions, `corpus_v6`, the readers, the Demotic step, the lexicon's statuses (`lexicon_statuses.tsv`, `lexicon_other_statuses.tsv`), the F4 pilot and rounds | 0.8 MB, 36 files |
+| `data/gold_lexicon.json`, `data/gold_morphology.json` | The answer key of the first tests: 82 accepted meanings and 26 endings, each with its source | 0.1 MB |
+| `data/leads/` | Four write-ups of leads and a README | 0.1 MB |
+| `data/synth_corpus.txt` | The synthetic twin language of the leak-free test | 0.1 MB |
+| `data/transliteration_map.md` | How the corpus's letters map to the scholars' transliteration | small |
+| `data/nes/README.md`, `data/nes/meroitic_wiktionary.tsv` | The sources of the Northern East Sudanic word lists, and Wiktionary's 46 Meroitic lemmas | small |
+
+## 2. Local: corpora and working files built by the project
+
+| Path | What it holds | Size |
+|---|---|---|
+| `data/otten/` | A copy of Otten and Anastasopoulos's repository, Meroitic-Corpus: the padded corpus file, the per-scholar example files, their code and embeddings. No licence stated | 23.0 MB, 52 files |
+| `data/corpus.jsonl`, `corpus_v2.jsonl`, `corpus_v2_c3_snapshot.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`, `texts.jsonl` | The corpora of each stage, from Otten's file with the copies removed to the 899 texts of `corpus_v5` | 0.1 to 0.2 MB each |
+| `data/corpus_v6.jsonl` | One row per inscription with real names: 548 inscriptions, 10,290 words. Built by `src/v6/build.py` | 0.2 MB |
+| `data/name_pools.json`, `data/swap_partners.json` | The two pools of swapped names recovered from Otten's file, and which text was swapped with which | 0.3 MB |
+| `data/rilly2003/` | Rilly's lexicon of 2003 as typed entries (headword, kind, status, page, meaning, other scholars' proposals), extracted from the scans of his thesis. In copyright | 0.6 MB, 7 files |
+| `data/nes/*.tsv` | Word lists of ten Northern East Sudanic languages (5,668 rows by the folder's README), 330 proto-forms and 82 sound correspondences. Basic vocabulary for the most part; `data/nes/README.md` names the source of every row | 2.3 MB |
+| `data/sources/v6/` | The files `corpus_v6` is built from and counted on: source lines, joins, the map of old ids, the readers' packs, and the word-by-word map of the clean corpus (`analysts/glosses.jsonl`) | 9.5 MB, 53 files |
+| `data/sources/coverage/` | The first coverage map (on `corpus_v5`): the analysts' packs and answers, the glosses, the ranked unknown pieces | 18.3 MB, 83 files |
+| `data/sources/dig/` | The six ways of finding meanings tried on 11 November: blessings, counted things, a crossword of parallels, Demotic, kin terms, proposals | 2.5 MB, 116 files |
+| `data/sources/egyptian/` | The Egyptian search: the lexicon's 207 entries that mention Egyptian, Demotic, Coptic, Greek or Latin, two readers' answer keys, the Coptic lexicon (KELLIA, CC BY-SA 4.0) and the TLA's Demotic sentences (CC BY-SA 4.0; forms, no meanings) | 19.9 MB, 35 files |
+| `data/sources/variants/` | The search for spellings of known words: the checkers' packs, answers and key | 1.9 MB, 39 files |
+| `data/sources/expert/` | The check of the map against Millet 2005 and FHN III: the editions' rows, the checkers' answers, the decoys, the differences | 1.1 MB, 31 files |
+| `data/sources/demotic/` | The same people in Demotic, Greek and Meroitic: the people of FHN III, the packs and the checked meanings | 0.5 MB, 17 files |
+| `data/sources/lexicon/` | F2: the judges' packs, answers and keys of three rounds, and the entries with their statuses | 0.6 MB, 24 files |
+| `data/sources/f4/` | The F4 pilot: the packs, the translators', splitter's and judges' answers, the key | 0.2 MB, 13 files |
+| `data/sources/f4r/` | The F4 rounds: the handbook (as compiled and after its check), the checkers' verdicts, the splitters' units for all 18 renderings, and the packs, answers and keys of the rounds `r1`, `r1b` and `held` | 6.7 MB, 386 files |
+| `data/sources/akinidad/` | REM 1003: the page images of Griffith 1917, the drafts, the word-by-word comparison with the other two readings | 5.0 MB, 39 files |
+| `data/sources/mnl/` (other than the scans) | The 256 texts typed from the Newsletter (`mnl_texts.jsonl`), `corpus_v4`, the collation of editions, the oracular decrees, the grammar test, Meeks's word list, the numbers | part of the 229.6 MB below |
+| `data/sources/recurring/` | The recurring open words: the 121 items with every place they stand, the dossiers, and the pass that collects what the sources say of each | started 13 November |
+| `data/sources/notes/` | The progress log (`PROGRESS.md`) and the three parallel sessions' logs | 0.2 MB |
+
+## 3. Local: the sources fetched, with where each came from
+
+Public domain here means published before 1930; the files are kept local all the same, as scans.
+
+| Path | Source | Fetched | Size | Rights | What it is for |
+|---|---|---|---|---|---|
+| `mnl/MeroNews1` to `MeroNews30` | *Meroitic Newsletter* 1 to 30 (1968 to 2003), scans at meroiticnewsletter.org | 9 Nov | 229.6 MB with the typed texts, 58 folders | in copyright | Printed transliterations with REM numbers; 256 texts typed; articles on the formulae |
+| `karanog/`, `karanog-text/` | Griffith, *Karanòg: The Meroitic Inscriptions of Shablûl and Karanòg* (1911), archive.org `karangmeroitic00grifuoft` | 10 Nov | 42.7 MB | public domain | 151 hand copies read; his formula tables and indexes; his chapters on the formulae |
+| `jssea/`, `jssea-text/` | Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), the society's PDF | 12 Nov | 18.9 MB | in copyright | The renderings the translations are scored against |
+| `fhn1/` | *Fontes Historiae Nubiorum* I, Bergen's server | 9 Nov (copied 13 Nov from the temporary folder) | 3.7 MB | all rights reserved | Not yet used |
+| `fhn2/`, `fhn2-text/` | *Fontes Historiae Nubiorum* II, Bergen's server | 12 Nov | 40.0 MB | all rights reserved | The editors' comments on Meroitic texts |
+| `fhn/`, `fhn-text/` | *Fontes Historiae Nubiorum* III, Zenodo record 821860 | 12 Nov | 54.4 MB | all rights reserved | Modern readings and comments; the check of the map; the Demotic step |
+| `fhn4/`, `fhn4-text/` | *Fontes Historiae Nubiorum* IV (corrigenda and indexes), Zenodo record 821885 | 12 Nov | 15.3 MB | all rights reserved | Its Meroitic indexes gloss 62 titles and 51 words: a second stated source in F2 |
+| `dotawo/`, `dotawo-text/` | Rilly, "Personal Markers and Verbal Number in Meroitic", Dotawo 7 (2021), eScholarship | 12 Nov | 3.8 MB | licence not checked | The newest study of the blessings' verbs; a source of the handbook |
+| `griffith-jea/`, `griffith-jea-text/` | Griffith, "Meroitic Studies" I to IV, JEA 3 and 4 (1916 to 1917), Zenodo (CC0) | 12 Nov | 6.3 MB | public domain | The numerals; the whole text of REM 1003 |
+| `lipinski2011/`, `lipinski2011-text/` | Lipiński, "Meroitic (Review article)", Rocznik Orientalistyczny 64/2 (2011), the Łódź repository | 12 Nov | 0.6 MB | in copyright | A second scholar's view of Rilly 2010; a source of the handbook |
+| `survey-text/` | Text layers from the survey of 9 November: JEA 3, 4, 11 and 15; *Liverpool Annals* 7 to 15; ASE memoirs 18 to 21; *Meroë* (1911); *Areika*; *Buhen*; the *Recueil Champollion* | 9 Nov (copied 13 Nov) | 15.9 MB, 35 files | public domain | Finding passages; no page images |
+| `laaa7/`, `laaa7-text/`, `laaa7-pages/` | *Liverpool Annals of Archaeology and Anthropology* 7 (1914 to 1915 by archive.org's record), the half archive.org holds (pp. 69 to 135) | 13 Nov | 5.0 MB and 6.5 MB of page images | public domain in the US | Sayce's reading of REM 1003, all 42 lines; not yet typed |
+| `griffith-mi1/`, `griffith-mi1-text/` | Griffith, *Meroitic Inscriptions* I (1911), archive.org `archaeologicals19egyp` | 13 Nov | 12.0 MB | public domain | His translations and comments; a source of the handbook |
+| `griffith-mi2/`, `griffith-mi2-text/` | Griffith, *Meroitic Inscriptions* II (1912), archive.org `archaeologicals20egyp` | 13 Nov | 16.8 MB | public domain | The same |
+| `meroe1911/`, `meroe1911-text/` | Garstang, Sayce and Griffith, *Meroë, the City of the Ethiopians* (1911), archive.org `merocityofethiop00gars` | 13 Nov | 14.6 MB | public domain | The Meroë inscriptions and their comments |
+| `champollion1922/`, `champollion1922-text/` | *Recueil d'études égyptologiques dédiées à Champollion* (1922), archive.org `bibliothquedel234ecol` | 13 Nov | 59.4 MB | public domain | Griffith's 46 Faras funerary texts (PDF pages 601 to 648) |
+| `jea11/` | *Journal of Egyptian Archaeology* 11 (1925), archive.org `in.ernet.dli.2015.70984` | 13 Nov | 25.5 MB | public domain | Griffith's Meroitic Studies V (the ostraca); page images, text in `survey-text/jea/` |
+| `jea15/` | *Journal of Egyptian Archaeology* 15 (1929), archive.org `in.ernet.dli.2015.70988` | 13 Nov | 20.9 MB | public domain in the US | Meroitic Studies VI; page images, text in `survey-text/jea/` |
+| `reinisch1879/` | Reinisch, *Die Nuba-Sprache* (1879), archive.org `sprachenvonnord03reingoog` | 13 Nov | 19.2 MB, 579 pages | public domain | A full Nubian dictionary, for the comparison by kind of word; page images, no text layer |
+| `lepsius1880/` | Lepsius, *Nubische Grammatik* (1880), archive.org `nubischegrammat00lepsgoog` | 13 Nov | 19.5 MB, 658 pages | public domain | The same; page images, no text layer |
+| `rilly2016/`, `rilly2016-text/` | Rilly, "Meroitic", UCLA Encyclopedia of Egyptology 1(1) (2016), eScholarship item 3128r3sw | 13 Nov, through the browser | 0.5 MB, 13 pages | all rights reserved | Which meanings Rilly accepts since the lexicon of 2003 |
+
+## 4. Not held
+
+| What | Why it matters | State |
+|---|---|---|
+| Hallof, *Analytisches Wörterbuch des Meroitischen*, with its volume 7 (2024), the texts of REM 0001 to 2780 | Five times our texts, and the newest dictionary | Print only; a purchase, parked |
+| Rilly, *Le méroïtique et sa famille linguistique* (2010) | The cognate series that link Meroitic to Nubian | Print only; a purchase, parked |
+| Rilly, *La langue du royaume de Méroé* (2007); Rilly and de Voogt (2012) | Later statements of grammar and lexicon | Print only; purchases, parked |
+| Hofmann, *Material für eine meroitische Grammatik* (1981); Hintze (1979) | Earlier proposals, among them on the blessings | Print only |
+| The first half of *Liverpool Annals* 7 (pp. 1 to 68, plates I to XIV) | The plates of the Akinidad stela | Not found online |
+| The REM volumes on Persée (2000) | Photographs and drawings of REM 0001 to 1278 | Online, in copyright; not fetched |
+| A Demotic word list with meanings | The Demotic side of a search for loans | Not looked for yet |

@@ -717,3 +717,13 @@ Griffith's own translations are not yet a second rendering.
 the splitters 1,169,212, the handbook 555,173 and its check 1,015,037, round one 3,565,443 and its second
 judging 953,178, the held texts 10,621,434. One translator costs about 112,000 tokens a text and the panel about
 450,000, most of it each agent's fixed cost.
+
+**The review of the rounds** (full tier) cost 440,752 subagent tokens and 33 minutes, from its task notification.
+It recounted every figure from the local files with a script of its own, rebuilt every pack from the answers, and
+checked the commits of the designs against the times of the first answers. It ended clean after ten fixes: the
+rule no longer carries anything from a judging that misses a bar; a judge's file counts only for its own pack;
+README's headline gave the panel's 74.9% to one translator; two claims said more than the counts show ("most of
+the gain is the handbook and the order of a sentence": the writer had the rules and each word's status too); the
+next step in NEXT_STEPS weighed cost against the rule set beforehand, which builds the pages with the panel; and
+the compiler's and the checkers' instructions were not in the repository (`runs/prompts/`).
+
