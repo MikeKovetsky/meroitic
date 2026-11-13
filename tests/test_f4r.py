@@ -365,7 +365,7 @@ def test_the_packs_are_not_written_again():
             lines(R.OUT / "r1" / "answers" / "writer" / "GA99.jsonl", [{"text": "GA99"}])
             lines(R.OUT / "r1" / "answers" / "editor" / "GA99.jsonl", [{"text": "GA99"}])
             lines(R.OUT / "r1" / "answers" / "judge1" / "GA99_1.jsonl", [{"text": "GA99"}])
-            for fn, args in ((R.split, ()), (R.packs, ("r1",)), (R.editors, ("r1",)), (R.judges, ("r1",))):
+            for fn, args in ((R.split, ()), (R.packs, ("r1",)), (R.judges, ("r1",))):
                 try:
                     fn(*args)
                     raise AssertionError(f"{fn.__name__} wrote its packs again")

@@ -4,13 +4,13 @@ renderings held back (NEXT_STEPS.md, step 25; the pilot is src/f4.py, whose text
   python3 -I src/f4r.py split            the splitter's packs, one per rendered text (the five and the held ones)
   python3 -I src/f4r.py handbook         the checkers' verdicts applied to the compiled handbook
   python3 -I src/f4r.py packs r1         the writer's and the translators' packs of a round
-  python3 -I src/f4r.py editors r1       the editors' packs, once the three translators have answered
+  python3 -I src/f4r.py editors r1       the editors' packs, for the texts whose three translators have answered
   python3 -I src/f4r.py judges r1        the judges' packs and the key, once every reading and the units are in
   python3 -I src/f4r.py count r1         the scores against the bars, printed
   python3 -I src/f4r.py public r1        the same, written to data/discovery/f4_rounds_figures.json (counts only)
   python3 -I src/f4r.py show r1 [text]   the readings of a round side by side (local, for the eye)
 
-Each command refuses to write packs again once an agent has answered them. Everything read or written but the
+No command writes a pack again once an agent has answered it (editors writes each text's pack once). Everything read or written but the
 figures file is local (data/sources/f4r/, data/sources/f4/): Millet's edition and Rilly's lexicon are in copyright
 and the agents' answers quote them. The answers are untrusted data: only their named fields are read.
 
@@ -794,24 +794,27 @@ def packs(rnd):
 
 
 def editors(rnd):
-    """The editors' packs, once the three translators of every text have answered. Refuses once an editor has."""
+    """The editors' packs, text by text as its three translators have answered; a pack is never written again."""
     base = folder(rnd)
     if source(rnd) != rnd:
         raise SystemExit(f"{rnd} judges the readings of {source(rnd)}: it has no packs of its own but the judges'")
-    if any((base / "answers" / "editor").glob("*.jsonl")):
-        raise SystemExit("an editor has answered: not writing the editors' packs again")
     ids, m, book = sets()[ROUNDS[rnd]["texts"]], materials(), handbook()
     index = index_of(m["gl"])
     for tid in ids:
-        n, three = name_of(tid), []
+        n, three, faults = name_of(tid), [], {}
+        pack = base / "packs" / f"editor_{n}.md"
+        if pack.exists() or (base / "answers" / "editor" / f"{n}.jsonl").exists():
+            continue                      # a pack is written once: its text may be with its editor already
         for k in range(1, PANEL + 1):
             a, f = one_answer(base / "answers" / f"translator{k}" / f"{n}.jsonl", tid, m["gl"])
             if f:
-                raise SystemExit(f"translator {k} on {tid}: {f}")
+                faults[k] = f
             three.append(a)
-        write(base / "packs" / f"editor_{n}.md",
-              editor_pack(tid, m, book, three, f"data/sources/f4r/{rnd}/answers/editor/{n}.jsonl", index))
-        print(f"editor_{n}.md", (base / "packs" / f"editor_{n}.md").stat().st_size, "bytes")
+        if faults:
+            print(f"{tid}: waiting for its translators {faults}")
+            continue
+        write(pack, editor_pack(tid, m, book, three, f"data/sources/f4r/{rnd}/answers/editor/{n}.jsonl", index))
+        print(f"editor_{n}.md", pack.stat().st_size, "bytes")
 
 
 def judges(rnd):
