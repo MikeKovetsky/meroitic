@@ -383,7 +383,7 @@ days, not hours. The costs are estimates from what the runs so far cost.
       word, by judges who see both.
     - What: for each inscription a line-by-line translation built from F2's table, with the status of every word
       shown and the open words left open; scored against Millet's 20 renderings and Griffith's own translations
-      where they exist; a page per text for the 303 texts whose source is in the public domain.
+      where they exist; a page per text for the 304 texts whose source is in the public domain.
     - Done: the texts with a full rendering counted, their agreement with the printed renderings measured, and
       the pages public.
     - Cost: 2 to 4 million subagent tokens. Needs F1 and F2.
