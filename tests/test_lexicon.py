@@ -18,7 +18,8 @@ from local_only import needs, run   # noqa: E402
 FIGURES = ROOT / "data/discovery/lexicon_figures.json"
 LOCAL = ("data/rilly2003", "data/sources/v6/analysts/glosses.jsonl", "data/sources/expert/rows.jsonl",
          "data/sources/expert/answers", "data/sources/lexicon/entries.jsonl", "data/sources/lexicon/key.json",
-         "data/sources/lexicon/answers")
+         "data/sources/lexicon/answers", "data/sources/lexicon/round2/key.json",
+         "data/sources/lexicon/round2/answers")
 AGREED = "agreed by two scholars"
 
 
@@ -180,7 +181,8 @@ def test_count_end_to_end():
         assert X.table_text([]) == "\t".join(X.COLUMNS) + "\n"
         # round two: the first judge reads P4, decoyed for it in round one, with the real proposal, beside a decoy
         lines(d / "lex" / "round2" / "answers" / "judge1_c.jsonl", [{"row": "P4", "verdict": "same"},
-                                                                    {"row": "P1", "verdict": "other"}])
+                                                                    {"row": "P1", "verdict": "other"},
+                                                                    {"row": "P9", "verdict": "Same."}])
         (d / "lex" / "round2" / "key.json").write_text(json.dumps(
             {"1": {"order": ["P4", "P1"], "real": ["P4"], "decoys": {"P1": "'water'"}},
              "2": {"order": [], "real": [], "decoys": {}}}))
@@ -193,7 +195,84 @@ def test_count_end_to_end():
         r2 = figs2["round two"]
         assert r2["decoys, judge 1"] == {"shown": 1, "accepted": 0, "verdicts": {"other": 1}}
         assert r2["all lines"]["rows"] == 4 and r2["lines_reread"] == {"1": 1, "2": 0} and r2["unanswered"] == {"1": 0, "2": 0}
+        assert r2["unknown_verdicts"] == 1 and r2["bars"] == {"kappa_same_or_not": True, "decoys_accepted": True}
         assert figs2["two judges"] == figs["two judges"]                       # round one's agreement stays as it was
+
+
+def test_round_two_takes_the_real_verdict_of_the_judge_who_saw_a_decoy():
+    """verdicts_of (item 6): on a row decoyed for one judge in round one, that judge's verdict of round two, for
+    either judge; never a verdict on a decoy, of either round; a row left unanswered in round two stays out."""
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "key.json").write_text(json.dumps({"order": ["P1", "P2", "P3", "P4", "P5", "P6"], "decoys": {
+            "1": {"P1": "'x'", "P6": "'x'"}, "2": {"P2": "'y'", "P5": "'z'"}}}))
+        lines(d / "answers" / "judge1_a.jsonl", [{"row": r, "verdict": v} for r, v in
+                                                 (("P1", "partly"), ("P2", "partly"), ("P3", "partly"), ("P4", "same"),
+                                                  ("P5", "other"), ("P6", "partly"))])
+        lines(d / "answers" / "judge2_a.jsonl", [{"row": r, "verdict": v} for r, v in
+                                                 (("P1", "other"), ("P2", "partly"), ("P3", "partly"), ("P4", "same"),
+                                                  ("P5", "partly"), ("P6", "other"))])
+        assert X.verdicts_of(d) == X.verdicts_of(d, rounds=1) == {"P3": ("partly", "partly"), "P4": ("same", "same")}
+        # round two: judge 1 rereads P1 (P6 is not in its key), judge 2 rereads P2 and P5; each sees a decoy on a
+        # row it read with the real proposal in round one; judge 2 leaves P5 unanswered
+        (d / "round2" / "answers").mkdir(parents=True)
+        (d / "round2" / "key.json").write_text(json.dumps(
+            {"1": {"order": ["P3", "P1"], "real": ["P1"], "decoys": {"P3": "'w'"}},
+             "2": {"order": ["P2", "P4", "P5"], "real": ["P2", "P5"], "decoys": {"P4": "'v'"}}}))
+        assert X.verdicts_of(d) == X.verdicts_of(d, rounds=1)                  # not answered yet: round one alone
+        lines(d / "round2" / "answers" / "judge1_c.jsonl", [{"row": "P1", "verdict": "same"},
+                                                            {"row": "P3", "verdict": "other"},
+                                                            {"row": "P6", "verdict": "same"}])
+        lines(d / "round2" / "answers" / "judge2_c.jsonl", [{"row": "P2", "verdict": "Same "},
+                                                            {"row": "P4", "verdict": "other"}])
+        assert X.verdicts_of(d) == {"P1": ("same", "other"), "P2": ("partly", "same"), "P3": ("partly", "partly"),
+                                    "P4": ("same", "same")}
+        assert X.verdicts_of(d, rounds=1) == {"P3": ("partly", "partly"), "P4": ("same", "same")}
+
+
+def test_the_bars_of_a_round():
+    """A decoy bar of a tenth allows 4 of 41 and 1 of 10, not 1 of 4; an undefined kappa misses its bar."""
+    ok = {"kappa_same_or_not": 0.6}
+    assert X.bars(ok, [{"shown": 41, "accepted": 4}, {"shown": 10, "accepted": 1}, {"shown": 0, "accepted": 0}]) == \
+        {"kappa_same_or_not": True, "decoys_accepted": True}
+    assert X.bars(ok, [{"shown": 4, "accepted": 0}, {"shown": 4, "accepted": 1}])["decoys_accepted"] is False
+    assert X.bars({"kappa_same_or_not": None}, [])["kappa_same_or_not"] is False
+    assert X.bars({"kappa_same_or_not": 0.59}, [])["kappa_same_or_not"] is False
+    assert X.caught(["other", None, "partly", "same"]) == {"shown": 4, "accepted": 2,
+                                                           "verdicts": {"other": 1, None: 1, "partly": 1, "same": 1}}
+    a = X.agreement([("same", "same"), ("same", "same")])                       # chance agreement 1: no kappa
+    assert a["rows"] == 2 and a["same_verdict"] == 2 and a["kappa_same_or_not"] is None
+
+
+def test_public_refuses_a_copied_or_long_meaning():
+    """`public` writes neither file when a meaning in our words copies the lexicon or runs past LONGEST words."""
+    saved, wrote = (X.count, X.PUBLIC, X.write_table), []
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            X.PUBLIC, X.write_table = Path(d) / "figures.json", lambda rows, path=None: wrote.append(rows)
+            for bad in ({"copied_after_rewording": 1, "longest_meaning_in_words": 3},
+                        {"copied_after_rewording": 0, "longest_meaning_in_words": X.LONGEST + 1}):
+                X.count = lambda: ({"meanings": bad}, {})
+                try:
+                    X.main(["lexicon.py", "public"])
+                except SystemExit as e:
+                    assert "nothing written" in str(e), e
+                else:
+                    raise AssertionError(f"public wrote with {bad}")
+                assert not X.PUBLIC.exists() and not wrote
+        finally:
+            X.count, X.PUBLIC, X.write_table = saved
+
+
+def test_a_copy_is_four_words_in_a_row():
+    """The check of the meanings in our words (item 6): quotes around a phrase and a homonym's number do not hide
+    a copy, of the lexicon's meaning or of a proposal; three words in a row are no copy. Made-up texts."""
+    assert X.words_of("'Under the old red bridge', someone’s k- (2)") == ["under", "the", "old", "red", "bridge",
+                                                                          "someone's", "k"]
+    e = {"meaning": "'under the old red bridge'", "proposals": [{"proposal": "a cousin of k- (2) in the rowing songs"}]}
+    assert X.copied("under the old red bridge", e) and X.copied("cousin of k- in rowing", e)
+    assert not X.copied("the old way", e) and not X.copied("under the bridge, a cousin", e)
+    assert X.shared_run("", "a b c d") == 0 and X.shared_run("Painter of the Boat", "the painter of the boat") == 4
 
 
 def test_the_sample_of_griffith():
@@ -245,6 +324,16 @@ def test_the_judges_tables_are_never_written_again():
             assert "not writing the tables again" in str(e)
         else:
             raise AssertionError("the tables were written over a judge's answers")
+        # round two's packs and the writer's, each once its answers are in (item 6)
+        for name, write, said in (("judge2_c.jsonl", X.second_round, "round two's answers"),
+                                  ("meanings.jsonl", X.meanings_pack, "the writer's answers")):
+            lines(Path(d) / "round2" / "answers" / name, [{"row": "P0001", "verdict": "same"}])
+            try:
+                write(Path(d))
+            except SystemExit as e:
+                assert said in str(e) and "not writing its pack" in str(e), e
+            else:
+                raise AssertionError(f"{write.__name__} wrote over {name}")
 
 
 def test_answers_are_read_from_every_pack_of_a_judge():
@@ -325,6 +414,7 @@ def test_reported_numbers():
     assert f"so the {f['rows'] - j['rows']} lines that carried a decoy" in text
     r2 = f["round two"]
     assert r2["lines_reread"] == {"1": 41, "2": 41} and r2["unanswered"] == {"1": 0, "2": 0}
+    assert r2["unknown_verdicts"] == 0
     assert (f"on all {r2['all lines']['rows']} lines the judges gave the same verdict on {r2['all lines']['same_verdict']} "
             f"(kappa {r2['all lines']['kappa']:.2f} on the four verdicts, {r2['all lines']['kappa_same_or_not']:.2f} on") in text
     d1, d2 = r2["decoys, judge 1"], r2["decoys, judge 2"]
@@ -500,16 +590,40 @@ def test_public_figures_are_what_the_local_files_give():
         return
     figs, st = X.count()
     assert figs == json.loads(FIGURES.read_text(encoding="utf-8"))
-    entries = X.entries_of()
-    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, X.verdicts_of(),
-                                                                            X.our_meanings()))
-    mine = X.our_meanings()
-    assert not [e["headword"] for e in entries if e["uses_translated"] and X.copied(mine[e["headword"]], e)]
-    assert X.copied(X.REWORDED and "verb prefix (?), variant of t- in filiation", entries_by(entries)["ye- (2)"])
+    entries, mine = X.entries_of(), X.our_meanings()
+    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, X.verdicts_of(), mine))
     assert len(table()) == figs["entries"]["behind_translated_words"]
+    # the meanings in our words: REWORDED stands for exactly those the writer copied, and no meaning of the table
+    # shares COPIED words in a row with any text of its entry as the lexicon prints it (the meaning in French and
+    # in English, Rilly's discussion, every proposal, his own included)
+    by = entries_by(entries)
+    answers = (X.ROUND2 / "answers" / "meanings.jsonl").read_text(encoding="utf-8").splitlines()
+    writer = {a["headword"]: a["meaning"] for a in (json.loads(l) for l in answers if l.strip()) if a.get("meaning")}
+    assert {h for h, m in writer.items() if X.copied(m, by[h])} == set(X.REWORDED)
+    assert not [h for h, m in mine.items() if m and X.copied(m, by[h])]
+    printed = X.lexicon()[1]
+    texts = lambda p: [v for v in p.values() if isinstance(v, str)] + [q.get("proposal") or "" for q in p["proposals"]]
+    assert not [h for h, r in table().items() if r["meaning_in_our_words"]
+                and max(X.shared_run(r["meaning_in_our_words"], t) for t in texts(printed[h])) >= X.COPIED]
     # the first count's evidence is the file written with the packs: the editors' verdicts, nothing left out
     first = X.editors(leave_out=lambda r, a: False)
     assert all(e["first_editors"] == dict(first.get(e["headword"], {})) for e in entries)
+
+
+def test_round_two_packs_are_what_the_code_writes():
+    """Round two's packs and key were written before its judges and the writer answered: second_round() and
+    meanings_pack() write them again byte for byte, into a folder of their own, and decoys() still draws round
+    one's decoys as round one's key holds them."""
+    needs(*LOCAL, "data/sources/lexicon/round2/packs")
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d) / "round2"
+        X.second_round(X.OUT, out)
+        X.meanings_pack(X.OUT, out)
+        for f in ("key.json", "packs/judge1_c.md", "packs/judge2_c.md", "packs/meanings.md"):
+            assert (out / f).read_bytes() == (X.ROUND2 / f).read_bytes(), f
+    entries = [json.loads(l) for l in (X.OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
+    key = json.loads((X.OUT / "key.json").read_text(encoding="utf-8"))
+    assert X.decoys(X.rows_for_judges(entries), entries) == [key["decoys"]["1"], key["decoys"]["2"]]
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]

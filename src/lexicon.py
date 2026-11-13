@@ -3,10 +3,12 @@
   python3 -I src/lexicon.py layout    every entry the map uses on corpus_v6, with its evidence (local)
   python3 -I src/lexicon.py packs     the judges' tables: does another scholar's proposal give the map's meaning?
   python3 -I src/lexicon.py check     a sample of the proposals given to Griffith, against his own text
+  python3 -I src/lexicon.py round2    round two: each judge's decoyed lines again with the real proposal, and the
+                                      writer's pack of the meanings to word anew (item 6)
   python3 -I src/lexicon.py count     the judges' verdicts, the statuses and the second figure, printed
   python3 -I src/lexicon.py public    the same, written: data/discovery/lexicon_figures.json and the table
-                                      data/discovery/lexicon_statuses.tsv (headwords, statuses, scholars; no
-                                      meaning)
+                                      data/discovery/lexicon_statuses.tsv (headwords, each meaning in words of
+                                      our own, statuses, scholars)
 
 "Translated" in the coverage map means that one lexicon, Rilly's of 2003, accepts the meaning. That lexicon also
 records, for most entries, what other scholars proposed (Griffith, Hintze, Hofmann, Millet, Priese and others),
@@ -35,6 +37,14 @@ asks, for every entry behind a word the map translates, whether a second scholar
    (Karanòg, 1911; the Meroitic Studies, 1916-17) goes to a reader with Griffith's own text: as stated,
    otherwise, or not found. Bars, set before it is read: found for 10 or more, and as stated for 90% or more of
    those found.
+6. Round two, after round one was counted. Under item 3 a line counts when both judges read its real proposal,
+   so the lines that carried a decoy for one judge could not count. Each judge reads those lines again with the
+   real proposal, beside a tenth as many decoys on lines both judges read with the real proposal in round one,
+   under the bars of item 2; verdicts_of() takes that judge's verdict of round two for them, and count() keeps
+   round one alone as a figure. A writer words the meaning of each entry behind a translated word anew, in at
+   most LONGEST words, from the lexicon's meaning and the proposals both judges of round one called "same"; a
+   meaning that shares COPIED words in a row with the lexicon's meaning or a proposal it records is reworded
+   here (REWORDED), and `public` refuses to write one.
 
 What the review of 12 November changed, after the judges had answered (the page says so, and count() keeps the
 first count as "as_first_counted"): status() followed item 3 for meanings and grammar words only and called the
@@ -49,7 +59,8 @@ pack's sample of Griffith (item 5) took his citations without a year too ("Griff
 text they cite.
 
 The other scholars' proposals reach us through Rilly's lexicon, which is in copyright and stays local
-(data/rilly2003/, data/sources/lexicon/); the public files hold counts and headwords only.
+(data/rilly2003/, data/sources/lexicon/); the public files hold counts, headwords, Rilly's pages, the scholars'
+names and the meanings in words of our own (item 6).
 """
 import collections
 import json
@@ -87,6 +98,7 @@ CHECK_BARS = {"found": 10, "as_stated_share_of_found": 0.9}
 # the writer's meanings reworded here because they shared four words in a row with the lexicon's text (copied())
 REWORDED = {"ye- (2)": "verbal prefix (?), like t- in naming parents"}
 COPIED = 4                                             # a run of this many words shared is a copy
+LONGEST = 8                                            # the most words a meaning in our words may have
 HELD = ("data/sources/karanog-text/pages.txt", "data/sources/griffith-jea-text/studies_I.txt",
         "data/sources/griffith-jea-text/studies_II.txt", "data/sources/griffith-jea-text/studies_III.txt",
         "data/sources/griffith-jea-text/studies_IV.txt")
@@ -465,7 +477,10 @@ def meanings_pack(folder=OUT, out=None):
 
 
 def words_of(text):
-    return re.findall(r"[a-zḫẖñ']+", text.lower())
+    """The words of a text, lowercased, for the copy check: runs of letters, an apostrophe inside a word kept
+    ("someone's") but not the quotes around one ('king'), which would hide a quoted phrase copied without them;
+    a number, such as a homonym's ("t- (1)"), is no word."""
+    return re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)*", text.lower().replace("’", "'").replace("‘", "'"))
 
 
 def shared_run(a, b):
@@ -495,7 +510,8 @@ def our_meanings(folder=OUT):
     for raw in f.read_text(encoding="utf-8").splitlines():
         if raw.strip():
             a = json.loads(raw)
-            out[a["headword"]] = " ".join((a.get("meaning") or "").split())
+            if a.get("headword"):
+                out[a["headword"]] = " ".join((a.get("meaning") or "").split())
     return {**out, **{h: m for h, m in REWORDED.items() if h in out}}
 
 
@@ -610,6 +626,27 @@ def ends_like(st, entries):
             and (e["headword"].lstrip("*").startswith(("-", "–")) or e["kind"] == "function word")}
 
 
+def caught(verdicts):
+    """How a judge answered the decoys it was shown ([verdict, or None where it gave none]); "same" and "partly"
+    accept a decoy."""
+    return {"shown": len(verdicts), "accepted": sum(v in ("same", "partly") for v in verdicts),
+            "verdicts": dict(collections.Counter(verdicts))}
+
+
+def agreement(pairs):
+    """How the two judges' verdicts on the same lines compare, on the four verdicts and on "same or not"."""
+    return {"rows": len(pairs), "same_verdict": sum(a == b for a, b in pairs), "kappa": T.kappa(pairs),
+            "kappa_same_or_not": T.kappa([(a == "same", b == "same") for a, b in pairs])}
+
+
+def bars(agreed, decoys):
+    """A round against BARS: the judges' kappa on "same or not" (an undefined kappa misses it), and the share of
+    its decoys each judge accepted."""
+    k = agreed["kappa_same_or_not"]
+    return {"kappa_same_or_not": k is not None and k >= BARS["kappa_same_or_not"],
+            "decoys_accepted": all(d["accepted"] <= BARS["decoys_accepted"] * d["shown"] for d in decoys)}
+
+
 def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     """The judges' verdicts against the bars, the statuses, and the map's second figure."""
     entries = entries_of(folder, expert)
@@ -620,33 +657,20 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     figs = {"rows": len(rows), "unanswered": {"1": sum(r not in one for r in rows), "2": sum(r not in two for r in rows)},
             "unknown_verdicts": sum(v not in VERDICTS for v in list(one.values()) + list(two.values()))}
     for j, mine in (("1", one), ("2", two)):
-        d = [mine.get(r) for r in decoyed[j]]
-        figs[f"decoys, judge {j}"] = {"shown": len(d), "accepted": sum(v in ("same", "partly") for v in d),
-                                      "verdicts": dict(collections.Counter(d))}
+        figs[f"decoys, judge {j}"] = caught([mine.get(r) for r in decoyed[j]])
     verdicts, first = verdicts_of(folder), verdicts_of(folder, rounds=1)
     pairs = list(first.values())
-    figs["two judges"] = {"rows": len(pairs), "same_verdict": sum(a == b for a, b in pairs), "kappa": T.kappa(pairs),
-                          "kappa_same_or_not": T.kappa([(a == "same", b == "same") for a, b in pairs]),
-                          "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs))}
-    accepted = max(figs[f"decoys, judge {j}"]["accepted"] / max(figs[f"decoys, judge {j}"]["shown"], 1) for j in "12")
-    figs["bars"] = {"kappa_same_or_not": figs["two judges"]["kappa_same_or_not"] is not None
-                    and figs["two judges"]["kappa_same_or_not"] >= BARS["kappa_same_or_not"],
-                    "decoys_accepted": accepted <= BARS["decoys_accepted"]}
+    figs["two judges"] = {**agreement(pairs), "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs))}
+    figs["bars"] = bars(figs["two judges"], [figs[f"decoys, judge {j}"] for j in "12"])
     key2, again = round_two(folder)
     if key2:
         r2 = {"lines_reread": {j: len(key2[j]["real"]) for j in "12"},
-              "unanswered": {j: sum(r not in again[j] for r in key2[j]["order"]) for j in "12"}}
+              "unanswered": {j: sum(r not in again[j] for r in key2[j]["order"]) for j in "12"},
+              "unknown_verdicts": sum(v not in VERDICTS for j in "12" for v in again[j].values())}
         for j in "12":
-            d = [again[j].get(r) for r in key2[j]["decoys"]]
-            r2[f"decoys, judge {j}"] = {"shown": len(d), "accepted": sum(v in ("same", "partly") for v in d),
-                                        "verdicts": dict(collections.Counter(d))}
-        every = list(verdicts.values())
-        r2["all lines"] = {"rows": len(every), "same_verdict": sum(a == b for a, b in every), "kappa": T.kappa(every),
-                           "kappa_same_or_not": T.kappa([(a == "same", b == "same") for a, b in every])}
-        r2["bars"] = {"kappa_same_or_not": r2["all lines"]["kappa_same_or_not"] >= BARS["kappa_same_or_not"],
-                      "decoys_accepted": all(r2[f"decoys, judge {j}"]["accepted"]
-                                             <= BARS["decoys_accepted"] * r2[f"decoys, judge {j}"]["shown"]
-                                             for j in "12")}
+            r2[f"decoys, judge {j}"] = caught([again[j].get(r) for r in key2[j]["decoys"]])
+        r2["all lines"] = agreement(list(verdicts.values()))
+        r2["bars"] = bars(r2["all lines"], [r2[f"decoys, judge {j}"] for j in "12"])
         figs["round two"] = r2
     behind = [e for e in entries if e["uses_translated"]]
     st = {e["headword"]: status(e, verdicts) for e in behind}
@@ -722,21 +746,24 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
 
 
 def verdicts_of(folder=OUT, rounds=2):
-    """{row id: (first, second)}: each judge's verdict on the real proposal. With round one alone (rounds=1), the
-    rows that carried a decoy for one judge are left out; with round two, that judge's verdict of round two is
-    taken for them, so that every row both judges answered counts."""
+    """{row id: (first, second)}: each judge's verdict on the real proposal, for the rows both judges answered so.
+    A judge who saw a decoy on a row in round one has no real verdict on it there: with round two (rounds=2) its
+    verdict of round two is taken, where round two's key shows it the real proposal; with round one alone
+    (rounds=1) the row is left out."""
     key = json.loads((folder / "key.json").read_text(encoding="utf-8"))
-    one, two = answers(1, folder), answers(2, folder)
-    decoyed = {"1": set(key["decoys"]["1"]), "2": set(key["decoys"]["2"])}
+    first = {"1": answers(1, folder), "2": answers(2, folder)}
     key2, again = round_two(folder) if rounds == 2 else (None, {})
+
+    def real(j, r):
+        if r not in key["decoys"][j]:
+            return first[j].get(r)
+        if key2 and r in key2[j]["real"] and r not in key2[j]["decoys"]:
+            return again[j].get(r)
+        return None
+
     out = {}
     for r in key["order"]:
-        if r in decoyed["1"]:
-            a, b = again.get("1", {}).get(r), two.get(r)
-        elif r in decoyed["2"]:
-            a, b = one.get(r), again.get("2", {}).get(r)
-        else:
-            a, b = one.get(r), two.get(r)
+        a, b = real("1", r), real("2", r)
         if a is not None and b is not None:
             out[r] = (a, b)
     return out
@@ -769,6 +796,10 @@ def main(argv):
         return
     if argv[1:] == ["public"]:
         figs, st = count()
+        m = figs.get("meanings", {})
+        if m.get("copied_after_rewording") or m.get("longest_meaning_in_words", 0) > LONGEST:
+            raise SystemExit(f"a meaning in our words shares {COPIED} words in a row with the lexicon or has more "
+                             f"than {LONGEST} words: reword it in REWORDED; nothing written")
         PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         write_table(table_rows(entries_of(), st, verdicts_of(), our_meanings()))
         return
