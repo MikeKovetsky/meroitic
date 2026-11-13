@@ -526,7 +526,7 @@ def test_published_table():
     assert sum(bool(r["open_reading"]) for r in table) == figs["inscriptions"]["with_an_open_reading"]
     assert sum(r["words"] for r in table) == figs["corpus_v6"]["words"]
     open_rows = {}
-    for folder in ("data/expansion", "data/expansion/karanog"):
+    for folder, _ in R.GRIFFITH:
         for p in sorted((ROOT / folder).glob("griffith_*.jsonl")):
             for l in p.read_text().splitlines():
                 if l.strip():
@@ -566,7 +566,8 @@ def test_page_tables():
 COST = ("<!-- cost: by hand, from the task notifications -->", "<!-- end of the cost -->")
 STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544", "0101", "362", "370",
           "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0",       # 4.0: the licence CC BY 4.0
-          "16", "489"}                                                    # GA 13+16; MilletExamples.txt line 489
+          "16", "489",                                                    # GA 13+16; MilletExamples.txt line 489
+          "933", "242", "29"}                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
 
 
 def test_page_text_quotes_the_tables():

@@ -6,7 +6,7 @@ inscription, with real names and a source for every reading. Every number on thi
 
 **The result in three sentences.** The 899 texts of `corpus_v5` hold 289 inscriptions, and more than half of
 its words were copies of a reading with a name swapped; the rest are example phrases and word-list entries.
-`corpus_v6` holds 548 inscriptions, each once, with real names, and 303 of the 563 inscriptions in the table
+`corpus_v6` holds 548 inscriptions, each once, with real names, and 304 of the 563 inscriptions in the table
 have a reading under an open licence. Counted on it, the coverage map translates 60.0% of the words of the
 inscriptions that were already in the corpus (62.0% on `corpus_v5`), and 51.3% with the inscriptions new to the
 corpus, 966 of whose words are spellings no analyst has seen.
@@ -30,7 +30,7 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
    the source line gives the reading with its names. The names are marked as names where Otten's files tag
    them (`ANTHROPONYM`, `ROYAL NAME`).
 2. **Every reading held, in one list** (`src/v6/readings.py`): Griffith's printed texts and the checked Karanòg
-   copies (public domain, the rows CC BY 4.0), the texts typed from the *Meroitic Newsletter*, the entries of
+   copies (public domain, the rows CC BY 4.0), Griffith's text of REM 1003 from his article of 1917 (item 8), the texts typed from the *Meroitic Newsletter*, the entries of
    Millet 2005 and of *Fontes Historiae Nubiorum* III (text layers, in copyright, used as witnesses and not as
    typed readings), Otten's three narrative files and his source lines. FHN no. 267 prints 15 texts under one
    number; each is set beside the inscription of its REM number after the matching, and matched with nothing.
@@ -68,6 +68,22 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
      `src/karanog.py`. Nothing else is made uniform (section 7).
 7. **The kind of text** comes from a rule, and the row says which: an epitaph opens with the names of Isis and
    Osiris, an oracular decree with `wteli pkeli`, and otherwise the description of the object decides.
+8. **REM 1003, the Great Stela of Akinidad, has an open reading since 2026-11-12** (`src/akinidad.py`,
+   [`data/expansion/jea/`](../expansion/jea/README.md)). Its preferred reading, Millet's as Otten typed it, has
+   no licence. Griffith printed the whole text in "Meroitic Studies IV" (*JEA* 4, 1917): all 42 lines, in 21
+   sections, in his transliteration of 1917. It was typed by hand from page images, since the article's text
+   layer drops his marks (š, ñ, ḫ, ẖ, ê), and his signs were mapped to today's spelling: ê `o`, š `S`, plain s
+   `s`, ñ `N`, z `d`, ḫ `x`, ẖ `X`. The row holds 337 words with the line of the stela each starts on, the 38
+   words he marks with a question mark, and 17 more places that are unsure: the signs his footnotes and his notes
+   on the sections doubt or read otherwise, and ours. Lined up letter by letter with Millet's reading, 278 of the
+   337 words agree (82.5%; 94.7% of the letters); with the Newsletter's printout, 276 (81.9%), and 275 (81.6%)
+   with no spelling folded, so the map of signs holds. Every letter and mark of the typed text was checked
+   against the page images, so the words that differ are his readings of 1917, not slips of the typing. A
+   second typed edition of REM 1003 moved the rule's formulae by a few runs, so some shares in the map moved, and
+   one example phrase lost its inscription: MilletExamples.txt line 933 (p. 242 of Millet's thesis), a sure match
+   to GA 29 until this row, which shares half as many of the line's own runs as GA 29, ranked close behind it.
+   The folder's README has the counts. REM 1003 is now of the kind royal or temple, not funerary, because a
+   reading describes its object.
 
 ## 3. The bar, set before the run, and what came of it
 
@@ -132,9 +148,9 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 - Otten's padded file: 18,090 lines, 17,995 of them different. Equal to a line of his per-scholar files: 340. Such a line with one stretch swapped: 17,446. Near one, with a second small difference: 206. From no such line: 3 (the three narratives, which have files of their own).
 - Source lines in the per-scholar files: 1,159. The 659 texts of the older corpus come from 329 of them.
 - The most copied line: MilletExamples.txt line 433 (GA 28), 52 texts and 4,540 words of `corpus_v5`. The most copied inscription: GA 28, 86 texts and 6,284 words, from 2 source lines.
-- Readings held besides Otten's lines: 152 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files; and 15 texts that FHN III prints under one number (no. 267), each set beside the inscription of its REM number after the matching.
+- Readings held besides Otten's lines: 153 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files; and 15 texts that FHN III prints under one number (no. 267), each set beside the inscription of its REM number after the matching.
 - Source lines by what they are: 47 readings of an inscription, 906 example phrases, 195 word-list entries, 8 inscriptions not identified, 3 with a doubtful match that is not settled.
-- The example phrases: 311 are a part of one held text or stand whole in it, 166 stand whole in several, 34 have a match that was not read (2 of them a sure one with a second inscription close behind, the rest doubtful), 1 was taken by the readers for a text of one inscription and is set aside because the rule matches it surely with another, and 394 match nothing held.
+- The example phrases: 310 are a part of one held text or stand whole in it, 166 stand whole in several, 35 have a match that was not read (3 of them a sure one with a second inscription close behind, the rest doubtful), 1 was taken by the readers for a text of one inscription and is set aside because the rule matches it surely with another, and 394 match nothing held.
 - Doubtful matches read by two readers: 17 lines. Both gave the same answer for 15 and differ on 2. Both named the same candidate for 14: 13 are used, 4 as the whole text and 9 as a part of it, and 1 is not, because both marked it as a guess. Both answered "none" for 1. Not settled: 3 lines, behind 3 texts and 28 words of `corpus_v5`.
 - The lines the readers settled, as they stand in the build: 3 are readings of an inscription, 9 are example phrases from one, 1 is set aside, and 1 matches nothing and is an inscription of its own.
 - A lone `l` read as a numeral: 13 (7 by another edition, 6 by analogy), in 2 inscription(s): REM 0101 (3), REM 0544 (10).
@@ -151,8 +167,8 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 | with a typed reading (the rows of `corpus_v6`) | 548 | 97.3% |
 | with real names in the preferred reading | 548 | 97.3% |
 | with two readings or more, from two editions or more | 64 | 11.4% |
-| with a reading under an open licence | 303 | 53.8% |
-| with an open reading of the whole text | 274 | 48.7% |
+| with a reading under an open licence | 304 | 54.0% |
+| with an open reading of the whole text | 275 | 48.8% |
 | whose preferred reading is the open one | 286 | 50.8% |
 | held only as a text layer of Millet 2005 (not typed) | 9 | 1.6% |
 | typed, without a legible word | 6 | 1.1% |
@@ -176,9 +192,9 @@ New to the corpus (rows of `corpus_v6` that no text of `corpus_v5` is a reading 
 
 | Kind | Inscriptions |
 |---|---|
-| Funerary | 269 |
+| Funerary | 268 |
 | Not known | 112 |
-| Royal or temple (stela, wall, cartouche, label) | 86 |
+| Royal or temple (stela, wall, cartouche, label) | 87 |
 | Document (ostracon, papyrus, wood, vessel) | 53 |
 | Graffito | 36 |
 | Oracular decree | 7 |
@@ -258,6 +274,22 @@ Near-copies counted once in both: texts with a legible word, 507 of 538 in `corp
 
 Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of a longer word in the preferred reading; 25 because the word is spelled otherwise in the preferred reading; 15 because the map's level is name).
 
+### REM 1003 from Griffith 1917
+
+| What he prints | Count |
+|---|---|
+| Lines of the stela | 42 |
+| Sections | 21 |
+| Words | 337 |
+| Signs | 1,645 |
+| Words he marks with a question mark | 38 |
+| Other places listed as unsure | 17 |
+
+| Closed reading | Words that agree | With nothing folded | Letters that agree |
+|---|---|---|---|
+| Otten's narrative file, Millet's reading (the preferred reading) | 278 of 337 (82.5%) | 247 (73.3%) | 1,642 of 1,733 (94.7%) |
+| Meroitic Newsletter 6 (1971), the printout | 276 of 337 (81.9%) | 275 (81.6%) | 1,651 of 1,733 (95.3%) |
+
 <!-- end of the tables -->
 
 ## 5. What the recount shows
@@ -323,18 +355,22 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
 | `data/inscriptions.jsonl` | every inscription: numbers, site, kind, readings with source and licence; texts of open readings only | public |
 | `data/inscriptions_map.tsv` | every id of `corpus_v5`: what it is, its inscription, the shares both ways, who settled it | public |
 | `data/discovery/corpus_v6_figures.json` | the counts | public |
+| `data/expansion/jea/` | REM 1003 as Griffith printed it in 1917, its row in the corpus spelling, the counts of the comparison | public |
 | `data/corpus_v6.jsonl` | one row per inscription with a typed reading | local |
 | `data/sources/v6/` | the table with all texts, the source lines, the readers' pack, key and answers, the recount | local |
 
 ```bash
+python3 -I src/akinidad.py
 python3 -I src/v6/build.py && python3 -I src/v6/recount.py && python3 -I src/v6/public.py
 python3 -I src/v6/readings.py test
 python3 -I src/v6/packs.py merge
 python3 -I tests/test_corpus_v6.py
+python3 -I tests/test_akinidad.py
 ```
 
-The first three lines need the local files (README, Data). The tests run on made-up rows and on the public
-files, and skip the checks that read local ones.
+The second to the fourth line need the local files (README, Data); the first writes the row of REM 1003 without
+them and its comparison only with them. The tests run on made-up rows and on the public files, and skip the
+checks that read local ones.
 
 **Cost.** The table, the map, the corpus and both recounts were built without an agent. The figures below are
 the subagent tokens and running times that the task notifications report; they are written by hand, and they

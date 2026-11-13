@@ -21,6 +21,10 @@ Cite as: Mike Kovetsky, *Meroitic with Opus 5.5* (2026), <https://github.com/Mik
   texts a modern edition prints (`data/expansion/karanog/README.md`). With them: the 48 typed reference pages and
   the readers' files. The readings are Griffith's: cite Griffith for the reading and this repository for the
   transcription.
+- **The Akinidad stela**, `data/expansion/jea/`: REM 1003 as Griffith printed it in "Meroitic Studies IV" (*Journal
+  of Egyptian Archaeology* 4, 1917), which is in the public domain: his sections typed by hand from page images,
+  the row in the corpus spelling, and the counts of its comparison with the closed readings (counts only). The
+  reading is Griffith's: cite Griffith for the reading and this repository for the transcription.
 - The answer keys compiled from cited publications (`data/gold_lexicon.json`, `data/gold_morphology.json`), the
   synthetic corpus (`data/synth_corpus.txt`) and the transliteration map.
 - The write-ups: `README.md`, `REPORT.md`, `NEXT_STEPS.md`, `data/discovery/`, `data/leads/`, the `.md` files under
