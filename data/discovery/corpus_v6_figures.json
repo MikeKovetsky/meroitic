@@ -401,7 +401,7 @@
   "words": 337,
   "signs": 1645,
   "doubted": 38,
-  "ours": 8,
+  "ours": 17,
   "against": {
    "otten:narrative:hamadab": {
     "words": 337,
@@ -412,8 +412,8 @@
     "letters_share": 0.947,
     "closed_words": 485,
     "strict": {
-     "agree": 245,
-     "share": 0.727
+     "agree": 247,
+     "share": 0.733
     }
    },
    "mnl:REM 1003|MeroNews6": {
@@ -425,8 +425,8 @@
     "letters_share": 0.953,
     "closed_words": 389,
     "strict": {
-     "agree": 273,
-     "share": 0.81
+     "agree": 275,
+     "share": 0.816
     }
    }
   }

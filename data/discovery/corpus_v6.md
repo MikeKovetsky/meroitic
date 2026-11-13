@@ -74,14 +74,16 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
    sections, in his transliteration of 1917. It was typed by hand from page images, since the article's text
    layer drops his marks (š, ñ, ḫ, ẖ, ê), and his signs were mapped to today's spelling: ê `o`, š `S`, plain s
    `s`, ñ `N`, z `d`, ḫ `x`, ẖ `X`. The row holds 337 words with the line of the stela each starts on, the 38
-   words he marks with a question mark, and 8 more places we are unsure of. Lined up letter by letter with
-   Millet's reading, 278 of the 337 words agree (82.5%; 94.7% of the letters); with the Newsletter's printout,
-   276 (81.9%), and 273 (81.0%) with no spelling folded, so the map of signs holds. The words that differ are
-   his readings of 1917, not slips of the typing: each was checked against the page image. A second typed
-   edition of REM 1003 moved the rule's formulae by a few runs, so some shares in the map moved, and one example
-   phrase lost its inscription: MilletExamples.txt line 933 (p. 242 of Millet's thesis), a sure match to GA 29
-   until Griffith's text of the same title ("ant : Mnê teslke") ranked close behind it. The folder's README has
-   the counts. REM 1003 is now of the kind royal or temple, not funerary, because a reading describes its object.
+   words he marks with a question mark, and 17 more places that are unsure: the signs his footnotes and his notes
+   on the sections doubt or read otherwise, and ours. Lined up letter by letter with Millet's reading, 278 of the
+   337 words agree (82.5%; 94.7% of the letters); with the Newsletter's printout, 276 (81.9%), and 275 (81.6%)
+   with no spelling folded, so the map of signs holds. Every mark of the typed text was checked on page images
+   rendered at high resolution, so the words that differ are his readings of 1917, not slips of the typing. A
+   second typed edition of REM 1003 moved the rule's formulae by a few runs, so some shares in the map moved, and
+   one example phrase lost its inscription: MilletExamples.txt line 933 (p. 242 of Millet's thesis), a sure match
+   to GA 29 until this row, which shares half as many of the line's own runs as GA 29, ranked close behind it.
+   The folder's README has the counts. REM 1003 is now of the kind royal or temple, not funerary, because a
+   reading describes its object.
 
 ## 3. The bar, set before the run, and what came of it
 
@@ -281,12 +283,12 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
 | Words | 337 |
 | Signs | 1,645 |
 | Words he marks with a question mark | 38 |
-| Other places listed as unsure | 8 |
+| Other places listed as unsure | 17 |
 
 | Closed reading | Words that agree | With nothing folded | Letters that agree |
 |---|---|---|---|
-| Otten's narrative file, Millet's reading (the preferred reading) | 278 of 337 (82.5%) | 245 (72.7%) | 1,642 of 1,733 (94.7%) |
-| Meroitic Newsletter 6 (1971), the printout | 276 of 337 (81.9%) | 273 (81.0%) | 1,651 of 1,733 (95.3%) |
+| Otten's narrative file, Millet's reading (the preferred reading) | 278 of 337 (82.5%) | 247 (73.3%) | 1,642 of 1,733 (94.7%) |
+| Meroitic Newsletter 6 (1971), the printout | 276 of 337 (81.9%) | 275 (81.6%) | 1,651 of 1,733 (95.3%) |
 
 <!-- end of the tables -->
 

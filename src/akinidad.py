@@ -1,27 +1,30 @@
 """REM 1003, the Great Stela of Akinidad, in Griffith's transliteration of 1917: an open reading.
 
 Griffith, "Meroitic Studies IV: The Great Stela of Prince Akinizaz" (JEA 4, 1917, pp. 159-173), prints the whole
-text of the stela, ll. 1 to 42, in 21 sections in his transliteration of 1917 (pp. 164 and 166-172). The article
-is in the public domain. data/expansion/jea/griffith1917_rem1003.txt holds those sections as typed by hand from
-page images of the article; this script turns them into the corpus spelling and writes the row
+text of the stela, ll. 1 to 42, in 21 sections in his transliteration of 1917 (pp. 164, 166 and 168-172). The
+article is in the public domain. data/expansion/jea/griffith1917_rem1003.txt holds those sections as typed by hand
+from page images of the article; this script turns them into the corpus spelling and writes the row
 data/expansion/jea/griffith_jea4.jsonl, which src/v6/readings.py reads as an open reading of REM 1003. The row
 is in the folder's own sub-folder, so that src/expand.py, which reads the griffith_*.jsonl files of
 data/expansion and not of its sub-folders, does not take it into corpus_v3 and corpus_v5, which stay as they were.
 
 Griffith's signs of 1917 and the corpus spelling (data/expansion/README.md, section 2, from his sign list of
-1911; the 1917 article marks the two h-signs, which the 1911 list does not):
+1911; the 1917 article marks every h with one of the two marks, which the 1911 list does not):
 
   ê -> o   (his sign 3; tê is the sign to)       š -> S   (the sign s)        plain s -> s   (the sign se)
   ñ -> N   (the sign ne)                          z -> d                       ḫ (h, breve below) -> x
-  ẖ (h, line below) -> X                          plain h -> X (sign 15 in the list of 1911; unsure here)
-  every other letter as written; capitals (names) lowered; his initial e and i are the signs e and i.
+  ẖ (h, line below) -> X
+  every other letter as written; capitals (names) lowered; his initial e and i are the signs e and i. A plain h
+  is no letter of the corpus spelling, so a slip of the typing that drops a mark shows in the row (the tests).
 
 How his print is read (all of it stated in the source file's head): "(l. N)" starts line N of the stela; a
 word is what stands between dividers and spaces, as he prints it; a line mark inside a word (Aki(l. 2)nizz)
 keeps the word whole and the word belongs to the line it starts on; his hyphens join (qêre-yi, and the two
 words he breaks at the end of a printed line); his restorations in [ ] and ( ) are kept as letters; "." is a
 lost sign, and a stretch of lost signs between spaces stands as a word of its own (the corpus counts no word
-there). A word with his "?" above a sign or his "(?)" after it is a word he doubts: the row lists them.
+there). A word with his "?" above a sign or his "(?)" after it is a word he doubts: the row lists them, and after
+them the signs his footnotes and his notes on the sections doubt or read otherwise, and the places we are unsure
+of (OURS).
 
 The comparison (local only: the closed readings are Millet's, as Otten's file has it, and the Newsletter's
 printout, both in copyright): both texts are spelled alike (src/expand.py skeleton(), digits kept), lined up
@@ -52,21 +55,31 @@ CLOSED = ("otten:narrative:hamadab", "mnl:REM 1003|MeroNews6")     # the preferr
 
 WORK = 'Griffith, "Meroitic Studies IV: The Great Stela of Prince Akinizaz", JEA 4 (1917)'
 ZENODO = "https://zenodo.org/records/2497984"
-SIGNS = str.maketrans({"ê": "o", "š": "S", "ñ": "N", "z": "d", "ḫ": "x", "ẖ": "X", "h": "X"})
+SIGNS = str.maketrans({"ê": "o", "š": "S", "ñ": "N", "z": "d", "ḫ": "x", "ẖ": "X"})
 SIGN = re.compile(r"tê|te|[a-zêšñḫẖ]")            # one Meroitic sign in his letters (te and tê are one sign each)
 MARK = re.compile(r"\(l\. (\d+)\)")
-# what is unsure beyond his own question marks: (his word as printed, why)
+# what is unsure beyond his own question marks, in the order of the stela: (his word as printed, why). Where his
+# footnotes and his notes on the sections (pp. 166-171) doubt a sign or read it otherwise, and where we are unsure.
 OURS = (
-    ("mhrlêsñ", "a plain h, without the mark below that he gives both h-signs elsewhere in the article: read X, "
-                "his sign 15 of 1911 (the closed readings differ here)"),
-    ("teñ-kelhe", "a plain h at the end of the article's text, where the same word has ḫ in § 16 (teñkelḫe): "
-                  "read X as printed"),
-    ("1·2", "a numeral printed \"1·2\" (his summary: \"1-2 women\"): read as two numerals, 1 and 2"),
-    ("1032.", "the last digit is hatched in the print (damaged): kept as a lost sign"),
-    ("teslke", "\"Mnê\" ends a printed line and \"teslke\" begins the next, without a hyphen: kept as two words"),
+    ("Armeyêsli", "his footnote: \"Or Arẖeyêsli here and in l. 5\" (p. 167: \"or Arẖeyês in both ll. 3 and 5\"): "
+                  "the sign m perhaps ẖ"),
+    ("Armil", "his footnote: \"m fairly certain\""),
+    ("Armeyslḫe", "his footnote on l. 3: \"Or Arẖeyêsli here and in l. 5; in the latter ê is lacking, one stroke "
+                  "having probably been omitted by accident\": the sign m perhaps ẖ"),
+    ("yezk", "his note on § 5 (p. 168) writes it \"yez(?)k\""),
+    ("1·2", "a numeral printed \"1·2\" (so too in his summary, \"1·2 women\"): read as two numerals, 1 and 2"),
+    ("ytes", "his note (p. 168): \"ytes might be read yter, or even be corrected to yqês\""),
+    ("weštel", "his note (p. 168): \"weštel seems a better reading than šeš\""),
     ("ḫrpḫ.", "his footnote on the lost sign: \"Perhaps a numeral\""),
-    (".ḫrpḫi", "his footnote mark on the lost sign before it, the note \"Perhaps a numeral\""),
     ("allebšê", "his footnote: \"Probably confused for alleleb-šê, cf. l. 13\""),
+    (".ḫrpḫi", "his footnote mark on the lost sign before it, the note \"Perhaps a numeral\""),
+    ("tewwibḫt", "his note on § 15 (p. 170): \"tewwibḫl or t\""),
+    ("mzeybeli", "his note (p. 170): \"mzeybeli the initial uncertain\""),
+    ("wlbrt[e", "his note (p. 170) writes it \"wt(?)brte l. 22\""),
+    (".....", "his note (p. 171): \"The signs at the beginning of l. 25 might be in part numerals, the last k or 9\""),
+    ("wwikewi", "his note (p. 171): \"wwikewi or perhaps wwi awi, see §§ 17, 21 following\""),
+    ("teslke", "\"Mnê\" ends a printed line and \"teslke\" begins the next, without a hyphen: kept as two words"),
+    ("1032.", "the last digit is hatched in the print (damaged): kept as a lost sign"),
 )
 
 
@@ -161,15 +174,15 @@ def row(ws=None, secs=None):
     return {
         "source": WORK, "item": ZENODO, "griffith_no": None, "rem": "1003",
         "label": "JEA 4 (1917), §§ 1-21",
-        "page": "pp. 164, 166-172 (§§ 1-21; the PDF's pages 7, 10, 12, 14-17)",
+        "page": "pp. 164, 166, 168-172 (§§ 1-21; the PDF's pages 7, 10, 12, 14-17)",
         "object": "the Great Stela of Queen Amanirenas and Prince Akinidad (gritstone; British Museum EA 1650), "
                   "from the temple at Hamadab near Meroe",
         "site": "Hamadab, near Meroe City",
         "text_std": text_std(secs),
         "text_corpus": " ".join(w["corpus"] for w in ws),
         "lines": {str(k): " ".join(v) for k, v in sorted(lines.items())},
-        "uncertain": str(sum(1 for w in ws if w["doubt"])),
-        "signs": str(signs),
+        "uncertain": sum(1 for w in ws if w["doubt"]),
+        "signs": signs,
         "words": sum(1 for w in ws if counted(w)),
         "doubts": [{"line": l, "word": p, "why": why} for l, p, why in doubts],
         "notes": ("Typed by hand from page images of Griffith's article (public domain; the JSTOR copy on Zenodo, "
@@ -178,7 +191,8 @@ def row(ws=None, secs=None):
                   "letters and marks, with (N) for the start of line N of the stela. text_corpus: the corpus "
                   "spelling (ê o, š S, s s, ñ N, z d, ḫ x, ẖ X), his word division, his restorations kept as "
                   "letters, '.' a lost sign. lines: the words of text_corpus by the line of the stela each "
-                  "starts on. doubts: the words he marks with '?' or '(?)', then the places we are unsure of. "
+                  "starts on. doubts: the words he marks with '?' or '(?)', then the signs his footnotes and notes "
+                  "doubt or read otherwise, and the places we are unsure of. "
                   "src/akinidad.py writes this row from data/expansion/jea/griffith1917_rem1003.txt."),
     }
 
@@ -228,7 +242,7 @@ def closed_readings(path=V6):
     """{key: text} of the closed readings of REM 1003 (local only), or None where the build is not here."""
     if not path.exists():
         return None
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         r = json.loads(line)
         if r["id"] == "REM 1003":
             return {x["key"]: x["text"] for x in r["readings"] if x["key"] in CLOSED}

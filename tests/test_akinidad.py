@@ -26,10 +26,11 @@ def row_file():
 # --- the spelling ---
 def test_signs_of_1917_in_the_corpus_spelling():
     cases = {"qêre-yi": "qoreyi", "peštê-ñyi": "peStoNyi", "kzweli": "kdweli", "yitnizebḫel": "yitnidebxel",
-             "Nptbiẖ": "nptbiX", "Qeš": "qeS", "abrsl": "abrsl", "Amnirens": "amnirens", "ašr": "aSr",
-             "mhrlêsñ": "mXrlosN", "1·2": "1 2", "1032.": "1032.", "q(ê)leb": "qoleb", "šwizê": "Swido", "qer[l]islw": "qerlislw"}
+             "yirêẖ": "yiroX", "Qeš": "qeS", "abrsl": "abrsl", "Amnirens": "amnirens", "ašr": "aSr",
+             "mḫrlêsñ": "mxrlosN", "1·2": "1 2", "1032.": "1032.", "q(ê)leb": "qoleb", "šwizê": "Swido", "qer[l]islw": "qerlislw"}
     for printed, corpus in cases.items():
         assert A.to_corpus(A.plain(printed)) == corpus, printed
+    assert A.to_corpus("mhrlêsñ") == "mhrlosN"          # a plain h stays h, no letter of the corpus: a dropped mark shows
 
 
 def test_signs_counted_as_signs():
@@ -39,7 +40,7 @@ def test_signs_counted_as_signs():
 
 # --- reading his print ---
 SECS = [(1, "(l. 1) Ab : qê-ri : Mn(l. 2)ê : x? : ... : yb (?) : [sb ? :] zz"),
-        (2, "(?)..kw : wi 1·2 (l. 3) teñ- kelhe :")]
+        (2, "(?)..kw : wi 1·2 (l. 3) teñ- kelẖe :")]
 
 
 def test_words_lines_and_doubts():
@@ -79,12 +80,12 @@ def test_row_holds_the_whole_text():
     assert r["words"] == len(ws) == 337
     assert sorted(map(int, r["lines"])) == list(range(1, 43))                   # every line of the stela, ll. 1-42
     assert " ".join(r["lines"][str(k)] for k in range(1, 43)) == r["text_corpus"]
-    assert all(re.fullmatch(r"[a-zA-Z0-9.]+", w) for w in r["text_corpus"].split())
-    assert not re.search(r"[A-Z]", re.sub(r"[SNX]", "", r["text_corpus"]))       # capitals only for S, N, X
+    assert all(re.fullmatch(r"[abdeiklmnopqrstwxySNX0-9.]+", w) for w in r["text_corpus"].split())   # corpus letters
     assert r["griffith_no"] is None and r["rem"] == "1003"
-    assert int(r["uncertain"]) == len({(d["line"], d["word"]) for d in r["doubts"]
-                                       if d["why"].startswith(("?", "(?)"))})
-    assert {(d["word"], d["why"]) for d in r["doubts"]} >= {(p, why) for p, why in A.OURS}
+    assert r["uncertain"] == len({(d["line"], d["word"]) for d in r["doubts"] if d["why"].startswith(("?", "(?)"))})
+    assert r["signs"] == sum(len(A.SIGN.findall(A.plain(t).lower())) for t in A.text_std().split())
+    assert [(d["word"], d["why"]) for d in r["doubts"][-len(A.OURS):]] == list(A.OURS)
+    assert [d["line"] for d in r["doubts"][-len(A.OURS):]] == sorted(d["line"] for d in r["doubts"][-len(A.OURS):])
 
 
 def test_the_corpus_reads_it_as_an_open_reading_of_rem_1003():

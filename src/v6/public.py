@@ -262,7 +262,7 @@ def rem1003():
     row = json.loads(A.ROW.read_text(encoding="utf-8"))
     comparison = json.loads(A.COMPARISON.read_text())
     return {"lines": len(row["lines"]), "sections": len(A.sections()), "words": row["words"],
-            "signs": int(row["signs"]), "doubted": int(row["uncertain"]), "ours": len(A.OURS),
+            "signs": row["signs"], "doubted": row["uncertain"], "ours": len(A.OURS),
             "against": {k: {x: v for x, v in a.items() if x != "by_line"} for k, a in comparison["against"].items()}}
 
 
