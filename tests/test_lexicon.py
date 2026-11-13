@@ -531,6 +531,7 @@ def test_the_summaries_quote_the_figures():
              "README, step 21": between(read("README.md"), "### 21. A second scholar", "## Reproduce"),
              "REPORT": between(read("REPORT.md"), "## Day five, night", "6. **Cost:**"),
              "REPORT, review": between(read("REPORT.md"), "7. **What the review changed in the count:**", "\n\n"),
+             "REPORT, round two": between(read("REPORT.md"), "**Round two of F2**", "\n\n"),
              "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2, first pass", "Next, in this order"),
              "NEXT_STEPS, F2": between(read("NEXT_STEPS.md"), "    - First pass, 12 November", "24. **F3."),
              "summary page": between(read("docs/report.html"), "<tr><td>Ask of every meaning", "</tr>")}
@@ -553,6 +554,15 @@ def test_the_summaries_quote_the_figures():
     assert f"A second scholar for {a} of the {e['behind_translated_words']} entries" in parts["README"]
     for name in ("README", "REPORT", "summary page"):
         assert f"{f['two judges']['kappa_same_or_not']:.2f}" in parts[name] and str(f["rows"]) in parts[name], name
+    # round two's decoys, whose bar the second judge misses by its letter, are stated beside round one's
+    r2 = [f["round two"][f"decoys, judge {j}"] for j in "12"]
+    assert not f["round two"]["bars"]["decoys_accepted"] and r2[1]["accepted"] == 1
+    late = f"{sum(d['accepted'] for d in r2)} of {sum(d['shown'] for d in r2)} in round two"
+    for name in ("README", "summary page"):
+        assert late in parts[name], name
+    assert (f"In round two the second judge accepted {r2[1]['accepted']} of its {r2[1]['shown']} decoys, which "
+            "misses the decoy bar by its letter") in parts["REPORT"]
+    assert "by the letter of the bar" in parts["REPORT, round two"]
     t = table()
     lead = sorted((h for h in t if t[h]["status"] == "disputed"), key=lambda h: -int(t[h]["uses_in_translated_words"]))[:3]
     assert f"{st['disputed']} disputed (`{lead[0]}`, `{lead[1]}` and `{lead[2]}` lead)" in parts["README"]

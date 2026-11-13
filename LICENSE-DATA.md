@@ -62,7 +62,7 @@ Third-party material keeps its own terms, and CC BY 4.0 gives no rights in it:
   files beside that page are under CC BY 4.0: `lexicon_figures.json` holds counts, and `lexicon_statuses.tsv` the
   headwords with Rilly's page and status, the names of the scholars he cites, our status and counts, and each
   entry's meaning in words of our own (at most eight words, checked to share no four words in a row with the
-  lexicon's text or the proposals it records).
+  lexicon's meaning or the proposals it records).
 - Short quotations from other publications in the write-ups, each cited where it stands.
 
 Other data without an open licence is not in this repository: the README's Data section lists what is kept out.

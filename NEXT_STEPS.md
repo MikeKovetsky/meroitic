@@ -362,10 +362,10 @@ days, not hours. The costs are estimates from what the runs so far cost.
       "agreed by two scholars"; the table is published under CC BY.
     - Cost: 2 to 3 million subagent tokens.
     - First pass, 12 November: statuses for all 177 entries behind translated words and the second figure
-      (point 15 above), and in a second round the meanings worded anew for the public table. Not yet done: the
-      spellings of each entry, the confirmed variants included; the page of each scholar's own statement (the
-      table gives Rilly's page); and a status for the other entries the map uses, in names or in words it does
-      not translate.
+      (point 15 above), and in a second round the decoyed lines read again with the real proposal and the
+      meanings worded anew for the public table. Not yet done: the spellings of each entry, the confirmed
+      variants included; the page of each scholar's own statement (the table gives Rilly's page); and a status
+      for the other entries the map uses, in names or in words it does not translate.
 24. **F3. One harness: the test of a model on a language nobody reads.**
     - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
       judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in

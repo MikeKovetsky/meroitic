@@ -162,8 +162,9 @@ count with both rounds), and a second figure of 3,873 (37.6%).
 A writer worded the meaning of each of the 177 entries anew, in at most eight words, from the lexicon's meaning
 and the proposals the judges of round one found the same; 7 are empty, where the lexicon gives no meaning. A
 check counts the words a meaning shares in a row with the lexicon's meaning and its proposals: one shared four
-with a proposal (`ye-`) and was reworded here (`REWORDED` in the script); none does now. The table carries these
-meanings, under the licence of the data ([`LICENSE-DATA.md`](../../LICENSE-DATA.md)).
+with the lexicon's meaning (`ye-`) and was reworded here (`REWORDED` in the script); none does now, and `public`
+refuses to write a table in which one does. The table carries these meanings, under the licence of the data
+([`LICENSE-DATA.md`](../../LICENSE-DATA.md)).
 
 ## Reproduce
 

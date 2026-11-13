@@ -573,9 +573,10 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
 2. **The statuses of the 177 entries behind translated words:** 83 agreed by two scholars, 22 disputed, 52 stated
    by one, 20 only proposed. `qo`, `mlo` and `mte` lead the disputed; endings and pieces of the benediction
    formulas (`-wi`, `ps-`, `-te`, `-kete`) the proposed.
-3. **The judges met both bars set before they answered:** kappa 0.92 on "same or not" (0.6 asked), and 2 and 0
-   of 41 decoys accepted (a tenth allowed). They read 407 proposals that the lexicon records, without the
-   scholars' names.
+3. **In round one the judges met both bars set before they answered:** kappa 0.92 on "same or not" (0.6 asked),
+   and 2 and 0 of 41 decoys accepted (a tenth allowed). They read 407 proposals that the lexicon records, without
+   the scholars' names. In round two the second judge accepted 1 of its 4 decoys, which misses the decoy bar by
+   its letter: "wife", called "partly" beside "woman".
 4. **The lexicon's record of other scholars held where it could be checked:** of 20 of its citations of
    Griffith, 15 were found in his own texts, all as stated (bars: 10 found, 90% as stated). The 5 not found all
    cite "Griffith" without a year, which does not say which text: 15 of the 20 drawn do.
@@ -583,10 +584,10 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
    round two had that judge read them with the real proposal, and with round one alone the figure would be 3,875
    (37.7%). An ending that the map's lookup cuts off without naming its entry is not checked; held to the agreed
    endings, the figure would be 4,014 (39.0%), and without the editors' agreements on pieces of words (which make
-   `-lowi` and `-to` agreed) 4,057 (39.4%). One editor's
-   agreement on one word is enough, which makes `yetmde` agreed; and the editors were shown the map's short
-   gloss, so their "good" for `mlo`, the lexicon's meaning, did not count as agreeing. A writer worded the 177
-   meanings anew for the public table; one that shared four words with a proposal was reworded by hand.
+   `-lowi` and `-to` agreed) 4,057 (39.4%). One editor's agreement on one word is enough, which makes `yetmde`
+   agreed; and the editors were shown the map's short gloss, so their "good" for `mlo`, the lexicon's meaning,
+   did not count as agreeing. A writer worded the 177 meanings anew for the public table; one that shared four
+   words in a row with the lexicon's meaning was reworded by hand.
 6. **Cost:** four judges' packs 388,896 subagent tokens, the check against Griffith 250,976: 639,872 before the
    review, against 1.4 to 1.8 million quoted with the review.
 7. **What the review changed in the count:** the code had called "proposed" the five names inside translated
@@ -599,5 +600,6 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
 notification: 1,098,891 for the first pass with its review, against the 1.4 to 1.8 million quoted for all of F2.
 
 **Round two of F2** (12 November, evening): the two judges read with the real proposal the 41 lines each where
-they had seen a decoy (143,940 subagent tokens), and a writer worded the 177 meanings anew (100,947). The second
-judge called 1 of its 4 new decoys "partly", "wife" beside "woman", a pair the list of fields does not keep apart.
+they had seen a decoy (143,940 subagent tokens), and a writer worded the 177 meanings anew (100,947; both costs by
+hand from the task notifications). The second judge called 1 of its 4 new decoys "partly", "wife" beside "woman",
+a pair the list of fields does not keep apart: by the letter of the bar (a tenth), round two's decoys fail it.

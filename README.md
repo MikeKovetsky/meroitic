@@ -133,7 +133,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     built only on meanings two scholars share.** Rilly's lexicon records what other scholars proposed for most of
     its entries. Two judges set 407 such proposals beside the lexicon's meaning, without the scholar's name and
     with decoys (kappa 0.92 on "same or not"; 2 of 82 decoys accepted), and in a second round read the real
-    proposal on the lines where they had seen a decoy; with the editors' readings of item 10, 83 entries are
+    proposal on the lines where they had seen a decoy (decoys accepted: 1 of 8 in round two, too many for the
+    second judge by the letter of the bar); with the editors' readings of item 10, 83 entries are
     agreed by two scholars, 22 disputed (`qo`, `mlo` and `mte` lead), 52 stated by one and 20 only proposed. One
     lexicon translates 5,419 of the running words (52.7%); names and numbers count in both figures, and an ending
     that the lookup cuts off without naming its entry is not checked. A sample of the lexicon's citations of
@@ -436,9 +437,11 @@ the entry (without the words that step found the map misreading). `packs` sets e
 states as a meaning or a grammar word beside the lexicon's meaning, without the scholar's name, for two judges,
 each with decoys of their own: another entry's meaning from outside the line's field of meaning. `check` sends a
 sample of the lexicon's citations of Griffith to a reader with Griffith's own texts. The bars and the rules for
-the four statuses were committed before any judge answered; `public` counts them and writes the figures and a
-table of headwords, statuses, the scholars cited and the editors' verdicts counted, without the meanings
-([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
+the four statuses were committed before any judge answered. `round2` gives each judge again, with the real
+proposal, the lines where it saw a decoy, beside a few new decoys, and a writer the meanings to word anew;
+`public` counts both rounds and writes the figures and a table of headwords, each meaning in words of our own
+(checked to copy no four words in a row of the lexicon's), statuses, the scholars cited and the editors' verdicts
+counted ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## Reproduce
 
