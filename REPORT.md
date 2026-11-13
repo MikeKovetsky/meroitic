@@ -580,7 +580,8 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
    cite "Griffith" without a year, which does not say which text: 15 of the 20 drawn do.
 5. **Limits:** the 82 lines that carried a decoy for one judge cannot count under the rule; had each kept its
    one real verdict, the figure would be 4,105 (39.9%). An ending that the map's lookup cuts off without naming
-   its entry is not checked; held to the agreed endings, the figure would be 3,788 (36.8%). One editor's
+   its entry is not checked; held to the agreed endings, the figure would be 3,788 (36.8%), and without the
+   editors' agreements on pieces of words (which make `-lowi` and `-to` agreed) 3,827 (37.2%). One editor's
    agreement on one word is enough, which makes `yetmde` agreed; and the editors were shown the map's short
    gloss, so their "good" for `mlo`, the lexicon's meaning, did not count as agreeing. The meanings are not yet
    worded anew, so the public table holds headwords, statuses, scholars and the editors' verdicts counted only.

@@ -43,8 +43,10 @@ non-agreements on words that the check against the editions found the map misrea
 letter l and names or pieces of words read as words (its own rule, publish.difference_of): such a word is not
 built on the entry. Neither change touches the judges' verdicts. The first rates the names as item 3 says, which
 makes four of them agreed through the editors; the second leaves out non-agreements only, so it can only move an
-entry from disputed to stated by one. The pack's sample of Griffith (item 5) took his citations without a year
-too ("Griffith"), which do not say which text they cite.
+entry from disputed to stated by one. An editor's agreement on a word that the map or the editor reads as a piece
+of another word still counts under the rule; count() gives the second figure without such agreements too. The
+pack's sample of Griffith (item 5) took his citations without a year too ("Griffith"), which do not say which
+text they cite.
 
 The other scholars' proposals reach us through Rilly's lexicon, which is in copyright and stays local
 (data/rilly2003/, data/sources/lexicon/); the public files hold counts and headwords only.
@@ -188,6 +190,16 @@ def misread(r, a):
     typed as the letter l, or a name or a piece of another word read as a word (its rule, publish.difference_of).
     Such a word is not built on the entry the map's parts name."""
     return a["verdict"] in P.NOT_AGREED and P.difference_of(r, a) in P.DIFFERENCES[:2]
+
+
+PIECE = re.compile(r"\b(?:end|part|piece|half|beginning|initial) of\b|written apart")
+
+
+def on_a_piece(r, a):
+    """Whether an editor's agreement is on a word that the map's reading or the editor's note calls a piece of
+    another word. The check's rule sorts non-agreements only (misread), so such agreements count under the rule;
+    count() gives the second figure without them."""
+    return a["verdict"] == "agree" and bool(PIECE.search(r["ours"].lower()) or PIECE.search(a["expert"].lower()))
 
 
 def editors(folder=EXPERT, leave_out=misread):
@@ -479,6 +491,8 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     st = {e["headword"]: status(e, verdicts) for e in behind}
     st_first = {e["headword"]: status({**e, "editors": e["first_editors"]}, verdicts, rated=("meaning", "grammar"))
                 for e in behind}
+    strict = editors(expert, leave_out=lambda r, a: misread(r, a) or on_a_piece(r, a))
+    st_piece = {e["headword"]: status({**e, "editors": dict(strict.get(e["headword"], {}))}, verdicts) for e in behind}
     alone = {}                                         # a decoyed row's one real verdict, for the sensitivity
     for r in rows:
         if r in decoyed["1"] and r in two:
@@ -504,7 +518,7 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
         for e in behind if st[e["headword"]] == STATUSES[0]
         for j, d in [(bool(agreeing(e, verdicts)), bool(e["editors"].get("agree")))]))
     spelled = ends_like(st, behind)
-    words, alone_words, first_words, unspelled = collections.Counter(), 0, 0, collections.Counter()
+    words, alone_words, first_words, piece_words, unspelled = collections.Counter(), 0, 0, 0, collections.Counter()
     for raw in path.read_text(encoding="utf-8").splitlines():
         for g in json.loads(raw)["glosses"]:
             words["all"] += 1
@@ -522,6 +536,7 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
                 unspelled.update(f for f in ends if agreed and f not in spelled)
                 alone_words += bool(hs) and all(st_alone.get(h) == STATUSES[0] for h in hs)
                 first_words += bool(hs) and all(st_first.get(h) == STATUSES[0] for h in hs)
+                piece_words += bool(hs) and all(st_piece.get(h) == STATUSES[0] for h in hs)
     figs["words"] = dict(words)
     figs["griffith_check"] = checked(entries, folder)
     figs["translated_by_one_lexicon"] = words["names and numbers"] + words["meaning or grammar"]
@@ -529,6 +544,9 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     figs["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"] = {
         "agreed_by_two_scholars": figs["agreed_by_two_scholars"] - words["with an unnamed ending no agreed entry spells"],
         "endings": dict(unspelled.most_common())}
+    figs["if_an_agreement_on_a_piece_of_a_word_did_not_count"] = {
+        "entries_agreed_only_so": sorted(h for h in st if st[h] == STATUSES[0] != st_piece[h]),
+        "agreed_by_two_scholars": words["names and numbers"] + piece_words}
     figs["if_a_decoyed_row_kept_its_one_real_verdict"] = {
         "statuses": {s: sum(v == s for v in st_alone.values()) for s in STATUSES},
         "entries_that_change": sum(st[h] != st_alone[h] for h in st),

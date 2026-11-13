@@ -94,9 +94,13 @@ entry Rilly gives only as a hypothesis, or without a meaning, is "proposed".
    map's short gloss of a word. Where that gloss gives only the kind of word, an edition that reads the lexicon's
    meaning counts as "new" there, not as "agree", and makes no entry agreed: `mlo` was "adjective" in that check
    (its section 4), and both editions read "good".
-6. **Some meanings are only a kind.** 21 of the 177 entries are titles or epithets whose meaning in the lexicon
+6. **An agreement can rest on a piece of a word.** The rule counts an editor's "agree" on any word built on the
+   entry, also on one that the map or the editor reads as a piece of another word. `-lowi` and `-to` are agreed
+   only so: the map read `elowi` as the end of `terikelowi` written apart, and the editor read `to` as a part of
+   `peseto`. Without such agreements the second figure would be 3,827 (37.2%).
+7. **Some meanings are only a kind.** 21 of the 177 entries are titles or epithets whose meaning in the lexicon
    is "a priestly title" or the like; agreement on them is agreement on the kind.
-7. **Not done yet:** the meanings worded anew, so that the table can carry them under CC BY. The table holds the
+8. **Not done yet:** the meanings worded anew, so that the table can carry them under CC BY. The table holds the
    headwords, the statuses, the scholars cited and the editors' verdicts counted.
 
 ## 6. The check of the record against Griffith's own words
@@ -134,7 +138,8 @@ verdicts, and the figures file keeps the first count (`as_first_counted`).
    that entry otherwise. Only such non-agreements are left out, never an agreement, so this can only move an
    entry from disputed to stated by one. `l` "to give" (117 uses) and `-so` were disputed only through such
    words and are stated by one now; others keep their status and lose an editor's dissent (`mẖe`, `ato`, `kdi`
-   among them).
+   among them). The check's rule sorts non-agreements only, so an agreement on such a word still counts; item 6
+   of section 5 gives the figure without them.
 
 As first counted: 70 agreed, 23 disputed, 59 stated by one and 25 proposed (7 entries change), and a second
 figure of 3,873 (37.6%).

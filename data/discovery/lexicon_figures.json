@@ -114,6 +114,13 @@
    "kete": 1
   }
  },
+ "if_an_agreement_on_a_piece_of_a_word_did_not_count": {
+  "entries_agreed_only_so": [
+   "-lowi",
+   "-to (2)"
+  ],
+  "agreed_by_two_scholars": 3827
+ },
  "if_a_decoyed_row_kept_its_one_real_verdict": {
   "statuses": {
    "agreed by two scholars": 83,

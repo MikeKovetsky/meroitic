@@ -107,6 +107,11 @@ def test_a_word_the_map_misread_is_not_an_editors_reading():
         first = {h: dict(c) for h, c in X.editors(folder, leave_out=lambda r, a: False).items()}
         assert first == {"l (2)": {"differ": 1}, "ato": {"differ": 2}, "Wos": {"agree": 1}, "mlo": {"new": 1},
                          "mẖe": {"partly": 1}}, first                           # a decoy never counts
+    # an agreement on a piece of another word counts under the rule; count() gives the figure without it
+    assert X.on_a_piece({"ours": "end of terikelowi written apart"}, {"verdict": "agree", "expert": "was her father"})
+    assert X.on_a_piece({"ours": "x"}, {"verdict": "agree", "expert": "part of peseto, King's Son"})
+    assert not X.on_a_piece({"ours": "x"}, {"verdict": "differ", "expert": "part of peseto"})
+    assert not X.on_a_piece({"ours": "ruler, sovereign"}, {"verdict": "agree", "expert": "king"})
 
 
 def test_an_unnamed_ending_rests_on_an_agreed_one_spelled_like_it():
@@ -128,7 +133,7 @@ def test_count_end_to_end():
               entry("qo", level="grammar", props=[("P2", "'noble'")], editors={"differ": 1}),
               entry("l (2)", props=[("P4", "'to give'")], editors={"differ": 1}),
               entry("-wi (5)", status="hypothesis", level="hypothesis", kind="function word"),
-              entry("abr", uses=0)]
+              entry("-to (2)", level="grammar", kind="function word", editors={"agree": 1}), entry("abr", uses=0)]
         lines(d / "lex" / "entries.jsonl", es)
         (d / "lex" / "key.json").write_text(json.dumps({"order": ["P1", "P2", "P3", "P4"],
                                                         "decoys": {"1": {"P4": "'water'"}, "2": {}}}))
@@ -137,32 +142,36 @@ def test_count_end_to_end():
         lines(d / "lex" / "answers" / "judge2_a.jsonl", [{"row": r, "verdict": v} for r, v in
                                                          (("P1", "same"), ("P2", "other"), ("P3", "same"), ("P4", "same"))])
         expert_folder(d / "expert", [("M1", "woSi", ["Wos", "ending"], False), ("M2", "l", ["l (2)"], False),
-                                     ("M3", "qo", ["qo"], False)],
-                      [("M1", "agree", "Isis"), ("M2", "differ", "the numeral 1"), ("M3", "differ", "the noble")])
+                                     ("M3", "qo", ["qo"], False), ("M4", "to", ["-to (2)"], False)],
+                      [("M1", "agree", "Isis"), ("M2", "differ", "the numeral 1"), ("M3", "differ", "the noble"),
+                       ("M4", "agree", "part of peseto, King's Son")])
         g = lambda form, level, *parts: {"form": form, "level": level, "parts": [{"form": f, "entry": h} for f, h in parts]}
         lines(d / "glosses.jsonl", [{"id": "T1", "glosses": [
             g("mlo", "meaning", ("mlo", "mlo")), g("mlolowi", "meaning", ("mlo", "mlo"), ("lowi", "ending")),
             g("mloli", "meaning", ("mlo", "mlo"), ("li", "ending")), g("qo", "grammar", ("qo", "qo")),
             g("NAME", "name"), g("12", "number"), g("woSmlo", "meaning", ("woS", "Wos"), ("mlo", "mlo")),
             g("l", "meaning", ("l", "l (2)")), g("xyz", "unknown"), g("psxrkete", "meaning", ("kete", "-wi (5)")),
-            g("qomlo", "meaning", ("qo", "qo"), ("mlo", "mlo")), g("qoli", "grammar", ("qo", "qo"), ("li", "ending"))]}])
+            g("qomlo", "meaning", ("qo", "qo"), ("mlo", "mlo")), g("qoli", "grammar", ("qo", "qo"), ("li", "ending")),
+            g("mloto", "meaning", ("mlo", "mlo"), ("to", "-to (2)"))]}])
         figs, st = X.count(d / "lex", d / "glosses.jsonl", d / "expert")
         assert st == {"mlo": AGREED, "qo": "disputed", "-li (1)": "stated by one", "-lowi": AGREED, "Wos": AGREED,
-                      "l (2)": "stated by one", "-wi (5)": "proposed"}, st
-        assert figs["words"] == {"all": 12, "names and numbers": 2, "meaning or grammar": 9, "every entry agreed": 4,
+                      "l (2)": "stated by one", "-wi (5)": "proposed", "-to (2)": AGREED}, st
+        assert figs["words"] == {"all": 13, "names and numbers": 2, "meaning or grammar": 10, "every entry agreed": 5,
                                  "with an unnamed ending": 2, "with an unnamed ending no agreed entry spells": 1}
-        assert figs["translated_by_one_lexicon"] == 11 and figs["agreed_by_two_scholars"] == 6
-        assert figs["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"] == {"agreed_by_two_scholars": 5,
+        assert figs["translated_by_one_lexicon"] == 12 and figs["agreed_by_two_scholars"] == 7
+        assert figs["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"] == {"agreed_by_two_scholars": 6,
                                                                                    "endings": {"li": 1}}
-        assert figs["as_first_counted"] == {"statuses": {AGREED: 2, "disputed": 2, "stated by one": 1, "proposed": 2},
-                                            "entries_that_change": 2, "agreed_by_two_scholars": 5}
+        assert figs["if_an_agreement_on_a_piece_of_a_word_did_not_count"] == {"entries_agreed_only_so": ["-to (2)"],
+                                                                              "agreed_by_two_scholars": 6}
+        assert figs["as_first_counted"] == {"statuses": {AGREED: 3, "disputed": 2, "stated by one": 1, "proposed": 2},
+                                            "entries_that_change": 2, "agreed_by_two_scholars": 6}
         alone = figs["if_a_decoyed_row_kept_its_one_real_verdict"]           # P4 keeps the second judge's "same"
-        assert alone["entries_that_change"] == 1 and alone["agreed_by_two_scholars"] == 7
+        assert alone["entries_that_change"] == 1 and alone["agreed_by_two_scholars"] == 8
         assert figs["two judges"]["rows"] == 3 and figs["decoys, judge 1"] == {"shown": 1, "accepted": 0,
                                                                                "verdicts": {"other": 1}}
         e = figs["entries"]
-        assert e["used"] == 8 and e["behind_translated_words"] == 7 and e["with_the_editors_verdict"] == 2
-        assert e["agreed_by"] == {"judges": 2, "editors": 1} and e["agreed_with_a_dissent"] == 0
+        assert e["used"] == 9 and e["behind_translated_words"] == 8 and e["with_the_editors_verdict"] == 3
+        assert e["agreed_by"] == {"judges": 2, "editors": 2} and e["agreed_with_a_dissent"] == 0
         assert figs["griffith_check"] is None                                   # not answered
         rows = {r["headword"]: r for r in X.table_rows(X.entries_of(d / "lex", d / "expert"), st, X.verdicts_of(d / "lex"))}
         assert (rows["l (2)"]["another_meaning"], rows["l (2)"]["editors_differ"]) == ("", 0)       # the numeral
@@ -298,6 +307,11 @@ def test_reported_numbers():
             f"{w['with an unnamed ending no agreed entry spells']} of them no agreed ending or function word is "
             f"spelled like it (`-{lead}` lead). Held to those, the second figure would be "
             f"{share(ends['agreed_by_two_scholars'])}") in text
+    pieces = f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]
+    assert pieces["entries_agreed_only_so"] == ["-lowi", "-to (2)"]
+    assert (f"`-lowi` and `-to` are agreed only so: the map read `elowi` as the end of `terikelowi` written apart, and "
+            f"the editor read `to` as a part of `peseto`. Without such agreements the second figure would be "
+            f"{share(pieces['agreed_by_two_scholars'])}.") in text
     g = f["griffith_check"]
     v, y = g["verdicts"], g["without_a_year"]
     assert (f"| {v.get('as stated', 0)} | {v.get('otherwise', 0)} | {v.get('not found', 0)} |" in text
@@ -350,7 +364,8 @@ def known(f):
     w = f["words"]
     for n in (f["translated_by_one_lexicon"], f["agreed_by_two_scholars"], f["as_first_counted"]["agreed_by_two_scholars"],
               f["if_a_decoyed_row_kept_its_one_real_verdict"]["agreed_by_two_scholars"],
-              f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"]):
+              f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"],
+              f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"]):
         out.add(f"{n / w['all']:.1%}")
     out.add(f"{w['every entry agreed'] / w['meaning or grammar']:.1%}")
     walk({"lines with a decoy": f["rows"] - f["two judges"]["rows"], "sample": X.SAMPLE, "found": X.CHECK_BARS["found"],
@@ -423,6 +438,9 @@ def test_the_summaries_quote_the_figures():
     ends = f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"]
     assert f"the figure would be {alone:,} ({alone / w['all']:.1%})" in parts["REPORT"]
     assert f"the figure would be {ends:,} ({ends / w['all']:.1%})" in parts["REPORT"]
+    pieces = f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"]
+    assert f"without the editors' agreements on pieces of words (which make `-lowi` and `-to` agreed) {pieces:,} " \
+           f"({pieces / w['all']:.1%})" in parts["REPORT"]
     first = f["as_first_counted"]
     assert (f"As first counted: {first['statuses'][AGREED]} agreed, {first['statuses']['disputed']} disputed, "
             f"{first['statuses']['stated by one']} stated by one, {first['statuses']['proposed']} proposed, and "
