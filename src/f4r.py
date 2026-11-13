@@ -94,7 +94,13 @@ TOKENS = {"all:splitters": 1169212,           # 18 agents, one per rendered text
           "r1:translators": 1639408,           # 15 agents: 527,088, 553,714 and 558,606 for the three of each text
           "r1:editors": 534641,                # 5 agents
           "r1:judges": 958165,                 # 14 agents (two judges, seven packs each)
-          "r1b:judges": 953178}                # 14 agents, the second judging
+          "r1b:judges": 953178,                # 14 agents, the second judging
+          "held:writers": 1162767,             # 13 agents
+          "held:decoys": 1380334,              # 13 agents, one translator for each decoy text
+          "held:translators": 4378027,         # 39 agents
+          "held:editors": 1145844,             # ten of the 13: three ended with an API error (the usage limit)
+                                               # after writing their answers, and their tokens were not reported
+          "held:judges": 2554462}              # 38 agents (two judges, 19 packs each)
 
 
 def name_of(tid):

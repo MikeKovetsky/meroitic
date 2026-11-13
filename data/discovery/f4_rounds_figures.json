@@ -871,5 +871,512 @@
    "r1:judges": 958165,
    "r1b:judges": 953178
   }
+ },
+ "held": {
+  "round": "held",
+  "of": "held",
+  "judging": 2,
+  "texts": [
+   "GA 04",
+   "GA 07",
+   "GA 19",
+   "GA 21",
+   "GA 22",
+   "GA 24",
+   "GA 25",
+   "GA 29",
+   "GA 30",
+   "GA 31",
+   "GA 39",
+   "GA 43",
+   "GA 54"
+  ],
+  "readings": [
+   "glosses",
+   "writer",
+   "translator",
+   "panel",
+   "decoy"
+  ],
+  "units": {
+   "all": 307,
+   "open": 74,
+   "judged": 233,
+   "not_in_copy": 15,
+   "scored": 218,
+   "open_with_a_translated_part": 3,
+   "by_kind": {
+    "god": 22,
+    "name": 58,
+    "other": 22,
+    "title": 48,
+    "relation": 34,
+    "place": 23,
+    "formula": 11
+   },
+   "per_text": {
+    "GA 04": 21,
+    "GA 07": 5,
+    "GA 19": 24,
+    "GA 21": 12,
+    "GA 22": 24,
+    "GA 24": 5,
+    "GA 25": 5,
+    "GA 29": 43,
+    "GA 30": 26,
+    "GA 31": 8,
+    "GA 39": 16,
+    "GA 43": 17,
+    "GA 54": 12
+   }
+  },
+  "scores": {
+   "1": {
+    "glosses": {
+     "given": 96,
+     "partly": 66,
+     "wrong": 19,
+     "missing": 37,
+     "unanswered": 0,
+     "score": 0.5917,
+     "given_share": 0.4404,
+     "wrong_share": 0.0872
+    },
+    "writer": {
+     "given": 118,
+     "partly": 69,
+     "wrong": 8,
+     "missing": 23,
+     "unanswered": 0,
+     "score": 0.6995,
+     "given_share": 0.5413,
+     "wrong_share": 0.0367
+    },
+    "translator": {
+     "given": 131,
+     "partly": 61,
+     "wrong": 6,
+     "missing": 20,
+     "unanswered": 0,
+     "score": 0.7408,
+     "given_share": 0.6009,
+     "wrong_share": 0.0275
+    },
+    "panel": {
+     "given": 133,
+     "partly": 63,
+     "wrong": 4,
+     "missing": 18,
+     "unanswered": 0,
+     "score": 0.7546,
+     "given_share": 0.6101,
+     "wrong_share": 0.0183
+    },
+    "decoy": {
+     "given": 14,
+     "partly": 2,
+     "wrong": 56,
+     "missing": 146,
+     "unanswered": 0,
+     "score": 0.0688,
+     "given_share": 0.0642,
+     "wrong_share": 0.2569
+    }
+   },
+   "2": {
+    "glosses": {
+     "given": 94,
+     "partly": 64,
+     "wrong": 21,
+     "missing": 39,
+     "unanswered": 0,
+     "score": 0.578,
+     "given_share": 0.4312,
+     "wrong_share": 0.0963
+    },
+    "writer": {
+     "given": 116,
+     "partly": 67,
+     "wrong": 11,
+     "missing": 24,
+     "unanswered": 0,
+     "score": 0.6858,
+     "given_share": 0.5321,
+     "wrong_share": 0.0505
+    },
+    "translator": {
+     "given": 127,
+     "partly": 67,
+     "wrong": 6,
+     "missing": 18,
+     "unanswered": 0,
+     "score": 0.7362,
+     "given_share": 0.5826,
+     "wrong_share": 0.0275
+    },
+    "panel": {
+     "given": 128,
+     "partly": 68,
+     "wrong": 6,
+     "missing": 16,
+     "unanswered": 0,
+     "score": 0.7431,
+     "given_share": 0.5872,
+     "wrong_share": 0.0275
+    },
+    "decoy": {
+     "given": 14,
+     "partly": 4,
+     "wrong": 54,
+     "missing": 146,
+     "unanswered": 0,
+     "score": 0.0734,
+     "given_share": 0.0642,
+     "wrong_share": 0.2477
+    }
+   }
+  },
+  "score": {
+   "glosses": 0.5848,
+   "writer": 0.6926,
+   "translator": 0.7385,
+   "panel": 0.7489,
+   "decoy": 0.0711
+  },
+  "given": {
+   "glosses": 0.4358,
+   "writer": 0.5367,
+   "translator": 0.5917,
+   "panel": 0.5987,
+   "decoy": 0.0642
+  },
+  "wrong": {
+   "glosses": 0.0917,
+   "writer": 0.0436,
+   "translator": 0.0275,
+   "panel": 0.0229,
+   "decoy": 0.2523
+  },
+  "lead": {
+   "writer": 0.1078,
+   "translator": 0.1537,
+   "panel": 0.1641
+  },
+  "unit_by_unit": {
+   "1": {
+    "writer": {
+     "same": 177,
+     "better": 40,
+     "worse": 1
+    },
+    "translator": {
+     "same": 163,
+     "better": 52,
+     "worse": 3
+    },
+    "panel": {
+     "same": 160,
+     "better": 56,
+     "worse": 2
+    }
+   },
+   "2": {
+    "writer": {
+     "same": 176,
+     "better": 40,
+     "worse": 2
+    },
+    "translator": {
+     "same": 162,
+     "better": 54,
+     "worse": 2
+    },
+    "panel": {
+     "same": 161,
+     "better": 55,
+     "worse": 2
+    }
+   }
+  },
+  "per_text": {
+   "GA 04": {
+    "glosses": 0.5952,
+    "writer": 0.7381,
+    "translator": 0.7738,
+    "panel": 0.75
+   },
+   "GA 07": {
+    "glosses": 0.9,
+    "writer": 1.0,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "GA 19": {
+    "glosses": 0.4583,
+    "writer": 0.5312,
+    "translator": 0.5521,
+    "panel": 0.5521
+   },
+   "GA 21": {
+    "glosses": 0.4375,
+    "writer": 0.5,
+    "translator": 0.4584,
+    "panel": 0.5
+   },
+   "GA 22": {
+    "glosses": 0.5625,
+    "writer": 0.8125,
+    "translator": 0.8646,
+    "panel": 0.8646
+   },
+   "GA 24": {
+    "glosses": 0.9,
+    "writer": 0.9,
+    "translator": 0.9,
+    "panel": 0.9
+   },
+   "GA 25": {
+    "glosses": 0.8,
+    "writer": 0.95,
+    "translator": 0.9,
+    "panel": 0.9
+   },
+   "GA 29": {
+    "glosses": 0.5814,
+    "writer": 0.6861,
+    "translator": 0.8198,
+    "panel": 0.8198
+   },
+   "GA 30": {
+    "glosses": 0.6154,
+    "writer": 0.6538,
+    "translator": 0.7596,
+    "panel": 0.7596
+   },
+   "GA 31": {
+    "glosses": 0.625,
+    "writer": 0.625,
+    "translator": 0.625,
+    "panel": 0.625
+   },
+   "GA 39": {
+    "glosses": 0.5625,
+    "writer": 0.5938,
+    "translator": 0.6875,
+    "panel": 0.6875
+   },
+   "GA 43": {
+    "glosses": 0.5294,
+    "writer": 0.7647,
+    "translator": 0.6765,
+    "panel": 0.8088
+   },
+   "GA 54": {
+    "glosses": 0.6875,
+    "writer": 0.75,
+    "translator": 0.7291,
+    "panel": 0.7291
+   }
+  },
+  "per_text_mean": {
+   "glosses": 0.635,
+   "writer": 0.7312,
+   "translator": 0.7497,
+   "panel": 0.7613
+  },
+  "by_kind": {
+   "formula": {
+    "glosses": 0.8409,
+    "writer": 0.9772,
+    "translator": 0.9772,
+    "panel": 0.9772
+   },
+   "god": {
+    "glosses": 1.0,
+    "writer": 1.0,
+    "translator": 1.0,
+    "panel": 1.0
+   },
+   "name": {
+    "glosses": 0.6681,
+    "writer": 0.7931,
+    "translator": 0.8103,
+    "panel": 0.8146
+   },
+   "other": {
+    "glosses": 0.25,
+    "writer": 0.4432,
+    "translator": 0.5341,
+    "panel": 0.5341
+   },
+   "place": {
+    "glosses": 0.4456,
+    "writer": 0.6087,
+    "translator": 0.8043,
+    "panel": 0.8696
+   },
+   "relation": {
+    "glosses": 0.4559,
+    "writer": 0.4853,
+    "translator": 0.5294,
+    "panel": 0.5294
+   },
+   "title": {
+    "glosses": 0.5469,
+    "writer": 0.6667,
+    "translator": 0.6875,
+    "panel": 0.6979
+   }
+  },
+  "agreement": {
+   "pairs": 872,
+   "same": 807,
+   "kappa": 0.8763,
+   "kappa_given_or_not": 0.9423,
+   "kappa_credited_or_not": 0.8881,
+   "per_text": {
+    "GA 04": {
+     "pairs": 84,
+     "same": 77,
+     "kappa": 0.8548
+    },
+    "GA 07": {
+     "pairs": 20,
+     "same": 20,
+     "kappa": 1.0
+    },
+    "GA 19": {
+     "pairs": 96,
+     "same": 93,
+     "kappa": 0.9552
+    },
+    "GA 21": {
+     "pairs": 48,
+     "same": 43,
+     "kappa": 0.8419
+    },
+    "GA 22": {
+     "pairs": 96,
+     "same": 86,
+     "kappa": 0.7937
+    },
+    "GA 24": {
+     "pairs": 20,
+     "same": 20,
+     "kappa": 1.0
+    },
+    "GA 25": {
+     "pairs": 20,
+     "same": 15,
+     "kappa": 0.2857
+    },
+    "GA 29": {
+     "pairs": 172,
+     "same": 148,
+     "kappa": 0.7444
+    },
+    "GA 30": {
+     "pairs": 104,
+     "same": 98,
+     "kappa": 0.9023
+    },
+    "GA 31": {
+     "pairs": 32,
+     "same": 32,
+     "kappa": 1.0
+    },
+    "GA 39": {
+     "pairs": 64,
+     "same": 64,
+     "kappa": 1.0
+    },
+    "GA 43": {
+     "pairs": 68,
+     "same": 66,
+     "kappa": 0.9497
+    },
+    "GA 54": {
+     "pairs": 48,
+     "same": 45,
+     "kappa": 0.8801
+    }
+   },
+   "units_judged_differently": 34
+  },
+  "decoys_measure": {
+   "1": {
+    "clean_units": 186,
+    "accepted": 1,
+    "verdicts": {
+     "missing": 136,
+     "wrong": 49,
+     "given": 1
+    }
+   },
+   "2": {
+    "clean_units": 186,
+    "accepted": 1,
+    "verdicts": {
+     "missing": 140,
+     "wrong": 45,
+     "given": 1
+    }
+   }
+  },
+  "bars": {
+   "kappa": true,
+   "decoys_accepted": true
+  },
+  "bars_set": {
+   "kappa": 0.6,
+   "decoys_accepted": 0.1
+  },
+  "expected": {
+   "glosses": [
+    0.5,
+    0.68
+   ],
+   "panel": [
+    0.62,
+    0.8
+   ],
+   "panel_lead": [
+    0.08,
+    0.18
+   ],
+   "panel_lead_bar": 0.05,
+   "panel_over_translator": [
+    0.0,
+    0.05
+   ],
+   "writer_lead": [
+    0.02,
+    0.1
+   ],
+   "wrong": 0.05
+  },
+  "rule": {
+   "lead": 0.05,
+   "wrong_over": 0.02,
+   "writer_loss": 0.03
+  },
+  "carried": "panel",
+  "handbook": {
+   "sourced": 124,
+   "unchecked": 1,
+   "corrected": 43,
+   "confirmed": 80,
+   "words": 4273
+  },
+  "tokens": {
+   "all:splitters": 1169212,
+   "all:handbook": 555173,
+   "all:handbook_check": 1015037,
+   "held:writers": 1162767,
+   "held:decoys": 1380334,
+   "held:translators": 4378027,
+   "held:editors": 1145844,
+   "held:judges": 2554462
+  }
  }
 }

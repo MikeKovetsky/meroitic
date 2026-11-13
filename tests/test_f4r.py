@@ -427,5 +427,82 @@ def test_the_texts_held_back():
     assert made == {"dev": ["B"], "held": ["A", "C"], "pages": ["P"]}
 
 
+def between(text, start, end):
+    i = text.index(start)
+    return text[i: text.index(end, i + len(start))]
+
+
+def pct(x):
+    return f"{100 * x:.1f}%"
+
+
+PAGE = ROOT / "data/discovery/f4_rounds.md"
+SECTIONS = {"r1": ("## 5. Round one, first judging", "## 6. "), "r1b": ("## 6. Round one, second judging", "## 7. "),
+            "held": ("## 8. The result on the held texts", "## 9. ")}
+
+
+def test_the_public_figures_are_the_count():
+    needs("data/sources/f4r/held/key.json", "data/sources/f4r/r1/key.json", "data/sources/f4r/r1b/key.json",
+          "data/sources/f4/texts.json", "data/sources/v6/analysts/glosses.jsonl")
+    public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
+    assert sorted(public) == ["held", "r1", "r1b"]
+    for rnd in public:
+        assert public[rnd] == json.loads(json.dumps(R.count(rnd))), rnd
+
+
+def test_the_page_quotes_the_figures():
+    public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
+    page = PAGE.read_text(encoding="utf-8")
+    for rnd, (start, end) in SECTIONS.items():
+        f, part = public[rnd], " ".join(between(page, start, end).split())
+        s = f["scores"]
+        for n in f["readings"]:
+            row = next(l for l in between(page, start, end).splitlines() if l.startswith(f"| {n} |"))
+            assert f"| {pct(s['1'][n]['score'])} | {pct(s['2'][n]['score'])} | {pct(f['score'][n])} | {pct(f['given'][n])} |" in row, (rnd, n)
+            if n != "decoy":
+                assert f"| {pct(f['wrong'][n])} |" in row, (rnd, n)
+            if n in f["lead"]:
+                assert row.rstrip().endswith(f"| +{100 * f['lead'][n]:.1f} |"), (rnd, n)
+        u, a = f["units"], f["agreement"]
+        if rnd != "r1b":                 # the second judging has the first's units, and its section does not repeat them
+            assert f"into {u['all']} units" in part and f"{u['scored']} are scored" in part, rnd
+        else:
+            assert u == public["r1"]["units"] and "The same readings and units" in part
+        assert f"{a['same']} of {a['pairs']} lines" in part, rnd
+        assert f"kappa {a['kappa']:.2f}" in part or f"is {a['kappa']:.2f}" in part, rnd
+        d = f["decoys_measure"]
+        assert d["1"]["clean_units"] == d["2"]["clean_units"] and f"{d['1']['clean_units']} clean decoy units" in part, rnd
+        assert f["bars"]["decoys_accepted"] is True
+    # what each section says of its bars
+    assert public["r1"]["bars"]["kappa"] is False and "The agreement's bar is missed" in page
+    assert public["r1b"]["bars"]["kappa"] is True and public["r1b"]["carried"] == "panel" and "the panel is carried on" in page
+    h = public["held"]
+    assert h["bars"] == {"kappa": True, "decoys_accepted": True}
+    assert h["decoys_measure"]["1"]["accepted"] == h["decoys_measure"]["2"]["accepted"] == 1
+    assert round(h["lead"]["panel"], 4) >= R.EXPECTED_HELD["panel_lead_bar"]
+    held = " ".join(between(page, *SECTIONS["held"]).split())
+    for j in ("1", "2"):
+        for n, words in (("panel", "the panel is better on"), ("translator", "the translator better on"), ("writer", "the writer better on")):
+            assert words in held
+    one, two = h["unit_by_unit"]["1"], h["unit_by_unit"]["2"]
+    assert f"the panel is better on {one['panel']['better']} and {two['panel']['better']} of the {h['units']['scored']} units and worse on {one['panel']['worse']} and {two['panel']['worse']}" in held
+    assert f"the translator better on {one['translator']['better']} and {two['translator']['better']}, worse on {one['translator']['worse']} and {two['translator']['worse']}" in held
+    assert f"the writer better on {one['writer']['better']} and {two['writer']['better']}, worse on {one['writer']['worse']} and {two['writer']['worse']}" in held
+    k = h["by_kind"]
+    for kind, name in (("place", "places"), ("title", "titles"), ("relation", "Relations gain least")):
+        assert f"{pct(k[kind]['glosses'])}" in held and f"{pct(k[kind]['panel'])}" in held, kind
+    m = h["per_text_mean"]
+    assert f"glosses {pct(m['glosses'])}, writer {pct(m['writer'])}, translator {pct(m['translator'])}, panel {pct(m['panel'])}" in held
+    assert all(d["panel"] >= d["glosses"] for d in h["per_text"].values()) and "at or above the glosses in each of the 13 texts" in held
+    # the cost: every figure of section 9 is in the script's TOKENS, and the total is their sum
+    cost = " ".join(between(page, "## 9. Cost", "## 10. ").split())
+    for key, n in R.TOKENS.items():
+        assert f"{n:,}" in cost, key
+    assert f"In all {sum(R.TOKENS.values()):,}." in cost
+    for rnd in ("r1", "held"):
+        total = sum(n for key, n in R.TOKENS.items() if key.startswith(rnd + ":"))
+        assert f"{total:,}" in cost, rnd
+
+
 if __name__ == "__main__":
     run([(name, fn) for name, fn in globals().items() if name.startswith("test_")])

@@ -107,7 +107,7 @@ are open (1 of them with a translated part, against 17 in the pilot), 77 went to
 | writer | at most 3 points under the glosses | 76.7% | 71.3% | 74.0% | 58.7% | 5.3% | +7.3 |
 | translator | 5 points or more over the glosses | 82.7% | 79.3% | 81.0% | 66.7% | 2.0% | +14.3 |
 | panel | not under the translator | 83.3% | 83.3% | 83.3% | 71.3% | 2.0% | +16.7 |
-| decoy | | 0% | 0% | 0% | 0% | | |
+| decoy | | 0.0% | 0.0% | 0.0% | 0.0% | | |
 
 1. **The decoys' bar is met:** neither judge called any of its 72 clean decoy units given or partly.
 2. **The agreement's bar is missed:** Cohen's kappa on the four verdicts is 0.58, under the 0.6 set beforehand
@@ -141,7 +141,7 @@ The same readings and units, 14 new judges, the rule on kinship added (13 Novemb
 | writer | at most 3 points under the glosses | 67.3% | 72.0% | 69.7% | 50.7% | 5.3% | +6.7 |
 | translator | 5 points or more over the glosses | 74.0% | 76.7% | 75.3% | 54.7% | 1.3% | +12.3 |
 | panel | not under the translator | 78.0% | 78.0% | 78.0% | 60.0% | 1.3% | +15.0 |
-| decoy | | 0% | 0% | 0% | 0% | | |
+| decoy | | 0.0% | 0.0% | 0.0% | 0.0% | | |
 
 1. **Both bars are met.** The judges gave the same verdict on 361 of 375 lines (Cohen's kappa 0.94; in GA28
    227 of 240, kappa 0.90), and neither called any of its 72 clean decoy units given or partly.
@@ -198,11 +198,69 @@ What the result will say, decided now:
 The expected scores are lower than round one's because the copies of some held texts hold less of Millet's
 reading (GA19 56%, GA07 64%, GA43 70% of his runs of letters), and because nothing was tuned on them.
 
-## 8. The result on the held texts
+## 8. The result on the held texts: the lead holds on texts nothing was tuned on
 
-Not run yet.
+Run on 13 November 2026. The 13 renderings were cut into 307 units; 74 are open (3 of them with a translated
+part), 233 went to the judges and 218 are scored (15 render Meroitic that is not in our copy, 7 of them in
+GA19).
 
-## 9. Files and commands
+| Reading | Expected | Judge 1 | Judge 2 | Mean | Given only | Wrong | Over the glosses |
+|---|---|---|---|---|---|---|---|
+| glosses | 50% to 68% | 59.2% | 57.8% | 58.5% | 43.6% | 9.2% | |
+| writer | 2 to 10 points over the glosses | 70.0% | 68.6% | 69.3% | 53.7% | 4.4% | +10.8 |
+| translator | | 74.1% | 73.6% | 73.9% | 59.2% | 2.8% | +15.4 |
+| panel | 62% to 80%; 8 to 18 points over the glosses | 75.5% | 74.3% | 74.9% | 59.9% | 2.3% | +16.4 |
+| decoy | | 6.9% | 7.3% | 7.1% | 6.4% | | |
+
+1. **Both bars are met.** The judges gave the same verdict on 807 of 872 lines (Cohen's kappa 0.88), and each
+   called 1 of its 186 clean decoy units given or partly (0.5%; the bar is 10%). The decoys score 7.1% over all
+   218 units because nine of them are epitaphs: on the units that share a word with the decoy (an invocation
+   of Isis, a wish for water) a judge is right to credit it, and those units are not in the decoy measure.
+2. **The panel leads the glosses by 16.4 points, over the bar of 5 and inside what was expected.** By section
+   7 this is the result: this way of translating gives meaning that Millet's renderings can see, on texts it
+   was not tuned on. The lead on the five tuning texts was 15.0.
+3. **Every expectation held but one:** the writer gained 10.8 points, a little more than the 2 to 10 expected.
+4. **The errors fall with the score:** the glosses are wrong on 9.2% of the units, the writer on 4.4%, the
+   translator on 2.8%, the panel on 2.3%.
+5. **Unit by unit against the glosses** (first and second judge): the panel is better on 56 and 55 of the 218
+   units and worse on 2 and 2; the translator better on 52 and 54, worse on 3 and 2; the writer better on 40
+   and 40, worse on 1 and 2.
+6. **Where the gain is:** places (23 units: glosses 44.6%, panel 87.0%), other statements (22: 25.0% and
+   53.4%), persons in a role (58: 66.8% and 81.5%), titles (48: 54.7% and 69.8%), formulae (11: 84.1% and
+   97.7%). Relations gain least (34: 45.6% and 52.9%), and the invocations of gods are given by every reading.
+7. **With each text weighing the same:** glosses 63.5%, writer 73.1%, translator 75.0%, panel 76.1%. The panel
+   is at or above the glosses in each of the 13 texts.
+
+How far to trust it, and what it does not show:
+
+1. **The panel is not shown to beat one translator.** Its lead over the first of its three translators is 1.0
+   point: 2 to 4 units of 218, with four agents a text against one. What carries the result is the translator's
+   design (the rules, the handbook, the parallels), not the editing of three into one.
+2. **Most of the gain is the handbook and the order of a sentence.** The writer sees no lexicon entry and no
+   parallel, only the map's reading of each word and the handbook, and gets 10.8 of the 16.4 points.
+3. **One scholar, one site, one kind of text.** All 18 renderings are Millet's, of inscriptions from Gebel
+   Adda, 14 of them stelae. A score against them measures agreement with Millet (`yetmde`, `qo`).
+4. **Two judges of one model with one set of instructions** agree; that shows the verdicts are stable.
+5. **Millet is out of the packs only as far as the project's files carry him** (the pilot's page, section 8,
+   item 7). The handbook's compiler and checkers were told not to open his edition; the handbook does not name
+   him, which a check in the script enforces, and it left out seven meanings that rest on him alone.
+6. **Three of the 13 editors ended with an API error after writing their answers** (a usage limit). Their
+   answers are complete and pass the same checks as the others; their tokens were not reported.
+7. **Not done:** the two renderings `corpus_v6` lacks, Griffith's own translations as a second rendering, and
+   the pages themselves.
+
+## 9. Cost
+
+Subagent tokens, from the task notifications: the splitters 1,169,212 (18 agents); the handbook 555,173 and its
+check 1,015,037; round one 3,565,443 (writers 433,229, translators 1,639,408, editors 534,641, judges 958,165)
+and its second judging 953,178; the held texts 10,621,434 without three editors (writers 1,162,767, the decoys'
+translators 1,380,334, translators 4,378,027, ten editors 1,145,844, judges 2,554,462). In all 17,879,477.
+
+Per text of the held round: one translator about 112,000 tokens, the panel with its editor about 450,000. An
+agent that reads one pack costs about 60,000 tokens before it reads a word of it, which is most of a short
+text's cost: the pilot's translator, five texts to an agent, took 29,000 a text.
+
+## 10. Files and commands
 
 | File | What it holds | Where |
 |---|---|---|
