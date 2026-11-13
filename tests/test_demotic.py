@@ -126,6 +126,17 @@ def test_the_ocr_and_a_readers_two_spellings_in_one():
     assert D.two_in_one("mete/mte", "FHN III", m) and not D.misread("mete/mte", "FHN III", m)
     assert D.two_in_one("pesto/peseto Akiri-te", "FHN III", m)             # two spellings, and the OCR's ñ
     assert not D.misread("hbhri", "FHN III", m) and not D.two_in_one("mreperi/mrepero", "FHN III", m)
+    assert D.corrected("hbhri qorises", ["267"]) == "hbhri qorise"                # FHN IV's corrigenda
+    assert D.corrected("hbhri qorises", ["268"]) == "hbhri qorises"               # only in the entry it corrects
+    assert D.corrected("stemedese pesetolis", ["270", "271"]) == "stemdese pesetolise"
+    titles = ({}, {}, {**in_map, D.K.M.spellings("hbhñ")[0]: held["meaning"]})
+    assert D.misprinted("hbhri qorises", ["267"], "FHN III", titles)              # corrected, then the OCR's ñ
+    assert not D.misread("hbhri qorises", "FHN III", titles)                      # the OCR alone does not do it
+    assert not D.misprinted("hbhri qorises", ["268"], "FHN III", titles)
+    assert not D.misprinted("hbhri qorises", ["267"], "Millet 2005", titles)      # FHN's misprints, FHN's lines
+    assert D.misread("hbhri qorise", "FHN III", titles)                           # no misprint: counted once,
+    assert not D.misprinted("hbhri qorise", ["267"], "FHN III", titles)           #   for the OCR
+    assert not D.misprinted("stemedese pesetolis", ["271"], "FHN III", titles)    # corrected, still not held
     assert D.cut_short("a loan from Demotic t") and D.cut_short("Isis / title related to Demotic p")
     assert not D.cut_short("Isis +i") and not D.cut_short("great envoy, chief envoy / ") and not D.cut_short("")
 
@@ -188,9 +199,12 @@ def test_reported_numbers():
         assert f"{label} | {lack[key]} | {sure[key]} |" in text, label
     assert f"| all | {sum(lack.values())} | {sum(sure.values())} |" in text
     n = f["not_in_the_map"]
-    ocr, two = n["held_once_the_ocr_is_mended"], n["held_once_two_spellings_are_read_apart"]
-    assert (f"{ocr + two} of the {n['lines']} lines \"not in the map\" are words the map holds: {ocr} misread by the "
-            f"OCR") in text and f"and {two} that a reader wrote as two spellings in one" in text
+    ocr, two, typo = (n["held_once_the_ocr_is_mended"], n["held_once_two_spellings_are_read_apart"],
+                      n["held_once_a_misprint_is_corrected"])
+    assert (f"{ocr + two + typo} of the {n['lines']} lines \"not in the map\" are words the map holds: {ocr} misread "
+            f"by the OCR") in text and f", {two} that a reader wrote as two spellings in one" in text
+    assert f"and {typo} misprinted in FHN III itself and corrected in its index volume" in text
+    assert f"The index volume corrects {f['misprints_corrected_by_fhn_iv']} of our lines in all" in text
     assert f"And {f['readings_cut_short']} of our readings reached the judges cut short" in text
     assert f"**The editors set {e['all'] - e['of_names']} Meroitic words or phrases" in text
     assert f"For the {t['our map']['translated']} different lines whose word our map translates" in text
@@ -207,7 +221,7 @@ def test_reported_numbers():
 # cost by hand, and the figures the review replaced
 ENTRIES = {"229", "231", "244", "246", "247", "249", "252", "253", "254", "260", "261", "264", "265", "267", "270",
            "271", "291", "306"}
-PAGE_STATED = ENTRIES | {"2026-11-12", "17", "80%", "5.5", "136,380", "138,439", "109,839", "384,658", "62,952",
+PAGE_STATED = ENTRIES | {"2026-11-12", "17", "80%", "5.5", "2000", "1234", "136,380", "138,439", "109,839", "384,658", "62,952",
                          "63,312", "126,264", "97"}
 NUMBER = re.compile(r"\d{4}-\d\d-\d\d|\d[\d,]*(?:\.\d+)?%?")
 
@@ -241,7 +255,8 @@ def known(f):
     out.update({str(e["all"] - e["of_names"]), str(sum(t["decoys"].values())), str(sum(t["lacking"].values())),
                 str(sum(t["lacking, stated as sure"].values())),
                 str(len(D.OTHER["Demotic"])), str(len(D.OTHER["Demotic"]) + len(D.OTHER["Greek"])),
-                str(n["held_once_the_ocr_is_mended"] + n["held_once_two_spellings_are_read_apart"])})
+                str(n["held_once_the_ocr_is_mended"] + n["held_once_two_spellings_are_read_apart"]
+                    + n["held_once_a_misprint_is_corrected"])})
     return out
 
 
@@ -280,7 +295,9 @@ def test_the_summaries_quote_the_figures():
     assert (f"{sum(t['lacking'].values())} lines, {t['lacking']['our map has no accepted meaning for the word']} of "
             "them on words without an accepted meaning") in parts["REPORT"]
     n = f["not_in_the_map"]
-    assert f"; {n['held_once_the_ocr_is_mended'] + n['held_once_two_spellings_are_read_apart']} of those are words" \
+    artefacts = sum(n[k] for k in ("held_once_the_ocr_is_mended", "held_once_two_spellings_are_read_apart",
+                                   "held_once_a_misprint_is_corrected"))
+    assert f"; {artefacts} of those are words" \
         in parts["REPORT"]
     cost = between(report, "6. **Cost:** eight analysts", "7. **What the review changed:**")
     analysts, readers, judges = 1012556, 384658, 126264

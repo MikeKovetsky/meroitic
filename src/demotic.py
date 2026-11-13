@@ -36,6 +36,11 @@ READERS = {"other": ("other_reader1", "other_reader2"), "meroitic": ("meroitic_r
 PUBLIC = ROOT / "data/discovery/demotic_figures.json"
 KNOWN = ("pelmos", "perite", "ant", "qoren", "peseto")   # equations of the editors that both readers should find
 SAME_NAME = 0.6                                        # how alike two spellings of a name must be (bare consonants)
+# The misprints of FHN III in Meroitic words that its index volume corrects (FHN IV, 2000, Corrigenda, p. 1234),
+# as (the entry, the word as printed): the word to read. Only a word of a line from that entry is read again.
+CORRIGENDA = {("267", "qorises"): "qorise",           # p. 1030 line 18: "hbhri qorises" read "hbhri qorise"
+              ("271", "stemedese"): "stemdese",       # p. 1039 line 12: "stemedese pesetolis Mheye" read
+              ("271", "pesetolis"): "pesetolise"}     #   "stemdese pesetolise Mheye"
 NAMESAKE = re.compile(r"\s*\(?\b([IVX]+|[A-Z])\)?\s*$")  # the editors' letter or number for namesakes, at the end
 
 BRIEF = """# People and their titles in {what}: a list from one printed edition
@@ -335,6 +340,22 @@ def two_in_one(word, source, m):
             and any(held(w) for a in apart(word) for w in [a] + mended(a)))
 
 
+def corrected(word, entries):
+    """The word or phrase with the misprints of FHN III that FHN IV corrects read right, for a line from the given
+    entries; the word itself when none applies."""
+    return " ".join(next((CORRIGENDA[e, tok] for e in entries if (e, tok) in CORRIGENDA), tok) for tok in word.split())
+
+
+def misprinted(word, entries, source, m):
+    """Whether a word or phrase that the map does not hold, as written or for the OCR's ñ or a reader's two
+    spellings in one, is held once the misprints that FHN IV corrects are read right (with the OCR's ñ read right
+    or not)."""
+    held = lambda w: K.held(w, source, m)[0] != "not in the map"
+    right = corrected(word, entries) if source == "FHN III" else word
+    return (right != word and not held(word) and not misread(word, source, m) and not two_in_one(word, source, m)
+            and any(held(w) for w in [right] + mended(right)))
+
+
 def cut_short(reading):
     """Whether a part of our reading ends in a word of one letter: a gloss cut at a bracket inside a word ("a loan
     from Demotic t" for t(3)-wšt.t), so that the judge does not see the word it names."""
@@ -360,7 +381,11 @@ def count(folder=OUT, before=K.FOLDER / "meanings_rows.jsonl"):
     figs["not_in_the_map"] = {"lines": len(absent),
                               "held_once_the_ocr_is_mended": sum(misread(r["word"], r["source"], m) for r in absent),
                               "held_once_two_spellings_are_read_apart":
-                                  sum(two_in_one(r["word"], r["source"], m) for r in absent)}
+                                  sum(two_in_one(r["word"], r["source"], m) for r in absent),
+                              "held_once_a_misprint_is_corrected":
+                                  sum(misprinted(r["word"], r["entries"], r["source"], m) for r in absent)}
+    figs["misprints_corrected_by_fhn_iv"] = sum(r["source"] == "FHN III" and corrected(r["word"], r["entries"]) != r["word"]
+                                               for r in lines.values())
     figs["lines_on_words_not_listed_before"] = {"lines": len(fresh), "judged": sum(bool(r["row"]) for r in fresh)}
     figs["readings_cut_short"] = sum(cut_short(r["ours"]) for r in lines.values() if r["row"])
     return figs

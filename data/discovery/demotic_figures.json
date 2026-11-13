@@ -194,8 +194,10 @@
  "not_in_the_map": {
   "lines": 26,
   "held_once_the_ocr_is_mended": 5,
-  "held_once_two_spellings_are_read_apart": 4
+  "held_once_two_spellings_are_read_apart": 4,
+  "held_once_a_misprint_is_corrected": 1
  },
+ "misprints_corrected_by_fhn_iv": 2,
  "lines_on_words_not_listed_before": {
   "lines": 53,
   "judged": 40

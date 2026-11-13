@@ -114,9 +114,11 @@ What is in it:
 5. **The same differences as before:** `ant` ("priest" in the map; "hont-priest", "prophet"), `pelmos` ("general";
    "strategus, district commissioner"), `mete`, `tebwe` (the Abaton or Thebes), `nlote` (Karanòg or Aniba), and
    the ending `-te`, which a lookup of the bare ending gets wrong.
-6. **Artefacts:** 9 of the 26 lines "not in the map" are words the map holds: 5 misread by the OCR (`ri` for the
-   letter ñ: `Akiri` for `Akiñ`, `ttri` for `ttñ`) and 4 that a reader wrote as two spellings in one (`mete/mte`,
-   `st(e)mdese`). And 2 of our readings reached the judges cut short at a bracket, so that the Demotic word they
+6. **Artefacts:** 10 of the 26 lines "not in the map" are words the map holds: 5 misread by the OCR (`ri` for the
+   letter ñ: `Akiri` for `Akiñ`, `ttri` for `ttñ`), 4 that a reader wrote as two spellings in one (`mete/mte`,
+   `st(e)mdese`), and 1 misprinted in FHN III itself and corrected in its index volume (FHN IV, 2000, p. 1234:
+   `hbhri qorises` for `hbhri qorise`). The index volume corrects 2 of our lines in all; the other (`stemedese
+   pesetolis` for `stemdese pesetolise`) stays "not in the map", which lacks `stemdese`. And 2 of our readings reached the judges cut short at a bracket, so that the Demotic word they
    name is lost (`a loan from Demotic t`).
 
 ## 5. How far to trust it

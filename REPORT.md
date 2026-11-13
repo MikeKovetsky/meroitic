@@ -543,8 +543,9 @@ The table, the map and the corpus were built without an agent; two readers then 
 4. **The editors' equations:** 143 in the readers' lists, 125 without the names, 110 different lines. The map
    translates the word of 64; two judges agree with its reading on 36 of 58 and 41 of 57, and accepted none of
    their 17 decoys. On the list of what the map lacks are 69 lines, 46 of them on words without an accepted
-   meaning, mostly titles the editors leave as titles too; 9 of those are words the map holds, spelled otherwise
-   by the OCR or written by a reader as two spellings in one. More than the map has: `qoreñ` as a title built on
+   meaning, mostly titles the editors leave as titles too; 10 of those are words the map holds, spelled otherwise
+   by the OCR, written by a reader as two spellings in one, or misprinted in FHN III and corrected in its index
+   volume. More than the map has: `qoreñ` as a title built on
    `qore` "ruler", `arbetke` as a title of priests with economic duties, and "the great envoy to Rome" for
    `apote-lẖ Arome-li-s`. No meaning is both new and sure.
 5. **Both bars of the Demotic step were met, and the hope of a meaning or two added was not:** the two readers
