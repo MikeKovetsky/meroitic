@@ -28,7 +28,7 @@ followed the same evening, 12 November 2026. The numbers below are in
    order, so glosses in order carry most of its meaning.
 6. **The full run:** scoring Millet's 18 held renderings costs about 2.1 million subagent tokens at the pilot's
    rates (1.6 million for the 13 not in the pilot; with one judge, about 0.5 million less for the 18 and 0.4
-   for the 13). Pages for the 303 inscriptions with an open reading would cost about 5.9 million with this
+   for the 13). Pages for the 304 inscriptions with an open reading would cost about 6.3 million with this
    translator, more than F4's whole estimate: by the rule set beforehand they should be built from the map's
    readings by a lighter step, which is not measured yet (section 7).
 7. **Cost:** 560,981 subagent tokens for five agents, 1.6 times the 0.35 million expected, and 398,363 for the
@@ -49,7 +49,7 @@ of its entries. `corpus_v6` holds 18 of them (not GA13 with GA16, nor GA15). By 
 The five hold 141 words. Our copies come from Millet's thesis of 1968, as Otten typed it; they differ from
 the 2005 reading in places, most in GA47 (74% of Millet's runs are in our copy).
 
-A second sample of five texts measures what a page of the 303 public-domain inscriptions costs: three epitaphs,
+A second sample of five texts measures what a page of the 304 public-domain inscriptions costs: three epitaphs,
 a temple text and a graffito, drawn by kind from the rows of `corpus_v6` whose reading is under an open licence,
 of 8 to 60 words with at most a fifth lost (REM 0240, Meroe 27, REM 0209, REM 0405, REM 0091c; 82 words).
 
@@ -187,10 +187,10 @@ The first judge's verdict on the translator is better than on the baseline for 7
    this pilot need about 1.6 million. The judges agreed on 112 of 114 lines, so a second judge on a sample only
    would save up to about 0.5 million on the 18 (0.4 on the 13). The two renderings `corpus_v6` lacks would
    have to be typed in first (F1).
-4. **The pages:** 303 inscriptions of F1's table have a reading under an open licence, with 4,625 words. For
-   286 of them (4,118 words) that reading is the row of `corpus_v6`, which the map reads; for the other 17 the
+4. **The pages:** 304 inscriptions of F1's table have a reading under an open licence, with 4,962 words. For
+   286 of them (4,118 words) that reading is the row of `corpus_v6`, which the map reads; for the other 18 the
    row holds another reading, so the map has not read the open one. At the pages translator's rate, 1,277
-   tokens a word, the 303 cost about 5.9 million subagent tokens and the 286 about 5.3, above F4's estimate of
+   tokens a word, the 304 cost about 6.3 million subagent tokens and the 286 about 5.3, above F4's estimate of
    2 to 4 million for all of it. Part of the rate is each pack's fixed part (instructions and lexicon entries),
    which larger packs would share; that is not measured. By item 1, the pages can be built from the map's
    readings with a lighter step that writes them as sentences and keeps each word's status; its cost and its

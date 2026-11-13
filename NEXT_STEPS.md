@@ -88,8 +88,8 @@ Done since this plan was written:
     [`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)). A translator blind to Millet's edition gets 58.3%
     of his 57 scored units of meaning, the map's glosses in order 60.5% (3.5% and 6.1% wrong; judges' kappa 0.97,
     no decoy accepted). The translator adds a readable text and the status of every word, not meaning the
-    renderings can see. The full scored run would cost about 2.1 million subagent tokens; pages for the 303
-    open inscriptions from this translator about 5.9 million.
+    renderings can see. The full scored run would cost about 2.1 million subagent tokens; pages for the 304
+    open inscriptions from this translator about 6.3 million.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 

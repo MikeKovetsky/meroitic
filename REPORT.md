@@ -660,7 +660,7 @@ every run, and ran the guard against copied meanings before any local file is re
    glossed in part, glosses the translator saw; one `Skl` and the relation and wrong place of GA53 rest on them.
 6. **For the full run:** scoring the 18 renderings the corpus holds costs about 2.1 million subagent tokens at
    the pilot's rates (1.6 million for the 13 left; with one judge about 0.5 million less for the 18, 0.4 for the
-   13); pages for the 303 inscriptions with an open reading with this translator about 5.9 million (5.3 for the
+   13); pages for the 304 inscriptions with an open reading with this translator about 6.3 million (5.3 for the
    286 whose corpus row is that reading). By the rule set beforehand the pages should be built from the map's
    readings by a lighter step, not yet measured. The splitter's "open" marks, the judges' rule against outside
    knowledge and the baseline's glosses need fixing first
