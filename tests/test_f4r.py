@@ -504,5 +504,47 @@ def test_the_page_quotes_the_figures():
         assert f"{total:,}" in cost, rnd
 
 
+def test_the_summaries_quote_the_figures():
+    """README, REPORT and NEXT_STEPS say of the rounds what the figures file says."""
+    public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
+    read = lambda name: " ".join((ROOT / name).read_text(encoding="utf-8").split())        # noqa: E731
+    parts = {"README": between(read("README.md"), "16. **A translator with a handbook", "## The question"),
+             "REPORT": read("REPORT.md")[read("REPORT.md").index("## Day six (2026-11-13)"):],
+             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "17. **F4, the rounds", "Next, in this order"),
+             "NEXT_STEPS, F4": between(read("NEXT_STEPS.md"), "- **The rounds, 13 November**", "The order: F1")}
+    h, b, one = public["held"], public["r1b"], public["r1"]
+    score, wrong = h["score"], h["wrong"]
+    for name in ("README", "REPORT", "NEXT_STEPS"):
+        text = parts[name]
+        for n in ("glosses", "writer", "translator", "panel"):
+            assert pct(score[n]) in text, (name, n)
+        assert f"{pct(wrong['glosses'])}, {pct(wrong['writer'])}, {pct(wrong['translator'])} and {pct(wrong['panel'])}" in text, name
+        assert f"{h['units']['scored']} units" in text and f"kappa {h['agreement']['kappa']:.2f}" in text, name
+        d = h["decoys_measure"]["1"]
+        assert f"{d['accepted']} of {d['clean_units']} clean decoy units" in text, name
+        assert f"{100 * h['lead']['panel']:.1f} points" in text, name
+    for name in ("README", "REPORT"):
+        text = parts[name]
+        assert f"kappa {one['agreement']['kappa']:.2f}" in text or f"kappa was {one['agreement']['kappa']:.2f}" in text, name
+        assert f"kappa {b['agreement']['kappa']:.2f}" in text, name
+        assert f"{100 * h['lead']['writer']:.1f} of the {100 * h['lead']['panel']:.1f} points" in text, name
+    report = parts["REPORT"]
+    for n in ("glosses", "pilot", "writer", "translator", "panel"):
+        assert f"{n} {pct(b['score'][n])}" in report, n
+    c = json.loads(json.dumps(R.TOKENS))
+    total = sum(c.values())
+    assert f"{total:,} subagent tokens" in report and f"{total:,}" in parts["NEXT_STEPS, F4"]
+    for key in ("all:splitters", "all:handbook", "all:handbook_check", "r1b:judges"):
+        assert f"{c[key]:,}" in report, key
+    for rnd in ("r1", "held"):
+        assert f"{sum(n for k, n in c.items() if k.startswith(rnd + ':')):,}" in report, rnd
+    f4 = parts["NEXT_STEPS, F4"]
+    for n in ("glosses", "writer", "translator", "panel"):
+        assert pct(score[n]) in f4, n
+    book = public["held"]["handbook"]
+    assert f"{book['sourced']} lines with a source" in report and f"{book['confirmed']} confirmed, {book['corrected']} corrected" in report
+    assert book.get("unsupported", 0) == 0 and "none dropped" in report and f"{book['unchecked']} outside their ranges" in report
+
+
 if __name__ == "__main__":
     run([(name, fn) for name, fn in globals().items() if name.startswith("test_")])

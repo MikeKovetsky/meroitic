@@ -157,6 +157,20 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     accepted). The translator adds a text a reader can follow and the status of every word; it leaves open what
     the map knows only vaguely, where a vague gloss earns half credit. Scoring all 18 of Millet's renderings the
     corpus holds would cost about 2.1 million subagent tokens ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
+16. **A translator with a handbook beats the map read word by word, also on texts it was not tuned on: 74.9%
+    of a scholar's units of meaning against 58.5%.** After the pilot, several ways of translating were compared
+    on its five texts: the map's glosses in order; a writer that only turns them into sentences; a translator with
+    rules that keep a vague meaning instead of leaving the word open, a handbook of the grammar and of how an
+    epitaph is built (compiled from the sources in hand, each line with its page, and checked line by line), and
+    the other places of the corpus where each word stands; and a panel of three such translators with an editor.
+    The first judging missed its bar (the judges' kappa 0.58: "related to" against "nephew or niece"), so one rule
+    was added and the same readings judged again by new judges (kappa 0.94). The panel was carried to the 13 other
+    renderings of Millet's that the corpus holds, held back until then: of 218 units the glosses get 58.5%, the
+    writer 69.3%, one translator 73.9% and the panel 74.9%, with 9.2%, 4.4%, 2.8% and 2.3% of the units wrong
+    (judges' kappa 0.88; each judge accepted 1 of 186 clean decoy units). The panel is not shown to beat one
+    translator, and the writer alone gets 10.8 of the 16.4 points: most of the gain is the handbook and the
+    order of a sentence. The pages for the 304 open inscriptions are not built yet
+    ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
 
 ## The question
 
@@ -473,6 +487,20 @@ translator's, the baseline, and a decoy, the translation of another text sharing
 rendering as can be. The bars and the expected scores were committed before any agent answered; `public` writes
 the counts ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
 
+### 23. Ways of translating compared, then scored once on held texts (`src/f4r.py`)
+
+`split` writes one splitter's pack for each of the 18 renderings: the pilot's instructions, but a unit is open
+only when all of it is untranslated. `handbook` applies the checkers' verdicts (confirmed, corrected,
+unsupported) to the handbook its compiler wrote, and no pack is built from a handbook that was not checked or
+that names Millet. `packs` writes, one text to a pack, the writer's pack (the map's reading of each word with
+its status, and the handbook) and three translators' packs (the pilot's materials, the rules, the handbook and
+the parallels: up to three other places of the corpus for each word, with the map's readings around it);
+`editors` writes the pack that makes one translation of the three; `judges` gives two judges each text's units,
+at most 20 a pack, beside the readings in an order of their own, with a decoy. A round can judge another
+round's readings again (`r1b`, with the rule on kinship). `count` gives each reading's score, its wrong units,
+its lead over the glosses unit by unit, the judges' agreement, the decoys and the reading carried on by the rule
+set beforehand ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -487,7 +515,7 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python3 -I tests/test_akinidad.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
-python3 -I tests/test_f4.py
+python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -523,6 +551,9 @@ Twelve things need files that are kept locally (Data, above), so they don't run 
 - `python3 -I src/f4.py count` (and `choose`, `packs`, `judges`, `public`) reads the text layer of Millet 2005,
   `corpus_v6` and its gloss file, Rilly's lexicon, F2's judges' answers, the check against the two editions and
   the translators', splitter's and judges' answers.
+- `python3 -I src/f4r.py count r1` (and `split`, `handbook`, `packs`, `editors`, `judges`, `public`, `show`; the
+  rounds `r1`, `r1b` and `held`) reads what `src/f4.py` reads, the handbook and its checkers' verdicts, and the
+  splitters', writers', translators', editors' and judges' answers.
 
 ## Layout
 

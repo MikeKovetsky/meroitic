@@ -7,7 +7,7 @@ The goal from here: an openly licensed and larger Meroitic corpus, an honest met
 scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
 looks like.
 
-## Where things stand (written 2026-11-10; points 7 to 16 added up to 2026-11-13)
+## Where things stand (written 2026-11-10; points 7 to 17 added up to 2026-11-13)
 
 Done since this plan was written:
 
@@ -90,6 +90,12 @@ Done since this plan was written:
     no decoy accepted). The translator adds a readable text and the status of every word, not meaning the
     renderings can see. The full scored run would cost about 2.1 million subagent tokens; pages for the 304
     open inscriptions from this translator about 6.3 million.
+17. **F4, the rounds: a translator with a handbook, scored on held texts** (2026-11-13,
+    [`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)). On the 13 renderings of Millet's held back
+    (218 units) the glosses get 58.5%, a writer of sentences 69.3%, one translator 73.9% and a panel of three
+    with an editor 74.9%, with 9.2%, 4.4%, 2.8% and 2.3% of the units wrong (judges' kappa 0.88; 1 of 186 clean
+    decoy units accepted by each judge). The lead of 16.4 points is over the bar of 5 set beforehand. The panel
+    is not shown to beat one translator.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -422,6 +428,17 @@ days, not hours. The costs are estimates from what the runs so far cost.
       five texts, scored the same way; (c) then the scored run of the 13 held renderings not in the pilot (about
       1.6 million subagent tokens at the pilot's rates, about 0.4 million less with one judge), and Griffith's
       own translations as a second rendering for the Karanòg pages.
+
+    - **The rounds, 13 November** ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)): items (a) and
+      (b) are done and the scored run of (c) too, for the 13 held renderings. The scoring's three faults are
+      fixed; the lighter step is the "writer" (69.3% on the held texts); a translator with rules, a handbook and
+      parallels gets 73.9% and a panel of three with an editor 74.9%, against 58.5% for the glosses. Cost:
+      17,879,477 subagent tokens.
+    - **Next in this step now:** the pages for the 304 open inscriptions. One translator costs about 112,000
+      subagent tokens a text (about 34 million for the 304), the panel about 450,000 (about 137 million), and
+      the panel's 1.0 point over one translator is not shown to be a gain. Most of the cost is each agent's
+      fixed part: several texts to an agent would cut it, and that has to be scored on the five tuning texts
+      before it is used. Then Griffith's own translations as a second rendering.
 
 The order: F1, then F2, then F3 and F4 side by side. Outside the four, the path through people stays open in
 section A: a specialist's reading of one page would be worth more than any of these runs.

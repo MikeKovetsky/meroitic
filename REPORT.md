@@ -675,3 +675,45 @@ the sizing in the script, and ended not clean on one line: the brief asked the t
 renderings themselves, and one blind splitter did it. Mike waived that line the same evening (21:14), and the
 reviewer, with his words, re-checked and marked a410dae: 28,262 subagent tokens more and about four minutes, 987,606
 for the pilot with its review.
+
+## Day six (2026-11-13): ways of translating compared, and the best scored on held texts (F4)
+
+The pilot of the day before left three faults in its scoring and one question: can a translation carry more of a
+scholar's meaning than the map's glosses in order? The page is
+[`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md); the design, the bars, the expected scores and the
+rule for what is carried on were committed before the agents of each step answered.
+
+**What changed.** Every one of the 18 renderings was cut again, by a splitter of its own that marks a unit open
+only when all of it is untranslated (on the pilot's five texts 1 open unit has a translated part, against 17).
+The judges may tell that two names are one place. The glosses show every gloss the translators see. And the
+translator got three things: rules that keep what the materials hold (a vague gloss stays, a disputed word shows
+both readings), a handbook, and parallels from the corpus. The handbook was compiled by one agent from Rilly's
+lexicon, Rilly 2021, the *Fontes Historiae Nubiorum*, Griffith 1911 and 1912, Lipiński 2011 and the project's
+pages, without Millet's edition: 124 lines with a source and a page. Four checkers read each against its page:
+80 confirmed, 43 corrected, none dropped, 1 outside their ranges.
+
+**Round one, on the pilot's five texts (75 units).** Five readings and a decoy: the pilot's translation, the
+glosses, a writer that only makes sentences of the glosses, one translator, and a panel of three translators
+with an editor. The first judging missed its bar: the judges' kappa was 0.58, because in GA28 Millet writes "she
+was related to X" where every reading says "nephew or niece of X", and one judge called that given and the other
+partly. By the rule set beforehand nothing was carried on. One rule was added (a kin term where the rendering
+names none is "partly") and 14 new judges read the same readings: kappa 0.94, no decoy accepted, glosses 63.0%,
+pilot 65.0%, writer 69.7%, translator 75.3%, panel 78.0%. The panel was carried on.
+
+**The held texts (13 renderings, 218 units), the result.** Both bars met: kappa 0.88, and each judge accepted 1
+of 186 clean decoy units. The glosses get 58.5%, the writer 69.3%, one translator 73.9% and the panel 74.9%; they
+are wrong on 9.2%, 4.4%, 2.8% and 2.3% of the units. The panel's lead over the glosses, 16.4 points, is over the
+bar of 5 set beforehand and inside the 8 to 18 expected. Unit by unit the panel is better than the glosses on 56
+and 55 units and worse on 2 and 2. The gain is largest in places (44.6% to 87.0%) and smallest in relations
+(45.6% to 52.9%).
+
+**What it does not show.** The panel leads one translator by 1.0 point, which is 2 to 4 units: the editing of
+three into one is not shown to add anything. The writer, who sees no lexicon entry and no parallel, gets 10.8 of
+the 16.4 points: most of the gain is the handbook and the order of a sentence. All 18 renderings are one
+scholar's, from one site. The pages for the 304 open inscriptions are not built, and Griffith's own translations
+are not yet a second rendering.
+
+**Cost.** 17,879,477 subagent tokens for the day's rounds without three editors whose tokens were not reported:
+the splitters 1,169,212, the handbook 555,173 and its check 1,015,037, round one 3,565,443 and its second
+judging 953,178, the held texts 10,621,434. One translator costs about 112,000 tokens a text and the panel about
+450,000, most of it each agent's fixed cost.
