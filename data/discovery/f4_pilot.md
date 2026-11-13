@@ -107,9 +107,10 @@ What the pilot then says about the full run, decided beforehand:
 
 ## 5. The result
 
-Millet's renderings of the five texts were cut into 98 units of meaning. He leaves 38 of them untranslated (a
-Meroitic word kept in the rendering, or a gap), so 60 went to the judges; 57 are scored, because 3 render
-Meroitic that is not in our copy. Scores are (given + half of partly) over the 57, pooled over the texts:
+Millet's renderings of the five texts were cut into 98 units of meaning. The splitter marked 38 of them open,
+where Millet keeps a Meroitic word in the rendering or leaves a gap (17 of them only in part, section 8), so 60
+went to the judges; 57 are scored, because 3 render Meroitic that is not in our copy. Scores are (given + half
+of partly) over the 57, pooled over the texts:
 
 | | Expected | Judge 1 | Judge 2 | Mean | Given only | Wrong |
 |---|---|---|---|---|---|---|
@@ -208,9 +209,12 @@ The first judge's verdict on the translator is better than on the baseline for 7
 3. **The decoys were easy.** They were translations of other texts, with other names: they show that a judge
    does not credit a reading of another text, not how it weighs a vague reading of the right one, and "partly"
    is where the two readings part most.
-4. **The splitter's "open" is coarse.** Four units join a translated part to an untranslated word or a gap (the
-   invocations of Isis with her epithet in GA41 and GA53; "the mother of ..." twice in GA37) and are marked open
-   whole, so they fall out for every reading.
+4. **The splitter's "open" is coarse.** 17 of the 38 open units join a translated part to an untranslated word
+   or a gap and are marked open whole, so they fall out for every reading: the invocations of Isis and of
+   Osiris with their epithets in GA41 and GA53, a title of GA28 that Millet renders "chief" with the Meroitic
+   word six times and another with "priest" three times, "the mother of ..." twice and the qorene "of Isis" in
+   GA37, and one in GA53 (counted as the open units whose English holds a word that is not the Meroitic they
+   render; before the review this item named four).
 5. **The rule for units in our copy missed two of GA28's** (a name with lost signs, and `qowi`, spelled `qewi`
    in our copy). They count only in the figure with all 60 units.
 6. **The judges could not use outside knowledge,** so both called "Sedeinga" wrong for Millet's "Atiye" (GA28,

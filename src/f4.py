@@ -442,11 +442,23 @@ def order_of(judge, text, seed=SEED):
     return dict(zip(LETTERS, random.Random(f"{seed} order judge{judge} {text}").sample(READINGS, len(READINGS))))
 
 
+def letters(meroitic):
+    """The Meroitic a unit renders, as Millet prints it, in bare letters (prepare.reduced_expert; ḫ and ẖ as h)."""
+    return P.reduced_expert((meroitic or "").replace("ḫ", "x").replace("ẖ", "h"))
+
+
+def translated_part(u):
+    """Whether a unit's English holds a content word that is not among the letters of the Meroitic it renders: a
+    word Millet translates. An open unit with one is open only in part."""
+    m = letters(u["meroitic"])
+    return any(P.reduced_expert(w) not in m for w in stems(u["english"]))
+
+
 def in_copy(meroitic, ours):
     """Whether the Meroitic a unit renders, as Millet prints it, stands in our copy (bare letters, as
     prepare.reduced_expert and reduced_ours give them): as a run, or half of its runs of four letters. A unit
     that names no word counts as in our copy."""
-    m = P.reduced_expert((meroitic or "").replace("ḫ", "x").replace("ẖ", "h"))
+    m = letters(meroitic)
     if not m:
         return True
     if m in ours:
@@ -627,7 +639,11 @@ def count(out=OUT, rows=None, gl=None):
     v = {j: verdicts_of(out / "answers" / f"judge{j}.jsonl", key, j) for j in (1, 2)}
     figs = {"pilot": ids, "pages": pages, "decoys": key["decoys"], "decoy_shared_words": key["decoy_shared_words"]}
     every = [u for t in ids for u in units.get(t, [])]
-    figs["units"] = {"all": len(every), "open": sum(u["open"] for u in every), "judged": len(judged),
+    figs["units"] = {"all": len(every), "open": sum(u["open"] for u in every),
+                     # not set before the run: open units the splitter marked open whole, though Millet translates
+                     # a part of them
+                     "open_with_a_translated_part": sum(u["open"] and translated_part(u) for u in every),
+                     "judged": len(judged),
                      "not_in_copy": len(judged) - len(scored), "scored": len(scored),
                      "doubt_scored": sum(u["doubt"] for t in ids for u in units.get(t, [])
                                          if (t, u["unit"]) in set(scored)),

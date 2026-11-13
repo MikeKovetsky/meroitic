@@ -199,6 +199,14 @@ def test_a_unit_in_our_copy():
     assert F.in_copy("ẖelowi", ours) and F.in_copy("tedḫelowi", ours)                   # ẖ and ḫ read as h
 
 
+def test_a_unit_open_in_part():
+    assert F.translated_part({"english": "O Isis, the wetneyinqe", "meroitic": "wos wet[neyine]qeli"})
+    assert F.translated_part({"english": "the chief womnise", "meroitic": "womnith"})
+    assert not F.translated_part({"english": "the aribet", "meroitic": "aribe[t]"})
+    assert not F.translated_part({"english": "A txbo", "meroitic": "txbo"})            # x read as h on both sides
+    assert not F.translated_part({"english": ". . .", "meroitic": ""})
+
+
 def test_the_decoys_share_the_fewest_words():
     rend = {"A": "O Isis! May she drink much water.", "B": "The king built the temple of Amun."}
     dec = {"X": "Isis gives water.", "Y": "The king's temple.", "Z": "A list of jars and baskets."}
@@ -328,6 +336,7 @@ def test_the_count_of_a_made_up_run():
         assert figs["units"]["all"] == 5 and figs["units"]["open"] == 1 and figs["units"]["judged"] == 4
         assert figs["units"]["scored"] == 3 and figs["units"]["not_in_copy"] == 1
         assert figs["units"]["doubt_scored"] == 1                          # T1 U01; U03 is open, T2 U02 not in copy
+        assert figs["units"]["open_with_a_translated_part"] == 0          # U03 is all Meroitic
         key = json.loads((out / "key.json").read_text(encoding="utf-8"))
         v = F.verdicts_of(out / "answers" / "judge1.jsonl", key, 1)
         assert len(v) == 12 and not any(u == "U03" for _, u, _ in v)      # 4 units by 3 readings; no open unit
@@ -461,6 +470,10 @@ def test_the_summaries_quote_the_figures():
     assert f"({100 * st['statuses']['open'] / st['words']:.0f}% of the words left open)" in parts["page"]
     assert f"{f['sizing']['pilot_total'] / 350_000:.1f} times the 0.35 million expected" in parts["page"]
     assert "| Subagent tokens of the pilot, review aside | about 0.35 million |" in page
+    u = f["units"]
+    assert f"{u['all']} units of meaning. The splitter marked {u['open']} of them open" in page
+    assert f"({u['open_with_a_translated_part']} of them only in part, section 8)" in page
+    assert f"{u['open_with_a_translated_part']} of the {u['open']} open units join a translated part" in page
     hidden = sum(map(len, f["baseline_without_the_gloss"].values()))
     for text in (page, " ".join(read("REPORT.md").split())):
         assert f"{hidden} of the {st['words_pilot']} words" in text

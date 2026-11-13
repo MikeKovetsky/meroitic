@@ -30,6 +30,7 @@
  "units": {
   "all": 98,
   "open": 38,
+  "open_with_a_translated_part": 17,
   "judged": 60,
   "not_in_copy": 3,
   "scored": 57,
