@@ -145,6 +145,15 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     verb `l` "to give" disputed on the numeral 1 typed as `l`. The public tables give each entry's meaning in words
     of our own (for the 177), its spellings with the confirmed variants of step 21, and the pages of the statements
     where the sources in hand give them ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
+15. **Five inscriptions translated whole, and scored against a scholar's renderings: the translation does not
+    beat the map read word by word.** A translator agent, blind to N. B. Millet's edition of the Gebel Adda
+    inscriptions (2005), translated five of the texts he renders, from the map's reading of each word and the
+    statuses of F2 counted again without his proposals. Two judges with decoys marked each of his units of
+    meaning given, partly, wrong or missing: of 57 units the translator gets 58.3% (given, and half of partly)
+    and the map's glosses in order 60.5%, with 3.5% and 6.1% of the units wrong (judges' kappa 0.97, no decoy
+    accepted). The translator adds a text a reader can follow and the status of every word; it leaves open what
+    the map knows only vaguely, where a vague gloss earns half credit. Scoring all 18 of Millet's renderings the
+    corpus holds would cost about 2.1 million subagent tokens ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
 
 ## The question
 
@@ -448,6 +457,18 @@ meaning in words of our own for the entries behind translated words (checked to 
 the lexicon's), statuses, the scholars cited, the editors' verdicts counted, spellings and the pages of the
 statements (`src/lexicon_refs.py`) ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
+### 22. Whole texts translated and scored, a pilot (`src/f4.py`)
+
+`choose` takes five of the texts Millet's Gebel Adda article (2005) renders into English, one of each kind of
+object and three stelae of different lengths, and five texts under an open licence for the cost of a page.
+`packs` writes, for a translator agent, each text with the map's reading of every word and the lexicon's entries
+with F2's statuses, Millet taken out of all of it (his proposals, the meanings that name him, and his weight in
+the statuses); the map's glosses in order are the baseline; a splitter agent cuts Millet's renderings into units
+of meaning. `judges` gives two judges each unit beside three unmarked readings in an order of its own: the
+translator's, the baseline, and a decoy, the translation of another text sharing as few content words with the
+rendering as can be. The bars and the expected scores were committed before any agent answered; `public` writes
+the counts ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -462,6 +483,7 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
+python3 -I tests/test_f4.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -470,7 +492,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Eleven things need files that are kept locally (Data, above), so they don't run from a clone:
+Twelve things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -494,14 +516,18 @@ Eleven things need files that are kept locally (Data, above), so they don't run 
 - `python3 -I src/lexicon.py public` (and `layout`, `packs`, `check`, `round2`, `count`) reads Rilly's lexicon, the
   coverage map's gloss file of the clean corpus, the check against the two editions, the judges' and the writer's
   answers, and for the check, Griffith's own texts.
+- `python3 -I src/f4.py count` (and `choose`, `packs`, `judges`, `public`) reads the text layer of Millet 2005,
+  `corpus_v6` and its gloss file, Rilly's lexicon, F2's judges' answers, the check against the two editions and
+  the translators', splitter's and judges' answers.
 
 ## Layout
 
 - `src/`: corpus cleaning, task builders, scorers, the synthetic language, cognate tests, lexicon test, merge,
   the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`), the search
   for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
-  the corpus keyed by inscription and its analysts (`v6/`) and the same people in Demotic, Greek and Meroitic
-  (`demotic.py`).
+  the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
+  (`demotic.py`), the second scholar for every meaning (`lexicon.py`) and whole texts translated and scored
+  (`f4.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

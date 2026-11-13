@@ -84,6 +84,12 @@ Done since this plan was written:
     stated by one, 360 proposed). The public tables give each meaning behind a translated word in words of our
     own, each entry's spellings with the confirmed variants, and pages where the sources in hand give them.
     Left: a meaning in our words for the 417 other entries, and the pages of the scholars whose works we lack.
+16. **F4, the pilot: five texts translated whole and scored** (2026-11-12,
+    [`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)). A translator blind to Millet's edition gets 58.3%
+    of his 57 scored units of meaning, the map's glosses in order 60.5% (3.5% and 6.1% wrong; judges' kappa 0.97,
+    no decoy accepted). The translator adds a readable text and the status of every word, not meaning the
+    renderings can see. The full scored run would cost about 2.1 million subagent tokens; pages for the 303
+    open inscriptions from this translator about 5.9 million.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -395,6 +401,18 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Done: the texts with a full rendering counted, their agreement with the printed renderings measured, and
       the pages public.
     - Cost: 2 to 4 million subagent tokens. Needs F1 and F2.
+    - **Pilot, 12 November** ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)): five of Millet's 20
+      renderings, a translator blind to Millet, the map's glosses in order as the baseline, two judges with
+      decoys. Both bars met (kappa 0.97; no decoy accepted). Translator 58.3% of 57 units, baseline 60.5%: under
+      the 5 points of lead set beforehand, so the translator adds readability, not meaning. 560,981 subagent
+      tokens.
+    - **Next in this step:** (a) fix the splitter's rule so that a unit is open only where all of it is
+      untranslated, let the judges know that two names of a place are one, and give the baseline every gloss
+      the translator sees (a word the map counts as unknown was "?" in the pilot's baseline); (b) a pilot of the
+      lighter step for the pages (the map's readings written as sentences, each word's status kept) on the same
+      five texts, scored the same way; (c) then the scored run of the 13 held renderings not in the pilot (about
+      1.6 million subagent tokens at the pilot's rates, about 0.4 million less with one judge), and Griffith's
+      own translations as a second rendering for the Karanòg pages.
 
 The order: F1, then F2, then F3 and F4 side by side. Outside the four, the path through people stays open in
 section A: a specialist's reading of one page would be worth more than any of these runs.
