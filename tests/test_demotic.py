@@ -137,6 +137,8 @@ def test_the_ocr_and_a_readers_two_spellings_in_one():
     assert D.misread("hbhri qorise", "FHN III", titles)                           # no misprint: counted once,
     assert not D.misprinted("hbhri qorise", ["267"], "FHN III", titles)           #   for the OCR
     assert not D.misprinted("stemedese pesetolis", ["271"], "FHN III", titles)    # corrected, still not held
+    assert D.corrected("ant boqhw dik", ["268"]) == "ant Boqhw dik"              # a capital letter only:
+    assert not D.misprinted("ant boqhw dik", ["268"], "FHN III", titles)          #   the lookup is the same
     assert D.cut_short("a loan from Demotic t") and D.cut_short("Isis / title related to Demotic p")
     assert not D.cut_short("Isis +i") and not D.cut_short("great envoy, chief envoy / ") and not D.cut_short("")
 

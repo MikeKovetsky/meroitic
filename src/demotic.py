@@ -36,11 +36,13 @@ READERS = {"other": ("other_reader1", "other_reader2"), "meroitic": ("meroitic_r
 PUBLIC = ROOT / "data/discovery/demotic_figures.json"
 KNOWN = ("pelmos", "perite", "ant", "qoren", "peseto")   # equations of the editors that both readers should find
 SAME_NAME = 0.6                                        # how alike two spellings of a name must be (bare consonants)
-# The misprints of FHN III in Meroitic words that its index volume corrects (FHN IV, 2000, Corrigenda, p. 1234),
-# as (the entry, the word as printed): the word to read. Only a word of a line from that entry is read again.
+# The misprints of FHN III in Meroitic words that its index volume corrects, a capital letter too (FHN IV, 2000,
+# Corrigenda, p. 1234), as (the entry, the word as printed): the word to read. Only a word of a line from that entry
+# is read again.
 CORRIGENDA = {("267", "qorises"): "qorise",           # p. 1030 line 18: "hbhri qorises" read "hbhri qorise"
               ("271", "stemedese"): "stemdese",       # p. 1039 line 12: "stemedese pesetolis Mheye" read
-              ("271", "pesetolis"): "pesetolise"}     #   "stemdese pesetolise Mheye"
+              ("271", "pesetolis"): "pesetolise",     #   "stemdese pesetolise Mheye"
+              ("268", "boqhw"): "Boqhw"}              # p. 1032 line 35: "ant boqhw dik" read "ant Boqhw dik"
 NAMESAKE = re.compile(r"\s*\(?\b([IVX]+|[A-Z])\)?\s*$")  # the editors' letter or number for namesakes, at the end
 
 BRIEF = """# People and their titles in {what}: a list from one printed edition
