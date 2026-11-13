@@ -625,3 +625,10 @@ page for 10 of the 206 proposals both judges found the same or otherwise. Rilly'
 them; the other scholars' pages are not in our sources, but for papers the Meroitic Newsletter may hold, which a
 year alone does not point to without Rilly's bibliography. Left open: a meaning in our words for the 417 other
 entries, and FHN IV's glosses as the statement of a second scholar.
+
+**The review of round three** (full tier) cost 596,297 subagent tokens and 43 minutes, by hand from its task
+notification. It fixed the count of the confirmed variants (a piece written as a headword is now compared in the
+corpus's letters), added FHN IV's indexes of places, persons and royal names, made the figures file the same on
+every run, and ran the guard against copied meanings before any local file is read. Round three with its review:
+767,689 subagent tokens. F2 so far: 2,458,456 with its three reviews, within the 2 to 3 million that step 23 of
+`NEXT_STEPS.md` quotes for it.
