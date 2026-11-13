@@ -1,0 +1,376 @@
+{
+ "griffith": {
+  "lines": 42,
+  "words": 337,
+  "words_he_doubts": 38
+ },
+ "how": "both texts spelled alike (src/expand.py skeleton(), digits kept: o and e, s and se, n and ne, x and X, capitals and small letters folded) and lined up letter by letter (difflib); a word of Griffith's agrees when every letter of it lies in a stretch the two share. strict: the same with nothing folded, the corpus spelling as it stands (Otten's file writes the sign s as s, where the corpus writes S, so it agrees less there)",
+ "against": {
+  "otten:narrative:hamadab": {
+   "words": 337,
+   "agree": 278,
+   "share": 0.825,
+   "letters": 1733,
+   "letters_agree": 1642,
+   "letters_share": 0.947,
+   "closed_words": 485,
+   "by_line": {
+    "1": {
+     "agree": 6,
+     "words": 6
+    },
+    "2": {
+     "agree": 7,
+     "words": 7
+    },
+    "3": {
+     "agree": 7,
+     "words": 8
+    },
+    "4": {
+     "agree": 7,
+     "words": 8
+    },
+    "5": {
+     "agree": 8,
+     "words": 9
+    },
+    "6": {
+     "agree": 7,
+     "words": 9
+    },
+    "7": {
+     "agree": 7,
+     "words": 9
+    },
+    "8": {
+     "agree": 9,
+     "words": 10
+    },
+    "9": {
+     "agree": 8,
+     "words": 9
+    },
+    "10": {
+     "agree": 10,
+     "words": 11
+    },
+    "11": {
+     "agree": 9,
+     "words": 10
+    },
+    "12": {
+     "agree": 10,
+     "words": 11
+    },
+    "13": {
+     "agree": 7,
+     "words": 10
+    },
+    "14": {
+     "agree": 8,
+     "words": 8
+    },
+    "15": {
+     "agree": 6,
+     "words": 9
+    },
+    "16": {
+     "agree": 9,
+     "words": 12
+    },
+    "17": {
+     "agree": 8,
+     "words": 9
+    },
+    "18": {
+     "agree": 4,
+     "words": 7
+    },
+    "19": {
+     "agree": 8,
+     "words": 10
+    },
+    "20": {
+     "agree": 11,
+     "words": 12
+    },
+    "21": {
+     "agree": 8,
+     "words": 9
+    },
+    "22": {
+     "agree": 5,
+     "words": 9
+    },
+    "23": {
+     "agree": 7,
+     "words": 8
+    },
+    "24": {
+     "agree": 4,
+     "words": 7
+    },
+    "25": {
+     "agree": 3,
+     "words": 8
+    },
+    "26": {
+     "agree": 7,
+     "words": 8
+    },
+    "27": {
+     "agree": 8,
+     "words": 8
+    },
+    "28": {
+     "agree": 8,
+     "words": 8
+    },
+    "29": {
+     "agree": 4,
+     "words": 6
+    },
+    "30": {
+     "agree": 5,
+     "words": 7
+    },
+    "31": {
+     "agree": 7,
+     "words": 8
+    },
+    "32": {
+     "agree": 2,
+     "words": 5
+    },
+    "33": {
+     "agree": 6,
+     "words": 8
+    },
+    "34": {
+     "agree": 4,
+     "words": 5
+    },
+    "35": {
+     "agree": 7,
+     "words": 8
+    },
+    "36": {
+     "agree": 6,
+     "words": 7
+    },
+    "37": {
+     "agree": 5,
+     "words": 6
+    },
+    "38": {
+     "agree": 5,
+     "words": 7
+    },
+    "39": {
+     "agree": 6,
+     "words": 6
+    },
+    "40": {
+     "agree": 6,
+     "words": 6
+    },
+    "41": {
+     "agree": 5,
+     "words": 5
+    },
+    "42": {
+     "agree": 4,
+     "words": 4
+    }
+   },
+   "strict": {
+    "agree": 245,
+    "share": 0.727
+   }
+  },
+  "mnl:REM 1003|MeroNews6": {
+   "words": 337,
+   "agree": 276,
+   "share": 0.819,
+   "letters": 1733,
+   "letters_agree": 1651,
+   "letters_share": 0.953,
+   "closed_words": 389,
+   "by_line": {
+    "1": {
+     "agree": 4,
+     "words": 6
+    },
+    "2": {
+     "agree": 6,
+     "words": 7
+    },
+    "3": {
+     "agree": 6,
+     "words": 8
+    },
+    "4": {
+     "agree": 8,
+     "words": 8
+    },
+    "5": {
+     "agree": 9,
+     "words": 9
+    },
+    "6": {
+     "agree": 5,
+     "words": 9
+    },
+    "7": {
+     "agree": 5,
+     "words": 9
+    },
+    "8": {
+     "agree": 9,
+     "words": 10
+    },
+    "9": {
+     "agree": 9,
+     "words": 9
+    },
+    "10": {
+     "agree": 9,
+     "words": 11
+    },
+    "11": {
+     "agree": 8,
+     "words": 10
+    },
+    "12": {
+     "agree": 10,
+     "words": 11
+    },
+    "13": {
+     "agree": 9,
+     "words": 10
+    },
+    "14": {
+     "agree": 7,
+     "words": 8
+    },
+    "15": {
+     "agree": 6,
+     "words": 9
+    },
+    "16": {
+     "agree": 11,
+     "words": 12
+    },
+    "17": {
+     "agree": 6,
+     "words": 9
+    },
+    "18": {
+     "agree": 6,
+     "words": 7
+    },
+    "19": {
+     "agree": 6,
+     "words": 10
+    },
+    "20": {
+     "agree": 11,
+     "words": 12
+    },
+    "21": {
+     "agree": 6,
+     "words": 9
+    },
+    "22": {
+     "agree": 6,
+     "words": 9
+    },
+    "23": {
+     "agree": 8,
+     "words": 8
+    },
+    "24": {
+     "agree": 4,
+     "words": 7
+    },
+    "25": {
+     "agree": 6,
+     "words": 8
+    },
+    "26": {
+     "agree": 7,
+     "words": 8
+    },
+    "27": {
+     "agree": 6,
+     "words": 8
+    },
+    "28": {
+     "agree": 8,
+     "words": 8
+    },
+    "29": {
+     "agree": 6,
+     "words": 6
+    },
+    "30": {
+     "agree": 7,
+     "words": 7
+    },
+    "31": {
+     "agree": 7,
+     "words": 8
+    },
+    "32": {
+     "agree": 4,
+     "words": 5
+    },
+    "33": {
+     "agree": 8,
+     "words": 8
+    },
+    "34": {
+     "agree": 5,
+     "words": 5
+    },
+    "35": {
+     "agree": 8,
+     "words": 8
+    },
+    "36": {
+     "agree": 6,
+     "words": 7
+    },
+    "37": {
+     "agree": 5,
+     "words": 6
+    },
+    "38": {
+     "agree": 3,
+     "words": 7
+    },
+    "39": {
+     "agree": 5,
+     "words": 6
+    },
+    "40": {
+     "agree": 3,
+     "words": 6
+    },
+    "41": {
+     "agree": 4,
+     "words": 5
+    },
+    "42": {
+     "agree": 4,
+     "words": 4
+    }
+   },
+   "strict": {
+    "agree": 273,
+    "share": 0.81
+   }
+  }
+ }
+}

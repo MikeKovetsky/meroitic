@@ -1,0 +1,37 @@
+# The Great Stela of Akinidad (REM 1003) in Griffith's transliteration of 1917
+#
+# Source: F. Ll. Griffith, "Meroitic Studies IV: The Great Stela of Prince Akinizaz", Journal of Egyptian
+# Archaeology 4 (1917), pp. 159-173, sections 1 to 21 on pp. 164 and 166-172. Public domain (published 1917;
+# the author died in 1934). Typed by hand from page images of the article, sign by sign, on 2026-11-12; the
+# article's text layer was not used for the letters.
+#
+# One line per section, in the order of the stela; Griffith's sections run on without a gap from l. 1 to l. 42.
+# Where he prints two or more sections side by side (§§ 3, 4, 6, 8, 10 on p. 166; §§ 15 and 19 on p. 170;
+# §§ 17 and 21 on p. 171), each section is typed whole on its own line. As printed: "(l. N)" is his mark for the
+# start of line N of the stela; ":" the word divider; a space without a divider stands as he printed it; [ ] his
+# restorations; "." a lost sign; "(?)" his doubt about the word before it. Typed for marks above or below a
+# letter: a "?" right after a letter is his question mark printed above that letter; ḫ is his h with a breve
+# below (sign 14, today ḫ), ẖ his h with a line below (sign 15, today ẖ), h a plain h. Footnote numbers, his
+# italics (they mark where parallel passages differ) and his footnote marks are left out. The comments that
+# follow "#" at the end of a line are ours.
+§1 (l. 1) Amnirens : qêreli : kzweli : yitnizebḫel : qêre-yi :
+§2 Aki(l. 2)nizz : pqr-ñyi : peštê-ñyi : pqr : qêrisl :
+§3 (l. 2) qêr : ḫrpḫelw : Qeš : (l. 3) Armeyêsli :
+§4 qêr : ḫrpḫel : aḫrêsl : atbe : tmêt : ḫrpḫl : Armil : (l. 4) Qeštê : abrsl : yekezi : kzisl : arsli : tkk : yemêqe : qebeswi : (l. 5) yerki : Armeyslḫe : azḫite : Qeper : abr 32 (?) : kzi 135 (?) : qêleb :
+§5 (l. 6) yezḫi : arbḫteke : pqrli : yezê : Qešli : imlêke : trêzeb : abekb : mszetz (l. 7) ñrê : ezeteq : trêñl : trêzebkte : eqelbḫe : yezk : arêbel : š?kte : Qeštê :
+§6 (l. 8) qêr : ḫrpḫel : aḫrêqesl : atbe tmêt : ḫrpḫel : Qeš : nktê : arêbel : abrsl : (l. 9) yekezi kzisl : arsli : tkk : emêqe : qebeswi : erk : škte : arêbe : (l. 10) azḫite : perite : abr 100 : kzi 1·2 : qêleb :
+§7 (l. 10) apêtebes : tkk : mkiñ : (l. 11) ytes : mki weštel :
+§8 (l. 11) abrsl : yekez : kzisl : are?sli : tkk : emêqe qebeswi : (l. 12) yerki : apes : mki : wetet?ḫe : azḫite : prite : abr 58 (?) : kzi 223 (?) : qêleb :
+§9 (l. 13) apête : qebes : yetkbḫi : yqêt : meẖ : ale . l : Qeštê : alleleb :
+§10 (l. 13) abrsl : (l. 14) yekez : kzisl arsli : tkk : zqebeswi :
+§11 (l. 14) awete (?) : etkb?ḫi : arkezni (l. 15) eqebesw?i : ḫ?rbḫi : alle?bšê : pertes : Qeš : qêleb wi : ḫrpḫ. : (?)    # ? over the second l or the e of allebšê; after ḫrpḫ. his footnote: "Perhaps a numeral"
+§12 mlewslke (?) (l. 16) aleqes wi zeli : eqetezebḫe : sb : q(ê)leb wites : yesbe : nš : nši :
+§13 qêr : a (l. 17)...eqepi : Mezewitel : ayêẖ..ešêbe : tkk : zz : [sb ? :] qêleb : wites : y(l. 18)esbe qebesli?li : šbl : Mezewiteli :
+§14 qêr : nl : ...... : ye...tê : Amn.(?) (l. 19). : qêr (?) mlêlḫ : Amnp : pnkk : aḫrê : .ḫrpḫi : bt.k. : (?)..kwizê : qêleb : ye..(l. 20) l? : yesbe wites : nš : nšlw : Amnp : yirêẖ : Mzewi : nš (?) :    # before ḫrpḫi a superscript 2, his footnote "Perhaps a numeral" (on the lost sign)
+§15 (l. 20) sb : krteli : art(l. 21)ḫn[ê]ki : teñkel : tewwibḫt : sb : meke : azblelḫe : e?nêqe : sb : mzeybeli : šqtes(l. 22)ñli : azblelḫ : tbrete : Qešli : lêlitike : sb sblḫe : enêwilê : wlbrt[e : ḫr](l. 23)pḫlke : šwizê[:]irḫḫi : sbwi : eqeswit : ekte : kzislw : abrslw : yemêqe(l. 24)e?qebeswit : wkbte :
+§16 (l. 24) teñkelḫe : etewwite : m?mêli : zẖbeli : Mzeweye : mkze (l. 25) ..... : wwikewi : kzeylk : abrike : wi 3348 (?)    # ? over one of the two m
+§17 (l. 25) wwikewi : erête : tinñke : (l. 26) wlikizbte : asnte : qerl?islw : ašr : aḫizebḫe wi 1626
+§18 Akinizz (l. 27) qê : pqrlê : peštêlê : pqrilke : mnê : nli : eqetḫñ : ant : (l. 28) Mnê teslke : mnê (?) : nli : eqetḫñ : pqrili : peštili : tbitnizebḫe : (l. 29) qêrebki? : Nptbiẖ : Atre : mhrlêsñ : Amni : Arress : (l. 30) k?rtezs : ḫrpḫe : wsl : tkt :    # ? over the k or the i of qêrebki; "Mnê" ends a printed line, "teslke" begins the next, with no hyphen
+§19 (l. 30) sb : krteli : artḫnêkewi : (l. 31) teñkel : tewwibḫe : sb : meke : azblelḫe : enêqe : sb : mtey(l. 32)beli : šqtesñli : azblelḫ : tbrete : Qešli : ẖêlitike : (l. 33) sb : sblḫ : enêwite : wlbrte : ḫrpḫlke : šwizê : irḫḫi : sbwi : (l. 34) eqeswit : ekte : kzislw : abrslw : emêqeqebeswit : (l. 35) wkbte :
+§20 p?ezekeslke : ḫrpḫlke : qêleb : wtezete : mk : wite pizelke : (l. 36) qê : l?ḫrpḫe : pbêli : ekk ... : w?tezetelebk : aḫil : p?lke : (l. 37) wtezete : Amnpte : pizelke : sb : w(?)re-wḫeli(?) : . p?e?t (l. 38) mkenêwi : teñkel : tbrke : qêrteb? . . . : etkbḫt : ḫr[pḫ]e : wsl : (l. 39) tkt : Amni : Arress : Amnp : ñtesl?i? : [A]mnp : (l. 40) p?izelke : qêleb : štezebte : sb : teñ-kelhe :    # "w(?)re-" and "teñ-" end printed lines: the hyphens join
+§21 (l. 40) wwikewi : (l. 41) erête : tinnki : wlikizbte : asnte : qer[l]islw : (l. 42) ašr aḫizebḫe wi 1032.    # the last digit is hatched in the print (damaged): typed as a lost sign

@@ -237,8 +237,33 @@ def tables(f):
             f"| of them with the map's meaning | {e5['agree']} ({pct(e5['agree'], e5['given'])}) | {e6['agree']} ({pct(e6['agree'], e6['given'])}) |",
             "",
             f"Not carried over: {exp['not_carried']} of the {exp['corpus_v5']['rows']:,} judged rows ("
-            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ").", "", END]
+            + "; ".join(f"{c} because {w}" for w, c in exp["why"].items()) + ")."]
+    g = f.get("rem1003")
+    if g:
+        out += ["", "### REM 1003 from Griffith 1917", "", "| What he prints | Count |", "|---|---|",
+                f"| Lines of the stela | {g['lines']} |", f"| Sections | {g['sections']} |",
+                f"| Words | {g['words']} |", f"| Signs | {g['signs']:,} |",
+                f"| Words he marks with a question mark | {g['doubted']} |", f"| Other places listed as unsure | {g['ours']} |",
+                "", "| Closed reading | Words that agree | With nothing folded | Letters that agree |", "|---|---|---|---|"]
+        for key, name in (("otten:narrative:hamadab", "Otten's narrative file, Millet's reading (the preferred reading)"),
+                          ("mnl:REM 1003|MeroNews6", "Meroitic Newsletter 6 (1971), the printout")):
+            a = g["against"].get(key)
+            if a:
+                out.append(f"| {name} | {a['agree']} of {a['words']} ({pct(a['agree'], a['words'])}) | "
+                           f"{a['strict']['agree']} ({pct(a['strict']['agree'], a['words'])}) | "
+                           f"{a['letters_agree']:,} of {a['letters']:,} ({pct(a['letters_agree'], a['letters'])}) |")
+    out += ["", END]
     return "\n".join(out)
+
+
+def rem1003():
+    """The counts of REM 1003 as Griffith printed it in 1917 (src/akinidad.py), from its public files."""
+    import akinidad as A
+    row = json.loads(A.ROW.read_text(encoding="utf-8"))
+    comparison = json.loads(A.COMPARISON.read_text())
+    return {"lines": len(row["lines"]), "sections": len(A.sections()), "words": row["words"],
+            "signs": int(row["signs"]), "doubted": int(row["uncertain"]), "ours": len(A.OURS),
+            "against": {k: {x: v for x, v in a.items() if x != "by_line"} for k, a in comparison["against"].items()}}
 
 
 def main(argv):
@@ -317,6 +342,7 @@ def main(argv):
                     "narratives": len(narratives), "witnesses": len(parts),
                     "witness_entries": sorted({r["numbers"]["fhn"][0] for r in parts})}
     figs["bars"] = bars
+    figs["rem1003"] = rem1003()
     recount = json.loads((LOCAL / "recount.json").read_text())
     figs["coverage"], figs["experts"] = recount["coverage"], recount["experts"]
     readers = LOCAL / "readers" / "figures.json"

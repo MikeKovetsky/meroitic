@@ -15,11 +15,14 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **303 inscriptions are machine-readable under an open licence, 237 of them missing from the public corpus.**
+2. **304 inscriptions are machine-readable under an open licence, 237 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
-   The test covered cursive type only; the 48 rows in hieroglyphic type were not scored.
+   The test covered cursive type only; the 48 rows in hieroglyphic type were not scored. REM 1003, the longest
+   text, is open too: Griffith printed all of it in 1917 in his transliteration of the time; typed from page
+   images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
+   (`src/akinidad.py`, `data/expansion/jea/`).
    Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
    once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
    and Shablûl inscriptions are transcribed too, all of them new, +15% words (Day three, below).
@@ -491,7 +494,7 @@ The table, the map and the corpus were built without an agent; two readers then 
    text, GA 28, stood 86 times (6,284 words, from 2 of Millet's lines).
 3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (209 of
    the Newsletter's texts and 50 of Griffith's rows that `corpus_v5` left out). The table holds 563 inscriptions:
-   441 with a REM number, 64 with readings from two editions or more, 303 with a reading under an open licence, 8
+   441 with a REM number, 64 with readings from two editions or more, 304 with a reading under an open licence, 8
    quoted by Millet and not identified.
 4. **The bar for the matching rule was missed:** the right partner is the best match for 45 of 54 known pairs
    (83.3%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a

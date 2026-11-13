@@ -1,7 +1,7 @@
 # Meroitic with Opus 5.5
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
-the data and the method: the public corpus turned out to be mostly copies, 303 inscriptions are now machine-readable
+the data and the method: the public corpus turned out to be mostly copies, 304 inscriptions are now machine-readable
 under an open licence (237 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
@@ -21,7 +21,7 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    662 is lower than the paper's 871, probably because, with names masked, examples that differ only in a name count
    once; that was not checked. `src/pool.py` recovers the two swap pools (178 private and 11 royal names) from the
    data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
-2. **303 inscriptions are now machine-readable under an open licence, 237 of them missing from the public corpus.**
+2. **304 inscriptions are now machine-readable under an open licence, 237 of them missing from the public corpus.**
    The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
    the modern edition (99.6% against what Griffith printed), measured on 12 texts. The test covered cursive type
    only: about a third of the rows (48) are in hieroglyphic type, read with Griffith's sign table and not scored.
@@ -33,7 +33,10 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
    again in type, and with each reading checked against those pages it reaches 97.7% on the four texts that have a
    modern edition: 151 more inscriptions ([`data/expansion/karanog/`](data/expansion/karanog/README.md)), none of
    them in the public corpus (+15% words). A second reader of eleven of the 53 pages got 97.7% of the same signs.
-   It can't read photographs of the stones (almost nothing).
+   It can't read photographs of the stones (almost nothing). The longest text, the Akinidad stela (REM 1003), is
+   open too: Griffith printed all 42 lines in 1917 in his transliteration of the time; typed by hand from page
+   images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
+   ([`data/expansion/jea/`](data/expansion/jea/), `src/akinidad.py`).
 3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
    re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
    scrambled corpus with neutral labels, it recognised the opening formula "O Isis, O Osiris" and read the script from
@@ -105,7 +108,7 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     has one row per inscription, with the real names: 548 inscriptions, 259 of them new to the corpus (209 of the
     Newsletter's texts, kept locally, and 50 of Griffith's rows that `corpus_v5` left out). The table of all 563
     inscriptions is public, with every reading's source and licence and the text of the open ones: 441 have a REM
-    number, 64 readings from two editions or more, 303 a reading under an open licence. Counted again on the
+    number, 64 readings from two editions or more, 304 a reading under an open licence. Counted again on the
     inscriptions that were already in the corpus, the coverage map translates 60.0% of the words (62.0% before),
     and the two editions give its meaning for 71.4% of the words they translate (69.5% before). The matching rule
     missed the bar set for it (the right partner for 45 of 54 known pairs, where 90% was asked), so numbers

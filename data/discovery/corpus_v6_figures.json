@@ -38,8 +38,8 @@
   "with_a_rem_number": 441,
   "with_real_names": 548,
   "with_readings_from_two_editions_or_more": 64,
-  "with_an_open_reading": 303,
-  "with_an_open_reading_of_the_whole_text": 274,
+  "with_an_open_reading": 304,
+  "with_an_open_reading_of_the_whole_text": 275,
   "preferred_reading_is_open": 286,
   "in_corpus_v5": 289,
   "new_to_the_corpus_by_source": {
@@ -48,9 +48,9 @@
   },
   "not_identified": 8,
   "by_kind": {
-   "funerary": 269,
+   "funerary": 268,
    "not known": 112,
-   "royal or temple (stela, wall, cartouche, label)": 86,
+   "royal or temple (stela, wall, cartouche, label)": 87,
    "document (ostracon, papyrus, wood, vessel)": 53,
    "graffito": 36,
    "oracular decree": 7
@@ -152,12 +152,12 @@
   }
  },
  "phrases": {
-  "in_one_text": 311,
+  "in_one_text": 310,
   "in_several": 166,
-  "doubtful": 34,
+  "doubtful": 35,
   "set_aside": 1,
   "nothing": 394,
-  "doubtful_and_rival": 2
+  "doubtful_and_rival": 3
  },
  "settled": {
   "readings": 3,
@@ -204,7 +204,7 @@
  },
  "held": {
   "edition_readings": {
-   "griffith": 152,
+   "griffith": 153,
    "karanog": 151,
    "mnl": 256,
    "millet2005": 34,
@@ -246,7 +246,7 @@
      "a": "mnl:REM 1228 (hypothetical reconstruction)|MeroNews25b",
      "b": "otten:narrative:kharamadoye",
      "verdict": "sure",
-     "shared": 34,
+     "shared": 33,
      "best_key": "otten:MilletExamples.txt:1283"
     },
     {
@@ -286,7 +286,7 @@
      "a": "mnl:REM 1041|MeroNews6",
      "b": "mnl:REM 1361A|MeroNews29e",
      "verdict": "doubtful",
-     "shared": 37,
+     "shared": 36,
      "best_key": "mnl:REM 1041A|MeroNews29e"
     },
     {
@@ -294,7 +294,7 @@
      "a": "mnl:REM 1044|MeroNews6",
      "b": "otten:narrative:tanyidamani",
      "verdict": "sure",
-     "shared": 1306,
+     "shared": 1299,
      "best_key": "otten:MilletExamples.txt:851"
     },
     {
@@ -351,7 +351,7 @@
      "a": "mnl:REM 1041|MeroNews6",
      "b": "mnl:REM 1361A|MeroNews29e",
      "verdict": "doubtful",
-     "shared": 37,
+     "shared": 36,
      "best_key": "mnl:REM 1041A|MeroNews29e"
     },
     {
@@ -393,6 +393,42 @@
      "karanog:G-karanog-21"
     ]
    ]
+  }
+ },
+ "rem1003": {
+  "lines": 42,
+  "sections": 21,
+  "words": 337,
+  "signs": 1645,
+  "doubted": 38,
+  "ours": 8,
+  "against": {
+   "otten:narrative:hamadab": {
+    "words": 337,
+    "agree": 278,
+    "share": 0.825,
+    "letters": 1733,
+    "letters_agree": 1642,
+    "letters_share": 0.947,
+    "closed_words": 485,
+    "strict": {
+     "agree": 245,
+     "share": 0.727
+    }
+   },
+   "mnl:REM 1003|MeroNews6": {
+    "words": 337,
+    "agree": 276,
+    "share": 0.819,
+    "letters": 1733,
+    "letters_agree": 1651,
+    "letters_share": 0.953,
+    "closed_words": 389,
+    "strict": {
+     "agree": 273,
+     "share": 0.81
+    }
+   }
   }
  },
  "coverage": {
