@@ -636,6 +636,17 @@ def test_what_is_not_built_is_said_plainly():
         assert "Do NOT open anything under `data/sources/jssea`" in text, name
 
 
+def test_the_readme_counts_the_rounds_among_the_local_commands():
+    """The README's list of what needs local files names the rounds' script, and its count of the list is right."""
+    words = ("Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen")
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    head = next(l for l in text.splitlines() if l.endswith("things need files that are kept locally (Data, above), so "
+                                                           "they don't run from a clone:"))
+    items = [l for l in between(text, head, "## Layout").splitlines() if l.startswith("- `python3 -I ")]
+    assert any(l.startswith("- `python3 -I src/f4r.py ") for l in items)
+    assert head.split()[0] == words[len(items) - 11], (head, len(items))
+
+
 def test_the_summaries_quote_the_figures():
     """README, REPORT and NEXT_STEPS say of the rounds what the figures file says."""
     public = json.loads(R.PUBLIC.read_text(encoding="utf-8"))
