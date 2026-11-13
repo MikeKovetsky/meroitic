@@ -74,7 +74,9 @@ EXPECTED = {"glosses": (0.55, 0.70), "pilot": (0.50, 0.68), "writer_under_glosse
 LEAD, WRONG_OVER, WRITER_LOSS = 0.05, 0.02, 0.03
 STATUS_ORDER = ("agreed", "stated by one", "disputed", "proposed")
 # subagent tokens of each agent, from the task notifications, by hand after a run
-TOKENS = {"all:splitters": 1169212}     # 18 agents, one per rendered text, 13 November 2026
+TOKENS = {"all:splitters": 1169212,           # 18 agents, one per rendered text, 13 November 2026
+          "all:handbook": 555173,              # its compiler
+          "all:handbook_check": 1015037}       # four checkers: 223,808, 257,191, 241,343 and 292,695
 
 
 def name_of(tid):
