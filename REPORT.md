@@ -608,3 +608,32 @@ a pair the list of fields does not keep apart: by the letter of the bar (a tenth
 notification. F2 so far: 1,690,767 subagent tokens with its two reviews, within the 1.4 to 1.8 million quoted. F2 is
 not complete: each entry's spellings, the page of each scholar's statement and a status for the other entries the
 map uses are still open (`NEXT_STEPS.md`, step 23).
+
+## Day five, late night (2026-11-12): whole texts translated and scored (the pilot of F4)
+
+1. **The design came first.** Five of the 20 texts N. B. Millet renders into English in his Gebel Adda article
+   (2005) were chosen by a rule (the label GA47, the offering table GA41, the stelae GA28, GA53 and GA37; 141
+   words), and five texts under an open licence for the cost of a page. The bars and the expected scores were
+   committed (b990f42) before any agent answered.
+2. **The translator was blind to Millet.** Its pack held the map's reading of every word and the lexicon's
+   entries with F2's statuses; the 152 proposals in the lexicon that are Millet's or speak of his, one meaning
+   and one word's reading that name him, and his weight in F2's statuses (16 of 177 entries change) were left
+   out. The baseline is the map's glosses in order, with the same reading withheld.
+3. **The judging held:** the two judges gave the same verdict on 112 of 114 lines (kappa 0.97, bar 0.6), and
+   called all 57 decoy lines wrong (bar: at most a tenth of the clean ones given or partly).
+4. **The translator does not beat the map read word by word.** Of Millet's 57 scored units of meaning it gets
+   58.3% (given, and half of partly) and the baseline 60.5%; with each text weighing the same, 50.8% and 46.8%.
+   The lead is under the 5 points set beforehand either way. Expected: 50% and 35%. The translator gets 3.5% of
+   the units wrong and the baseline 6.1%.
+5. **Why:** the translator leaves open the words the map knows only vaguely, where the vague gloss earns half
+   credit (`smlo`, `mde`), and makes `yetmde ... aqebetowi` "their nephew or niece" where Millet has "related
+   to"; it reads places better (`Skl` as Sakala, "in Meroe") and drops the map's "this one is" where Millet has
+   "the noble one". An epitaph is a list in a fixed order, so glosses in order carry most of it.
+6. **For the full run:** scoring the 18 renderings the corpus holds costs about 2.1 million subagent tokens at
+   the pilot's rates (1.6 million for the 13 left; about 0.5 million less with one judge); pages for the 286
+   open texts with this translator about 5.3 million. By the rule set beforehand the pages should be built from
+   the map's readings by a lighter step, not yet measured. The splitter's "open" marks and the judges' rule
+   against outside knowledge need fixing first ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md),
+   sections 7 and 8).
+7. **Cost:** five agents, 560,981 subagent tokens (translators 145,118 and 104,696, splitter 99,501, judges
+   107,682 and 103,984), against 0.35 million expected, before the review.

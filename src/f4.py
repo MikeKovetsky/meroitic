@@ -79,7 +79,8 @@ EXPECTED = {"translator": 0.50, "translator_range": (0.35, 0.65),
             "baseline": 0.35, "baseline_range": (0.20, 0.50),
             "lead": 0.10,         # translator minus baseline; under 0.05 the translator is not worth its tokens
             "translator_wrong": 0.15}
-TOKENS = {}                      # subagent tokens of each agent, from the task notifications, by hand after the run
+# subagent tokens of each agent, from the task notifications, by hand after the run (12 November 2026)
+TOKENS = {"translator_pilot": 145118, "translator_pages": 104696, "splitter": 99501, "judge1": 107682, "judge2": 103984}
 
 
 # ---------------------------------------------------------------------------------------------------- the texts
@@ -633,6 +634,15 @@ def count(out=OUT, rows=None, gl=None, entries=None):
     figs["with_units_not_in_copy"] = {n: mean([score(tallies(v[j], judged, n)) for j in (1, 2)]) for n in READINGS}
     figs["per_text"] = {t: {n: mean([score(tallies(v[j], [(x, u) for x, u in scored if x == t], n)) for j in (1, 2)])
                             for n in ("translator", "baseline")} for t in ids}
+    # not set before the run: each text weighs the same (GA28 holds most of the pilot's units)
+    figs["per_text_mean"] = {n: mean([figs["per_text"][t][n] for t in ids]) for n in ("translator", "baseline")}
+    # not set before the run: on how many units the translator's verdict is better than the baseline's, or worse,
+    # in the order given, partly, missing, wrong (leaving a unit open is better than getting it wrong)
+    rank = {"given": 3, "partly": 2, "missing": 1, "wrong": 0}
+    figs["unit_by_unit"] = {str(j): dict(collections.Counter(
+        "better" if rank[a] > rank[b] else "worse" if rank[a] < rank[b] else "same"
+        for t, u in scored for a, b in [(v[j].get((t, u, "translator")), v[j].get((t, u, "baseline")))] if a and b))
+        for j in (1, 2)}
     figs["by_kind"] = {k: {n: mean([score(tallies(v[j], [(t, u) for t, u in scored if key["units"][t][u]["kind"] == k], n))
                                     for j in (1, 2)]) for n in ("translator", "baseline")}
                        for k in sorted(figs["units"]["by_kind"])}

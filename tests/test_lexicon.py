@@ -527,12 +527,12 @@ def between(text, start, end):
 def test_the_summaries_quote_the_figures():
     f = json.loads(FIGURES.read_text(encoding="utf-8"))
     read = lambda name: (ROOT / name).read_text(encoding="utf-8")
-    parts = {"README": between(read("README.md"), "14. **A second scholar", "## The question"),
-             "README, step 21": between(read("README.md"), "### 21. A second scholar", "## Reproduce"),
+    parts = {"README": between(read("README.md"), "14. **A second scholar", "15. **"),
+             "README, step 21": between(read("README.md"), "### 21. A second scholar", "### 22."),
              "REPORT": between(read("REPORT.md"), "## Day five, night", "6. **Cost:**"),
              "REPORT, review": between(read("REPORT.md"), "7. **What the review changed in the count:**", "\n\n"),
              "REPORT, round two": between(read("REPORT.md"), "**Round two of F2**", "\n\n"),
-             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2, first pass", "Next, in this order"),
+             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2, first pass", "16. **"),
              "NEXT_STEPS, F2": between(read("NEXT_STEPS.md"), "    - First pass, 12 November", "24. **F3."),
              "summary page": between(read("docs/report.html"), "<tr><td>Ask of every meaning", "</tr>")}
     w, e = f["words"], f["entries"]

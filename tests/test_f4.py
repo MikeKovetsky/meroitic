@@ -252,6 +252,9 @@ def test_the_count_of_a_made_up_run():
         assert figs["score"]["translator"] == 0.8333 and figs["score"]["baseline"] == 0.4166
         assert figs["lead"] == 0.4167
         assert figs["with_units_not_in_copy"]["translator"] == 0.75        # judge 2 gave U02 of T2; judge 1 did not
+        assert figs["per_text"] == {"T1": {"translator": 1.0, "baseline": 0.625}, "T2": {"translator": 0.5, "baseline": 0.0}}
+        assert figs["per_text_mean"] == {"translator": 0.75, "baseline": 0.3125}
+        assert figs["unit_by_unit"] == {"1": {"same": 1, "better": 2}, "2": {"same": 1, "better": 2}}
         # the decoys: only clean units count (T1 U01 and T2 U01; T1 U02 shares a word with its decoy)
         assert figs["decoys_measure"]["1"] == {"clean_units": 2, "accepted": 0, "verdicts": {"missing": 2}}
         assert figs["decoys_measure"]["2"] == {"clean_units": 2, "accepted": 1, "verdicts": {"given": 1, "missing": 1}}
@@ -303,6 +306,39 @@ def test_the_public_figures():
     again = F.count(rows=rows, gl=gl)
     again["tokens"], again["sizing"] = F.TOKENS, F.sizing(again, F.TOKENS, rows, gl)
     assert json.loads(json.dumps(again, ensure_ascii=False)) == figs
+
+
+
+def between(text, start, end):
+    """The text from start (which stands once) to end, its spaces as one."""
+    assert text.count(start) == 1, start
+    rest = text[text.index(start):]
+    return " ".join((rest[:rest.index(end)] if end in rest else rest).split())
+
+
+def test_the_summaries_quote_the_figures():
+    if not F.PUBLIC.exists():
+        return
+    f = json.loads(F.PUBLIC.read_text(encoding="utf-8"))
+    read = lambda name: (ROOT / name).read_text(encoding="utf-8")   # noqa: E731
+    parts = {"page": between(read("data/discovery/f4_pilot.md"), "## 1. Answer first", "## 2. The texts"),
+             "README": between(read("README.md"), "15. **Five inscriptions", "## The question"),
+             "REPORT": between(read("REPORT.md"), "## Day five, late night (2026-11-12): whole texts", "7. **Cost:**"),
+             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "16. **F4, the pilot", "Next, in this order"),
+             "summary page": between(read("docs/report.html"), "<tr><td>Translate five inscriptions whole", "</tr>")}
+    pct = lambda x: f"{100 * x:.1f}%"                                 # noqa: E731
+    must = [pct(f["score"]["translator"]), pct(f["score"]["baseline"]), pct(f["wrong"]["translator"]),
+            pct(f["wrong"]["baseline"]), f"{f['agreement']['kappa']:.2f}", str(f["units"]["scored"])]
+    for name, text in parts.items():
+        missing = [m for m in must if m not in text]
+        assert not missing, (name, missing)
+    for name in ("page", "REPORT"):
+        assert pct(f["per_text_mean"]["translator"]) in parts[name] and pct(f["per_text_mean"]["baseline"]) in parts[name]
+    assert f"trails by {-100 * f['lead']:.1f}" in parts["page"]
+    total = f"{f['sizing']['pilot_total']:,} subagent tokens"
+    assert total in parts["page"] and total in " ".join(read("REPORT.md").split())
+    assert f["sizing"]["pilot_total"] == sum(F.TOKENS.values())
+    assert round(f["sizing"]["scored_run"]["total"] / 1e6, 1) == 2.1 and round(f["sizing"]["pages_run"]["translator"] / 1e6, 1) == 5.3
 
 
 if __name__ == "__main__":
