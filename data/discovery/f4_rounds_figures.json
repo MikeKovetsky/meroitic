@@ -24,6 +24,9 @@
    "judged": 77,
    "not_in_copy": 2,
    "scored": 75,
+   "not_in_copy_per_text": {
+    "GA 28": 2
+   },
    "open_with_a_translated_part": 1,
    "by_kind": {
     "other": 4,
@@ -242,6 +245,17 @@
     }
    }
   },
+  "panel_against_translator": {
+   "1": {
+    "same": 72,
+    "better": 2,
+    "worse": 1
+   },
+   "2": {
+    "same": 69,
+    "better": 6
+   }
+  },
   "per_text": {
    "GA 47": {
     "pilot": 0.0,
@@ -370,7 +384,13 @@
      "kappa": 0.9196
     }
    },
-   "units_judged_differently": 25
+   "units_judged_differently": 25,
+   "differing_pairs": {
+    "given / missing": 1,
+    "given / partly": 82,
+    "missing / wrong": 1,
+    "partly / wrong": 3
+   }
   },
   "decoys_measure": {
    "1": {
@@ -417,7 +437,7 @@
    "wrong_over": 0.02,
    "writer_loss": 0.03
   },
-  "carried": "panel",
+  "carried": null,
   "handbook": {
    "sourced": 124,
    "unchecked": 1,
@@ -460,6 +480,9 @@
    "judged": 77,
    "not_in_copy": 2,
    "scored": 75,
+   "not_in_copy_per_text": {
+    "GA 28": 2
+   },
    "open_with_a_translated_part": 1,
    "by_kind": {
     "other": 4,
@@ -678,6 +701,16 @@
     }
    }
   },
+  "panel_against_translator": {
+   "1": {
+    "same": 69,
+    "better": 6
+   },
+   "2": {
+    "same": 73,
+    "better": 2
+   }
+  },
   "per_text": {
    "GA 47": {
     "pilot": 0.0,
@@ -806,7 +839,12 @@
      "kappa": 1.0
     }
    },
-   "units_judged_differently": 8
+   "units_judged_differently": 8,
+   "differing_pairs": {
+    "given / partly": 8,
+    "missing / partly": 5,
+    "missing / wrong": 1
+   }
   },
   "decoys_measure": {
    "1": {
@@ -904,6 +942,13 @@
    "judged": 233,
    "not_in_copy": 15,
    "scored": 218,
+   "not_in_copy_per_text": {
+    "GA 04": 2,
+    "GA 07": 2,
+    "GA 19": 7,
+    "GA 39": 1,
+    "GA 43": 3
+   },
    "open_with_a_translated_part": 3,
    "by_kind": {
     "god": 22,
@@ -1096,6 +1141,18 @@
      "better": 55,
      "worse": 2
     }
+   }
+  },
+  "panel_against_translator": {
+   "1": {
+    "same": 212,
+    "worse": 1,
+    "better": 5
+   },
+   "2": {
+    "same": 215,
+    "worse": 1,
+    "better": 2
    }
   },
   "per_text": {
@@ -1301,7 +1358,13 @@
      "kappa": 0.8801
     }
    },
-   "units_judged_differently": 34
+   "units_judged_differently": 34,
+   "differing_pairs": {
+    "given / partly": 25,
+    "missing / partly": 21,
+    "missing / wrong": 14,
+    "partly / wrong": 5
+   }
   },
   "decoys_measure": {
    "1": {

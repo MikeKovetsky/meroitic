@@ -646,11 +646,16 @@ def readings_of(rnd, ids, m, pages=None):
 
 
 def verdicts_of(rnd, key, judge):
-    """{(text, unit, reading name): verdict} of one judge over all its packs of a round (f4.verdicts_of each)."""
+    """{(text, unit, reading name): verdict} of one judge over all its packs of a round (f4.verdicts_of each). A
+    pack's file counts only for the units that pack held (key["chunks"], the file named as judges() names it): a
+    line for a unit the judge was not shown is left out."""
+    shown = {f"{name_of(t)}_{c}": (t, set(chunk)) for t, cs in key["chunks"].items() for c, chunk in enumerate(cs, 1)}
     out = {}
     for path in sorted((folder(rnd) / "answers" / f"judge{judge}").glob("*.jsonl")):
+        text, units = shown.get(path.stem, (None, set()))
         for k, v in F.verdicts_of(path, key, judge).items():
-            out.setdefault(k, v)
+            if k[0] == text and k[1] in units:
+                out.setdefault(k, v)
     return out
 
 
@@ -670,10 +675,11 @@ def compare(v, units, name, other=REFERENCE):
     return dict(c)
 
 
-def carried(score, wrong, names):
-    """The reading carried to the held texts by the rule set beforehand (LEAD, WRONG_OVER, WRITER_LOSS). The
-    differences are rounded to four places, as the scores are, so that 0.60 - 0.57 is 0.03."""
-    if score.get(REFERENCE) is None:
+def carried(score, wrong, names, bars=None):
+    """The reading carried to the held texts by the rule set beforehand (LEAD, WRONG_OVER, WRITER_LOSS), or None
+    when a bar of the judging is missed (bars: f4.bars_of), for then the judging is changed first and nothing is
+    carried. The differences are rounded to four places, as the scores are, so that 0.60 - 0.57 is 0.03."""
+    if score.get(REFERENCE) is None or (bars is not None and not all(bars.values())):
         return None
     ok = [n for n in names if n not in ("decoy", "pilot", REFERENCE, "writer") and score.get(n) is not None
           and round(wrong[n] - wrong[REFERENCE], 4) <= WRONG_OVER]
@@ -687,8 +693,8 @@ def carried(score, wrong, names):
 
 def count(rnd):
     """Every figure of a round: the units, each reading's score with its share of given and of wrong units, its
-    lead over the glosses, unit by unit against the glosses, by text and by kind, the judges' agreement, the
-    decoys, the bars, and the reading carried on."""
+    lead over the glosses, unit by unit against the glosses (and the panel against the translator), by text and
+    by kind, the judges' agreement and where they part, the decoys, the bars, and the reading carried on."""
     key = json.loads((folder(rnd) / "key.json").read_text(encoding="utf-8"))
     ids, names = key["texts"], key["readings"]
     real = [n for n in names if n != "decoy"]
@@ -697,9 +703,11 @@ def count(rnd):
     scored = [(t, u) for t, u in judged if key["units"][t][u]["in_copy"]]
     v = {j: verdicts_of(rnd, key, j) for j in (1, 2)}
     every = [u for t in ids for u in units.get(t, [])]
+    outside = collections.Counter(t for t, u in judged if not key["units"][t][u]["in_copy"])
     figs = {"round": rnd, "of": key.get("of", rnd), "judging": key.get("judging", 1), "texts": ids, "readings": names,
             "units": {"all": len(every), "open": sum(u["open"] for u in every), "judged": len(judged),
                       "not_in_copy": len(judged) - len(scored), "scored": len(scored),
+                      "not_in_copy_per_text": {t: outside[t] for t in ids if outside[t]},
                       "open_with_a_translated_part": sum(u["open"] and F.translated_part(u) for u in every),
                       "by_kind": dict(collections.Counter(key["units"][t][u]["kind"] for t, u in scored)),
                       "per_text": {t: sum(x == t for x, _ in scored) for t in ids}},
@@ -716,6 +724,9 @@ def count(rnd):
     figs["lead"] = {n: round(figs["score"][n] - figs["score"][REFERENCE], 4) for n in real
                     if n != REFERENCE and None not in (figs["score"][n], figs["score"].get(REFERENCE))}
     figs["unit_by_unit"] = {str(j): {n: compare(v[j], scored, n) for n in real if n != REFERENCE} for j in (1, 2)}
+    # not set before round one: the panel against the first of its translators, unit by unit, for each judge
+    if {"panel", "translator"} <= set(real):
+        figs["panel_against_translator"] = {str(j): compare(v[j], scored, "panel", "translator") for j in (1, 2)}
     figs["per_text"] = {t: {n: F.mean([F.score(F.tallies(v[j], [(x, u) for x, u in scored if x == t], n)) for j in (1, 2)])
                             for n in real} for t in ids}
     figs["per_text_mean"] = {n: F.mean([figs["per_text"][t][n] for t in ids]) for n in real}
@@ -735,6 +746,8 @@ def count(rnd):
                                             "kappa": F.T.kappa(p) if len(p) >= 20 else None}
     figs["agreement"]["units_judged_differently"] = len({(t, u) for t, u in scored for n in real
                                                          if v[1].get((t, u, n)) != v[2].get((t, u, n))})
+    figs["agreement"]["differing_pairs"] = dict(sorted(collections.Counter(
+        " / ".join(sorted((a, b))) for a, b in pairs(scored) if a != b).items()))
     figs["decoys_measure"] = {}
     for j in (1, 2):
         c = collections.Counter(v[j].get((t, u, "decoy"), "unanswered") for t, u in scored if key["units"][t][u]["clean"])
@@ -743,7 +756,7 @@ def count(rnd):
     figs["bars"] = F.bars_of(figs["agreement"]["kappa"], figs["decoys_measure"])
     figs["bars_set"], figs["expected"] = BARS, (EXPECTED_HELD if rnd == "held" else EXPECTED)
     figs["rule"] = {"lead": LEAD, "wrong_over": WRONG_OVER, "writer_loss": WRITER_LOSS}
-    figs["carried"] = carried(figs["score"], figs["wrong"], names)
+    figs["carried"] = carried(figs["score"], figs["wrong"], names, figs["bars"])
     counts = CHECK / "counts.json"
     figs["handbook"] = json.loads(counts.read_text(encoding="utf-8")) if counts.exists() else {}
     figs["tokens"] = {k: n for k, n in TOKENS.items() if k.split(":")[0] in (rnd, source(rnd), "all")}

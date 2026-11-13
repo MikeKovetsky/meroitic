@@ -41,7 +41,7 @@ def test_the_glosses_show_what_the_analyst_read_of_an_unknown_word():
               g("yetmde", "hypothesis", "nephew")):
         assert R.word_reading(w) == F.word_reading(w)
     # a gloss withheld from the translators is withheld here too, also on an unknown word
-    held = g("bqol", "unknown", "would mean to control", parts=[{"entry": "bqo"}])
+    held = g("bqol", "unknown", "a made-up gloss cut short", parts=[{"entry": "bqo"}])
     assert R.word_reading(held, frozenset({"bqo"})) == "[bqol: ?]"
     assert R.word_reading(g("abc", "unknown", "as Millet reads it")) == "[abc: ?]"
     assert R.glosses([g("wos", "meaning", "Isis"), g("Sklte", "unknown", "in Skl")]) == "Isis · [Sklte: in Skl (?)]"
@@ -86,8 +86,8 @@ def test_the_parallels():
     assert f"- `wos`: in {R.COMMON + 1} other texts (a word of the formulae)." in out
     # smlo: two other texts, one place each (the first of a text), WIDTH words on each side, its own text left out
     assert "- `smlo`: in 2 other texts." in out
-    assert "  - T2 (Somewhere): a2 a3 a4 **smlo** b1 b2 b3 = B (a name) · C (a name) · D (a name) · [smlo: a title] · " \
-           "E (a name) · F (a name) · G (a name)" in out or "**smlo**" in text
+    assert "  - T2 (Somewhere): a2 a3 a4 **smlo** b1 b2 b3 = B · C · D · [smlo: a title] · E · F · G" in out
+    assert "  - T3 (Somewhere): **smlo** 12 ab x.y = [smlo: a title] · 12 · x · [x.y: signs lost]" in out
     assert sum(l.startswith("  - T2") for l in out) == 1 and sum(l.startswith("  - T3") for l in out) == 1
     assert not any(l.startswith("  - T1") for l in out)
     # a number, a word with lost signs and a word of two letters get none
@@ -176,20 +176,20 @@ def test_the_second_judging_has_one_rule_more():
 def test_the_packs_keep_millet_out_and_say_the_rules():
     m = {"rows": {"T 1": {"site": "Faras", "kind": "funerary"}},
          "gl": {"T 1": [g("wos", "meaning", "Isis", parts=[{"entry": "Wos"}]),
-                        g("bqol", "meaning", "would mean to control", parts=[{"entry": "bqo"}]),
+                        g("bqol", "meaning", "a made-up gloss cut short", parts=[{"entry": "bqo"}]),
                         g("abc", "unknown", "as Millet reads it", by="analyst", evidence="Millet 1973 has it")]},
          "lex": {"Wos": {"headword": "Wos", "kind": "god name", "page": 259, "status": "established", "meaning": "Isis",
                          "proposals": [{"author": "Millet 1973", "proposal": "a goddess"},
                                        {"author": "Griffith 1911", "proposal": "Isis"}]},
                  "bqo": {"headword": "bqo", "kind": "verb", "page": 60, "status": "hypothesis",
-                         "meaning": "to control (Millet)", "proposals": []}},
-         "st": {"Wos": "agreed by two scholars"}, "ours": {"Wos": "the goddess Isis", "bqo": "to rule"},
+                         "meaning": "a made-up gloss (Millet)", "proposals": []}},
+         "st": {"Wos": "agreed by two scholars"}, "ours": {"Wos": "the goddess Isis", "bqo": "our made-up wording"},
          "withheld": frozenset({"bqo"})}
     for pack in (R.translator_pack("T 1", m, "THE BOOK", "a.jsonl"), R.writer_pack("T 1", m, "THE BOOK", "a.jsonl"),
                  R.editor_pack("T 1", m, "THE BOOK", [{"words": [], "translation": "x"}] * 3, "a.jsonl")):
         assert not F.MILLET.search(pack), pack
         assert "THE BOOK" in pack and "`a.jsonl`" in pack and "Lose nothing the materials hold" in pack
-        assert "to control" not in pack and "to rule" not in pack
+        assert "made-up gloss" not in pack and "made-up wording" not in pack
     t = R.translator_pack("T 1", m, "THE BOOK", "a.jsonl")
     assert "| 1 | wos | meaning | Isis | Wos (agreed by two scholars) |" in t and "Griffith 1911: Isis" in t
     assert "## Other places in the corpus where these words stand\n\nNone." in t
@@ -275,6 +275,11 @@ def test_the_rule_for_what_is_carried_on():
     # the pilot's translator is never carried, and without the glosses' score nothing is
     assert R.carried({**s, "translator": 0.5, "panel": 0.5, "writer": 0.4}, wrong, NAMES) == "glosses"
     assert R.carried({**s, "glosses": None}, wrong, NAMES) is None
+    # a judging that misses a bar carries nothing: the judging is changed first
+    met = {"kappa": True, "decoys_accepted": True}
+    assert R.carried(s, wrong, NAMES, met) == "translator"
+    assert R.carried(s, wrong, NAMES, {**met, "kappa": False}) is None
+    assert R.carried(s, wrong, NAMES, {**met, "decoys_accepted": False}) is None
 
 
 def made_up_round(base, verdicts2=None):
@@ -319,14 +324,15 @@ def test_the_count_of_a_made_up_round():
         finally:
             R.OUT = old
     assert f["units"] == {"all": 4, "open": 1, "judged": 3, "not_in_copy": 1, "scored": 2,
-                          "open_with_a_translated_part": 0, "by_kind": {"name": 1, "place": 1},
-                          "per_text": {"GA 99": 2}}
+                          "not_in_copy_per_text": {"GA 99": 1}, "open_with_a_translated_part": 0,
+                          "by_kind": {"name": 1, "place": 1}, "per_text": {"GA 99": 2}}
     # U04 is not in our copy and is not scored: translator 2 given of 2, panel 1.5, glosses and writer 0.5 of 2
     assert f["score"] == {"pilot": 0.25, "glosses": 0.25, "writer": 0.25, "translator": 1.0, "panel": 0.75, "decoy": 0.5}
     assert f["wrong"]["glosses"] == 0.5 and f["wrong"]["translator"] == 0.0 and f["given"]["panel"] == 0.5
     assert f["lead"] == {"pilot": 0.0, "writer": 0.0, "translator": 0.75, "panel": 0.5}
     assert f["unit_by_unit"]["1"]["translator"] == {"better": 2} and f["unit_by_unit"]["1"]["writer"] == {"same": 2}
     assert f["unit_by_unit"]["1"]["pilot"] == {"same": 1, "better": 1}             # missing is better than wrong
+    assert f["panel_against_translator"] == {"1": {"same": 1, "worse": 1}, "2": {"same": 1, "worse": 1}}
     assert f["per_text"]["GA 99"]["panel"] == 0.75 and f["by_kind"]["place"]["translator"] == 1.0
     assert f["agreement"]["pairs"] == 10 and f["agreement"]["same"] == 10          # five real readings, two units
     # the decoy counts on clean units only: U01 (wrong); U03's decoy shares a word with it and is left out
@@ -336,6 +342,7 @@ def test_the_count_of_a_made_up_round():
     assert f["rule"] == {"lead": R.LEAD, "wrong_over": R.WRONG_OVER, "writer_loss": R.WRITER_LOSS}
     assert f["agreement"]["kappa_credited_or_not"] == 1.0 and f["agreement"]["units_judged_differently"] == 0
     assert f["agreement"]["per_text"] == {"GA 99": {"pairs": 10, "same": 10, "kappa": None}}       # under 20 lines
+    assert f["agreement"]["differing_pairs"] == {}
     assert f["of"] == "r1" and f["judging"] == 1
 
 
@@ -354,6 +361,41 @@ def test_two_judges_who_differ():
     assert f["scores"]["2"]["translator"]["score"] == 0.25 and f["score"]["translator"] == 0.625   # the judges' mean
     assert f["agreement"]["same"] == 0 and f["bars"]["kappa"] is False
     assert f["decoys_measure"]["2"]["accepted"] == 1 and f["bars"]["decoys_accepted"] is False     # 1 of 1 clean unit
+    assert f["carried"] is None                        # a bar missed: nothing is carried, the judging is changed first
+    # where the judges part, each pair in the order of the alphabet: U01 given against partly for all five readings;
+    # U03 missing against wrong for the pilot, the glosses and the writer, the translator given against wrong, the
+    # panel partly against wrong
+    assert f["agreement"]["differing_pairs"] == {"given / partly": 5, "given / wrong": 1, "missing / wrong": 3,
+                                                 "partly / wrong": 1}
+    assert list(f["agreement"]["differing_pairs"]) == sorted(f["agreement"]["differing_pairs"])
+
+
+def test_a_judges_line_counts_only_for_the_units_of_its_pack():
+    with tempfile.TemporaryDirectory() as d:
+        old = R.OUT
+        try:
+            R.OUT = Path(d)
+            rnd = made_up_round(R.OUT)
+            key = json.loads((R.OUT / rnd / "key.json").read_text(encoding="utf-8"))
+            key["chunks"]["GA 99"] = [["U01"], ["U03", "U04"]]                 # the same units, in two packs
+            (R.OUT / rnd / "key.json").write_text(json.dumps(key), encoding="utf-8")
+            letter = {name: l for l, name in key["order"]["1"]["GA 99"].items()}
+            one = R.OUT / rnd / "answers" / "judge1"
+            rows = [json.loads(l) for l in (one / "GA99_1.jsonl").read_text(encoding="utf-8").splitlines()]
+            glosses = {"text": "GA99", "unit": "U01", "reading": letter["glosses"]}
+            # pack 1 held U01 only: its lines for U03 (here "wrong" for every reading, where pack 2, which held U03,
+            # gives the translator "given") are not read, and its line for U01's glosses stands in a file of no pack
+            lines(one / "GA99_2.jsonl", [r for r in rows if r["unit"] in ("U03", "U04")])
+            lines(one / "GA99_1.jsonl", [{**r, "verdict": "wrong"} if r["unit"] == "U03" else r for r in rows
+                                         if {k: r[k] for k in glosses} != glosses])
+            lines(one / "GA99_3.jsonl", [{**glosses, "verdict": "given"}])
+            v = R.verdicts_of(rnd, key, 1)
+            f = R.count(rnd)
+        finally:
+            R.OUT = old
+    assert v[("GA 99", "U03", "translator")] == "given" and ("GA 99", "U01", "glosses") not in v
+    assert {u for _, u, _ in v} == {"U01", "U03", "U04"} and len(v) == 3 * len(NAMES) - 1
+    assert f["score"]["translator"] == 1.0 and f["scores"]["1"]["glosses"]["unanswered"] == 1
 
 
 def test_the_packs_are_not_written_again():
@@ -481,16 +523,16 @@ def test_the_page_quotes_the_figures():
     assert h["decoys_measure"]["1"]["accepted"] == h["decoys_measure"]["2"]["accepted"] == 1
     assert round(h["lead"]["panel"], 4) >= R.EXPECTED_HELD["panel_lead_bar"]
     held = " ".join(between(page, *SECTIONS["held"]).split())
-    for j in ("1", "2"):
-        for n, words in (("panel", "the panel is better on"), ("translator", "the translator better on"), ("writer", "the writer better on")):
-            assert words in held
     one, two = h["unit_by_unit"]["1"], h["unit_by_unit"]["2"]
     assert f"the panel is better on {one['panel']['better']} and {two['panel']['better']} of the {h['units']['scored']} units and worse on {one['panel']['worse']} and {two['panel']['worse']}" in held
     assert f"the translator better on {one['translator']['better']} and {two['translator']['better']}, worse on {one['translator']['worse']} and {two['translator']['worse']}" in held
     assert f"the writer better on {one['writer']['better']} and {two['writer']['better']}, worse on {one['writer']['worse']} and {two['writer']['worse']}" in held
-    k = h["by_kind"]
-    for kind, name in (("place", "places"), ("title", "titles"), ("relation", "Relations gain least")):
-        assert f"{pct(k[kind]['glosses'])}" in held and f"{pct(k[kind]['panel'])}" in held, kind
+    k, n = h["by_kind"], h["units"]["by_kind"]
+    assert f"places ({n['place']} units: glosses {pct(k['place']['glosses'])}, panel {pct(k['place']['panel'])})" in held
+    for kind, name in (("other", "other statements"), ("name", "persons in a role"), ("title", "titles"),
+                       ("formula", "formulae"), ("relation", "Relations gain least")):
+        assert f"{name} ({n[kind]}: {pct(k[kind]['glosses'])} and {pct(k[kind]['panel'])})" in held, kind
+    assert set(k["god"].values()) == {1.0} and "the invocations of gods are given by every reading" in held
     m = h["per_text_mean"]
     assert f"glosses {pct(m['glosses'])}, writer {pct(m['writer'])}, translator {pct(m['translator'])}, panel {pct(m['panel'])}" in held
     assert all(d["panel"] >= d["glosses"] for d in h["per_text"].values()) and "at or above the glosses in each of the 13 texts" in held
