@@ -190,14 +190,13 @@ The first judge's verdict on the translator is better than on the baseline for 7
    286 of them (4,118 words) that reading is the row of `corpus_v6`, which the map reads; for the other 17 the
    row holds another reading, so the map has not read the open one. At the pages translator's rate, 1,277
    tokens a word, the 303 cost about 5.9 million subagent tokens and the 286 about 5.3, above F4's estimate of
-   2 to 4 million for all of it. Part of the rate
-   is each pack's fixed part (instructions and lexicon entries), which larger packs would share; that is not
-   measured. By item 1, the pages can be built from the map's readings with a lighter step that writes them as
-   sentences and keeps each word's status; its cost and its score need a pilot of their own, on the same five
-   texts.
-5. **The scoring itself needs two changes before the full run:** the splitter should not mark a whole unit
-   open when only a part of it is untranslated, and the judges should be allowed to know that two names of a
-   place are one place (section 8, items 4 and 6).
+   2 to 4 million for all of it. Part of the rate is each pack's fixed part (instructions and lexicon entries),
+   which larger packs would share; that is not measured. By item 1, the pages can be built from the map's
+   readings with a lighter step that writes them as sentences and keeps each word's status; its cost and its
+   score need a pilot of their own, on the same five texts.
+5. **The scoring itself needs three changes before the full run:** the splitter should not mark a whole unit
+   open when only a part of it is untranslated, the judges should be allowed to know that two names of a place
+   are one place, and the baseline should get every gloss the translator gets (section 8, items 4, 6 and 9).
 
 ## 8. How far to trust it
 
