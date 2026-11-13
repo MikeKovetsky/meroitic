@@ -76,12 +76,14 @@ Done since this plan was written:
     [`data/discovery/demotic.md`](data/discovery/demotic.md)), a part of step 17: four people carry titles in two
     languages, and where the two texts give the same office the titles line up with the lexicon; the editors' 125
     equations add no meaning that is new and sure.
-15. **F2, first pass: a second scholar for every meaning** (2026-11-12,
+15. **F2: a second scholar for every meaning** (2026-11-12,
     [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 4,105 of 10,290 running words (39.9%) are built
     only on meanings a second scholar gives too, against 5,419 (52.7%) translated by one lexicon; of the 177
-    entries behind translated words, 83 are agreed, 22 disputed, 52 stated by one and 20 only proposed, after two
-    rounds of judges. The public table gives each meaning in words of our own. Left: each entry's spellings, the
-    page of each scholar's statement, and a status for the other entries the map uses.
+    entries behind translated words, 84 are agreed, 22 disputed, 51 stated by one and 20 only proposed, after
+    three rounds of judges. Every one of the 594 entries the map uses has a status (114 agreed, 26 disputed, 94
+    stated by one, 360 proposed). The public tables give each meaning behind a translated word in words of our
+    own, each entry's spellings with the confirmed variants, and pages where the sources in hand give them.
+    Left: a meaning in our words for the 417 other entries, and the pages of the scholars whose works we lack.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -363,9 +365,14 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Cost: 2 to 3 million subagent tokens.
     - First pass, 12 November: statuses for all 177 entries behind translated words and the second figure
       (point 15 above), and in a second round the decoyed lines read again with the real proposal and the
-      meanings worded anew for the public table. Not yet done: the spellings of each entry, the confirmed
-      variants included; the page of each scholar's own statement (the table gives Rilly's page); and a status
-      for the other entries the map uses, in names or in words it does not translate.
+      meanings worded anew for the public table.
+    - Round three, 12 November: a status for the 417 other entries the map uses (30 agreed, 4 disputed, 43
+      stated by one, 340 proposed), after two judges read every proposal on them and on the names (kappa 0.90, 0
+      of 40 decoys accepted). Every entry's spellings with 39 of the 48 confirmed variants of step 21, and the
+      pages where the sources in hand give them: the editions' entries (100 entries), FHN IV's index (74) and
+      Griffith's own page (10 of the 206 proposals both judges found the same or otherwise). Still open: a meaning
+      in our words for the 417 other entries; the pages of the other scholars, whose works we do not hold; FHN
+      IV's glosses as the statement of a second scholar.
 24. **F3. One harness: the test of a model on a language nobody reads.**
     - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
       judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in

@@ -129,18 +129,21 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     Demotic writes the same title, of unknown meaning, as `3krre` for one. Two judges agree with the map's reading
     on 36 of 58 and 41 of 57 of the lines whose word it translates. No meaning is both new and sure; what the map
     lacks is mostly titles the editors leave as titles too ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
-14. **A second scholar for 83 of the 177 entries the map leans on: 4,105 of the 10,290 running words (39.9%) are
+14. **A second scholar for 84 of the 177 entries the map leans on: 4,105 of the 10,290 running words (39.9%) are
     built only on meanings two scholars share.** Rilly's lexicon records what other scholars proposed for most of
     its entries. Two judges set 407 such proposals beside the lexicon's meaning, without the scholar's name and
     with decoys (kappa 0.92 on "same or not"; 2 of 82 decoys accepted), and in a second round read the real
     proposal on the lines where they had seen a decoy (decoys accepted: 1 of 8 in round two, too many for the
-    second judge by the letter of the bar); with the editors' readings of item 10, 83 entries are
-    agreed by two scholars, 22 disputed (`qo`, `mlo` and `mte` lead), 52 stated by one and 20 only proposed. One
+    second judge by the letter of the bar); with the editors' readings of item 10, 84 entries are
+    agreed by two scholars, 22 disputed (`qo`, `mlo` and `mte` lead), 51 stated by one and 20 only proposed. One
     lexicon translates 5,419 of the running words (52.7%); names and numbers count in both figures, and an ending
-    that the lookup cuts off without naming its entry is not checked. A sample of the lexicon's citations of
+    that the lookup cuts off without naming its entry is not checked. A third round (kappa 0.90, 0 of 40 decoys
+    accepted) rated the 417 other entries the map uses: of all 594, 114 are agreed, 26 disputed, 94 stated by one
+    and 360 only proposed. Held to a stricter rule for the editors' readings, 3,715 words (36.1%) are agreed. A sample of the lexicon's citations of
     Griffith, checked against his own texts, held for all 15 found. The review corrected the first count (3,873
     words), which had called five names "proposed" and the verb `l` "to give" disputed on the numeral 1 typed as
-    `l`. The public table gives each entry's meaning in words of our own
+    `l`. The public tables give each entry's meaning in words of our own (for the 177), its spellings with the
+    confirmed variants of step 21, and the pages of the statements where the sources in hand give them
     ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## The question
@@ -439,9 +442,11 @@ each with decoys of their own: another entry's meaning from outside the line's f
 sample of the lexicon's citations of Griffith to a reader with Griffith's own texts. The bars and the rules for
 the four statuses were committed before any judge answered. `round2` gives each judge again, with the real
 proposal, the lines where it saw a decoy, beside a few new decoys, and a writer the meanings to word anew;
-`public` counts both rounds and writes the figures and a table of headwords, each meaning in words of our own
-(checked to copy no four words in a row of the lexicon's), statuses, the scholars cited and the editors' verdicts
-counted ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
+`round3` gives both judges every proposal on the other entries the map uses and on the names, beside decoy lines
+under new numbers; `public` counts the three rounds and writes the figures and two tables of headwords, each
+meaning in words of our own for the entries behind translated words (checked to copy no four words in a row of
+the lexicon's), statuses, the scholars cited, the editors' verdicts counted, spellings and the pages of the
+statements (`src/lexicon_refs.py`) ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## Reproduce
 

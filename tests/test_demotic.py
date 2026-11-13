@@ -280,7 +280,7 @@ def test_the_summaries_quote_the_figures():
              "README, step 20": between(readme, "### 20. The same people in two scripts", "### 21."),
              "REPORT": between(report, "3. **The same people in Demotic, Greek and Meroitic**", "6. **Cost:**"),
              "REPORT, review": between(report, "7. **What the review changed:** the join"),
-             "NEXT_STEPS, point 14": between(steps, "14. **The same people in Demotic", "15. **F2, first pass"),
+             "NEXT_STEPS, point 14": between(steps, "14. **The same people in Demotic", "15. **F2: a second scholar"),
              "NEXT_STEPS, step 17": between(steps, "    - **The people named in both the Philae graffiti",
                                             "    - **What it leaves:** the Demotic list"),
              "the summary page": between(html, "<tr><td>Read the 22 Demotic graffiti", "</tr>")}

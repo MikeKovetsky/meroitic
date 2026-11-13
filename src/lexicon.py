@@ -8,9 +8,10 @@
   python3 -I src/lexicon.py round3    round three: the proposals on the other entries the map uses and on the
                                       names, every real line for each judge, beside decoy lines (item 7)
   python3 -I src/lexicon.py count    the judges' verdicts, the statuses and the second figure, printed
-  python3 -I src/lexicon.py public    the same, written: data/discovery/lexicon_figures.json and the table
-                                      data/discovery/lexicon_statuses.tsv (headwords, each meaning in words of
-                                      our own, statuses, scholars)
+  python3 -I src/lexicon.py public    the same, written: data/discovery/lexicon_figures.json and two tables,
+                                      data/discovery/lexicon_statuses.tsv (the entries behind translated words:
+                                      headwords, each meaning in words of our own, statuses, scholars, spellings,
+                                      pages) and lexicon_other_statuses.tsv (the other entries, without a meaning)
 
 "Translated" in the coverage map means that one lexicon, Rilly's of 2003, accepts the meaning. That lexicon also
 records, for most entries, what other scholars proposed (Griffith, Hintze, Hofmann, Millet, Priese and others),
@@ -80,9 +81,11 @@ text they cite.
 
 The other scholars' proposals reach us through Rilly's lexicon, which is in copyright and stays local
 (data/rilly2003/, data/sources/lexicon/); the public files hold counts, headwords, Rilly's pages, the scholars'
-names and the meanings in words of our own (item 6).
+names, the meanings in words of our own (item 6), and each entry's spellings and the pages of the statements on
+its meaning where the sources in hand give them (src/lexicon_refs.py).
 """
 import collections
+import csv
 import json
 import pathlib
 import random
@@ -96,12 +99,14 @@ import lexique as L                                    # noqa: E402
 import close as K                                      # noqa: E402
 import publish as P                                    # noqa: E402
 import tally as T                                      # noqa: E402
+import lexicon_refs as R                               # noqa: E402
 
 GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"
 EXPERT = ROOT / "data/sources/expert"
 OUT = ROOT / "data/sources/lexicon"
 PUBLIC = ROOT / "data/discovery/lexicon_figures.json"
 TABLE = ROOT / "data/discovery/lexicon_statuses.tsv"
+OTHER_TABLE = ROOT / "data/discovery/lexicon_other_statuses.tsv"
 ROUND2 = OUT / "round2"                               # round two: its packs, key and answers
 ROUND3 = OUT / "round3"                               # round three: its packs, key and answers
 DECOYS3 = 20                                           # round three: the decoy lines each judge reads
@@ -279,17 +284,31 @@ def on_a_piece(r, a):
     return a["verdict"] == "agree" and bool(PIECE.search(r["ours"].lower()) or PIECE.search(a["expert"].lower()))
 
 
-def editors(folder=EXPERT, leave_out=misread):
-    """{headword: Counter of the first judge's verdicts} of the check against Millet 2005 and FHN III, on the words
-    built on that entry: decoys left out, and the words the map misread (leave_out). The answers are read as the
-    check reads them (publish.first_judge)."""
+def edited(folder=EXPERT, leave_out=misread):
+    """(headword, verdict, row) for each word of the check against Millet 2005 and FHN III that is built on an
+    entry: decoys left out, and the words the map misread (leave_out). The answers are read as the check reads
+    them (publish.first_judge)."""
     rows = T.load_rows(folder / "rows.jsonl")
     one = P.first_judge(rows, folder)
-    out = collections.defaultdict(collections.Counter)
     for r in rows:
         a, h = one.get(r["row"]), stem_of(r.get("entry_of"))
         if a and h and not r.get("decoy") and not leave_out(r, a):
-            out[h][a["verdict"]] += 1
+            yield h, a["verdict"], r
+
+
+def editors(folder=EXPERT, leave_out=misread):
+    """{headword: Counter of the first judge's verdicts} of the check against the editions (edited)."""
+    out = collections.defaultdict(collections.Counter)
+    for h, verdict, _ in edited(folder, leave_out):
+        out[h][verdict] += 1
+    return out
+
+
+def editions_of(folder=EXPERT):
+    """{headword: {verdict: {(source, the edition's entry)}}}: where the editors' readings of edited() stand."""
+    out = collections.defaultdict(lambda: collections.defaultdict(set))
+    for h, verdict, r in edited(folder):
+        out[h][verdict].add((r["source"], r["entry"]))
     return out
 
 
@@ -707,36 +726,103 @@ def dissent(e, verdicts):
 
 
 COLUMNS = ("headword", "kind", "meaning_in_our_words", "rilly_2003_page", "uses_in_translated_words", "status",
-           "rilly_status", "same_meaning", "another_meaning", "editors_agree", "editors_partly", "editors_differ")
+           "rilly_status", "same_meaning", "another_meaning", "editors_agree", "editors_partly", "editors_differ",
+           "spellings", "confirmed_variants", "pages_of_the_statements", "fhn_index")
+# the second table: the entries behind no translated word, which have no meaning in our words
+OTHER_COLUMNS = ("headword", "kind", "rilly_2003_page", "uses", "status", "rilly_status", "rilly_gives",
+                 "same_meaning", "another_meaning", "editors_agree", "editors_partly", "editors_differ", "spellings",
+                 "confirmed_variants", "pages_of_the_statements", "fhn_index")
+GIVES = {"meaning": "a meaning", "grammar": "a grammar word", "name": "a name", "hypothesis": "a hypothesis",
+         "kind": "the kind of word only", "unknown": "no meaning"}
+NO_REFS = {"spellings": {}, "confirmed": {}, "confirmed_already": [], "confirmed_unmatched": [], "griffith": {},
+           "editions": {}, "fhn": {}}
 
 
-def table_rows(entries, st, verdicts, meanings=None):
+def refs_of(entries, expert=EXPERT):
+    """What the tables add to each entry (src/lexicon_refs.py): Rilly's spellings, the confirmed variants of step
+    21, the pages of Griffith's statements, of the editions' readings, and FHN IV's index."""
+    mine, printed = lexicon()
+    used = {e["headword"] for e in entries}
+    pieces = R.confirmed(used, mine, printed)
+    return {"spellings": {h: R.spellings(printed[h]) for h in used}, "confirmed": pieces["given"],
+            "confirmed_already": pieces["already"], "confirmed_unmatched": pieces["unmatched"],
+            "griffith": R.griffith_pages(), "editions": R.edition_pages(editions_of(expert)), "fhn": R.fhn_index()}
+
+
+def row_of(e, st, verdicts, refs, meanings):
+    """One entry as the tables give it (COLUMNS, OTHER_COLUMNS): who agrees or reads it otherwise (the scholars as
+    Rilly cites them, and the editions of the check), the editors' verdicts counted, the spellings, and the pages
+    of the statements where the sources in hand give them: the agreeing or dissenting scholars' (Griffith's own,
+    or as Rilly's record gives it) and the editions'."""
+    ed, h = e["editors"], e["headword"]
+    yes_p, no_p = agreeing(e, verdicts), dissent(e, verdicts)
+    yes = sorted({p["author"] for p in yes_p}) + (["Millet 2005 or FHN III"] if ed.get("agree") else [])
+    no = sorted({p["author"] for p in no_p}) + (["Millet 2005 or FHN III"] if ed.get("differ") else [])
+    pages = [f"{p['author']}: {page}" for p in sorted(yes_p + no_p, key=lambda p: (p["author"], p["id"]))
+             for page in [refs["griffith"].get(p["id"]) or R.record_page(p)] if page]
+    return {"headword": h, "kind": e["kind"], "meaning_in_our_words": meanings.get(h, ""), "rilly_2003_page": e["page"],
+            "uses": e["uses"], "uses_in_translated_words": e["uses_translated"], "status": st[h],
+            "rilly_status": e["status"] or "none", "rilly_gives": GIVES.get(e["level"], e["level"]),
+            "same_meaning": "; ".join(yes), "another_meaning": "; ".join(no), "editors_agree": ed.get("agree", 0),
+            "editors_partly": ed.get("partly", 0), "editors_differ": ed.get("differ", 0),
+            "spellings": "; ".join(refs["spellings"].get(h, [])), "confirmed_variants": "; ".join(refs["confirmed"].get(h, [])),
+            "pages_of_the_statements": "; ".join(pages + refs["editions"].get(h, [])),
+            "fhn_index": "; ".join(refs["fhn"].get(h, []))}
+
+
+def references(entries, verdicts, refs, path=R.CONFIRMED):
+    """The spellings and pages the tables give, counted: Rilly's variants, the confirmed variants of step 21 and
+    where they went, and the statements with a page, by kind (src/lexicon_refs.py)."""
+    with path.open(encoding="utf-8") as f:
+        pieces = [r["piece"].strip() for r in csv.DictReader(f, delimiter="\t")]
+    used = {e["headword"] for e in entries}
+    named = [p for e in entries for p in agreeing(e, verdicts) + dissent(e, verdicts)]
+    return {"entries_with_variants_rilly_lists": sum(len(v) > 1 for h, v in refs["spellings"].items() if h in used),
+            "confirmed_variants": {"pieces": len(pieces),
+                                   "given": len({p for ps in refs["confirmed"].values() for p in ps}),
+                                   "entries": len(refs["confirmed"]),
+                                   "already_a_spelling_of_the_entry_they_name": refs["confirmed_already"],
+                                   "naming_no_entry_the_map_uses": refs["confirmed_unmatched"]},
+            "agreeing_or_dissenting_proposals": len(named),
+            "with_a_page_in_rillys_record": sum(bool(R.record_page(p)) for p in named),
+            "with_griffiths_own_page": sum(p["id"] in refs["griffith"] for p in named),
+            "entries_with_an_editions_page": sum(h in used for h in refs["editions"]),
+            "fhn_index_items": len(R.FHN4), "entries_with_fhn_index": sum(h in used for h in refs["fhn"])}
+
+
+def figures():
+    """What `public` writes, and the checks compare: count()'s figures with the references counted, the statuses,
+    the entries, the verdicts and the references."""
+    figs, st = count()
+    entries, verdicts = entries_of(), verdicts_of()
+    refs = refs_of(entries)
+    return {**figs, "references": references(entries, verdicts, refs)}, st, entries, verdicts, refs
+
+
+def table_rows(entries, st, verdicts, meanings=None, refs=None):
     """The public table: per entry behind a translated word, its headword, kind, Rilly's page, its uses on
-    corpus_v6, its status, who agrees or reads it otherwise (the scholars as Rilly cites them, and the editions of
-    the check), and on how many words built on it the editors read it the same way, partly, or otherwise. The
-    meaning is worded anew (our_meanings), never Rilly's, which is in copyright."""
-    meanings = meanings or {}
-    out = []
-    for e in sorted((e for e in entries if e["uses_translated"]), key=lambda e: (-e["uses_translated"], e["headword"])):
-        ed = e["editors"]
-        yes = sorted({p["author"] for p in agreeing(e, verdicts)}) + (["Millet 2005 or FHN III"] if ed.get("agree") else [])
-        no = sorted({p["author"] for p in dissent(e, verdicts)}) + (["Millet 2005 or FHN III"] if ed.get("differ") else [])
-        out.append({"headword": e["headword"], "kind": e["kind"], "meaning_in_our_words": meanings.get(e["headword"], ""),
-                    "rilly_2003_page": e["page"],
-                    "uses_in_translated_words": e["uses_translated"], "status": st[e["headword"]],
-                    "rilly_status": e["status"] or "none", "same_meaning": "; ".join(yes),
-                    "another_meaning": "; ".join(no), "editors_agree": ed.get("agree", 0),
-                    "editors_partly": ed.get("partly", 0), "editors_differ": ed.get("differ", 0)})
-    return out
+    corpus_v6, its status, who agrees or reads it otherwise, on how many words built on it the editors read it
+    the same way, partly, or otherwise, its spellings and the pages of the statements (row_of). The meaning is
+    worded anew (our_meanings), never Rilly's, which is in copyright."""
+    return [row_of(e, st, verdicts, refs or NO_REFS, meanings or {})
+            for e in sorted((e for e in entries if e["uses_translated"]), key=lambda e: (-e["uses_translated"], e["headword"]))]
 
 
-def table_text(rows):
+def other_rows(entries, st, verdicts, refs=None):
+    """The second public table: the same for the entries behind no translated word, most used first, with what
+    Rilly gives for each (a meaning, a name, a hypothesis, the kind of word only, no meaning) and no meaning in
+    our words."""
+    return [row_of(e, st, verdicts, refs or NO_REFS, {})
+            for e in sorted((e for e in entries if not e["uses_translated"]), key=lambda e: (-e["uses"], e["headword"]))]
+
+
+def table_text(rows, columns=COLUMNS):
     clean = lambda v: " ".join(str(v).replace("\t", " ").split())
-    return "\t".join(COLUMNS) + "\n" + "".join("\t".join(clean(r[c]) for c in COLUMNS) + "\n" for r in rows)
+    return "\t".join(columns) + "\n" + "".join("\t".join(clean(r[c]) for c in columns) + "\n" for r in rows)
 
 
-def write_table(rows, path=TABLE):
-    path.write_text(table_text(rows), encoding="utf-8")
+def write_table(rows, path=TABLE, columns=COLUMNS):
+    path.write_text(table_text(rows, columns), encoding="utf-8")
 
 
 def entries_of(folder=OUT, expert=EXPERT):
@@ -853,6 +939,10 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
               "unknown_verdicts": sum(v not in VERDICTS for j in "12" for v in got[j].values())}
         for j in "12":
             r3[f"decoys, judge {j}"] = caught([got[j].get(l) for l in key3[j]["decoys"]])
+        owner = {q["id"]: e for e in entries for q in e["proposals"]}
+        r3["lines_on"] = {"other entries": sum(not owner[q]["uses_translated"] for q in key3["1"]["real"].values()),
+                          "names behind translated words": sum(bool(owner[q]["uses_translated"])
+                                                               for q in key3["1"]["real"].values())}
         pairs3 = list(third(folder).values())
         r3["all lines"] = {**agreement(pairs3), "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs3))}
         r3["bars"] = bars(r3["all lines"], [r3[f"decoys, judge {j}"] for j in "12"])
@@ -1016,13 +1106,14 @@ def main(argv):
         print(json.dumps(figs, ensure_ascii=False, indent=1))
         return
     if argv[1:] == ["public"]:
-        figs, st = count()
+        figs, st, entries, verdicts, refs = figures()
         m = figs.get("meanings", {})
         if m.get("copied_after_rewording") or m.get("longest_meaning_in_words", 0) > LONGEST:
             raise SystemExit(f"a meaning in our words shares {COPIED} words in a row with the lexicon or has more "
                              f"than {LONGEST} words: reword it in REWORDED; nothing written")
         PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        write_table(table_rows(entries_of(), st, verdicts_of(), our_meanings()))
+        write_table(table_rows(entries, st, verdicts, our_meanings(), refs))
+        write_table(other_rows(entries, st, verdicts, refs), path=OTHER_TABLE, columns=OTHER_COLUMNS)
         return
     raise SystemExit(__doc__)
 

@@ -9,8 +9,8 @@
   "shown": 41,
   "accepted": 2,
   "verdicts": {
-   "other": 39,
-   "partly": 2
+   "partly": 2,
+   "other": 39
   }
  },
  "decoys, judge 2": {
@@ -78,6 +78,57 @@
    "decoys_accepted": false
   }
  },
+ "round three": {
+  "real_lines": 134,
+  "decoy_lines": {
+   "1": 20,
+   "2": 20
+  },
+  "unanswered": {
+   "1": 0,
+   "2": 0
+  },
+  "unknown_verdicts": 0,
+  "decoys, judge 1": {
+   "shown": 20,
+   "accepted": 0,
+   "verdicts": {
+    "other": 20
+   }
+  },
+  "decoys, judge 2": {
+   "shown": 20,
+   "accepted": 0,
+   "verdicts": {
+    "other": 20
+   }
+  },
+  "lines_on": {
+   "other entries": 109,
+   "names behind translated words": 25
+  },
+  "all lines": {
+   "rows": 134,
+   "same_verdict": 124,
+   "kappa": 0.8855,
+   "kappa_same_or_not": 0.8964,
+   "table": {
+    "no meaning / no meaning": 65,
+    "same / same": 29,
+    "partly / partly": 10,
+    "other / other": 20,
+    "other / partly": 2,
+    "partly / same": 2,
+    "other / no meaning": 1,
+    "no meaning / other": 2,
+    "no meaning / same": 3
+   }
+  },
+  "bars": {
+   "kappa_same_or_not": true,
+   "decoys_accepted": true
+  }
+ },
  "entries": {
   "used": 594,
   "behind_translated_words": 177,
@@ -86,24 +137,24 @@
   "with_the_editors_reading": 66,
   "only_a_kind": 21,
   "statuses": {
-   "agreed by two scholars": 83,
+   "agreed by two scholars": 84,
    "disputed": 22,
-   "stated by one": 52,
+   "stated by one": 51,
    "proposed": 20
   },
   "statuses_by_use": {
-   "agreed by two scholars": 3381,
+   "agreed by two scholars": 3383,
    "disputed": 384,
-   "stated by one": 447,
+   "stated by one": 445,
    "proposed": 628
   },
-  "agreed_with_a_dissent": 26,
+  "agreed_with_a_dissent": 27,
   "agreed_only_through_an_unnamed_source": [
    "-o (1)"
   ],
   "agreed_by": {
    "judges and editors": 22,
-   "judges": 32,
+   "judges": 33,
    "editors": 29
   }
  },
@@ -123,21 +174,23 @@
   "with_a_proposal_of_another_scholar": 49,
   "with_the_editors_verdict": 23,
   "statuses": {
-   "agreed by two scholars": 15,
-   "disputed": 2,
-   "stated by one": 60,
+   "agreed by two scholars": 30,
+   "disputed": 4,
+   "stated by one": 43,
    "proposed": 340
   },
   "statuses_by_use": {
-   "agreed by two scholars": 158,
-   "disputed": 20,
-   "stated by one": 253,
+   "agreed by two scholars": 201,
+   "disputed": 28,
+   "stated by one": 202,
    "proposed": 1803
   },
   "agreed_by": {
-   "editors": 15
+   "judges and editors": 6,
+   "editors": 9,
+   "judges": 15
   },
-  "agreed_with_a_dissent": 1,
+  "agreed_with_a_dissent": 11,
   "proposed_with_an_editors_agree": 18,
   "without_round_three": {
    "agreed by two scholars": 15,
@@ -147,9 +200,9 @@
   }
  },
  "all entries": {
-  "agreed by two scholars": 98,
-  "disputed": 24,
-  "stated by one": 112,
+  "agreed by two scholars": 114,
+  "disputed": 26,
+  "stated by one": 94,
   "proposed": 360
  },
  "words": {
@@ -204,9 +257,9 @@
  },
  "if_the_editors_had_to_agree_on_two_words_and_most": {
   "statuses": {
-   "agreed by two scholars": 71,
+   "agreed by two scholars": 72,
    "disputed": 24,
-   "stated by one": 62,
+   "stated by one": 61,
    "proposed": 20
   },
   "entries_that_change": 12,
@@ -219,7 +272,9 @@
    "stated by one": 52,
    "proposed": 20
   },
-  "entries_that_change": [],
+  "entries_that_change": [
+   "Mnp"
+  ],
   "agreed_by_two_scholars": 4105
  },
  "with_round_one_alone": {
@@ -250,5 +305,32 @@
   ],
   "longest_meaning_in_words": 8,
   "copied_after_rewording": 0
+ },
+ "references": {
+  "entries_with_variants_rilly_lists": 176,
+  "confirmed_variants": {
+   "pieces": 48,
+   "given": 39,
+   "entries": 37,
+   "already_a_spelling_of_the_entry_they_name": [
+    "arebetke",
+    "aretwte",
+    "atepoke",
+    "beke",
+    "dkretri",
+    "erk",
+    "pkrtr",
+    "yeredeb"
+   ],
+   "naming_no_entry_the_map_uses": [
+    "tepke"
+   ]
+  },
+  "agreeing_or_dissenting_proposals": 206,
+  "with_a_page_in_rillys_record": 0,
+  "with_griffiths_own_page": 10,
+  "entries_with_an_editions_page": 100,
+  "fhn_index_items": 87,
+  "entries_with_fhn_index": 74
  }
 }

@@ -473,17 +473,90 @@ def test_round_one_fields_stay_as_drawn():
     assert head.split("Each line")[0] == X.JUDGE.split("Each line")[0]
 
 
+def test_spellings_and_confirmed_variants():
+    """lexicon_refs: Rilly's spellings without the homonym's number, his notes in English; a confirmed piece goes
+    to the entry it names (with its number, or by a spelling Rilly lists), not where it is already a spelling."""
+    assert X.R.spellings({"headword": "-se (1)", "variants": ["Mn (peut-être)", "x (arch.)", " ", "-se"]}) == \
+        ["-se", "Mn (?)", "x (archaic)"]
+    with tempfile.TemporaryDirectory() as d:
+        f = Path(d) / "confirmed.tsv"
+        f.write_text("piece\t" + X.R.CHECKED_AS + "\n" + "".join(f"{a}\t{b}\n" for a, b in (
+            ("smlo", "smlo (1)"), ("qoriti", "Qoreti"), ("aberse", "abr"), ("Aqedise", "Aqodise"),
+            ("tepke", "tipke"), ("snmd", "smlo (2)"))), encoding="utf-8")
+        used = {"smlo (1)", "Simlo", "Qoreti", "abr", "Aqedise"}
+        printed = {"smlo (1)": {"variants": []}, "Simlo": {"variants": ["Smlo"]}, "Qoreti": {"variants": []},
+                   "abr": {"variants": ["br"]}, "Aqedise": {"variants": ["Qedise", "Aqodise"]}}
+        mine = {h: {"forms": {"Aqedise"} if h == "Aqedise" else set()} for h in used}
+        got = X.R.confirmed(used, mine, printed, f)
+        assert got == {"given": {"smlo (1)": ["smlo"], "Qoreti": ["qoriti"], "abr": ["aberse"]},
+                       "already": ["Aqedise"], "unmatched": ["snmd", "tepke"]}, got
+
+
+def test_the_pages_a_record_or_a_running_head_gives():
+    """record_page: a page of one author's one work; printed_page: a page's own number counts where a page near
+    it shows the same offset (a lone number in a table does not), else the nearest such page's offset."""
+    rp = lambda author, text="x": X.R.record_page({"author": author, "proposal": text})
+    assert rp("Hintze 1979", '"Variante" (p. 34)') == "p. 34" and rp("Hintze 1979", "(p. 34) and (p. 55)") == "pp. 34, 55"
+    assert rp("Griffith 1911a (p. 101)") == "p. 101" and rp("Griffith 1911a (p. 101); Hintze 1963") is None
+    assert rp("Hintze", "(p. 34)") is None and rp("Millet", "(cf. Edwards-Fuller 2000, p. 89)") is None
+    assert rp("Priese 1971", "against Trigger (p. 277 [1.13.8])") is None
+    pages = {1: "36 INSCRIPTIONS OF KARAN6G\ntext", 2: "DESCRIPTIVE PHRASES 37\ntext", 3: "DESCRIPTIVE PHRASES\ntext",
+             4: "69\n109\ntext", 5: "40 INSCRIPTIONS\n1 For two more", 6: "MEROITIC STUDIES\n41\ntext",
+             9: "Plate XXXI\n12", 10: "text only"}
+    assert [X.R.own_number(pages[n]) for n in (1, 2, 3, 4, 5, 6, 9, 10)] == [36, 37, None, 69, 40, 41, None, None]
+    assert [X.R.printed_page(pages, n) for n in (1, 3, 4, 6, 10)] == [36, 38, 39, 41, None]
+
+
+def test_the_editions_pages_and_fhn_index():
+    """edition_pages: each edition's entry once per verdict, with its pages; the index's references as printed."""
+    got = X.R.edition_pages({"qore": {"agree": {("fhn", "300"), ("millet", "GA05")}, "differ": {("fhn", "300")},
+                                      "partly": {("millet", "GA06")}}, "x": {"agree": {("millet", "GA99")}}},
+                            millet={"GA05": (3, 4), "GA06": (5, 5)})
+    assert got == {"qore": ["FHN III, FHN 300, pp. 1103-1107 (the same)", "Millet 2005, GA05, pp. 3-4 (the same)",
+                            "FHN III, FHN 300, pp. 1103-1107 (otherwise)"]}
+    idx = X.R.fhn_index()
+    assert idx["kdke"] == ["FHN IV p. 1293 (kdke): see ktke", "FHN IV p. 1330 (kdwe): FHN 722"]
+    assert idx["Wos"] == ["FHN IV p. 1262 (Asi): FHN 920-21", "FHN IV p. 1265 (Wos): see Isis"]
+
+
+def test_fhn_index_as_the_text_layer_prints_it():
+    """FHN4, read from the scan's images, against its text layer: every FHN page it gives stands on the page of
+    FHN IV it names, and every entry it names is one the map uses."""
+    needs("data/sources/fhn4-text/pages.txt", "data/sources/lexicon/entries.jsonl")
+    text = X.R.pages_of(X.R.FHN4_TEXT)
+    used = {json.loads(l)["headword"] for l in (X.OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()}
+    for h, page, term, where in X.R.FHN4:
+        assert h in used, h
+        on = re.sub(r"-\s*\n\s*", "-", text[page - X.R.FHN4_OFFSET])          # "1025-" and "31" on two lines
+        for n in ([] if where.startswith("see") else re.findall(r"\d+(?:-\d+)?", where)):
+            assert n in on, (h, page, n)
+
+
+def test_griffiths_own_pages():
+    """griffith_pages: the printed page of each proposal the check found as stated, read from the page's head."""
+    needs("data/sources/lexicon/answers/griffith_check.jsonl", "data/sources/karanog-text/pages.txt",
+          "data/sources/griffith-jea-text")
+    got = X.R.griffith_pages()
+    assert len(got) == 15 and got["P0013"] == "Karanòg (1911), p. 39" and got["P0064"] == "Karanòg (1911), p. 51"
+    assert got["P0229"] == "Meroitic Studies IV (1917), p. 167" and got["P0189"] == "Meroitic Studies II (1916), p. 124"
+
+
 PAGE = ROOT / "data/discovery/lexicon.md"
 JUDGES = (99371, 101866, 98363, 89296)                     # the cost, by hand from the task notifications
 CHECK = 250976                                             # the check against Griffith, the same
 ROUND2 = (71296, 72644)                                    # round two's judges, the same
 WRITER = 100947                                            # the writer of the meanings, the same
+ROUND3 = (86127, 85265)                                    # round three's judges, the same
 EMPTY = {"ps-", "-te (4)", "t- (1)", "-te (5)", "-to (1)", "yi-", "-bete-"}   # entries the lexicon gives no meaning
 
 
-def table():
-    with X.TABLE.open(encoding="utf-8") as f:
+def table(path=X.TABLE):
+    with path.open(encoding="utf-8") as f:
         return {r["headword"]: r for r in csv.DictReader(f, delimiter="\t")}
+
+
+def other_table():
+    return table(X.OTHER_TABLE)
 
 
 def test_reported_numbers():
@@ -531,9 +604,73 @@ def test_reported_numbers():
     assert (f"One entry, `-o` ({uses('-o (1)')} uses), is agreed only through a view the lexicon records without a "
             "scholar's name") in text
     assert f"{e['only_a_kind']} of the {e['behind_translated_words']} entries are titles or epithets" in text
-    o = f["other entries"]
-    assert o["count"] == e["used"] - e["behind_translated_words"]
-    assert f"a status for the {o['count']} other entries the map uses" in text
+    o, ot = f["other entries"], other_table()
+    assert o["count"] == e["used"] - e["behind_translated_words"] == len(ot)
+    al = f["all entries"]
+    assert al == {s: e["statuses"][s] + o["statuses"][s] for s in X.STATUSES}
+    assert (f"Every one of the {e['used']} entries the map uses has a status: {al[AGREED]} are agreed by two scholars, "
+            f"{al['disputed']} disputed, {al['stated by one']} stated by one and {al['proposed']} only proposed") in text
+    assert (f"The other {o['count']} entries stand behind names, or behind words the map does not translate. Rilly "
+            f"states {sum(o['stated_by_rilly'].values())} of them as a name, a meaning or a grammar word; "
+            f"{o['with_a_proposal_of_another_scholar']} of these have a proposal of another scholar, and the editors "
+            f"read words built on {o['with_the_editors_verdict']}. The other {o['statuses']['proposed']} he gives") in text
+    for s in X.STATUSES:                                                          # section 5's table
+        assert f"| {s} | {o['statuses'][s]} | {o['statuses_by_use'][s]:,} |" in text, s
+    lv = o["proposed_by_level"]
+    assert (f"as a hypothesis ({lv['hypothesis']}), by their kind only ({lv['kind']}) or without a meaning "
+            f"({lv['unknown']})") in text and sum(lv.values()) == o["statuses"]["proposed"]
+    ou = lambda h: int(ot[h]["uses"])
+    assert (f"`ḫr` ({ou('ḫr')} uses) and `ẖol` ({ou('ẖol')}) and the title `pqr` ({ou('pqr')})" in text
+            and all(ot[h]["status"] == "proposed" for h in ("ḫr", "ẖol", "pqr")))
+    assert f"The editors read words built on {o['proposed_with_an_editors_agree']} of them as the lexicon does" in text
+    ob = o["agreed_by"]
+    assert (f"**Agreed:** {o['statuses'][AGREED]}, nearly all names: {ob['judges']} by the judges alone, {ob['editors']} "
+            f"by the editors alone, {ob['judges and editors']} by both; {o['agreed_with_a_dissent']} of them also") in text
+    assert (f"Horus (`Ar`, {ou('Ar (1)')} uses), Philae (`Pilqe`, {ou('Pilqe')}), Sedeinga (`Atiye`, {ou('Atiye')}) "
+            f"and Faras (`Pẖrse`, {ou('Pẖrse')})") in text
+    disputed3 = sorted((h for h in ot if ot[h]["status"] == "disputed"), key=lambda h: -ou(h))
+    assert disputed3 == ["Tebwe", "Nlote", "yeto", "Brebri"] and len(disputed3) == o["statuses"]["disputed"]
+    assert (f"`Tebwe` ({ou('Tebwe')} uses), the Abaton for the lexicon, Thebes for Török" in text
+            and f"`Nlote` ({ou('Nlote')}), `yeto` ({ou('yeto')}) and `Brebri` ({ou('Brebri')})" in text)
+    assert (f"**Stated by one:** {o['statuses']['stated by one']}, nearly all names" in text
+            and ot["Amni"]["status"] == "stated by one" and f"Amun (`Amni`, {ou('Amni')} uses) is one" in text)
+    w3 = o["without_round_three"]
+    assert (f"Without round three, {w3[AGREED]} of the {o['count']} would be agreed, {w3['disputed']} disputed and "
+            f"{w3['stated by one']} stated by one.") in text
+    r3 = f["round three"]
+    assert r3["unanswered"] == {"1": 0, "2": 0} and r3["unknown_verdicts"] == 0 and r3["bars"] == \
+        {"kappa_same_or_not": True, "decoys_accepted": True}
+    assert (f"{r3['lines_on']['other entries']} on the other entries and {r3['lines_on']['names behind translated words']} "
+            f"on the names inside translated words") in text and sum(r3["lines_on"].values()) == r3["real_lines"]
+    assert f"Each judge read all {r3['real_lines']} real lines" in text
+    assert all(f"and {n} lines more, each with a" in text for n in set(r3["decoy_lines"].values()))
+    assert f"| {r3['all lines']['kappa_same_or_not']:.2f} |" in text
+    for k in "12":
+        d = r3[f"decoys, judge {k}"]
+        assert d == {"shown": 20, "accepted": 0, "verdicts": {"other": 20}} and f"| {d['accepted']} of {d['shown']} |" in text
+    assert (f"On the {r3['all lines']['rows']} real lines the judges gave the same verdict on {r3['all lines']['same_verdict']} "
+            f"(kappa {r3['all lines']['kappa']:.2f} on the four verdicts)") in text
+    wo = f["without_round_three"]
+    assert wo["entries_that_change"] == ["Mnp"] and wo["agreed_by_two_scholars"] == f["agreed_by_two_scholars"]
+    assert (f"the god `Mnp` ({uses_of(t, 'Mnp')} uses), whose meaning two of its proposals give as the lexicon does "
+            "and one otherwise") in text and t["Mnp"]["same_meaning"] and t["Mnp"]["another_meaning"]
+    sr = f["if_the_editors_had_to_agree_on_two_words_and_most"]
+    assert (f"{sr['statuses'][AGREED]} of the {e['behind_translated_words']} would be agreed ({sr['entries_that_change']} "
+            f"entries change) and the second figure would be {share(sr['agreed_by_two_scholars'])}") in text
+    assert f"Held to a stricter rule for the editors' readings it would be {share(sr['agreed_by_two_scholars'])}" in text
+    rf, cv = f["references"], f["references"]["confirmed_variants"]
+    assert (f"{rf['entries_with_variants_rilly_lists']} entries have variants" in text
+            and f"{cv['given']} of the {cv['pieces']} go to {cv['entries']} entries the map uses; "
+                f"{len(cv['already_a_spelling_of_the_entry_they_name'])} are already a spelling of the entry they "
+                f"name, and {len(cv['naming_no_entry_the_map_uses'])} names an entry the map does not use" in text)
+    assert cv["given"] + len(cv["already_a_spelling_of_the_entry_they_name"]) + len(cv["naming_no_entry_the_map_uses"]) \
+        == cv["pieces"]
+    assert (f"of the {rf['agreeing_or_dissenting_proposals']} proposals both judges found the same or otherwise, Rilly's "
+            f"record gives a page for none" in text and rf["with_a_page_in_rillys_record"] == 0
+            and f"For {rf['with_griffiths_own_page']} of them the table gives Griffith's own page" in text)
+    assert f"for {rf['entries_with_an_editions_page']} entries, the entries of Millet 2005 and FHN III" in text
+    assert (f"for {rf['entries_with_fhn_index']} entries, FHN IV's indexes" in text
+            and f"({rf['fhn_index_items']} references, read from the page images" in text)
     alone = f["with_round_one_alone"]
     assert (f"With round one alone, {alone['entries_that_change']} entries had another status and the second figure "
             f"was {share(alone['agreed_by_two_scholars'])}.") in text
@@ -581,12 +718,13 @@ def test_reported_numbers():
             f"and {st['proposed']} proposed ({first['entries_that_change']} entries change against the count with both "
             f"rounds), and a second figure of "
             f"{share(first['agreed_by_two_scholars'])}") in text
-    assert all(t[h]["status"] == AGREED for h in ("Wos", "Sori", "Asori", "Npte")) and t["Mnp"]["status"] == "stated by one"
+    assert all(t[h]["status"] == AGREED for h in ("Wos", "Sori", "Asori", "Npte", "Mnp"))     # Mnp: round three
     assert t["l (2)"]["status"] == AGREED and t["-so (2)"]["status"] == "disputed"                 # round two
     assert f"`l` \"to give\" ({uses('l (2)')} uses) and `-so` were disputed only through such words" in text
     assert f"the check against Griffith's text {CHECK:,}, about ten minutes;" in text
     assert (f"round two's two judges {sum(ROUND2):,} ({ROUND2[0]:,} and {ROUND2[1]:,}), about two minutes each; the "
-            f"writer {WRITER:,}, about four minutes.") in text
+            f"writer {WRITER:,}, about four minutes; round three's two judges {sum(ROUND3):,} ({ROUND3[0]:,} and "
+            f"{ROUND3[1]:,}), about three minutes each.") in text
     assert (f"four judges' packs {sum(JUDGES):,} subagent tokens ({JUDGES[0]:,} and {JUDGES[1]:,} for the first "
             f"judge, {JUDGES[2]:,} and {JUDGES[3]:,} for the second)") in text
 
@@ -595,8 +733,8 @@ NUMBER = re.compile(r"\d{4}-\d\d-\d\d|\d[\d,]*(?:\.\d+)?%?")
 # numbers a text may state without a figure behind them: years and dates, the step and item it names, the bars set
 # beforehand and the costs by hand
 STATED = {"1911", "1916", "17", "2003", "2005", "2026", "2026-11-12", "23", "0.6", "10%", "90%", "1.4", "1.8",
-          f"{sum(JUDGES):,}", f"{CHECK:,}", f"{sum(JUDGES) + CHECK:,}", f"{sum(ROUND2):,}", f"{WRITER:,}"} | \
-    {f"{c:,}" for c in JUDGES + ROUND2}
+          f"{sum(JUDGES):,}", f"{CHECK:,}", f"{sum(JUDGES) + CHECK:,}", f"{sum(ROUND2):,}", f"{WRITER:,}",
+          f"{sum(ROUND3):,}"} | {f"{c:,}" for c in JUDGES + ROUND2 + ROUND3}
 
 
 def known(f):
@@ -618,16 +756,22 @@ def known(f):
     walk(f)
     for r in table().values():
         walk({c: int(r[c]) for c in ("uses_in_translated_words", "editors_agree", "editors_partly", "editors_differ")})
+    for r in other_table().values():
+        walk({c: int(r[c]) for c in ("uses", "editors_agree", "editors_partly", "editors_differ")})
     w = f["words"]
     for n in (f["translated_by_one_lexicon"], f["agreed_by_two_scholars"], f["as_first_counted"]["agreed_by_two_scholars"],
               f["with_round_one_alone"]["agreed_by_two_scholars"],
               f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"],
-              f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"]):
+              f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"],
+              f["if_the_editors_had_to_agree_on_two_words_and_most"]["agreed_by_two_scholars"]):
         out.add(f"{n / w['all']:.1%}")
     out.add(f"{w['every entry agreed'] / w['meaning or grammar']:.1%}")
     walk({"lines with a decoy": f["rows"] - f["two judges"]["rows"], "sample": X.SAMPLE, "found": X.CHECK_BARS["found"],
           "decoys shown": sum(f[f"decoys, judge {j}"]["shown"] for j in "12"),
-          "decoys accepted": sum(f[f"decoys, judge {j}"]["accepted"] for j in "12")})
+          "decoys accepted": sum(f[f"decoys, judge {j}"]["accepted"] for j in "12"),
+          "round three's decoys": sum(f["round three"][f"decoys, judge {j}"]["shown"] for j in "12"),
+          "round three's lines": {j: f["round three"]["real_lines"] + n for j, n in f["round three"]["decoy_lines"].items()},
+          "stated by Rilly among the other entries": sum(f["other entries"]["stated_by_rilly"].values())})
     return out
 
 
@@ -659,7 +803,9 @@ def test_the_summaries_quote_the_figures():
              "REPORT": between(read("REPORT.md"), "## Day five, night", "6. **Cost:**"),
              "REPORT, review": between(read("REPORT.md"), "7. **What the review changed in the count:**", "\n\n"),
              "REPORT, round two": between(read("REPORT.md"), "**Round two of F2**", "\n\n"),
-             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2, first pass", "Next, in this order"),
+             "REPORT, round three": between(read("REPORT.md"), "**Round three of F2**", "\n\n"),
+             "REPORT, pages": between(read("REPORT.md"), "**Spellings and pages:**", "\n\n"),
+             "NEXT_STEPS": between(read("NEXT_STEPS.md"), "15. **F2: a second scholar", "Next, in this order"),
              "NEXT_STEPS, F2": between(read("NEXT_STEPS.md"), "    - First pass, 12 November", "24. **F3."),
              "summary page": between(read("docs/report.html"), "<tr><td>Ask of every meaning", "</tr>")}
     w, e = f["words"], f["entries"]
@@ -675,7 +821,20 @@ def test_the_summaries_quote_the_figures():
     assert f"{a} entries are agreed by two scholars, {d} disputed (" in parts["README"]
     assert f"{s} stated by one and {p} only proposed. One" in parts["README"]
     assert f"{a} agreed by two scholars, {d} disputed, {s} stated by one, {p} only proposed." in parts["REPORT"]
-    assert f"{a} are agreed, {d} disputed, {s} stated by one and {p} only proposed, after two" in parts["NEXT_STEPS"]
+    assert f"{a} are agreed, {d} disputed, {s} stated by one and {p} only proposed, after three" in parts["NEXT_STEPS"]
+    al, o = f["all entries"], f["other entries"]
+    whole = (f"{al[AGREED]} agreed, {al['disputed']} disputed, {al['stated by one']} stated by one, {al['proposed']} "
+             "proposed")
+    assert f"of all {e['used']}, {al[AGREED]} are agreed, {al['disputed']} disputed, {al['stated by one']} stated by " \
+           f"one and {al['proposed']} only proposed" in parts["README"]
+    assert f"Every one of the {e['used']} entries the map uses has a status ({whole})" in parts["NEXT_STEPS"]
+    assert f"Of all {e['used']} the map uses, {al[AGREED]} are agreed" in parts["summary page"]
+    st3 = o["statuses"]
+    assert (f"a status for the {o['count']} other entries the map uses ({st3[AGREED]} agreed, {st3['disputed']} "
+            f"disputed, {st3['stated by one']} stated by one, {st3['proposed']} proposed)") in parts["NEXT_STEPS, F2"]
+    r3 = sum(f["round three"][f"decoys, judge {j}"]["shown"] for j in "12")
+    for name in ("README", "summary page", "NEXT_STEPS, F2"):
+        assert f"0 of {r3}" in parts[name] and f["round three"]["bars"]["decoys_accepted"], name
     assert f"{a} are agreed, {d} disputed (" in parts["summary page"]
     assert f"{s} stated by one, {p} only proposed." in parts["summary page"]
     assert f"A second scholar for {a} of the {e['behind_translated_words']} entries" in parts["README"]
@@ -717,6 +876,10 @@ def test_the_summaries_quote_the_figures():
     assert "[the lexicon's page](lexicon.md)" in read("data/discovery/v6_readers.md")   # the map points to its second figure
 
 
+def uses_of(t, h):
+    return t[h]["uses_in_translated_words"]
+
+
 def entries_by(entries):
     return {e["headword"]: e for e in entries}
 
@@ -725,11 +888,17 @@ def test_public_figures_are_what_the_local_files_give():
     needs(*LOCAL)
     if not FIGURES.exists():
         return
-    figs, st = X.count()
+    needs("data/sources/karanog-text/pages.txt", "data/sources/griffith-jea-text", "data/sources/jssea-text")
+    figs, st, entries, verdicts, refs = X.figures()
     assert figs == json.loads(FIGURES.read_text(encoding="utf-8"))
-    entries, mine = X.entries_of(), X.our_meanings()
-    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, X.verdicts_of(), mine))
+    mine = X.our_meanings()
+    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, verdicts, mine, refs))
+    assert X.OTHER_TABLE.read_text(encoding="utf-8") == X.table_text(X.other_rows(entries, st, verdicts, refs),
+                                                                     X.OTHER_COLUMNS)
     assert len(table()) == figs["entries"]["behind_translated_words"]
+    assert len(other_table()) == figs["other entries"]["count"] == len(entries) - len(table())
+    every = {**table(), **other_table()}
+    assert {h: r["status"] for h, r in every.items()} == st                     # every entry the map uses, rated
     # the meanings in our words: REWORDED stands for exactly those the writer copied, and no meaning of the table
     # shares COPIED words in a row with any text of its entry as the lexicon prints it (the meaning in French and
     # in English, Rilly's discussion, every proposal, his own included)

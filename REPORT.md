@@ -570,9 +570,9 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
    scholar gives too;** one lexicon translates 5,419 (52.7%). Names and numbers count in both. Of the 3,676 words
    the map translates as a meaning or a grammar word, 2,362 (64.3%) are built only on agreed entries. With the
    first round of judges alone it was 3,875 (37.7%): a second round closed the gap item 5 named.
-2. **The statuses of the 177 entries behind translated words:** 83 agreed by two scholars, 22 disputed, 52 stated
+2. **The statuses of the 177 entries behind translated words:** 84 agreed by two scholars, 22 disputed, 51 stated
    by one, 20 only proposed. `qo`, `mlo` and `mte` lead the disputed; endings and pieces of the benediction
-   formulas (`-wi`, `ps-`, `-te`, `-kete`) the proposed.
+   formulas (`-wi`, `ps-`, `-te`, `-kete`) the proposed. Round three (below) made the god `Mnp` agreed.
 3. **In round one the judges met both bars set before they answered:** kappa 0.92 on "same or not" (0.6 asked),
    and 2 and 0 of 41 decoys accepted (a tenth allowed). They read 407 proposals that the lexicon records, without
    the scholars' names. In round two the second judge accepted 1 of its 4 decoys, which misses the decoy bar by
@@ -608,3 +608,19 @@ a pair the list of fields does not keep apart: by the letter of the bar (a tenth
 notification. F2 so far: 1,690,767 subagent tokens with its two reviews, within the 1.4 to 1.8 million quoted. F2 is
 not complete: each entry's spellings, the page of each scholar's statement and a status for the other entries the
 map uses are still open (`NEXT_STEPS.md`, step 23).
+
+**Round three of F2** (12 November, night): both judges read every proposal that rounds one and two had not sent,
+109 on the 417 other entries the map uses and 25 on the names inside translated words, each beside 20 decoy lines
+under new numbers; a decoy was a real proposal of another entry, far from the line in meaning (171,392 subagent
+tokens, by hand from the task notifications). Both bars, set before they answered, were met: kappa 0.90 on "same or
+not", and 0 of 20 decoys accepted by each judge. Of the 417 other entries, 30 are agreed, 4 disputed, 43 stated by
+one and 340 proposed (Rilly gives them as a hypothesis, by their kind only or without a meaning); of all 594, 114
+are agreed. The second figure stays at 4,105 words; under a stricter rule for the editors (at least two words read
+the same, and most of them) it would be 3,715 (36.1%).
+
+**Spellings and pages:** both tables now give Rilly's spellings of each entry and 39 of the 48 confirmed variants
+of step 21, and pages where the sources in hand give them: the editions' entries for 100 entries, FHN IV's indexes
+for 74 (read from its page images), and Griffith's own page for 10 of the 206 proposals both judges found the same
+or otherwise. Rilly's record gives a page for none of them; the other scholars' pages are not in our sources. Left
+open: a meaning in our words for the 417 other entries, and FHN IV's glosses as the statement of a second
+scholar.
