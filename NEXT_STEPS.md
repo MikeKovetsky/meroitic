@@ -7,7 +7,7 @@ The goal from here: an openly licensed and larger Meroitic corpus, an honest met
 scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
 looks like.
 
-## Where things stand (2026-11-10, evening)
+## Where things stand (written 2026-11-10; points 7 to 16 added up to 2026-11-13)
 
 Done since this plan was written:
 
@@ -94,8 +94,10 @@ Done since this plan was written:
 Next, in this order (the small steps; the four big pieces are in section F):
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
-2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too.
-3. **Step 6, Griffith's ostraca** in JEA 11: the volume has to be fetched first.
+2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too. The
+   volume is in hand since 13 November.
+3. **Step 6, Griffith's ostraca** in JEA 11: the volume is in hand since 13 November, as page images without a
+   text layer, and so is JEA 15 with his Meroitic Studies VI.
 4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
    no reader (Kar. 17 `sotnkel` and Kar. 111 `tewideqowi`, section 9 of the Karanòg page); word division outside
    the closing formulae still follows each reader, and so does a formula word parted by a divider on the stone;
@@ -104,6 +106,13 @@ Next, in this order (the small steps; the four big pieces are in section F):
    of the typed pages, has a second typing for its first page only.
 5. **Faults found on the way:** eleven lines of the old corpus are the oracular-decree formula tagged
    "funerary" (one of them counted 187 times); three faint letters mistyped in the Tanyidamani printout.
+6. **No download is left for these steps or for F4** (13 November). Fetched that day from archive.org, all public
+   domain, and kept locally: Griffith's *Meroitic Inscriptions* I and II (1911–12), *Meroë, the City of the
+   Ethiopians* (1911), the *Recueil Champollion* (1922) with his Faras article, and *Journal of Egyptian
+   Archaeology* 11 and 15. F4 reads none of them to start: its sources were in hand before. Also fetched: the
+   half of *Liverpool Annals* 7 that archive.org holds. It prints Sayce's reading of REM 1003, all 42 lines in
+   the letter values he used, and no picture of the stone; it is not yet typed or compared. Not fetched, on
+   purpose: the Nubian grammars of step 18, the REM volumes of step 7, and the books that have to be bought.
 
 ## A. Share
 
@@ -364,8 +373,8 @@ days, not hours. The costs are estimates from what the runs so far cost.
       be public.
     - Sources in hand: Griffith 1911–12 (public domain), Rilly 2003, FHN III, Millet 2005, Rilly's 2016 overview.
       FHN's index volume (FHN IV) is in hand since 12 November, local only: its Meroitic indexes gloss 62
-      titles and 51 words. Worth adding: FHN's volume II (not on Zenodo), and later, to check the result,
-      Rilly and de Voogt 2012.
+      titles and 51 words. FHN's volume II is in hand since 12 November too (from Bergen's server, not on
+      Zenodo; local only). Worth adding later, to check the result: Rilly and de Voogt 2012.
     - Done: every entry the map uses has a status; the map gives two figures, "translated by one lexicon" and
       "agreed by two scholars"; the table is published under CC BY.
     - Cost: 2 to 3 million subagent tokens.

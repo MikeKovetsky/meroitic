@@ -1,6 +1,10 @@
 # More Meroitic text: what is online, and a Karanog pilot
 
 Work of 2026-11-09, about 75 minutes. Downloads are in `/private/tmp/claude-501/expansion/` (not in the repo).
+Since 2026-11-13 these are also under `data/sources/`, which git ignores and a restart does not empty: the text
+layers of that survey, and the PDFs of Karanòg, *Meroitic Inscriptions* I and II, *Meroë*, the *Recueil
+Champollion*, JEA 11 and 15 (of JEA 3 and 4 only Griffith's four articles), FHN I to IV, the Newsletter, and the
+half of Liverpool Annals 7 that archive.org holds.
 
 **Update, 2026-11-10:** Karanòg has since been read in full ([`karanog/README.md`](karanog/README.md)), and the
 texts printed in the *Meroitic Newsletter* have been typed ([`newsletter_reading.md`](newsletter_reading.md)). The
