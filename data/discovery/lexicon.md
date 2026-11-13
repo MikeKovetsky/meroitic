@@ -1,17 +1,19 @@
-# A second scholar for every meaning: the first pass of F2
+# A second scholar for every meaning (F2)
 
 **Of the 10,290 running words of the clean corpus, 5,419 (52.7%) are translated by one lexicon, Rilly's of 2003;
-3,875 (37.7%) are names, numbers or words built only on entries that a second scholar reads the same way.** Names
-and numbers count in both figures. Of the 3,676 words the map translates as a meaning or a grammar word, 2,132
-(58.0%) are built only on such entries. This is the second figure that step 23 of
+4,105 (39.9%) are names, numbers or words built only on entries that a second scholar reads the same way.** Names
+and numbers count in both figures. Of the 3,676 words the map translates as a meaning or a grammar word, 2,362
+(64.3%) are built only on such entries. This is the second figure that step 23 of
 [`NEXT_STEPS.md`](../../NEXT_STEPS.md) (F2) asked for; the first figure is the map's
-([`corpus_v6_readers.json`](corpus_v6_readers.json)). The review of this step corrected two things after the judges
-had answered (section 7): as first counted, the second figure was 3,873 (37.6%).
+([`corpus_v6_readers.json`](corpus_v6_readers.json)). It stands on two rounds of judges (section 3); with the first
+round alone it was 3,875 (37.7%). The review of the first round corrected two things after the judges had answered
+(section 7): as first counted, the second figure was 3,873 (37.6%).
 
 Counted on 12 November 2026 by [`src/lexicon.py`](../../src/lexicon.py); figures in
 [`lexicon_figures.json`](lexicon_figures.json), and every entry with its status in
-[`lexicon_statuses.tsv`](lexicon_statuses.tsv) (headwords, statuses, the scholars cited and the editors' verdicts
-counted; no meaning, since the meanings are Rilly's and in copyright).
+[`lexicon_statuses.tsv`](lexicon_statuses.tsv) (headwords, their meaning in words of our own, statuses, the
+scholars cited and the editors' verdicts counted; the lexicon's own wording, which is in copyright, is never
+copied: section 8).
 
 ## 1. What was asked
 
@@ -49,6 +51,15 @@ counts in both figures, and the few names inside a translated word are rated by 
 On the 325 lines both judges saw with the real proposal, they gave the same verdict on 303 (kappa 0.91 on the four
 verdicts). Both bars are met.
 
+**Round two.** Under the rule a line counts when both judges read its real proposal, so the 82 lines that carried
+a decoy for one judge could not count after round one. In round two that judge read them with the real proposal,
+beside 4 decoys of its own on lines it had already read with the real one. Every proposal now has two real
+verdicts: on all 407 lines the judges gave the same verdict on 373 (kappa 0.89 on the four verdicts, 0.90 on
+"same or not"). The first judge called its 4 decoys "other"; the second called 3 "other" and 1 "partly": "wife"
+beside the lexicon's "woman", two words of one field that the list of fields (kin, rank, gods) does not hold. The
+verdict is fair, but by the letter of the bar (at most a tenth) round two's decoys fail it; 4 decoys a judge are
+too few to weigh much, and the judges' attention rests on round one's 82.
+
 ## 4. The statuses
 
 The rules were committed before the judges answered. An entry Rilly states is "agreed by two scholars" when a
@@ -58,16 +69,16 @@ entry Rilly gives only as a hypothesis, or without a meaning, is "proposed".
 
 | Status | Entries | Uses in translated words |
 |---|---|---|
-| agreed by two scholars | 74 | 3,119 |
-| disputed | 21 | 368 |
-| stated by one | 62 | 725 |
+| agreed by two scholars | 83 | 3,381 |
+| disputed | 22 | 384 |
+| stated by one | 52 | 447 |
 | proposed | 20 | 628 |
 
-1. **Agreed:** 22 entries by both the judges and the editors, 23 by the judges alone, 29 by the editors alone. 21
-   of the 74 also have a dissent: a proposal both judges call "other", or an editor who reads a word otherwise.
+1. **Agreed:** 22 entries by both the judges and the editors, 32 by the judges alone, 29 by the editors alone. 26
+   of the 83 also have a dissent: a proposal both judges call "other", or an editor who reads a word otherwise.
    `yetmde` is one: agreed through the editors' reading of 6 words, while they read 49 others only partly the
-   same, and 3 scholars proposed a social bond rather than kinship.
-2. **Disputed:** `qo` (123 uses), `mlo` (113), `mte` (34) and `nse doke` (15) lead; `qo` and `mte` were already
+   same, and 4 scholars proposed a social bond rather than kinship.
+2. **Disputed:** `qo` (123 uses), `mlo` (113), `mte` (34) and `-so` (19) lead; `qo` and `mte` were already
    differences of the check against the editions. `mlo` is disputed through a remark of Griffith's that both judges
    read as another meaning, a comparison with the Egyptian epithet "justified"; both editions read it as the
    lexicon does (section 5, item 5).
@@ -79,13 +90,13 @@ entry Rilly gives only as a hypothesis, or without a meaning, is "proposed".
 
 1. **The proposals reach us through Rilly.** His lexicon records who proposed what; that record is the source,
    not the scholars' own texts. Section 6 checks a sample of it.
-2. **A decoyed line has one real verdict.** The rule asks for both judges, so the 82 lines that carried a decoy
-   for one judge cannot count. Had each kept its one real verdict, 12 entries would change status and the second
-   figure would be 4,105 (39.9%), not 3,875.
+2. **Round two closed the gap of the decoyed lines.** The rule asks for both judges, so the 82 lines that carried
+   a decoy for one judge could not count after round one (section 3). With round one alone, 12 entries had
+   another status and the second figure was 3,875 (37.7%).
 3. **An ending the lookup leaves unnamed is not checked.** The map's lookup cuts some known endings off a word
    without naming their entry; the rule leaves such a part out, as the map does, so only the rest of the word is
-   checked. 428 of the 2,132 words carry one, and for 87 of them no agreed ending or function word is spelled like
-   it (`-li`, `-leb` and `-lebkwi` lead). Held to those, the second figure would be 3,788 (36.8%).
+   checked. 432 of the 2,362 words carry one, and for 91 of them no agreed ending or function word is spelled like
+   it (`-li`, `-leb` and `-lebkwi` lead). Held to those, the second figure would be 4,014 (39.0%).
 4. **"Agreed" is the agreement of two scholars, not proof.** The scholars read the same few texts and often
    followed one another. And one editor's "agree" on one word is enough under the rule, however many other words
    the editor reads only partly the same (`yetmde`, item 1 of section 4). One entry, `-o` (246 uses), is agreed
@@ -97,11 +108,12 @@ entry Rilly gives only as a hypothesis, or without a meaning, is "proposed".
 6. **An agreement can rest on a piece of a word.** The rule counts an editor's "agree" on any word built on the
    entry, also on one that the map or the editor reads as a piece of another word. `-lowi` and `-to` are agreed
    only so: the map read `elowi` as the end of `terikelowi` written apart, and the editor read `to` as a part of
-   `peseto`. Without such agreements the second figure would be 3,827 (37.2%).
+   `peseto`. Without such agreements the second figure would be 4,057 (39.4%).
 7. **Some meanings are only a kind.** 21 of the 177 entries are titles or epithets whose meaning in the lexicon
    is "a priestly title" or the like; agreement on them is agreement on the kind.
-8. **Not done yet:** the meanings worded anew, so that the table can carry them under CC BY. The table holds the
-   headwords, the statuses, the scholars cited and the editors' verdicts counted.
+8. **Not done yet:** the spellings of each entry with the confirmed variants of step 21; the page of each
+   scholar's own statement (the lexicon gives the year, seldom the page, and the table gives Rilly's page); and a
+   status for the 417 other entries the map uses, in names or in words it does not translate.
 
 ## 6. The check of the record against Griffith's own words
 
@@ -137,12 +149,21 @@ verdicts, and the figures file keeps the first count (`as_first_counted`).
    of the first two kinds is not built on the entry the map named, so it no longer counts as an editor reading
    that entry otherwise. Only such non-agreements are left out, never an agreement, so this can only move an
    entry from disputed to stated by one. `l` "to give" (117 uses) and `-so` were disputed only through such
-   words and are stated by one now; others keep their status and lose an editor's dissent (`mẖe`, `ato`, `kdi`
+   words and were stated by one after round one (round two makes `l` agreed and `-so` disputed, each through a
+   proposal both judges read so); others keep their status and lose an editor's dissent (`mẖe`, `ato`, `kdi`
    among them). The check's rule sorts non-agreements only, so an agreement on such a word still counts; item 6
    of section 5 gives the figure without them.
 
-As first counted: 70 agreed, 23 disputed, 59 stated by one and 25 proposed (7 entries change), and a second
-figure of 3,873 (37.6%).
+As first counted: 70 agreed, 23 disputed, 59 stated by one and 25 proposed (16 entries change against the
+count with both rounds), and a second figure of 3,873 (37.6%).
+
+## 8. The meanings in our own words
+
+A writer worded the meaning of each of the 177 entries anew, in at most eight words, from the lexicon's meaning
+and the proposals the judges of round one found the same; 7 are empty, where the lexicon gives no meaning. A
+check counts the words a meaning shares in a row with the lexicon's meaning and its proposals: one shared four
+with a proposal (`ye-`) and was reworded here (`REWORDED` in the script); none does now. The table carries these
+meanings, under the licence of the data ([`LICENSE-DATA.md`](../../LICENSE-DATA.md)).
 
 ## Reproduce
 
@@ -150,10 +171,12 @@ figure of 3,873 (37.6%).
 python3 -I src/lexicon.py layout     # needs data/rilly2003/ and the local gloss file of the clean corpus
 python3 -I src/lexicon.py packs      # refuses once a judge has answered
 python3 -I src/lexicon.py check      # the sample given to Griffith; refuses once answered
+python3 -I src/lexicon.py round2     # round two's packs and the writer's; refuses once answered
 python3 -I src/lexicon.py public
 python3 -I tests/test_lexicon.py
 ```
 
 **Cost,** from the task notifications, by hand: four judges' packs 388,896 subagent tokens (99,371 and 101,866 for
 the first judge, 98,363 and 89,296 for the second), about five minutes each; the check against Griffith's text
-250,976, about ten minutes.
+250,976, about ten minutes; round two's two judges 143,940 (71,296 and 72,644), about two minutes each; the writer
+100,947, about four minutes.

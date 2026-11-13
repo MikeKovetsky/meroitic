@@ -129,16 +129,17 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     Demotic writes the same title, of unknown meaning, as `3krre` for one. Two judges agree with the map's reading
     on 36 of 58 and 41 of 57 of the lines whose word it translates. No meaning is both new and sure; what the map
     lacks is mostly titles the editors leave as titles too ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
-14. **A second scholar for 74 of the 177 entries the map leans on: 3,875 of the 10,290 running words (37.7%) are
+14. **A second scholar for 83 of the 177 entries the map leans on: 4,105 of the 10,290 running words (39.9%) are
     built only on meanings two scholars share.** Rilly's lexicon records what other scholars proposed for most of
     its entries. Two judges set 407 such proposals beside the lexicon's meaning, without the scholar's name and
-    with decoys (kappa 0.92 on "same or not"; 2 of 82 decoys accepted); with the editors' readings of item 10, 74
-    entries are agreed by two scholars, 21 disputed (`qo`, `mlo` and `mte` lead), 62 stated by one and 20 only
-    proposed. One lexicon translates 5,419 of the running words (52.7%); names and numbers count in both figures,
-    and an ending that the lookup cuts off without naming its entry is not checked. A sample of the lexicon's
-    citations of Griffith, checked against his own texts, held for all 15 found. The review corrected the first
-    count (3,873 words), which had called five names "proposed" and the verb `l` "to give" disputed on the
-    numeral 1 typed as `l`. The meanings are not yet worded anew for a public table
+    with decoys (kappa 0.92 on "same or not"; 2 of 82 decoys accepted), and in a second round read the real
+    proposal on the lines where they had seen a decoy; with the editors' readings of item 10, 83 entries are
+    agreed by two scholars, 22 disputed (`qo`, `mlo` and `mte` lead), 52 stated by one and 20 only proposed. One
+    lexicon translates 5,419 of the running words (52.7%); names and numbers count in both figures, and an ending
+    that the lookup cuts off without naming its entry is not checked. A sample of the lexicon's citations of
+    Griffith, checked against his own texts, held for all 15 found. The review corrected the first count (3,873
+    words), which had called five names "proposed" and the verb `l` "to give" disputed on the numeral 1 typed as
+    `l`. The public table gives each entry's meaning in words of our own
     ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## The question

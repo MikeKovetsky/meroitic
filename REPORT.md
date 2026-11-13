@@ -566,10 +566,11 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
 
 ## Day five, night (2026-11-12): a second scholar for every meaning (F2, first pass)
 
-1. **3,875 of the 10,290 running words of the clean corpus (37.7%) are built only on meanings that a second
+1. **4,105 of the 10,290 running words of the clean corpus (39.9%) are built only on meanings that a second
    scholar gives too;** one lexicon translates 5,419 (52.7%). Names and numbers count in both. Of the 3,676 words
-   the map translates as a meaning or a grammar word, 2,132 (58.0%) are built only on agreed entries.
-2. **The statuses of the 177 entries behind translated words:** 74 agreed by two scholars, 21 disputed, 62 stated
+   the map translates as a meaning or a grammar word, 2,362 (64.3%) are built only on agreed entries. With the
+   first round of judges alone it was 3,875 (37.7%): a second round closed the gap item 5 named.
+2. **The statuses of the 177 entries behind translated words:** 83 agreed by two scholars, 22 disputed, 52 stated
    by one, 20 only proposed. `qo`, `mlo` and `mte` lead the disputed; endings and pieces of the benediction
    formulas (`-wi`, `ps-`, `-te`, `-kete`) the proposed.
 3. **The judges met both bars set before they answered:** kappa 0.92 on "same or not" (0.6 asked), and 2 and 0
@@ -578,13 +579,14 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
 4. **The lexicon's record of other scholars held where it could be checked:** of 20 of its citations of
    Griffith, 15 were found in his own texts, all as stated (bars: 10 found, 90% as stated). The 5 not found all
    cite "Griffith" without a year, which does not say which text: 15 of the 20 drawn do.
-5. **Limits:** the 82 lines that carried a decoy for one judge cannot count under the rule; had each kept its
-   one real verdict, the figure would be 4,105 (39.9%). An ending that the map's lookup cuts off without naming
-   its entry is not checked; held to the agreed endings, the figure would be 3,788 (36.8%), and without the
-   editors' agreements on pieces of words (which make `-lowi` and `-to` agreed) 3,827 (37.2%). One editor's
+5. **Limits:** after round one the 82 lines that carried a decoy for one judge could not count under the rule;
+   round two had that judge read them with the real proposal, and with round one alone the figure would be 3,875
+   (37.7%). An ending that the map's lookup cuts off without naming its entry is not checked; held to the agreed
+   endings, the figure would be 4,014 (39.0%), and without the editors' agreements on pieces of words (which make
+   `-lowi` and `-to` agreed) 4,057 (39.4%). One editor's
    agreement on one word is enough, which makes `yetmde` agreed; and the editors were shown the map's short
-   gloss, so their "good" for `mlo`, the lexicon's meaning, did not count as agreeing. The meanings are not yet
-   worded anew, so the public table holds headwords, statuses, scholars and the editors' verdicts counted only.
+   gloss, so their "good" for `mlo`, the lexicon's meaning, did not count as agreeing. A writer worded the 177
+   meanings anew for the public table; one that shared four words with a proposal was reworded by hand.
 6. **Cost:** four judges' packs 388,896 subagent tokens, the check against Griffith 250,976: 639,872 before the
    review, against 1.4 to 1.8 million quoted with the review.
 7. **What the review changed in the count:** the code had called "proposed" the five names inside translated
@@ -595,3 +597,7 @@ notification: 2,057,415 for the two steps with their review, against the 2.0 mil
 
 **The review of F2's first pass** (full tier) cost 459,019 subagent tokens and 44 minutes, by hand from its task
 notification: 1,098,891 for the first pass with its review, against the 1.4 to 1.8 million quoted for all of F2.
+
+**Round two of F2** (12 November, evening): the two judges read with the real proposal the 41 lines each where
+they had seen a decoy (143,940 subagent tokens), and a writer worded the 177 meanings anew (100,947). The second
+judge called 1 of its 4 new decoys "partly", "wife" beside "woman", a pair the list of fields does not keep apart.

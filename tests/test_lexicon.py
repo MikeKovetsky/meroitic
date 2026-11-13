@@ -165,8 +165,8 @@ def test_count_end_to_end():
                                                                               "agreed_by_two_scholars": 6}
         assert figs["as_first_counted"] == {"statuses": {AGREED: 3, "disputed": 2, "stated by one": 1, "proposed": 2},
                                             "entries_that_change": 2, "agreed_by_two_scholars": 6}
-        alone = figs["if_a_decoyed_row_kept_its_one_real_verdict"]           # P4 keeps the second judge's "same"
-        assert alone["entries_that_change"] == 1 and alone["agreed_by_two_scholars"] == 8
+        alone = figs["with_round_one_alone"]                                  # no round two yet: the same count
+        assert alone["entries_that_change"] == 0 and alone["agreed_by_two_scholars"] == 7 and "round two" not in figs
         assert figs["two judges"]["rows"] == 3 and figs["decoys, judge 1"] == {"shown": 1, "accepted": 0,
                                                                                "verdicts": {"other": 1}}
         e = figs["entries"]
@@ -178,6 +178,22 @@ def test_count_end_to_end():
         assert (rows["qo"]["another_meaning"], rows["qo"]["editors_differ"]) == ("Someone; Millet 2005 or FHN III", 1)
         assert (rows["Wos"]["same_meaning"], rows["Wos"]["status"]) == ("Millet 2005 or FHN III", AGREED)
         assert X.table_text([]) == "\t".join(X.COLUMNS) + "\n"
+        # round two: the first judge reads P4, decoyed for it in round one, with the real proposal, beside a decoy
+        lines(d / "lex" / "round2" / "answers" / "judge1_c.jsonl", [{"row": "P4", "verdict": "same"},
+                                                                    {"row": "P1", "verdict": "other"}])
+        (d / "lex" / "round2" / "key.json").write_text(json.dumps(
+            {"1": {"order": ["P4", "P1"], "real": ["P4"], "decoys": {"P1": "'water'"}},
+             "2": {"order": [], "real": [], "decoys": {}}}))
+        assert X.verdicts_of(d / "lex")["P4"] == ("same", "same") and "P4" not in X.verdicts_of(d / "lex", rounds=1)
+        figs2, st2 = X.count(d / "lex", d / "glosses.jsonl", d / "expert")
+        assert st2["l (2)"] == AGREED and {h for h in st if st[h] != st2[h]} == {"l (2)"}
+        assert figs2["agreed_by_two_scholars"] == 8 and figs2["with_round_one_alone"] == {
+            "statuses": {s: sum(v == s for v in st.values()) for s in X.STATUSES}, "entries_that_change": 1,
+            "agreed_by_two_scholars": 7}
+        r2 = figs2["round two"]
+        assert r2["decoys, judge 1"] == {"shown": 1, "accepted": 0, "verdicts": {"other": 1}}
+        assert r2["all lines"]["rows"] == 4 and r2["lines_reread"] == {"1": 1, "2": 0} and r2["unanswered"] == {"1": 0, "2": 0}
+        assert figs2["two judges"] == figs["two judges"]                       # round one's agreement stays as it was
 
 
 def test_the_sample_of_griffith():
@@ -245,6 +261,9 @@ def test_answers_are_read_from_every_pack_of_a_judge():
 PAGE = ROOT / "data/discovery/lexicon.md"
 JUDGES = (99371, 101866, 98363, 89296)                     # the cost, by hand from the task notifications
 CHECK = 250976                                             # the check against Griffith, the same
+ROUND2 = (71296, 72644)                                    # round two's judges, the same
+WRITER = 100947                                            # the writer of the meanings, the same
+EMPTY = {"ps-", "-te (4)", "t- (1)", "-te (5)", "-to (1)", "yi-", "-bete-"}   # entries the lexicon gives no meaning
 
 
 def table():
@@ -288,19 +307,36 @@ def test_reported_numbers():
                                       f"{len(y['another_meaning'].split('; '))} scholars proposed") in text
     uses = lambda h: t[h]["uses_in_translated_words"]
     disputed = sorted((h for h in t if t[h]["status"] == "disputed"), key=lambda h: -int(uses(h)))
-    assert disputed[:4] == ["qo", "mlo", "mte", "nse doke"]
-    assert (f"`qo` ({uses('qo')} uses), `mlo` ({uses('mlo')}), `mte` ({uses('mte')}) and `nse doke` "
-            f"({uses('nse doke')}) lead") in text
+    assert disputed[:4] == ["qo", "mlo", "mte", "-so (2)"]
+    assert (f"`qo` ({uses('qo')} uses), `mlo` ({uses('mlo')}), `mte` ({uses('mte')}) and `-so` "
+            f"({uses('-so (2)')}) lead") in text
     assert (f"`-wi` ({uses('-wi (5)')} uses), `ps-` ({uses('ps-')}), `-te` ({uses('-te (4)')}), `-kete` "
             f"({uses('-kete')})") in text and all(t[h]["status"] == "proposed" for h in ("-wi (5)", "ps-", "-te (4)", "-kete"))
     assert e["agreed_only_through_an_unnamed_source"] == ["-o (1)"]
     assert (f"One entry, `-o` ({uses('-o (1)')} uses), is agreed only through a view the lexicon records without a "
             "scholar's name") in text
     assert f"{e['only_a_kind']} of the {e['behind_translated_words']} entries are titles or epithets" in text
-    alone = f["if_a_decoyed_row_kept_its_one_real_verdict"]
-    assert (f"{alone['entries_that_change']} entries would change status and the second figure would be "
-            f"{share(alone['agreed_by_two_scholars'])}, not {f['agreed_by_two_scholars']:,}") in text
+    assert e["without_a_status"] == e["used"] - e["behind_translated_words"]
+    assert f"a status for the {e['without_a_status']} other entries the map uses" in text
+    alone = f["with_round_one_alone"]
+    assert (f"With round one alone, {alone['entries_that_change']} entries had another status and the second figure "
+            f"was {share(alone['agreed_by_two_scholars'])}.") in text
+    assert f"with the first round alone it was {share(alone['agreed_by_two_scholars'])}" in text
     assert f"so the {f['rows'] - j['rows']} lines that carried a decoy" in text
+    r2 = f["round two"]
+    assert r2["lines_reread"] == {"1": 41, "2": 41} and r2["unanswered"] == {"1": 0, "2": 0}
+    assert (f"on all {r2['all lines']['rows']} lines the judges gave the same verdict on {r2['all lines']['same_verdict']} "
+            f"(kappa {r2['all lines']['kappa']:.2f} on the four verdicts, {r2['all lines']['kappa_same_or_not']:.2f} on") in text
+    d1, d2 = r2["decoys, judge 1"], r2["decoys, judge 2"]
+    assert d1 == {"shown": 4, "accepted": 0, "verdicts": {"other": 4}} and "The first judge called its 4 decoys \"other\"" in text
+    assert d2 == {"shown": 4, "accepted": 1, "verdicts": {"other": 3, "partly": 1}} and r2["bars"]["decoys_accepted"] is False
+    assert "the second called 3 \"other\" and 1 \"partly\"" in text and "round two's decoys fail it" in text
+    m = f["meanings"]
+    assert m["written"] == e["behind_translated_words"] and m["copied_after_rewording"] == 0
+    assert m["longest_meaning_in_words"] <= 8 and m["reworded_for_a_copy"] == sorted(X.REWORDED)
+    assert (f"A writer worded the meaning of each of the {m['written']} entries anew, in at most eight words" in text
+            and f"; {m['empty']} are empty, where the lexicon gives no meaning" in text)
+    assert all(bool(r["meaning_in_our_words"]) == (r["headword"] not in EMPTY) for r in t.values())
     ends = f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]
     lead = "`, `-".join(list(ends["endings"])[:2]) + "` and `-" + list(ends["endings"])[2]
     assert (f"{w['with an unnamed ending']} of the {w['every entry agreed']:,} words carry one, and for "
@@ -325,12 +361,15 @@ def test_reported_numbers():
     assert v.get("otherwise", 0) == 0 and g["found"] == v["as stated"]          # "all as the lexicon states them"
     st = first["statuses"]
     assert (f"As first counted: {st[AGREED]} agreed, {st['disputed']} disputed, {st['stated by one']} stated by one "
-            f"and {st['proposed']} proposed ({first['entries_that_change']} entries change), and a second figure of "
+            f"and {st['proposed']} proposed ({first['entries_that_change']} entries change against the count with both "
+            f"rounds), and a second figure of "
             f"{share(first['agreed_by_two_scholars'])}") in text
     assert all(t[h]["status"] == AGREED for h in ("Wos", "Sori", "Asori", "Npte")) and t["Mnp"]["status"] == "stated by one"
-    assert t["l (2)"]["status"] == t["-so (2)"]["status"] == "stated by one"
+    assert t["l (2)"]["status"] == AGREED and t["-so (2)"]["status"] == "disputed"                 # round two
     assert f"`l` \"to give\" ({uses('l (2)')} uses) and `-so` were disputed only through such words" in text
-    assert f"the check against Griffith's text {CHECK:,}, about ten minutes." in text
+    assert f"the check against Griffith's text {CHECK:,}, about ten minutes;" in text
+    assert (f"round two's two judges {sum(ROUND2):,} ({ROUND2[0]:,} and {ROUND2[1]:,}), about two minutes each; the "
+            f"writer {WRITER:,}, about four minutes.") in text
     assert (f"four judges' packs {sum(JUDGES):,} subagent tokens ({JUDGES[0]:,} and {JUDGES[1]:,} for the first "
             f"judge, {JUDGES[2]:,} and {JUDGES[3]:,} for the second)") in text
 
@@ -339,7 +378,8 @@ NUMBER = re.compile(r"\d{4}-\d\d-\d\d|\d[\d,]*(?:\.\d+)?%?")
 # numbers a text may state without a figure behind them: years and dates, the step and item it names, the bars set
 # beforehand and the costs by hand
 STATED = {"1911", "1916", "17", "2003", "2005", "2026", "2026-11-12", "23", "0.6", "10%", "90%", "1.4", "1.8",
-          f"{sum(JUDGES):,}", f"{CHECK:,}", f"{sum(JUDGES) + CHECK:,}"} | {f"{c:,}" for c in JUDGES}
+          f"{sum(JUDGES):,}", f"{CHECK:,}", f"{sum(JUDGES) + CHECK:,}", f"{sum(ROUND2):,}", f"{WRITER:,}"} | \
+    {f"{c:,}" for c in JUDGES + ROUND2}
 
 
 def known(f):
@@ -363,7 +403,7 @@ def known(f):
         walk({c: int(r[c]) for c in ("uses_in_translated_words", "editors_agree", "editors_partly", "editors_differ")})
     w = f["words"]
     for n in (f["translated_by_one_lexicon"], f["agreed_by_two_scholars"], f["as_first_counted"]["agreed_by_two_scholars"],
-              f["if_a_decoyed_row_kept_its_one_real_verdict"]["agreed_by_two_scholars"],
+              f["with_round_one_alone"]["agreed_by_two_scholars"],
               f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"],
               f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"]):
         out.add(f"{n / w['all']:.1%}")
@@ -415,9 +455,9 @@ def test_the_summaries_quote_the_figures():
         assert not missing, (name, missing)
     a, d, s, p = st[AGREED], st["disputed"], st["stated by one"], st["proposed"]   # small numbers: as phrases
     assert f"{a} entries are agreed by two scholars, {d} disputed (" in parts["README"]
-    assert f"{s} stated by one and {p} only proposed." in parts["README"]
+    assert f"{s} stated by one and {p} only proposed. One" in parts["README"]
     assert f"{a} agreed by two scholars, {d} disputed, {s} stated by one, {p} only proposed." in parts["REPORT"]
-    assert f"{a} are agreed, {d} disputed, {s} stated by one and {p} only proposed." in parts["NEXT_STEPS"]
+    assert f"{a} are agreed, {d} disputed, {s} stated by one and {p} only proposed, after two" in parts["NEXT_STEPS"]
     assert f"{a} are agreed, {d} disputed (" in parts["summary page"]
     assert f"{s} stated by one, {p} only proposed." in parts["summary page"]
     assert f"A second scholar for {a} of the {e['behind_translated_words']} entries" in parts["README"]
@@ -434,9 +474,10 @@ def test_the_summaries_quote_the_figures():
     report = " ".join(read("REPORT.md").split())
     assert f"four judges' packs {sum(JUDGES):,} subagent tokens, the check against Griffith {CHECK:,}: " \
            f"{sum(JUDGES) + CHECK:,} before the review" in report
-    alone = f["if_a_decoyed_row_kept_its_one_real_verdict"]["agreed_by_two_scholars"]
+    alone = f["with_round_one_alone"]["agreed_by_two_scholars"]
     ends = f["if_an_unnamed_ending_must_be_spelled_like_an_agreed_one"]["agreed_by_two_scholars"]
-    assert f"the figure would be {alone:,} ({alone / w['all']:.1%})" in parts["REPORT"]
+    assert f"with round one alone the figure would be {alone:,} ({alone / w['all']:.1%})" in parts["REPORT"]
+    assert f"With the first round of judges alone it was {alone:,} ({alone / w['all']:.1%})" in parts["REPORT"]
     assert f"the figure would be {ends:,} ({ends / w['all']:.1%})" in parts["REPORT"]
     pieces = f["if_an_agreement_on_a_piece_of_a_word_did_not_count"]["agreed_by_two_scholars"]
     assert f"without the editors' agreements on pieces of words (which make `-lowi` and `-to` agreed) {pieces:,} " \
@@ -449,6 +490,10 @@ def test_the_summaries_quote_the_figures():
     assert "[the lexicon's page](lexicon.md)" in read("data/discovery/v6_readers.md")   # the map points to its second figure
 
 
+def entries_by(entries):
+    return {e["headword"]: e for e in entries}
+
+
 def test_public_figures_are_what_the_local_files_give():
     needs(*LOCAL)
     if not FIGURES.exists():
@@ -456,7 +501,11 @@ def test_public_figures_are_what_the_local_files_give():
     figs, st = X.count()
     assert figs == json.loads(FIGURES.read_text(encoding="utf-8"))
     entries = X.entries_of()
-    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, X.verdicts_of()))
+    assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, X.verdicts_of(),
+                                                                            X.our_meanings()))
+    mine = X.our_meanings()
+    assert not [e["headword"] for e in entries if e["uses_translated"] and X.copied(mine[e["headword"]], e)]
+    assert X.copied(X.REWORDED and "verb prefix (?), variant of t- in filiation", entries_by(entries)["ye- (2)"])
     assert len(table()) == figs["entries"]["behind_translated_words"]
     # the first count's evidence is the file written with the packs: the editors' verdicts, nothing left out
     first = X.editors(leave_out=lambda r, a: False)

@@ -77,10 +77,11 @@ Done since this plan was written:
     languages, and where the two texts give the same office the titles line up with the lexicon; the editors' 125
     equations add no meaning that is new and sure.
 15. **F2, first pass: a second scholar for every meaning** (2026-11-12,
-    [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 3,875 of 10,290 running words (37.7%) are built
+    [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 4,105 of 10,290 running words (39.9%) are built
     only on meanings a second scholar gives too, against 5,419 (52.7%) translated by one lexicon; of the 177
-    entries behind translated words, 74 are agreed, 21 disputed, 62 stated by one and 20 only proposed. Left: the
-    meanings worded anew, so that the public table can carry them.
+    entries behind translated words, 83 are agreed, 22 disputed, 52 stated by one and 20 only proposed, after two
+    rounds of judges. The public table gives each meaning in words of our own. Left: each entry's spellings, the
+    page of each scholar's statement, and a status for the other entries the map uses.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -361,9 +362,10 @@ days, not hours. The costs are estimates from what the runs so far cost.
       "agreed by two scholars"; the table is published under CC BY.
     - Cost: 2 to 3 million subagent tokens.
     - First pass, 12 November: statuses for all 177 entries behind translated words and the second figure
-      (point 15 above). Not yet done: the meanings worded anew for the public table; the spellings of each entry,
-      the confirmed variants included; the page of each scholar's own statement (the table gives Rilly's page);
-      and a status for the other entries the map uses, in names or in words it does not translate.
+      (point 15 above), and in a second round the meanings worded anew for the public table. Not yet done: the
+      spellings of each entry, the confirmed variants included; the page of each scholar's own statement (the
+      table gives Rilly's page); and a status for the other entries the map uses, in names or in words it does
+      not translate.
 24. **F3. One harness: the test of a model on a language nobody reads.**
     - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
       judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in

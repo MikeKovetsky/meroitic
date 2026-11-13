@@ -42,6 +42,41 @@
   "kappa_same_or_not": true,
   "decoys_accepted": true
  },
+ "round two": {
+  "lines_reread": {
+   "1": 41,
+   "2": 41
+  },
+  "unanswered": {
+   "1": 0,
+   "2": 0
+  },
+  "decoys, judge 1": {
+   "shown": 4,
+   "accepted": 0,
+   "verdicts": {
+    "other": 4
+   }
+  },
+  "decoys, judge 2": {
+   "shown": 4,
+   "accepted": 1,
+   "verdicts": {
+    "other": 3,
+    "partly": 1
+   }
+  },
+  "all lines": {
+   "rows": 407,
+   "same_verdict": 373,
+   "kappa": 0.8865,
+   "kappa_same_or_not": 0.8954
+  },
+  "bars": {
+   "kappa_same_or_not": true,
+   "decoys_accepted": false
+  }
+ },
  "entries": {
   "used": 594,
   "behind_translated_words": 177,
@@ -49,34 +84,35 @@
   "with_the_editors_verdict": 97,
   "with_the_editors_reading": 66,
   "only_a_kind": 21,
+  "without_a_status": 417,
   "statuses": {
-   "agreed by two scholars": 74,
-   "disputed": 21,
-   "stated by one": 62,
+   "agreed by two scholars": 83,
+   "disputed": 22,
+   "stated by one": 52,
    "proposed": 20
   },
   "statuses_by_use": {
-   "agreed by two scholars": 3119,
-   "disputed": 368,
-   "stated by one": 725,
+   "agreed by two scholars": 3381,
+   "disputed": 384,
+   "stated by one": 447,
    "proposed": 628
   },
-  "agreed_with_a_dissent": 21,
+  "agreed_with_a_dissent": 26,
   "agreed_only_through_an_unnamed_source": [
    "-o (1)"
   ],
   "agreed_by": {
    "judges and editors": 22,
-   "judges": 23,
+   "judges": 32,
    "editors": 29
   }
  },
  "words": {
   "all": 10290,
   "meaning or grammar": 3676,
-  "every entry agreed": 2132,
-  "with an unnamed ending": 428,
-  "with an unnamed ending no agreed entry spells": 87,
+  "every entry agreed": 2362,
+  "with an unnamed ending": 432,
+  "with an unnamed ending no agreed entry spells": 91,
   "names and numbers": 1743
  },
  "griffith_check": {
@@ -98,16 +134,16 @@
   }
  },
  "translated_by_one_lexicon": 5419,
- "agreed_by_two_scholars": 3875,
+ "agreed_by_two_scholars": 4105,
  "if_an_unnamed_ending_must_be_spelled_like_an_agreed_one": {
-  "agreed_by_two_scholars": 3788,
+  "agreed_by_two_scholars": 4014,
   "endings": {
-   "li": 22,
+   "li": 23,
    "leb": 21,
    "lebkwi": 17,
+   "ye": 8,
    "lis": 7,
-   "ye": 6,
-   "yi": 4,
+   "yi": 5,
    "lw": 4,
    "wi": 3,
    "te": 2,
@@ -119,17 +155,17 @@
    "-lowi",
    "-to (2)"
   ],
-  "agreed_by_two_scholars": 3827
+  "agreed_by_two_scholars": 4057
  },
- "if_a_decoyed_row_kept_its_one_real_verdict": {
+ "with_round_one_alone": {
   "statuses": {
-   "agreed by two scholars": 83,
-   "disputed": 22,
-   "stated by one": 52,
+   "agreed by two scholars": 74,
+   "disputed": 21,
+   "stated by one": 62,
    "proposed": 20
   },
   "entries_that_change": 12,
-  "agreed_by_two_scholars": 4105
+  "agreed_by_two_scholars": 3875
  },
  "as_first_counted": {
   "statuses": {
@@ -138,7 +174,16 @@
    "stated by one": 59,
    "proposed": 25
   },
-  "entries_that_change": 7,
+  "entries_that_change": 16,
   "agreed_by_two_scholars": 3873
+ },
+ "meanings": {
+  "written": 177,
+  "empty": 7,
+  "reworded_for_a_copy": [
+   "ye- (2)"
+  ],
+  "longest_meaning_in_words": 8,
+  "copied_after_rewording": 0
  }
 }
