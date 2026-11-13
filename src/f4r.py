@@ -157,7 +157,7 @@ def index_of(gl):
 def parallels(tid, gl, rows, withheld=frozenset(), index=None):
     """The lines of a pack's section of parallels: for each word of the text that is not a number and stands in
     other texts too, up to PARALLELS of those places with WIDTH words on each side and the map's reading of
-    each; a word standing in more than COMMON other texts gets its count only."""
+    each; a word standing in more than COMMON other texts gets its count only. Millet is not named (label())."""
     index = index or index_of(gl)
     lines, seen = [], set()
     for g in gl[tid]:
@@ -180,8 +180,17 @@ def parallels(tid, gl, rows, withheld=frozenset(), index=None):
             shown.add(t)
             span = gl[t][max(0, i - WIDTH): i + WIDTH + 1]
             words = " ".join(f"**{x['form']}**" if x["form"] == form else x["form"] for x in span)
-            lines.append(f"  - {t} ({rows[t]['site']}): {words} = " + " · ".join(word_reading(x, withheld) for x in span))
+            lines.append(f"  - {label(t, rows)}: {words} = " + " · ".join(word_reading(x, withheld) for x in span))
     return lines
+
+
+def label(tid, rows):
+    """A text as a pack names it: its id and site; a text or a site that names Millet (the phrases his thesis of
+    1968 quotes are rows of the corpus) is named without him."""
+    if F.MILLET.search(tid):
+        return "a phrase quoted in a study of 1968"
+    site = rows[tid].get("site") or ""
+    return f"{tid} ({site})" if site and not F.MILLET.search(site) else tid
 
 
 # ---------------------------------------------------------------------------------------------------- the packs

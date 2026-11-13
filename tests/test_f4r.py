@@ -95,6 +95,13 @@ def test_the_parallels():
     # at most PARALLELS places for a word
     many = {"T": [g("zzz", "unknown")], **{f"P{i}": [g("zzz", "unknown")] for i in range(R.PARALLELS + 2)}}
     assert sum(l.startswith("  - ") for l in R.parallels("T", many, {t: {"site": "S"} for t in many})) == R.PARALLELS
+    # a row of the corpus that names Millet (a phrase his thesis quotes) is shown without his name
+    named = {"T": [g("zzz", "unknown")], "Millet 1968 p. 362 (MilletExamples.txt line 4)": [g("zzz", "unknown")],
+             "S": [g("zzz", "unknown")]}
+    out = R.parallels("T", named, {"T": {"site": "x"}, "S": {"site": "after Millet"},
+                                   "Millet 1968 p. 362 (MilletExamples.txt line 4)": {"site": ""}})
+    assert not F.MILLET.search("\n".join(out)) and "  - a phrase quoted in a study of 1968: **zzz** = [zzz: ?]" in out
+    assert "  - S: **zzz** = [zzz: ?]" in out
     # a word that stands nowhere else gets no line
     assert R.parallels("T", {"T": [g("only", "unknown")]}, {"T": {"site": "S"}}) == []
 
