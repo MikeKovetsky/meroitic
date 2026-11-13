@@ -168,8 +168,8 @@ Round three gives each of the 417 other entries the map uses a status, by the sa
 7. **Some meanings are only a kind.** 21 of the 177 entries are titles or epithets whose meaning in the lexicon
    is "a priestly title" or the like; agreement on them is agreement on the kind.
 8. **Round three's decoys are another kind** than those of rounds one and two: real proposals of other entries,
-   not quoted meanings. They are harder to tell from a real line, and none was accepted; the two rates are not one
-   measure.
+   not quoted meanings, under new numbers like the real lines. They are not quite like them: each quotes a gloss,
+   which most of round three's real lines do not. None was accepted; the two rates are not one measure.
 9. **Not done yet:** a meaning in our words for the 417 other entries (their table gives none); the pages of most
    scholars' statements (section 7); and FHN IV's glosses as the statement of a second scholar.
 

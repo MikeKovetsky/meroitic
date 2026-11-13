@@ -130,9 +130,7 @@ CHECK_BARS = {"found": 10, "as_stated_share_of_found": 0.9}
 REWORDED = {"ye- (2)": "verbal prefix (?), like t- in naming parents"}
 COPIED = 4                                             # a run of this many words shared is a copy
 LONGEST = 8                                            # the most words a meaning in our words may have
-HELD = ("data/sources/karanog-text/pages.txt", "data/sources/griffith-jea-text/studies_I.txt",
-        "data/sources/griffith-jea-text/studies_II.txt", "data/sources/griffith-jea-text/studies_III.txt",
-        "data/sources/griffith-jea-text/studies_IV.txt")
+HELD = tuple(path for path, _ in R.GRIFFITH_TEXTS.values())   # Karanòg, then the Meroitic Studies I to IV
 
 JUDGE = """# Two statements about the meaning of a Meroitic word: do they give the same meaning?
 

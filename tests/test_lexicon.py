@@ -993,6 +993,13 @@ def test_round_three_packs_are_what_the_code_writes():
         X.third_round(X.OUT, out)
         for f in ("key.json", "packs/judge1.md", "packs/judge2.md"):
             assert (out / f).read_bytes() == (X.ROUND3 / f).read_bytes(), f
+    # the page's limit (section 6, item 8): every decoy quotes a gloss, which most real lines do not
+    entries = [json.loads(l) for l in (X.OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
+    texts = {p["id"]: " ".join(p["proposal"].split()) for e in entries for p in e["proposals"]}
+    key, glossed = json.loads((X.ROUND3 / "key.json").read_text(encoding="utf-8")), lambda i: bool(X.GLOSS.search(texts[i]))
+    assert all(glossed(d["from"]) for j in "12" for d in key[j]["decoys"].values())
+    assert 2 * sum(map(glossed, key["1"]["real"].values())) < len(key["1"]["real"])
+    assert "each quotes a gloss, which most of round three's real lines do not" in " ".join(PAGE.read_text(encoding="utf-8").split())
 
 
 CHECKS = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
