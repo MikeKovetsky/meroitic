@@ -137,13 +137,13 @@ Round three gives each of the 417 other entries the map uses a status, by the sa
    `Nlote` (8), `yeto` (7) and `Brebri` (1).
 4. **Stated by one:** 43, nearly all names, for which the record holds no second statement of the meaning or the
    judges found none the same. Amun (`Amni`, 45 uses) is one: its proposals are about its form, and no edition of
-   the check reads it. FHN IV's index gives the name as Amūn, but the rules do not use FHN IV (section 7).
+   the check reads it. FHN IV's index gives the name as Amûn, but the rules do not use FHN IV (section 7).
 5. Without round three, 15 of the 417 would be agreed, 2 disputed and 60 stated by one.
 
 ## 6. Limits
 
 1. **The proposals reach us through Rilly.** His lexicon records who proposed what; that record is the source,
-   not the scholars' own texts. Section 6 checks a sample of it.
+   not the scholars' own texts. Section 8 checks a sample of it.
 2. **Round two closed the gap of the decoyed lines.** The rule asks for both judges, so the 82 lines that carried
    a decoy for one judge could not count after round one (section 3). With round one alone, 12 entries had
    another status and the second figure was 3,875 (37.7%).
@@ -180,8 +180,10 @@ give them ([`src/lexicon_refs.py`](../../src/lexicon_refs.py)).
 
 1. **Spellings:** the headword as Rilly spells it, then the variants he lists, for every entry; 176 entries have
    variants. Beside them, the pieces of the corpus that both checkers of step 21 confirmed as a spelling or form of
-   a word ([`variants_confirmed.tsv`](variants_confirmed.tsv)): 39 of the 48 go to 37 entries the map uses; 8 are
-   already a spelling of the entry they name, and 1 names an entry the map does not use.
+   a word ([`variants_confirmed.tsv`](variants_confirmed.tsv)): 33 of the 48 go to 29 entries the map uses; 14
+   are already a spelling of the entry they name, and 1 names an entry the map does not use. A piece that is a
+   headword is in Rilly's letters; the others are in the corpus's (`x` and `X` for ḫ and ẖ, `s` for the sign se,
+   `S` for s, `N` for ne), so `smlo` beside `smlo (1)` is a spelling with se.
 2. **Rilly's page** of every entry has a column of its own.
 3. **The scholars' own pages:** of the 206 proposals both judges found the same or otherwise, Rilly's record gives
    a page for none; it gives the author and the year, or the author alone. For 10 of them the table gives
@@ -190,12 +192,16 @@ give them ([`src/lexicon_refs.py`](../../src/lexicon_refs.py)).
 4. **The editions' pages:** for 100 entries, the entries of Millet 2005 and FHN III that hold a word built on the
    entry which the editor reads the same way or otherwise, with their pages. The check against the editions
    recorded each word's entry in the edition, not its line, so the page is that of the entry.
-5. **FHN IV's index:** for 74 entries, FHN IV's indexes of Meroitic titles, words and gods give the page where the
-   term is indexed and the pages of FHN it lists or the name it sends to (87 references, read from the page images,
-   since the text layer garbles some terms). These glosses are FHN's own statements of the meaning; they were not
-   judged, so they make no entry agreed.
+5. **FHN IV's index:** for 113 entries, FHN IV's indexes of gods, persons, royal names, Meroitic titles, places
+   and Meroitic words give the page where the term is indexed and the pages of FHN it lists or the name it sends
+   to (137 references, read from the page images, since the text layer garbles some terms). The indexes of places,
+   persons and royal names give the names among them: `Pedeme`, `Atiye`, `Tebwe` and the other places FHN prints in
+   their Meroitic spelling, and rulers such as `Ntkmni`. These glosses are FHN's own statements of the meaning;
+   they were not judged, so they make no entry agreed.
 6. **Not in hand:** the pages of the other scholars (Hintze, Hofmann, Priese, Zyhlarz, Millet's earlier papers
-   and others): their works are not among our sources.
+   and others). Most of their works are not among our sources. Some papers may be in the Meroitic Newsletter,
+   whose scans we hold, but the record gives a year at most, and without Rilly's bibliography, which we do not
+   hold, a year does not say which paper is meant; the Newsletter was not searched for them.
 
 ## 8. The check of the record against Griffith's own words
 

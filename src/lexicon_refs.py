@@ -14,19 +14,27 @@ The pages, of five kinds:
 4. The editors': the pages of the entry of Millet 2005 (JSSEA 32, printed page = PDF page - 1) or FHN III (its
    contents, prepare.FHN_ENTRIES) that holds a word built on the entry (edition_pages). The check against the
    editions recorded the edition's entry of each word, not its line, so the page is that of the entry.
-5. FHN IV's indexes of Meroitic titles (pp. 1292-94), Meroitic words (pp. 1329-31) and gods (pp. 1261-65): the
+5. FHN IV's indexes of gods (pp. 1261-65), of other persons (pp. 1271-81), of royal names (pp. 1281-86), of
+   Meroitic titles (pp. 1292-94), of peoples and places (pp. 1295-1314) and of Meroitic words (pp. 1329-31): the
    page of FHN IV where the term is indexed, the term as FHN spells it, and the FHN pages the index gives or the
    entry it sends to (FHN4). Read from the scan's page images on 12 November 2026, because its text layer garbles
-   some terms (FHN's ñ, Rilly's "ne"); tests compare the pages with the text layer. A term goes to an entry the map
-   uses when it is spelled like the entry or a spelling Rilly lists under it and FHN's gloss is the entry's
-   meaning ("at (bread)" is at (2), "-te (locative suffix)" is -te (2)); the index's phrases ("ant qorise") are
-   left out. FHN IV's glosses are not used for the statuses: the rules of lexicon.py (item 3) were set without
-   them.
+   some terms (FHN's ñ, Rilly's "ne"; "Bêk" read as "Wek"); tests compare the pages with the text layer. A term
+   goes to every entry the map uses that is spelled like it, or that lists a spelling like it (FHN writes ḫ for
+   Rilly's ḫ and ẖ, ñ for his ne; case, brackets and a hyphen inside a word aside: "s-lḫ" is slẖ), where FHN
+   gives it as the same thing: where several entries are spelled so, its gloss decides ("at (bread)" is at (2),
+   "-te (locative suffix)" is -te (2), "ḫr (North)" is ẖr, "Mni, Mno (Mer. Amûn)" is not Amnote, Amun of Thebes)
+   and a term without a hyphen at its edge is a word, not an ending ("qo" is not -qo); a god in the index of gods,
+   a place in that of places, a person in those of persons and royal names. The Meroitic names it gives for Isis,
+   Osiris and Amun ("Asi", "Asor", "Amani") go to Wos, Asori and Amni. Left out: the index's phrases ("ant
+   qorise"), the rulers it indexes by their names in English (Amanitore, II.2) where the royal names give no
+   Meroitic spelling, and its Egyptian spellings. FHN IV's glosses are not used for the statuses: the rules of
+   lexicon.py (item 3) were set without them.
 
 FHN IV, Millet 2005, FHN III, Griffith's scans and Rilly's lexicon stay local; the public tables hold spellings,
 pages and the names of the works, no wording of theirs.
 """
 import csv
+import json
 import pathlib
 import re
 import sys
@@ -34,10 +42,12 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts")]
 import coverage as C                                   # noqa: E402
+import lexique as L                                    # noqa: E402
 import prepare as PR                                   # noqa: E402
 
 CONFIRMED = ROOT / "data/discovery/variants_confirmed.tsv"
 CHECKED_AS = "the word it is a spelling or a form of, for both checkers"
+PIECE_IS = "headword or letters"                       # a piece is a headword (Rilly's letters) or the corpus's letters
 GRIFFITH_CHECK = ROOT / "data/sources/lexicon/answers/griffith_check.jsonl"
 GRIFFITH_TEXTS = {"karanog": ("data/sources/karanog-text/pages.txt", "Karanòg (1911)"),
                   "studies_I": ("data/sources/griffith-jea-text/studies_I.txt", "Meroitic Studies I (1916)"),
@@ -48,8 +58,37 @@ NOTES = (("(peut-être)", "(?)"), ("(archaïque)", "(archaic)"), ("(arch.)", "(a
 PAGE_NOTE = re.compile(r"\((?:p|pp)\. ?(\d+(?:[-–]\d+)?(?:, ?\d+(?:[-–]\d+)?)*)\)")
 ONE_WORK = re.compile(r"^[A-Z][\w'’\-]*(?: [A-Z][\w'’\-]*)* \d{4}[a-z]?$")      # "Hintze 1979": one author, one year
 
-# FHN IV's index (5 of the docstring): (the entry, FHN IV's page, the term as FHN spells it, FHN's pages or "see")
+# FHN IV's index (5 of the docstring): (the entry, FHN IV's page, the term as FHN spells it, FHN's pages or "see"),
+# index by index in the order of the volume
 FHN4 = (
+    # II.1 divinities
+    ("Amni", 1261, "Amani", "see Amûn"),
+    ("Amnp", 1261, "Amnp", "see Amûn of Luxor"),
+    ("Mnp", 1261, "Amnp", "see Amûn of Luxor"),
+    ("Amnpte", 1261, "Amnpte", "see Amûn (Amen-Rê) of Napata"),
+    ("Mnpte", 1261, "Amnpte", "see Amûn (Amen-Rê) of Napata"),
+    ("Aqedise", 1262, "Aqedise", "670, 725"),
+    ("Ar (1)", 1262, "Ar[e]", "see Horus"),
+    ("Wos", 1262, "Asi", "920-21"),
+    ("Asori", 1262, "Asor", "see Osiris"),
+    ("mk", 1264, "Meke", "670"),
+    ("Amni", 1264, "Mni, Mno", "see Amûn"),
+    ("Mni", 1264, "Mni, Mno", "see Amûn"),
+    ("Ms", 1264, "Ms", "954-55, 955 n. 579"),
+    ("Wos", 1265, "Wos", "see Isis"),
+    # II.3 other persons
+    ("Arotnide", 1272, "Arotnide", "998, 1048-49"),
+    ("Beke", 1272, "Beke", "see Bêk"),
+    ("Pẖome", 1276, "Pḫeme", "973"),
+    # III royal names: the Meroitic spelling FHN gives beside an Egyptian or English one
+    ("Arkḫtni", 1284, "Arkḫtni", "907"),
+    ("Mnḫble", 1284, "Mnḫble", "836"),
+    ("Mnitenmomide", 1284, "Mnitenmomide", "915"),
+    ("Ntkmni", 1285, "Ntkmni", "897"),
+    ("Sorkror", 1285, "Sorkror", "908"),
+    ("Mnitore", 1285, "Mnitore", "902"),
+    ("Amnisḫeto", 1285, "Mnisḫte", "723-24"),
+    # IV.4 Meroitic titles
     ("kroro", 1292, "akroro/kroro", "973, 974-75, 1000, 1008, 1011, 1014, 1025-31, 1034-35"),
     ("beloloke", 1292, "ameloloke", "670"),
     ("ant", 1292, "ant", "673, 675, 720-22, 975"),
@@ -62,12 +101,16 @@ FHN4 = (
     ("ḫlbine", 1293, "ḫlbiñ", "670"),
     ("ḫrpḫne", 1293, "ḫrpḫñ", "670-71"),
     ("kdke", 1293, "kdke", "see ktke"),
+    ("kdke", 1293, "kdwe", "see ktke"),
+    ("kroro", 1293, "kroro", "see akroro"),
     ("ktke", 1293, "ktke", "510, 718, 719-22, 723-24, 897-904"),
+    ("kdke", 1293, "ktke", "510, 718, 719-22, 723-24, 897-904"),
     ("pelmos", 1293, "pelmos", "716, 940, 965, 972-73"),
     ("perite", 1293, "perite/pirite", "688, 973, 975"),
     ("peseto", 1293, "peseto/pesto", "673-76, 719-22, 988, 1008-9, 1019-20, 1022, 1025-31, 1035, 1038-41"),
     ("pesto", 1293, "peseto/pesto", "673-76, 719-22, 988, 1008-9, 1019-20, 1022, 1025-31, 1035, 1038-41"),
     ("pkrtr", 1293, "pkrtr", "905"),
+    ("pqrtr", 1293, "pkrtr", "905"),
     ("plsn", 1293, "plsn", "973"),
     ("pnqose", 1293, "pnqose/pñqose", "803"),
     ("pqr", 1293, "pqr", "670, 715-16, 718-22, 726-27, 803, 848, 1019, 1076"),
@@ -80,6 +123,39 @@ FHN4 = (
     ("ssimete", 1294, "ssimete", "670, 736"),
     ("ssor", 1294, "ssor", "670, 1036 n. 633, 1036-41"),
     ("womnise", 1294, "womnise", "1034-35, 1036-38"),
+    # V peoples and places: the Meroitic names, which FHN sets in italics
+    ("Adenodor", 1295, "Adenodor", "670"),
+    ("Adere", 1295, "Adere", "556, 807, 1107"),
+    ("Adomn", 1295, "Adomn", "556, 807"),
+    ("Akine", 1295, "Akiñ", "674-76, 727, 1019-20, 1022, 1032, 1033, 1036-37"),
+    ("Amod", 1296, "Amod", "556, 675-76, 808"),
+    ("Arere", 1296, "Arere", "670"),
+    ("Adere", 1296, "Arere", "670"),
+    ("Arme", 1296, "Arme", "556, 720-22, 808"),
+    ("Atiye", 1297, "Atiye", "556, 808, 1037, 1051"),
+    ("Beqe", 1297, "Beqe", "see Boqḫ"),
+    ("Dor", 1300, "Dor", "556, 807, 1074-76"),
+    ("Mdewe", 1305, "Mdewi", "see Medewi"),
+    ("Medewi", 1305, "Mdewi", "see Medewi"),
+    ("Medewi", 1306, "Medewi", "670, 722"),
+    ("Nlote", 1307, "Nlote", "556, 807, 1033"),
+    ("Npte", 1307, "Npte", "670, 879, 972-73"),
+    ("Pedeme", 1308, "Pedeme", "556, 807-8, 879, 931, 1032, 1036-37"),
+    ("Pẖrse", 1309, "Pḫrse", "556, 671, 808, 879, 930, 1033, 1036-37"),
+    ("Pilqe", 1309, "Pilqe", "1051, 1107"),
+    ("Qes", 1310, "Qes", "665-69, 720-22, 726-27, 727 n. 357, 1107"),
+    ("Qoreti", 1310, "Qoreli/Qoreti", "1107"),
+    ("Sdose", 1311, "Sdose", "555, 703, 807, 834-35, 879, 931"),
+    ("Selele", 1311, "Selele", "1107"),
+    ("Simlo", 1311, "Simlo", "807, 1014, 1107"),
+    ("Sye", 1311, "Siye", "555, 807, 1029"),
+    ("Sobore", 1311, "Sobore", "557, 1051"),
+    ("Sye", 1312, "Sye", "555, 670, 807"),
+    ("Tebwe", 1313, "Tebwe", "1051"),
+    ("Tketore", 1313, "Tketore", "556, 675-76, 808, 991"),
+    ("Tmne", 1313, "Tmñ", "808, 879, 1033"),
+    ("Twete", 1313, "Twete", "1036-37"),
+    # VII.4 Meroitic words
     ("abr", 1329, "abr", "716, 722, 725"),
     ("adb", 1329, "adb", "716"),
     ("aleqese", 1329, "aleqese", "725"),
@@ -97,6 +173,7 @@ FHN4 = (
     ("kdke", 1330, "kdwe", "722"),
     ("kroro", 1330, "kroro", "see akroro"),
     ("ktke", 1330, "ktke", "510, 903"),
+    ("kdke", 1330, "ktke", "510, 903"),
     ("-leb", 1330, "-leb", "670, 722, 1106"),
     ("lẖ", 1330, "lḫ", "664, 911, 1033, 1037"),
     ("mde", 1330, "mde", "966"),
@@ -124,20 +201,10 @@ FHN4 = (
     ("wide", 1330, "wide", "803 n. 366"),
     ("wte", 1330, "wte", "664"),
     ("-erike-", 1331, "yerike", "397, 533"),
-    ("yeseboẖe", 1331, "yesebohe", "914"),
+    ("yeseboẖe", 1331, "yeseboḫe", "914"),
     ("yetmde", 1331, "yetmde", "see mde"),
     ("yinnidte", 1331, "yinnidte", "840"),
     ("yireqe (1)", 1331, "yireke", "1107"),
-    ("Amni", 1261, "Amani", "see Amūn"),
-    ("Amnp", 1261, "Amnp", "see Amūn of Luxor"),
-    ("Amnpte", 1261, "Amnpte", "see Amūn (Amen-Re) of Napata"),
-    ("Aqedise", 1262, "Aqedise", "670, 725"),
-    ("Ar (1)", 1262, "Ar[e]", "see Horus"),
-    ("Wos", 1262, "Asi", "920-21"),
-    ("Asori", 1262, "Asor", "see Osiris"),
-    ("Mni", 1264, "Mni, Mno", "see Amūn"),
-    ("Ms", 1264, "Ms", "954-55, 955 n. 579"),
-    ("Wos", 1265, "Wos", "see Isis"),
 )
 FHN4_OFFSET = 1214                                     # FHN IV: printed page = PDF page + 1214
 FHN4_TEXT = ROOT / "data/sources/fhn4-text/pages.txt"
@@ -160,19 +227,22 @@ def confirmed(used, mine, printed, path=CONFIRMED):
     {headword: [pieces]}, "already": [pieces], "unmatched": [pieces]}. A piece is given to every entry the map
     uses that is that word: the headword itself where the checkers give its number ("smlo (1)"), else an entry
     whose headword or one of whose listed variants is spelled so, without its number. A piece that is already
-    one of such an entry's spellings in the corpus's letters (mine[h]["forms"]) is not given again ("already");
-    a piece whose word is no entry the map uses is "unmatched"."""
+    one of such an entry's spellings in the corpus's letters (mine[h]["forms"]) is not given again ("already"):
+    a piece of letters is in the corpus's letters as it stands, a headword piece in Rilly's, which
+    lexique.corpus_spellings turns into the corpus's ("aroẖe" is "aroXe", listed under yiroẖe). A piece whose word
+    is no entry the map uses is "unmatched"."""
     with path.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f, delimiter="\t"))
     given, already, unmatched = {}, set(), set()
     for r in rows:
         word, piece = r[CHECKED_AS].strip(), r["piece"].strip()
+        letters = L.corpus_spellings(piece) if r[PIECE_IS].strip() == "headword" else {piece}
         if re.search(r"\(\d+\)$", word):
             hits = [word] if word in used else []
         else:
             hits = sorted(h for h in used if word in {C.bare(s) for s in [h] + list(printed[h].get("variants") or [])})
         for h in hits:
-            if piece in mine[h]["forms"]:
+            if letters and letters <= mine[h]["forms"]:
                 already.add(piece)
             else:
                 given.setdefault(h, set()).add(piece)
@@ -182,6 +252,11 @@ def confirmed(used, mine, printed, path=CONFIRMED):
             "unmatched": sorted(unmatched)}
 
 
+def said(pages):
+    """'p. 34' for one page, 'pp. 34-36' or 'pp. 34, 55' for more."""
+    return ("pp. " if re.search(r"[-–,]", pages) else "p. ") + pages
+
+
 def record_page(p):
     """The page Rilly's record gives for a proposal of one author's one work: after the year in the author field
     ("Griffith 1911a (p. 101)") or in the proposal ("Hintze 1979" and "(p. 34)"), as "p. 34" or "pp. 34, 55";
@@ -189,11 +264,11 @@ def record_page(p):
     author = p["author"].strip()
     m = PAGE_NOTE.search(author)
     if m:
-        return f"p. {m.group(1)}" if ONE_WORK.match(author[:m.start()].strip()) and not author[m.end():].strip() \
+        return said(m.group(1)) if ONE_WORK.match(author[:m.start()].strip()) and not author[m.end():].strip() \
             else None
     found = PAGE_NOTE.findall(p["proposal"])
     if ONE_WORK.match(author) and found:
-        return ("p. " if len(found) == 1 else "pp. ") + ", ".join(found)
+        return said(", ".join(found))
     return None
 
 
@@ -242,7 +317,6 @@ def griffith_pages(path=GRIFFITH_CHECK, root=ROOT):
     check against his texts found as stated; {} before it is answered."""
     if not path.exists():
         return {}
-    import json
     texts, out = {}, {}
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():

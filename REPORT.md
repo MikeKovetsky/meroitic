@@ -618,9 +618,10 @@ one and 340 proposed (Rilly gives them as a hypothesis, by their kind only or wi
 are agreed. The second figure stays at 4,105 words; under a stricter rule for the editors (at least two words read
 the same, and most of them) it would be 3,715 (36.1%).
 
-**Spellings and pages:** both tables now give Rilly's spellings of each entry and 39 of the 48 confirmed variants
+**Spellings and pages:** both tables now give Rilly's spellings of each entry and 33 of the 48 confirmed variants
 of step 21, and pages where the sources in hand give them: the editions' entries for 100 entries, FHN IV's indexes
-for 74 (read from its page images), and Griffith's own page for 10 of the 206 proposals both judges found the same
-or otherwise. Rilly's record gives a page for none of them; the other scholars' pages are not in our sources. Left
-open: a meaning in our words for the 417 other entries, and FHN IV's glosses as the statement of a second
-scholar.
+of gods, persons, royal names, titles, places and words for 113 (read from its page images), and Griffith's own
+page for 10 of the 206 proposals both judges found the same or otherwise. Rilly's record gives a page for none of
+them; the other scholars' pages are not in our sources, but for papers the Meroitic Newsletter may hold, which a
+year alone does not point to without Rilly's bibliography. Left open: a meaning in our words for the 417 other
+entries, and FHN IV's glosses as the statement of a second scholar.

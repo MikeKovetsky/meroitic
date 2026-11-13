@@ -138,13 +138,13 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     agreed by two scholars, 22 disputed (`qo`, `mlo` and `mte` lead), 51 stated by one and 20 only proposed. One
     lexicon translates 5,419 of the running words (52.7%); names and numbers count in both figures, and an ending
     that the lookup cuts off without naming its entry is not checked. A third round (kappa 0.90, 0 of 40 decoys
-    accepted) rated the 417 other entries the map uses: of all 594, 114 are agreed, 26 disputed, 94 stated by one
-    and 360 only proposed. Held to a stricter rule for the editors' readings, 3,715 words (36.1%) are agreed. A sample of the lexicon's citations of
-    Griffith, checked against his own texts, held for all 15 found. The review corrected the first count (3,873
-    words), which had called five names "proposed" and the verb `l` "to give" disputed on the numeral 1 typed as
-    `l`. The public tables give each entry's meaning in words of our own (for the 177), its spellings with the
-    confirmed variants of step 21, and the pages of the statements where the sources in hand give them
-    ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
+    accepted) rated the 417 other entries the map uses and the names among the 177: of all 594, 114 are agreed, 26
+    disputed, 94 stated by one and 360 only proposed. Held to a stricter rule for the editors' readings, 3,715 words
+    (36.1%) are agreed. A sample of the lexicon's citations of Griffith, checked against his own texts, held for all
+    15 found. The review corrected the first count (3,873 words), which had called five names "proposed" and the
+    verb `l` "to give" disputed on the numeral 1 typed as `l`. The public tables give each entry's meaning in words
+    of our own (for the 177), its spellings with the confirmed variants of step 21, and the pages of the statements
+    where the sources in hand give them ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## The question
 

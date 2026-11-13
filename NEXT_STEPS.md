@@ -368,11 +368,12 @@ days, not hours. The costs are estimates from what the runs so far cost.
       meanings worded anew for the public table.
     - Round three, 12 November: a status for the 417 other entries the map uses (30 agreed, 4 disputed, 43
       stated by one, 340 proposed), after two judges read every proposal on them and on the names (kappa 0.90, 0
-      of 40 decoys accepted). Every entry's spellings with 39 of the 48 confirmed variants of step 21, and the
-      pages where the sources in hand give them: the editions' entries (100 entries), FHN IV's index (74) and
+      of 40 decoys accepted). Every entry's spellings with 33 of the 48 confirmed variants of step 21, and the
+      pages where the sources in hand give them: the editions' entries (100 entries), FHN IV's indexes (113) and
       Griffith's own page (10 of the 206 proposals both judges found the same or otherwise). Still open: a meaning
-      in our words for the 417 other entries; the pages of the other scholars, whose works we do not hold; FHN
-      IV's glosses as the statement of a second scholar.
+      in our words for the 417 other entries; the pages of the other scholars, whose works we do not hold (papers
+      in the Meroitic Newsletter, whose scans we hold, need Rilly's bibliography to be found); FHN IV's glosses as
+      the statement of a second scholar.
 24. **F3. One harness: the test of a model on a language nobody reads.**
     - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
       judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in

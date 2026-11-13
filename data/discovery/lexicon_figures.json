@@ -9,8 +9,8 @@
   "shown": 41,
   "accepted": 2,
   "verdicts": {
-   "partly": 2,
-   "other": 39
+   "other": 39,
+   "partly": 2
   }
  },
  "decoys, judge 2": {
@@ -310,17 +310,23 @@
   "entries_with_variants_rilly_lists": 176,
   "confirmed_variants": {
    "pieces": 48,
-   "given": 39,
-   "entries": 37,
+   "given": 33,
+   "entries": 29,
    "already_a_spelling_of_the_entry_they_name": [
+    "Aqedise",
     "arebetke",
     "aretwte",
+    "aroẖe",
     "atepoke",
     "beke",
     "dkretri",
     "erk",
+    "mselẖse",
     "pkrtr",
-    "yeredeb"
+    "ssemri",
+    "tiso",
+    "yeredeb",
+    "ḫirette"
    ],
    "naming_no_entry_the_map_uses": [
     "tepke"
@@ -330,7 +336,7 @@
   "with_a_page_in_rillys_record": 0,
   "with_griffiths_own_page": 10,
   "entries_with_an_editions_page": 100,
-  "fhn_index_items": 87,
-  "entries_with_fhn_index": 74
+  "fhn_index_items": 137,
+  "entries_with_fhn_index": 113
  }
 }

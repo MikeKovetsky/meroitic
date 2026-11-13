@@ -790,10 +790,10 @@ def references(entries, verdicts, refs, path=R.CONFIRMED):
             "fhn_index_items": len(R.FHN4), "entries_with_fhn_index": sum(h in used for h in refs["fhn"])}
 
 
-def figures():
-    """What `public` writes, and the checks compare: count()'s figures with the references counted, the statuses,
-    the entries, the verdicts and the references."""
-    figs, st = count()
+def figures(counted=None):
+    """What `public` writes, and the checks compare: count()'s figures (counted, when count() has run) with the
+    references counted, the statuses, the entries, the verdicts and the references."""
+    figs, st = counted or count()
     entries, verdicts = entries_of(), verdicts_of()
     refs = refs_of(entries)
     return {**figs, "references": references(entries, verdicts, refs)}, st, entries, verdicts, refs
@@ -911,12 +911,11 @@ def count(folder=OUT, path=GLOSSES, expert=EXPERT):
     entries = entries_of(folder, expert)
     key = json.loads((folder / "key.json").read_text(encoding="utf-8"))
     one, two = answers(1, folder), answers(2, folder)
-    decoyed = {"1": set(key["decoys"]["1"]), "2": set(key["decoys"]["2"])}
     rows = key["order"]
     figs = {"rows": len(rows), "unanswered": {"1": sum(r not in one for r in rows), "2": sum(r not in two for r in rows)},
             "unknown_verdicts": sum(v not in VERDICTS for v in list(one.values()) + list(two.values()))}
     for j, mine in (("1", one), ("2", two)):
-        figs[f"decoys, judge {j}"] = caught([mine.get(r) for r in decoyed[j]])
+        figs[f"decoys, judge {j}"] = caught([mine.get(r) for r in key["decoys"][j]])     # the key's order, not a set's
     verdicts, first, both = verdicts_of(folder), verdicts_of(folder, rounds=1), verdicts_of(folder, rounds=2)
     pairs = list(first.values())
     figs["two judges"] = {**agreement(pairs), "table": dict(collections.Counter(f"{a} / {b}" for a, b in pairs))}
@@ -1106,11 +1105,12 @@ def main(argv):
         print(json.dumps(figs, ensure_ascii=False, indent=1))
         return
     if argv[1:] == ["public"]:
-        figs, st, entries, verdicts, refs = figures()
-        m = figs.get("meanings", {})
+        counted = count()
+        m = counted[0].get("meanings", {})
         if m.get("copied_after_rewording") or m.get("longest_meaning_in_words", 0) > LONGEST:
             raise SystemExit(f"a meaning in our words shares {COPIED} words in a row with the lexicon or has more "
                              f"than {LONGEST} words: reword it in REWORDED; nothing written")
+        figs, st, entries, verdicts, refs = figures(counted)
         PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         write_table(table_rows(entries, st, verdicts, our_meanings(), refs))
         write_table(other_rows(entries, st, verdicts, refs), path=OTHER_TABLE, columns=OTHER_COLUMNS)

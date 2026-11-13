@@ -6,7 +6,7 @@ Rilly's lexicon, the map's gloss file, the judges' tables and answers are local 
 on made-up entries and rows; the checks of the reported numbers read the public figures file and table and compare
 them with the local files where those are present.
 """
-import csv, json, re, sys, tempfile
+import collections, csv, json, re, sys, tempfile, unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -254,11 +254,17 @@ def test_the_bars_of_a_round():
 
 
 def test_public_refuses_a_copied_or_long_meaning():
-    """`public` writes neither file when a meaning in our words copies the lexicon or runs past LONGEST words."""
-    saved, wrote = (X.count, X.PUBLIC, X.write_table), []
+    """`public` writes neither file when a meaning in our words copies the lexicon or runs past LONGEST words, and
+    refuses before it reads the local files the tables need (figures()), so that it refuses in a clone without
+    them too."""
+    saved, wrote = (X.count, X.PUBLIC, X.write_table, X.figures), []
+
+    def too_early(counted=None):
+        raise AssertionError("public read the tables' local files before it refused")
     with tempfile.TemporaryDirectory() as d:
         try:
-            X.PUBLIC, X.write_table = Path(d) / "figures.json", lambda rows, path=None: wrote.append(rows)
+            X.PUBLIC, X.write_table = Path(d) / "figures.json", lambda rows, path=None, columns=None: wrote.append(rows)
+            X.figures = too_early
             for bad in ({"copied_after_rewording": 1, "longest_meaning_in_words": 3},
                         {"copied_after_rewording": 0, "longest_meaning_in_words": X.LONGEST + 1}):
                 X.count = lambda: ({"meanings": bad}, {})
@@ -270,7 +276,7 @@ def test_public_refuses_a_copied_or_long_meaning():
                     raise AssertionError(f"public wrote with {bad}")
                 assert not X.PUBLIC.exists() and not wrote
         finally:
-            X.count, X.PUBLIC, X.write_table = saved
+            X.count, X.PUBLIC, X.write_table, X.figures = saved
 
 
 def test_a_copy_is_four_words_in_a_row():
@@ -475,21 +481,29 @@ def test_round_one_fields_stay_as_drawn():
 
 def test_spellings_and_confirmed_variants():
     """lexicon_refs: Rilly's spellings without the homonym's number, his notes in English; a confirmed piece goes
-    to the entry it names (with its number, or by a spelling Rilly lists), not where it is already a spelling."""
+    to the entry it names (with its number, or by a spelling Rilly lists), not where it is already a spelling: a
+    piece of the corpus's letters as it stands, a headword piece by its spellings in those letters. The entries'
+    forms are in the corpus's letters, as coverage.entry() gives them (s the se sign, S the s sign, X for ẖ)."""
     assert X.R.spellings({"headword": "-se (1)", "variants": ["Mn (peut-être)", "x (arch.)", " ", "-se"]}) == \
         ["-se", "Mn (?)", "x (archaic)"]
     with tempfile.TemporaryDirectory() as d:
         f = Path(d) / "confirmed.tsv"
-        f.write_text("piece\t" + X.R.CHECKED_AS + "\n" + "".join(f"{a}\t{b}\n" for a, b in (
-            ("smlo", "smlo (1)"), ("qoriti", "Qoreti"), ("aberse", "abr"), ("Aqedise", "Aqodise"),
-            ("tepke", "tipke"), ("snmd", "smlo (2)"))), encoding="utf-8")
-        used = {"smlo (1)", "Simlo", "Qoreti", "abr", "Aqedise"}
+        f.write_text("piece\t" + X.R.PIECE_IS + "\t" + X.R.CHECKED_AS + "\n" + "".join(f"{a}\t{k}\t{b}\n" for a, k, b in (
+            ("smlo", "letters", "smlo (1)"), ("qoriti", "letters", "Qoreti"), ("aberse", "letters", "abr"),
+            ("Aqedise", "headword", "Aqodise"), ("tepke", "headword", "tipke"), ("snmd", "letters", "smlo (2)"),
+            ("aroẖe", "headword", "yiroẖe"), ("yesebe", "headword", "esebe"), ("aroXe", "letters", "yiroẖe"))),
+            encoding="utf-8")
         printed = {"smlo (1)": {"variants": []}, "Simlo": {"variants": ["Smlo"]}, "Qoreti": {"variants": []},
-                   "abr": {"variants": ["br"]}, "Aqedise": {"variants": ["Qedise", "Aqodise"]}}
-        mine = {h: {"forms": {"Aqedise"} if h == "Aqedise" else set()} for h in used}
+                   "abr": {"variants": ["br"]}, "Aqedise": {"variants": ["Qedise", "Aqodise"]},
+                   "yiroẖe": {"variants": ["aroẖe"]}, "esebe": {"variants": []}, "yesebe": {"variants": ["esebe (arch.)"]}}
+        used = set(printed)
+        mine = {h: {"forms": set().union(*(X.L.corpus_spellings(s) for s in [h] + printed[h]["variants"]))} for h in used}
+        assert "Smlo" in mine["smlo (1)"]["forms"] and "smlo" not in mine["smlo (1)"]["forms"]     # smlo is se-m-l-o
         got = X.R.confirmed(used, mine, printed, f)
-        assert got == {"given": {"smlo (1)": ["smlo"], "Qoreti": ["qoriti"], "abr": ["aberse"]},
-                       "already": ["Aqedise"], "unmatched": ["snmd", "tepke"]}, got
+        # Aqedise and yesebe are their own headwords, aroẖe a variant Rilly lists under yiroẖe, in either letters;
+        # yesebe is new to esebe, whose spellings it is not
+        assert got == {"given": {"smlo (1)": ["smlo"], "Qoreti": ["qoriti"], "abr": ["aberse"], "esebe": ["yesebe"]},
+                       "already": ["Aqedise", "aroXe", "aroẖe"], "unmatched": ["snmd", "tepke"]}, got
 
 
 def test_the_pages_a_record_or_a_running_head_gives():
@@ -498,6 +512,7 @@ def test_the_pages_a_record_or_a_running_head_gives():
     rp = lambda author, text="x": X.R.record_page({"author": author, "proposal": text})
     assert rp("Hintze 1979", '"Variante" (p. 34)') == "p. 34" and rp("Hintze 1979", "(p. 34) and (p. 55)") == "pp. 34, 55"
     assert rp("Griffith 1911a (p. 101)") == "p. 101" and rp("Griffith 1911a (p. 101); Hintze 1963") is None
+    assert rp("Griffith 1911a (pp. 101, 103)") == "pp. 101, 103" and rp("Hintze 1979", "(pp. 34-36)") == "pp. 34-36"
     assert rp("Hintze", "(p. 34)") is None and rp("Millet", "(cf. Edwards-Fuller 2000, p. 89)") is None
     assert rp("Priese 1971", "against Trigger (p. 277 [1.13.8])") is None
     pages = {1: "36 INSCRIPTIONS OF KARAN6G\ntext", 2: "DESCRIPTIVE PHRASES 37\ntext", 3: "DESCRIPTIVE PHRASES\ntext",
@@ -515,14 +530,28 @@ def test_the_editions_pages_and_fhn_index():
     assert got == {"qore": ["FHN III, FHN 300, pp. 1103-1107 (the same)", "Millet 2005, GA05, pp. 3-4 (the same)",
                             "FHN III, FHN 300, pp. 1103-1107 (otherwise)"]}
     idx = X.R.fhn_index()
-    assert idx["kdke"] == ["FHN IV p. 1293 (kdke): see ktke", "FHN IV p. 1330 (kdwe): FHN 722"]
+    assert idx["kdke"] == ["FHN IV p. 1293 (kdke): see ktke", "FHN IV p. 1293 (kdwe): see ktke",
+                           "FHN IV p. 1293 (ktke): FHN 510, 718, 719-22, 723-24, 897-904", "FHN IV p. 1330 (kdwe): FHN 722",
+                           "FHN IV p. 1330 (ktke): FHN 510, 903"]
     assert idx["Wos"] == ["FHN IV p. 1262 (Asi): FHN 920-21", "FHN IV p. 1265 (Wos): see Isis"]
+    assert idx["Pedeme"] == ["FHN IV p. 1308 (Pedeme): FHN 556, 807-8, 879, 931, 1032, 1036-37"]   # a place
+    pages = [p for _, p, _, _ in X.R.FHN4]
+    assert pages == sorted(pages)                                              # in the order of the volume
+
+
+def fhn_key(s):
+    """A spelling as FHN IV's index and Rilly's lexicon can be compared: FHN's ñ is Rilly's ne, its ḫ his ḫ and ẖ;
+    case, marks under letters, brackets and hyphens aside."""
+    s = unicodedata.normalize("NFD", s.replace("ñ", "ne").replace("Ñ", "Ne"))
+    return re.sub(r"[^a-z]", "", "".join(c for c in s if not unicodedata.combining(c)).lower())
 
 
 def test_fhn_index_as_the_text_layer_prints_it():
-    """FHN4, read from the scan's images, against its text layer: every FHN page it gives stands on the page of
-    FHN IV it names, and every entry it names is one the map uses."""
-    needs("data/sources/fhn4-text/pages.txt", "data/sources/lexicon/entries.jsonl")
+    """FHN4, read from the scan's images, against its text layer and its rule (lexicon_refs, item 5): every FHN page
+    it gives stands on the page of FHN IV it names; every entry it names is one the map uses and is spelled like the
+    term or lists a spelling like it, but for the Meroitic names FHN gives for three gods; and every entry so
+    spelled has the term, but for those FHN's gloss or the term's form leaves out."""
+    needs("data/sources/fhn4-text/pages.txt", "data/sources/lexicon/entries.jsonl", "data/rilly2003")
     text = X.R.pages_of(X.R.FHN4_TEXT)
     used = {json.loads(l)["headword"] for l in (X.OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()}
     for h, page, term, where in X.R.FHN4:
@@ -530,6 +559,22 @@ def test_fhn_index_as_the_text_layer_prints_it():
         on = re.sub(r"-\s*\n\s*", "-", text[page - X.R.FHN4_OFFSET])          # "1025-" and "31" on two lines
         for n in ([] if where.startswith("see") else re.findall(r"\d+(?:-\d+)?", where)):
             assert n in on, (h, page, n)
+    printed, spelled = X.lexicon()[1], {}
+    for h in used:
+        for s in X.R.spellings(printed[h]):
+            spelled.setdefault(fhn_key(X.C.bare(s)), set()).add(h)
+    gods = {"Amani": {"Amni"}, "Asi": {"Wos"}, "Asor": {"Asori"}}            # "(Mer. Amûn)", "(Mer. Isis)"...
+    # spelled so, but another thing: the gloss (Horus, not are; king, not "it is the king"; Amûn, not Amûn of
+    # Thebes; bread; the locative suffix; North), or a word where the entry is an ending (qo, not -qo)
+    other = {("Ar[e]", "are (3)"), ("Mni, Mno", "Amnote"), ("qore/qoro", "qor-o"), ("at", "ant"), ("at", "at (1)"),
+             ("qo", "-qo"), ("ḫr", "ḫr")} | {("-te", h) for h in ("-se (2)", "-te (4)", "-te (5)", "t- (1)", "te (1)")}
+    given = collections.defaultdict(set)
+    for h, page, term, where in X.R.FHN4:
+        given[(page, term)].add(h)
+    for (page, term), hs in given.items():
+        like = set().union(*(spelled.get(fhn_key(f), set()) for f in re.split(r"/|, ", term)))
+        assert hs - like <= gods.get(term, set()), (page, term, hs - like)
+        assert not {h for h in like - hs if (term, h) not in other}, (page, term, like - hs)
 
 
 def test_griffiths_own_pages():
@@ -771,7 +816,10 @@ def known(f):
           "decoys accepted": sum(f[f"decoys, judge {j}"]["accepted"] for j in "12"),
           "round three's decoys": sum(f["round three"][f"decoys, judge {j}"]["shown"] for j in "12"),
           "round three's lines": {j: f["round three"]["real_lines"] + n for j, n in f["round three"]["decoy_lines"].items()},
-          "stated by Rilly among the other entries": sum(f["other entries"]["stated_by_rilly"].values())})
+          "stated by Rilly among the other entries": sum(f["other entries"]["stated_by_rilly"].values()),
+          "confirmed variants already a spelling, or naming no entry": [
+              len(f["references"]["confirmed_variants"][k])
+              for k in ("already_a_spelling_of_the_entry_they_name", "naming_no_entry_the_map_uses")]})
     return out
 
 
@@ -891,6 +939,8 @@ def test_public_figures_are_what_the_local_files_give():
     needs("data/sources/karanog-text/pages.txt", "data/sources/griffith-jea-text", "data/sources/jssea-text")
     figs, st, entries, verdicts, refs = X.figures()
     assert figs == json.loads(FIGURES.read_text(encoding="utf-8"))
+    # as `public` writes it, byte for byte: no count may take its order from a set, which changes from run to run
+    assert json.dumps(figs, ensure_ascii=False, indent=1) + "\n" == FIGURES.read_text(encoding="utf-8")
     mine = X.our_meanings()
     assert X.TABLE.read_text(encoding="utf-8") == X.table_text(X.table_rows(entries, st, verdicts, mine, refs))
     assert X.OTHER_TABLE.read_text(encoding="utf-8") == X.table_text(X.other_rows(entries, st, verdicts, refs),
