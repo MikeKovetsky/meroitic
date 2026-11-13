@@ -129,6 +129,15 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     Demotic writes the same title, of unknown meaning, as `3krre` for one. Two judges agree with the map's reading
     on 36 of 58 and 41 of 57 of the lines whose word it translates. No meaning is both new and sure; what the map
     lacks is mostly titles the editors leave as titles too ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
+14. **A second scholar for 70 of the 177 entries the map leans on: 3,873 of the 10,290 running words (37.6%) rest
+    only on meanings two scholars share.** Rilly's lexicon records what other scholars proposed for most of its
+    entries. Two judges set 407 such proposals beside the lexicon's meaning, without the scholar's name and with
+    decoys (kappa 0.92 on "same or not"; 2 of 82 decoys accepted); with the editors' readings of item 10, 70
+    entries are agreed by two scholars, 23 disputed (`qo`, `l` "to give", `mlo` and `mte` lead), 59 stated by one
+    and 25 only proposed. One lexicon translates 5,419 of the running words (52.7%); names and numbers count in
+    both figures. A sample of the lexicon's citations of Griffith, checked against his own texts, held for all 15
+    found. The meanings are not yet worded anew for a public table
+    ([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
 
 ## The question
 
@@ -416,6 +425,17 @@ person lines both readers list, and whether both find the known equations. The e
 and the judges' table of step 17, each judge with decoys of its own
 ([`data/discovery/demotic.md`](data/discovery/demotic.md)).
 
+### 21. A second scholar for every meaning (`src/lexicon.py`)
+
+`layout` lists every entry of the lexicon that the map of the clean corpus uses, with Rilly's status and page,
+the proposals of other scholars that the lexicon records, and the editors' verdicts of step 17 on words built on
+the entry. `packs` sets each proposal on an entry Rilly states beside the lexicon's meaning, without the
+scholar's name, for two judges, each with decoys of their own: another entry's meaning from outside the line's
+field of meaning. `check` sends a sample of the lexicon's citations of Griffith to a reader with Griffith's own
+texts. The bars and the rules for the four statuses were committed before any judge answered; `public` counts
+them and writes the figures and a table of headwords, statuses and the scholars cited, without the meanings
+([`data/discovery/lexicon.md`](data/discovery/lexicon.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -429,7 +449,7 @@ python3 -I tests/test_harness.py && python3 -I tests/test_cognates_rules.py && p
 python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && python3 -I src/mnl/test_mnl.py
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py
-python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py
+python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints

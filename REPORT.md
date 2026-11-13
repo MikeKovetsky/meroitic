@@ -563,3 +563,24 @@ The table, the map and the corpus were built without an agent; two readers then 
 
 **The review of these two steps** (full tier) cost 533,937 subagent tokens and 37 minutes, by hand from its task
 notification: 2,057,415 for the two steps with their review, against the 2.0 million quoted.
+
+## Day five, night (2026-11-12): a second scholar for every meaning (F2, first pass)
+
+1. **3,873 of the 10,290 running words of the clean corpus (37.6%) rest only on meanings that a second scholar
+   gives too;** one lexicon translates 5,419 (52.7%). Names and numbers count in both. Of the 3,676 words the map
+   translates as a meaning or a grammar word, 2,130 (57.9%) are built only on agreed entries.
+2. **The statuses of the 177 entries behind translated words:** 70 agreed by two scholars, 23 disputed, 59 stated
+   by one, 25 only proposed. `qo`, `l` "to give", `mlo` and `mte` lead the disputed; endings and pieces of the
+   benediction formulas (`-wi`, `ps-`, `-te`, `-kete`) the proposed.
+3. **The judges met both bars set before they answered:** kappa 0.92 on "same or not" (0.6 asked), and 2 and 0
+   of 41 decoys accepted (a tenth allowed). They read 407 proposals that the lexicon records, without the
+   scholars' names.
+4. **The lexicon's record of other scholars held where it could be checked:** of 20 of its citations of
+   Griffith, 15 were found in his own texts, all as stated (bars: 10 found, 90% as stated); 5 are in works we do
+   not hold or in words the scan garbles.
+5. **Limits:** the 82 lines that carried a decoy for one judge cannot count under the rule; had each kept its
+   one real verdict, the figure would be 4,103 (39.9%). One editor's agreement on one word is enough, which makes
+   `yetmde` agreed. The meanings are not yet worded anew, so the public table holds headwords, statuses and
+   scholars only.
+6. **Cost:** four judges' packs 388,896 subagent tokens, the check against Griffith 250,976: 639,872 before the
+   review, against 1.4 to 1.8 million quoted with the review.

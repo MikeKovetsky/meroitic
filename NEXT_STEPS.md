@@ -76,6 +76,11 @@ Done since this plan was written:
     [`data/discovery/demotic.md`](data/discovery/demotic.md)), a part of step 17: four people carry titles in two
     languages, and where the two texts give the same office the titles line up with the lexicon; the editors' 125
     equations add no meaning that is new and sure.
+15. **F2, first pass: a second scholar for every meaning** (2026-11-12,
+    [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 3,873 of 10,290 running words (37.6%) rest only on
+    meanings a second scholar gives too, against 5,419 (52.7%) translated by one lexicon; of the 177 entries
+    behind translated words, 70 are agreed, 23 disputed, 59 stated by one and 25 only proposed. Left: the
+    meanings worded anew, so that the public table can carry them.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 
@@ -355,6 +360,8 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Done: every entry the map uses has a status; the map gives two figures, "translated by one lexicon" and
       "agreed by two scholars"; the table is published under CC BY.
     - Cost: 2 to 3 million subagent tokens.
+    - First pass, 12 November: statuses for all 177 entries behind translated words and the second figure
+      (point 15 above). Not yet done: the meanings worded anew for the public table.
 24. **F3. One harness: the test of a model on a language nobody reads.**
     - Why: this is the project's second goal, and today it is six studies with their own packs, decoys and
       judges (`lexique`, `synth`, `cloze`, `egyptian`, `variants`, `experts`). What they taught is written in

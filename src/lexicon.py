@@ -3,7 +3,10 @@
   python3 -I src/lexicon.py layout    every entry the map uses on corpus_v6, with its evidence (local)
   python3 -I src/lexicon.py packs     the judges' tables: does another scholar's proposal give the map's meaning?
   python3 -I src/lexicon.py check     a sample of the proposals given to Griffith, against his own text
-  python3 -I src/lexicon.py count     the judges' verdicts, the statuses, the second figure, the public figures
+  python3 -I src/lexicon.py count     the judges' verdicts, the statuses and the second figure, printed
+  python3 -I src/lexicon.py public    the same, written: data/discovery/lexicon_figures.json and the table
+                                      data/discovery/lexicon_statuses.tsv (headwords, statuses, scholars; no
+                                      meaning)
 
 "Translated" in the coverage map means that one lexicon, Rilly's of 2003, accepts the meaning. That lexicon also
 records, for most entries, what other scholars proposed (Griffith, Hintze, Hofmann, Millet, Priese and others),
@@ -54,6 +57,7 @@ GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"
 EXPERT = ROOT / "data/sources/expert"
 OUT = ROOT / "data/sources/lexicon"
 PUBLIC = ROOT / "data/discovery/lexicon_figures.json"
+TABLE = ROOT / "data/discovery/lexicon_statuses.tsv"
 PSEUDO = {"ending", "?", "NAME", "NUMBER"}
 SEED = 23
 DECOYS = 0.10
@@ -351,6 +355,44 @@ def status(e, verdicts):
     return "stated by one"
 
 
+def unnamed(author):
+    """Whether the lexicon gives a proposal without a scholar's name ("unnamed", "earlier view")."""
+    return not author.strip()[:1].isupper()
+
+
+def agreeing(e, verdicts):
+    """The proposals on an entry that both judges call "same"."""
+    return [p for p in e["proposals"] if verdicts.get(p["id"]) == ("same", "same")]
+
+
+def dissent(e, verdicts):
+    """The proposals on an entry that both judges call "other"."""
+    return [p for p in e["proposals"] if verdicts.get(p["id"]) == ("other", "other")]
+
+
+def table_rows(entries, st, verdicts):
+    """The public table: per entry behind a translated word, its headword, kind, Rilly's page, its uses on
+    corpus_v6, its status, and who agrees or reads it otherwise (the scholars as Rilly cites them, and the
+    editions of the check). No meaning: the meanings are Rilly's, in copyright."""
+    out = []
+    for e in sorted((e for e in entries if e["uses_translated"]), key=lambda e: (-e["uses_translated"], e["headword"])):
+        ed = e["editors"]
+        yes = sorted({p["author"] for p in agreeing(e, verdicts)}) + (["Millet 2005 or FHN III"] if ed.get("agree") else [])
+        no = sorted({p["author"] for p in dissent(e, verdicts)}) + (["Millet 2005 or FHN III"] if ed.get("differ") else [])
+        out.append({"headword": e["headword"], "kind": e["kind"], "rilly_2003_page": e["page"],
+                    "uses_in_translated_words": e["uses_translated"], "status": st[e["headword"]],
+                    "rilly_status": e["status"] or "none", "same_meaning": "; ".join(yes),
+                    "another_meaning": "; ".join(no)})
+    return out
+
+
+def write_table(rows, path=TABLE):
+    cols = list(rows[0])
+    clean = lambda v: " ".join(str(v).replace("\t", " ").split())
+    path.write_text("\t".join(cols) + "\n" + "".join("\t".join(clean(r[c]) for c in cols) + "\n" for r in rows),
+                    encoding="utf-8")
+
+
 def count(folder=OUT, path=GLOSSES):
     """The judges' verdicts against the bars, the statuses, and the map's second figure."""
     entries = [json.loads(l) for l in (folder / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
@@ -376,13 +418,29 @@ def count(folder=OUT, path=GLOSSES):
     verdicts = dict(zip(real, pairs))
     behind = [e for e in entries if e["uses_translated"]]
     st = {e["headword"]: status(e, verdicts) for e in behind}
+    alone = {}                                         # a decoyed row's one real verdict, for the sensitivity
+    for r in rows:
+        if r in decoyed["1"] and r in two:
+            alone[r] = (two[r], two[r])
+        elif r in decoyed["2"] and r in one:
+            alone[r] = (one[r], one[r])
+    st_alone = {e["headword"]: status(e, {**verdicts, **alone}) for e in behind}
     figs["entries"] = {"used": len(entries), "behind_translated_words": len(behind),
                        "with_a_proposal_of_another_scholar": sum(bool(e["proposals"]) for e in behind),
                        "with_the_editors_verdict": sum(bool(e["editors"]) for e in behind),
                        "statuses": {s: sum(v == s for v in st.values()) for s in STATUSES},
                        "statuses_by_use": {s: sum(e["uses_translated"] for e in behind if st[e["headword"]] == s)
                                            for s in STATUSES}}
-    words = collections.Counter()
+    figs["entries"]["agreed_with_a_dissent"] = sum(
+        st[e["headword"]] == STATUSES[0] and bool(dissent(e, verdicts) or e["editors"].get("differ")) for e in behind)
+    figs["entries"]["agreed_only_through_an_unnamed_source"] = sorted(
+        e["headword"] for e in behind if st[e["headword"]] == STATUSES[0] and not e["editors"].get("agree")
+        and all(unnamed(p["author"]) for p in agreeing(e, verdicts)))
+    figs["entries"]["agreed_by"] = dict(collections.Counter(
+        "judges and editors" if j and d else "judges" if j else "editors"
+        for e in behind if st[e["headword"]] == STATUSES[0]
+        for j, d in [(bool(agreeing(e, verdicts)), bool(e["editors"].get("agree")))]))
+    words, alone_words = collections.Counter(), 0
     for raw in path.read_text(encoding="utf-8").splitlines():
         for g in json.loads(raw)["glosses"]:
             words["all"] += 1
@@ -391,12 +449,25 @@ def count(folder=OUT, path=GLOSSES):
             elif g["level"] in ("meaning", "grammar"):
                 hs = {p.get("entry") for p in g.get("parts") or []} - PSEUDO - {None}
                 words["meaning or grammar"] += 1
-                words["every entry agreed"] += bool(hs) and all(st.get(h) == "agreed by two scholars" for h in hs)
+                words["every entry agreed"] += bool(hs) and all(st.get(h) == STATUSES[0] for h in hs)
+                alone_words += bool(hs) and all(st_alone.get(h) == STATUSES[0] for h in hs)
     figs["words"] = dict(words)
     figs["griffith_check"] = checked(folder)
     figs["translated_by_one_lexicon"] = words["names and numbers"] + words["meaning or grammar"]
     figs["agreed_by_two_scholars"] = words["names and numbers"] + words["every entry agreed"]
+    figs["if_a_decoyed_row_kept_its_one_real_verdict"] = {
+        "statuses": {s: sum(v == s for v in st_alone.values()) for s in STATUSES},
+        "entries_that_change": sum(st[h] != st_alone[h] for h in st),
+        "agreed_by_two_scholars": words["names and numbers"] + alone_words}
     return figs, st
+
+
+def verdicts_of(folder=OUT):
+    """{row id: (first, second)} of the real rows that both judges answered (decoyed rows left out)."""
+    key = json.loads((folder / "key.json").read_text(encoding="utf-8"))
+    one, two = answers(1, folder), answers(2, folder)
+    out = set(key["decoys"]["1"]) | set(key["decoys"]["2"])
+    return {r: (one[r], two[r]) for r in key["order"] if r not in out and r in one and r in two}
 
 
 def main(argv):
@@ -416,8 +487,14 @@ def main(argv):
         print(len(rows), "proposals given to Griffith, in", OUT / "packs" / "griffith_check.md")
         return
     if argv[1:] == ["count"]:
-        figs, _ = count()
+        figs, st = count()
         print(json.dumps(figs, ensure_ascii=False, indent=1))
+        return
+    if argv[1:] == ["public"]:
+        figs, st = count()
+        entries = [json.loads(l) for l in (OUT / "entries.jsonl").read_text(encoding="utf-8").splitlines()]
+        PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        write_table(table_rows(entries, st, verdicts_of()))
         return
     raise SystemExit(__doc__)
 

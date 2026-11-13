@@ -1,0 +1,101 @@
+{
+ "rows": 407,
+ "unanswered": {
+  "1": 0,
+  "2": 0
+ },
+ "unknown_verdicts": 0,
+ "decoys, judge 1": {
+  "shown": 41,
+  "accepted": 2,
+  "verdicts": {
+   "other": 39,
+   "partly": 2
+  }
+ },
+ "decoys, judge 2": {
+  "shown": 41,
+  "accepted": 0,
+  "verdicts": {
+   "other": 41
+  }
+ },
+ "two judges": {
+  "rows": 325,
+  "same_verdict": 303,
+  "kappa": 0.9081,
+  "kappa_same_or_not": 0.9171,
+  "table": {
+   "partly / partly": 74,
+   "same / same": 75,
+   "no meaning / no meaning": 103,
+   "partly / same": 6,
+   "other / other": 51,
+   "other / partly": 5,
+   "no meaning / partly": 5,
+   "no meaning / same": 1,
+   "same / partly": 3,
+   "partly / no meaning": 2
+  }
+ },
+ "bars": {
+  "kappa_same_or_not": true,
+  "decoys_accepted": true
+ },
+ "entries": {
+  "used": 594,
+  "behind_translated_words": 177,
+  "with_a_proposal_of_another_scholar": 131,
+  "with_the_editors_verdict": 101,
+  "statuses": {
+   "agreed by two scholars": 70,
+   "disputed": 23,
+   "stated by one": 59,
+   "proposed": 25
+  },
+  "statuses_by_use": {
+   "agreed by two scholars": 3114,
+   "disputed": 504,
+   "stated by one": 587,
+   "proposed": 635
+  },
+  "agreed_with_a_dissent": 26,
+  "agreed_only_through_an_unnamed_source": [
+   "-o (1)"
+  ],
+  "agreed_by": {
+   "judges and editors": 22,
+   "judges": 23,
+   "editors": 25
+  }
+ },
+ "words": {
+  "all": 10290,
+  "meaning or grammar": 3676,
+  "every entry agreed": 2130,
+  "names and numbers": 1743
+ },
+ "griffith_check": {
+  "verdicts": {
+   "as stated": 15,
+   "not found": 5
+  },
+  "found": 15,
+  "bars": {
+   "found": true,
+   "as_stated_share_of_found": true
+  }
+ },
+ "translated_by_one_lexicon": 5419,
+ "agreed_by_two_scholars": 3873,
+ "if_a_decoyed_row_kept_its_one_real_verdict": {
+  "statuses": {
+   "agreed by two scholars": 79,
+   "disputed": 22,
+   "stated by one": 51,
+   "proposed": 25
+  },
+  "entries_that_change": 11,
+  "agreed_by_two_scholars": 4103
+ }
+}
