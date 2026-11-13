@@ -32,7 +32,7 @@ followed the same evening, 12 November 2026. The numbers below are in
    translator, more than F4's whole estimate: by the rule set beforehand they should be built from the map's
    readings by a lighter step, which is not measured yet (section 7).
 7. **Cost:** 560,981 subagent tokens for five agents, 1.6 times the 0.35 million expected, and 398,363 for the
-   review: 959,344 in all (section 10).
+   review: 987,606 in all with the review's re-check (section 10).
 
 ## 2. The texts
 
@@ -263,4 +263,5 @@ minutes), the translator of the pages sample 104,696 (five), the splitter 99,501
 since three and then two ran side by side. The review of the script and this page (full tier) took 398,363
 subagent tokens and 34 minutes, by hand from its task notification: 959,344 in all, past the 0.8 million at which
 the brief asked to check with Mike first. The review ended not clean on one line: the brief asked the judges to
-split the renderings themselves, and one splitter did it (section 3, item 4).
+split the renderings themselves, and one splitter did it (section 3, item 4). Mike waived that line the same
+evening (21:14), and the reviewer re-checked and marked the branch: 28,262 subagent tokens more, 987,606 in all.

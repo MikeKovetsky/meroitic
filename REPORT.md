@@ -645,4 +645,6 @@ map uses are still open (`NEXT_STEPS.md`, step 23).
 notification: 959,344 for the pilot with its review, past the 0.8 million at which the brief asked to check with
 Mike first. It stated on the page that the baseline hid the analysts' glosses of 4 words the translator saw, counted
 the sizing in the script, and ended not clean on one line: the brief asked the two judges to split Millet's
-renderings themselves, and one blind splitter did it.
+renderings themselves, and one blind splitter did it. Mike waived that line the same evening (21:14), and the
+reviewer, with his words, re-checked and marked a410dae: 28,262 subagent tokens more and about four minutes, 987,606
+for the pilot with its review.
