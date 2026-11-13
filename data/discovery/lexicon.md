@@ -199,9 +199,9 @@ give them ([`src/lexicon_refs.py`](../../src/lexicon_refs.py)).
    their Meroitic spelling, and rulers such as `Ntkmni`. These glosses are FHN's own statements of the meaning;
    they were not judged, so they make no entry agreed.
 6. **Not in hand:** the pages of the other scholars (Hintze, Hofmann, Priese, Zyhlarz, Millet's earlier papers
-   and others). Most of their works are not among our sources. Some papers may be in the Meroitic Newsletter,
-   whose scans we hold, but the record gives a year at most, and without Rilly's bibliography, which we do not
-   hold, a year does not say which paper is meant; the Newsletter was not searched for them.
+   and others). Their works are not among our sources, but for papers that may be in the Meroitic Newsletter,
+   whose scans we hold: the record gives a year at most, and without Rilly's bibliography, which we do not hold, a
+   year does not say which paper is meant, so the Newsletter was not searched for them.
 
 ## 8. The check of the record against Griffith's own words
 
