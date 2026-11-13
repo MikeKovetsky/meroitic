@@ -66,12 +66,21 @@ ROUNDS = {
     # for a kin term narrower or wider than the rendering's (JUDGE_RULES)
     "r1b": {"texts": "dev", "of": "r1", "judging": 2,
             "readings": ("pilot", "glosses", "writer", "translator", "panel", "decoy")},
+    # the renderings held back: the design round one carried on (the panel) beside the glosses, the writer and
+    # one translator, judged by the second judging's rules; the decoys are translations of a sample of its own
+    "held": {"texts": "held", "judging": 2, "decoys": "pages2",
+             "readings": ("glosses", "writer", "translator", "panel", "decoy")},
 }
 REFERENCE = "glosses"            # the reading every other is compared with
 # Set on 2026-11-13, before any agent of round one answered (the judging's bars are the pilot's).
 BARS = dict(F.BARS)
 EXPECTED = {"glosses": (0.55, 0.70), "pilot": (0.50, 0.68), "writer_under_glosses": 0.03,
             "translator_lead": 0.05, "panel_over_translator": 0.0, "wrong": 0.05}
+# Set on 2026-11-13, after round one's second judging and before any agent of the held texts answered.
+EXPECTED_HELD = {"glosses": (0.50, 0.68), "panel": (0.62, 0.80), "panel_lead": (0.08, 0.18), "panel_lead_bar": 0.05,
+                 "panel_over_translator": (0.0, 0.05), "writer_lead": (0.02, 0.10), "wrong": 0.05}
+# The decoys of the held texts: a sample of open inscriptions that are not from Gebel Adda, by kind.
+PAGES2 = {"funerary": 9, "royal or temple (stela, wall, cartouche, label)": 2, "graffito": 2}
 # The rule for what is carried to the held texts, set with them: the reading with the best pooled score among
 # those whose share of wrong units is at most WRONG_OVER above the glosses'; a lead under LEAD over the glosses
 # is no lead, and then the writer is carried if it is within WRITER_LOSS of the glosses, else the glosses.
@@ -84,7 +93,8 @@ TOKENS = {"all:splitters": 1169212,           # 18 agents, one per rendered text
           "r1:writers": 433229,                # 5 agents
           "r1:translators": 1639408,           # 15 agents: 527,088, 553,714 and 558,606 for the three of each text
           "r1:editors": 534641,                # 5 agents
-          "r1:judges": 958165}                 # 14 agents (two judges, seven packs each)
+          "r1:judges": 958165,                 # 14 agents (two judges, seven packs each)
+          "r1b:judges": 953178}                # 14 agents, the second judging
 
 
 def name_of(tid):
@@ -98,6 +108,47 @@ def sets(chosen=None):
     dev = list(chosen["pilot"])
     return {"dev": dev, "held": sorted(c["id"] for c in chosen["candidates"] if c["id"] not in dev),
             "pages": list(chosen["pages"])}
+
+
+def pages2(rows, gl, taken, seed=SEED):
+    """The decoys' texts of the held round: per kind, a draw of its own from the open rows of the pilot's size
+    (f4.MIN_WORDS to MAX_WORDS words, at most LOST_SHARE lost) that are not from Gebel Adda and not in taken."""
+    out = []
+    for kind, n in PAGES2.items():
+        pool = sorted(i for i, r in rows.items() if r.get("open") and r["kind"] == kind and i in gl and i not in taken
+                      and "gebel adda" not in (r.get("site") or "").lower() and not i.startswith("GA ")
+                      and F.MIN_WORDS <= len(gl[i]) <= F.MAX_WORDS
+                      and sum(g["level"] == "lost" for g in gl[i]) <= F.LOST_SHARE * len(gl[i]))
+        out += random.Random(f"{seed} pages2 {kind}").sample(pool, n)
+    return out
+
+
+def file_of(tid):
+    """A text's id as a file name: its letters and digits."""
+    return re.sub(r"[^A-Za-z0-9]+", "", tid)
+
+
+def assign(cost):
+    """{row: column} of the least total cost, each column used at most once; cost: {row: {column: number}}, with
+    as many columns as rows or more. Rows and columns are taken in sorted order, and of equal totals the first
+    found stays. (A search over the sets of columns used: f4.assign_decoys tries every order, too many for 13.)"""
+    rows = sorted(cost)
+    cols = sorted({c for r in rows for c in cost[r]})
+    best = {0: (0, ())}
+    for r in rows:
+        nxt = {}
+        for mask, (total, picked) in best.items():
+            for i, c in enumerate(cols):
+                if mask >> i & 1 or c not in cost[r]:
+                    continue
+                key, value = mask | 1 << i, (total + cost[r][c], picked + (c,))
+                if key not in nxt or value[0] < nxt[key][0]:
+                    nxt[key] = value
+        best = nxt
+    if not best:
+        raise ValueError("no assignment: too few columns")
+    total, picked = min(best.values(), key=lambda x: x[0])
+    return dict(zip(rows, picked))
 
 
 def materials():
@@ -684,7 +735,7 @@ def count(rnd):
         figs["decoys_measure"][str(j)] = {"clean_units": sum(c.values()), "accepted": c["given"] + c["partly"],
                                           "verdicts": dict(c)}
     figs["bars"] = F.bars_of(figs["agreement"]["kappa"], figs["decoys_measure"])
-    figs["bars_set"], figs["expected"] = BARS, EXPECTED
+    figs["bars_set"], figs["expected"] = BARS, (EXPECTED_HELD if rnd == "held" else EXPECTED)
     figs["rule"] = {"lead": LEAD, "wrong_over": WRONG_OVER, "writer_loss": WRITER_LOSS}
     figs["carried"] = carried(figs["score"], figs["wrong"], names)
     counts = CHECK / "counts.json"
@@ -728,7 +779,15 @@ def packs(rnd):
         for k in range(1, PANEL + 1):
             write(base / "packs" / f"translator{k}_{n}.md",
                   translator_pack(tid, m, book, f"{rel}/translator{k}/{n}.jsonl", index))
-    for sub in ["writer", "editor"] + [f"translator{k}" for k in range(1, PANEL + 1)] + ["judge1", "judge2"]:
+    extra = []
+    if ROUNDS[rnd].get("decoys") == "pages2":
+        s = sets()
+        extra = pages2(m["rows"], m["gl"], set(s["pages"]) | set(s["dev"]) | set(s["held"]))
+        for tid in extra:
+            write(base / "packs" / f"decoy_{file_of(tid)}.md",
+                  translator_pack(tid, m, book, f"{rel}/decoy/{file_of(tid)}.jsonl", index))
+        write(base / "decoys.json", json.dumps(extra, ensure_ascii=False, indent=1) + "\n")
+    for sub in ["writer", "editor", "decoy"] + [f"translator{k}" for k in range(1, PANEL + 1)] + ["judge1", "judge2"]:
         (base / "answers" / sub).mkdir(parents=True, exist_ok=True)
     for f in sorted((base / "packs").glob("*.md")):
         print(f.name, f.stat().st_size, "bytes")
@@ -767,10 +826,25 @@ def judges(rnd):
     if faults or set(units) != set(ids):
         raise SystemExit(f"answers incomplete: {faults or 'readings ok'}; splitters' texts {sorted(units)}")
     renderings = {t: F.sections(m["entries"][(name_of(t),)])[1] for t in ids}
-    tp, f2 = F.translations(F.OUT / "answers" / "translator_pages.jsonl", s["pages"], m["gl"])
-    if f2:
-        raise SystemExit(f"the decoys' translations: {f2}")
-    decoys, shared = F.assign_decoys(renderings, {p: tp[p]["translation"] for p in s["pages"]})
+    if ROUNDS[rnd].get("decoys") == "pages2":
+        tp, f2 = {}, {}
+        for p in json.loads((base / "decoys.json").read_text(encoding="utf-8")):
+            a, f = one_answer(base / "answers" / "decoy" / f"{file_of(p)}.jsonl", p, m["gl"])
+            if f:
+                f2[p] = f
+            else:
+                tp[p] = a
+        if f2:
+            raise SystemExit(f"the decoys' translations: {f2}")
+        words = {p: F.stems(tp[p]["translation"]) for p in tp}
+        cost = {t: {p: len({x for x in F.stems(renderings[t]) if F.K.shares({x}, words[p])}) for p in tp} for t in ids}
+        decoys = assign(cost)
+        shared = {t: cost[t][decoys[t]] for t in ids}
+    else:
+        tp, f2 = F.translations(F.OUT / "answers" / "translator_pages.jsonl", s["pages"], m["gl"])
+        if f2:
+            raise SystemExit(f"the decoys' translations: {f2}")
+        decoys, shared = F.assign_decoys(renderings, {p: tp[p]["translation"] for p in s["pages"]})
     for t in ids:
         readings[t]["decoy"] = tp[decoys[t]]["translation"]
     ours = {t: P.reduced_ours(m["rows"][t]["text"].split()) for t in ids}

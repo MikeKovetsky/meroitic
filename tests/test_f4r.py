@@ -375,6 +375,49 @@ def test_the_packs_are_not_written_again():
             R.OUT = old
 
 
+def test_the_decoys_of_the_held_texts():
+    import itertools
+    import random
+    # assign() finds the least total, as trying every order does
+    rnd = random.Random(7)
+    for n, m in ((1, 1), (2, 3), (4, 4), (5, 7)):
+        cost = {f"r{i}": {f"c{j}": rnd.randint(0, 6) for j in range(m)} for i in range(n)}
+        got = R.assign(cost)
+        assert sorted(got) == sorted(cost) and len(set(got.values())) == n
+        best = min(sum(cost[r][c] for r, c in zip(sorted(cost), perm))
+                   for perm in itertools.permutations([f"c{j}" for j in range(m)], n))
+        assert sum(cost[r][got[r]] for r in cost) == best
+    assert R.assign({"a": {"x": 1, "y": 0}, "b": {"x": 0, "y": 0}}) == {"a": "y", "b": "x"}
+    assert R.assign({"a": {"x": 3}, "b": {"y": 2, "x": 0}}) == {"a": "x", "b": "y"}       # a column a row lacks
+    try:
+        R.assign({"a": {"x": 1}, "b": {"x": 1}})
+        raise AssertionError("two rows got one column")
+    except ValueError:
+        pass
+    # the sample: open rows of the right size and kind, not from Gebel Adda, not taken
+    def row(kind, site="Karanog", open_=True):
+        return {"kind": kind, "site": site, "open": open_}
+    kinds = list(R.PAGES2)
+    rows, gl = {}, {}
+    for k in kinds:
+        for i in range(12):
+            rows[f"{k[:3]}{i:02d}"] = row(k)
+    rows.update({"GA 99": row(kinds[0]), "adda1": row(kinds[0], "Gebel Adda, cemetery 3"), "closed": row(kinds[0], open_=False),
+                 "short": row(kinds[0]), "lost": row(kinds[0]), "taken": row(kinds[0])})
+    gl = {i: [g("w", "meaning", "x")] * 10 for i in rows}
+    gl["short"] = [g("w", "meaning", "x")] * (F.MIN_WORDS - 1)
+    gl["lost"] = [g("w", "lost", "")] * 5 + [g("w", "meaning", "x")] * 5
+    out = R.pages2(rows, gl, {"taken"})
+    assert len(out) == sum(R.PAGES2.values()) == len(set(out)) and out == R.pages2(rows, gl, {"taken"})
+    assert not set(out) & {"GA 99", "adda1", "closed", "short", "lost", "taken"}
+    assert [sum(rows[i]["kind"] == k for i in out) for k in kinds] == list(R.PAGES2.values())
+    assert R.file_of("REM 0091c") == "REM0091c" and R.file_of("Meroe 27") == "Meroe27" and R.file_of("Kar. 4/a") == "Kar4a"
+    # the held round: the panel's design beside the glosses, judged by the second judging's rules, decoys of its own
+    h = R.ROUNDS["held"]
+    assert h["texts"] == "held" and h["judging"] == 2 and h["decoys"] == "pages2" and R.source("held") == "held"
+    assert h["readings"] == ("glosses", "writer", "translator", "panel", "decoy")
+
+
 def test_the_texts_held_back():
     needs("data/sources/f4/texts.json")
     s = R.sets()

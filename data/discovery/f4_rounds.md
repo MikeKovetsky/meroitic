@@ -130,11 +130,79 @@ readings, the same units, the same bars, the same rule for what is carried on; 1
 order of its own. Expected: the kappa at 0.6 or more; every score lower than above, since those units become
 "partly" for both judges; the same order of the readings.
 
-## 6. Round one, second judging
+## 6. Round one, second judging: the bars are met and the panel is carried on
+
+The same readings and units, 14 new judges, the rule on kinship added (13 November 2026).
+
+| Reading | Expected | Judge 1 | Judge 2 | Mean | Given only | Wrong | Over the glosses |
+|---|---|---|---|---|---|---|---|
+| pilot | 50% to 68% | 65.3% | 64.7% | 65.0% | 42.7% | 4.7% | +2.0 |
+| glosses | 55% to 70% | 62.7% | 63.3% | 63.0% | 42.7% | 6.7% | |
+| writer | at most 3 points under the glosses | 67.3% | 72.0% | 69.7% | 50.7% | 5.3% | +6.7 |
+| translator | 5 points or more over the glosses | 74.0% | 76.7% | 75.3% | 54.7% | 1.3% | +12.3 |
+| panel | not under the translator | 78.0% | 78.0% | 78.0% | 60.0% | 1.3% | +15.0 |
+| decoy | | 0% | 0% | 0% | 0% | | |
+
+1. **Both bars are met.** The judges gave the same verdict on 361 of 375 lines (Cohen's kappa 0.94; in GA28
+   227 of 240, kappa 0.90), and neither called any of its 72 clean decoy units given or partly.
+2. **Every expectation held, and the writer did better than expected:** it does not lose meaning against the
+   glosses, it gains 6.7 points, because it orders the words into the sentences the handbook describes.
+3. **The order is the first judging's,** and every score is lower, as expected: the units "she was related to
+   X" are now partly for both judges.
+4. **Unit by unit against the glosses** (first and second judge): the panel is better on 22 and 21 of the 75
+   units and worse on 2 and 2; the translator better on 16 and 19, worse on 2 and 2; the writer better on 5 and
+   11 and worse on none.
+5. **Where the gain is:** titles (18 units: glosses 63.9%, panel 91.7%), places (8 units: 75% and 100%) and
+   the three relations the new splitters marked as such (33% and 100%). On the 34 units that name a person in a
+   role the readings are close (61.0% to 64.7%): most of them are the "related to" units.
+6. **By the rule of section 4 the panel is carried on:** the best pooled score among the translator and the
+   panel, 15.0 points over the glosses, with fewer wrong units (1.3% against 6.7%).
+
+How far to trust it: these are five texts that had been seen, and the rules of section 3 answer what the pilot
+said of them. The panel's lead over one translator, 2.7 points, is 3 to 5 units of 75. GA28 holds 48 of the 75
+units. GA47 scores 0 for every reading (2 units; our copy of it differs from the reading Millet renders).
+
+## 7. The held texts: the design, the bars and the expected scores, set before any of their agents answered
+
+The 13 renderings held back (section 3) are the result. Their units are cut already (307, of which 233 go to
+the judges), by the splitters of section 2; nobody but those splitters has read them.
+
+1. **The readings:** glosses, writer, translator (the first of the panel's three) and panel, made exactly as in
+   round one, from the same handbook and rules; and a decoy.
+2. **The decoys** are translations, by one translator of round one's design, of 13 inscriptions drawn for this
+   purpose from the rows of `corpus_v6` with an open reading that are not from Gebel Adda: nine epitaphs, two
+   royal or temple texts and two graffiti, of 8 to 60 words with at most a fifth lost. Each held text gets one,
+   assigned so that the renderings and their decoys share as few content words as can be.
+3. **The judges:** two per text, the second judging's rules (the kinship rule included), at most 20 units a
+   pack, each with an order of its own.
+
+| | Bar or expectation |
+|---|---|
+| The two judges' agreement on the four verdicts (Cohen's kappa), over the four real readings | 0.6 or more |
+| Clean decoy units a judge calls given or partly | at most 10%, for each judge |
+| glosses | 50% to 68% |
+| panel | 62% to 80% |
+| The panel's lead over the glosses | 8 to 18 points; **the bar: 5 points or more** |
+| The panel over the translator | 0 to 5 points |
+| The writer's lead over the glosses | 2 to 10 points |
+| Units the panel gets wrong | at most 5% |
+
+What the result will say, decided now:
+
+1. Both bars met and the panel 5 points or more over the glosses: the panel's way of translating gives meaning
+   that Millet's renderings can see, on texts it was not tuned on, and F4's pages are built with it.
+2. The bars met and the lead under 5 points: round one's lead was a property of the five texts. The pages are
+   then built by the writer if it is within 3 points of the glosses, and the tuning starts again on other texts.
+3. A bar missed: the judging is changed first, as in section 5, and that is said.
+
+The expected scores are lower than round one's because the copies of some held texts hold less of Millet's
+reading (GA19 56%, GA07 64%, GA43 70% of his runs of letters), and because nothing was tuned on them.
+
+## 8. The result on the held texts
 
 Not run yet.
 
-## 7. Files and commands
+## 9. Files and commands
 
 | File | What it holds | Where |
 |---|---|---|
@@ -151,6 +219,7 @@ python3 -I src/f4r.py judges r1    # the judges' packs and the key
 python3 -I src/f4r.py count r1
 python3 -I src/f4r.py public r1    # writes f4_rounds_figures.json
 python3 -I src/f4r.py judges r1b   # the second judging of round one's readings; then count and public r1b
+python3 -I src/f4r.py packs held   # then editors, judges, count and public held, as for r1
 ```
 
 The packs go to agents by hand: one agent per pack, told to read only that file and to write its answers file.
