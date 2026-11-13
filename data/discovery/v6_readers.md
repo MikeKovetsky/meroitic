@@ -15,6 +15,9 @@ a reading tags as a personal name were not sent. The numbers are in
 | `corpus_v6` with the new answers | 10,290 | 5,419 | 52.7% |
 | the Meroitic Newsletter's texts, before and after | 3,578 | 1,295 and 1,424 | 36.2% and 39.8% |
 
+"Translated" here means translated by one lexicon. The second figure, the words built only on meanings that a
+second scholar gives too, is counted beside it on [the lexicon's page](lexicon.md).
+
 1. **139 words more are translated:** 77 are names that the analysts recognised, 59 are words with a meaning and
    3 are grammar words.
 2. **Of the 930 spellings, 125 got a translated level** (68 names, 55 meanings, 2 grammar words), 194 a proposal

@@ -77,9 +77,9 @@ Done since this plan was written:
     languages, and where the two texts give the same office the titles line up with the lexicon; the editors' 125
     equations add no meaning that is new and sure.
 15. **F2, first pass: a second scholar for every meaning** (2026-11-12,
-    [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 3,873 of 10,290 running words (37.6%) rest only on
-    meanings a second scholar gives too, against 5,419 (52.7%) translated by one lexicon; of the 177 entries
-    behind translated words, 70 are agreed, 23 disputed, 59 stated by one and 25 only proposed. Left: the
+    [`data/discovery/lexicon.md`](data/discovery/lexicon.md)): 3,875 of 10,290 running words (37.7%) are built
+    only on meanings a second scholar gives too, against 5,419 (52.7%) translated by one lexicon; of the 177
+    entries behind translated words, 74 are agreed, 21 disputed, 62 stated by one and 20 only proposed. Left: the
     meanings worded anew, so that the public table can carry them.
 
 Next, in this order (the small steps; the four big pieces are in section F):

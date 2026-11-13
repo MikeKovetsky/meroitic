@@ -46,33 +46,37 @@
   "used": 594,
   "behind_translated_words": 177,
   "with_a_proposal_of_another_scholar": 131,
-  "with_the_editors_verdict": 101,
+  "with_the_editors_verdict": 97,
+  "with_the_editors_reading": 66,
+  "only_a_kind": 21,
   "statuses": {
-   "agreed by two scholars": 70,
-   "disputed": 23,
-   "stated by one": 59,
-   "proposed": 25
+   "agreed by two scholars": 74,
+   "disputed": 21,
+   "stated by one": 62,
+   "proposed": 20
   },
   "statuses_by_use": {
-   "agreed by two scholars": 3114,
-   "disputed": 504,
-   "stated by one": 587,
-   "proposed": 635
+   "agreed by two scholars": 3119,
+   "disputed": 368,
+   "stated by one": 725,
+   "proposed": 628
   },
-  "agreed_with_a_dissent": 26,
+  "agreed_with_a_dissent": 21,
   "agreed_only_through_an_unnamed_source": [
    "-o (1)"
   ],
   "agreed_by": {
    "judges and editors": 22,
    "judges": 23,
-   "editors": 25
+   "editors": 29
   }
  },
  "words": {
   "all": 10290,
   "meaning or grammar": 3676,
-  "every entry agreed": 2130,
+  "every entry agreed": 2132,
+  "with an unnamed ending": 428,
+  "with an unnamed ending no agreed entry spells": 87,
   "names and numbers": 1743
  },
  "griffith_check": {
@@ -81,21 +85,53 @@
    "not found": 5
   },
   "found": 15,
+  "unanswered": 0,
+  "drawn_from": 52,
+  "without_a_year": {
+   "drawn_from": 34,
+   "drawn": 15,
+   "not_found": 5
+  },
   "bars": {
    "found": true,
    "as_stated_share_of_found": true
   }
  },
  "translated_by_one_lexicon": 5419,
- "agreed_by_two_scholars": 3873,
+ "agreed_by_two_scholars": 3875,
+ "if_an_unnamed_ending_must_be_spelled_like_an_agreed_one": {
+  "agreed_by_two_scholars": 3788,
+  "endings": {
+   "li": 22,
+   "leb": 21,
+   "lebkwi": 17,
+   "lis": 7,
+   "ye": 6,
+   "yi": 4,
+   "lw": 4,
+   "wi": 3,
+   "te": 2,
+   "kete": 1
+  }
+ },
  "if_a_decoyed_row_kept_its_one_real_verdict": {
   "statuses": {
-   "agreed by two scholars": 79,
+   "agreed by two scholars": 83,
    "disputed": 22,
-   "stated by one": 51,
+   "stated by one": 52,
+   "proposed": 20
+  },
+  "entries_that_change": 12,
+  "agreed_by_two_scholars": 4105
+ },
+ "as_first_counted": {
+  "statuses": {
+   "agreed by two scholars": 70,
+   "disputed": 23,
+   "stated by one": 59,
    "proposed": 25
   },
-  "entries_that_change": 11,
-  "agreed_by_two_scholars": 4103
+  "entries_that_change": 7,
+  "agreed_by_two_scholars": 3873
  }
 }
