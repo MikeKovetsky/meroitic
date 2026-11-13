@@ -628,12 +628,15 @@ map uses are still open (`NEXT_STEPS.md`, step 23).
 5. **Why:** the translator leaves open the words the map knows only vaguely, where the vague gloss earns half
    credit (`smlo`, `mde`), and makes `yetmde ... aqebetowi` "their nephew or niece" where Millet has "related
    to"; it reads places better (`Skl` as Sakala, "in Meroe") and drops the map's "this one is" where Millet has
-   "the noble one". An epitaph is a list in a fixed order, so glosses in order carry most of it.
+   "the noble one". An epitaph is a list in a fixed order, so glosses in order carry most of it. Found in the
+   review: the baseline gave "?" for the 4 of the 141 words that the map counts as unknown but its analyst
+   glossed in part, glosses the translator saw; one `Skl` and the relation and wrong place of GA53 rest on them.
 6. **For the full run:** scoring the 18 renderings the corpus holds costs about 2.1 million subagent tokens at
-   the pilot's rates (1.6 million for the 13 left; about 0.5 million less with one judge); pages for the 286
-   open texts with this translator about 5.3 million. By the rule set beforehand the pages should be built from
-   the map's readings by a lighter step, not yet measured. The splitter's "open" marks and the judges' rule
-   against outside knowledge need fixing first ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md),
-   sections 7 and 8).
+   the pilot's rates (1.6 million for the 13 left; with one judge about 0.5 million less for the 18, 0.4 for the
+   13); pages for the 303 inscriptions with an open reading with this translator about 5.9 million (5.3 for the
+   286 whose corpus row is that reading). By the rule set beforehand the pages should be built from the map's
+   readings by a lighter step, not yet measured. The splitter's "open" marks, the judges' rule against outside
+   knowledge and the baseline's glosses need fixing first
+   ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md), sections 7 and 8).
 7. **Cost:** five agents, 560,981 subagent tokens (translators 145,118 and 104,696, splitter 99,501, judges
    107,682 and 103,984), against 0.35 million expected, before the review.

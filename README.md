@@ -460,9 +460,9 @@ object and three stelae of different lengths, and five texts under an open licen
 with F2's statuses, Millet taken out of all of it (his proposals, the meanings that name him, and his weight in
 the statuses); the map's glosses in order are the baseline; a splitter agent cuts Millet's renderings into units
 of meaning. `judges` gives two judges each unit beside three unmarked readings in an order of its own: the
-translator's, the baseline, and a decoy, the translation of another text sharing no content word with the
-rendering. The bars and the expected scores were committed before any agent answered; `public` writes the counts
-([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
+translator's, the baseline, and a decoy, the translation of another text sharing as few content words with the
+rendering as can be. The bars and the expected scores were committed before any agent answered; `public` writes
+the counts ([`data/discovery/f4_pilot.md`](data/discovery/f4_pilot.md)).
 
 ## Reproduce
 

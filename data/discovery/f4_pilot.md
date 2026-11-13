@@ -22,14 +22,15 @@ followed the same evening, 12 November 2026. The numbers below are in
 4. **Where it loses:** it leaves open the words the map knows only vaguely, where the vague gloss earns half
    credit (`smlo`, "a title" in the map, Millet's "good person"), and it writes "nephew or niece" where Millet
    writes "related to" and the baseline's "relative" comes closer. Where it wins: places (`Skl` read as
-   Sakala), and it drops the map's "this one is" where Millet reads "the noble one".
+   Sakala, once from a gloss of the map that the baseline did not show, section 8), and it drops the map's
+   "this one is" where Millet reads "the noble one".
 5. **The baseline beat its expectation by far:** 60.5% against 35% expected. An epitaph is a list in a fixed
    order, so glosses in order carry most of its meaning.
 6. **The full run:** scoring Millet's 18 held renderings costs about 2.1 million subagent tokens at the pilot's
-   rates (1.6 million for the 13 not in the pilot; about 0.5 million less with one judge). Pages for the open
-   texts with this translator would cost about 5.3 million, more than F4's whole estimate: by the rule set
-   beforehand they should be built from the map's readings by a lighter step, which is not measured yet
-   (section 7).
+   rates (1.6 million for the 13 not in the pilot; with one judge, about 0.5 million less for the 18 and 0.4
+   for the 13). Pages for the 303 inscriptions with an open reading would cost about 5.9 million with this
+   translator, more than F4's whole estimate: by the rule set beforehand they should be built from the map's
+   readings by a lighter step, which is not measured yet (section 7).
 7. **Cost:** 560,981 subagent tokens for five agents, 1.6 times the 0.35 million expected, before the review.
 
 ## 2. The texts
@@ -66,7 +67,9 @@ of 8 to 60 words with at most a fifth lost (REM 0240, Meroe 27, REM 0209, REM 04
    check against Millet 2005. That changes the status of 16 of the 177 entries: `qewi`, disputed through his reading, is stated by
    one; `t-dḫe`, agreed through it, is disputed.
 3. **The baseline** is the map's reading of every word, word by word, and nothing else; a word whose reading is
-   withheld from the translator is withheld here too. It shows what the translator adds to the map.
+   withheld from the translator is withheld here too. It shows what the translator adds to the map. Found in
+   the review, after the run: a word the map counts as unknown is "?" in the baseline even where the map's
+   analyst glossed a part of it, a gloss the translator saw (section 8, item 9).
 4. **The splitter** is one agent that sees only Millet's transliteration and rendering of the five texts. It
    cuts each rendering into units of meaning (a person with a role, a relation, a title, a place, an invocation,
    a wish), each with the Meroitic it renders, its kind, Millet's doubt, and whether Millet leaves it
@@ -155,12 +158,17 @@ The first judge's verdict on the translator is better than on the baseline for 7
 2. **Two readings of `yetmde`.** In GA28 the translator makes the closing `aqebetowi` "their nephew or niece";
    the map's gloss of it, "it is their (relative)", comes closer to Millet's "related to" (6 units). The lexicon
    reads `yetmde` "nephew, niece", Millet and FHN "relative" (the check against the editions, section 4).
-3. **The translator reads places better:** `Skl` as Sakala (2 units) and `bedewitel` as "in Meroe", where the
-   map has only the word's form; it guesses wrong once, "in Meroe (?)" for Millet's Makhatebede.
+3. **The translator reads places better, in part from glosses the baseline did not show:** `Skl` as Sakala (2
+   units: one through lost signs, by the parallel of the `Sklte` the map reads "in Skl"; one in a word the map
+   counts as unknown and glosses "in Skl", which the baseline gave as "?"), and `bedewitel` as "in Meroe",
+   where the map has only the word's form. Its one wrong place, "in Meroe (?)" for Millet's Makhatebede (GA53),
+   is the map's own gloss of such a word, which it followed.
 4. **`qowi`:** the map's "this one is" is wrong against Millet's "the noble one"; the translator folds it into
    "This is X" and is called "missing" (2 units).
-5. **Two relations the map leaves inside an unknown word** the translator reads in part: "nephew or niece of"
-   where Millet has "related to" (GA53), and "of the mothers" where he has "the sister of" (GA37).
+5. **Two relations inside words the map cannot read** the translator reads in part: "nephew or niece of" where
+   Millet has "related to" (GA53), from the map's own gloss of that unknown word, which the baseline gave as
+   "?"; and "of the mothers" where he has "the sister of" (GA37), in a word with lost signs, by the parallel of
+   the same ending earlier in the text (the first judge only).
 
 ## 7. What the pilot says about the full run
 
@@ -175,10 +183,13 @@ The first judge's verdict on the translator is better than on the baseline for 7
    splitter, 588 a line for each judge, 0.18 judged units a word of rendering) the 18 cost about 2.06 million
    subagent tokens: 0.57 for the translator, 0.48 for the splitter, 1.02 for the two judges. The 13 not in
    this pilot need about 1.6 million. The judges agreed on 112 of 114 lines, so a second judge on a sample only
-   would save about 0.5 million.
-4. **The pages:** the rows of `corpus_v6` whose reading is open hold 286 texts and 4,118 words (303
-   inscriptions have an open reading). At the pages translator's rate, 1,277 tokens a word, that is about 5.3
-   million subagent tokens (5.6 for 303), above F4's estimate of 2 to 4 million for all of it. Part of the rate
+   would save up to about 0.5 million on the 18 (0.4 on the 13). The two renderings `corpus_v6` lacks would
+   have to be typed in first (F1).
+4. **The pages:** 303 inscriptions of F1's table have a reading under an open licence, with 4,625 words. For
+   286 of them (4,118 words) that reading is the row of `corpus_v6`, which the map reads; for the other 17 the
+   row holds another reading, so the map has not read the open one. At the pages translator's rate, 1,277
+   tokens a word, the 303 cost about 5.9 million subagent tokens and the 286 about 5.3, above F4's estimate of
+   2 to 4 million for all of it. Part of the rate
    is each pack's fixed part (instructions and lexicon entries), which larger packs would share; that is not
    measured. By item 1, the pages can be built from the map's readings with a lighter step that writes them as
    sentences and keeps each word's status; its cost and its score need a pilot of their own, on the same five
@@ -211,6 +222,14 @@ The first judge's verdict on the translator is better than on the baseline for 7
    translator's instructions were written.
 8. **Millet's 2005 article is not a later authority than the lexicon:** where the two differ (`yetmde`, `qo`),
    a score against Millet measures agreement with Millet.
+9. **The baseline did not get every gloss the translator saw** (found in the review, after the run). A word the
+   map counts as unknown is "?" in the baseline even where the map's analyst glossed a part of it, and the
+   translator's pack showed that gloss: 4 of the 141 words of the pilot, in GA28 and GA53. On such words the
+   two readings part for one `Sklte` of GA28 ("in Skl": given to the translator, missing in the baseline) and
+   for the relation and the place in GA53's `mxtebedetelyetmdelowi` ("nephew or niece of", partly, and "in
+   Meroe (?)" for Millet's Makhatebede, wrong; the baseline missing both). On these units the comparison is
+   not like for like: with those glosses the baseline could have earned the place and part of the relation,
+   and been wrong on the other place as well. The full run should give both readings the same glosses.
 
 ## 9. Files
 

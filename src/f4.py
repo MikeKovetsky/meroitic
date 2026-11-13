@@ -12,8 +12,9 @@ and the agents' answers quote them. The answers are untrusted data: only their n
 
 The design, set before any agent answered (data/discovery/f4_pilot.md says it in prose):
 
-1. The texts. Millet 2005 prints a rendering into English for 20 of its entries; an entry is held when corpus_v6
-   has a row "GA nn" for every inscription it names. Its kind is the object Millet's first lines describe: a
+1. The texts. Millet 2005 prints a rendering into English for 20 of its entries; an entry is held when it names
+   one inscription and corpus_v6 has its row "GA nn" (GA13 with GA16, one entry on two, is not taken; corpus_v6
+   has neither). Its kind is the object Millet's first lines describe: a
    stela (or slab), an offering table, a label. The pilot takes, of each kind but the stela, the entry whose
    copy holds the largest share of Millet's text (runs of five letters, as src/experts/prepare.py counts them),
    then the longest; and three stelae among those whose copy holds at least COVERED of Millet's text: the
@@ -58,6 +59,7 @@ import tally as T                                      # noqa: E402
 
 CORPUS = ROOT / "data/corpus_v6.jsonl"
 GLOSSES = X.GLOSSES                                    # the map of corpus_v6 with the analysts' answers (local)
+INSCRIPTIONS = ROOT / "data/inscriptions.jsonl"        # F1's public table, with each inscription's open reading
 OUT = ROOT / "data/sources/f4"                         # local only
 PUBLIC = ROOT / "data/discovery/f4_pilot_figures.json"
 
@@ -220,7 +222,9 @@ def blind_gloss(g, withheld=frozenset()):
 
 def word_reading(g, withheld=frozenset()):
     """The baseline's reading of one word: the map's gloss, marked by its level; a gloss withheld from the
-    translator (blind_gloss) is withheld here too, as an unknown word."""
+    translator (blind_gloss) is withheld here too, as an unknown word. A word the map counts as unknown is "?"
+    even where its analyst glossed a part of it, a gloss the translator's pack shows: so the pilot's baseline
+    was built (count() counts those words; data/discovery/f4_pilot.md, section 8)."""
     level, form = g["level"], g["form"]
     gloss = blind_gloss(g, withheld)
     if gloss == WITHHELD:
@@ -325,9 +329,11 @@ def entry_block(h, e, st, ours):
 
 
 def translator_pack(ids, rows, gl, entries, st, ours, answers):
-    """The text of a translator's pack, and how many texts of the lexicon or the map it withheld."""
+    """The text of a translator's pack, and how many texts of the lexicon or the map it withheld. F2's meaning in
+    our words of an entry of millet_heads() rewords the meaning withheld, so it is left out with it."""
     parts = [TRANSLATE.format(n=len(ids), context=CONTEXT, answers=answers)]
     used, withheld, heads_withheld = [], 0, millet_heads(entries)
+    ours = {h: m for h, m in ours.items() if h not in heads_withheld}
     for tid in ids:
         r = rows[tid]
         parts.append(f"\n---\n\n## {tid}\n\nSite: {r['site']}. Kind: {r['kind']}. Words: {len(gl[tid])}.\n\n"
@@ -564,14 +570,16 @@ def units_of(path, ids):
 
 def verdicts_of(path, key, judge):
     """{(text, unit, reading name): verdict} of one judge, mapped through the key's order; unknown verdicts and
-    lines for units or readings not in the pack are left out, and a line given twice keeps its first."""
+    lines for units or readings not in the pack (an open unit is not) are left out, and a line given twice keeps
+    its first."""
     out = {}
     order = key["order"][str(judge)]
     for a in jsonl(path):
         t = text_id(a.get("text"), list(order))
         name = order.get(t, {}).get(a.get("reading"))
+        unit = key["units"].get(t, {}).get(a.get("unit"))
         k = (t, a.get("unit"), name)
-        if name and a.get("unit") in key["units"].get(t, {}) and a.get("verdict") in VERDICTS and k not in out:
+        if name and unit and not unit["open"] and a.get("verdict") in VERDICTS and k not in out:
             out[k] = a["verdict"]
     return out
 
@@ -600,7 +608,15 @@ def mean(xs):
     return round(statistics.mean(xs), 4) if xs else None
 
 
-def count(out=OUT, rows=None, gl=None, entries=None):
+def bars_of(kappa, decoys):
+    """Whether the judging met BARS: the judges' kappa (None when it cannot be counted), and for each judge
+    {"accepted", "clean_units"} of its decoys; a judge without a clean decoy unit has not met the bar."""
+    return {"kappa": kappa is not None and kappa >= BARS["kappa"],
+            "decoys_accepted": all(d["clean_units"] and d["accepted"] <= BARS["decoys_accepted"] * d["clean_units"]
+                                   for d in decoys.values())}
+
+
+def count(out=OUT, rows=None, gl=None):
     """Every figure of the pilot but the costs' sizing: the scores, the agreement, the decoys, the bars."""
     rows, gl = rows or rows_of(), gl or glosses_of()
     key = json.loads((out / "key.json").read_text(encoding="utf-8"))
@@ -652,10 +668,7 @@ def count(out=OUT, rows=None, gl=None, entries=None):
         c = collections.Counter(v[j].get((t, u, "decoy"), "unanswered") for t, u in scored if key["units"][t][u]["clean"])
         figs["decoys_measure"][str(j)] = {"clean_units": sum(c.values()), "accepted": c["given"] + c["partly"],
                                           "verdicts": dict(c)}
-    k = figs["agreement"]["kappa"]
-    figs["bars"] = {"kappa": k is not None and k >= BARS["kappa"],
-                    "decoys_accepted": all(d["accepted"] <= BARS["decoys_accepted"] * d["clean_units"]
-                                           for d in figs["decoys_measure"].values())}
+    figs["bars"] = bars_of(figs["agreement"]["kappa"], figs["decoys_measure"])
     figs["bars_set"], figs["expected"] = BARS, EXPECTED
     tr, _ = translations(out / "answers" / "translator_pilot.jsonl", ids, gl)
     tp, _ = translations(out / "answers" / "translator_pages.jsonl", pages, gl)
@@ -663,13 +676,20 @@ def count(out=OUT, rows=None, gl=None, entries=None):
     figs["translator"] = {"words": sum(st.values()), "statuses": dict(st.most_common()),
                           "words_pilot": sum(len(gl[t]) for t in ids), "words_pages": sum(len(gl[t]) for t in pages)}
     figs["blind"] = key["blind"]
+    # not set before the run: the words of the pilot the map counts as unknown though its analyst glossed a part
+    # of them, by number in the text: the translator's pack showed that gloss, the baseline "?" (word_reading)
+    figs["baseline_without_the_gloss"] = {t: [n for n, g in enumerate(gl[t], 1) if g["level"] == "unknown"
+                                              and scrub(g.get("gloss")).strip() not in ("", "?", WITHHELD)]
+                                          for t in ids}
     return figs
 
 
-def sizing(figs, tokens, rows, gl, entries=None):
+def sizing(figs, tokens, rows, gl, entries=None, table=INSCRIPTIONS):
     """What the full run would cost at the pilot's rates: the scored run (every rendering of Millet held in
-    corpus_v6) and the pages (every open row of corpus_v6). Rates per word of text for the translators, per word
-    of rendering for the splitter, per line of verdict for the judges."""
+    corpus_v6; those not in the pilot apart; the judges' part with one judge beside it) and the pages (every open
+    row of corpus_v6, and every inscription of F1's table with an open reading, by the words of that reading).
+    Rates per word of text for the translators, per word of rendering for the splitter, per line of verdict for
+    the judges."""
     if not tokens:
         return {}
     entries = rendered() if entries is None else entries
@@ -682,13 +702,23 @@ def sizing(figs, tokens, rows, gl, entries=None):
     lines = 3 * figs["units"]["judged"]
     per_line = (tokens["judge1"] + tokens["judge2"]) / (2 * lines)
     units_per_rend_word = figs["units"]["judged"] / rend_words(pilot)
+
+    def scored(ids):
+        words, rw = sum(len(gl[t]) for t in ids), rend_words(ids)
+        run = {"texts": len(ids), "words": words, "rendering_words": rw, "translator": round(per_word_pilot * words),
+               "splitter": round(per_rend_word * rw), "judges": round(per_line * 2 * 3 * units_per_rend_word * rw)}
+        run["total"] = run["translator"] + run["splitter"] + run["judges"]
+        run["one_judge"] = round(per_line * 3 * units_per_rend_word * rw)
+        return run
+
     open_rows = [i for i, r in rows.items() if r.get("open")]
-    held_words, open_words = sum(len(gl[t]) for t in held), sum(len(gl[t]) for t in open_rows)
-    scored_run = {"texts": len(held), "words": held_words, "rendering_words": rend_words(held),
-                  "translator": round(per_word_pilot * held_words), "splitter": round(per_rend_word * rend_words(held)),
-                  "judges": round(per_line * 2 * 3 * units_per_rend_word * rend_words(held))}
-    scored_run["total"] = scored_run["translator"] + scored_run["splitter"] + scored_run["judges"]
+    open_words = sum(len(gl[t]) for t in open_rows)
+    scored_run = {**scored(held), "not_in_pilot": scored([t for t in held if t not in pilot])}
     pages_run = {"texts": len(open_rows), "words": open_words, "translator": round(per_word_pages * open_words)}
+    readings = [r for r in jsonl(table) if r.get("open_reading")]
+    reading_words = sum(len((r.get("open_text") or "").split()) for r in readings)
+    pages_run["open_readings"] = {"texts": len(readings), "words": reading_words,
+                                  "translator": round(per_word_pages * reading_words)}
     scored_tokens = tokens["translator_pilot"] + tokens["splitter"] + tokens["judge1"] + tokens["judge2"]
     per_text = {"translator_pilot": round(tokens["translator_pilot"] / len(pilot)),
                 "translator_pages": round(tokens["translator_pages"] / len(pages)),

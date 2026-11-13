@@ -291,6 +291,19 @@
    "pages": 0
   }
  },
+ "baseline_without_the_gloss": {
+  "GA 47": [],
+  "GA 41": [],
+  "GA 28": [
+   18,
+   33,
+   72
+  ],
+  "GA 53": [
+   15
+  ],
+  "GA 37": []
+ },
  "tokens": {
   "translator_pilot": 145118,
   "translator_pages": 104696,
@@ -319,12 +332,28 @@
    "translator": 565034,
    "splitter": 478959,
    "judges": 1018877,
-   "total": 2062870
+   "total": 2062870,
+   "one_judge": 509439,
+   "not_in_pilot": {
+    "texts": 13,
+    "words": 408,
+    "rendering_words": 1289,
+    "translator": 419916,
+    "splitter": 379458,
+    "judges": 807211,
+    "total": 1606585,
+    "one_judge": 403606
+   }
   },
   "pages_run": {
    "texts": 286,
    "words": 4118,
-   "translator": 5257782
+   "translator": 5257782,
+   "open_readings": {
+    "texts": 303,
+    "words": 4625,
+    "translator": 5905110
+   }
   }
  }
 }
