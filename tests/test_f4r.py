@@ -173,11 +173,38 @@ def test_the_packs_keep_millet_out_and_say_the_rules():
     assert "Translation: reading 2" in e and "Do not add a meaning that none of the three gives" in e
 
 
+def test_the_checkers_verdicts_on_the_handbook():
+    book = "\n".join(["# Title", "- one [A, p. 1, established]", "- two [A, p. 2, probable]", "- three [A, p. 3, proposal]",
+                      "a line without a source", "- four [A, p. 4, established]", "- five [A, p. 5, established]",
+                      "- six [A, p. 6, established]"])
+    verdicts = [{"line": 2, "verdict": "confirmed"}, {"line": 2, "verdict": "unsupported"},          # the first counts
+                {"line": 3, "verdict": "corrected", "text": "- two, as the source has it [A, p. 2, proposal]"},
+                {"line": 4, "verdict": "unsupported"},
+                {"line": 5, "verdict": "unsupported"},                                             # not a sourced line
+                {"line": 6, "verdict": "corrected", "text": "- four, without a source"},            # no source: dropped
+                {"line": 7, "verdict": "corrected", "text": "- five, as Millet has it [A, p. 5, established]"},
+                {"line": 99, "verdict": "confirmed"}, {"line": "8", "verdict": "unsupported"}, {"line": 8, "verdict": "fine"}]
+    text, counts = R.apply_check(book, verdicts)
+    assert text.split("\n") == ["# Title", "- one [A, p. 1, established]", "- two, as the source has it [A, p. 2, proposal]",
+                                "a line without a source", "- six [A, p. 6, established]"]
+    assert counts == {"sourced": 6, "confirmed": 1, "corrected": 1, "unsupported": 1, "corrected_without_a_line": 2,
+                      "unchecked": 1}
+    assert R.apply_check(book, []) == (book, {"sourced": 6, "unchecked": 6})
+
+
 def test_the_handbook_may_not_name_millet():
     with tempfile.TemporaryDirectory() as d:
-        old = R.HANDBOOK
+        old, check = R.HANDBOOK, R.CHECK
         try:
-            R.HANDBOOK = Path(d) / "handbook.md"
+            R.HANDBOOK, R.CHECK = Path(d) / "handbook.md", Path(d) / "handbook_check"
+            R.HANDBOOK.write_text("The copula is -o [Rilly 2003, p. 117].\n", encoding="utf-8")
+            try:
+                R.handbook()
+                raise AssertionError("a handbook that was not checked was read")
+            except SystemExit as e:
+                assert "has not been checked" in str(e)
+            R.HANDBOOK.unlink()
+            lines(R.CHECK / "counts.json", [{"sourced": 1}])
             try:
                 R.handbook()
                 raise AssertionError("a missing handbook was read")
@@ -192,7 +219,7 @@ def test_the_handbook_may_not_name_millet():
             except SystemExit:
                 pass
         finally:
-            R.HANDBOOK = old
+            R.HANDBOOK, R.CHECK = old, check
 
 
 def test_one_reading_against_another_unit_by_unit():

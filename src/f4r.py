@@ -2,6 +2,7 @@
 renderings held back (NEXT_STEPS.md, step 25; the pilot is src/f4.py, whose texts, lexicon and scoring this reuses).
 
   python3 -I src/f4r.py split            the splitter's packs, one per rendered text (the five and the held ones)
+  python3 -I src/f4r.py handbook         the checkers' verdicts applied to the compiled handbook
   python3 -I src/f4r.py packs r1         the writer's and the translators' packs of a round
   python3 -I src/f4r.py editors r1       the editors' packs, once the three translators have answered
   python3 -I src/f4r.py judges r1        the judges' packs and the key, once every reading and the units are in
@@ -47,7 +48,9 @@ import lexicon as X                                    # noqa: E402
 import prepare as P                                    # noqa: E402
 
 OUT = ROOT / "data/sources/f4r"                        # local only
-HANDBOOK = OUT / "handbook.md"
+HANDBOOK = OUT / "handbook.md"                         # the handbook the packs hold: the compiled one after its check
+COMPILED = OUT / "handbook_compiled.md"                # as its compiler wrote it
+CHECK = OUT / "handbook_check"                         # the checkers' verdicts, one file per part, and the counts
 PUBLIC = ROOT / "data/discovery/f4_rounds_figures.json"
 
 SEED = "f4 rounds"
@@ -339,7 +342,63 @@ not be judged.
 """
 
 
+def sourced(line):
+    """Whether a line of the handbook ends in its source, in square brackets."""
+    return bool(re.search(r"\]\s*$", line))
+
+
+def apply_check(text, verdicts):
+    """(the handbook after its check, the counts). Each line that ends in a source takes its checker's verdict,
+    the first given for its number: confirmed, it stays; corrected, the checker's line stands in its place, if
+    that is one line that ends in a source and does not name Millet, and else the line is dropped; unsupported,
+    it is dropped. A sourced line without a verdict stays and is counted. Verdicts on other lines are not read."""
+    lines, by = text.split("\n"), {}
+    for v in verdicts:
+        n = v.get("line")
+        if isinstance(n, int) and not isinstance(n, bool) and v.get("verdict") in ("confirmed", "corrected", "unsupported"):
+            by.setdefault(n, v)
+    out, c = [], collections.Counter()
+    for n, line in enumerate(lines, 1):
+        if not sourced(line):
+            out.append(line)
+            continue
+        c["sourced"] += 1
+        v = by.get(n)
+        if v is None:
+            c["unchecked"] += 1
+            out.append(line)
+        elif v["verdict"] == "confirmed":
+            c["confirmed"] += 1
+            out.append(line)
+        elif v["verdict"] == "unsupported":
+            c["unsupported"] += 1
+        else:
+            new = str(v.get("text") or "").strip("\n")
+            if new.strip() and "\n" not in new and sourced(new) and not F.MILLET.search(new):
+                c["corrected"] += 1
+                out.append(new)
+            else:
+                c["corrected_without_a_line"] += 1
+    return "\n".join(out), dict(c)
+
+
+def check_handbook():
+    """The command "handbook": the checkers' verdicts applied to the compiled handbook, kept beside it."""
+    if not COMPILED.exists():
+        if not HANDBOOK.exists():
+            raise SystemExit(f"{HANDBOOK} is missing: the handbook has to be compiled first")
+        COMPILED.write_text(HANDBOOK.read_text(encoding="utf-8"), encoding="utf-8")
+    verdicts = [v for f in sorted(CHECK.glob("part*.jsonl")) for v in F.jsonl(f)]
+    text, counts = apply_check(COMPILED.read_text(encoding="utf-8"), verdicts)
+    counts["words"] = len(text.split())
+    HANDBOOK.write_text(text, encoding="utf-8")
+    write(CHECK / "counts.json", json.dumps(counts, indent=1) + "\n")
+    print(counts)
+
+
 def handbook():
+    if not (CHECK / "counts.json").exists():
+        raise SystemExit("the handbook has not been checked: python3 -I src/f4r.py handbook")
     if not HANDBOOK.exists():
         raise SystemExit(f"{HANDBOOK} is missing: the handbook has to be compiled first")
     text = HANDBOOK.read_text(encoding="utf-8")
@@ -580,6 +639,8 @@ def count(rnd):
     figs["bars_set"], figs["expected"] = BARS, EXPECTED
     figs["rule"] = {"lead": LEAD, "wrong_over": WRONG_OVER, "writer_loss": WRITER_LOSS}
     figs["carried"] = carried(figs["score"], figs["wrong"], names)
+    counts = CHECK / "counts.json"
+    figs["handbook"] = json.loads(counts.read_text(encoding="utf-8")) if counts.exists() else {}
     figs["tokens"] = {k: v for k, v in TOKENS.items() if k.startswith(rnd + ":") or k.startswith("all:")}
     return figs
 
@@ -697,6 +758,8 @@ def main(argv):
     cmd, args = (argv[1:2] or [""])[0], argv[2:]
     if cmd == "split" and not args:
         return split()
+    if cmd == "handbook" and not args:
+        return check_handbook()
     if cmd in ("packs", "editors", "judges") and len(args) == 1 and args[0] in ROUNDS:
         return {"packs": packs, "editors": editors, "judges": judges}[cmd](args[0])
     if cmd in ("count", "public") and len(args) == 1 and args[0] in ROUNDS:
