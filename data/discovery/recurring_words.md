@@ -140,6 +140,18 @@ The readers' **choice** for a word is the option that four or five of the five p
    source, favoured by the contexts", no more.
 6. A reader's file counts only for the words of its own pack.
 
+**Added on 2026-11-13 after step 1 was counted and before any reader of step 2 answered:**
+
+- Left out of step 2: the items that are names by the sources (a name has no meaning to choose), and the items
+  whose first candidate is an ending or a numeral (the test has no accepted words of that kind to set beside
+  them).
+- Three candidates that leave a Meroitic word untranslated ("great womnise", "ate of Primis", "great paqar") are
+  taken out: they are not meanings, and they would show the hidden word's spelling. A candidate whose content
+  words an earlier candidate of the same item already has ("his brother" after "brother") is dropped.
+- A reading of a neighbouring word that spells out a hidden word of the same pack is shown as withheld, and what
+  stands in round brackets in a neighbour's reading is cut (such remarks name spellings and guesses).
+- Each accepted word is one in three "meaning not offered", drawn by the fixed seed within its kind.
+
 What the test cannot show: the readers are language models that may know published readings of Meroitic texts;
 hiding the spellings and the text numbers lowers that risk and does not remove it. The accepted words are on
 average commoner and stand in more fixed phrases than the open ones, so their score is an upper bound for what
