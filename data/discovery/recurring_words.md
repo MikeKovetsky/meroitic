@@ -1,7 +1,7 @@
 # The recurring open words
 
-Status on 2026-11-13: in work. Sections 1 to 5 are written; the place pass of section 5 is running; section 6
-(the test of the words that stay open) is written before that test runs.
+Status on 2026-11-13: in work. Sections 1 to 6 are written; the place pass of section 5 is counted in the log; the test of section 6 is
+running.
 
 ## 1. What was asked
 
@@ -90,6 +90,57 @@ The bar, set on 2026-11-13 before any checker answered:
 What the pass cannot show: the checkers see five words on each side, not the stone. A "piece" verdict says that
 two readers, from the same pack, name the same whole word; it does not replace the edition.
 
-## 6. The test of the words that stay open
+## 6. The test of the words that stay open (bars set before any reader answers)
 
-To be written before it runs.
+Earlier work in this project found that the words around an open word give its kind (a title, a verb, a name) and
+seldom its meaning, and no reading of our own has held. So this test does not ask readers to invent meanings. It
+asks a narrower question that can be scored: **can the contexts of a word tell the meaning a scholar has proposed
+for it from other meanings of the same kind?** It is measured first on words whose meaning is accepted.
+
+**The items.** Every item with three or more places that section 5's pass calls "open".
+
+**Step 1, the candidates.** Two readers, each on its own, list for each item the meanings on record: a word or a
+short phrase a source in the statements gives for the item in the use of its open places (not a kind such as "a
+title"), three at most; and whether the sources accept the item as a proper name (of a place, a god, a person).
+Rules, set beforehand: a candidate is kept only when both readers list it (their wordings share a content word);
+an item counts as "a name by the sources" only when both say so with the stance "accepts" or "probable". An item
+with no candidate kept does not enter step 2.
+
+**Step 2, the choice, blind.** Each word is shown as a code. Its spelling, the spellings of the words around it and
+the number of the text are not shown: a place is six readings on each side, as the map has them (an accepted
+meaning, a name, a number; an unsure reading marked "(?)"; a word without a reading as `[?]`), with the endings the
+map cuts off the word. Twelve places a word at most, drawn by a fixed seed. Under each word stand four meanings of
+the same kind and "none of these". Five readers answer each pack, each on its own, with the meanings in an order of
+its own; a reader sees one pack only, and the words of a pack are not shown as readings anywhere in that pack.
+
+Three sorts of word are mixed, and a reader cannot tell which is which:
+
+- **open words**: the options are the candidates kept in step 1, filled up to four with accepted meanings of other
+  words of the same kind;
+- **words with an accepted meaning, the meaning offered** (the lexicon of 2003 calls it established or probable
+  and the map reads it): the options are the true meaning and three others of the same kind;
+- **words with an accepted meaning, the meaning not offered**: four other meanings of the same kind. The right
+  answer is "none of these".
+
+The readers' **choice** for a word is the option that four or five of the five pick; otherwise there is no choice.
+
+**The bars**, set on 2026-11-13 before any reader answered:
+
+1. Among the accepted words with the meaning offered for which the readers make a choice other than "none", the
+   choice is the true meaning for at least 80%, and there are at least 8 such words.
+2. Among the accepted words with the meaning not offered, the readers choose a meaning (a wrong one) for at most
+   10%.
+3. Only if both hold: a candidate of an open word that is the readers' choice is called **favoured by the
+   contexts**. The page gives beside it the share of accepted words whose true meaning was the choice, so that
+   the number of true proposals the test would miss is plain.
+4. Each favoured candidate then goes to two checkers who see everything (the spelling, every place, the
+   statements) and look for a place or a statement that contradicts it. If both name the same contradiction the
+   label is withdrawn.
+5. Nothing from this test enters the map as an accepted meaning. A favoured candidate is "a proposal of its
+   source, favoured by the contexts", no more.
+6. A reader's file counts only for the words of its own pack.
+
+What the test cannot show: the readers are language models that may know published readings of Meroitic texts;
+hiding the spellings and the text numbers lowers that risk and does not remove it. The accepted words are on
+average commoner and stand in more fixed phrases than the open ones, so their score is an upper bound for what
+contexts can do on the open words.
