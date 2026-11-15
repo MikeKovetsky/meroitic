@@ -727,3 +727,65 @@ the gain is the handbook and the order of a sentence": the writer had the rules 
 next step in NEXT_STEPS weighed cost against the rule set beforehand, which builds the pages with the panel; and
 the compiler's and the checkers' instructions were not in the repository (`runs/prompts/`).
 
+## Day six, afternoon (2026-11-13): the unread spellings that recur
+
+Asked that day: "our goal is to decipher the meaning of all words", then "start working on the 154 recurring
+words". Of the 7,331 running words of `corpus_v6` that need a meaning the map reads 3,676 (50.1%). 154 spellings
+without an accepted meaning stand in three texts or more; they cover 1,108 running words and fall into 121 items
+by the lexicon entry they are filed under. Page: [`data/discovery/recurring_words.md`](data/discovery/recurring_words.md);
+script `src/recurring.py`. Every bar below was set before the agents it binds were started: committed for the
+place pass and the blind test, written in the working script for class A (the page's section 9 gives the commits
+and the times).
+
+**What the sources say.** Ten readers collected 792 statements about the items from the sources in hand, each
+with a quote; a script found all 792 quotes in the files named. For 29 items the first reader found a statement of
+Rilly's work of 2016 or 2021 that accepts a meaning or calls it probable; two more readers each read those
+statements in their place, and 26 items pass (both find the meaning stated firmly in the same source). The map
+does not have these meanings because it rests on the lexicon of 2003.
+
+**Every place, twice.** A meaning stated for a word is not a meaning for every place its spelling stands, so two
+checkers decided each of the 1,108 places on their own (kappa 0.91, bar 0.6): 273 hold the word the later source
+speaks of, 192 are pieces of a longer word or name that the edition's word division cut, 425 are words of their
+own that stay open, 139 are unclear and 79 not agreed. A script, apart from the checkers, finds bread among the
+three words before all 87 stated places of the verb "eat".
+
+**The count.** Laid over the map, which is not changed, the results move the share of running words with a
+meaning from 50.1% to 53.9% (3,916 read, 306 fewer open). Every one of these meanings is Rilly's or the map's own
+reading of a rejoined word; none is a reading of this project.
+
+**The open words.** 65 items keep three or more open places. For 48 both readers list a meaning the sources
+propose, and seven items are names by the sources. A blind test then asked whether the contexts can tell a
+proposed meaning from other meanings of the same kind: 71 words shown only as a code among the map's readings of
+the words around them, four meanings under each, five readers a word. On the 27 accepted words that had their
+true meaning among the four, the readers chose a meaning for 17 and were right for 13 (76.5%; the bar was 80%);
+on the 11 whose true meaning was not offered they still chose one for 2 (18.2%; the bar was 10%). Both bars are
+missed, so no proposal for an open word is labelled, and the check of labelled proposals did not run. The readers
+confused meanings of one kind: "good" with "great", "agent" with "priest", "sister" with "direct descendant".
+
+**Limits.** All readers and checkers are one model, so their agreement shows that a reading can be repeated, not
+that it is right. The literature pass had one reader a batch, so a statement it missed is missing from every later
+step. The stated meanings are one scholar's. The 2,203 open spellings that stand in one or two texts were not in
+this work.
+
+**Cost.** 101 fresh agents, 9,846,666 subagent tokens: the literature pass 2,411,497, the two readers of the
+stated meanings 613,355, the place checkers 4,146,199, the readers of the proposals 780,535, the blind readers
+1,895,080.
+
+**The review** (full tier) cost 497,794 subagent tokens and 36 minutes, from its task notification. It recounted
+every figure from the local files with a script of its own, rebuilt every pack and result byte for byte in a
+copy, and set the times of the bars against the times the agents were started. It ended clean after 13 fixes.
+The main ones: the pages said every bar was committed before its agents answered, but the bar of the stated
+meanings stood only in a local script, written five seconds before its readers were started; the literature pass
+has one reader a batch, not two; the 139 unclear places were called damaged, and about 45 of them have no lost
+sign; README's headline said more than the blind test showed; the script's check of the formula took water for
+bread (the counts did not change); and the packs can no longer be written again once they are answered. After
+the review, nine meanings that followed a source's wording for four words in a row were put in our own words in
+the public files; the packs and the answers keep the readers' wording.
+
+**A second review**, of the one commit made after the first (the nine meanings put in our own words), cost
+373,318 subagent tokens and 24 minutes, from its task notification, and ended clean after six fixes. The table of
+rewordings held the readers' wordings as its keys, so they still stood in a tracked file; the check for copied
+wording read only the lexicon entries the map uses, and missed words in which the text layer of Rilly 2021 has
+lost a ligature; one of the new wordings itself followed another entry for four words. It also noted that the
+copied wordings still stand in the branch's earlier commits, which a later commit cannot take out.
+

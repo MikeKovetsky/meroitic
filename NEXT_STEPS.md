@@ -7,7 +7,7 @@ The goal from here: an openly licensed and larger Meroitic corpus, an honest met
 scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
 looks like.
 
-## Where things stand (written 2026-11-10; points 7 to 17 added up to 2026-11-13)
+## Where things stand (written 2026-11-10; points 7 to 18 added up to 2026-11-13)
 
 Done since this plan was written:
 
@@ -97,6 +97,16 @@ Done since this plan was written:
     decoy units accepted by each judge). The panel's lead of 16.4 points is over the bar of 5 set beforehand.
     The panel is not shown to beat one translator. Not built yet: the pages for the 304 open inscriptions, and
     the scoring against Griffith's own translations.
+18. **The unread spellings that recur** (2026-11-13,
+    [`data/discovery/recurring_words.md`](data/discovery/recurring_words.md)). The goal named that day is the
+    meaning of all words: the map reads 50.1% of the running words that need one. Of the 1,108 running words
+    under the 154 open spellings that stand in three texts or more, 273 take a meaning Rilly states in 2016 or
+    2021, 192 are pieces of a longer word or name, 425 stay open and 218 are unclear or not agreed (two
+    checkers a place, kappa 0.91). Laid over the map that gives 53.9%; the map is not changed yet. A blind test
+    of the proposals on record for the open words missed both bars (right for 13 of 17 accepted words where
+    the readers chose, 76.5% against 80%; a wrong meaning chosen for 2 of 11 where the true one was not offered,
+    18.2% against 10%), so no proposal is labelled. Open: applying the overlay to the map; the same pass on the
+    2,203 open spellings that stand in one or two texts.
 
 Next, in this order (the small steps; the four big pieces are in section F):
 

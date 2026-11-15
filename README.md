@@ -172,6 +172,23 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     translator, and the writer, who sees no lexicon entry and no parallel, gets 10.8 of the 16.4 points: most of
     the gain needs neither. Not built yet: the pages for the 304 open inscriptions, and the scoring against
     Griffith's own translations ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
+17. **Of the unread spellings that recur, a quarter of the places take a meaning a scholar stated after 2003 and
+    a sixth are pieces of other words; for the words that stay open, a blind test could not tell from the
+    contexts, well enough to label any, the meaning a scholar proposed from others of its kind.** 154 spellings
+    without an accepted meaning stand in three texts or more and cover 1,108 running words of the clean corpus.
+    Readers collected what the sources in hand say of them (792 statements, every quote found in its file by
+    script): for 26 items Rilly's later work (2016, 2021) states a meaning that the map, built on his lexicon of
+    2003, does not have. Two checkers then decided each of the 1,108 places on their own (kappa 0.91): 273 hold
+    the word the later source speaks of (the benediction verbs "eat" and "present, serve", "prince", the emphatic
+    particle after the copula), 192 are pieces of a longer word or name that the edition's word division cut, 425
+    are words of their own that stay open, and 218 are unclear or not agreed. Laid over the map, that moves the
+    running words with a meaning from 3,676 to 3,916, from 50.1% to 53.9% of those that need one; the map itself
+    is not changed yet. For the open words a blind test asked five readers to pick, from the contexts
+    alone, the meaning a scholar proposed among others of the same kind. On words whose meaning is accepted the
+    readers' choice was right for 13 of 17 (76.5%, the bar was 80%), and they chose a wrong meaning for 2 of 11
+    words whose true meaning was not offered (18.2%, the bar was 10%): so no proposal is labelled. None of these
+    meanings is a reading of this project
+    ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md)).
 
 ## The question
 
@@ -506,6 +523,24 @@ round's readings again (`r1b`, with the rule on kinship). `count` gives each rea
 its lead over the glosses unit by unit, the judges' agreement, the decoys and the reading carried on by the rule
 set beforehand, none when a bar of the judging is missed ([`data/discovery/f4_rounds.md`](data/discovery/f4_rounds.md)).
 
+### 24. The unread spellings that recur (`src/recurring.py`)
+
+`items` groups the open spellings that stand in three texts or more by the lexicon entry they are filed under,
+each with every place it stands. `batches` writes one dossier a batch for the readers who collect what the
+sources say (`runs/prompts/RECURRING_literature.md`); `quotes` keeps a statement only when its quote stands in
+the file named, and sorts the items into three classes by rule. `verify-packs` and `verify` give the items for
+which a later source states a meaning to two readers, and an item passes only when both find it stated firmly
+in the same source. `place-packs` and `places` give every place to two checkers (stated, a piece of another
+word, open, unclear): a place counts only where both agree, and nothing is taken if their kappa is under 0.6.
+`cand-packs` and `cands` list the meanings on record for the items that stay open, kept when two readers list
+them. `choice-packs` builds the blind test: each word a code, its places as the map's readings of the words
+around it with no spelling and no text number, four meanings of one kind, and among the open words accepted
+words with and without their true meaning offered; `choice` counts the choices of five readers against two
+bars. `recount` lays the results over the map without changing it. Every bar was set before the agents it binds
+were started: committed for the place pass and the blind test, written in the working script for class A; a
+command that writes packs refuses once an agent of its step has answered. The page gives the commits and the
+times ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md), section 9).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -520,7 +555,7 @@ python3 -I tests/test_karanog.py && python3 -I tests/test_newsletter.py && pytho
 python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python3 -I tests/test_variants.py
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python3 -I tests/test_akinidad.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
-python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py
+python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -529,7 +564,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Thirteen things need files that are kept locally (Data, above), so they don't run from a clone:
+Fourteen things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -559,6 +594,9 @@ Thirteen things need files that are kept locally (Data, above), so they don't ru
 - `python3 -I src/f4r.py count r1` (and `split`, `handbook`, `packs`, `editors`, `judges`, `public`, `show`; the
   rounds `r1`, `r1b` and `held`) reads what `src/f4.py` reads, the handbook and its checkers' verdicts, and the
   splitters', writers', translators', editors' and judges' answers.
+- `python3 -I src/recurring.py public` (and `items`, `batches`, `quotes`, `verify-packs`, `verify`, `place-packs`,
+  `places`, `cand-packs`, `cands`, `choice-packs`, `choice`, `recount`) reads `corpus_v6` and its gloss file,
+  Rilly's lexicon, the text layers of the sources and the readers' and checkers' answers.
 
 ## Layout
 
@@ -566,8 +604,8 @@ Thirteen things need files that are kept locally (Data, above), so they don't ru
   the translation coverage map (`coverage.py`), the search for Egyptian sources (`egyptian.py`), the search
   for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
   the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
-  (`demotic.py`), the second scholar for every meaning (`lexicon.py`) and whole texts translated and scored
-  (`f4.py`, the pilot, and `f4r.py`, the rounds).
+  (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
+  (`f4.py`, the pilot, and `f4r.py`, the rounds) and the unread spellings that recur (`recurring.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

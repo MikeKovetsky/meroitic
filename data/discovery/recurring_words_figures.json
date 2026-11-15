@@ -1,0 +1,2385 @@
+{
+ "map": {
+  "inscriptions": 548,
+  "running_words": 10290,
+  "open_spellings": 2357,
+  "in_three_texts_or_more": 154,
+  "in_one_or_two_texts": 2203
+ },
+ "spellings": 154,
+ "items": 121,
+ "running_words": 1108,
+ "literature": {
+  "statements": 792,
+  "quote_found": 792,
+  "page_corrected": 0,
+  "items": 121,
+  "items_with_a_checked_statement": 120,
+  "batches": 10,
+  "sources": {
+   "Rilly 2003": 258,
+   "Project": 142,
+   "FHN III": 73,
+   "Rilly 2021": 68,
+   "Griffith 1911": 60,
+   "Millet 2005": 56,
+   "FHN II": 39,
+   "Rilly 2016": 21,
+   "Griffith MI II": 14,
+   "FHN IV": 12,
+   "Lipinski 2011": 10,
+   "Griffith MS I to IV": 7,
+   "Griffith MS IV": 7,
+   "Meroe 1911": 6,
+   "Griffith MS I": 6,
+   "Griffith MI I": 6,
+   "Griffith MS III": 3,
+   "Griffith MS II": 2,
+   "Griffith MS V": 1,
+   "Griffith MS VI": 1
+  }
+ },
+ "classes": {
+  "A": {
+   "items": 29,
+   "spellings": 53,
+   "running_words": 531
+  },
+  "B": {
+   "items": 52,
+   "spellings": 58,
+   "running_words": 370
+  },
+  "C": {
+   "items": 40,
+   "spellings": 43,
+   "running_words": 207
+  }
+ },
+ "class_a": {
+  "items": 29,
+  "verdicts": {
+   "stated": 26,
+   "not stated firmly": 3
+  },
+  "not_stated": [
+   "ek",
+   "sete",
+   "yini"
+  ],
+  "running_words": 520,
+  "covered": {
+   "some": 164,
+   "all": 251,
+   "none": 105
+  },
+  "stated": [
+   {
+    "item": "-wi (5)",
+    "uses": 103,
+    "meaning": "particle of emphasis, optional, that follows the copula -o of the singular",
+    "source": "Rilly 2021",
+    "page": 8,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 103
+    },
+    "places_stated": 49
+   },
+   {
+    "item": "ḫr",
+    "uses": 91,
+    "meaning": "verb stem 'eat'; with the causative prefix, 'make eat'",
+    "source": "Rilly 2021",
+    "page": 12,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 91
+    },
+    "places_stated": 87
+   },
+   {
+    "item": "ẖol",
+    "uses": 77,
+    "meaning": "verb 'present, offer, serve' (a meal) in benedictions C and D",
+    "source": "Rilly 2021",
+    "page": 42,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 77
+    },
+    "places_stated": 64
+   },
+   {
+    "item": "ye- (2)",
+    "uses": 70,
+    "meaning": "eroded noun yet- 'person' in filiation terms, not a verbal prefix",
+    "source": "Rilly 2021",
+    "page": 36,
+    "stances": [
+     "probable",
+     "probable"
+    ],
+    "covered": {
+     "none": 70
+    },
+    "places_stated": 1
+   },
+   {
+    "item": "pqr",
+    "uses": 27,
+    "meaning": "prince, a title",
+    "source": "Rilly 2016",
+    "page": 11,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 27
+    },
+    "places_stated": 25
+   },
+   {
+    "item": "ps-",
+    "uses": 19,
+    "meaning": "prefix that makes a benediction verb causative ('make' drink, eat)",
+    "source": "Rilly 2021",
+    "page": 43,
+    "stances": [
+     "accepts",
+     "probable"
+    ],
+    "covered": {
+     "all": 7,
+     "none": 6,
+     "some": 6
+    },
+    "places_stated": 3
+   },
+   {
+    "item": "-kete",
+    "uses": 16,
+    "meaning": "optative ending, 2nd person plural (-ke plural + -te)",
+    "source": "Rilly 2021",
+    "page": 43,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 16
+    },
+    "places_stated": 7
+   },
+   {
+    "item": "-w (1)",
+    "uses": 14,
+    "meaning": "objective (accusative/dative) case ending after noun phrases, variant of -xe",
+    "source": "Rilly 2021",
+    "page": 27,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 14
+    },
+    "places_stated": 1
+   },
+   {
+    "item": "wte",
+    "uses": 12,
+    "meaning": "life, lifetime",
+    "source": "Rilly 2021",
+    "page": 57,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 12
+    },
+    "places_stated": 5
+   },
+   {
+    "item": "l (2)",
+    "uses": 10,
+    "meaning": "to give",
+    "source": "Rilly 2021",
+    "page": 13,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 4,
+     "none": 6
+    },
+    "places_stated": 4
+   },
+   {
+    "item": "wse",
+    "uses": 10,
+    "meaning": "'his/her', a possessive (singular, third person), another form of qo-se",
+    "source": "Rilly 2021",
+    "page": 41,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 10
+    },
+    "places_stated": 2
+   },
+   {
+    "item": "mlowi",
+    "uses": 9,
+    "meaning": "health",
+    "source": "Rilly 2021",
+    "page": 56,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 9
+    },
+    "places_stated": 3
+   },
+   {
+    "item": "pl (2)",
+    "uses": 8,
+    "meaning": "verb 'to give, offer' in funerary benediction D",
+    "source": "Rilly 2021",
+    "page": 82,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "none": 8
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "-ketese",
+    "uses": 6,
+    "meaning": "plural optative ending -kete plus an optional emphatic particle -se",
+    "source": "Rilly 2021",
+    "page": 43,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 6
+    },
+    "places_stated": 5
+   },
+   {
+    "item": "yet (2)",
+    "uses": 6,
+    "meaning": "noun 'person', first element of yetmde 'nephew/niece'",
+    "source": "Rilly 2021",
+    "page": 36,
+    "stances": [
+     "probable",
+     "probable"
+    ],
+    "covered": {
+     "none": 6
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "-i (2)",
+    "uses": 5,
+    "meaning": "vocative suffix -i ('O Isis!')",
+    "source": "Rilly 2016",
+    "page": 10,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 5
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "wi (1)",
+    "uses": 5,
+    "meaning": "brother (wide, which becomes wi- when the article follows)",
+    "source": "Rilly 2016",
+    "page": 11,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "none": 5
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "-lowi",
+    "uses": 4,
+    "meaning": "article -l, singular copula -o and emphatic -wi: '(he/she) was'",
+    "source": "Rilly 2016",
+    "page": 10,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 4
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "-se (1)",
+    "uses": 4,
+    "meaning": "genitive suffix, here with article and copula: 'it is of X'",
+    "source": "Rilly 2021",
+    "page": 8,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 4
+    },
+    "places_stated": 4
+   },
+   {
+    "item": "mde",
+    "uses": 4,
+    "meaning": "the mother's family, in a matrilineal society",
+    "source": "Rilly 2021",
+    "page": 36,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 4
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "wide",
+    "uses": 4,
+    "meaning": "brother",
+    "source": "Rilly 2021",
+    "page": 52,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 4
+    },
+    "places_stated": 3
+   },
+   {
+    "item": "yiroẖe",
+    "uses": 4,
+    "meaning": "take under one's protection; also take control",
+    "source": "Rilly 2021",
+    "page": 57,
+    "stances": [
+     "probable",
+     "accepts"
+    ],
+    "covered": {
+     "none": 4
+    },
+    "places_stated": 0
+   },
+   {
+    "item": "Stqo",
+    "uses": 3,
+    "meaning": "these feet: st 'foot/feet' with demonstrative qo",
+    "source": "Rilly 2021",
+    "page": 9,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 3
+    },
+    "places_stated": 3
+   },
+   {
+    "item": "ato",
+    "uses": 3,
+    "meaning": "water",
+    "source": "Rilly 2016",
+    "page": 11,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 3
+    },
+    "places_stated": 3
+   },
+   {
+    "item": "bqo",
+    "uses": 3,
+    "meaning": "take control (of)",
+    "source": "Rilly 2021",
+    "page": 38,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "some": 3
+    },
+    "places_stated": 1
+   },
+   {
+    "item": "tḫ (1)",
+    "uses": 3,
+    "meaning": "present (a meal); with causative prefix, have someone presented",
+    "source": "Rilly 2021",
+    "page": 42,
+    "stances": [
+     "accepts",
+     "accepts"
+    ],
+    "covered": {
+     "all": 3
+    },
+    "places_stated": 3
+   }
+  ]
+ },
+ "places": {
+  "places": 1108,
+  "answered by both": 1108,
+  "kappa": 0.9088,
+  "bar": 0.6,
+  "taken": true,
+  "verdicts": {
+   "stated": 273,
+   "not agreed": 79,
+   "unclear": 139,
+   "open": 425,
+   "piece": 192
+  },
+  "by class": {
+   "A": {
+    "stated": 273,
+    "not agreed": 48,
+    "unclear": 49,
+    "open": 106,
+    "piece": 55
+   },
+   "B": {
+    "unclear": 88,
+    "piece": 137,
+    "not agreed": 28,
+    "open": 117
+   },
+   "C": {
+    "open": 202,
+    "not agreed": 3,
+    "unclear": 2
+   }
+  },
+  "formula_check": {
+   "ḫr": {
+    "stated": 87,
+    "what": "a form of at, bread (not ato, water)",
+    "with": 87
+   },
+   "ẖol": {
+    "stated": 64,
+    "what": "a form of ḫmlol, a good meal",
+    "with": 54
+   }
+  }
+ },
+ "open_items": 65,
+ "open_places": 389,
+ "candidates": {
+  "items": 65,
+  "with_a_candidate": 48,
+  "none": 17,
+  "names": {
+   "Akine": "place",
+   "Aritene": "god",
+   "Ms": "god",
+   "Simlo": "place",
+   "brtoye": "person",
+   "doke": "person",
+   "yeseboẖe": "person"
+  },
+  "left_out": {
+   "first candidate a function word": 8,
+   "a name by the sources": 4,
+   "first candidate a numeral": 2,
+   "no candidate left after the removals": 1
+  }
+ },
+ "choice": {
+  "words": 71,
+  "complete": true,
+  "offered": 27,
+  "offered_chosen": 17,
+  "offered_right": 13,
+  "right_when_chosen": 0.7647,
+  "found": 0.4815,
+  "offered_none": 0,
+  "offered_no_choice": 10,
+  "absent": 11,
+  "absent_wrong": 2,
+  "wrong_when_absent": 0.1818,
+  "absent_none": 6,
+  "bar1": false,
+  "bar2": false,
+  "labels_given": false,
+  "open_words": 33,
+  "open": {
+   "chosen, no label": 13,
+   "no choice": 13,
+   "none of the four": 5,
+   "a filler chosen": 2
+  },
+  "bars": {
+   "right_when_chosen": 0.8,
+   "chosen_at_least": 8,
+   "wrong_when_absent": 0.1
+  },
+  "readers": 5,
+  "needed": 4,
+  "packs": 5,
+  "all_agree": {
+   "offered_chosen": 15,
+   "offered_right": 12,
+   "absent_wrong": 0,
+   "open_candidates": [
+    "mlowi",
+    "penn",
+    "pqrtr",
+    "qomlise",
+    "wse",
+    "yed",
+    "ẖol"
+   ]
+  },
+  "rows": [
+   {
+    "sort": "offered",
+    "entry": "ẖe (1)",
+    "kind": "verb",
+    "true": "to drink",
+    "candidates": [],
+    "options": [
+     "to drink",
+     "to give",
+     "to love, to revere",
+     "to kill"
+    ],
+    "picks": {
+     "to drink": 5
+    },
+    "choice": "to drink"
+   },
+   {
+    "sort": "absent",
+    "entry": "ked",
+    "kind": "verb",
+    "true": "to kill",
+    "candidates": [],
+    "options": [
+     "to love, to revere",
+     "to plunder",
+     "to order, to command",
+     "to give"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "offered",
+    "entry": "sem",
+    "kind": "noun",
+    "true": "wife",
+    "candidates": [],
+    "options": [
+     "wife",
+     "strength",
+     "land, province",
+     "west"
+    ],
+    "picks": {
+     "none": 3,
+     "wife": 2
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "penn",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "year",
+     "a star's rising"
+    ],
+    "options": [
+     "year",
+     "a star's rising",
+     "bull",
+     "a Nubian"
+    ],
+    "picks": {
+     "year": 5
+    },
+    "choice": "year",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "year": [
+      "Millet 2005",
+      "proposes"
+     ],
+     "a star's rising": [
+      "Griffith MS I",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "wse",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "of the country"
+    ],
+    "options": [
+     "of the country",
+     "god",
+     "a Nubian",
+     "bull"
+    ],
+    "picks": {
+     "of the country": 5
+    },
+    "choice": "of the country",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "of the country": [
+      "Millet",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "mde",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "mother's kin",
+     "direct descendant",
+     "mother's brother"
+    ],
+    "options": [
+     "mother's kin",
+     "direct descendant",
+     "mother's brother",
+     "land, province"
+    ],
+    "picks": {
+     "mother's kin": 3,
+     "direct descendant": 1,
+     "land, province": 1
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "mother's kin": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "direct descendant": [
+      "Rilly 2003",
+      "probable"
+     ],
+     "mother's brother": [
+      "Hintze",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "lẖ",
+    "kind": "adjective",
+    "true": "great, elder",
+    "candidates": [],
+    "options": [
+     "great, elder",
+     "abundant",
+     "small, young",
+     "good"
+    ],
+    "picks": {
+     "none": 3,
+     "great, elder": 2
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "ẖol",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "to present",
+     "to serve",
+     "to grant"
+    ],
+    "options": [
+     "to present",
+     "to serve",
+     "to grant",
+     "to give"
+    ],
+    "picks": {
+     "to present": 5
+    },
+    "choice": "to present",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "to present": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "to serve": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "to grant": [
+      "Rilly 2003",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "mlomrse",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "notable",
+     "good of repute",
+     "citizen"
+    ],
+    "options": [
+     "notable",
+     "good of repute",
+     "citizen",
+     "envoy"
+    ],
+    "picks": {
+     "notable": 4,
+     "citizen": 1
+    },
+    "choice": "notable",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "notable": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "good of repute": [
+      "Millet 2005",
+      "proposes"
+     ],
+     "citizen": [
+      "Hofmann 1978b",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "ntki",
+    "kind": "noun",
+    "true": "strength",
+    "candidates": [],
+    "options": [
+     "strength",
+     "woman",
+     "child",
+     "cow"
+    ],
+    "picks": {
+     "woman": 3,
+     "child": 1,
+     "none": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "womnitẖ",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "Amun's first priest"
+    ],
+    "options": [
+     "Amun's first priest",
+     "temple administrator",
+     "viceroy",
+     "scribe"
+    ],
+    "picks": {
+     "viceroy": 2,
+     "none": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "Amun's first priest": [
+      "Rilly 2003",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "absent",
+    "entry": "mḫe",
+    "kind": "adjective",
+    "true": "abundant",
+    "candidates": [],
+    "options": [
+     "small, young",
+     "good",
+     "great, elder",
+     "child"
+    ],
+    "picks": {
+     "good": 2,
+     "none": 2,
+     "great, elder": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "yeso",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "made by",
+     "written by"
+    ],
+    "options": [
+     "made by",
+     "written by",
+     "to kill",
+     "to drink"
+    ],
+    "picks": {
+     "none": 1,
+     "written by": 4
+    },
+    "choice": "written by",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "made by": [
+      "Griffith (in Rilly 2003)",
+      "proposes"
+     ],
+     "written by": [
+      "Priese (in Rilly 2003)",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "mr",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "village",
+     "eternity"
+    ],
+    "options": [
+     "village",
+     "eternity",
+     "wife",
+     "water"
+    ],
+    "picks": {
+     "eternity": 2,
+     "none": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "village": [
+      "Priese",
+      "proposes"
+     ],
+     "eternity": [
+      "Haycock",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "wte",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "life",
+     "protection",
+     "strength"
+    ],
+    "options": [
+     "life",
+     "protection",
+     "strength",
+     "a good meal"
+    ],
+    "picks": {
+     "strength": 1,
+     "none": 3,
+     "life": 1
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "life": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "protection": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "strength": [
+      "Hofmann 1981a",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "wetneyineqeli",
+    "kind": "adjective",
+    "true": null,
+    "candidates": [
+     "powerful",
+     "beneficent"
+    ],
+    "options": [
+     "powerful",
+     "beneficent",
+     "good",
+     "great, elder"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none",
+    "verdict": "none of the four",
+    "given_by": {
+     "powerful": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "beneficent": [
+      "Macadam",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "yeto",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "water"
+    ],
+    "options": [
+     "water",
+     "direct descendant",
+     "adoration, praise",
+     "land, province"
+    ],
+    "picks": {
+     "none": 4,
+     "water": 1
+    },
+    "choice": "none",
+    "verdict": "none of the four",
+    "given_by": {
+     "water": [
+      "Rilly 2003",
+      "doubts"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "ḫrpḫne",
+    "kind": "title",
+    "true": "governor",
+    "candidates": [],
+    "options": [
+     "governor",
+     "temple administrator",
+     "envoy",
+     "scribe"
+    ],
+    "picks": {
+     "governor": 5
+    },
+    "choice": "governor"
+   },
+   {
+    "sort": "offered",
+    "entry": "tkk",
+    "kind": "verb",
+    "true": "to plunder",
+    "candidates": [],
+    "options": [
+     "to plunder",
+     "to order, to command",
+     "to kill",
+     "to give"
+    ],
+    "picks": {
+     "to plunder": 5
+    },
+    "choice": "to plunder"
+   },
+   {
+    "sort": "open",
+    "entry": "wi (1)",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "brother"
+    ],
+    "options": [
+     "brother",
+     "wife",
+     "nephew, niece",
+     "life"
+    ],
+    "picks": {
+     "none": 2,
+     "brother": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "brother": [
+      "Rilly 2016",
+      "accepts"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "dime",
+    "kind": "noun",
+    "true": "cow",
+    "candidates": [],
+    "options": [
+     "cow",
+     "god",
+     "ruler",
+     "west"
+    ],
+    "picks": {
+     "cow": 5
+    },
+    "choice": "cow"
+   },
+   {
+    "sort": "offered",
+    "entry": "mlo",
+    "kind": "adjective",
+    "true": "good",
+    "candidates": [],
+    "options": [
+     "good",
+     "abundant",
+     "great, elder",
+     "small, young"
+    ],
+    "picks": {
+     "great, elder": 5
+    },
+    "choice": "great, elder"
+   },
+   {
+    "sort": "open",
+    "entry": "yed",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "silver"
+    ],
+    "options": [
+     "silver",
+     "water",
+     "woman",
+     "god"
+    ],
+    "picks": {
+     "silver": 5
+    },
+    "choice": "silver",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "silver": [
+      "Rilly 2003",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "tiso",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "to make"
+    ],
+    "options": [
+     "to make",
+     "to order, to command",
+     "to love, to revere",
+     "to drink"
+    ],
+    "picks": {
+     "to love, to revere": 5
+    },
+    "choice": "to love, to revere",
+    "verdict": "a filler chosen",
+    "given_by": {
+     "to make": [
+      "Haycock",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "kdi",
+    "kind": "noun",
+    "true": "woman",
+    "candidates": [],
+    "options": [
+     "woman",
+     "a Nubian",
+     "land, province",
+     "west"
+    ],
+    "picks": {
+     "a Nubian": 3,
+     "woman": 1,
+     "land, province": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "wetrri",
+    "kind": "adjective",
+    "true": null,
+    "candidates": [
+     "life-giver"
+    ],
+    "options": [
+     "life-giver",
+     "good",
+     "abundant",
+     "great, elder"
+    ],
+    "picks": {
+     "none": 4,
+     "life-giver": 1
+    },
+    "choice": "none",
+    "verdict": "none of the four",
+    "given_by": {
+     "life-giver": [
+      "Priese",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "absent",
+    "entry": "ato",
+    "kind": "noun",
+    "true": "water",
+    "candidates": [],
+    "options": [
+     "child",
+     "adoration, praise",
+     "ruler",
+     "woman"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "offered",
+    "entry": "tewiseti",
+    "kind": "noun",
+    "true": "adoration, praise",
+    "candidates": [],
+    "options": [
+     "adoration, praise",
+     "ruler",
+     "sister",
+     "strength"
+    ],
+    "picks": {
+     "adoration, praise": 5
+    },
+    "choice": "adoration, praise"
+   },
+   {
+    "sort": "offered",
+    "entry": "tk (2)",
+    "kind": "verb",
+    "true": "to love, to revere",
+    "candidates": [],
+    "options": [
+     "to love, to revere",
+     "to drink",
+     "to kill",
+     "to give"
+    ],
+    "picks": {
+     "to love, to revere": 5
+    },
+    "choice": "to love, to revere"
+   },
+   {
+    "sort": "offered",
+    "entry": "qore",
+    "kind": "noun",
+    "true": "ruler",
+    "candidates": [],
+    "options": [
+     "ruler",
+     "man",
+     "water",
+     "life"
+    ],
+    "picks": {
+     "ruler": 5
+    },
+    "choice": "ruler"
+   },
+   {
+    "sort": "offered",
+    "entry": "kdise",
+    "kind": "noun",
+    "true": "sister",
+    "candidates": [],
+    "options": [
+     "sister",
+     "direct descendant",
+     "woman",
+     "west"
+    ],
+    "picks": {
+     "direct descendant": 4,
+     "none": 1
+    },
+    "choice": "direct descendant"
+   },
+   {
+    "sort": "offered",
+    "entry": "peseto",
+    "kind": "title",
+    "true": "viceroy",
+    "candidates": [],
+    "options": [
+     "viceroy",
+     "envoy",
+     "governor",
+     "general"
+    ],
+    "picks": {
+     "viceroy": 2,
+     "none": 2,
+     "general": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "absent",
+    "entry": "ssor",
+    "kind": "title",
+    "true": "scribe",
+    "candidates": [],
+    "options": [
+     "general",
+     "viceroy",
+     "governor",
+     "envoy"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "offered",
+    "entry": "perite",
+    "kind": "title",
+    "true": "agent",
+    "candidates": [],
+    "options": [
+     "agent",
+     "general",
+     "scribe",
+     "priest"
+    ],
+    "picks": {
+     "priest": 5
+    },
+    "choice": "priest"
+   },
+   {
+    "sort": "offered",
+    "entry": "yetmde",
+    "kind": "noun",
+    "true": "nephew, niece",
+    "candidates": [],
+    "options": [
+     "nephew, niece",
+     "sister",
+     "child",
+     "adoration, praise"
+    ],
+    "picks": {
+     "nephew, niece": 5
+    },
+    "choice": "nephew, niece"
+   },
+   {
+    "sort": "open",
+    "entry": "attḫ",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "beneficial water offering"
+    ],
+    "options": [
+     "beneficial water offering",
+     "cow",
+     "god",
+     "man"
+    ],
+    "picks": {
+     "beneficial water offering": 4,
+     "none": 1
+    },
+    "choice": "beneficial water offering",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "beneficial water offering": [
+      "Abdalla",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "absent",
+    "entry": "ḫmlol",
+    "kind": "noun",
+    "true": "a good meal",
+    "candidates": [],
+    "options": [
+     "bull",
+     "woman",
+     "life",
+     "ruler"
+    ],
+    "picks": {
+     "life": 4,
+     "none": 1
+    },
+    "choice": "life"
+   },
+   {
+    "sort": "absent",
+    "entry": "pwrite (2)",
+    "kind": "noun",
+    "true": "life",
+    "candidates": [],
+    "options": [
+     "sacrifice",
+     "woman",
+     "water",
+     "direct descendant"
+    ],
+    "picks": {
+     "none": 4,
+     "water": 1
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "absent",
+    "entry": "abr",
+    "kind": "noun",
+    "true": "man",
+    "candidates": [],
+    "options": [
+     "god",
+     "nephew, niece",
+     "direct descendant",
+     "woman"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "open",
+    "entry": "ado",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "fortress"
+    ],
+    "options": [
+     "fortress",
+     "cow",
+     "direct descendant",
+     "ruler"
+    ],
+    "picks": {
+     "direct descendant": 4,
+     "none": 1
+    },
+    "choice": "direct descendant",
+    "verdict": "a filler chosen",
+    "given_by": {
+     "fortress": [
+      "Millet (in Rilly 2003)",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "nob",
+    "kind": "noun",
+    "true": "a Nubian",
+    "candidates": [],
+    "options": [
+     "a Nubian",
+     "strength",
+     "water",
+     "wife"
+    ],
+    "picks": {
+     "a Nubian": 5
+    },
+    "choice": "a Nubian"
+   },
+   {
+    "sort": "open",
+    "entry": "mlowi",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "health",
+     "beauty"
+    ],
+    "options": [
+     "health",
+     "beauty",
+     "bull",
+     "life"
+    ],
+    "picks": {
+     "health": 5
+    },
+    "choice": "health",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "health": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "beauty": [
+      "Rilly 2003",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "pl (2)",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "lord of",
+     "out of"
+    ],
+    "options": [
+     "lord of",
+     "out of",
+     "strength",
+     "nephew, niece"
+    ],
+    "picks": {
+     "none": 1,
+     "lord of": 4
+    },
+    "choice": "lord of",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "lord of": [
+      "Meroe 1911",
+      "proposes"
+     ],
+     "out of": [
+      "Zyhlarz (in Rilly 2003)",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "sḫi",
+    "kind": "adjective",
+    "true": "small, young",
+    "candidates": [],
+    "options": [
+     "small, young",
+     "abundant",
+     "good",
+     "great, elder"
+    ],
+    "picks": {
+     "none": 2,
+     "great, elder": 2,
+     "small, young": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "amero",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "temple bread administrator"
+    ],
+    "options": [
+     "temple bread administrator",
+     "scribe",
+     "agent",
+     "viceroy"
+    ],
+    "picks": {
+     "temple bread administrator": 4,
+     "agent": 1
+    },
+    "choice": "temple bread administrator",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "temple bread administrator": [
+      "Almagro",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "absent",
+    "entry": "ant",
+    "kind": "title",
+    "true": "priest",
+    "candidates": [],
+    "options": [
+     "temple administrator",
+     "envoy",
+     "agent",
+     "general"
+    ],
+    "picks": {
+     "none": 5
+    },
+    "choice": "none"
+   },
+   {
+    "sort": "open",
+    "entry": "aḫro",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "country"
+    ],
+    "options": [
+     "country",
+     "child",
+     "sister",
+     "land, province"
+    ],
+    "picks": {
+     "country": 2,
+     "none": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "country": [
+      "Millet",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "Aqedise",
+    "kind": "adjective",
+    "true": null,
+    "candidates": [
+     "shining",
+     "star",
+     "lord of eternity"
+    ],
+    "options": [
+     "shining",
+     "star",
+     "lord of eternity",
+     "great, elder"
+    ],
+    "picks": {
+     "none": 1,
+     "lord of eternity": 2,
+     "great, elder": 2
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "shining": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "star": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "lord of eternity": [
+      "Leclant",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "mk",
+    "kind": "noun",
+    "true": "god",
+    "candidates": [],
+    "options": [
+     "god",
+     "life",
+     "adoration, praise",
+     "bull"
+    ],
+    "picks": {
+     "bull": 2,
+     "god": 3
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "l (2)",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "to give",
+     "to praise"
+    ],
+    "options": [
+     "to give",
+     "to praise",
+     "to order, to command",
+     "to drink"
+    ],
+    "picks": {
+     "none": 2,
+     "to order, to command": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "to give": [
+      "Rilly 2003",
+      "accepts"
+     ],
+     "to praise": [
+      "Millet 1973a",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "ḫlbi",
+    "kind": "noun",
+    "true": "bull",
+    "candidates": [],
+    "options": [
+     "bull",
+     "cow",
+     "a good meal",
+     "land, province"
+    ],
+    "picks": {
+     "bull": 5
+    },
+    "choice": "bull"
+   },
+   {
+    "sort": "open",
+    "entry": "mreperi",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "majordomo",
+     "estate steward"
+    ],
+    "options": [
+     "majordomo",
+     "estate steward",
+     "priest",
+     "scribe"
+    ],
+    "picks": {
+     "none": 3,
+     "majordomo": 2
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "majordomo": [
+      "FHN III",
+      "proposes"
+     ],
+     "estate steward": [
+      "Rilly 2003",
+      "doubts"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "pelmos",
+    "kind": "title",
+    "true": "general",
+    "candidates": [],
+    "options": [
+     "general",
+     "priest",
+     "temple administrator",
+     "envoy"
+    ],
+    "picks": {
+     "general": 2,
+     "envoy": 1,
+     "none": 2
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "qomlise",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "good god"
+    ],
+    "options": [
+     "good god",
+     "wife",
+     "west",
+     "man"
+    ],
+    "picks": {
+     "good god": 5
+    },
+    "choice": "good god",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "good god": [
+      "Rilly 2003",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "dete",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "given"
+    ],
+    "options": [
+     "given",
+     "to give",
+     "to drink",
+     "to order, to command"
+    ],
+    "picks": {
+     "to give": 1,
+     "given": 4
+    },
+    "choice": "given",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "given": [
+      "Priese",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "sete",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "mother",
+     "tutor",
+     "follower"
+    ],
+    "options": [
+     "mother",
+     "tutor",
+     "follower",
+     "cow"
+    ],
+    "picks": {
+     "none": 4,
+     "follower": 1
+    },
+    "choice": "none",
+    "verdict": "none of the four",
+    "given_by": {
+     "mother": [
+      "Rilly 2021",
+      "accepts"
+     ],
+     "tutor": [
+      "Rilly 2016",
+      "accepts"
+     ],
+     "follower": [
+      "Millet 2005",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "absent",
+    "entry": "tre",
+    "kind": "verb",
+    "true": "to give",
+    "candidates": [],
+    "options": [
+     "to order, to command",
+     "to kill",
+     "to love, to revere",
+     "to drink"
+    ],
+    "picks": {
+     "to drink": 4,
+     "to love, to revere": 1
+    },
+    "choice": "to drink"
+   },
+   {
+    "sort": "open",
+    "entry": "ptroti",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "the southern one (feminine)",
+     "to be praised",
+     "master"
+    ],
+    "options": [
+     "the southern one (feminine)",
+     "to be praised",
+     "master",
+     "a good meal"
+    ],
+    "picks": {
+     "a good meal": 3,
+     "none": 2
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "the southern one (feminine)": [
+      "Zyhlarz",
+      "proposes"
+     ],
+     "to be praised": [
+      "Priese 1977a",
+      "proposes"
+     ],
+     "master": [
+      "Griffith 1911",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "ns",
+    "kind": "noun",
+    "true": "sacrifice",
+    "candidates": [],
+    "options": [
+     "sacrifice",
+     "child",
+     "woman",
+     "ruler"
+    ],
+    "picks": {
+     "sacrifice": 5
+    },
+    "choice": "sacrifice"
+   },
+   {
+    "sort": "offered",
+    "entry": "mte",
+    "kind": "noun",
+    "true": "child",
+    "candidates": [],
+    "options": [
+     "child",
+     "man",
+     "a Nubian",
+     "wife"
+    ],
+    "picks": {
+     "child": 4,
+     "none": 1
+    },
+    "choice": "child"
+   },
+   {
+    "sort": "open",
+    "entry": "d",
+    "kind": "verb",
+    "true": null,
+    "candidates": [
+     "to give",
+     "house",
+     "to send"
+    ],
+    "options": [
+     "to give",
+     "house",
+     "to send",
+     "to drink"
+    ],
+    "picks": {
+     "none": 3,
+     "house": 2
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "to give": [
+      "Rilly 2021",
+      "proposes"
+     ],
+     "house": [
+      "Rilly 2021",
+      "proposes"
+     ],
+     "to send": [
+      "Zyhlarz",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "aleqese",
+    "kind": "noun",
+    "true": null,
+    "candidates": [
+     "monument",
+     "written announcement"
+    ],
+    "options": [
+     "monument",
+     "written announcement",
+     "a good meal",
+     "sister"
+    ],
+    "picks": {
+     "monument": 2,
+     "none": 3
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "monument": [
+      "Hintze",
+      "proposes"
+     ],
+     "written announcement": [
+      "Hallof 2020",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "teneke",
+    "kind": "noun",
+    "true": "west",
+    "candidates": [],
+    "options": [
+     "west",
+     "a Nubian",
+     "land, province",
+     "sacrifice"
+    ],
+    "picks": {
+     "west": 3,
+     "none": 1,
+     "a Nubian": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "offered",
+    "entry": "ḫrpḫe",
+    "kind": "verb",
+    "true": "to order, to command",
+    "candidates": [],
+    "options": [
+     "to order, to command",
+     "to give",
+     "to kill",
+     "to love, to revere"
+    ],
+    "picks": {
+     "to love, to revere": 5
+    },
+    "choice": "to love, to revere"
+   },
+   {
+    "sort": "open",
+    "entry": "aribet",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "corn measurer"
+    ],
+    "options": [
+     "corn measurer",
+     "general",
+     "temple administrator",
+     "envoy"
+    ],
+    "picks": {
+     "none": 3,
+     "envoy": 2
+    },
+    "choice": null,
+    "verdict": "no choice",
+    "given_by": {
+     "corn measurer": [
+      "FHN IV",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "open",
+    "entry": "womnise",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "priest of Amun",
+     "nilometer controller"
+    ],
+    "options": [
+     "priest of Amun",
+     "nilometer controller",
+     "agent",
+     "governor"
+    ],
+    "picks": {
+     "none": 4,
+     "governor": 1
+    },
+    "choice": "none",
+    "verdict": "none of the four",
+    "given_by": {
+     "priest of Amun": [
+      "Rilly 2003",
+      "proposes"
+     ],
+     "nilometer controller": [
+      "Zyhlarz",
+      "proposes"
+     ]
+    }
+   },
+   {
+    "sort": "offered",
+    "entry": "plsn",
+    "kind": "title",
+    "true": "temple administrator",
+    "candidates": [],
+    "options": [
+     "temple administrator",
+     "viceroy",
+     "scribe",
+     "governor"
+    ],
+    "picks": {
+     "governor": 3,
+     "none": 2
+    },
+    "choice": null
+   },
+   {
+    "sort": "offered",
+    "entry": "apote",
+    "kind": "title",
+    "true": "envoy",
+    "candidates": [],
+    "options": [
+     "envoy",
+     "priest",
+     "viceroy",
+     "governor"
+    ],
+    "picks": {
+     "envoy": 5
+    },
+    "choice": "envoy"
+   },
+   {
+    "sort": "absent",
+    "entry": "adb",
+    "kind": "noun",
+    "true": "land, province",
+    "candidates": [],
+    "options": [
+     "nephew, niece",
+     "adoration, praise",
+     "direct descendant",
+     "west"
+    ],
+    "picks": {
+     "none": 3,
+     "west": 1,
+     "direct descendant": 1
+    },
+    "choice": null
+   },
+   {
+    "sort": "absent",
+    "entry": "mdese",
+    "kind": "noun",
+    "true": "direct descendant",
+    "candidates": [],
+    "options": [
+     "a Nubian",
+     "ruler",
+     "bull",
+     "strength"
+    ],
+    "picks": {
+     "none": 3,
+     "ruler": 2
+    },
+    "choice": null
+   },
+   {
+    "sort": "open",
+    "entry": "pqrtr",
+    "kind": "title",
+    "true": null,
+    "candidates": [
+     "great prince"
+    ],
+    "options": [
+     "great prince",
+     "viceroy",
+     "scribe",
+     "agent"
+    ],
+    "picks": {
+     "great prince": 5
+    },
+    "choice": "great prince",
+    "verdict": "chosen, no label",
+    "given_by": {
+     "great prince": [
+      "Heyler-Leclant",
+      "proposes"
+     ]
+    }
+   }
+  ]
+ },
+ "in_our_words": 9,
+ "recount": {
+  "running_words": 10290,
+  "before": {
+   "read": 3676,
+   "names": 1743,
+   "open": 3655,
+   "lost": 1216,
+   "share": 0.5014
+  },
+  "after": {
+   "read": 3916,
+   "names": 1809,
+   "open": 3349,
+   "lost": 1216,
+   "share": 0.539
+  },
+  "overlay": {
+   "stated": 273,
+   "piece": 66,
+   "name": 46
+  },
+  "overlay_levels": {
+   "meaning": 307,
+   "name": 77,
+   "grammar": 1
+  },
+  "was": {
+   "hypothesis": 268,
+   "meaning": 26,
+   "name": 11,
+   "grammar": 42,
+   "kind": 22,
+   "unknown": 16
+  },
+  "pieces": {
+   "read": 35,
+   "name": 31,
+   "not a form of the map": 66,
+   "open": 60
+  },
+  "spellings": 154,
+  "spellings_all_resolved": 27,
+  "spellings_most_resolved": 39,
+  "spellings_none_resolved": 92
+ },
+ "tokens": {
+  "literature": {
+   "agents": 10,
+   "tokens": 2411497
+  },
+  "verifiers": {
+   "agents": 6,
+   "tokens": 613355
+  },
+  "place_checkers": {
+   "agents": 52,
+   "tokens": 4146199
+  },
+  "candidate_readers": {
+   "agents": 8,
+   "tokens": 780535
+  },
+  "choice_readers": {
+   "agents": 25,
+   "tokens": 1895080
+  },
+  "all": {
+   "agents": 101,
+   "tokens": 9846666
+  }
+ },
+ "when": [
+  {
+   "step": "the classes (section 3)",
+   "set_in": "the working session, not committed",
+   "set": "15:57:05",
+   "started": "15:46:21",
+   "first_answer": "15:53:08"
+  },
+  {
+   "step": "class A read twice (section 4)",
+   "set_in": "the working script, not committed",
+   "set": "15:58:05",
+   "started": "15:58:10",
+   "first_answer": "15:59:59"
+  },
+  {
+   "step": "the place pass (section 5)",
+   "set_in": "e3fdb9f",
+   "set": "16:06:33",
+   "started": "16:06:41",
+   "first_answer": "16:07:27"
+  },
+  {
+   "step": "the choice test, step 1 (section 6)",
+   "set_in": "60f7bd8",
+   "set": "16:14:24",
+   "started": "16:15:12",
+   "first_answer": "16:16:01"
+  },
+  {
+   "step": "the choice test, step 2 (section 6)",
+   "set_in": "fff9478",
+   "set": "16:19:20",
+   "started": "16:19:25",
+   "first_answer": "16:20:29"
+  }
+ ]
+}
