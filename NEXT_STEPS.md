@@ -106,9 +106,10 @@ Done since this plan was written:
     of the proposals on record for the open words missed both bars (right for 13 of 17 accepted words where
     the readers chose, 76.5% against 80%; a wrong meaning chosen for 2 of 11 where the true one was not offered,
     18.2% against 10%), so no proposal is labelled. Open: applying the overlay to the map; the same pass on the
-    2,203 open spellings that stand in one or two texts.
+    2,203 open spellings that stand in one or two texts. Both are steps of section G.
 
-Next, in this order (the small steps; the four big pieces are in section F):
+Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
+all words in section G):
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
 2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too. The
@@ -453,3 +454,63 @@ days, not hours. The costs are estimates from what the runs so far cost.
 
 The order: F1, then F2, then F3 and F4 side by side. Outside the four, the path through people stays open in
 section A: a specialist's reading of one page would be worth more than any of these runs.
+
+## G. Toward the meaning of all words (defined 2026-11-15)
+
+Mike, 2026-11-13: "our goal is to decipher the meaning of all words". 2026-11-15: "define next steps".
+
+**Where the count stands.** With the results of point 18 laid over the map, 7,265 of the 10,290 running words of
+`corpus_v6` need a meaning and 3,916 have one (53.9%). The 3,349 that stay open are of four kinds, and each kind
+has its own step:
+
+| Kind | Running words | Spellings | Step |
+|---|---|---|---|
+| a. The spelling is open, but the lexicon calls its stem or ending established or probable | 366 | 312 | G2 |
+| b. The lexicon holds the entry without an accepted meaning, and the spelling stands in one or two texts | 1,032 | 784 |G4 |
+| c. The lexicon does not hold the spelling, and it stands in one or two texts | 1,225 | 1,107 |G3 |
+| d. Places of the 154 recurring spellings that point 18 left: 378 open, 124 pieces of a word the map does not read, 137 unclear, 77 not agreed | 716 | 127 | G5, G6 |
+
+Ten more are single open places of spellings the map reads elsewhere.
+
+The steps, in this order. Each keeps the rules of point 18: two readers a place, each bar committed before its
+readers are started, a count that follows from a figures file, and nothing called a meaning of ours unless it
+passes a test set beforehand.
+
+1. **G1. Put the overlay into the map.** The 385 places of point 18 (273 stated by Rilly in 2016 or 2021, 66
+   pieces of a word or name the map reads, 46 places of seven names) become a layer of the map's build, each with
+   its source. Done when the map's own figure is 53.9%, the pages that count from the map (coverage, the
+   translations' baseline, the lexicon's statuses) are rebuilt from the same file, and the checks and the review
+   pass. No agents but the review.
+2. **G2. The spellings under a sure stem** (kind a: 366 running words under 116 lexicon entries). Most should be
+   rarer spellings or compounds of words the map already reads. The place pass of point 18 again: two checkers
+   say for each place whether it holds the lexicon's word. If every one were read the share would be 58.9%; the
+   first pass kept about half of what its first readers counted (273 of 531), so expect less. About 16 checkers.
+3. **G3. The spellings that are not in the lexicon** (kind c: 1,225 running words, most of them standing once).
+   Point 18 found a sixth of the recurring places to be pieces of a longer word or name that the edition's word
+   division cut, and seven items to be names. So first a pilot on 100 places drawn by a fixed seed: a script
+   proposes the joins with the neighbouring words that give a form the map reads, two checkers decide (a piece, a
+   name, a word of its own, unclear), and the bar is set beforehand. A name or a piece of a name needs no
+   meaning; a piece of a word the map reads takes that word's. This step deciphers nothing: it corrects the
+   count of what is left to decipher. If half of kind c left that count, the share would be 58.9% with nothing
+   else changed.
+4. **G4. The later sources on the rest of the lexicon's open entries** (kind b: 1,032 running words under 323
+   entries). The literature pass, the two readers and the place pass of point 18 again. A first search by
+   headword finds only 51 entries of kinds a and b named in Rilly 2016 or 2021, covering 175 running words, so
+   the yield will be small. It comes after G2 and G3, which cost less for more.
+5. **G5. A second scholar for the stated meanings.** The 26 meanings of point 18 are Rilly's alone. The method
+   of F2 on them: does FHN, Millet 2005 or Griffith state the same, or dissent, as Millet does on `sete`? The
+   result is a status for each meaning (agreed by two, stated by one, disputed), not a higher count.
+6. **G6. The blind test again, with what the first one taught.** The bar set beforehand at "all five readers
+   agree" (seen after the first count: 12 of 15 right, and no wrong choice among the 11 words whose meaning was
+   not offered); the 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38;
+   fillers worded like the candidates. If the bars hold, a proposal on record for one of the 378 open places
+   can be called favoured by the contexts. It is the only way in hand to say anything about kind d.
+7. **G7. New evidence, on Mike's word.** After G6 the sources in hand are used up for meanings. What would move
+   the count further: an answer from Rilly, Hallof or Smith to the letters of 9 November (none had come by 15
+   November, and the pull request to Otten had no comment); the works we do not hold that state meanings for
+   open words (Rilly 2007 and 2010, Hofmann 1981, Hintze 1979); and Hallof's edition of 2,780 inscriptions,
+   which would turn many spellings that stand once into spellings that recur and can be tested. Purchases are
+   parked, and the results are frozen before a new source is opened.
+
+Not on this path: the pages for the 304 open inscriptions and Griffith's translations as a second rendering
+(F4, above) assemble meanings scholars already have.
