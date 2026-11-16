@@ -1,7 +1,7 @@
 # The blind test again (step G6)
 
-Status on 2026-11-16, 15:41: the words, the options and the bars are set; no reader has been started. Working
-script (local until the test is counted): `data/sources/g6/run.py`. What the readers are given:
+Status on 2026-11-16, 15:45: the test is counted and **no label is given**: one bar held and one was missed
+(section 6). Working script (local, not reviewed yet): `data/sources/g6/run.py`. What the readers were given:
 [`runs/prompts/G6_choice.md`](../../runs/prompts/G6_choice.md). The first test is section 6 of
 [recurring_words.md](recurring_words.md).
 
@@ -94,3 +94,58 @@ whether a favoured proposal should ever count there would change what a row mean
 - **The readers are one model.** It may know published translations in spite of the brief, and five readers
   that agree are five draws from one reader.
 - No meaning found here is the project's own.
+
+## 6. The result (counted at 15:44, no label given)
+
+The 25 readers were started at 15:42, after the commit with the bars (15:41:41); their answers came between
+15:42 and 15:43. Every reader answered every word of its pack (76 words, five readers each).
+
+| Bar | Result | |
+|---|---|---|
+| Every reader answers every word | 380 of 380 answers | met |
+| Accepted words shown with their meaning: of those with a choice, at least 80% right, at least 8 such words | 16 of 17 right (94.1%) | met |
+| Accepted words shown without their meaning: at most 10% get a choice | **3 of 13 (23.1%)** | **missed** |
+
+By rule 5 of section 3 no label is given: no proposal is called favoured by the contexts.
+
+**The accepted words, one by one.**
+
+| | Shown with their meaning (30) | Shown without it (13) |
+|---|---|---|
+| All five pick the true meaning | 16 | (not offered) |
+| All five pick a wrong meaning | 1 | 3 |
+| All five say "none of these" | 1 | 2 |
+| No choice (the five differ) | 12 | 8 |
+
+- **The one wrong choice with the meaning offered:** "small, young" was taken for "great, elder".
+- **The three wrong choices without it:** "sister" was taken for "direct descendant", "god" for "silver", and
+  "general" for "governor". In each case all five readers agreed.
+- **The 5 new accepted words:** one was chosen, rightly ("to bear a child"); for the three others shown with
+  their meaning the readers made no choice; the one shown without it got no choice either.
+
+**The open words (33), had the bars held.**
+
+| | Words |
+|---|---|
+| All five pick the same proposal (no label) | 7 |
+| All five pick a filler | 1 |
+| All five say "none of these" | 1 |
+| No choice | 24 |
+
+The seven are `wse` (of the country), `wi` (brother), `yed` (silver), `pqrtr` (great prince), `ẖol` (to grant),
+`qomlise` (good god) and `penn` (year). They carry no label.
+
+**What this shows.**
+
+- **With the right meaning among the four, five readers who agree are nearly always right.** That part of the
+  first test held, and more strongly: 16 of 17, against 12 of 15.
+- **Without it, they agree on a wrong one about one time in four.** The first test's "no wrong choice among 11"
+  did not hold: it was read off the answers after the count, and this is what such a figure is worth.
+- **An open word is in the second case whenever its true meaning is not among the proposals,** and nobody knows
+  when that is. So a proposal that all five choose cannot be told from a wrong one chosen for want of the right
+  one. "Silver" shows it: all five chose it for `yed`, where it is the proposal on record, and all five chose it
+  for the word for "god", where it was a filler.
+- The method as it stands, a choice among four meanings from the contexts alone, is not a test a proposal can
+  pass. This is its second miss, and the stricter rule did not mend it.
+
+Cost: 25 agents, 1,930,704 tokens (typed from the task notifications into `data/sources/g6/tokens.json`, local).

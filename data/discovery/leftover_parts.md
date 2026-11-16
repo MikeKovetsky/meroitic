@@ -1,10 +1,10 @@
 # The leftover parts, and the meanings Millet and Lipiński state (a follow-up to G2 and G4)
 
-Status on 2026-11-16, 15:35: part 1 is counted and **not taken**: one bar was missed by one answer (section 6), so
-no place of it is laid and the part stops there. Part 2's rule is set, with an addition made before any of its
-readers was started (section 4); none of them has answered yet. Working scripts (local until the step is
-counted): `data/sources/g8/run.py` and `data/sources/rare/g4m/run.py`. What the checkers of part 1 were given:
-[`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
+Status on 2026-11-16, 15:45: both parts are counted. **Part 1 is not taken:** one bar was missed by one answer
+(section 6), so no place of it is laid. **Part 2 met its bars** (section 7): 17 places can be laid, 13 of them as
+names and 4 as translated words. Its scripts are local and not reviewed yet (`data/sources/g8/run.py`,
+`data/sources/rare/g4m/run.py`), so the map and the scoreboard do not count part 2 yet. What the checkers of
+part 1 were given: [`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
 
 ## 1. What was asked
 
@@ -150,3 +150,57 @@ other 17 places, where no name is expected, both said "unknown" every time.
   is Mike's call.
 
 Cost: 6 agents, 595,672 tokens (typed from the task notifications into `data/sources/g8/tokens.json`, local).
+
+## 7. Part 2: the result (counted at 15:40, bars met)
+
+**The statements, read twice.** Four readers (two for each of 2 packs) were started at 15:35, after the commit
+with the added rule (15:35:28); their answers came between 15:36 and 15:37.
+
+| Of the 15 entries | Entries |
+|---|---|
+| Stated by Millet 2005 or Lipiński 2011, by both readers | 12 |
+| Not stated firmly by both | 3 |
+
+| What the source gives, for the 12, by both readers | Entries |
+|---|---|
+| A name (five places, two persons) | 7 |
+| A meaning that leaves a Meroitic word as it is | 3 |
+| A meaning in full | 2 |
+
+The two meanings in full are both from Lipiński 2011: "child" for `mse`, and "women who have not borne a child"
+(our wording) for `kdimdḫe`. By the readers' notes Lipiński takes the first from a work of Rilly of 2010 and the
+second from Millet. The lexicon of 2003 files `mse` as a title, with a question mark.
+
+**The places.** Four checkers (two for each of 2 packs) were started at 15:38; their answers came between 15:39
+and 15:40.
+
+| Bar | Result | |
+|---|---|---|
+| Every place answered by both | 56 of 56 | met |
+| Kappa of 0.6 or more | 0.97 | met |
+
+| Both checkers say | Places |
+|---|---|
+| the word the source speaks of ("stated") | 24 |
+| open | 20 |
+| a piece of another word | 8 |
+| unclear | 3 |
+| not agreed | 1 |
+
+**What can be laid: 17 places.**
+
+| | Places |
+|---|---|
+| A name, of an entry the lexicon files as a place name | 10 |
+| A name, of an entry both readers say the source calls a personal name | 2 |
+| A piece of a word the map holds as a name | 1 |
+| A translated word (`mse` three times in one text, `kdimdḫe` once) | 4 |
+
+**What stays open:** 5 stated places where the map leaves a part of the spelling unnamed, 3 where the meaning
+leaves a Meroitic word as it is, and 7 pieces whose whole word the map does not hold or holds open.
+
+The gain is small, as the entries foretold: 4 running words and 2 words of the dictionary get a meaning, each
+from one scholar, and 13 places leave the count of words that need one. The numbers of the map change only when
+the script is in `src/` and reviewed.
+
+Cost: 8 agents, 692,849 tokens (4 readers 368,724; 4 checkers 324,125).
