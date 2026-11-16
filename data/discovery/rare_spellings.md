@@ -106,10 +106,10 @@ meaning. So:
 
 This is stricter than the rule above: it can take translated words away and cannot add one.
 
-**A second rule, added on 2026-11-16 at 13:23,** before any checker of G4's places was started, and after G2's
+**A second rule, added on 2026-11-16 at 13:22,** before any checker of G4's places was started, and after G2's
 places had been counted (so for G2 it is a correction made with the count in view; it only lowers G2's figure).
 G2's count showed what "stated" covers when the map leaves a part of the spelling unnamed: of the 68 such
-places of stem entries, about half join the lexicon's word to a name or to a word nobody reads (a god's name
+places of stem entries, about half join the lexicon's word to a name or to an unknown word (a god's name
 inside a personal name, a title after an unknown noun). The word as a whole is then not translated. So, for
 both steps:
 
