@@ -91,5 +91,8 @@ both checkers say so. A stated place takes the lexicon's meaning of that entry.
   translated already.
 - In every count the meanings are the sources', not the project's.
 
+The briefs the checkers of both place passes are given, and their launch line, are in
+[`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md), committed before any of them was started.
+
 What the runs cannot show: the readers and checkers are one model, so their agreement shows that a judgment can
 be repeated, not that it is right; they see five words on each side, not the stone.
