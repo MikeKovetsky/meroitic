@@ -102,8 +102,8 @@ analysis uses were read as they are now; the status says only that the scholars 
 
 An independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the reasoning) checked the
 step on 2026-11-16 with its rows, answers and times and the session's record of every agent launched: the rules
-were committed at 13:59:53 and the first judge was started at 14:00:15; `src/second_later.py` writes the rows, the
-packs and the result again byte for byte; the agents' tokens are those of their task notifications. The review
-added to section 5 the decoys called "partly" (F2's bar), the one status that rests on a proposal without a
-scholar's name, and the scholars' names the judges saw; corrected the list of scholars in section 2; and marked
-the requirements of section 1 as met. No status changed.
+were committed at 13:59:53 and the first judge was started at 14:00:15 (`WHEN` in `src/second_later.py`, with
+checks); `src/second_later.py` writes the rows, the packs and the result again byte for byte; the agents' tokens
+are those of their task notifications. The review added to section 5 the decoys called "partly" (F2's bar), the one
+status that rests on a proposal without a scholar's name, and the scholars' names the judges saw; corrected the
+list of scholars in section 2; and marked the requirements of section 1 as met. No status changed.

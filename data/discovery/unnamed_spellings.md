@@ -266,10 +266,12 @@ the same.
 
 An independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the reasoning) checked the
 step on 2026-11-16, with its answers, its times and the session's record of every agent launched. Each reading's
-rules were committed a few seconds before its first checker was started (8, 6 and 7 seconds for the two pilots
-and the full pass), and nothing of the full pass was counted before the north star's rule of section 9 was
-committed at 14:09:13; the count ran at 14:09:27. `src/unnamed.py` writes the three readings' packs, results and
-the layer again byte for byte, and the agents' tokens are those of their task notifications. The review changed:
+rules were committed a few seconds before its first checker was started (the two pilots and the full pass: rules
+at 13:59:53, 14:03:42 and 14:05:38, first checkers at 14:00:00, 14:03:47 and 14:05:45; `WHEN` in
+`src/unnamed.py`, with checks), and nothing of the full pass was counted before the north star's rule of section 9
+was committed at 14:09:13; the count ran at 14:09:27. `src/unnamed.py` writes the three readings' packs, results
+and the layer again byte for byte, and the agents' tokens are those of their task notifications. The review
+changed:
 
 1. The north star with this layer: 12.1%, not 12.2% (section 10; `star_pct` of `src/themap.py`).
 2. "39 stems become names", not "names or pieces": a piece laid as part of a translated word keeps its stem in

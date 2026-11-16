@@ -260,6 +260,31 @@ def test_the_script_writes_the_rows_and_packs_the_judges_were_given():
     in_a_folder(go)
 
 
+def test_the_rules_were_in_git_before_the_judges_were_started():
+    """WHEN's commit is git's, at its time; the judges were started after it (the session's log, by hand), answered
+    after that and were counted after their last answer; the rules the page names stand in that commit."""
+    def git(*args):
+        return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True).stdout
+    w = S.WHEN
+    assert git("log", "-1", "--format=%cI", w["set_in"]).strip() == f"2026-11-16T{w['set']}-08:00"
+    assert w["set"] < w["started"] < w["first_answer"] <= w["last_answer"] < w["counted"]
+    for phrase in ("## 3. The bars and the rule, set before any judge is started", "**The status of a meaning:**"):
+        out = git("log", "--reverse", "--format=%cI", f"-S{phrase}", "--", "data/discovery/second_scholar_later.md").split()
+        assert out and out[0][11:19] <= w["set"], phrase
+    assert f"the rules were committed at {w['set']} and the first judge was started at {w['started']}" in page()
+
+
+def test_the_times_of_the_answers_are_the_files():
+    """WHEN's first and last answer are the times of the judges' answer files (Pacific time)."""
+    needs("data/sources/g5/answers1", "data/sources/g5/answers2")
+    import datetime
+    import zoneinfo
+    pacific = zoneinfo.ZoneInfo("America/Los_Angeles")
+    times = sorted(datetime.datetime.fromtimestamp(f.stat().st_mtime, pacific).strftime("%H:%M:%S")
+                   for j in (1, 2) for f in (S.HOME / f"answers{j}").glob("*.jsonl"))
+    assert times and (times[0], times[-1]) == (S.WHEN["first_answer"], S.WHEN["last_answer"]), (times[0], times[-1])
+
+
 def test_the_rules_were_in_git_before_the_judges_answered():
     needs("data/sources/g5/answers1", "data/sources/g5/answers2")
     out = subprocess.run(["git", "-C", str(ROOT), "log", "--reverse", "--format=%ct", "-S## 3. The bars and the rule, set before any judge is started", "--",

@@ -380,5 +380,53 @@ def test_each_rule_was_in_git_before_the_checkers_it_binds():
     assert committed("The brief", "runs/prompts/G3_places.md") < first_answer("pilot")
 
 
+def git(*args):
+    return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True).stdout
+
+
+def test_each_reading_was_set_before_its_checkers_were_started():
+    """WHEN's commits are git's, at its times. Each reading's rules were in git before its checkers were started, who
+    answered after that and were counted after their last answer (the launches and the counts are the session's log,
+    by hand); the rules the page names stand in those commits; and the rule for the north star (section 9 of the
+    page) was in git before the full pass was counted."""
+    def first(phrase, path):
+        """The time of the first commit that holds the phrase."""
+        out = git("log", "--reverse", "--format=%cI", f"-S{phrase}", "--", path).split()
+        assert out and out[0].startswith("2026-11-16T") and out[0].endswith("-08:00"), (phrase, out)
+        return out[0][11:19]
+    assert [w["reading"] for w in U.WHEN] == list(U.READINGS)
+    for w in U.WHEN:
+        assert git("log", "-1", "--format=%cI", w["set_in"]).strip() == f"2026-11-16T{w['set']}-08:00", w["reading"]
+        assert w["set"] < w["started"] < w["first_answer"] <= w["last_answer"] < w["counted"], w["reading"]
+    pilot, pilot2, full = U.WHEN
+    rules = "data/discovery/unnamed_spellings.md"
+    for phrase, path, w in (("## 4. The bars, set before any checker is started", rules, pilot), ("The brief", "runs/prompts/G3_places.md", pilot),
+                            ("## 7. The second pilot (rules set on", rules, pilot2), ("**The full pass** (set at", rules, full)):
+        assert first(phrase, path) <= w["set"], phrase
+    ns = U.NORTH_STAR_RULE
+    assert git("log", "-1", "--format=%cI", ns["set_in"]).strip() == f"2026-11-16T{ns['set']}-08:00"
+    assert first("## 9. How the north star is counted after this step", rules) == ns["set"] < full["counted"]
+    text = page()                                                         # what the page says of the times
+    assert f"rule of section 9 was committed at {ns['set']}; the count ran at {full['counted']}" in text
+    assert (f"rules at {pilot['set']}, {pilot2['set']} and {full['set']}, first checkers at {pilot['started']}, {pilot2['started']} and "
+            f"{full['started']}; `WHEN` in `src/unnamed.py`, with checks)") in text
+
+
+def test_the_times_of_the_answers_are_the_files():
+    """WHEN's first and last answer of each reading are the times of its answer files (Pacific time)."""
+    needs(*[f"data/sources/g3/{r}/answers{c}" for r in U.READINGS for c in (1, 2)])
+    import datetime
+    import zoneinfo
+    pacific = zoneinfo.ZoneInfo("America/Los_Angeles")
+
+    def clock(path):
+        t = datetime.datetime.fromtimestamp(path.stat().st_mtime, pacific)
+        assert t.date() == datetime.date(2026, 11, 16), (path, t)
+        return t.strftime("%H:%M:%S")
+    for w in U.WHEN:
+        times = sorted(clock(f) for c in (1, 2) for f in (U.HOME / w["reading"] / f"answers{c}").glob("*.jsonl"))
+        assert times and (times[0], times[-1]) == (w["first_answer"], w["last_answer"]), (w["reading"], times[0], times[-1])
+
+
 if __name__ == "__main__":
     run([(name, fn) for name, fn in globals().items() if name.startswith("test_")])

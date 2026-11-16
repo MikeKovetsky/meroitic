@@ -40,6 +40,20 @@ BARS = {"kappa": 0.6, "words_called_name_or_piece": 0.10, "names_called_name": 0
 READINGS = ("pilot", "pilot2", "full")                 # in the order they were made
 TAKEN = ("pilot2", "full")                             # the readings whose verdicts count: together every place, once
 TOKENS = {r: f"tokens_{r}.json" for r in READINGS}     # from the task notifications, typed by hand (local)
+# When the rules were set against the checkers they bind (2026-11-16, Pacific time), as src/rare.py records it:
+# "set_in" is the commit of the rules a reading's checkers worked under and "set" its time in git; "started" is the
+# reading's first launch and "counted" the command that first counted its answers, both in the session's log, by
+# hand; "first_answer" and "last_answer" are the earliest and the latest times of its answer files under HOME.
+WHEN = [
+    {"reading": "pilot", "set_in": "7395a7f", "set": "13:59:53", "started": "14:00:00",
+     "first_answer": "14:00:49", "last_answer": "14:01:04", "counted": "14:01:19"},
+    {"reading": "pilot2", "set_in": "1ba8a90", "set": "14:03:42", "started": "14:03:47",
+     "first_answer": "14:04:43", "last_answer": "14:04:55", "counted": "14:05:09"},
+    {"reading": "full", "set_in": "7f2cddb", "set": "14:05:38", "started": "14:05:45",
+     "first_answer": "14:06:23", "last_answer": "14:09:17", "counted": "14:09:27"},
+]
+NORTH_STAR_RULE = {"set_in": "47e77e3", "set": "14:09:13"}  # how the north star is counted after the step (section 9
+#                                                            of the page): set before the full pass was counted
 
 BRIEF = """# Decide, place by place, what {places} Meroitic spellings are
 

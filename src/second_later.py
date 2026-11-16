@@ -37,6 +37,11 @@ SAYS = ("accepts", "probable", "proposes", "doubts", "rejects")  # a statement t
 SEED, DECOYS, PACK = 20261116, 0.10, 60
 VERDICTS = ("same", "partly", "other", "no meaning")
 BARS = {"kappa_same_or_not": 0.6, "decoys_called_same": 0.10}
+# When the rules were set against the judges (2026-11-16, Pacific time), as src/rare.py records it: the commit of the
+# rules and its time in git, the first launch and the first count of the answers (the session's log, by hand), and
+# the earliest and the latest times of the answer files under HOME.
+WHEN = {"set_in": "7395a7f", "set": "13:59:53", "started": "14:00:15", "first_answer": "14:00:57", "last_answer": "14:01:11",
+        "counted": "14:02:32"}
 
 BRIEF = """# Two statements about the meaning of a Meroitic word: do they give the same meaning?
 
