@@ -1,0 +1,208 @@
+---
+name: reporting
+description: How to report the status of the Meroitic project. Use whenever Mike asks for a status, where things stand, progress, the scoreboard or the north star, at the end of a milestone, and before quoting any of the project's headline numbers (distinct words translated, running words translated, distinct spellings translated, our own meanings, translation score). It fixes the table's shape, what each number means, where it is read or how it is counted, and what "Before us" is for each row.
+---
+
+# Reporting: the scoreboard and how each number is measured
+
+Mike, 2026-11-16: "we need to develop an easier repeatable format of status sharing. 2-3 metrics we optimize for",
+then "note down all into reporting.md skill in repo with how we measure each number to make sure we have
+consistent ways of measuring across compactions and sessions".
+
+This file is the single place for both. If a session's memory, a summary or an earlier message says something
+else about a number, this file wins; if this file is wrong, change it here, with the date and Mike's words.
+
+## 1. The shape of a status
+
+A status is this table and three lines, and little else:
+
+| Metric | Before us | Now | Since last status | Next target |
+|---|---|---|---|---|
+| Distinct words translated (north star) | | | | |
+| Running words translated | | | | |
+| Distinct spellings translated | | | | |
+| Our own meanings | | | | |
+| Translation score | | | | |
+
+- **Done since last status:** one line.
+- **Next:** one line, the next step by its name in `NEXT_STEPS.md` (section G).
+- **Needs you:** one line, or "nothing".
+
+Rules of shape, each from Mike's words on 2026-11-16:
+
+1. The rows stand in this order, the north star first ("do it and add to the table as the first row").
+2. The column "Before us" stays ("add a column "status before us". to see our progress from the start").
+3. Short by default, but formatted: a bold lead line, the table, a few bullets. Never half a page, never a wall of
+   text ("answer shorter by default. 1 paragraph"; "when i meant "paragraph" i meant shortness, not a wall a wall
+   of text without formatting").
+4. Under the table give the north star's range in one line, because its count of words is an estimate.
+5. Say "provisional" beside any number whose work is still in review or not yet on main.
+
+## 2. Words
+
+- **Translated**, never "read". Every Meroitic sign can be read aloud; what is counted is whether the meaning is
+  known ("why "read"? what does it even mean?"). A word is translated when the map gives it an accepted meaning or
+  grammatical function (the map's levels `meaning` and `grammar`).
+- **A word that needs a meaning** is every running word that is no name, no numeral and has no lost sign (the
+  map's levels `name`, `number` and `lost` are left out of every share below).
+- **A spelling** is one written form, exactly as it stands in a text. One dictionary word has many: with endings
+  and prefixes, in variant writings, cut in two by an edition. Say "written form" if the word is unclear.
+- **A dictionary word** is an entry of Rilly's lexicon of 2003 that is no name. All spellings built on one entry
+  are that one word.
+- **Our own meaning** is a meaning this project found, not one a scholar published.
+- The public coverage page says "translated" for a wider count (names and numerals included, of all running
+  words: 52.7%). If both appear, name the difference.
+
+## 3. The rows
+
+The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is
+`data/sources/v6/analysts/glosses.jsonl` (local). Read a number from its figures file or count it with the command
+given; never quote it from memory, from this file's log, or from an earlier message.
+
+### Distinct words translated (the north star)
+
+- **What it is:** of the different words the corpus holds, the share that has a meaning. Mike: "this sounds like
+  a north star metric if we want the entire language translatable".
+- **How it is counted** (`src/words.py`, page `data/discovery/distinct_words.md`): every running word that needs
+  a meaning is a dictionary word, a name, or a stem the map could not name. Translated words are the dictionary
+  words in use whose meaning the lexicon calls established or probable. Distinct words are the dictionary words
+  in use plus an estimate of how many of the unnamed stems are words of their own, from a sample of 240 stems
+  judged by two checkers (bar: their kappa at least 0.6).
+- **Now:** `data/discovery/distinct_words_figures.json`: `translated` over `distinct_words.point`, the share in
+  `star.point`, its range in `star.low` and `star.high`.
+- **Before us: the same as Now.** Mike, after asking three times how this row could rise without a meaning of
+  ours: "“Before us” should really equal “Now”, 11.6%." The translated words were translated by scholars before
+  the project, and the project has added none. A plain lookup of the lexicon finds fewer of them in the texts
+  (136 of 160 on 2026-11-16); that is a fact about our matching and never the starting point of this row.
+- **Next target:** `next.star.point` of the same file (the dictionary words that the recurring-words work found
+  stated by a later source, once that work is in the map).
+- **What moves it:** a dictionary word getting a meaning (a scholar's, from a source, or our own), or the count of
+  distinct words being corrected. **What does not:** recognising one more spelling of a word that is already
+  translated.
+- **Counting again:** run `python3 -I src/words.py population` after the map changes; it recounts the dictionary
+  words. The estimate of the unnamed stems rests on the sample drawn on 2026-11-16 from the stems of that day. If
+  a step changes which stems are unnamed (step G3 in particular), draw and judge a new sample with its bar set
+  beforehand; do not carry the old share over.
+
+### Running words translated
+
+- **What it is:** of the running words that need a meaning, the share that is translated. It shows how much of
+  what scholars already know we can apply to the texts.
+- **Now:** the snippet of section 4, line "the map". Until the recurring-words results are in the map (step G1),
+  the same figure is `recount.before.share` of `data/discovery/recurring_words_figures.json`.
+- **Before us:** the lexicon of 2003 looked up word by word, with none of the project's analysts or corrections:
+  the snippet's line "plain lookup". It was 2,816 of 7,847, 35.9%, and does not change unless the corpus or the
+  typed lexicon changes. It is a machine's baseline: a scholar reading the texts recognises more than a lookup.
+- **Next target:** the snippet's line "with the recurring-words overlay" while that overlay is not yet in the map
+  (also `recount.after.share`); after G1, the gain the next step's page gives.
+- **What moves it:** recognising a spelling as a known word; a meaning from a later source; showing that an open
+  "word" is a name or a piece of one (it then needs no meaning).
+
+### Distinct spellings translated
+
+- **What it is:** the same, with each different spelling counted once, by the level it has most often in the map.
+- **Now, Before us, Next target:** the snippet of section 4, second number of each line. Before us was 325 of
+  3,189, 10.2%.
+- It stands far under the running words because the common words are the translated ones.
+
+### Our own meanings
+
+- **What it is:** the number of meanings this project found that (1) no source in hand states, (2) passed a test
+  whose bar was committed before the test ran, (3) survived an independent check and the review, and (4) stand on
+  a page of `data/discovery/`.
+- **Now:** 0. **Before us:** 0.
+- **What does not count:** a scholar's proposal that a test of ours favours (it is the scholar's); a meaning a
+  later source states; a spelling recognised as a known word; a reading no test has passed.
+- This is the only row that measures decipherment.
+
+### Translation score
+
+- **What it is:** on texts held back from tuning, the share of a scholar's units of meaning that our translation
+  gives (a unit given counts one, a unit partly given a half), judged by two judges with decoys.
+- **Now:** `data/discovery/f4_rounds_figures.json`: `held.score.translator` (one translator with rules, a handbook
+  and parallels, on 13 renderings of Millet's, 218 units). The panel's higher score is not shown to beat it and
+  is not the row's value.
+- **Before us:** `held.score.glosses`: the map read word by word on the same texts. No machine translation
+  existed; this is the earliest thing measured, and it already uses our map.
+- **What moves it:** a better way of translating, or a better map. It can rise with no new word translated,
+  because turning word-by-word readings into sentences is most of the gain.
+- Its scale is not that of the rows above: a few epitaphs from one site, not the corpus.
+
+## 4. The snippet for running words and spellings
+
+Run from the repository's root (it needs the local files):
+
+```bash
+python3 -I - <<'EOF'
+import sys, json, collections
+sys.path[:0] = ["src", "src/experts", "src/v6"]
+import recurring as W, words as D
+
+def tally(texts):
+    group = lambda l: "translated" if l in W.READ else "named" if l in W.NAMED else "open" if l in W.OPEN else "lost"
+    run, by_form = collections.Counter(), collections.defaultdict(collections.Counter)
+    for gs in texts:
+        for form, level in gs:
+            run[group(level)] += 1
+            by_form[form][group(level)] += 1
+    spell = collections.Counter(c.most_common(1)[0][0] for c in by_form.values())
+    share = lambda c: f"{c['translated']} of {c['translated'] + c['open']} = {100 * c['translated'] / (c['translated'] + c['open']):.1f}%"
+    return share(run), share(spell)
+
+the_map = W.the_map()
+rows = {"plain lookup (Before us)": [[(g["form"], g["level"]) for g in gs] for gs in D.lookup_only().values()],
+        "the map (Now)": [[(g["form"], g["level"]) for g in gs] for gs in the_map.values()]}
+overlay = W.OUT / "overlay.jsonl"
+if overlay.exists():
+    new = {(o["text"], o["n"]): o["level"] for o in map(json.loads, overlay.open(encoding="utf-8"))}
+    rows["the map with the recurring-words overlay"] = [[(g["form"], new.get((t, i + 1), g["level"])) for i, g in enumerate(gs)] for t, gs in the_map.items()]
+for name, texts in rows.items():
+    running, spellings = tally(texts)
+    print(f"{name}: running words translated {running}; distinct spellings translated {spellings}")
+EOF
+```
+
+On 2026-11-16 it printed:
+
+```
+plain lookup (Before us): running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
+the map (Now): running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
+the map with the recurring-words overlay: running words translated 3916 of 7265 = 53.9%; distinct spellings translated 626 of 2944 = 21.3%
+```
+
+Once step G1 has put the overlay into the map, the third line no longer applies: drop it from the status.
+
+## 5. Giving a status, step by step
+
+1. Run the snippet of section 4 and read the three figures files named in section 3. If a local file is missing,
+   say which number could not be counted instead of quoting an old one.
+2. Open `STATUS_LOG.md` beside this file and take its last row: "Since last status" is the difference from it, in
+   points for the shares ("+3.8 points") and in units for the count of our own meanings, or "no change", or "new
+   row".
+3. Write the table and the three lines of section 1.
+4. Add a row to `STATUS_LOG.md` with the date and the numbers given, and commit it with the docs.
+5. If a number changed for a reason that is not obvious from the row's name, say in one bullet what moved it, in
+   the terms of "what moves it" above. Mike asked this of three rows in a row on 2026-11-16.
+
+## 6. Changing a measure
+
+A row's definition, its "Before us" or its source changes only on Mike's word. Record the change in section 7 with
+the date and his words, change section 3, and say in the next status that the row is measured differently, so
+that a jump is not read as progress. A new row gets its "Before us" counted before it is first shown.
+
+## 7. Decisions, in Mike's words (all 2026-11-16)
+
+- The format: "Template A: scoreboard. But add a column "status before us". to see our progress from the start".
+- The spellings row: "let's have spelling in the table, too".
+- The word "translated": "why "read"? what does it even mean? does it mean "we can read, not not translate the
+  word"?".
+- The north star: "why dont we have Distinct wrords translated? this sounds like a north star metric if we want
+  the entire language translatable?"; "do it and add to the table as the first row".
+- Its "Before us": "“Before us” should really equal “Now”, 11.6%."
+- Length: "answer shorter by default. 1 paragraph"; "when i meant "paragraph" i meant shortness, not a wall a wall
+  of text without formatting".
+- This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have
+  consistent ways of measuring across compactions and sessions".
+
+Offered and not taken up: the translation row could give way to "words whose meaning two scholars agree on"
+(39.9%, `data/discovery/lexicon.md`); the column "Before us" could be named "Plain lookup".
