@@ -47,7 +47,7 @@ CASES = ("word", "known", "same", "name", "piece", "unclear")
 KAPPA = 0.6                     # Cohen's kappa of the two checkers over the sampled stems; under it nothing is taken
 Z = 1.96                        # the range is a 95% interval
 # Subagent tokens of the checkers of each reading, from the task notifications, by hand after the runs.
-TOKENS = {"r1": (20, 1504282), "r2": (0, 0)}
+TOKENS = {"r1": (20, 1504282), "r2": (20, 1508109)}
 
 BRIEF = """# What are these {n} stems? A sample of what the map of Meroitic could not name
 
@@ -106,7 +106,8 @@ Rules for the cases (read them before you start; a first reading without them di
 """
 BRIEF2 = BRIEF.replace("\nLetters: the project writes", RULES2 + "\nLetters: the project writes")
 assert BRIEF2 != BRIEF
-ROUNDS = {"r1": {"folder": "", "brief": BRIEF}, "r2": {"folder": "r2/", "brief": BRIEF2}}
+# A reading's folder under OUT, its brief, and the commit that set its bar or its rules before its checkers started.
+ROUNDS = {"r1": {"folder": "", "brief": BRIEF, "set_in": "845396b"}, "r2": {"folder": "r2/", "brief": BRIEF2, "set_in": "2d9a6a4"}}
 LAST = "r2"
 
 
@@ -382,11 +383,13 @@ def figures():
             "unnamed_stems": pop["unnamed_stems"], "unnamed_in_one_place": pop["unnamed_in_one_place"],
             "unnamed_running_words": pop["unnamed_running_words"], "before": pop["before"],
             "sample": {k: res[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"seed": SEED, "reading": LAST},
-            "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} for r, v in by_round.items()},
+            "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"set_in": ROUNDS[r]["set_in"]}
+                         for r, v in by_round.items()},
             "unnamed_words": res["unnamed_words"], "distinct_words": res["distinct_words"],
             "star": res["star"], "star_before": res["star_before"],
             "next": {"stated_later": len(later), "translated": nxt, "star": star(nxt, pop["dictionary_words"], res["unnamed_words"])},
-            "tokens": {k: {"agents": a, "tokens": t} for k, (a, t) in TOKENS.items()}}
+            "tokens": {k: {"agents": a, "tokens": t} for k, (a, t) in TOKENS.items()}
+            | {"all": {"agents": sum(a for a, _ in TOKENS.values()), "tokens": sum(t for _, t in TOKENS.values())}}}
 
 
 def public():

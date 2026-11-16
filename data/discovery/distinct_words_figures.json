@@ -1,0 +1,120 @@
+{
+ "running": {
+  "stem": 1350,
+  "dictionary": 5571,
+  "none": 2959,
+  "name": 410
+ },
+ "dictionary_words": 446,
+ "translated": 160,
+ "unnamed_stems": 1107,
+ "unnamed_in_one_place": 975,
+ "unnamed_running_words": 1350,
+ "before": {
+  "running": {
+   "stem": 3997,
+   "dictionary": 3790,
+   "none": 2443,
+   "name": 60
+  },
+  "dictionary_words": 352,
+  "translated": 136
+ },
+ "sample": {
+  "sampled": 240,
+  "answered by both": 240,
+  "kappa": 0.9425,
+  "bar": 0.6,
+  "taken": true,
+  "verdicts": {
+   "word": 158,
+   "piece": 22,
+   "known": 3,
+   "unclear": 42,
+   "same": 5,
+   "name": 3,
+   "not agreed": 7
+  },
+  "seed": 20261116,
+  "reading": "r2"
+ },
+ "readings": {
+  "r1": {
+   "sampled": 240,
+   "answered by both": 240,
+   "kappa": 0.5282,
+   "bar": 0.6,
+   "taken": false,
+   "verdicts": {
+    "unclear": 38,
+    "not agreed": 71,
+    "word": 99,
+    "name": 8,
+    "same": 7,
+    "piece": 16,
+    "known": 1
+   },
+   "set_in": "845396b"
+  },
+  "r2": {
+   "sampled": 240,
+   "answered by both": 240,
+   "kappa": 0.9425,
+   "bar": 0.6,
+   "taken": true,
+   "verdicts": {
+    "word": 158,
+    "piece": 22,
+    "known": 3,
+    "unclear": 42,
+    "same": 5,
+    "name": 3,
+    "not agreed": 7
+   },
+   "set_in": "2d9a6a4"
+  }
+ },
+ "unnamed_words": {
+  "point": 930,
+  "low": 672,
+  "high": 1007
+ },
+ "distinct_words": {
+  "point": 1376,
+  "low": 1118,
+  "high": 1453
+ },
+ "star": {
+  "point": 0.1163,
+  "low": 0.1101,
+  "high": 0.1431
+ },
+ "star_before": {
+  "point": 0.0988,
+  "low": 0.0936,
+  "high": 0.1216
+ },
+ "next": {
+  "stated_later": 15,
+  "translated": 175,
+  "star": {
+   "point": 0.1272,
+   "low": 0.1204,
+   "high": 0.1565
+  }
+ },
+ "tokens": {
+  "r1": {
+   "agents": 20,
+   "tokens": 1504282
+  },
+  "r2": {
+   "agents": 20,
+   "tokens": 1508109
+  },
+  "all": {
+   "agents": 40,
+   "tokens": 3012391
+  }
+ }
+}

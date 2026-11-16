@@ -798,3 +798,28 @@ bars were set, each hold one run of four words of Rilly 2021: the name of the ca
 then checked the squash again with the waiver (286,998 subagent tokens, 8 minutes), corrected two sentences of
 the new section G of NEXT_STEPS, and marked the commit. The work is on main since 2026-11-16.
 
+## Day nine (2026-11-16): distinct words, the north star
+
+Asked that day: "why dont we have Distinct wrords translated? this sounds like a north star metric if we want the
+entire language translatable?", then "do it and add to the table as the first row". Page:
+[`data/discovery/distinct_words.md`](data/discovery/distinct_words.md); script `src/words.py`.
+
+**Why it was missing.** A spelling is one written form, and a word has many. For a spelling without a meaning
+nobody can say offhand which word it belongs to, so the words could not be counted, only the spellings (20.2% of
+them translated) and the running words (50.1%).
+
+**The count.** Every running word of the map that needs a meaning is a word of the lexicon (446 in use, 160 of
+them with an established or probable meaning), a name, or a stem the map could not name (1,107, of which 975
+stand in one place). Two checkers judged a sample of 240 of those stems, drawn by a fixed seed. The first reading
+missed its bar (kappa 0.53: "a word" against "unclear" for stems that stand once), so by the rule set beforehand
+the brief was corrected and other checkers read the same sample: kappa 0.94. About two in three of the stems are
+words of their own; the rest are pieces, words with lost signs, names or forms of known words.
+
+**The result.** About 1,376 distinct words (between 1,118 and 1,453), of which 160 are translated: 160 of about
+1,376, or 11.6% (between 11.0% and 14.3%). Before the project, with the lexicon looked up word by word, it was
+136 (9.9%). With the recurring-words results in the map it would be 175 (12.7%). No meaning among them is the
+project's own: the share moves only when a word of the dictionary gets a meaning, and that has come from
+scholars so far.
+
+**Cost.** 40 fresh agents, 3,012,391 subagent tokens for the two readings.
+

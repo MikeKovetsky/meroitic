@@ -189,6 +189,15 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     words whose true meaning was not offered (18.2%, the bar was 10%): so no proposal is labelled. None of these
     meanings is a reading of this project
     ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md)).
+18. **Counted by distinct words, about one word in nine has a meaning: 160 of about 1,376 (11.6%, between 11.0%
+    and 14.3%).** Half of the running words are translated because the common words are. Counted once each, the
+    words are far fewer: the map ties its spellings to 446 words of the lexicon, 160 of them with an established
+    or probable meaning, and leaves 1,107 stems it cannot name. Two checkers judged a sample of 240 of those stems
+    (a first reading missed its bar; with the brief corrected the second agreed, kappa 0.94): about two in three
+    are words of their own, the rest pieces, damaged words, names or forms of known words. Before the project,
+    with the lexicon looked up word by word, 136 of those words were translated (9.9%); the 24 more are words whose
+    meaning scholars had, found in spellings the lookup does not know. This is the project's north star, and no
+    meaning in it is our own ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
 
 ## The question
 
@@ -541,6 +550,16 @@ were started: committed for the place pass and the blind test, written in the wo
 command that writes packs refuses once an agent of its step has answered. The page gives the commits and the
 times ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md), section 9).
 
+### 25. Distinct words (`src/words.py`)
+
+`population` says of every running word of the map that needs a meaning what word it is: a word of the lexicon
+(every spelling built on one entry is that entry), a name, or a stem the map could not name. `packs` draws 240 of
+those stems by a fixed seed and writes them for two checkers, each stem with its places and the spellings that
+look like it; `count` compares the two (a stem has a case only when both give it; under a kappa of 0.6 nothing is
+taken) and estimates how many of the stems are words of their own, with a range. The share of distinct words that
+have a meaning is the translated words of the lexicon over the words of the lexicon in use plus that estimate
+([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -556,6 +575,7 @@ python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python3 -I tests/test_akinidad.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
+python3 -I tests/test_words.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -564,7 +584,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Fourteen things need files that are kept locally (Data, above), so they don't run from a clone:
+Fifteen things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -597,6 +617,8 @@ Fourteen things need files that are kept locally (Data, above), so they don't ru
 - `python3 -I src/recurring.py public` (and `items`, `batches`, `quotes`, `verify-packs`, `verify`, `place-packs`,
   `places`, `cand-packs`, `cands`, `choice-packs`, `choice`, `recount`) reads `corpus_v6` and its gloss file,
   Rilly's lexicon, the text layers of the sources and the readers' and checkers' answers.
+- `python3 -I src/words.py public` (and `population`, `packs`, `count`) reads `corpus_v6` and its gloss file,
+  Rilly's lexicon and the checkers' answers.
 
 ## Layout
 
@@ -605,7 +627,8 @@ Fourteen things need files that are kept locally (Data, above), so they don't ru
   for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
   the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
-  (`f4.py`, the pilot, and `f4r.py`, the rounds) and the unread spellings that recur (`recurring.py`).
+  (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`) and the count
+  of distinct words (`words.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

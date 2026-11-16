@@ -1,7 +1,12 @@
 # Distinct words translated: the north star
 
-Status on 2026-11-16: the count of the dictionary words is done; the first reading of the sample missed its bar;
-the second reading is with its checkers. Script: `src/words.py`. Checks: `tests/test_words.py`.
+Status on 2026-11-16: done. Figures: `distinct_words_figures.json`. Script: `src/words.py`. Checks:
+`tests/test_words.py`.
+
+**In short.** The corpus holds about 1,376 distinct words (between 1,118 and 1,453), and 160 of them have a
+meaning: 11.6% (between 11.0% and 14.3%). Before the project, with the lexicon looked up word by word, it was 136
+of them, 9.9%. No meaning among them is the project's own. The number of distinct words is an estimate: 446 are
+words of the dictionary, the rest comes from a sample of the stems the map could not name, judged by two checkers.
 
 ## 1. What was asked
 
@@ -16,8 +21,8 @@ Requirements, one line each:
 
 | | Requirement | State |
 |---|---|---|
-| R1 | A way to count distinct words translated, the share of the different words of the corpus that have a meaning. | In work. |
-| R2 | The count itself, to stand as the first row of the status table, with what it was before the project. | In work. |
+| R1 | A way to count distinct words translated, the share of the different words of the corpus that have a meaning. | MET: sections 3 and 4. The dictionary words are counted; the other words are estimated from a sample, with a range. |
+| R2 | The count itself, to stand as the first row of the status table, with what it was before the project. | MET: section 5 gives it now, before the project, and with the recurring-words results in the map. |
 
 ## 2. Why spellings are not words
 
@@ -38,7 +43,9 @@ sign) is one of three things, by the pieces the map cuts it into:
   name, or the whole spelling) is the stem.
 
 The dictionary words can be counted, and so can those whose meaning the lexicon calls established or probable:
-these are the **translated** ones. The unnamed stems cannot be counted as they stand. Some are names, pieces of
+these are the **translated** ones. 446 dictionary words are in use, and 160 of them are translated. There are
+1,107 unnamed stems, under 1,350 running words; 975 of them stand in one place. The unnamed stems cannot be counted
+as they stand. Some are names, pieces of
 longer words, forms of dictionary words the map missed, or one word under two stems; most stand in one place.
 
 ## 4. The sample of the unnamed stems (bar set before the checkers are started)
@@ -57,7 +64,7 @@ A checker gives each stem one of six cases:
 - **piece**: no stem, but a piece of a longer word, or an ending or a sign alone;
 - **unclear**: signs are lost, or too little is shown to decide.
 
-The bar, set on 2026-11-16 before any checker was started:
+The bar, set on 2026-11-16 before any checker was started (commit `845396b`):
 
 1. A stem has a case only when both checkers give that case. Otherwise it is "not agreed".
 2. If Cohen's kappa of the two checkers over the sampled stems is under 0.6, or a stem is not answered by both,
@@ -84,7 +91,7 @@ the other, most of them stems that stand once among words nobody understands; 13
 
 As point 2 of the bar says, the brief is corrected and fresh checkers read the same 240 stems again. Nothing else
 changes: the sample, the packs' contents, the bar and the way of estimating are those above. The rules added to
-the brief, set on 2026-11-16 before any checker of the second reading was started:
+the brief, set on 2026-11-16 before any checker of the second reading was started (commit `2d9a6a4`):
 
 - A stem with no lost sign is a "word" unless something shown marks it as another case. That it stands once, or
   among words nobody understands, is no reason for "unclear": the edition wrote it as a word, and it counts as one
@@ -99,6 +106,59 @@ the brief, set on 2026-11-16 before any checker of the second reading was starte
 
 These rules make the count cautious for the north star: a stem in doubt counts as a word, which makes the number
 of distinct words larger and the share of them that is translated smaller.
+
+### The second reading passed
+
+20 other checkers answered all 240 stems. Their Cohen's kappa is 0.94 (bar 0.6), so this reading is taken.
+
+| Case | First reading | Second reading |
+|---|---|---|
+| word | 99 | 158 |
+| known | 1 | 3 |
+| same | 7 | 5 |
+| name | 8 | 3 |
+| piece | 16 | 22 |
+| unclear | 38 | 42 |
+| not agreed | 71 | 7 |
+
+So about two in three of the sampled stems are words of their own, one in eleven is a piece, one in six has a lost
+sign in or beside it, and few are names or forms of a word the lexicon has.
+
+## 5. The north star
+
+By the bar's rule the sample gives about 930 distinct words among the unnamed stems (between 672 and 1,007). With
+the 446 dictionary words that makes about 1,376 distinct words in all (between 1,118 and 1,453).
+
+| | Dictionary words translated | Share of the distinct words | Range |
+|---|---|---|---|
+| Before us | 136 | 9.9% | 9.4% to 12.2% |
+| Now | 160 | 11.6% | 11.0% to 14.3% |
+| With the recurring-words results in the map | 175 | 12.7% | 12.0% to 15.7% |
+
+- **Before us** is the lexicon of 2003 looked up word by word: the lookup reaches 352 of the dictionary words,
+  136 of them translated.
+- **Now** is the map as it stands. The 24 words more are words whose meaning scholars had and which stand in the
+  corpus only in spellings the lookup does not know. None is a meaning the project found.
+- **With the recurring-words results** ([the recurring open words](recurring_words.md)) 15 more dictionary words
+  count as translated: those for which Rilly's work of 2016 or 2021 states a meaning that two checkers found to
+  hold in at least one place.
+
+The share moves only when a dictionary word gets a meaning or when the count of words is corrected. Recognising
+one more spelling of a word that is already translated does not move it, which is why it stands so far under the
+share of running words translated (50.1%).
+
+## 6. Limits and cost
+
+- The number of distinct words is an estimate from 240 of 1,107 stems; the range carries the sample's 95% interval
+  and the stems the checkers call unclear or do not agree on.
+- By the second reading's rules a stem in doubt counts as a word. That makes the number of words larger and the
+  share smaller: the north star is given on its cautious side.
+- A word of the dictionary counts as one word even where the lexicon files two words under one spelling or one
+  word under two entries; endings and particles that have an entry are counted as words.
+- "Translated" is the lexicon's own judgment of 2003 (established or probable). A second scholar agrees for only
+  part of these ([the lexicon's statuses](lexicon.md)).
+- The two readings cost 40 fresh agents, 3,012,391 subagent tokens: 1,504,282 for the first reading and 1,508,109 for
+  the second. The line each was started with is in `runs/prompts/WORDS_launch.md`.
 
 What the count cannot show: the checkers are one model, so their agreement shows that a judgment can be repeated,
 not that it is right; they see six words on each side, not the stone; and the corpus is what survives, so "all
