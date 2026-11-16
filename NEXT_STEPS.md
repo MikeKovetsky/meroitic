@@ -470,11 +470,12 @@ has its own step:
 | c. The lexicon does not hold the spelling, and it stands in one or two texts | 1,225 | 1,107 |G3 |
 | d. Places of the 154 recurring spellings that point 18 left: 378 open, 124 pieces of a word the map does not read, 137 unclear, 77 not agreed | 716 | 127 | G5, G6 |
 
-Ten more are single open places of spellings the map reads elsewhere.
+Ten more are open places of five spellings that the map takes as names elsewhere.
 
-The steps, in this order. Each keeps the rules of point 18: two readers a place, each bar committed before its
-readers are started, a count that follows from a figures file, and nothing called a meaning of ours unless it
-passes a test set beforehand.
+The steps, in this order. Each keeps the rules of point 18, one of them more strictly: two readers a place, each
+bar committed before its readers are started (point 18 did so for every bar but that of the stated meanings, which
+went into git only with its result), a count that follows from a figures file, and nothing called a meaning of
+ours unless it passes a test set beforehand.
 
 1. **G1. Put the overlay into the map.** The 385 places of point 18 (273 stated by Rilly in 2016 or 2021, 66
    pieces of a word or name the map reads, 46 places of seven names) become a layer of the map's build, each with
