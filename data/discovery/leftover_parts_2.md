@@ -1,8 +1,9 @@
 # The leftover parts, read again (the second reading of part 1)
 
-Status on 2026-11-16, 15:51: the rules and the bars of the second reading are set; no checker has been started.
-Working script (local until the reading is counted): `data/sources/g8b/run.py`. The first reading and the
-step's other part are on [leftover_parts.md](leftover_parts.md). What the checkers are given:
+Status on 2026-11-16, 15:53: the second reading is counted and **its bars are met** (section 5): 32 places can be
+laid, 27 of them as translated words. Its script is local and not reviewed yet (`data/sources/g8b/run.py`), so
+the map and the scoreboard do not count them yet. The first reading and the step's other part are on
+[leftover_parts.md](leftover_parts.md). What the checkers were given:
 [`runs/prompts/G8_parts_2.md`](../../runs/prompts/G8_parts_2.md).
 
 ## 1. What was asked
@@ -63,3 +64,44 @@ each verdict?": "Yes, read again".
 - The checkers are one model: their agreement shows that a judgment can be repeated, not that it is right.
 - No meaning found here is the project's own: a place that is laid takes the meaning the lexicon or a later
   source already gives its entry.
+
+## 5. The result (counted at 15:53, bars met)
+
+The six checkers were started at 15:51, after the commit with the bars (15:51:18); their answers came between
+15:52 and 15:53.
+
+| Bar | Result | |
+|---|---|---|
+| Every place answered by both | 136 of 136 (96 places, 40 controls) | met |
+| Kappa of 0.6 or more on the real places | 0.66 | met |
+| Each checker calls at most 2 of 20 runs of lot letters an ending or a known word | 0 and 1 | met |
+| Each checker calls at least 14 of 20 hidden endings an ending | 20 and 19 | met |
+
+| Both checkers say, of the 96 places | Places |
+|---|---|
+| unknown | 37 |
+| ending | 32 |
+| a name (not laid) | 6 |
+| a known word, the same entry | 1 |
+| not agreed | 20 |
+
+**What can be laid: 32 places.** 27 become translated words and 5 become names (their entry is a name by the
+lexicon). One place both checkers call an ending stays open, because another stem of its spelling has no
+meaning. The 6 places both call a name stay open, as the rule says.
+
+**The two readings side by side** (the first was not taken):
+
+| | First | Second |
+|---|---|---|
+| Kappa | 0.77 | 0.66 |
+| Both say ending | 40 | 32 |
+| Both say unknown | 28 | 37 |
+| Both say a name | 12 | 6 |
+| Not agreed | 14 | 20 |
+
+The second reading agrees less and gives less, and it is the one that counts. Letters drawn by lot that stood
+before "begotten of" were again called a name by both checkers, which is the reason a name is no longer laid.
+
+The numbers of the map change only when the script is in `src/` and reviewed.
+
+Cost: 6 agents, 565,589 tokens (typed from the task notifications into `data/sources/g8b/tokens.json`, local).
