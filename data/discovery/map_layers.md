@@ -30,7 +30,7 @@ Requirements, one line each:
 | R1 | "The 385 places of point 18 [...] become a layer of the map's build, each with its source." | MET: sections 2 and 4. `src/themap.py` lays the layer's 385 lines over the base; each changed word carries its source, the reason and the level it had. |
 | R2 | "Done when the map's own figure is 53.9%" | MET: section 4. With the layer `recurring` the script's count is 3,916 of 7,265, and it equals the count the recurring-words study made itself (`tests/test_themap.py`). The two layers laid after it the same day move it on (section 3). |
 | R3 | "the pages that count from the map (coverage, the translations' baseline, the lexicon's statuses) are rebuilt from the same file" | NOT MET as written, on purpose, and waived by Mike on 2026-11-16 at 13:52, asked whether the three pages could keep their numbers and point here: "Yes, waive it." Section 5 gives the reasons. The figure of the coverage measure is counted from the map with its layers (section 3) and the three pages point here; their own numbers are not counted again. |
-| R4 | "the checks and the review pass" | The checks pass; the review is named in section 7. |
+| R4 | "the checks and the review pass" | MET: the checks pass, and the review of section 7 left nothing open after its fixes. |
 | R5 | "No agents but the review." | MET: no agent was run for this step. |
 
 ## 2. What a layer is
@@ -157,5 +157,17 @@ python3 -I tests/test_themap.py   # the method on made-up words; the figures, th
 A new layer is one more entry of `LAYERS` in `src/themap.py` and one more row of section 4. The lines of the two
 layers of the rare spellings are written by `python3 -I src/rare.py layers`.
 
-Review: an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the reasoning)
-checks this step before it is public; what it changes is listed here once it has run.
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked this step with G2 and G4 and changed:
+
+1. The coverage measure of section 5: 58.2% on the map as it stands (55.6% was the map with the first layer alone).
+2. `src/themap.py` stops on a line whose former level is not the map's, since the figures count what the layers
+   moved from it.
+3. One rule for a word of the dictionary that a layer gives a meaning (`given()`), used by the north star and by
+   the page of the rare spellings, which had a rule of its own.
+4. Mike's waiver of R3 is recorded here and in the summaries, and the cut is said wherever the step is told.
+5. On [the page of the rare spellings](rare_spellings.md) and in the summaries, counts and times corrected: the
+   pieces among the places laid, the one place kept out for a stem without a meaning, the additions made after
+   G2's checkers had answered, the entries of class C. `src/rare.py` was shown to write the run's packs and results
+   again byte for byte; the agents' launch lines and the times of each step's rules, launches and answers are
+   recorded, with checks.

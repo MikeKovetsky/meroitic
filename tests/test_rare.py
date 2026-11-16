@@ -423,7 +423,7 @@ def test_every_pack_and_result_is_what_the_steps_write():
               ("g4", ["places/answers1", "places/answers2"]), ("g4", ["places", "place-packs2"]),
               ("g4", ["places2/answers1", "places2/answers2"]), ("g4", ["places2"]), ("g2", ["place-packs"]),
               ("g2", ["places/answers1", "places/answers2"]), ("g2", ["places"])]
-    real, out = R.HOME, W.OUT
+    real, out, batches = R.HOME, W.OUT, W.BATCHES                      # what the steps point elsewhere while they run
     with tempfile.TemporaryDirectory() as d:
         try:
             R.HOME = Path(d)
@@ -435,7 +435,7 @@ def test_every_pack_and_result_is_what_the_steps_write():
                     else:
                         shutil.copytree(real / run_ / step, R.HOME / run_ / step, dirs_exist_ok=True)
         finally:
-            R.HOME, W.OUT = real, out
+            R.HOME, W.OUT, W.BATCHES = real, out, batches
         mine = {p.relative_to(d) for p in Path(d).rglob("*") if p.is_file()}
         # written by other commands than the steps': the brief, a copy of the public one, and the lines of `layers`
         theirs = {p.relative_to(real) for p in real.rglob("*") if p.is_file() and p.relative_to(real).parts[0] in R.LAYER

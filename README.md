@@ -205,13 +205,13 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     need a meaning are translated, and 136 of about 1,307 distinct words (10.4%, between 9.8% and 13.0%).** The 385 places that item
     17 resolved (273 where Rilly states a meaning in 2016 or 2021, 66 pieces of a word or name the map holds, 46
     places of seven names) are laid over the analysts' map as a layer, each with its source; the analysts' map is
-    not changed, and the studies run on it keep their numbers. The step also asked for the three pages that count
-    from the map (the coverage of the clean corpus, the lexicon's statuses, the translations' baseline) to be
-    rebuilt from the same file: they are not, they keep their dated numbers and point to the new page, and Mike
-    waived that part on 2026-11-16 ("Yes, waive it."). That makes 240 running words more translated
+    not changed, and the studies run on it keep their numbers. That makes 240 running words more translated
     (3,676 to 3,916 of those that need a meaning, 50.1% to 53.9%) and gives 9 more words of the lexicon a meaning
     (127 to 136). All of these meanings were published before the project, so the north star's "before us" is
-    the same 10.4%, and the project still has no meaning of its own
+    the same 10.4%, and the project still has no meaning of its own. The step also asked for the three pages that
+    count from the map (the coverage of the clean corpus, the lexicon's statuses, the translations' baseline) to be
+    rebuilt from the same file: they are not, they keep their dated numbers and point to the new page, and Mike
+    waived that part on 2026-11-16 ("Yes, waive it.")
     ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
 20. **Of the open spellings that stand in one or two texts, 268 more places take a scholar's meaning or turn out to
     be names; the map now translates 57.4% of the running words that need a meaning, and 156 of about 1,307 distinct
