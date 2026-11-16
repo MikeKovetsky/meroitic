@@ -787,5 +787,12 @@ the public files; the packs and the answers keep the readers' wording.
 rewordings held the readers' wordings as its keys, so they still stood in a tracked file; the check for copied
 wording read only the lexicon entries the map uses, and missed words in which the text layer of Rilly 2021 has
 lost a ligature; one of the new wordings itself followed another entry for four words. It also noted that the
-copied wordings still stand in the branch's earlier commits, which a later commit cannot take out.
+copied wordings still stood in the branch's earlier commits, which a later commit cannot take out.
+
+**Before the push.** On Mike's word of 2026-11-15 the six commits from the work itself to the second review's
+cost were made one, with the same files, so none of the nine wordings reached GitHub. A check of that squash
+(210,173 subagent tokens, 12 minutes, from its task notification) found the files unchanged and no local-only
+file in any commit. It also found that the three commits kept as they were, because their times show when the
+bars were set, each hold one run of four words of Rilly 2021: the name of the case ending of `-w (1)` in section
+4 of the page, which the head says in other words. Mike waived that one phrase on 2026-11-16.
 
