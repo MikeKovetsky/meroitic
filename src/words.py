@@ -11,11 +11,13 @@ Every command reads and writes under data/sources/words/ (local only: the packs 
 `public`, which writes the figures of the page.
 
   python3 -I src/words.py population   the words of the map, by what they are (population.json)
-  python3 -I src/words.py packs        the sample of unnamed stems for two checkers (packs/, sample.json)
-  python3 -I src/words.py count        the two checkers compared, the estimate and its range (result.json)
+  python3 -I src/words.py packs r2     the sample of unnamed stems for two checkers (packs/, sample.json)
+  python3 -I src/words.py count r2     the two checkers compared, the estimate and its range (result.json)
   python3 -I src/words.py public       data/discovery/distinct_words_figures.json
 
-The line each checker was started with is in runs/prompts/WORDS_launch.md; the brief is BRIEF below.
+Two readings of the same sample: `r1`, whose checkers missed the bar, and `r2`, with the brief corrected as the
+bar says (fresh checkers; the rules of RULES2). The line each checker was started with is in
+runs/prompts/WORDS_launch.md; the briefs are BRIEF and BRIEF2 below.
 """
 import collections
 import json
@@ -44,8 +46,8 @@ CASES = ("word", "known", "same", "name", "piece", "unclear")
 # The bar, set and committed before any checker was started (the page gives the commit).
 KAPPA = 0.6                     # Cohen's kappa of the two checkers over the sampled stems; under it nothing is taken
 Z = 1.96                        # the range is a 95% interval
-# Subagent tokens of the checkers, from the task notifications, by hand after the run.
-TOKENS = {"checkers": (0, 0)}
+# Subagent tokens of the checkers of each reading, from the task notifications, by hand after the runs.
+TOKENS = {"r1": (20, 1504282), "r2": (0, 0)}
 
 BRIEF = """# What are these {n} stems? A sample of what the map of Meroitic could not name
 
@@ -82,6 +84,30 @@ accepted meaning for. The repository's root is /Users/mike/repos/mike/meroitic.
 
 When the file is written, reply in one line: how many items, and how many of each case.
 """
+
+
+# The second reading: the first missed the bar, mostly on "word" against "unclear" for a stem that stands once
+# (42 of its 71 stems not agreed) and on "word" against "name" (13). These rules were added and committed before
+# any checker of the second reading was started.
+RULES2 = """
+Rules for the cases (read them before you start; a first reading without them did not agree):
+
+- A stem with no lost sign is a **"word"** unless something shown marks it as one of the other cases. That it
+  stands once, or among words nobody understands, is no reason for "unclear": the edition wrote it as a word, and
+  it counts as one until something shows otherwise.
+- **"unclear"** only when a sign is lost (a dot) in the stem's own word or in the word right before or right after
+  it, or when the text has fewer than three words. Too little context alone is not "unclear".
+- **"name"** only when the place gives a reason: the stem stands where names stand (beside a word of filiation
+  such as "born of" or "begotten of", before "this one is", or with a title and "it is"), or the map reads the
+  word beside it as part of the same name.
+- **"piece"** only when the word beside it completes it to a spelling the lexicon has, or when the stem is one or
+  two signs. A stem of three signs or more that nothing completes is a "word".
+- **"known"** and **"same"** only when the places support it, not on the look of the spelling alone.
+"""
+BRIEF2 = BRIEF.replace("\nLetters: the project writes", RULES2 + "\nLetters: the project writes")
+assert BRIEF2 != BRIEF
+ROUNDS = {"r1": {"folder": "", "brief": BRIEF}, "r2": {"folder": "r2/", "brief": BRIEF2}}
+LAST = "r2"
 
 
 def read(path):
@@ -235,15 +261,19 @@ def answered(folder):
     return folder.is_dir() and any(folder.glob("*.jsonl"))
 
 
-def packs():
-    if answered(OUT / "answers1") or answered(OUT / "answers2"):
+def packs(rnd=LAST):
+    """The packs of one reading: the same sample for every reading, the reading's own brief."""
+    sub = ROUNDS[rnd]["folder"]
+    if answered(OUT / f"{sub}answers1") or answered(OUT / f"{sub}answers2"):
         raise SystemExit("the packs are answered: they are not written again")
     gl, rows, pop = W.the_map(), W.corpus_rows(), read("population.json")
     words, _, _ = C.index(C.lexicon())
     stems = pop["stems"]
     chosen = sample_of(stems)
     groups = [chosen[i: i + PACK] for i in range(0, len(chosen), PACK)]
-    (OUT / "packs").mkdir(parents=True, exist_ok=True)
+    if (OUT / "sample.json").exists() and read("sample.json") != groups:
+        raise SystemExit("the sample is not the one already drawn")
+    (OUT / f"{sub}packs").mkdir(parents=True, exist_ok=True)
     n = 0
     for k, group in enumerate(groups, 1):
         body = []
@@ -251,11 +281,11 @@ def packs():
             n += 1
             body.append(item_block(n, stems[stem], gl, rows, words, stems))
         for c in (1, 2):
-            (OUT / f"answers{c}").mkdir(exist_ok=True)
-            text = BRIEF.format(n=len(group), answers=f"data/sources/words/answers{c}/S{k:02d}.jsonl") + "\n---\n\n" + "\n".join(body)
-            (OUT / "packs" / f"S{k:02d}_c{c}.md").write_text(text, encoding="utf-8")
+            (OUT / f"{sub}answers{c}").mkdir(exist_ok=True)
+            text = ROUNDS[rnd]["brief"].format(n=len(group), answers=f"data/sources/words/{sub}answers{c}/S{k:02d}.jsonl") + "\n---\n\n" + "\n".join(body)
+            (OUT / f"{sub}packs" / f"S{k:02d}_c{c}.md").write_text(text, encoding="utf-8")
     write("sample.json", groups)
-    print(len(groups), "packs,", len(chosen), "stems of", len(stems))
+    print(rnd, len(groups), "packs,", len(chosen), "stems of", len(stems))
 
 
 # ---------------------------------------------------------------------------------------------------- the count
@@ -322,11 +352,11 @@ def results(pop, groups, one, two):
     return out
 
 
-def count():
-    pop, groups = read("population.json"), read("sample.json")
-    out = results(pop, groups, sample_answers(OUT / "answers1", groups), sample_answers(OUT / "answers2", groups))
-    write("result.json", out)
-    print({k: v for k, v in out.items() if k != "rows"})
+def count(rnd=LAST):
+    pop, groups, sub = read("population.json"), read("sample.json"), ROUNDS[rnd]["folder"]
+    out = results(pop, groups, sample_answers(OUT / f"{sub}answers1", groups), sample_answers(OUT / f"{sub}answers2", groups))
+    write(f"{sub}result.json", out)
+    print(rnd, {k: v for k, v in out.items() if k != "rows"})
 
 
 # ---------------------------------------------------------------------------------------------- the public figures
@@ -341,15 +371,18 @@ def stated_later(lex):
 
 def figures():
     """What the page reports, from the local results: counts only, with a few stems as examples."""
-    pop, res, lex = read("population.json"), read("result.json"), W.lexicon()
+    pop, lex = read("population.json"), W.lexicon()
+    by_round = {r: read(f"{ROUNDS[r]['folder']}result.json") for r in ROUNDS}
+    res = by_round[LAST]
     if not res["taken"]:
-        raise SystemExit("the sample missed its bar: nothing is taken from it")
+        raise SystemExit("the last reading missed its bar: nothing is taken from it")
     later = stated_later(lex)
     nxt = pop["translated"] + len(later)
     return {"running": pop["running"], "dictionary_words": pop["dictionary_words"], "translated": pop["translated"],
             "unnamed_stems": pop["unnamed_stems"], "unnamed_in_one_place": pop["unnamed_in_one_place"],
             "unnamed_running_words": pop["unnamed_running_words"], "before": pop["before"],
-            "sample": {k: res[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"seed": SEED},
+            "sample": {k: res[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"seed": SEED, "reading": LAST},
+            "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} for r, v in by_round.items()},
             "unnamed_words": res["unnamed_words"], "distinct_words": res["distinct_words"],
             "star": res["star"], "star_before": res["star_before"],
             "next": {"stated_later": len(later), "translated": nxt, "star": star(nxt, pop["dictionary_words"], res["unnamed_words"])},
@@ -364,6 +397,6 @@ def public():
 COMMANDS = {"population": population, "packs": packs, "count": count, "public": public}
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:
+    if len(sys.argv) not in (2, 3) or sys.argv[1] not in COMMANDS or (sys.argv[2:] and (sys.argv[1] not in ("packs", "count") or sys.argv[2] not in ROUNDS)):
         raise SystemExit(__doc__)
-    COMMANDS[sys.argv[1]]()
+    COMMANDS[sys.argv[1]](*sys.argv[2:])

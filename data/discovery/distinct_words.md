@@ -1,7 +1,7 @@
 # Distinct words translated: the north star
 
-Status on 2026-11-16: the count of the dictionary words is done; the sample of the unnamed stems is with its
-checkers. Script: `src/words.py`. Checks: `tests/test_words.py`.
+Status on 2026-11-16: the count of the dictionary words is done; the first reading of the sample missed its bar;
+the second reading is with its checkers. Script: `src/words.py`. Checks: `tests/test_words.py`.
 
 ## 1. What was asked
 
@@ -73,6 +73,32 @@ The bar, set on 2026-11-16 before any checker was started:
    analysts or corrections: the translated dictionary words that the lookup reaches, over the same number of
    distinct words (how many words the corpus holds does not depend on us).
 6. A checker's file counts only for the stems of its own pack.
+
+### The first reading missed the bar
+
+20 checkers answered all 240 stems. Their Cohen's kappa is 0.53, under the bar of 0.6, so nothing is taken from
+this reading. They agree on 169 stems and not on 71. Of the 71, 42 are "word" for one checker and "unclear" for
+the other, most of them stems that stand once among words nobody understands; 13 are "word" against "name".
+
+### The second reading: the same sample, the brief corrected (set before its checkers are started)
+
+As point 2 of the bar says, the brief is corrected and fresh checkers read the same 240 stems again. Nothing else
+changes: the sample, the packs' contents, the bar and the way of estimating are those above. The rules added to
+the brief, set on 2026-11-16 before any checker of the second reading was started:
+
+- A stem with no lost sign is a "word" unless something shown marks it as another case. That it stands once, or
+  among words nobody understands, is no reason for "unclear": the edition wrote it as a word, and it counts as one
+  until something shows otherwise.
+- "Unclear" only when a sign is lost in the stem's own word or in the word right before or after it, or when the
+  text has fewer than three words.
+- "Name" only when the place gives a reason: the stem stands where names stand, or the map reads the word beside
+  it as part of the same name.
+- "Piece" only when the word beside it completes it to a spelling the lexicon has, or when the stem is one or two
+  signs.
+- "Known" and "same" only when the places support it, not on the look of the spelling alone.
+
+These rules make the count cautious for the north star: a stem in doubt counts as a word, which makes the number
+of distinct words larger and the share of them that is translated smaller.
 
 What the count cannot show: the checkers are one model, so their agreement shows that a judgment can be repeated,
 not that it is right; they see six words on each side, not the stone; and the corpus is what survives, so "all
