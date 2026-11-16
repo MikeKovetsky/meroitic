@@ -220,13 +220,10 @@ def test_the_reporting_skill_reads_these_figures():
                 "`north_star.star.low`", "`north_star.star.high`", "`current.running.share`", "`lookup.running.share`",
                 "`current.spellings.share`", "`lookup.spellings.share`", "`python3 -I src/themap.py`"):
         assert key in skill, key
-    assert f["north_star"]["star"]["point"] and f["current"]["running"]["share"] and f["lookup"]["spellings"]["share"]
-    pct = lambda x: f"{100 * x:.1f}%"                                     # noqa: E731
-    log = (SKILL.parent / "STATUS_LOG.md").read_text(encoding="utf-8").splitlines()
-    last = [l for l in log if l.startswith("| 20")][-1]
-    # the last status given may be older than the figures; when it is of the day the last layer was laid or later, it quotes them
-    if last.split("|")[1].strip() >= M.LAYERS[-1]["laid"] and "layer" in last:
-        assert pct(f["north_star"]["star"]["point"]) in last and pct(f["current"]["running"]["share"]) in last and pct(f["current"]["spellings"]["share"]) in last
+    # the skill quotes what the command prints, line for line, so its example cannot go stale when a layer is laid
+    raw = SKILL.read_text(encoding="utf-8")
+    for l in M.lines(f):
+        assert l + "\n" in raw, l
 
 
 def test_the_figures_are_the_count_of_the_local_files():

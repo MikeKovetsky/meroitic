@@ -152,16 +152,21 @@ def figures():
             "north_star": star}
 
 
+def lines(figs):
+    """The four lines the command prints; the reporting skill quotes them as they stand."""
+    pct = lambda x: f"{100 * x:.1f}%"                                    # noqa: E731
+    out = [f"{name}: running words translated {c['running']['translated']} of {c['running']['need']} = {pct(c['running']['share'])}; "
+           f"distinct spellings translated {c['spellings']['translated']} of {c['spellings']['need']} = {pct(c['spellings']['share'])}"
+           for name, c in (("plain lookup", figs["lookup"]), ("base", figs["base"]), ("as it stands", figs["current"]))]
+    n = figs["north_star"]
+    return out + [f"north star: {n['translated']} of about {n['distinct_words']['point']} = {pct(n['star']['point'])} "
+                  f"({pct(n['star']['low'])} to {pct(n['star']['high'])})"]
+
+
 def main():
     figs = figures()
     PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    pct = lambda x: f"{100 * x:.1f}%"                                    # noqa: E731
-    for name, c in (("plain lookup", figs["lookup"]), ("base", figs["base"]), ("as it stands", figs["current"])):
-        print(f"{name}: running words translated {c['running']['translated']} of {c['running']['need']} = {pct(c['running']['share'])}; "
-              f"distinct spellings translated {c['spellings']['translated']} of {c['spellings']['need']} = {pct(c['spellings']['share'])}")
-    n = figs["north_star"]
-    print(f"north star: {n['translated']} of about {n['distinct_words']['point']} = {pct(n['star']['point'])} "
-          f"({pct(n['star']['low'])} to {pct(n['star']['high'])})")
+    print("\n".join(lines(figs)))
 
 
 if __name__ == "__main__":
