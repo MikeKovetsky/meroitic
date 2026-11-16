@@ -830,5 +830,8 @@ plan's "strip the known endings" does not do either, and one name of the kind "n
 1,376, 11.6%, the figure in Mike's answer above. The review made them pieces and a name, on the side of the
 dictionary only, so the sample and its estimate stay as they were.
 
-**Cost.** 40 fresh agents, 3,012,391 subagent tokens for the two readings.
+**Cost.** 40 fresh agents, 3,012,391 subagent tokens for the two readings. The review (full tier) cost 562,088
+subagent tokens and 49 minutes, from its task notification. Mike kept the review's count on 2026-11-16 ("Yes, 9.7%
+and push"). How the status table is built and each of its numbers measured is in
+`.claude/skills/reporting/SKILL.md`.
 
