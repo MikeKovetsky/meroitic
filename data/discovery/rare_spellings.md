@@ -91,6 +91,21 @@ both checkers say so. A stated place takes the lexicon's meaning of that entry.
   translated already.
 - In every count the meanings are the sources', not the project's.
 
+**One rule added on 2026-11-16 at 13:21,** after G2's checkers had answered and before their answers were
+counted, and before any checker of G4's places was started. 26 of G2's 116 entries and 36 of G4's 323 are endings
+or particles: the map files a spelling under such an entry when it finds no stem of the lexicon in it. For these
+entries "stated" says only that the ending in the spelling is that ending; the stem beside it still has no
+meaning. So:
+
+- A stated place of an entry that is an ending or a particle counts as translated only where the map names every
+  part of the spelling, so that the ending or particle is written as a word of its own (as `wi` is among the
+  recurring words). Where a part of the spelling is unnamed, the place stays open and is counted apart, as
+  "ending recognised".
+- For the entries that are stems the rule above stands. The count of the stated places where the map names every
+  part of the spelling is given beside it, as the stricter figure.
+
+This is stricter than the rule above: it can take translated words away and cannot add one.
+
 The briefs the checkers of both place passes are given, and their launch line, are in
 [`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md), committed before any of them was started.
 
