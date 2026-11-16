@@ -102,11 +102,12 @@ Done since this plan was written:
     meaning of all words: the map reads 50.1% of the running words that need one. Of the 1,108 running words
     under the 154 open spellings that stand in three texts or more, 273 take a meaning Rilly states in 2016 or
     2021, 192 are pieces of a longer word or name, 425 stay open and 218 are unclear or not agreed (two
-    checkers a place, kappa 0.91). Laid over the map that gives 53.9%; the map is not changed yet. A blind test
+    checkers a place, kappa 0.91). Laid over the map that gives 53.9%; since 2026-11-16 it is the map's first
+    layer (point 20). A blind test
     of the proposals on record for the open words missed both bars (right for 13 of 17 accepted words where
     the readers chose, 76.5% against 80%; a wrong meaning chosen for 2 of 11 where the true one was not offered,
-    18.2% against 10%), so no proposal is labelled. Open: applying the overlay to the map; the same pass on the
-    2,203 open spellings that stand in one or two texts. Both are steps of section G.
+    18.2% against 10%), so no proposal is labelled. Open: the same pass on the 2,203 open spellings that stand in
+    one or two texts (steps G2 to G4 of section G).
 19. **Distinct words translated, the north star** (2026-11-16,
     [`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)). Counted once each, 127 of about
     1,307 distinct words have a meaning: 9.7% (between 9.2% and 12.1%), the same as before the project (each of
@@ -116,6 +117,13 @@ Done since this plan was written:
     section G move this number only where they give a word of the dictionary a meaning (G1: 9 words, Rilly's of
     2016 and 2021; G4 and G7 where they find one) or correct the count of words (G3). Only a meaning of the
     project's own would set it apart from before us.
+20. **The map with its layers** (2026-11-16, [`data/discovery/map_layers.md`](data/discovery/map_layers.md);
+    step G1). The 385 places point 18 resolved are laid over the analysts' map as its first layer, each with its
+    source (`src/themap.py`); the analysts' map is not changed. The map as it stands: 3,916 of the 7,265 running
+    words that need a meaning are translated (53.9%, from 50.1%), 626 of 2,944 distinct spellings (21.3%), and 136
+    of about 1,307 distinct words (10.4%, between 9.8% and 13.0%; before us the same). The status table reads
+    its first three rows from this count. The dated studies keep the analysts' map. Open: the layers of G4 and
+    G2, if their bars are met.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -491,6 +499,11 @@ ours unless it passes a test set beforehand.
    its source. Done when the map's own figure is 53.9%, the pages that count from the map (coverage, the
    translations' baseline, the lexicon's statuses) are rebuilt from the same file, and the checks and the review
    pass. No agents but the review.
+   **Built on 2026-11-16** (point 20, [`data/discovery/map_layers.md`](data/discovery/map_layers.md)): the layer is
+   laid by `src/themap.py` and the map's figure is 53.9%. One part is not built as written and waits for Mike's
+   word: the three pages are not counted again. They report dated work on the analysts' map, two of them rest on
+   judges, and the translations' baseline is the status table's "Before us"; they point to the new page, which
+   counts the map as it stands.
 2. **G2. The spellings under a sure stem** (kind a: 366 running words under 116 lexicon entries). Most should be
    rarer spellings or compounds of words the map already reads. The place pass of point 18 again: two checkers
    say for each place whether it holds the lexicon's word. If every one were read the share would be 58.9%; the

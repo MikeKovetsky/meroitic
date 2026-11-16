@@ -1,6 +1,7 @@
 # The recurring open words
 
-Status on 2026-11-14: done, not applied to the map. Every bar was set before the agents it binds were started:
+Status on 2026-11-14: done, not applied to the map. Since 2026-11-16 the 385 resolved places are the map's first
+layer ([map_layers.md](map_layers.md)); the numbers of this page are unchanged. Every bar was set before the agents it binds were started:
 committed for the place pass and the test of the open words; for class A written in the working script, and in
 git only with its result (section 9 gives the commits and the times). The results were counted on 2026-11-13.
 Figures: `recurring_words_figures.json`. Script: `src/recurring.py`. Checks: `tests/test_recurring.py`.

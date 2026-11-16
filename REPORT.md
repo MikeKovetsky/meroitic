@@ -835,3 +835,29 @@ subagent tokens and 49 minutes, from its task notification. Mike kept the review
 and push"). How the status table is built and each of its numbers measured is in
 `.claude/skills/reporting/SKILL.md`.
 
+## Day nine, afternoon (2026-11-16): the map takes its first layer (G1)
+
+Asked that day: "Yes, start G1 and G4, queue G2". Page:
+[`data/discovery/map_layers.md`](data/discovery/map_layers.md); script `src/themap.py`.
+
+**What was built.** The 385 places that the recurring open spellings resolved had been counted over the map but
+were no part of it. They are now a layer: a file of lines, one for each running word, with the new level and
+meaning, the reason and the source. The script lays the layers over the analysts' map each time it runs and
+stops if a line does not fit the map. The analysts' map is not changed.
+
+**The map as it stands.** 3,916 of the 7,265 running words that need a meaning are translated (53.9%, from 50.1%);
+626 of the 2,944 distinct spellings (21.3%, from 20.2%); 136 of about 1,307 distinct words (10.4%, between 9.8%
+and 13.0%, from 9.7%). The nine words more are Rilly's meanings of 2016 and 2021, published before the project, so
+the north star's "before us" is 10.4% too. Of the layer's 385 places, 79 were translated or named already and
+take the later reading; 306 were open. Two of the 1,107 stems the map could not name become names; the estimate
+of the words among those stems is carried over, and the script stops if layers ever take more than 2% of them.
+
+**What was not built as the step said.** The step named three pages to be rebuilt from the same file: the
+coverage of the clean corpus, the lexicon's statuses and the translations' baseline. They are not counted again.
+Each reports dated work on the analysts' map; the lexicon's statuses and the baseline rest on judges who never
+saw what the layer adds; and the baseline is the status table's "Before us", which changes only on Mike's word.
+The new page counts the coverage measure on the map as it stands (55.6% of all running words translated or
+named, from 52.7%), and the three pages point to it. This cut waits for Mike's word.
+
+**The status table** reads its first three rows from `data/discovery/map_figures.json` since this step
+(`.claude/skills/reporting/SKILL.md`).

@@ -182,8 +182,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     the word the later source speaks of (the benediction verbs "eat" and "present, serve", "prince", the emphatic
     particle after the copula), 192 are pieces of a longer word or name that the edition's word division cut, 425
     are words of their own that stay open, and 218 are unclear or not agreed. Laid over the map, that moves the
-    running words with a meaning from 3,676 to 3,916, from 50.1% to 53.9% of those that need one; the map itself
-    is not changed yet. For the open words a blind test asked five readers to pick, from the contexts
+    running words with a meaning from 3,676 to 3,916, from 50.1% to 53.9% of those that need one; since
+    2026-11-16 these places are the map's first layer (item 19). For the open words a blind test asked five readers to pick, from the contexts
     alone, the meaning a scholar proposed among others of the same kind. On words whose meaning is accepted the
     readers' choice was right for 13 of 17 (76.5%, the bar was 80%), and they chose a wrong meaning for 2 of 11
     words whose true meaning was not offered (18.2%, the bar was 10%): so no proposal is labelled. None of these
@@ -201,6 +201,15 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     lookup does not know. The first count took the endings and particles written as words for words and gave
     11.6%; the review corrected it. This is the project's north star
     ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
+19. **The map now carries what later sources state: 53.9% of the running words that need a meaning are
+    translated, and 136 of about 1,307 distinct words (10.4%, between 9.8% and 13.0%).** The 385 places that item
+    17 resolved (273 where Rilly states a meaning in 2016 or 2021, 66 pieces of a word or name the map holds, 46
+    places of seven names) are laid over the analysts' map as a layer, each with its source; the analysts' map is
+    not changed, and the studies run on it keep their numbers. That makes 240 running words more translated
+    (3,676 to 3,916 of those that need a meaning, 50.1% to 53.9%) and gives 9 more words of the lexicon a meaning
+    (127 to 136). All of these meanings were published before the project, so the north star's "before us" is
+    the same 10.4%, and the project still has no meaning of its own
+    ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
 
 ## The question
 
@@ -568,6 +577,20 @@ the same, since every one of those meanings is in the lexicon of 2003, and what 
 reaches is given apart, as the reach of the map
 ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
 
+### 26. The map and its layers (`src/themap.py`)
+
+The analysts' map stays as it is. A later study that resolves places hands over a file of lines, one for each
+running word it changes: the text, the word's number, its spelling, the new level and meaning, the reason (a
+later source states the meaning there; a piece of a word or name the map holds; a name) and the source. The
+script lays these layers over the map in their order each time it runs and stops if a line does not fit: a place
+or spelling the map does not have, two lines for one place, a level that does not resolve the word. It then
+counts the map as it stands: the running words and the distinct spellings that need a meaning and have one, the
+same for the base and for a plain lookup of the lexicon, and the distinct words, where a word of the lexicon
+counts as translated if the lexicon calls its meaning established or probable or a layer gives it one from a
+later source. The estimate of how many unnamed stems are words is carried from section 25's sample, and the
+script stops if the layers take more than 2% of those stems. The status table reads its first three rows from
+this count ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -583,7 +606,7 @@ python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python3 -I tests/test_akinidad.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
-python3 -I tests/test_words.py
+python3 -I tests/test_words.py && python3 -I tests/test_themap.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -592,7 +615,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Fifteen things need files that are kept locally (Data, above), so they don't run from a clone:
+Sixteen things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -627,6 +650,8 @@ Fifteen things need files that are kept locally (Data, above), so they don't run
   Rilly's lexicon, the text layers of the sources and the readers' and checkers' answers.
 - `python3 -I src/words.py public` (and `population`, `packs`, `count`) reads `corpus_v6` and its gloss file,
   Rilly's lexicon and the checkers' answers.
+- `python3 -I src/themap.py` reads the gloss file of `corpus_v6`, the layers' lines, Rilly's lexicon and the
+  figures of the count of distinct words.
 
 ## Layout
 
@@ -635,8 +660,8 @@ Fifteen things need files that are kept locally (Data, above), so they don't run
   for spellings of known words (`variants.py`), the check of the map against two printed editions (`experts/`),
   the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
-  (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`) and the count
-  of distinct words (`words.py`).
+  (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`), the count
+  of distinct words (`words.py`) and the map with its layers (`themap.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

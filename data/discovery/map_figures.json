@@ -1,0 +1,141 @@
+{
+ "inscriptions": 548,
+ "base": {
+  "running": {
+   "translated": 3676,
+   "named": 1743,
+   "open": 3655,
+   "lost": 1216,
+   "need": 7331,
+   "share": 0.5014,
+   "all": 10290,
+   "of_all": 0.5266
+  },
+  "spellings": {
+   "translated": 598,
+   "named": 769,
+   "open": 2357,
+   "lost": 1069,
+   "need": 2955,
+   "share": 0.2024,
+   "all": 4793
+  }
+ },
+ "layers": [
+  {
+   "name": "recurring",
+   "page": "data/discovery/recurring_words.md",
+   "laid": "2026-11-16",
+   "what": "the recurring open spellings, each place judged by two checkers",
+   "places": 385,
+   "why": {
+    "stated": 273,
+    "piece": 66,
+    "name": 46
+   },
+   "to": {
+    "meaning": 307,
+    "name": 77,
+    "grammar": 1
+   },
+   "was": {
+    "hypothesis": 268,
+    "grammar": 42,
+    "meaning": 26,
+    "kind": 22,
+    "unknown": 16,
+    "name": 11
+   },
+   "after": {
+    "running": {
+     "translated": 3916,
+     "named": 1809,
+     "open": 3349,
+     "lost": 1216,
+     "need": 7265,
+     "share": 0.539,
+     "all": 10290,
+     "of_all": 0.5564
+    },
+    "spellings": {
+     "translated": 626,
+     "named": 780,
+     "open": 2318,
+     "lost": 1069,
+     "need": 2944,
+     "share": 0.2126,
+     "all": 4793
+    }
+   }
+  }
+ ],
+ "current": {
+  "running": {
+   "translated": 3916,
+   "named": 1809,
+   "open": 3349,
+   "lost": 1216,
+   "need": 7265,
+   "share": 0.539,
+   "all": 10290,
+   "of_all": 0.5564
+  },
+  "spellings": {
+   "translated": 626,
+   "named": 780,
+   "open": 2318,
+   "lost": 1069,
+   "need": 2944,
+   "share": 0.2126,
+   "all": 4793
+  }
+ },
+ "lookup": {
+  "running": {
+   "translated": 2816,
+   "named": 1227,
+   "open": 5031,
+   "lost": 1216,
+   "need": 7847,
+   "share": 0.3589,
+   "all": 10290,
+   "of_all": 0.3929
+  },
+  "spellings": {
+   "translated": 325,
+   "named": 535,
+   "open": 2864,
+   "lost": 1069,
+   "need": 3189,
+   "share": 0.1019,
+   "all": 4793
+  }
+ },
+ "north_star": {
+  "dictionary_words": 377,
+  "translated_by_the_lexicon": 127,
+  "translated_by_a_layer": {
+   "recurring": 9
+  },
+  "translated": 136,
+  "distinct_words": {
+   "point": 1307,
+   "low": 1049,
+   "high": 1384
+  },
+  "star": {
+   "point": 0.1041,
+   "low": 0.0983,
+   "high": 0.1296
+  },
+  "before_us": {
+   "point": 0.1041,
+   "low": 0.0983,
+   "high": 0.1296
+  },
+  "unnamed_stems": {
+   "sampled": 1107,
+   "now": 1105
+  }
+ }
+}

@@ -1,0 +1,168 @@
+"""The map of corpus_v6 as it stands: the analysts' map with the layers that later studies have laid over it, and
+the counts the status table reads from it (data/discovery/map_layers.md, .claude/skills/reporting/SKILL.md).
+
+The base is data/sources/v6/analysts/glosses.jsonl (src/v6/readers.py count). A layer is a file of lines, one for
+each running word it changes: the text, the word's number in it, its spelling, the new level and reading, why, and
+the source. Layers are laid in the order of LAYERS. Nothing is written back to the base: the studies that were run
+on it (the lexicon's statuses, the translations, the recurring open words, the sample behind the count of distinct
+words) keep reading it and are not counted again. What is counted from now on reads current().
+
+  python3 -I src/themap.py        the counts of the base, of each layer and of the map as it stands
+                                  (writes data/discovery/map_figures.json; needs the local files)
+"""
+import collections
+import json
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(ROOT / "src" / "v6")]
+import lexicon as X                                    # noqa: E402
+import recurring as W                                  # noqa: E402
+import words as D                                      # noqa: E402
+
+BASE = X.GLOSSES
+PUBLIC = ROOT / "data/discovery/map_figures.json"
+WORDS = ROOT / "data/discovery/distinct_words_figures.json"
+# The layers, in the order they are laid: a name, the file of its lines (local), the page of the study it comes
+# from, the day it was laid, and what it is in a few words.
+LAYERS = [
+    {"name": "recurring", "file": "data/sources/recurring/overlay.jsonl", "page": "data/discovery/recurring_words.md",
+     "laid": "2026-11-16", "what": "the recurring open spellings, each place judged by two checkers"},
+]
+WHY = ("stated", "piece", "name")      # why a line changes a word: a later source states its meaning there; it is a
+#                                        piece of a word or name the map holds; it is a name by the sources
+DRIFT = 0.02                           # the estimate of how many unnamed stems are words (src/words.py) rests on a
+#                                        sample of the base's stems: it is carried while the layers take at most this
+#                                        share of those stems out of the unnamed ones; past it a new sample is due
+
+
+def base():
+    return {r["id"]: r["glosses"] for r in map(json.loads, BASE.read_text(encoding="utf-8").splitlines())}
+
+
+def lines_of(layer):
+    return [json.loads(l) for l in (ROOT / layer["file"]).read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def lay(gl, lines, name):
+    """A copy of the map with a layer's lines laid over it. A line must name a word that stands there with that
+    spelling, give a level the map knows and a reason of WHY, and no two lines may name one word: a layer that does
+    not fit the map it is laid on stops the build."""
+    out = {t: list(gs) for t, gs in gl.items()}
+    seen = set()
+    for o in lines:
+        at = (o["text"], o["n"])
+        gs = out.get(o["text"])
+        if gs is None or not 1 <= o["n"] <= len(gs) or gs[o["n"] - 1]["form"] != o["form"]:
+            raise SystemExit(f"layer {name}: no word {o['form']!r} at {at}")
+        if at in seen:
+            raise SystemExit(f"layer {name}: two lines for {at}")
+        if o["level"] not in W.READ + W.NAMED or o["why"] not in WHY:
+            raise SystemExit(f"layer {name}: {at} has the level {o['level']!r} and the reason {o['why']!r}")
+        seen.add(at)
+        g = gs[o["n"] - 1]
+        gs[o["n"] - 1] = g | {"level": o["level"], "gloss": o["gloss"], "source": o["source"], "by": f"layer: {name}",
+                              "why": o["why"], "was": g["level"]}
+    return out
+
+
+def current(upto=None):
+    """The map as it stands: the base with the layers laid over it (the first `upto` of them, all by default)."""
+    gl = base()
+    for layer in LAYERS[:upto]:
+        gl = lay(gl, lines_of(layer), layer["name"])
+    return gl
+
+
+def counts(gl):
+    """The running words and the spellings of a map by what they are, and the two shares the status table gives:
+    of the words that need a meaning (no name, no numeral, no lost sign) those that have one. A spelling has the
+    level it has most often (at a tie, the one it has first in the texts' order). `of_all` is the coverage page's
+    wider measure: translated or named, of all words."""
+    def group(level):
+        return "translated" if level in W.READ else "named" if level in W.NAMED else "open" if level in W.OPEN else "lost"
+
+    def tally(c):
+        need = c["translated"] + c["open"]
+        return {k: c[k] for k in ("translated", "named", "open", "lost")} | {"need": need, "share": round(c["translated"] / need, 4) if need else None}
+
+    run, by_form = collections.Counter(), collections.defaultdict(collections.Counter)
+    for gs in gl.values():
+        for g in gs:
+            run[group(g["level"])] += 1
+            by_form[g["form"]][group(g["level"])] += 1
+    spell = collections.Counter(c.most_common(1)[0][0] for c in by_form.values())
+    every = sum(run.values())
+    return {"running": tally(run) | {"all": every, "of_all": round((run["translated"] + run["named"]) / every, 4) if every else None},
+            "spellings": tally(spell) | {"all": sum(spell.values())}}
+
+
+def given_by_layers(layers_lines, known, lex):
+    """layer -> the dictionary words in use that a line of it gives a meaning (reason "stated") and that the lexicon
+    of 2003 does not call established or probable; a word counts for the first layer that gives it one."""
+    out, taken = {}, set()
+    for name, lines in layers_lines:
+        new = sorted({o["item"] for o in lines if o["why"] == "stated" and o.get("item") in known
+                      and (lex[o["item"]].get("status") or "") not in W.SURE} - taken)
+        out[name] = new
+        taken |= set(new)
+    return out
+
+
+def north_star(known, lex, layers_lines, unnamed):
+    """Distinct words translated on the map as it stands: the dictionary words in use that the lexicon calls
+    established or probable, and those a layer gives a meaning from a later source, over the dictionary words in
+    use and the estimate of the unnamed stems that are words (src/words.py). Before the project it was the same:
+    every one of these meanings is a scholar's."""
+    by_lexicon = D.translated(known, lex)
+    by_layer = given_by_layers(layers_lines, known, lex)
+    done = len(by_lexicon) + sum(map(len, by_layer.values()))
+    star = D.star(done, len(known), unnamed)
+    return {"dictionary_words": len(known), "translated_by_the_lexicon": len(by_lexicon),
+            "translated_by_a_layer": {k: len(v) for k, v in by_layer.items()}, "translated": done,
+            "distinct_words": {k: len(known) + v for k, v in unnamed.items()}, "star": star, "before_us": star}
+
+
+def carried(sampled, now):
+    """The unnamed stems the estimate was drawn from and those the map has now. A layer that makes a stem a name or
+    a piece takes it out; the estimate is carried only while few go (DRIFT), and never if stems are added."""
+    if not 0 <= sampled - now <= DRIFT * sampled:
+        raise SystemExit(f"the map has {now} unnamed stems, the estimate of the words among them was drawn from {sampled}: "
+                         "draw and judge a new sample (src/words.py) before the north star is counted again")
+    return {"sampled": sampled, "now": now}
+
+
+def figures():
+    """What the status table reads: the base, each layer and what it moved, the map as it stands, the plain lookup
+    of the lexicon ("before us" for the running words and the spellings), and the north star. Counts only."""
+    lex, gl, laid = W.lexicon(), base(), []
+    first = counts(gl)
+    layers_lines = [(layer["name"], lines_of(layer)) for layer in LAYERS]
+    for layer, (name, lines) in zip(LAYERS, layers_lines):
+        gl = lay(gl, lines, name)
+        laid.append({k: layer[k] for k in ("name", "page", "laid", "what")}
+                    | {"places": len(lines), "why": dict(collections.Counter(o["why"] for o in lines).most_common()),
+                       "to": dict(collections.Counter(o["level"] for o in lines).most_common()),
+                       "was": dict(collections.Counter(o["was"] for o in lines).most_common()), "after": counts(gl)})
+    known, stems, _ = D.population_of(gl, lex, fix=True)
+    words = json.loads(WORDS.read_text(encoding="utf-8"))
+    star = north_star(known, lex, layers_lines, words["unnamed_words"]) | {"unnamed_stems": carried(words["unnamed_stems"], len(stems))}
+    return {"inscriptions": len(gl), "base": first, "layers": laid, "current": counts(gl), "lookup": counts(D.lookup_only()),
+            "north_star": star}
+
+
+def main():
+    figs = figures()
+    PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    pct = lambda x: f"{100 * x:.1f}%"                                    # noqa: E731
+    for name, c in (("plain lookup", figs["lookup"]), ("base", figs["base"]), ("as it stands", figs["current"])):
+        print(f"{name}: running words translated {c['running']['translated']} of {c['running']['need']} = {pct(c['running']['share'])}; "
+              f"distinct spellings translated {c['spellings']['translated']} of {c['spellings']['need']} = {pct(c['spellings']['share'])}")
+    n = figs["north_star"]
+    print(f"north star: {n['translated']} of about {n['distinct_words']['point']} = {pct(n['star']['point'])} "
+          f"({pct(n['star']['low'])} to {pct(n['star']['high'])})")
+
+
+if __name__ == "__main__":
+    main()

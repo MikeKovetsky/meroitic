@@ -1,5 +1,8 @@
 # The spellings of the clean corpus that no analyst had read
 
+> The map has since taken layers over the analysts' map that this page counts. The numbers here are those of
+> the work reported here and are not counted again; the map as it stands is on [map_layers.md](map_layers.md).
+
 [The clean corpus](corpus_v6.md) was built with 1,013 of its words, in 912 spellings, that no analyst had seen
 (its section 5). On 2026-11-12 the analysts of the coverage map read them (`src/v6/readers.py`): the 930
 spellings (1,038 running words) that the lookup leaves on `corpus_v6` and that no pack of the first run holds

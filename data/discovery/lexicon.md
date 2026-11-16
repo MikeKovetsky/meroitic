@@ -1,5 +1,8 @@
 # A second scholar for every meaning (F2)
 
+> The map has since taken layers over the analysts' map that this page counts. The numbers here are those of
+> the work reported here and are not counted again; the map as it stands is on [map_layers.md](map_layers.md).
+
 **Of the 10,290 running words of the clean corpus, 5,419 (52.7%) are translated by one lexicon, Rilly's of 2003;
 4,105 (39.9%) are names, numbers or words built only on entries that a second scholar reads the same way.** Names
 and numbers count in both figures. Of the 3,676 words the map translates as a meaning or a grammar word, 2,362

@@ -52,13 +52,17 @@ Rules of shape, each from Mike's words on 2026-11-16:
   written as a word of its own is a piece of a word, not a dictionary word.
 - **Our own meaning** is a meaning this project found, not one a scholar published.
 - The public coverage page says "translated" for a wider count (names and numerals included, of all running
-  words: 52.7%). If both appear, name the difference.
+  words: 52.7% on the analysts' map, `current.running.of_all` of the map's figures file with the layers). If both
+  appear, name the difference.
 
 ## 3. The rows
 
-The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is
-`data/sources/v6/analysts/glosses.jsonl` (local). Read a number from its figures file or count it with the command
-given; never quote it from memory, from this file's log, or from an earlier message.
+The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
+(`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
+(`src/themap.py`, page `data/discovery/map_layers.md`; the first layer, the recurring open spellings, since step
+G1 on 2026-11-16). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
+three rows are read from that file. Read a number from its figures file or count it with the command given; never
+quote it from memory, from this file's log, or from an earlier message.
 
 ### Distinct words translated (the north star)
 
@@ -67,47 +71,54 @@ given; never quote it from memory, from this file's log, or from an earlier mess
 - **How it is counted** (`src/words.py`, page `data/discovery/distinct_words.md`): every running word that needs
   a meaning is a dictionary word, a piece (an ending or a particle written as a word of its own), a name, or a
   stem the map could not name; pieces and names are not counted. Translated words are the dictionary
-  words in use whose meaning the lexicon calls established or probable. Distinct words are the dictionary words
+  words in use whose meaning the lexicon calls established or probable, and those to which a layer of the map
+  gives a meaning that a later source states (`src/themap.py`). Distinct words are the dictionary words
   in use plus an estimate of how many of the unnamed stems are words of their own, from a sample of 240 stems
   judged by two checkers (bar: their kappa at least 0.6).
-- **Now:** `data/discovery/distinct_words_figures.json`: `translated` over `distinct_words.point`, the share in
-  `star.point`, its range in `star.low` and `star.high`.
+- **Now:** `data/discovery/map_figures.json`: `north_star.translated` over `north_star.distinct_words.point`, the
+  share in `north_star.star.point`, its range in `north_star.star.low` and `north_star.star.high`. The count on
+  the analysts' map alone, with no layer, stays in `data/discovery/distinct_words_figures.json` (`translated`
+  over `distinct_words.point`, `star.point`, `star.low` and `star.high`): it was the figure of the first status.
 - **Before us: the same as Now.** Mike, after asking three times how this row could rise without a meaning of
   ours: "“Before us” should really equal “Now”, 11.6%." (11.6% was the first count; the review of the same day
   took the endings and particles written as words for pieces, section 7. Before us is now, whatever the count
   gives.) The translated words were translated by scholars before the project, and the project has added none;
-  the figures file's `star_before` is `star`. A plain lookup of the lexicon finds fewer of them in the texts (112
-  of 127 on 2026-11-16), `lookup.translated` in the figures file; that is a fact about our matching and never the
-  starting point of this row.
-- **Next target:** `next.star.point` of the same file (the dictionary words that the recurring-words work found
-  stated by a later source, once that work is in the map).
+  the figures files give it so (`north_star.before_us` is `north_star.star`; in the distinct-words file
+  `star_before` is `star`). A plain lookup of the lexicon finds fewer of them in the texts (112
+  of 127 on 2026-11-16), `lookup.translated` in the distinct-words file; that is a fact about our matching and
+  never the starting point of this row.
+- **Next target:** the gain the next step's page gives, once that step's bar is met; "not known yet" until then.
+  (`next.star.point` of the distinct-words file was the target for the first layer; G1 reached it.)
 - **What moves it:** a dictionary word getting a meaning (a scholar's, from a source, or our own), or the count of
   distinct words being corrected. **What does not:** recognising one more spelling of a word that is already
   translated.
-- **Counting again:** after the map changes, run `python3 -I src/words.py population`, then `count r2`, then
-  `public`; `public` counts the dictionary words again from the map. The estimate of the unnamed stems rests on
-  the sample drawn on 2026-11-16 from the stems of that day. If a step changes which stems are unnamed (step G3 in
-  particular), draw and judge a new sample with its bar set beforehand; do not carry the old share over.
+- **Counting again:** after a layer is added, run `python3 -I src/themap.py`: it counts the dictionary words again
+  on the map with its layers and carries the estimate of the unnamed stems over. That estimate rests on the
+  sample drawn on 2026-11-16 from the stems the analysts' map could not name. The script stops if the layers have
+  taken more than 2% of those stems out of the unnamed ones, or added any (`north_star.unnamed_stems`). Then, and
+  whenever a step changes which stems are unnamed (step G3 in particular), draw and judge a new sample with its
+  bar set beforehand (`src/words.py`: `population`, `packs`, `count`, `public`); do not carry the old share over.
 
 ### Running words translated
 
 - **What it is:** of the running words that need a meaning, the share that is translated. It shows how much of
   what scholars already know we can apply to the texts.
-- **Now:** the snippet of section 4, line "the map". Until the recurring-words results are in the map (step G1),
-  the same figure is `recount.before.share` of `data/discovery/recurring_words_figures.json`.
+- **Now:** `current.running.share` of `data/discovery/map_figures.json` (`current.running.translated` over
+  `current.running.need`); the command of section 4 prints it as the line "as it stands".
 - **Before us:** the lexicon of 2003 looked up word by word, with none of the project's analysts or corrections:
-  the snippet's line "plain lookup". It was 2,816 of 7,847, 35.9%, and does not change unless the corpus or the
-  typed lexicon changes. It is a machine's baseline: a scholar reading the texts recognises more than a lookup.
-- **Next target:** the snippet's line "with the recurring-words overlay" while that overlay is not yet in the map
-  (also `recount.after.share`); after G1, the gain the next step's page gives.
+  `lookup.running.share` of the same file, the command's line "plain lookup". It was 2,816 of 7,847, 35.9%, and
+  does not change unless the corpus or the typed lexicon changes. It is a machine's baseline: a scholar reading
+  the texts recognises more than a lookup.
+- **Next target:** the gain the next step's page gives, once that step's bar is met; "not known yet" until then.
 - **What moves it:** recognising a spelling as a known word; a meaning from a later source; showing that an open
   "word" is a name or a piece of one (it then needs no meaning).
 
 ### Distinct spellings translated
 
 - **What it is:** the same, with each different spelling counted once, by the level it has most often in the map.
-- **Now, Before us, Next target:** the snippet of section 4, second number of each line. Before us was 325 of
-  3,189, 10.2%.
+- **Now:** `current.spellings.share` of `data/discovery/map_figures.json`. **Before us:** `lookup.spellings.share`
+  of the same file; it was 325 of 3,189, 10.2%. **Next target:** as for the running words. The command of
+  section 4 prints each as the second number of its line.
 - It stands far under the running words because the common words are the translated ones.
 
 ### Our own meanings
@@ -133,53 +144,30 @@ given; never quote it from memory, from this file's log, or from an earlier mess
   because turning word-by-word readings into sentences is most of the gain.
 - Its scale is not that of the rows above: a few epitaphs from one site, not the corpus.
 
-## 4. The snippet for running words and spellings
+## 4. The command for the first three rows
 
-Run from the repository's root (it needs the local files):
+Run from the repository's root (it needs the local files: the map, the lexicon and the layers):
 
 ```bash
-python3 -I - <<'EOF'
-import sys, json, collections
-sys.path[:0] = ["src", "src/experts", "src/v6"]
-import recurring as W, words as D
-
-def tally(texts):
-    group = lambda l: "translated" if l in W.READ else "named" if l in W.NAMED else "open" if l in W.OPEN else "lost"
-    run, by_form = collections.Counter(), collections.defaultdict(collections.Counter)
-    for gs in texts:
-        for form, level in gs:
-            run[group(level)] += 1
-            by_form[form][group(level)] += 1
-    spell = collections.Counter(c.most_common(1)[0][0] for c in by_form.values())
-    share = lambda c: f"{c['translated']} of {c['translated'] + c['open']} = {100 * c['translated'] / (c['translated'] + c['open']):.1f}%"
-    return share(run), share(spell)
-
-the_map = W.the_map()
-rows = {"plain lookup (Before us)": [[(g["form"], g["level"]) for g in gs] for gs in D.lookup_only().values()],
-        "the map (Now)": [[(g["form"], g["level"]) for g in gs] for gs in the_map.values()]}
-overlay = W.OUT / "overlay.jsonl"
-if overlay.exists():
-    new = {(o["text"], o["n"]): o["level"] for o in map(json.loads, overlay.open(encoding="utf-8"))}
-    rows["the map with the recurring-words overlay"] = [[(g["form"], new.get((t, i + 1), g["level"])) for i, g in enumerate(gs)] for t, gs in the_map.items()]
-for name, texts in rows.items():
-    running, spellings = tally(texts)
-    print(f"{name}: running words translated {running}; distinct spellings translated {spellings}")
-EOF
+python3 -I src/themap.py
 ```
 
-On 2026-11-16 it printed:
+It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with the first layer, it printed:
 
 ```
-plain lookup (Before us): running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
-the map (Now): running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
-the map with the recurring-words overlay: running words translated 3916 of 7265 = 53.9%; distinct spellings translated 626 of 2944 = 21.3%
+plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
+base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
+as it stands: running words translated 3916 of 7265 = 53.9%; distinct spellings translated 626 of 2944 = 21.3%
+north star: 136 of about 1307 = 10.4% (9.8% to 13.0%)
 ```
 
-Once step G1 has put the overlay into the map, the third line no longer applies: drop it from the status.
+"plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map
+with no layer (what Now was before G1). `python3 -I tests/test_themap.py` checks the file against the local
+count, against this skill and against the page `data/discovery/map_layers.md`.
 
 ## 5. Giving a status, step by step
 
-1. Run the snippet of section 4 and read the three figures files named in section 3. If a local file is missing,
+1. Run the command of section 4 and read the figures files named in section 3. If a local file is missing,
    say which number could not be counted instead of quoting an old one.
 2. Open `STATUS_LOG.md` beside this file and take its last row: "Since last status" is the difference from it, in
    points for the shares ("+3.8 points") and in units for the count of our own meanings, or "no change", or "new
@@ -212,6 +200,9 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
   of text without formatting".
 - This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have
   consistent ways of measuring across compactions and sessions".
+- The layers: "Yes, start G1 and G4, queue G2". G1 put the recurring-words results into the map as a layer, as
+  sections 3 and 4 had announced; since then the first three rows are read from `data/discovery/map_figures.json`.
+  No row's definition or "Before us" changed with it.
 
 Offered and not taken up: the translation row could give way to "words whose meaning two scholars agree on"
 (39.9%, `data/discovery/lexicon.md`); the column "Before us" could be named "Plain lookup".

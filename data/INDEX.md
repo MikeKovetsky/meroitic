@@ -1,7 +1,7 @@
 # Index of the data
 
 Everything the project holds, by folder: what it is, where it came from, how big it is, and whether it is in the
-public repository. Counted on 2026-11-13 from the files on disk (the row of `data/sources/words/` on 2026-11-16).
+public repository. Counted on 2026-11-13 from the files on disk (the rows of `data/discovery/` and `data/sources/words/` on 2026-11-16).
 "Local" means the folder is listed in `.gitignore` and stays on the author's machine, because the material has no
 open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the [README's section
 "Data"](../README.md#data) say why for each).
@@ -13,7 +13,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 | `data/inscriptions.jsonl` | One row for each of the 563 inscriptions the project holds a reading of: REM or edition number, site, kind, every reading's source and licence, and the text of the readings that are open (304) | 0.6 MB |
 | `data/inscriptions_map.tsv` | What each of the 899 texts of `corpus_v5` is: an inscription, a part of one, or an example phrase | 0.2 MB |
 | `data/expansion/` | The open transcriptions: Griffith's *Meroitic Inscriptions* I and II and *Meroë* (152 inscriptions), Karanòg and Shablûl (151, with the 48 typed reference pages and the readers' files), the Akinidad stela REM 1003 from Griffith 1917 (`jea/`), and the tests of the reading method | 3.4 MB, 488 files |
-| `data/discovery/` | The pages of each study with their figures files and public tables: the coverage map, the Egyptian and variant searches, the check against two editions, `corpus_v6`, the readers, the Demotic step, the lexicon's statuses (`lexicon_statuses.tsv`, `lexicon_other_statuses.tsv`), the F4 pilot and rounds, the recurring open words, the count of distinct words | 1.0 MB, 40 files |
+| `data/discovery/` | The pages of each study with their figures files and public tables: the coverage map, the Egyptian and variant searches, the check against two editions, `corpus_v6`, the readers, the Demotic step, the lexicon's statuses (`lexicon_statuses.tsv`, `lexicon_other_statuses.tsv`), the F4 pilot and rounds, the recurring open words, the count of distinct words, the rules for the open spellings in one or two texts, the map with its layers (`map_layers.md`, `map_figures.json`) | 1.0 MB, 43 files |
 | `data/gold_lexicon.json`, `data/gold_morphology.json` | The answer key of the first tests: 82 accepted meanings and 26 endings, each with its source | 0.1 MB |
 | `data/leads/` | Four write-ups of leads and a README | 0.1 MB |
 | `data/synth_corpus.txt` | The synthetic twin language of the leak-free test | 0.1 MB |

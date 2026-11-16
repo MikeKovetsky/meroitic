@@ -438,14 +438,15 @@ def test_the_summaries_quote_the_figures():
 
 def test_the_reporting_skill_names_the_figures_as_they_are():
     """The reporting skill reads the north star from the figures file by these keys, says that before us is now, and
-    gives the lookup's reach as it is; its log's last row gives the north star as the figures do."""
+    gives the lookup's reach as it is; its log's first row, the status of the day of this count, gives the north star
+    as these figures do (later rows are of the map with its layers: tests/test_themap.py)."""
     f = figs()
     skill = " ".join((ROOT / ".claude/skills/reporting/SKILL.md").read_text(encoding="utf-8").split())
     for key in ("`translated`", "`distinct_words.point`", "`star.point`", "`star.low`", "`star.high`", "`next.star.point`", "`lookup.translated`"):
         assert key in skill, key
     assert f["star_before"] == f["star"] and "**Before us: the same as Now.**" in skill
     assert f"({f['lookup']['translated']} of {f['translated']} on 2026-11-16)" in skill
-    row = [l for l in (ROOT / ".claude/skills/reporting/STATUS_LOG.md").read_text(encoding="utf-8").splitlines() if l.startswith("| 2026-")][-1]
+    row = [l for l in (ROOT / ".claude/skills/reporting/STATUS_LOG.md").read_text(encoding="utf-8").splitlines() if l.startswith("| 2026-")][0]
     st, d = f["star"], f["distinct_words"]
     assert f"| {pct(st['point'])} ({f['translated']} of about {d['point']:,}; range {pct(st['low'])} to {pct(st['high'])}) |" in row
     assert f"Before us: {pct(f['star_before']['point'])}," in row and f"(G1): {pct(f['next']['star']['point'])}," in row

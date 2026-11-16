@@ -1,5 +1,8 @@
 # Whole texts translated: the rounds of F4
 
+> The map has since taken layers over the analysts' map that this page counts. The numbers here are those of
+> the work reported here and are not counted again; the map as it stands is on [map_layers.md](map_layers.md).
+
 Step 25 of [`NEXT_STEPS.md`](../../NEXT_STEPS.md) (F4) asks for whole inscriptions translated and scored against a
 scholar's printed rendering, and a page per text. [The pilot](f4_pilot.md) of 12 November scored one translator
 on five texts and found that it added a readable text but no meaning over the map read word by word. This page
