@@ -1,8 +1,10 @@
 # The leftover parts, and the meanings Millet and Lipiński state (a follow-up to G2 and G4)
 
-Status on 2026-11-16, 15:23: the places, the controls and the bars of part 1 are set, and the rule of part 2; no
-checker or reader has answered yet. Working script (local until the step is counted): `data/sources/g8/run.py`.
-What the checkers are given: [`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
+Status on 2026-11-16, 15:35: part 1 is counted and **not taken**: one bar was missed by one answer (section 6), so
+no place of it is laid and the part stops there. Part 2's rule is set, with an addition made before any of its
+readers was started (section 4); none of them has answered yet. Working scripts (local until the step is
+counted): `data/sources/g8/run.py` and `data/sources/rare/g4m/run.py`. What the checkers of part 1 were given:
+[`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
 
 ## 1. What was asked
 
@@ -81,9 +83,70 @@ The rule of G4 again, with the source changed:
 
 These meanings rest on one scholar each, like those of G4.
 
+**Added on 2026-11-16 at 15:35, before any reader of part 2 was started.** Looking at the 15 entries showed what
+the rule above did not foresee: by Millet's reading most of them are names, three of them names of persons that
+the lexicon does not file as names, and one statement renders a title with a Meroitic word left as it is. Counted
+by the rule of G4 alone, such places would have come out as translated words. So:
+
+- **Each reader also says what the statement gives:** a name (of a person, a place, a people or a god), a meaning
+  in full, or a meaning that leaves a Meroitic word as it is.
+- **A translated word** only when both readers say the source gives a meaning in full.
+- **A name** when the lexicon calls the entry a name, or both readers say the source states a name.
+- **Open, as it is,** in every other case: the meaning leaves a Meroitic word as it is, or the readers differ on
+  what is given.
+- **The source** both readers name must be Millet 2005 or Lipiński 2011; a statement of another source does not
+  count here.
+- **The place checkers' briefs name the number of lines** their pack expects, as in the second reading of G4.
+
+The addition can only lower the count of translated words.
+
 ## 5. What the step cannot show
 
 - The controls of part 1 are made by a script: letters drawn by lot are easier to see through than a real unknown
   word joined to a known one.
 - The checkers are one model: their agreement shows that a judgment can be repeated, not that it is right.
 - No meaning found here is the project's own.
+
+## 6. Part 1: the result (counted at 15:30, nothing taken)
+
+Six checkers (two for each of 3 packs) were started at 15:27, after the commit that set the bars (15:23); the
+last answer came at 15:29.
+
+| Bar | Result | |
+|---|---|---|
+| Every place answered by both | 136 of 136 (96 places, 40 controls) | met |
+| Kappa of 0.6 or more on the real places | 0.77 | met |
+| Each checker calls at least 14 of 20 hidden endings an ending | 20 and 20 | met |
+| Each checker explains at most 2 of 20 runs of letters drawn by lot | **3** and 2 | **missed by one** |
+
+By rule 5 of section 3 nothing is taken: no place of part 1 is laid in the map, and the part stops here until
+Mike has seen why.
+
+**Why the bar was missed.** All five explanations were "a name"; neither checker called a run of lot letters an
+ending or a known word. The five answers stand at three places: the letters had been put before `qo` ("this
+one") once and before the word for "born of" twice, which is where a name stands in an epitaph. Both checkers
+called the two before "born of" the mother's name; one called the one before `qo` the name of the dead. At the
+other 17 places, where no name is expected, both said "unknown" every time.
+
+**What the checkers said of the 96 real places** (not taken; given so that the miss can be judged):
+
+| Both say | Places |
+|---|---|
+| ending | 40 |
+| unknown | 28 |
+| a name | 12 |
+| a known word, the same entry | 1 |
+| unclear | 1 |
+| not agreed | 14 |
+
+**What this shows, and what it does not.**
+
+- The control did its work: it shows that "a name" is said of any letters that stand where a name is expected.
+  The 12 places both checkers call a name rest on that same judgment, so they cannot be laid on this reading.
+- The verdict "ending" came through its own two controls without a miss (40 of 40 hidden endings found, 0 of 40
+  runs of lot letters called an ending). The bar, though, was set on all three explanations together, and a bar
+  is not cut to fit after the count: the 40 places stay open.
+- A new reading would need its own bars, set beforehand for each verdict, and fresh checkers. Whether to make it
+  is Mike's call.
+
+Cost: 6 agents, 595,672 tokens (typed from the task notifications into `data/sources/g8/tokens.json`, local).
