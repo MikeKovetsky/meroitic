@@ -896,3 +896,9 @@ meaning, all Rilly's; by his own later analysis several are forms of one another
 **Cost.** 119 fresh agents, 13,892,589 subagent tokens, from the task notifications; 34 minutes from the first
 reader to the last count.
 
+**The review of G1, G2 and G4** (full tier, a fresh Opus agent at the highest effort): 19 corrections in two
+commits, among them the coverage figure on the map's page (58.2%, not the 55.6% of the first layer alone), the
+pieces among the places laid, the times at which three of the rules were added, and a check that runs every step
+of G2 and G4 again and gets the same packs and results. Cost: 531,129 subagent tokens and 42 minutes, from its
+task notification. Mike's word on the three older pages of G1, 13:52: "Yes, waive it."
+

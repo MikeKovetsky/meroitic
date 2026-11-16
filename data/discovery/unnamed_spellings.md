@@ -2,6 +2,7 @@
 
 Status on 2026-11-16, 14:10: counted. The first pilot was not taken (section 6); the second pilot and the full pass met
 their bars (sections 8 and 10). What the step resolves is not yet a layer of the map (section 10).
+Not reviewed yet: the working script and its checks are still local, and a review may correct these numbers.
 script (local until the step is counted): `data/sources/g3/run.py`. What the checkers are given:
 [`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md).
 
