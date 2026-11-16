@@ -120,6 +120,17 @@ both steps:
   laid as a name, which needs no meaning, not as a translated word.
 - **Both figures are reported:** the stated places by the rule of sections 3 and 4, and those laid in the map.
 
+**Two points more, added on 2026-11-16 at 13:26,** before G4's places were counted (two of its 32 checkers
+were still at work):
+
+- **Every stem must have a meaning.** A stated place is laid as translated only where each stem among the
+  spelling's parts has one: the lexicon calls it established or probable, a later source states it (it passed
+  the bar of class A here or among the recurring words), or it is a name. An ending the lexicon is not sure of
+  does not keep a word out.
+- **The north star counts what is laid.** An entry of G4 is a dictionary word that a later source gives a
+  meaning only when one of its stated places is laid in the map as translated. The entries with a stated place
+  but none laid are given beside it.
+
 The recurring open words had no such condition: 41 of their 273 stated places have a part the map leaves
 unnamed (forms of four words in fixed phrases). They stay as that study's rule, set beforehand, had them.
 
