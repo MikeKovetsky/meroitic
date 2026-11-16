@@ -49,3 +49,15 @@ the checker writes.
     This pack lists {places} places: your file must have {places} lines, one for each place, none left out. When the
     file is written, count its lines against that number, then reply in one line: how many places, and how many of
     each case.
+
+## The second pilot and the full pass (added on 2026-11-16 at 14:03, before any of their checkers was started)
+
+The packs are under `data/sources/g3/pilot2/` (then `data/sources/g3/full/`), and the launch line names that
+folder. One bullet is added to the brief, before the bullet "Some places are put in on purpose":
+
+    - Under some places a script's note says that the word, joined with the word before or after it, gives a
+      spelling the map holds. The note is a fact about letters, not a judgment: say "piece" only if the place fits it.
+
+Such a place carries the line "A script's note: joined with a word beside it, this gives `<the joined spelling>`,
+a spelling the map holds."
+
