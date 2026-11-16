@@ -140,3 +140,23 @@ when both name the same whole and the map holds that whole as translated or name
 
 The brief is that of the first pilot with one bullet added on the script's note
 ([`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md)).
+
+## 8. The second pilot: its bars are met (counted on 2026-11-16 at 14:05)
+
+Six fresh checkers answered all 150 places. On the 100 real places their kappa is 0.80 (bar 0.6).
+
+| Control | Bar | First checker | Second checker |
+|---|---|---|---|
+| Translated words called a name | at most 2 of 20 | 0 | 0 |
+| Names called a name | at least 11 of 15 | 11 | 11 |
+| Particles written apart called a piece (no bar) | | 9 of 15 | 9 of 15 |
+
+Of the 100 real places both checkers call 58 a word of its own, 11 a name, 4 a piece and 16 unclear; 11 are not
+agreed. The bar on the names is met with nothing to spare: each checker found 11 of 15, and called the other four
+words or unclear. So the checkers miss names rather than invent them.
+
+**The full pass** (set at 14:05, before any of its checkers is started). It takes every place the second pilot
+did not judge, 1,125 places, the first pilot's 100 among them, because that pilot's verdicts were not taken. With
+them go 112 controls (75 translated words, 37 names), in 25 packs of at most 50 places, two fresh checkers
+a pack, under bars 1 to 4 of section 7.
+
