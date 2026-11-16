@@ -93,3 +93,14 @@ Changed against the recurring words' brief: "three texts or more" reads "one or 
     a word the map has no accepted meaning for. The repository's root is /Users/mike/repos/mike/meroitic.
 
     When the file is written, reply in one line: how many places, and how many of each case.
+
+## G4, the second reading of the places (added on 2026-11-16 at 13:27, before its checkers were started)
+
+The first reading was not taken: one place of 695 had one checker's answer only. The packs are the same; the
+answers go to `data/sources/rare/g4/places2/`, and the launch line names that folder. The brief's last line,
+"When the file is written, reply in one line: how many places, and how many of each case.", now reads (with the
+pack's own number in the place of `{places}`):
+
+    This pack lists {places} places: your file must have {places} lines, one for each place, none left out. When the
+    file is written, count its lines against that number, then reply in one line: how many places, and how many of
+    each case.

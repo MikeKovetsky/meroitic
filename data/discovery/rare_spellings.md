@@ -131,6 +131,13 @@ were still at work):
   meaning only when one of its stated places is laid in the map as translated. The entries with a stated place
   but none laid are given beside it.
 
+**G4's first reading of the places is not taken** (noted on 2026-11-16 at 13:27, when it was counted). The 32
+checkers agreed well (Cohen's kappa 0.93), but one of the 695 places has one checker's answer only: a checker's
+file has 40 lines for a pack of 41 places. By point 4 of the bar nothing is taken. The brief's last line is
+corrected to name the number of places in the pack and to ask the checker to count its lines against it
+([`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md)), and 32 fresh checkers read the same 16 packs
+again. The first reading is kept and reported beside the second.
+
 The recurring open words had no such condition: 41 of their 273 stated places have a part the map leaves
 unnamed (forms of four words in fixed phrases). They stay as that study's rule, set beforehand, had them.
 
