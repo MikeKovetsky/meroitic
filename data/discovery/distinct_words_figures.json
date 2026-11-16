@@ -10,34 +10,36 @@
  },
  "running": {
   "stem": 1350,
-  "dictionary": 5569,
+  "piece": 803,
+  "dictionary": 4766,
   "none": 2959,
   "name": 412
  },
- "dictionary_words": 445,
- "translated": 160,
+ "dictionary_words": 377,
+ "translated": 127,
  "unnamed_stems": 1107,
  "unnamed_in_one_place": 975,
  "unnamed_running_words": 1350,
  "lookup": {
   "running": {
    "stem": 3997,
-   "dictionary": 3788,
+   "piece": 755,
+   "dictionary": 3033,
    "none": 2443,
    "name": 62
   },
-  "dictionary_words": 351,
-  "translated": 136
+  "dictionary_words": 301,
+  "translated": 112
  },
  "corrections": {
   "names": {
    "entries": 1,
    "translated": 0
+  },
+  "endings": {
+   "entries": 68,
+   "translated": 33
   }
- },
- "endings": {
-  "in_use": 68,
-  "translated": 33
  },
  "beside_a_stem": {
   "running_words": 104,
@@ -164,27 +166,27 @@
   "high": 1007
  },
  "distinct_words": {
-  "point": 1375,
-  "low": 1117,
-  "high": 1452
+  "point": 1307,
+  "low": 1049,
+  "high": 1384
  },
  "star": {
-  "point": 0.1164,
-  "low": 0.1102,
-  "high": 0.1432
+  "point": 0.0972,
+  "low": 0.0918,
+  "high": 0.1211
  },
  "star_before": {
-  "point": 0.1164,
-  "low": 0.1102,
-  "high": 0.1432
+  "point": 0.0972,
+  "low": 0.0918,
+  "high": 0.1211
  },
  "next": {
-  "stated_later": 15,
-  "translated": 175,
+  "stated_later": 9,
+  "translated": 136,
   "star": {
-   "point": 0.1273,
-   "low": 0.1205,
-   "high": 0.1567
+   "point": 0.1041,
+   "low": 0.0983,
+   "high": 0.1296
   }
  },
  "first_count": {

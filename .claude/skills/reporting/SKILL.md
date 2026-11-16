@@ -48,7 +48,8 @@ Rules of shape, each from Mike's words on 2026-11-16:
 - **A spelling** is one written form, exactly as it stands in a text. One dictionary word has many: with endings
   and prefixes, in variant writings, cut in two by an edition. Say "written form" if the word is unclear.
 - **A dictionary word** is an entry of Rilly's lexicon of 2003 that is no name. All spellings built on one entry
-  are that one word.
+  are that one word. An ending or a particle of the lexicon (a headword with a hyphen that is a function word)
+  written as a word of its own is a piece of a word, not a dictionary word.
 - **Our own meaning** is a meaning this project found, not one a scholar published.
 - The public coverage page says "translated" for a wider count (names and numerals included, of all running
   words: 52.7%). If both appear, name the difference.
@@ -64,17 +65,20 @@ given; never quote it from memory, from this file's log, or from an earlier mess
 - **What it is:** of the different words the corpus holds, the share that has a meaning. Mike: "this sounds like
   a north star metric if we want the entire language translatable".
 - **How it is counted** (`src/words.py`, page `data/discovery/distinct_words.md`): every running word that needs
-  a meaning is a dictionary word, a name, or a stem the map could not name. Translated words are the dictionary
+  a meaning is a dictionary word, a piece (an ending or a particle written as a word of its own), a name, or a
+  stem the map could not name; pieces and names are not counted. Translated words are the dictionary
   words in use whose meaning the lexicon calls established or probable. Distinct words are the dictionary words
   in use plus an estimate of how many of the unnamed stems are words of their own, from a sample of 240 stems
   judged by two checkers (bar: their kappa at least 0.6).
 - **Now:** `data/discovery/distinct_words_figures.json`: `translated` over `distinct_words.point`, the share in
   `star.point`, its range in `star.low` and `star.high`.
 - **Before us: the same as Now.** Mike, after asking three times how this row could rise without a meaning of
-  ours: "“Before us” should really equal “Now”, 11.6%." The translated words were translated by scholars before
-  the project, and the project has added none; the figures file's `star_before` is `star`. A plain lookup of the
-  lexicon finds fewer of them in the texts (136 of 160 on 2026-11-16), `lookup.translated` in the figures file;
-  that is a fact about our matching and never the starting point of this row.
+  ours: "“Before us” should really equal “Now”, 11.6%." (11.6% was the first count; the review of the same day
+  took the endings and particles written as words for pieces, section 7. Before us is now, whatever the count
+  gives.) The translated words were translated by scholars before the project, and the project has added none;
+  the figures file's `star_before` is `star`. A plain lookup of the lexicon finds fewer of them in the texts (112
+  of 127 on 2026-11-16), `lookup.translated` in the figures file; that is a fact about our matching and never the
+  starting point of this row.
 - **Next target:** `next.star.point` of the same file (the dictionary words that the recurring-words work found
   stated by a later source, once that work is in the map).
 - **What moves it:** a dictionary word getting a meaning (a scholar's, from a source, or our own), or the count of
@@ -200,6 +204,10 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
 - The north star: "why dont we have Distinct wrords translated? this sounds like a north star metric if we want
   the entire language translatable?"; "do it and add to the table as the first row".
 - Its "Before us": "“Before us” should really equal “Now”, 11.6%."
+- Its endings: the plan he answered "do it and add to the table as the first row" to was "remove names and cut
+  pieces, strip the known endings so forms of one word fall together, then have two checkers judge a sample". The
+  first count still took the endings and particles written as a word of their own for words (11.6%); the review
+  made them pieces the same day (9.7%), as the plan and the checkers' case "piece" have it. Measured so since.
 - Length: "answer shorter by default. 1 paragraph"; "when i meant "paragraph" i meant shortness, not a wall a wall
   of text without formatting".
 - This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have

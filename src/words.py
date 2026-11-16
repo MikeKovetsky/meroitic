@@ -8,10 +8,11 @@ the same word twice. So two checkers judge a sample of them, drawn by a fixed se
 words is an estimate with a range.
 
 identity() is the rule as it was set before the checkers were started, and population.json and the results are
-counted with it. The figures apply the review's correction on top (counted()): an entry of any kind of name is a
-name. It does not touch the unnamed stems, so the sample stays as drawn. For the north star "before us" is "now"
-(Mike, 2026-11-16): every translated word's meaning was in the lexicon before the project. What a plain lookup of
-the lexicon reaches is kept apart, as the reach of the map.
+counted with it. The figures apply the review's two corrections on top (counted()): an entry of any kind of name
+is a name, and a word built only on endings and particles is a piece, as the checkers' case "piece" takes an
+ending standing alone among the unnamed stems. Neither touches the unnamed stems, so the sample stays as drawn.
+For the north star "before us" is "now" (Mike, 2026-11-16): every translated word's meaning was in the lexicon
+before the project. What a plain lookup of the lexicon reaches is kept apart, as the reach of the map.
 
 Every command reads and writes under data/sources/words/ (local only: the packs quote the lexicon), except
 `public`, which writes the figures of the page.
@@ -160,13 +161,17 @@ def ending(h, lex):
 
 
 def counted(what, ids, lex):
-    """What a running word counts as for the north star: identity()'s answer, with the review's correction. An
-    entry of any kind of name src/coverage.py knows (the kind "name" too) is a name. An unnamed stem is never
-    changed."""
+    """What a running word counts as for the north star: identity()'s answer, with the review's two corrections.
+    An entry of any kind of name src/coverage.py knows (the kind "name" too) is a name; and a word built only on
+    endings and particles is a piece of a word, as the checkers' case "piece" takes an ending standing alone among
+    the unnamed stems and as the plan stripped the known endings. ("piece", ()) is not counted, like a name. An
+    unnamed stem is never changed."""
     if what != "dictionary":
         return what, ids
-    kept = tuple(h for h in ids if (lex[h].get("kind") or "") not in C.NAME_KINDS)
-    return ("dictionary", kept) if kept else ("name", ())
+    kept = tuple(h for h in ids if (lex[h].get("kind") or "") not in C.NAME_KINDS and not ending(h, lex))
+    if kept:
+        return "dictionary", kept
+    return ("name", ()) if any((lex[h].get("kind") or "") in C.NAME_KINDS for h in ids) else ("piece", ())
 
 
 def population_of(gl, lex, fix=False):
@@ -447,7 +452,7 @@ def not_agreed(rows):
 
 def figures():
     """What the page reports, from the local results: counts only. The first count is identity()'s, as set before
-    the checkers (population.json and the results); the north star is counted with counted()'s correction. Before
+    the checkers (population.json and the results); the north star is counted with counted()'s corrections. Before
     us it was the same (Mike, 2026-11-16: "“Before us” should really equal “Now”"): every translated word's meaning
     was in the lexicon of 2003, and the project has added none. "lookup" is only the reach of a plain lookup of
     the lexicon, which the rows of running words and of spellings measure, not the north star before the project."""
@@ -467,8 +472,8 @@ def figures():
             "unnamed_stems": pop["unnamed_stems"], "unnamed_in_one_place": pop["unnamed_in_one_place"],
             "unnamed_running_words": pop["unnamed_running_words"],
             "lookup": {"running": running_lookup, "dictionary_words": len(reached), "translated": len(translated(reached, lex))},
-            "corrections": {"names": taken_out(first, lex, lambda h: (lex[h].get("kind") or "") in C.NAME_KINDS)},
-            "endings": {"in_use": sum(ending(h, lex) for h in known), "translated": sum(ending(h, lex) for h in done)},
+            "corrections": {"names": taken_out(first, lex, lambda h: (lex[h].get("kind") or "") in C.NAME_KINDS),
+                            "endings": taken_out(first, lex, lambda h: ending(h, lex))},
             "beside_a_stem": beside_a_stem(gl, lex, stems),
             "sample": {k: res[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"seed": SEED, "reading": LAST},
             "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")}

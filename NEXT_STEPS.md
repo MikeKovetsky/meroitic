@@ -108,13 +108,14 @@ Done since this plan was written:
     18.2% against 10%), so no proposal is labelled. Open: applying the overlay to the map; the same pass on the
     2,203 open spellings that stand in one or two texts. Both are steps of section G.
 19. **Distinct words translated, the north star** (2026-11-16,
-    [`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)). Counted once each, 160 of about
-    1,375 distinct words have a meaning: 11.6% (between 11.0% and 14.3%), the same as before the project (each of
-    those meanings is in the lexicon of 2003), against 50.1% of the running words. 445 are words of the lexicon;
-    the others are estimated from a sample of the 1,107 stems the map cannot name (two checkers, kappa 0.94 on the
-    second reading). The steps of section G move this number only where they give a word of the dictionary a
-    meaning (G1: 15 words, Rilly's of 2016 and 2021; G4 and G7 where they find one) or correct the count of words
-    (G3). Only a meaning of the project's own would set it apart from before us.
+    [`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)). Counted once each, 127 of about
+    1,307 distinct words have a meaning: 9.7% (between 9.2% and 12.1%), the same as before the project (each of
+    those meanings is in the lexicon of 2003), against 50.1% of the running words. 377 are words of the lexicon
+    (an ending or a particle written as a word of its own is a piece, not a word); the others are estimated from a
+    sample of the 1,107 stems the map cannot name (two checkers, kappa 0.94 on the second reading). The steps of
+    section G move this number only where they give a word of the dictionary a meaning (G1: 9 words, Rilly's of
+    2016 and 2021; G4 and G7 where they find one) or correct the count of words (G3). Only a meaning of the
+    project's own would set it apart from before us.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):

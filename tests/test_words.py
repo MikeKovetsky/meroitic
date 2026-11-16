@@ -85,17 +85,21 @@ LEX2 = dict(LEX, **{"Mso": {"kind": "name", "status": "hypothesis"}, "Mlo": {"ki
                     "t- (1)": {"kind": "function word", "status": "hypothesis"}, "-se": {"kind": "", "status": "established"}})
 
 
-def test_the_north_star_counts_no_name_as_a_word():
-    """counted(): identity() as set, with the review's correction, and nothing else changed."""
+def test_the_north_star_counts_no_ending_and_no_name_as_a_word():
+    """counted(): identity() as set, with the review's two corrections, and nothing else changed."""
     c = lambda w: D.counted(*D.identity(w, LEX2), LEX2)                                     # noqa: E731
     assert [D.ending(h, LEX2) for h in ("-lo", "ps-", "t- (1)", "-se", "-erike-", "kdi", "Mso")] == [True] * 4 + [False] * 3
     # an entry of the kinds "name" and "people name" was a word as set; it is a name, and a stem beside it stays
     assert D.identity(g("mSo", "hypothesis", ("mSo", "Mso")), LEX2) == ("dictionary", ("Mso",))
     assert c(g("mSo", "hypothesis", ("mSo", "Mso"))) == c(g("mlo", "hypothesis", ("mlo", "Mlo"))) == ("name", ())
     assert c(g("atmSo", "hypothesis", ("at", "at (1)"), ("mSo", "Mso"))) == ("dictionary", ("at (1)",))
+    # an ending or a particle written as a word, or a word made only of them, is a piece, as the checkers' case has it
+    assert D.identity(g("lo", "grammar", ("lo", "-lo")), LEX2) == ("dictionary", ("-lo",))
+    assert c(g("lo", "grammar", ("lo", "-lo"))) == c(g("pSkete", "kind", ("pS", "ps-"), ("kete", "-kete"))) == ("piece", ())
+    # a stem the lexicon writes with hyphens is a word, without the endings around it
+    assert c(g("terikelowi", "meaning", ("t", "t- (1)"), ("erike", "-erike-"), ("lowi", "-lo"))) == ("dictionary", ("-erike-",))
     # nothing else changes, and an unnamed stem never does: the sample is drawn from the same stems
-    for w in (g("kdilo", "meaning", ("kdi", "kdi"), ("lo", "-lo")), g("Tneyi", "name", ("Tneyi", "NAME")), g("lo", "grammar", ("lo", "-lo")),
-              g("pSkete", "kind", ("pS", "ps-"), ("kete", "-kete")), g("terikelowi", "meaning", ("t", "t- (1)"), ("erike", "-erike-"), ("lowi", "-lo")),
+    for w in (g("kdilo", "meaning", ("kdi", "kdi"), ("lo", "-lo")), g("Tneyi", "name", ("Tneyi", "NAME")),
               g("akiNlo", "hypothesis", ("akiN", "Akine"), ("lo", "-lo")), g("diyXokete", "unknown", ("diyXo", "?"), ("kete", "-kete")),
               g("terikSelowi", "unknown", ("t", "t- (1)"), ("erik", "-erike-"), ("Se", "?"), ("lowi", "-lo")), g("yiteb", "unknown")):
         assert c(w) == D.identity(w, LEX2), w["form"]
@@ -111,11 +115,12 @@ def test_the_population_counts_each_entry_and_each_stem_once():
     assert stems["diyXo"] == {"stem": "diyXo", "uses": 2, "texts": 2, "forms": {"diyXokete": 1, "diyXo": 1}, "places": [["T1", 2], ["T2", 0]]}
     # translated: the entries in use that the lexicon calls established or probable
     assert D.translated(known, LEX) == ["-lo", "kdi"]
-    # with the review's correction a name of the kind "name" is a name; the stems are the same
+    # with the review's corrections the ending written as a word is a piece and a name of the kind "name" a name;
+    # the stems are the same
     gl["T2"].append(g("mSo", "hypothesis", ("mSo", "Mso")))
     known, fixed, c = D.population_of(gl, LEX2, fix=True)
-    assert dict(known) == {"kdi": 2, "ḫr": 1, "-lo": 1} and c == {"dictionary": 4, "stem": 3, "none": 1, "name": 2} and fixed == stems
-    assert dict(D.population_of(gl, LEX2)[0]) == {"kdi": 2, "ḫr": 1, "-lo": 1, "Mso": 1}
+    assert dict(known) == {"kdi": 2, "ḫr": 1} and c == {"dictionary": 3, "stem": 3, "none": 1, "name": 2, "piece": 1} and fixed == stems
+    assert dict(D.population_of(gl, LEX2)[0]) == {"kdi": 2, "ḫr": 1, "-lo": 1, "Mso": 1} and D.translated(known, LEX2) == ["kdi"]
 
 
 # ---------------------------------------------------------------------------------------------------- the sample
@@ -314,7 +319,7 @@ def test_the_figures_add_up():
     assert f["translated"] == first["translated"] - sum(c["translated"] for c in fix.values())
     assert first["distinct_words"] == {k: first["dictionary_words"] + v for k, v in u.items()}
     assert first["star"] == D.star(first["translated"], first["dictionary_words"], u)
-    assert f["endings"]["translated"] <= f["endings"]["in_use"] <= f["dictionary_words"]
+    assert r["piece"] == first["running"]["dictionary"] - r["dictionary"] - (r["name"] - first["running"]["name"])
     m = f["map"]
     assert m["running_words"] == sum(r.values()) and m["running_need"] == m["running_words"] - r["none"] and m["inscriptions"] == 548
     assert m["running_translated"] <= m["running_need"] and m["spellings_translated"] <= m["spellings_need"] <= m["spellings"]
@@ -343,27 +348,21 @@ def lookup_share(f):
     return pct(f["lookup"]["translated"] / f["distinct_words"]["point"])
 
 
-def as_pieces(f):
-    """The north star with the endings and particles written as words taken as pieces."""
-    e = f["endings"]
-    return D.star(f["translated"] - e["translated"], f["dictionary_words"] - e["in_use"], f["unnamed_words"])
-
-
 def test_the_page_says_what_the_figures_say():
     f, text = figs(), page()
     s, u, d, m, b = f["sample"], f["unnamed_words"], f["distinct_words"], f["map"], f["beside_a_stem"]
-    st, sb, first, lk, e = f["star"], f["star_before"], f["first_count"], f["lookup"], f["endings"]
+    st, sb, first, lk, e = f["star"], f["star_before"], f["first_count"], f["lookup"], f["corrections"]["endings"]
     # in short: before us is now, and no meaning is the project's
     assert (f"holds about {d['point']:,} distinct words (between {d['low']:,} and {d['high']:,}), and {f['translated']} of them have a "
             f"meaning: {pct(st['point'])} (between {pct(st['low'])} and {pct(st['high'])})") in text
     assert f"Before the project it was the same: each of the {f['translated']} has its meaning in the lexicon of 2003, and the project has added no meaning" in text
     assert f"{f['dictionary_words']} are words of the dictionary" in text
-    assert f"{e['in_use']} of the {f['dictionary_words']} are endings, prefixes and particles that stand as a written word of their own" in text
+    assert f"took the endings and particles written as a word of their own for words and gave {pct(first['star']['point'])}" in text
     assert "| R5 | \"“Before us” should really equal “Now”\"" in PAGE.read_text(encoding="utf-8") and lookup_share(f) not in text
-    # spellings, and what a running word is
+    # spellings, and the four things a running word is
     assert f"The corpus has {m['spellings']:,} different spellings" in text
     assert f"({m['spellings_translated']} of the {m['spellings_need']:,} that need one, {pct(m['spellings_translated'] / m['spellings_need'])})" in text
-    assert f"{f['dictionary_words']} dictionary words are in use, and {f['translated']} of them are translated." in text
+    assert f"{f['dictionary_words']} dictionary words are in use, and {f['translated']} of them are translated; {f['running']['piece']} running words are pieces" in text
     assert f"{f['unnamed_stems']:,} unnamed stems, under {f['unnamed_running_words']:,} running words; {f['unnamed_in_one_place']} of them stand in one place" in text
     # the two readings
     one = f["readings"]["r1"]
@@ -390,11 +389,11 @@ def test_the_page_says_what_the_figures_say():
     assert f"{f['next']['stated_later']} more dictionary words count as translated" in text and "older than the project" in text
     assert f"({pct(m['running_translated'] / m['running_need'])}: {m['running_translated']:,} of the {m['running_need']:,} that need a meaning)" in text
     # what the review corrected, and the first count
-    assert f["corrections"]["names"] == {"entries": 1, "translated": 0} and "one entry of the kind \"name\" counted as a dictionary word" in text
+    assert (f"so {e['entries']} endings, prefixes and particles that stand as a written word of their own counted as dictionary words, "
+            f"{e['translated']} of them translated") in text
+    assert f["corrections"]["names"] == {"entries": 1, "translated": 0} and "One entry of the kind \"name\" counted as a dictionary word" in text
     assert f"The first count gave {first['translated']} of about {first['distinct_words']['point']:,} distinct words ({pct(first['star']['point'])}, between {pct(first['star']['low'])} and {pct(first['star']['high'])})" in text
     # limits and cost
-    assert (f"{e['in_use']} endings, prefixes and particles of the lexicon that stand as a written word of their own count as dictionary words, "
-            f"{e['translated']} of them translated") in text and f"Counted as pieces, they would make the share {pct(as_pieces(f)['point'])}" in text
     assert f"({b['pieces']} different pieces in {b['running_words']} running words; {b['three_signs_or_more_no_stem']} of them have three signs or more" in text
     more = b["three_signs_or_more_no_stem"]
     assert f"Were all {more} words, the share would be {pct(f['translated'] / (d['point'] + more))}" in text
@@ -410,7 +409,7 @@ def test_the_summaries_quote_the_figures():
     parts = {"README": between(read("README.md"), "18. **Counted by distinct words", "## The question"),
              "REPORT": read("REPORT.md")[read("REPORT.md").index("## Day nine (2026-11-16): distinct words"):],
              "NEXT_STEPS": between(read("NEXT_STEPS.md"), "19. **Distinct words translated", "Next, in this order")}
-    st, d, m, lk, e = f["star"], f["distinct_words"], f["map"], f["lookup"], f["endings"]
+    st, d, m, lk, e = f["star"], f["distinct_words"], f["map"], f["lookup"], f["corrections"]["endings"]
     for name, text in parts.items():
         assert f"{pct(st['point'])} (between {pct(st['low'])} and {pct(st['high'])})" in text or f"({pct(st['point'])}, between {pct(st['low'])} and {pct(st['high'])})" in text, name
         assert f"{f['translated']} of about {d['point']:,}" in text and ("the same as before the project" in text or "it was the same" in text), name
@@ -420,7 +419,7 @@ def test_the_summaries_quote_the_figures():
     assert f"the map ties its spellings to {f['dictionary_words']} words of the lexicon, {f['translated']} of them" in readme
     assert (f"a plain lookup of the lexicon finds {lk['translated']} of them, and the map recognises the other {f['translated'] - lk['translated']} "
             "in spellings the lookup does not know") in readme
-    assert f"{e['in_use']} of the {f['dictionary_words']} are endings and particles written as a word of their own; counted as pieces of words, they would make the share {pct(as_pieces(f)['point'])}" in readme
+    assert f"The first count took the endings and particles written as words for words and gave {pct(f['first_count']['star']['point'])}" in readme
     assert f"a word of the lexicon ({f['dictionary_words']} in use, {f['translated']} of them" in report
     assert f"({f['unnamed_stems']:,}, of which {f['unnamed_in_one_place']} stand in one place)" in report
     assert f"About {d['point']:,} distinct words (between {d['low']:,} and {d['high']:,})" in report
@@ -428,8 +427,8 @@ def test_the_summaries_quote_the_figures():
     assert f"({lk['translated']} of the {f['translated']})" in report
     assert f"it would be {f['next']['translated']} ({pct(f['next']['star']['point'])})" in report
     assert f"the spellings ({pct(m['spellings_translated'] / m['spellings_need'])} of those" in report and f"the running words ({pct(m['running_translated'] / m['running_need'])})" in report
-    assert f"({f['first_count']['translated']} of about {f['first_count']['distinct_words']['point']:,})" in report
-    assert f"({e['in_use']} entries, {e['translated']} of them translated)" in report and f"as pieces they would make the share {pct(as_pieces(f)['point'])}" in report
+    assert f"{f['first_count']['translated']} of about {f['first_count']['distinct_words']['point']:,}, {pct(f['first_count']['star']['point'])}" in report
+    assert f"({e['entries']} entries, {e['translated']} of them translated)" in report
     assert f"kappa {f['sample']['kappa']:.2f}" in report and f"kappa {f['readings']['r1']['kappa']:.2f}" in report
     assert f"{f['tokens']['all']['agents']} fresh agents, {f['tokens']['all']['tokens']:,} subagent tokens" in report
     assert f"the same as before the project (each of those meanings is in the lexicon of 2003), against {pct(m['running_translated'] / m['running_need'])} of the running words" in steps
