@@ -1,10 +1,16 @@
 # The open spellings the lexicon does not hold (step G3)
 
-Status on 2026-11-16, 14:10: counted. The first pilot was not taken (section 6); the second pilot and the full pass met
-their bars (sections 8 and 10). What the step resolves is not yet a layer of the map (section 10).
-Not reviewed yet: the working script and its checks are still local, and a review may correct these numbers.
-script (local until the step is counted): `data/sources/g3/run.py`. What the checkers are given:
-[`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md).
+Status on 2026-11-16: counted, and what the step resolves is laid in the map as its fourth layer
+([map_layers.md](map_layers.md)). The first pilot was not taken (section 6); the second pilot and the full pass
+met their bars (sections 8 and 10). Figures: `unnamed_spellings_figures.json`. Script: `src/unnamed.py`. Checks:
+`tests/test_unnamed.py`. What the checkers were given:
+[`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md). Sections 2 to 5, 7 and 9 are the rules as they
+were set before the checkers they bind were started (section 9 before the full pass was counted).
+
+**In short.** Of the 1,225 open places of rare spellings that the lexicon does not hold, two checkers call 828 a
+word of its own, 111 a name and 41 a piece of a neighbouring word; 245 are unclear or not agreed. The 111 names
+and 7 of the pieces are laid in the map. That translates nothing: it takes 113 running words out of those that
+need a meaning. A first pilot missed its bars because of its controls and is not taken.
 
 ## 1. What was asked
 
@@ -19,9 +25,9 @@ Mike, 2026-11-16, to "Start G3's pilot and G5 now, while the review runs?": "Yes
 
 | | Requirement | State |
 |---|---|---|
-| R1 | "a pilot on 100 places drawn by a fixed seed" | Set: section 3. |
-| R2 | "a script proposes the joins with the neighbouring words that give a form the map reads" | Counted before the pilot and found empty: section 2. The checkers name the whole word themselves. |
-| R3 | "two checkers decide (a piece, a name, a word of its own, unclear), and the bar is set beforehand" | Set: sections 3 and 4. |
+| R1 | "a pilot on 100 places drawn by a fixed seed" | MET: sections 3 and 6 to 8. Two pilots: the first was not taken. |
+| R2 | "a script proposes the joins with the neighbouring words that give a form the map reads" | MET from the second pilot on (section 7): the script's joins stand as a note under the place. It finds few (section 2), so the checkers name the whole word themselves. |
+| R3 | "two checkers decide (a piece, a name, a word of its own, unclear), and the bar is set beforehand" | MET: sections 4, 7, 8 and 10. Each reading's bars were committed before its checkers were started. |
 
 ## 2. The places, and what a script can do
 
@@ -174,6 +180,14 @@ the 2% up to which the old estimate may be carried. So, before any of the full p
 - **The same rule of counting:** a sampled stem that both checkers of that study called a word counts one, one
   they called a form of a known word counts a half, the others nothing; the share, times the number of stems
   still unnamed, with its 95% interval (Wilson), as before.
+  *Corrected after the count:* this sentence described that study's rule wrongly. In its rule (`estimate` of
+  `src/words.py`) the half is for a stem that is the same word as another unnamed stem; a form of a known word
+  counts nothing. The figure of section 10 uses the study's rule, as the heading of this point says: about 907
+  words. By the sentence as first written it would be about 904, and the north star 12.2% either way.
+- **This is not what the reporting skill said to do.** It said to draw and judge a new sample when a step changes
+  which stems are unnamed. Making the estimate again from the old sample is cheaper and rests on the same
+  reasoning, but the measure of the north star changes only on Mike's word, and he has not given it yet. Until
+  then the north star with this layer is provisional.
 - **No new judging.** The verdicts of that study stand; nothing of this step's checkers enters the estimate
   except which stems are left.
 - The north star's "before us" stays equal to its "now": this step gives no word a meaning.
@@ -207,8 +221,7 @@ With the second pilot's 100 places, all 1,225 places are judged:
   piece, mostly where a script's note showed that the word and its neighbour also stand joined elsewhere. No bar
   was set on that. It touches the 7 pieces that are laid, not the names.
 
-**The map with this step as a layer** (the layer is written, `118` lines; it is laid by the map's script once the
-review of the earlier steps is done, so these numbers are provisional):
+**The map with this step as a layer** (the layer `unnamed` of `src/themap.py`, 118 lines):
 
 | | Running words translated | Share | Distinct spellings translated | Share |
 |---|---|---|---|---|

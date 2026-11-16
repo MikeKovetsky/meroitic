@@ -67,7 +67,20 @@
      "all": 4793
     }
    },
-   "distinct_words_translated": 136
+   "distinct_words_translated": 136,
+   "north_star": {
+    "translated": 136,
+    "distinct_words": {
+     "point": 1307,
+     "low": 1049,
+     "high": 1384
+    },
+    "star": {
+     "point": 0.1041,
+     "low": 0.0983,
+     "high": 0.1296
+    }
+   }
   },
   {
    "name": "rare_sure",
@@ -109,7 +122,20 @@
      "all": 4793
     }
    },
-   "distinct_words_translated": 136
+   "distinct_words_translated": 136,
+   "north_star": {
+    "translated": 136,
+    "distinct_words": {
+     "point": 1307,
+     "low": 1049,
+     "high": 1384
+    },
+    "star": {
+     "point": 0.1041,
+     "low": 0.0983,
+     "high": 0.1296
+    }
+   }
   },
   {
    "name": "rare_later",
@@ -152,27 +178,94 @@
      "all": 4793
     }
    },
-   "distinct_words_translated": 156
+   "distinct_words_translated": 156,
+   "north_star": {
+    "translated": 156,
+    "distinct_words": {
+     "point": 1307,
+     "low": 1049,
+     "high": 1384
+    },
+    "star": {
+     "point": 0.1194,
+     "low": 0.1127,
+     "high": 0.1487
+    }
+   }
+  },
+  {
+   "name": "unnamed",
+   "page": "data/discovery/unnamed_spellings.md",
+   "laid": "2026-11-16",
+   "what": "open spellings the lexicon does not hold that two checkers call a name or a piece (G3)",
+   "places": 118,
+   "why": {
+    "name": 111,
+    "piece": 7
+   },
+   "to": {
+    "name": 113,
+    "meaning": 5
+   },
+   "was": {
+    "hypothesis": 68,
+    "unknown": 50
+   },
+   "after": {
+    "running": {
+     "translated": 4154,
+     "named": 1957,
+     "open": 2963,
+     "lost": 1216,
+     "need": 7117,
+     "share": 0.5837,
+     "all": 10290,
+     "of_all": 0.5939
+    },
+    "spellings": {
+     "translated": 815,
+     "named": 911,
+     "open": 1998,
+     "lost": 1069,
+     "need": 2813,
+     "share": 0.2897,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 156,
+   "north_star": {
+    "translated": 156,
+    "distinct_words": {
+     "point": 1284,
+     "low": 1023,
+     "high": 1356
+    },
+    "star": {
+     "point": 0.1215,
+     "low": 0.115,
+     "high": 0.1525
+    }
+   }
   }
  ],
  "current": {
   "running": {
-   "translated": 4149,
-   "named": 1844,
-   "open": 3081,
+   "translated": 4154,
+   "named": 1957,
+   "open": 2963,
    "lost": 1216,
-   "need": 7230,
-   "share": 0.5739,
+   "need": 7117,
+   "share": 0.5837,
    "all": 10290,
-   "of_all": 0.5824
+   "of_all": 0.5939
   },
   "spellings": {
-   "translated": 814,
-   "named": 807,
-   "open": 2103,
+   "translated": 815,
+   "named": 911,
+   "open": 1998,
    "lost": 1069,
-   "need": 2917,
-   "share": 0.2791,
+   "need": 2813,
+   "share": 0.2897,
    "all": 4793
   }
  },
@@ -203,27 +296,43 @@
   "translated_by_a_layer": {
    "recurring": 9,
    "rare_sure": 0,
-   "rare_later": 20
+   "rare_later": 20,
+   "unnamed": 0
   },
   "translated": 156,
   "distinct_words": {
-   "point": 1307,
-   "low": 1049,
-   "high": 1384
+   "point": 1284,
+   "low": 1023,
+   "high": 1356
   },
   "star": {
-   "point": 0.1194,
-   "low": 0.1127,
-   "high": 0.1487
+   "point": 0.1215,
+   "low": 0.115,
+   "high": 0.1525
   },
   "before_us": {
-   "point": 0.1194,
-   "low": 0.1127,
-   "high": 0.1487
+   "point": 0.1215,
+   "low": 0.115,
+   "high": 0.1525
+  },
+  "unnamed_words": {
+   "point": 907,
+   "low": 646,
+   "high": 979
   },
   "unnamed_stems": {
    "sampled": 1107,
-   "now": 1105
+   "now": 1066,
+   "sample_still_unnamed": 230,
+   "its_verdicts": {
+    "word": 152,
+    "unclear": 42,
+    "piece": 21,
+    "not agreed": 7,
+    "same": 4,
+    "known": 3,
+    "name": 1
+   }
   }
  }
 }

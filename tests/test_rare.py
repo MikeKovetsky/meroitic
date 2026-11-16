@@ -241,15 +241,19 @@ def test_the_figures_add_up():
 
 
 def test_the_figures_agree_with_the_map():
-    """The two layers of the map hold what the figures say is laid, and the north star's gain is the new words."""
+    """The two layers of the map hold what the figures say is laid, and the north star's gain is the new words.
+    The pages of this study quote the map as these two layers left it; layers laid later move it on."""
     f, m = figs(), json.loads(M.PUBLIC.read_text(encoding="utf-8"))
     layers = {l["name"]: l for l in m["layers"]}
-    assert [l["name"] for l in M.LAYERS][-2:] == list(R.LAYER.values()) == ["rare_sure", "rare_later"]
+    names = [l["name"] for l in M.LAYERS]
+    assert names[names.index("rare_sure"): names.index("rare_sure") + 2] == list(R.LAYER.values()) == ["rare_sure", "rare_later"]
     for run, name in R.LAYER.items():
         l, laid = layers[name], f[run]["laid"]
         assert (l["places"], l["why"], l["to"], l["was"]) == (laid["lines"], laid["why"], laid["to"], laid["was"]), run
     new = sum(w["new_to_the_map"] for w in f["g4"]["words"])
-    assert m["north_star"]["translated_by_a_layer"] == {"recurring": 9, "rare_sure": 0, "rare_later": new}
+    by = m["north_star"]["translated_by_a_layer"]
+    assert {k: by[k] for k in ("recurring", "rare_sure", "rare_later")} == {"recurring": 9, "rare_sure": 0, "rare_later": new}
+    assert layers["rare_later"]["distinct_words_translated"] - layers["rare_sure"]["distinct_words_translated"] == new
 
 
 def test_the_figures_hold_no_wording_but_ours():
@@ -272,8 +276,9 @@ def test_the_figures_hold_no_wording_but_ours():
 
 def test_the_page_says_what_the_figures_say():
     f, text, m = figs(), page(), json.loads(M.PUBLIC.read_text(encoding="utf-8"))
-    g2, g4, n = f["g2"], f["g4"], m["north_star"]
+    g2, g4 = f["g2"], f["g4"]
     L = {l["name"]: l["after"] for l in m["layers"]}
+    n = {l["name"]: l["north_star"] for l in m["layers"]}["rare_later"]         # the north star as these layers left it
     r2, r4a, r4 = g2["readings"]["1"], g4["readings"]["1"], g4["readings"]["2"]
     judged = g2["places_judged"]["places"] + g4["places_judged"]["places"]
     lines = g2["laid"]["lines"] + g4["laid"]["lines"]
@@ -335,10 +340,11 @@ def test_the_summaries_name_the_step():
     assert "python3 -I tests/test_rare.py" in readme and "- `python3 -I src/rare.py public` (and " in readme
     steps = " ".join((ROOT / "NEXT_STEPS.md").read_text(encoding="utf-8").split())
     f, m = figs(), json.loads(M.PUBLIC.read_text(encoding="utf-8"))
-    c = m["current"]["running"]
+    after = {l["name"]: l for l in m["layers"]}["rare_later"]                   # the map as this step left it
+    c, star = after["after"]["running"], after["north_star"]
     for text in (" ".join(readme.split()), steps):
         assert f"{c['translated']:,} of the {c['need']:,} running words that need a meaning" in text and pct(c["share"]) in text
-        assert f"{m['north_star']['translated']} of about {m['north_star']['distinct_words']['point']:,}" in text
+        assert f"{star['translated']} of about {star['distinct_words']['point']:,}" in text
     lines = f["g2"]["laid"]["lines"] + f["g4"]["laid"]["lines"]
     assert "rare_spellings.md" in steps and f"{lines} places" in steps
     assert f"{f['g2']['laid']['why']['piece'] + f['g4']['laid']['why']['piece']} of the {lines} are pieces of a word the map holds" in steps

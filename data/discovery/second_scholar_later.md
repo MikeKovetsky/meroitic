@@ -1,9 +1,9 @@
 # A second scholar for the meanings Rilly states in 2016 and 2021 (step G5)
 
-Status on 2026-11-16, 14:04: counted, its bars are met (section 5). Not reviewed yet: the working script, its
-checks and its figures file are still local, and a review may correct these numbers. Working script (local
-until the step is counted): `data/sources/g5/run.py`. What the judges are given:
-[`runs/prompts/G5_judges.md`](../../runs/prompts/G5_judges.md).
+Status on 2026-11-16: counted, its bars are met (section 5). Figures: `second_scholar_later_figures.json`. Script:
+`src/second_later.py`. Checks: `tests/test_second_later.py`. What the judges were given:
+[`runs/prompts/G5_judges.md`](../../runs/prompts/G5_judges.md). Sections 2 to 4 are the rules as they were set
+before any judge was started.
 
 ## 1. What was asked
 

@@ -126,10 +126,20 @@ def test_the_north_star_before_us_is_the_north_star():
     assert n["star"] == {"point": 0.03, "low": round(3 / 120, 4), "high": round(3 / 64, 4)} and n["before_us"] == n["star"]
 
 
-def test_the_estimate_is_carried_only_while_the_layers_take_few_stems():
-    assert M.carried(1000, 1000) == {"sampled": 1000, "now": 1000} and M.carried(1000, 980) == {"sampled": 1000, "now": 980}
-    assert stops(lambda: M.carried(1000, 979), "draw and judge a new sample")        # more than DRIFT of the stems went
-    assert stops(lambda: M.carried(1000, 1001), "draw and judge a new sample")       # a stem the sample never saw
+def test_the_estimate_is_carried_while_few_stems_go_and_made_again_from_the_sample_when_more_do():
+    import words as D
+    words = {"unnamed_stems": 1000, "unnamed_words": {"point": 800, "low": 700, "high": 900}}
+    never = lambda: stops(lambda: None, "the sample must not be read")              # noqa: E731
+    stems = lambda n: {f"s{i}" for i in range(n)}                                   # noqa: E731
+    assert M.unnamed_words(words, stems(1000), never) == (words["unnamed_words"], {"sampled": 1000, "now": 1000})
+    assert M.unnamed_words(words, stems(980), never) == (words["unnamed_words"], {"sampled": 1000, "now": 980})     # DRIFT is 2%
+    assert stops(lambda: M.unnamed_words(words, stems(1001), never), "draw and judge a new sample")                # a stem the sample never saw
+    # past DRIFT: the sampled stems that are still unnamed, by the rule of the count of distinct words
+    sample = {"s0": "word", "s1": "word", "s2": "same", "s3": "name", "s4": "unclear", "s5": "not agreed", "s990": "word", "s995": "piece"}
+    got, rests = M.unnamed_words(words, stems(900), lambda: sample)
+    left = {"word": 2, "same": 1, "name": 1, "unclear": 1, "not agreed": 1}         # s990 and s995 are no longer unnamed
+    assert got == D.estimate(900, left) and got["point"] == round(900 * 2.5 / 4) and got["low"] <= got["point"] <= got["high"]
+    assert rests == {"sampled": 1000, "now": 900, "sample_still_unnamed": 6, "its_verdicts": {"word": 2, "same": 1, "name": 1, "unclear": 1, "not agreed": 1}}
     assert M.DRIFT == 0.02
 
 
@@ -156,9 +166,18 @@ def test_the_figures_add_up():
     assert n["translated"] == n["translated_by_the_lexicon"] + sum(n["translated_by_a_layer"].values()) and n["before_us"] == n["star"]
     assert set(n["translated_by_a_layer"]) == {l["name"] for l in M.LAYERS}
     assert n["star"]["point"] == round(n["translated"] / n["distinct_words"]["point"], 4) and n["star"]["low"] <= n["star"]["point"] <= n["star"]["high"]
-    u = n["unnamed_stems"]
-    assert 0 <= u["sampled"] - u["now"] <= M.DRIFT * u["sampled"]
-    assert u["sampled"] == json.loads(M.WORDS.read_text(encoding="utf-8"))["unnamed_stems"]
+    u, w = n["unnamed_stems"], json.loads(M.WORDS.read_text(encoding="utf-8"))
+    assert u["sampled"] == w["unnamed_stems"] >= u["now"]
+    if u["sampled"] - u["now"] <= M.DRIFT * u["sampled"]:
+        assert n["unnamed_words"] == w["unnamed_words"] and set(u) == {"sampled", "now"}
+    else:                                                                # made again from the sampled stems still unnamed
+        assert sum(u["its_verdicts"].values()) == u["sample_still_unnamed"] <= w["sample"]["sampled"]
+        assert n["unnamed_words"]["low"] <= n["unnamed_words"]["point"] <= n["unnamed_words"]["high"] <= u["now"]
+    assert n["distinct_words"] == {k: n["dictionary_words"] + v for k, v in n["unnamed_words"].items()}
+    assert f["layers"][-1]["north_star"] == {k: n[k] for k in ("translated", "distinct_words", "star")}
+    for l in f["layers"]:
+        s = l["north_star"]
+        assert s["translated"] == l["distinct_words_translated"] and s["star"]["point"] == round(s["translated"] / s["distinct_words"]["point"], 4), l["name"]
 
 
 def test_the_figures_hold_counts_only():
@@ -196,9 +215,11 @@ def test_the_page_says_what_the_figures_say():
     assert f"{already} of its {first['places']} places were translated or named in the base already" in text
     assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words, {pct(n['star']['point'])} (between {pct(n['star']['low'])} and {pct(n['star']['high'])})" in text
     assert f"{n['translated_by_the_lexicon']} by the lexicon of 2003 and {sum(n['translated_by_a_layer'].values())} by a later source" in text
-    u, words = n["unnamed_stems"], json.loads(M.WORDS.read_text(encoding="utf-8"))
-    assert f"a sample of the {u['sampled']:,} stems the base could not name. The layers make {u['sampled'] - u['now']} of them names, so {u['now']:,} are left" in text
-    assert f"(about {words['unnamed_words']['point']} of them are words)" in text and f"more than {100 * M.DRIFT:.0f}% of those stems" in text
+    u = n["unnamed_stems"]
+    assert f"The layers make {u['sampled'] - u['now']} of those stems names or pieces, so {u['now']:,} are left" in text and f"at most {100 * M.DRIFT:.0f}% of the stems" in text
+    assert f"made again from the {u['sample_still_unnamed']} sampled stems that are still unnamed" in text
+    assert f"about {n['unnamed_words']['point']} of the {u['now']:,} are words of their own (between {n['unnamed_words']['low']} and {n['unnamed_words']['high']})" in text
+    assert f"from {pct(f['layers'][-2]['north_star']['star']['point'])} to {pct(n['star']['point'])}, is a correction of the count of words" in text
     a = first["after"]                                                   # the map after the first layer alone
     gain = a["running"]["translated"] - b["running"]["translated"]
     names = a["running"]["named"] - b["running"]["named"]
@@ -288,7 +309,7 @@ def test_the_two_studies_count_the_same():
     assert (r["before"]["read"], r["before"]["share"]) == (f["base"]["running"]["translated"], f["base"]["running"]["share"])
     w = json.loads((ROOT / "data/discovery/distinct_words_figures.json").read_text(encoding="utf-8"))
     first = f["layers"][0]["distinct_words_translated"]              # what the count of distinct words gave beforehand as its "next"
-    assert w["next"]["translated"] == first and w["next"]["star"]["point"] == round(first / f["north_star"]["distinct_words"]["point"], 4)
+    assert w["next"]["translated"] == first and w["next"]["star"] == f["layers"][0]["north_star"]["star"]
     assert f["layers"][-1]["distinct_words_translated"] == f["north_star"]["translated"]
     assert [l["distinct_words_translated"] for l in f["layers"]] == sorted(l["distinct_words_translated"] for l in f["layers"])
     assert w["translated"] == f["north_star"]["translated_by_the_lexicon"] and w["dictionary_words"] == f["north_star"]["dictionary_words"]

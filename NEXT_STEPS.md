@@ -136,6 +136,19 @@ Done since this plan was written:
     both checkers recognise the word but the map leaves a part of the spelling unnamed (or, at one, another stem
     has no meaning), the 159 entries for which Rilly's later work states no meaning firmly, and a second scholar
     for Rilly's meanings (G5).
+22. **The open spellings the lexicon does not hold** (2026-11-16,
+    [`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md); step G3). Two checkers judged
+    all 1,225 open places from the place alone, with controls: 828 are words of their own, 111 names, 41 pieces, 245
+    unclear or not agreed (a first pilot missed its bars and is not taken). The 111 names and 7 pieces are the map's
+    fourth layer. The map as it stands: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%).
+    Nothing is deciphered by this: fewer words need a meaning, and the count of distinct words is corrected. The
+    way the north star is recounted (from the old sample's stems still unnamed) is not the one the reporting rules named, and Mike has not yet said
+    yes to it. Open: the
+    828 words of their own, which are what is left to decipher among these spellings.
+23. **A second scholar for Rilly's later meanings** (2026-11-16,
+    [`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md); step G5). 33 of the 66
+    meanings are also stated by another scholar (15 of them with a dissent), 13 are disputed, 20 rest on Rilly
+    alone. No count of the map changes.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -531,6 +544,8 @@ ours unless it passes a test set beforehand.
    meaning; a piece of a word the map reads takes that word's. This step deciphers nothing: it corrects the
    count of what is left to decipher. If half of kind c left that count, the share would be 58.9% with nothing
    else changed.
+   **Done on 2026-11-16** (point 22): 111 names and 7 pieces laid; a tenth of kind c left the count, not a half,
+   and the share is 58.4%.
 4. **G4. The later sources on the rest of the lexicon's open entries** (kind b: 1,032 running words under 323
    entries). The literature pass, the two readers and the place pass of point 18 again. A first search by
    headword finds only 51 entries of kinds a and b named in Rilly 2016 or 2021, covering 175 running words, so
@@ -540,6 +555,7 @@ ours unless it passes a test set beforehand.
 5. **G5. A second scholar for the stated meanings.** The 26 meanings of point 18 are Rilly's alone. The method
    of F2 on them: does FHN, Millet 2005 or Griffith state the same, or dissent, as Millet does on `sete`? The
    result is a status for each meaning (agreed by two, stated by one, disputed), not a higher count.
+   **Done on 2026-11-16** (point 23), with the meanings of G4: 33 agreed, 13 disputed, 20 stated by one.
 6. **G6. The blind test again, with what the first one taught.** The bar set beforehand at "all five readers
    agree" (seen after the first count: 12 of 15 right, and no wrong choice among the 11 words whose meaning was
    not offered); the 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38;

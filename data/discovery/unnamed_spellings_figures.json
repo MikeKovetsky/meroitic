@@ -1,0 +1,277 @@
+{
+ "places": 1225,
+ "spellings": 1107,
+ "places_where_a_script_finds_a_join": 11,
+ "readings": {
+  "pilot": {
+   "places": 100,
+   "answered_by_both": 100,
+   "kappa": 0.8493,
+   "controls": {
+    "1": {
+     "cut": {
+      "shown": 15,
+      "right": 9,
+      "called_name": 1,
+      "called_piece": 9,
+      "called_word": 5
+     },
+     "name": {
+      "shown": 15,
+      "right": 12,
+      "called_name": 12,
+      "called_word": 3
+     },
+     "word": {
+      "shown": 20,
+      "right": 17,
+      "called_name": 1,
+      "called_piece": 2,
+      "called_word": 17
+     }
+    },
+    "2": {
+     "cut": {
+      "shown": 15,
+      "right": 9,
+      "called_name": 1,
+      "called_piece": 9,
+      "called_word": 5
+     },
+     "name": {
+      "shown": 15,
+      "right": 13,
+      "called_name": 13,
+      "called_word": 2
+     },
+     "word": {
+      "shown": 20,
+      "right": 16,
+      "called_name": 1,
+      "called_piece": 2,
+      "called_unclear": 1,
+      "called_word": 16
+     }
+    }
+   },
+   "bars": {
+    "every_place_answered_by_both": true,
+    "kappa": true,
+    "names_called_name": true,
+    "words_called_name_or_piece": false,
+    "cuts_called_piece_of_the_whole": false
+   },
+   "taken": false,
+   "verdicts": {
+    "word": 61,
+    "name": 15,
+    "unclear": 15,
+    "not agreed": 8,
+    "piece": 1
+   },
+   "pairs": {
+    "word / word": 61,
+    "name / name": 15,
+    "unclear / unclear": 15,
+    "unclear / word": 2,
+    "word / unclear": 2,
+    "word / name": 2,
+    "piece / unclear": 1,
+    "piece / piece": 1,
+    "name / unclear": 1
+   }
+  },
+  "pilot2": {
+   "places": 100,
+   "answered_by_both": 100,
+   "kappa": 0.7965,
+   "controls": {
+    "1": {
+     "name": {
+      "shown": 15,
+      "right": 11,
+      "called_name": 11,
+      "called_unclear": 2,
+      "called_word": 2
+     },
+     "particle": {
+      "shown": 15,
+      "right": 9,
+      "called_piece": 9,
+      "called_unclear": 1,
+      "called_word": 5
+     },
+     "word": {
+      "shown": 20,
+      "right": 19,
+      "called_unclear": 1,
+      "called_word": 19
+     }
+    },
+    "2": {
+     "name": {
+      "shown": 15,
+      "right": 11,
+      "called_name": 11,
+      "called_unclear": 1,
+      "called_word": 3
+     },
+     "particle": {
+      "shown": 15,
+      "right": 9,
+      "called_piece": 9,
+      "called_unclear": 1,
+      "called_word": 5
+     },
+     "word": {
+      "shown": 20,
+      "right": 17,
+      "called_piece": 1,
+      "called_unclear": 2,
+      "called_word": 17
+     }
+    }
+   },
+   "bars": {
+    "every_place_answered_by_both": true,
+    "kappa": true,
+    "names_called_name": true,
+    "words_called_name": true
+   },
+   "taken": true,
+   "verdicts": {
+    "word": 58,
+    "unclear": 16,
+    "not agreed": 11,
+    "name": 11,
+    "piece": 4
+   },
+   "pairs": {
+    "word / word": 58,
+    "unclear / unclear": 16,
+    "name / name": 11,
+    "unclear / word": 5,
+    "piece / piece": 4,
+    "word / unclear": 3,
+    "word / name": 1,
+    "word / piece": 1,
+    "name / word": 1
+   }
+  },
+  "full": {
+   "places": 1125,
+   "answered_by_both": 1125,
+   "kappa": 0.787,
+   "controls": {
+    "1": {
+     "name": {
+      "shown": 37,
+      "right": 30,
+      "called_name": 30,
+      "called_piece": 2,
+      "called_unclear": 1,
+      "called_word": 4
+     },
+     "word": {
+      "shown": 75,
+      "right": 55,
+      "called_name": 4,
+      "called_piece": 16,
+      "called_word": 55
+     }
+    },
+    "2": {
+     "name": {
+      "shown": 37,
+      "right": 29,
+      "called_name": 29,
+      "called_piece": 3,
+      "called_unclear": 1,
+      "called_word": 4
+     },
+     "word": {
+      "shown": 75,
+      "right": 59,
+      "called_name": 4,
+      "called_piece": 12,
+      "called_word": 59
+     }
+    }
+   },
+   "bars": {
+    "every_place_answered_by_both": true,
+    "kappa": true,
+    "names_called_name": true,
+    "words_called_name": true
+   },
+   "taken": true,
+   "verdicts": {
+    "word": 770,
+    "unclear": 112,
+    "not agreed": 106,
+    "name": 100,
+    "piece": 37
+   },
+   "pairs": {
+    "word / word": 770,
+    "unclear / unclear": 112,
+    "name / name": 100,
+    "piece / piece": 37,
+    "name / word": 29,
+    "unclear / word": 25,
+    "word / unclear": 14,
+    "word / name": 13,
+    "word / piece": 12,
+    "name / unclear": 6,
+    "piece / word": 4,
+    "piece / unclear": 1,
+    "name / piece": 1,
+    "piece / name": 1
+   }
+  }
+ },
+ "taken": [
+  "pilot2",
+  "full"
+ ],
+ "verdicts": {
+  "word": 828,
+  "unclear": 128,
+  "not agreed": 117,
+  "name": 111,
+  "piece": 41
+ },
+ "laid": {
+  "lines": 118,
+  "why": {
+   "name": 111,
+   "piece": 7
+  },
+  "to": {
+   "name": 113,
+   "meaning": 5
+  },
+  "was": {
+   "hypothesis": 68,
+   "unknown": 50
+  }
+ },
+ "left_out": {
+  "piece, the whole word not a form of the map": 32,
+  "piece, the whole word open in the map": 2
+ },
+ "cost": {
+  "pilot": {
+   "agents": 6,
+   "tokens": 458438
+  },
+  "pilot2": {
+   "agents": 6,
+   "tokens": 463418
+  },
+  "full": {
+   "agents": 50,
+   "tokens": 3793254
+  }
+ }
+}

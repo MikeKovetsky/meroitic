@@ -228,6 +228,26 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     of them are forms of one another, so the gain in words is smaller than 20. Before the project the north star
     was the same 11.9%: every one of these meanings was published before it
     ([`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md)).
+21. **Of the open spellings the lexicon does not hold, two thirds are words of their own and a tenth are names;
+    laying the 111 names leaves fewer words to decipher and translates none.** 1,107 spellings that stand in one or two
+    texts hang on no entry of the lexicon; they stand at 1,225 open places. Two checkers judged every place from the
+    place alone (the word, five words on each side, the map's reading of each), with places of known answer mixed
+    in. A first pilot missed two bars and is not taken: its controls asked for what context cannot show (a word
+    cut in two in running text) and counted particles written apart as words. A second pilot and the full pass
+    met their bars (kappa 0.79; no more than one known word in ten called a name, at least seven known names in
+    ten found). Both checkers call 828 places a word of its own, 111 a name and 41 a piece of a word beside it;
+    245 are unclear or not agreed. The 111 names and the 7 pieces whose whole word the map holds are the map's fourth
+    layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%). The north star's last step is a recount, not a meaning: 41 of the stems the map cannot name
+    became names or pieces, and the estimate of the words among them was made again from the sampled stems still
+    unnamed. That way of recounting is not the one the reporting rules named, and Mike has not yet said yes to it
+    ([`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md)).
+22. **Half of the meanings that Rilly states in 2016 and 2021 are also stated by another scholar.** For the 66
+    entries of the lexicon that items 17 and 20 gave a later meaning, two judges compared it with 260 statements
+    of other scholars (Griffith, Millet, the editors of FHN, Lipiński, and the proposals the lexicon of 2003
+    reports), with decoys mixed in (kappa 0.95; each judge took 1 of 26 decoys for the same meaning). 33 of the 66
+    meanings are agreed by two scholars, for 15 of them with a third who dissents; 13 are disputed; 20 rest on
+    Rilly alone. This is a status for each meaning, not a count of the map
+    ([`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md)).
 
 ## The question
 
@@ -606,8 +626,10 @@ does not resolve the word. It then
 counts the map as it stands: the running words and the distinct spellings that need a meaning and have one, the
 same for the base and for a plain lookup of the lexicon, and the distinct words, where a word of the lexicon
 counts as translated if the lexicon calls its meaning established or probable or a layer gives it one from a
-later source. The estimate of how many unnamed stems are words is carried from section 25's sample, and the
-script stops if the layers take more than 2% of those stems. The status table reads its first three rows from
+later source. The estimate of how many unnamed stems are words is carried from section 25's sample while the
+layers take at most 2% of those stems out of the unnamed ones; past that it is made again, by the same rule,
+from the sampled stems that are still unnamed, and the script stops if a layer adds a stem the sample was not
+drawn from. The status table reads its first three rows from
 this count ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
 
 ### 27. The open spellings in one or two texts (`src/rare.py`)
@@ -623,6 +645,32 @@ corrected and fresh checkers read the same packs. `layers` then writes what goes
 only where the map names every part of the spelling and every stem among them has a meaning; a name where the
 entry is one; a piece where the whole word both checkers name is translated or named in the map. The rest is
 counted apart and stays open ([`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md)).
+
+### 28. The open spellings the lexicon does not hold (`src/unnamed.py`)
+
+For each open place of a rare spelling that hangs on no entry of the lexicon, two checkers say whether it is a
+name, a piece of a word beside it (they name the whole), a word of its own, or unclear. They see the word, five
+words on each side and the map's reading of each, with the word itself shown as unknown, and open no file. Among
+the real places stand controls whose answer the map holds and which look the same: translated words built on a
+stem of the lexicon, names the analysts recognised that are no entry of the lexicon, and, in the first pilot,
+spellings the script cut in two. Where joining the word with a word beside it gives a spelling the map holds,
+the pack says so in a note. A reading counts only if both checkers answered every place, their kappa is 0.6 or
+more, and each checker calls at most a tenth of the control words a name and at least seven control names in
+ten a name. `layer` then writes what goes into the map: a name where both say so; a piece only where both name
+the same whole word and the map holds it as translated or named
+([`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md)).
+
+### 29. A second scholar for the later meanings (`src/second_later.py`)
+
+The method of section 21 on the meanings a later source gave in sections 24 and 27. Each meaning stands beside
+every statement of another scholar about its entry: those the literature passes collected from the scholars'
+own works (a statement that takes a stance on a meaning, not a bare mention), and the proposals the lexicon of
+2003 reports. A tenth more rows are decoys, a meaning beside a statement about another entry. Two judges say of
+each row: the same meaning, partly, another, or none stated. The rows count only if both judges answered all of
+them, their kappa on "same" against the rest is 0.6 or more, and each took at most a tenth of the decoys for the
+same. A meaning is agreed by two scholars when both judges call one of its rows the same, disputed when none is
+and both call one another meaning, and stated by one otherwise
+([`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md)).
 
 ## Reproduce
 
@@ -640,6 +688,7 @@ python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
 python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
+python3 -I tests/test_unnamed.py && python3 -I tests/test_second_later.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -648,7 +697,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Seventeen things need files that are kept locally (Data, above), so they don't run from a clone:
+Nineteen things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -688,6 +737,10 @@ Seventeen things need files that are kept locally (Data, above), so they don't r
 - `python3 -I src/rare.py public` (and `layers`; for the runs `g4` and `g2`: `items`, `batches`, `quotes`,
   `verify-packs`, `verify`, `place-packs`, `places`, `place-packs2`, `places2`) reads `corpus_v6` and its gloss file,
   Rilly's lexicon, the text layers of the sources, the layers' lines and the readers' and checkers' answers.
+- `python3 -I src/unnamed.py public` (and `pilot-packs`, `pilot`, `pilot2-packs`, `pilot2`, `full-packs`, `full`,
+  `layer`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines and the checkers' answers.
+- `python3 -I src/second_later.py public` (and `rows`, `packs`, `count`) reads Rilly's lexicon, the statements the
+  literature passes of sections 24 and 27 collected, the two readers' results and the judges' answers.
 
 ## Layout
 
@@ -698,7 +751,8 @@ Seventeen things need files that are kept locally (Data, above), so they don't r
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
   (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`), the count
   of distinct words (`words.py`), the map with its layers (`themap.py`) and the open spellings in one or two
-  texts (`rare.py`).
+  texts (`rare.py`), the open spellings the lexicon does not hold (`unnamed.py`) and the second scholar for the
+  later meanings (`second_later.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

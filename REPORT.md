@@ -902,3 +902,32 @@ pieces among the places laid, the times at which three of the rules were added, 
 of G2 and G4 again and gets the same packs and results. Cost: 531,129 subagent tokens and 42 minutes, from its
 task notification. Mike's word on the three older pages of G1, 13:52: "Yes, waive it."
 
+## Day nine, afternoon (2026-11-16): names among the unknown spellings (G3), and a second scholar for the later meanings (G5)
+
+Asked that day, to "Start G3's pilot and G5 now, while the review runs?": "Yes, both". Pages:
+[`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md) and
+[`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md); scripts `src/unnamed.py` and
+`src/second_later.py`.
+
+**G3.** 1,107 rare spellings hang on no entry of the lexicon (1,225 open places). The step had planned a script that
+proposes joins with the neighbouring words; counted first, it finds one at 11 places, so the checkers decide from
+the place. The first pilot (100 places, 50 controls) missed two bars and is not taken: the checkers could not see
+a word cut in two in running text, which nothing in a context shows, and two of the three known words they
+called pieces were particles written apart, which the project's own counting rule calls pieces. The faults were
+in the controls. A second pilot with other places, controls with a sure answer and a bar on what is laid (a
+known word called a name) met its bars, and so did the full pass: kappa 0.79; 4 of 75 known words called a
+name by each checker; 30 and 29 of 37 known names found. Of the 1,225 places 828 are words of their own, 111 names,
+41 pieces, 128 unclear and 117 not agreed.
+
+**What it changes.** The 111 names and 7 pieces are the map's fourth layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%).
+No word got a meaning. The running words rise because 113 words no longer need one; the north star rises
+because the count of distinct words fell from about 1,307 to about 1,284. That recount was made from the 230 sampled
+stems still unnamed, by a rule written down before the full pass was counted; the reporting rules had named a
+new sample instead, and Mike has not yet said yes to the other way.
+
+**G5.** For the 66 entries with a meaning stated by Rilly in 2016 or 2021, two judges compared it with 260
+statements of other scholars and 26 decoys (kappa 0.95; one decoy taken for the same by each judge). 33 meanings
+are agreed by two scholars (15 with a dissent), 13 are disputed, 20 rest on Rilly alone.
+
+**Cost.** G3: 62 agents, 4,715,110 subagent tokens. G5: 10 agents, 704,095. From the task notifications.
+

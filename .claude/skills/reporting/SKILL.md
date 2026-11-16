@@ -59,8 +59,8 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
 (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
-(`src/themap.py`, page `data/discovery/map_layers.md`; three layers since 2026-11-16: the recurring open spellings
-of step G1, and the rare spellings of steps G2 and G4). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
+(`src/themap.py`, page `data/discovery/map_layers.md`; four layers since 2026-11-16: the recurring open spellings
+of step G1, the rare spellings of steps G2 and G4, and the names and pieces of step G3). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
 three rows are read from that file. Read a number from its figures file or count it with the command given; never
 quote it from memory, from this file's log, or from an earlier message.
 
@@ -93,11 +93,17 @@ quote it from memory, from this file's log, or from an earlier message.
   distinct words being corrected. **What does not:** recognising one more spelling of a word that is already
   translated.
 - **Counting again:** after a layer is added, run `python3 -I src/themap.py`: it counts the dictionary words again
-  on the map with its layers and carries the estimate of the unnamed stems over. That estimate rests on the
-  sample drawn on 2026-11-16 from the stems the analysts' map could not name. The script stops if the layers have
-  taken more than 2% of those stems out of the unnamed ones, or added any (`north_star.unnamed_stems`). Then, and
-  whenever a step changes which stems are unnamed (step G3 in particular), draw and judge a new sample with its
-  bar set beforehand (`src/words.py`: `population`, `packs`, `count`, `public`); do not carry the old share over.
+  on the map with its layers. The estimate of the unnamed stems rests on the sample of 240 stems drawn on
+  2026-11-16 from the 1,107 stems the analysts' map could not name. While the layers have taken at most 2% of
+  those stems out of the unnamed ones, the estimate is carried as it was drawn. Past that (step G3 took more),
+  the script makes it again from the sampled stems that are still unnamed, by the same rule of counting
+  (`north_star.unnamed_stems` says how many of the sample are left and their verdicts). It stops if a layer adds
+  a stem the sample was not drawn from: then draw and judge a new sample with its bar set beforehand
+  (`src/words.py`: `population`, `packs`, `count`, `public`).
+  **This replaces an earlier line of this file,** which said to draw and judge a new sample whenever a step
+  changes which stems are unnamed. The new rule was written down on 2026-11-16 before step G3 was counted
+  (`data/discovery/unnamed_spellings.md`, section 9), without Mike's word. Until he has given it, say
+  "provisional" beside the north star and name the other way (a new sample of 240 stems, about 40 agents).
 
 ### Running words translated
 
@@ -152,13 +158,13 @@ Run from the repository's root (it needs the local files: the map, the lexicon a
 python3 -I src/themap.py
 ```
 
-It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with three layers, it printed:
+It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with four layers, it printed:
 
 ```
 plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
 base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
-as it stands: running words translated 4149 of 7230 = 57.4%; distinct spellings translated 814 of 2917 = 27.9%
-north star: 156 of about 1307 = 11.9% (11.3% to 14.9%)
+as it stands: running words translated 4154 of 7117 = 58.4%; distinct spellings translated 815 of 2813 = 29.0%
+north star: 156 of about 1284 = 12.2% (11.5% to 15.2%)
 ```
 
 "plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map
@@ -202,7 +208,7 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
 - This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have
   consistent ways of measuring across compactions and sessions".
 - The layers: "Yes, start G1 and G4, queue G2". G1 put the recurring-words results into the map as a layer, as
-  sections 3 and 4 had announced; G2 and G4 each added one the same day. Since then the first three rows are read
+  sections 3 and 4 had announced; G2, G4 and G3 each added one the same day. Since then the first three rows are read
   from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it. The three dated pages
   that G1 named to be rebuilt (the coverage of the clean corpus, the lexicon's statuses, the translations'
   baseline, which is the last row's "Before us") keep their numbers: "Yes, waive it." (13:52).

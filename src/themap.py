@@ -33,13 +33,17 @@ LAYERS = [
      "laid": "2026-11-16", "what": "rare spellings that are forms of a word the lexicon calls sure (G2)"},
     {"name": "rare_later", "file": "data/sources/rare/g4/overlay.jsonl", "page": "data/discovery/rare_spellings.md",
      "laid": "2026-11-16", "what": "rare spellings whose entry a later source gives a meaning (G4)"},
+    {"name": "unnamed", "file": "data/sources/g3/overlay.jsonl", "page": "data/discovery/unnamed_spellings.md",
+     "laid": "2026-11-16", "what": "open spellings the lexicon does not hold that two checkers call a name or a piece (G3)"},
 ]
 WHY = ("stated", "form", "piece", "name")   # why a line changes a word: a later source states its meaning there; it
 #                                             is a form of a word the lexicon calls sure; it is a piece of a word or
-#                                             name the map holds; it is a name by the sources
+#                                             name the map holds; it is a name (by the sources, or, in the layer
+#                                             `unnamed`, by its place in the text)
 DRIFT = 0.02                           # the estimate of how many unnamed stems are words (src/words.py) rests on a
 #                                        sample of the base's stems: it is carried while the layers take at most this
-#                                        share of those stems out of the unnamed ones; past it a new sample is due
+#                                        share of those stems out of the unnamed ones; past it the estimate is made
+#                                        again from the sampled stems that are still unnamed (unnamed_words)
 
 
 def base():
@@ -139,34 +143,55 @@ def north_star(known, lex, layers_lines, unnamed):
             "distinct_words": {k: len(known) + v for k, v in unnamed.items()}, "star": star, "before_us": star}
 
 
-def carried(sampled, now):
-    """The unnamed stems the estimate was drawn from and those the map has now. A layer that makes a stem a name or
-    a piece takes it out; the estimate is carried only while few go (DRIFT), and never if stems are added."""
-    if not 0 <= sampled - now <= DRIFT * sampled:
+def unnamed_words(words, stems, sample):
+    """(how many of the stems the map cannot name are words of their own, what the estimate rests on). `words` is
+    the figures file of the count of distinct words, `stems` the stems unnamed on the map as it stands, `sample`
+    that count's judged sample as {stem: verdict}, read only when it is needed.
+
+    While the layers have taken at most DRIFT of the sampled stems out of the unnamed ones, that count's estimate
+    is carried. Past it the estimate is made again by that count's own rule (words.estimate) from the sampled
+    stems that are still unnamed: they are a sample by lot of the stems still unnamed, because a stem leaves or
+    stays by what it is, not by whether it was sampled. A stem the sample was not drawn from stops the count."""
+    sampled, now = words["unnamed_stems"], len(stems)
+    if now > sampled:
         raise SystemExit(f"the map has {now} unnamed stems, the estimate of the words among them was drawn from {sampled}: "
                          "draw and judge a new sample (src/words.py) before the north star is counted again")
-    return {"sampled": sampled, "now": now}
+    if sampled - now <= DRIFT * sampled:
+        return words["unnamed_words"], {"sampled": sampled, "now": now}
+    left = collections.Counter(v for stem, v in sample().items() if stem in stems)
+    return D.estimate(now, left), {"sampled": sampled, "now": now, "sample_still_unnamed": sum(left.values()),
+                                   "its_verdicts": dict(left.most_common())}
+
+
+def the_sample():
+    """{stem: verdict} of the sample behind the count of distinct words (its last reading; local)."""
+    rows = json.loads((D.OUT / f"{D.ROUNDS[D.LAST]['folder']}result.json").read_text(encoding="utf-8"))["rows"]
+    return {r["stem"]: r["verdict"] for r in rows}
 
 
 def figures():
     """What the status table reads: the base, each layer and what it moved, the map as it stands, the plain lookup
-    of the lexicon ("before us" for the running words and the spellings), and the north star. Counts only."""
+    of the lexicon ("before us" for the running words and the spellings), and the north star, also as it stood
+    once each layer was laid (a study's page quotes the map as it left it). Counts only."""
     lex, gl, laid = W.lexicon(), base(), []
     first = counts(gl)
+    words = json.loads(WORDS.read_text(encoding="utf-8"))
     layers_lines = [(layer["name"], lines_of(layer)) for layer in LAYERS]
-    for layer, (name, lines) in zip(LAYERS, layers_lines):
+    for n, (layer, (name, lines)) in enumerate(zip(LAYERS, layers_lines), 1):
         gl = lay(gl, lines, name)
+        known, stems, _ = D.population_of(gl, lex, fix=True)
+        unnamed, rests_on = unnamed_words(words, stems, the_sample)
+        star = north_star(known, lex, layers_lines[:n], unnamed) | {"unnamed_words": unnamed, "unnamed_stems": rests_on}
         laid.append({k: layer[k] for k in ("name", "page", "laid", "what")}
                     | {"places": len(lines), "why": dict(collections.Counter(o["why"] for o in lines).most_common()),
                        "to": dict(collections.Counter(o["level"] for o in lines).most_common()),
-                       "was": dict(collections.Counter(o["was"] for o in lines).most_common()), "after": counts(gl)})
-    known, stems, _ = D.population_of(gl, lex, fix=True)
-    words = json.loads(WORDS.read_text(encoding="utf-8"))
-    star = north_star(known, lex, layers_lines, words["unnamed_words"]) | {"unnamed_stems": carried(words["unnamed_stems"], len(stems))}
-    so_far = star["translated_by_the_lexicon"]
-    for l in laid:                                          # the distinct words translated once each layer is laid
-        so_far += star["translated_by_a_layer"][l["name"]]
-        l["distinct_words_translated"] = so_far
+                       "was": dict(collections.Counter(o["was"] for o in lines).most_common()), "after": counts(gl),
+                       "distinct_words_translated": star["translated"],
+                       "north_star": {k: star[k] for k in ("translated", "distinct_words", "star")}})
+    if not laid:
+        known, stems, _ = D.population_of(gl, lex, fix=True)
+        unnamed, rests_on = unnamed_words(words, stems, the_sample)
+        star = north_star(known, lex, [], unnamed) | {"unnamed_words": unnamed, "unnamed_stems": rests_on}
     return {"inscriptions": len(gl), "base": first, "layers": laid, "current": counts(gl), "lookup": counts(D.lookup_only()),
             "north_star": star}
 
