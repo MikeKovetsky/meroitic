@@ -1,13 +1,15 @@
 # The map as it stands: the base and its layers
 
-Status on 2026-11-16: the first layer is laid. Figures: `map_figures.json`. Script: `src/themap.py`. Checks:
+Status on 2026-11-16: three layers are laid. Figures: `map_figures.json`. Script: `src/themap.py`. Checks:
 `tests/test_themap.py`.
 
-**In short.** The results of [the recurring open spellings](recurring_words.md) are now part of the map, as a
-layer over the analysts' map: 385 places, each with its source. With it, 3,916 of the 7,265 running words that
-need a meaning are translated (53.9%, from 50.1%), and 136 of about 1,307 distinct words (10.4%). Every one of
-these meanings is a scholar's: the project has still added none of its own. The analysts' map itself is not
-changed, and the studies that were run on it keep their numbers.
+**In short.** What three steps resolved is now part of the map, as layers over the analysts' map:
+[the recurring open spellings](recurring_words.md) (385 places) and
+[the rare spellings](rare_spellings.md) that hang on an entry of the lexicon (109 and 159 places), each place with
+its source. With them, 4,149 of the 7,230 running words that need a meaning are translated (57.4%, from 50.1%),
+and 156 of about 1,307 distinct words (11.9%). Every one of these meanings is a scholar's: the project has still
+added none of its own. The analysts' map itself is not changed, and the studies that were run on it keep their
+numbers.
 
 ## 1. What was asked
 
@@ -26,7 +28,7 @@ Requirements, one line each:
 | | Requirement | State |
 |---|---|---|
 | R1 | "The 385 places of point 18 [...] become a layer of the map's build, each with its source." | MET: sections 2 and 4. `src/themap.py` lays the layer's 385 lines over the base; each changed word carries its source, the reason and the level it had. |
-| R2 | "Done when the map's own figure is 53.9%" | MET: section 3. The script's count is 3,916 of 7,265, and it equals the count the recurring-words study made itself (`tests/test_themap.py`). |
+| R2 | "Done when the map's own figure is 53.9%" | MET: section 4. With the layer `recurring` the script's count is 3,916 of 7,265, and it equals the count the recurring-words study made itself (`tests/test_themap.py`). The two layers laid after it the same day move it on (section 3). |
 | R3 | "the pages that count from the map (coverage, the translations' baseline, the lexicon's statuses) are rebuilt from the same file" | NOT MET as written, on purpose, and waiting for Mike's word: section 5. The figure of the coverage measure is counted from the map with its layers (section 3) and the three pages point here; their own numbers are not counted again. |
 | R4 | "the checks and the review pass" | The checks pass; the review is named in section 7. |
 | R5 | "No agents but the review." | MET: no agent was run for this step. |
@@ -42,11 +44,12 @@ their order, each time it runs; nothing is written back.
 
 1. **A layer only resolves.** A line gives a word a meaning, a grammatical function, or says it is a name or a
    numeral. A layer cannot make a word open.
-2. **Three reasons are allowed:** a later source states the word's meaning at that place ("stated"); the word is
-   a piece of a word or name that the map holds ("piece"); the word is a name by the sources ("name").
+2. **Four reasons are allowed:** a later source states the word's meaning at that place ("stated"); the word is
+   a form of a word whose meaning the lexicon calls sure ("form"); it is a piece of a word or name that the map
+   holds ("piece"); it is a name by the sources ("name").
 3. **A layer that does not fit stops the build.** A line that names a text, a place or a spelling the map does
-   not have there, two lines for one place, or a level or reason outside the lists, ends the run with the line
-   named.
+   not have there, two lines for one place, a place that an earlier layer changed, or a level or reason outside
+   the lists, ends the run with the line named.
 4. **Each changed word says where it comes from:** the layer, the source, the reason, and the level it had.
 5. **The lines are local.** They hold meanings taken from the sources, so the layers' files are kept out of the
    repository like the map itself. What is public is this page and the counts.
@@ -57,7 +60,7 @@ their order, each time it runs; nothing is written back.
 |---|---|---|---|---|---|
 | Plain lookup of the lexicon | 2,816 of 7,847 | 35.9% | 325 of 3,189 | 10.2% | 39.3% |
 | The base | 3,676 of 7,331 | 50.1% | 598 of 2,955 | 20.2% | 52.7% |
-| With the layers | 3,916 of 7,265 | 53.9% | 626 of 2,944 | 21.3% | 55.6% |
+| With the layers | 4,149 of 7,230 | 57.4% | 814 of 2,917 | 27.9% | 58.2% |
 
 - "Of" counts the words that need a meaning: no name, no numeral, no lost sign. A word is translated when the
   map gives it a meaning or a grammatical function.
@@ -67,21 +70,25 @@ their order, each time it runs; nothing is written back.
 - The plain lookup is the lexicon of 2003 looked up word by word, with none of the project's analysts or
   corrections. It is the status table's "Before us" for the first two columns.
 
-**The north star.** On the map with its layers, 136 of about 1,307 distinct words, 10.4% (between 9.8% and
-13.0%), have a meaning: 127 by the lexicon of 2003 and 9 by a later source (Rilly's work of 2016 and 2021).
-Before the project it was the same, since all 136 meanings were published before it. How the words are counted
-is on [the page of the distinct words](distinct_words.md); that page gave this figure beforehand as its "next".
+**The north star.** On the map with its layers, 156 of about 1,307 distinct words, 11.9% (between 11.3% and
+14.9%), have a meaning: 127 by the lexicon of 2003 and 29 by a later source (Rilly's work of 2016 and 2021:
+9 through the layer `recurring`, 20 through `rare_later`). Before the project it was the same, since all 156
+meanings were published before it. How the words are counted is on
+[the page of the distinct words](distinct_words.md). A word counts when a layer lays one of its places as a
+translated word for the reason "stated"; the layer `rare_sure` adds none, because its words had a meaning.
 
 The count of distinct words is carried over from that page. It rests on a sample of the 1,107 stems the base
-could not name. The layer makes 2 of them names, so 1,105 are left; the estimate (about 930 of them are words)
+could not name. The layers make 2 of them names, so 1,105 are left; the estimate (about 930 of them are words)
 is kept as it was drawn, which changes no figure here at one decimal. The script stops if the layers ever take
 more than 2% of those stems, or add any: a new sample is then due.
 
 ## 4. The layers
 
-| Layer | Laid | Places | Stated by a later source | Piece of a word or name | Name | From |
-|---|---|---|---|---|---|---|
-| `recurring` | 2026-11-16 | 385 | 273 | 66 | 46 | [recurring_words.md](recurring_words.md) |
+| Layer | Laid | Places | Stated by a later source | Form of a word the lexicon calls sure | Piece of a word or name | Name | Running words translated after it | From |
+|---|---|---|---|---|---|---|---|---|
+| `recurring` | 2026-11-16 | 385 | 273 | 0 | 66 | 46 | 53.9% | [recurring_words.md](recurring_words.md) |
+| `rare_sure` | 2026-11-16 | 109 | 0 | 103 | 6 | 0 | 55.3% | [rare_spellings.md](rare_spellings.md) |
+| `rare_later` | 2026-11-16 | 159 | 141 | 0 | 18 | 0 | 57.4% | [rare_spellings.md](rare_spellings.md) |
 
 **`recurring`.** Two checkers judged every place of the 154 open spellings that stand in three or more texts.
 The layer holds the places where both agreed that a meaning Rilly states in 2016 or 2021 applies (273), that
@@ -93,6 +100,19 @@ the "word" is a piece of a word or name the map holds (66), or that it is one of
 - So 240 running words more are translated, and 66 more are names, which need no meaning: 7,331 words that need
   one become 7,265.
 - By distinct spellings the gain is smaller (598 to 626), because these are few spellings in many places.
+
+**`rare_sure`** (step G2). The open spellings that stand in one or two texts and that the map files under a
+stem or an ending the lexicon calls established or probable. Two checkers judged each place; the layer holds the
+places where both call the spelling a form of that word and the map names every part of the spelling (103), and
+the pieces of a word the map holds (6). 86 places become translated words and 23 names; all 109 were open.
+
+**`rare_later`** (step G4). The same kind of spellings under an entry the lexicon holds without an accepted
+meaning. The layer holds the places where both checkers find the word for which Rilly states a meaning in 2016
+or 2021 and the map names every part of the spelling (141), and the pieces of a word the map holds (18).
+147 places become translated words and 12 names; all 159 were open.
+
+Both layers leave out the places where the checkers recognise the word but the map leaves a part of the spelling
+unnamed; [the page of the rare spellings](rare_spellings.md) counts them.
 
 ## 5. What keeps the base, and why
 
@@ -115,11 +135,14 @@ base they were run on. What is counted from now on, and the steps that follow, r
 
 - **No meaning here is the project's own.** A layer applies what scholars have published. The row "Our own
   meanings" of the status table stays at 0.
-- **The 273 stated places rest on one scholar.** They are Rilly's readings of 2016 and 2021; no second scholar
+- **The 414 stated places rest on one scholar.** They are Rilly's readings of 2016 and 2021; no second scholar
   confirms them (step G5).
+- **The north star counts entries of the lexicon.** Several of the entries that `rare_later` gives a meaning are,
+  by the same later source, forms or variants of one another or of known words
+  ([the page of the rare spellings](rare_spellings.md), section 9).
 - **"Translated" at a place means two checkers agreed that the source's statement applies there.** Their
-  agreement beyond chance (Cohen's kappa) was 0.91 against a bar of 0.6; the places they did not agree on are not
-  in the layer.
+  agreement beyond chance (Cohen's kappa) was 0.91 for `recurring`, 0.70 for `rare_sure` and 0.93 for
+  `rare_later`, against a bar of 0.6; the places they did not agree on are in no layer.
 - **The spellings count is coarse:** a spelling translated in most of its places counts as translated.
 
 ## 7. Reproduce
@@ -129,8 +152,8 @@ python3 -I src/themap.py          # needs the local map, lexicon and layers; wri
 python3 -I tests/test_themap.py   # the method on made-up words; the figures, this page and the status skill
 ```
 
-A new layer is one more entry of `LAYERS` in `src/themap.py` and one more row of section 4. The steps G4 and G2
-([rare_spellings.md](rare_spellings.md)) will each add one if their bars are met.
+A new layer is one more entry of `LAYERS` in `src/themap.py` and one more row of section 4. The lines of the two
+layers of the rare spellings are written by `python3 -I src/rare.py layers`.
 
 Review: an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the reasoning)
 checks this step before it is public; what it changes is listed here once it has run.

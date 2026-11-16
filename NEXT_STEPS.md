@@ -122,8 +122,16 @@ Done since this plan was written:
     source (`src/themap.py`); the analysts' map is not changed. The map as it stands: 3,916 of the 7,265 running
     words that need a meaning are translated (53.9%, from 50.1%), 626 of 2,944 distinct spellings (21.3%), and 136
     of about 1,307 distinct words (10.4%, between 9.8% and 13.0%; before us the same). The status table reads
-    its first three rows from this count. The dated studies keep the analysts' map. Open: the layers of G4 and
-    G2, if their bars are met.
+    its first three rows from this count. The dated studies keep the analysts' map. The layers of G2 and G4
+    followed the same day (point 21).
+21. **The open spellings in one or two texts that hang on an entry of the lexicon** (2026-11-16,
+    [`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md); steps G2 and G4). Two checkers judged
+    1,061 places; 268 places are laid in the map as two layers (109 forms of words the lexicon calls sure, 159 where
+    Rilly states the entry's meaning in 2016 or 2021 or the "word" is a piece). The map as it stands:
+    4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%); before us the north star is the same. 20 entries of the
+    lexicon get a meaning; by the later source several are forms of one another. Open: the 182 places where
+    both checkers recognise the word but the map leaves a part of the spelling unnamed, the 159 entries no later
+    source speaks of, and a second scholar for Rilly's meanings (G5).
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -508,6 +516,8 @@ ours unless it passes a test set beforehand.
    rarer spellings or compounds of words the map already reads. The place pass of point 18 again: two checkers
    say for each place whether it holds the lexicon's word. If every one were read the share would be 58.9%; the
    first pass kept about half of what its first readers counted (273 of 531), so expect less. About 16 checkers.
+   **Done on 2026-11-16** (point 21): 245 of 366 places stated by both checkers (kappa 0.70), 109 laid in the
+   map: a place counts only where the map names every part of the spelling.
 3. **G3. The spellings that are not in the lexicon** (kind c: 1,225 running words, most of them standing once).
    Point 18 found a sixth of the recurring places to be pieces of a longer word or name that the edition's word
    division cut, and seven items to be names. So first a pilot on 100 places drawn by a fixed seed: a script
@@ -520,6 +530,8 @@ ours unless it passes a test set beforehand.
    entries). The literature pass, the two readers and the place pass of point 18 again. A first search by
    headword finds only 51 entries of kinds a and b named in Rilly 2016 or 2021, covering 175 running words, so
    the yield will be small. It comes after G2 and G3, which cost less for more.
+   **Done on 2026-11-16** (point 21): 57 entries with a meaning stated by Rilly in 2016 or 2021, 181 places stated
+   by both checkers, 159 places laid in the map; 20 words of the dictionary new with a meaning.
 5. **G5. A second scholar for the stated meanings.** The 26 meanings of point 18 are Rilly's alone. The method
    of F2 on them: does FHN, Millet 2005 or Griffith state the same, or dissent, as Millet does on `sete`? The
    result is a status for each meaning (agreed by two, stated by one, disputed), not a higher count.

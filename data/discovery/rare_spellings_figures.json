@@ -1,0 +1,491 @@
+{
+ "g2": {
+  "entries": 116,
+  "spellings": 312,
+  "places": 366,
+  "entries_that_are": {
+   "a stem": 90,
+   "an ending or a particle": 26
+  },
+  "places_judged": {
+   "entries": 116,
+   "places": 366
+  },
+  "readings": {
+   "1": {
+    "places": 366,
+    "answered by both": 366,
+    "kappa": 0.6989,
+    "bar": 0.6,
+    "taken": true,
+    "verdicts": {
+     "stated": 245,
+     "not agreed": 51,
+     "unclear": 24,
+     "open": 18,
+     "piece": 28
+    },
+    "by class": {
+     "A": {
+      "stated": 245,
+      "not agreed": 51,
+      "unclear": 24,
+      "open": 18,
+      "piece": 28
+     }
+    }
+   }
+  },
+  "reading_taken": 1,
+  "stated": {
+   "ending, a part unnamed": 74,
+   "ending, every part named": 1,
+   "stem, a part unnamed": 68,
+   "stem, every part named": 102
+  },
+  "laid": {
+   "lines": 109,
+   "why": {
+    "form": 103,
+    "piece": 6
+   },
+   "to": {
+    "meaning": 85,
+    "name": 23,
+    "grammar": 1
+   },
+   "to_by_why": {
+    "form": {
+     "meaning": 80,
+     "name": 22,
+     "grammar": 1
+    },
+    "piece": {
+     "meaning": 5,
+     "name": 1
+    }
+   },
+   "was": {
+    "hypothesis": 108,
+    "kind": 1
+   }
+  },
+  "left_out": {
+   "stated, stem, a part of the spelling unnamed": 68,
+   "stated, ending, a part of the spelling unnamed": 74,
+   "piece, the whole word not a form of the map": 21,
+   "piece, the whole word open in the map": 1
+  },
+  "the_entries": {
+   "with_a_stated_place": 89,
+   "laid_as_a_translated_word": 43,
+   "laid_as_a_name_only": 14,
+   "none_laid": 32,
+   "dictionary_words_given_a_meaning": 0
+  },
+  "cost": {
+   "places": {
+    "agents": 16,
+    "tokens": 1325143
+   }
+  }
+ },
+ "g4": {
+  "entries": 323,
+  "spellings": 784,
+  "places": 1033,
+  "entries_that_are": {
+   "a stem": 287,
+   "an ending or a particle": 36
+  },
+  "places_judged": {
+   "entries": 164,
+   "places": 695
+  },
+  "readings": {
+   "1": {
+    "places": 695,
+    "answered by both": 694,
+    "kappa": 0.93,
+    "bar": 0.6,
+    "taken": false,
+    "verdicts": {
+     "piece": 105,
+     "not agreed": 36,
+     "open": 320,
+     "unclear": 45,
+     "stated": 188,
+     "not answered by both": 1
+    },
+    "by class": {
+     "A": {
+      "piece": 38,
+      "not agreed": 18,
+      "stated": 188,
+      "open": 93,
+      "unclear": 24,
+      "not answered by both": 1
+     },
+     "B": {
+      "piece": 67,
+      "open": 227,
+      "unclear": 21,
+      "not agreed": 18
+     }
+    }
+   },
+   "2": {
+    "places": 695,
+    "answered by both": 695,
+    "kappa": 0.9254,
+    "bar": 0.6,
+    "taken": true,
+    "verdicts": {
+     "piece": 113,
+     "open": 327,
+     "not agreed": 39,
+     "stated": 181,
+     "unclear": 35
+    },
+    "by class": {
+     "A": {
+      "piece": 40,
+      "open": 99,
+      "stated": 181,
+      "not agreed": 25,
+      "unclear": 17
+     },
+     "B": {
+      "piece": 73,
+      "open": 228,
+      "not agreed": 14,
+      "unclear": 18
+     }
+    }
+   }
+  },
+  "reading_taken": 2,
+  "stated": {
+   "ending, a part unnamed": 12,
+   "ending, every part named": 9,
+   "stem, a part unnamed": 27,
+   "stem, another stem without a meaning": 1,
+   "stem, every part named": 132
+  },
+  "laid": {
+   "lines": 159,
+   "why": {
+    "stated": 141,
+    "piece": 18
+   },
+   "to": {
+    "meaning": 138,
+    "name": 12,
+    "grammar": 9
+   },
+   "to_by_why": {
+    "piece": {
+     "meaning": 13,
+     "name": 5
+    },
+    "stated": {
+     "meaning": 125,
+     "grammar": 9,
+     "name": 7
+    }
+   },
+   "was": {
+    "hypothesis": 136,
+    "kind": 22,
+    "unknown": 1
+   }
+  },
+  "left_out": {
+   "piece, the whole word not a form of the map": 54,
+   "piece, the whole word open in the map": 41,
+   "stated, stem, a part of the spelling unnamed": 27,
+   "stated, ending, a part of the spelling unnamed": 12,
+   "stated, stem, another stem without a meaning": 1
+  },
+  "the_entries": {
+   "with_a_stated_place": 40,
+   "laid_as_a_translated_word": 29,
+   "laid_as_a_name_only": 3,
+   "none_laid": 8,
+   "dictionary_words_given_a_meaning": 25
+  },
+  "cost": {
+   "literature": {
+    "agents": 27,
+    "tokens": 5713974
+   },
+   "class A read twice": {
+    "agents": 12,
+    "tokens": 1287161
+   },
+   "places, first reading": {
+    "agents": 32,
+    "tokens": 2784088
+   },
+   "places, second reading": {
+    "agents": 32,
+    "tokens": 2782223
+   }
+  },
+  "literature": {
+   "statements": 1659,
+   "quote_found": 1659,
+   "page_corrected": 0,
+   "items": 323,
+   "items_with_a_checked_statement": 318,
+   "batches": 27,
+   "classes": {
+    "A": 60,
+    "B": 104,
+    "C": 159
+   }
+  },
+  "class_a": {
+   "entries": 60,
+   "verdicts": {
+    "stated": 57,
+    "not stated firmly": 3
+   },
+   "stated_by": {
+    "Rilly 2021": 49,
+    "Rilly 2016": 8
+   },
+   "stated_that_are": {
+    "a stem": 41,
+    "an ending or a particle": 16
+   }
+  },
+  "words": [
+   {
+    "entry": "Aqedise",
+    "kind": "epithet",
+    "meaning": "the Moon-god",
+    "source": "Rilly 2021",
+    "page": 67,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "abrse",
+    "kind": "title",
+    "meaning": "each man",
+    "source": "Rilly 2021",
+    "page": 31,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "anese",
+    "kind": "noun",
+    "meaning": "donkey",
+    "source": "Rilly 2021",
+    "page": 15,
+    "places_laid": 4,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "aqebese",
+    "kind": "function word",
+    "meaning": "their, a variant spelling",
+    "source": "Rilly 2021",
+    "page": 11,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "asr",
+    "kind": "noun",
+    "meaning": "meat, animal",
+    "source": "Rilly 2016",
+    "page": 11,
+    "places_laid": 3,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "bqo",
+    "kind": "verb",
+    "meaning": "to take control",
+    "source": "Rilly 2021",
+    "page": 38,
+    "places_laid": 3,
+    "new_to_the_map": false
+   },
+   {
+    "entry": "erk",
+    "kind": "",
+    "meaning": "I took",
+    "source": "Rilly 2021",
+    "page": 37,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "kb",
+    "kind": "verb",
+    "meaning": "to seize",
+    "source": "Rilly 2021",
+    "page": 39,
+    "places_laid": 5,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "kdke",
+    "kind": "title",
+    "meaning": "Candace, the queen-mother",
+    "source": "Rilly 2016",
+    "page": 11,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "mreke",
+    "kind": "noun",
+    "meaning": "horse",
+    "source": "Rilly 2021",
+    "page": 31,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "pl (2)",
+    "kind": "verb",
+    "meaning": "to give, offer",
+    "source": "Rilly 2021",
+    "page": 82,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "plete",
+    "kind": "verb",
+    "meaning": "to give, offer",
+    "source": "Rilly 2021",
+    "page": 82,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "pqr",
+    "kind": "title",
+    "meaning": "prince",
+    "source": "Rilly 2016",
+    "page": 10,
+    "places_laid": 2,
+    "new_to_the_map": false
+   },
+   {
+    "entry": "pso",
+    "kind": "title",
+    "meaning": "causative prefix before 'drink'",
+    "source": "Rilly 2021",
+    "page": 12,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "pẖo",
+    "kind": "title",
+    "meaning": "causative prefix before 'present'",
+    "source": "Rilly 2021",
+    "page": 42,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "sr",
+    "kind": "noun",
+    "meaning": "meat, animal",
+    "source": "Rilly 2016",
+    "page": 11,
+    "places_laid": 3,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "tk (1)",
+    "kind": "verb",
+    "meaning": "to seize",
+    "source": "Rilly 2021",
+    "page": 31,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "tk (3)",
+    "kind": "verb",
+    "meaning": "to seize",
+    "source": "Rilly 2021",
+    "page": 24,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "tlt",
+    "kind": "noun",
+    "meaning": "talent, a weight",
+    "source": "Rilly 2021",
+    "page": 8,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "tḫ (1)",
+    "kind": "verb",
+    "meaning": "to present a meal",
+    "source": "Rilly 2021",
+    "page": 45,
+    "places_laid": 25,
+    "new_to_the_map": false
+   },
+   {
+    "entry": "wese",
+    "kind": "",
+    "meaning": "his, her",
+    "source": "Rilly 2021",
+    "page": 41,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "yel",
+    "kind": "verb",
+    "meaning": "to give",
+    "source": "Rilly 2021",
+    "page": 47,
+    "places_laid": 1,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "yerki",
+    "kind": "verb",
+    "meaning": "I took",
+    "source": "Rilly 2021",
+    "page": 37,
+    "places_laid": 2,
+    "new_to_the_map": true
+   },
+   {
+    "entry": "ḫr",
+    "kind": "verb",
+    "meaning": "to eat",
+    "source": "Rilly 2021",
+    "page": 42,
+    "places_laid": 41,
+    "new_to_the_map": false
+   },
+   {
+    "entry": "ẖol",
+    "kind": "verb",
+    "meaning": "to present, serve",
+    "source": "Rilly 2021",
+    "page": 44,
+    "places_laid": 17,
+    "new_to_the_map": false
+   }
+  ]
+ }
+}

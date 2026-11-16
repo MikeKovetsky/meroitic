@@ -201,8 +201,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     lookup does not know. The first count took the endings and particles written as words for words and gave
     11.6%; the review corrected it. This is the project's north star
     ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
-19. **The map now carries what later sources state: 53.9% of the running words that need a meaning are
-    translated, and 136 of about 1,307 distinct words (10.4%, between 9.8% and 13.0%).** The 385 places that item
+19. **The results of item 17 are laid into the map as its first layer: with it 53.9% of the running words that
+    need a meaning are translated, and 136 of about 1,307 distinct words (10.4%, between 9.8% and 13.0%).** The 385 places that item
     17 resolved (273 where Rilly states a meaning in 2016 or 2021, 66 pieces of a word or name the map holds, 46
     places of seven names) are laid over the analysts' map as a layer, each with its source; the analysts' map is
     not changed, and the studies run on it keep their numbers. That makes 240 running words more translated
@@ -210,6 +210,20 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     (127 to 136). All of these meanings were published before the project, so the north star's "before us" is
     the same 10.4%, and the project still has no meaning of its own
     ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
+20. **Of the open spellings that stand in one or two texts, 268 more places take a scholar's meaning or turn out to
+    be names; the map now translates 57.4% of the running words that need a meaning, and 156 of about 1,307 distinct
+    words (11.9%).** 1,096 such spellings hang on an entry of the lexicon. Where the lexicon calls that entry sure,
+    two checkers judged whether each place holds its word (366 places, kappa 0.70); where it does not, readers
+    collected what the later sources say (1,659 statements, every quote found by script), two readers found a
+    meaning stated by Rilly in 2016 or 2021 for 57 of 60 entries, and two checkers judged the 695 places of the
+    entries concerned (kappa 0.93; a first reading was not taken, because one place had one checker's answer
+    only). A place is laid in the map only where the map names every part of the spelling: 109 places of the
+    first kind and 159 of the second. At 182 more places both checkers recognise the word, but a part of the
+    spelling is unnamed, so they stay open. With the three layers 4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%). 20 entries of the lexicon get a meaning
+    that way ("donkey", "horse", "to seize", "talent", the title Candace); by Rilly's own later analysis several
+    of them are forms of one another, so the gain in words is smaller than 20. Before the project the north star
+    was the same 11.9%: every one of these meanings was published before it
+    ([`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md)).
 
 ## The question
 
@@ -591,6 +605,20 @@ later source. The estimate of how many unnamed stems are words is carried from s
 script stops if the layers take more than 2% of those stems. The status table reads its first three rows from
 this count ([`data/discovery/map_layers.md`](data/discovery/map_layers.md)).
 
+### 27. The open spellings in one or two texts (`src/rare.py`)
+
+The steps of section 24 again, in a folder of their own, for the open spellings that stand in one or two texts
+and hang on an entry of the lexicon. For an entry without an accepted meaning: a literature pass (one reader a
+batch of twelve entries, each with the pages of Rilly 2016 and 2021 on which a script finds the headword; every
+quote looked for in its file), the entries for which Rilly states a meaning read by two readers, and every place
+of those entries and of the ones a reader calls a piece judged by two checkers. For an entry the lexicon calls
+sure, only the place pass, with the lexicon's own line in the place of a later statement. A reading of the
+places counts only if both checkers answered every place and their kappa is 0.6 or more; if not, the brief is
+corrected and fresh checkers read the same packs. `layers` then writes what goes into the map: a stated place
+only where the map names every part of the spelling and every stem among them has a meaning; a name where the
+entry is one; a piece where the whole word both checkers name is translated or named in the map. The rest is
+counted apart and stays open ([`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -606,7 +634,7 @@ python3 -I tests/test_coverage.py && python3 -I tests/test_egyptian.py && python
 python3 -I tests/test_experts.py && python3 -I tests/test_corpus_v6.py && python3 -I tests/test_akinidad.py
 python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && python3 -I tests/test_lexicon.py
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
-python3 -I tests/test_words.py && python3 -I tests/test_themap.py
+python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -615,7 +643,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Sixteen things need files that are kept locally (Data, above), so they don't run from a clone:
+Seventeen things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -652,6 +680,9 @@ Sixteen things need files that are kept locally (Data, above), so they don't run
   Rilly's lexicon and the checkers' answers.
 - `python3 -I src/themap.py` reads the gloss file of `corpus_v6`, the layers' lines, Rilly's lexicon and the
   figures of the count of distinct words.
+- `python3 -I src/rare.py public` (and `layers`; for the runs `g4` and `g2`: `items`, `batches`, `quotes`,
+  `verify-packs`, `verify`, `place-packs`, `places`, `place-packs2`, `places2`) reads `corpus_v6` and its gloss file,
+  Rilly's lexicon, the text layers of the sources, the layers' lines and the readers' and checkers' answers.
 
 ## Layout
 
@@ -661,7 +692,8 @@ Sixteen things need files that are kept locally (Data, above), so they don't run
   the corpus keyed by inscription and its analysts (`v6/`), the same people in Demotic, Greek and Meroitic
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
   (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`), the count
-  of distinct words (`words.py`) and the map with its layers (`themap.py`).
+  of distinct words (`words.py`), the map with its layers (`themap.py`) and the open spellings in one or two
+  texts (`rare.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

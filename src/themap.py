@@ -29,9 +29,14 @@ WORDS = ROOT / "data/discovery/distinct_words_figures.json"
 LAYERS = [
     {"name": "recurring", "file": "data/sources/recurring/overlay.jsonl", "page": "data/discovery/recurring_words.md",
      "laid": "2026-11-16", "what": "the recurring open spellings, each place judged by two checkers"},
+    {"name": "rare_sure", "file": "data/sources/rare/g2/overlay.jsonl", "page": "data/discovery/rare_spellings.md",
+     "laid": "2026-11-16", "what": "rare spellings that are forms of a word the lexicon calls sure (G2)"},
+    {"name": "rare_later", "file": "data/sources/rare/g4/overlay.jsonl", "page": "data/discovery/rare_spellings.md",
+     "laid": "2026-11-16", "what": "rare spellings whose entry a later source gives a meaning (G4)"},
 ]
-WHY = ("stated", "piece", "name")      # why a line changes a word: a later source states its meaning there; it is a
-#                                        piece of a word or name the map holds; it is a name by the sources
+WHY = ("stated", "form", "piece", "name")   # why a line changes a word: a later source states its meaning there; it
+#                                             is a form of a word the lexicon calls sure; it is a piece of a word or
+#                                             name the map holds; it is a name by the sources
 DRIFT = 0.02                           # the estimate of how many unnamed stems are words (src/words.py) rests on a
 #                                        sample of the base's stems: it is carried while the layers take at most this
 #                                        share of those stems out of the unnamed ones; past it a new sample is due
@@ -47,8 +52,8 @@ def lines_of(layer):
 
 def lay(gl, lines, name):
     """A copy of the map with a layer's lines laid over it. A line must name a word that stands there with that
-    spelling, give a level the map knows and a reason of WHY, and no two lines may name one word: a layer that does
-    not fit the map it is laid on stops the build."""
+    spelling, give a level the map knows and a reason of WHY, and no two lines may name one word, in this layer or
+    in one laid before it: a layer that does not fit the map it is laid on stops the build."""
     out = {t: list(gs) for t, gs in gl.items()}
     seen = set()
     for o in lines:
@@ -58,12 +63,14 @@ def lay(gl, lines, name):
             raise SystemExit(f"layer {name}: no word {o['form']!r} at {at}")
         if at in seen:
             raise SystemExit(f"layer {name}: two lines for {at}")
+        if "layer" in gs[o["n"] - 1]:
+            raise SystemExit(f"layer {name}: {at} was changed by the layer {gs[o['n'] - 1]['layer']} already")
         if o["level"] not in W.READ + W.NAMED or o["why"] not in WHY:
             raise SystemExit(f"layer {name}: {at} has the level {o['level']!r} and the reason {o['why']!r}")
         seen.add(at)
         g = gs[o["n"] - 1]
         gs[o["n"] - 1] = g | {"level": o["level"], "gloss": o["gloss"], "source": o["source"], "by": f"layer: {name}",
-                              "why": o["why"], "was": g["level"]}
+                              "layer": name, "why": o["why"], "was": g["level"]}
     return out
 
 
@@ -99,11 +106,12 @@ def counts(gl):
 
 
 def given_by_layers(layers_lines, known, lex):
-    """layer -> the dictionary words in use that a line of it gives a meaning (reason "stated") and that the lexicon
-    of 2003 does not call established or probable; a word counts for the first layer that gives it one."""
+    """layer -> the dictionary words in use that a line of it gives a meaning (reason "stated", laid as a translated
+    word) and that the lexicon of 2003 does not call established or probable; a word counts for the first layer
+    that gives it one."""
     out, taken = {}, set()
     for name, lines in layers_lines:
-        new = sorted({o["item"] for o in lines if o["why"] == "stated" and o.get("item") in known
+        new = sorted({o["item"] for o in lines if o["why"] == "stated" and o.get("level") in W.READ and o.get("item") in known
                       and (lex[o["item"]].get("status") or "") not in W.SURE} - taken)
         out[name] = new
         taken |= set(new)
@@ -148,6 +156,10 @@ def figures():
     known, stems, _ = D.population_of(gl, lex, fix=True)
     words = json.loads(WORDS.read_text(encoding="utf-8"))
     star = north_star(known, lex, layers_lines, words["unnamed_words"]) | {"unnamed_stems": carried(words["unnamed_stems"], len(stems))}
+    so_far = star["translated_by_the_lexicon"]
+    for l in laid:                                          # the distinct words translated once each layer is laid
+        so_far += star["translated_by_a_layer"][l["name"]]
+        l["distinct_words_translated"] = so_far
     return {"inscriptions": len(gl), "base": first, "layers": laid, "current": counts(gl), "lookup": counts(D.lookup_only()),
             "north_star": star}
 

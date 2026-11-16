@@ -66,27 +66,113 @@
      "share": 0.2126,
      "all": 4793
     }
-   }
+   },
+   "distinct_words_translated": 136
+  },
+  {
+   "name": "rare_sure",
+   "page": "data/discovery/rare_spellings.md",
+   "laid": "2026-11-16",
+   "what": "rare spellings that are forms of a word the lexicon calls sure (G2)",
+   "places": 109,
+   "why": {
+    "form": 103,
+    "piece": 6
+   },
+   "to": {
+    "meaning": 85,
+    "name": 23,
+    "grammar": 1
+   },
+   "was": {
+    "hypothesis": 108,
+    "kind": 1
+   },
+   "after": {
+    "running": {
+     "translated": 4002,
+     "named": 1832,
+     "open": 3240,
+     "lost": 1216,
+     "need": 7242,
+     "share": 0.5526,
+     "all": 10290,
+     "of_all": 0.567
+    },
+    "spellings": {
+     "translated": 700,
+     "named": 798,
+     "open": 2226,
+     "lost": 1069,
+     "need": 2926,
+     "share": 0.2392,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 136
+  },
+  {
+   "name": "rare_later",
+   "page": "data/discovery/rare_spellings.md",
+   "laid": "2026-11-16",
+   "what": "rare spellings whose entry a later source gives a meaning (G4)",
+   "places": 159,
+   "why": {
+    "stated": 141,
+    "piece": 18
+   },
+   "to": {
+    "meaning": 138,
+    "name": 12,
+    "grammar": 9
+   },
+   "was": {
+    "hypothesis": 136,
+    "kind": 22,
+    "unknown": 1
+   },
+   "after": {
+    "running": {
+     "translated": 4149,
+     "named": 1844,
+     "open": 3081,
+     "lost": 1216,
+     "need": 7230,
+     "share": 0.5739,
+     "all": 10290,
+     "of_all": 0.5824
+    },
+    "spellings": {
+     "translated": 814,
+     "named": 807,
+     "open": 2103,
+     "lost": 1069,
+     "need": 2917,
+     "share": 0.2791,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 156
   }
  ],
  "current": {
   "running": {
-   "translated": 3916,
-   "named": 1809,
-   "open": 3349,
+   "translated": 4149,
+   "named": 1844,
+   "open": 3081,
    "lost": 1216,
-   "need": 7265,
-   "share": 0.539,
+   "need": 7230,
+   "share": 0.5739,
    "all": 10290,
-   "of_all": 0.5564
+   "of_all": 0.5824
   },
   "spellings": {
-   "translated": 626,
-   "named": 780,
-   "open": 2318,
+   "translated": 814,
+   "named": 807,
+   "open": 2103,
    "lost": 1069,
-   "need": 2944,
-   "share": 0.2126,
+   "need": 2917,
+   "share": 0.2791,
    "all": 4793
   }
  },
@@ -115,23 +201,25 @@
   "dictionary_words": 377,
   "translated_by_the_lexicon": 127,
   "translated_by_a_layer": {
-   "recurring": 9
+   "recurring": 9,
+   "rare_sure": 0,
+   "rare_later": 20
   },
-  "translated": 136,
+  "translated": 156,
   "distinct_words": {
    "point": 1307,
    "low": 1049,
    "high": 1384
   },
   "star": {
-   "point": 0.1041,
-   "low": 0.0983,
-   "high": 0.1296
+   "point": 0.1194,
+   "low": 0.1127,
+   "high": 0.1487
   },
   "before_us": {
-   "point": 0.1041,
-   "low": 0.0983,
-   "high": 0.1296
+   "point": 0.1194,
+   "low": 0.1127,
+   "high": 0.1487
   },
   "unnamed_stems": {
    "sampled": 1107,

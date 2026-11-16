@@ -70,6 +70,11 @@ def test_a_layer_that_does_not_fit_the_map_stops_the_build():
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete"), line("T1", 2, "xrkete")], "x"), "two lines")
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete", level="hypothesis")], "x"), "the level 'hypothesis'")   # a layer only resolves
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete", why="a guess")], "x"), "the reason 'a guess'")
+    # a later layer cannot change a word that an earlier one changed
+    once = M.lay(gl, [line("T1", 2, "xrkete")], "first")
+    assert stops(lambda: M.lay(once, [line("T1", 2, "xrkete", why="form")], "second"), "was changed by the layer first already")
+    twice = M.lay(once, [line("T1", 1, "ato", why="form")], "second")
+    assert (twice["T1"][0]["layer"], twice["T1"][1]["layer"]) == ("second", "first") and set(M.WHY) == {"stated", "form", "piece", "name"}
 
 
 def test_the_layers_are_named_once_and_point_at_local_files_and_public_pages():
@@ -105,6 +110,8 @@ def test_a_layer_gives_a_dictionary_word_a_meaning_only_by_a_stated_place():
     two = [line("U", 1, "x", item="ḫr"), line("U", 2, "x", item="wte")]
     got = M.given_by_layers([("first", one), ("second", two)], known, lex)
     assert got == {"first": ["ḫr"], "second": ["wte"]}                            # a word counts for the first layer that gives it
+    # a stated place laid as a name gives no word a meaning, and neither does a form of a word the lexicon calls sure
+    assert M.given_by_layers([("x", [line("T", 1, "x", item="wte", level="name"), line("T", 2, "x", item="ḫr", why="form")])], known, lex) == {"x": []}
 
 
 def test_the_north_star_before_us_is_the_north_star():
@@ -152,9 +159,21 @@ def test_the_figures_add_up():
 
 
 def test_the_figures_hold_counts_only():
-    text = M.PUBLIC.read_text(encoding="utf-8")
-    for word in ('"gloss"', '"source"', '"form"', '"text"', '"item"'):
-        assert word not in text, word
+    """Every value of the figures file is a number, but for the four words that describe a layer: no line of a
+    layer, with its spelling, its meaning or its source, is in it."""
+    def leaves(o, key=None):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                yield from leaves(v, k)
+        elif isinstance(o, list):
+            for v in o:
+                yield from leaves(v, key)
+        else:
+            yield key, o
+    for key, v in leaves(figs()):
+        assert isinstance(v, (int, float)) and not isinstance(v, bool) or key in ("name", "page", "laid", "what"), (key, v)
+    described = {(l["name"], l["page"], l["laid"], l["what"]) for l in M.LAYERS}
+    assert {(l["name"], l["page"], l["laid"], l["what"]) for l in figs()["layers"]} == described
 
 
 def test_the_page_says_what_the_figures_say():
@@ -166,7 +185,8 @@ def test_the_page_says_what_the_figures_say():
         assert f"| {name} | {r['translated']:,} of {r['need']:,} | {pct(r['share'])} | {s['translated']:,} of {s['need']:,} | {pct(s['share'])} | {pct(r['of_all'])} |" in text, name
     for l in f["layers"]:
         why = l["why"]
-        assert f"| `{l['name']}` | {l['laid']} | {l['places']} | {why.get('stated', 0)} | {why.get('piece', 0)} | {why.get('name', 0)} |" in text, l["name"]
+        assert (f"| `{l['name']}` | {l['laid']} | {l['places']} | {why.get('stated', 0)} | {why.get('form', 0)} | {why.get('piece', 0)} | {why.get('name', 0)} | "
+                f"{pct(l['after']['running']['share'])} |") in text, l["name"]
         assert f"[{l['page'].split('/')[-1]}]({l['page'].split('/')[-1]})" in PAGE.read_text(encoding="utf-8"), l["name"]
     first = f["layers"][0]
     already = sum(first["was"].get(k, 0) for k in ("meaning", "grammar", "name"))
@@ -174,17 +194,26 @@ def test_the_page_says_what_the_figures_say():
     assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words, {pct(n['star']['point'])} (between {pct(n['star']['low'])} and {pct(n['star']['high'])})" in text
     assert f"{n['translated_by_the_lexicon']} by the lexicon of 2003 and {sum(n['translated_by_a_layer'].values())} by a later source" in text
     u, words = n["unnamed_stems"], json.loads(M.WORDS.read_text(encoding="utf-8"))
-    assert f"a sample of the {u['sampled']:,} stems the base could not name. The layer makes {u['sampled'] - u['now']} of them names, so {u['now']:,} are left" in text
+    assert f"a sample of the {u['sampled']:,} stems the base could not name. The layers make {u['sampled'] - u['now']} of them names, so {u['now']:,} are left" in text
     assert f"(about {words['unnamed_words']['point']} of them are words)" in text and f"more than {100 * M.DRIFT:.0f}% of those stems" in text
-    gain = c["running"]["translated"] - b["running"]["translated"]
-    names = c["running"]["named"] - b["running"]["named"]
+    a = first["after"]                                                   # the map after the first layer alone
+    gain = a["running"]["translated"] - b["running"]["translated"]
+    names = a["running"]["named"] - b["running"]["named"]
     assert f"So {gain} running words more are translated, and {names} more are names" in text
-    assert f"{b['running']['need']:,} words that need one become {c['running']['need']:,}" in text
+    assert f"{b['running']['need']:,} words that need one become {a['running']['need']:,}" in text
     assert f"{first['to'].get('meaning', 0)} places become a meaning, {first['to'].get('name', 0)} a name, {first['to'].get('grammar', 0)} a grammatical function" in text
     was = first["was"]
     assert f"({was.get('meaning', 0)} with a meaning, {was.get('grammar', 0)} as a grammar word, {was.get('name', 0)} as a name)" in text
     assert f"The other {first['places'] - already} were open" in text
-    assert f"({pct(c['running']['share'])}, from {pct(b['running']['share'])})" in text and f"({b['spellings']['translated']} to {c['spellings']['translated']})" in text
+    assert f"({pct(c['running']['share'])}, from {pct(b['running']['share'])})" in text and f"({b['spellings']['translated']} to {a['spellings']['translated']})" in text
+    by = n["translated_by_a_layer"]
+    assert f"{by['recurring']} through the layer `recurring`, {by['rare_later']} through `rare_later`" in text and by["rare_sure"] == 0
+    for l in f["layers"][1:]:
+        to = l["to"]
+        assert f"{to.get('meaning', 0) + to.get('grammar', 0)} places become translated words and {to.get('name', 0)} names; all {l['places']} were open" in text, l["name"]
+        assert set(l["was"]) <= {"hypothesis", "kind", "unknown"}, l["name"]
+    stated = sum(l["why"].get("stated", 0) for l in f["layers"])
+    assert f"The {stated} stated places rest on one scholar" in text
 
 
 def test_the_pages_that_keep_the_base_point_here():
@@ -241,8 +270,10 @@ def test_the_two_studies_count_the_same():
         (after["translated"], after["named"], after["open"], after["lost"], after["share"])
     assert (r["before"]["read"], r["before"]["share"]) == (f["base"]["running"]["translated"], f["base"]["running"]["share"])
     w = json.loads((ROOT / "data/discovery/distinct_words_figures.json").read_text(encoding="utf-8"))
-    if len(M.LAYERS) == 1:
-        assert w["next"]["translated"] == f["north_star"]["translated"] and w["next"]["star"] == f["north_star"]["star"]
+    first = f["layers"][0]["distinct_words_translated"]              # what the count of distinct words gave beforehand as its "next"
+    assert w["next"]["translated"] == first and w["next"]["star"]["point"] == round(first / f["north_star"]["distinct_words"]["point"], 4)
+    assert f["layers"][-1]["distinct_words_translated"] == f["north_star"]["translated"]
+    assert [l["distinct_words_translated"] for l in f["layers"]] == sorted(l["distinct_words_translated"] for l in f["layers"])
     assert w["translated"] == f["north_star"]["translated_by_the_lexicon"] and w["dictionary_words"] == f["north_star"]["dictionary_words"]
     assert w["map"]["running_translated"] == f["base"]["running"]["translated"] and w["lookup"]["translated"] <= w["translated"]
 

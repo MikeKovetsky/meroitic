@@ -1,7 +1,7 @@
 # Index of the data
 
 Everything the project holds, by folder: what it is, where it came from, how big it is, and whether it is in the
-public repository. Counted on 2026-11-13 from the files on disk (the rows of `data/discovery/` and `data/sources/words/` on 2026-11-16).
+public repository. Counted on 2026-11-13 from the files on disk (the rows of `data/discovery/`, `data/sources/words/` and `data/sources/rare/` on 2026-11-16).
 "Local" means the folder is listed in `.gitignore` and stays on the author's machine, because the material has no
 open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the [README's section
 "Data"](../README.md#data) say why for each).
@@ -13,7 +13,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 | `data/inscriptions.jsonl` | One row for each of the 563 inscriptions the project holds a reading of: REM or edition number, site, kind, every reading's source and licence, and the text of the readings that are open (304) | 0.6 MB |
 | `data/inscriptions_map.tsv` | What each of the 899 texts of `corpus_v5` is: an inscription, a part of one, or an example phrase | 0.2 MB |
 | `data/expansion/` | The open transcriptions: Griffith's *Meroitic Inscriptions* I and II and *Meroë* (152 inscriptions), Karanòg and Shablûl (151, with the 48 typed reference pages and the readers' files), the Akinidad stela REM 1003 from Griffith 1917 (`jea/`), and the tests of the reading method | 3.4 MB, 488 files |
-| `data/discovery/` | The pages of each study with their figures files and public tables: the coverage map, the Egyptian and variant searches, the check against two editions, `corpus_v6`, the readers, the Demotic step, the lexicon's statuses (`lexicon_statuses.tsv`, `lexicon_other_statuses.tsv`), the F4 pilot and rounds, the recurring open words, the count of distinct words, the rules for the open spellings in one or two texts, the map with its layers (`map_layers.md`, `map_figures.json`) | 1.0 MB, 43 files |
+| `data/discovery/` | The pages of each study with their figures files and public tables: the coverage map, the Egyptian and variant searches, the check against two editions, `corpus_v6`, the readers, the Demotic step, the lexicon's statuses (`lexicon_statuses.tsv`, `lexicon_other_statuses.tsv`), the F4 pilot and rounds, the recurring open words, the count of distinct words, the open spellings in one or two texts (`rare_spellings.md` and its figures), the map with its layers (`map_layers.md`, `map_figures.json`) | 1.0 MB, 44 files |
 | `data/gold_lexicon.json`, `data/gold_morphology.json` | The answer key of the first tests: 82 accepted meanings and 26 endings, each with its source | 0.1 MB |
 | `data/leads/` | Four write-ups of leads and a README | 0.1 MB |
 | `data/synth_corpus.txt` | The synthetic twin language of the leak-free test | 0.1 MB |
@@ -44,6 +44,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 | `data/sources/mnl/` (other than the scans) | The 256 texts typed from the Newsletter (`mnl_texts.jsonl`), `corpus_v4`, the collation of editions, the oracular decrees, the grammar test, Meeks's word list, the numbers | part of the 229.6 MB below |
 | `data/sources/recurring/` | The recurring open words (`src/recurring.py`): the 121 items with every place they stand, the dossiers and the readers' statements, the two readings of the stated meanings, the two checkers' verdict on each of the 1,108 places, the proposals on record, the blind test's packs, key and answers, the overlay on the map, and the first working scripts (`old_scripts/`, which hold the bar of class A as it was set) | 6.0 MB, 225 files |
 | `data/sources/words/` | Distinct words (`src/words.py`): what every running word of the map is, the sample of 240 unnamed stems, the packs and the answers of the two readings (two checkers each), and the estimate | 1.4 MB, 84 files |
+| `data/sources/rare/` | The open spellings in one or two texts (`src/rare.py`): for G4 the 323 entries with every place, the dossiers and the readers' statements, the two readings of the stated meanings, both readings of the places (two checkers each); for G2 the 116 entries and the checkers' verdicts; the lines each run lays in the map; the tokens of each agent; the first working script (`run.py`) | 9.1 MB, 261 files |
 | `data/sources/notes/` | The progress log (`PROGRESS.md`) and the three parallel sessions' logs | 0.2 MB |
 
 ## 3. Local: the sources fetched, with where each came from

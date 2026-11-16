@@ -861,3 +861,37 @@ named, from 52.7%), and the three pages point to it. This cut waits for Mike's w
 
 **The status table** reads its first three rows from `data/discovery/map_figures.json` since this step
 (`.claude/skills/reporting/SKILL.md`).
+
+## Day nine, afternoon (2026-11-16): the rare spellings under an entry of the lexicon (G4 and G2)
+
+Asked that day: "Yes, start G1 and G4, queue G2". Page:
+[`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md); script `src/rare.py`. The rules of both
+steps were committed at 12:58, before any agent was started; G2 ran beside G4 as soon as agents were free.
+
+**G4, the entries without an accepted meaning** (323 entries, 784 spellings, 1,033 places). 27 readers collected
+1,659 statements, each quote found in its file by script. For 57 of the 60 entries of class A two readers agree
+that Rilly states a meaning in 2016 or 2021. The 695 places of the entries of class A and B went to two
+checkers. The first reading was not taken: the checkers agreed (kappa 0.93), but one place had one answer
+only, and the bar set beforehand takes nothing then. The brief got one line naming the number of places in the
+pack, and 32 fresh checkers read the same packs: every place answered, kappa 0.93, 181 places stated,
+113 pieces, 327 open.
+
+**G2, the spellings under an entry the lexicon calls sure** (116 entries, 366 places). Two checkers a place,
+kappa 0.70: 245 places hold a form of the lexicon's word, 28 are pieces, 51 are not agreed.
+
+**What goes into the map.** Looking at G2's stated places showed that "a form of the word" is not "the word is
+translated": 74 stand under an ending whose stem nobody knows, and about half of the 68 stem places with an
+unnamed part join the lexicon's word to a name or an unknown word. So a place is laid only where the map names
+every part of the spelling and every stem among them has a meaning, and an entry that is a name is laid as a
+name. These rules were written into the page as they were made, with the time: before G4's places were counted,
+but for G2 partly after its count, where they only lower the figure. Laid: 109 places of G2 and 159 of G4;
+182 recognised places stay open.
+
+**The map as it stands.** 4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%). After G1 the
+map stood at 53.9% of the running words and 10.4% of the distinct words. 20 entries of the lexicon are new with a
+meaning, all Rilly's; by his own later analysis several are forms of one another (`sr` and `asr`, `erk` and
+`yerki`, the two `tk`), so the gain in words is smaller. Our own meanings: still none.
+
+**Cost.** 119 fresh agents, 13,892,589 subagent tokens, from the task notifications; 34 minutes from the first
+reader to the last count.
+

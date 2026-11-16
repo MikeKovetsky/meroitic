@@ -59,8 +59,8 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
 (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
-(`src/themap.py`, page `data/discovery/map_layers.md`; the first layer, the recurring open spellings, since step
-G1 on 2026-11-16). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
+(`src/themap.py`, page `data/discovery/map_layers.md`; three layers since 2026-11-16: the recurring open spellings
+of step G1, and the rare spellings of steps G2 and G4). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
 three rows are read from that file. Read a number from its figures file or count it with the command given; never
 quote it from memory, from this file's log, or from an earlier message.
 
@@ -152,17 +152,18 @@ Run from the repository's root (it needs the local files: the map, the lexicon a
 python3 -I src/themap.py
 ```
 
-It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with the first layer, it printed:
+It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with three layers, it printed:
 
 ```
 plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
 base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
-as it stands: running words translated 3916 of 7265 = 53.9%; distinct spellings translated 626 of 2944 = 21.3%
-north star: 136 of about 1307 = 10.4% (9.8% to 13.0%)
+as it stands: running words translated 4149 of 7230 = 57.4%; distinct spellings translated 814 of 2917 = 27.9%
+north star: 156 of about 1307 = 11.9% (11.3% to 14.9%)
 ```
 
 "plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map
-with no layer (what Now was before G1). `python3 -I tests/test_themap.py` checks the file against the local
+with no layer (what Now was before G1). The page `data/discovery/map_layers.md` gives the figure after each
+layer. `python3 -I tests/test_themap.py` checks the file against the local
 count, against this skill and against the page `data/discovery/map_layers.md`.
 
 ## 5. Giving a status, step by step
@@ -201,8 +202,8 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
 - This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have
   consistent ways of measuring across compactions and sessions".
 - The layers: "Yes, start G1 and G4, queue G2". G1 put the recurring-words results into the map as a layer, as
-  sections 3 and 4 had announced; since then the first three rows are read from `data/discovery/map_figures.json`.
-  No row's definition or "Before us" changed with it.
+  sections 3 and 4 had announced; G2 and G4 each added one the same day. Since then the first three rows are read
+  from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it.
 
 Offered and not taken up: the translation row could give way to "words whose meaning two scholars agree on"
 (39.9%, `data/discovery/lexicon.md`); the column "Before us" could be named "Plain lookup".
