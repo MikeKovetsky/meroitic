@@ -107,7 +107,7 @@ Done since this plan was written:
     of the proposals on record for the open words missed both bars (right for 13 of 17 accepted words where
     the readers chose, 76.5% against 80%; a wrong meaning chosen for 2 of 11 where the true one was not offered,
     18.2% against 10%), so no proposal is labelled. Open: the same pass on the 2,203 open spellings that stand in
-    one or two texts (steps G2 to G4 of section G).
+    one or two texts (steps G2 to G4 of section G; G2 and G4 are done, point 21).
 19. **Distinct words translated, the north star** (2026-11-16,
     [`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)). Counted once each, 127 of about
     1,307 distinct words have a meaning: 9.7% (between 9.2% and 12.1%), the same as before the project (each of
@@ -119,19 +119,23 @@ Done since this plan was written:
     project's own would set it apart from before us.
 20. **The map with its layers** (2026-11-16, [`data/discovery/map_layers.md`](data/discovery/map_layers.md);
     step G1). The 385 places point 18 resolved are laid over the analysts' map as its first layer, each with its
-    source (`src/themap.py`); the analysts' map is not changed. The map as it stands: 3,916 of the 7,265 running
+    source (`src/themap.py`); the analysts' map is not changed. With this layer: 3,916 of the 7,265 running
     words that need a meaning are translated (53.9%, from 50.1%), 626 of 2,944 distinct spellings (21.3%), and 136
     of about 1,307 distinct words (10.4%, between 9.8% and 13.0%; before us the same). The status table reads
-    its first three rows from this count. The dated studies keep the analysts' map. The layers of G2 and G4
-    followed the same day (point 21).
+    its first three rows from this count. Not built as the step said: the three pages that count from the map
+    (coverage, the translations' baseline, the lexicon's statuses) are not rebuilt; they keep their dated numbers
+    and point to the new page, and Mike waived that part on 2026-11-16 ("Yes, waive it."). The other dated studies
+    keep the analysts' map too. The layers of G2 and G4 followed the same day (point 21).
 21. **The open spellings in one or two texts that hang on an entry of the lexicon** (2026-11-16,
     [`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md); steps G2 and G4). Two checkers judged
-    1,061 places; 268 places are laid in the map as two layers (109 forms of words the lexicon calls sure, 159 where
-    Rilly states the entry's meaning in 2016 or 2021 or the "word" is a piece). The map as it stands:
+    1,061 places; 268 places are laid in the map as two layers (109 under words the lexicon calls sure and 159
+    under entries to which Rilly gives a meaning in 2016 or 2021; 24 of the 268 are pieces of a word the map
+    holds). The map as it stands:
     4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%); before us the north star is the same. 20 entries of the
     lexicon get a meaning; by the later source several are forms of one another. Open: the 182 places where
-    both checkers recognise the word but the map leaves a part of the spelling unnamed, the 159 entries no later
-    source speaks of, and a second scholar for Rilly's meanings (G5).
+    both checkers recognise the word but the map leaves a part of the spelling unnamed (or, at one, another stem
+    has no meaning), the 159 entries for which Rilly's later work states no meaning firmly, and a second scholar
+    for Rilly's meanings (G5).
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -508,16 +512,17 @@ ours unless it passes a test set beforehand.
    translations' baseline, the lexicon's statuses) are rebuilt from the same file, and the checks and the review
    pass. No agents but the review.
    **Built on 2026-11-16** (point 20, [`data/discovery/map_layers.md`](data/discovery/map_layers.md)): the layer is
-   laid by `src/themap.py` and the map's figure is 53.9%. One part is not built as written and waits for Mike's
-   word: the three pages are not counted again. They report dated work on the analysts' map, two of them rest on
-   judges, and the translations' baseline is the status table's "Before us"; they point to the new page, which
+   laid by `src/themap.py` and the map's figure is 53.9%. One part is not built as written, and Mike waived it on
+   2026-11-16 at 13:52, asked whether the three pages could keep their numbers and point to the new page: "Yes,
+   waive it." The three pages are not counted again. They report dated work on the analysts' map, two of them rest
+   on judges, and the translations' baseline is the status table's "Before us"; they point to the new page, which
    counts the map as it stands.
 2. **G2. The spellings under a sure stem** (kind a: 366 running words under 116 lexicon entries). Most should be
    rarer spellings or compounds of words the map already reads. The place pass of point 18 again: two checkers
    say for each place whether it holds the lexicon's word. If every one were read the share would be 58.9%; the
    first pass kept about half of what its first readers counted (273 of 531), so expect less. About 16 checkers.
-   **Done on 2026-11-16** (point 21): 245 of 366 places stated by both checkers (kappa 0.70), 109 laid in the
-   map: a place counts only where the map names every part of the spelling.
+   **Done on 2026-11-16** (point 21): 245 of 366 places stated by both checkers (kappa 0.70); 109 laid in the
+   map: 103 of the stated places, those whose every part the map names, and 6 pieces of a word it holds.
 3. **G3. The spellings that are not in the lexicon** (kind c: 1,225 running words, most of them standing once).
    Point 18 found a sixth of the recurring places to be pieces of a longer word or name that the edition's word
    division cut, and seven items to be names. So first a pilot on 100 places drawn by a fixed seed: a script

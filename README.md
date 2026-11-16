@@ -205,7 +205,10 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     need a meaning are translated, and 136 of about 1,307 distinct words (10.4%, between 9.8% and 13.0%).** The 385 places that item
     17 resolved (273 where Rilly states a meaning in 2016 or 2021, 66 pieces of a word or name the map holds, 46
     places of seven names) are laid over the analysts' map as a layer, each with its source; the analysts' map is
-    not changed, and the studies run on it keep their numbers. That makes 240 running words more translated
+    not changed, and the studies run on it keep their numbers. The step also asked for the three pages that count
+    from the map (the coverage of the clean corpus, the lexicon's statuses, the translations' baseline) to be
+    rebuilt from the same file: they are not, they keep their dated numbers and point to the new page, and Mike
+    waived that part on 2026-11-16 ("Yes, waive it."). That makes 240 running words more translated
     (3,676 to 3,916 of those that need a meaning, 50.1% to 53.9%) and gives 9 more words of the lexicon a meaning
     (127 to 136). All of these meanings were published before the project, so the north star's "before us" is
     the same 10.4%, and the project still has no meaning of its own
@@ -217,9 +220,10 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     collected what the later sources say (1,659 statements, every quote found by script), two readers found a
     meaning stated by Rilly in 2016 or 2021 for 57 of 60 entries, and two checkers judged the 695 places of the
     entries concerned (kappa 0.93; a first reading was not taken, because one place had one checker's answer
-    only). A place is laid in the map only where the map names every part of the spelling: 109 places of the
-    first kind and 159 of the second. At 182 more places both checkers recognise the word, but a part of the
-    spelling is unnamed, so they stay open. With the three layers 4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%). 20 entries of the lexicon get a meaning
+    only). A stated place is laid in the map only where the map names every part of the spelling and each stem in
+    it has a meaning, a piece only where the map translates or names the whole word: 109 places of the first kind
+    and 159 of the second. At 182 more places both checkers recognise the word, but a part of the spelling is
+    unnamed (at one, another stem has no meaning), so they stay open. With the three layers 4,149 of the 7,230 running words that need a meaning are translated (57.4%), 814 of 2,917 distinct spellings (27.9%) and 156 of about 1,307 distinct words (11.9%, between 11.3% and 14.9%). 20 entries of the lexicon get a meaning
     that way ("donkey", "horse", "to seize", "talent", the title Candace); by Rilly's own later analysis several
     of them are forms of one another, so the gain in words is smaller than 20. Before the project the north star
     was the same 11.9%: every one of these meanings was published before it
@@ -597,7 +601,8 @@ The analysts' map stays as it is. A later study that resolves places hands over 
 running word it changes: the text, the word's number, its spelling, the new level and meaning, the reason (a
 later source states the meaning there; a piece of a word or name the map holds; a name) and the source. The
 script lays these layers over the map in their order each time it runs and stops if a line does not fit: a place
-or spelling the map does not have, two lines for one place, a level that does not resolve the word. It then
+or spelling the map does not have, two lines for one place, a former level that is not the map's, a level that
+does not resolve the word. It then
 counts the map as it stands: the running words and the distinct spellings that need a meaning and have one, the
 same for the base and for a plain lookup of the lexicon, and the distinct words, where a word of the lexicon
 counts as translated if the lexicon calls its meaning established or probable or a layer gives it one from a
@@ -678,8 +683,8 @@ Seventeen things need files that are kept locally (Data, above), so they don't r
   Rilly's lexicon, the text layers of the sources and the readers' and checkers' answers.
 - `python3 -I src/words.py public` (and `population`, `packs`, `count`) reads `corpus_v6` and its gloss file,
   Rilly's lexicon and the checkers' answers.
-- `python3 -I src/themap.py` reads the gloss file of `corpus_v6`, the layers' lines, Rilly's lexicon and the
-  figures of the count of distinct words.
+- `python3 -I src/themap.py` reads `corpus_v6` (for the plain lookup) and its gloss file, the layers' lines,
+  Rilly's lexicon and the figures of the count of distinct words.
 - `python3 -I src/rare.py public` (and `layers`; for the runs `g4` and `g2`: `items`, `batches`, `quotes`,
   `verify-packs`, `verify`, `place-packs`, `places`, `place-packs2`, `places2`) reads `corpus_v6` and its gloss file,
   Rilly's lexicon, the text layers of the sources, the layers' lines and the readers' and checkers' answers.

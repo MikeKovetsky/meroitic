@@ -52,8 +52,9 @@ def lines_of(layer):
 
 def lay(gl, lines, name):
     """A copy of the map with a layer's lines laid over it. A line must name a word that stands there with that
-    spelling, give a level the map knows and a reason of WHY, and no two lines may name one word, in this layer or
-    in one laid before it: a layer that does not fit the map it is laid on stops the build."""
+    spelling and the level the line says it had (the figures count what the layers moved from it), give a level
+    the map knows and a reason of WHY, and no two lines may name one word, in this layer or in one laid before it:
+    a layer that does not fit the map it is laid on stops the build."""
     out = {t: list(gs) for t, gs in gl.items()}
     seen = set()
     for o in lines:
@@ -65,6 +66,8 @@ def lay(gl, lines, name):
             raise SystemExit(f"layer {name}: two lines for {at}")
         if "layer" in gs[o["n"] - 1]:
             raise SystemExit(f"layer {name}: {at} was changed by the layer {gs[o['n'] - 1]['layer']} already")
+        if o.get("was") != gs[o["n"] - 1]["level"]:
+            raise SystemExit(f"layer {name}: {at} has the level {gs[o['n'] - 1]['level']!r} in the map, the line says {o.get('was')!r}")
         if o["level"] not in W.READ + W.NAMED or o["why"] not in WHY:
             raise SystemExit(f"layer {name}: {at} has the level {o['level']!r} and the reason {o['why']!r}")
         seen.add(at)
@@ -105,16 +108,20 @@ def counts(gl):
             "spellings": tally(spell) | {"all": sum(spell.values())}}
 
 
+def given(lines, known, lex):
+    """The dictionary words in use (`known`, src/words.py: no name, no ending or particle) that a layer's lines give
+    a meaning: a place laid as a translated word for the reason "stated", of an entry the lexicon of 2003 does not
+    call established or probable."""
+    return {o["item"] for o in lines if o["why"] == "stated" and o.get("level") in W.READ and o.get("item") in known
+            and (lex[o["item"]].get("status") or "") not in W.SURE}
+
+
 def given_by_layers(layers_lines, known, lex):
-    """layer -> the dictionary words in use that a line of it gives a meaning (reason "stated", laid as a translated
-    word) and that the lexicon of 2003 does not call established or probable; a word counts for the first layer
-    that gives it one."""
+    """layer -> the words given(); a word counts for the first layer that gives it one."""
     out, taken = {}, set()
     for name, lines in layers_lines:
-        new = sorted({o["item"] for o in lines if o["why"] == "stated" and o.get("level") in W.READ and o.get("item") in known
-                      and (lex[o["item"]].get("status") or "") not in W.SURE} - taken)
-        out[name] = new
-        taken |= set(new)
+        out[name] = sorted(given(lines, known, lex) - taken)
+        taken |= set(out[name])
     return out
 
 

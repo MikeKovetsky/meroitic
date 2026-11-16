@@ -856,8 +856,9 @@ of the words among those stems is carried over, and the script stops if layers e
 coverage of the clean corpus, the lexicon's statuses and the translations' baseline. They are not counted again.
 Each reports dated work on the analysts' map; the lexicon's statuses and the baseline rest on judges who never
 saw what the layer adds; and the baseline is the status table's "Before us", which changes only on Mike's word.
-The new page counts the coverage measure on the map as it stands (55.6% of all running words translated or
-named, from 52.7%), and the three pages point to it. This cut waits for Mike's word.
+The new page counts the coverage measure on the map with this layer (55.6% of all running words translated or
+named, from 52.7%), and the three pages point to it. Mike waived this cut on 2026-11-16 at 13:52, asked whether
+the three pages could keep their numbers and point to the new page: "Yes, waive it."
 
 **The status table** reads its first three rows from `data/discovery/map_figures.json` since this step
 (`.claude/skills/reporting/SKILL.md`).
@@ -881,9 +882,9 @@ kappa 0.70: 245 places hold a form of the lexicon's word, 28 are pieces, 51 are 
 
 **What goes into the map.** Looking at G2's stated places showed that "a form of the word" is not "the word is
 translated": 74 stand under an ending whose stem nobody knows, and about half of the 68 stem places with an
-unnamed part join the lexicon's word to a name or an unknown word. So a place is laid only where the map names
-every part of the spelling and every stem among them has a meaning, and an entry that is a name is laid as a
-name. These rules were written into the page as they were made, with the time: before G4's places were counted,
+unnamed part join the lexicon's word to a name or an unknown word. So a stated place is laid only where the map
+names every part of the spelling and every stem among them has a meaning, and an entry that is a name is laid as
+a name (a piece, as before, only where the map translates or names the whole word). These rules were written into the page as they were made, with the time: before G4's places were counted,
 but for G2 partly after its count, where they only lower the figure. Laid: 109 places of G2 and 159 of G4;
 182 recognised places stay open.
 

@@ -203,7 +203,9 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
   consistent ways of measuring across compactions and sessions".
 - The layers: "Yes, start G1 and G4, queue G2". G1 put the recurring-words results into the map as a layer, as
   sections 3 and 4 had announced; G2 and G4 each added one the same day. Since then the first three rows are read
-  from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it.
+  from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it. The three dated pages
+  that G1 named to be rebuilt (the coverage of the clean corpus, the lexicon's statuses, the translations'
+  baseline, which is the last row's "Before us") keep their numbers: "Yes, waive it." (13:52).
 
 Offered and not taken up: the translation row could give way to "words whose meaning two scholars agree on"
 (39.9%, `data/discovery/lexicon.md`); the column "Before us" could be named "Plain lookup".

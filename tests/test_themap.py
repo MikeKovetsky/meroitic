@@ -70,10 +70,13 @@ def test_a_layer_that_does_not_fit_the_map_stops_the_build():
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete"), line("T1", 2, "xrkete")], "x"), "two lines")
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete", level="hypothesis")], "x"), "the level 'hypothesis'")   # a layer only resolves
     assert stops(lambda: M.lay(gl, [line("T1", 2, "xrkete", why="a guess")], "x"), "the reason 'a guess'")
+    # a line must say the level the word has: the figures count what the layers moved from it
+    assert stops(lambda: M.lay(gl, [line("T1", 1, "ato", why="form")], "x"), "has the level 'meaning' in the map, the line says 'hypothesis'")
+    assert stops(lambda: M.lay(gl, [{k: v for k, v in line("T1", 2, "xrkete").items() if k != "was"}], "x"), "the line says None")
     # a later layer cannot change a word that an earlier one changed
     once = M.lay(gl, [line("T1", 2, "xrkete")], "first")
-    assert stops(lambda: M.lay(once, [line("T1", 2, "xrkete", why="form")], "second"), "was changed by the layer first already")
-    twice = M.lay(once, [line("T1", 1, "ato", why="form")], "second")
+    assert stops(lambda: M.lay(once, [line("T1", 2, "xrkete", why="form", was="meaning")], "second"), "was changed by the layer first already")
+    twice = M.lay(once, [line("T1", 1, "ato", why="form", was="meaning")], "second")
     assert (twice["T1"][0]["layer"], twice["T1"][1]["layer"]) == ("second", "first") and set(M.WHY) == {"stated", "form", "piece", "name"}
 
 
@@ -214,6 +217,20 @@ def test_the_page_says_what_the_figures_say():
         assert set(l["was"]) <= {"hypothesis", "kind", "unknown"}, l["name"]
     stated = sum(l["why"].get("stated", 0) for l in f["layers"])
     assert f"The {stated} stated places rest on one scholar" in text
+    # the coverage page's measure on the map as it stands is the last column of section 3, for the map with the layers
+    assert f"Its measure on the map as it stands is the last column of section 3: {pct(c['running']['of_all'])}." in text
+
+
+def test_the_cut_of_the_step_and_its_waiver_are_said_plainly():
+    """G1 asked for the three pages that count from the map to be rebuilt. They are not, and Mike waived it (2026-11-16,
+    13:52, "Yes, waive it."): every page that tells of the step says so in his words, and none says it still waits."""
+    for path in ("data/discovery/map_layers.md", "NEXT_STEPS.md", "REPORT.md", "README.md", ".claude/skills/reporting/SKILL.md"):
+        text = " ".join((ROOT / path).read_text(encoding="utf-8").split())
+        assert '"Yes, waive it."' in text, path
+        assert "waits for Mike's word" not in text and "waiting for Mike's word" not in text, path
+    assert "NOT MET as written, on purpose, and waived by Mike on 2026-11-16 at 13:52" in page()
+    steps = " ".join((ROOT / "NEXT_STEPS.md").read_text(encoding="utf-8").split())
+    assert "Not built as the step said: the three pages that count from the map" in steps and "and Mike waived it on 2026-11-16 at 13:52" in steps
 
 
 def test_the_pages_that_keep_the_base_point_here():

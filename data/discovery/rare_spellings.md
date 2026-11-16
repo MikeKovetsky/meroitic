@@ -7,11 +7,12 @@ they were set before the agents of each step were started; the additions made on
 The results are in sections 6 to 10.
 
 **In short.** Two checkers judged 1,061 places of rare spellings that hang on an entry of the lexicon. 268 of
-them now carry a meaning or a name in the map: 109 where the spelling is a form of a word the lexicon calls sure
-(G2), 159 where Rilly's work of 2016 or 2021 gives the entry a meaning or the "word" is a piece of a word the map
-holds (G4). The running words translated go from 53.9% to 57.4%, and 20 more words of the lexicon have a meaning
-(136 to 156 of about 1,307, 10.4% to 11.9%). Every one of these meanings is a scholar's. Both checkers recognised
-the word at 182 more places that are not laid, because the map leaves a part of the spelling unnamed.
+them now carry a meaning or a name in the map: 109 under a word the lexicon calls sure (G2: 103 forms of that word
+and 6 pieces of a word the map holds), 159 under an entry to which Rilly's work of 2016 or 2021 gives a meaning (G4:
+141 places of that word and 18 pieces). The running words translated go from 53.9% to 57.4%, and 20 more words of
+the lexicon have a meaning (136 to 156 of about 1,307, 10.4% to 11.9%). Every one of these meanings is a scholar's.
+Both checkers recognised the word at 182 more places that are not laid: at 181 the map leaves a part of the
+spelling unnamed, at 1 another stem of the spelling has no meaning.
 
 ## 1. What was asked
 
@@ -29,7 +30,7 @@ Requirements, one line each:
 |---|---|---|
 | R1 | G4: for the entries the lexicon of 2003 holds without an accepted meaning and whose open spellings stand in one or two texts, find what the later sources state, and check it place by place. | MET: section 7. |
 | R2 | G2: for the open spellings filed under a stem or ending the lexicon calls sure, have two checkers say for each place whether it holds the lexicon's word. | MET: section 6. |
-| R3 | The rules of the recurring open words (point 18): two readers on every judgment that is counted, each bar committed before its readers are started, counts that follow from a figures file, nothing called a meaning of ours. | MET, with what section 9 says: the bars of both steps were committed before their agents were started; two of the four additions of section 5 were made for G2 after its checkers had answered, one of them after its count, and both only lower its figure. No meaning here is the project's. |
+| R3 | The rules of the recurring open words (point 18): two readers on every judgment that is counted, each bar committed before its readers are started, counts that follow from a figures file, nothing called a meaning of ours. | MET, with what section 9 says: the bars of both steps were committed before their agents were started; the three additions of section 5 that apply to G2 were made after its checkers had answered, two of them after its count, and they only lower its figure. No meaning here is the project's. |
 
 ## 2. The items
 
@@ -42,8 +43,8 @@ entry the map files a spelling under:
 | b. An entry the lexicon holds without an accepted meaning | G4 | 323 | 784 | 1,033 |
 | c. No entry of the lexicon | G3, not started | | 1,107 | |
 
-One running word of kind b more than `NEXT_STEPS.md` counted (1,032): that count left out the places the
-recurring-words results would resolve, and this one takes every place of the spellings.
+One running word of kind b more than `NEXT_STEPS.md` counted (1,032): that count took the places where the map
+leaves the spelling open, and this one takes every place of the spellings, one of which the map reads as a name.
 
 ## 3. G4: what the later sources state (rules set before any reader is started)
 
@@ -129,8 +130,9 @@ both steps:
   laid as a name, which needs no meaning, not as a translated word.
 - **Both figures are reported:** the stated places by the rule of sections 3 and 4, and those laid in the map.
 
-**Two points more, added on 2026-11-16 at 13:26,** before G4's places were counted (two of its 32 checkers
-were still at work):
+**Two points more, added on 2026-11-16 at 13:26,** after the 32 checkers of G4's first reading had written their
+answers and before those were counted, and before the checkers of the second reading, the one that counts, were
+started:
 
 - **Every stem must have a meaning.** A stated place is laid as translated only where each stem among the
   spelling's parts has one: the lexicon calls it established or probable, a later source states it (it passed
@@ -140,7 +142,7 @@ were still at work):
   meaning only when one of its stated places is laid in the map as translated. The entries with a stated place
   but none laid are given beside it.
 
-**G4's first reading of the places is not taken** (noted on 2026-11-16 at 13:27, when it was counted). The 32
+**G4's first reading of the places is not taken** (noted on 2026-11-16 at 13:27, after it was counted). The 32
 checkers agreed well (Cohen's kappa 0.93), but one of the 695 places has one checker's answer only: a checker's
 file has 40 lines for a pack of 41 places. By point 4 of the bar nothing is taken. The brief's last line is
 corrected to name the number of places in the pack and to ask the checker to count its lines against it
@@ -151,7 +153,10 @@ The recurring open words had no such condition: 41 of their 273 stated places ha
 unnamed (forms of four words in fixed phrases). They stay as that study's rule, set beforehand, had them.
 
 The briefs the checkers of both place passes are given, and their launch line, are in
-[`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md), committed before any of them was started.
+[`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md), committed before any of them was started. The
+line each agent of every step was started with, as the session's log records it, is in
+[`runs/prompts/RARE_launch.md`](../../runs/prompts/RARE_launch.md); `WHEN` in `src/rare.py` gives, for each step,
+when its rules were committed, when its agents were started, and when they answered.
 
 What the runs cannot show: the readers and checkers are one model, so their agreement shows that a judgment can
 be repeated, not that it is right; they see five words on each side, not the stone.
@@ -268,16 +273,20 @@ each of these spellings stands once or twice.
   with an ending; `aqebese` and `wese` as variant spellings of possessives; `yel` as a form of a verb the lexicon
   has. The north star counts entries, as it did for the 127 of the lexicon; counted as words, the gain is smaller.
 - **182 places were recognised and not laid.** Both checkers found the lexicon's word or the later source's there,
-  but the map leaves a part of the spelling unnamed. They wait for a step that names those parts (G3).
+  but the map leaves a part of the spelling unnamed (181 places) or another stem of the spelling has no meaning
+  (1). They wait for a step that names those parts (G3) or gives that stem a meaning.
 - **The rule for what is laid was tightened on the way** (section 5). For G4 every addition was written down before
-  its places were counted. For G2 two were made after its checkers had answered, one after its count; they only
-  lower its figure (245 stated places by the first rule, 103 laid).
+  its places were counted, and before the checkers of the reading that counts were started. For G2 the three that
+  apply to it came after its checkers had answered, two of them after its count; they only lower its figure (245
+  stated places by the first rule, 103 laid).
 - **G4's place pass was read twice.** The first reading missed the bar on one unanswered place and is not taken;
   its numbers stand beside the second's in section 7.
 - **G2's checkers agree less** (kappa 0.70) than those of G4 (0.93) or of the recurring words (0.91): 51 of
   366 places are not agreed and stay open.
-- **159 entries of G4 were not judged** (class C): the readers found no statement of Rilly's later work and no
-  sign of a piece. One reader a batch collected the statements, so a statement can have been missed.
+- **159 entries of G4 were not judged** (class C): the readers found no statement of Rilly's later work that
+  accepts a meaning or calls one probable, and no sign of a piece. What else the later sources say of them (Rilly
+  2021 proposes or mentions something for a few, Millet 2005 speaks of more) does not count by the rule of point 18,
+  set beforehand. One reader a batch collected the statements, so a statement can have been missed.
 - The readers and checkers are one model: their agreement shows that a judgment can be repeated, not that it is
   right; they see five words on each side, not the stone.
 
@@ -285,7 +294,7 @@ each of these spellings stands once or twice.
 
 119 agents (Opus, each a fresh one), 13,892,589 subagent tokens, from the task notifications: G4's literature pass
 5,713,974 (27 readers), class A read twice 1,287,161 (12), its places 2,784,088 and 2,782,223 (two
-readings, 32 checkers each); G2's places 1,325,143 (16). From the first reader to the last count: 12:59 to
+readings, 32 checkers each); G2's places 1,325,143 (16). From the first reader to the last count: 12:58 to
 13:33 on 2026-11-16.
 
 ```
@@ -298,4 +307,6 @@ python3 -I tests/test_rare.py
 ```
 
 The commands need the local files (the map, the lexicon, the text layers of the sources, the agents' answers). The
-packs go to agents by hand, one fresh agent a pack, with the lines of `runs/prompts/RARE_*.md`.
+packs go to agents by hand, one fresh agent a pack, with the lines of `runs/prompts/RARE_launch.md`. The run itself
+went through a first working script (`data/sources/rare/run.py`, local); `src/rare.py` writes every pack and every
+result of it again byte for byte (`tests/test_rare.py`).

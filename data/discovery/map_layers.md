@@ -29,7 +29,7 @@ Requirements, one line each:
 |---|---|---|
 | R1 | "The 385 places of point 18 [...] become a layer of the map's build, each with its source." | MET: sections 2 and 4. `src/themap.py` lays the layer's 385 lines over the base; each changed word carries its source, the reason and the level it had. |
 | R2 | "Done when the map's own figure is 53.9%" | MET: section 4. With the layer `recurring` the script's count is 3,916 of 7,265, and it equals the count the recurring-words study made itself (`tests/test_themap.py`). The two layers laid after it the same day move it on (section 3). |
-| R3 | "the pages that count from the map (coverage, the translations' baseline, the lexicon's statuses) are rebuilt from the same file" | NOT MET as written, on purpose, and waiting for Mike's word: section 5. The figure of the coverage measure is counted from the map with its layers (section 3) and the three pages point here; their own numbers are not counted again. |
+| R3 | "the pages that count from the map (coverage, the translations' baseline, the lexicon's statuses) are rebuilt from the same file" | NOT MET as written, on purpose, and waived by Mike on 2026-11-16 at 13:52, asked whether the three pages could keep their numbers and point here: "Yes, waive it." Section 5 gives the reasons. The figure of the coverage measure is counted from the map with its layers (section 3) and the three pages point here; their own numbers are not counted again. |
 | R4 | "the checks and the review pass" | The checks pass; the review is named in section 7. |
 | R5 | "No agents but the review." | MET: no agent was run for this step. |
 
@@ -48,8 +48,8 @@ their order, each time it runs; nothing is written back.
    a form of a word whose meaning the lexicon calls sure ("form"); it is a piece of a word or name that the map
    holds ("piece"); it is a name by the sources ("name").
 3. **A layer that does not fit stops the build.** A line that names a text, a place or a spelling the map does
-   not have there, two lines for one place, a place that an earlier layer changed, or a level or reason outside
-   the lists, ends the run with the line named.
+   not have there, two lines for one place, a place that an earlier layer changed, a level it had that is not the
+   map's, or a level or reason outside the lists, ends the run with the line named.
 4. **Each changed word says where it comes from:** the layer, the source, the reason, and the level it had.
 5. **The lines are local.** They hold meanings taken from the sources, so the layers' files are kept out of the
    repository like the map itself. What is public is this page and the counts.
@@ -103,23 +103,25 @@ the "word" is a piece of a word or name the map holds (66), or that it is one of
 
 **`rare_sure`** (step G2). The open spellings that stand in one or two texts and that the map files under a
 stem or an ending the lexicon calls established or probable. Two checkers judged each place; the layer holds the
-places where both call the spelling a form of that word and the map names every part of the spelling (103), and
-the pieces of a word the map holds (6). 86 places become translated words and 23 names; all 109 were open.
+places where both call the spelling a form of that word and the map names every part of the spelling, each stem
+among them with a meaning (103), and the pieces of a word the map holds (6). 86 places become translated words and
+23 names; all 109 were open.
 
 **`rare_later`** (step G4). The same kind of spellings under an entry the lexicon holds without an accepted
 meaning. The layer holds the places where both checkers find the word for which Rilly states a meaning in 2016
-or 2021 and the map names every part of the spelling (141), and the pieces of a word the map holds (18).
-147 places become translated words and 12 names; all 159 were open.
+or 2021 and the map names every part of the spelling, each stem among them with a meaning (141), and the pieces of
+a word the map holds (18). 147 places become translated words and 12 names; all 159 were open.
 
 Both layers leave out the places where the checkers recognise the word but the map leaves a part of the spelling
-unnamed; [the page of the rare spellings](rare_spellings.md) counts them.
+unnamed, or another stem in it has no meaning; [the page of the rare spellings](rare_spellings.md) counts them.
 
 ## 5. What keeps the base, and why
 
-Three pages count from the map and were named in the step as pages to rebuild. They are not counted again:
+Three pages count from the map and were named in the step as pages to rebuild. They are not counted again, and
+Mike waived that part of the step on 2026-11-16 at 13:52 ("Yes, waive it."):
 
 1. **[The coverage of the clean corpus](v6_readers.md)** (52.7%) reports one run of the analysts on 2026-11-12,
-   before and after. Its measure on the map as it stands is the last column of section 3: 55.6%.
+   before and after. Its measure on the map as it stands is the last column of section 3: 58.2%.
 2. **[The lexicon's statuses](lexicon.md)** rest on judges who compared what scholars say about each entry behind
    a translated word. The layer puts entries behind translated words that those judges never saw. Counting the
    page again would need new judges.

@@ -42,6 +42,28 @@ LEADS = {"Rilly 2016": "data/sources/rilly2016-text/pages.txt", "Rilly 2021": "d
 TOKENS = {"g4": {"literature": "tokens_g4_lit.json", "class A read twice": "tokens_g4_verify.json",
                  "places, first reading": "tokens_g4_places.json", "places, second reading": "tokens_g4_places2.json"},
           "g2": {"places": "tokens_g2_places.json"}}   # from the task notifications, typed by hand (local)
+# When the rules were set against the agents they bind (2026-11-16, Pacific time). "set_in" is the last commit of the
+# rules a step's agents worked under (its bar, its brief and, for a place pass, the rules of what is laid) before they
+# were started, and "set" its time in git; "started" is the step's first launch and "counted" the command that first
+# counted its answers, both in the session's log, by hand (the twelve launches of the second reading at 13:27:31 to
+# 13:27:54 did not run: the permission check gave no verdict, and they were made again from 13:29:11 on);
+# "first_answer" and "last_answer" are the earliest and the latest times of the step's answer files under HOME.
+WHEN = [
+    {"step": "G4, the literature pass", "set_in": "035d272", "set": "12:58:26", "started": "12:58:35",
+     "first_answer": "13:03:13", "last_answer": "13:17:27", "counted": "13:17:41", "answers": ["g4/lit/answers"]},
+    {"step": "G4, class A read twice", "set_in": "035d272", "set": "12:58:26", "started": "13:17:57",
+     "first_answer": "13:19:39", "last_answer": "13:21:14", "counted": "13:21:55",
+     "answers": ["g4/lit/verify/answers1", "g4/lit/verify/answers2"]},
+    {"step": "G2, the places", "set_in": "1725d1f", "set": "13:15:38", "started": "13:15:45",
+     "first_answer": "13:16:59", "last_answer": "13:19:01", "counted": "13:20:46",
+     "answers": ["g2/places/answers1", "g2/places/answers2"]},
+    {"step": "G4, the places, first reading", "set_in": "c4d8c66", "set": "13:22:20", "started": "13:22:25",
+     "first_answer": "13:23:20", "last_answer": "13:26:06", "counted": "13:26:20",
+     "answers": ["g4/places/answers1", "g4/places/answers2"]},
+    {"step": "G4, the places, second reading", "set_in": "d67fd0a", "set": "13:27:25", "started": "13:29:11",
+     "first_answer": "13:29:32", "last_answer": "13:32:46", "counted": "13:33:13",
+     "answers": ["g4/places2/answers1", "g4/places2/answers2"]},
+]
 
 
 def here(run):
@@ -58,43 +80,9 @@ def rel(run):
 
 def items_of(gl, rows, lex, hows):
     """As W.items_of, for the open spellings that stand in MOST_TEXTS texts at most and whose item is of one of
-    the kinds `hows` (W.key_of's second value)."""
-    level, texts, heads = W.spellings_of(gl)
-    forms = sorted(f for f, c in level.items() if c.most_common(1)[0][0] in W.OPEN and len(texts[f]) <= MOST_TEXTS)
-    items = collections.OrderedDict()
-    for f in forms:
-        hs = [h for h in heads[f].most_common(1)[0][0] if h not in X.PSEUDO]
-        key, how = W.key_of(f, hs, lex)
-        if how not in hows:
-            continue
-        it = items.setdefault(key, {"item": key, "how": how, "forms": [], "places": []})
-        it["forms"].append({"form": f, "texts": len(texts[f]), "uses": sum(level[f].values()),
-                            "level": level[f].most_common(1)[0][0], "parts": hs})
-    wanted = {f["form"]: k for k, it in items.items() for f in it["forms"]}
-    for t in sorted(gl):
-        gs = gl[t]
-        for i, g in enumerate(gs):
-            k = wanted.get(g["form"])
-            if k is None:
-                continue
-            span = gs[max(0, i - W.WIDTH): i + W.WIDTH + 1]
-            items[k]["places"].append({
-                "text": t, "site": rows[t].get("site") or "", "kind": rows[t].get("kind") or "", "n": i + 1, "of": len(gs),
-                "form": g["form"], "gloss": (g.get("gloss") or "").strip(), "note": (g.get("evidence") or "")[:200],
-                "words": " ".join(f"**{x['form']}**" if x is g else x["form"] for x in span),
-                "readings": " · ".join(W.R.word_reading(x) for x in span)})
-    out = []
-    for k, it in items.items():
-        e = lex.get(k)
-        it["texts"] = len({p["text"] for p in it["places"]})
-        it["uses"] = len(it["places"])
-        it["kinds_of_text"] = dict(collections.Counter(p["kind"] for p in it["places"]).most_common())
-        it["sites"] = dict(collections.Counter(p["site"].split(":")[0].split(",")[0][:30] for p in it["places"]).most_common(6))
-        it["lexicon"] = None if e is None else {"kind": e["kind"], "status": e["status"], "page": e["page"], "meaning": e["meaning"],
-                                                "proposals": e["proposals"]}
-        out.append(it)
-    out.sort(key=lambda it: ((it["lexicon"] or {}).get("kind") or "", it["item"]))
-    return out
+    the kinds `hows` (W.key_of's second value), sorted by the lexicon's kind of the entry."""
+    return W.items_of(gl, rows, lex, texts_ok=lambda n: n <= MOST_TEXTS, hows=hows,
+                      order=lambda it: ((it["lexicon"] or {}).get("kind") or "", it["item"]))
 
 
 def answered(run, folders):
@@ -406,15 +394,15 @@ MEANINGS = {
 }
 
 
-def dictionary_words(lines, lex):
-    """The entries a run's lines give a meaning as a translated word that are words of the dictionary (no name, no
-    ending or particle) and that the lexicon does not call sure."""
-    laid = {o["item"] for o in lines if o["why"] == "stated" and o["level"] in W.READ}
-    return sorted(k for k in laid if (lex[k].get("kind") or "") not in C.NAME_KINDS and not W.affix(k)
-                  and (lex[k].get("status") or "") not in W.SURE)
+def dictionary_words(lines, lex, known):
+    """The entries a run's lines give a meaning as a translated word that are words of the dictionary in use
+    (`known`: no name, no ending or particle, as the count of distinct words takes them) and that the lexicon does
+    not call sure: src/themap.py's rule for the north star."""
+    import themap as M
+    return sorted(M.given(lines, known, lex))
 
 
-def entries_of(its, lines, rows, lex):
+def entries_of(its, lines, rows, lex, known):
     """The run's entries by what its places gave: with a stated place; with one laid as a translated word; with
     one laid, but only as a name; with none laid; and the words of the dictionary given a meaning."""
     with_stated = {r["item"] for r in rows if r["verdict"] == "stated"}
@@ -422,7 +410,7 @@ def entries_of(its, lines, rows, lex):
     translated = {o["item"] for o in mine if o["level"] in W.READ}
     names = {o["item"] for o in mine} - translated
     return {"with_a_stated_place": len(with_stated), "laid_as_a_translated_word": len(translated), "laid_as_a_name_only": len(names),
-            "none_laid": len(with_stated - translated - names), "dictionary_words_given_a_meaning": len(dictionary_words(lines, lex))}
+            "none_laid": len(with_stated - translated - names), "dictionary_words_given_a_meaning": len(dictionary_words(lines, lex, known))}
 
 
 def tokens(run):
@@ -441,6 +429,7 @@ def figures():
     stated = stated_entries(json.loads((RECURRING / "lit/verify/result.json").read_text(encoding="utf-8")),
                             json.loads((HOME / "g4/lit/verify/result.json").read_text(encoding="utf-8")))
     names = [l["name"] for l in M.LAYERS]
+    known = set(D.population_of(M.current(), lex, fix=True)[0])          # the dictionary words in use
     figs = {}
     for run in LAYER:
         gl = M.current(upto=names.index(LAYER[run]))
@@ -457,7 +446,7 @@ def figures():
                       "to_by_why": {w: dict(collections.Counter(o["level"] for o in lines if o["why"] == w).most_common())
                                     for w in sorted({o["why"] for o in lines})},
                       "was": dict(collections.Counter(o["was"] for o in lines).most_common())},
-             "left_out": apart, "the_entries": entries_of(its, lines, res["rows"], lex), "cost": tokens(run)}
+             "left_out": apart, "the_entries": entries_of(its, lines, res["rows"], lex, known), "cost": tokens(run)}
         if run == "g4":
             counts, classes, ver = W.read("lit/counts.json"), W.read("lit/classes.json"), W.read("lit/verify/result.json")
             f["literature"] = counts | {"classes": dict(sorted(collections.Counter(c[0] for c in classes.values()).items()))}
@@ -465,11 +454,10 @@ def figures():
                             "stated_by": dict(collections.Counter(v["one"]["source"] for v in ver.values() if v["verdict"] == "stated").most_common()),
                             "stated_that_are": dict(collections.Counter("an ending or a particle" if every[k]["how"].startswith("affix") else "a stem"
                                                                         for k, v in ver.items() if v["verdict"] == "stated").most_common())}
-            words = dictionary_words(lines, lex)
+            words = dictionary_words(lines, lex, known)
             missing = sorted(set(words) ^ set(MEANINGS))
             if missing:
                 raise SystemExit(f"MEANINGS and the words G4 lays differ: {missing}")
-            known = set(D.population_of(M.current(), lex, fix=True)[0])
             new = set(M.given_by_layers([(l["name"], M.lines_of(l)) for l in M.LAYERS], known, lex)[LAYER[run]])
             f["words"] = [{"entry": k, "kind": lex[k].get("kind") or "", "meaning": MEANINGS[k], "source": ver[k]["one"]["source"],
                            "page": ver[k]["one"]["page"], "places_laid": sum(o["item"] == k and o["why"] == "stated" for o in lines),

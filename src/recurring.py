@@ -180,15 +180,19 @@ def key_of(form, heads, lex):
     return form, "not in the lexicon"
 
 
-def items_of(gl, rows, lex):
+def items_of(gl, rows, lex, texts_ok=lambda n: n >= MIN_TEXTS, hows=None, order=lambda it: (-it["texts"], it["item"])):
     """The open spellings that stand in MIN_TEXTS texts or more, grouped into items, each with every place: the
-    word, WIDTH words on each side, and the map's reading of each."""
+    word, WIDTH words on each side, and the map's reading of each. src/rare.py takes other spellings with the same
+    steps: `texts_ok` says which numbers of texts a spelling may stand in, `hows` (if given) which kinds of item
+    (key_of's second value) are kept, and `order` sorts the items."""
     level, texts, heads = spellings_of(gl)
-    forms = sorted(f for f, c in level.items() if c.most_common(1)[0][0] in OPEN and len(texts[f]) >= MIN_TEXTS)
+    forms = sorted(f for f, c in level.items() if c.most_common(1)[0][0] in OPEN and texts_ok(len(texts[f])))
     items = collections.OrderedDict()
     for f in forms:
         hs = [h for h in heads[f].most_common(1)[0][0] if h not in X.PSEUDO]
         key, how = key_of(f, hs, lex)
+        if hows is not None and how not in hows:
+            continue
         it = items.setdefault(key, {"item": key, "how": how, "forms": [], "places": []})
         it["forms"].append({"form": f, "texts": len(texts[f]), "uses": sum(level[f].values()),
                             "level": level[f].most_common(1)[0][0], "parts": hs})
@@ -215,7 +219,7 @@ def items_of(gl, rows, lex):
         it["lexicon"] = None if e is None else {"kind": e["kind"], "status": e["status"], "page": e["page"], "meaning": e["meaning"],
                                                 "proposals": e["proposals"]}
         out.append(it)
-    out.sort(key=lambda it: (-it["texts"], it["item"]))
+    out.sort(key=order)
     return out
 
 
