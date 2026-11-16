@@ -160,3 +160,20 @@ did not judge, 1,125 places, the first pilot's 100 among them, because that pilo
 them go 112 controls (75 translated words, 37 names), in 25 packs of at most 50 places, two fresh checkers
 a pack, under bars 1 to 4 of section 7.
 
+## 9. How the north star is counted after this step (set on 2026-11-16 at 14:09, before the full pass is counted)
+
+The count of distinct words adds, to the words of the dictionary, an estimate of how many of the stems the map
+cannot name are words of their own. It rests on a sample of 240 of those stems, drawn by lot and judged by two
+checkers ([distinct_words.md](distinct_words.md)). This step makes some of those stems names, and far more than
+the 2% up to which the old estimate may be carried. So, before any of the full pass is counted:
+
+- **The same sample, the stems that are left.** The estimate is made again from the sampled stems that are still
+  unnamed once this step's names and pieces are laid. They are a sample by lot of all the stems still unnamed,
+  because a stem leaves or stays by what it is, not by whether it was sampled.
+- **The same rule of counting:** a sampled stem that both checkers of that study called a word counts one, one
+  they called a form of a known word counts a half, the others nothing; the share, times the number of stems
+  still unnamed, with its 95% interval (Wilson), as before.
+- **No new judging.** The verdicts of that study stand; nothing of this step's checkers enters the estimate
+  except which stems are left.
+- The north star's "before us" stays equal to its "now": this step gives no word a meaning.
+
