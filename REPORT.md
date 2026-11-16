@@ -794,5 +794,7 @@ cost were made one, with the same files, so none of the nine wordings reached Gi
 (210,173 subagent tokens, 12 minutes, from its task notification) found the files unchanged and no local-only
 file in any commit. It also found that the three commits kept as they were, because their times show when the
 bars were set, each hold one run of four words of Rilly 2021: the name of the case ending of `-w (1)` in section
-4 of the page, which the head says in other words. Mike waived that one phrase on 2026-11-16.
+4 of the page, which the head says in other words. Mike waived that one phrase on 2026-11-16. The same reviewer
+then checked the squash again with the waiver (286,998 subagent tokens, 8 minutes), corrected two sentences of
+the new section G of NEXT_STEPS, and marked the commit. The work is on main since 2026-11-16.
 
