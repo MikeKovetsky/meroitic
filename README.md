@@ -189,15 +189,17 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     words whose true meaning was not offered (18.2%, the bar was 10%): so no proposal is labelled. None of these
     meanings is a reading of this project
     ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md)).
-18. **Counted by distinct words, about one word in nine has a meaning: 160 of about 1,376 (11.6%, between 11.0%
-    and 14.3%).** Half of the running words are translated because the common words are. Counted once each, the
-    words are far fewer: the map ties its spellings to 446 words of the lexicon, 160 of them with an established
-    or probable meaning, and leaves 1,107 stems it cannot name. Two checkers judged a sample of 240 of those stems
-    (a first reading missed its bar; with the brief corrected the second agreed, kappa 0.94): about two in three
-    are words of their own, the rest pieces, damaged words, names or forms of known words. Before the project,
-    with the lexicon looked up word by word, 136 of those words were translated (9.9%); the 24 more are words whose
-    meaning scholars had, found in spellings the lookup does not know. This is the project's north star, and no
-    meaning in it is our own ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
+18. **Counted by distinct words, about one word in nine has a meaning: 160 of about 1,375 (11.6%, between 11.0%
+    and 14.3%), the same as before the project.** Half of the running words are translated because the common
+    words are. Counted once each, the words are far fewer: the map ties its spellings to 445 words of the lexicon,
+    160 of them with an established or probable meaning, and leaves 1,107 stems it cannot name. Two checkers
+    judged a sample of 240 of those stems (a first reading missed its bar; with the brief corrected the second
+    agreed, kappa 0.94): about two in three are words of their own, the rest pieces, damaged words, names or forms
+    of known words. Each of the 160 has its meaning in the lexicon of 2003, so the share was the same before the
+    project, which has added no meaning; a plain lookup of the lexicon finds 136 of them, and the map recognises
+    the other 24 in spellings the lookup does not know. 68 of the 445 are endings and particles written as a word
+    of their own; counted as pieces of words, they would make the share 9.7%. This is the project's north star
+    ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
 
 ## The question
 
@@ -552,12 +554,16 @@ times ([`data/discovery/recurring_words.md`](data/discovery/recurring_words.md),
 
 ### 25. Distinct words (`src/words.py`)
 
-`population` says of every running word of the map that needs a meaning what word it is: a word of the lexicon
-(every spelling built on one entry is that entry), a name, or a stem the map could not name. `packs` draws 240 of
-those stems by a fixed seed and writes them for two checkers, each stem with its places and the spellings that
-look like it; `count` compares the two (a stem has a case only when both give it; under a kappa of 0.6 nothing is
-taken) and estimates how many of the stems are words of their own, with a range. The share of distinct words that
-have a meaning is the translated words of the lexicon over the words of the lexicon in use plus that estimate
+`population` says of every running word of the map that needs a meaning what word it is, by the rule set before
+the checkers: a word of the lexicon (every spelling built on one entry is that entry), a name, or a stem the map
+could not name. `packs` draws 240 of those stems by a fixed seed and writes them for two checkers, each stem with
+its places and the spellings that look like it; `count` compares the two (a stem has a case only when both give
+it; under a kappa of 0.6 nothing is taken) and estimates how many of the stems are words of their own, with a
+range. `public` counts the words of the lexicon again with the review's correction, which leaves the stems as
+they are: an entry of any kind of name is a name. The share of distinct words that have a meaning is the
+translated words of the lexicon over the words of the lexicon in use plus that estimate; before the project it was
+the same, since every one of those meanings is in the lexicon of 2003, and what a plain lookup of the lexicon
+reaches is given apart, as the reach of the map
 ([`data/discovery/distinct_words.md`](data/discovery/distinct_words.md)).
 
 ## Reproduce

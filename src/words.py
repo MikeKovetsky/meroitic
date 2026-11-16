@@ -7,12 +7,20 @@ be counted as they stand: some are names, pieces of longer words, forms of dicti
 the same word twice. So two checkers judge a sample of them, drawn by a fixed seed, and the count of distinct
 words is an estimate with a range.
 
+identity() is the rule as it was set before the checkers were started, and population.json and the results are
+counted with it. The figures apply the review's correction on top (counted()): an entry of any kind of name is a
+name. It does not touch the unnamed stems, so the sample stays as drawn. For the north star "before us" is "now"
+(Mike, 2026-11-16): every translated word's meaning was in the lexicon before the project. What a plain lookup of
+the lexicon reaches is kept apart, as the reach of the map.
+
 Every command reads and writes under data/sources/words/ (local only: the packs quote the lexicon), except
 `public`, which writes the figures of the page.
 
   python3 -I src/words.py population   the words of the map, by what they are (population.json)
-  python3 -I src/words.py packs r2     the sample of unnamed stems for two checkers (packs/, sample.json)
-  python3 -I src/words.py count r2     the two checkers compared, the estimate and its range (result.json)
+  python3 -I src/words.py packs r2     the sample of unnamed stems for two checkers (r2/packs/, sample.json)
+  python3 -I src/words.py count r2     the two checkers compared, the estimate and its range (r2/result.json)
+
+(`r1` writes the first reading's packs/ and result.json.)
   python3 -I src/words.py public       data/discovery/distinct_words_figures.json
 
 Two readings of the same sample: `r1`, whose checkers missed the bar, and `r2`, with the brief corrected as the
@@ -35,7 +43,7 @@ import recurring as W                                  # noqa: E402
 OUT = ROOT / "data/sources/words"
 PUBLIC = ROOT / "data/discovery/distinct_words_figures.json"
 RECURRING = ROOT / "data/discovery/recurring_words_figures.json"
-NAME_KINDS = ("person name", "place name", "god name")
+NAME_KINDS = ("person name", "place name", "god name")   # identity()'s, as set; counted() takes all of C.NAME_KINDS
 SEED = 20261116
 SAMPLE = 240
 PACK = 24
@@ -145,13 +153,29 @@ def identity(g, lex):
     return ("dictionary", tuple(words)) if words else ("stem", (g["form"],))
 
 
-def population_of(gl, lex):
+def ending(h, lex):
+    """An ending, a prefix or a particle of the lexicon: a headword written with a hyphen that is a function word or
+    has no kind. A stem the lexicon writes with hyphens (the verb -erike-, the noun wo-) is no ending."""
+    return W.affix(h) and (lex[h].get("kind") or "") in ("function word", "")
+
+
+def counted(what, ids, lex):
+    """What a running word counts as for the north star: identity()'s answer, with the review's correction. An
+    entry of any kind of name src/coverage.py knows (the kind "name" too) is a name. An unnamed stem is never
+    changed."""
+    if what != "dictionary":
+        return what, ids
+    kept = tuple(h for h in ids if (lex[h].get("kind") or "") not in C.NAME_KINDS)
+    return ("dictionary", kept) if kept else ("name", ())
+
+
+def population_of(gl, lex, fix=False):
     """The running words that need a meaning, by what they are: the dictionary words in use (entry -> uses), the
-    count of names, and the unnamed stems, each with its spellings and places."""
+    count of names, and the unnamed stems, each with its spellings and places. fix: with counted()'s corrections."""
     known, stems, c = collections.Counter(), {}, collections.Counter()
     for t in sorted(gl):
         for i, g in enumerate(gl[t]):
-            what, ids = identity(g, lex)
+            what, ids = counted(*identity(g, lex), lex) if fix else identity(g, lex)
             c[what] += 1
             if what == "dictionary":
                 known.update(set(ids))
@@ -182,15 +206,20 @@ def lookup_only():
     return {r["id"]: gs for r, gs in C.gloss_texts(V.rows_for_map(corpus), words, affixes, {})}
 
 
-def population():
+def population_figures():
+    """What population.json holds: the map counted by identity(), as set before the checkers, and the lookup alone."""
     gl, lex = W.the_map(), W.lexicon()
     known, stems, c = population_of(gl, lex)
     before, _, cb = population_of(lookup_only(), lex)
-    out = {"running": c, "dictionary_words": len(known), "translated": len(translated(known, lex)),
-           "unnamed_stems": len(stems), "unnamed_in_one_place": sum(s["uses"] == 1 for s in stems.values()),
-           "unnamed_running_words": sum(s["uses"] for s in stems.values()),
-           "before": {"running": cb, "dictionary_words": len(before), "translated": len(translated(before, lex))},
-           "known": dict(known.most_common()), "stems": stems}
+    return {"running": c, "dictionary_words": len(known), "translated": len(translated(known, lex)),
+            "unnamed_stems": len(stems), "unnamed_in_one_place": sum(s["uses"] == 1 for s in stems.values()),
+            "unnamed_running_words": sum(s["uses"] for s in stems.values()),
+            "before": {"running": cb, "dictionary_words": len(before), "translated": len(translated(before, lex))},
+            "known": dict(known.most_common()), "stems": stems}
+
+
+def population():
+    out = population_figures()
     write("population.json", out)
     print({k: v for k, v in out.items() if k not in ("known", "stems")})
 
@@ -345,6 +374,7 @@ def results(pop, groups, one, two):
     out = {"sampled": len(rows), "answered by both": len(pairs), "kappa": None if kp is None else round(kp, 4), "bar": KAPPA,
            "taken": taken, "verdicts": verdicts, "rows": rows}
     if taken:
+        # the first count, as set: its "star_before" is the lookup's reach, which Mike replaced (figures())
         unnamed = estimate(pop["unnamed_stems"], verdicts)
         out |= {"unnamed_words": unnamed,
                 "distinct_words": {k: None if v is None else pop["dictionary_words"] + v for k, v in unnamed.items()},
@@ -362,32 +392,92 @@ def count(rnd=LAST):
 
 # ---------------------------------------------------------------------------------------------- the public figures
 
-def stated_later(lex):
-    """The dictionary words that the recurring-words work found stated by a later source in at least one place and
-    that the lexicon of 2003 does not call established or probable: translated once that work is in the map."""
+def stated_later(lex, known):
+    """The dictionary words in use (known) that the recurring-words work found stated by a later source in at
+    least one place and that the lexicon of 2003 does not call established or probable: translated once that work
+    is in the map."""
     f = json.loads(RECURRING.read_text(encoding="utf-8"))
     return sorted(s["item"] for s in f["class_a"]["stated"]
-                  if s["places_stated"] and s["item"] in lex and (lex[s["item"]].get("status") or "") not in W.SURE)
+                  if s["places_stated"] and s["item"] in known and (lex[s["item"]].get("status") or "") not in W.SURE)
+
+
+def map_counts(gl):
+    """The map's running words and spellings, and those that need a meaning (no name, numeral or lost sign) and have
+    one (the level meaning or grammar); a spelling has the level it has most often."""
+    need = [g for gs in gl.values() for g in gs if g["level"] not in W.NAMED and g["level"] != "lost"]
+    level, _, _ = W.spellings_of(gl)
+    top = [c.most_common(1)[0][0] for c in level.values()]
+    open_ = [lv for lv in top if lv not in W.NAMED and lv != "lost"]
+    return {"inscriptions": len(gl), "running_words": sum(map(len, gl.values())), "spellings": len(top),
+            "running_need": len(need), "running_translated": sum(g["level"] in W.READ for g in need),
+            "spellings_need": len(open_), "spellings_translated": sum(lv in W.READ for lv in open_)}
+
+
+def beside_a_stem(gl, lex, stems):
+    """The pieces the map could not name in a word that is built on a stem of the lexicon (counted as that stem's
+    word, so the piece is not counted): the running words, the different pieces, and those of three signs or more
+    that are no unnamed stem anywhere."""
+    found = collections.Counter()
+    for gs in gl.values():
+        for g in gs:
+            unnamed = [p["form"] for p in g.get("parts") or [] if p.get("entry") == "?"]
+            if unnamed and counted(*identity(g, lex), lex)[0] == "dictionary":
+                found[max(unnamed, key=len)] += 1
+    return {"running_words": sum(found.values()), "pieces": len(found),
+            "three_signs_or_more_no_stem": sum(len(p) >= 3 and p not in stems for p in found)}
+
+
+def taken_out(first, lex, which):
+    """The entries of the first count's dictionary words that a correction takes out, and how many were translated."""
+    out = [h for h in first if which(h)]
+    return {"entries": len(out), "translated": len(translated(out, lex))}
+
+
+def not_agreed(rows):
+    """How many stems the two checkers did not agree on, by the pair of cases they gave (in the order of CASES), and
+    how many of those stand in one place."""
+    out = collections.defaultdict(lambda: {"count": 0, "in_one_place": 0})
+    for r in rows:
+        if r["verdict"] == "not agreed":
+            pair = "/".join(sorted((r["one"]["case"], r["two"]["case"]), key=CASES.index))
+            out[pair]["count"] += 1
+            out[pair]["in_one_place"] += r["uses"] == 1
+    return dict(sorted(out.items(), key=lambda kv: (-kv[1]["count"], kv[0])))
 
 
 def figures():
-    """What the page reports, from the local results: counts only, with a few stems as examples."""
-    pop, lex = read("population.json"), W.lexicon()
+    """What the page reports, from the local results: counts only. The first count is identity()'s, as set before
+    the checkers (population.json and the results); the north star is counted with counted()'s correction. Before
+    us it was the same (Mike, 2026-11-16: "“Before us” should really equal “Now”"): every translated word's meaning
+    was in the lexicon of 2003, and the project has added none. "lookup" is only the reach of a plain lookup of
+    the lexicon, which the rows of running words and of spellings measure, not the north star before the project."""
+    pop, lex, gl = read("population.json"), W.lexicon(), W.the_map()
     by_round = {r: read(f"{ROUNDS[r]['folder']}result.json") for r in ROUNDS}
     res = by_round[LAST]
     if not res["taken"]:
         raise SystemExit("the last reading missed its bar: nothing is taken from it")
-    later = stated_later(lex)
-    nxt = pop["translated"] + len(later)
-    return {"running": pop["running"], "dictionary_words": pop["dictionary_words"], "translated": pop["translated"],
+    known, stems, running = population_of(gl, lex, fix=True)
+    reached, _, running_lookup = population_of(lookup_only(), lex, fix=True)
+    done, unnamed = translated(known, lex), res["unnamed_words"]
+    later = stated_later(lex, known)
+    nxt = len(done) + len(later)
+    first = set(pop["known"])
+    return {"map": map_counts(gl),
+            "running": running, "dictionary_words": len(known), "translated": len(done),
             "unnamed_stems": pop["unnamed_stems"], "unnamed_in_one_place": pop["unnamed_in_one_place"],
-            "unnamed_running_words": pop["unnamed_running_words"], "before": pop["before"],
+            "unnamed_running_words": pop["unnamed_running_words"],
+            "lookup": {"running": running_lookup, "dictionary_words": len(reached), "translated": len(translated(reached, lex))},
+            "corrections": {"names": taken_out(first, lex, lambda h: (lex[h].get("kind") or "") in C.NAME_KINDS)},
+            "endings": {"in_use": sum(ending(h, lex) for h in known), "translated": sum(ending(h, lex) for h in done)},
+            "beside_a_stem": beside_a_stem(gl, lex, stems),
             "sample": {k: res[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"seed": SEED, "reading": LAST},
-            "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")} | {"set_in": ROUNDS[r]["set_in"]}
-                         for r, v in by_round.items()},
-            "unnamed_words": res["unnamed_words"], "distinct_words": res["distinct_words"],
-            "star": res["star"], "star_before": res["star_before"],
-            "next": {"stated_later": len(later), "translated": nxt, "star": star(nxt, pop["dictionary_words"], res["unnamed_words"])},
+            "readings": {r: {k: v[k] for k in ("sampled", "answered by both", "kappa", "bar", "taken", "verdicts")}
+                         | {"not_agreed": not_agreed(v["rows"]), "set_in": ROUNDS[r]["set_in"]} for r, v in by_round.items()},
+            "unnamed_words": unnamed, "distinct_words": {k: len(known) + v for k, v in unnamed.items()},
+            "star": star(len(done), len(known), unnamed), "star_before": star(len(done), len(known), unnamed),
+            "next": {"stated_later": len(later), "translated": nxt, "star": star(nxt, len(known), unnamed)},
+            "first_count": {"running": pop["running"], "dictionary_words": pop["dictionary_words"], "translated": pop["translated"],
+                            "distinct_words": res["distinct_words"], "star": res["star"]},
             "tokens": {k: {"agents": a, "tokens": t} for k, (a, t) in TOKENS.items()}
             | {"all": {"agents": sum(a for a, _ in TOKENS.values()), "tokens": sum(t for _, t in TOKENS.values())}}}
 

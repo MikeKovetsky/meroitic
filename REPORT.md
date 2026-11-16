@@ -806,20 +806,27 @@ entire language translatable?", then "do it and add to the table as the first ro
 
 **Why it was missing.** A spelling is one written form, and a word has many. For a spelling without a meaning
 nobody can say offhand which word it belongs to, so the words could not be counted, only the spellings (20.2% of
-them translated) and the running words (50.1%).
+those that need a meaning are translated) and the running words (50.1%).
 
-**The count.** Every running word of the map that needs a meaning is a word of the lexicon (446 in use, 160 of
+**The count.** Every running word of the map that needs a meaning is a word of the lexicon (445 in use, 160 of
 them with an established or probable meaning), a name, or a stem the map could not name (1,107, of which 975
 stand in one place). Two checkers judged a sample of 240 of those stems, drawn by a fixed seed. The first reading
 missed its bar (kappa 0.53: "a word" against "unclear" for stems that stand once), so by the rule set beforehand
-the brief was corrected and other checkers read the same sample: kappa 0.94. About two in three of the stems are
-words of their own; the rest are pieces, words with lost signs, names or forms of known words.
+the brief was corrected and other checkers read the same sample: kappa 0.94. About two in three of the sampled
+stems are words of their own; the rest are pieces, words with lost signs, names or forms of known words.
 
-**The result.** About 1,376 distinct words (between 1,118 and 1,453), of which 160 are translated: 160 of about
-1,376, or 11.6% (between 11.0% and 14.3%). Before the project, with the lexicon looked up word by word, it was
-136 (9.9%). With the recurring-words results in the map it would be 175 (12.7%). No meaning among them is the
-project's own: the share moves only when a word of the dictionary gets a meaning, and that has come from
-scholars so far.
+**The result.** About 1,375 distinct words (between 1,117 and 1,452), of which 160 are translated: 160 of about
+1,375, or 11.6% (between 11.0% and 14.3%). Before the project it was the same: each of the 160 has its meaning in
+the lexicon of 2003, and the project has added no meaning. The first count had given as "before us" what a plain
+lookup of the lexicon reaches (136 of the 160); Mike answered "“Before us” should really equal “Now”, 11.6%.",
+since the lookup measures the reach of the map, as the rows of running words and of spellings do. With the
+recurring-words results in the map it would be 175 (12.7%), with Rilly's meanings of 2016 and 2021, which are
+older than the project too.
+
+**The review.** The first count also took one name of the kind "name" for a word (160 of about 1,376); the review
+made it a name, on the side of the dictionary only, so the sample and its estimate stay as they were. The count
+takes the endings and particles written as a word of their own for words (68 entries, 33 of them translated),
+which the checkers' case "piece" does not do among the unnamed stems; as pieces they would make the share 9.7%.
 
 **Cost.** 40 fresh agents, 3,012,391 subagent tokens for the two readings.
 

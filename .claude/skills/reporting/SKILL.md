@@ -72,17 +72,18 @@ given; never quote it from memory, from this file's log, or from an earlier mess
   `star.point`, its range in `star.low` and `star.high`.
 - **Before us: the same as Now.** Mike, after asking three times how this row could rise without a meaning of
   ours: "“Before us” should really equal “Now”, 11.6%." The translated words were translated by scholars before
-  the project, and the project has added none. A plain lookup of the lexicon finds fewer of them in the texts
-  (136 of 160 on 2026-11-16); that is a fact about our matching and never the starting point of this row.
+  the project, and the project has added none; the figures file's `star_before` is `star`. A plain lookup of the
+  lexicon finds fewer of them in the texts (136 of 160 on 2026-11-16), `lookup.translated` in the figures file;
+  that is a fact about our matching and never the starting point of this row.
 - **Next target:** `next.star.point` of the same file (the dictionary words that the recurring-words work found
   stated by a later source, once that work is in the map).
 - **What moves it:** a dictionary word getting a meaning (a scholar's, from a source, or our own), or the count of
   distinct words being corrected. **What does not:** recognising one more spelling of a word that is already
   translated.
-- **Counting again:** run `python3 -I src/words.py population` after the map changes; it recounts the dictionary
-  words. The estimate of the unnamed stems rests on the sample drawn on 2026-11-16 from the stems of that day. If
-  a step changes which stems are unnamed (step G3 in particular), draw and judge a new sample with its bar set
-  beforehand; do not carry the old share over.
+- **Counting again:** after the map changes, run `python3 -I src/words.py population`, then `count r2`, then
+  `public`; `public` counts the dictionary words again from the map. The estimate of the unnamed stems rests on
+  the sample drawn on 2026-11-16 from the stems of that day. If a step changes which stems are unnamed (step G3 in
+  particular), draw and judge a new sample with its bar set beforehand; do not carry the old share over.
 
 ### Running words translated
 

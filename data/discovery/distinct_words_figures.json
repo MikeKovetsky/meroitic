@@ -1,24 +1,48 @@
 {
+ "map": {
+  "inscriptions": 548,
+  "running_words": 10290,
+  "spellings": 4793,
+  "running_need": 7331,
+  "running_translated": 3676,
+  "spellings_need": 2955,
+  "spellings_translated": 598
+ },
  "running": {
   "stem": 1350,
-  "dictionary": 5571,
+  "dictionary": 5569,
   "none": 2959,
-  "name": 410
+  "name": 412
  },
- "dictionary_words": 446,
+ "dictionary_words": 445,
  "translated": 160,
  "unnamed_stems": 1107,
  "unnamed_in_one_place": 975,
  "unnamed_running_words": 1350,
- "before": {
+ "lookup": {
   "running": {
    "stem": 3997,
-   "dictionary": 3790,
+   "dictionary": 3788,
    "none": 2443,
-   "name": 60
+   "name": 62
   },
-  "dictionary_words": 352,
+  "dictionary_words": 351,
   "translated": 136
+ },
+ "corrections": {
+  "names": {
+   "entries": 1,
+   "translated": 0
+  }
+ },
+ "endings": {
+  "in_use": 68,
+  "translated": 33
+ },
+ "beside_a_stem": {
+  "running_words": 104,
+  "pieces": 75,
+  "three_signs_or_more_no_stem": 42
  },
  "sample": {
   "sampled": 240,
@@ -54,6 +78,52 @@
     "piece": 16,
     "known": 1
    },
+   "not_agreed": {
+    "word/unclear": {
+     "count": 42,
+     "in_one_place": 41
+    },
+    "word/name": {
+     "count": 13,
+     "in_one_place": 13
+    },
+    "word/known": {
+     "count": 5,
+     "in_one_place": 4
+    },
+    "name/unclear": {
+     "count": 2,
+     "in_one_place": 2
+    },
+    "piece/unclear": {
+     "count": 2,
+     "in_one_place": 2
+    },
+    "word/piece": {
+     "count": 2,
+     "in_one_place": 1
+    },
+    "known/name": {
+     "count": 1,
+     "in_one_place": 1
+    },
+    "known/piece": {
+     "count": 1,
+     "in_one_place": 0
+    },
+    "known/unclear": {
+     "count": 1,
+     "in_one_place": 1
+    },
+    "name/piece": {
+     "count": 1,
+     "in_one_place": 1
+    },
+    "word/same": {
+     "count": 1,
+     "in_one_place": 1
+    }
+   },
    "set_in": "845396b"
   },
   "r2": {
@@ -71,6 +141,20 @@
     "name": 3,
     "not agreed": 7
    },
+   "not_agreed": {
+    "word/known": {
+     "count": 3,
+     "in_one_place": 2
+    },
+    "word/same": {
+     "count": 3,
+     "in_one_place": 3
+    },
+    "word/name": {
+     "count": 1,
+     "in_one_place": 1
+    }
+   },
    "set_in": "2d9a6a4"
   }
  },
@@ -80,27 +164,47 @@
   "high": 1007
  },
  "distinct_words": {
-  "point": 1376,
-  "low": 1118,
-  "high": 1453
+  "point": 1375,
+  "low": 1117,
+  "high": 1452
  },
  "star": {
-  "point": 0.1163,
-  "low": 0.1101,
-  "high": 0.1431
+  "point": 0.1164,
+  "low": 0.1102,
+  "high": 0.1432
  },
  "star_before": {
-  "point": 0.0988,
-  "low": 0.0936,
-  "high": 0.1216
+  "point": 0.1164,
+  "low": 0.1102,
+  "high": 0.1432
  },
  "next": {
   "stated_later": 15,
   "translated": 175,
   "star": {
-   "point": 0.1272,
-   "low": 0.1204,
-   "high": 0.1565
+   "point": 0.1273,
+   "low": 0.1205,
+   "high": 0.1567
+  }
+ },
+ "first_count": {
+  "running": {
+   "stem": 1350,
+   "dictionary": 5571,
+   "none": 2959,
+   "name": 410
+  },
+  "dictionary_words": 446,
+  "translated": 160,
+  "distinct_words": {
+   "point": 1376,
+   "low": 1118,
+   "high": 1453
+  },
+  "star": {
+   "point": 0.1163,
+   "low": 0.1101,
+   "high": 0.1431
   }
  },
  "tokens": {

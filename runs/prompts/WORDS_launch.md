@@ -11,8 +11,8 @@ second, written at the head of each pack. The packs are local only (they quote t
     under data/sources/words/ or data/sources/recurring/, do not spawn agents, and do not change any file other
     than your answers file.
 
-For the second reading the path is `data/sources/words/r2/packs/S<nn>_c<1|2>.md`, and the line names `r2` among
-the folders not to read:
+For the second reading the line is the same but for the path, `data/sources/words/r2/packs/S<nn>_c<1|2>.md`
+(the folder of the first reading's answers is under `data/sources/words/`, which the line forbids):
 
     Read the file /Users/mike/repos/mike/meroitic/data/sources/words/r2/packs/S<nn>_c<1|2>.md in full and do
     exactly what it asks: write one JSON line per item to the answers file it names (the path is relative to
