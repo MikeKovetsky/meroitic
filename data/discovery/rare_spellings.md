@@ -91,7 +91,7 @@ both checkers say so. A stated place takes the lexicon's meaning of that entry.
   translated already.
 - In every count the meanings are the sources', not the project's.
 
-**One rule added on 2026-11-16 at 13:21,** after G2's checkers had answered and before their answers were
+**One rule added on 2026-11-16 at 13:20,** after G2's checkers had answered and before their answers were
 counted, and before any checker of G4's places was started. 26 of G2's 116 entries and 36 of G4's 323 are endings
 or particles: the map files a spelling under such an entry when it finds no stem of the lexicon in it. For these
 entries "stated" says only that the ending in the spelling is that ending; the stem beside it still has no
@@ -105,6 +105,23 @@ meaning. So:
   part of the spelling is given beside it, as the stricter figure.
 
 This is stricter than the rule above: it can take translated words away and cannot add one.
+
+**A second rule, added on 2026-11-16 at 13:23,** before any checker of G4's places was started, and after G2's
+places had been counted (so for G2 it is a correction made with the count in view; it only lowers G2's figure).
+G2's count showed what "stated" covers when the map leaves a part of the spelling unnamed: of the 68 such
+places of stem entries, about half join the lexicon's word to a name or to a word nobody reads (a god's name
+inside a personal name, a title after an unknown noun). The word as a whole is then not translated. So, for
+both steps:
+
+- **What is laid in the map.** A stated place is laid as translated only where the map names every part of the
+  spelling with an entry of the lexicon. A stated place with an unnamed part is counted apart, as "the word
+  recognised, a part of the spelling unnamed", and stays as the map has it.
+- **Names.** Where the entry of a stated place is a name by the lexicon (a god, a person, a place), the place is
+  laid as a name, which needs no meaning, not as a translated word.
+- **Both figures are reported:** the stated places by the rule of sections 3 and 4, and those laid in the map.
+
+The recurring open words had no such condition: 41 of their 273 stated places have a part the map leaves
+unnamed (forms of four words in fixed phrases). They stay as that study's rule, set beforehand, had them.
 
 The briefs the checkers of both place passes are given, and their launch line, are in
 [`runs/prompts/RARE_places.md`](../../runs/prompts/RARE_places.md), committed before any of them was started.
