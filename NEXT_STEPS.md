@@ -466,8 +466,8 @@ has its own step:
 | Kind | Running words | Spellings | Step |
 |---|---|---|---|
 | a. The spelling is open, but the lexicon calls its stem or ending established or probable | 366 | 312 | G2 |
-| b. The lexicon holds the entry without an accepted meaning, and the spelling stands in one or two texts | 1,032 | 784 |G4 |
-| c. The lexicon does not hold the spelling, and it stands in one or two texts | 1,225 | 1,107 |G3 |
+| b. The lexicon holds the entry without an accepted meaning, and the spelling stands in one or two texts | 1,032 | 784 | G4 |
+| c. The lexicon does not hold the spelling, and it stands in one or two texts | 1,225 | 1,107 | G3 |
 | d. Places of the 154 recurring spellings that point 18 left: 378 open, 124 pieces of a word the map does not read, 137 unclear, 77 not agreed | 716 | 127 | G5, G6 |
 
 Ten more are open places of five spellings that the map takes as names elsewhere.
