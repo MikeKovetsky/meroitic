@@ -8,7 +8,7 @@ Status on 2026-11-16: four layers are laid. Figures: `map_figures.json`. Script:
 [the rare spellings](rare_spellings.md) that hang on an entry of the lexicon (109 and 159 places) and
 [the spellings the lexicon does not hold](unnamed_spellings.md) that are names or pieces (118 places), each place
 with its source or its reason. With them, 4,154 of the 7,117 running words that need a meaning are translated
-(58.4%, from 50.1%), and 156 of about 1,284 distinct words (12.2%). Every one of these meanings is a scholar's: the project has still
+(58.4%, from 50.1%), and 156 of about 1,284 distinct words (12.1%). Every one of these meanings is a scholar's: the project has still
 added none of its own. The analysts' map itself is not changed, and the studies that were run on it keep their
 numbers.
 
@@ -71,7 +71,7 @@ their order, each time it runs; nothing is written back.
 - The plain lookup is the lexicon of 2003 looked up word by word, with none of the project's analysts or
   corrections. It is the status table's "Before us" for the first two columns.
 
-**The north star.** On the map with its layers, 156 of about 1,284 distinct words, 12.2% (between 11.5% and
+**The north star.** On the map with its layers, 156 of about 1,284 distinct words, 12.1% (between 11.5% and
 15.2%), have a meaning: 127 by the lexicon of 2003 and 29 by a later source (Rilly's work of 2016 and 2021:
 9 through the layer `recurring`, 20 through `rare_later`). Before the project it was the same, since all 156
 meanings were published before it. How the words are counted is on
@@ -81,13 +81,21 @@ had a meaning, and the second gives none.
 
 The count of distinct words adds, to the 377 words of the dictionary in use, an estimate of how many of the stems the
 map cannot name are words of their own. That page drew it from a sample of 240 of the 1,107 stems the base could
-not name. The layers make 41 of those stems names or pieces, so 1,066 are left. While the layers took at most 2% of
+not name. The layers make 41 of those stems names, so 1,066 are left. A place that a layer translates keeps its
+stem in this count, because the count reads the parts of a word and a layer changes only its level and meaning:
+the 5 pieces of translated words that `unnamed` lays are such places. While the layers took at most 2% of
 the stems, the estimate was carried as it was drawn (the north star with the first three layers, 11.9%, used it).
 The layer `unnamed` takes more, so the estimate is made again from the 230 sampled stems that are still unnamed, by
 that page's own rule: about 907 of the 1,066 are words of their own (between 646 and 979). The rule was written
-down before the layer was counted ([unnamed_spellings.md](unnamed_spellings.md), section 9). So the last step
-of the north star, from 11.9% to 12.2%, is a correction of the count of words: no word got a meaning by it. The
-script stops if a layer adds a stem the sample was not drawn from.
+down before the layer was counted ([unnamed_spellings.md](unnamed_spellings.md), section 9). The reporting rules
+had named a new sample instead; asked whether to keep the recount or draw a new sample, Mike answered on
+2026-11-16 at 14:49: "why do you need my approval to recount? this is obvious you need to recount to show the up
+to date result?". So the last step of the north star, from 11.9% to 12.1%, is a correction of the count of words:
+no word got a meaning by it. The script stops if a layer adds a stem the sample was not drawn from.
+
+Each share on this page is divided from its counts and rounded once. 156 of 1,284 is 12.1495%; the figures file
+holds the share rounded to four places, 0.1215, and rounding that again gives 12.2%, the figure first given for
+the north star with this layer.
 
 ## 4. The layers
 
@@ -151,14 +159,17 @@ base they were run on. What is counted from now on, and the steps that follow, r
 
 - **No meaning here is the project's own.** A layer applies what scholars have published. The row "Our own
   meanings" of the status table stays at 0.
-- **The 414 stated places rest on one scholar.** They are Rilly's readings of 2016 and 2021; no second scholar
-  confirms them (step G5).
+- **The 414 stated places rest on Rilly's readings of 2016 and 2021.** Step G5 set each of the 66 meanings
+  behind them beside what other scholars say: 33 are stated by another scholar too (15 with a dissent), 13 are
+  disputed and 20 rest on Rilly alone ([second_scholar_later.md](second_scholar_later.md)). The layers do not
+  change with it.
 - **The north star counts entries of the lexicon.** Several of the entries that `rare_later` gives a meaning are,
   by the same later source, forms or variants of one another or of known words
   ([the page of the rare spellings](rare_spellings.md), section 9).
-- **"Translated" at a place means two checkers agreed that the source's statement applies there.** Their
-  agreement beyond chance (Cohen's kappa) was 0.91 for `recurring`, 0.70 for `rare_sure`, 0.93 for `rare_later`
-  and 0.79 for `unnamed`, against a bar of 0.6; the places they did not agree on are in no layer.
+- **"Translated" at a place means two checkers agreed that the source's statement applies there;** in `unnamed`,
+  that both called the place a name, or a piece of the same whole word. Their agreement beyond chance (Cohen's
+  kappa) was 0.91 for `recurring`, 0.70 for `rare_sure`, 0.93 for `rare_later`, and 0.80 and 0.79 for the two
+  readings behind `unnamed`, against a bar of 0.6; the places they did not agree on are in no layer.
 - **The spellings count is coarse:** a spelling translated in most of its places counts as translated.
 
 ## 7. Reproduce
@@ -187,3 +198,16 @@ reasoning) checked this step with G2 and G4 and changed:
    G2's checkers had answered, the entries of class C. `src/rare.py` was shown to write the run's packs and results
    again byte for byte; the agents' launch lines and the times of each step's rules, launches and answers are
    recorded, with checks.
+
+Review of the fourth layer (2026-11-16, with steps G3 and G5): an independent reviewer (Opus 5.5, a fresh agent
+that saw the change and the task, not the reasoning) changed:
+
+1. The north star with four layers is 12.1%, not 12.2%: 156 of 1,284 is 12.1495%, and 12.2% came from rounding the
+   rounded share 0.1215 again. `src/themap.py` now divides each share it prints from its counts (`star_pct`), and
+   the checks hold the pages to that.
+2. `src/themap.py` stops on any unnamed stem the sample was not drawn from, as this page, the README and the
+   reporting skill said; before, it only compared the number of stems, so a layer that added one stem and took
+   another out would have passed.
+3. The layers make 41 stems names, not "names or pieces": a piece laid as part of a translated word keeps its stem
+   in the count (section 3). Each layer's figures now give the stems left after it (`north_star.unnamed_stems`).
+4. Mike's answer on the recount is recorded in his words (section 3), and section 6 gives the result of G5.

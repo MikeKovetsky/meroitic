@@ -229,17 +229,18 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     was the same 11.9%: every one of these meanings was published before it
     ([`data/discovery/rare_spellings.md`](data/discovery/rare_spellings.md)).
 21. **Of the open spellings the lexicon does not hold, two thirds are words of their own and a tenth are names;
-    laying the 111 names leaves fewer words to decipher and translates none.** 1,107 spellings that stand in one or two
+    laying the 111 names leaves fewer words to decipher and gives no word a meaning.** 1,107 spellings that stand in one or two
     texts hang on no entry of the lexicon; they stand at 1,225 open places. Two checkers judged every place from the
     place alone (the word, five words on each side, the map's reading of each), with places of known answer mixed
     in. A first pilot missed two bars and is not taken: its controls asked for what context cannot show (a word
     cut in two in running text) and counted particles written apart as words. A second pilot and the full pass
-    met their bars (kappa 0.79; no more than one known word in ten called a name, at least seven known names in
-    ten found). Both checkers call 828 places a word of its own, 111 a name and 41 a piece of a word beside it;
-    245 are unclear or not agreed. The 111 names and the 7 pieces whose whole word the map holds are the map's fourth
-    layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%). The north star's last step is a recount, not a meaning: 41 of the stems the map cannot name
-    became names or pieces, and the estimate of the words among them was made again from the sampled stems still
-    unnamed. That way of recounting is not the one the reporting rules named, and Mike has not yet said yes to it
+    met their bars (kappa 0.80 and 0.79; no more than one known word in ten called a name, at least seven known
+    names in ten found). Both checkers call 828 places a word of its own, 111 a name and 41 a piece of a word beside
+    it; 245 are unclear or not agreed. The 111 names and the 7 pieces whose whole word the map holds are the map's
+    fourth layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.1%, between 11.5% and 15.2%). The north star's last step is a recount, not a meaning: 39 more of the stems the map cannot
+    name became names, and the estimate of the words among them was made again from the sampled stems still
+    unnamed. The reporting rules had named a new sample; asked whether to keep the recount, Mike answered "why do
+    you need my approval to recount? this is obvious you need to recount to show the up to date result?"
     ([`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md)).
 22. **Half of the meanings that Rilly states in 2016 and 2021 are also stated by another scholar.** For the 66
     entries of the lexicon that items 17 and 20 gave a later meaning, two judges compared it with 260 statements

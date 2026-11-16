@@ -79,6 +79,10 @@
      "point": 0.1041,
      "low": 0.0983,
      "high": 0.1296
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1105
     }
    }
   },
@@ -134,6 +138,10 @@
      "point": 0.1041,
      "low": 0.0983,
      "high": 0.1296
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1105
     }
    }
   },
@@ -190,6 +198,10 @@
      "point": 0.1194,
      "low": 0.1127,
      "high": 0.1487
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1105
     }
    }
   },
@@ -244,6 +256,20 @@
      "point": 0.1215,
      "low": 0.115,
      "high": 0.1525
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1066,
+     "sample_still_unnamed": 230,
+     "its_verdicts": {
+      "word": 152,
+      "unclear": 42,
+      "piece": 21,
+      "not agreed": 7,
+      "same": 4,
+      "known": 3,
+      "name": 1
+     }
     }
    }
   }

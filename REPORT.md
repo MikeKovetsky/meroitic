@@ -912,22 +912,35 @@ Asked that day, to "Start G3's pilot and G5 now, while the review runs?": "Yes, 
 **G3.** 1,107 rare spellings hang on no entry of the lexicon (1,225 open places). The step had planned a script that
 proposes joins with the neighbouring words; counted first, it finds one at 11 places, so the checkers decide from
 the place. The first pilot (100 places, 50 controls) missed two bars and is not taken: the checkers could not see
-a word cut in two in running text, which nothing in a context shows, and two of the three known words they
-called pieces were particles written apart, which the project's own counting rule calls pieces. The faults were
-in the controls. A second pilot with other places, controls with a sure answer and a bar on what is laid (a
-known word called a name) met its bars, and so did the full pass: kappa 0.79; 4 of 75 known words called a
-name by each checker; 30 and 29 of 37 known names found. Of the 1,225 places 828 are words of their own, 111 names,
-41 pieces, 128 unclear and 117 not agreed.
+a word cut in two in running text, which nothing in a context shows, and the two known words they both called
+pieces were particles written apart, which the project's own counting rule calls pieces (the third known word
+they missed, both called a name). The faults were in the controls. A second pilot with other places, controls
+with a sure answer and a bar on what is laid (a known word called a name) met its bars, and so did the full pass:
+kappa 0.79; 4 of 75 known words called a name by each checker; 30 and 29 of 37 known names found. Of the 1,225
+places 828 are words of their own, 111 names, 41 pieces, 128 unclear and 117 not agreed.
 
-**What it changes.** The 111 names and 7 pieces are the map's fourth layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%).
-No word got a meaning. The running words rise because 113 words no longer need one; the north star rises
-because the count of distinct words fell from about 1,307 to about 1,284. That recount was made from the 230 sampled
-stems still unnamed, by a rule written down before the full pass was counted; the reporting rules had named a
-new sample instead, and Mike has not yet said yes to the other way.
+**What it changes.** The 111 names and 7 pieces are the map's fourth layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.1%, between 11.5% and 15.2%).
+No word got a new meaning. The running words rise because 113 words no longer need one and 5 pieces take the
+meaning the map gives their whole word; the north star rises because the count of distinct words fell from about
+1,307 to about 1,284. That recount was made from the 230 sampled stems still unnamed, by a rule written down before
+the full pass was counted; the reporting rules had named a new sample instead. Asked whether to keep the recount,
+Mike answered at 14:49: "why do you need my approval to recount? this is obvious you need to recount to show the up
+to date result?". The north star with this layer was first given as 12.2%, from its share rounded twice: 156 of
+1,284 is 12.1495%.
 
 **G5.** For the 66 entries with a meaning stated by Rilly in 2016 or 2021, two judges compared it with 260
-statements of other scholars and 26 decoys (kappa 0.95; one decoy taken for the same by each judge). 33 meanings
-are agreed by two scholars (15 with a dissent), 13 are disputed, 20 rest on Rilly alone.
+statements of other scholars and 26 decoys (kappa 0.95; one decoy taken for the same by each judge, none for
+"partly"). 33 meanings are agreed by two scholars (15 with a dissent), 13 are disputed, 20 rest on Rilly alone. One
+of the disputed, `tk (3)`, is disputed only through a proposal the lexicon gives without a scholar's name. Unlike
+F2's judges, these saw the name of each statement's scholar.
 
 **Cost.** G3: 62 agents, 4,715,110 subagent tokens. G5: 10 agents, 704,095. From the task notifications.
+
+**Review.** An independent reviewer (Opus 5.5, a fresh agent) checked both steps against their answers, the times of
+their rules and the session's record of every agent launched, and changed: the north star with four layers to
+12.1% (the map's script now divides each share it prints from its counts); the map's script stops on any unnamed
+stem the sample was not drawn from, as the pages said, where it had only compared their number; "names or pieces"
+to "names" for the stems that leave the count; the account of the first pilot's missed controls; the scholars the
+lexicon reports for G5, the decoys called "partly", and the one status that rests on a proposal without a scholar's
+name; Mike's answer on the recount, recorded on every page that had called it unapproved.
 

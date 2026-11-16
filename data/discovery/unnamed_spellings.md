@@ -5,12 +5,14 @@ Status on 2026-11-16: counted, and what the step resolves is laid in the map as 
 met their bars (sections 8 and 10). Figures: `unnamed_spellings_figures.json`. Script: `src/unnamed.py`. Checks:
 `tests/test_unnamed.py`. What the checkers were given:
 [`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md). Sections 2 to 5, 7 and 9 are the rules as they
-were set before the checkers they bind were started (section 9 before the full pass was counted).
+were set before the checkers they bind were started (section 9 before the full pass was counted), but for the
+notes in them marked as added or corrected after the count.
 
 **In short.** Of the 1,225 open places of rare spellings that the lexicon does not hold, two checkers call 828 a
 word of its own, 111 a name and 41 a piece of a neighbouring word; 245 are unclear or not agreed. The 111 names
-and 7 of the pieces are laid in the map. That translates nothing: it takes 113 running words out of those that
-need a meaning. A first pilot missed its bars because of its controls and is not taken.
+and 7 of the pieces are laid in the map. No word gets a meaning by it: 113 running words no longer need one, and
+5 pieces take the meaning the map already gives the word they belong to. A first pilot missed its bars because of
+its controls and is not taken.
 
 ## 1. What was asked
 
@@ -28,6 +30,7 @@ Mike, 2026-11-16, to "Start G3's pilot and G5 now, while the review runs?": "Yes
 | R1 | "a pilot on 100 places drawn by a fixed seed" | MET: sections 3 and 6 to 8. Two pilots: the first was not taken. |
 | R2 | "a script proposes the joins with the neighbouring words that give a form the map reads" | MET from the second pilot on (section 7): the script's joins stand as a note under the place. It finds few (section 2), so the checkers name the whole word themselves. |
 | R3 | "two checkers decide (a piece, a name, a word of its own, unclear), and the bar is set beforehand" | MET: sections 4, 7, 8 and 10. Each reading's bars were committed before its checkers were started. |
+| R4 | "A name or a piece of a name needs no meaning; a piece of a word the map reads takes that word's. This step deciphers nothing: it corrects the count of what is left to decipher." | MET: section 10 and `lines_of` of `src/unnamed.py`. A name is laid as a name; a piece takes the level and the meaning the map gives its whole word, and stays open where the map does not translate or name that word. No word gets a meaning; the count of words that need one, and of distinct words, is corrected. |
 
 ## 2. The places, and what a script can do
 
@@ -104,14 +107,16 @@ the record only: 61 a word of its own, 15 a name, 15 unclear, 1 a piece, 8 not a
 
 Why the bars were missed, from the answers:
 
-- **The cut spellings.** Where the script cut a word of a known formula, the checkers named the whole. Where it
-  cut a word in a running text (six of the fifteen), both saw "nothing that marks a cut", and nothing does: two
-  unknown halves side by side look like two unknown words. A cut of a word the map holds is found by joining the
-  letters, which is a script's work, not a judgment from context.
-- **The translated words.** Two of the three that both checkers called a piece are an ending or a particle written
-  apart (`qowi` after a name, `lowi` after `terike`). By the project's own rule for counting words such a word is
-  a piece, so the control's answer was wrong, not the checkers. The third (`mloye` in a list of relatives) both
-  called a name.
+- **The cut spellings.** Where the script cut a word of a known formula or a name, the checkers named the whole.
+  Where it cut a word in a running text or a string of titles (six of the fifteen, the same six for both), both
+  took the half for a word of its own (five) or for a name (one), and where their reasons speak of it they say
+  that no cut is shown ("no name formula or cut shown"). Nothing does show one: two unknown halves side by side
+  look like two unknown words. A cut of a word the map holds is found by joining the letters, which is a
+  script's work, not a judgment from context.
+- **The translated words.** Each checker called the same three of the twenty a name or a piece. The two both
+  called a piece are an ending or a particle written apart (`qowi` after a name, `lowi` after `terike`). By the
+  project's own rule for counting words such a word is a piece, so the control's answer was wrong, not the
+  checkers. The third (`mloye` in a list of relatives) both called a name.
 
 By rule 5 the brief would now be corrected and the same packs read again. That is not done: the fault lies in the
 controls, which a new brief does not change, and the same packs would miss the same bars. The step as first
@@ -183,11 +188,12 @@ the 2% up to which the old estimate may be carried. So, before any of the full p
   *Corrected after the count:* this sentence described that study's rule wrongly. In its rule (`estimate` of
   `src/words.py`) the half is for a stem that is the same word as another unnamed stem; a form of a known word
   counts nothing. The figure of section 10 uses the study's rule, as the heading of this point says: about 907
-  words. By the sentence as first written it would be about 904, and the north star 12.2% either way.
-- **This is not what the reporting skill said to do.** It said to draw and judge a new sample when a step changes
-  which stems are unnamed. Making the estimate again from the old sample is cheaper and rests on the same
-  reasoning, but the measure of the north star changes only on Mike's word, and he has not given it yet. Until
-  then the north star with this layer is provisional.
+  words. By the sentence as first written it would be about 904 words, and the north star 12.2% instead of 12.1%.
+- *Added after the count:* **this was not what the reporting skill said to do.** It said to draw and judge a new
+  sample when a step changes which stems are unnamed. Making the estimate again from the old sample rests on the
+  same reasoning and needs no new judging. Asked whether to keep this recount or draw a new sample, Mike answered
+  on 2026-11-16 at 14:49: "why do you need my approval to recount? this is obvious you need to recount to show the
+  up to date result?". The recount stands, and the north star with this layer is not provisional for it.
 - **No new judging.** The verdicts of that study stand; nothing of this step's checkers enters the estimate
   except which stems are left.
 - The north star's "before us" stays equal to its "now": this step gives no word a meaning.
@@ -231,12 +237,19 @@ With the second pilot's 100 places, all 1,225 places are judged:
 The share rises because 113 running words no longer need a meaning; 5 more are translated (pieces of
 translated words). Nothing is deciphered by this step.
 
-**The north star,** counted by the rule of section 9. 39 of the 1,105 stems the map cannot name become names or
-pieces (most of the 111 name places were counted as names before, because an analyst had guessed so). Of the
-240 sampled stems 230 are still unnamed. From them, about 907 of the 1,066 stems still unnamed are words of
+**The north star,** counted by the rule of section 9. 39 of the 1,105 stems the map cannot name become names
+(most of the 111 name places were counted as names before, because an analyst had guessed so). Those stems are
+not the spellings of section 2: the count of distinct words drew its sample from 1,107 stems of the base, as many
+as there are spellings here by chance, and 999 are in both. The 5 pieces laid as parts of translated words keep
+their stems in this count, which reads the parts of a word, not its level. Of the 240 sampled stems 230 are still
+unnamed. From them, about 907 of the 1,066 stems still unnamed are words of
 their own (between 646 and 979), so the corpus holds about 1,284 distinct words (between 1,023 and
-1,356), and 156 of them have a meaning: 12.2% (between 11.5% and 15.2%), from 11.9%. No word got a
-meaning: the count of words was corrected. Before the project the share is the same.
+1,356), and 156 of them have a meaning: 12.1% (between 11.5% and 15.2%), from 11.9%. No word got a
+meaning: the count of words was corrected. Before the project the share is the same. (156 of 1,284 is 12.1495%;
+it was first given as 12.2%, from the share already rounded to 0.1215.) Of the 10 sampled stems that the layers
+made names (9 of them in this step), the checkers of the count of distinct words had called 6 a word of its own,
+2 a name, 1 a piece and 1 the same word as another stem: there the studies differ, and the layers' verdict is
+the one laid.
 
 **Cost:** 62 agents (Opus, each a fresh one), 4,715,110 subagent tokens, from the task notifications: the first pilot
 458,438, the second 463,418, the full pass 3,793,254.
@@ -244,4 +257,25 @@ meaning: the count of words was corrected. Before the project the share is the s
 **What this does not show.** A name here is a name by its place in the text, judged by one model twice; no source
 names these persons or places. The checkers found about four names in five among the controls and called about
 one known word in twenty a name, so some names are missed and a few of the 111 may be words. The 245 places
-that are unclear or not agreed stay open.
+that are unclear or not agreed stay open. One of the 7 pieces (`ese`, part of `esebe`) takes a meaning that is
+only "?": the map counts `esebe` as translated because the typed lexicon marks its entry established, though the
+entry only refers to `yesebe`, whose meaning the lexicon gives as a hypothesis. The rule of section 4 lays it all
+the same.
+
+## 11. Review
+
+An independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the reasoning) checked the
+step on 2026-11-16, with its answers, its times and the session's record of every agent launched. Each reading's
+rules were committed a few seconds before its first checker was started (8, 6 and 7 seconds for the two pilots
+and the full pass), and nothing of the full pass was counted before the north star's rule of section 9 was
+committed at 14:09:13; the count ran at 14:09:27. `src/unnamed.py` writes the three readings' packs, results and
+the layer again byte for byte, and the agents' tokens are those of their task notifications. The review changed:
+
+1. The north star with this layer: 12.1%, not 12.2% (section 10; `star_pct` of `src/themap.py`).
+2. "39 stems become names", not "names or pieces": a piece laid as part of a translated word keeps its stem in
+   the count (section 10).
+3. Section 6: what the checkers said of the missed controls, as their answers have it. The short account at the
+   top, which said the layer translates nothing though 5 pieces take a meaning. R4 added to section 1.
+4. Section 9: the bullet on the reporting skill is marked as added after the count, with Mike's answer.
+5. `src/unnamed.py` reads the answers with the shared `own_lines` and checks each reading against its own bars;
+   `tests/test_unnamed.py` checks that a checker's line counts only for its own pack.

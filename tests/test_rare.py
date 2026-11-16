@@ -326,7 +326,8 @@ def test_the_page_says_what_the_figures_say():
     for label, x in (("Before (the recurring words laid)", L["recurring"]), ("With G2's layer", L["rare_sure"]), ("With G4's layer too", L["rare_later"])):
         r, s = x["running"], x["spellings"]
         assert f"| {label} | {r['translated']:,} of {r['need']:,} | {pct(r['share'])} | {s['translated']:,} of {s['need']:,} | {pct(s['share'])} |" in text, label
-    assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words have a meaning, {pct(n['star']['point'])} (between {pct(n['star']['low'])} and {pct(n['star']['high'])})" in text
+    s = M.star_pct(n)                                                  # divided from the counts and rounded once
+    assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words have a meaning, {s['point']} (between {s['low']} and {s['high']})" in text
     cost = [c for g in (g2, g4) for c in g["cost"].values()]
     assert f"{sum(c['agents'] for c in cost)} agents (Opus, each a fresh one), {sum(c['tokens'] for c in cost):,} subagent tokens" in text
     for c in cost:

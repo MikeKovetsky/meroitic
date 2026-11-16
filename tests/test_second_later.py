@@ -121,12 +121,39 @@ def test_the_packs_and_the_count_and_its_bars():
             S.entries = entries
     good, bad = in_a_folder(go)
     assert good["taken"] and good["kappa_same_or_not"] == 1.0 and good["answered_by_both"] == good["rows"] == 19 and all(good["bars"].values())
-    assert good["decoys"] == {"1": {"shown": 2, "called_same": 0}, "2": {"shown": 2, "called_same": 0}}
+    assert good["decoys"] == {"1": {"shown": 2, "called_same": 0, "called_partly": 0}, "2": {"shown": 2, "called_same": 0, "called_partly": 0}}
+    assert good["without_the_proposals_of_no_named_scholar"] == {}                # every made-up statement names its scholar
     odd = sum(i % 3 > 0 for i in range(1, 20, 2))                                # the odd entries with a statement are agreed
     assert good["statuses"]["agreed by two scholars"] == odd and good["with_no_other_scholar"] == sum(i % 3 == 0 for i in range(20))
     assert good["statuses"]["stated by one"] == good["with_no_other_scholar"] and good["statuses"]["disputed"] == 20 - odd - good["with_no_other_scholar"]
     assert not bad["taken"] and bad["bars"] == {"every_row_answered_by_both": False, "kappa_same_or_not": True, "decoys_called_same": False}
     assert bad["decoys"]["2"]["called_same"] == 2 and S.BARS == {"kappa_same_or_not": 0.6, "decoys_called_same": 0.10}
+
+
+def test_a_judges_file_counts_only_for_its_own_pack_and_a_status_without_a_named_scholar_is_reported():
+    def go(d):
+        rows = [{"row": "R0001", "entry": "a", "scholar": "Griffith", "decoy": False}, {"row": "R0002", "entry": "b", "scholar": "Hintze", "decoy": False},
+                {"row": "R0003", "entry": "b", "scholar": "unattributed ('earlier view')", "decoy": False},
+                {"row": "R0004", "entry": "a", "scholar": "Millet", "decoy": True}]
+        S.write("rows.json", rows)
+        S.write("entries.json", {"a": {"others": [1]}, "b": {"others": [1, 2]}})
+        S.write("groups.json", [["R0001", "R0002"], ["R0003", "R0004"]])
+        for j in (1, 2):
+            (d / f"answers{j}").mkdir()
+            (d / f"answers{j}" / "J01.jsonl").write_text("\n".join(json.dumps(x) for x in (
+                {"row": "R0001", "verdict": "same"}, {"row": "R0001", "verdict": "other"},     # the first line wins
+                {"row": "R0003", "verdict": "same"},                                           # a row of the other pack
+                {"row": "R0002", "verdict": "partly"})) + "\n", encoding="utf-8")
+            (d / f"answers{j}" / "J02.jsonl").write_text("\n".join(json.dumps(x) for x in (
+                {"row": "R0003", "verdict": "other"}, {"row": "R0004", "verdict": "partly" if j == 1 else "no meaning"})) + "\n", encoding="utf-8")
+        assert S.answers(1) == {"R0001": "same", "R0002": "partly", "R0003": "other", "R0004": "partly"}
+        S.count()
+        return S.read(d / "result.json")
+    r = in_a_folder(go)
+    assert r["by_entry"] == {"a": "agreed by two scholars", "b": "disputed"}
+    # b is disputed only through the proposal without a scholar's name: reported, and counted as the rule has it
+    assert r["without_the_proposals_of_no_named_scholar"] == {"b": "stated by one"}
+    assert r["decoys"] == {"1": {"shown": 1, "called_same": 0, "called_partly": 1}, "2": {"shown": 1, "called_same": 0, "called_partly": 0}}
 
 
 def test_what_the_judges_were_given_is_public():
@@ -185,6 +212,15 @@ def test_the_page_says_what_the_figures_say():
         names = ", ".join(f"`{k}`" for k in sorted(k for k, v in f["by_entry"].items() if v == status))
         assert f"**{label}** {names}." in text, status
     assert f"Cost: {f['cost']['tokens']:,} subagent tokens" in text
+    # F2's bar on the decoys counted "partly" with "same"
+    assert d["1"]["called_partly"] == d["2"]["called_partly"] == 0 and 'is met too: neither judge called a decoy "partly"' in text
+    for k, v in f["without_the_proposals_of_no_named_scholar"].items():
+        assert f"`{k}` is {f['by_entry'][k]} only through it, and would be {v} without it" in text, k
+    assert len(f["without_the_proposals_of_no_named_scholar"]) == 1 and "**One status rests on a proposal the lexicon gives without a scholar's name,**" in text
+    rep = f["reported_by_the_lexicon_most_often"]
+    assert rep["Priese"] == rep["Zyhlarz"] and (f"Griffith ({rep['Griffith']} rows), Hintze ({rep['Hintze']}), Millet ({rep['Millet']}), "
+                                                f"Hofmann ({rep['Hofmann']}), Priese and Zyhlarz ({rep['Priese']} each)") in text
+    assert "MET: sections 2, 3 and 5." in text and "the judges saw each statement's scholar, where F2's did not" in text
 
 
 def test_the_summaries_name_the_step():

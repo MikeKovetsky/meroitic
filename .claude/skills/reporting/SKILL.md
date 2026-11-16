@@ -79,6 +79,9 @@ quote it from memory, from this file's log, or from an earlier message.
   share in `north_star.star.point`, its range in `north_star.star.low` and `north_star.star.high`. The count on
   the analysts' map alone, with no layer, stays in `data/discovery/distinct_words_figures.json` (`translated`
   over `distinct_words.point`, `star.point`, `star.low` and `star.high`): it was the figure of the first status.
+  Give the share to one decimal as the command of section 4 prints it, divided from the counts: `star.point` is
+  rounded to four places already, and rounding it again can put the tenth one too high (0.1215 is 156 of 1,284,
+  12.1495%: 12.1%, not 12.2%).
 - **Before us: the same as Now.** Mike, after asking three times how this row could rise without a meaning of
   ours: "“Before us” should really equal “Now”, 11.6%." (11.6% was the first count; the review of the same day
   took the endings and particles written as words for pieces, section 7. Before us is now, whatever the count
@@ -102,8 +105,10 @@ quote it from memory, from this file's log, or from an earlier message.
   (`src/words.py`: `population`, `packs`, `count`, `public`).
   **This replaces an earlier line of this file,** which said to draw and judge a new sample whenever a step
   changes which stems are unnamed. The new rule was written down on 2026-11-16 before step G3 was counted
-  (`data/discovery/unnamed_spellings.md`, section 9), without Mike's word. Until he has given it, say
-  "provisional" beside the north star and name the other way (a new sample of 240 stems, about 40 agents).
+  (`data/discovery/unnamed_spellings.md`, section 9). Asked whether to keep that recount or draw a new sample,
+  Mike answered the same day at 14:49: "why do you need my approval to recount? this is obvious you need to
+  recount to show the up to date result?". The recount stands; the north star is not provisional for it
+  (section 6).
 
 ### Running words translated
 
@@ -164,7 +169,7 @@ It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16
 plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
 base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
 as it stands: running words translated 4154 of 7117 = 58.4%; distinct spellings translated 815 of 2813 = 29.0%
-north star: 156 of about 1284 = 12.2% (11.5% to 15.2%)
+north star: 156 of about 1284 = 12.1% (11.5% to 15.2%)
 ```
 
 "plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map
@@ -190,6 +195,11 @@ A row's definition, its "Before us" or its source changes only on Mike's word. R
 the date and his words, change section 3, and say in the next status that the row is measured differently, so
 that a jump is not read as progress. A new row gets its "Before us" counted before it is first shown.
 
+Counting a number again so that it is up to date after the map changes is no change of measure and needs no ask
+(Mike, 2026-11-16, 14:49: "why do you need my approval to recount? this is obvious you need to recount to show the
+up to date result?"). Recount, give the new number, and say in one bullet what moved it (section 5, item 5). What
+still changes only on his word is what a row means, its "Before us" and its source.
+
 ## 7. Decisions, in Mike's words (all 2026-11-16)
 
 - The format: "Template A: scoreboard. But add a column "status before us". to see our progress from the start".
@@ -212,6 +222,10 @@ that a jump is not read as progress. A new row gets its "Before us" counted befo
   from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it. The three dated pages
   that G1 named to be rebuilt (the coverage of the clean corpus, the lexicon's statuses, the translations'
   baseline, which is the last row's "Before us") keep their numbers: "Yes, waive it." (13:52).
+- The recount of the north star after G3, from the old sample's stems still unnamed (section 3, "Counting
+  again"), asked as "Accept the north star recount from the old sample, or draw a new sample?": "are you saying we
+  need a new sample?", then "why do you need my approval to recount? this is obvious you need to recount to show
+  the up to date result?" (14:48 and 14:49). No new sample was drawn; recounting needs no ask (section 6).
 
 Offered and not taken up: the translation row could give way to "words whose meaning two scholars agree on"
 (39.9%, `data/discovery/lexicon.md`); the column "Before us" could be named "Plain lookup".

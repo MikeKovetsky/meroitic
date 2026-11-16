@@ -259,10 +259,19 @@ def test_the_page_says_what_the_figures_say():
     for label, x in (("Before this step", b), ("With this step", a)):
         r, s = x["running"], x["spellings"]
         assert f"| {label} | {r['translated']:,} of {r['need']:,} | {pct(r['share'])} | {s['translated']:,} of {s['need']:,} | {pct(s['share'])} |" in text, label
-    u = m["north_star"]["unnamed_stems"]
+    u, u0 = n["unnamed_stems"], n0["unnamed_stems"]
+    assert f"{u0['now'] - u['now']} of the {u0['now']:,} stems the map cannot name become names" in text and "become names or pieces" not in text
+    assert f"The {l['to'].get('meaning', 0)} pieces laid as parts of translated words keep their stems in this count" in text
     assert f"Of the 240 sampled stems {u['sample_still_unnamed']} are still unnamed" in text
-    assert f"{n['translated']} of them have a meaning: {pct(n['star']['point'])} (between {pct(n['star']['low'])} and {pct(n['star']['high'])}), from {pct(n0['star']['point'])}" in text
+    s, s0 = M.star_pct(n), M.star_pct(n0)                                 # a share is divided from its counts and rounded once
+    assert f"{n['translated']} of them have a meaning: {s['point']} (between {s['low']} and {s['high']}), from {s0['point']}" in text
     assert f"about {n['distinct_words']['point']:,} distinct words (between {n['distinct_words']['low']:,} and {n['distinct_words']['high']:,})" in text
+    # the sampled stems the layers made names, and what the checkers of the count of distinct words had called them
+    w = json.loads(M.WORDS.read_text(encoding="utf-8"))["sample"]
+    gone = {k: v - u["its_verdicts"].get(k, 0) for k, v in w["verdicts"].items() if v - u["its_verdicts"].get(k, 0)}
+    assert sum(gone.values()) == w["sampled"] - u["sample_still_unnamed"] and gone == {"word": 6, "name": 2, "piece": 1, "same": 1}
+    assert (f"Of the {sum(gone.values())} sampled stems that the layers made names (9 of them in this step), the checkers of the count of "
+            f"distinct words had called {gone['word']} a word of its own, {gone['name']} a name, {gone['piece']} a piece and {gone['same']} the same word") in text
     cost = f["cost"]
     assert f"{sum(c['agents'] for c in cost.values())} agents (Opus, each a fresh one), {sum(c['tokens'] for c in cost.values()):,} subagent tokens" in text
     assert f"the first pilot {cost['pilot']['tokens']:,}, the second {cost['pilot2']['tokens']:,}, the full pass {cost['full']['tokens']:,}" in text
@@ -274,10 +283,53 @@ def test_the_summaries_name_the_step():
     f, m = figs(), json.loads(M.PUBLIC.read_text(encoding="utf-8"))
     l = {x["name"]: x for x in m["layers"]}[U.LAYER]
     c, star = l["after"]["running"], l["north_star"]
+    s = M.star_pct(star)
     for text in (" ".join(readme.split()), " ".join((ROOT / "NEXT_STEPS.md").read_text(encoding="utf-8").split())):
         assert f"{c['translated']:,} of the {c['need']:,} running words that need a meaning" in text and pct(c["share"]) in text
-        assert f"{star['translated']} of about {star['distinct_words']['point']:,}" in text and f"{f['verdicts']['name']} names" in text
-        assert "unnamed_spellings.md" in text
+        assert f"{star['translated']} of about {star['distinct_words']['point']:,} distinct words ({s['point']}, between {s['low']} and {s['high']})" in text
+        assert f"{f['verdicts']['name']} names" in text and "unnamed_spellings.md" in text
+
+
+MIKE = "why do you need my approval to recount? this is obvious you need to recount to show the up to date result?"
+
+
+def test_the_recount_rests_on_mikes_word():
+    """The north star after this step is recounted from the old sample, not from a new one as the reporting skill
+    had said. Asked, Mike answered (2026-11-16, 14:49) in the words of MIKE: every page that tells of the recount
+    quotes them, none still calls it unapproved or the north star provisional for it, and the reporting skill says
+    that recounting needs no ask."""
+    pages = (".claude/skills/reporting/SKILL.md", "data/discovery/unnamed_spellings.md", "data/discovery/map_layers.md", "README.md",
+             "NEXT_STEPS.md", "REPORT.md")
+    for path in pages:
+        text = " ".join((ROOT / path).read_text(encoding="utf-8").split())
+        assert MIKE in text, path
+        for stale in ("has not yet said yes", "without Mike's word", "he has not given it", "Until he has given it"):
+            assert stale not in text, (path, stale)
+    g3 = page()
+    assert f"*Added after the count:* **this was not what the reporting skill said to do.**" in g3 and "is not provisional for it" in g3
+    skill = " ".join((ROOT / ".claude/skills/reporting/SKILL.md").read_text(encoding="utf-8").split())
+    assert "Counting a number again so that it is up to date after the map changes is no change of measure and needs no ask" in skill
+    assert "What still changes only on his word is what a row means, its \"Before us\" and its source." in skill
+
+
+def test_a_checkers_file_counts_only_for_its_own_pack():
+    """A line counts only in the file of the pack that holds its place, once (the first), and with a known case."""
+    home = U.HOME
+    with tempfile.TemporaryDirectory() as d:
+        U.HOME = Path(d)
+        try:
+            U.write("r/groups.json", [["Q0001", "Q0002"], ["Q0003"]])
+            (Path(d) / "r" / "answers1").mkdir()
+            (Path(d) / "r" / "answers1" / "P01.jsonl").write_text("\n".join([
+                json.dumps({"place": "Q0001", "case": "name"}), json.dumps({"place": "Q0001", "case": "word"}),    # the first line wins
+                json.dumps({"place": "Q0003", "case": "name"}),                                                     # another pack's place
+                json.dumps({"place": "Q0002", "case": "a guess"}), "not json", "[]"]) + "\n", encoding="utf-8")
+            (Path(d) / "r" / "answers1" / "P02.jsonl").write_text(json.dumps({"place": "Q0002", "case": "word"}) + "\n", encoding="utf-8")
+            got = U.answers("r", 1)
+            assert {k: v["case"] for k, v in got.items()} == {"Q0001": "name"}
+            assert U.answers("r", 2) == {}                                        # no file: no answer
+        finally:
+            U.HOME = home
 
 
 # ------------------------------------------------------------------------------------------- with the local files

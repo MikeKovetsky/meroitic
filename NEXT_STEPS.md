@@ -140,11 +140,12 @@ Done since this plan was written:
     [`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md); step G3). Two checkers judged
     all 1,225 open places from the place alone, with controls: 828 are words of their own, 111 names, 41 pieces, 245
     unclear or not agreed (a first pilot missed its bars and is not taken). The 111 names and 7 pieces are the map's
-    fourth layer. The map as it stands: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.2%, between 11.5% and 15.2%).
+    fourth layer. The map as it stands: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.1%, between 11.5% and 15.2%).
     Nothing is deciphered by this: fewer words need a meaning, and the count of distinct words is corrected. The
-    way the north star is recounted (from the old sample's stems still unnamed) is not the one the reporting rules named, and Mike has not yet said
-    yes to it. Open: the
-    828 words of their own, which are what is left to decipher among these spellings.
+    north star is recounted from the old sample's stems still unnamed, not from a new sample as the reporting rules
+    had said; asked, Mike answered "why do you need my approval to recount? this is obvious you need to recount to
+    show the up to date result?". Open: the 828 words of their own, which are what is left to decipher among these
+    spellings.
 23. **A second scholar for Rilly's later meanings** (2026-11-16,
     [`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md); step G5). 33 of the 66
     meanings are also stated by another scholar (15 of them with a dissent), 13 are disputed, 20 rest on Rilly

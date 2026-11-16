@@ -5,14 +5,24 @@
   "reported by the lexicon of 2003": 142,
   "own work": 118
  },
+ "reported_by_the_lexicon_most_often": {
+  "Griffith": 21,
+  "Hintze": 19,
+  "Millet": 18,
+  "Hofmann": 15,
+  "Priese": 10,
+  "Zyhlarz": 10
+ },
  "decoys": {
   "1": {
    "shown": 26,
-   "called_same": 1
+   "called_same": 1,
+   "called_partly": 0
   },
   "2": {
    "shown": 26,
-   "called_same": 1
+   "called_same": 1,
+   "called_partly": 0
   }
  },
  "answered_by_both": 260,
@@ -45,6 +55,9 @@
   "disputed": 13
  },
  "with_no_other_scholar": 8,
+ "without_the_proposals_of_no_named_scholar": {
+  "tk (3)": "stated by one"
+ },
  "by_entry": {
   "-bete-": "stated by one",
   "-bte": "stated by one",

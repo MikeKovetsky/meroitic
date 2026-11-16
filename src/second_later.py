@@ -19,10 +19,12 @@ import collections
 import json
 import pathlib
 import random
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(ROOT / "src" / "v6")]
+import lexicon as X                                    # noqa: E402
 import recurring as W                                  # noqa: E402
 
 HOME = ROOT / "data/sources/g5"
@@ -141,17 +143,11 @@ def packs():
 
 
 def answers(j):
-    groups, out = read(HOME / "groups.json"), {}
-    for n, g in enumerate(groups, 1):
-        f = HOME / f"answers{j}" / f"J{n:02d}.jsonl"
-        for line in f.read_text(encoding="utf-8").splitlines() if f.exists() else []:
-            try:
-                r = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if isinstance(r, dict) and r.get("row") in g and r.get("verdict") in VERDICTS:      # only the rows of its own pack
-                out.setdefault(r["row"], r["verdict"])
-    return out
+    """A judge's verdicts, kept only for the rows of the pack the file is named after, with a known verdict."""
+    groups = read(HOME / "groups.json")
+    lines = W.own_lines(HOME / f"answers{j}", groups, "J{n:02d}", "row",
+                        lambda r, n: r.get("row") if r.get("row") in groups[n - 1] and r.get("verdict") in VERDICTS else None)
+    return {k: r["verdict"] for k, r in lines.items()}
 
 
 def status(pairs):
@@ -168,20 +164,26 @@ def count():
     real = [r for r in table if not r["decoy"]]
     both = [(one[r["row"]], two[r["row"]]) for r in real if r["row"] in one and r["row"] in two]
     kp = W.kappa([(a == "same", b == "same") for a, b in both])
-    dec = {str(j): {"shown": sum(r["decoy"] for r in table), "called_same": sum(ans.get(r["row"]) == "same" for r in table if r["decoy"])}
-           for j, ans in ((1, one), (2, two))}
+    dec = {str(j): {"shown": sum(r["decoy"] for r in table), **{f"called_{v}": sum(ans.get(r["row"]) == v for r in table if r["decoy"]) for v in ("same", "partly")}}
+           for j, ans in ((1, one), (2, two))}             # "partly" is reported: F2's bar counted it with "same"
     bars = {"every_row_answered_by_both": all(r["row"] in one and r["row"] in two for r in table),
             "kappa_same_or_not": kp is not None and kp >= BARS["kappa_same_or_not"],
             "decoys_called_same": all(d["called_same"] <= BARS["decoys_called_same"] * d["shown"] for d in dec.values())}
-    by = collections.defaultdict(list)
+    by, named = collections.defaultdict(list), collections.defaultdict(list)
     for r in real:
         if r["row"] in one and r["row"] in two:
             by[r["entry"]].append((one[r["row"]], two[r["row"]]))
+            if not X.unnamed(r["scholar"]):
+                named[r["entry"]].append((one[r["row"]], two[r["row"]]))
     st = {k: status(by.get(k, [])) for k in ents}
+    # as F2 did (src/lexicon.py, unnamed): the statuses that rest on a proposal the lexicon gives without a scholar's
+    # name, and what they would be without it; reported, not taken out
+    alone = {k: status(named.get(k, [])) for k in sorted(ents) if status(named.get(k, [])) != st[k]}
     out = {"entries": len(ents), "rows": len(real), "decoys": dec, "answered_by_both": len(both), "kappa_same_or_not": None if kp is None else round(kp, 4),
            "pairs": dict(collections.Counter(f"{a} / {b}" for a, b in both).most_common()), "bars": bars, "taken": all(bars.values()),
            "statuses": dict(collections.Counter(st.values()).most_common()), "by_entry": st,
-           "with_no_other_scholar": sum(not e["others"] for e in ents.values())}
+           "with_no_other_scholar": sum(not e["others"] for e in ents.values()),
+           "without_the_proposals_of_no_named_scholar": alone}
     write("result.json", out)
     print({k: v for k, v in out.items() if k != "by_entry"})
 
@@ -194,11 +196,19 @@ def figures():
     table = read(HOME / "rows.json")
     real = [x for x in table if not x["decoy"]]
     words = collections.Counter(r["by_entry"][w["entry"]] for w in read(RARE)["g4"]["words"])
+    reported = collections.Counter(first_name(x["scholar"]) for x in real if x["how"] != "own work")
     return {"entries": r["entries"], "rows": r["rows"], "rows_by": dict(collections.Counter(x["how"] for x in real).most_common()),
+            "reported_by_the_lexicon_most_often": {k: n for k, n in reported.most_common() if n >= 10},
             "decoys": r["decoys"], "answered_by_both": r["answered_by_both"], "kappa_same_or_not": r["kappa_same_or_not"], "pairs": r["pairs"],
             "bars": r["bars"], "taken": r["taken"], "statuses": r["statuses"], "with_no_other_scholar": r["with_no_other_scholar"],
+            "without_the_proposals_of_no_named_scholar": r["without_the_proposals_of_no_named_scholar"],
             "by_entry": dict(sorted(r["by_entry"].items())), "words_given_a_meaning_by_g4": dict(words.most_common()),
             "cost": {"agents": len(tok), "tokens": sum(tok.values())}}
+
+
+def first_name(scholar):
+    """The first scholar a row names ("Hintze 1979" and "Hintze; Priese" are Hintze's)."""
+    return re.split(r"[\s,;(]", scholar.strip(), maxsplit=1)[0]
 
 
 def public():

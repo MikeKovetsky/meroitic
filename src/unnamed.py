@@ -88,8 +88,6 @@ BARS2 = {"kappa": 0.6, "words_called_name": 0.10, "names_called_name": 0.70}
 CONTROLS2 = {"word": 20, "name": 15, "particle": 15}
 
 
-
-
 def read(name):
     return json.loads((HOME / name).read_text(encoding="utf-8"))
 
@@ -129,22 +127,28 @@ def shown(gs, i, hide, rows, t):
             "form": gs[i]["form"], "words": words, "readings": readings}
 
 
+def pick(rnd, texts, cands, k):
+    """k of the candidate places, drawn by lot from those in the texts of the real places where there are enough."""
+    near = [c for c in cands if c[0] in texts]
+    return rnd.sample(near if len(near) >= k else cands, k)
+
+
+def names_of(gl):
+    """The places of the names the analysts recognised that are no entry of the lexicon (no layer's)."""
+    return sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs)
+                  if g["level"] == "name" and "layer" not in g and [p.get("entry") for p in g.get("parts") or []] == ["NAME"])
+
+
 def controls(gl, rnd, texts, n):
     """Places whose answer the map holds, shown as open: n["word"] translated words (the answer: a word of its own),
     n["name"] names the analysts recognised that are no entry of the lexicon, n["cut"] translated or named
     spellings of six letters or more cut in two at a place drawn by lot (the answer: a piece of that spelling).
     The words are taken from the texts of the real places where there are enough."""
-    def pick(cands, k):
-        near = [c for c in cands if c[0] in texts]
-        pool = near if len(near) >= k else cands
-        return rnd.sample(pool, k)
     words = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if g["level"] in W.READ and len(g["form"]) >= 3 and "layer" not in g)
-    names = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs)
-                   if g["level"] == "name" and "layer" not in g and [p.get("entry") for p in g.get("parts") or []] == ["NAME"])
     longs = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if g["level"] in W.READ + W.NAMED and len(g["form"]) >= 6 and "layer" not in g)
-    out = [{"control": "word", "text": t, "i": i, "answer": "word"} for t, i in pick(words, n["word"])]
-    out += [{"control": "name", "text": t, "i": i, "answer": "name"} for t, i in pick(names, n["name"])]
-    for t, i in pick(longs, n["cut"]):
+    out = [{"control": "word", "text": t, "i": i, "answer": "word"} for t, i in pick(rnd, texts, words, n["word"])]
+    out += [{"control": "name", "text": t, "i": i, "answer": "name"} for t, i in pick(rnd, texts, names_of(gl), n["name"])]
+    for t, i in pick(rnd, texts, longs, n["cut"]):
         form = gl[t][i]["form"]
         at = rnd.randrange(2, len(form) - 1)
         out.append({"control": "cut", "text": t, "i": i, "answer": "piece", "whole": form, "at": at, "half": rnd.randrange(2)})
@@ -157,10 +161,6 @@ def controls2(gl, lex, rnd, texts, n):
     name), n["name"] names the analysts recognised that are no entry of the lexicon, n["particle"] endings or
     particles written as a word of their own (by the project's rule a piece of the word beside them; reported,
     under no bar)."""
-    def pick(cands, k):
-        near = [c for c in cands if c[0] in texts]
-        return rnd.sample(near if len(near) >= k else cands, k)
-
     def what(g):
         ents = [p.get("entry") for p in g.get("parts") or []]
         if g["level"] not in W.READ or "layer" in g or not ents or any(e not in lex for e in ents):
@@ -169,11 +169,9 @@ def controls2(gl, lex, rnd, texts, n):
         return "word" if stems and len(g["form"]) >= 3 else "particle" if not stems and len(g["form"]) >= 2 else None
     words = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if what(g) == "word")
     parts = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if what(g) == "particle")
-    names = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs)
-                   if g["level"] == "name" and "layer" not in g and [p.get("entry") for p in g.get("parts") or []] == ["NAME"])
-    return ([{"control": "word", "text": t, "i": i, "answer": "word"} for t, i in pick(words, n["word"])]
-            + [{"control": "name", "text": t, "i": i, "answer": "name"} for t, i in pick(names, n["name"])]
-            + [{"control": "particle", "text": t, "i": i, "answer": "piece"} for t, i in pick(parts, n["particle"])])
+    return ([{"control": "word", "text": t, "i": i, "answer": "word"} for t, i in pick(rnd, texts, words, n["word"])]
+            + [{"control": "name", "text": t, "i": i, "answer": "name"} for t, i in pick(rnd, texts, names_of(gl), n["name"])]
+            + [{"control": "particle", "text": t, "i": i, "answer": "piece"} for t, i in pick(rnd, texts, parts, n["particle"])])
 
 
 def joins(gl, t, i, good):
@@ -192,7 +190,6 @@ def place_of(c, gl, rows):
         gs = gs[:c["i"]] + two + gs[c["i"] + 1:]
         return shown(gs, c["i"] + c["half"], {c["i"], c["i"] + 1}, rows, c["text"])
     return shown(gs, c["i"], {c["i"]}, rows, c["text"])
-
 
 
 def packs_of(folder, real, ctrl, gl, rows, rnd, brief, good=None):
@@ -252,17 +249,9 @@ def full_packs():
 
 def answers(folder, c):
     """A checker's lines, kept only for the places of the pack the file is named after, with a known case."""
-    groups, out = read(f"{folder}/groups.json"), {}
-    for n, g in enumerate(groups, 1):
-        f = HOME / folder / f"answers{c}" / f"P{n:02d}.jsonl"
-        for line in f.read_text(encoding="utf-8").splitlines() if f.exists() else []:
-            try:
-                r = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if isinstance(r, dict) and r.get("place") in g and r.get("case") in CASES:
-                out.setdefault(r["place"], r)
-    return out
+    groups = read(f"{folder}/groups.json")
+    return W.own_lines(HOME / folder / f"answers{c}", groups, "P{n:02d}", "place",
+                       lambda r, n: r.get("place") if r.get("place") in groups[n - 1] and r.get("case") in CASES else None)
 
 
 def right(p, a):
@@ -299,14 +288,15 @@ def result_of(key, one, two, second):
         ctrl[j] = c
     def rate(kind, *cases):
         return [sum(c[kind].get(f"called_{x}", 0) for x in cases) / c[kind]["shown"] for c in ctrl.values()]
+    bar = BARS2 if second else BARS
     bars = {"every_place_answered_by_both": all(p["place"] in one and p["place"] in two for p in key),
-            "kappa": kp is not None and kp >= BARS["kappa"],
-            "names_called_name": all(r >= BARS["names_called_name"] for r in rate("name", "name"))}
+            "kappa": kp is not None and kp >= bar["kappa"],
+            "names_called_name": all(r >= bar["names_called_name"] for r in rate("name", "name"))}
     if second:
-        bars["words_called_name"] = all(r <= BARS2["words_called_name"] for r in rate("word", "name"))
+        bars["words_called_name"] = all(r <= bar["words_called_name"] for r in rate("word", "name"))
     else:
-        bars["words_called_name_or_piece"] = all(r <= BARS["words_called_name_or_piece"] for r in rate("word", "name", "piece"))
-        bars["cuts_called_piece_of_the_whole"] = all(c["cut"]["right"] >= BARS["cuts_called_piece_of_the_whole"] * c["cut"]["shown"] for c in ctrl.values())
+        bars["words_called_name_or_piece"] = all(r <= bar["words_called_name_or_piece"] for r in rate("word", "name", "piece"))
+        bars["cuts_called_piece_of_the_whole"] = all(c["cut"]["right"] >= bar["cuts_called_piece_of_the_whole"] * c["cut"]["shown"] for c in ctrl.values())
     rows = []
     for p in real:
         a, b = one.get(p["place"]), two.get(p["place"])

@@ -131,16 +131,31 @@ def test_the_estimate_is_carried_while_few_stems_go_and_made_again_from_the_samp
     words = {"unnamed_stems": 1000, "unnamed_words": {"point": 800, "low": 700, "high": 900}}
     never = lambda: stops(lambda: None, "the sample must not be read")              # noqa: E731
     stems = lambda n: {f"s{i}" for i in range(n)}                                   # noqa: E731
-    assert M.unnamed_words(words, stems(1000), never) == (words["unnamed_words"], {"sampled": 1000, "now": 1000})
-    assert M.unnamed_words(words, stems(980), never) == (words["unnamed_words"], {"sampled": 1000, "now": 980})     # DRIFT is 2%
-    assert stops(lambda: M.unnamed_words(words, stems(1001), never), "draw and judge a new sample")                # a stem the sample never saw
+    drawn = lambda: stems(1000)                                                     # noqa: E731
+    assert M.unnamed_words(words, stems(1000), never, drawn) == (words["unnamed_words"], {"sampled": 1000, "now": 1000})
+    assert M.unnamed_words(words, stems(980), never, drawn) == (words["unnamed_words"], {"sampled": 1000, "now": 980})     # DRIFT is 2%
+    assert stops(lambda: M.unnamed_words(words, stems(1001), never, drawn), "1 of them not among the 1000")              # a stem the sample never saw
+    # a stem the sample never saw stops the count also when the layers took others out, so that the number is lower
+    assert stops(lambda: M.unnamed_words(words, stems(990) | {"new"}, never, drawn), "draw and judge a new sample")
+    assert stops(lambda: M.unnamed_words(words, stems(900) | {"new"}, never, drawn), "(new)")
     # past DRIFT: the sampled stems that are still unnamed, by the rule of the count of distinct words
     sample = {"s0": "word", "s1": "word", "s2": "same", "s3": "name", "s4": "unclear", "s5": "not agreed", "s990": "word", "s995": "piece"}
-    got, rests = M.unnamed_words(words, stems(900), lambda: sample)
+    got, rests = M.unnamed_words(words, stems(900), lambda: sample, drawn)
     left = {"word": 2, "same": 1, "name": 1, "unclear": 1, "not agreed": 1}         # s990 and s995 are no longer unnamed
     assert got == D.estimate(900, left) and got["point"] == round(900 * 2.5 / 4) and got["low"] <= got["point"] <= got["high"]
     assert rests == {"sampled": 1000, "now": 900, "sample_still_unnamed": 6, "its_verdicts": {"word": 2, "same": 1, "name": 1, "unclear": 1, "not agreed": 1}}
     assert M.DRIFT == 0.02
+
+
+def test_a_share_is_rounded_once_from_its_counts():
+    """156 of 1,284 is 12.1495%: 12.1%. Its share in the figures, 0.1215, would give 12.2% if it were rounded again."""
+    n = {"translated": 156, "distinct_words": {"point": 1284, "low": 1023, "high": 1356}, "star": {"point": 0.1215, "low": 0.115, "high": 0.1525}}
+    assert M.star_pct(n) == {"point": "12.1%", "low": "11.5%", "high": "15.2%"} and M.pct(n["star"]["point"]) == "12.2%"
+    figs = {side: {"running": {"translated": 1215, "need": 10000, "share": 0.1215}, "spellings": {"translated": 1, "need": 3, "share": 0.3333}}
+            for side in ("lookup", "base", "current")} | {"north_star": n}
+    out = M.lines(figs)
+    assert out[0] == "plain lookup: running words translated 1215 of 10000 = 12.2%; distinct spellings translated 1 of 3 = 33.3%"   # 12.15 exactly
+    assert out[-1] == "north star: 156 of about 1284 = 12.1% (11.5% to 15.2%)"
 
 
 # ------------------------------------------------------------------------------------ the figures and the pages
@@ -174,10 +189,13 @@ def test_the_figures_add_up():
         assert sum(u["its_verdicts"].values()) == u["sample_still_unnamed"] <= w["sample"]["sampled"]
         assert n["unnamed_words"]["low"] <= n["unnamed_words"]["point"] <= n["unnamed_words"]["high"] <= u["now"]
     assert n["distinct_words"] == {k: n["dictionary_words"] + v for k, v in n["unnamed_words"].items()}
-    assert f["layers"][-1]["north_star"] == {k: n[k] for k in ("translated", "distinct_words", "star")}
+    assert f["layers"][-1]["north_star"] == {k: n[k] for k in ("translated", "distinct_words", "star", "unnamed_stems")}
+    left = u["sampled"]
     for l in f["layers"]:
         s = l["north_star"]
         assert s["translated"] == l["distinct_words_translated"] and s["star"]["point"] == round(s["translated"] / s["distinct_words"]["point"], 4), l["name"]
+        assert s["unnamed_stems"]["sampled"] == u["sampled"] and s["unnamed_stems"]["now"] <= left, l["name"]       # a layer only takes stems out
+        left = s["unnamed_stems"]["now"]
 
 
 def test_the_figures_hold_counts_only():
@@ -213,13 +231,19 @@ def test_the_page_says_what_the_figures_say():
     first = f["layers"][0]
     already = sum(first["was"].get(k, 0) for k in ("meaning", "grammar", "name"))
     assert f"{already} of its {first['places']} places were translated or named in the base already" in text
-    assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words, {pct(n['star']['point'])} (between {pct(n['star']['low'])} and {pct(n['star']['high'])})" in text
+    s = M.star_pct(n)                                                    # a share is divided from its counts and rounded once
+    assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words, {s['point']} (between {s['low']} and {s['high']})" in text
+    assert f"and {n['translated']} of about {n['distinct_words']['point']:,} distinct words ({s['point']})" in text
+    assert f"{n['translated']} of {n['distinct_words']['point']:,} is {100 * n['translated'] / n['distinct_words']['point']:.4f}%" in text
+    assert f"holds the share rounded to four places, {n['star']['point']}, and rounding that again gives {pct(n['star']['point'])}" in text
     assert f"{n['translated_by_the_lexicon']} by the lexicon of 2003 and {sum(n['translated_by_a_layer'].values())} by a later source" in text
     u = n["unnamed_stems"]
-    assert f"The layers make {u['sampled'] - u['now']} of those stems names or pieces, so {u['now']:,} are left" in text and f"at most {100 * M.DRIFT:.0f}% of the stems" in text
+    assert f"The layers make {u['sampled'] - u['now']} of those stems names, so {u['now']:,} are left" in text and f"at most {100 * M.DRIFT:.0f}% of the stems" in text
+    pieces = {l["name"]: l for l in f["layers"]}["unnamed"]["to"].get("meaning", 0)
+    assert f"the {pieces} pieces of translated words that `unnamed` lays are such places" in text
     assert f"made again from the {u['sample_still_unnamed']} sampled stems that are still unnamed" in text
     assert f"about {n['unnamed_words']['point']} of the {u['now']:,} are words of their own (between {n['unnamed_words']['low']} and {n['unnamed_words']['high']})" in text
-    assert f"from {pct(f['layers'][-2]['north_star']['star']['point'])} to {pct(n['star']['point'])}, is a correction of the count of words" in text
+    assert f"from {M.star_pct(f['layers'][-2]['north_star'])['point']} to {s['point']}, is a correction of the count of words" in text
     a = first["after"]                                                   # the map after the first layer alone
     gain = a["running"]["translated"] - b["running"]["translated"]
     names = a["running"]["named"] - b["running"]["named"]
@@ -237,7 +261,14 @@ def test_the_page_says_what_the_figures_say():
         assert f"{to.get('meaning', 0) + to.get('grammar', 0)} places become translated words and {to.get('name', 0)} names; all {l['places']} were open" in text, l["name"]
         assert set(l["was"]) <= {"hypothesis", "kind", "unknown"}, l["name"]
     stated = sum(l["why"].get("stated", 0) for l in f["layers"])
-    assert f"The {stated} stated places rest on one scholar" in text
+    assert f"The {stated} stated places rest on Rilly's readings of 2016 and 2021." in text
+    g5 = json.loads((PAGE.parent / "second_scholar_later_figures.json").read_text(encoding="utf-8"))
+    st = g5["statuses"]
+    assert (f"each of the {g5['entries']} meanings behind them beside what other scholars say: "
+            f"{st['agreed by two scholars'] + st['agreed by two scholars, with a dissent']} are stated by another scholar too "
+            f"({st['agreed by two scholars, with a dissent']} with a dissent), {st['disputed']} are disputed and {st['stated by one']} rest on Rilly alone") in text
+    g3 = json.loads((PAGE.parent / "unnamed_spellings_figures.json").read_text(encoding="utf-8"))["readings"]
+    assert f"{g3['pilot2']['kappa']:.2f} and {g3['full']['kappa']:.2f} for the two readings behind `unnamed`, against a bar of 0.6" in text
     # the coverage page's measure on the map as it stands is the last column of section 3, for the map with the layers
     assert f"Its measure on the map as it stands is the last column of section 3: {pct(c['running']['of_all'])}." in text
 
@@ -294,7 +325,7 @@ def test_the_reporting_skill_reads_these_figures():
 
 
 def test_the_figures_are_the_count_of_the_local_files():
-    needs("data/sources/v6", "data/rilly2003", *[l["file"] for l in M.LAYERS])
+    needs("data/sources/v6", "data/rilly2003", "data/sources/words/population.json", "data/sources/words/r2/result.json", *[l["file"] for l in M.LAYERS])
     assert M.figures() == figs()
 
 
