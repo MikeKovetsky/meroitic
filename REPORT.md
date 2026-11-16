@@ -944,3 +944,11 @@ to "names" for the stems that leave the count; the account of the first pilot's 
 lexicon reports for G5, the decoys called "partly", and the one status that rests on a proposal without a scholar's
 name; Mike's answer on the recount, recorded on every page that had called it unapproved.
 
+**The review of G3 and G5** (full tier, a fresh Opus agent at the highest effort): eleven findings fixed in two
+commits. The north star with four layers is 12.1%, not the 12.2% first given: the share had been rounded twice.
+The map's script now compares the stems themselves, not their number, with those the sample was drawn from. The
+39 stems that left the unnamed ones all became names. The pages' account of the first pilot's misses was
+corrected, and the times of every rule, launch, answer and count are now recorded and checked. Cost: 529,388
+subagent tokens and 37 minutes, from its task notification. Mike on the recount, 14:49: "why do you need my
+approval to recount? this is obvious you need to recount to show the up to date result?"
+
