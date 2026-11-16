@@ -1,7 +1,7 @@
 # The open spellings the lexicon does not hold (step G3)
 
-Status on 2026-11-16, 14:03: the first pilot missed two of its bars and is not taken (section 6); a second pilot with
-other places and corrected controls is set (section 7), and none of its checkers has answered yet. Working
+Status on 2026-11-16, 14:10: counted. The first pilot was not taken (section 6); the second pilot and the full pass met
+their bars (sections 8 and 10). What the step resolves is not yet a layer of the map (section 10).
 script (local until the step is counted): `data/sources/g3/run.py`. What the checkers are given:
 [`runs/prompts/G3_places.md`](../../runs/prompts/G3_places.md).
 
@@ -177,3 +177,57 @@ the 2% up to which the old estimate may be carried. So, before any of the full p
   except which stems are left.
 - The north star's "before us" stays equal to its "now": this step gives no word a meaning.
 
+## 10. The full pass: its bars are met (counted on 2026-11-16 at 14:10)
+
+50 fresh checkers answered all 1,125 places and their 112 controls. On the real places their kappa is 0.79
+(bar 0.6).
+
+| Control | Bar | First checker | Second checker |
+|---|---|---|---|
+| Translated words called a name | at most 10% | 4 of 75 | 4 of 75 |
+| Names called a name | at least 70% | 30 of 37 | 29 of 37 |
+
+With the second pilot's 100 places, all 1,225 places are judged:
+
+| Both checkers say the spelling is | Places |
+|---|---|
+| a word of its own | 828 |
+| a name | 111 |
+| a piece of a word or name beside it | 41 |
+| unclear | 128 |
+| not agreed | 117 |
+
+- **Two thirds are words of their own** (828 of 1,225): they stay open, and they are what is left to decipher
+  among these spellings.
+- **111 places are names.** They are laid as names, which need no meaning.
+- **41 places are pieces,** but the whole word both checkers name is a spelling the map holds as translated or
+  named for only 7 of them. The other 34 stay open.
+- **A caution on the pieces.** Of the 75 control words, which are words of their own, the checkers called 16 and 12 a
+  piece, mostly where a script's note showed that the word and its neighbour also stand joined elsewhere. No bar
+  was set on that. It touches the 7 pieces that are laid, not the names.
+
+**The map with this step as a layer** (the layer is written, `118` lines; it is laid by the map's script once the
+review of the earlier steps is done, so these numbers are provisional):
+
+| | Running words translated | Share | Distinct spellings translated | Share |
+|---|---|---|---|---|
+| Before this step | 4,149 of 7,230 | 57.4% | 814 of 2,917 | 27.9% |
+| With this step | 4,154 of 7,117 | 58.4% | 815 of 2,813 | 29.0% |
+
+The share rises because 113 running words no longer need a meaning; 5 more are translated (pieces of
+translated words). Nothing is deciphered by this step.
+
+**The north star,** counted by the rule of section 9. 39 of the 1,105 stems the map cannot name become names or
+pieces (most of the 111 name places were counted as names before, because an analyst had guessed so). Of the
+240 sampled stems 230 are still unnamed. From them, about 907 of the 1,066 stems still unnamed are words of
+their own (between 646 and 979), so the corpus holds about 1,284 distinct words (between 1,023 and
+1,356), and 156 of them have a meaning: 12.2% (between 11.5% and 15.2%), from 11.9%. No word got a
+meaning: the count of words was corrected. Before the project the share is the same.
+
+**Cost:** 62 agents (Opus, each a fresh one), 4,715,110 subagent tokens, from the task notifications: the first pilot
+458,438, the second 463,418, the full pass 3,793,254.
+
+**What this does not show.** A name here is a name by its place in the text, judged by one model twice; no source
+names these persons or places. The checkers found about four names in five among the controls and called about
+one known word in twenty a name, so some names are missed and a few of the 111 may be words. The 245 places
+that are unclear or not agreed stay open.

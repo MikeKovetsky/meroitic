@@ -1,6 +1,6 @@
 # A second scholar for the meanings Rilly states in 2016 and 2021 (step G5)
 
-Status on 2026-11-16: the rows, the decoys and the bars are set; no judge has answered yet. Working script (local
+Status on 2026-11-16, 14:04: counted, its bars are met (section 5). Figures: `second_scholar_later_figures.json`. Working script (local
 until the step is counted): `data/sources/g5/run.py`. What the judges are given:
 [`runs/prompts/G5_judges.md`](../../runs/prompts/G5_judges.md).
 
@@ -54,3 +54,36 @@ An entry with a row that both call "same" and a row that both call "other" is ag
 - "Same" is judged from two short statements. A later work that follows an older proposal is not an independent
   confirmation of it: a status says that two scholars state the meaning, not that it is proved.
 - No count of the map changes with this step.
+
+## 5. The result
+
+10 judges answered all 286 rows. On "same" against the rest their Cohen's kappa is 0.95 (bar 0.6); each
+called 1 of the 26 decoys "same" (bar: at most 10%). The bars are met.
+
+| Status of Rilly's later meaning | Entries |
+|---|---|
+| Agreed by two scholars | 18 |
+| Agreed by two scholars, with a dissent | 15 |
+| Disputed | 13 |
+| Stated by one | 20 |
+
+- **33 of the 66 meanings are also stated by another scholar;** for 15 of them a third scholar gives a different
+  one.
+- **13 are disputed:** no other scholar gives the same meaning, and at least one gives another.
+- **20 rest on Rilly alone,** 8 of them because no other scholar says anything of the entry.
+- Of the 25 words of the dictionary that step G4 laid with a meaning, 11 are agreed by two scholars, 4
+  disputed and 10 stated by one.
+
+The entries by status:
+
+- **Agreed by two scholars:** `-i (2)`, `-k (2)`, `-kete`, `-se (1)`, `-td`, `Aritene`, `Stqo`, `arede`, `aroẖe`, `asr`, `ato`, `mreke`, `nbr`, `sr`, `wese`, `wi (1)`, `ḫr`, `ẖol`.
+- **Agreed, with a dissent:** `-wi (5)`, `Aqedise`, `Ms`, `bqo`, `kdke`, `l (2)`, `mde`, `pqr`, `ps-`, `sete`, `t- (1)`, `tlt`, `wide`, `wte`, `yiroẖe`.
+- **Disputed:** `-lw (1)`, `-w (1)`, `ad`, `eqe-`, `erk`, `mlowi`, `nobow`, `pl (2)`, `tk (3)`, `wse`, `ye- (2)`, `yerki`, `yet (2)`.
+- **Stated by one:** `-bete-`, `-bte`, `-bto`, `-kese`, `-ketese`, `-lowi`, `-te (4)`, `Dqri`, `abrse`, `anese`, `aqebese`, `kb`, `ntk`, `plete`, `pso`, `pẖo`, `tk (1)`, `tḫ (1)`, `yel`, `yi-`.
+
+The judges' pairs of verdicts on the 260 real rows: same / same: 83; no meaning / no meaning: 56; other / other: 55; partly / partly: 40; other / partly: 7; other / no meaning: 5; no meaning / other: 4; partly / same: 3; partly / no meaning: 2; same / no meaning: 2; same / partly: 1; partly / other: 1; no meaning / partly: 1.
+
+Cost: 704,095 subagent tokens, from the task notifications.
+
+A disputed meaning is not a wrong one. The older proposals often come from before the texts that Rilly's later
+analysis uses were read as they are now; the status says only that the scholars in hand do not agree.
