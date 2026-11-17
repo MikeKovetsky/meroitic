@@ -26,7 +26,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 |---|---|---|
 | `data/otten/` | A copy of Otten and Anastasopoulos's repository, Meroitic-Corpus: the padded corpus file, the per-scholar example files, their code and embeddings. No licence stated | 23.0 MB, 52 files |
 | `data/corpus.jsonl`, `corpus_v2.jsonl`, `corpus_v2_c3_snapshot.jsonl`, `corpus_v3.jsonl`, `corpus_v5.jsonl`, `texts.jsonl` | The corpora of each stage, from Otten's file with the copies removed to the 899 texts of `corpus_v5` | 0.1 to 0.2 MB each |
-| `data/corpus_v6.jsonl` | One row per inscription with real names: 570 inscriptions, 10,649 words (since the Faras texts, 2026-11-17; the map holds the 548 of before, 10,290 words). Built by `src/v6/build.py` | 0.2 MB |
+| `data/corpus_v6.jsonl` | One row per inscription with real names: 570 inscriptions, 10,649 words (since the Faras texts, 2026-11-17; the map holds the 548 of before, 10,290 words). Built by `src/v6/build.py` | 0.3 MB |
 | `data/name_pools.json`, `data/swap_partners.json` | The two pools of swapped names recovered from Otten's file, and which text was swapped with which | 0.3 MB |
 | `data/rilly2003/` | Rilly's lexicon of 2003 as typed entries (headword, kind, status, page, meaning, other scholars' proposals), extracted from the scans of his thesis. In copyright | 0.6 MB, 7 files |
 | `data/nes/*.tsv` | Word lists of ten Northern East Sudanic languages (5,668 rows by the folder's README), 330 proto-forms and 82 sound correspondences. Basic vocabulary for the most part; `data/nes/README.md` names the source of every row | 2.3 MB |
