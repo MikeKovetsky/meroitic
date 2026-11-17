@@ -12,8 +12,16 @@ What a pack shows of a word (token): the map's gloss in square brackets for a wo
 hidden entry of such a word and for an open word (levels hypothesis, unknown, kind), with the glosses of the
 endings the map names beside it; a god's name in English; a code that says person, place or name; a number;
 `[lost]`. No Meroitic letters: a gloss that names a Meroitic word is replaced or has the word blanked. The key says
-what each code is, and for a hidden word the meaning its answers are judged against: the project's words of the
-public table of the lexicon's sure entries, else the lexicon's English, else the map's reading.
+what each code is, and for a hidden word the meaning its answers are judged against, taken as in track A
+(src/nubian.py, wording()): the public table's short wording, else the wording the layers' lines state for a word
+a layer gives its meaning, else the lexicon's English. A meaning that only names another word ("another form of
+akroro") is replaced by that word's meaning where the map gives it one; a word left without a meaning of its own
+is hidden like the others but left out of the count (the page's 22:15 answers 2 and 3).
+
+The arm with the frames reads a digest of the six files of the frame builders, written by `packs`
+(frames_digest.md): each frame's id, name, place in a text and monuments, and each slot's number, meaning, wording
+and whether it may be left out or repeated, without the sources' passages and notes. There, a meaning that names no
+frame and slot of the digest counts as "none", and the number of such answers is reported (answers 4 and 6).
 
 A hidden word that stands in several packs is answered in each. The count takes it as given when both aligners
 of one of its packs give it a meaning, and as right only when it is right in every pack where it is given
@@ -22,9 +30,11 @@ of one of its packs give it a meaning, and as right only when it is right in eve
 Everything is read and written under data/sources/frames/ (local only: the packs show the map), except `public`.
 The six files frames_*.json there are the frame builders'; this script never writes them.
 
-  python3 -I src/frames.py texts          the texts with their words and the four counts of the page (texts.json)
+  python3 -I src/frames.py texts          the texts with their words and the four counts of the page (texts.json;
+                                          written again only while no aligner has answered and the folds stay)
   python3 -I src/frames.py folds          the known words dealt into two halves (folds.json; drawn once)
-  python3 -I src/frames.py packs          the packs of each fold, the key and the aligners' briefs (packs/, briefs/)
+  python3 -I src/frames.py packs          the packs of each fold, the key, the aligners' briefs and the digest of
+                                          the frames (packs/, briefs/, frames_digest.md)
   python3 -I src/frames.py answers-check  each aligner's file against its pack and the frames (answers/<arm>/<pack>_<a|b>.jsonl)
   python3 -I src/frames.py judge-packs    the rows for two judges: answers for hidden words, each with a decoy (judge/)
   python3 -I src/frames.py count          gate B for the arm with the frames, the same count without (result.json)
@@ -34,7 +44,6 @@ The six files frames_*.json there are the frame builders'; this script never wri
 What the aligners and the judges are given is in runs/prompts/FRAMES_aligners.md and FRAMES_judges.md.
 """
 import collections
-import csv
 import json
 import pathlib
 import random
@@ -44,6 +53,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(ROOT / "src" / "v6")]
 import coverage as C                                    # noqa: E402
+import nubian as A                                      # noqa: E402  track A: its meanings, taken the same way here
 import recurring as W                                   # noqa: E402
 import themap as M                                      # noqa: E402
 import words as D                                       # noqa: E402
@@ -52,7 +62,7 @@ HOME = ROOT / "data/sources/frames"
 FOLDER = "data/sources/frames"                           # as the briefs name it
 REPO = "/Users/mike/repos/mike/meroitic"                 # where the agents work
 PUBLIC = ROOT / "data/discovery/outside_frames_figures.json"
-TABLE = ROOT / "data/discovery/lexicon_statuses.tsv"     # the meanings in the project's own words (public)
+DIGEST = "frames_digest.md"                              # what the arm with the frames reads, written by `packs`
 SEED = 20261116
 LAYERS = ("recurring", "rare_sure", "rare_later", "unnamed", "rare_millet", "leftover", "leftover_stems")   # the map when the test was set
 LONG = 100                                               # words: a long text, and a pack of its own
@@ -137,8 +147,7 @@ the corpus has it, or by a code (`{code}`). You never see how a word is written.
 the marks.
 
 A code stands for one word: the same code is the same word wherever it stands, in this pack and in the others. A
-code may be any kind of word: a noun, a verb, a title, an epithet, an adjective, a particle. For some of the codes
-a meaning is known and is held back here, as a check; nothing in a code tells which.
+code may be any kind of word: a noun, a verb, a title, an epithet, an adjective, a particle.
 
 {given}
 
@@ -171,25 +180,27 @@ them you gave a meaning.
 """
 # The two variants of the brief: what the aligner is given, what a reason is, the line and the fields of an answer.
 GIVEN = {
-    "frames": """You are also given six files of frames:
+    "frames": """You are also given a digest of frames:
 
-{files}
+    {repo}/{folder}/{digest}
 
-They were built from the Egyptian texts of the kings of Kush (8th to 1st century BC) in their editors' English,
-by readers who saw no Meroitic text. A frame is a run of slots in a fixed order that stands in at least three of
-those texts. Each file lists its frames under `frames`: a frame has an id (`K3`) and its slots in order, each with
-its number (`n`), its meaning and the wording of the translation. Read the six files first. Then read each text
-of the pack against them: where the readings, the names and the numbers of a Meroitic text follow a frame, a code
-that stands in one of the frame's slots may have that slot's meaning.""",
+The frames were built from the Egyptian texts of the kings of Kush (8th to 1st century BC) in their editors'
+English, by readers who saw no Meroitic text. A frame is a run of slots in a fixed order that stands in at least
+three of those texts. A frame of the digest has an id (`K3`), a name, where it stands in a text and on which
+monuments; then its slots in order, each with its number, its meaning, the wording of the translation, and
+whether it may be left out or repeated. Read the digest first. Then read each text of the pack against it: where
+the readings, the names and the numbers of a Meroitic text follow a frame, a code that stands in one of the
+frame's slots may have that slot's meaning.""",
     "plain": """You are given the pack alone. Read each text for what the readings, the names, the numbers and the order of
 the words say about the codes among them.""",
 }
 REASON = {"frames": ": a frame that the words around it follow, with the code in one of its slots", "plain": ""}
 LINE = {"frames": '{{"code": "{code}", "meaning": "a few English words, or none", "frame": "K3", "slot": 2, "why": "one short sentence"}}',
         "plain": '{{"code": "{code}", "meaning": "a few English words, or none", "why": "one short sentence"}}'}
-FIELDS = {"frames": '- "frame" and "slot": the frame the meaning rests on, by its id in the six files, and the number of its slot.\n'
-                    '  Every meaning you give rests on one; null for both where you give "none".\n', "plain": ""}
-ONLY = {"frames": "the pack and the six files of frames", "plain": "the pack"}
+FIELDS = {"frames": '- "frame" and "slot": the frame the meaning rests on, by its id in the digest, and the number of its slot.\n'
+                    '  Every meaning you give rests on one: a meaning without a frame and a slot of the digest counts as "none".\n'
+                    '  Give null for both where you give "none".\n', "plain": ""}
+ONLY = {"frames": "the pack and the digest of frames", "plain": "the pack"}
 
 JUDGE_BRIEF = """# Does an answer give the meaning of a word? {n} rows
 
@@ -329,12 +340,15 @@ def the_map():
     return M.current(upto=len(LAYERS))
 
 
+def layers_of():
+    """The lines of the layers the map had when the test was set."""
+    return [(l["name"], M.lines_of(l)) for l in M.LAYERS[:len(LAYERS)]]
+
+
 def with_a_meaning(gl, lex):
-    """The dictionary words in use that have a meaning on the map: those the lexicon calls established or probable
-    and those a layer gives one from a later source (the north star's count, src/themap.py)."""
-    layers = [(l["name"], M.lines_of(l)) for l in M.LAYERS[:len(LAYERS)]]
-    known, _, _ = D.population_of(gl, lex, fix=True)
-    return set(D.translated(known, lex)) | {w for v in M.given_by_layers(layers, known, lex).values() for w in v}
+    """The dictionary words in use that have a meaning on the map, as track A counts them (src/nubian.py,
+    given_by()): those the lexicon calls established or probable and those a layer gives one from a later source."""
+    return set(A.given_by(gl, lex, layers_of()))
 
 
 def chosen(gl, rows):
@@ -368,15 +382,33 @@ def is_piece(g):
     return g.get("why") == "piece" or bool(PIECE.search(g.get("gloss") or "")) or (not g.get("parts") and g["level"] in W.READ + ("name",))
 
 
-def meaning_to_judge(e, lex, table, glosses):
-    """(the meaning a hidden word's answers are judged against, where it is from): the project's own words of the
-    public table; else the lexicon's English; else, where the lexicon gives none (a word a layer gave its meaning
-    from a later source), the map's reading at its places."""
-    if (table.get(e) or "").strip():
-        return table[e].strip(), "the project's words (lexicon_statuses.tsv)"
-    if (lex[e].get("meaning") or "").strip():
-        return lex[e]["meaning"].strip(), "the lexicon's English"
-    return collections.Counter(TAIL.sub("", g) for g in glosses).most_common(1)[0][0], "the map's reading (a later source, laid by a layer)"
+def only_names(meaning):
+    """The word a meaning only names ("another form of akroro", "probably a form of mlowi (noun)"), or None where
+    the meaning says more than that."""
+    m = ONLY_REFERS.match(meaning or "")
+    if not m:
+        return None
+    rest = re.sub(r"\s+\([^()]*\)\s*$", "", meaning[m.end():]).strip(" .,;:")
+    return rest if re.fullmatch(r"[^\W\d_][^\s,;:]*", rest) else None
+
+
+def meaning_to_judge(e, said, by):
+    """(the meaning a hidden word's answers are judged against, where it is from, the word it is taken from,
+    whether the word has a meaning of its own). The meaning is said(e), taken as in track A (src/nubian.py,
+    wording()). One that only names another word (only_names()) is replaced by that word's meaning where the map
+    gives it one: the one word with a meaning on the map (`by`) whose letters are the named ones, and whose own
+    meaning says more than another name. Else the word has no meaning of its own: it is hidden like the others and
+    left out of the count (the page's 22:15 answers 2 and 3)."""
+    meaning, source = said(e)
+    named = only_names(meaning)
+    if named is None:
+        return meaning, source, "", True
+    hits = sorted(h for h in by if A.bare(h) == A.bare(named))
+    if len(hits) == 1:
+        other, where = said(hits[0])
+        if other and only_names(other) is None:
+            return other, f"{where}, of {hits[0]}", hits[0], True
+    return meaning, source, "", False
 
 
 def ending_gloss(e, lex, table, mero):
@@ -432,14 +464,17 @@ def texts_of(gl, rows, lex, table):
     judge against, what is known of each entry that is a part of a word, and the four counts."""
     ids = chosen(gl, rows)
     texts = [(t, gl[t]) for t in ids]
-    places = places_of(texts, with_a_meaning(gl, lex))
+    layers = layers_of()
+    by = A.given_by(gl, lex, layers)
+    places = places_of(texts, set(by))
     mero = meroitic(gl, lex)
+    said = lambda e: A.wording(e, lex, table, layers, by)                       # noqa: E731
     known = {}
     for e, ps in places.items():
-        meaning, source = meaning_to_judge(e, lex, table, [gl[t][i].get("gloss") or "" for t, i in ps])
-        reading = shown(meaning, mero, cut=source != "the project's words (lexicon_statuses.tsv)") or blank(clean(meaning), mero)
+        meaning, source, taken, own = meaning_to_judge(e, said, by)
+        reading = shown(meaning, mero, cut=source != "the public table") or blank(clean(meaning), mero)
         known[e] = {"kind": lex[e].get("kind") or "", "places": len(ps), "texts": len({t for t, _ in ps}), "meaning": meaning, "from": source,
-                    "names_another_word": bool(ONLY_REFERS.search(meaning)), "reading": reading}
+                    "taken_from": taken, "own_meaning": own, "reading": reading}
     gods = god_names(texts, lex, mero)
     entries = {}
     for e in sorted({p.get("entry") for _, gs in texts for g in gs for p in g.get("parts") or []} & set(lex)):
@@ -465,18 +500,20 @@ def texts_of(gl, rows, lex, table):
     return {"counts": counts_of(texts, places), "seed": SEED, "layers": list(LAYERS), "texts": out, "known": known, "entries": entries}
 
 
-def the_table():
-    with open(TABLE, encoding="utf-8", newline="") as f:
-        return {r["headword"]: r["meaning_in_our_words"] for r in csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)}
+the_table = A.the_table                                 # headword -> the public table's short wording
 
 
 def texts():
+    """texts.json. Once the folds are drawn it is written again only while no aligner has answered, and only if the
+    known words are the ones the folds were drawn from, so that the folds stay as drawn."""
     data = texts_of(the_map(), W.corpus_rows(), W.lexicon(), the_table())
     print(data["counts"])
     if data["counts"] != PAGE:
         raise SystemExit(f"the counts are not the page's {PAGE}: nothing is written")
-    if (HOME / "folds.json").exists() and (HOME / "texts.json").exists() and read("texts.json") != data:
-        raise SystemExit("the folds are drawn and the texts would differ from texts.json: nothing is written")
+    if answer_files():
+        raise SystemExit("aligners have answered: the texts are not written again")
+    if (HOME / "folds.json").exists() and read("folds.json") != folds_of(data["known"], read("folds.json")["seed"]):
+        raise SystemExit("the folds are drawn from other known words than these texts hold: nothing is written")
     write("texts.json", data)
 
 
@@ -651,15 +688,14 @@ def pack_text(name, toks, codes):
 
 
 def decoys_of(hidden, known, rng):
-    """entry -> the hidden word whose meaning is its decoy: another hidden word of the fold and of its kind, drawn
-    by lot among those whose meaning shares no content word with its own (two words for "to give" are no decoys
-    of each other) and says what its word means (not "another form of ..."); of another kind where the kind has
-    none. One decoy a hidden word: every answer for the word is paired with the same meaning, so that the decoys
-    are counted as the words are."""
-    out = {}
-    for e in sorted(hidden):
-        far = [o for o in sorted(hidden) if o != e and not known[o]["names_another_word"]
-               and not W.content(known[o]["meaning"]) & W.content(known[e]["meaning"])]
+    """entry -> the hidden word whose meaning is its decoy, for each hidden word with a meaning of its own: another
+    such hidden word of the fold and of its kind, drawn by lot among those whose meaning shares no content word with
+    its own (two words for "to give" are no decoys of each other); of another kind where the kind has none. One
+    decoy a hidden word: every answer for the word is paired with the same meaning, so that the decoys are counted
+    as the words are. A word without a meaning of its own is not counted and has none."""
+    out, counted = {}, sorted(e for e in hidden if known[e]["own_meaning"])
+    for e in counted:
+        far = [o for o in counted if o != e and not W.content(known[o]["meaning"]) & W.content(known[e]["meaning"])]
         same = [o for o in far if known[o]["kind"] == known[e]["kind"]]
         if not far:
             raise SystemExit(f"no hidden word of the fold has a meaning apart from that of {e}: it has no decoy")
@@ -691,8 +727,8 @@ def build(data, halves, seed=SEED):
         for c, k in of.items():
             if k["sort"] == "hidden":
                 e = k["entry"]
-                k |= {"meaning": known[e]["meaning"], "from": known[e]["from"], "names_another_word": known[e]["names_another_word"],
-                      "decoy": decoy[e], "decoy_meaning": known[decoy[e]]["meaning"]}
+                k |= {"meaning": known[e]["meaning"], "from": known[e]["from"], "taken_from": known[e]["taken_from"],
+                      "own_meaning": known[e]["own_meaning"], "decoy": decoy.get(e, ""), "decoy_meaning": known[decoy[e]]["meaning"] if e in decoy else ""}
             elif k.get("entry") in known:
                 k["known_where_the_map_is_sure"] = True
         in_pack = {}
@@ -716,8 +752,8 @@ def build(data, halves, seed=SEED):
 
 def brief_of(arm, pack, aligner, n, code="W012"):
     """The brief of one aligner: the arm's variant, with its pack, its answers file and the number of codes."""
-    files = "\n".join(f"    {REPO}/{FOLDER}/frames_{k}.json   ({what})" for k, what in FRAMES.items())
-    return ALIGNER_BRIEF.format(repo=REPO, folder=FOLDER, pack=pack, code=code, n=n, given=GIVEN[arm].format(files=files),
+    given = GIVEN[arm].format(repo=REPO, folder=FOLDER, digest=DIGEST)
+    return ALIGNER_BRIEF.format(repo=REPO, folder=FOLDER, pack=pack, code=code, n=n, given=given,
                                 reason=REASON[arm], line=LINE[arm].format(code=code), fields=FIELDS[arm], only=ONLY[arm],
                                 answers=f"{FOLDER}/answers/{arm}/{pack}_{aligner}.jsonl")
 
@@ -726,9 +762,49 @@ def answer_files():
     return sorted((HOME / "answers").glob("*/*.jsonl")) if (HOME / "answers").exists() else []
 
 
+def the_frames():
+    """angle -> the frame builders' file of that angle (frames_<angle>.json); {} while one of the six is missing."""
+    paths = {k: HOME / f"frames_{k}.json" for k in FRAMES}
+    if not all(p.exists() for p in paths.values()):
+        return {}
+    return {k: json.loads(p.read_text(encoding="utf-8")) for k, p in paths.items()}
+
+
+def listed(x):
+    """A field of a frame or a slot as text: a list joined, a text as it is."""
+    return "; ".join(map(str, x)) if isinstance(x, list) else str(x or "")
+
+
+def digest_of(files):
+    """What the arm with the frames reads (the page's 22:15 answer 4): the frames of the six files, each with its
+    id, name, place in a text and monuments, and each slot with its number, meaning, wording and whether it may be
+    left out or repeated. The sources' passages and the notes are left out. `files`: the_frames()."""
+    out = ["# The frames: a digest", "",
+           "Frames built from the Egyptian texts of the kings of Kush (8th to 1st century BC) in their editors' English, by",
+           "readers who saw no Meroitic text. A frame is a run of slots in a fixed order that stands in at least three of",
+           "those texts. Each frame gives its id, its name, where it stands in a text and on which monuments; then its",
+           "slots in order: the slot's number, its meaning, the wording of the translation, and whether it may be left out",
+           "or repeated.", ""]
+    for k, what in FRAMES.items():
+        frames = files[k].get("frames") or []
+        out += [f"## {k}: {what} ({len(frames)} frames)", ""]
+        for f in frames:
+            out += [f"### {f['id']}. {listed(f.get('name'))}", "", f"Where: {listed(f.get('where'))}. Monuments: {listed(f.get('monuments'))}.", ""]
+            for s in f.get("slots") or []:
+                marks = [m for m, on in (("may be left out", s.get("optional")), ("may repeat", s.get("repeats"))) if on]
+                wording = "; ".join(f'"{w}"' for w in s["wording"]) if isinstance(s.get("wording"), list) else f'"{listed(s.get("wording"))}"'
+                out.append(f"{s['n']}. {listed(s.get('meaning'))}. Wording: {wording}." + (f" ({'; '.join(marks)})" if marks else ""))
+            out.append("")
+    return "\n".join(out)
+
+
 def packs():
     if answer_files():
         raise SystemExit("aligners have answered: the packs are not written again")
+    files = the_frames()
+    if not files:
+        raise SystemExit("the six files of frames are not all there: the digest the arm with the frames reads cannot be written")
+    write_text(DIGEST, digest_of(files))
     files, key = build(read("texts.json"), read("folds.json")["halves"])
     for name, text in files.items():
         write_text(f"packs/{name}.md", text)
@@ -756,15 +832,18 @@ def meaning_given(answer):
 
 
 def frame_slots():
-    """frame id -> the numbers of its slots, from the six files of the frame builders; {} while one is missing."""
-    out = {}
-    for k in FRAMES:
-        f = HOME / f"frames_{k}.json"
-        if not f.exists():
-            return {}
-        for frame in json.loads(f.read_text(encoding="utf-8")).get("frames") or []:
-            out[frame["id"]] = {slot.get("n") for slot in frame.get("slots") or []}
-    return out
+    """frame id -> the numbers of its slots: the frames of the digest, from the six files it is made of; {} while
+    one of them is missing."""
+    return {frame["id"]: {slot.get("n") for slot in frame.get("slots") or []}
+            for f in the_frames().values() for frame in f.get("frames") or []}
+
+
+def slots_in_hand():
+    """frame_slots(), for a command that counts answers: it stops while one of the six files is missing."""
+    frames = frame_slots()
+    if not frames:
+        raise SystemExit("the six files of frames are not all there: the frames and slots the answers name cannot be checked")
+    return frames
 
 
 def slot_of(answer):
@@ -773,11 +852,22 @@ def slot_of(answer):
     return int(slot) if isinstance(slot, str) and slot.strip().isdigit() else slot
 
 
-def check_answers(text, codes, arm="plain", frames=None):
+def counted(answer, arm, frames):
+    """The meaning an answer gives as the count takes it: meaning_given(); in the arm with the frames only where the
+    answer names a frame and one of its slots of the digest (`frames`: frame_slots()), and else None, as "none"
+    (the page's 22:15 answer 6)."""
+    m = meaning_given(answer)
+    if m is None or arm != "frames":
+        return m
+    frame = answer.get("frame")
+    return m if isinstance(frame, str) and slot_of(answer) in frames.get(frame, ()) else None
+
+
+def check_answers(text, codes):
     """(code -> its line, what is wrong with an aligner's file): every line a JSON object, every code of the pack
-    answered once and no other, a meaning in each (a text, "none" included), and with the frames a frame and a
-    slot for every meaning that is not "none": one of the frames of the six files (`frames`: frame_slots()),
-    and one of its slots."""
+    answered once and no other, and a meaning in each (a text, "none" included). In the arm with the frames, a
+    meaning that names no frame and slot of the digest is no fault of the file: the count takes it as "none"
+    (counted())."""
     got, wrong = {}, []
     for n, line in enumerate((l for l in text.splitlines() if l.strip()), 1):
         try:
@@ -792,10 +882,6 @@ def check_answers(text, codes, arm="plain", frames=None):
             wrong.append(f"{c} is answered twice")
         elif not isinstance(a.get("meaning"), str) or not a["meaning"].strip():
             wrong.append(f"{c} has no meaning (\"none\" is one)")
-        elif arm == "frames" and meaning_given(a) is not None and (not a.get("frame") or a.get("slot") is None):
-            wrong.append(f"{c} has a meaning that names no frame and slot")
-        elif arm == "frames" and meaning_given(a) is not None and frames and slot_of(a) not in frames.get(a["frame"], ()):
-            wrong.append(f"{c} names a frame or a slot that the six files do not have")
         else:
             got[c] = a
     missing = [c for c in codes if c not in got]
@@ -806,7 +892,7 @@ def check_answers(text, codes, arm="plain", frames=None):
 
 def the_answers(key, folder=None):
     """(arm, pack, aligner) -> (code -> line) for every aligner's file, and what is wrong or missing, by file."""
-    folder, got, wrong, frames = folder or HOME / "answers", {}, {}, frame_slots()
+    folder, got, wrong = folder or HOME / "answers", {}, {}
     for arm in ARMS:
         for fold in FOLDS:
             for pack, codes in key["folds"][str(fold)]["packs"].items():
@@ -815,18 +901,20 @@ def the_answers(key, folder=None):
                     if not f.exists():
                         wrong[f"{arm}/{f.name}"] = ["no file"]
                         continue
-                    got[arm, pack, a], bad = check_answers(f.read_text(encoding="utf-8"), codes, arm, frames)
+                    got[arm, pack, a], bad = check_answers(f.read_text(encoding="utf-8"), codes)
                     if bad:
                         wrong[f"{arm}/{f.name}"] = bad
     return got, wrong
 
 
 def answers_check():
-    key = read("packs/key.json")
+    key, frames = read("packs/key.json"), slots_in_hand()
     got, wrong = the_answers(key)
     for (arm, pack, a), lines in sorted(got.items()):
         given = sum(meaning_given(x) is not None for x in lines.values())
+        loose = given - sum(counted(x, arm, frames) is not None for x in lines.values())
         print(f"{arm}/{pack}_{a}: {len(lines)} of {len(key['folds'][pack[1]]['packs'][pack])} codes, {given} with a meaning"
+              + (f", {loose} of them without a frame and slot of the digest (counted as none)" if loose else "")
               + ("" if f"{arm}/{pack}_{a}.jsonl" not in wrong else "  NOT VALID"))
     for f, bad in sorted(wrong.items()):
         print(f"{f}: " + "; ".join(bad))
@@ -837,14 +925,15 @@ def answers_check():
 
 # ----------------------------------------------------------------------------------------------------- the judges
 
-def hidden_answers(key, got):
-    """Every answer that gives a hidden word a meaning: (arm, fold, pack, aligner, code) -> the meaning given."""
+def hidden_answers(key, got, frames):
+    """Every answer that gives a counted hidden word (one with a meaning of its own) a meaning as the count takes
+    it (counted()): (arm, fold, pack, aligner, code) -> the meaning given."""
     out = {}
     for (arm, pack, a), lines in got.items():
         codes = key["folds"][pack[1]]["codes"]
         for c, x in lines.items():
-            m = meaning_given(x)
-            if m is not None and codes[c]["sort"] == "hidden":
+            m = counted(x, arm, frames)
+            if m is not None and codes[c]["sort"] == "hidden" and codes[c]["own_meaning"]:
                 out[arm, int(pack[1]), pack, a, c] = m
     return out
 
@@ -892,11 +981,11 @@ def judged(folder):
 def judge_packs():
     if judged("judge"):
         raise SystemExit("the judges have answered: their packs are not written again")
-    key = read("packs/key.json")
+    key, frames = read("packs/key.json"), slots_in_hand()
     got, wrong = the_answers(key)
     if wrong:
         raise SystemExit(f"{len(wrong)} answer files are missing or not valid (answers-check): the judges get every answer at once")
-    rows = judge_rows(key, hidden_answers(key, got))
+    rows = judge_rows(key, hidden_answers(key, got, frames))
     write("judge/key.json", {"rows": rows, "packs": write_rows("judge", JUDGE_BRIEF, rows, "J")})
     print(len(rows), "rows in", -(-len(rows) // JUDGE_PACK), "packs for each of the two judges")
 
@@ -960,18 +1049,20 @@ def gate(f, kappa, complete=True):
 
 
 def hidden_words(key):
+    """The hidden words the count takes: those with a meaning of their own (the page's 22:15 answer 3)."""
     return [{"fold": int(f), "code": c} | {x: k[x] for x in ("entry", "packs", "meaning", "decoy_meaning")}
-            for f, fold in key["folds"].items() for c, k in fold["codes"].items() if k["sort"] == "hidden"]
+            for f, fold in key["folds"].items() for c, k in fold["codes"].items() if k["sort"] == "hidden" and k["own_meaning"]]
 
 
-def open_pairs(key, got):
-    """(fold, pack, code) -> the two answers of the aligners with the frames, for every open word that both give a meaning."""
+def open_pairs(key, got, frames):
+    """(fold, pack, code) -> the two answers of the aligners with the frames, for every open word that both give a
+    meaning as the count takes it (counted())."""
     out = {}
     for fold in FOLDS:
         for pack, codes in key["folds"][str(fold)]["packs"].items():
             mine = [got.get(("frames", pack, a), {}) for a in ALIGNERS]
             for c in codes:
-                ms = [meaning_given(x.get(c)) for x in mine]
+                ms = [counted(x.get(c), "frames", frames) for x in mine]
                 if key["folds"][str(fold)]["codes"][c]["sort"] == "open" and None not in ms:
                     out[fold, pack, c] = [x[c] for x in mine]
     return out
@@ -1000,18 +1091,22 @@ def unordered(a, b):
 
 
 def count():
-    key = read("packs/key.json")
+    key, frames = read("packs/key.json"), slots_in_hand()
     got, wrong = the_answers(key)
     judge = read("judge/key.json") if (HOME / "judge/key.json").exists() else {"rows": {}, "packs": {}}
     seen = verdicts_of("judge", judge["packs"])
     by_pair = {pair(a, m): seen[r] for r, (a, m) in judge["rows"].items()}
-    given = hidden_answers(key, got)
+    given = hidden_answers(key, got, frames)
+    loose = sum(meaning_given(x) is not None and counted(x, "frames", frames) is None
+                for (arm, _, _), lines in got.items() if arm == "frames" for x in lines.values())
+    uncounted = sum(k["sort"] == "hidden" and not k["own_meaning"] for f in key["folds"].values() for k in f["codes"].values())
     unjudged = sorted({pair(m, x) for (arm, fold, pack, a, c), m in given.items() for k in [key["folds"][str(fold)]["codes"][c]]
                        for x in (k["meaning"], k["decoy_meaning"]) if None in by_pair.get(pair(m, x), [None])})
     complete = not wrong and not unjudged
     both = [tuple(v) for v in seen.values() if None not in v]
     kappa, two = W.kappa(both), W.kappa([(a == "same", b == "same") for a, b in both])     # the bar is on the three verdicts
     res = {"complete": complete, "files_missing_or_not_valid": len(wrong), "pairs_without_two_verdicts": len(unjudged),
+           "frames_meanings_without_a_frame_and_slot": loose, "hidden_without_a_meaning_of_their_own": uncounted,
            "judges": {"rows": len(judge["rows"]), "judged_by_both": len(both), "kappa": None if kappa is None else round(kappa, 4),
                       "kappa_same_or_not": None if two is None else round(two, 4),
                       "verdicts": [dict(collections.Counter(v[j] for v in both).most_common()) for j in (0, 1)]}}
@@ -1024,7 +1119,7 @@ def count():
         o = read("open/key.json")
         ov = verdicts_of("open", o["packs"])
         said = {unordered(*o["rows"][r]): ov[r] for r in o["rows"]}
-        res["open"] = open_figures(key, open_pairs(key, got), lambda a, b: said.get(unordered(a, b)))
+        res["open"] = open_figures(key, open_pairs(key, got, frames), lambda a, b: said.get(unordered(a, b)))
     write("result.json", res)
     print(json.dumps({k: (v if k not in ARMS else {x: y for x, y in v.items() if x != "words"}) for k, v in res.items() if k != "open"},
                      ensure_ascii=False, indent=1))
@@ -1040,7 +1135,7 @@ def open_packs():
     key = read("packs/key.json")
     got, _ = the_answers(key)
     pairs = {}
-    for (fold, pack, c), (a, b) in sorted(open_pairs(key, got).items()):
+    for (fold, pack, c), (a, b) in sorted(open_pairs(key, got, slots_in_hand()).items()):
         pairs.setdefault(unordered(meaning_given(a), meaning_given(b)), [meaning_given(a), meaning_given(b)])
     order = sorted(pairs)
     random.Random(SEED).shuffle(order)
@@ -1061,7 +1156,8 @@ def figures():
                 stands[len(k["packs"])] += 1
     out = {"counts": data["counts"], "seed": SEED, "layers": list(LAYERS), "bars": BARS,
            "known_words": {"meaning_from": dict(collections.Counter(k["from"] for k in data["known"].values()).most_common()),
-                           "meaning_names_another_word": sum(k["names_another_word"] for k in data["known"].values()),
+                           "meaning_taken_from_another_word": sum(bool(k["taken_from"]) for k in data["known"].values()),
+                           "without_a_meaning_of_their_own": sum(not k["own_meaning"] for k in data["known"].values()),
                            "by_kind": dict(collections.Counter(k["kind"] or "no kind" for k in data["known"].values()).most_common()),
                            "by_packs_they_stand_in": {str(n): c for n, c in sorted(stands.items())},
                            "in_more_than_one_pack": sum(c for n, c in stands.items() if n > 1)},

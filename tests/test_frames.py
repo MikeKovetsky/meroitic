@@ -44,6 +44,17 @@ def stops(fn, part):
 
 
 @contextlib.contextmanager
+def swapped(obj, name, value):
+    """A module's value replaced for the length of a check."""
+    old = getattr(obj, name)
+    setattr(obj, name, value)
+    try:
+        yield
+    finally:
+        setattr(obj, name, old)
+
+
+@contextlib.contextmanager
 def home():
     """The script's folder as an empty one, for a check that writes; what the commands print is not shown."""
     old = F.HOME
@@ -71,7 +82,7 @@ ENTRIES = {
     "Amni": {"class": "name", "kind": "god name", "god": "Amun"}, "Amnx": {"class": "name", "kind": "god name"},
     "Pedeme": {"class": "name", "kind": "place name"}, "Ntkmni": {"class": "name", "kind": "person name"},
 }
-KNOWN = {e: {"kind": ENTRIES[e]["kind"], "places": 1, "texts": 1, "meaning": m, "from": "made up", "names_another_word": False, "reading": m}
+KNOWN = {e: {"kind": ENTRIES[e]["kind"], "places": 1, "texts": 1, "meaning": m, "from": "made up", "taken_from": "", "own_meaning": True, "reading": m}
          for e, m in (("qore", "king, ruler"), ("kdi", "woman"), ("lẖ", "great, elder"), ("ked", "to kill"))}
 TEXT = [
     word("qore", "meaning", ("qore", "qore"), gloss="ruler"),                                   # 0 a known word
@@ -223,13 +234,30 @@ def test_a_reading_falls_back_on_the_known_entries_meaning():
 def test_a_decoy_is_another_hidden_word_of_the_kind_with_another_meaning():
     known = {"l": {"kind": "verb", "meaning": "to give"}, "tre": {"kind": "verb", "meaning": "to give"}, "ked": {"kind": "verb", "meaning": "to kill"},
              "qore": {"kind": "noun", "meaning": "king, ruler"}, "qor": {"kind": "noun", "meaning": "the ruler"}, "kdi": {"kind": "noun", "meaning": "woman"},
-             "kroro": {"kind": "noun", "meaning": "another form of akroro", "names_another_word": True}, "mlo": {"kind": "adjective", "meaning": "good"}}
-    known = {e: {"names_another_word": False} | k for e, k in known.items()}
+             "kroro": {"kind": "noun", "meaning": "another form of akroro", "own_meaning": False}, "mlo": {"kind": "adjective", "meaning": "good"}}
+    known = {e: {"own_meaning": True} | k for e, k in known.items()}
     for seed in range(30):
         d = F.decoys_of(set(known), known, random.Random(seed))
         assert d["l"] == d["tre"] == "ked" and d["qore"] == d["qor"] == "kdi"       # never the other word for "to give" or for "ruler"
-        assert d["kdi"] in ("qore", "qor") and d["kroro"] in ("qore", "qor", "kdi")  # a meaning that names another word is no decoy
-        assert d["mlo"] != "mlo" and d["mlo"] != "kroro" and d["ked"] in ("l", "tre")   # no other adjective: of another kind
+        assert d["kdi"] in ("qore", "qor") and "kroro" not in d and "kroro" not in d.values()   # a word without a meaning of its own: none
+        assert d["mlo"] != "mlo" and d["ked"] in ("l", "tre")                         # no other adjective: of another kind
+
+
+def test_the_meaning_to_judge_is_taken_as_in_track_a():
+    said = {"qore": ("king, ruler", "the public table"), "mleyi": ("probably a form of mlowi (noun)", "the public table"),
+            "mlowi": ("health", "the layers' lines"), "kroro": ("another form of akroro", "the public table"),
+            "esebe": ("another form of yesebe", "the public table"), "yesebe": ("", "the lexicon"),
+            "asr": ("variant of sr", "the lexicon"), "sr": ("variant (?) of asr", "the lexicon"), "beliloke": ("senior title (variant of beloloke)", "the public table")}
+    by = {h: "the lexicon" for h in ("qore", "mleyi", "mlowi", "kroro", "esebe", "asr", "sr", "beliloke")}
+    m = lambda e: F.meaning_to_judge(e, said.get, by)                                  # noqa: E731
+    assert m("qore") == ("king, ruler", "the public table", "", True)
+    assert m("mleyi") == ("health", "the layers' lines, of mlowi", "mlowi", True)        # replaced by the meaning of the word it names
+    assert m("kroro") == ("another form of akroro", "the public table", "", False)       # akroro has no meaning on the map
+    assert m("esebe")[3] is False and m("asr")[3] is False                               # yesebe is not on the map; sr only names asr
+    assert m("beliloke") == ("senior title (variant of beloloke)", "the public table", "", True)   # it says more than a name
+    assert [F.only_names(x) for x in ("variant of sr", "another form of akroro", "probably a form of mlowi (noun)", "variant (?) of mte",
+                                      "a form of qore, 'king'", "south; a form of yireqe", "senior title (variant of beloloke)")] == \
+        ["sr", "akroro", "mlowi", "mte", None, None, None]
 
 
 def test_the_key_says_what_each_code_is():
@@ -240,7 +268,7 @@ def test_the_key_says_what_each_code_is():
     hid = {k["entry"]: (c, k) for c, k in one.items() if k["sort"] == "hidden"}
     assert set(hid) == {"qore", "kdi"} and hid["qore"][1]["packs"] == ["f1_p01", "f1_p02"] and hid["qore"][1]["places"] == 3 + 90
     assert hid["qore"][1] | {"packs": 0, "places": 0} == {"fold": 1, "sort": "hidden", "entry": "qore", "kind": "noun", "packs": 0, "places": 0,
-                                                         "meaning": "king, ruler", "from": "made up", "names_another_word": False,
+                                                         "meaning": "king, ruler", "from": "made up", "taken_from": "", "own_meaning": True,
                                                          "decoy": "kdi", "decoy_meaning": "woman"}
     opened = {k.get("entry") or k["spelling"]: k for k in one.values() if k["sort"] == "open"}
     assert set(opened) == {"wse", "pide", "xyzpide"} and opened["wse"]["kind"] == "noun" and "spelling" in opened["pide"] and "meaning" not in opened["wse"]
@@ -264,21 +292,61 @@ def test_an_answer_file_is_checked_against_its_pack():
     assert wrong == ["W001 is answered twice", "line 3 is no JSON", "line 4: 'W009' is no code of the pack", 'W002 has no meaning ("none" is one)',
                      "line 6: None is no code of the pack", "2 codes without a valid line: W002, W003"]
     with_frames = "\n".join([line("W001", frame=None, slot=None), line("W002", "a king", frame="K3", slot=2), line("W003", "a god")])
-    assert F.check_answers(with_frames, codes, "frames")[1] == ["W003 has a meaning that names no frame and slot", "1 codes without a valid line: W003"]
-    assert not F.check_answers(with_frames, codes, "plain")[1]
+    got, wrong = F.check_answers(with_frames, codes)
+    assert not wrong                                                                              # a meaning without a frame is no fault of the file
     known_frames = {"K3": {1, 2, 3}, "W1": {1}}
-    cites = lambda frame, slot: "\n".join([line("W001"), line("W002", "a king", frame=frame, slot=slot), line("W003")])     # noqa: E731
-    assert not F.check_answers(cites("K3", 2), codes, "frames", known_frames)[1] and not F.check_answers(cites("K9", 2), codes, "frames", {})[1]
-    assert not F.check_answers(cites("W1", "1"), codes, "frames", known_frames)[1]                # a slot written as "1" is slot 1
-    for frame, slot in (("K9", 2), ("K3", 4), ("W1", 2), ("K3", "second")):
-        assert F.check_answers(cites(frame, slot), codes, "frames", known_frames)[1][0] == "W002 names a frame or a slot that the six files do not have"
+    assert [F.counted(got[c], "frames", known_frames) for c in codes] == [None, "a king", None]   # ... it counts as "none" with the frames
+    assert [F.counted(got[c], "plain", known_frames) for c in codes] == [None, "a king", "a god"]  # and as given without them
+    cites = lambda frame, slot: {"code": "W002", "meaning": "a king", "frame": frame, "slot": slot}   # noqa: E731
+    assert F.counted(cites("K3", 2), "frames", known_frames) == "a king" == F.counted(cites("W1", "1"), "frames", known_frames)   # "1" is slot 1
+    for frame, slot in (("K9", 2), ("K3", 4), ("W1", 2), ("K3", "second"), ("K3", None), (None, 2), (["K3"], 2)):
+        assert F.counted(cites(frame, slot), "frames", known_frames) is None, (frame, slot)       # no frame and slot of the digest
+    assert F.counted(cites("K3", 2), "frames", {}) is None
     with home() as d:
-        assert F.frame_slots() == {}                                                              # until the six files are there
+        assert F.frame_slots() == {} and stops(F.slots_in_hand, "the six files of frames are not all there")   # until the six files are there
         for k in F.FRAMES:
             F.write(f"frames_{k}.json", {"angle": k, "frames": [{"id": f"{k}1", "slots": [{"n": 1}, {"n": 2}]}]})
-        assert F.frame_slots() == {f"{k}1": {1, 2} for k in "KGDWOP"}
+        assert F.frame_slots() == {f"{k}1": {1, 2} for k in "KGDWOP"} == F.slots_in_hand()
     assert [F.meaning_given({"meaning": m}) for m in ("none", " None ", "", "\"none\"", "no meaning", "a  great\tking")] == [None] * 5 + ["a great king"]
     assert F.meaning_given(None) is None and F.meaning_given({"meaning": 3}) is None
+
+
+def test_the_digest_holds_the_frames_without_their_passages_and_notes():
+    frame = {"id": "K1", "name": "Dated titulary", "where": "opening", "monuments": "royal stelae (Kawa)",
+             "sources": [{"fhn": "I 17", "page": 128, "passage": "PASSAGE OF THE SOURCE"}], "notes": "A NOTE OF THE BUILDER",
+             "slots": [{"n": 1, "meaning": "the date", "wording": ["Regnal year 6", "Year 3"], "egyptian": "EGYPTIAN WORDS", "optional": False, "repeats": False},
+                       {"n": 2, "meaning": "praise of the king", "wording": ["the good god"], "egyptian": "", "optional": True, "repeats": True}]}
+    files = {k: {"angle": "x", "frames": [frame | {"id": f"{k}1"}], "read": ["I 17"], "rejected": [{"why": "A REJECTED ONE"}]} for k in F.FRAMES}
+    text = F.digest_of(files)
+    for k, what in F.FRAMES.items():
+        assert f"## {k}: {what} (1 frames)" in text and f"### {k}1. Dated titulary" in text
+    assert "Where: opening. Monuments: royal stelae (Kawa)." in text
+    assert '1. the date. Wording: "Regnal year 6"; "Year 3".\n' in text and '2. praise of the king. Wording: "the good god". (may be left out; may repeat)' in text
+    assert not re.search(r"PASSAGE|NOTE OF|EGYPTIAN|REJECTED|I 17|128", text)                     # no passage, note, Egyptian, page
+    with home() as d:
+        F.write("texts.json", {"known": {}})
+        assert stops(F.packs, "the six files of frames are not all there") and not (d / F.DIGEST).exists()
+
+
+def test_the_texts_are_written_again_only_while_the_folds_stay_and_no_aligner_has_answered():
+    data = {"counts": dict(F.PAGE), "known": {f"w{n}": {} for n in range(10)}, "texts": []}
+    with home() as d, contextlib.ExitStack() as stack:
+        for name, value in (("texts_of", lambda *a: data), ("the_map", lambda: {}), ("the_table", lambda: {})):
+            stack.enter_context(swapped(F, name, value))
+        stack.enter_context(swapped(F.W, "corpus_rows", lambda: {}))
+        stack.enter_context(swapped(F.W, "lexicon", lambda: {}))
+        F.texts()
+        F.folds()
+        data["texts"] = ["a new reading"]                                                        # the same known words: the folds stay
+        F.texts()
+        assert F.read("texts.json")["texts"] == ["a new reading"]
+        data["known"] = {f"w{n}": {} for n in range(1, 11)}                                      # other known words: other folds
+        assert stops(F.texts, "the folds are drawn from other known words") and F.read("texts.json")["texts"] == ["a new reading"]
+        data["known"] = {f"w{n}": {} for n in range(10)}
+        F.write_text("answers/plain/f1_p01_a.jsonl", "")
+        assert stops(F.texts, "aligners have answered")
+        data["counts"] = dict(F.PAGE, open=1369)
+        assert stops(F.texts, "the counts are not the page's")
 
 
 # ------------------------------------------------------------------------------------------------ gate B
@@ -323,6 +391,17 @@ def test_gate_b_is_counted_as_the_page_states_it():
     assert not F.gate(a_test(10, 0), 0.9, complete=False)["met"]                                  # an answer or a verdict is missing
 
 
+def test_a_word_without_a_meaning_of_its_own_is_left_out_of_the_count():
+    key = {"folds": {"1": {"codes": {"W001": {"sort": "hidden", "entry": "qore", "packs": ["f1_p01"], "meaning": "king", "decoy_meaning": "woman", "own_meaning": True},
+                                     "W002": {"sort": "hidden", "entry": "kroro", "packs": ["f1_p01"], "meaning": "another form of akroro", "decoy_meaning": "",
+                                              "own_meaning": False},
+                                     "W003": {"sort": "open", "spelling": "x", "packs": ["f1_p01"]}}}}}
+    assert [h["entry"] for h in F.hidden_words(key)] == ["qore"]
+    given = {(1, "f1_p01", a, c): "a king" for a in F.ALIGNERS for c in ("W001", "W002")}
+    f = F.arm_figures(F.hidden_words(key), given, lambda ans, meaning: ("same", "same"))
+    assert (f["hidden"], f["given"], f["right"]) == (1, 1, 1)
+
+
 def test_a_word_in_several_packs_is_right_only_where_it_is_right_in_each():
     h = {"fold": 1, "code": "W001", "entry": "qore", "packs": ["f1_p01", "f1_p02", "f1_p03"], "meaning": "king", "decoy_meaning": "woman"}
     given = {(1, p, a, "W001"): f"{p} {a}" for p in ("f1_p01", "f1_p02") for a in F.ALIGNERS} | {(1, "f1_p03", "a", "W001"): "f1_p03 a"}
@@ -338,15 +417,18 @@ def test_a_word_in_several_packs_is_right_only_where_it_is_right_in_each():
 
 
 def test_the_judges_rows_pair_each_answer_with_its_meaning_and_with_a_decoy():
-    key = {"folds": {"1": {"codes": {"W001": {"sort": "hidden", "meaning": "king", "decoy_meaning": "woman"},
-                                     "W002": {"sort": "hidden", "meaning": "woman", "decoy_meaning": "king"}, "W003": {"sort": "open"}}}}}
-    line = lambda m: {"meaning": m}                                                              # noqa: E731
-    got = {("frames", "f1_p01", "a"): {"W001": line("a ruler"), "W002": line("none"), "W003": line("a house")},
-           ("frames", "f1_p01", "b"): {"W001": line("A ruler"), "W002": line("a queen"), "W003": line("a house")},
-           ("plain", "f1_p01", "a"): {"W001": line("a ruler"), "W002": line("a ruler"), "W003": line("none")}}
-    given = F.hidden_answers(key, got)
+    key = {"folds": {"1": {"codes": {"W001": {"sort": "hidden", "meaning": "king", "decoy_meaning": "woman", "own_meaning": True},
+                                     "W002": {"sort": "hidden", "meaning": "woman", "decoy_meaning": "king", "own_meaning": True}, "W003": {"sort": "open"},
+                                     "W004": {"sort": "hidden", "meaning": "another form of akroro", "decoy_meaning": "", "own_meaning": False}}}}}
+    line = lambda m, frame="K1": {"meaning": m, "frame": frame, "slot": 1}                       # noqa: E731
+    got = {("frames", "f1_p01", "a"): {"W001": line("a ruler"), "W002": line("none"), "W003": line("a house"), "W004": line("a god")},
+           ("frames", "f1_p01", "b"): {"W001": line("A ruler"), "W002": line("a queen"), "W003": line("a house"), "W004": line("a god")},
+           ("frames", "f1_p02", "a"): {"W001": line("a priest", frame="K9")},
+           ("plain", "f1_p01", "a"): {"W001": line("a ruler"), "W002": line("a ruler"), "W003": line("none"), "W004": line("a god")}}
+    given = F.hidden_answers(key, got, {"K1": {1}})
     assert set(given) == {("frames", 1, "f1_p01", "a", "W001"), ("frames", 1, "f1_p01", "b", "W001"), ("frames", 1, "f1_p01", "b", "W002"),
-                          ("plain", 1, "f1_p01", "a", "W001"), ("plain", 1, "f1_p01", "a", "W002")}       # no "none", no open word
+                          ("plain", 1, "f1_p01", "a", "W001"), ("plain", 1, "f1_p01", "a", "W002")}       # no "none", no open word, no K9,
+    #                                                                                               and no word without a meaning of its own
     rows = F.judge_rows(key, given)
     assert sorted(rows) == ["R0001", "R0002", "R0003", "R0004"]                                  # a pair of texts stands once, whoever gave it
     assert sorted(map(tuple, rows.values())) == [("a queen", "king"), ("a queen", "woman"), ("a ruler", "king"), ("a ruler", "woman")]
@@ -363,12 +445,15 @@ def test_the_count_reads_the_answers_and_the_verdicts_and_the_open_words_wait_fo
     ws = [word(f"k{n}", "meaning", (f"k{n}", f"k{n}"), gloss=f"gloss {n}") for n in range(12)] + [word(f"o{n}", "unknown", (f"o{n}", "?")) for n in range(3)]
     entries = {f"k{n}": {"class": "known", "kind": "noun"} for n in range(12)}
     things = ["king", "woman", "water", "bread", "bull", "cow", "god", "life", "west", "north", "south", "milk"]
-    known = {f"k{n}": {"kind": "noun", "places": 1, "texts": 1, "meaning": things[n], "from": "made up", "names_another_word": False, "reading": things[n]}
-             for n in range(12)}
+    known = {f"k{n}": {"kind": "noun", "places": 1, "texts": 1, "meaning": things[n], "from": "made up", "taken_from": "", "own_meaning": True,
+                       "reading": things[n]} for n in range(12)}
     data = {"texts": [{"id": "T1", "kind": "long text", "words": ws}], "entries": entries, "known": known}
     with home() as d:
         files, key = F.build(data, {"1": [f"k{n}" for n in range(10)], "2": ["k10", "k11"]})
         F.write("packs/key.json", key)
+        assert stops(F.judge_packs, "the six files of frames are not all there")
+        for k in F.FRAMES:
+            F.write(f"frames_{k}.json", {"frames": [{"id": f"{k}1", "slots": [{"n": 1}]}]})
         assert stops(F.judge_packs, "missing or not valid") and stops(F.open_packs, "does not say that gate B is met")
         for arm in F.ARMS:
             for fold in ("1", "2"):
@@ -378,7 +463,8 @@ def test_the_count_reads_the_answers_and_the_verdicts_and_the_open_words_wait_fo
                     for c in key["folds"][fold]["packs"][f"f{fold}_p01"]:
                         k = codes[c]
                         m = (k["meaning"] if arm == "frames" else "none") if k["sort"] == "hidden" else "a house" if k["spelling"] != "o2" else "none"
-                        lines.append(json.dumps({"code": c, "meaning": m} | ({"frame": "K1", "slot": 1} if arm == "frames" else {})))
+                        slot = 1 if (k["sort"], k.get("spelling"), a) != ("open", "o1", "b") or fold == "1" else 7   # one answer without a slot
+                        lines.append(json.dumps({"code": c, "meaning": m} | ({"frame": "K1", "slot": slot} if arm == "frames" else {})))
                     F.write_text(f"answers/{arm}/f{fold}_p01_{a}.jsonl", "\n".join(lines) + "\n")
         assert stops(F.packs, "aligners have answered")
         F.answers_check()
@@ -399,6 +485,7 @@ def test_the_count_reads_the_answers_and_the_verdicts_and_the_open_words_wait_fo
         assert res["complete"] and res["judges"]["kappa"] == 1.0 and res["judges"]["judged_by_both"] == 24
         assert (fr["hidden"], fr["given"], fr["right"], fr["decoys_same"]) == (12, 12, 12, 0) and fr["gate"]["met"] and res["gate_met"]
         assert (pl["given"], pl["right"]) == (0, 0) and not pl["gate"]["met"]                    # the arm without frames, counted the same way
+        assert res["frames_meanings_without_a_frame_and_slot"] == 1 and res["hidden_without_a_meaning_of_their_own"] == 0   # o1 in fold 2, by b
         F.open_packs()
         o = F.read("open/key.json")
         assert list(o["rows"].values()) == [["a house", "a house"]] and (d / "open/packs/O01_j1.md").exists()   # one pair of texts, judged once
@@ -406,8 +493,8 @@ def test_the_count_reads_the_answers_and_the_verdicts_and_the_open_words_wait_fo
             F.write_text(f"open/answers{j}/O01.jsonl", json.dumps({"row": "P0001", "verdict": "same"}) + "\n")
         F.count()
         op = F.read("result.json")["open"]
-        assert (op["open_words"], op["pairs_with_two_meanings"], op["words_agreed"]) == (3, 4, 2)   # o0 and o1 in both folds; o2 got "none"
-        assert [(x["spelling"], x["stands_in_packs"], len(x["agreed_in"])) for x in op["agreed"]] == [("o0", 2, 2), ("o1", 2, 2)]
+        assert (op["open_words"], op["pairs_with_two_meanings"], op["words_agreed"]) == (3, 3, 2)   # o0 in both folds, o1 in fold 1 only
+        assert [(x["spelling"], x["stands_in_packs"], len(x["agreed_in"])) for x in op["agreed"]] == [("o0", 2, 2), ("o1", 2, 1)]   # o2: "none"
         assert op["agreed"][0]["agreed_in"][0]["frames"] == [["K1", 1], ["K1", 1]]
 
 
@@ -423,12 +510,13 @@ def test_what_the_aligners_and_the_judges_are_given_is_public():
              "only": "<<what it may use>>"}
     one = F.ALIGNER_BRIEF.format(repo=F.REPO, folder=F.FOLDER, pack="<pack>", code="W012", n="<n>", answers=f"{F.FOLDER}/answers/<arm>/<pack>_<a|b>.jsonl", **marks)
     assert indented(one) in aligners                                                    # one brief, word for word, its two variants marked
-    files = "\n".join(f"    {F.REPO}/{F.FOLDER}/frames_{k}.json   ({what})" for k, what in F.FRAMES.items())
+    assert "held back" not in F.ALIGNER_BRIEF and "known" not in F.ALIGNER_BRIEF and "check" not in F.ALIGNER_BRIEF   # no word of the known codes
+    given = {arm: F.GIVEN[arm].format(repo=F.REPO, folder=F.FOLDER, digest=F.DIGEST) for arm in F.ARMS}
     for arm in F.ARMS:
-        for piece in (F.GIVEN[arm].format(files=files), F.REASON[arm], F.LINE[arm].format(code="W012"), F.FIELDS[arm], F.ONLY[arm]):
+        for piece in (given[arm], F.REASON[arm], F.LINE[arm].format(code="W012"), F.FIELDS[arm], F.ONLY[arm]):
             assert indented(piece) in aligners, (arm, piece)
         brief = F.brief_of(arm, "f1_p03", "b", 151, "W012")
-        assert brief == one.replace(marks["given"], F.GIVEN[arm].format(files=files)).replace(marks["reason"], F.REASON[arm]) \
+        assert brief == one.replace(marks["given"], given[arm]).replace(marks["reason"], F.REASON[arm]) \
             .replace(marks["line"], F.LINE[arm].format(code="W012")).replace(marks["fields"], F.FIELDS[arm]).replace(marks["only"], F.ONLY[arm]) \
             .replace("<arm>", arm).replace("<pack>", "f1_p03").replace("<a|b>", "b").replace("<n>", "151")
         flat = " ".join(brief.split())
@@ -437,7 +525,9 @@ def test_what_the_aligners_and_the_judges_are_given_is_public():
         assert "Do not open any other file of the repository, do not search the web" in flat and "You may not look up the inscription" in flat
         assert f"{F.FOLDER}/answers/{arm}/f1_p03_b.jsonl" in flat and "key.json" not in flat
     with_frames, alone = F.brief_of("frames", "p", "a", 3), F.brief_of("plain", "p", "a", 3)
-    assert all(f"frames_{k}.json" in with_frames for k in "KGDWOP") and "frames_" not in alone and '"frame"' not in alone and '"slot": 2' in with_frames
+    assert f"{F.REPO}/{F.FOLDER}/frames_digest.md" in with_frames and "frames_K" not in with_frames and '"slot": 2' in with_frames
+    assert "digest" not in alone and "frames_" not in alone and '"frame"' not in alone
+    assert 'a meaning without a frame and a slot of the digest counts as "none"' in " ".join(with_frames.split())
     assert list(F.FRAMES) == list("KGDWOP") and "data/sources/frames/briefs/<arm>/<pack>_<a|b>.md" in aligners
     judges = " ".join((ROOT / "runs/prompts/FRAMES_judges.md").read_text(encoding="utf-8").split())
     for brief in (F.JUDGE_BRIEF, F.OPEN_BRIEF):
@@ -468,10 +558,12 @@ def test_the_texts_file_is_the_map_as_the_test_was_set():
     assert data == F.texts_of(F.the_map(), W.corpus_rows(), W.lexicon(), F.the_table()) and data["counts"] == F.PAGE
     known = data["known"]
     assert len(known) == 102 and sum(k["places"] for k in known.values()) == 624 and all(k["meaning"] and k["reading"] for k in known.values())
-    assert set(collections.Counter(k["from"] for k in known.values())) == {"the project's words (lexicon_statuses.tsv)", "the lexicon's English",
-                                                                         "the map's reading (a later source, laid by a layer)"}
+    assert collections.Counter(k["from"] for k in known.values()) == {"the public table": 77, "the layers' lines": 23, "the lexicon": 1,
+                                                                      "the layers' lines, of mlowi": 1}
     table = F.the_table()
-    assert all((k["meaning"] == table[e]) == k["from"].startswith("the project's") for e, k in known.items() if table.get(e))
+    assert all((k["meaning"] == table[e]) == (k["from"] == "the public table") for e, k in known.items() if table.get(e) and not k["taken_from"])
+    assert {e: (k["taken_from"], k["meaning"]) for e, k in known.items() if k["taken_from"]} == {"mleyi": ("mlowi", "health")}   # the page's answer 3
+    assert sorted(e for e, k in known.items() if not k["own_meaning"]) == ["esebe", "kroro"]   # left out of the count, hidden all the same
     assert F.read("folds.json") == F.folds_of(known)
 
 
@@ -502,6 +594,7 @@ def test_the_packs_are_what_the_script_builds_and_the_same_in_both_folds():
     for name, text in files.items():
         assert (F.HOME / "packs" / f"{name}.md").read_text(encoding="utf-8") == text, name
     assert sorted(f.name for f in (F.HOME / "packs").iterdir()) == sorted([f"{n}.md" for n in files] + ["key.json"])
+    assert (F.HOME / F.DIGEST).read_text(encoding="utf-8") == F.digest_of(F.the_frames())        # the digest the arm with the frames reads
     assert len(key["packs"]) == 10 and sum(len(p["texts"]) for p in key["packs"].values()) == 99 and sum(p["words"] for p in key["packs"].values()) == 2945
     sizes = {len(t["words"]) for t in data["texts"] if len(t["words"]) >= F.LONG}
     alone = [p["words"] for p in key["packs"].values() if len(p["texts"]) == 1]
@@ -598,10 +691,12 @@ def test_a_hidden_entry_has_one_code_in_a_fold_and_a_code_one_word():
         meant = sum(data["known"][e]["places"] for e in hidden)
         assert meant <= sum(places.values()) <= meant + 2                                        # the 624 places, and where the map reads the entry as grammar
         for c, k in codes.items():
-            if k["sort"] == "hidden":
+            if k["sort"] == "hidden" and not k["own_meaning"]:
+                assert k["decoy"] == k["decoy_meaning"] == "" and k["entry"] in ("esebe", "kroro") and fold == 1
+            elif k["sort"] == "hidden":
                 d = codes[of[k["decoy"]]]
                 assert k["decoy"] in hidden and k["decoy"] != k["entry"] and k["decoy_meaning"] == d["meaning"] != k["meaning"]
-                assert not W.content(k["meaning"]) & W.content(d["meaning"]) and not d["names_another_word"]
+                assert not W.content(k["meaning"]) & W.content(d["meaning"]) and d["own_meaning"]
                 assert k["meaning"] == data["known"][k["entry"]]["meaning"] and k["from"] and k["kind"] == data["known"][k["entry"]]["kind"]
             else:
                 assert ("entry" in k) != ("spelling" in k) and "meaning" not in k and k["packs"] and k["places"] >= 1
@@ -612,6 +707,8 @@ def test_the_figures_are_counts_only():
     data, halves, key = local()
     f = F.figures()
     assert f["counts"] == F.PAGE and f["aligners"] == 80 and f["folds"]["1"]["hidden_words"] == f["folds"]["2"]["hidden_words"] == 51
+    k = f["known_words"]
+    assert (k["meaning_taken_from_another_word"], k["without_a_meaning_of_their_own"], k["in_more_than_one_pack"]) == (1, 2, 59)   # the page's 59 of 102
     assert sum(f["known_words"]["by_packs_they_stand_in"].values()) == 102 and len(f["packs"]) == 10
     assert sum(p["words"] for p in f["packs"]) == 2945 and all(p["fold_1"]["open"] == p["fold_2"]["open"] for p in f["packs"])
 

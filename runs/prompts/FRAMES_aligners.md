@@ -1,15 +1,23 @@
 # Track B, the royal texts beside the Kushite kings' Egyptian texts: what the aligners are given
 
-Written on 2026-11-16 at 22:02, before any aligner was started. The rules and the bars are in
-[`data/discovery/outside_evidence.md`](../../data/discovery/outside_evidence.md), section 3. The packs, their key
-and the briefs are written by [`src/frames.py`](../../src/frames.py) (`packs`); the brief below is its
-`ALIGNER_BRIEF`, word for word.
+Written on 2026-11-16 at 22:02, before any aligner was started, and rewritten the same evening with the answers
+the page added at about 22:15, still before any aligner was started. The rules and the bars are in
+[`data/discovery/outside_evidence.md`](../../data/discovery/outside_evidence.md), section 3. The packs, their key,
+the briefs and the digest of the frames are written by [`src/frames.py`](../../src/frames.py) (`packs`); the
+brief below is its `ALIGNER_BRIEF`, word for word.
 
 There are 10 packs in each of the two folds. Each pack of a fold goes to four fresh agents: two with the frames
 (arm `frames`) and two with the pack alone (arm `plain`), 80 agents in all. Each agent has a file of its own,
 `data/sources/frames/briefs/<arm>/<pack>_<a|b>.md`: the brief of its arm with its pack (`f<fold>_p<NN>`), its
 answers file (`data/sources/frames/answers/<arm>/<pack>_<a|b>.jsonl`) and the number of codes of its pack
-filled in. No agent is given the key (`data/sources/frames/packs/key.json`).
+filled in. No agent is given the key (`data/sources/frames/packs/key.json`). The brief does not say that some codes
+are known words (the page's answer 6).
+
+The arm with the frames reads one file, `data/sources/frames/frames_digest.md`: the frames of the six files of the
+frame builders, each with its id, name, place in a text and monuments, and each slot with its number, meaning,
+wording and whether it may be left out or repeated, without the sources' passages and notes (the page's answer 4).
+A meaning that names no frame and slot of the digest is counted as "none", and the number of such answers is
+reported (answer 6).
 
 ## The launch line (one fresh agent for each brief)
 
@@ -36,8 +44,7 @@ it is.
     the marks.
 
     A code stands for one word: the same code is the same word wherever it stands, in this pack and in the others. A
-    code may be any kind of word: a noun, a verb, a title, an epithet, an adjective, a particle. For some of the codes
-    a meaning is known and is held back here, as a check; nothing in a code tells which.
+    code may be any kind of word: a noun, a verb, a title, an epithet, an adjective, a particle.
 
     <<what the aligner is given>>
 
@@ -73,21 +80,17 @@ it is.
 
 `<<what the aligner is given>>`:
 
-    You are also given six files of frames:
+    You are also given a digest of frames:
 
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_K.json   (the king's names, titles and epithets)
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_G.json   (the gods: epithets, speeches, hymns)
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_D.json   (dates, enthronement and journeys)
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_W.json   (war: the report of a campaign, the lists of booty and of captives)
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_O.json   (gifts and buildings: donations and offerings with their numbers, dedications)
-        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_P.json   (the texts of people who are not kings: officials, graffiti, oracles and decrees)
+        /Users/mike/repos/mike/meroitic/data/sources/frames/frames_digest.md
 
-    They were built from the Egyptian texts of the kings of Kush (8th to 1st century BC) in their editors' English,
-    by readers who saw no Meroitic text. A frame is a run of slots in a fixed order that stands in at least three of
-    those texts. Each file lists its frames under `frames`: a frame has an id (`K3`) and its slots in order, each with
-    its number (`n`), its meaning and the wording of the translation. Read the six files first. Then read each text
-    of the pack against them: where the readings, the names and the numbers of a Meroitic text follow a frame, a code
-    that stands in one of the frame's slots may have that slot's meaning.
+    The frames were built from the Egyptian texts of the kings of Kush (8th to 1st century BC) in their editors'
+    English, by readers who saw no Meroitic text. A frame is a run of slots in a fixed order that stands in at least
+    three of those texts. A frame of the digest has an id (`K3`), a name, where it stands in a text and on which
+    monuments; then its slots in order, each with its number, its meaning, the wording of the translation, and
+    whether it may be left out or repeated. Read the digest first. Then read each text of the pack against it: where
+    the readings, the names and the numbers of a Meroitic text follow a frame, a code that stands in one of the
+    frame's slots may have that slot's meaning.
 
 `<<what a reason is>>`, after "give a reason for it":
 
@@ -99,10 +102,11 @@ it is.
 
 `<<the frame and the slot>>`:
 
-    - "frame" and "slot": the frame the meaning rests on, by its id in the six files, and the number of its slot.
-      Every meaning you give rests on one; null for both where you give "none".
+    - "frame" and "slot": the frame the meaning rests on, by its id in the digest, and the number of its slot.
+      Every meaning you give rests on one: a meaning without a frame and a slot of the digest counts as "none".
+      Give null for both where you give "none".
 
-`<<what it may use>>`: the pack and the six files of frames.
+`<<what it may use>>`: the pack and the digest of frames.
 
 ## With the pack alone (arm `plain`)
 
