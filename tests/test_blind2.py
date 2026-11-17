@@ -134,6 +134,17 @@ def test_an_accepted_word_is_right_wrong_none_or_without_a_choice():
     assert [B.outcome({"choice": c, "true": "water"}) for c in ("water", "silver", "none", None)] == ["right", "wrong", "none", "no choice"]
 
 
+def test_the_options_are_told_by_the_sorts_they_hold():
+    """Both sorts: an accepted meaning of the test and a proposal of one of its open words among the four. Near
+    proposals: two of an open word's own proposals share a content word or a group."""
+    rows = [{"sort": "open", "entry": "x", "candidates": ["to present", "to grant"], "options": ["to present", "to grant", "water", "boat"]},
+            {"sort": "open", "entry": "y", "candidates": ["house"], "options": ["house", "to present", "boat", "silver"]},
+            {"sort": "offered", "entry": "ato", "candidates": [], "options": ["water", "god", "man", "wife"]},
+            {"sort": "absent", "entry": "kdi", "candidates": [], "options": ["to grant", "house", "boat", "silver"]}]
+    assert {"water", "god", "man", "wife"} <= {m for m, _ in B.ACCEPTED.values()} and not {"boat", "silver", "house"} & {m for m, _ in B.ACCEPTED.values()}
+    assert B.options_of(rows) == {"words": 4, "of_both_sorts": 1, "open_words_with_near_proposals": ["x"]}
+
+
 def test_what_the_readers_were_given_is_public():
     prompts = " ".join((ROOT / "runs/prompts/G6_choice.md").read_text(encoding="utf-8").split())
     assert "`CHOICE_BRIEF` in [`src/recurring.py`](../../src/recurring.py), word for word but for its last line" in prompts
@@ -229,7 +240,7 @@ def test_the_page_says_what_the_figures_say():
     new = {x["true"]: (x["sort"], x["outcome"]) for x in f["new_words"]}
     assert new == {"to bear (a child)": ("offered", "right"), "mother": ("offered", "no choice"), "the ruler's spouse": ("offered", "no choice"),
                    "queen (Candace)": ("offered", "no choice"), "to beget (a child)": ("absent", "no choice")}
-    assert 'one was chosen, rightly ("to bear a child"); for the three others shown with their meaning the readers made no choice' in text
+    assert 'one was chosen, rightly ("to bear (a child)"); for the three others shown with their meaning the readers made no choice' in text
     assert f"**The open words ({c['open_words']}), had the bars held.**" in text
     for label, key in (("All five pick the same proposal (no label)", "chosen, no label"), ("All five pick a filler", "a filler chosen"),
                        ('All five say "none of these"', "none of the four"), ("No choice", "no choice")):
@@ -252,11 +263,23 @@ def test_the_page_says_what_the_figures_say():
     assert {(r["entry"], r["sort"]) for r in yed} == {("yed", "open"), ("mk", "absent")} and "all five chose it for the word for \"god\", where it was a filler" in text
     assert f"Cost: {f['cost']['agents']} agents, {f['cost']['tokens']:,} tokens" in text
     assert "A label is not a translation." in text and "No meaning found here is the project's own." in text
+    # the review's two corrections of section 2, which stands as it was written before the readers
+    o = f["options"]
+    assert "Now the two sorts stand mixed under every word." in text and "**Never two near meanings.**" in text
+    assert f"they hold both an accepted meaning and a proposal under {o['of_both_sorts']} of the {o['words']} words" in text and o["words"] == f["words"]
+    near = o["open_words_with_near_proposals"]
+    assert (f"under {len(near)} open words ({', '.join(f'`{e}`' for e in near)}) two or three of the four are near meanings") in text
+    accepted = {m for m, _ in B.ACCEPTED.values()}                              # both figures counted again from the rows
+    proposals = {m for r in f["rows"] if r["sort"] == "open" for m in r["candidates"]}
+    assert o["of_both_sorts"] == sum(bool(set(r["options"]) & accepted and set(r["options"]) & proposals) for r in f["rows"])
+    assert set(near) == {r["entry"] for r in f["rows"] if r["sort"] == "open" and any(B.near(a, b) for a in r["candidates"] for b in r["candidates"] if a != b)}
 
 
 def test_the_summaries_name_the_step():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "python3 -I tests/test_blind2.py" in readme and "- `python3 -I src/blind2.py public`" in readme
+    o = figs()["options"]
+    assert f"by that lot, {o['of_both_sorts']} of the {o['words']} words have both sorts among their four" in " ".join(readme.split())
     c = figs()["choice"]
     for name in ("README.md", "NEXT_STEPS.md", "REPORT.md"):
         text = " ".join((ROOT / name).read_text(encoding="utf-8").split())
@@ -297,6 +320,24 @@ def test_the_script_writes_the_packs_the_readers_were_given():
         finally:
             B.HOME = live
     assert W.NEEDED == 4
+
+
+def test_no_pack_shows_a_hidden_spelling():
+    """As in the first test: no pack shows the spelling of a word it hides, and each pack offers each of its words the
+    key's four meanings, in the order of that reader's letters."""
+    needs(*LOCAL, "data/sources/g6/packs", "data/sources/v6/analysts/glosses.jsonl", "data/rilly2003")
+    key, gl = B.read("key.json"), B.shown_map(B.the_map())
+    for n in range(1, B.PACKS + 1):
+        mine = [w | {"code": c} for c, w in key["words"].items() if w["pack"] == n]
+        tokens = W.tokens_of(mine, gl)
+        for r in range(1, B.READERS + 1):
+            body = (B.HOME / "packs" / f"K{n}_r{r}.md").read_text(encoding="utf-8").split("\n---\n", 1)[1]
+            for tok in tokens:
+                assert not re.search(rf"(?<![A-Za-zḫẖšñ]){re.escape(tok)}(?![A-Za-zḫẖšñ])", body), (n, r, tok)
+            for w in mine:
+                block = body[body.index(f"## `{w['code']}`"):].split("\n## `", 1)[0]
+                letters = key["letters"][f"{w['code']}/{r}"]
+                assert re.findall(r"(?m)^[ABCD]\. (.*)$", block) == letters and sorted(letters) == sorted(w["options"]), (w["code"], r)
 
 
 def test_the_test_reads_the_map_as_it_was_when_it_was_set():

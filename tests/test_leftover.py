@@ -202,14 +202,34 @@ def test_a_checkers_file_counts_only_for_its_own_pack():
 
 
 def test_the_lot_letters_are_told_by_checker_and_by_place():
+    """A run of lot letters is explained as the first reading's bar counts it: an ending, a known word or a name;
+    "unclear" explains nothing (J4)."""
     key = [{"place": f"J{i}", "control": "junk", "front": i < 2, "parts": [["zz", None], ["te", "te-dḫe-l"]] if i < 2 else [["ato", "ato"], ["zz", None]]}
-           for i in range(4)] + [{"place": "E0", "control": "ending"}]
-    one = {"J0": {"case": "name"}, "J1": {"case": "name"}, "J2": {"case": "unknown"}, "J3": {"case": "ending"}, "E0": {"case": "ending"}}
-    two = {"J0": {"case": "name"}, "J1": {"case": "unknown"}, "J2": {"case": "unknown"}, "J3": {"case": "unknown"}, "E0": {"case": "ending"}}
+           for i in range(5)] + [{"place": "E0", "control": "ending"}]
+    one = {"J0": {"case": "name"}, "J1": {"case": "name"}, "J2": {"case": "unknown"}, "J3": {"case": "ending"}, "J4": {"case": "unclear"}, "E0": {"case": "ending"}}
+    two = {"J0": {"case": "name"}, "J1": {"case": "unknown"}, "J2": {"case": "unknown"}, "J3": {"case": "unknown"}, "J4": {"case": "unknown"}, "E0": {"case": "ending"}}
     got = L.lot_letters(key, one, two)
-    assert got["shown"] == 4 and got["explained"] == {"1": 3, "2": 1} and got["explained_as"] == {"1": {"name": 2, "ending": 1}, "2": {"name": 1}}
+    assert got["shown"] == 5 and got["explained"] == {"1": 3, "2": 1} and got["explained_as"] == {"1": {"name": 2, "ending": 1}, "2": {"name": 1}}
     assert got["unknown_by_both"] == 1 and [(x["word"], x["letters"], x["answers"]) for x in got["explained_at"]] == [
         ("te-dḫe-l", "before", ["name", "name"]), ("te-dḫe-l", "before", ["name", "unknown"]), ("ato", "after", ["ending", "unknown"])]
+    assert L.rule()[4] == L.EXPLAINS                                            # the figure counts what the first reading's bar counts
+
+
+def test_a_word_of_the_dictionary_counts_for_the_first_layer_that_gives_it_a_meaning():
+    """src/themap.py's rule for the north star: a word an earlier layer gave a meaning is not counted again."""
+    def line(item):
+        return {"item": item, "why": "stated", "level": "meaning"}
+    lex = {"kb": {"kind": "verb", "status": "hypothesis"}, "zz": {"kind": "noun", "status": "hypothesis"}}
+    saved = M.LAYERS, M.lines_of, M.current, L.D.population_of
+    M.LAYERS = [{"name": "earlier"}, {"name": L.LAYER}, {"name": L.LAYER_AGAIN}]
+    M.lines_of = lambda layer: [line("kb")] if layer["name"] == "earlier" else [line("zz")]
+    M.current = lambda upto=None: {}
+    L.D.population_of = lambda gl, lex, fix=False: ({"kb": 1, "zz": 1}, {}, {})
+    try:
+        assert L.first_given(L.LAYER, [line("kb"), line("zz")], lex) == ["zz"]
+        assert L.first_given(L.LAYER_AGAIN, [line("zz")], lex) == []
+    finally:
+        M.LAYERS, M.lines_of, M.current, L.D.population_of = saved
 
 
 def test_part_1_reads_the_map_as_it_was_when_the_step_was_set():
@@ -399,8 +419,11 @@ def test_the_page_says_what_the_figures_say():
             f"{again['lines']} places, {again['to']['meaning']} of them translated words and {again['to']['name']} names.") in text
     both = [again, two["laid"]]
     assert (f"**The step in all:** {sum(x['lines'] for x in both)} places are laid, {sum(x['to']['meaning'] for x in both)} of them as translated words and "
-            f"{sum(x['to']['name'] for x in both)} as names, and {len(two['words']) + len(f['part_1_again']['words'])} words of the dictionary get a meaning, "
-            f"each from one scholar; it took {cost['all']['agents']} agents and {cost['all']['tokens']:,} tokens.") in text
+            f"{sum(x['to']['name'] for x in both)} as names, and {len(two['words']) + len(f['part_1_again']['words'])} words of the dictionary get a meaning "
+            f"a scholar published; it took {cost['all']['agents']} agents and {cost['all']['tokens']:,} tokens.") in text
+    g5 = json.loads((ROOT / "data/discovery/second_scholar_later_figures.json").read_text(encoding="utf-8"))["by_entry"]
+    assert {w["entry"]: g5[w["entry"]] for w in f["part_1_again"]["words"]} == {     # so not "each from one scholar"
+        "nbr": "agreed by two scholars", "yiroẖe": "agreed by two scholars, with a dissent"}
     assert f"It met its bars and lays {again['lines']} places." in text
     hm = lambda t: t[:5]                                                   # noqa: E731
     lot, ends = one["lot_letters"], one["hidden_endings"]

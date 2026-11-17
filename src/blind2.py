@@ -15,6 +15,7 @@ What the readers were given is in runs/prompts/G6_choice.md.
 import collections
 import contextlib
 import copy
+import itertools
 import json
 import pathlib
 import random
@@ -281,6 +282,18 @@ def outcome(r):
     return "no choice" if c is None else "none" if c == "none" else "right" if c == r["true"] else "wrong"
 
 
+def options_of(rows):
+    """What the words' four options hold: how many words have both sorts of meaning among them (an accepted meaning
+    of the test and a proposal on record for one of its open words), and the open words two of whose own proposals
+    are near one another (they stay together, as the sources give them)."""
+    accepted = {m for m, _ in ACCEPTED.values()}
+    proposals = {m for r in rows if r["sort"] == "open" for m in r["candidates"]}
+    return {"words": len(rows),
+            "of_both_sorts": sum(bool(set(r["options"]) & accepted) and bool(set(r["options"]) & proposals) for r in rows),
+            "open_words_with_near_proposals": sorted(r["entry"] for r in rows if r["sort"] == "open"
+                                                     and any(near(a, b) for a, b in itertools.combinations(r["candidates"], 2)))}
+
+
 def figures():
     """What the page reports, from the local results: counts, and each word's row in the wording of the packs
     (the accepted meanings and the proposals as the first test's public figures have them)."""
@@ -293,7 +306,8 @@ def figures():
         "accepted": {"all": len(acc), "of_the_first_test": sum(not r["new"] for r in acc), "new": sum(r["new"] for r in acc)},
         "further_entries": {"all": len(NEW) + len(OUT), "taken": len(NEW), "left_out": dict(collections.Counter(OUT.values()).most_common()),
                             "by_entry": {k: "taken" for k in sorted(NEW)} | dict(sorted(OUT.items()))},
-        "groups_of_near_meanings": len(GROUPS), "seed": SEED, "places_shown_at_most": W.SHOWN, "words_each_side": W.CHOICE_WIDTH,
+        "groups_of_near_meanings": len(GROUPS), "options": options_of(rows), "seed": SEED, "places_shown_at_most": W.SHOWN,
+        "words_each_side": W.CHOICE_WIDTH,
         "answers": sum(r["answered"] for r in rows), "answers_expected": len(rows) * READERS,
         "choice": res["figures"],
         "accepted_by_outcome": {s: dict(collections.Counter(outcome(r) for r in acc if r["sort"] == s).most_common()) for s in ("offered", "absent")},

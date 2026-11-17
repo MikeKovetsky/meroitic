@@ -68,6 +68,17 @@
   }
  },
  "groups_of_near_meanings": 17,
+ "options": {
+  "words": 76,
+  "of_both_sorts": 63,
+  "open_words_with_near_proposals": [
+   "mde",
+   "mlomrse",
+   "mreperi",
+   "wte",
+   "ẖol"
+  ]
+ },
  "seed": 20261122,
  "places_shown_at_most": 12,
  "words_each_side": 6,

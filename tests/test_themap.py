@@ -278,14 +278,15 @@ def test_the_page_says_what_the_figures_say():
     assert {w["source"] for w in again["words"]} == {"Rilly 2016", "Rilly 2021"}
     mine = by_name["leftover"]                                           # the sixth layer is the second reading of the unnamed parts
     assert (mine["places"], mine["why"], mine["to"], mine["was"]) == (again["laid"]["lines"], again["laid"]["why"], again["laid"]["to"], again["laid"]["was"])
-    assert (f"The {again['places']} places of `rare_sure` and `rare_later` where both checkers of those steps recognised the word but the map leaves a part "
-            f"of the spelling unnamed.") in text
+    assert (f"The {again['places']} places of steps G2 and G4 that `rare_sure` and `rare_later` left open: both checkers of those steps recognised the "
+            f"word, but the map leaves a part of the spelling unnamed.") in text
     assert (f"{mine['why']['form']} forms of a word the lexicon calls sure and {mine['why']['stated']} places of a word for which Rilly states a meaning") in text
     assert "A place both checkers call a name is not laid." in text and "the second is the layer `leftover`" in text
     by_why = left["laid"]["to_by_why"]
     assert by_why["stated"] == {"name": by_name["rare_millet"]["why"]["stated"] - by_why["stated"]["meaning"], "meaning": sum(w["places_laid"] for w in left["words"])}
-    assert (f"The {stated} stated places of `recurring`, `rare_later` and `leftover` rest on Rilly's readings of 2016 and 2021,** the {by_name['rare_millet']['why']['stated']} of "
-            f"`rare_millet` on Millet 2005 ({by_why['stated']['name']}, all of them names of places) and on Lipiński 2011 ({by_why['stated']['meaning']}).") in text
+    assert f"The {stated} stated places of `recurring`, `rare_later` and `leftover` rest on Rilly's readings of 2016 and 2021.**" in text
+    assert (f"The {by_name['rare_millet']['why']['stated']} stated places of `rare_millet` rest on Millet 2005 ({by_why['stated']['name']}, all of them names "
+            f"of places) and on Lipiński 2011 ({by_why['stated']['meaning']}).") in text
     assert {w["source"] for w in left["words"]} == {"Lipinski 2011"}
     assert (f"({by_name['rare_millet']['why']['stated']}: {by_why['stated']['name']} of entries the lexicon files as place names, {by_why['stated']['meaning']} of the "
             f"{len(left['words'])} words Lipiński gives a meaning in full), {by_why['name']['name']} places of two entries that both readers say Millet calls a "
@@ -293,7 +294,7 @@ def test_the_page_says_what_the_figures_say():
     assert f"{left['the_places']['kappa']:.2f} for `rare_millet` and {again['kappa']:.2f} for `leftover`, against a bar of 0.6" in text
     g5 = json.loads((PAGE.parent / "second_scholar_later_figures.json").read_text(encoding="utf-8"))
     st = g5["statuses"]
-    assert (f"each of the {g5['entries']} meanings behind them beside what other scholars say: "
+    assert (f"Step G5 set each of Rilly's {g5['entries']} later meanings, those behind these places among them, beside what other scholars say: "
             f"{st['agreed by two scholars'] + st['agreed by two scholars, with a dissent']} are stated by another scholar too "
             f"({st['agreed by two scholars, with a dissent']} with a dissent), {st['disputed']} are disputed and {st['stated by one']} rest on Rilly alone") in text
     g3 = json.loads((PAGE.parent / "unnamed_spellings_figures.json").read_text(encoding="utf-8"))["readings"]
@@ -356,6 +357,22 @@ def test_the_reporting_skill_reads_these_figures():
 def test_the_figures_are_the_count_of_the_local_files():
     needs("data/sources/v6", "data/rilly2003", "data/sources/words/population.json", "data/sources/words/r2/result.json", *[l["file"] for l in M.LAYERS])
     assert M.figures() == figs()
+
+
+def test_the_stated_places_rest_on_the_sources_the_page_names():
+    """Section 6: the stated places of `recurring`, `rare_later` and `leftover` cite Rilly 2016 or 2021, each on an
+    entry whose later meaning step G5 judged; those of `rare_millet` cite Millet 2005 (names of places) or Lipiński
+    2011 (translated words)."""
+    needs(*[l["file"] for l in M.LAYERS])
+    g5 = json.loads((PAGE.parent / "second_scholar_later_figures.json").read_text(encoding="utf-8"))["by_entry"]
+    for l in M.LAYERS:
+        stated = [o for o in M.lines_of(l) if o["why"] == "stated"]
+        if l["name"] in ("recurring", "rare_later", "leftover"):
+            assert stated and all(o["source"].startswith(("Rilly 2016,", "Rilly 2021,")) and o["item"] in g5 for o in stated), l["name"]
+        elif l["name"] == "rare_millet":
+            assert sorted({(o["source"].split(",")[0], o["level"]) for o in stated}) == [("Lipinski 2011", "meaning"), ("Millet 2005", "name")]
+        else:
+            assert not stated, l["name"]
 
 
 def test_the_two_studies_count_the_same():

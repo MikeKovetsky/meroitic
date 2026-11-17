@@ -80,6 +80,7 @@ MEANINGS_AGAIN = {"nbr": "gold", "yiroẖe": "to take control"}
 SEED, PACK = 20261116 + 8, 46
 CONTROLS = {"ending": 20, "junk": 20}
 CASES = ("ending", "known", "name", "unknown", "unclear")
+EXPLAINS = ("ending", "known", "name")                 # the cases that explain letters drawn by lot ("unclear" does not)
 BARS = {"kappa": 0.6, "junk_explained": 0.10, "endings_called_ending": 0.70}
 LETTERS = "abdeiklmnoqrstwyxXSN"
 # The second reading: a seed of its own, and a bar for each verdict. The bar on the letters drawn by lot counts only
@@ -124,7 +125,7 @@ def rule(again=False):
     cases that bar counts as an explanation)."""
     if again:
         return HOME_AGAIN, SEED_AGAIN, BARS_AGAIN, "junk_called_ending_or_known", LAID
-    return HOME, SEED, BARS, "junk_explained", ("ending", "known", "name")
+    return HOME, SEED, BARS, "junk_explained", EXPLAINS
 
 
 def read(name, home=None):
@@ -488,16 +489,24 @@ def tokens():
 
 
 def lot_letters(key, one, two):
-    """The controls with letters drawn by lot: how each checker answered them, and the places where one of the
-    two explained the letters (the entry of the word they were put on, on which side, the two answers)."""
+    """The controls with letters drawn by lot: how often each checker explained them (as an ending, a known word or
+    a name, as the first reading's bar counts; "unclear" explains nothing) and as what, and the places where one of
+    the two did (the entry of the word they were put on, on which side, the two answers)."""
     junk = [p for p in key if p["control"] == "junk"]
     said = [(p, one[p["place"]]["case"], two[p["place"]]["case"]) for p in junk]
     return {"shown": len(junk),
-            "explained": {str(j): sum(c[j] != "unknown" for c in [(None, a, b) for _, a, b in said]) for j in (1, 2)},
-            "explained_as": {str(j): dict(collections.Counter(c[j] for c in [(None, a, b) for _, a, b in said] if c[j] != "unknown")) for j in (1, 2)},
+            "explained": {str(j): sum(s[j] in EXPLAINS for s in said) for j in (1, 2)},
+            "explained_as": {str(j): dict(collections.Counter(s[j] for s in said if s[j] in EXPLAINS)) for j in (1, 2)},
             "unknown_by_both": sum(a == b == "unknown" for _, a, b in said),
             "explained_at": [{"word": next(e for _, e in p["parts"] if e), "letters": "before" if p["front"] else "after", "answers": [a, b]}
-                             for p, a, b in said if (a, b) != ("unknown", "unknown")]}
+                             for p, a, b in said if a in EXPLAINS or b in EXPLAINS]}
+
+
+def first_given(name, lines, lex):
+    """The words of the dictionary in use that the layer `name` is the first to give a meaning, by src/themap.py's
+    rule for the north star, with `lines` for that layer's own; on the map with all its layers."""
+    known = set(D.population_of(M.current(), lex, fix=True)[0])                 # the dictionary words in use
+    return M.given_by_layers([(l["name"], lines if l["name"] == name else M.lines_of(l)) for l in M.LAYERS], known, lex)[name]
 
 
 def name_kind(entry, v, lex):
@@ -531,8 +540,7 @@ def part_2():
     W.OUT = R.RECURRING
     firm = {k: sorted({s["source"] for s in checked[k]["statements"] if s["source"] in SOURCES and s["stance"] in W.FIRM}) for k in its}
     stated = {k: v for k, v in verified.items() if v["verdict"] == "stated"}
-    known = set(D.population_of(M.current(), lex, fix=True)[0])                 # the dictionary words in use
-    words = sorted(M.given(lines, known, lex))
+    words = first_given(LAYER, lines, lex)
     if set(words) != set(MEANINGS):
         raise SystemExit(f"MEANINGS and the words part 2 lays differ: {sorted(set(words) ^ set(MEANINGS))}")
 
@@ -566,9 +574,7 @@ def part_1_again():
     words of the dictionary it is the first layer to give a meaning."""
     lex = W.lexicon()
     lines, apart, verified = build_again()
-    known = set(D.population_of(M.current(), lex, fix=True)[0])                 # the dictionary words in use
-    by_layer = M.given_by_layers([(l["name"], lines if l["name"] == LAYER_AGAIN else M.lines_of(l)) for l in M.LAYERS], known, lex)
-    words = by_layer[LAYER_AGAIN]
+    words = first_given(LAYER_AGAIN, lines, lex)
     if set(words) != set(MEANINGS_AGAIN):
         raise SystemExit(f"MEANINGS_AGAIN and the words the second reading is the first to lay differ: {sorted(set(words) ^ set(MEANINGS_AGAIN))}")
     run_of = {o["item"]: ("g2" if o["why"] == "form" else "g4") for o in lines}
