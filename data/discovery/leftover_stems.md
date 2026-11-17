@@ -1,9 +1,11 @@
 # The leftover stems (the 86 places the leftover-parts step did not give to checkers)
 
-Status on 2026-11-16, 18:42: the places, the controls and the bars are set; no checker has been started. Working
-script (local until the step is counted): `data/sources/g9/run.py`. The step it follows is on
-[leftover_parts.md](leftover_parts.md) and [leftover_parts_2.md](leftover_parts_2.md). What the checkers are
-given: [`runs/prompts/G9_stems.md`](../../runs/prompts/G9_stems.md).
+Status on 2026-11-16, 18:45: the step is counted and **every bar is met** (section 6): 23 of the 86 places can be
+laid, 22 as names and 1 as a word of grammar. No stem was recognised as a word the lexicon knows. The script is
+local and not reviewed yet (`data/sources/g9/run.py`), so the map and the scoreboard do not count the 23 places
+yet. The step it follows is on [leftover_parts.md](leftover_parts.md) and
+[leftover_parts_2.md](leftover_parts_2.md). What the checkers were given:
+[`runs/prompts/G9_stems.md`](../../runs/prompts/G9_stems.md).
 
 ## 1. What was asked
 
@@ -84,3 +86,45 @@ be said. Step G3 laid names on bars of the same kind.
 - The checkers are one model: their agreement shows that a judgment can be repeated, not that it is right.
 - No meaning found here is the project's own: a place laid as a translated word takes the meaning the lexicon
   gives the entry both checkers name.
+
+## 6. The result (counted at 18:44, every bar met)
+
+The eight checkers were started at 18:42, after the commit with the bars (18:42:24); their answers came between
+18:43 and 18:44.
+
+| Bar for every verdict | Result | |
+|---|---|---|
+| Every place answered by both | 166 of 166 (86 places, 80 controls) | met |
+| Kappa of 0.6 or more on the real places | 0.79 | met |
+
+| Verdict | Found (at least 14 of 20) | Said wrongly (at most 2 of 20) | |
+|---|---|---|---|
+| A known word | 18 and 15 hidden stems named with their entry | 0 and 0 runs of lot letters called a known word | met |
+| Ending | 20 and 20 | 0 and 0 runs of lot letters called ending | met |
+| A name | 18 and 18 | 0 and 0 runs of lot letters, and 0 and 0 hidden stems, called a name | met |
+
+| Both checkers say, of the 86 places | Places |
+|---|---|
+| unknown | 55 |
+| a name | 22 |
+| ending | 1 |
+| a known word | 0 |
+| not agreed | 8 |
+
+**What can be laid: 23 places,** 22 as names and 1 as a word of grammar (its unnamed part is an ending inside the
+word for "begotten of"). No place is left out for a second unnamed part or for another stem without a meaning.
+
+**What this shows.**
+
+- **The review's question has its answer: no.** At none of the 86 places did the two checkers recognise the
+  unnamed stem as a word the lexicon knows, though both found such stems where they were hidden (18 and 15 of
+  20). What the map leaves unnamed there is unknown to the lexicon too.
+- **A quarter of the places are names.** By the checkers' reasons most are names of places before the locative
+  ending, and names of persons before the word for "this one". They leave the count of words that need a
+  meaning; they do not add a translated word.
+- **The judgment by place is not steady.** One spelling stands at five places of one text: the two checkers call
+  it a name at two, differ at two, and call it unknown at one. Only the two agreed places are laid.
+
+The numbers of the map change only when the script is in `src/` and reviewed.
+
+Cost: 8 agents, 725,765 tokens (typed from the task notifications into `data/sources/g9/tokens.json`, local).
