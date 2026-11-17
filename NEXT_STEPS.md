@@ -612,7 +612,8 @@ ours unless it passes a test set beforehand.
 **What is left of section G after 2026-11-16:** G7 alone. G1 to G6 are done, and so are their follow-ups: the
 leftover parts with their two readings and the meanings Millet and Lipiński state (point 24), and the leftover
 stems, the 86 places of the same kind where the unnamed part is the stem itself (point 26). With the sources in
-hand, no step is left that could give a word a meaning.
+hand, no step is left that could give a word a meaning. Section H notes three paths that would bring in evidence from outside
+the texts.
 
 **What the grammar pilot adds to that** (point 27): the other way that needs no new source is closed as well.
 New grammar cannot be tested on this little text: only the epitaph's formulas and the habits of the script come
@@ -623,3 +624,60 @@ grammar of 2007 or Hintze 1979 state them is a question for a scholar, and would
 
 Not on this path: the pages for the 304 open inscriptions and Griffith's translations as a second rendering
 (F4, above) assemble meanings scholars already have.
+
+## H. Paths that bring evidence from outside the texts (noted 2026-11-16, 20:54)
+
+Asked whether the project is a dead end, I answered yes for the texts alone. Mike: "but we didnt have claude
+code+fable for a centure. and not enough attention to this language. are you sure there are no scientific
+methods left to attack it?", and then: "note down these paths in the doc if not yet". He is right that one door
+was closed too fast. What the tests of sections F and G and the grammar pilot close is narrow: a meaning or a
+rule got from these 548 texts alone. Three paths bring evidence from outside them. None is started, and none
+has a bar yet: each gets one, committed before its first agent, like every step above.
+
+**H1. Whole dictionaries of the related languages, each proposal checked by the contexts** (the first to try).
+
+- **What:** type whole dictionaries of Nubian and its relatives, thousands of words each, in the place of the
+  short lists used so far. Let regular sound correspondences propose, for each Meroitic word without a meaning,
+  the words it could be a relative of. Give each proposal to the blind choice as one of its four meanings.
+- **Why it is not closed:** the comparison of 9 November (D 15, `data/discovery/cognates_rules.md`) had 31
+  words that the correspondences were not built from and lists of a few hundred words a language, 5,442 rows
+  in all. It came out at chance, so by its own rule no proposal for an unknown word was ever made. That shows
+  that short lists carry no signal that generalises, not that dictionaries carry none.
+- **Why the two halves fit:** the blind choice fails only where the true meaning is missing from the options.
+  Where it was offered, five readers who agreed were right in 16 of 17 and in 36 of 37 words (G6). A dictionary
+  of a related language is a source of meanings from outside the texts. Step E 18 adds a filter that costs
+  nothing: match a word only against words of its own kind, which the contexts do give.
+- **What it needs:** the dictionaries. Reinisch's *Die Nuba-Sprache* (1879) and Lepsius's *Nubische Grammatik*
+  (1880) are public domain and on archive.org, untyped (E 18); what else is free has to be looked up. One list
+  of downloads goes to Mike before anything is fetched.
+- **How it is known early whether it works:** the whole path is run blind on the words whose meaning is known,
+  with the bar set beforehand: how many meanings it recovers, and how many wrong ones it lets through. If it
+  fails there, it stops there.
+- **What is not known:** how much of the vocabulary has a recognisable relative at all. The sound
+  correspondences in hand were built by one scholar from about 20 word series; a handful of words more would
+  already be the project's first meanings of its own.
+
+**H2. The Kushites' own Egyptian texts as a stand-in bilingual.**
+
+- **What:** the kings of Kush had royal stelae written in Egyptian for centuries before Meroitic was written.
+  *Fontes Historiae Nubiorum* I and II translate them. Read the Meroitic royal and temple texts beside them,
+  frame by frame: the titles and epithets of the king and the gods, the dating, the lists of booty and gifts
+  with their numbers, the order of the parts.
+- **What it needs:** nothing new. Volume I is held and not yet used (`data/INDEX.md`), volume II is typed.
+- **How it is known early:** where a frame holds a Meroitic word whose meaning is known, the Egyptian word in
+  the same place must have that meaning more often than a draw by lot would give. Only then is an open word
+  read off a frame.
+- **What speaks against it:** the two tries of this kind on 11 November (the offering formulas against the
+  Egyptian funerary wishes, the titles against the Demotic graffiti) found nothing that the lexicon does not
+  have. The royal texts were not compared with the Egyptian royal texts.
+
+**H3. Names as small sentences.**
+
+- **What:** a Meroitic personal name is often a compound, with a god's name or a known word in it. Split the
+  names the map marks into the parts that come back, and compare how the parts stand (first or last, with
+  which god, in men's or women's names) with how such names are built in Egyptian and in Nubian.
+- **What it needs:** nothing new: the map marks the names, and the epitaphs say who is whose mother and father.
+- **How it is known early:** parts that are known words (`mlo`, `lẖ`) must come out as what they are.
+- **What speaks against it:** like the contexts, it may give the kind of a part sooner than its meaning.
+
+The write-up names these paths under what would change its answer ([FINDINGS.md](FINDINGS.md), section 7).
