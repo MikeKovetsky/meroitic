@@ -11,3 +11,7 @@ reviewed code: the reviewed pipeline is `src/`.
   opened) and the scoring script behind `data/expansion/hand_copy_test.md`.
 - `vision/`: the photograph test behind `data/discovery/vision.md`, with the download manifest (URL, licence, size).
 - `gold_builders/`: the scripts that wrote `data/gold_lexicon.json` and `data/gold_morphology.json`.
+- `faras/` (2026-11-17): the tools that cut Griffith's Faras copies for the readers (`data/expansion/faras/`):
+  `pdfpng.swift` renders the PDF's pages and crops them (CoreGraphics; no PDF library is installed), `locate.py`
+  places each copy on its page by its ink lines, and `cut2.py` cuts each copy into an overview, pieces and a context
+  crop. Both scripts name the session's scratch folder, where the rendered pages and the compiled tool were.
