@@ -232,6 +232,38 @@ With fewer than 8 parts agreed, a bar is neither met nor missed: the test is too
 is laid. If the kinds' bar is met, the parts without a meaning that both readers agree on are listed with
 their kind. Only if the meanings' bar is met is a meaning listed, and then only as a proposal, as in track B.
 
+**Rules added on 2026-11-16 at about 22:45, after the script was written on the tuning names and before it was
+committed or run on a held-back name.** The builders named eight points; the answers:
+
+1. **Endings.** Where the map cuts a name into parts, what it names as an ending is taken off. Where it does not,
+   an end is taken off only where the map reads the word "this is X", and only an end that the map's own parts
+   take off at least three tuning names and that the lexicon lists (in practice `qowi` and `qo`). Taking off
+   whatever the lexicon lists as an ending would have cut 251 of the 262 one-piece tuning names.
+2. **A name, for counting,** is a spelling with its endings off, so that two spellings of one name count once,
+   for the cutter and for gate C2. Gate C1 counts the 305 held-back spellings, as above, with the count by names
+   beside it.
+3. **The parts** that "stand in at least three tuning names" are the cutter's 328: strings of two letters or more
+   in at least three tuning names, without a string that a string one letter longer follows into every one of its
+   names (358 strings before that cut).
+4. **The codes of gate C2** are the frozen cutter's parts, counted over all names; a god stands "in the same name"
+   only where its letters are one of those parts.
+5. **The kinds in the key** come from the lexicon's kind of the word by a fixed table (a god's name: god;
+   adjective or epithet: quality; verb: deed; title: title; noun: thing or person, or kin word where its meaning is
+   a kin term; function word: ending). **Title and quality count as one kind for the bar:** in names both describe
+   the bearer, and the lexicon files some words as titles that names use as qualities (`lẖ`, "great"). A known
+   part without a kind in the lexicon counts for the meanings only.
+6. **Two readers who both say "unclear"** have not agreed on a kind.
+7. **A meaning that only names another word** is replaced as in track B; no known part among the tuning parts
+   needs it.
+8. **Reported beside gate C1, with no bar:** the same share for made-up names that keep their syllables and only
+   shuffle their order.
+
+**What the bar of C1 may expect, measured before the run on the tuning names alone:** learning from half of them
+and cutting the other half, 30.0% are wholly split against 5.9% for shuffled letters (24.1 points); learning from
+four fifths and cutting the last fifth, 48.2% against 11.3% (36.9 points); with every other tuning text standing
+for the held-back set, 33.7% against 6.4% (27.4 points). The real gate learns from all 342 tuning names. The bar
+of 30 points is not changed.
+
 ## 5. The order, and who writes what
 
 - The three tracks run side by side; none reads another's files. Agents write under `data/sources/nubian/`,
