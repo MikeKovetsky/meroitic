@@ -5,6 +5,8 @@ the data and the method: the public corpus turned out to be mostly copies, 304 i
 under an open licence (237 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
+Why the texts alone do not give more is written up in one place: [FINDINGS.md](FINDINGS.md).
+
 ## What's new
 
 1. **The public Meroitic corpus is mostly copies.** The only machine-readable corpus
@@ -826,6 +828,7 @@ python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/
 python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
 python3 -I tests/test_unnamed.py && python3 -I tests/test_second_later.py
 python3 -I tests/test_leftover.py && python3 -I tests/test_blind2.py && python3 -I tests/test_grammar.py
+python3 -I tests/test_findings.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
