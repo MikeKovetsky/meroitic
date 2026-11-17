@@ -490,10 +490,11 @@ def gray(path, run=None):
     import struct
     import subprocess
     import tempfile
-    tmp = Path(tempfile.mkdtemp()) / "page.bmp"
-    (run or (lambda c: subprocess.run(c, check=True, capture_output=True)))(
-        ["sips", "-s", "format", "bmp", str(path), "--out", str(tmp)])
-    b = tmp.read_bytes()
+    with tempfile.TemporaryDirectory() as d:          # the BMP of a page is about 11 MB: not left behind
+        tmp = Path(d) / "page.bmp"
+        (run or (lambda c: subprocess.run(c, check=True, capture_output=True)))(
+            ["sips", "-s", "format", "bmp", str(path), "--out", str(tmp)])
+        b = tmp.read_bytes()
     off = struct.unpack_from("<I", b, 10)[0]
     w, h = struct.unpack_from("<ii", b, 18)
     px = struct.unpack_from("<H", b, 28)[0] // 8
