@@ -1006,6 +1006,20 @@ proposal for 7 of the 33 open words, six of them words on which the first test's
 one of the six, `ẖol`, the two tests' readers agreed on two different proposals. What the first test showed after
 its count, no wrong choice among 11 words without their meaning, did not hold when it was set as a bar.
 
+**The run with all 83 accepted words.** Asked whether he waived the 83 words, Mike answered "No, do not waive".
+So the test was run again with all 83
+([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)): the 40 entries left out came in with
+the meaning the lexicon gives them, 21 of them only a coarse one ("a priestly title"), which is never drawn as a
+filler. 116 words in 8 packs, 40 readers; the session's usage limit stopped the launch after 32 of them, and the
+last 8 were started 72 minutes after the rules were committed, with the packs unchanged. All 580 lines were
+answered. Shown with their meaning, 37 of 56 accepted words got a meaning from all five readers and 36 of 37 the
+right one (97.3%; the bar is met). Shown without it, 6 of 27 got a wrong meaning from all five (22.2%; the bar
+allowed two). No label is given. The 40 new words were right every time the readers chose (21 of 21), as weak
+test items would be; among the 38 words of the first test, 3 of 14 still got a wrong choice. All five chose the
+same proposal for 8 of the 33 open words, six of them the same as in the run with 43. It is the method's third
+miss. A check added afterwards found that one pack showed the spelling of one hidden word as a piece of
+another; neither of the two words is among the choices counted, so neither bar moved.
+
 **What it means.** 31 more running words are translated, four more words of the dictionary have a scholar's
 meaning in the map, and 18 places are names. The blind choice
 among four meanings is not a test a proposal can pass as it stands: when the true meaning is missing from the
@@ -1013,4 +1027,9 @@ four, five readers agree on a wrong one about one time in four, and for an open 
 missing.
 
 **Cost.** Part 1: 6 agents, 595,672 subagent tokens; read again: 6 agents, 565,589. Part 2: 8 agents, 692,849.
-G6: 25 agents, 1,930,704. From the task notifications.
+G6: 25 agents, 1,930,704. From the task notifications. The run with 83: 40 readers, of whom 31 reported 2,406,801
+tokens together; the other nine wrote their complete files and were cut off by the usage limit before their last
+reply, so no count was reported for them and none is estimated.
+
+**The first review** (full tier): 473,117 tokens, 25 minutes. It fixed 10 findings in two commits (8f4339b and
+82143c0) and ended NOT CLEAN on one line alone, the 83 accepted words, which Mike did not waive.

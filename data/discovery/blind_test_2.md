@@ -1,7 +1,8 @@
 # The blind test again (step G6)
 
 Status on 2026-11-16: the test is counted and **no label is given**: one bar held and one was missed
-(section 6). Figures: `blind_test_2_figures.json`. Script: `src/blind2.py`. Checks: `tests/test_blind2.py`. What
+(section 6). It ran with 43 of the plan's 83 accepted words; the run with all 83 is on
+[blind_test_83.md](blind_test_83.md) and came out the same way. Figures: `blind_test_2_figures.json`. Script: `src/blind2.py`. Checks: `tests/test_blind2.py`. What
 the readers were given: [`runs/prompts/G6_choice.md`](../../runs/prompts/G6_choice.md). The first test is
 section 6 of [recurring_words.md](recurring_words.md).
 
@@ -19,7 +20,7 @@ Mike, 2026-11-16, to "Start the leftover-parts step and G6 once G3 and G5 are pu
 | | Requirement | State |
 |---|---|---|
 | R1 | "The bar set beforehand at 'all five readers agree'." | Set: section 3. |
-| R2 | "The 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38." | **Not met as worded: 43 accepted words, not 83.** Only 5 of the 45 further entries have a meaning that can be offered (section 2). |
+| R2 | "The 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38." | **Not met as worded: 43 accepted words, not 83.** Only 5 of the 45 further entries have a meaning that can be offered (section 2). Mike, asked the same day "Do you waive that requirement, so the review can pass?": "No, do not waive". So the test was run again with all 83: [blind_test_83.md](blind_test_83.md). |
 | R3 | "Fillers worded like the candidates." | Set: section 2. |
 | R4 | "If the bars hold, a proposal on record ... can be called favoured by the contexts." | Set: section 4. |
 | R5 | The rules of section G: every bar committed before its readers are started, counts from a figures file, nothing called a meaning of ours. | The bars are in this page, committed before any reader is started. |

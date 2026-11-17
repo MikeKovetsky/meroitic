@@ -274,7 +274,12 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     got "none of these" from all five). Shown without it, 3 of 13 got a wrong one from all five readers (the
     bar allowed one). So no label is given: a proposal that all five choose cannot be told from a wrong meaning
     chosen for want of the right one. All five chose the same proposal for 7 of the 33 open words; they carry no
-    label ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
+    label ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)). Mike did not waive the 83 words
+    ("No, do not waive"), so the test was run again with all 83, the 40 others with the meaning the lexicon gives
+    them, however coarse ("a priestly title"). It came out the same way: 36 of 37 right with the meaning offered,
+    6 of 27 wrongly chosen without it, where the bar allowed two. No label is given, and this is the method's
+    third miss. All five chose the same proposal for 8 of the 33 open words
+    ([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)).
 
 ## The question
 
@@ -730,6 +735,15 @@ first test and the 5 further entries of the lexicon that have a meaning of their
 lot is shown without its true meaning. The bars are those of the first test
 ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
 
+The run with all 83 accepted words (the commands `words-83`, `packs-83` and `count-83`) takes in the 40 entries
+the first run left out, each with the meaning the lexicon gives it in a few words of our own. Twenty-one of them
+have only a coarse meaning ("a priestly title", "an administrative title"); such a meaning is the true meaning
+of its own words and is never drawn as a filler, since it would be true of any title of its sort it stood
+beside. Five groups of near meanings are added, the readings shown are those of the map with its six layers, and
+the accepted words' outcomes are also counted by sort of word, because the coarse meanings and the forms of
+words already in the test are weak test items
+([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -803,8 +817,9 @@ Twenty-one things need files that are kept locally (Data, above), so they don't 
 - `python3 -I src/leftover.py public` (and `packs`, `count`, `packs-again`, `count-again`, `layer-again`, `setup`,
   `verify-packs`, `verify`, `place-packs`, `places`, `layer`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the results of
   section 27, the text layers of Millet 2005 and Lipiński 2011, and the readers' and checkers' answers.
-- `python3 -I src/blind2.py public` (and `words`, `packs`, `count`) reads `corpus_v6` and its gloss file, Rilly's
-  lexicon, the layers' lines, the proposals collected in section 24 and the readers' answers.
+- `python3 -I src/blind2.py public` (and `words`, `packs`, `count`, and the same three ending in `-83` for the
+  run with all 83 accepted words) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the
+  proposals collected in section 24 and the readers' answers of both runs.
 
 ## Layout
 

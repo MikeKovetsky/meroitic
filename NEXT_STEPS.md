@@ -164,7 +164,10 @@ Done since this plan was written:
     step G6). No label is given. With the meaning offered, 17 accepted words got a meaning from all five readers and
     16 of 17 the right one; without it, 3 of 13 got a wrong one from all five, where the bar allowed one. A choice
     among four meanings from the contexts alone is not a test a proposal can pass: this is its second miss. No
-    count of the map changes.
+    count of the map changes. That run took 43 of the plan's 83 accepted words, and Mike did not waive the
+    rest ("No, do not waive"). So the test was run again with all 83
+    ([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)): 36 of 37 right with the meaning
+    offered, 6 of 27 wrongly chosen without it, where the bar allowed two. No label is given: the third miss.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -577,9 +580,13 @@ ours unless it passes a test set beforehand.
    not offered); the 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38;
    fillers worded like the candidates. If the bars hold, a proposal on record for one of the 378 open places
    can be called favoured by the contexts. It is the only way in hand to say anything about kind d.
-   **Done on 2026-11-16** (point 25): no label is given. One bar held (16 of 17 right with the meaning offered)
-   and one was missed (3 of 13 wrong without it). Only 43 accepted words could be used, not 83: 5 of the 45
-   further entries have a meaning that can be offered.
+   **Done on 2026-11-16** (point 25), in two runs: no label is given. With 43 accepted words one bar held (16
+   of 17 right with the meaning offered) and one was missed (3 of 13 wrong without it); 5 of the 45 further
+   entries have a meaning of their own that can be offered. Mike did not waive the 83, so the second run took
+   them all, the 40 others with the coarse meaning the lexicon gives them: 36 of 37 right, 6 of 27 wrong, the
+   same bar missed. Nothing is left to try by this method: more accepted words and a stricter rule of choice
+   changed nothing in what it cannot do, which is to tell a right proposal from a wrong one chosen for want of
+   the right one.
 7. **G7. New evidence, on Mike's word.** After G6 the sources in hand are used up for meanings. What would move
    the count further: an answer from Rilly, Hallof or Smith to the letters of 9 November (none had come by 15
    November, and the pull request to Otten had no comment); the works we do not hold that state meanings for
