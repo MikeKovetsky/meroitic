@@ -133,6 +133,10 @@ a typed page** (its builder had seen no typed page). Its builder named two weakn
   across words of every length breaks that pairing. Shuffling the meanings only among words with the same number
   of consonants gave p < 0.05 in 2 of 40 (median 0.488), the size a 5% test should have. The script computes both
   (`by_length` beside the engine's own). Which one is the bar is Mike's to say, and is asked before the gate runs.
+  **Decided before the gate ran:** asked "Should gate A1's bar be the length-matched shuffle instead of the
+  engine's own?", Mike answered on 2026-11-17 at about 06:50: "do you call". The bar is the length-matched
+  shuffle (`by_length`), because the engine's own passes about one time in three with no related word in the data;
+  the engine's own is reported beside it.
 - Words that name a kind of word or speak of meaning ("noun", "verb", "adjective", "adverb", "particle",
   "suffix", "prefix", "ending", "word", "meaning", "sense") join the words taken out before the keys.
 - `pqr` is dropped by name as a form of `qore`: the lexicon's entry `p- (2)` analyses it as p- + `qr`.
