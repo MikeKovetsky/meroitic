@@ -1,0 +1,3104 @@
+{
+ "words": 116,
+ "sorts": {
+  "offered": 56,
+  "open": 33,
+  "absent": 27
+ },
+ "accepted": {
+  "all": 83,
+  "of_the_first_test": 38,
+  "new": 45
+ },
+ "further_entries": {
+  "all": 45,
+  "taken": 45,
+  "left_out": {},
+  "by_entry": {
+   "apote-lẖ": "taken",
+   "beliloke": "taken",
+   "beloloke": "taken",
+   "deseke": "taken",
+   "dik": "taken",
+   "dot": "taken",
+   "dḫe": "taken",
+   "kroro": "taken",
+   "ktke": "taken",
+   "l (2)": "taken",
+   "mkesḫe": "taken",
+   "mẖe": "taken",
+   "nse doke": "taken",
+   "ntke (1)": "taken",
+   "pesto": "taken",
+   "pke": "taken",
+   "qetneyineqeli": "taken",
+   "qetrri": "taken",
+   "qor": "taken",
+   "qor-o": "taken",
+   "qorene": "taken",
+   "qoresem": "taken",
+   "qorise": "taken",
+   "siremroke": "taken",
+   "sleqene": "taken",
+   "slẖ": "taken",
+   "slẖs": "taken",
+   "snte": "taken",
+   "soni": "taken",
+   "sqo": "taken",
+   "ssimete": "taken",
+   "ste": "taken",
+   "stmdese": "taken",
+   "t-dḫe": "taken",
+   "t-erike-l": "taken",
+   "tbqo": "taken",
+   "te-dḫe-l": "taken",
+   "teter": "taken",
+   "tqi": "taken",
+   "trtekese": "taken",
+   "ttne": "taken",
+   "wi (1)": "taken",
+   "ḫbḫne": "taken",
+   "ḫlbine": "taken",
+   "ḫlẖl": "taken"
+  }
+ },
+ "groups_of_near_meanings": 22,
+ "options": {
+  "words": 116,
+  "of_both_sorts": 110,
+  "open_words_with_near_proposals": [
+   "mde",
+   "mlomrse",
+   "mreperi",
+   "wetneyineqeli",
+   "wte",
+   "ẖol"
+  ]
+ },
+ "seed": 20261126,
+ "places_shown_at_most": 12,
+ "words_each_side": 6,
+ "answers": 580,
+ "answers_expected": 580,
+ "choice": {
+  "words": 116,
+  "complete": true,
+  "offered": 56,
+  "offered_chosen": 37,
+  "offered_right": 36,
+  "right_when_chosen": 0.973,
+  "found": 0.6429,
+  "offered_none": 4,
+  "offered_no_choice": 15,
+  "absent": 27,
+  "absent_wrong": 6,
+  "wrong_when_absent": 0.2222,
+  "absent_none": 5,
+  "bar1": true,
+  "bar2": false,
+  "labels_given": false,
+  "open_words": 33,
+  "open": {
+   "no choice": 20,
+   "none of the four": 3,
+   "chosen, no label": 8,
+   "a filler chosen": 2
+  },
+  "bars": {
+   "right_when_chosen": 0.8,
+   "chosen_at_least": 8,
+   "wrong_when_absent": 0.1
+  },
+  "readers": 5,
+  "needed": 5,
+  "packs": 8
+ },
+ "accepted_by_outcome": {
+  "offered": {
+   "right": 36,
+   "no choice": 15,
+   "none": 4,
+   "wrong": 1
+  },
+  "absent": {
+   "no choice": 16,
+   "wrong": 6,
+   "none": 5
+  }
+ },
+ "wrong_choices": [
+  {
+   "entry": "pelmos",
+   "sort": "absent",
+   "true": "general",
+   "chosen": "governor"
+  },
+  {
+   "entry": "tbqo",
+   "sort": "absent",
+   "true": "an administrative title",
+   "chosen": "chief envoy"
+  },
+  {
+   "entry": "slẖ",
+   "sort": "absent",
+   "true": "a priestly title",
+   "chosen": "temple administrator"
+  },
+  {
+   "entry": "sem",
+   "sort": "offered",
+   "true": "wife",
+   "chosen": "mother's kin"
+  },
+  {
+   "entry": "nse doke",
+   "sort": "absent",
+   "true": "a favourable sacrifice",
+   "chosen": "life"
+  },
+  {
+   "entry": "tkk",
+   "sort": "absent",
+   "true": "to plunder",
+   "chosen": "to send"
+  },
+  {
+   "entry": "sḫi",
+   "sort": "absent",
+   "true": "small, young",
+   "chosen": "great, elder"
+  }
+ ],
+ "new_words": [
+  {
+   "entry": "te-dḫe-l",
+   "sort": "offered",
+   "true": "to bear (a child)",
+   "outcome": "right"
+  },
+  {
+   "entry": "tqi",
+   "sort": "absent",
+   "true": "a priestly title",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "mẖe",
+   "sort": "offered",
+   "true": "abundant",
+   "outcome": "right"
+  },
+  {
+   "entry": "pke",
+   "sort": "absent",
+   "true": "a blessing",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "qor-o",
+   "sort": "offered",
+   "true": "the ruler, as a predicate",
+   "outcome": "none"
+  },
+  {
+   "entry": "ḫbḫne",
+   "sort": "offered",
+   "true": "a household official of the ruler",
+   "outcome": "right"
+  },
+  {
+   "entry": "t-dḫe",
+   "sort": "offered",
+   "true": "to bear (a child)",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "tbqo",
+   "sort": "absent",
+   "true": "an administrative title",
+   "outcome": "wrong"
+  },
+  {
+   "entry": "mkesḫe",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "dik",
+   "sort": "absent",
+   "true": "all the way, from one place to another",
+   "outcome": "none"
+  },
+  {
+   "entry": "beloloke",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "slẖ",
+   "sort": "absent",
+   "true": "a priestly title",
+   "outcome": "wrong"
+  },
+  {
+   "entry": "ḫlẖl",
+   "sort": "offered",
+   "true": "a great meal",
+   "outcome": "right"
+  },
+  {
+   "entry": "l (2)",
+   "sort": "offered",
+   "true": "to give",
+   "outcome": "right"
+  },
+  {
+   "entry": "pesto",
+   "sort": "absent",
+   "true": "viceroy",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "qoresem",
+   "sort": "offered",
+   "true": "the ruler's spouse",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "trtekese",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "siremroke",
+   "sort": "offered",
+   "true": "an administrative title",
+   "outcome": "right"
+  },
+  {
+   "entry": "dḫe",
+   "sort": "offered",
+   "true": "to bear (a child)",
+   "outcome": "right"
+  },
+  {
+   "entry": "t-erike-l",
+   "sort": "offered",
+   "true": "to beget (a child)",
+   "outcome": "right"
+  },
+  {
+   "entry": "qor",
+   "sort": "offered",
+   "true": "the ruler",
+   "outcome": "right"
+  },
+  {
+   "entry": "slẖs",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "nse doke",
+   "sort": "absent",
+   "true": "a favourable sacrifice",
+   "outcome": "wrong"
+  },
+  {
+   "entry": "ntke (1)",
+   "sort": "offered",
+   "true": "strength",
+   "outcome": "right"
+  },
+  {
+   "entry": "qorene",
+   "sort": "absent",
+   "true": "a title, the office not known",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "ktke",
+   "sort": "absent",
+   "true": "queen (Candace)",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "sleqene",
+   "sort": "offered",
+   "true": "an administrative title",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "teter",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "ḫlbine",
+   "sort": "offered",
+   "true": "an official under the viceroy",
+   "outcome": "right"
+  },
+  {
+   "entry": "qetneyineqeli",
+   "sort": "offered",
+   "true": "a byname of Isis",
+   "outcome": "right"
+  },
+  {
+   "entry": "qorise",
+   "sort": "offered",
+   "true": "of the ruler",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "wi (1)",
+   "sort": "absent",
+   "true": "brother",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "stmdese",
+   "sort": "absent",
+   "true": "an official under the viceroy",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "ttne",
+   "sort": "offered",
+   "true": "a household official of the ruler",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "ste",
+   "sort": "offered",
+   "true": "mother",
+   "outcome": "right"
+  },
+  {
+   "entry": "kroro",
+   "sort": "offered",
+   "true": "a title, the office not known",
+   "outcome": "right"
+  },
+  {
+   "entry": "dot",
+   "sort": "offered",
+   "true": "favourable",
+   "outcome": "right"
+  },
+  {
+   "entry": "deseke",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "sqo",
+   "sort": "offered",
+   "true": "this man",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "apote-lẖ",
+   "sort": "offered",
+   "true": "chief envoy",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "snte",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "soni",
+   "sort": "offered",
+   "true": "a priestly title",
+   "outcome": "right"
+  },
+  {
+   "entry": "ssimete",
+   "sort": "absent",
+   "true": "a priestly title",
+   "outcome": "no choice"
+  },
+  {
+   "entry": "qetrri",
+   "sort": "offered",
+   "true": "a byname of Osiris",
+   "outcome": "right"
+  },
+  {
+   "entry": "beliloke",
+   "sort": "absent",
+   "true": "a priestly title",
+   "outcome": "no choice"
+  }
+ ],
+ "open_chosen": {
+  "pl (2)": "lord of",
+  "wse": "of the country",
+  "penn": "year",
+  "mlowi": "health",
+  "pqrtr": "great prince",
+  "yed": "silver",
+  "wi (1)": "brother",
+  "qomlise": "good god"
+ },
+ "first_test": {
+  "needed": 4,
+  "all_agree": {
+   "offered_chosen": 15,
+   "offered_right": 12,
+   "absent_wrong": 0,
+   "open_candidates": [
+    "mlowi",
+    "penn",
+    "pqrtr",
+    "qomlise",
+    "wse",
+    "yed",
+    "ẖol"
+   ]
+  },
+  "absent": 11
+ },
+ "rows": [
+  {
+   "sort": "offered",
+   "entry": "te-dḫe-l",
+   "kind": "verb",
+   "true": "to bear (a child)",
+   "candidates": [],
+   "options": [
+    "to bear (a child)",
+    "to praise",
+    "to send",
+    "written by"
+   ],
+   "picks": {
+    "to bear (a child)": 5
+   },
+   "choice": "to bear (a child)",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "tqi",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "the ruler's spouse",
+    "governor",
+    "general",
+    "notable"
+   ],
+   "picks": {
+    "none": 1,
+    "notable": 3,
+    "governor": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "mde",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "mother's kin",
+    "direct descendant",
+    "mother's brother"
+   ],
+   "options": [
+    "mother's kin",
+    "direct descendant",
+    "mother's brother",
+    "year"
+   ],
+   "picks": {
+    "none": 2,
+    "mother's kin": 3
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "mk",
+   "kind": "noun",
+   "true": "god",
+   "candidates": [],
+   "options": [
+    "god",
+    "of the ruler",
+    "the southern one (feminine)",
+    "village"
+   ],
+   "picks": {
+    "none": 4,
+    "god": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "yeto",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "water"
+   ],
+   "options": [
+    "water",
+    "protection",
+    "man",
+    "the southern one (feminine)"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "verdict": "none of the four"
+  },
+  {
+   "sort": "open",
+   "entry": "tiso",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "to make"
+   ],
+   "options": [
+    "to make",
+    "to kill",
+    "to be praised",
+    "written by"
+   ],
+   "picks": {
+    "to be praised": 2,
+    "to make": 1,
+    "none": 2
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "d",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "to give",
+    "house",
+    "to send"
+   ],
+   "options": [
+    "to give",
+    "house",
+    "to send",
+    "to kill"
+   ],
+   "picks": {
+    "to give": 4,
+    "none": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "mẖe",
+   "kind": "adjective",
+   "true": "abundant",
+   "candidates": [],
+   "options": [
+    "abundant",
+    "great, elder",
+    "a byname of Osiris",
+    "shining"
+   ],
+   "picks": {
+    "abundant": 5
+   },
+   "choice": "abundant",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "apote",
+   "kind": "title",
+   "true": "envoy",
+   "candidates": [],
+   "options": [
+    "envoy",
+    "viceroy",
+    "Amun's first priest",
+    "good of repute"
+   ],
+   "picks": {
+    "envoy": 5
+   },
+   "choice": "envoy",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫrpḫne",
+   "kind": "title",
+   "true": "governor",
+   "candidates": [],
+   "options": [
+    "governor",
+    "notable",
+    "the ruler's spouse",
+    "viceroy"
+   ],
+   "picks": {
+    "governor": 4,
+    "notable": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "tre",
+   "kind": "verb",
+   "true": "to give",
+   "candidates": [],
+   "options": [
+    "to send",
+    "to love, to revere",
+    "all the way, from one place to another",
+    "to make"
+   ],
+   "picks": {
+    "to love, to revere": 3,
+    "none": 1,
+    "to make": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ant",
+   "kind": "title",
+   "true": "priest",
+   "candidates": [],
+   "options": [
+    "priest",
+    "majordomo",
+    "citizen",
+    "general"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ẖe (1)",
+   "kind": "verb",
+   "true": "to drink",
+   "candidates": [],
+   "options": [
+    "to drink",
+    "to praise",
+    "to bear (a child)",
+    "to present"
+   ],
+   "picks": {
+    "to drink": 5
+   },
+   "choice": "to drink",
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "pke",
+   "kind": "noun",
+   "true": "a blessing",
+   "candidates": [],
+   "options": [
+    "water",
+    "a Nubian",
+    "land, province",
+    "god"
+   ],
+   "picks": {
+    "none": 3,
+    "god": 2
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "pl (2)",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "lord of",
+    "out of"
+   ],
+   "options": [
+    "lord of",
+    "out of",
+    "brother",
+    "star"
+   ],
+   "picks": {
+    "lord of": 5
+   },
+   "choice": "lord of",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "open",
+   "entry": "wse",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "of the country"
+   ],
+   "options": [
+    "of the country",
+    "nephew, niece",
+    "the ruler, as a predicate",
+    "beauty"
+   ],
+   "picks": {
+    "of the country": 5
+   },
+   "choice": "of the country",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "open",
+   "entry": "penn",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "year",
+    "a star's rising"
+   ],
+   "options": [
+    "year",
+    "a star's rising",
+    "the ruler",
+    "wife"
+   ],
+   "picks": {
+    "year": 5
+   },
+   "choice": "year",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "absent",
+   "entry": "ḫmlol",
+   "kind": "noun",
+   "true": "a good meal",
+   "candidates": [],
+   "options": [
+    "master",
+    "strength",
+    "sister",
+    "wife"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "ẖol",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "to present",
+    "to serve",
+    "to grant"
+   ],
+   "options": [
+    "to present",
+    "to serve",
+    "to grant",
+    "to kill"
+   ],
+   "picks": {
+    "to kill": 3,
+    "to grant": 2
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "womnise",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "priest of Amun",
+    "nilometer controller"
+   ],
+   "options": [
+    "priest of Amun",
+    "nilometer controller",
+    "the ruler's spouse",
+    "majordomo"
+   ],
+   "picks": {
+    "priest of Amun": 1,
+    "none": 4
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "qor-o",
+   "kind": "noun",
+   "true": "the ruler, as a predicate",
+   "candidates": [],
+   "options": [
+    "the ruler, as a predicate",
+    "a star's rising",
+    "brother",
+    "cow"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫbḫne",
+   "kind": "title",
+   "true": "a household official of the ruler",
+   "candidates": [],
+   "options": [
+    "a household official of the ruler",
+    "priest of Amun",
+    "great prince",
+    "envoy"
+   ],
+   "picks": {
+    "a household official of the ruler": 5
+   },
+   "choice": "a household official of the ruler",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "pelmos",
+   "kind": "title",
+   "true": "general",
+   "candidates": [],
+   "options": [
+    "priest of Amun",
+    "nilometer controller",
+    "governor",
+    "corn measurer"
+   ],
+   "picks": {
+    "governor": 5
+   },
+   "choice": "governor",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "t-dḫe",
+   "kind": "verb",
+   "true": "to bear (a child)",
+   "candidates": [],
+   "options": [
+    "to bear (a child)",
+    "written by",
+    "to send",
+    "to make"
+   ],
+   "picks": {
+    "none": 2,
+    "to bear (a child)": 3
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "tbqo",
+   "kind": "title",
+   "true": "an administrative title",
+   "candidates": [],
+   "options": [
+    "Amun's first priest",
+    "chief envoy",
+    "nilometer controller",
+    "good of repute"
+   ],
+   "picks": {
+    "chief envoy": 5
+   },
+   "choice": "chief envoy",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "lẖ",
+   "kind": "adjective",
+   "true": "great, elder",
+   "candidates": [],
+   "options": [
+    "abundant",
+    "shining",
+    "small, young",
+    "a byname of Osiris"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "mkesḫe",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "notable",
+    "nilometer controller",
+    "the ruler's spouse"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "dik",
+   "kind": "verb",
+   "true": "all the way, from one place to another",
+   "candidates": [],
+   "options": [
+    "to present",
+    "to bear (a child)",
+    "made by",
+    "written by"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "beloloke",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "temple bread administrator",
+    "scribe",
+    "lord of eternity"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "slẖ",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "agent",
+    "notable",
+    "great prince",
+    "temple administrator"
+   ],
+   "picks": {
+    "temple administrator": 5
+   },
+   "choice": "temple administrator",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫlẖl",
+   "kind": "noun",
+   "true": "a great meal",
+   "candidates": [],
+   "options": [
+    "a great meal",
+    "the ruler, as a predicate",
+    "adoration, praise",
+    "west"
+   ],
+   "picks": {
+    "a great meal": 5
+   },
+   "choice": "a great meal",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "l (2)",
+   "kind": "verb",
+   "true": "to give",
+   "candidates": [],
+   "options": [
+    "to give",
+    "made by",
+    "to order, to command",
+    "written by"
+   ],
+   "picks": {
+    "to give": 5
+   },
+   "choice": "to give",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "pesto",
+   "kind": "title",
+   "true": "viceroy",
+   "candidates": [],
+   "options": [
+    "priest of Amun",
+    "governor",
+    "temple bread administrator",
+    "scribe"
+   ],
+   "picks": {
+    "none": 3,
+    "scribe": 2
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "mlowi",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "health",
+    "beauty"
+   ],
+   "options": [
+    "health",
+    "beauty",
+    "cow",
+    "master"
+   ],
+   "picks": {
+    "health": 5
+   },
+   "choice": "health",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "offered",
+   "entry": "qoresem",
+   "kind": "title",
+   "true": "the ruler's spouse",
+   "candidates": [],
+   "options": [
+    "the ruler's spouse",
+    "envoy",
+    "nilometer controller",
+    "notable"
+   ],
+   "picks": {
+    "envoy": 4,
+    "notable": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "sem",
+   "kind": "noun",
+   "true": "wife",
+   "candidates": [],
+   "options": [
+    "wife",
+    "written announcement",
+    "man",
+    "mother's kin"
+   ],
+   "picks": {
+    "mother's kin": 5
+   },
+   "choice": "mother's kin",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "pqrtr",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "great prince"
+   ],
+   "options": [
+    "great prince",
+    "Amun's first priest",
+    "majordomo",
+    "chief envoy"
+   ],
+   "picks": {
+    "great prince": 5
+   },
+   "choice": "great prince",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "offered",
+   "entry": "mḫe",
+   "kind": "adjective",
+   "true": "abundant",
+   "candidates": [],
+   "options": [
+    "abundant",
+    "life-giver",
+    "great, elder",
+    "shining"
+   ],
+   "picks": {
+    "abundant": 5
+   },
+   "choice": "abundant",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "ptroti",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "the southern one (feminine)",
+    "to be praised",
+    "master"
+   ],
+   "options": [
+    "the southern one (feminine)",
+    "to be praised",
+    "master",
+    "a Nubian"
+   ],
+   "picks": {
+    "none": 4,
+    "to be praised": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "trtekese",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "agent",
+    "envoy",
+    "estate steward"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "siremroke",
+   "kind": "title",
+   "true": "an administrative title",
+   "candidates": [],
+   "options": [
+    "an administrative title",
+    "nilometer controller",
+    "priest",
+    "chief envoy"
+   ],
+   "picks": {
+    "an administrative title": 5
+   },
+   "choice": "an administrative title",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "dḫe",
+   "kind": "verb",
+   "true": "to bear (a child)",
+   "candidates": [],
+   "options": [
+    "to bear (a child)",
+    "to love, to revere",
+    "to drink",
+    "given"
+   ],
+   "picks": {
+    "to bear (a child)": 5
+   },
+   "choice": "to bear (a child)",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "pwrite (2)",
+   "kind": "noun",
+   "true": "life",
+   "candidates": [],
+   "options": [
+    "life",
+    "follower",
+    "land, province",
+    "silver"
+   ],
+   "picks": {
+    "life": 5
+   },
+   "choice": "life",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "plsn",
+   "kind": "title",
+   "true": "temple administrator",
+   "candidates": [],
+   "options": [
+    "temple administrator",
+    "envoy",
+    "Amun's first priest",
+    "queen (Candace)"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "t-erike-l",
+   "kind": "verb",
+   "true": "to beget (a child)",
+   "candidates": [],
+   "options": [
+    "to beget (a child)",
+    "made by",
+    "to drink",
+    "to serve"
+   ],
+   "picks": {
+    "to beget (a child)": 5
+   },
+   "choice": "to beget (a child)",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "mr",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "village",
+    "eternity"
+   ],
+   "options": [
+    "village",
+    "eternity",
+    "this man",
+    "the ruler"
+   ],
+   "picks": {
+    "none": 3,
+    "village": 1,
+    "eternity": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "qor",
+   "kind": "noun",
+   "true": "the ruler",
+   "candidates": [],
+   "options": [
+    "the ruler",
+    "a blessing",
+    "the southern one (feminine)",
+    "star"
+   ],
+   "picks": {
+    "the ruler": 5
+   },
+   "choice": "the ruler",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "mreperi",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "majordomo",
+    "estate steward"
+   ],
+   "options": [
+    "majordomo",
+    "estate steward",
+    "citizen",
+    "scribe"
+   ],
+   "picks": {
+    "estate steward": 1,
+    "none": 4
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "ato",
+   "kind": "noun",
+   "true": "water",
+   "candidates": [],
+   "options": [
+    "water",
+    "health",
+    "village",
+    "year"
+   ],
+   "picks": {
+    "water": 5
+   },
+   "choice": "water",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "slẖs",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "chief envoy",
+    "governor",
+    "general"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "mlo",
+   "kind": "adjective",
+   "true": "good",
+   "candidates": [],
+   "options": [
+    "good",
+    "small, young",
+    "a byname of Osiris",
+    "great, elder"
+   ],
+   "picks": {
+    "none": 1,
+    "good": 3,
+    "small, young": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "nse doke",
+   "kind": "noun",
+   "true": "a favourable sacrifice",
+   "candidates": [],
+   "options": [
+    "life",
+    "the ruler, as a predicate",
+    "good god",
+    "country"
+   ],
+   "picks": {
+    "life": 5
+   },
+   "choice": "life",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "wetneyineqeli",
+   "kind": "adjective",
+   "true": null,
+   "candidates": [
+    "powerful",
+    "beneficent"
+   ],
+   "options": [
+    "powerful",
+    "beneficent",
+    "shining",
+    "small, young"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "verdict": "none of the four"
+  },
+  {
+   "sort": "offered",
+   "entry": "ntke (1)",
+   "kind": "noun",
+   "true": "strength",
+   "candidates": [],
+   "options": [
+    "strength",
+    "adoration, praise",
+    "sister",
+    "country"
+   ],
+   "picks": {
+    "strength": 5
+   },
+   "choice": "strength",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "qorene",
+   "kind": "title",
+   "true": "a title, the office not known",
+   "candidates": [],
+   "options": [
+    "citizen",
+    "queen (Candace)",
+    "corn measurer",
+    "governor"
+   ],
+   "picks": {
+    "governor": 2,
+    "none": 3
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "nob",
+   "kind": "noun",
+   "true": "a Nubian",
+   "candidates": [],
+   "options": [
+    "a Nubian",
+    "house",
+    "village",
+    "a star's rising"
+   ],
+   "picks": {
+    "village": 1,
+    "a Nubian": 2,
+    "none": 2
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "ktke",
+   "kind": "title",
+   "true": "queen (Candace)",
+   "candidates": [],
+   "options": [
+    "citizen",
+    "Amun's first priest",
+    "governor",
+    "nilometer controller"
+   ],
+   "picks": {
+    "none": 4,
+    "governor": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫlbi",
+   "kind": "noun",
+   "true": "bull",
+   "candidates": [],
+   "options": [
+    "bull",
+    "the southern one (feminine)",
+    "adoration, praise",
+    "brother"
+   ],
+   "picks": {
+    "bull": 5
+   },
+   "choice": "bull",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫrpḫe",
+   "kind": "verb",
+   "true": "to order, to command",
+   "candidates": [],
+   "options": [
+    "to order, to command",
+    "to drink",
+    "to grant",
+    "to bear (a child)"
+   ],
+   "picks": {
+    "to order, to command": 5
+   },
+   "choice": "to order, to command",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "sleqene",
+   "kind": "title",
+   "true": "an administrative title",
+   "candidates": [],
+   "options": [
+    "an administrative title",
+    "envoy",
+    "notable",
+    "governor"
+   ],
+   "picks": {
+    "an administrative title": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "teter",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "governor",
+    "general",
+    "majordomo"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "yed",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "silver"
+   ],
+   "options": [
+    "silver",
+    "this man",
+    "nephew, niece",
+    "country"
+   ],
+   "picks": {
+    "silver": 5
+   },
+   "choice": "silver",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "offered",
+   "entry": "ḫlbine",
+   "kind": "title",
+   "true": "an official under the viceroy",
+   "candidates": [],
+   "options": [
+    "an official under the viceroy",
+    "the ruler's spouse",
+    "scribe",
+    "priest of Amun"
+   ],
+   "picks": {
+    "an official under the viceroy": 5
+   },
+   "choice": "an official under the viceroy",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "qetneyineqeli",
+   "kind": "adjective",
+   "true": "a byname of Isis",
+   "candidates": [],
+   "options": [
+    "a byname of Isis",
+    "small, young",
+    "great, elder",
+    "shining"
+   ],
+   "picks": {
+    "a byname of Isis": 5
+   },
+   "choice": "a byname of Isis",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "qorise",
+   "kind": "noun",
+   "true": "of the ruler",
+   "candidates": [],
+   "options": [
+    "of the ruler",
+    "sacrifice",
+    "lord of",
+    "year"
+   ],
+   "picks": {
+    "of the ruler": 4,
+    "lord of": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "aribet",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "corn measurer"
+   ],
+   "options": [
+    "corn measurer",
+    "priest of Amun",
+    "scribe",
+    "agent"
+   ],
+   "picks": {
+    "none": 4,
+    "priest of Amun": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "attḫ",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "beneficial water offering"
+   ],
+   "options": [
+    "beneficial water offering",
+    "master",
+    "a great meal",
+    "a Nubian"
+   ],
+   "picks": {
+    "a great meal": 5
+   },
+   "choice": "a great meal",
+   "verdict": "a filler chosen"
+  },
+  {
+   "sort": "open",
+   "entry": "amero",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "temple bread administrator"
+   ],
+   "options": [
+    "temple bread administrator",
+    "governor",
+    "good of repute",
+    "priest of Amun"
+   ],
+   "picks": {
+    "priest of Amun": 5
+   },
+   "choice": "priest of Amun",
+   "verdict": "a filler chosen"
+  },
+  {
+   "sort": "absent",
+   "entry": "yetmde",
+   "kind": "noun",
+   "true": "nephew, niece",
+   "candidates": [],
+   "options": [
+    "woman",
+    "eternity",
+    "a good meal",
+    "wife"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "womnitẖ",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "Amun's first priest"
+   ],
+   "options": [
+    "Amun's first priest",
+    "the ruler's spouse",
+    "general",
+    "envoy"
+   ],
+   "picks": {
+    "none": 3,
+    "general": 2
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "absent",
+   "entry": "wi (1)",
+   "kind": "noun",
+   "true": "brother",
+   "candidates": [],
+   "options": [
+    "the southern one (feminine)",
+    "the ruler",
+    "cow",
+    "follower"
+   ],
+   "picks": {
+    "follower": 3,
+    "none": 2
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "ked",
+   "kind": "verb",
+   "true": "to kill",
+   "candidates": [],
+   "options": [
+    "to kill",
+    "all the way, from one place to another",
+    "given",
+    "to send"
+   ],
+   "picks": {
+    "to kill": 5
+   },
+   "choice": "to kill",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "ado",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "fortress"
+   ],
+   "options": [
+    "fortress",
+    "mother's kin",
+    "water",
+    "country"
+   ],
+   "picks": {
+    "none": 4,
+    "country": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "absent",
+   "entry": "stmdese",
+   "kind": "title",
+   "true": "an official under the viceroy",
+   "candidates": [],
+   "options": [
+    "nilometer controller",
+    "lord of eternity",
+    "notable",
+    "envoy"
+   ],
+   "picks": {
+    "none": 2,
+    "notable": 3
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "mdese",
+   "kind": "noun",
+   "true": "direct descendant",
+   "candidates": [],
+   "options": [
+    "direct descendant",
+    "a good meal",
+    "this man",
+    "wife"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "peseto",
+   "kind": "title",
+   "true": "viceroy",
+   "candidates": [],
+   "options": [
+    "citizen",
+    "majordomo",
+    "great prince",
+    "general"
+   ],
+   "picks": {
+    "great prince": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "mte",
+   "kind": "noun",
+   "true": "child",
+   "candidates": [],
+   "options": [
+    "child",
+    "health",
+    "this man",
+    "mother's brother"
+   ],
+   "picks": {
+    "mother's brother": 3,
+    "child": 1,
+    "none": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "yeso",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "made by",
+    "written by"
+   ],
+   "options": [
+    "made by",
+    "written by",
+    "to serve",
+    "to order, to command"
+   ],
+   "picks": {
+    "to serve": 1,
+    "written by": 1,
+    "none": 3
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "ttne",
+   "kind": "title",
+   "true": "a household official of the ruler",
+   "candidates": [],
+   "options": [
+    "a household official of the ruler",
+    "queen (Candace)",
+    "priest",
+    "governor"
+   ],
+   "picks": {
+    "none": 4,
+    "governor": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "Aqedise",
+   "kind": "adjective",
+   "true": null,
+   "candidates": [
+    "shining",
+    "star",
+    "lord of eternity"
+   ],
+   "options": [
+    "shining",
+    "star",
+    "lord of eternity",
+    "beneficent"
+   ],
+   "picks": {
+    "lord of eternity": 4,
+    "none": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "wi (1)",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "brother"
+   ],
+   "options": [
+    "brother",
+    "woman",
+    "beauty",
+    "west"
+   ],
+   "picks": {
+    "brother": 5
+   },
+   "choice": "brother",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "absent",
+   "entry": "kdi",
+   "kind": "noun",
+   "true": "woman",
+   "candidates": [],
+   "options": [
+    "the ruler, as a predicate",
+    "mother's kin",
+    "sacrifice",
+    "bull"
+   ],
+   "picks": {
+    "mother's kin": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "tkk",
+   "kind": "verb",
+   "true": "to plunder",
+   "candidates": [],
+   "options": [
+    "to order, to command",
+    "to serve",
+    "to send",
+    "to bear (a child)"
+   ],
+   "picks": {
+    "to send": 5
+   },
+   "choice": "to send",
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "adb",
+   "kind": "noun",
+   "true": "land, province",
+   "candidates": [],
+   "options": [
+    "lord of",
+    "silver",
+    "house",
+    "bull"
+   ],
+   "picks": {
+    "house": 2,
+    "none": 1,
+    "lord of": 2
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ste",
+   "kind": "noun",
+   "true": "mother",
+   "candidates": [],
+   "options": [
+    "mother",
+    "cow",
+    "beneficial water offering",
+    "monument"
+   ],
+   "picks": {
+    "mother": 5
+   },
+   "choice": "mother",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "aleqese",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "monument",
+    "written announcement"
+   ],
+   "options": [
+    "monument",
+    "written announcement",
+    "sacrifice",
+    "life"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "verdict": "none of the four"
+  },
+  {
+   "sort": "offered",
+   "entry": "ns",
+   "kind": "noun",
+   "true": "sacrifice",
+   "candidates": [],
+   "options": [
+    "sacrifice",
+    "the southern one (feminine)",
+    "lord of",
+    "this man"
+   ],
+   "picks": {
+    "sacrifice": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "kroro",
+   "kind": "title",
+   "true": "a title, the office not known",
+   "candidates": [],
+   "options": [
+    "a title, the office not known",
+    "governor",
+    "general",
+    "agent"
+   ],
+   "picks": {
+    "a title, the office not known": 5
+   },
+   "choice": "a title, the office not known",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "dot",
+   "kind": "adjective",
+   "true": "favourable",
+   "candidates": [],
+   "options": [
+    "favourable",
+    "small, young",
+    "powerful",
+    "shining"
+   ],
+   "picks": {
+    "favourable": 5
+   },
+   "choice": "favourable",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "deseke",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "nilometer controller",
+    "governor",
+    "general"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "dime",
+   "kind": "noun",
+   "true": "cow",
+   "candidates": [],
+   "options": [
+    "cow",
+    "water",
+    "adoration, praise",
+    "a great meal"
+   ],
+   "picks": {
+    "cow": 5
+   },
+   "choice": "cow",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "aḫro",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "country"
+   ],
+   "options": [
+    "country",
+    "master",
+    "mother's kin",
+    "woman"
+   ],
+   "picks": {
+    "master": 4,
+    "none": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "absent",
+   "entry": "qore",
+   "kind": "noun",
+   "true": "ruler",
+   "candidates": [],
+   "options": [
+    "silver",
+    "beauty",
+    "man",
+    "strength"
+   ],
+   "picks": {
+    "strength": 1,
+    "none": 4
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "perite",
+   "kind": "title",
+   "true": "agent",
+   "candidates": [],
+   "options": [
+    "agent",
+    "majordomo",
+    "corn measurer",
+    "notable"
+   ],
+   "picks": {
+    "agent": 5
+   },
+   "choice": "agent",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "l (2)",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "to give",
+    "to praise"
+   ],
+   "options": [
+    "to give",
+    "to praise",
+    "all the way, from one place to another",
+    "made by"
+   ],
+   "picks": {
+    "all the way, from one place to another": 4,
+    "none": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "tewiseti",
+   "kind": "noun",
+   "true": "adoration, praise",
+   "candidates": [],
+   "options": [
+    "adoration, praise",
+    "a favourable sacrifice",
+    "master",
+    "direct descendant"
+   ],
+   "picks": {
+    "adoration, praise": 5
+   },
+   "choice": "adoration, praise",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "sqo",
+   "kind": "noun",
+   "true": "this man",
+   "candidates": [],
+   "options": [
+    "this man",
+    "water",
+    "a favourable sacrifice",
+    "strength"
+   ],
+   "picks": {
+    "this man": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "tk (2)",
+   "kind": "verb",
+   "true": "to love, to revere",
+   "candidates": [],
+   "options": [
+    "all the way, from one place to another",
+    "to kill",
+    "to give",
+    "written by"
+   ],
+   "picks": {
+    "none": 5
+   },
+   "choice": "none",
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "abr",
+   "kind": "noun",
+   "true": "man",
+   "candidates": [],
+   "options": [
+    "west",
+    "woman",
+    "a star's rising",
+    "health"
+   ],
+   "picks": {
+    "none": 3,
+    "west": 2
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "ssor",
+   "kind": "title",
+   "true": "scribe",
+   "candidates": [],
+   "options": [
+    "scribe",
+    "estate steward",
+    "agent",
+    "chief envoy"
+   ],
+   "picks": {
+    "scribe": 4,
+    "none": 1
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "apote-lẖ",
+   "kind": "title",
+   "true": "chief envoy",
+   "candidates": [],
+   "options": [
+    "chief envoy",
+    "temple administrator",
+    "citizen",
+    "nilometer controller"
+   ],
+   "picks": {
+    "chief envoy": 3,
+    "none": 2
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "snte",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "estate steward",
+    "notable",
+    "scribe"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "wetrri",
+   "kind": "adjective",
+   "true": null,
+   "candidates": [
+    "life-giver"
+   ],
+   "options": [
+    "life-giver",
+    "good",
+    "small, young",
+    "great, elder"
+   ],
+   "picks": {
+    "great, elder": 2,
+    "none": 3
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "offered",
+   "entry": "ntki",
+   "kind": "noun",
+   "true": "strength",
+   "candidates": [],
+   "options": [
+    "strength",
+    "star",
+    "life",
+    "cow"
+   ],
+   "picks": {
+    "strength": 3,
+    "none": 2
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "soni",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "a priestly title",
+    "nilometer controller",
+    "good of repute",
+    "governor"
+   ],
+   "picks": {
+    "a priestly title": 5
+   },
+   "choice": "a priestly title",
+   "new": true
+  },
+  {
+   "sort": "absent",
+   "entry": "teneke",
+   "kind": "noun",
+   "true": "west",
+   "candidates": [],
+   "options": [
+    "country",
+    "the ruler, as a predicate",
+    "tutor",
+    "follower"
+   ],
+   "picks": {
+    "none": 1,
+    "country": 4
+   },
+   "choice": null,
+   "new": false
+  },
+  {
+   "sort": "absent",
+   "entry": "ssimete",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "chief envoy",
+    "corn measurer",
+    "lord of eternity",
+    "general"
+   ],
+   "picks": {
+    "none": 2,
+    "chief envoy": 3
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "offered",
+   "entry": "qetrri",
+   "kind": "adjective",
+   "true": "a byname of Osiris",
+   "candidates": [],
+   "options": [
+    "a byname of Osiris",
+    "shining",
+    "good",
+    "small, young"
+   ],
+   "picks": {
+    "a byname of Osiris": 5
+   },
+   "choice": "a byname of Osiris",
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "qomlise",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "good god"
+   ],
+   "options": [
+    "good god",
+    "west",
+    "fortress",
+    "ruler"
+   ],
+   "picks": {
+    "good god": 5
+   },
+   "choice": "good god",
+   "verdict": "chosen, no label"
+  },
+  {
+   "sort": "absent",
+   "entry": "beliloke",
+   "kind": "title",
+   "true": "a priestly title",
+   "candidates": [],
+   "options": [
+    "temple bread administrator",
+    "scribe",
+    "great prince",
+    "notable"
+   ],
+   "picks": {
+    "temple bread administrator": 3,
+    "great prince": 1,
+    "notable": 1
+   },
+   "choice": null,
+   "new": true
+  },
+  {
+   "sort": "open",
+   "entry": "dete",
+   "kind": "verb",
+   "true": null,
+   "candidates": [
+    "given"
+   ],
+   "options": [
+    "given",
+    "to order, to command",
+    "made by",
+    "to praise"
+   ],
+   "picks": {
+    "given": 4,
+    "made by": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "absent",
+   "entry": "sḫi",
+   "kind": "adjective",
+   "true": "small, young",
+   "candidates": [],
+   "options": [
+    "shining",
+    "beneficent",
+    "great, elder",
+    "to praise"
+   ],
+   "picks": {
+    "great, elder": 5
+   },
+   "choice": "great, elder",
+   "new": false
+  },
+  {
+   "sort": "offered",
+   "entry": "kdise",
+   "kind": "noun",
+   "true": "sister",
+   "candidates": [],
+   "options": [
+    "sister",
+    "good god",
+    "strength",
+    "silver"
+   ],
+   "picks": {
+    "sister": 5
+   },
+   "choice": "sister",
+   "new": false
+  },
+  {
+   "sort": "open",
+   "entry": "sete",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "mother",
+    "tutor",
+    "follower"
+   ],
+   "options": [
+    "mother",
+    "tutor",
+    "follower",
+    "lord of"
+   ],
+   "picks": {
+    "none": 4,
+    "mother": 1
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "wte",
+   "kind": "noun",
+   "true": null,
+   "candidates": [
+    "life",
+    "protection",
+    "strength"
+   ],
+   "options": [
+    "life",
+    "protection",
+    "strength",
+    "the southern one (feminine)"
+   ],
+   "picks": {
+    "none": 3,
+    "life": 2
+   },
+   "choice": null,
+   "verdict": "no choice"
+  },
+  {
+   "sort": "open",
+   "entry": "mlomrse",
+   "kind": "title",
+   "true": null,
+   "candidates": [
+    "notable",
+    "good of repute",
+    "citizen"
+   ],
+   "options": [
+    "notable",
+    "good of repute",
+    "citizen",
+    "temple administrator"
+   ],
+   "picks": {
+    "citizen": 3,
+    "notable": 2
+   },
+   "choice": null,
+   "verdict": "no choice"
+  }
+ ],
+ "packs_of": {
+  "1": 15,
+  "2": 15,
+  "3": 15,
+  "4": 15,
+  "5": 14,
+  "6": 14,
+  "7": 14,
+  "8": 14
+ },
+ "cost": {
+  "agents": 40,
+  "with_a_count": 31,
+  "tokens_counted": 2406801,
+  "without_a_count": [
+   "K4_r4",
+   "K5_r5",
+   "K6_r1",
+   "K6_r2",
+   "K6_r3",
+   "K6_r4",
+   "K6_r5",
+   "K7_r1",
+   "K7_r2"
+  ]
+ },
+ "when": {
+  "set_in": "bb57217",
+  "set": "16:49:38",
+  "packs_written": "16:49:40",
+  "started": "16:49:46",
+  "first_answer": "16:50:22",
+  "last_launch_before_the_limit": "16:51:18",
+  "last_answer_before_the_limit": "16:51:53",
+  "readers_before_the_limit": 32,
+  "resumed": "18:01:14",
+  "first_answer_after": "18:01:54",
+  "last_answer": "18:01:59",
+  "readers_after_the_limit": 8,
+  "counted": "18:02:17"
+ },
+ "by_sort": {
+  "a form or a variant of a word of the test, or the same meaning": {
+   "absent: no choice": 1,
+   "absent: wrong": 1,
+   "offered: no choice": 4,
+   "offered: none": 1,
+   "offered: right": 8
+  },
+  "a title of which only the kind of office is known": {
+   "absent: no choice": 5,
+   "absent: wrong": 2,
+   "offered: no choice": 2,
+   "offered: right": 11
+  },
+  "also an open word of the test": {
+   "absent: no choice": 1,
+   "offered: right": 1
+  },
+  "no meaning of its own, or not of the four kinds": {
+   "absent: no choice": 1,
+   "absent: none": 1,
+   "offered: right": 1
+  },
+  "one of the 38 of the first test": {
+   "absent: no choice": 7,
+   "absent: none": 4,
+   "absent: wrong": 3,
+   "offered: no choice": 8,
+   "offered: none": 3,
+   "offered: right": 12,
+   "offered: wrong": 1
+  },
+  "one of the five that G6 added": {
+   "absent: no choice": 1,
+   "offered: no choice": 1,
+   "offered: right": 3
+  }
+ },
+ "the_40": {
+  "beliloke": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "beloloke": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "deseke": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "mkesḫe": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "qorene": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a title, the office not known",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "siremroke": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "an administrative title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "sleqene": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "an administrative title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "slẖ": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "wrong"
+  },
+  "slẖs": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "snte": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "soni": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "ssimete": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "stmdese": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "an official under the viceroy",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "tbqo": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "an administrative title",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "wrong"
+  },
+  "teter": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "tqi": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "trtekese": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a priestly title",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "ttne": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a household official of the ruler",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "ḫbḫne": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "a household official of the ruler",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "ḫlbine": {
+   "sort": "a title of which only the kind of office is known",
+   "meaning": "an official under the viceroy",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "apote-lẖ": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "chief envoy",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "dḫe": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "to bear (a child)",
+   "kind": "verb",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "kroro": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "a title, the office not known",
+   "kind": "title",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "mẖe": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "abundant",
+   "kind": "adjective",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "nse doke": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "a favourable sacrifice",
+   "kind": "noun",
+   "shown": "absent",
+   "outcome": "wrong"
+  },
+  "ntke (1)": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "strength",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "pesto": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "viceroy",
+   "kind": "title",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "qetneyineqeli": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "a byname of Isis",
+   "kind": "adjective",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "qetrri": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "a byname of Osiris",
+   "kind": "adjective",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "qor": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "the ruler",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "qor-o": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "the ruler, as a predicate",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "none"
+  },
+  "qorise": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "of the ruler",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "sqo": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "this man",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "t-dḫe": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "to bear (a child)",
+   "kind": "verb",
+   "shown": "offered",
+   "outcome": "no choice"
+  },
+  "ḫlẖl": {
+   "sort": "a form or a variant of a word of the test, or the same meaning",
+   "meaning": "a great meal",
+   "kind": "noun",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "dik": {
+   "sort": "no meaning of its own, or not of the four kinds",
+   "meaning": "all the way, from one place to another",
+   "kind": "verb",
+   "shown": "absent",
+   "outcome": "none"
+  },
+  "dot": {
+   "sort": "no meaning of its own, or not of the four kinds",
+   "meaning": "favourable",
+   "kind": "adjective",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "pke": {
+   "sort": "no meaning of its own, or not of the four kinds",
+   "meaning": "a blessing",
+   "kind": "noun",
+   "shown": "absent",
+   "outcome": "no choice"
+  },
+  "l (2)": {
+   "sort": "also an open word of the test",
+   "meaning": "to give",
+   "kind": "verb",
+   "shown": "offered",
+   "outcome": "right"
+  },
+  "wi (1)": {
+   "sort": "also an open word of the test",
+   "meaning": "brother",
+   "kind": "noun",
+   "shown": "absent",
+   "outcome": "no choice"
+  }
+ },
+ "coarse_meanings": {
+  "a household official of the ruler": 2,
+  "a priestly title": 12,
+  "a title, the office not known": 2,
+  "an administrative title": 3,
+  "an official under the viceroy": 2
+ },
+ "groups_added": 5,
+ "layers": [
+  "recurring",
+  "rare_sure",
+  "rare_later",
+  "unnamed",
+  "rare_millet",
+  "leftover"
+ ],
+ "run_with_43": {
+  "offered": 30,
+  "offered_chosen": 17,
+  "offered_right": 16,
+  "right_when_chosen": 0.9412,
+  "absent": 13,
+  "absent_wrong": 3,
+  "wrong_when_absent": 0.2308,
+  "bar1": true,
+  "bar2": false
+ }
+}

@@ -1,4 +1,5 @@
-"""Checks for the blind test again (src/blind2.py, data/discovery/blind_test_2.md).
+"""Checks for the blind test again (src/blind2.py, data/discovery/blind_test_2.md) and for its run with all 83
+accepted words (data/discovery/blind_test_83.md).
 
   python3 -I tests/test_blind2.py
 
@@ -326,18 +327,23 @@ def test_no_pack_shows_a_hidden_spelling():
     """As in the first test: no pack shows the spelling of a word it hides, and each pack offers each of its words the
     key's four meanings, in the order of that reader's letters."""
     needs(*LOCAL, "data/sources/g6/packs", "data/sources/v6/analysts/glosses.jsonl", "data/rilly2003")
-    key, gl = B.read("key.json"), B.shown_map(B.the_map())
+    assert hidden_spellings_shown() == []
+
+
+def hidden_spellings_shown():
+    """[(pack, reader, spelling)] for every hidden spelling a pack shows; the packs' letters are checked on the way."""
+    key, gl, shown = B.read("key.json"), B.shown_map(B.the_map()), []
     for n in range(1, B.PACKS + 1):
         mine = [w | {"code": c} for c, w in key["words"].items() if w["pack"] == n]
         tokens = W.tokens_of(mine, gl)
         for r in range(1, B.READERS + 1):
             body = (B.HOME / "packs" / f"K{n}_r{r}.md").read_text(encoding="utf-8").split("\n---\n", 1)[1]
-            for tok in tokens:
-                assert not re.search(rf"(?<![A-Za-zḫẖšñ]){re.escape(tok)}(?![A-Za-zḫẖšñ])", body), (n, r, tok)
+            shown += [(n, r, tok) for tok in tokens if re.search(rf"(?<![A-Za-zḫẖšñ]){re.escape(tok)}(?![A-Za-zḫẖšñ])", body)]
             for w in mine:
                 block = body[body.index(f"## `{w['code']}`"):].split("\n## `", 1)[0]
                 letters = key["letters"][f"{w['code']}/{r}"]
                 assert re.findall(r"(?m)^[ABCD]\. (.*)$", block) == letters and sorted(letters) == sorted(w["options"]), (w["code"], r)
+    return shown
 
 
 def test_the_test_reads_the_map_as_it_was_when_it_was_set():
@@ -386,7 +392,340 @@ def test_no_new_meaning_follows_a_source_for_four_words():
     for path in ("data/sources/rilly2016-text/pages.txt", "data/sources/dotawo-text/pages.txt"):
         text = re.sub(r"(?m)^\f?=== page \d+ ===$", " ", (ROOT / path).read_text(encoding="utf-8", errors="replace"))
         grams |= runs(text) | runs(re.sub(r"(?<=[^\W\d_])-[ \t]*\n\s*(?=[^\W\d_])", "", text))
-    assert [m for m, _ in B.NEW.values() if runs(m) & grams] == []
+    assert [m for m, _ in list(B.NEW.values()) + list(B.NEW_83.values()) if runs(m) & grams] == []
+
+
+# ------------------------------------------------------------------------- the run with all 83 accepted words
+
+PAGE_83 = ROOT / "data/discovery/blind_test_83.md"
+LOCAL_83 = ("data/sources/g6b/result.json", "data/sources/g6b/key.json", "data/sources/g6b/tokens.json", "data/sources/g6b/pack_wording.json",
+            "data/sources/g6/result.json")
+MAP_83 = ("data/sources/v6/analysts/glosses.jsonl", "data/rilly2003", "data/sources/recurring/choice/candidates.json",
+          "data/sources/rare/g4m/overlay.jsonl", "data/sources/g8b/overlay.jsonl")
+
+
+def figs83():
+    return json.loads(B.PUBLIC_83.read_text(encoding="utf-8"))
+
+
+def page83():
+    return " ".join(PAGE_83.read_text(encoding="utf-8").split())
+
+
+def settings_now():
+    return (B.HOME, B.ANSWERS, B.PUBLIC, B.SEED, B.PACKS, B.LAYERS, dict(B.NEW), dict(B.OUT), dict(B.ACCEPTED), list(B.GROUPS), B.COARSE, B.SORTS, B.WHEN)
+
+
+def test_the_run_with_83_has_its_own_settings_and_gives_the_first_runs_back():
+    first = settings_now()
+    with B.run_83():
+        assert (B.HOME, B.ANSWERS, B.PUBLIC, B.SEED, B.PACKS) == (B.HOME_83, "data/sources/g6b", B.PUBLIC_83, 20261126, 8)
+        assert B.LAYERS == first[5] + ("rare_millet", "leftover") == tuple(l["name"] for l in M.LAYERS[:6])
+        assert B.OUT == {} and len(B.NEW) == 45 and len(B.ACCEPTED) == 83 and len(B.GROUPS) == 22 and B.SORTS is B.SORT and B.WHEN is B.WHEN_83
+        assert set(B.NEW) == set(first[6]) | set(first[7])                  # every one of the 45 further entries is in
+        with B.settings():
+            assert (W.READERS, W.PACKS, W.NEEDED) == (5, 8, 5) and len(W.ACCEPTED) == 83
+        assert len(W.ACCEPTED) == 38
+    assert settings_now() == first
+    try:
+        with B.run_83():
+            raise KeyError
+    except KeyError:
+        assert settings_now() == first
+
+
+def test_the_40_entries_the_first_run_left_out_are_in_each_with_its_sort_and_meaning():
+    assert {h: B.SORT[h] for h in B.OUT} == B.OUT and {why: len(hs) for why, hs in B.MORE.items()} == {B.OFFICE: 20, B.FORM: 15, B.NONE: 3, B.ALSO: 2}
+    assert all(B.SORT[h] == B.OF_THE_FIVE for h in B.NEW) and len(B.SORT) == 45 == len(B.NEW_83) and set(B.NEW_83) == set(B.NEW) | set(B.OUT)
+    assert all(k in W.KINDS for _, k in B.NEW_83.values()) and len(B.ACCEPTED_83) == 83 and not set(B.NEW_83) & set(W.ACCEPTED)
+    coarse = {h for h, (m, _) in B.NEW_83.items() if m in B.COARSE_83}
+    assert len(coarse) == 21 and coarse == set(B.MORE[B.OFFICE]) | {"kroro"} and len(B.COARSE_83) == 5
+    # a form or a variant has the meaning of its word of the test; the two that are open words too, the map's meaning
+    for form, word_of_the_test in (("pesto", "peseto"), ("mẖe", "mḫe"), ("ntke (1)", "ntki"), ("l (2)", "tre")):
+        assert B.NEW_83[form] == W.ACCEPTED[word_of_the_test], form
+    assert B.NEW_83["dḫe"] == B.NEW_83["t-dḫe"] == B.NEW["te-dḫe-l"] and B.NEW_83["apote-lẖ"][0].endswith(W.ACCEPTED["apote"][0])
+    assert len(B.GROUPS_83) == len(B.GROUPS) + 5 and B.GROUPS_83[:len(B.GROUPS)] == B.GROUPS
+
+
+def test_a_coarse_meaning_is_never_a_filler():
+    pool = {(B.PRIEST, "title"), (B.ADMIN, "title"), ("scribe", "title"), ("envoy", "title"), ("general", "title"), ("governor", "title"),
+            ("viceroy", "title")}
+    assert not B.near(B.PRIEST, "scribe") and B.COARSE == frozenset()         # in the first run nothing is coarse
+    assert any(B.PRIEST in B.fill(["scribe"], "title", random.Random(s), pool) for s in range(30))
+    with B.run_83():
+        assert B.near(B.PRIEST, "scribe") and not B.near("scribe", B.PRIEST) and {B.PRIEST, B.ADMIN, B.TITLE} <= B.COARSE and len(B.COARSE) == 5
+        for seed in range(30):
+            opts = B.fill(["scribe"], "title", random.Random(seed), pool)
+            assert len(opts) == 4 and not set(opts) & B.COARSE, opts
+            own = B.fill([B.PRIEST], "title", random.Random(seed), pool)     # it stands as the true meaning of its own word
+            assert own[0] == B.PRIEST and len(own) == 4 and not set(own[1:]) & B.COARSE, own
+            assert not set(B.fill([], "title", random.Random(seed), pool, avoid=[B.ADMIN])) & B.COARSE
+    assert not B.near(B.PRIEST, "scribe")
+    f = figs83()
+    assert set(f["coarse_meanings"]) == set(B.COARSE_83) and sum(f["coarse_meanings"].values()) == 21
+    for r in f["rows"]:
+        own = [r["true"]] if r["true"] else r["candidates"]
+        assert not (set(r["options"]) - set(own)) & set(B.COARSE_83), r["entry"]
+
+
+def test_the_outcomes_are_counted_by_sort_of_word():
+    rows = [{"sort": "offered", "entry": "tqi", "true": "a", "choice": "a"}, {"sort": "absent", "entry": "slẖ", "true": "a", "choice": "b"},
+            {"sort": "offered", "entry": "ste", "true": "m", "choice": None}, {"sort": "absent", "entry": "kdi", "true": "w", "choice": "none"},
+            {"sort": "offered", "entry": "kdi", "true": "w", "choice": "w"}, {"sort": "open", "entry": "wse", "true": None, "choice": "x"}]
+    with B.run_83():
+        assert B.by_sort(rows) == {B.OFFICE: {"absent: wrong": 1, "offered: right": 1}, B.OF_THE_FIRST: {"absent: none": 1, "offered: right": 1},
+                                   B.OF_THE_FIVE: {"offered: no choice": 1}}
+    assert B.SORTS is None                                                    # the first run's result has no count by sort
+
+
+def test_the_figures_of_the_run_with_83_add_up():
+    import collections
+    f = figs83()
+    c, rows = f["choice"], f["rows"]
+    assert f["words"] == len(rows) == sum(f["sorts"].values()) == c["words"] == sum(f["packs_of"].values()) == 116 and len(f["packs_of"]) == B.PACKS_83
+    assert f["answers"] == f["answers_expected"] == f["words"] * B.READERS and c["complete"] and all(sum(r["picks"].values()) == B.READERS for r in rows)
+    assert (c["readers"], c["needed"], c["packs"]) == (B.READERS, B.NEEDED, B.PACKS_83) == (5, 5, 8) and c["bars"] == B.BARS
+    assert f["seed"] == B.SEED_83 and f["layers"] == list(B.LAYERS_83) and f["groups_of_near_meanings"] == len(B.GROUPS_83) == 22 and f["groups_added"] == 5
+    for r in rows:                                                              # a choice is what all five readers pick
+        top = [m for m, n in r["picks"].items() if n == B.READERS]
+        assert r["choice"] == (top[0] if top else None) and len(r["options"]) == 4 and set(r["picks"]) <= set(r["options"]) | {"none"}, r["entry"]
+    acc = [r for r in rows if r["sort"] != "open"]
+    off, ab = f["accepted_by_outcome"]["offered"], f["accepted_by_outcome"]["absent"]
+    assert f["accepted"] == {"all": len(acc), "of_the_first_test": 38, "new": 45} and len(acc) == len(B.ACCEPTED_83) == 83
+    assert sum(off.values()) == c["offered"] == f["sorts"]["offered"] and sum(ab.values()) == c["absent"] == f["sorts"]["absent"]
+    assert all(r["true"] in r["options"] for r in acc if r["sort"] == "offered") and all(r["true"] not in r["options"] for r in acc if r["sort"] == "absent")
+    assert (c["offered_chosen"], c["offered_right"]) == (off["right"] + off["wrong"], off["right"]) and c["absent_wrong"] == ab["wrong"] and "right" not in ab
+    assert c["right_when_chosen"] == round(c["offered_right"] / c["offered_chosen"], 4) and c["wrong_when_absent"] == round(c["absent_wrong"] / c["absent"], 4)
+    assert c["bar1"] == (c["offered_chosen"] >= B.BARS["chosen_at_least"] and c["right_when_chosen"] >= B.BARS["right_when_chosen"]) is True
+    assert c["bar2"] == (c["wrong_when_absent"] <= B.BARS["wrong_when_absent"]) is False and c["labels_given"] is False
+    assert len(f["wrong_choices"]) == off["wrong"] + ab["wrong"] and all(w["chosen"] != w["true"] for w in f["wrong_choices"])
+    opened = [r for r in rows if r["sort"] == "open"]
+    assert c["open_words"] == len(opened) == sum(c["open"].values()) == 33 and "favoured" not in c["open"]
+    assert f["open_chosen"] == {r["entry"]: r["choice"] for r in opened if r["verdict"] == "chosen, no label"} and len(f["open_chosen"]) == c["open"]["chosen, no label"]
+    assert sorted(w["entry"] for w in f["new_words"]) == sorted(B.NEW_83) and all(B.NEW_83[w["entry"]][0] == w["true"] for w in f["new_words"])
+    assert f["further_entries"]["taken"] == f["further_entries"]["all"] == 45 and f["further_entries"]["left_out"] == {}
+    # by sort of word: every accepted word once, and the sorts' counts are those of the two columns
+    total = collections.Counter()
+    for v in f["by_sort"].values():
+        total.update(v)
+    assert dict(total) == {f"offered: {k}": n for k, n in off.items()} | {f"absent: {k}": n for k, n in ab.items()}
+    assert {k: sum(v.values()) for k, v in f["by_sort"].items()} == {B.OF_THE_FIRST: 38, B.OF_THE_FIVE: 5, B.OFFICE: 20, B.FORM: 15, B.NONE: 3, B.ALSO: 2}
+    by_entry = {r["entry"]: r for r in acc}
+    assert {h: v["sort"] for h, v in f["the_40"].items()} == B.OUT
+    for h, v in f["the_40"].items():
+        assert (v["meaning"], v["kind"]) == B.NEW_83[h] and v["meaning"] == by_entry[h]["true"], h
+        assert (v["shown"], v["outcome"]) == (by_entry[h]["sort"], B.outcome(by_entry[h])), h
+    again = collections.defaultdict(collections.Counter)
+    for r in acc:
+        again[B.SORT.get(r["entry"], B.OF_THE_FIRST)][f"{r['sort']}: {B.outcome(r)}"] += 1
+    assert {k: dict(v) for k, v in again.items()} == f["by_sort"]
+    cost = f["cost"]
+    assert cost["agents"] == B.READERS * B.PACKS_83 == cost["with_a_count"] + len(cost["without_a_count"]) == 40 and cost["with_a_count"] == 31
+    assert f["when"] == B.WHEN_83 and f["run_with_43"] == {k: figs()["choice"][k] for k in f["run_with_43"]}
+    assert f["first_test"]["needed"] == 4 and f["places_shown_at_most"] == W.SHOWN and f["words_each_side"] == W.CHOICE_WIDTH
+
+
+def test_the_figures_of_the_run_with_83_hold_only_wordings_that_were_public_or_are_ours():
+    first = json.loads(B.FIRST.read_text(encoding="utf-8"))["choice"]["rows"]
+    public = {m for r in first for m in r["options"] + r["candidates"] + ([r["true"]] if r["true"] else [])} | {"none"}
+    ours = {m for m, _ in B.NEW_83.values()}
+    f = figs83()
+    for r in f["rows"]:
+        for m in r["options"] + r["candidates"] + list(r["picks"]) + [x for x in (r["true"], r["choice"]) if x]:
+            assert m in public | ours, (r["entry"], m)
+    import lexicon as X
+    assert all(len(X.words_of(m)) <= X.LONGEST for m in ours)
+    if B.PACK_WORDING.exists():                                                # the packs' wording of four meanings stays local
+        theirs = B.pack_wording()
+        assert set(theirs) <= ours and len(theirs) == 4
+        for name in ("data/discovery/blind_test_83_figures.json", "data/discovery/blind_test_83.md", "src/blind2.py"):
+            assert not any(v in (ROOT / name).read_text(encoding="utf-8") for v in theirs.values()), name
+
+
+def test_the_page_of_the_run_with_83_says_what_the_figures_say():
+    import datetime
+    f, text = figs83(), page83()
+    c, w, acc = f["choice"], f["when"], f["accepted"]
+    off, ab = f["accepted_by_outcome"]["offered"], f["accepted_by_outcome"]["absent"]
+    hm = lambda t: t[:5]                                                   # noqa: E731
+    pct = lambda x: f"{100 * x:.1f}%"                                      # noqa: E731
+    # what was set before the readers
+    assert '"No, do not waive". So the test is run again with all 83.' in text and f"Set: all {acc['all']} (section 2)." in text
+    assert f"**The accepted words: {acc['all']}.** The {len(B.ACCEPTED)} of the last run, and the {len(B.OUT)} it left out" in text
+    for label, key in (("A title of which only the kind of office is known", B.OFFICE), ("A form or a variant of a word of the test", B.FORM),
+                       ("No meaning of its own in the lexicon, or not of the four kinds", B.NONE), ("Also an open word of the test", B.ALSO)):
+        assert f"| {label} | {len(B.MORE[key])} |" in text, key
+    office = {m: sum(v[0] == m for v in B.MORE[B.OFFICE].values()) for m in B.COARSE_83}
+    assert all(f'"{m}" ({n})' in text for m, n in office.items()) and sum(office.values()) == 20 and B.MORE[B.FORM]["kroro"][0] == B.TITLE
+    assert all(f'"{B.NEW_83[h][0]}"' in text for h in ("pesto", "qor", "qorise", "dḫe", "apote-lẖ", "qetneyineqeli", "qetrri", "dot", "pke", "dik", "l (2)", "wi (1)", "qor-o"))
+    assert f"{c['absent']} of the {acc['all']}. The other {c['offered']} are shown with it." in text and f"**The open words: {c['open_words']},**" in text
+    assert "Five groups of near meanings are added" in text and f["groups_added"] == 5 and "**A coarse meaning is never a filler.**" in text
+    assert f"five for each of {c['packs']} packs ({f['words']} words), each a fresh agent (Opus): {f['cost']['agents']}. Seed {f['seed']}." in text
+    assert f"(of {c['absent']}: two at most)" in text and int(B.BARS["wrong_when_absent"] * c["absent"]) == 2
+    assert "those of the map with its six layers" in text and len(f["layers"]) == 6
+    assert "**This is the third run of the test, and the first two each missed a bar.**" in text
+    # the result
+    assert f"## 6. The result (counted at {hm(w['counted'])}, no label given)" in text
+    assert (f"The first {w['readers_before_the_limit']} readers were started from {hm(w['started'])}, after the commit with the bars ({w['set']}); "
+            f"their answers came between {hm(w['first_answer'])} and {hm(w['last_answer_before_the_limit'])}. Then the session's usage limit stopped the launch.") in text
+    secs = lambda t: datetime.timedelta(hours=int(t[:2]), minutes=int(t[3:5]), seconds=int(t[6:8])).total_seconds()   # noqa: E731
+    late = round((secs(w["resumed"]) - secs(w["set"])) / 60)
+    assert (f"The last {w['readers_after_the_limit']} readers (three of pack 7 and the five of pack 8) were started at {hm(w['resumed'])}, {late} minutes after "
+            f"the commit, when the limit was lifted; their answers came at {hm(w['last_answer'])}.") in text and hm(w["first_answer_after"]) == hm(w["last_answer"])
+    assert w["readers_before_the_limit"] + w["readers_after_the_limit"] == f["cost"]["agents"] and late == 72
+    assert f"the {f['cost']['agents']} packs and the key were written at {w['packs_written']} and not again" in text
+    assert f"Every reader answered every word of its pack ({f['words']} words, five readers each)." in text
+    assert f"| Every reader answers every word | {f['answers']} of {f['answers_expected']} answers | met |" in text
+    assert f"| {c['offered_right']} of {c['offered_chosen']} right ({pct(c['right_when_chosen'])}) | met |" in text
+    assert f"| **{c['absent_wrong']} of {c['absent']} ({pct(c['wrong_when_absent'])})** | **missed** |" in text
+    assert f"| | Shown with their meaning ({c['offered']}) | Shown without it ({c['absent']}) |" in text
+    assert f"| All five pick the true meaning | {off['right']} | (not offered) |" in text and f"| All five pick a wrong meaning | {off['wrong']} | {ab['wrong']} |" in text
+    assert f"| All five say \"none of these\" | {off['none']} | {ab['none']} |" in text and f"| No choice (the five differ) | {off['no choice']} | {ab['no choice']} |" in text
+    wrong = {(x["sort"], x["true"], x["chosen"]) for x in f["wrong_choices"]}
+    assert wrong == {("offered", "wife", "mother's kin"), ("absent", "general", "governor"), ("absent", "to plunder", "to send"),
+                     ("absent", "small, young", "great, elder"), ("absent", "a favourable sacrifice", "life"),
+                     ("absent", "an administrative title", "chief envoy"), ("absent", "a priestly title", "temple administrator")}
+    assert '"wife" was taken for "mother\'s kin"' in text
+    assert ('"general" was taken for "governor", "to plunder" for "to send", "small, young" for "great, elder", "a favourable sacrifice" for "life", '
+            '"an administrative title" for "chief envoy", and "a priestly title" for "temple administrator"') in text
+    forty = [0, 0]
+    for label, key in (("One of the 38 of the first test", B.OF_THE_FIRST), ("One of the five that the run with 43 added", B.OF_THE_FIVE),
+                       ("A title of which only the kind of office is known", B.OFFICE), ("A form or a variant of a word of the test", B.FORM),
+                       ("No meaning of its own, or not of the four kinds", B.NONE), ("Also an open word of the test", B.ALSO)):
+        v = f["by_sort"][key]
+        right, chosen = v.get("offered: right", 0), v.get("offered: right", 0) + v.get("offered: wrong", 0)
+        wrongly, absent = v.get("absent: wrong", 0), sum(n for k, n in v.items() if k.startswith("absent"))
+        assert f"| {label} | {sum(v.values())} | {right} of {chosen} | {wrongly} of {absent} |" in text, key
+        if key in B.MORE:
+            forty = [forty[0] + right, forty[1] + chosen]
+    assert f"The {len(B.OUT)} words that are new here" in text and f"({forty[0]} of {forty[1]})" in text and forty[0] == forty[1]
+    v = f["by_sort"][B.OF_THE_FIRST]
+    assert f"among the 38 words of the first test, {v['absent: wrong']} of {sum(n for k, n in v.items() if k.startswith('absent'))} got a wrong choice" in text
+    assert f"**The open words ({c['open_words']}), had the bars held.**" in text
+    for label, key in (("All five pick the same proposal (no label)", "chosen, no label"), ("All five pick a filler", "a filler chosen"),
+                       ('All five say "none of these"', "none of the four"), ("No choice", "no choice")):
+        assert f"| {label} | {c['open'][key]} |" in text, key
+    eight = f["open_chosen"]
+    assert eight == {"pl (2)": "lord of", "wse": "of the country", "penn": "year", "mlowi": "health", "pqrtr": "great prince", "yed": "silver",
+                     "wi (1)": "brother", "qomlise": "good god"}
+    assert ("The eight are `pl` (lord of), `wse` (of the country), `penn` (year), `mlowi` (health), `pqrtr` (great prince), `yed` (silver), `wi` (brother) "
+            "and `qomlise` (good god). They carry no label.") in text
+    before = figs()["open_chosen"]
+    assert len(set(before) & set(eight)) == 6 and all(before[k] == eight[k] for k in set(before) & set(eight)) and set(before) - set(eight) == {"ẖol"}
+    assert {r["entry"]: r["verdict"] for r in f["rows"] if r["entry"] == "ẖol"} == {"ẖol": "no choice"}
+    assert "Six of them had all five readers of the run with 43 too; `ẖol`, chosen then, got no choice now." in text
+    fillers = {r["entry"]: r["choice"] for r in f["rows"] if r["sort"] == "open" and r["verdict"] == "a filler chosen"}
+    assert fillers == {"attḫ": "a great meal", "amero": "priest of Amun"} and 'The two fillers chosen: "a great meal" for `attḫ` and "priest of Amun" for `amero`.' in text
+    # the three runs side by side
+    one, two = json.loads(B.FIRST.read_text(encoding="utf-8"))["choice"], f["run_with_43"]
+    for label, needs_, r in (("The first test", "four of five", one), ("The run with 43 accepted words", "all five", two), ("This run, with 83", "all five", c)):
+        assert (f"| {label} | {needs_} | {r['offered_right']} of {r['offered_chosen']} ({pct(r['right_when_chosen'])}) | "
+                f"{r['absent_wrong']} of {r['absent']} ({pct(r['wrong_when_absent'])}) |") in text, label
+    assert one["needed"] == 4 and "**This is the method's third miss.**" in text and "**The pattern of the run with 43 held with 83 words.**" in text
+    assert "The lexicon calls it a variant of `akroro`, which is not in the test" in text and B.OUT["kroro"] == B.FORM
+    cost = f["cost"]
+    assert (f"Cost: {cost['agents']} readers. {cost['with_a_count']} of them reported {cost['tokens_counted']:,} tokens together") in text
+    assert "The other nine wrote their complete answer files" in text and len(cost["without_a_count"]) == 9 and "none is estimated here" in text
+    assert "A label is not a translation" in text and "No meaning found here is the project's own." in text
+
+
+def test_the_summaries_name_the_run_with_83():
+    c = figs83()["choice"]
+    for name in ("README.md", "NEXT_STEPS.md", "REPORT.md"):
+        text = " ".join((ROOT / name).read_text(encoding="utf-8").split())
+        assert "blind_test_83.md" in text and '"No, do not waive"' in text, name
+        assert f"{c['offered_right']} of {c['offered_chosen']}" in text and f"{c['absent_wrong']} of {c['absent']}" in text, name
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "`words-83`, `packs-83` and `count-83`" in readme and "third miss" in readme
+    assert "`data/sources/g6b/`" in (ROOT / "data/INDEX.md").read_text(encoding="utf-8")
+    assert "blind_test_83.md" in (ROOT / "data/discovery/blind_test_2.md").read_text(encoding="utf-8")
+    prompts = " ".join((ROOT / "runs/prompts/G6_choice_83.md").read_text(encoding="utf-8").split())
+    assert "data/sources/g6b/packs/K<n>_r<r>.md" in prompts and "word for word" in prompts
+
+
+def test_the_figures_of_the_run_with_83_are_the_count_of_the_local_files():
+    needs(*LOCAL_83)
+    assert B.figures_83() == figs83()
+    names = {f"K{n}_r{r}": B.HOME_83 / f"reader{r}" / f"K{n}.jsonl" for n in range(1, B.PACKS_83 + 1) for r in range(1, B.READERS + 1)}
+    key = json.loads((B.HOME_83 / "key.json").read_text(encoding="utf-8"))
+    size = {n: sum(w["pack"] == n for w in key["words"].values()) for n in range(1, B.PACKS_83 + 1)}
+    for name in figs83()["cost"]["without_a_count"]:                            # the nine without a count wrote complete files
+        assert len(names[name].read_text(encoding="utf-8").splitlines()) == size[int(name[1])], name
+
+
+def test_the_script_writes_the_packs_of_the_run_with_83():
+    """As for the first run: the packs again in a folder of its own, the answers copied in afterwards: byte for byte
+    the packs of the run, its key and its result with the count by sort."""
+    needs(*LOCAL_83, *MAP_83, "data/sources/g6b/packs")
+    with B.run_83():
+        live = B.HOME
+        with tempfile.TemporaryDirectory() as d:
+            B.HOME = Path(d)
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    B.packs()
+                    assert (B.HOME / "key.json").read_bytes() == (live / "key.json").read_bytes()
+                    names = sorted(p.name for p in (live / "packs").iterdir())
+                    assert len(names) == B.READERS * B.PACKS == 40 and names == sorted(p.name for p in (B.HOME / "packs").iterdir())
+                    assert all(filecmp.cmp(B.HOME / "packs" / n, live / "packs" / n, shallow=False) for n in names)
+                    assert "`data/sources/g6b/reader1/K1.jsonl`" in (B.HOME / "packs" / "K1_r1.md").read_text(encoding="utf-8")
+                    for r in range(1, B.READERS + 1):
+                        shutil.copytree(live / f"reader{r}", B.HOME / f"reader{r}", dirs_exist_ok=True)
+                    assert stops(B.packs, "the readers have answered")
+                    B.count()
+                    assert (B.HOME / "result.json").read_bytes() == (live / "result.json").read_bytes()
+            finally:
+                B.HOME = live
+    assert W.NEEDED == 4 and B.HOME == ROOT / "data/sources/g6"
+
+
+def test_one_pack_of_the_run_with_83_shows_one_hidden_spelling():
+    """Pack 5 hides the words for "nephew, niece" and for "child". In one place they are joined in one word, and the
+    pack shows the letters of the second as a piece cut off the first. No other pack shows a hidden spelling, and
+    neither of the two words counted for a bar: all five said "none" of the first, and made no choice for the second."""
+    needs(*LOCAL_83, *MAP_83, "data/sources/g6b/packs")
+    with B.run_83():
+        shown = hidden_spellings_shown()
+        key = B.read("key.json")
+        assert shown == [(5, r, "mete") for r in range(1, B.READERS + 1)]
+        two = {w["entry"]: c for c, w in key["words"].items() if w["pack"] == 5 and w["entry"] in ("yetmde", "mte")}
+        for r in range(1, B.READERS + 1):
+            body = (B.HOME / "packs" / f"K5_r{r}.md").read_text(encoding="utf-8")
+            assert re.findall(r"(?<![A-Za-zḫẖšñ])mete(?![A-Za-zḫẖšñ])\S*", body) == [f"mete-l-{two['yetmde']}-lowi"], r
+    rows = {r["entry"]: r for r in figs83()["rows"] if r["sort"] != "open"}
+    assert (rows["yetmde"]["sort"], B.outcome(rows["yetmde"])) == ("absent", "none") and (rows["mte"]["sort"], B.outcome(rows["mte"])) == ("offered", "no choice")
+    text = page83()
+    assert "**One pack showed one hidden spelling.**" in text and "all five readers said \"none of these\" of the first and made no choice for the second" in text
+
+
+def test_the_rules_of_the_run_with_83_were_in_git_before_its_readers():
+    def git(*args):
+        return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True).stdout
+    w = B.WHEN_83
+    assert git("log", "-1", "--format=%cI", w["set_in"]).strip() == f"2026-11-16T{w['set']}-08:00"
+    assert (w["set"] < w["packs_written"] < w["started"] < w["first_answer"] <= w["last_launch_before_the_limit"] < w["last_answer_before_the_limit"]
+            < w["resumed"] < w["first_answer_after"] <= w["last_answer"] < w["counted"])
+    for phrase in ("## 3. The bars, set before any reader is started", "**The accepted words: 83.**", "**A coarse meaning is never a filler.**",
+                   "**This is the third run of the test, and the first two each missed a bar.**"):
+        out = git("log", "--reverse", "--format=%cI", f"-S{phrase}", "--", "data/discovery/blind_test_83.md").split()
+        assert out and out[0][11:19] <= w["set"] and phrase in PAGE_83.read_text(encoding="utf-8"), phrase
+
+
+def test_the_times_of_the_run_with_83_are_the_files():
+    needs("data/sources/g6b/reader1", "data/sources/g6b/reader5", "data/sources/g6b/packs", "data/sources/g6b/key.json")
+    import datetime
+    import zoneinfo
+    pacific = zoneinfo.ZoneInfo("America/Los_Angeles")
+    at = lambda f: datetime.datetime.fromtimestamp(f.stat().st_mtime, pacific).strftime("%H:%M:%S")   # noqa: E731
+    w = B.WHEN_83
+    times = sorted(at(f) for r in range(1, B.READERS + 1) for f in (B.HOME_83 / f"reader{r}").glob("K*.jsonl"))
+    before, after = w["readers_before_the_limit"], w["readers_after_the_limit"]
+    assert len(times) == before + after == 40 and (times[0], times[before - 1]) == (w["first_answer"], w["last_answer_before_the_limit"]), times[:2]
+    assert (times[before], times[-1]) == (w["first_answer_after"], w["last_answer"]), times[-2:]
+    late = sorted(f"K{f.stem[1:]} r{r}" for r in range(1, B.READERS + 1) for f in (B.HOME_83 / f"reader{r}").glob("K*.jsonl") if at(f) > w["resumed"])
+    assert late == sorted([f"K7 r{r}" for r in (3, 4, 5)] + [f"K8 r{r}" for r in range(1, 6)])       # three of pack 7 and the five of pack 8
+    written = {at(f) for f in list((B.HOME_83 / "packs").glob("K*_r*.md")) + [B.HOME_83 / "key.json"]}
+    assert written == {w["packs_written"]}, written                           # the packs and the key were not written again
 
 
 if __name__ == "__main__":
