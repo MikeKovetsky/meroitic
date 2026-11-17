@@ -634,6 +634,11 @@ was closed too fast. What the tests of sections F and G and the grammar pilot cl
 rule got from these 548 texts alone. Three paths bring evidence from outside them. None is started, and none
 has a bar yet: each gets one, committed before its first agent, like every step above.
 
+**Launched on 2026-11-16** (Mike, asked "Should I launch the three tracks now?": "Yes, launch all"). The rules
+and the bars of all three, set before any agent was started, are on
+[`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md): H1 is its track A, H2 its track B,
+H3 its track C. Results are written there.
+
 **H1. Whole dictionaries of the related languages, each proposal checked by the contexts** (the first to try).
 
 - **What:** type whole dictionaries of Nubian and its relatives, thousands of words each, in the place of the
