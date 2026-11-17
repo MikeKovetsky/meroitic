@@ -280,6 +280,22 @@ def test_held_by_the_rems_own_designation():
     assert set(held) == {"0256", "0413", "0368"} and [r["id"] for r in held["0413"]] == ["Meroe 13"]
 
 
+def test_the_corpus_is_the_texts_the_map_is_drawn_on():
+    """A row added to corpus_v6 after the map was drawn (an ostracon, or a Faras text with its REM number) neither
+    counts in the corpus nor holds a REM number: the estimate stays set against the texts the open spellings are."""
+    table = [{"id": "REM 0256", "in_corpus_v6": True, "rem": ["0256"], "words": 5},
+             {"id": "Meroe 13", "in_corpus_v6": True, "rem": [], "words": 3},
+             {"id": "F.O. 1", "in_corpus_v6": True, "rem": [], "words": 4},
+             {"id": "REM 0501", "in_corpus_v6": True, "rem": ["0501"], "words": 6},
+             {"id": "REM 0300", "in_corpus_v6": False, "rem": ["0300"], "words": 9}]
+    texts = {"REM 0256", "Meroe 13", "REM 0300"}
+    assert [r["id"] for r in R.corpus_rows(table, texts)] == ["REM 0256", "Meroe 13"]
+    idx = [{"rem": "0413", "catalogue": {"fields": {"Désignation originelle": "Meroe 13."}}}]
+    assert set(R.held_numbers(table, idx, texts)) == {"0256", "0413"}
+    assert "F.O. 1" not in R.corpus_rows(R.rows()) and len(R.corpus_rows(R.rows())) == 548 < sum(
+        1 for r in R.rows() if r.get("in_corpus_v6"))
+
+
 def test_plates_for_lettered_entries():
     idx = [{"rem": "0057A"}, {"rem": "0057B"}, {"rem": "0058"}, {"rem": "0091A"}]
     assert [e["rem"] for e in R.plates_for("0057", idx)] == ["0057A", "0057B"]
@@ -416,8 +432,9 @@ def test_the_figures_add_up():
     assert max(e["new_lines_stated"], e["new_with_a_drawing_by_caption"]) <= e["new"] and e["held_by_designation"] <= e["held"]
     assert abs(e["words_new"] - sum(e["words_new_by_section"].values())) <= len(R.SECTIONS) / 2
     assert set(e["rates"]) == set(e["rate_pairs"]) and e["words_new"] <= e["words_new_at_the_mean_rate"]
-    v6 = [r for r in table if r.get("in_corpus_v6")]
+    v6 = R.corpus_rows(table)
     assert (e["corpus_inscriptions"], e["corpus_words"]) == (len(v6), sum(r["words"] for r in v6))
+    assert e["corpus_inscriptions"] == len(json.loads(R.MAP_TEXTS.read_text(encoding="utf-8"))["texts"]) == 548
     cc = e["caption_check"]
     assert cc["drawing_named_by_caption"] <= cc["drawing_by_eye"] <= cc["picks"] == sum(R.ALLOC.values())
     # what it would add

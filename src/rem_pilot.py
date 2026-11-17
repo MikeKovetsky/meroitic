@@ -37,6 +37,7 @@ INDEX = REM / "index.jsonl"
 PILOT = REM / "pilot"
 TABLE = ROOT / "data/inscriptions.jsonl"              # public: every inscription, with its open reading
 GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"   # local: the analysts' map of corpus_v6
+MAP_TEXTS = ROOT / "data/discovery/map_texts.json"    # public: the texts of corpus_v6 the map is drawn on
 FIGURES = ROOT / "data/discovery/rem_pilot_figures.json"
 FHN_TYPED = (ROOT / "runs/work/griffith/score.py", "fhn"), (ROOT / "runs/work/handcopy/score_hc.py", "FHN")
 VOLUMES = {1: range(1, 388), 2: range(401, 852), 3: range(1001, 1279)}
@@ -243,6 +244,14 @@ def fhn_typed(sources=FHN_TYPED):
 
 def rows(path=TABLE):
     return [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def corpus_rows(table, texts=None):
+    """The rows of the table that are the corpus this pilot measures against: the texts of corpus_v6 the map is drawn
+    on (MAP_TEXTS, 548). A row added to corpus_v6 after the map was drawn (the ostraca of 2026-11-17) is not one, so
+    the estimate and the open spellings it is set against count the same texts."""
+    texts = set(json.loads(MAP_TEXTS.read_text(encoding="utf-8"))["texts"]) if texts is None else texts
+    return [r for r in table if r.get("in_corpus_v6") and r["id"] in texts]
 
 
 def rem_int(rem):
@@ -796,17 +805,16 @@ def series_number(name):
     return (m.group(1), int(m.group(2).translate(str.maketrans("lI!O", "1110")))) if m else None
 
 
-def held_numbers(table=None, idx=None):
+def held_numbers(table=None, idx=None, texts=None):
     """{four-digit REM number: [rows of the table in corpus_v6 that stand for it]}: the rows that carry the number,
     and, with the index, a row without a REM number whose name is the entry's first designation in the REM
     ('Meroe 13' is REM 0413, by the REM's catalogue)."""
-    table = rows() if table is None else table
+    corpus = corpus_rows(rows() if table is None else table, texts)
     out = collections.defaultdict(list)
-    for r in table:
-        if r.get("in_corpus_v6"):
-            for x in r.get("rem") or []:
-                out[x[:4]].append(r)
-    named = {series_number(r["id"]): r for r in table if r.get("in_corpus_v6") and not r.get("rem")}
+    for r in corpus:
+        for x in r.get("rem") or []:
+            out[x[:4]].append(r)
+    named = {series_number(r["id"]): r for r in corpus if not r.get("rem")}
     named.pop(None, None)
     for e in idx or []:
         r = named.get(series_number(((e["catalogue"] or {}).get("fields") or {}).get("Désignation originelle")))
@@ -917,9 +925,10 @@ def extrapolate(points, k):
 
 def estimate(scores=None):
     idx, table = read_index(), rows()
+    corpus = corpus_rows(table)
     held = held_numbers(table, idx)
     rates, medians, n_pairs = word_rates(idx, held)
-    sizes = sorted(r["words"] for r in table if r.get("in_corpus_v6"))
+    sizes = sorted(r["words"] for r in corpus)
     overall = sizes[len(sizes) // 2]
     numbers = by_number(idx)
     new = {n: es for n, es in numbers.items() if n not in held}
@@ -946,7 +955,7 @@ def estimate(scores=None):
         "words_new": round(sum(words.values())), "words_new_at_the_mean_rate": round(words_mean),
         "words_new_by_section": {k: round(sum(w for n, w in words.items() if section(n) == k))
                                  for k in dict.fromkeys(map(section, new))},
-        "corpus_inscriptions": sum(1 for r in table if r.get("in_corpus_v6")),
+        "corpus_inscriptions": len(corpus),
         "all_by_script": dict(collections.Counter(cat(es, "script") or "not stated" for es in numbers.values())),
     }
     if SPEC.exists():                      # how often a caption names a drawing that is there, on the picks
@@ -957,7 +966,7 @@ def estimate(scores=None):
     if GLOSSES.exists():
         forms = open_forms()
         k_all = len(forms)
-        corpus_words = sum(r["words"] for r in table if r.get("in_corpus_v6"))
+        corpus_words = sum(r["words"] for r in corpus)
         out["corpus_words"] = corpus_words
         rec = {}
         for name, ratio in (("by_words", sum(words.values()) / corpus_words), ("by_words_mean", words_mean / corpus_words),
@@ -992,8 +1001,8 @@ def estimate(scores=None):
         t, sg = sum(first[k] for k in first if k in signs), sum(signs[k] for k in first if k in signs)
         items = sum(1 for r in scores["items"] if r["pack"] in first)
         per_sign = t / sg if sg else None
-        avg_signs = sum(len(corpus_to_signs(r.get("open_text") or "")) for r in table if r.get("open_text")) / \
-            max(1, sum(open_words(r) for r in table if r.get("open_text")))
+        avg_signs = sum(len(corpus_to_signs(r.get("open_text") or "")) for r in corpus if r.get("open_text")) / \
+            max(1, sum(open_words(r) for r in corpus if r.get("open_text")))
         out["cost"] = {"tokens": t, "items": items, "signs": sg, "per_item": round(t / items) if items else None,
                        "per_sign": round(per_sign, 1) if per_sign else None, "signs_per_word": round(avg_signs, 2),
                        "full_read": round(per_sign * sum(words.values()) * avg_signs) if per_sign else None,

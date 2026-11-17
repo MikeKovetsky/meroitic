@@ -328,6 +328,15 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     61.8%, where Griffith's agree at 82.5%; at Griffith's 38 doubted words Sayce reads 7 the same and 20
     otherwise and is unsure himself at 11, and Millet sides with Sayce alone at 1
     ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
+28. **The REM's plates cannot be read well enough to grow the corpus.** The *Répertoire d'épigraphie méroïtique*
+    (2000, on Persée) gives each inscription as plates of photographs and drawings, with no transliteration. It
+    holds 917 inscriptions, not 1,278 as its numbering suggests; 473 are not among the 548 texts the map is drawn
+    on, about 4,600 words. A reader that saw only the plates read 4 inscriptions from their drawings: 426 of 555
+    signs right against Griffith (76.8%) and 43 of 103 words (41.7%), under the bar of 85%, at 158,438 subagent
+    tokens an inscription, and nothing from the photographs. Reading all 473 so would cost about 28 to 75 million
+    tokens and give about 44 of the 2,013 open spellings that stand in one text a second text read right. The pilot
+    stopped at 4 of its 20 inscriptions on Mike's word; the route is a printed transliteration
+    ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)).
 
 ## The question
 
@@ -868,7 +877,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Twenty-two things need files that are kept locally (Data, above), so they don't run from a clone:
+Twenty-three things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -921,6 +930,8 @@ Twenty-two things need files that are kept locally (Data, above), so they don't 
 - `python3 -I src/grammar.py public` (and `split`, `dump`, `briefs`, `tuning`, `held-dump`, `held`, `packs`,
   `count`, the five ending in `2` for the second round, and `parse`) reads `corpus_v6` and its gloss file, the layers'
   lines, the tables of the two sets, the finders' rules and the readers' answers.
+- `python3 -I src/rem_pilot.py public` (and `index`, `pick`, `packs`, `score`, `estimate`) reads the REM volumes'
+  text layers and plate pages, the readers' answers and the analysts' map of `corpus_v6`.
 
 ## Layout
 
