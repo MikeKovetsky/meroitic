@@ -112,6 +112,10 @@ the words that were not used to build the correspondences the result is at chanc
 for the family rests on the word series it was argued from, and open word lists add nothing a cognate search
 could build on.
 
+**How far this goes.** The test was small: 31 words that the correspondences were not built from, against lists
+of a few hundred words a language (5,442 rows in all). It shows that short lists carry no signal that
+generalises. It does not show that whole dictionaries would carry none: that comparison has not been run.
+
 Details: [cognates_rules.md](data/discovery/cognates_rules.md).
 
 ## 5. Why
@@ -141,6 +145,8 @@ Details: [cognates_rules.md](data/discovery/cognates_rules.md).
 - **More text.** The project holds 548 inscriptions. Editions it does not hold contain more, and each new long
   text adds contexts for words that now stand alone.
 - **Evidence from outside the texts:** a bilingual, or a published reading the project has not read.
+- **A comparison with whole dictionaries of the related languages,** in the place of short word lists, with
+  each meaning it proposes checked against the contexts. It has not been run (section 4).
 - **The scholars' judgment** on 16 points of grammar and spelling: the 15 where the project's counts are
   sharper than its sources, and the one rule those sources do not state. And the grammars the project does not
   hold (Rilly 2007, Rilly and de Voogt 2012, Hintze 1979).
