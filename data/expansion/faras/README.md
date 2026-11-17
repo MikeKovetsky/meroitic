@@ -10,7 +10,7 @@ pp. 565-600, public domain, [archive.org `bibliothquedel234ecol`](https://archiv
 1. **All 46 texts are typed and in `corpus_v6` as open readings of REM 0501 to 0546.** 3,865 signs and 762 words
    (in the corpus spelling, with 388 lost signs and 231 query marks), in 217 rows of the copies. The run stopped
    at the line of 2.5 million subagent tokens after Faras 1 to 23; Mike's word ("Yes, both picks": type 24 to 46
-   only if 1 to 23 met their bar) started the second half once the bar was met. Cost: 4,988,040 subagent tokens
+   only if 1 to 23 met their bar) started the second half once the bar was met. Cost: 5,361,718 subagent tokens
    in all (section 7).
 2. **What the article prints.** 46 texts. For each: a description of the object, Griffith's hand copy of the text
    in Meroitic cursive, and his English rendering, which spells the names, titles and formula words in Latin letters
@@ -310,8 +310,8 @@ python3 -I src/faras.py && python3 -I src/v6/build.py && python3 -I src/v6/recou
 && python3 -I src/v6/readers.py count && python3 -I src/themap.py && python3 -I src/faras.py compare &&
 python3 -I src/faras.py recur`.
 
-**Cost:** 4,988,040 subagent tokens. Readers 4,339,767: pack A 535,784, B 494,108, C 458,865, D 535,444 (the
+**Cost:** 5,361,718 subagent tokens. Readers 4,339,767: pack A 535,784, B 494,108, C 458,865, D 535,444 (the
 first wave, with X), E 487,874, F 477,019, G 412,724, H 510,781, and the blind second typing X 427,168; 2,102 tool
-calls, about 45 minutes a pack, four packs at once. The two readers of Millet's lines 135,256; the full review of
-the first half 513,017. About 1,000 tokens a sign of the first typing (3,912,599 for 3,865 signs). The estimate
+calls, about 45 minutes a pack, four packs at once. The two readers of Millet's lines 135,256; the reviews 886,695 (the full review of the first half 513,017,
+of the second half 256,539, of the merge with `main` 117,139). About 1,000 tokens a sign of the first typing (3,912,599 for 3,865 signs). The estimate
 before the first pack was 1 to 2 million for all 46 texts. No download.

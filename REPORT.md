@@ -1188,7 +1188,7 @@ prints hand copies and English renderings, with no transliteration of whole text
 read from the copies and checked against his Latin letters for the names, titles and formula words: 3,865 signs,
 762 words. The bar, committed before any reader ran, was met: a fresh reader typed five texts drawn by lot a second
 time, blind, and the two agree on 373 of 382 signs (97.6%; the bar was 95%). The run stopped at 2.5 million
-subagent tokens after Faras 1 to 23 and went on, on Mike's word, once the bar was met; it cost 4,988,040 in all.
+subagent tokens after Faras 1 to 23 and went on, on Mike's word, once the bar was met; it cost 5,361,718 in all, with three reviews.
 Against the modern readings the corpus holds, Faras 43 agrees with Millet's on 90.4% of the letters and Faras 44
 with the Newsletter's on 83.0%. Two of Millet's texts counted as "not identified" are Faras texts: line 414 a part
 of Faras 21, and line 286 the whole of Faras 43, which two readers settled. `corpus_v6` holds 637 inscriptions (594

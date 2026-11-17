@@ -206,7 +206,7 @@ Done since this plan was written:
     are Faras texts: line 414 a part of Faras 21, line 286 the whole of Faras 43 (settled by two readers). Of the
     map's 1,681 open spellings in one text, 5 now stand in a Faras text too. The studies of the map read the corpus
     as the analysts glossed it (`data/sources/v6/analysts/corpus.jsonl`), so that texts added to `corpus_v6` leave
-    them and the scoreboard's "before us" as they were. Cost 4,988,040 subagent tokens, where 1 to 2 million was
+    them and the scoreboard's "before us" as they were. Cost 5,361,718 subagent tokens, where 1 to 2 million was
     estimated. Left: glossing the new texts, which puts them on the map.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
@@ -352,8 +352,8 @@ all words in section G):
    - **Status, 2026-11-17: all 46 typed** ([`data/expansion/faras/`](data/expansion/faras/README.md)). No indexes:
      the check is against his English renderings and his notes on the formulae. 3,865 signs, 762 words; the blind
      second typing of five texts drawn by lot agrees on 373 of 382 signs (97.6%, bar 95%). In `corpus_v6` as open
-     readings of REM 0501 to 0546. Cost 4,988,040 subagent tokens (about 1,000 a sign of the first typing), where
-     1 to 2 million was estimated. Left: glossing the new texts on the map.
+     readings of REM 0501 to 0546. Cost 5,361,718 subagent tokens with the reviews (about 1,000 a sign of the first
+     typing), where 1 to 2 million was estimated. Left: glossing the new texts on the map.
 9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):
    clean modern readings for private analysis only (FHN is "all rights reserved").
 10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
