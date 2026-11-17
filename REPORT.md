@@ -1033,3 +1033,9 @@ reply, so no count was reported for them and none is estimated.
 
 **The first review** (full tier): 473,117 tokens, 25 minutes. It fixed 10 findings in two commits (8f4339b and
 82143c0) and ended NOT CLEAN on one line alone, the 83 accepted words, which Mike did not waive.
+
+**The second review** (the same reviewer, on the commits of the run with 83): 94,890 tokens more, 12 minutes. It
+fixed 3 findings in two commits (6bad0f5 and 84cb62c), found every line of the checklist met, and marked 84cb62c.
+Mike, asked "Should I finish the 83-word test and then push when the review is clean?": "Yes, finish and push".
+Main went from 3a21cbf to 84cb62c at 18:35, and the status of that minute is the last row of the reporting
+skill's log: 12.5% of distinct words, 59.0% of running words and 30.0% of distinct spellings translated.
