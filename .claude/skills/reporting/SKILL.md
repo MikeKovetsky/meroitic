@@ -59,7 +59,7 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 The corpus is `corpus_v6` as the analysts glossed it (548 inscriptions, 10,290 running words;
 `data/sources/v6/analysts/corpus.jsonl`, local). `corpus_v6` itself has grown since: the Faras texts of 2026-11-17
-make it 570 inscriptions, and they stay off the map and off these rows until they are glossed. The map is the
+make it 591 inscriptions, and they stay off the map and off these rows until they are glossed. The map is the
 analysts' map (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
 (`src/themap.py`, page `data/discovery/map_layers.md`; seven layers since 2026-11-16: the recurring open spellings
 of step G1, the rare spellings of steps G2 and G4, the names and pieces of step G3, the entries Millet 2005 or

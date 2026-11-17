@@ -5,24 +5,37 @@
   "in_one_text_on_the_map": 1681,
   "in_one_text": 1678,
   "texts_now_part_of_another_inscription": [
+   "Millet 1968 p. 238-240 (MilletExamples.txt line 286)",
    "Millet 1968 p. 321 (MilletExamples.txt line 414)"
   ]
  },
- "new_texts": 23,
- "in_one_text_now_in_a_faras_text": 3,
+ "new_texts": 44,
+ "in_one_text_now_in_a_faras_text": 5,
  "in_one_text_now_in_a_faras_text_as_a_name_only": 0,
- "reach_three_texts": 2,
- "new_words": 366,
+ "reach_three_texts": 5,
+ "new_words": 679,
  "new_spellings": {
-  "distinct": 211,
-  "on_the_map": 87,
-  "open_on_the_map": 17,
-  "new_to_the_map": 124,
-  "new_to_the_map_in_two_faras_texts": 0
+  "distinct": 313,
+  "on_the_map": 128,
+  "open_on_the_map": 29,
+  "new_to_the_map": 185,
+  "new_to_the_map_in_two_faras_texts": 2
  },
  "spellings": {
   "anSyi": {
    "map_texts": 1,
+   "faras_texts": 1
+  },
+  "ete": {
+   "map_texts": 1,
+   "faras_texts": 1
+  },
+  "md": {
+   "map_texts": 2,
+   "faras_texts": 1
+  },
+  "mesn": {
+   "map_texts": 2,
    "faras_texts": 1
   },
   "mkl": {
@@ -37,7 +50,15 @@
    "map_texts": 1,
    "faras_texts": 1
   },
+  "tes": {
+   "map_texts": 2,
+   "faras_texts": 1
+  },
   "wyekite": {
+   "map_texts": 1,
+   "faras_texts": 1
+  },
+  "yeqo": {
    "map_texts": 1,
    "faras_texts": 1
   }

@@ -29,7 +29,7 @@
    "matches": [
     {
      "verdict": "doubtful",
-     "share_faras": 0.085,
+     "share_faras": 0.086,
      "share_other": 0.35,
      "shared": 7,
      "key": "mnl:REM 1062|MeroNews6"
@@ -93,14 +93,14 @@
     },
     {
      "verdict": "sure",
-     "share_faras": 0.116,
+     "share_faras": 0.117,
      "share_other": 0.875,
      "shared": 28,
      "key": "otten:MilletExamples.txt:414"
     },
     {
      "verdict": "sure",
-     "share_faras": 0.116,
+     "share_faras": 0.117,
      "share_other": 0.875,
      "shared": 28,
      "key": "otten:MilletExamples.txt:56"
@@ -196,6 +196,163 @@
      "strict": {
       "agree": 21,
       "letters": 21
+     }
+    }
+   ]
+  },
+  "Faras 34": {
+   "rem": "0534",
+   "matches": [],
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:560",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 9,
+      "letters": 9
+     },
+     "strict": {
+      "agree": 9,
+      "letters": 9
+     }
+    }
+   ]
+  },
+  "Faras 38": {
+   "rem": "0538",
+   "matches": [
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.2,
+     "share_other": 0.429,
+     "shared": 6,
+     "key": "otten:MilletExamples.txt:779"
+    }
+   ],
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:779",
+     "class": "phrase",
+     "by": "two readers who saw both texts",
+     "folded": {
+      "agree": 17,
+      "letters": 27
+     },
+     "strict": {
+      "agree": 17,
+      "letters": 27
+     }
+    }
+   ]
+  },
+  "Faras 43": {
+   "rem": "0543",
+   "matches": [
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.118,
+     "share_other": 0.857,
+     "shared": 6,
+     "key": "griffith:G-meroe-28"
+    },
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.49,
+     "share_other": 0.532,
+     "shared": 25,
+     "key": "otten:MilletExamples.txt:286"
+    }
+   ],
+   "against": {
+    "otten:MilletExamples.txt:286": {
+     "agree": 75,
+     "letters": 83
+    }
+   },
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:286",
+     "class": "reading",
+     "by": "two readers who saw both texts",
+     "folded": {
+      "agree": 75,
+      "letters": 83
+     },
+     "strict": {
+      "agree": 76,
+      "letters": 85
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:768",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 8,
+      "letters": 8
+     },
+     "strict": {
+      "agree": 8,
+      "letters": 8
+     }
+    }
+   ]
+  },
+  "Faras 44": {
+   "rem": "0544",
+   "matches": [
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.459,
+     "share_other": 0.545,
+     "shared": 78,
+     "key": "mnl:REM 0544|MeroNews28"
+    },
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.418,
+     "share_other": 0.497,
+     "shared": 71,
+     "key": "otten:MilletExamples.txt:629"
+    },
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.035,
+     "share_other": 0.429,
+     "shared": 6,
+     "key": "otten:MilletExamples.txt:904"
+    },
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.4,
+     "share_other": 0.407,
+     "shared": 68,
+     "key": "fhn:271"
+    }
+   ],
+   "against": {
+    "mnl:REM 0544|MeroNews28": {
+     "agree": 253,
+     "letters": 305
+    },
+    "otten:MilletExamples.txt:629": {
+     "agree": 204,
+     "letters": 284
+    }
+   },
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:629",
+     "class": "reading",
+     "by": "read side by side on 2026-11-12 (src/experts/prepare.py, HELD)",
+     "folded": {
+      "agree": 231,
+      "letters": 284
+     },
+     "strict": {
+      "agree": 231,
+      "letters": 287
      }
     }
    ]

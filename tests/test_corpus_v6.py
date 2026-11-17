@@ -569,7 +569,8 @@ STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544",
           "16", "489",                                                    # GA 13+16; MilletExamples.txt line 489
           "933", "242", "29",                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
           "2026-11-17", "414", "0521",           # the Faras texts: MilletExamples.txt line 414 is a part of REM 0521
-          "1922", "0501", "0523", "23"}          # Griffith's article of 1922; Faras 1 to 23, REM 0501 to 0523
+          "1922", "0501", "0546", "46",          # Griffith's article of 1922; the 46 Faras texts, REM 0501 to 0546
+          "286", "0543", "27"}                   # MilletExamples.txt line 286 is REM 0543; Griffith's Meroe 27
 
 
 def test_page_text_quotes_the_tables():

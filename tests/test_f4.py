@@ -18,7 +18,8 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 import f4 as F                       # noqa: E402
 from local_only import needs, run    # noqa: E402
 
-LOCAL = ("data/sources/jssea-text/pages.txt", "data/sources/v6/analysts/glosses.jsonl", "data/corpus_v6.jsonl")
+LOCAL = ("data/sources/jssea-text/pages.txt", "data/sources/v6/analysts/glosses.jsonl", "data/sources/v6/analysts/corpus.jsonl",
+         "data/sources/v6/analysts/inscriptions.jsonl")     # the map, its texts and the table as they stood together
 ANSWERED = ("data/sources/f4/key.json", "data/sources/f4/answers")
 
 
@@ -371,9 +372,8 @@ def test_the_cost_of_the_full_run():
     tokens = {"translator_pilot": 1000, "translator_pages": 800, "splitter": 400, "judge1": 600, "judge2": 600}
     with tempfile.TemporaryDirectory() as d:
         table = Path(d) / "inscriptions.jsonl"
-        lines(table, [{"id": "P1", "open_reading": "k1", "open_text": "a b c"}, {"id": "GA 02", "open_reading": None},
-                      {"id": "P2", "open_reading": "k2", "open_text": "d e"},
-                      {"id": "REM 0501", "open_reading": "k3", "open_text": "f g h i"}])     # not on the map: left out
+        lines(table, [{"open_reading": "k1", "open_text": "a b c"}, {"open_reading": None}, {"open_reading": "k2",
+                                                                                             "open_text": "d e"}])
         s = F.sizing(figs, tokens, rows, gl, entries=entries, table=table)
     # rates: 1000/2 a word of the pilot, 800/4 of the pages, 400/4 a word of rendering, 1200/(2*3*2) a line,
     # 2/4 units a word of rendering; the three held texts have 10 words and 12 of rendering, GA02 and GA03 8 and 8

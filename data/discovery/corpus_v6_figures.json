@@ -30,26 +30,26 @@
   }
  },
  "inscriptions": {
-  "all": 585,
-  "with_a_typed_reading": 570,
+  "all": 606,
+  "with_a_typed_reading": 591,
   "only_a_text_layer": 9,
   "typed_without_a_legible_word": 6,
   "in_two_or_more_parts": 9,
-  "with_a_rem_number": 464,
-  "with_real_names": 570,
-  "with_readings_from_two_editions_or_more": 64,
-  "with_an_open_reading": 327,
-  "with_an_open_reading_of_the_whole_text": 298,
-  "preferred_reading_is_open": 309,
+  "with_a_rem_number": 486,
+  "with_real_names": 591,
+  "with_readings_from_two_editions_or_more": 65,
+  "with_an_open_reading": 350,
+  "with_an_open_reading_of_the_whole_text": 321,
+  "preferred_reading_is_open": 330,
   "in_corpus_v5": 288,
   "new_to_the_corpus_by_source": {
    "mnl": 209,
-   "griffith": 73
+   "griffith": 94
   },
-  "not_identified": 7,
+  "not_identified": 6,
   "by_kind": {
-   "funerary": 291,
-   "not known": 111,
+   "funerary": 310,
+   "not known": 113,
    "royal or temple (stela, wall, cartouche, label)": 87,
    "document (ostracon, papyrus, wood, vessel)": 53,
    "graffito": 36,
@@ -58,23 +58,23 @@
   "kind_not_known_and_only_in_the_printout": 72,
   "preferred_by_source": {
    "mnl": 210,
-   "griffith": 159,
+   "griffith": 180,
    "karanog": 150,
    "otten": 48,
    "otten:narrative": 3
   }
  },
  "corpus_v6": {
-  "texts": 570,
-  "words": 10649,
+  "texts": 591,
+  "words": 10962,
   "words_of_inscriptions_in_corpus_v5": 6579,
   "name_words_marked": 87,
   "numerals_set": 13
  },
  "lines": {
   "phrase": 908,
-  "reading": 46,
-  "unidentified": 7,
+  "reading": 47,
+  "unidentified": 6,
   "pending": 3,
   "word list": 195
  },
@@ -136,31 +136,31 @@
    "pairs": 1,
    "list": [
     [
-     "Meroe 28",
-     "Millet 1968 p. 238-240 (MilletExamples.txt line 286)"
+     "REM 0543",
+     "Meroe 28"
     ]
    ],
    "sure": 0
   }
  },
  "phrases": {
-  "in_one_text": 316,
+  "in_one_text": 318,
   "in_several": 168,
   "doubtful": 34,
   "set_aside": 1,
-  "nothing": 389,
+  "nothing": 387,
   "doubtful_and_rival": 2
  },
  "settled": {
-  "readings": 3,
-  "phrases": 8,
+  "readings": 4,
+  "phrases": 9,
   "set_aside": 1,
-  "none": 1
+  "none": 0
  },
  "numerals": {
   "all": 13,
-  "by_another_edition": 7,
-  "by_analogy": 6,
+  "by_another_edition": 8,
+  "by_analogy": 5,
   "inscriptions": 2,
   "where": [
    "REM 0101",
@@ -196,7 +196,7 @@
  },
  "held": {
   "edition_readings": {
-   "griffith": 176,
+   "griffith": 199,
    "karanog": 151,
    "mnl": 256,
    "millet2005": 34,
@@ -262,7 +262,7 @@
      "a": "mnl:REM 0544|MeroNews28",
      "b": "otten:MilletExamples.txt:629",
      "verdict": "doubtful",
-     "shared": 71,
+     "shared": 64,
      "best_key": "otten:MilletExamples.txt:642"
     },
     {
@@ -327,7 +327,7 @@
      "a": "mnl:REM 0544|MeroNews28",
      "b": "otten:MilletExamples.txt:629",
      "verdict": "doubtful",
-     "shared": 71,
+     "shared": 64,
      "best_key": "otten:MilletExamples.txt:904"
     },
     {
@@ -425,27 +425,27 @@
  },
  "coverage": {
   "all": {
-   "texts": 570,
-   "words": 10649,
-   "translated": 5458,
-   "share": 0.5125,
+   "texts": 591,
+   "words": 10962,
+   "translated": 5626,
+   "share": 0.5132,
    "levels": {
-    "meaning": 3057,
-    "grammar": 690,
-    "name": 1472,
+    "meaning": 3181,
+    "grammar": 703,
+    "name": 1503,
     "number": 239,
-    "hypothesis": 1310,
-    "kind": 587,
-    "unknown": 2041,
-    "lost": 1253
+    "hypothesis": 1330,
+    "kind": 595,
+    "unknown": 2104,
+    "lost": 1307
    }
   },
   "by_part": {
    "Griffith's other volumes": {
-    "texts": 159,
-    "words": 1582,
-    "translated": 689,
-    "share": 0.4355
+    "texts": 180,
+    "words": 1895,
+    "translated": 857,
+    "share": 0.4522
    },
    "Karanog and Shablul (Griffith 1911)": {
     "texts": 150,
@@ -467,9 +467,9 @@
    }
   },
   "near_copies_once": {
-   "texts": 560,
-   "words": 10614,
-   "translated": 5436
+   "texts": 581,
+   "words": 10927,
+   "translated": 5604
   },
   "inscriptions_that_were_in_corpus_v5": {
    "texts": 288,
@@ -488,34 +488,34 @@
    }
   },
   "inscriptions_new_to_the_corpus": {
-   "texts": 282,
-   "words": 4070,
-   "translated": 1508,
-   "share": 0.3705,
+   "texts": 303,
+   "words": 4383,
+   "translated": 1676,
+   "share": 0.3824,
    "levels": {
-    "meaning": 832,
-    "grammar": 262,
-    "name": 261,
+    "meaning": 956,
+    "grammar": 275,
+    "name": 292,
     "number": 153,
-    "hypothesis": 367,
-    "kind": 151,
-    "unknown": 1165,
-    "lost": 879
+    "hypothesis": 387,
+    "kind": 159,
+    "unknown": 1228,
+    "lost": 933
    }
   },
   "texts": {
-   "texts": 560,
-   "legible": 529,
-   "no_blocker": 42,
-   "one_blocker": 94,
-   "median": 0.6153846153846154
+   "texts": 581,
+   "legible": 550,
+   "no_blocker": 43,
+   "one_blocker": 95,
+   "median": 0.625
   },
-  "pieces_without_an_accepted_meaning": 2186,
+  "pieces_without_an_accepted_meaning": 2239,
   "names_by_the_source": 87,
   "not_analysed": {
-   "words": 1124,
-   "spellings": 1017,
-   "in_new_inscriptions": 1080,
+   "words": 1182,
+   "spellings": 1070,
+   "in_new_inscriptions": 1138,
    "in_inscriptions_that_were_in_corpus_v5": 44,
    "unknown_words_seen_before": 1
   },
@@ -533,10 +533,10 @@
     "newly_translated_once": 23
    },
    "a word written apart": {
-    "words": 112,
-    "newly_translated": 77,
-    "words_once": 112,
-    "newly_translated_once": 77
+    "words": 110,
+    "newly_translated": 75,
+    "words_once": 110,
+    "newly_translated_once": 75
    },
    "a spelling of a known word": {
     "words": 33,

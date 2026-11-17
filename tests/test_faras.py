@@ -112,6 +112,40 @@ def test_rows_from_made_up_readings():
     assert "ẖol (his Latin: khêl)" in r2["notes"] and r2["notes"].endswith("a note")
 
 
+def test_a_gap_of_the_copy_inside_a_known_word_is_closed():
+    """The readers write a space at each gap of the copy; text_corpus closes it where the parts spell a word the other
+    Griffith rows hold in three texts or more, never across a divider, longest join first."""
+    known = {"Soreyi", "at", "pSoXte", "tedxelowi"}
+    words, closed = F.joined(F.K.runs("wosi : so (2) reyi : a(6) t mẖe : p soẖ te"), known)
+    assert F.K.spell(words).split() == ["woSi", "Soreyi", "at", "mXe", "pSoXte"] and closed == 4
+    words, closed = F.joined(F.K.runs("so : reyi tedḫe lowi"), known)                   # the divider stays
+    assert F.K.spell(words).split() == ["So", "reyi", "tedxelowi"] and closed == 1
+    first = {24: made_up(24, "wosi", "(1) wosi : so (2) reyi : ato mẖe : p (7) soẖte")}
+    r = F.rows(first, {}, {}, F.formula_pairs(), {"Soreyi", "pSoXte"})[0]
+    assert r["text_corpus"] == "woSi Soreyi ato mXe pSoXte" and "closes 2 gaps" in r["notes"]
+    assert r["text_std"] == "(1) wosi : so (2) reyi : ato mẖe : p (7) soẖte"            # the reading as written
+
+
+def test_a_numeral_is_a_word_of_its_own_and_a_line_number_is_not():
+    """Faras 44 writes the numeral 1 after each prince's name; "(13)" is a line number of the copy."""
+    words, _, _ = F.words_of("pese(2)to : krinkror 1 peseto (13) 13 mto", {"pesto"}, [])
+    assert F.K.spell(words).split() == ["pesto", "krinkror", "1", "pesto", "13", "mto"]
+    first = {44: made_up(44, "x", "peseto 1 krinkror 13")}
+    r = F.rows(first, {}, {}, [], set())[0]
+    assert r["text_corpus"] == "pesto 1 krinkror 13" and r["words"] == 4 and r["signs"] == 4 + 8   # p e se to; k r i n k r o r
+    with tempfile.TemporaryDirectory() as d:                                  # the check of a final reading lets them be
+        (pathlib.Path(d) / "A").mkdir()
+        (pathlib.Path(d) / "A" / "readings.jsonl").write_text(json.dumps(first[44]) + "\n")
+        assert list(F.readings(pathlib.Path(d))) == [44]
+
+
+def test_the_known_words_are_the_other_griffith_rows():
+    kw = F.known_words()
+    assert {"woSi", "Soreyi", "tedxelowi", "terikelowi", "at", "ato", "mXe"} <= kw
+    assert all(w.isalpha() for w in kw) and not any(w.startswith("G-faras") for w in kw)
+    assert F.known_words(least=10_000) == set()
+
+
 def test_a_restoration_over_a_word_end_keeps_the_two_words():
     """Faras 5: "terike[li teri](6)kelowi" is terikeli terikelowi, its middle restored; the bracket's lost signs
     stay in both words and the reading as written is untouched."""
@@ -150,8 +184,8 @@ def test_rows_hold_every_text_typed_once_in_the_corpus_spelling():
     assert typed == list(range(1, len(typed) + 1)) and set(F.DRAWN) <= set(typed)   # Faras 1 to N, the drawn five in
     assert [r["label"] for r in rows] == [f"Faras {n}" for n in typed]
     for r in rows:
-        assert all(re.fullmatch(r"[abdeiklmnopqrstwxySNX.]+", w) for w in r["text_corpus"].split()), r["label"]
-        assert r["words"] == sum(bool(re.search("[a-zA-Z]", w)) for w in r["text_corpus"].split())
+        assert all(re.fullmatch(r"[abdeiklmnopqrstwxySNX.]+|\d+", w) for w in r["text_corpus"].split()), r["label"]
+        assert r["words"] == sum(bool(re.search("[a-zA-Z0-9]", w)) for w in r["text_corpus"].split())   # numerals count
         assert r["signs"] == len(F.bare(r["text_std"])) and r["source"] == F.SOURCE
 
 
@@ -213,11 +247,14 @@ def test_the_page_quotes_the_comparison():
     """What the page says of Millet's quotations is what comparison.json counts."""
     texts = json.loads(F.COMPARISON.read_text())["texts"]
     page = " ".join((F.FARAS / "README.md").read_text(encoding="utf-8").split())
-    lines = texts["Faras 21"]["lines"]
-    agree, letters = (sum(l["strict"][k] for l in lines) for k in ("agree", "letters"))
-    assert len(lines) == 7 and f"{agree} of their {letters} letters" in page
-    (l787,) = texts["Faras 7"]["lines"]
-    assert f"{l787['strict']['agree']} of {l787['strict']['letters']}" in page
+    parts = [l for t, e in texts.items() if t != "Faras 38" for l in e.get("lines", []) if l["class"] == "phrase"]
+    agree, letters = (sum(l["folded"][k] for l in parts) for k in ("agree", "letters"))
+    assert len(parts) == 11 and f"on {agree} of {letters} letters" in page                  # the quotations of parts
+    assert len(texts["Faras 21"]["lines"]) == 7                                              # seven of them of Faras 21
+    for text, key in (("Faras 43", "otten:MilletExamples.txt:286"), ("Faras 44", "mnl:REM 0544|MeroNews28"),
+                      ("Faras 44", "otten:MilletExamples.txt:629")):                      # the whole texts
+        a = texts[text]["against"][key]
+        assert f"| {a['letters']} | {a['agree']} ({a['agree'] / a['letters']:.1%}) |" in page, (text, key)
 
 
 def test_settled_readings_differ_from_the_first_only_where_listed():
@@ -250,7 +287,8 @@ def test_published_recur():
     r = json.loads(F.RECUR.read_text())
     assert r == F.recur()
     assert r["in_one_text_now_in_a_faras_text"] <= r["map"]["in_one_text"] <= r["map"]["in_one_text_on_the_map"]
-    assert r["new_texts"] == len([n for n in F.readings() if F.rem(n) != "0544"])
+    # Faras 44 is REM 0544, on the map before; Faras 43 was on it as Millet's line 286, whose reading REM 0543 prefers
+    assert r["new_texts"] == len([n for n in F.readings() if F.rem(n) not in ("0543", "0544")])
     s = r["new_spellings"]
     assert s["on_the_map"] + s["new_to_the_map"] == s["distinct"] and s["open_on_the_map"] <= s["on_the_map"]
 
@@ -263,11 +301,12 @@ def test_the_page_quotes_the_recount():
     assert f"{m['in_one_text_on_the_map']:,} open spellings that stand in one of its texts" in page
     assert f"{r['in_one_text_now_in_a_faras_text']} of them now stand in a new Faras text too" in page
     assert f"{r['reach_three_texts']} open spellings reach three texts" in page
-    assert (f"Of the {s['distinct']} distinct spellings of the new texts" in page and f"{s['on_the_map']} are on the "
-            f"map already, {s['open_on_the_map']} of them open; {s['new_to_the_map']} are new to it" in page)
-    assert s["new_to_the_map_in_two_faras_texts"] == 0 and "none of those stands in two Faras texts" in page
+    assert (f"Of the {s['distinct']} distinct spellings of the {r['new_texts']} texts new to the map" in page and
+            f"{s['on_the_map']} are on the map already, {s['open_on_the_map']} of them open; {s['new_to_the_map']} are "
+            f"new to it, and {s['new_to_the_map_in_two_faras_texts']} of those stand in two Faras texts" in page)
     rows = rows_file()
-    assert f"{len(rows)} texts, {sum(r['signs'] for r in rows):,} signs, {sum(r['words'] for r in rows)} words" in page
+    assert f"All {len(rows)} texts are typed" in page
+    assert f"{sum(r['signs'] for r in rows):,} signs and {sum(r['words'] for r in rows)} words" in page
 
 
 def test_the_studies_of_the_map_read_the_texts_of_the_map():

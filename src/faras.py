@@ -6,9 +6,9 @@ bibliothquedel234ecol, PDF pages 601 to 648). He prints each text as a hand copy
 English rendering that spells the names, titles and formula words in Latin letters, and notes on the formulae in his
 transliteration (pp. 599-600). He prints no transliteration of whole texts and no indexes.
 
-Readers (Claude Opus 5.5) type the texts from page images, pack by pack (data/expansion/faras/readings/<pack>/
-readings.jsonl, the brief beside them; Faras 1 to 23 so far, README.md says why the rest wait): first from the copy
-alone (`first`), then checked against his Latin letters (`final`). Five texts drawn by lot before typing (BAR.md)
+Readers (Claude Opus 5.5) typed all 46 texts from page images, pack by pack (data/expansion/faras/readings/<pack>/
+readings.jsonl, the brief beside them): first from the copy alone (`first`), then checked against his Latin letters
+(`final`). Five texts drawn by lot before typing (BAR.md)
 were typed a second time by a fresh reader who saw nothing of the first typing (data/expansion/faras/second/).
 Where the two differ, the place was settled against the page (settled.jsonl), and the row takes the settled
 reading.
@@ -22,6 +22,8 @@ a sub-folder that src/expand.py does not read, so corpus_v3 and corpus_v5 stay a
   python3 -I src/faras.py measure      the second typing against the first on the five drawn texts (the bar)
   python3 -I src/faras.py compare      the typed texts against the readings corpus_v6 already holds (local; the
                                        counts go to data/expansion/faras/comparison.json)
+  python3 -I src/faras.py verdicts     before the rebuild: two readers' verdicts on Millet's lines 286 and 779 into
+                                       the build's verdicts (local)
   python3 -I src/faras.py recur        after the rebuild: the map's open spellings that stood in one text and now
                                        stand in a new Faras text too (local; data/expansion/faras/recur.json)
 """
@@ -44,6 +46,7 @@ ROW = FARAS / "griffith_faras.jsonl"
 MEASURE = FARAS / "measure.json"
 COMPARISON = FARAS / "comparison.json"
 RECUR = FARAS / "recur.json"
+VERDICTS = FARAS / "verdicts.jsonl"                     # two readers on the Millet lines the Faras texts settle
 V6 = ROOT / "data/sources/v6/inscriptions.jsonl"
 
 SOURCE = 'Griffith, "Meroitic funerary inscriptions from Faras, Nubia", Recueil Champollion (1922)'
@@ -86,9 +89,10 @@ def readings(folder=READINGS):
                 raise ValueError(f"{pack.name}: text {o.get('text')!r} is not 'Faras N' (1 to 46)")
             if n in out:
                 raise ValueError(f"{pack.name}: Faras {n} is read twice (also in pack {out[n]['pack']})")
-            if K.stray(o.get("final", "")):                # the reading the row takes: nothing but signs and marks
+            stray = K.stray(NUMERAL.sub(" ", o.get("final", "")))   # the row's reading: signs, marks and numerals
+            if stray:
                 raise ValueError(f"{pack.name}: the final reading of Faras {n} holds "
-                                 f"{K.stray(o['final'])!r}, neither signs nor marks: {o['final']!r}")
+                                 f"{stray!r}, neither signs nor marks: {o['final']!r}")
             out[n] = dict(o, pack=pack.name)
     return out
 
@@ -164,26 +168,79 @@ def restored(reading):
     return re.sub(r"\[([^\]]*\s[^\]]*)\]", lambda m: " ".join(f"[{w}]" for w in m.group(1).split()), reading)
 
 
+GRIFFITH_ROWS = (ROOT / "data/expansion", K.KAR)       # the other public Griffith rows: his volumes and Karanòg
+KNOWN = 3              # a spelling that stands in this many of those rows is a word a gap of the copy does not part
+
+
+def known_words(folders=GRIFFITH_ROWS, least=KNOWN):
+    """The spellings (corpus spelling, letters only) that stand in `least` texts or more of the other public Griffith
+    rows (Meroitic Inscriptions, Meroë, Karanòg): wosi, soreyi, tedxelowi, pSoXte and the like."""
+    texts = collections.Counter()
+    for folder in folders:
+        for path in sorted(folder.glob("griffith_*.jsonl")):
+            for r in load(path):
+                texts.update({w for w in r.get("text_corpus", "").split() if re.fullmatch(r"[A-Za-z]+", w)})
+    return {w for w, n in texts.items() if n >= least}
+
+
+def joined(runs, known, most=K.JOIN):
+    """The words of runs (karanog.runs: the words between two dividers, each a list of signs) as one list, with
+    neighbours of one run joined where together they spell a known word: the copies leave gaps inside words (the
+    altars' borders, a raised number of Griffith's), and the readers wrote a space at each gap ("so (2) reyi",
+    "a(6)t", "pSi Xte"). Two to `most` words, the longest join first; a divider is the stone's and is never crossed.
+    Returns (words, gaps closed)."""
+    out, closed = [], 0
+    for run in runs:
+        i = 0
+        while i < len(run):
+            j = next((j for j in range(min(len(run), i + most), i + 1, -1)
+                      if K.spell([[s for w in run[i:j] for s in w]]) in known), i + 1)
+            out.append([s for w in run[i:j] for s in w])
+            closed += j - i - 1
+            i = j
+    return out, closed
+
+
+NUMERAL = re.compile(r"(?<![\d(])(\d+)(?![\d)])")       # a numeral of the stone ("1" after each prince, Faras 44),
+#                                                      not a line number "(13)"
+
+
+def words_of(reading, known, pairs):
+    """(the words of a reading, each a list of signs or [numeral], gaps closed, formula words parted). A numeral is a
+    word of its own and parts the text around it; the rest goes through joined() and karanog.divided()."""
+    words, closed = [], 0
+    for k, part in enumerate(NUMERAL.split(restored(reading))):
+        if k % 2:
+            words.append([part])
+            continue
+        ws, c = joined(K.runs(part), known)
+        words += ws
+        closed += c
+    words, parted = K.divided(words, pairs)
+    return words, closed, parted
+
+
 def counted(word):
-    """A word that counts: it has a letter (a stretch of lost signs does not)."""
-    return bool(re.search(r"[A-Za-z]", word))
+    """A word that counts: it has a letter or is a numeral (a stretch of lost signs does not)."""
+    return bool(re.search(r"[A-Za-z0-9]", word))
 
 
 def count(n, noun):
     return K.count(n, noun)
 
 
-def rows(first=None, second=None, decided=None, pairs=None):
+def rows(first=None, second=None, decided=None, pairs=None, known=None):
     """One row per text, in Griffith's order."""
     first = readings() if first is None else first
     second = readings(SECOND) if second is None else second
     decided = settled() if decided is None else decided
     pairs = formula_pairs() if pairs is None else pairs
+    known = known_words() if known is None else known
     out = []
     for n in sorted(first):
         o = first[n]
         final = decided[n]["final"] if n in decided else o["final"]
-        words, parted = K.divided(K.words_of(restored(final)), pairs)
+        words, closed, parted = words_of(final, known, pairs)
         corpus = K.spell(words)
         notes = [f"Typed from Griffith's hand copy by Claude Opus 5.5 (pack {o['pack']}), then checked against his "
                  f"Latin letters (the names, titles and formula words of his English rendering, and his notes on the "
@@ -198,6 +255,9 @@ def rows(first=None, second=None, decided=None, pairs=None):
         if o.get("kept"):
             notes.append("Copy kept against his Latin letters: " + "; ".join(
                 f"{k.get('copy', '')} (his Latin: {k.get('latin', '')})" for k in o["kept"]) + ".")
+        if closed:
+            notes.append(f"text_corpus closes {count(closed, 'gap')} of the copy inside a word that the other Griffith "
+                         f"rows spell whole (so reyi is soreyi).")
         if parted:
             notes.append(f"text_corpus parts {count(parted, 'formula word')} as Griffith's Karanòg formula tables do "
                          f"(ato mẖe, at mẖe, mẖe psḫrkete and the like).")
@@ -403,6 +463,21 @@ def recur(corpus_path=ROOT / "data/corpus_v6.jsonl"):
                           for f in sorted(set(again) | set(reach))}}
 
 
+# ------------------------------------------------------------------------------------------ the readers' verdicts
+
+def merge_verdicts(ours=VERDICTS, path=None):
+    """Write the verdicts of VERDICTS into the corpus build's verdicts (data/sources/v6/readers/verdicts.jsonl,
+    local), in place of the earlier verdict on the same line, so that src/v6/build.py takes them: Millet's line 286,
+    a text not identified before, is Faras 43, and his line 779 quotes Faras 38. Returns the lines replaced and added."""
+    import build as B
+    path = B.VERDICTS if path is None else path
+    new = {o["line"]: {k: o[k] for k in ("line", "same_as", "part")} for o in load(ours)}
+    old = load(path)
+    out = [new.get(o["line"], o) for o in old]
+    out += [v for k, v in new.items() if k not in {o["line"] for o in old}]
+    path.write_text("".join(json.dumps(o, ensure_ascii=False) + "\n" for o in out), encoding="utf-8")
+    return sum(o["line"] in new for o in old), len(out) - len(old)
+
 def main(argv):
     if argv[:1] == ["measure"]:
         m = measure()
@@ -411,6 +486,10 @@ def main(argv):
             v = m[key]
             print(f"{key}: {v['agree']} of {v['signs']} signs agree ({v['share']:.1%})")
         print("bar (95%) met" if m["met"] else "bar (95%) NOT met")
+        return
+    if argv[:1] == ["verdicts"]:
+        replaced, added = merge_verdicts()
+        print(f"data/sources/v6/readers/verdicts.jsonl: {count(replaced, 'verdict')} replaced, {added} added")
         return
     if argv[:1] == ["recur"]:
         r = recur()

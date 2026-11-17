@@ -106,6 +106,9 @@ GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"
 # the map read these and not data/corpus_v6.jsonl, which grows as texts are added (the Faras texts, 2026-11-17) and
 # loses a text that is found to be part of another; a copy of corpus_v6 as it stood before the first such rebuild
 MAPPED = GLOSSES.with_name("corpus.jsonl")
+# F1's public table (data/inscriptions.jsonl) as it stood with the map, for the studies that size or read it (F4):
+# the table of commit 1e55987, `git show 1e55987:data/inscriptions.jsonl`, copied here
+MAPPED_TABLE = GLOSSES.with_name("inscriptions.jsonl")
 EXPERT = ROOT / "data/sources/expert"
 OUT = ROOT / "data/sources/lexicon"
 PUBLIC = ROOT / "data/discovery/lexicon_figures.json"

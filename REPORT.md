@@ -15,15 +15,15 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **327 inscriptions are machine-readable under an open licence, 260 of them missing from the public corpus.**
+2. **350 inscriptions are machine-readable under an open licence, 281 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
    The test covered cursive type only; the 48 rows in hieroglyphic type were not scored. REM 1003, the longest
    text, is open too: Griffith printed all of it in 1917 in his transliteration of the time; typed from page
    images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
-   (`src/akinidad.py`, `data/expansion/jea/`). Faras 1 to 23 of Griffith 1922, typed from his hand copies and
-   checked against his English renderings: 2,034 signs; a blind second typing of five texts drawn by lot agrees on
+   (`src/akinidad.py`, `data/expansion/jea/`). The 46 Faras texts of Griffith 1922, typed from his hand copies and
+   checked against his English renderings: 3,865 signs; a blind second typing of five texts drawn by lot agrees on
    373 of 382 signs, 97.6% (`src/faras.py`, `data/expansion/faras/`).
    Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
    once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
@@ -494,9 +494,9 @@ The table, the map and the corpus were built without an agent; two readers then 
    copies of a reading with a name swapped (54.4% of the words), 274 are example phrases from a grammar or
    word-list entries and 124 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
    text, GA 28, stood 86 times (6,284 words, from 2 of Millet's lines).
-3. **`corpus_v6`:** 570 inscriptions, each once, with real names; 288 were in `corpus_v5` and 282 are new (209 of
-   the Newsletter's texts and 73 of Griffith's rows that `corpus_v5` left out). The table holds 585 inscriptions:
-   464 with a REM number, 64 with readings from two editions or more, 327 with a reading under an open licence, 7
+3. **`corpus_v6`:** 591 inscriptions, each once, with real names; 288 were in `corpus_v5` and 303 are new (209 of
+   the Newsletter's texts and 94 of Griffith's rows that `corpus_v5` left out). The table holds 606 inscriptions:
+   486 with a REM number, 65 with readings from two editions or more, 350 with a reading under an open licence, 6
    quoted by Millet and not identified. (These counts are those of the build as it stands, with the Faras texts
    added on 2026-11-17; one of the Millet texts then not identified is a part of a Faras text.)
 4. **The bar for the matching rule was missed:** the right partner is the best match for 45 of 54 known pairs
@@ -514,7 +514,7 @@ The table, the map and the corpus were built without an agent; two readers then 
    in the epitaph of Makheye (REM 0544; 4 after Newsletter 28 and 6 by analogy in the same list) and 3 in REM 0101
    after Griffith's print.
 8. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
-   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,080 of their words
+   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,138 of their words
    are spellings no analyst has seen (the Faras texts of 2026-11-17 among them).
 9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,005 still stand in
    `corpus_v6`; on those the editions give the map's meaning for 71.4% of the words they translate (267 of 374;
@@ -1145,17 +1145,17 @@ counted; the figures files of all three are public
 ([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
 changes.
 
-## Day ten, morning (2026-11-17): the Faras texts, half typed
+## Day ten, morning (2026-11-17): the Faras texts
 
-Step 8 of section B, half done: Faras 1 to 23 of Griffith's 46 funerary texts (*Recueil Champollion*, 1922) are
-typed, and **Faras 24 to 46 are not**: the readers had used 2,451,369 subagent tokens, at the line of 2.5 million
-set for the step, and the other half (about 2.3 million) waits for Mike's yes. The article prints hand copies and
-English renderings, with no transliteration of whole texts and no index, so every sign was read from the copies
-and checked against his Latin letters for the names, titles and formula words: 2,034 signs, 366 words. The bar,
-committed before any reader ran, was met: a fresh reader typed five texts drawn by lot a second time, blind, and
-the two agree on 373 of 382 signs (97.6%; the bar was 95%). The corpus held Faras 21 in part, in seven of Millet's
-example lines; they agree with the typing but for one sign lost in the copy, and one of them, which stood as an
-inscription not identified, is now a part of REM 0521. `corpus_v6` holds 570 inscriptions (548 before) and the
-public table 585 (563), 327 of them with an open reading (304). The map is unchanged: the new texts are not
-glossed, and its studies now read the 548 texts the analysts glossed. Of its 1,681 open spellings that stand in
-one text, 3 now stand in a Faras text too ([`data/expansion/faras/`](data/expansion/faras/README.md)).
+Step 8 of section B: Griffith's 46 funerary texts from Faras (*Recueil Champollion*, 1922) are typed. The article
+prints hand copies and English renderings, with no transliteration of whole texts and no index, so every sign was
+read from the copies and checked against his Latin letters for the names, titles and formula words: 3,865 signs,
+762 words. The bar, committed before any reader ran, was met: a fresh reader typed five texts drawn by lot a second
+time, blind, and the two agree on 373 of 382 signs (97.6%; the bar was 95%). The run stopped at 2.5 million
+subagent tokens after Faras 1 to 23 and went on, on Mike's word, once the bar was met; it cost 4,988,040 in all.
+Against the modern readings the corpus holds, Faras 43 agrees with Millet's on 90.4% of the letters and Faras 44
+with the Newsletter's on 83.0%. Two of Millet's texts counted as "not identified" are Faras texts: line 414 a part
+of Faras 21, and line 286 the whole of Faras 43, which two readers settled. `corpus_v6` holds 591 inscriptions (548
+before) and the public table 606 (563), 350 of them with an open reading (304). The map is unchanged: the new texts
+are not glossed, and its studies now read the 548 texts the analysts glossed. Of its 1,681 open spellings that
+stand in one text, 5 now stand in a Faras text too ([`data/expansion/faras/`](data/expansion/faras/README.md)).

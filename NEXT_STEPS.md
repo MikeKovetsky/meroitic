@@ -65,7 +65,7 @@ Done since this plan was written:
     consequence.
 12. **The corpus keyed by inscription** (2026-11-12, [`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)),
     piece F1 of section F: built without an agent, then read by two readers. The 899 texts of `corpus_v5` hold
-    288 inscriptions; `corpus_v6` holds 570 with real names, and the public table 585 with every reading's
+    288 inscriptions; `corpus_v6` holds 591 with real names, and the public table 606 with every reading's
     source and licence. The matching rule missed its bar (45 of 54 known pairs), so numbers decide before
     letters; of the 17 doubtful matches the readers settled all but 3.
 13. **Analysts on the unread spellings of the clean corpus** (2026-11-12,
@@ -198,24 +198,23 @@ Done since this plan was written:
     branches, fetched on 2026-11-16, are not typed: the page's section 2 tests them the same way, its section 6 had
     tied them to a signal in A1, and which rule holds is Mike's to say. No count of the map changes; no meaning of
     our own.
-29. **Faras, half typed** (2026-11-17, [`data/expansion/faras/`](data/expansion/faras/README.md); step 8 of
-    section B). Griffith's article of 1922 prints 46 hand copies and English renderings, no index. Faras 1 to 23
-    are typed (2,034 signs) and in `corpus_v6` as open readings of REM 0501 to 0523; a blind second typing of
-    five texts drawn by lot agrees on 97.6% of the signs (bar 95%, met). Faras 21 was held in part: seven of
-    Millet's example lines quote it, one of which stood as an inscription not identified, and they agree with the
-    typing but for one sign lost in the copy. Of the map's 1,681 open spellings in one text (1,678 without that
-    line), 3 now stand in a Faras text too. Faras 24 to 46 wait for a yes on the cost (about 2.3
-    million subagent tokens; the first half took 2,451,369). The studies of the map now read the corpus as the
-    analysts glossed it (`data/sources/v6/analysts/corpus.jsonl`), so that texts added to `corpus_v6` leave them
-    and the scoreboard's "before us" as they were.
+29. **Faras, typed** (2026-11-17, [`data/expansion/faras/`](data/expansion/faras/README.md); step 8 of section B).
+    Griffith's article of 1922 prints 46 hand copies and English renderings, no index. All 46 are typed (3,865
+    signs) and in `corpus_v6` as open readings of REM 0501 to 0546; a blind second typing of five texts drawn by lot
+    agrees on 97.6% of the signs (bar 95%, met), and the two held in a modern edition agree on 90.4% (Faras 43,
+    Millet) and 83.0% (Faras 44, the Newsletter) of the letters. Two of Millet's texts counted as not identified
+    are Faras texts: line 414 a part of Faras 21, line 286 the whole of Faras 43 (settled by two readers). Of the
+    map's 1,681 open spellings in one text, 5 now stand in a Faras text too. The studies of the map read the corpus
+    as the analysts glossed it (`data/sources/v6/analysts/corpus.jsonl`), so that texts added to `corpus_v6` leave
+    them and the scoreboard's "before us" as they were. Cost 4,988,040 subagent tokens, where 1 to 2 million was
+    estimated. Left: glossing the new texts, which puts them on the map.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
 
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
-2. **Step 8, Faras** (46 funerary texts, hand copies): half done on 2026-11-17 (Faras 1 to 23, point 29). It
-   prints no indexes, only English renderings of names, titles and formula words. Faras 24 to 46 are cut and
-   briefed, about 2.3 million subagent tokens; they wait for Mike's yes.
+2. **Step 8, Faras** (46 funerary texts, hand copies): done on 2026-11-17 (point 29). Left: the analysts' gloss of
+   the 44 texts new to the map, so that the map counts them.
 3. **Step 6, Griffith's ostraca** in JEA 11: the volume is in hand since 13 November, as page images without a
    text layer, and so is JEA 15 with his Meroitic Studies VI.
 4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
@@ -327,12 +326,11 @@ all words in section G):
      are in copyright.
 8. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
    pipeline once it passes. Check first whether that article has indexes like Karanòg's.
-   - **Status, 2026-11-17: Faras 1 to 23 typed** ([`data/expansion/faras/`](data/expansion/faras/README.md)). No
-     indexes: the check is against his English renderings and his notes on the formulae. 2,034 signs, 366 words;
-     the blind second typing of five texts drawn by lot agrees on 373 of 382 signs (97.6%, bar 95%). In
-     `corpus_v6` as open readings of REM 0501 to 0523. Cost 2,451,369 subagent tokens (995 a sign for the first
-     typing), so all 46 come to about 4.8 million, where 1 to 2 million was estimated. Left: Faras 24 to 46 (about
-     2.3 million, packs ready), and glossing the new texts on the map.
+   - **Status, 2026-11-17: all 46 typed** ([`data/expansion/faras/`](data/expansion/faras/README.md)). No indexes:
+     the check is against his English renderings and his notes on the formulae. 3,865 signs, 762 words; the blind
+     second typing of five texts drawn by lot agrees on 373 of 382 signs (97.6%, bar 95%). In `corpus_v6` as open
+     readings of REM 0501 to 0546. Cost 4,988,040 subagent tokens (about 1,000 a sign of the first typing), where
+     1 to 2 million was estimated. Left: glossing the new texts on the map.
 9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):
    clean modern readings for private analysis only (FHN is "all rights reserved").
 10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the
@@ -478,16 +476,16 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Comes first: F2 to F4 are all counted on it.
     - **Status, 2026-11-12: built** ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)). Otten's file
       is undone from his own per-scholar files, so every older text has a source line with real names. Done: the
-      table of 585 inscriptions, the map of all 899 old ids, `corpus_v6` with 570 inscriptions, the coverage map
+      table of 606 inscriptions, the map of all 899 old ids, `corpus_v6` with 591 inscriptions, the coverage map
       and the expert check counted again (60.0% and 71.4% on the inscriptions that were in the corpus, against
       62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens. Reviewed at the
       full tier (523,726 subagent tokens).
-    - **What it leaves for later:** 1,080 words of the new inscriptions (and 44 of the others) have no analyst in
+    - **What it leaves for later:** 1,138 words of the new inscriptions (and 44 of the others) have no analyst in
       the build as it stands; those of 2026-11-12 were read the same day ([the readers' page](data/discovery/v6_readers.md)
       gives what that changed), the Faras texts of 2026-11-17 not yet;
-      nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and could be typed; 7 texts
-      quoted by Millet 1968 are not identified, one of which may be Griffith's Meroë 28; 3 doubtful matches
-      are not settled; the kind of text is not known for 111 inscriptions; and word division still follows each
+      nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and could be typed; 6 texts
+      quoted by Millet 1968 are not identified (two more turned out to be Faras texts on 2026-11-17); 3 doubtful matches
+      are not settled; the kind of text is not known for 113 inscriptions; and word division still follows each
       edition.
 23. **F2. A lexicon with a source and a status for every meaning.**
     - Why: "translated" in the map means that one lexicon of 2003 accepts the meaning. The check of 2026-11-12

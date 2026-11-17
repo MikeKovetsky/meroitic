@@ -59,7 +59,7 @@ import tally as T                                      # noqa: E402
 
 CORPUS = X.MAPPED                                      # the texts of the map (corpus_v6 as glossed; local)
 GLOSSES = X.GLOSSES                                    # the map of corpus_v6 with the analysts' answers (local)
-INSCRIPTIONS = ROOT / "data/inscriptions.jsonl"        # F1's public table, with each inscription's open reading
+INSCRIPTIONS = X.MAPPED_TABLE                          # F1's public table as it stood with the map (local copy)
 OUT = ROOT / "data/sources/f4"                         # local only
 PUBLIC = ROOT / "data/discovery/f4_pilot_figures.json"
 
@@ -703,8 +703,8 @@ def count(out=OUT, rows=None, gl=None):
 def sizing(figs, tokens, rows, gl, entries=None, table=INSCRIPTIONS):
     """What the full run would cost at the pilot's rates: the scored run (every rendering of Millet held in
     corpus_v6; those not in the pilot apart; the judges' part with one judge beside it) and the pages (every open
-    row of corpus_v6, and every inscription of F1's table on the map with an open reading, by the words of that
-    reading; the table grows as texts are added, the map and this sizing do not).
+    row of corpus_v6, and every inscription of F1's table with an open reading, by the words of that reading; the
+    table as it stood with the map: it has grown since, the map and this sizing have not).
     Rates per word of text for the translators, per word of rendering for the splitter, per line of verdict for
     the judges."""
     if not tokens:
@@ -732,7 +732,7 @@ def sizing(figs, tokens, rows, gl, entries=None, table=INSCRIPTIONS):
     open_words = sum(len(gl[t]) for t in open_rows)
     scored_run = {**scored(held), "not_in_pilot": scored([t for t in held if t not in pilot])}
     pages_run = {"texts": len(open_rows), "words": open_words, "translator": round(per_word_pages * open_words)}
-    readings = [r for r in jsonl(table) if r.get("open_reading") and r["id"] in gl]
+    readings = [r for r in jsonl(table) if r.get("open_reading")]
     reading_words = sum(len((r.get("open_text") or "").split()) for r in readings)
     pages_run["open_readings"] = {"texts": len(readings), "words": reading_words,
                                   "translator": round(per_word_pages * reading_words)}

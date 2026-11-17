@@ -1,8 +1,8 @@
 # Meroitic with Opus 5.5
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
-the data and the method: the public corpus turned out to be mostly copies, 327 inscriptions are now machine-readable
-under an open licence (260 of them missing from that corpus), the obvious way to blind a test of AI on an
+the data and the method: the public corpus turned out to be mostly copies, 350 inscriptions are now machine-readable
+under an open licence (281 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
 Why the texts alone do not give more is written up in one place: [FINDINGS.md](FINDINGS.md).
@@ -23,7 +23,7 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
    662 is lower than the paper's 871, probably because, with names masked, examples that differ only in a name count
    once; that was not checked. `src/pool.py` recovers the two swap pools (178 private and 11 royal names) from the
    data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
-2. **327 inscriptions are now machine-readable under an open licence, 260 of them missing from the public corpus.**
+2. **350 inscriptions are now machine-readable under an open licence, 281 of them missing from the public corpus.**
    The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
    the modern edition (99.6% against what Griffith printed), measured on 12 texts. The test covered cursive type
    only: about a third of the rows (48) are in hieroglyphic type, read with Griffith's sign table and not scored.
@@ -39,10 +39,11 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
    open too: Griffith printed all 42 lines in 1917 in his transliteration of the time; typed by hand from page
    images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
    ([`data/expansion/jea/`](data/expansion/jea/), `src/akinidad.py`). Griffith's Faras texts of 1922 are hand copies
-   with no type to check them by, only his English renderings of the names, titles and formula words: 23 of the 46
-   are typed, 2,034 signs, and two readers who did not see each other's work agree on 97.6% of the signs of five
-   texts drawn by lot (the bar was 95%); the other 23 wait for a yes on the cost
-   ([`data/expansion/faras/`](data/expansion/faras/README.md), `src/faras.py`).
+   with no type to check them by, only his English renderings of the names, titles and formula words: all 46 are
+   typed, 3,865 signs; two readers who did not see each other's work agree on 97.6% of the signs of five texts
+   drawn by lot (the bar was 95%), and the two texts held in a modern edition agree on 90.4% (Faras 43, Millet) and
+   83.0% (Faras 44, the Newsletter) of the letters ([`data/expansion/faras/`](data/expansion/faras/README.md),
+   `src/faras.py`).
 3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
    re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
    scrambled corpus with neutral labels, it recognised the opening formula "O Isis, O Osiris" and read the script from
@@ -111,11 +112,11 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     exactly from his own per-scholar files: of its 17,995 different lines, 340 are a line of those files and
     17,446 are such a line with one name swapped. Traced that way, 54.4% of the words of `corpus_v5` are copies of
     a reading with a name swapped, and the texts that stand for an inscription hold 29.9% of them. `corpus_v6`
-    has one row per inscription, with the real names: 570 inscriptions, 282 of them new to the corpus (209 of the
-    Newsletter's texts, kept locally, and 73 of Griffith's rows that `corpus_v5` left out, the Faras texts typed on
-    2026-11-17 among them). The table of all 585
-    inscriptions is public, with every reading's source and licence and the text of the open ones: 464 have a REM
-    number, 64 readings from two editions or more, 327 a reading under an open licence. Counted again on the
+    has one row per inscription, with the real names: 591 inscriptions, 303 of them new to the corpus (209 of the
+    Newsletter's texts, kept locally, and 94 of Griffith's rows that `corpus_v5` left out, the Faras texts typed on
+    2026-11-17 among them). The table of all 606
+    inscriptions is public, with every reading's source and licence and the text of the open ones: 486 have a REM
+    number, 65 readings from two editions or more, 350 a reading under an open licence. Counted again on the
     inscriptions that were already in the corpus, the coverage map translates 60.0% of the words (62.0% before),
     and the two editions give its meaning for 71.4% of the words they translate (69.5% before). The matching rule
     missed the bar set for it (the right partner for 45 of 54 known pairs, where 90% was asked), so numbers
@@ -353,7 +354,7 @@ what can be rebuilt.
 | Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map; and FHN III's Demotic and Greek graffiti, read beside its Meroitic texts | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), the judges' packs and answers in `data/sources/expert/`, and the readers' and judges' packs and answers of the Demotic step in `data/sources/demotic/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only, `demotic_figures.json` counts and five title words |
 
 Since 2026-11-12 the readings are also listed by inscription: [`data/inscriptions.jsonl`](data/inscriptions.jsonl)
-has one row for each of the 585 inscriptions the project holds a reading of, with its REM or edition number, site,
+has one row for each of the 606 inscriptions the project holds a reading of, with its REM or edition number, site,
 kind and every reading's source and licence, and the text of the readings that are open;
 [`data/inscriptions_map.tsv`](data/inscriptions_map.tsv) says what each of the 899 texts of `corpus_v5` is.
 `data/corpus_v6.jsonl`, one row per inscription with real names, is local like the corpora before it.
