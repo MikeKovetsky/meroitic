@@ -57,7 +57,8 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 ## 3. The rows
 
-The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
+The corpus is `corpus_v6`: 594 inscriptions since 2026-11-17 (Griffith's 46 ostraca came in), of which the map is
+drawn on 548 (`data/discovery/map_texts.json`), 10,290 running words. The map is the analysts' map
 (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
 (`src/themap.py`, page `data/discovery/map_layers.md`; seven layers since 2026-11-16: the recurring open spellings
 of step G1, the rare spellings of steps G2 and G4, the names and pieces of step G3, the entries Millet 2005 or
