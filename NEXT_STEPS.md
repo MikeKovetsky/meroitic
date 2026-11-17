@@ -174,6 +174,13 @@ Done since this plan was written:
     a word the lexicon knows. The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated
     word. The map as it stands:
     4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%).
+27. **Grammar first, a pilot** (2026-11-16, [`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md);
+    Mike: "how can we make more structural strategic moves", then "Yes, start it"). Rules of the grammar were
+    found on 329 texts and tested on the 219 others, each rule by a function committed before the held-back
+    texts were touched. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3.
+    The 41 rules of the first round that passed describe the epitaph, and the sources in hand state or partly
+    state every one; outside the epitaphs the texts are too few for rules of word order. The pilot ended on its
+    first evening. No count of the map changes.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -604,6 +611,13 @@ ours unless it passes a test set beforehand.
 leftover parts with their two readings and the meanings Millet and Lipiński state (point 24), and the leftover
 stems, the 86 places of the same kind where the unnamed part is the stem itself (point 26). With the sources in
 hand, no step is left that could give a word a meaning.
+
+**What the grammar pilot adds to that** (point 27): the other way that needs no new source is closed as well.
+New grammar cannot be tested on this little text: only the epitaph's formulas and the habits of the script come
+back often enough, and scholars have described both. What is left is evidence the project does not hold: more
+texts, the works named under G7, and the scholars who hold them. The pilot leaves 15 points where the count is
+sharper than what the sources in hand say, and one rule they do not state (on the sign `q`); whether Rilly's
+grammar of 2007 or Hintze 1979 state them is a question for a scholar, and would be a concrete thing to ask one.
 
 Not on this path: the pages for the 304 open inscriptions and Griffith's translations as a second rendering
 (F4, above) assemble meanings scholars already have.

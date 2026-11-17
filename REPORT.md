@@ -1078,3 +1078,49 @@ now a name. Before the project the north star is the same.
 
 **Cost.** 8 agents, 725,765 subagent tokens, from the task notifications.
 
+## Day nine, evening (2026-11-16): grammar first, a pilot
+
+**What was asked.** After the status of that evening Mike wrote: "how can we make more structural strategic
+moves. I am a bit pissed we've been working on "assembling some data" for the last week". The answer given him
+was that every meaning in this field came from outside evidence and that the sources in hand are used up; of
+three moves offered, the first was grammar: "Stop chasing word meanings. Find rules of the grammar (word order,
+endings, agreement), test each on held-back texts, then parse the long royal texts with them." Asked "Should I
+start a two-day grammar-first pilot?", he answered: "Yes, start it"
+([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
+
+**The rules, committed before any finder was started.** The 548 texts were dealt by lot into 329 tuning texts
+(5,614 words) and 219 held-back texts (4,676 words), 40% of each kind of text held back. A rule is a statement
+about forms and places that a script can count on the map's columns, with its cases, its prediction and a
+comparison rate. Its test is a function, committed before it is run on the held-back texts, where it passes
+with at least 20 cases, holding in at least 80% of them, at least 30 points above its comparison. A rule that
+passes is a finding of ours only if two readers, each on their own, find it in none of the sources in hand. The
+pilot's verdict was set beforehand: worth going on with if at least 3 rules are findings of ours.
+
+**The first round.** Eight finders, each a fresh agent with one angle (the noun phrase, the verb, the clause,
+the endings of place, counting, the epitaph, the long texts, writing), proposed 54 rules and wrote each rule's
+count as a function; all 54 functions give their finder's counts on the tuning texts. On the held-back texts 41
+passed; 4 had fewer than 20 cases, 8 held in under 80% and 1 stood under 30 points above its comparison. Four
+readers then searched the sources for each of the 41: 28 are stated by both readers' sources, 4 by one and
+partly by the other's, 9 partly by both, and none is found nowhere. The rules describe the epitaph: 90% of
+their cases stand in funerary texts, and Griffith described that frame in 1911. Applied to the seven long
+texts they say little: in the stela REM 1003 only 7 of the 41 have a case at all.
+
+**The second round,** set before its finders were started, searched only the texts that are not funerary
+(2,210 words for the finders, 1,776 held back). Six finders proposed 19 rules; 12 passed and 7 held in
+under 80%. Of the 12, the two readers found 4 stated, 1 stated by one and partly by the other, 6 partly
+stated, and 1 in no source: inside a word the sign `q` is followed by o or e far more often than other
+consonant signs are. Every finder reported the same limit on its own: outside the epitaphs the texts are too few
+and too broken for rules of word order, and what passes is mostly spelling.
+
+**The verdict.** Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
+the pilot ended on its first evening. The grammar that can be tested on this corpus is the grammar the sources
+already describe. Its yield is 53 rules that hold out of sample, 15 points where the count is sharper than what
+the sources in hand say, and one rule they do not state. With the blind tests it closes the ways that need no
+new source: meanings cannot be told from the contexts, and new grammar cannot be tested on this little text.
+
+**What it changes.** Nothing in the map or the scoreboard. The script is `src/grammar.py`; the rules' tests stand
+in `runs/grammar/` as they were frozen; `data/discovery/grammar_pilot_figures.json` gives every rule with its
+counts and its readers' verdicts.
+
+**Cost.** 20 agents, 2,485,947 subagent tokens, from the task notifications: the finders 845,046 and
+739,226, the readers 630,212 and 271,463.

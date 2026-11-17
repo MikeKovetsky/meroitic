@@ -2,9 +2,14 @@
 
 Status on 2026-11-16, 19:34: **the pilot is over, and its bar is not met.** Over two rounds 73 rules were
 proposed, 53 passed on held-back texts, and 1 is a finding of ours where 3 were needed (sections 8, 10 and 11).
-The grammar that can be tested on this corpus is the grammar the sources already describe. Working scripts
-(local, not reviewed yet): `data/sources/grammar/`; the rules' tests are frozen on the branch `grammar`. What the
-finders were given: [`runs/prompts/GRAMMAR_finders.md`](../../runs/prompts/GRAMMAR_finders.md).
+The grammar that can be tested on this corpus is the grammar the sources already describe. The script is
+`src/grammar.py` (checks: `tests/test_grammar.py`); the rules' tests stand in `runs/grammar/` as they were frozen
+(first committed on a branch of their own as 604c379 and 6c974f3, in this history 8b011a7 and 81a043e, the same
+files at the same times). Every count of this page is in
+[`grammar_pilot_figures.json`](grammar_pilot_figures.json), where each rule stands with its counts and its two
+readers' verdicts. What the agents were given:
+[`runs/prompts/GRAMMAR_finders.md`](../../runs/prompts/GRAMMAR_finders.md) and
+[`GRAMMAR_round2.md`](../../runs/prompts/GRAMMAR_round2.md).
 
 ## 1. What was asked
 

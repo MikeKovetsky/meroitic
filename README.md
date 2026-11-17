@@ -294,6 +294,20 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     do both find a known word. The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated
     word ([`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md)). The map as it stands:
     4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%); before us the north star is the same.
+26. **Grammar first, a pilot: the grammar that can be tested is the grammar already described.** Mike asked for a
+    move of another kind ("how can we make more structural strategic moves. I am a bit pissed we've been working
+    on "assembling some data" for the last week") and answered "Yes, start it" to a pilot: find rules of the
+    grammar on one part of the texts and test each on the other. The 548 texts were dealt by lot into
+    329 for finding and 219 held back. Eight finders, one angle each, proposed 54 rules, each with its
+    count written as a function; the functions were committed before the held-back texts were touched. A rule
+    passed there with at least 20 cases, holding in 80% of them, 30 points above its comparison. 41 passed,
+    and two readers found every one of them stated or partly stated in a source in hand: 90% of their cases
+    stand in epitaphs, whose frame Griffith described in 1911. A second round on the texts that are not
+    epitaphs (2,210 words for finding, 1,776 held back) gave 19 rules; 12 passed, and one is in no
+    source in hand: inside a word the sign `q` is followed by o or e far more often than other consonant signs
+    are. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
+    the pilot ended on its first evening. At 15 points the count is sharper than what the sources in hand say. The
+    map and its counts do not change ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
 
 ## The question
 
@@ -771,6 +785,22 @@ the accepted words' outcomes are also counted by sort of word, because the coars
 words already in the test are weak test items
 ([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)).
 
+### 32. Grammar first, a pilot (`src/grammar.py`)
+
+`split` deals the texts by lot into a tuning set and a held-back set, 40% of each kind of text held back and the
+long texts apart; it is drawn once. `dump` writes the tuning texts as a table, one word a line: the spelling, the
+map's level, the parts with their entries and a short gloss. A finder, a fresh agent with one angle, sees that
+table alone and gives at most 8 rules, each with its cases, what must hold there and a comparison rate, and
+writes each rule's count as a function over the table's columns (`runs/grammar/`). `tuning` checks that every
+function gives its finder's counts. The functions are committed, and only then does `held-dump` write the
+held-back table and `held` run them on it, once: a rule passes with at least 20 cases, holding in at least 80%
+of them, at least 30 points above its comparison. `packs` gives the rules that passed to two readers, who search
+the sources in hand for each, and `count` calls a rule a finding of ours only when both find it in none. The
+second round (`briefs2`, `tuning2`, `held2`, `packs2`, `count2`) does the same on the texts that are not
+funerary, with six finders and at most 6 rules each. The figures give every rule with its counts and its
+readers' verdicts; a statement that shared four words in a row with a source is reworded there
+([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -788,7 +818,7 @@ python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && pytho
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
 python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
 python3 -I tests/test_unnamed.py && python3 -I tests/test_second_later.py
-python3 -I tests/test_leftover.py && python3 -I tests/test_blind2.py
+python3 -I tests/test_leftover.py && python3 -I tests/test_blind2.py && python3 -I tests/test_grammar.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -797,7 +827,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Twenty-one things need files that are kept locally (Data, above), so they don't run from a clone:
+Twenty-two things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -847,6 +877,9 @@ Twenty-one things need files that are kept locally (Data, above), so they don't 
 - `python3 -I src/blind2.py public` (and `words`, `packs`, `count`, and the same three ending in `-83` for the
   run with all 83 accepted words) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the
   proposals collected in section 24 and the readers' answers of both runs.
+- `python3 -I src/grammar.py public` (and `split`, `dump`, `briefs`, `tuning`, `held-dump`, `held`, `packs`,
+  `count`, and the five ending in `2` for the second round) reads `corpus_v6` and its gloss file, the layers'
+  lines, the tables of the two sets, the finders' rules and the readers' answers.
 
 ## Layout
 
@@ -858,14 +891,15 @@ Twenty-one things need files that are kept locally (Data, above), so they don't 
   (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`), the count
   of distinct words (`words.py`), the map with its layers (`themap.py`) and the open spellings in one or two
   texts (`rare.py`), the open spellings the lexicon does not hold (`unnamed.py`), the second scholar for the
-  later meanings (`second_later.py`), the leftover parts and what Millet and Lipiński state (`leftover.py`) and
-  the blind test again (`blind2.py`).
+  later meanings (`second_later.py`), the leftover parts and what Millet and Lipiński state (`leftover.py`),
+  the blind test again (`blind2.py`) and the grammar-first pilot (`grammar.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,
   `corpus_v3.jsonl`, `corpus_v5.jsonl`, `corpus_v6.jsonl`), the word lists and Rilly's lexicon are local-only.
 - `runs/`: prompts, the task each blind run saw, its answers, keys and scores; `runs/work/` holds the agents'
-  working files (transcription scripts, timestamped blind readings).
+  working files (transcription scripts, timestamped blind readings); `runs/grammar/` holds the tests of the
+  grammar pilot's rules, one function a rule, as they were frozen.
 - `docs/report.html`: the summary page's source; `docs/index.html` is the same page as GitHub Pages serves it
   (`python3 -I tests/test_harness.py pages` rebuilds it).
 - `LICENSE` (MIT, the code) and `LICENSE-DATA.md` (CC BY 4.0, the data and write-ups, with what is excepted).
