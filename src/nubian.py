@@ -100,11 +100,12 @@ MAP_LAYERS = ("recurring", "rare_sure", "rare_later", "unnamed", "rare_millet", 
 COUNTS = {"with_a_meaning": 160, "loans_by_both_readers": 15, "rule_words": 18, "left": 127}
 RULE_WORDS = "abr are ato dime dm ḫlbi ḫre kdi ked l lẖ mte pwrite st tre wle yer wide abore qore nob ms".split()
 MIN_LETTERS = 3
-# The third reduction, by name (the page, 22:15): headword -> (what it is, the word it rests on, the lexicon entry
-# whose text names that word, how). A form of a word the correspondences were built from, or a word built on a
-# loan by both readers of the Egyptian key. ḫ- (1) 'meal' and ḫmlol 'a good meal' rest on the entry ḫlẖl, which
-# writes their element ḫ- 'meal' as ḫ(re), Rilly's *ḫre 'repas' (correspondence N° 7); their own entries do not
-# name it.
+# The third reduction, by name (the page, 22:15, and pqr at 23:15): headword -> (what it is, the word it rests on,
+# the lexicon entry whose text says so, how, and the words that entry must name: the word it rests on unless said
+# otherwise). A form of a word the correspondences were built from, or a word built on a loan by both readers of
+# the Egyptian key. ḫ- (1) 'meal' and ḫmlol 'a good meal' rest on the entry ḫlẖl, which writes their element ḫ-
+# 'meal' as ḫ(re), Rilly's *ḫre 'repas' (correspondence N° 7); their own entries do not name it. pqr rests on the
+# entry p- (2), which analyses it as p- + qr ("pqr / qr"), qr being a form of qore.
 BY_NAME = {
     "qor": ("form", "qore", "qor", "qore with the article"),
     "yeto": ("form", "ato", "yeto", "a rare variant"),
@@ -112,6 +113,7 @@ BY_NAME = {
     "ḫlẖl": ("form", "ḫre", "ḫlẖl", "ḫ(re) + lẖ + l"),
     "ḫ- (1)": ("form", "ḫre", "ḫlẖl", "the element ḫ- 'meal', written ḫ(re) in the entry ḫlẖl"),
     "ḫmlol": ("form", "ḫre", "ḫlẖl", "ḫ- 'meal' + mlo + l, its ḫ- written ḫ(re) in the entry ḫlẖl"),
+    "pqr": ("form", "qore", "p- (2)", "p- + qr, qr a form of qore", ("pqr", "qr")),
     "apote-lẖ": ("loan", "apote", "apote-lẖ", "apote + lẖ"),
     "pesto": ("loan", "peseto", "pesto", "a short form"),
     "at (1)": ("loan", "ant", "at (1)", "a variant"),
@@ -119,8 +121,9 @@ BY_NAME = {
 # Words of grammar and of cross-reference, taken out of a meaning's wording and out of the typists' English
 # meanings before the engine makes its keys (the page, 22:15): articles, prepositions, conjunctions, auxiliaries,
 # pronouns (with the determiners that stand as pronouns) and the negation; the words of cross-reference and of
-# doubt the page names, with their plurals; and the hedges of the same sort as "perhaps" and "probably". No word
-# of content is on it. The engine's own STOP list and its rule of three letters take the shorter ones out anyway.
+# doubt the page names, with their plurals; the hedges of the same sort as "perhaps" and "probably"; and (23:15)
+# the words that name a kind of word or speak of meaning, with their plurals. No word of content is on it. The
+# engine's own STOP list and its rule of three letters take the shorter ones out anyway.
 FUNCTION_WORDS = frozenset("""
     a an the
     about above across after against along amid among amongst around at before behind below beneath beside besides
@@ -136,6 +139,8 @@ FUNCTION_WORDS = frozenset("""
     not no
     see also variant variants form forms cf etc perhaps probably kind kinds sort sorts type types
     likely possibly maybe rather very
+    noun nouns verb verbs adjective adjectives adverb adverbs particle particles suffix suffixes prefix prefixes
+    ending endings word words meaning meanings sense senses
 """.split())
 CONNECTIVES = frozenset("und auch oder neben meist seltener".split())   # how the books join two forms of a headword
 # A dialect mark typed into a headword cell: "(D)", "(KD)", "(K, D)", or "M.", "MK." standing as a word.
@@ -229,13 +234,15 @@ def named_in(word, entry):
 def by_name(h, lex, loans):
     """(whether the third reduction drops a word it names, the rule): only where the word it rests on is one the
     correspondences were built from (a form) or a loan by both readers of the Egyptian key (`loans`), and the
-    lexicon's entry named in BY_NAME names it."""
-    what, base, entry, how = BY_NAME[h]
-    if (base in RULE_WORDS if what == "form" else base in loans) and entry in lex and named_in(base, lex[entry]):
+    lexicon's entry named in BY_NAME names it (or the words BY_NAME gives for it)."""
+    what, base, entry, how, *names = BY_NAME[h]
+    names = names[0] if names else (base,)
+    if (base in RULE_WORDS if what == "form" else base in loans) and entry in lex and all(named_in(n, lex[entry]) for n in names):
         if what == "form":
             return True, f"by name, a form of {base}, a word the correspondences were built from: {how} (the lexicon's entry {entry})"
         return True, f"by name, built on {base}, a loan by both readers of the Egyptian key: {how} (the lexicon's entry {entry})"
-    return False, f"named by the third reduction, but the lexicon's entry {entry} does not name {base} as a {'word the correspondences were built from' if what == 'form' else 'loan'}"
+    return False, (f"named by the third reduction, but the lexicon's entry {entry} does not name {' and '.join(names)}, or {base} is not "
+                   f"a {'word the correspondences were built from' if what == 'form' else 'loan'}")
 
 
 def reductions(left, rule, lex=None, loans=frozenset()):

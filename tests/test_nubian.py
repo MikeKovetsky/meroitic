@@ -114,7 +114,7 @@ def test_the_list_has_the_pages_counts():
     assert len(by_rule("a loan into Meroitic")) == 15 and len(by_rule("a word the correspondences")) == 18
     assert all(len(by_rule(start)) == c[k] for k, start in N.REDUCED.items())
     kept = [w for w in ws if w["kept"]]
-    assert len(kept) == c["kept"] == 127 - sum(c[k] for k in N.REDUCED) == 84
+    assert len(kept) == c["kept"] == 127 - sum(c[k] for k in N.REDUCED) == 83
     assert all(w["rule"] == "kept" for w in kept) and not any(w["rule"].startswith("kept") for w in ws if not w["kept"])
     assert c["kept_by_the_lexicon"] + c["kept_by_a_layer"] == c["kept"] == sum(c["kept_wording_from"].values())
     assert sum(w["meaning_from"] == "the lexicon" for w in kept) == c["kept_by_the_lexicon"]
@@ -158,7 +158,7 @@ def test_the_list_keeps_the_pages_rules():
             on = w["rule"][len("built on the rule word "):].split(" and ")
             assert set(on) <= set(stems) and all(N.bare(w["headword"]).startswith(s) or N.bare(w["headword"]).endswith(s) for s in on)
         if w["rule"].startswith("by name, "):
-            what, base, entry, _ = N.BY_NAME[w["headword"]]
+            what, base, entry, *_ = N.BY_NAME[w["headword"]]
             assert f" {base}, " in w["rule"] and w["rule"].endswith(f"(the lexicon's entry {entry})")
 
 
@@ -192,6 +192,7 @@ def test_the_third_reduction_by_name_is_checked_against_the_lexicon():
            "mse": entry("mse", "variant (?) of mte"), "ḫlẖl": entry("ḫlẖl", "ḫ(re) + lẖ + l 'a great *ḫre' (meal)"),
            "ḫ- (1)": entry("ḫ- (1)", "meal"), "ḫmlol": entry("ḫmlol", "doubtless 'a good meal'"),
            "apote-lẖ": entry("apote-lẖ", "great envoy, chief envoy"), "pesto": entry("pesto", "viceroy (see peseto)"),
+           "pqr": entry("pqr", "'prince' or 'vizier'"), "p- (2)": entry("p- (2)", "a prefix p- in some nouns (pwide / wide, pqr / qr)"),
            "at (1)": entry("at (1)", "priest", "a variant of ant 'priest' in three texts")}
     loans = {"apote", "peseto", "ant"}
     out = N.reductions(sorted(N.BY_NAME), [], lex, loans)
@@ -199,11 +200,14 @@ def test_the_third_reduction_by_name_is_checked_against_the_lexicon():
     assert out["qor"][1] == "by name, a form of qore, a word the correspondences were built from: qore with the article (the lexicon's entry qor)"
     assert out["ḫ- (1)"][1].endswith("(the lexicon's entry ḫlẖl)")                         # its own entry does not name ḫre: ḫlẖl's does
     assert out["at (1)"][1].startswith("by name, built on ant, a loan by both readers")      # a proposal of the entry names it
+    assert out["pqr"][1].endswith("p- + qr, qr a form of qore (the lexicon's entry p- (2))")   # p- (2) names pqr and qr
+    no_qr = N.reductions(["pqr"], [], {**lex, "p- (2)": entry("p- (2)", "a prefix p- in some nouns (pwide / wide)")}, loans)
+    assert no_qr["pqr"][0] and "does not name pqr and qr" in no_qr["pqr"][1]                 # an entry that does not analyse it: kept
     assert N.named_in("ḫre", lex["ḫlẖl"]) and N.named_in("apote", lex["apote-lẖ"]) and not N.named_in("ḫre", lex["ḫ- (1)"])
     assert not N.named_in("ato", entry("x", "a variant of atom")) and not N.named_in("ant", entry("x", "a plant"))   # a word of its own
     wrong = N.reductions(["mse", "pesto", "apote-lẖ"], [], {**lex, "mse": entry("mse", "a variant of mde")}, {"apote"})
     assert wrong["mse"][0] and "mse does not name mte" in wrong["mse"][1]                  # the entry does not say so: kept
-    assert wrong["pesto"][0] and "does not name peseto as a loan" in wrong["pesto"][1]      # not a loan by both readers: kept
+    assert wrong["pesto"][0] and "or peseto is not a loan" in wrong["pesto"][1]             # not a loan by both readers: kept
     assert not wrong["apote-lẖ"][0]
     assert N.reductions(["ḫ- (1)", "ḫbḫne", "ḫr"], [], {}, set())["ḫbḫne"] == (False, "counted once, in the family of ḫ- (1), a stem under three letters")
 
@@ -213,6 +217,10 @@ def test_function_words_are_taken_out_before_the_keys():
     assert N.keys_of("before; in someone's presence") == {"presence"} and N.keys_of("this, this one (variant of qo)") == frozenset()
     assert N.keys_of("god; very likely also goddess") == {"god", "goddess"} and N.keys_of("another form of yesebe") == {"yesebe"}
     assert N.keys_of("to go out with them and with him") == frozenset() and N.keys_of("") == frozenset()
+    assert N.keys_of("probably a form of mlowi (noun)") == {"mlowi"} and N.keys_of("verb stem 'eat'; with the causative prefix") == {"stem", "eat", "causative"}
+    assert N.keys_of("a blessing or favour (positive sense)") == {"blessing", "favour", "positive"}    # words that speak of words (23:15)
+    meta = "noun verb adjective adverb particle suffix prefix ending word meaning sense".split()
+    assert {w for m in meta for w in (m, m + ("es" if m.endswith("x") else "s"))} <= N.FUNCTION_WORDS
     for text in ("water, and perhaps 'river' or 'Nile'", "a kind of sacrifice; per unclear", "to take, to receive", "Kandake, Candace"):
         assert N.keys_of(text) == N.cr.cognates.keys(text) - N.FUNCTION_WORDS                 # the engine's keys, less the list
     content = "water king ruler give take kill god goddess man woman child mother father brother sister bread meal milk cow dog bull " \
