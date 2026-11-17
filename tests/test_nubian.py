@@ -6,6 +6,7 @@ The typed pages are local only, and this file was written before any of them was
 `agree` and `gate` run on made-up pages and words. The list of known words is public and is checked as it stands,
 and against a count from the local files where those are present.
 """
+import collections
 import contextlib
 import io
 import json
@@ -111,21 +112,26 @@ def test_the_list_has_the_pages_counts():
     assert {k: c[k] for k in N.COUNTS} == N.COUNTS and len(ws) == 160 == len({w["headword"] for w in ws})
     by_rule = lambda start: [w for w in ws if w["rule"].startswith(start)]       # noqa: E731
     assert len(by_rule("a loan into Meroitic")) == 15 and len(by_rule("a word the correspondences")) == 18
-    assert len(by_rule("built on the rule word")) == c["built_on_a_rule_word"]
-    assert len(by_rule("counted once, under")) == c["counted_under_a_shorter_stem"]
+    assert all(len(by_rule(start)) == c[k] for k, start in N.REDUCED.items())
     kept = [w for w in ws if w["kept"]]
-    assert len(kept) == c["kept"] == 127 - c["built_on_a_rule_word"] - c["counted_under_a_shorter_stem"]
-    assert all(w["rule"] == "kept" for w in kept) and not any(w["rule"] == "kept" for w in ws if not w["kept"])
-    assert c["kept_by_the_lexicon"] + c["kept_by_a_layer"] == c["kept"]
+    assert len(kept) == c["kept"] == 127 - sum(c[k] for k in N.REDUCED) == 84
+    assert all(w["rule"] == "kept" for w in kept) and not any(w["rule"].startswith("kept") for w in ws if not w["kept"])
+    assert c["kept_by_the_lexicon"] + c["kept_by_a_layer"] == c["kept"] == sum(c["kept_wording_from"].values())
     assert sum(w["meaning_from"] == "the lexicon" for w in kept) == c["kept_by_the_lexicon"]
+    assert dict(collections.Counter(w["wording_from"] for w in kept)) == c["kept_wording_from"]
     assert c["kept_with_a_same_meaning_row_in_the_short_lists"] <= c["kept"] - c["kept_without_a_key"]
-    assert f["map_layers"] == list(N.MAP_LAYERS) and len(N.MAP_LAYERS) == 7
+    assert f["map_layers"] == list(N.MAP_LAYERS) and len(N.MAP_LAYERS) == 7 and f["function_words"] == sorted(N.FUNCTION_WORDS)
+    named = {w["headword"]: w["rule"] for w in ws if w["headword"] in N.BY_NAME}
+    assert set(named) == set(N.BY_NAME) and all(r.startswith("by name, ") for r in named.values())    # each check holds on the lexicon
+    families = {w["rule"].split(", ")[1][len("in the family of "):] for w in by_rule("counted once, in the family of")}
+    assert families == {"tk (1)", "ns", "qo", "qe (1)", "mk", "at (2)", "pl (2)"}                    # tk, ns, qo, and the others found
 
 
 def test_the_list_has_no_meaning():
     f = the_list()
-    assert all(set(w) == {"headword", "kind", "meaning_from", "kept", "rule"} for w in f["words"])      # the lexicon is in copyright
+    assert all(set(w) == {"headword", "kind", "meaning_from", "wording_from", "kept", "rule"} for w in f["words"])   # the lexicon is in copyright
     assert all(w["meaning_from"] == "the lexicon" or w["meaning_from"].split()[1] in N.MAP_LAYERS for w in f["words"])
+    assert {w["wording_from"] for w in f["words"]} <= {"the public table", "the layers' lines", "the lexicon"}
     assert "meaning" not in f and "meaning" not in f["counts"]
 
 
@@ -139,33 +145,94 @@ def test_the_list_keeps_the_pages_rules():
     assert len(stems) == 15                                            # dm, l and lẖ have fewer than three letters
     kept = [N.bare(w["headword"]) for w in ws if w["kept"]]
     assert not any(k.startswith(s) or k.endswith(s) for k in kept for s in stems)
-    longer = [k for k in kept if len(k) >= 3]
-    assert not any(a != b and b.startswith(a) for a in longer for b in kept)       # one word a stem
-    assert len(longer) == len(set(longer))
+    assert not any(a != b and b.startswith(a) for a in kept for b in kept) and len(kept) == len(set(kept))   # one word a stem, of any length
+    assert not set(N.BY_NAME) & {w["headword"] for w in ws if w["kept"]}
     for w in ws:                                                       # a dropped word names what dropped it
         if w["rule"].startswith("counted once, under "):
             stem = w["rule"][len("counted once, under "):]
             assert stem in {x["headword"] for x in ws if x["kept"]} and N.bare(w["headword"]).startswith(N.bare(stem)) and len(N.bare(stem)) >= 3
+        if w["rule"].startswith("counted once, in the family of "):
+            stem = w["rule"][len("counted once, in the family of "):].split(", a stem")[0]
+            assert stem in {x["headword"] for x in ws if x["kept"]} and N.bare(w["headword"]).startswith(N.bare(stem)) and len(N.bare(stem)) < 3
         if w["rule"].startswith("built on the rule word "):
             on = w["rule"][len("built on the rule word "):].split(" and ")
             assert set(on) <= set(stems) and all(N.bare(w["headword"]).startswith(s) or N.bare(w["headword"]).endswith(s) for s in on)
+        if w["rule"].startswith("by name, "):
+            what, base, entry, _ = N.BY_NAME[w["headword"]]
+            assert f" {base}, " in w["rule"] and w["rule"].endswith(f"(the lexicon's entry {entry})")
 
 
 def test_reductions_on_made_up_headwords():
-    left = ["kdise", "mkdi", "ptare", "slẖ", "qor", "qor-o", "qorise", "mlo", "mlowi", "tk (1)", "tk (2)", "tkk", "abc (2)", "abc (1)", "ns per"]
+    left = ["kdise", "mkdi", "ptare", "slẖ", "qor", "qor-o", "qorise", "mlo", "mlowi", "tk (1)", "tk (2)", "tkk", "abc (2)", "abc (1)", "ns per", "kb"]
     out = N.reductions(left, ["kdi", "qore", "l (2)", "lẖ", "are (3)"])
     assert out["kdise"] == out["mkdi"] == (False, "built on the rule word kdi")           # begins with it, ends with it
     assert out["ptare"] == (False, "built on the rule word are")                          # the sense number is no letter
     assert out["slẖ"] == (True, "kept")                                                   # lẖ and l have under three letters
-    assert out["qor"] == (True, "kept")                                                   # qor does not begin with qore
+    assert out["qor"][0] and "the lexicon's entry qor does not name qore" in out["qor"][1]   # named, but no lexicon here: kept
     assert out["qor-o"] == out["qorise"] == (False, "counted once, under qor")            # the hyphen is no letter
     assert out["mlo"] == (True, "kept") and out["mlowi"] == (False, "counted once, under mlo")
-    assert out["tk (1)"] == out["tk (2)"] == out["tkk"] == (True, "kept")                 # a stem of two letters stands for none
+    assert out["tk (1)"] == (True, "kept")                                                # a family under three letters: the shortest alone
+    assert out["tk (2)"] == out["tkk"] == (False, "counted once, in the family of tk (1), a stem under three letters")
     assert out["abc (1)"] == (True, "kept") and out["abc (2)"] == (False, "counted once, under abc (1)")
-    assert out["ns per"] == (True, "kept") and N.bare("ns per") == "nsper" and N.bare("t-erike-l") == "terikel" and N.bare("ḫ- (1)") == "ḫ"
+    assert out["ns per"] == out["kb"] == (True, "kept")                                   # a stem that stands once
+    assert N.bare("ns per") == "nsper" and N.bare("t-erike-l") == "terikel" and N.bare("ḫ- (1)") == "ḫ"
     assert set(out) == set(left)
     chain = N.reductions(["abcde", "abcd", "abc"], [])
     assert chain["abcde"] == chain["abcd"] == (False, "counted once, under abc")          # the shortest stands
+    short = N.reductions(["ns", "ns per", "nse doke", "qo", "qoli", "qor-o"], [])
+    assert [short[h][0] for h in ("ns", "ns per", "nse doke", "qo", "qoli", "qor-o")] == [True, False, False, True, False, False]
+
+
+def entry(h, meaning, *proposals):
+    return {"headword": h, "meaning": meaning, "proposals": [{"proposal": p} for p in proposals]}
+
+
+def test_the_third_reduction_by_name_is_checked_against_the_lexicon():
+    lex = {"qor": entry("qor", "determined form of qore 'ruler'"), "yeto": entry("yeto", "water, a very rare variant of ato"),
+           "mse": entry("mse", "variant (?) of mte"), "ḫlẖl": entry("ḫlẖl", "ḫ(re) + lẖ + l 'a great *ḫre' (meal)"),
+           "ḫ- (1)": entry("ḫ- (1)", "meal"), "ḫmlol": entry("ḫmlol", "doubtless 'a good meal'"),
+           "apote-lẖ": entry("apote-lẖ", "great envoy, chief envoy"), "pesto": entry("pesto", "viceroy (see peseto)"),
+           "at (1)": entry("at (1)", "priest", "a variant of ant 'priest' in three texts")}
+    loans = {"apote", "peseto", "ant"}
+    out = N.reductions(sorted(N.BY_NAME), [], lex, loans)
+    assert all(not out[h][0] and out[h][1].startswith("by name, ") for h in N.BY_NAME)
+    assert out["qor"][1] == "by name, a form of qore, a word the correspondences were built from: qore with the article (the lexicon's entry qor)"
+    assert out["ḫ- (1)"][1].endswith("(the lexicon's entry ḫlẖl)")                         # its own entry does not name ḫre: ḫlẖl's does
+    assert out["at (1)"][1].startswith("by name, built on ant, a loan by both readers")      # a proposal of the entry names it
+    assert N.named_in("ḫre", lex["ḫlẖl"]) and N.named_in("apote", lex["apote-lẖ"]) and not N.named_in("ḫre", lex["ḫ- (1)"])
+    assert not N.named_in("ato", entry("x", "a variant of atom")) and not N.named_in("ant", entry("x", "a plant"))   # a word of its own
+    wrong = N.reductions(["mse", "pesto", "apote-lẖ"], [], {**lex, "mse": entry("mse", "a variant of mde")}, {"apote"})
+    assert wrong["mse"][0] and "mse does not name mte" in wrong["mse"][1]                  # the entry does not say so: kept
+    assert wrong["pesto"][0] and "does not name peseto as a loan" in wrong["pesto"][1]      # not a loan by both readers: kept
+    assert not wrong["apote-lẖ"][0]
+    assert N.reductions(["ḫ- (1)", "ḫbḫne", "ḫr"], [], {}, set())["ḫbḫne"] == (False, "counted once, in the family of ḫ- (1), a stem under three letters")
+
+
+def test_function_words_are_taken_out_before_the_keys():
+    assert N.keys_of("their (plural possessive pronoun)") == {"plural", "possessive", "pronoun"}
+    assert N.keys_of("before; in someone's presence") == {"presence"} and N.keys_of("this, this one (variant of qo)") == frozenset()
+    assert N.keys_of("god; very likely also goddess") == {"god", "goddess"} and N.keys_of("another form of yesebe") == {"yesebe"}
+    assert N.keys_of("to go out with them and with him") == frozenset() and N.keys_of("") == frozenset()
+    for text in ("water, and perhaps 'river' or 'Nile'", "a kind of sacrifice; per unclear", "to take, to receive", "Kandake, Candace"):
+        assert N.keys_of(text) == N.cr.cognates.keys(text) - N.FUNCTION_WORDS                 # the engine's keys, less the list
+    content = "water king ruler give take kill god goddess man woman child mother father brother sister bread meal milk cow dog bull " \
+              "great good small young old new south north west east name title priest land sun foot hand eye head house day".split()
+    assert not N.FUNCTION_WORDS & set(content) and {"perhaps", "probably", "see", "also", "variant", "form", "cf", "kind", "sort", "type"} <= N.FUNCTION_WORDS
+
+
+def test_the_meanings_are_taken_in_the_pages_order():
+    lex = {"a": {"meaning": "the lexicon's a"}, "b": {"meaning": "the lexicon's b"}, "c": {"meaning": "the lexicon's c"}, "d": {"meaning": ""}}
+    table = {"a": "our a"}
+    layers = [("recurring", [{"item": "b", "why": "stated", "level": "meaning", "gloss": "b by a layer"},
+                             {"item": "b", "why": "stated", "level": "meaning", "gloss": "b by a layer"},
+                             {"item": "b", "why": "form", "level": "meaning", "gloss": "not stated"}]),
+              ("rare_later", [{"item": "b", "why": "stated", "level": "meaning", "gloss": "b once"}])]
+    by = {"a": "layer recurring", "b": "layer recurring", "c": "the lexicon", "d": "the lexicon"}
+    assert N.wording("a", lex, table, layers, by) == ("our a", "the public table")            # the table first, even for a layer's word
+    assert N.wording("b", lex, table, layers, by) == ("b by a layer", "the layers' lines")    # the wording stated most often
+    assert N.wording("c", lex, table, layers, by) == ("the lexicon's c", "the lexicon")
+    assert N.wording("d", lex, table, layers, by) == ("", "the lexicon")
+    assert all(v.strip() == v and v for v in N.the_table().values()) and N.the_table()["mẖe"] == "abundant, plentiful"
 
 
 def test_the_engines_lists_against_the_pages():
@@ -180,8 +247,8 @@ def test_the_engines_lists_against_the_pages():
 
 
 def test_words_of_leaves_out_a_word_without_a_key():
-    words, left = N.words_of([("ato", "water"), ("x (1)", ""), ("y", "to be"), ("tk (2)", "to love, to revere")])
-    assert [w[0] for w in words] == ["ato", "tk (2)"] and left == ["x (1)", "y"]
+    words, left = N.words_of([("ato", "water"), ("x (1)", ""), ("y", "to be"), ("tk (2)", "to love, to revere"), ("qe (1)", "this, this one")])
+    assert [w[0] for w in words] == ["ato", "tk (2)"] and left == ["x (1)", "y", "qe (1)"]
     assert words[1][1] == frozenset({"love", "revere"})                                   # the engine's own keys
 
 
@@ -194,8 +261,13 @@ def test_the_list_is_the_count_of_the_local_files():
     assert len(words) + len(no_key) == public["counts"]["kept"] and len(no_key) == public["counts"]["kept_without_a_key"]
     assert len({f for f, _, _ in words}) == len(words)                                    # one row of scores a word
     assert all(cr.pattern(f) for f, _, _ in words)                                        # the engine reads every headword
-    for w in local["words"]:                                                              # the meaning is the map's
-        assert w["meaning"] == w["lexicon_meaning"] if w["meaning_from"] == "the lexicon" else w["lexicon_status"] not in ("established", "probable")
+    table = N.the_table()
+    for w in local["words"]:                                                              # the meaning in the page's order
+        assert (w["meaning"] == table[w["headword"]]) if w["wording_from"] == "the public table" else w["headword"] not in table
+        assert w["meaning"] == w["lexicon_meaning"].strip() or w["wording_from"] != "the lexicon"
+        assert w["wording_from"] != "the layers' lines" or w["meaning_from"] != "the lexicon"
+        assert w["keys"] == sorted(N.keys_of(w["meaning"]))
+    assert {w["headword"] for w in local["words"] if not w["keys"]} == {"dḫno", "qe (1)"}  # 'another form of ydḫno', 'this, this one'
     with set_to(N, COUNTS=N.COUNTS | {"left": 126}):
         assert stops(N.word_list, "nothing is written")
 
@@ -384,15 +456,20 @@ def test_agree_misses_on_the_meanings():
 
 
 def test_what_the_bar_sets_aside():
-    same = [("Āb", "ab"), ("tā́r", "tar"), ("kídē", "KIDE"), ("àgar", "agár"), ("ûr", "ur"), (" aman ", "aman")]
+    same = [("Āb", "ab"), ("tā́r", "tar"), ("kídē", "KIDE"), ("àgar", "agár"), ("ûr", "ur"), (" aman ", "aman"),
+            ("ǵer", "ġer"), ("ǧer", "ǵer"), ("ñog", "ńog")]                                  # one printed mark rendered two ways
     assert all(N.letters(a) == N.letters(b) for a, b in same)                            # length, accent, any mark on a vowel, case
-    other = [("šā", "sā"), ("ža", "za"), ("ñog", "nog"), ("aṅ", "an"), ("ǵer", "ger"), ("ńog", "nog"), ("ǧer", "ger"), ("ǵer", "ġer"),
-             ("ñog", "ńog"), ("au-tir", "autir"), ("au tir", "autir"), ("tar", "tarr"), ("taar", "tār")]
+    other = [("šā", "sā"), ("ža", "za"), ("ñog", "nog"), ("aṅ", "an"), ("ǵer", "ger"), ("ńog", "nog"), ("ǧer", "ger"), ("ṅog", "ńog"),
+             ("ǰa", "ja"), ("au-tir", "autir"), ("au tir", "autir"), ("tar", "tarr"), ("taar", "tār")]
     assert all(N.letters(a) != N.letters(b) for a, b in other)                           # a mark that makes another consonant; a hyphen
-    assert N.letters("Šā́ñ") == "šañ" and N.letters(unicodedata.normalize("NFD", "ṅā")) == N.letters("ṅa") == "ṅa"
+    assert N.letters("Šā́ñ") == "šań" and N.letters(unicodedata.normalize("NFD", "ṅā")) == N.letters("ṅa") == "ṅa"
+    for a, b in same[-3:] + [("ṅog", "ńog")]:                                          # the gate reads them as the bar counts them
+        assert (N.sounds(a, "L") == N.sounds(b, "L")) == (N.letters(a) == N.letters(b))
     res = agreed(twenty(lambda n, r: r | {"headword": r["headword"].replace("g", "ġ")}), first=twenty(lambda n, r: r | {"headword": r["headword"].replace("g", "ǵ")}))
     e = res["entries"]
-    assert (e["found"], e["mark_for_mark"], e["same_sounds"]) == (19, 19, 20)            # ǵ and ġ: other letters, one sound for the gate
+    assert (e["found"], e["mark_for_mark"], e["same_sounds"]) == (20, 19, 20)            # ǵ and ġ: one printed mark, one sound for the gate
+    dot = agreed(twenty(lambda n, r: r | {"headword": r["headword"].replace("n", "ṅ")}), first=twenty(lambda n, r: r | {"headword": r["headword"].replace("n", "ń")}))
+    assert (dot["entries"]["found"], dot["entries"]["same_sounds"]) == (19, 19)          # ṅ and ń: two letters of the print, two sounds
 
 
 def test_agree_reports_the_subrows_apart():
@@ -468,8 +545,8 @@ def test_dialect_marks_become_the_engines_languages():
     assert N.languages("K") == (("kenzi",), "") and N.languages("D") == (("dongolawi",), "")
     assert N.languages("F") == N.languages("M") == N.languages("FM") == (("nobiin",), "")
     assert N.languages("KD") == (("kenzi", "dongolawi"), "") and N.languages("MKD") == (("nobiin", "kenzi", "dongolawi"), "")
-    assert N.languages("") == (("nobiin",), "") and N.languages("K. D.") == (("kenzi", "dongolawi"), "")
-    assert N.languages("KX") == (("kenzi",), "X") and N.languages("Ar") == (("nobiin",), "AR")
+    assert N.languages("") == ((), "") and N.languages("K. D.") == (("kenzi", "dongolawi"), "")
+    assert N.languages("KX") == ((), "KX") and N.languages("Ar") == ((), "AR")              # no dialect mark of the books: no language
     assert {cr.group(l) for l in N.DIALECTS.values()} == {"nubian"} == {cr.group(N.UNMARKED)}      # one set of correspondences
     assert cr.align("kdi", seg("kari"), "kenzi") == cr.align("kdi", seg("kari"), "dongolawi") == cr.align("kdi", seg("kari"), "nobiin")
 
@@ -489,11 +566,11 @@ def test_dictionary_rows_for_the_engine():
     got = [(r.lang, r.form, r.dataset) for r in rows]
     assert got == [("kenzi", "Āb", "reinisch1879"), ("dongolawi", "Āb", "reinisch1879"), ("kenzi", "āb-kiñ", "reinisch1879"),
                    ("dongolawi", "āb-kiñ", "reinisch1879"), ("nobiin", "Agar", "reinisch1879"), ("nobiin", "Aman", "reinisch1879"),
-                   ("dongolawi", "ar-kā", "reinisch1879"), ("nobiin", "ā", "lepsius1880"), ("kenzi", "xoǵ", "lepsius1880")]
+                   ("dongolawi", "ar-kā", "reinisch1879"), ("nobiin", "ā", "lepsius1880"), ("nobiin", "xoǵ", "lepsius1880")]
     assert c["entries_read"] == 9 and c["subrows_read"] == 3 and c["loans_left_out"] == 2 and c["subrows_of_loans_left_out"] == 1
-    assert c["without_an_english_meaning"] == 1 and c["without_a_letter_the_engine_reads"] == 1
-    assert c["compared"] == 7 and c["rows"] == 9 and c["without_a_dialect"] == 1 and c["subrows_under_the_entry_before"] == 1
-    assert c["rows_by_list"] == {"reinisch1879": 7, "lepsius1880": 2} and c["rows_by_language"] == {"kenzi": 3, "dongolawi": 3, "nobiin": 3}
+    assert c["without_an_english_meaning"] == 1 and c["without_a_letter_the_engine_reads"] == 1 and c["without_a_key"] == 1   # "us"
+    assert c["compared"] == 7 and c["rows"] == 9 and c["without_a_dialect"] == 2 and c["subrows_under_the_entry_before"] == 1
+    assert c["rows_by_list"] == {"reinisch1879": 7, "lepsius1880": 2} and c["rows_by_language"] == {"kenzi": 2, "dongolawi": 3, "nobiin": 4}
     assert c["dialect_marks_not_of_the_books"] == {"KZ": 1} and c["letters_the_engine_does_not_read"] == {}
     water = rows[5]
     assert water.keys == frozenset({"water"}) and water.gloss == "water" and water.variants == (("aman", seg("aman")),)
@@ -507,6 +584,74 @@ def test_dictionary_rows_for_the_engine():
     assert c["subrows_of_loans_left_out"] == 1 and c["subrows_under_the_entry_before"] == 2
     alone, c = N.engine_rows([d("ab-ki", "orphan", parent=N.CONTINUED)])                   # no entry before it at all
     assert [(r.lang, r.form) for r in alone] == [("nobiin", "ab-ki")] and c["without_a_dialect"] == 1
+
+
+def test_the_cells_as_the_typists_filled_them():
+    """The shapes the typists' notes name (data/sources/nubian/typists_notes.json), each read without a guess."""
+    # 1. A dialect cell: letters run together, groups split by commas, a place in the dialect's place.
+    assert N.languages("K, D") == N.languages("KD") == (("kenzi", "dongolawi"), "")
+    assert N.languages("K, DF, M") == N.languages("KDFM") == N.languages("KDF, FM") == (("kenzi", "dongolawi", "nobiin"), "")
+    assert N.languages("D, K, FM") == (("dongolawi", "kenzi", "nobiin"), "") and N.languages("MK.") == (("nobiin", "kenzi"), "")
+    assert N.languages("Derr") == ((), "DERR") and N.languages("M (Burckh.)") == (("nobiin",), "BURCKH")    # not D for Dongola
+    # 2. Two or three forms in one headword cell; the first is the headword.
+    for cell, fs in [("Bīr, bírri", ["Bīr", "bírri"]), ("Ard, árid", ["Ard", "árid"]), ("Kúsu und kússu", ["Kúsu", "kússu"]),
+                     ("Dalū, auch dallū", ["Dalū", "dallū"]), ("Kull meist kúlli", ["Kull", "kúlli"]), ("Un, unni, unn", ["Un", "unni", "unn"]),
+                     ("Nebs, nébis, seltener nefs", ["Nebs", "nébis", "nefs"]), ("Hilgē (D), halgē (K), hálig (FM)", ["Hilgē", "halgē", "hálig"]),
+                     ("Kāše M. kašere D.", ["Kāše", "kašere"]), ("Kīdire MK. kīdere D.", ["Kīdire", "kīdere"]), ("Doin (doṅ?)", ["Doin", "doṅ?"]),
+                     ("Mūr, -kā", ["Mūr", "-kā"]), ("-in, -n", ["-in", "-n"]), ("Rāī und ógij rāī", ["Rāī", "ógij rāī"]),
+                     ("ói-n fóki", ["ói-n fóki"]), ("kúl(l)i", ["kúl(l)i"]), ("Fart (?)", ["Fart"]), ("Iā!", ["Iā!"])]:
+        assert N.forms(cell) == fs and N.headword_of(cell) == fs[0], (cell, N.forms(cell))
+    assert [v for v, _ in N.variants_of("Bīr, bírri", "R")] == ["bīr", "bírri"]                # every form a variant of the row
+    assert [v for v, _ in N.variants_of("Ingir, ingira, ingir-rā", "L")] == ["ingir", "ingira", "ingirrā"]
+    assert [v for v, _ in N.variants_of("Mūr, -kā", "L")] == ["mūr"] and [v for v, _ in N.variants_of("jom-bay, -bai, -bä", "R")] == ["jombay", "jom"]
+    assert [v for v, _ in N.variants_of("-in, -n", "L")] == ["in", "n"]                         # a suffix entry keeps its forms
+    assert [v for v, _ in N.variants_of("kúl(l)i", "R")] == ["kúli", "kúl", "kúlli"]            # the engine's own reading of brackets
+    # A sub-row's parent repeats the whole cell, or names its first form.
+    rows, c = N.engine_rows([d("Bīr, bírri", "well", "KD"), d("bīr-ti", "small well", parent="Bīr, bírri"), d("bīr-kā", "the well", parent="Bīr"),
+                             d("Bīr, bírri", "well", "FM") | {"page": "2"}, d("bir-ri", "spring", parent=N.CONTINUED) | {"page": "3"}])
+    assert c["subrows_under_the_entry_before"] == 1 and [r.lang for r in rows if r.form == "bīr-kā"] == ["kenzi", "dongolawi"]
+    assert [r.lang for r in rows if r.form == "bir-ri"] == ["nobiin"]                          # a page begun inside an entry: the entry before
+    rows, c = N.engine_rows([d("Kúsu", "laziness", "M"), d("Ard", "earth", "K"), d("kúsu-ti", "lazy", parent="Kúsu, kússu")])
+    assert c["subrows_under_the_entry_before"] == 0 and [r.lang for r in rows if r.form == "kúsu-ti"] == ["nobiin"]   # its first form names it
+    # 3. Any loan mark drops the entry and its sub-rows, and nothing else does.
+    marks = ["Ar", "*", "Kopt", "Tigré", "Amh.", "Altegypt.", "Aeg.", "Aeg, Kopt, Ar", "Sudan-Ar.", "vulg. Ar.", "vgl. Ar.", "Ar?", "Gr",
+             "aus τράπεζα", "identisch mit دروش", "Ar; spanisch", "* türkisch"]
+    rows, c = N.engine_rows([d(f"Ka{n}", "word", "K", loan=m) for n, m in enumerate(marks)] + [d("ka0-ti", "of the word", parent="Ka0"),
+                             d("Asāia", "a plant", "M", book="L") | {"note": "[ʿašāʾ] no star printed"}, d("Gobel", "a loan", "M", loan="*", book="L")])
+    assert c["loans_left_out"] == len(marks) + 1 and c["subrows_of_loans_left_out"] == 1 and [r.form for r in rows] == ["Asāia"]
+    # 4. An entry that runs over a page: its next page's derived words hang on it; a page begun inside an entry may have none.
+    with a_home() as home:
+        typed(home / "typed", "R", 333, [dict(headword="Bīr, bírri", de="brunnen", en="well", dialect="K, D", note="runs on")])
+        typed(home / "typed", "R", 334, [dict(headword="bīr-ti", de="kleiner brunnen", en="small well", parent=N.CONTINUED),
+                                         dict(headword="Bot", de="loch", en="hole", dialect="KDFM", note="runs on")])
+        typed(home / "typed", "R", 335, [dict(headword="Dalū", de="eimer", en="bucket")])                 # no (continued) row
+        typed(home / "typed", "R", 336, [], blank=True)
+        rows, rep = N.merge_of(home / "typed", {"R": SMALL["R"]})
+        assert not rep["failed"] and rep["continued_not_attached"] == [] and {r["headword"]: r for r in rows}["bīr-ti"]["parent"] == "Bīr, bírri"
+        engine, _ = N.engine_rows(rows)
+        assert [(r.lang, r.form) for r in engine if r.form == "bīr-ti"] == [("kenzi", "bīr-ti"), ("dongolawi", "bīr-ti")]
+    # 5. Forms put in `see` or `note` are not scored: the row is its headword cell alone.
+    see, _ = N.engine_rows([d("Defē", "boat", "KD") | {"see": "= FM defai", "note": "also printed: defai"}])
+    assert [v for v, _ in see[0].variants] == ["defē"]
+
+
+def test_the_german_meanings_are_compared_as_typed_but_for_the_long_s():
+    assert N.likeness("weiſse farbe", "weiße farbe") == 1.0 == N.likeness("Geheimniß", "geheimniſs") == N.likeness("groſser", "großer")
+    assert N.likeness("aus-ser", "außer") < 1.0 and N.german(unicodedata.normalize("NFD", "Mädchen ")) == "mädchen"
+    first = [dict(headword="Bīr, bírri", de="der brunnen, weiſse", en="well"), dict(headword="Gōz", de="sand", en="sand")]
+    second = [dict(headword="Bīr", de="der Brunnen, weiße", en="well", note="also printed: bírri"), dict(headword="Gōz", de="sand", en="sand")]
+    with a_home() as home:
+        typed(home / "typed", "L", 411, first)
+        typed(home / "typed2", "L", 411, second)
+        e = N.agree_of(home / "typed", home / "typed2", {"L": (411,)})["entries"]
+    assert (e["found"], e["same_meaning"], e["mark_for_mark"]) == (2, 2, 2)                     # the first form of a cell is its headword
+
+
+def test_a_later_form_can_carry_the_match():
+    words = made_up(36)
+    rows = N.engine_rows([d(f"Zuzuzu{n}, {regular(f)}", g, "K") for n, (f, _, g) in enumerate(words)])[0]
+    alone = N.engine_rows([d(regular(f), g, "K") for f, _, g in words])[0]
+    assert all(cr.rule_score(f, a) == cr.rule_score(f, b) for (f, _, _), a, b in zip(words, rows, alone))
 
 
 # --------------------------------------------------------------------------------------------------- the gate

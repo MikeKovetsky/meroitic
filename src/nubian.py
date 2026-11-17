@@ -12,25 +12,50 @@ Everything is read and written under data/sources/nubian/ (local only), except t
   python3 -I src/nubian.py gate      gate A1, once (gate.json)
   python3 -I src/nubian.py public    data/discovery/outside_nubian_figures.json, counts only
 
-The rules and the bars are the page's. What the page leaves open is decided here, before any typed page was seen:
+The rules and the bars are the page's, with the rules it added at about 22:15 (section 2). What the page leaves
+open is decided here, before any typed page was seen (the typists' notes on how they filled the cells were read,
+data/sources/nubian/typists_notes.json; no typed page):
 
-1. The meaning of a known word is the one the map has: the lexicon's for a word the lexicon calls established
-   or probable, and for a word a layer gives a meaning the wording the layers' lines state for it most often.
-2. A file that fails a check is listed and left out of dictionary.tsv; nothing in it is repaired. The gate does
+1. The meaning of a known word is taken in the page's order (wording()): the short wording of the public table
+   (data/discovery/lexicon_statuses.tsv, `meaning_in_our_words`) where it has one; else, for a word a layer gives
+   its meaning, the wording the layers' lines state for it most often; else the lexicon's English. Track B takes
+   it the same way (src/frames.py).
+2. FUNCTION_WORDS are taken out of that wording and out of the typists' English meanings before the engine makes
+   its keys (keys_of()). The engine is not changed.
+3. The third reduction by name (BY_NAME) drops a word only where the lexicon's entry named there names the word
+   it rests on, and that word is one the correspondences were built from, or a loan by both readers of the
+   Egyptian key. A named word that fails the check is kept by that rule, and the list says so.
+4. A file that fails a check is listed and left out of dictionary.tsv; nothing in it is repaired. The gate does
    not run while a page is missing or fails, or while the typing's bar is not counted as met.
-3. The typing's bar sets aside, in a headword: every mark on a vowel (macron, acute and any other combining
-   mark) and the case of the letters. It does not set aside a mark on a consonant (š ž ñ ṅ ǵ ń ǧ: there the mark
-   makes another consonant), a hyphen or a space.
-4. For the engine a typed headword is read as the two books define their letters (Reinisch p. 1-2, Lepsius
+5. A headword cell may hold two or three forms of the word ("Bīr, bírri", "Kúsu und kússu", "Hilgē (D), halgē
+   (K)"): forms() splits it, and the first form is the headword. The typing's bar compares the first forms; the
+   gate scores every form as a variant of the row, as the engine does with "a ~ b" in the short lists, except a
+   later form that begins or ends with a hyphen ("Mūr, -kā", "jom-bay, -bai"): that is an ending or a shortened
+   form, which only the print completes. A form a typist put in `see` or `note` is not scored: there it stands
+   beside pointers to other entries and comparisons, and nothing in the cell tells them apart.
+6. The typing's bar sets aside, in a headword: every mark on a vowel (macron, acute and any other combining
+   mark) and the case of the letters. It does not set aside a mark on a consonant (š ž ñ ṅ ǵ ń ǰ: there the mark
+   makes another consonant), a hyphen or a space; but a mark that the books print in one way and the typists
+   render in two counts as one (letters()): a g with any mark (both books print one marked g), and an n with a
+   tilde or an acute (the palatal nasal: Reinisch prints ñ, Lepsius ń). The dot of ṅ, Lepsius's velar nasal, is
+   another letter: the typists name it apart from ń, and the gate reads the two as two sounds. The German
+   meanings are compared as written, but for the case, the composition of the letters and the long s (ſs, ſ
+   and ß are one: a typing convention, not a reading).
+7. For the engine a typed headword is read as the two books define their letters (Reinisch p. 1-2, Lepsius
    p. 5-7): ṅ is the velar nasal, ñ and ń the palatal nasal, a g with any mark the palatal stop that Reinisch
    writes j, and Reinisch's q the palatal he pairs with j. The engine reads the rest itself: length and accent
-   dropped, š, ž, j, y, z.
-5. K is Kenzi, D Dongola, F and M Nobiin; an entry with several marks is a row for each of those languages. An
-   entry without a mark is one row, as Nobiin: the engine scores the three by the same correspondences, so the
-   choice cannot change the test, and one row keeps such an entry from counting three times at the top. A
-   sub-row has the dialect and the loan mark of the entry it stands in.
+   dropped, š, ž, j, ǰ, y, z.
+8. A dialect cell is split at commas, spaces and stops ("K, DF, M", "KDFM", "K. D."). K is Kenzi, D Dongola, F
+   and M Nobiin; an entry with several marks is a row for each of those languages. A part that is not made of
+   those letters ("Derr", a place) is no dialect mark: it is listed and gives no language. An entry without a
+   mark is one row, as Nobiin: the engine scores the three by the same correspondences, so the choice cannot
+   change the test, and one row keeps such an entry from counting three times at the top. A sub-row has the
+   dialect and the loan mark of the entry it stands in.
+9. Any `loan` that is not empty ("Ar", "*", "Kopt", "Tigré", "vgl. Ar.", "Ar?") drops the entry and its sub-rows,
+   and nothing else does: an entry whose note names a source word in brackets but whose `loan` is empty stays.
 """
 import collections
+import csv
 import difflib
 import json
 import pathlib
@@ -51,6 +76,7 @@ LIST = ROOT / "runs/nubian/known_words.json"
 PUBLIC = ROOT / "data/discovery/outside_nubian_figures.json"
 PAGE = "data/discovery/outside_evidence.md"
 LOANS = ROOT / "data/sources/egyptian/loans_both.jsonl"
+TABLE = ROOT / "data/discovery/lexicon_statuses.tsv"    # the meanings in the project's own words (public)
 # The books: the PDF indexes of the Nubian-German part, what is taken off an index for the printed page, and the
 # name its rows carry in the engine.
 BOOKS = {"R": {"first": 333, "last": 520, "page": 332, "list": "reinisch1879"},
@@ -73,10 +99,50 @@ MAP_LAYERS = ("recurring", "rare_sure", "rare_later", "unnamed", "rare_millet", 
 COUNTS = {"with_a_meaning": 160, "loans_by_both_readers": 15, "rule_words": 18, "left": 127}
 RULE_WORDS = "abr are ato dime dm ḫlbi ḫre kdi ked l lẖ mte pwrite st tre wle yer wide abore qore nob ms".split()
 MIN_LETTERS = 3
+# The third reduction, by name (the page, 22:15): headword -> (what it is, the word it rests on, the lexicon entry
+# whose text names that word, how). A form of a word the correspondences were built from, or a word built on a
+# loan by both readers of the Egyptian key. ḫ- (1) 'meal' and ḫmlol 'a good meal' rest on the entry ḫlẖl, which
+# writes their element ḫ- 'meal' as ḫ(re), Rilly's *ḫre 'repas' (correspondence N° 7); their own entries do not
+# name it.
+BY_NAME = {
+    "qor": ("form", "qore", "qor", "qore with the article"),
+    "yeto": ("form", "ato", "yeto", "a rare variant"),
+    "mse": ("form", "mte", "mse", "a variant (?)"),
+    "ḫlẖl": ("form", "ḫre", "ḫlẖl", "ḫ(re) + lẖ + l"),
+    "ḫ- (1)": ("form", "ḫre", "ḫlẖl", "the element ḫ- 'meal', written ḫ(re) in the entry ḫlẖl"),
+    "ḫmlol": ("form", "ḫre", "ḫlẖl", "ḫ- 'meal' + mlo + l, its ḫ- written ḫ(re) in the entry ḫlẖl"),
+    "apote-lẖ": ("loan", "apote", "apote-lẖ", "apote + lẖ"),
+    "pesto": ("loan", "peseto", "pesto", "a short form"),
+    "at (1)": ("loan", "ant", "at (1)", "a variant"),
+}
+# Words of grammar and of cross-reference, taken out of a meaning's wording and out of the typists' English
+# meanings before the engine makes its keys (the page, 22:15): articles, prepositions, conjunctions, auxiliaries,
+# pronouns (with the determiners that stand as pronouns) and the negation; the words of cross-reference and of
+# doubt the page names, with their plurals; and the hedges of the same sort as "perhaps" and "probably". No word
+# of content is on it. The engine's own STOP list and its rule of three letters take the shorter ones out anyway.
+FUNCTION_WORDS = frozenset("""
+    a an the
+    about above across after against along amid among amongst around at before behind below beneath beside besides
+    between beyond by despite down during except for from in inside into near of off on onto out outside over per
+    since through throughout till to toward towards under underneath until unto up upon via with within without
+    and or but nor yet so if as than that because while whilst when whenever where wherever whether although though
+    unless either neither both
+    am is are was were be been have has had do does did will would shall should can could may might must ought
+    i me my mine myself you your yours yourself yourselves he him his himself she her hers herself it its itself
+    we us our ours ourselves they them their theirs themselves thou thee thy thine ye this these those who whom whose
+    which what whoever whomever whatever whichever another other others each every all any some none one ones
+    someone somebody something anyone anybody anything everyone everybody everything nobody nothing such
+    not no
+    see also variant variants form forms cf etc perhaps probably kind kinds sort sorts type types
+    likely possibly maybe rather very
+""".split())
+CONNECTIVES = frozenset("und auch oder neben meist seltener".split())   # how the books join two forms of a headword
+# A dialect mark typed into a headword cell: "(D)", "(KD)", "(K, D)", or "M.", "MK." standing as a word.
+DIALECT_MARK = re.compile(r"\((?:[KDFM]+[.,\s]*)+\)|(?:(?<=[\s,;])|^)[KDFM]+\.(?=[\s,;]|$)")
 DIALECTS = {"K": "kenzi", "D": "dongolawi", "F": "nobiin", "M": "nobiin"}
 UNMARKED = "nobiin"
 VOWELS = "aeiou"
-DOT, ACUTE = "\u0307", "\u0301"                      # the combining dot above and acute
+DOT, ACUTE, TILDE = "\u0307", "\u0301", "\u0303"     # the combining dot above, acute and tilde
 ENGINE = "src/cognates_rules.py"
 FRAMEWORK = ("src/nubian.py", ENGINE, "src/cognates.py", "runs/nubian/known_words.json")   # what the gate is run with
 
@@ -109,28 +175,22 @@ def the_map():
     return T.current(upto=len(MAP_LAYERS)), [(l["name"], T.lines_of(l)) for l in T.LAYERS[:len(MAP_LAYERS)]]
 
 
-def reductions(left, rule):
-    """The page's two reductions on the words left, in their order: {headword: (kept, the rule)}.
+def given_by(gl, lex, layers):
+    """headword -> what gives it its meaning, for the dictionary words in use that have one on the map: "the
+    lexicon" for a word the lexicon calls established or probable, "layer <name>" for a word a layer gives a
+    meaning from a later source (the north star's count, src/themap.py). Track B counts the same words."""
+    known, _, _ = D.population_of(gl, lex, fix=True)
+    by = {h: "the lexicon" for h in D.translated(known, lex)}
+    for name, hs in T.given_by_layers(layers, known, lex).items():
+        by.update({h: f"layer {name}" for h in hs})
+    return by
 
-    1. A word built on a word the correspondences were built from is left out: its letters begin or end with
-       the letters of one of `rule` that has MIN_LETTERS letters or more.
-    2. Words built on one stem count once: the shortest headword of MIN_LETTERS letters or more stands for those
-       whose letters begin with its letters (of two with the same letters, the first by its headword)."""
-    stems = sorted({bare(r) for r in rule if len(bare(r)) >= MIN_LETTERS})
-    out, rest = {}, []
-    for h in left:
-        on = [s for s in stems if bare(h).startswith(s) or bare(h).endswith(s)]
-        if on:
-            out[h] = (False, "built on the rule word " + " and ".join(on))
-        else:
-            rest.append(h)
-    kept = []
-    for h in sorted(rest, key=lambda h: (len(bare(h)), bare(h), h)):
-        stem = next((k for k in kept if len(bare(k)) >= MIN_LETTERS and bare(h).startswith(bare(k))), None)
-        if stem is None:
-            kept.append(h)
-        out[h] = (True, "kept") if stem is None else (False, f"counted once, under {stem}")
-    return out
+
+def the_table(path=TABLE):
+    """headword -> the short wording of the public table (`meaning_in_our_words`), where it has one."""
+    with open(path, encoding="utf-8", newline="") as f:
+        rows = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
+        return {r["headword"]: r["meaning_in_our_words"].strip() for r in rows if r["meaning_in_our_words"].strip()}
 
 
 def stated_most(layers, headword):
@@ -138,6 +198,78 @@ def stated_most(layers, headword):
     seen = collections.Counter(o["gloss"] for _, lines in layers for o in lines
                                if o.get("item") == headword and o["why"] == "stated" and o.get("level") in W.READ)
     return seen.most_common(1)[0][0] if seen else ""
+
+
+def wording(h, lex, table, layers, by):
+    """(the meaning of a word that has one on the map, where it is from), in the page's order (22:15): the public
+    table's short wording where it has one; else, for a word a layer gives its meaning (`by`, given_by()), the
+    wording the layers' lines state for it most often; else the lexicon's English."""
+    if table.get(h):
+        return table[h], "the public table"
+    if by.get(h, "the lexicon") != "the lexicon":
+        return stated_most(layers, h), "the layers' lines"
+    return (lex[h].get("meaning") or "").strip(), "the lexicon"
+
+
+def keys_of(text):
+    """The engine's keys of a wording (cognates.keys, by its own rule) once FUNCTION_WORDS are taken out of it."""
+    left = [w for w in re.split(r"[^a-z]+", (text or "").lower()) if w and w not in FUNCTION_WORDS]
+    return frozenset(cr.cognates.keys(" ".join(left)))
+
+
+def named_in(word, entry):
+    """Whether a lexicon entry (its headword, English meaning and proposals) names a word: its letters as a word
+    of their own, read through the lexicon's brackets and stars ("ḫ(re)" and "*ḫre" name ḫre)."""
+    text = " ".join([entry.get("headword") or "", entry.get("meaning") or ""] + [p.get("proposal") or "" for p in entry.get("proposals") or []])
+    text = re.sub(r"[()*]", "", unicodedata.normalize("NFC", text))
+    return re.search(rf"(?<![^\W\d_]){re.escape(word)}(?![^\W\d_])", text) is not None
+
+
+def by_name(h, lex, loans):
+    """(whether the third reduction drops a word it names, the rule): only where the word it rests on is one the
+    correspondences were built from (a form) or a loan by both readers of the Egyptian key (`loans`), and the
+    lexicon's entry named in BY_NAME names it."""
+    what, base, entry, how = BY_NAME[h]
+    if (base in RULE_WORDS if what == "form" else base in loans) and entry in lex and named_in(base, lex[entry]):
+        if what == "form":
+            return True, f"by name, a form of {base}, a word the correspondences were built from: {how} (the lexicon's entry {entry})"
+        return True, f"by name, built on {base}, a loan by both readers of the Egyptian key: {how} (the lexicon's entry {entry})"
+    return False, f"named by the third reduction, but the lexicon's entry {entry} does not name {base} as a {'word the correspondences were built from' if what == 'form' else 'loan'}"
+
+
+def reductions(left, rule, lex=None, loans=frozenset()):
+    """The page's reductions of the words left, in their order: {headword: (kept, the rule)}.
+
+    1. A word built on a word the correspondences were built from is left out: its letters begin or end with
+       the letters of one of `rule` that has MIN_LETTERS letters or more.
+    2. By name (the third reduction, BY_NAME, by_name()): a form of a word the correspondences were built from,
+       and a word built on a loan, each only where the lexicon's entry names the word it rests on.
+    3. Words built on one stem count once: the shortest headword stands for those whose letters begin with its
+       letters (of two with the same letters, the first by its headword). A stem of MIN_LETTERS letters or more
+       does so by the second reduction; a stem under that by the third, as the shortest headword of its family,
+       which then stands more than once."""
+    lex = lex or {}
+    stems = sorted({bare(r) for r in rule if len(bare(r)) >= MIN_LETTERS})
+    out, rest = {}, []
+    for h in left:
+        on = [s for s in stems if bare(h).startswith(s) or bare(h).endswith(s)]
+        if on:
+            out[h] = (False, "built on the rule word " + " and ".join(on))
+        elif h in BY_NAME and (named := by_name(h, lex, loans))[0]:
+            out[h] = (False, named[1])
+        else:
+            rest.append(h)
+    kept = []
+    for h in sorted(rest, key=lambda h: (len(bare(h)), bare(h), h)):
+        stem = next((k for k in kept if bare(h).startswith(bare(k))), None)
+        if stem is None:
+            kept.append(h)
+            out[h] = (True, "kept" if h not in BY_NAME else "kept; " + by_name(h, lex, loans)[1])
+        elif len(bare(stem)) >= MIN_LETTERS:
+            out[h] = (False, f"counted once, under {stem}")
+        else:
+            out[h] = (False, f"counted once, in the family of {stem}, a stem under three letters")
+    return out
 
 
 def engine_differences(done, loans):
@@ -150,10 +282,10 @@ def engine_differences(done, loans):
 
 def words_of(pairs):
     """(headword, meaning) pairs as the engine's words (form, the meaning's keys, meaning), and those without a
-    key, which the engine cannot compare (as its own gold_words leaves them out)."""
+    key, which the engine cannot compare (as its own gold_words leaves them out). The keys are keys_of()'s."""
     words, left = [], []
     for h, meaning in pairs:
-        keys = frozenset(cr.cognates.keys(meaning or ""))
+        keys = keys_of(meaning)
         if keys:
             words.append((h, keys, meaning))
         else:
@@ -161,16 +293,24 @@ def words_of(pairs):
     return words, left
 
 
+def loans_both():
+    """The headwords both readers of the Egyptian key take for loans into Meroitic."""
+    return {e["headword"] for e in map(json.loads, LOANS.read_text(encoding="utf-8").splitlines()) if e.get("both_into_meroitic")}
+
+
+# What each reduction writes as its rule, at its start: the counts of the public list.
+REDUCED = {"built_on_a_rule_word": "built on the rule word", "a_form_of_a_rule_word_by_name": "by name, a form of",
+           "built_on_a_loan_by_name": "by name, built on", "counted_under_a_shorter_stem": "counted once, under",
+           "counted_once_in_a_family_under_three_letters": "counted once, in the family of"}
+
+
 def word_list():
     """(the public list, the local list): the dictionary words in use that have a meaning on the map, each kept
     or dropped by the page's rules, and the kept ones with their meaning. Stops if the page's counts are not met."""
     lex = W.lexicon()
     gl, layers = the_map()
-    known, _, _ = D.population_of(gl, lex, fix=True)
-    by = {h: "the lexicon" for h in D.translated(known, lex)}
-    for name, hs in T.given_by_layers(layers, known, lex).items():
-        by.update({h: f"layer {name}" for h in hs})
-    both = {e["headword"] for e in map(json.loads, LOANS.read_text(encoding="utf-8").splitlines()) if e.get("both_into_meroitic")}
+    by = given_by(gl, lex, layers)
+    both = loans_both()
     loans = set(by) & both
     rule = {h for h in set(by) - loans if bare(h) in RULE_WORDS}
     left = sorted(set(by) - loans - rule)
@@ -179,25 +319,27 @@ def word_list():
         raise SystemExit(f"the page counts {COUNTS}, the map gives {counts}: nothing is written")
     verdict = {h: (False, "a loan into Meroitic by both readers of the Egyptian key") for h in loans}
     verdict |= {h: (False, "a word the correspondences were built from") for h in rule}
-    verdict |= reductions(left, rule)
+    verdict |= reductions(left, rule, lex, both)
     kept = sorted(h for h, (k, _) in verdict.items() if k)
-    meaning = {h: lex[h].get("meaning") or "" if by[h] == "the lexicon" else stated_most(layers, h) for h in kept}
-    words, no_key = words_of([(h, meaning[h]) for h in kept])
+    table = the_table()
+    said = {h: wording(h, lex, table, layers, by) for h in by}
+    words, no_key = words_of([(h, said[h][0]) for h in kept])
     rows = cr.load_nes()
     if len(rows) != GATE["short_rows"]:
         raise SystemExit(f"the short lists have {len(rows)} rows, the page counts {GATE['short_rows']}")
     with_a_row = sum(1 for _, n, _ in cr.comparanda(words, rows) if n)
-    counts |= {"built_on_a_rule_word": sum(r.startswith("built on") for _, r in verdict.values()),
-               "counted_under_a_shorter_stem": sum(r.startswith("counted once") for _, r in verdict.values()),
-               "kept": len(kept), "kept_by_the_lexicon": sum(by[h] == "the lexicon" for h in kept),
-               "kept_by_a_layer": sum(by[h] != "the lexicon" for h in kept), "kept_without_a_key": len(no_key),
-               "kept_with_a_same_meaning_row_in_the_short_lists": with_a_row}
+    counts |= {k: sum(r.startswith(start) for _, r in verdict.values()) for k, start in REDUCED.items()}
+    counts |= {"kept": len(kept), "kept_by_the_lexicon": sum(by[h] == "the lexicon" for h in kept),
+               "kept_by_a_layer": sum(by[h] != "the lexicon" for h in kept),
+               "kept_wording_from": dict(collections.Counter(said[h][1] for h in kept).most_common()),
+               "kept_without_a_key": len(no_key), "kept_with_a_same_meaning_row_in_the_short_lists": with_a_row}
     public = {"page": f"{PAGE}, section 2, gate A1", "map_layers": list(MAP_LAYERS), "counts": counts,
-              "engine": engine_differences(set(by), loans),
-              "words": [{"headword": h, "kind": lex[h].get("kind") or "", "meaning_from": by[h], "kept": verdict[h][0], "rule": verdict[h][1]}
-                        for h in sorted(by)]}
-    local = {"words": [{"headword": h, "kind": lex[h].get("kind") or "", "meaning": meaning[h], "meaning_from": by[h],
-                        "lexicon_status": lex[h].get("status") or "", "lexicon_meaning": lex[h].get("meaning") or ""} for h in kept]}
+              "engine": engine_differences(set(by), loans), "function_words": sorted(FUNCTION_WORDS),
+              "words": [{"headword": h, "kind": lex[h].get("kind") or "", "meaning_from": by[h], "wording_from": said[h][1],
+                         "kept": verdict[h][0], "rule": verdict[h][1]} for h in sorted(by)]}
+    local = {"words": [{"headword": h, "kind": lex[h].get("kind") or "", "meaning": said[h][0], "wording_from": said[h][1],
+                        "keys": sorted(keys_of(said[h][0])), "meaning_from": by[h], "lexicon_status": lex[h].get("status") or "",
+                        "lexicon_meaning": lex[h].get("meaning") or ""} for h in kept]}
     return public, local
 
 
@@ -352,21 +494,39 @@ def merge():
 # ------------------------------------------------------------------------------------------ the typing's bar
 
 def letters(headword):
-    """A headword as the typing's bar compares it: lower case, every combining mark on a vowel set aside (the
+    """Letters as the typing's bar compares them: lower case, every combining mark on a vowel set aside (the
     macron of length, the acute of the accent, any other). A mark on a consonant stays (it makes another
-    consonant), and so do hyphens and spaces."""
-    out = []
+    consonant), and so do hyphens and spaces; but a mark the books print in one way and the typists render in
+    two is one mark: a g with any mark is ǵ (the one marked g of either book), an n with a tilde or an acute is ń
+    (the palatal nasal, Reinisch's ñ and Lepsius's ń). Lepsius's ṅ, the velar nasal, stays apart."""
+    signs = []                                        # [a letter, its marks]
     for ch in unicodedata.normalize("NFD", headword.strip().lower()):
-        if unicodedata.combining(ch) and out and out[-1] in VOWELS:
-            continue
-        out.append(ch if not unicodedata.combining(ch) or not out else out.pop() + ch)
+        if unicodedata.combining(ch) and signs:
+            signs[-1][1].append(ch)
+        else:
+            signs.append([ch, []])
+    out = []
+    for base, marks in signs:
+        if base in VOWELS:
+            marks = []
+        elif base == "g" and marks:
+            marks = [ACUTE]
+        elif base == "n" and marks and set(marks) <= {TILDE, ACUTE}:
+            marks = [ACUTE]
+        out.append(base + "".join(marks))
     return unicodedata.normalize("NFC", "".join(out))
 
 
+def german(text):
+    """A German meaning as the bar compares it: composed letters, lower case, one space between words, and the
+    long s as s and ß as ss (ſs, ſ and ß are a typing convention, not a reading)."""
+    return " ".join(unicodedata.normalize("NFC", text).lower().replace("ſ", "s").replace("ß", "ss").split())
+
+
 def likeness(a, b):
-    """The likeness of two German meanings: difflib's ratio on the lower-cased texts (without its shortcut for
-    long texts, which leaves common letters out of the comparison)."""
-    return difflib.SequenceMatcher(None, a.strip().lower(), b.strip().lower(), autojunk=False).ratio()
+    """The likeness of two German meanings: difflib's ratio on german() of each (without its shortcut for long
+    texts, which leaves common letters out of the comparison)."""
+    return difflib.SequenceMatcher(None, german(a), german(b), autojunk=False).ratio()
 
 
 def sounds(headword, book):
@@ -381,15 +541,15 @@ def in_both(first, second, key):
 
 def compare(first, second, book):
     """One page's rows of one sort (entries, or sub-rows) in the two readings. A row of the first reading is
-    found when a row of the second has the same letters(); where several share them, the pairs are made by
-    the likeness of their German meanings, the likest first. Found rows carry the same meaning at TYPING's
-    likeness or more."""
+    found when a row of the second has the same letters() in its headword, the first form of its cell
+    (headword_of()); where several share them, the pairs are made by the likeness of their German meanings, the
+    likest first. Found rows carry the same meaning at TYPING's likeness or more."""
     theirs = collections.defaultdict(list)
     for r in second:
-        theirs[letters(r["headword"])].append(r)
+        theirs[letters(headword_of(r["headword"]))].append(r)
     mine = collections.defaultdict(list)
     for r in first:
-        mine[letters(r["headword"])].append(r)
+        mine[letters(headword_of(r["headword"]))].append(r)
     found = same = 0
     not_found, only_second, other_meaning = [], [], []
     for key in list(mine) + [k for k in theirs if k not in mine]:
@@ -408,9 +568,9 @@ def compare(first, second, book):
                 other_meaning.append({"headword": rows[i]["headword"], "first": rows[i]["gloss_de"], "second": others[j]["gloss_de"], "likeness": round(-neg, 3)})
         not_found += [r["headword"] for i, r in enumerate(rows) if i not in used_a]
         only_second += [r["headword"] for j, r in enumerate(others) if j not in used_b]
-    nfc = lambda r: unicodedata.normalize("NFC", r["headword"].strip())          # noqa: E731
-    return {"first": len(first), "second": len(second), "found": found, "same_meaning": same,
-            "mark_for_mark": in_both(first, second, nfc), "same_sounds": in_both(first, second, lambda r: sounds(r["headword"], book)),
+    nfc = lambda r: unicodedata.normalize("NFC", headword_of(r["headword"]))     # noqa: E731
+    return {"first": len(first), "second": len(second), "found": found, "same_meaning": same, "mark_for_mark": in_both(first, second, nfc),
+            "same_sounds": in_both(first, second, lambda r: sounds(headword_of(r["headword"]), book)),
             "not_found": not_found, "only_in_the_second": only_second, "other_meaning": other_meaning}
 
 
@@ -484,32 +644,83 @@ def spelling(headword, book=""):
     return unicodedata.normalize("NFC", "".join(out))
 
 
+def forms(headword):
+    """The forms of a headword cell, the headword first ("Bīr, bírri" -> Bīr, bírri). The cell is split at
+    commas, semicolons and slashes, at the words the books join two forms with (CONNECTIVES: "Kúsu und kússu",
+    "Dalū, auch dallū"), at a dialect mark typed into it ("Hilgē (D), halgē (K)", "Kāše M. kašere D."), and
+    before a form in round brackets after a space ("Doin (doṅ?)"). Brackets inside a word stay: the engine reads
+    them as letters that may stand or not. A part without a letter is no form."""
+    text = DIALECT_MARK.sub(",", unicodedata.normalize("NFC", headword))
+    text = re.sub(r"\s\(([^()]*)\)", r", \1", text)
+    out = []
+    for chunk in re.split(r"[,;/]", text):
+        run = []
+        for tok in chunk.split() + [""]:
+            if tok and tok.lower() not in CONNECTIVES:
+                run.append(tok)
+            elif run:
+                out.append(" ".join(run))
+                run = []
+    return [f for f in out if any(ch.isalpha() for ch in f)] or [headword.strip()]
+
+
+def headword_of(cell):
+    """The headword of a headword cell: its first form."""
+    return forms(cell)[0]
+
+
+def variants_of(headword, book):
+    """What the engine scores of a headword cell: the engine's own variants (cognates_rules.variants) of each of
+    its forms, read as the book means its letters (spelling()). A later form that begins or ends with a hyphen
+    where the first does not ("Mūr, -kā", "jom-bay, -bai") is an ending or a shortened form that only the print
+    completes: it is not scored."""
+    fs = forms(headword)
+    affix = lambda f: f.startswith("-") or f.endswith("-")         # noqa: E731
+    out = []
+    for n, f in enumerate(fs):
+        if n and affix(f) and not affix(fs[0]):
+            continue
+        for v in cr.variants(spelling(f, book)):
+            s = cr.segments(v)
+            if s and (v, s) not in out:
+                out.append((v, s))
+    return tuple(out)
+
+
 def languages(dialect):
-    """(the engine's languages of a dialect cell, the letters in it that are no dialect of the books). Without a
-    dialect of the books the row is UNMARKED's."""
-    marks = [c for c in dialect.upper() if c.isalpha()]
-    langs = list(dict.fromkeys(DIALECTS[c] for c in marks if c in DIALECTS))
-    return tuple(langs) or (UNMARKED,), "".join(c for c in marks if c not in DIALECTS)
+    """(the engine's languages of a dialect cell, what in it is no dialect mark of the books). The cell is split
+    at commas, semicolons, spaces, stops and brackets ("K, DF, M", "KDFM", "K. D."); a part made only of K, D, F
+    and M gives a language for each letter, any other part ("Derr", a place) none. No language: the row has no
+    dialect mark of the books."""
+    langs, other = [], []
+    for part in re.split(r"[\s,;.()]+", dialect.upper()):
+        if part and set(part) <= set(DIALECTS):
+            langs += [DIALECTS[ch] for ch in part]
+        elif part:
+            other.append(part)
+    return tuple(dict.fromkeys(langs)), " ".join(other)
 
 
 def engine_rows(rows):
     """(the rows of dictionary.tsv as rows the engine scores, the counts). A sub-row stands in the entry its
-    `parent` names, the nearest one before it on its page; where the page has none of that headword before it
-    (a page that begins inside an entry, a parent typed otherwise), in the entry right before it. It takes that
-    entry's loan mark, and its dialect where it has none of its own. Left out: an entry marked as a loan with its
-    sub-rows, a row without an English meaning, a row whose headword has no letter the engine reads."""
+    `parent` names (the whole cell, or its first form), the nearest one before it on its page; where the page
+    has none of that headword before it (a page that begins inside an entry, a parent typed otherwise), in the
+    entry right before it. It takes that entry's loan mark, and its dialect where it has none of its own. Left
+    out: an entry with any loan mark, with its sub-rows; a row without an English meaning; a row whose headword
+    has no letter the engine reads. A row's keys are keys_of() its English meaning; a row without a dialect mark
+    of the books is UNMARKED's."""
     out, c = [], collections.Counter()
     named, before = {}, {}
     odd, unread = collections.Counter(), collections.Counter()
     for r in rows:
         book = r["book"]
         if r["parent"]:
-            own = named.get((book, r["page"], r["parent"]))
+            own = named.get((book, r["page"], r["parent"])) or named.get((book, r["page"], headword_of(r["parent"])))
             if own is None:
                 own = before.get(book)
                 c["subrows_under_the_entry_before"] += 1
         else:
-            own = named[(book, r["page"], r["headword"])] = before[book] = r
+            own = named[(book, r["page"], r["headword"])] = named[(book, r["page"], headword_of(r["headword"]))] = before[book] = r
         c["subrows_read" if r["parent"] else "entries_read"] += 1
         if r["loan"] or (own is not None and own["loan"]):
             c["subrows_of_loans_left_out" if r["parent"] else "loans_left_out"] += 1
@@ -517,22 +728,24 @@ def engine_rows(rows):
         if not r["gloss_en"]:
             c["without_an_english_meaning"] += 1
             continue
-        spelt = spelling(r["headword"], book)
-        vs = tuple((v, s) for v, s in ((v, cr.segments(v)) for v in cr.variants(spelt)) if s)
+        vs = variants_of(r["headword"], book)
         if not vs:
             c["without_a_letter_the_engine_reads"] += 1
             continue
-        unread.update(ch for ch in unicodedata.normalize("NFD", spelt) if ch.isalpha() and ch not in cr.SEG)
+        unread.update(ch for ch in unicodedata.normalize("NFD", spelling(r["headword"], book)) if ch.isalpha() and ch not in cr.SEG)
         dialect = r["dialect"] or (own["dialect"] if own is not None else "")
         langs, other = languages(dialect)
         if other:
             odd[dialect] += 1
-        c["without_a_dialect"] += not any(ch in DIALECTS for ch in dialect.upper())
+        keys = keys_of(r["gloss_en"])
+        c["without_a_dialect"] += not langs
+        c["without_a_key"] += not keys
         c["compared"] += 1
-        for lang in langs:
-            out.append(cr.Row(lang, r["headword"], r["gloss_en"], frozenset(cr.cognates.keys(r["gloss_en"])), BOOKS[book]["list"], dialect, vs))
+        for lang in langs or (UNMARKED,):
+            out.append(cr.Row(lang, r["headword"], r["gloss_en"], keys, BOOKS[book]["list"], dialect, vs))
     counts = {k: c[k] for k in ("entries_read", "subrows_read", "loans_left_out", "subrows_of_loans_left_out", "without_an_english_meaning",
-                                "without_a_letter_the_engine_reads", "compared", "without_a_dialect", "subrows_under_the_entry_before")}
+                                "without_a_letter_the_engine_reads", "compared", "without_a_dialect", "without_a_key",
+                                "subrows_under_the_entry_before")}
     counts |= {"rows": len(out), "rows_by_list": dict(collections.Counter(r.dataset for r in out)),
                "rows_by_language": dict(collections.Counter(r.lang for r in out)),
                "dialect_marks_not_of_the_books": dict(odd), "letters_the_engine_does_not_read": dict(unread)}
