@@ -176,3 +176,14 @@ run's table stands as it was committed; here the word is offered as "a title, th
 Cost: 40 readers. 31 of them reported 2,406,801 tokens together (typed from the task notifications into
 `data/sources/g6b/tokens.json`, local). The other nine wrote their complete answer files and were then cut off by
 the usage limit before their last reply, so no count was reported for them, and none is estimated here.
+
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked the script, the checks and this page against the local files. It corrects one sentence of
+section 2, which stands as it was written before the readers were started: "never two near meanings" holds for
+the fillers, but a word's own proposals stay together as the sources give them, and under 6 open words (`mde`,
+`mlomrse`, `mreperi`, `wetneyineqeli`, `wte`, `ẖol`) two or three of the four are near meanings. The four options
+hold both an accepted meaning and a proposal under 110 of the 116 words. Neither touches a bar or a count. The
+review also checked that the rules were in git before the first reader was started and that nothing was changed
+before the last eight (the time of the commit in git's own log of the branch, the 40 launches in the session's
+log, one for each pack and reader, and the files of the packs and of the answers), and that the 31 token counts
+are those of their task notifications.

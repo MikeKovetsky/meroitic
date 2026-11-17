@@ -583,8 +583,8 @@ ours unless it passes a test set beforehand.
    **Done on 2026-11-16** (point 25), in two runs: no label is given. With 43 accepted words one bar held (16
    of 17 right with the meaning offered) and one was missed (3 of 13 wrong without it); 5 of the 45 further
    entries have a meaning of their own that can be offered. Mike did not waive the 83, so the second run took
-   them all, the 40 others with the coarse meaning the lexicon gives them: 36 of 37 right, 6 of 27 wrong, the
-   same bar missed. Nothing is left to try by this method: more accepted words and a stricter rule of choice
+   them all, the 40 others with the meaning the lexicon gives them, however coarse: 36 of 37 right, 6 of 27
+   wrong, the same bar missed. Nothing is left to try by this method: more accepted words and a stricter rule of choice
    changed nothing in what it cannot do, which is to tell a right proposal from a wrong one chosen for want of
    the right one.
 7. **G7. New evidence, on Mike's word.** After G6 the sources in hand are used up for meanings. What would move
