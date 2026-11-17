@@ -249,6 +249,31 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     meanings are agreed by two scholars, for 15 of them with a third who dissents; 13 are disputed; 20 rest on
     Rilly alone. This is a status for each meaning, not a count of the map
     ([`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md)).
+23. **The leftover parts: 49 more places are laid, 31 of them as translated words.** A follow-up to item 20, in two
+    parts. Part 1: at 96 places the checkers of item 20 had recognised the word, but the map leaves a part of the
+    spelling unnamed. Two checkers said what that part is, with 40 places of known answer mixed in. The first
+    reading of the unnamed parts is not taken: one checker explained 3 of the 20 runs of letters drawn by lot,
+    one more than the bar allowed, each time as a name, where the letters stood before "born of" or "this one".
+    Asked whether to read again with a bar for each verdict, Mike said: "Yes, read again". The second reading,
+    by fresh checkers on controls drawn anew, lays only what both call an ending or a known word, and never a
+    name. It met its bars (kappa 0.66; 0 and 1 of the 20 runs of lot letters called an ending or a known word;
+    20 and 19 of the 20 hidden endings found). The map's sixth layer lays 32 places, 27 of them as translated
+    words and 5 as names
+    ([`data/discovery/leftover_parts_2.md`](data/discovery/leftover_parts_2.md)). Part 2: for 15 entries that
+    Rilly's later work gives no meaning, Millet 2005 or Lipiński 2011 states one. Two readers found 12 stated
+    firmly: 7 as names, 3 with a Meroitic word left as it is, 2 as a meaning in full (both from Lipiński). Two
+    checkers judged the 56 places (kappa 0.97). The map's fifth layer lays 17 places, 13 of them as names and 4 as
+    translated words ([`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md)). With both layers,
+    4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%); before us the north star is the same.
+24. **The blind test again gives no label: when five readers agree they are right 16 times in 17 if the meaning is
+    offered, and they agree on a wrong one 3 times in 13 if it is not.** The choice test of item 17 with what it
+    taught: a choice needs all five readers, the fillers are worded like the proposals, and near meanings are kept
+    apart. The plan named 83 accepted words; 43 could be used, because only 5 of the 45 further entries have a
+    meaning that can be offered. Shown with their meaning, 16 of 17 accepted words that got a choice got the right
+    one (the bar of 80% is met). Shown without it, 3 of 13 got a wrong one from all five readers (the bar allowed
+    one). So no label is given: a proposal that all five choose cannot be told from a wrong meaning chosen for
+    want of the right one. All five chose the same proposal for 7 of the 33 open words; they carry no label
+    ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
 
 ## The question
 
@@ -673,6 +698,35 @@ same. A meaning is agreed by two scholars when both judges call one of its rows 
 and both call one another meaning, and stated by one otherwise
 ([`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md)).
 
+### 30. The leftover parts, and what Millet and Lipiński state (`src/leftover.py`)
+
+Part 1 shows two checkers each place with the spelling's parts as the map cuts them, the named ones with their
+entry of the lexicon and the unnamed ones marked. They say whether the unnamed part is nothing but endings, a
+known word (they name its entry), a name, unknown or unclear. Among the places stand controls that look the
+same: translated words whose endings are shown as unnamed, and translated words with three to five letters
+drawn by lot attached. A reading counts only if both checkers answered every place, their kappa is 0.6 or more,
+each calls at least 14 of the 20 hidden endings an ending, and each explains at most 2 of the 20 runs of lot
+letters. The first reading missed the last of these bars by one answer and is not taken. The second reading
+(`packs-again`, `count-again`) keeps the places and the brief, draws the controls anew and has a bar for each
+verdict: its bar on the lot letters counts only an ending or a known word, and a place both checkers call a name
+is not laid. `layer-again` writes what it lays: a place both call an ending, or a known word and the same one,
+unless another stem of the spelling has no meaning
+([`data/discovery/leftover_parts_2.md`](data/discovery/leftover_parts_2.md)). Part 2 is the method of section 27
+with the source changed: two readers read what Millet 2005 or
+Lipiński 2011 states about an entry and say what it gives (a name, a meaning in full, or a meaning that leaves a
+Meroitic word as it is), and two checkers judge each place. `layer` writes what goes into the map: a translated
+word only when both readers say the meaning is given in full; a name when the lexicon files the entry as one or
+both readers say the source calls it one ([`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md)).
+
+### 31. The blind test again (`src/blind2.py`)
+
+The choice test of section 24 with three changes, set before any reader was started. A choice needs all five
+readers. The four options under a word are filled by lot from one pool of accepted meanings and proposals, so
+that a proposal no longer stands out by its wording. Meanings that no context could tell apart (bull and cow)
+are never offered together. The accepted words are the 38 of the first test and the 5 further entries of the
+lexicon that have a meaning of their own; in each kind every third by lot is shown without its true meaning. The
+bars are those of the first test ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -690,6 +744,7 @@ python3 -I tests/test_v6_readers.py && python3 -I tests/test_demotic.py && pytho
 python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/test_recurring.py
 python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
 python3 -I tests/test_unnamed.py && python3 -I tests/test_second_later.py
+python3 -I tests/test_leftover.py && python3 -I tests/test_blind2.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -698,7 +753,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Nineteen things need files that are kept locally (Data, above), so they don't run from a clone:
+Twenty-one things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -742,6 +797,11 @@ Nineteen things need files that are kept locally (Data, above), so they don't ru
   `layer`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines and the checkers' answers.
 - `python3 -I src/second_later.py public` (and `rows`, `packs`, `count`) reads Rilly's lexicon, the statements the
   literature passes of sections 24 and 27 collected, the two readers' results and the judges' answers.
+- `python3 -I src/leftover.py public` (and `packs`, `count`, `packs-again`, `count-again`, `layer-again`, `setup`,
+  `verify-packs`, `verify`, `place-packs`, `places`, `layer`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the results of
+  section 27, the text layers of Millet 2005 and Lipiński 2011, and the readers' and checkers' answers.
+- `python3 -I src/blind2.py public` (and `words`, `packs`, `count`) reads `corpus_v6` and its gloss file, Rilly's
+  lexicon, the layers' lines, the proposals collected in section 24 and the readers' answers.
 
 ## Layout
 
@@ -752,8 +812,9 @@ Nineteen things need files that are kept locally (Data, above), so they don't ru
   (`demotic.py`), the second scholar for every meaning (`lexicon.py`), whole texts translated and scored
   (`f4.py`, the pilot, and `f4r.py`, the rounds), the unread spellings that recur (`recurring.py`), the count
   of distinct words (`words.py`), the map with its layers (`themap.py`) and the open spellings in one or two
-  texts (`rare.py`), the open spellings the lexicon does not hold (`unnamed.py`) and the second scholar for the
-  later meanings (`second_later.py`).
+  texts (`rare.py`), the open spellings the lexicon does not hold (`unnamed.py`), the second scholar for the
+  later meanings (`second_later.py`), the leftover parts and what Millet and Lipiński state (`leftover.py`) and
+  the blind test again (`blind2.py`).
 - `tests/`: the checks; `tests/local_only.py` lets a check skip when a local-only file is absent.
 - `data/`: answer keys, leads, discovery write-ups, the Griffith transcriptions (`data/expansion/`) and the table
   of inscriptions (`inscriptions.jsonl`, `inscriptions_map.tsv`); the cleaned corpora (`corpus_v2.jsonl`,

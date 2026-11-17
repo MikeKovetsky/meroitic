@@ -1,9 +1,9 @@
 # The blind test again (step G6)
 
-Status on 2026-11-16, 15:45: the test is counted and **no label is given**: one bar held and one was missed
-(section 6). Working script (local, not reviewed yet): `data/sources/g6/run.py`. What the readers were given:
-[`runs/prompts/G6_choice.md`](../../runs/prompts/G6_choice.md). The first test is section 6 of
-[recurring_words.md](recurring_words.md).
+Status on 2026-11-16: the test is counted and **no label is given**: one bar held and one was missed
+(section 6). Figures: `blind_test_2_figures.json`. Script: `src/blind2.py`. Checks: `tests/test_blind2.py`. What
+the readers were given: [`runs/prompts/G6_choice.md`](../../runs/prompts/G6_choice.md). The first test is
+section 6 of [recurring_words.md](recurring_words.md).
 
 ## 1. What was asked
 
@@ -133,7 +133,9 @@ By rule 5 of section 3 no label is given: no proposal is called favoured by the 
 | No choice | 24 |
 
 The seven are `wse` (of the country), `wi` (brother), `yed` (silver), `pqrtr` (great prince), `ẖol` (to grant),
-`qomlise` (good god) and `penn` (year). They carry no label.
+`qomlise` (good god) and `penn` (year). They carry no label. Six of them had all five readers of the first test
+too, five with the same proposal; for `ẖol` the readers then agreed on "to present" and now on "to grant", two
+of its three proposals.
 
 **What this shows.**
 
@@ -149,3 +151,13 @@ The seven are `wse` (of the country), `wi` (brother), `yed` (silver), `pqrtr` (g
   pass. This is its second miss, and the stricter rule did not mend it.
 
 Cost: 25 agents, 1,930,704 tokens (typed from the task notifications into `data/sources/g6/tokens.json`, local).
+
+## 7. Reproduce
+
+```
+python3 -I src/blind2.py public   # needs the local files; writes blind_test_2_figures.json
+python3 -I tests/test_blind2.py   # the method on made-up words; the figures and this page
+```
+
+`python3 -I src/blind2.py count` counts the readers' answers again; the packs are not written again once a reader
+has answered.

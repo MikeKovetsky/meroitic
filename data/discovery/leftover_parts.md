@@ -1,10 +1,14 @@
 # The leftover parts, and the meanings Millet and Lipiński state (a follow-up to G2 and G4)
 
-Status on 2026-11-16, 15:45: both parts are counted. **Part 1 is not taken:** one bar was missed by one answer
-(section 6), so no place of it is laid. **Part 2 met its bars** (section 7): 17 places can be laid, 13 of them as
-names and 4 as translated words. Its scripts are local and not reviewed yet (`data/sources/g8/run.py`,
-`data/sources/rare/g4m/run.py`), so the map and the scoreboard do not count part 2 yet. What the checkers of
-part 1 were given: [`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
+Status on 2026-11-16: both parts are counted. **The first reading of part 1 is not taken:** one bar was missed
+by one answer (section 6), so no place of it is laid. **The second reading of part 1 met its bars**
+([leftover_parts_2.md](leftover_parts_2.md)) and is the map's sixth layer, `leftover`: 32 places, 27 of them
+translated words and 5 names. **Part 2 met its bars** (section 7) and is the map's fifth layer, `rare_millet`:
+17 places, 13 of them names and 4 translated words. **The step in all:** 49 places are laid, 31 of them as
+translated words and 18 as names, and 4 words of the dictionary get a meaning, each from one scholar; it took 20
+agents and 1,854,110 tokens. Figures: `leftover_parts_figures.json`. Script: `src/leftover.py`. Checks:
+`tests/test_leftover.py`. What the checkers of part 1 were given:
+[`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
 
 ## 1. What was asked
 
@@ -109,7 +113,7 @@ The addition can only lower the count of translated words.
 
 ## 6. Part 1: the result (counted at 15:30, nothing taken)
 
-Six checkers (two for each of 3 packs) were started at 15:27, after the commit that set the bars (15:23); the
+Six checkers (two for each of 3 packs) were started at 15:27, after the commit that set the bars (15:23:46); the
 last answer came at 15:29.
 
 | Bar | Result | |
@@ -119,8 +123,7 @@ last answer came at 15:29.
 | Each checker calls at least 14 of 20 hidden endings an ending | 20 and 20 | met |
 | Each checker explains at most 2 of 20 runs of letters drawn by lot | **3** and 2 | **missed by one** |
 
-By rule 5 of section 3 nothing is taken: no place of part 1 is laid in the map, and the part stops here until
-Mike has seen why.
+By rule 5 of section 3 nothing is taken: no place of this reading is laid in the map.
 
 **Why the bar was missed.** All five explanations were "a name"; neither checker called a run of lot letters an
 ending or a known word. The five answers stand at three places: the letters had been put before `qo` ("this
@@ -145,9 +148,9 @@ other 17 places, where no name is expected, both said "unknown" every time.
   The 12 places both checkers call a name rest on that same judgment, so they cannot be laid on this reading.
 - The verdict "ending" came through its own two controls without a miss (40 of 40 hidden endings found, 0 of 40
   runs of lot letters called an ending). The bar, though, was set on all three explanations together, and a bar
-  is not cut to fit after the count: the 40 places stay open.
-- A new reading would need its own bars, set beforehand for each verdict, and fresh checkers. Whether to make it
-  is Mike's call.
+  is not cut to fit after the count: the 40 places stay open on this reading.
+- A second reading, with a bar set beforehand for each verdict and fresh checkers, is on its own page
+  ([leftover_parts_2.md](leftover_parts_2.md)). It met its bars and lays 32 places.
 
 Cost: 6 agents, 595,672 tokens (typed from the task notifications into `data/sources/g8/tokens.json`, local).
 
@@ -200,7 +203,22 @@ and 15:40.
 leaves a Meroitic word as it is, and 7 pieces whose whole word the map does not hold or holds open.
 
 The gain is small, as the entries foretold: 4 running words and 2 words of the dictionary get a meaning, each
-from one scholar, and 13 places leave the count of words that need one. The numbers of the map change only when
-the script is in `src/` and reviewed.
+from one scholar, and 13 places leave the count of words that need one.
+
+**The map with this layer** ([map_layers.md](map_layers.md)): 4,158 of the 7,104 running words that need a
+meaning are translated (58.5%, from 58.4%), 817 of 2,802 distinct spellings (29.2%, from 29.0%) and 158 of about
+1,284 distinct words (12.3%, between 11.7% and 15.4%, from 12.1%). Before the project the north star is the same:
+both meanings were published before it.
 
 Cost: 8 agents, 692,849 tokens (4 readers 368,724; 4 checkers 324,125).
+
+## 8. Reproduce
+
+```
+python3 -I src/leftover.py public   # needs the local files; writes leftover_parts_figures.json
+python3 -I src/leftover.py layer    # the lines of the layer `rare_millet` (local)
+python3 -I tests/test_leftover.py   # the method on made-up words; the figures and both pages
+```
+
+`python3 -I src/leftover.py count`, `count-again`, `verify` and `places` count the answers again; the packs are
+not written again once they are answered.

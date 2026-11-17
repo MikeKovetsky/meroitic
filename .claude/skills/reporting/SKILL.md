@@ -59,8 +59,10 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
 (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
-(`src/themap.py`, page `data/discovery/map_layers.md`; four layers since 2026-11-16: the recurring open spellings
-of step G1, the rare spellings of steps G2 and G4, and the names and pieces of step G3). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
+(`src/themap.py`, page `data/discovery/map_layers.md`; six layers since 2026-11-16: the recurring open spellings
+of step G1, the rare spellings of steps G2 and G4, the names and pieces of step G3, the entries Millet 2005 or
+Lipiński 2011 give a meaning or call a name, and the rare spellings whose unnamed part two checkers call an ending
+or a known word). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
 three rows are read from that file. Read a number from its figures file or count it with the command given; never
 quote it from memory, from this file's log, or from an earlier message.
 
@@ -163,13 +165,13 @@ Run from the repository's root (it needs the local files: the map, the lexicon a
 python3 -I src/themap.py
 ```
 
-It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with four layers, it printed:
+It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with six layers, it printed:
 
 ```
 plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
 base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
-as it stands: running words translated 4154 of 7117 = 58.4%; distinct spellings translated 815 of 2813 = 29.0%
-north star: 156 of about 1284 = 12.1% (11.5% to 15.2%)
+as it stands: running words translated 4185 of 7099 = 59.0%; distinct spellings translated 840 of 2798 = 30.0%
+north star: 160 of about 1284 = 12.5% (11.8% to 15.6%)
 ```
 
 "plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map

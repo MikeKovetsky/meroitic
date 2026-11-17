@@ -7,7 +7,7 @@ The goal from here: an openly licensed and larger Meroitic corpus, an honest met
 scripts, and both in the hands of the people who can use them. Each step says why, how, the cost and what "done"
 looks like.
 
-## Where things stand (written 2026-11-10; points 7 to 19 added up to 2026-11-16)
+## Where things stand (written 2026-11-10; points 7 to 25 added up to 2026-11-16)
 
 Done since this plan was written:
 
@@ -140,7 +140,7 @@ Done since this plan was written:
     [`data/discovery/unnamed_spellings.md`](data/discovery/unnamed_spellings.md); step G3). Two checkers judged
     all 1,225 open places from the place alone, with controls: 828 are words of their own, 111 names, 41 pieces, 245
     unclear or not agreed (a first pilot missed its bars and is not taken). The 111 names and 7 pieces are the map's
-    fourth layer. The map as it stands: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.1%, between 11.5% and 15.2%).
+    fourth layer. The map with that layer: 4,154 of the 7,117 running words that need a meaning are translated (58.4%), 815 of 2,813 distinct spellings (29.0%) and 156 of about 1,284 distinct words (12.1%, between 11.5% and 15.2%).
     Nothing is deciphered by this: fewer words need a meaning, and the count of distinct words is corrected. The
     north star is recounted from the old sample's stems still unnamed, not from a new sample as the reporting rules
     had said; asked, Mike answered "why do you need my approval to recount? this is obvious you need to recount to
@@ -150,6 +150,21 @@ Done since this plan was written:
     [`data/discovery/second_scholar_later.md`](data/discovery/second_scholar_later.md); step G5). 33 of the 66
     meanings are also stated by another scholar (15 of them with a dissent), 13 are disputed, 20 rest on Rilly
     alone. No count of the map changes.
+24. **The leftover parts, and the meanings Millet and Lipiński state** (2026-11-16,
+    [`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md); a follow-up to G2 and G4). The first
+    reading of the unnamed parts is not taken: one checker explained 3 of the 20 runs of lot letters, one more than
+    the bar allowed. Asked whether to read again with a bar for each verdict, Mike said: "Yes, read again". The
+    second reading, by fresh checkers on controls drawn anew, met its bars (kappa 0.66): the map's sixth layer
+    lays 32 places, 27 of them as translated words and 5 as names; a place both checkers call a name is not laid
+    ([`data/discovery/leftover_parts_2.md`](data/discovery/leftover_parts_2.md)). For 15 entries Millet 2005 or
+    Lipiński 2011 states a meaning; 12 are stated firmly, 7 of them as names and 2 as a meaning in full. The
+    map's fifth layer lays 17 places, 13 of them as names and 4 as translated words. The map as it stands:
+    4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%).
+25. **The blind test again** (2026-11-16, [`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md);
+    step G6). No label is given. With the meaning offered, 16 of 17 accepted words that all five readers agreed
+    on got the right one; without it, 3 of 13 got a wrong one from all five, where the bar allowed one. A choice
+    among four meanings from the contexts alone is not a test a proposal can pass: this is its second miss. No
+    count of the map changes.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -562,6 +577,9 @@ ours unless it passes a test set beforehand.
    not offered); the 83 lexicon entries the map reads in three texts or more as accepted words, instead of 38;
    fillers worded like the candidates. If the bars hold, a proposal on record for one of the 378 open places
    can be called favoured by the contexts. It is the only way in hand to say anything about kind d.
+   **Done on 2026-11-16** (point 25): no label is given. One bar held (16 of 17 right with the meaning offered)
+   and one was missed (3 of 13 wrong without it). Only 43 accepted words could be used, not 83: 5 of the 45
+   further entries have a meaning that can be offered.
 7. **G7. New evidence, on Mike's word.** After G6 the sources in hand are used up for meanings. What would move
    the count further: an answer from Rilly, Hallof or Smith to the letters of 9 November (none had come by 15
    November, and the pull request to Otten had no comment); the works we do not hold that state meanings for

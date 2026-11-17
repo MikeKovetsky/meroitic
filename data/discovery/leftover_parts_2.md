@@ -1,9 +1,9 @@
 # The leftover parts, read again (the second reading of part 1)
 
-Status on 2026-11-16, 15:53: the second reading is counted and **its bars are met** (section 5): 32 places can be
-laid, 27 of them as translated words. Its script is local and not reviewed yet (`data/sources/g8b/run.py`), so
-the map and the scoreboard do not count them yet. The first reading and the step's other part are on
-[leftover_parts.md](leftover_parts.md). What the checkers were given:
+Status on 2026-11-16: the second reading is counted and **its bars are met** (section 5). It is the map's sixth
+layer, `leftover`: 32 places, 27 of them translated words and 5 names. Figures: `leftover_parts_figures.json`
+(under `part_1_again`). Script: `src/leftover.py`. Checks: `tests/test_leftover.py`. The first reading and the
+step's other part are on [leftover_parts.md](leftover_parts.md). What the checkers were given:
 [`runs/prompts/G8_parts_2.md`](../../runs/prompts/G8_parts_2.md).
 
 ## 1. What was asked
@@ -102,6 +102,21 @@ meaning. The 6 places both call a name stay open, as the rule says.
 The second reading agrees less and gives less, and it is the one that counts. Letters drawn by lot that stood
 before "begotten of" were again called a name by both checkers, which is the reason a name is no longer laid.
 
-The numbers of the map change only when the script is in `src/` and reviewed.
+**The map with this layer** ([map_layers.md](map_layers.md)): 4,185 of the 7,099 running words that need a
+meaning are translated (59.0%, from 58.5%), 840 of 2,798 distinct spellings (30.0%, from 29.2%) and 160 of about
+1,284 distinct words (12.5%, between 11.8% and 15.6%, from 12.3%). The 2 words of the dictionary that this layer
+is the first to lay as translated words are `nbr` ("gold", by Rilly 2016) and `yiroẖe` ("to take control", our
+wording, by Rilly 2021). Before the project the north star is the same: both meanings were published before it.
 
 Cost: 6 agents, 565,589 tokens (typed from the task notifications into `data/sources/g8b/tokens.json`, local).
+
+## 6. Reproduce
+
+```
+python3 -I src/leftover.py public        # needs the local files; writes leftover_parts_figures.json
+python3 -I src/leftover.py layer-again   # the lines of the layer `leftover` (local)
+python3 -I tests/test_leftover.py        # the method on made-up words; the figures and this page
+```
+
+`python3 -I src/leftover.py count-again` counts the answers again; the packs are not written again once they are
+answered.

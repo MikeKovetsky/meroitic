@@ -952,3 +952,65 @@ corrected, and the times of every rule, launch, answer and count are now recorde
 subagent tokens and 37 minutes, from its task notification. Mike on the recount, 14:49: "why do you need my
 approval to recount? this is obvious you need to recount to show the up to date result?"
 
+## Day nine, afternoon (2026-11-16): the leftover parts, what Millet and Lipiński state, and the blind test again (G6)
+
+Asked that day, to "Start the leftover-parts step and G6 once G3 and G5 are pushed?": "Yes, both". Pages:
+[`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md) and
+[`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md); scripts `src/leftover.py` and `src/blind2.py`.
+
+**The leftover parts, part 1.** At 96 places of the rare spellings both checkers had recognised the word, but the
+map leaves a part of the spelling unnamed (the step had been put to Mike with 182 places; at the other 86 the
+unnamed part is the stem itself). Two checkers said what the unnamed part is: endings, a known word, a name,
+unknown or unclear. Mixed in were 20 translated words with their endings shown as unnamed and 20 with three to
+five letters drawn by lot attached. Both checkers answered all 136 places, their kappa on the real places is
+0.77, and each found all 20 hidden endings. But one checker explained 3 of the 20 runs of lot letters and the
+other 2, where the bar allowed 2 each. The first reading of the unnamed parts is not taken, and it lays nothing.
+All five explanations were "a name", at the three places where the letters stood before "born of" or "this one",
+which is where a name stands in an epitaph; no run of lot letters was called an ending or a known word.
+
+**Part 1, read again.** Asked whether to read part 1 again with a separate bar for each verdict, Mike said:
+"Yes, read again". The rules were committed before any checker was started
+([`data/discovery/leftover_parts_2.md`](data/discovery/leftover_parts_2.md)): the same 96 places and the same
+brief, six fresh checkers, the 40 controls drawn anew, a bar on the lot letters that counts only an ending or a
+known word, and no name laid, since letters that stand where a name is expected are called a name whatever they
+are. The first reading's answers would have met these bars, which is why they are judged on a new reading. Both
+checkers answered all 136 places, their kappa is 0.66, they called 0 and 1 of the 20 runs of lot letters an
+ending or a known word and found 20 and 19 of the 20 hidden endings: every bar is met. Both call the unnamed
+part an ending at 32 places and a known word at 1 (40 endings in the first reading), a name at 6, unknown at 37,
+and they differ at 20. The map's sixth layer lays 32 places, 27 of them as translated words and 5 as names; one
+place stays open because another stem of its spelling has no meaning.
+
+**Part 2.** For 15 entries of G4 that Rilly's later work gives no meaning (the step had named 8), Millet 2005
+(13) or Lipiński 2011 (2) states one. Before any reader was started a rule was added, because most of these
+statements give a name: each reader also says what the statement gives, and a place becomes a translated word
+only when both say it gives a meaning in full. Two readers found 12 entries stated firmly: 7 as names (five
+places, two persons), 3 with a Meroitic word left as it is, 2 as a meaning in full, both from Lipiński 2011
+(`mse`, child; `kdimdḫe`, women who have not borne a child). Two checkers judged the 56 places (kappa 0.97):
+24 are the word the source speaks of. The map's fifth layer lays 17 places, 13 of them as names and 4 as
+translated words; 5 stated places stay open because a part of the spelling is unnamed, and 3 because the meaning
+leaves a Meroitic word as it is.
+
+**The map as it stands.** With both layers, 4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%). Before the project the north star is the same: the four
+meanings the two layers add were published before it.
+
+**The blind test again (G6).** The choice test of day six with what it taught: a choice needs all five readers
+(four were enough then), the fillers come from one pool of accepted meanings and proposals, and 17 groups of
+near meanings are kept apart. The plan named 83 accepted words. Only 43 could be used: of the 45 entries beyond
+the first test's 38, 20 are titles of which only the kind of office is known, 15 are forms or variants of words
+already in the test, 3 have no meaning of their own, 2 are also open words of the test, and 5 have a meaning that
+can be offered. 25 readers answered all 380 lines. Shown with their meaning, 17 of 30 accepted words got a choice
+and 16 of 17 the right one (94.1%; the bar of 80% is met). Shown without it, 3 of 13 got a wrong meaning from
+all five readers (23.1%; the bar of 10% is missed): "sister" was taken for "direct descendant", "god" for
+"silver", "general" for "governor". So no label is given. All five chose the same proposal for 7 of the 33 open
+words, six of them words on which the first test's readers had all agreed too; for one of the six, `ẖol`, the
+two tests' readers agreed on two different proposals. What the first test showed after its count, no wrong
+choice among 11 words without their meaning, did not hold when it was set as a bar.
+
+**What it means.** 31 more running words are translated, four more words of the dictionary have a scholar's
+meaning in the map, and 18 places are names. The blind choice
+among four meanings is not a test a proposal can pass as it stands: when the true meaning is missing from the
+four, five readers agree on a wrong one about one time in four, and for an open word nobody knows whether it is
+missing.
+
+**Cost.** Part 1: 6 agents, 595,672 subagent tokens; read again: 6 agents, 565,589. Part 2: 8 agents, 692,849.
+G6: 25 agents, 1,930,704. From the task notifications.
