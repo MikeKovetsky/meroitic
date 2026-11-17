@@ -990,7 +990,7 @@ places, two persons), 3 with a Meroitic word left as it is, 2 as a meaning in fu
 translated words; 5 stated places stay open because a part of the spelling is unnamed, and 3 because the meaning
 leaves a Meroitic word as it is.
 
-**The map as it stands.** With both layers, 4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%). Before the project the north star is the same: the four
+**The map after these two layers.** With both layers, 4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%). Before the project the north star is the same: the four
 meanings the two layers add were published before it.
 
 **The blind test again (G6).** The choice test of day six with what it taught: a choice needs all five readers
@@ -1039,3 +1039,38 @@ fixed 3 findings in two commits (6bad0f5 and 84cb62c), found every line of the c
 Mike, asked "Should I finish the 83-word test and then push when the review is clean?": "Yes, finish and push".
 Main went from 3a21cbf to 84cb62c at 18:35, and the status of that minute is the last row of the reporting
 skill's log: 12.5% of distinct words, 59.0% of running words and 30.0% of distinct spellings translated.
+
+## Day nine, evening (2026-11-16): the leftover stems
+
+**What was asked.** The leftover parts had named 182 places and given checkers 96. At the other 86 the entry the
+checkers of G2 and G4 had recognised is an ending or a particle, and what the map leaves unnamed is the stem
+itself; the page had said that naming it "would be deciphering it". The review answered that a checker could
+still recognise such a stem as a word the lexicon knows. Mike, asked "Should I give the 86 skipped leftover
+places to two checkers?": "run it and document everything in our doc"
+([`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md)).
+
+**The rules, committed before any checker was started.** The brief of the leftover parts, word for word. Among
+the 86 places stood 80 places of known answer, 20 of each of four kinds and each kind from 20 different entries
+of the lexicon: a translated word with its stem shown as unnamed, one with its endings shown as unnamed, a name
+with endings and the name shown as unnamed, and a translated word whose stem's letters were replaced by letters
+drawn by lot. Every verdict needed both checkers to answer every place with a kappa of 0.6 or more. Beyond that
+each verdict stood on its own bars: found by each checker at least 14 times in 20 where it was hidden, said at
+most 2 times in 20 of the lot letters, and a name also at most 2 times in 20 of the hidden stems. A name can be
+laid here, as it could not in the second reading of the leftover parts, because here the name has controls that
+can tell a good judgment from a bad one.
+
+**The result.** Eight fresh checkers answered all 166 places; their kappa on the 86 is 0.79. They named 18 and
+15 of the 20 hidden stems with their entry, found 20 and 20 of the hidden endings and 18 and 18 of the names, and
+called no run of lot letters and no hidden stem a name, an ending or a known word: every bar is met. Of the 86
+places both call the stem unknown at 55, a name at 22 and an ending at 1, and they differ at 8. At no place do
+both find a word the lexicon knows: the review's question has its answer, and it is no. The judgment by place
+is not steady: one spelling stands at five places of one text, and the checkers call it a name at two, differ at
+two and call it unknown at one; only the agreed places are laid.
+
+**What it changes.** The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated word. The
+map as it stands: 4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%). The layer gives no word of the dictionary a meaning, so the north star does
+not move: 22 names leave the count of words that need a meaning, and 1 of the stems the map could not name is
+now a name. Before the project the north star is the same.
+
+**Cost.** 8 agents, 725,765 subagent tokens, from the task notifications.
+

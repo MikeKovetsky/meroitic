@@ -59,10 +59,10 @@ Rules of shape, each from Mike's words on 2026-11-16:
 
 The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is the analysts' map
 (`data/sources/v6/analysts/glosses.jsonl`, local) with the layers that later steps have laid over it
-(`src/themap.py`, page `data/discovery/map_layers.md`; six layers since 2026-11-16: the recurring open spellings
+(`src/themap.py`, page `data/discovery/map_layers.md`; seven layers since 2026-11-16: the recurring open spellings
 of step G1, the rare spellings of steps G2 and G4, the names and pieces of step G3, the entries Millet 2005 or
-Lipiński 2011 give a meaning or call a name, and the rare spellings whose unnamed part two checkers call an ending
-or a known word). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
+Lipiński 2011 give a meaning or call a name, the rare spellings whose unnamed part two checkers call an ending
+or a known word, and those whose unnamed stem they call a name or an ending). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
 three rows are read from that file. Read a number from its figures file or count it with the command given; never
 quote it from memory, from this file's log, or from an earlier message.
 
@@ -92,6 +92,14 @@ quote it from memory, from this file's log, or from an earlier message.
   `star_before` is `star`). A plain lookup of the lexicon finds fewer of them in the texts (112
   of 127 on 2026-11-16), `lookup.translated` in the distinct-words file; that is a fact about our matching and
   never the starting point of this row.
+  **Confirmed on 2026-11-16 in the evening.** Mike first called the rule senseless ("“Before us” is set equal to
+  “Now” - lol. this makes no sense"), was offered the plain lookup of the lexicon of 2003 as the starting point
+  instead, and answered "anyones cares about 2003 dictionary? if new meanings arrived after it? why is it such a
+  big deal?", then "ok, change to 12.5". So the rule stands, and the cell says why: write it as the share of the
+  day with the words "all from scholars; ours: 0". When this row has risen within the project (it stood lower at
+  the first count than that evening), say in one bullet that the project caught up with what scholars had
+  published, and that this is no gain on the language. The lexicon of 2003 alone is never this row's starting
+  point.
 - **Next target:** the gain the next step's page gives, once that step's bar is met; "not known yet" until then.
   (`next.star.point` of the distinct-words file was the target for the first layer; G1 reached it.)
 - **What moves it:** a dictionary word getting a meaning (a scholar's, from a source, or our own), or the count of
@@ -165,13 +173,13 @@ Run from the repository's root (it needs the local files: the map, the lexicon a
 python3 -I src/themap.py
 ```
 
-It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with six layers, it printed:
+It writes `data/discovery/map_figures.json` and prints four lines. On 2026-11-16, with seven layers, it printed:
 
 ```
 plain lookup: running words translated 2816 of 7847 = 35.9%; distinct spellings translated 325 of 3189 = 10.2%
 base: running words translated 3676 of 7331 = 50.1%; distinct spellings translated 598 of 2955 = 20.2%
-as it stands: running words translated 4185 of 7099 = 59.0%; distinct spellings translated 840 of 2798 = 30.0%
-north star: 160 of about 1284 = 12.5% (11.8% to 15.6%)
+as it stands: running words translated 4186 of 7077 = 59.1%; distinct spellings translated 841 of 2781 = 30.2%
+north star: 160 of about 1283 = 12.5% (11.8% to 15.6%)
 ```
 
 "plain lookup" is Before us for the second and third rows, "as it stands" is Now, "base" is the analysts' map
@@ -211,6 +219,9 @@ still changes only on his word is what a row means, its "Before us" and its sour
 - The north star: "why dont we have Distinct wrords translated? this sounds like a north star metric if we want
   the entire language translatable?"; "do it and add to the table as the first row".
 - Its "Before us": "“Before us” should really equal “Now”, 11.6%."
+- Its "Before us", again in the evening: "“Before us” is set equal to “Now” - lol. this makes no sense"; "anyones
+  cares about 2003 dictionary? if new meanings arrived after it? why is it such a big deal?"; "ok, change to 12.5".
+  It stays equal to Now and is written with its reason: "all from scholars; ours: 0".
 - Its endings: the plan he answered "do it and add to the table as the first row" to was "remove names and cut
   pieces, strip the known endings so forms of one word fall together, then have two checkers judge a sample". The
   first count still took the endings and particles written as a word of their own for words (11.6%); the review

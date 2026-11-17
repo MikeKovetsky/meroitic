@@ -1,10 +1,10 @@
 # The leftover stems (the 86 places the leftover-parts step did not give to checkers)
 
-Status on 2026-11-16, 18:45: the step is counted and **every bar is met** (section 6): 23 of the 86 places can be
-laid, 22 as names and 1 as a word of grammar. No stem was recognised as a word the lexicon knows. The script is
-local and not reviewed yet (`data/sources/g9/run.py`), so the map and the scoreboard do not count the 23 places
-yet. The step it follows is on [leftover_parts.md](leftover_parts.md) and
-[leftover_parts_2.md](leftover_parts_2.md). What the checkers were given:
+Status on 2026-11-16: the step is counted and **every bar is met** (section 6): 23 of the 86 places are laid,
+22 as names and 1 as a word of grammar. No stem was recognised as a word the lexicon knows. The 23 places are the
+map's seventh layer, `leftover_stems`. Figures: `leftover_stems_figures.json`. Script: `src/leftover.py` (its
+third part). Checks: `tests/test_leftover.py`. The step it follows is on [leftover_parts.md](leftover_parts.md)
+and [leftover_parts_2.md](leftover_parts_2.md). What the checkers were given:
 [`runs/prompts/G9_stems.md`](../../runs/prompts/G9_stems.md).
 
 ## 1. What was asked
@@ -125,6 +125,23 @@ word for "begotten of"). No place is left out for a second unnamed part or for a
 - **The judgment by place is not steady.** One spelling stands at five places of one text: the two checkers call
   it a name at two, differ at two, and call it unknown at one. Only the two agreed places are laid.
 
-The numbers of the map change only when the script is in `src/` and reviewed.
+**The map with this layer** ([map_layers.md](map_layers.md)): 4,186 of the 7,077 running words that need a
+meaning are translated (59.1%, from 59.0%), 841 of 2,781 distinct spellings (30.2%, from 30.0%) and 160 of about
+1,283 distinct words (12.5%, between 11.8% and 15.6%, from 12.5%). The layer gives no word of the dictionary a
+meaning, so the north star does not move: the 22 names leave the count of words that need a meaning, and 1 of
+the stems the map could not name is now a name.
 
 Cost: 8 agents, 725,765 tokens (typed from the task notifications into `data/sources/g9/tokens.json`, local).
+
+## 7. Reproduce
+
+```
+python3 -I src/leftover.py packs-stems    # needs the local map, lexicon and layers; refuses once answers exist
+python3 -I src/leftover.py count-stems    # the checkers compared, the bars of each verdict
+python3 -I src/leftover.py layer-stems    # the lines of the map's seventh layer
+python3 -I src/leftover.py public         # writes leftover_stems_figures.json (and the step's other figures file)
+python3 -I tests/test_leftover.py         # the method on made-up words; the figures, this page, the local files
+```
+
+The packs, the key, the checkers' answers, the result and the layer's lines are local (`data/sources/g9/`): they
+show the texts and quote the lexicon. The script writes the key, the packs and the result again as they were.

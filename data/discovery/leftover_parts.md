@@ -6,7 +6,9 @@ by one answer (section 6), so no place of it is laid. **The second reading of pa
 translated words and 5 names. **Part 2 met its bars** (section 7) and is the map's fifth layer, `rare_millet`:
 17 places, 13 of them names and 4 translated words. **The step in all:** 49 places are laid, 31 of them as
 translated words and 18 as names, and 4 words of the dictionary get a meaning a scholar published; it took 20
-agents and 1,854,110 tokens. Figures: `leftover_parts_figures.json`. Script: `src/leftover.py`. Checks:
+agents and 1,854,110 tokens. **The 86 places that part 1 did not give to checkers** were judged afterwards
+([leftover_stems.md](leftover_stems.md)): 23 of them are laid, 22 as names and 1 as a word of grammar, the map's
+seventh layer; no stem was recognised as a word the lexicon knows. Figures: `leftover_parts_figures.json`. Script: `src/leftover.py`. Checks:
 `tests/test_leftover.py`. What the checkers of part 1 were given:
 [`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
 

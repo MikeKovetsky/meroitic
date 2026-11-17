@@ -3,7 +3,9 @@
 Status on 2026-11-16: the second reading is counted and **its bars are met** (section 5). It is the map's sixth
 layer, `leftover`: 32 places, 27 of them translated words and 5 names. Figures: `leftover_parts_figures.json`
 (under `part_1_again`). Script: `src/leftover.py`. Checks: `tests/test_leftover.py`. The first reading and the
-step's other part are on [leftover_parts.md](leftover_parts.md). What the checkers were given:
+step's other part are on [leftover_parts.md](leftover_parts.md). The 86 places that neither reading was given,
+where the unnamed part is the stem itself, were judged afterwards, with bars for a name too
+([leftover_stems.md](leftover_stems.md)). What the checkers were given:
 [`runs/prompts/G8_parts_2.md`](../../runs/prompts/G8_parts_2.md).
 
 ## 1. What was asked

@@ -280,6 +280,19 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     6 of 27 wrongly chosen without it, where the bar allowed two. No label is given, and this is the method's
     third miss. All five chose the same proposal for 8 of the 33 open words
     ([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)).
+25. **The leftover stems: 23 more places are laid, 22 of them as names; no unnamed stem is a word the lexicon
+    knows.** Item 23 named 182 leftover places and gave checkers 96. At the other 86 the checkers of item 20 had
+    recognised an ending or a particle, and the unnamed part is the stem itself. The review asked whether a
+    checker could still recognise such a stem as a known word, and Mike said: "run it and document everything in
+    our doc". Two fresh checkers judged the 86 places among 80 places of known answer, 20 of each of four kinds:
+    a hidden stem, hidden endings, a name, and letters drawn by lot in a stem's place. Each verdict stood on its
+    own bars: found by each checker at least 14 times in 20, said wrongly at most 2 times in 20. Every bar was
+    met (kappa 0.79; hidden stems named with their entry 18 and 15 times, hidden endings found 20 and 20 times,
+    names 18 and 18 times; no run of lot letters and no hidden stem called a name, an ending or a known word).
+    Both checkers call the stem unknown at 55 places, a name at 22, an ending at 1, and differ at 8; at no place
+    do both find a known word. The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated
+    word ([`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md)). The map as it stands:
+    4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%); before us the north star is the same.
 
 ## The question
 
@@ -723,6 +736,17 @@ Lipiński 2011 states about an entry and say what it gives (a name, a meaning in
 Meroitic word as it is), and two checkers judge each place. `layer` writes what goes into the map: a translated
 word only when both readers say the meaning is given in full; a name when the lexicon files the entry as one or
 both readers say the source calls it one ([`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md)).
+Part 3, the leftover stems (`packs-stems`, `count-stems`, `layer-stems`), gives two checkers the 86 places of the
+same kind where the entry recognised is an ending or a particle and the unnamed part is the stem itself, with the
+same brief. Four kinds of control are mixed in, 20 of each, each kind from 20 different entries of the lexicon: a
+translated word with its stem shown as unnamed (the answer: a known word, that entry), one with its endings shown
+as unnamed (ending), a name with endings and the name shown as unnamed (name), and a translated word whose stem's
+letters are replaced by letters drawn by lot (none of the three). Both checkers must answer every place with a
+kappa of 0.6 or more; beyond that each verdict stands on its own bars and is laid only if they are met: each
+checker finds it at least 14 times in 20 where it is hidden, and says it at most 2 times in 20 of the lot
+letters (a name also at most 2 times in 20 of the hidden stems). A known word and a name are laid only where the
+spelling has one unnamed part, and a known word only when both checkers name the same entry, which the lexicon
+calls established or probable ([`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md)).
 
 ### 31. The blind test again (`src/blind2.py`)
 
@@ -815,7 +839,7 @@ Twenty-one things need files that are kept locally (Data, above), so they don't 
 - `python3 -I src/second_later.py public` (and `rows`, `packs`, `count`) reads Rilly's lexicon, the statements the
   literature passes of sections 24 and 27 collected, the two readers' results and the judges' answers.
 - `python3 -I src/leftover.py public` (and `packs`, `count`, `packs-again`, `count-again`, `layer-again`, `setup`,
-  `verify-packs`, `verify`, `place-packs`, `places`, `layer`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the results of
+  `verify-packs`, `verify`, `place-packs`, `places`, `layer`, `packs-stems`, `count-stems`, `layer-stems`) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the results of
   section 27, the text layers of Millet 2005 and Lipiński 2011, and the readers' and checkers' answers.
 - `python3 -I src/blind2.py public` (and `words`, `packs`, `count`, and the same three ending in `-83` for the
   run with all 83 accepted words) reads `corpus_v6` and its gloss file, Rilly's lexicon, the layers' lines, the

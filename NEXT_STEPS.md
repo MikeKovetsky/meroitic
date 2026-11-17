@@ -158,7 +158,7 @@ Done since this plan was written:
     lays 32 places, 27 of them as translated words and 5 as names; a place both checkers call a name is not laid
     ([`data/discovery/leftover_parts_2.md`](data/discovery/leftover_parts_2.md)). For 15 entries Millet 2005 or
     Lipiński 2011 states a meaning; 12 are stated firmly, 7 of them as names and 2 as a meaning in full. The
-    map's fifth layer lays 17 places, 13 of them as names and 4 as translated words. The map as it stands:
+    map's fifth layer lays 17 places, 13 of them as names and 4 as translated words. The map with these two layers:
     4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%).
 25. **The blind test again** (2026-11-16, [`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md);
     step G6). No label is given. With the meaning offered, 17 accepted words got a meaning from all five readers and
@@ -168,6 +168,12 @@ Done since this plan was written:
     rest ("No, do not waive"). So the test was run again with all 83
     ([`data/discovery/blind_test_83.md`](data/discovery/blind_test_83.md)): 36 of 37 right with the meaning
     offered, 6 of 27 wrongly chosen without it, where the bar allowed two. No label is given: the third miss.
+26. **The leftover stems** (2026-11-16, [`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md);
+    the 86 places that point 24 did not give to checkers, where the unnamed part is the stem itself). Two fresh
+    checkers, four kinds of control, and bars of its own for each verdict; all were met (kappa 0.79). No stem is
+    a word the lexicon knows. The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated
+    word. The map as it stands:
+    4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%).
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -593,6 +599,11 @@ ours unless it passes a test set beforehand.
    open words (Rilly 2007 and 2010, Hofmann 1981, Hintze 1979); and Hallof's edition of 2,780 inscriptions,
    which would turn many spellings that stand once into spellings that recur and can be tested. Purchases are
    parked, and the results are frozen before a new source is opened.
+
+**What is left of section G after 2026-11-16:** G7 alone. G1 to G6 are done, and so are their follow-ups: the
+leftover parts with their two readings and the meanings Millet and Lipiński state (point 24), and the leftover
+stems, the 86 places of the same kind where the unnamed part is the stem itself (point 26). With the sources in
+hand, no step is left that could give a word a meaning.
 
 Not on this path: the pages for the 304 open inscriptions and Griffith's translations as a second rendering
 (F4, above) assemble meanings scholars already have.
