@@ -11,7 +11,24 @@
   "ending": 20
  },
  "control_entries": {
-  "stem": 20
+  "entries": {
+   "stem": 20,
+   "ending": 20,
+   "name": 16,
+   "lot": 20
+  },
+  "names_of_the_lexicon": {
+   "places": 11,
+   "entries": 7
+  },
+  "name_found_counted_once": {
+   "names": 16,
+   "found": {
+    "1": 14,
+    "2": 14
+   },
+   "bar_met": true
+  }
  },
  "packs": 4,
  "lines_expected": 166,

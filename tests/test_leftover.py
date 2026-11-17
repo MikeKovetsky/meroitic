@@ -413,6 +413,24 @@ def test_the_controls_of_the_stems_take_twenty_entries_a_kind_and_no_word_twice(
     assert stops(lambda: L.controls_stems(few, lex_few, random.Random(5)), "too few entries for a kind of control")
 
 
+def test_the_controls_are_counted_by_entry_and_a_name_once():
+    """Each kind by the entries its words were drawn from; a personal name of the map by its spelling; a name of the
+    lexicon that stands twice is one name, found by a checker only if both its places are called a name."""
+    def word(form, level, *parts):
+        return {"form": form, "level": level, "parts": [{"form": f, "entry": e} for f, e in parts]}
+    gl = {"T": [word("abclo", "meaning", ("abc", "w1"), ("lo", "-lo")), word("abclo", "meaning", ("abc", "w1"), ("lo", "-lo")),
+                word("deflo", "meaning", ("def", "w2"), ("lo", "-lo")), word("pyeqo", "name", ("pye", "NAME"), ("qo", "-qo")),
+                word("ryeqo", "name", ("rye", "NAME"), ("qo", "-qo")), word("aSoreqo", "name", ("aSore", "Asori"), ("qo", "-qo")),
+                word("aSoreqo", "name", ("aSore", "Asori"), ("qo", "-qo"))]}
+    key = [{"place": q, "control": kind, "text": "T", "i": i} for q, kind, i in (("S1", "stem", 0), ("S2", "stem", 2), ("E1", "ending", 1), ("L1", "lot", 2),
+                                                                                 ("N1", "name", 3), ("N2", "name", 4), ("N3", "name", 5), ("N4", "name", 6), ("Q1", None, 0))]
+    name, unknown = {"case": "name"}, {"case": "unknown"}
+    ans = {1: dict.fromkeys(("N1", "N2", "N3", "N4"), name), 2: {"N1": name, "N2": unknown, "N3": name, "N4": unknown}}
+    got = L.control_entries(key, gl, ans)
+    assert got["entries"] == {"stem": 2, "ending": 1, "name": 3, "lot": 1} and got["names_of_the_lexicon"] == {"places": 2, "entries": 1}
+    assert got["name_found_counted_once"] == {"names": 3, "found": {"1": 3, "2": 1}, "bar_met": False}    # Asori found at one of its places only
+
+
 def test_the_letters_by_lot_stand_in_the_stems_place():
     gl, lex = a_map_for_controls()
     old = L.U.shown
@@ -780,7 +798,14 @@ def test_the_stems_figures_add_up_and_hold_counts_only():
     assert f["places"] == sum(f["places_by_run"].values()) == sum(f["verdicts"].values()) == f["answered_by_both"]
     assert sum(sum(v.values()) for v in f["verdicts_by_run"].values()) == f["places"]
     assert f["lines_expected"] == f["places"] + sum(f["controls"].values()) == f["answered"]["1"] == f["answered"]["2"]
-    assert f["controls"] == dict.fromkeys(f["controls"], L.N_STEMS) and set(f["controls"]) == set(L.KINDS_STEMS) and f["control_entries"] == {"stem": L.N_STEMS}
+    assert f["controls"] == dict.fromkeys(f["controls"], L.N_STEMS) and set(f["controls"]) == set(L.KINDS_STEMS)
+    ce = f["control_entries"]                                                   # the rule's 20 entries a kind: kept but for the names
+    assert {k: ce["entries"][k] for k in ("stem", "ending", "lot")} == dict.fromkeys(("stem", "ending", "lot"), L.N_STEMS)
+    personal = L.N_STEMS - ce["names_of_the_lexicon"]["places"]
+    assert ce["entries"]["name"] == personal + ce["names_of_the_lexicon"]["entries"] == ce["name_found_counted_once"]["names"] < L.N_STEMS
+    once = ce["name_found_counted_once"]
+    assert once["bar_met"] == all(n >= L.HIT * once["names"] for n in once["found"].values()) is True
+    assert all(once["found"][j] <= f["controls_by_checker"][j]["name"]["called_name"] for j in "12")
     for j in "12":
         c = f["controls_by_checker"][j]
         for kind in L.KINDS_STEMS:
@@ -876,6 +901,15 @@ def test_the_stems_page_says_what_the_figures_say():
     assert (f"the {names} names leave the count of words that need a meaning, and {gone} of the stems the map could not name is now a name") in text
     assert b["running"]["need"] - a["running"]["need"] == names and mine["north_star"]["translated"] == before["north_star"]["translated"]
     assert "`data/sources/g9/run.py`" not in text and "- `python3 -I src/leftover.py layer-stems`" not in text
+    # the review's two corrections of sections 2 and 3, which stand as they were written before the checkers
+    ce = f["control_entries"]
+    lex_names, once = ce["names_of_the_lexicon"], ce["name_found_counted_once"]
+    assert (f"they are the {L.N_STEMS - lex_names['places']} personal names the map holds and {lex_names['places']} places of {lex_names['entries']} "
+            f"names of the lexicon, drawn by place, so that four names stand twice. Counted once each, the {once['names']} names were found by each "
+            f"checker {once['found']['1']} and {once['found']['2']} times, which still meets the bar of 70%.") in text and once["bar_met"]
+    assert lex_names["places"] - lex_names["entries"] == 4 and round(100 * L.HIT) == 70
+    assert ('"A word of grammar when both call every unnamed part an ending: the spelling is then endings or particles only." At the one place '
+            'laid so it is not') in text and laid["to"] == {"name": names, "grammar": 1}
     for cmd in ("packs-stems", "count-stems", "layer-stems", "public"):
         assert f"python3 -I src/leftover.py {cmd}" in PAGE_STEMS.read_text(encoding="utf-8") and cmd in L.COMMANDS, cmd
     # the two earlier pages of the step point here
@@ -1041,6 +1075,12 @@ def test_the_stems_layer_is_what_the_script_builds():
     # the places are those of G2 and G4 that part 1 was not given: none of its places is among them
     for home in (L.HOME, L.HOME_AGAIN):
         assert not {(p["text"], p["i"]) for p in L.read("key.json", home) if p["control"] is None} & {(t, n - 1) for t, n in by}, home.name
+    # the page's review: the one place laid as a word of grammar holds a verb stem the lexicon writes with hyphens
+    import words as D
+    lex = W.lexicon()
+    stems_written_as_affixes = [[p["entry"] for p in gl[o["text"]][o["n"] - 1]["parts"] if p.get("entry") in lex and W.affix(p["entry"])
+                                 and not D.ending(p["entry"], lex)] for o in lines if o["level"] == "grammar"]
+    assert stems_written_as_affixes == [["-erike-"]] and lex["-erike-"]["kind"] == "verb"
 
 
 def test_the_script_writes_the_stems_packs_again():

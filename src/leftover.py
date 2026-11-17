@@ -849,6 +849,27 @@ def steadiness(rows):
             "the_most_places": len(most), "its_verdicts": dict(collections.Counter(most).most_common())}
 
 
+def control_entries(key, gl, ans):
+    """The entries each kind of control was drawn from (the stem's entry of the word; for a name the name's entry,
+    a personal name of the map, which has none, by its spelling), the names of the lexicon apart (drawn by place:
+    an entry may stand twice), and the bar "a name is found" with each name counted once: found by a checker when
+    every place of it is called a name. The rule set 20 different entries for each kind; this shows how far the
+    names kept it, and what their bar is without the names that stand twice."""
+    def ident(p):
+        s = next(x for x in gl[p["text"]][p["i"]]["parts"] if x.get("entry") == "NAME" or not W.affix(x["entry"]))
+        return ("NAME", s["form"]) if s["entry"] == "NAME" else s["entry"]
+    ids = {kind: [ident(p) for p in key if p["control"] == kind] for kind in KINDS_STEMS}
+    of_the_lexicon = [i for i in ids["name"] if not isinstance(i, tuple)]
+    names = collections.defaultdict(list)
+    for p in key:
+        if p["control"] == "name":
+            names[ident(p)].append(p["place"])
+    found = {str(j): sum(all((ans[j].get(q) or {}).get("case") == "name" for q in qs) for qs in names.values()) for j in (1, 2)}
+    return {"entries": {kind: len(set(v)) for kind, v in ids.items()},
+            "names_of_the_lexicon": {"places": len(of_the_lexicon), "entries": len(set(of_the_lexicon))},
+            "name_found_counted_once": {"names": len(names), "found": found, "bar_met": all(n >= HIT * len(names) for n in found.values())}}
+
+
 def figures_stems(home=None):
     """What the page of part 3 reports, from the local files: counts, bars and verdicts, no word of a pack."""
     home = home or HOME_STEMS
@@ -861,7 +882,7 @@ def figures_stems(home=None):
     t = json.loads((home / TOKENS_STEMS.name).read_text(encoding="utf-8"))["checkers"] if (home / TOKENS_STEMS.name).exists() else {}
     return {"places": len(real), "places_by_run": dict(collections.Counter(p["run"] for p in real).most_common()),
             "controls": dict(collections.Counter(p["control"] for p in key if p["control"])),
-            "control_entries": {k: len({p["answer_entry"] for p in key if p["control"] == k}) for k in ("stem",)},
+            "control_entries": control_entries(key, before_stems(), {j: answers(j, home) for j in (1, 2)}),
             "packs": len(read("groups.json", home)), "lines_expected": len(key),
             "answered": {str(c): len(answers(c, home)) for c in (1, 2)},
             "answered_by_both": res["answered_by_both"], "kappa": res["kappa"],
