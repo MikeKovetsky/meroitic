@@ -227,7 +227,7 @@ would search the same few words again.
 - **The testable grammar is the known grammar.** A rule needs a construction that comes back at least 20
   times in texts it was not found in. On this corpus only the epitaph's formulas and the habits of the script
   do, and scholars have described both.
-- **Outside the epitaphs there are about 4,000 words,** a quarter of them in one stela. That is too little to
+- **Outside the epitaphs there are about 4,000 words,** one in eight of them in one stela. That is too little to
   test word order, endings or agreement, however regular they may be.
 - **The yield is small and real:** 53 rules that hold out of sample (a check on the map's grammar), 15 points
   where the count is sharper than what the sources in hand say (the 9 of section 8 and 6 of this round), and
