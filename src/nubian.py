@@ -59,6 +59,7 @@ import csv
 import difflib
 import json
 import pathlib
+import random
 import re
 import subprocess
 import sys
@@ -768,12 +769,40 @@ def verdict(n, p):
     return "met" if p < GATE["p"] else "missed"
 
 
+LENGTHS = 4          # by_length(): words of this many consonants or more shuffle as one group
+
+
+def by_length(words, t, sims, seed):
+    """Beside the bar, not part of it: the engine's statistic over the words that have a row of the same meaning
+    (t: its shuffle test), their meanings shuffled only among words of the same number of consonants (pattern();
+    LENGTHS or more as one group). A shuffle across lengths gives the broad meanings of short words, which match
+    many rows, to long forms that score low against any row: the real pairing beats it with no cognate at all.
+    On the short lists with each row's forms moved to another row, the engine's test gave p < 0.05 in 13 of 40
+    such draws, this one in 2 of 40 (the review of 2026-11-16)."""
+    have = [a for a, m in enumerate(t["match"]) if m]
+    groups = collections.defaultdict(list)
+    for a in have:
+        groups[min(LENGTHS, sum(s.kind == "C" for s in cr.pattern(words[a][0])))].append(a)
+    best = t["best"]
+    real = sum(best[a][a] for a in have) / max(1, len(have))
+    rng, ge = random.Random(seed), 0
+    for _ in range(sims):
+        total = 0.0
+        for g in groups.values():
+            other = g[:]
+            rng.shuffle(other)
+            total += sum(best[a][b] for a, b in zip(g, other))
+        ge += total / max(1, len(have)) >= real - 1e-9
+    return {"n": len(have), "groups": {str(k): len(v) for k, v in sorted(groups.items())}, "stat": real, "ge": ge, "sims": sims,
+            "p": (ge + 1) / (sims + 1), "seed": seed}
+
+
 def measures(words, rows, S, sims, seed):
     """The engine's measures of one scorer on one set of rows: its shuffle test, its precision at the top (one
-    row, ten rows) and the ranks of the best same-meaning row. (the numbers, the shuffle test as the engine
-    gives it)"""
+    row, ten rows) and the ranks of the best same-meaning row; and beside them by_length(). (the numbers, the
+    shuffle test as the engine gives it)"""
     t = cr.shuffle_test(words, rows, S, sims, seed)
-    out = {"shuffle": {k: t[k] for k in ("n", "of", "stat", "ge", "sims", "p")} | {"seed": seed}}
+    out = {"shuffle": {k: t[k] for k in ("n", "of", "stat", "ge", "sims", "p")} | {"seed": seed}, "by_length": by_length(words, t, sims, seed)}
     if t["n"]:
         for k in (1, 10):
             if len(rows) >= k:
@@ -859,6 +888,7 @@ def gate():
           f"shuffled >= real in {bar['ge']} of {bar['sims']} (p = {bar['p']:.4f}); commit {res['commit'][:7]}")
     alone = res["dictionaries"]["rule"]["shuffle"]
     print(f"  the two dictionaries alone ({res['rows']['dictionaries']} rows): {alone['n']} words, p = {alone['p']:.4f}")
+    print(f"  beside the bar, shuffled within words of one length (by_length): p = {res['all']['rule']['by_length']['p']:.4f}")
     print(f"  raw similarity, all rows: p = {res['all']['raw']['shuffle']['p']:.4f}")
 
 

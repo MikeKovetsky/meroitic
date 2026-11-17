@@ -702,7 +702,9 @@ def test_the_gate_passes_planted_regular_words():
     assert res["rows"] == {"short_lists": 4, "dictionaries": len(dictionary_of(words))} and res["words"] == 36
     assert res["all"]["rule"]["top1"]["precision"] > res["all"]["rule"]["top1"]["chance"] and res["all"]["rule"]["top1"]["words_with_a_hit"] >= 30
     assert res["all"]["rule"]["ranks"]["of_rows"] == sum(res["rows"].values()) and res["all"]["rule"]["ranks"]["in_the_top_10"] == 36
-    assert set(res["all"]["raw"]) == set(res["all"]["rule"]) == {"shuffle", "top1", "top10", "ranks"} == set(res["dictionaries"]["raw"])
+    assert set(res["all"]["raw"]) == set(res["all"]["rule"]) == {"shuffle", "by_length", "top1", "top10", "ranks"} == set(res["dictionaries"]["raw"])
+    lengths = res["all"]["rule"]["by_length"]
+    assert lengths["n"] == 36 and lengths["p"] < 0.05 and lengths["stat"] == bar["stat"] and sum(lengths["groups"].values()) == 36   # beside the bar
     assert len(res["pairs"]) == 36 and res["pairs"][0]["best"]["score"] >= res["pairs"][-1]["best"]["score"] > 0.9
     first = next(p for p in res["pairs"] if p["headword"] == words[0][0])
     assert first["best"]["form"] == regular(words[0][0]) and first["rows_of_the_same_meaning"] == first["of_them_in_the_dictionaries"] + 1
@@ -717,7 +719,28 @@ def test_the_bar_is_on_all_rows():
     res = N.gate_of(words, short, chairs)                                                # the regular words stand in the short lists only
     assert res["verdict"] == "met" and res["all"]["rule"]["shuffle"]["n"] == 36
     assert res["dictionaries"]["rule"]["shuffle"]["n"] == 0 == res["dictionaries"]["raw"]["shuffle"]["n"]
-    assert set(res["dictionaries"]["rule"]) == {"shuffle"} and all(p["of_them_in_the_dictionaries"] == 0 for p in res["pairs"])
+    assert set(res["dictionaries"]["rule"]) == {"shuffle", "by_length"} and all(p["of_them_in_the_dictionaries"] == 0 for p in res["pairs"])
+
+
+def test_the_shuffle_by_length_keeps_each_meaning_among_words_of_its_length():
+    """A made-up case of the bias by_length() is beside the bar for: short words with broad meanings that match
+    many rows, long words with narrow ones; no row is a cognate of any word. The engine's shuffle passes it; the
+    shuffle within one length does not."""
+    rng, cons = random.Random(0), "kdtrlnsbw"
+    short = []
+    while len(short) < 12:
+        f = rng.choice(cons) + rng.choice(cons)
+        short += [f] if f not in short else []
+    long = ["".join(rng.choice(cons) for _ in range(6)) for _ in range(24)]
+    words = [(f, frozenset({f"broad{i}"}), "") for i, f in enumerate(short)] + [(f, frozenset({f"narrow{i}"}), "") for i, f in enumerate(long)]
+    rows = []
+    for key, n in [(f"broad{i}", 150) for i in range(12)] + [(f"narrow{i}", 2) for i in range(24)]:
+        for _ in range(n):
+            v = "".join(rng.choice("kdtrlnsbwgmaeiou") for _ in range(rng.randint(3, 7)))
+            rows.append(cr.Row("nobiin", v, "", frozenset({key}), "x", "", ((v, cr.segments(v)),)))
+    t = cr.shuffle_test(words, rows, cr.matrix(words, rows, cr.rule_score), 500, 3)
+    lengths = N.by_length(words, t, 500, 3)
+    assert t["p"] < 0.05 < 0.2 < lengths["p"] and lengths["groups"] == {"2": 12, "4": 24} and lengths["stat"] == t["stat"]
 
 
 def test_the_gate_is_the_engines_own_test():
@@ -740,7 +763,7 @@ def test_the_gate_misses_when_the_words_are_not_regular():
     res = N.gate_of(words, short_of(words), dictionary_of(words, turn=5))
     bar = res["all"]["rule"]["shuffle"]
     assert bar["n"] == 36 and bar["p"] > 0.05 and res["verdict"] == "missed"
-    assert bar["stat"] < 0.5 and res["dictionaries"]["rule"]["shuffle"]["p"] > 0.05
+    assert bar["stat"] < 0.5 and res["dictionaries"]["rule"]["shuffle"]["p"] > 0.05 and res["all"]["rule"]["by_length"]["p"] > 0.05
 
 
 def test_the_gate_does_not_decide_on_fewer_than_30_words():
@@ -755,7 +778,8 @@ def test_the_gate_does_not_decide_on_fewer_than_30_words():
     assert N.verdict(29, 0.0005) == "too small to decide" == N.verdict(0, 1.0)
     assert N.verdict(30, 0.0499) == "met" and N.verdict(30, 0.05) == "missed" and N.verdict(107, 0.49) == "missed"
     none = N.gate_of(some, short_of(some)[:2], [])                                       # no row of the same meaning at all
-    assert none["verdict"] == "too small to decide" and none["pairs"] == [] and set(none["all"]["rule"]) == {"shuffle"}
+    assert none["verdict"] == "too small to decide" and none["pairs"] == [] and set(none["all"]["rule"]) == {"shuffle", "by_length"}
+    assert none["all"]["rule"]["by_length"] | {"seed": 0} == {"n": 0, "groups": {}, "stat": 0.0, "ge": 2000, "sims": 2000, "p": 1.0, "seed": 0}
     assert (N.GATE["p"], N.GATE["words"], N.GATE["sims"], N.GATE["seed"], N.GATE["short_rows"]) == (0.05, 30, 2000, 3, 5442)
 
 
