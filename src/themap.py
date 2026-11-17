@@ -35,6 +35,10 @@ LAYERS = [
      "laid": "2026-11-16", "what": "rare spellings whose entry a later source gives a meaning (G4)"},
     {"name": "unnamed", "file": "data/sources/g3/overlay.jsonl", "page": "data/discovery/unnamed_spellings.md",
      "laid": "2026-11-16", "what": "open spellings the lexicon does not hold that two checkers call a name or a piece (G3)"},
+    {"name": "rare_millet", "file": "data/sources/rare/g4m/overlay.jsonl", "page": "data/discovery/leftover_parts.md",
+     "laid": "2026-11-16", "what": "rare spellings whose entry Millet 2005 or Lipinski 2011 calls a name or gives a meaning"},
+    {"name": "leftover", "file": "data/sources/g8b/overlay.jsonl", "page": "data/discovery/leftover_parts_2.md",
+     "laid": "2026-11-16", "what": "rare spellings whose unnamed part two checkers call an ending or a known word (the leftover parts)"},
 ]
 WHY = ("stated", "form", "piece", "name")   # why a line changes a word: a later source states its meaning there; it
 #                                             is a form of a word the lexicon calls sure; it is a piece of a word or

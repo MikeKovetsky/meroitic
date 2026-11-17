@@ -1,0 +1,540 @@
+{
+ "part_1": {
+  "places": 96,
+  "places_by_run": {
+   "g2": 68,
+   "g4": 28
+  },
+  "controls": {
+   "junk": 20,
+   "ending": 20
+  },
+  "packs": 3,
+  "lines_expected": 136,
+  "answered": {
+   "1": 136,
+   "2": 136
+  },
+  "answered_by_both": 96,
+  "kappa": 0.774,
+  "bars_set": {
+   "kappa": 0.6,
+   "junk_explained": 0.1,
+   "endings_called_ending": 0.7
+  },
+  "bars": {
+   "every_place_answered_by_both": true,
+   "kappa": true,
+   "junk_explained": false,
+   "endings_called_ending": true
+  },
+  "taken": false,
+  "hidden_endings": {
+   "1": {
+    "shown": 20,
+    "called_ending": 20
+   },
+   "2": {
+    "shown": 20,
+    "called_ending": 20
+   }
+  },
+  "lot_letters": {
+   "shown": 20,
+   "explained": {
+    "1": 3,
+    "2": 2
+   },
+   "explained_as": {
+    "1": {
+     "name": 3
+    },
+    "2": {
+     "name": 2
+    }
+   },
+   "unknown_by_both": 17,
+   "explained_at": [
+    {
+     "word": "qo",
+     "letters": "before",
+     "answers": [
+      "name",
+      "unknown"
+     ]
+    },
+    {
+     "word": "te-dḫe-l",
+     "letters": "before",
+     "answers": [
+      "name",
+      "name"
+     ]
+    },
+    {
+     "word": "te-dḫe-l",
+     "letters": "before",
+     "answers": [
+      "name",
+      "name"
+     ]
+    }
+   ]
+  },
+  "verdicts": {
+   "ending": 40,
+   "unknown": 28,
+   "not agreed": 14,
+   "name": 12,
+   "unclear": 1,
+   "known": 1
+  },
+  "verdicts_by_run": {
+   "g2": {
+    "unknown": 22,
+    "ending": 20,
+    "not agreed": 12,
+    "name": 12,
+    "unclear": 1,
+    "known": 1
+   },
+   "g4": {
+    "ending": 20,
+    "unknown": 6,
+    "not agreed": 2
+   }
+  }
+ },
+ "part_1_again": {
+  "places": 96,
+  "places_by_run": {
+   "g2": 68,
+   "g4": 28
+  },
+  "controls": {
+   "ending": 20,
+   "junk": 20
+  },
+  "packs": 3,
+  "lines_expected": 136,
+  "answered": {
+   "1": 136,
+   "2": 136
+  },
+  "answered_by_both": 96,
+  "kappa": 0.6563,
+  "bars_set": {
+   "kappa": 0.6,
+   "junk_called_ending_or_known": 0.1,
+   "endings_called_ending": 0.7
+  },
+  "bars": {
+   "every_place_answered_by_both": true,
+   "kappa": true,
+   "junk_called_ending_or_known": true,
+   "endings_called_ending": true
+  },
+  "taken": true,
+  "hidden_endings": {
+   "1": {
+    "shown": 20,
+    "called_ending": 20
+   },
+   "2": {
+    "shown": 20,
+    "called_ending": 19,
+    "called_unknown": 1
+   }
+  },
+  "lot_letters": {
+   "shown": 20,
+   "explained": {
+    "1": 1,
+    "2": 2
+   },
+   "explained_as": {
+    "1": {
+     "name": 1
+    },
+    "2": {
+     "known": 1,
+     "name": 1
+    }
+   },
+   "unknown_by_both": 18,
+   "explained_at": [
+    {
+     "word": "ato",
+     "letters": "after",
+     "answers": [
+      "unknown",
+      "known"
+     ]
+    },
+    {
+     "word": "t-erike-l",
+     "letters": "before",
+     "answers": [
+      "name",
+      "name"
+     ]
+    }
+   ]
+  },
+  "verdicts": {
+   "unknown": 37,
+   "ending": 32,
+   "not agreed": 20,
+   "name": 6,
+   "known": 1
+  },
+  "verdicts_by_run": {
+   "g2": {
+    "unknown": 29,
+    "not agreed": 19,
+    "ending": 13,
+    "name": 6,
+    "known": 1
+   },
+   "g4": {
+    "ending": 19,
+    "unknown": 8,
+    "not agreed": 1
+   }
+  },
+  "laid": {
+   "lines": 32,
+   "why": {
+    "stated": 18,
+    "form": 14
+   },
+   "to": {
+    "meaning": 27,
+    "name": 5
+   },
+   "to_by_why": {
+    "form": {
+     "meaning": 10,
+     "name": 4
+    },
+    "stated": {
+     "meaning": 17,
+     "name": 1
+    }
+   },
+   "was": {
+    "hypothesis": 16,
+    "unknown": 14,
+    "kind": 2
+   },
+   "by_run": {
+    "g4": 18,
+    "g2": 14
+   },
+   "entries": 22
+  },
+  "left_out": {
+   "another stem of the spelling has no meaning": 1
+  },
+  "not_laid": {
+   "name": 6
+  },
+  "words": [
+   {
+    "entry": "nbr",
+    "kind": "noun",
+    "meaning": "gold",
+    "source": "Rilly 2016",
+    "places_laid": 1,
+    "texts": 1
+   },
+   {
+    "entry": "yiroẖe",
+    "kind": "verb",
+    "meaning": "to take control",
+    "source": "Rilly 2021",
+    "places_laid": 1,
+    "texts": 1
+   }
+  ]
+ },
+ "part_2": {
+  "entries": 15,
+  "places": 56,
+  "entries_by_source": {
+   "Millet 2005": 13,
+   "Lipinski 2011": 2
+  },
+  "read_twice": {
+   "stated": 12,
+   "not stated firmly": 3
+  },
+  "gives": {
+   "name": 7,
+   "partly": 3,
+   "word": 2
+  },
+  "names": {
+   "a place name": 5,
+   "a personal name": 2
+  },
+  "by_entry": [
+   {
+    "entry": "Skl",
+    "kind": "place name",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a place name"
+   },
+   {
+    "entry": "Tmne",
+    "kind": "place name",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a place name"
+   },
+   {
+    "entry": "mse",
+    "kind": "title",
+    "source": "Lipinski 2011",
+    "verdict": "stated",
+    "gives": "word",
+    "meaning": "child"
+   },
+   {
+    "entry": "yeteke",
+    "kind": "",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a personal name"
+   },
+   {
+    "entry": "yitkite",
+    "kind": "place name",
+    "source": "",
+    "verdict": "not stated firmly",
+    "gives": "",
+    "meaning": ""
+   },
+   {
+    "entry": "Dbre",
+    "kind": "place name",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a place name"
+   },
+   {
+    "entry": "womnitẖ",
+    "kind": "title",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "partly",
+    "meaning": ""
+   },
+   {
+    "entry": "yet (2)",
+    "kind": "noun",
+    "source": "",
+    "verdict": "not stated firmly",
+    "gives": "",
+    "meaning": ""
+   },
+   {
+    "entry": "kdimdḫe",
+    "kind": "noun",
+    "source": "Lipinski 2011",
+    "verdict": "stated",
+    "gives": "word",
+    "meaning": "women who have not borne a child"
+   },
+   {
+    "entry": "mlekye",
+    "kind": "title",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a personal name"
+   },
+   {
+    "entry": "pnqose",
+    "kind": "title",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "partly",
+    "meaning": ""
+   },
+   {
+    "entry": "teketin",
+    "kind": "noun",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "partly",
+    "meaning": ""
+   },
+   {
+    "entry": "Amod",
+    "kind": "place name",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a place name"
+   },
+   {
+    "entry": "Wrose",
+    "kind": "place name",
+    "source": "Millet 2005",
+    "verdict": "stated",
+    "gives": "name",
+    "meaning": "a place name"
+   },
+   {
+    "entry": "qoreneye",
+    "kind": "title",
+    "source": "",
+    "verdict": "not stated firmly",
+    "gives": "",
+    "meaning": ""
+   }
+  ],
+  "the_places": {
+   "places": 56,
+   "answered by both": 56,
+   "kappa": 0.9729,
+   "bar": 0.6,
+   "taken": true,
+   "verdicts": {
+    "stated": 24,
+    "open": 20,
+    "unclear": 3,
+    "piece": 8,
+    "not agreed": 1
+   },
+   "by class": {
+    "A": {
+     "stated": 24,
+     "open": 20,
+     "unclear": 3,
+     "piece": 8,
+     "not agreed": 1
+    }
+   }
+  },
+  "laid": {
+   "lines": 17,
+   "why": {
+    "stated": 14,
+    "name": 2,
+    "piece": 1
+   },
+   "to": {
+    "name": 13,
+    "meaning": 4
+   },
+   "to_by_why": {
+    "name": {
+     "name": 2
+    },
+    "piece": {
+     "name": 1
+    },
+    "stated": {
+     "name": 10,
+     "meaning": 4
+    }
+   },
+   "was": {
+    "kind": 10,
+    "hypothesis": 6,
+    "unknown": 1
+   }
+  },
+  "left_out": {
+   "piece, the whole word open in the map": 3,
+   "piece, the whole word not a form of the map": 4,
+   "stated, stem, a part of the spelling unnamed": 5,
+   "stated, but the meaning leaves a Meroitic word as it is, or the readers differ on what is given": 3
+  },
+  "words": [
+   {
+    "entry": "kdimdḫe",
+    "kind": "noun",
+    "meaning": "women who have not borne a child",
+    "source": "Lipinski 2011",
+    "places_laid": 1,
+    "texts": 1
+   },
+   {
+    "entry": "mse",
+    "kind": "title",
+    "meaning": "child",
+    "source": "Lipinski 2011",
+    "places_laid": 3,
+    "texts": 1
+   }
+  ]
+ },
+ "cost": {
+  "part 1, the checkers": {
+   "agents": 6,
+   "tokens": 595672
+  },
+  "part 2, the readers": {
+   "agents": 4,
+   "tokens": 368724
+  },
+  "part 2, the checkers": {
+   "agents": 4,
+   "tokens": 324125
+  },
+  "part 1 again, the checkers": {
+   "agents": 6,
+   "tokens": 565589
+  },
+  "all": {
+   "agents": 20,
+   "tokens": 1854110
+  }
+ },
+ "when": [
+  {
+   "step": "part 1, the unnamed parts",
+   "set_in": "1c86898",
+   "set": "15:23:46",
+   "started": "15:27:11",
+   "first_answer": "15:28:06",
+   "last_answer": "15:29:31",
+   "counted": "15:30:41"
+  },
+  {
+   "step": "part 2, the statements read twice",
+   "set_in": "4b0c763",
+   "set": "15:35:28",
+   "started": "15:35:38",
+   "first_answer": "15:36:13",
+   "last_answer": "15:37:16",
+   "counted": "15:38:26"
+  },
+  {
+   "step": "part 2, the places",
+   "set_in": "4b0c763",
+   "set": "15:35:28",
+   "started": "15:38:47",
+   "first_answer": "15:39:08",
+   "last_answer": "15:40:08",
+   "counted": "15:40:35"
+  },
+  {
+   "step": "part 1 again, the unnamed parts",
+   "set_in": "ebfa9e3",
+   "set": "15:51:18",
+   "started": "15:51:35",
+   "first_answer": "15:52:36",
+   "last_answer": "15:53:01",
+   "counted": "15:53:14"
+  }
+ ]
+}

@@ -234,8 +234,10 @@ def test_the_page_says_what_the_figures_say():
     s = M.star_pct(n)                                                    # a share is divided from its counts and rounded once
     assert f"{n['translated']} of about {n['distinct_words']['point']:,} distinct words, {s['point']} (between {s['low']} and {s['high']})" in text
     assert f"and {n['translated']} of about {n['distinct_words']['point']:,} distinct words ({s['point']})" in text
-    assert f"{n['translated']} of {n['distinct_words']['point']:,} is {100 * n['translated'] / n['distinct_words']['point']:.4f}%" in text
-    assert f"holds the share rounded to four places, {n['star']['point']}, and rounding that again gives {pct(n['star']['point'])}" in text
+    n4 = {l["name"]: l for l in f["layers"]}["unnamed"]["north_star"]    # the example of a share rounded twice: the map with four layers
+    assert f"With four layers, {n4['translated']} of {n4['distinct_words']['point']:,} is {100 * n4['translated'] / n4['distinct_words']['point']:.4f}%" in text
+    assert f"holds the share rounded to four places, {n4['star']['point']}, and rounding that again gives {pct(n4['star']['point'])}" in text
+    assert pct(n4["star"]["point"]) != M.star_pct(n4)["point"]
     assert f"{n['translated_by_the_lexicon']} by the lexicon of 2003 and {sum(n['translated_by_a_layer'].values())} by a later source" in text
     u = n["unnamed_stems"]
     assert f"The layers make {u['sampled'] - u['now']} of those stems names, so {u['now']:,} are left" in text and f"at most {100 * M.DRIFT:.0f}% of the stems" in text
@@ -243,7 +245,15 @@ def test_the_page_says_what_the_figures_say():
     assert f"the {pieces} pieces of translated words that `unnamed` lays are such places" in text
     assert f"made again from the {u['sample_still_unnamed']} sampled stems that are still unnamed" in text
     assert f"about {n['unnamed_words']['point']} of the {u['now']:,} are words of their own (between {n['unnamed_words']['low']} and {n['unnamed_words']['high']})" in text
-    assert f"from {M.star_pct(f['layers'][-2]['north_star'])['point']} to {s['point']}, is a correction of the count of words" in text
+    by_name = {l["name"]: l for l in f["layers"]}
+    three, four = (M.star_pct(by_name[k]["north_star"])["point"] for k in ("rare_later", "unnamed"))
+    assert f"from {three} to {four}, is a correction of the count of words" in text
+    by = n["translated_by_a_layer"]                                      # the fifth and the sixth layer take no stem; each gives two words a meaning
+    for name in ("rare_millet", "leftover"):
+        assert by_name[name]["north_star"]["unnamed_stems"] == by_name["unnamed"]["north_star"]["unnamed_stems"], name
+    five = M.star_pct(by_name["rare_millet"]["north_star"])["point"]
+    assert by["rare_millet"] == by["leftover"] and f["layers"][-1]["name"] == "leftover"
+    assert f"and the {by['leftover']} words each gives a meaning bring the north star from {four} to {five} and then to {s['point']}" in text
     a = first["after"]                                                   # the map after the first layer alone
     gain = a["running"]["translated"] - b["running"]["translated"]
     names = a["running"]["named"] - b["running"]["named"]
@@ -254,21 +264,40 @@ def test_the_page_says_what_the_figures_say():
     assert f"({was.get('meaning', 0)} with a meaning, {was.get('grammar', 0)} as a grammar word, {was.get('name', 0)} as a name)" in text
     assert f"The other {first['places'] - already} were open" in text
     assert f"({pct(c['running']['share'])}, from {pct(b['running']['share'])})" in text and f"({b['spellings']['translated']} to {a['spellings']['translated']})" in text
-    by = n["translated_by_a_layer"]
-    assert f"{by['recurring']} through the layer `recurring`, {by['rare_later']} through `rare_later`" in text and by["rare_sure"] == 0
+    assert (f"{by['recurring']} through the layer `recurring`, {by['rare_later']} through `rare_later` and {by['leftover']} through `leftover`; "
+            f"Lipiński 2011: {by['rare_millet']} through `rare_millet`") in text
+    assert by["rare_sure"] == by["unnamed"] == 0
     for l in f["layers"][1:]:
         to = l["to"]
         assert f"{to.get('meaning', 0) + to.get('grammar', 0)} places become translated words and {to.get('name', 0)} names; all {l['places']} were open" in text, l["name"]
         assert set(l["was"]) <= {"hypothesis", "kind", "unknown"}, l["name"]
-    stated = sum(l["why"].get("stated", 0) for l in f["layers"])
-    assert f"The {stated} stated places rest on Rilly's readings of 2016 and 2021." in text
+    stated = sum(l["why"].get("stated", 0) for l in f["layers"] if l["name"] != "rare_millet")
+    assert {l["name"] for l in f["layers"] if l["why"].get("stated")} == {"recurring", "rare_later", "leftover", "rare_millet"}
+    both = json.loads((PAGE.parent / "leftover_parts_figures.json").read_text(encoding="utf-8"))
+    left, again = both["part_2"], both["part_1_again"]
+    assert {w["source"] for w in again["words"]} == {"Rilly 2016", "Rilly 2021"}
+    mine = by_name["leftover"]                                           # the sixth layer is the second reading of the unnamed parts
+    assert (mine["places"], mine["why"], mine["to"], mine["was"]) == (again["laid"]["lines"], again["laid"]["why"], again["laid"]["to"], again["laid"]["was"])
+    assert (f"The {again['places']} places of `rare_sure` and `rare_later` where both checkers of those steps recognised the word but the map leaves a part "
+            f"of the spelling unnamed.") in text
+    assert (f"{mine['why']['form']} forms of a word the lexicon calls sure and {mine['why']['stated']} places of a word for which Rilly states a meaning") in text
+    assert "A place both checkers call a name is not laid." in text and "the second is the layer `leftover`" in text
+    by_why = left["laid"]["to_by_why"]
+    assert by_why["stated"] == {"name": by_name["rare_millet"]["why"]["stated"] - by_why["stated"]["meaning"], "meaning": sum(w["places_laid"] for w in left["words"])}
+    assert (f"The {stated} stated places of `recurring`, `rare_later` and `leftover` rest on Rilly's readings of 2016 and 2021,** the {by_name['rare_millet']['why']['stated']} of "
+            f"`rare_millet` on Millet 2005 ({by_why['stated']['name']}, all of them names of places) and on Lipiński 2011 ({by_why['stated']['meaning']}).") in text
+    assert {w["source"] for w in left["words"]} == {"Lipinski 2011"}
+    assert (f"({by_name['rare_millet']['why']['stated']}: {by_why['stated']['name']} of entries the lexicon files as place names, {by_why['stated']['meaning']} of the "
+            f"{len(left['words'])} words Lipiński gives a meaning in full), {by_why['name']['name']} places of two entries that both readers say Millet calls a "
+            f"personal name, and {by_why['piece']['name']} piece of a name the map holds") in text.replace("two words Lipiński", f"{len(left['words'])} words Lipiński")
+    assert f"{left['the_places']['kappa']:.2f} for `rare_millet` and {again['kappa']:.2f} for `leftover`, against a bar of 0.6" in text
     g5 = json.loads((PAGE.parent / "second_scholar_later_figures.json").read_text(encoding="utf-8"))
     st = g5["statuses"]
     assert (f"each of the {g5['entries']} meanings behind them beside what other scholars say: "
             f"{st['agreed by two scholars'] + st['agreed by two scholars, with a dissent']} are stated by another scholar too "
             f"({st['agreed by two scholars, with a dissent']} with a dissent), {st['disputed']} are disputed and {st['stated by one']} rest on Rilly alone") in text
     g3 = json.loads((PAGE.parent / "unnamed_spellings_figures.json").read_text(encoding="utf-8"))["readings"]
-    assert f"{g3['pilot2']['kappa']:.2f} and {g3['full']['kappa']:.2f} for the two readings behind `unnamed`, against a bar of 0.6" in text
+    assert f"{g3['pilot2']['kappa']:.2f} and {g3['full']['kappa']:.2f} for the two readings behind `unnamed`, and" in text
     # the coverage page's measure on the map as it stands is the last column of section 3, for the map with the layers
     assert f"Its measure on the map as it stands is the last column of section 3: {pct(c['running']['of_all'])}." in text
 

@@ -272,26 +272,165 @@
      }
     }
    }
+  },
+  {
+   "name": "rare_millet",
+   "page": "data/discovery/leftover_parts.md",
+   "laid": "2026-11-16",
+   "what": "rare spellings whose entry Millet 2005 or Lipinski 2011 calls a name or gives a meaning",
+   "places": 17,
+   "why": {
+    "stated": 14,
+    "name": 2,
+    "piece": 1
+   },
+   "to": {
+    "name": 13,
+    "meaning": 4
+   },
+   "was": {
+    "kind": 10,
+    "hypothesis": 6,
+    "unknown": 1
+   },
+   "after": {
+    "running": {
+     "translated": 4158,
+     "named": 1970,
+     "open": 2946,
+     "lost": 1216,
+     "need": 7104,
+     "share": 0.5853,
+     "all": 10290,
+     "of_all": 0.5955
+    },
+    "spellings": {
+     "translated": 817,
+     "named": 922,
+     "open": 1985,
+     "lost": 1069,
+     "need": 2802,
+     "share": 0.2916,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 158,
+   "north_star": {
+    "translated": 158,
+    "distinct_words": {
+     "point": 1284,
+     "low": 1023,
+     "high": 1356
+    },
+    "star": {
+     "point": 0.1231,
+     "low": 0.1165,
+     "high": 0.1544
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1066,
+     "sample_still_unnamed": 230,
+     "its_verdicts": {
+      "word": 152,
+      "unclear": 42,
+      "piece": 21,
+      "not agreed": 7,
+      "same": 4,
+      "known": 3,
+      "name": 1
+     }
+    }
+   }
+  },
+  {
+   "name": "leftover",
+   "page": "data/discovery/leftover_parts_2.md",
+   "laid": "2026-11-16",
+   "what": "rare spellings whose unnamed part two checkers call an ending or a known word (the leftover parts)",
+   "places": 32,
+   "why": {
+    "stated": 18,
+    "form": 14
+   },
+   "to": {
+    "meaning": 27,
+    "name": 5
+   },
+   "was": {
+    "hypothesis": 16,
+    "unknown": 14,
+    "kind": 2
+   },
+   "after": {
+    "running": {
+     "translated": 4185,
+     "named": 1975,
+     "open": 2914,
+     "lost": 1216,
+     "need": 7099,
+     "share": 0.5895,
+     "all": 10290,
+     "of_all": 0.5986
+    },
+    "spellings": {
+     "translated": 840,
+     "named": 926,
+     "open": 1958,
+     "lost": 1069,
+     "need": 2798,
+     "share": 0.3002,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 160,
+   "north_star": {
+    "translated": 160,
+    "distinct_words": {
+     "point": 1284,
+     "low": 1023,
+     "high": 1356
+    },
+    "star": {
+     "point": 0.1246,
+     "low": 0.118,
+     "high": 0.1564
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1066,
+     "sample_still_unnamed": 230,
+     "its_verdicts": {
+      "word": 152,
+      "unclear": 42,
+      "piece": 21,
+      "not agreed": 7,
+      "same": 4,
+      "known": 3,
+      "name": 1
+     }
+    }
+   }
   }
  ],
  "current": {
   "running": {
-   "translated": 4154,
-   "named": 1957,
-   "open": 2963,
+   "translated": 4185,
+   "named": 1975,
+   "open": 2914,
    "lost": 1216,
-   "need": 7117,
-   "share": 0.5837,
+   "need": 7099,
+   "share": 0.5895,
    "all": 10290,
-   "of_all": 0.5939
+   "of_all": 0.5986
   },
   "spellings": {
-   "translated": 815,
-   "named": 911,
-   "open": 1998,
+   "translated": 840,
+   "named": 926,
+   "open": 1958,
    "lost": 1069,
-   "need": 2813,
-   "share": 0.2897,
+   "need": 2798,
+   "share": 0.3002,
    "all": 4793
   }
  },
@@ -323,23 +462,25 @@
    "recurring": 9,
    "rare_sure": 0,
    "rare_later": 20,
-   "unnamed": 0
+   "unnamed": 0,
+   "rare_millet": 2,
+   "leftover": 2
   },
-  "translated": 156,
+  "translated": 160,
   "distinct_words": {
    "point": 1284,
    "low": 1023,
    "high": 1356
   },
   "star": {
-   "point": 0.1215,
-   "low": 0.115,
-   "high": 0.1525
+   "point": 0.1246,
+   "low": 0.118,
+   "high": 0.1564
   },
   "before_us": {
-   "point": 0.1215,
-   "low": 0.115,
-   "high": 0.1525
+   "point": 0.1246,
+   "low": 0.118,
+   "high": 0.1564
   },
   "unnamed_words": {
    "point": 907,
