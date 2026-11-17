@@ -1167,8 +1167,9 @@ order"). The bar and the lot were committed before any typing
 4. **Sayce on REM 1003.** His 42 lines (*Liverpool Annals* 7, pp. 69-72), typed from page images, four lines of
    them typed again blind (169 of 169 of his units agree). He died in 1933, so his reading is public. Mapped to
    Griffith's signs by a table fixed before the comparison, his words agree with Millet's reading at 61.8%, where
-   Griffith's do at 82.5%. At Griffith's 38 doubted words Sayce reads 7 the same, 24 otherwise, is unsure himself
-   at 6 and cannot be lined up at 1; Millet sides with Sayce alone at 1 of the 38, with Griffith alone at 17. He
-   settles almost nothing.
+   Griffith's do at 82.5%. At Griffith's 38 doubted words Sayce reads 7 the same, 20 otherwise and is unsure
+   himself at 11 (the review corrected the first count of 7 the same, 24 otherwise, 6 unsure and 1 not lined up:
+   the script had not applied the classes to a numeral he queries or a place he prints as lost); Millet sides
+   with Sayce alone at 1 of the 38, with Griffith alone at 17. He settles almost nothing.
 5. **Cost:** the two blind typists 216,800 subagent tokens (102,132 and 114,668); the check against the
    hand copies and the review are on the page.

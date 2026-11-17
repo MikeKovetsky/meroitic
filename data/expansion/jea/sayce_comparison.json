@@ -6,7 +6,7 @@
   "signs": 1647,
   "words_unsure": 33
  },
- "how": "both texts in the corpus spelling, lined up letter by letter (difflib) over the whole text; a word agrees when all its letters lie in stretches the two share. folded: src/akinidad.py fold(); strict: the corpus letters as they stand, x and X one letter. units: how often each of his units lines up with each of Griffith's signs where the two agree or are replaced one for one",
+ "how": "both texts in the corpus spelling, lined up letter by letter (difflib) over the whole text; a word agrees when all its letters lie in stretches the two share. folded: src/akinidad.py fold(); strict: the corpus letters as they stand, x and X one letter. units: how often each of his units lines up with each of Griffith's signs where the two agree or are replaced one for one. doubted: Sayce's letters at the place of each of Griffith's doubted words (strict; '#' a sign Sayce prints as lost), from the first that lines up with the word to the last",
  "against_griffith": {
   "folded": {
    "sayce_words": 340,
@@ -491,10 +491,9 @@
  "doubted": {
   "words": 38,
   "by_class": {
-   "reads otherwise": 24,
+   "reads otherwise": 20,
    "confirms": 7,
-   "also unsure": 6,
-   "not found": 1
+   "also unsure": 11
   },
   "places": [
    {
@@ -537,14 +536,14 @@
     "griffith": "58",
     "doubt": "? after the word",
     "sayce": "505",
-    "class": "reads otherwise"
+    "class": "also unsure"
    },
    {
     "line": 12,
     "griffith": "223",
     "doubt": "? after the word",
     "sayce": "2503",
-    "class": "reads otherwise"
+    "class": "also unsure"
    },
    {
     "line": 14,
@@ -557,7 +556,7 @@
     "line": 14,
     "griffith": "etkb?ḫi",
     "doubt": "? above a sign",
-    "sayce": "bxi",
+    "sayce": "binxi",
     "class": "also unsure"
    },
    {
@@ -578,7 +577,7 @@
     "line": 15,
     "griffith": "all?ebšê",
     "doubt": "? above a sign",
-    "sayce": "alebqo",
+    "sayce": "alepbqo",
     "class": "reads otherwise"
    },
    {
@@ -613,8 +612,8 @@
     "line": 18,
     "griffith": "Amn.(?)",
     "doubt": "(?) by the word",
-    "sayce": "ame",
-    "class": "reads otherwise"
+    "sayce": "awk###Nqsme",
+    "class": "also unsure"
    },
    {
     "line": 19,
@@ -641,8 +640,8 @@
     "line": 20,
     "griffith": "nš",
     "doubt": "? after the word",
-    "sayce": "a",
-    "class": "reads otherwise"
+    "sayce": "a#",
+    "class": "also unsure"
    },
    {
     "line": 21,
@@ -739,8 +738,8 @@
     "line": 37,
     "griffith": "pe?t?",
     "doubt": "? above a sign",
-    "sayce": "",
-    "class": "not found"
+    "sayce": "###",
+    "class": "also unsure"
    },
    {
     "line": 38,

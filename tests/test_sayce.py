@@ -42,6 +42,22 @@ def test_words_lines_numerals_and_doubts():
     assert S.roman("CCLII") == 252 and S.roman("MMMCCCC") == 3400 and S.roman("CXV") == 115
 
 
+def test_doubted_words_are_classed_as_the_page_fixes():
+    """The classes of data/discovery/ostraca_sayce.md: a sign or numeral he queries, also where a space parts it
+    from his "(?)", and a place he prints as lost are "also unsure"; letters he has inside the place count."""
+    g = lambda printed, doubt="?": {"line": 1, "printed": printed, "griffith": printed, "corpus": printed,
+                                    "doubt": doubt}
+    gw = [g("qor"), g("58"), g("wi", ""), g("pet"), g("ye", ""), g("abde"), g("lmn"), g("sb")]
+    sw = S.words([(1, "k'-r : L (?) V : u-i : . . . : y-e : a-b-th-rh-e : l-m-n (?) : s-b")])
+    assert sw[1]["kind"] == "numeral" and sw[1]["doubt"] and sw[-2]["signs"][-1] == ("n", True)
+    closed = {"k": "qor 58 wi pet ye abde lmn sb"}
+    got = {d["griffith"]: (d["sayce"], d["class"], d["k"]) for d in S.doubted(gw, sw, closed)}
+    assert got == {"qor": ("qor", "confirms", "both"), "58": ("505", "also unsure", "Griffith"),
+                   "pet": ("###", "also unsure", "Griffith"),            # where he has no letter he has no say
+                   "abde": ("abtde", "reads otherwise", "Griffith"), "lmn": ("lmn", "also unsure", "both"),
+                   "sb": ("sb", "confirms", "both")}, got
+
+
 # --- the files ---
 def test_the_whole_text_is_typed():
     ws = S.words()

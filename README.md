@@ -325,8 +325,8 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     sample for the north star; of its 1,681 open spellings that stood in one text, 9 now stand in an ostracon too,
     five of them two-letter pieces. Sayce printed all 42 lines of REM 1003 in 1914-15 in his own letters (public
     domain: he died in 1933). Typed and mapped to Griffith's signs, his words agree with Millet's later reading at
-    61.8%, where Griffith's agree at 82.5%; at Griffith's 38 doubted words Sayce reads 7 the same and 24
-    otherwise, and Millet sides with Sayce alone at 1
+    61.8%, where Griffith's agree at 82.5%; at Griffith's 38 doubted words Sayce reads 7 the same and 20
+    otherwise and is unsure himself at 11, and Millet sides with Sayce alone at 1
     ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
 
 ## The question

@@ -61,8 +61,8 @@ on all 56 signs (bar 97%), and four lines of Sayce typed twice agree on all 169 
 spellings that stood in one text of the map, 9 now stand in a second, most of them two-letter pieces of broken
 words; the map itself, the scoreboard and the north star (12.5%) are unchanged, because the map is drawn on its 548
 texts until it is counted again with a new sample. Sayce's reading of REM 1003 settles almost nothing that Griffith
-left open: of Griffith's 38 doubted words Sayce reads 7 the same and 24 otherwise, and Millet's later reading
-sides with Sayce alone at 1 of the 38 (with Griffith alone at 17).
+left open: of Griffith's 38 doubted words Sayce reads 7 the same and 20 otherwise and is unsure himself at 11, and
+Millet's later reading sides with Sayce alone at 1 of the 38 (with Griffith alone at 17).
 
 ## 1. Griffith's ostraca
 
@@ -160,11 +160,19 @@ numerals agree (61.8%), where Griffith's agree at 278 of 337 (82.5%); against th
 | Sayce at the same place | Words |
 |---|---|
 | confirms (the same signs, not queried) | 7 |
-| reads otherwise (other signs, not queried) | 24 |
-| also unsure (queried, restored or lost) | 6 |
-| not found (cannot be lined up) | 1 |
+| reads otherwise (other signs, not queried) | 20 |
+| also unsure (queried, restored or lost) | 11 |
+| not found (cannot be lined up) | 0 |
 
-Five of the 38 are numerals (Sayce reads 12 where Griffith reads 32 with a query, and 115 for 135). Which of the
+*Corrected in the review:* the first count gave 7, 24, 6 and 1. The script did not apply two parts of these classes
+(a numeral Sayce queries, `L (?) V` and `CCL (?) III` in l. 12, and a place he prints as lost, `. . .` where
+Griffith reads `pe?t?` in l. 37, and `a- .` where he reads `nš` in l. 20), and it lined each word up with the
+letters of Sayce's that match it only, so that what he has inside the place was left out (at `Amn.(?)` in l. 18 he
+has `a-u (?)-g (?) . . . ṇ`). The classes are as fixed; `src/sayce.py` now applies them, and the published places
+write a sign he prints as lost `#`.
+
+Five of the 38 are numerals (Sayce reads 12 where Griffith reads 32 with a query, and 115 for 135; at the two of
+l. 12 he queries his own). Which of the
 two Millet's later reading sides with at the 38 places: Griffith alone 17, both 12, Sayce alone 1, neither 8. The
 Newsletter's printout: Griffith alone 18, both 10, Sayce alone 4, neither 6. So Sayce settles almost nothing that
 Griffith left open: where he reads otherwise, the later editors mostly side with Griffith; where he agrees with

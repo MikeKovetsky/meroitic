@@ -16,8 +16,9 @@ is counted (`units`), so a value that does not hold shows.
 
 How his print is read: a word is what stands between his dividers ":" and spaces; his hyphens part the signs of a
 word, and a hyphen at the end of a line runs the word on into the next line (it belongs to the line it starts on);
-"(?)" doubts the sign before it, or the word when it stands alone; [ ] are his restorations (kept, and counted as
-unsure); a run of dots is a lost stretch; his roman numerals are numerals.
+"(?)" doubts the sign before it, also where a space parts the two ("b-t (?) :" doubts the t, "L (?) V" the
+numeral L; the word or numeral is listed as doubted); [ ] are his restorations (kept, and counted as unsure); a run
+of dots is a lost stretch; his roman numerals are numerals.
 
 The comparison: both texts in the corpus spelling, lined up letter by letter (difflib) over the whole text. A word
 agrees when all its letters lie in stretches the two share. Two spellings: folded (src/akinidad.py fold(), as for
@@ -26,8 +27,11 @@ part Griffith's two h-signs).
 
 Griffith's doubted words (his "?" and "(?)", 38 words): each is lined up with Sayce's letters at the same place, and
 classed as data/discovery/ostraca_sayce.md fixes before the comparison: confirms, reads otherwise, also unsure, not
-found. Where the closed readings are here (local only), each place also says whether the later reading sides with
-Griffith, with Sayce, with both or with neither (folded spelling; counts only are public).
+found. For this, Sayce's lost signs stay in his letters as "#" (no letter of Griffith's), so that a place he prints
+as lost lines up and counts as unsure, and the place is the whole stretch of his letters from the first that lines
+up with the word to the last, with the letters he has there and Griffith has not. Where the closed readings are
+here (local only), each place also says whether the later reading sides with Griffith, with Sayce, with both or
+with neither (folded spelling; counts only are public); a place where Sayce has no letter does not side with him.
 
   python3 -I src/sayce.py          write data/expansion/jea/sayce_rem1003.json (the words) and sayce_comparison.json
 """
@@ -140,9 +144,11 @@ def words(src=None):
             if k == len(toks) - 1 and t.endswith("-") and not t.endswith("]-"):
                 carry = (t, n_word)
                 continue
-            if t == "(?)":
+            if t == "(?)":                      # it doubts the sign before it: a word's last sign, or a numeral
                 if out:
                     out[-1]["doubt"] = "; ".join(filter(None, [out[-1]["doubt"], "(?) after it"]))
+                    if out[-1].get("signs"):
+                        out[-1]["signs"][-1] = (out[-1]["signs"][-1][0], True)
                 continue
             if ROMAN.fullmatch(t):
                 out.append({"line": n_word, "printed": t, "units": [], "griffith": t, "corpus": t, "doubt": "",
@@ -170,11 +176,18 @@ def strict(text):
     return re.sub(r"[^A-Za-z0-9]", "", text.replace("X", "x"))
 
 
-def as_akinidad(ws):
-    """Words in the shape src/akinidad.py compare() takes (corpus, line), numerals turned to digits."""
+def kept(text):
+    """strict(), with each lost sign kept as "#", which no letter of Griffith's is: Sayce's side of the doubted
+    words, so that a place he prints as lost lines up with what Griffith reads there."""
+    return re.sub(r"[^A-Za-z0-9#]", "", text.replace("X", "x").replace(".", "#"))
+
+
+def as_akinidad(ws, lost=False):
+    """Words in the shape src/akinidad.py compare() takes (corpus, line), numerals turned to digits; the lost
+    stretches too where `lost`."""
     out = []
     for w in ws:
-        if w["kind"] == "lost":
+        if w["kind"] == "lost" and not lost:
             continue
         c = str(roman(w["corpus"])) if w["kind"] == "numeral" else w["corpus"]
         out.append({"line": w["line"], "corpus": c, "printed": w["printed"], "doubt": w["doubt"]})
@@ -200,11 +213,12 @@ def stream(ws, spell):
     return s, owner
 
 
-def aligned(a_ws, b_ws, spell):
-    """For each word of a: the letters of b lined up with it (difflib over the whole texts), and whether all its
-    letters lie in shared stretches."""
+def aligned(a_ws, b_ws, spell, b_spell=None):
+    """For each word of a: the letters of b lined up with it (difflib over the whole texts), from the first that
+    lines up with one of its letters to the last (so letters b has inside the word are part of it), and whether
+    all its letters lie in shared stretches. b_spell: how b is spelled, where not as a."""
     a, a_own = stream(a_ws, spell)
-    b, _ = stream(b_ws, spell)
+    b, _ = stream(b_ws, b_spell or spell)
     seg, good = collections.defaultdict(list), [True] * len(a_ws)
     shared = [False] * len(a)
     for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
@@ -219,7 +233,7 @@ def aligned(a_ws, b_ws, spell):
         good[k] = good[k] and shared[i]
     out = []
     for k, w in enumerate(a_ws):
-        js = sorted(set(seg.get(k, [])))
+        js = list(range(min(seg[k]), max(seg[k]) + 1)) if seg.get(k) else []
         out.append({"word": w, "agrees": good[k] if spell(w["corpus"]) else None,
                     "other": "".join(b[j] for j in js), "at": js})
     return out, b
@@ -236,31 +250,35 @@ def by_line(result):
 
 
 def unsure_at(s_ws, spell):
-    """For each letter of Sayce's stream: whether it is a sign he queries or restores, or lies in a lost stretch."""
+    """For each letter of Sayce's stream (his words in the order of as_akinidad(s_ws, lost=True), spelled by
+    `spell`): whether it is a sign he queries or restores, a numeral he queries, or a lost sign. A spelling that
+    drops lost signs (strict) gives them no letter."""
     flags = []
     for w in s_ws:
         if w["kind"] == "numeral":
-            flags += [False] * len(spell(str(roman(w["corpus"]))))
-            continue
-        if w["kind"] != "word":
-            continue
-        for g, unsure in w["signs"]:
-            flags += [unsure or g == "."] * len(spell(A.to_corpus(g)))
+            flags += [bool(w["doubt"])] * len(spell(str(roman(w["corpus"]))))
+        elif w["kind"] == "lost":
+            flags += [True] * len(spell(w["corpus"]))
+        else:
+            for g, unsure in w["signs"]:
+                flags += [unsure or g == "."] * len(spell(A.to_corpus(g)))
     return flags
 
 
 def doubted(g_ws, s_ws, closed=None):
     """Griffith's doubted words, each with Sayce's letters at the same place and its class."""
     gw = [w for w in g_ws if A.counted(w)]
-    sw = [w for w in s_ws if w["kind"] != "lost"]
-    res, _ = aligned(gw, as_akinidad(sw), strict)
-    flags = unsure_at(sw, strict)
+    sl = as_akinidad(s_ws, lost=True)                  # his lost stretches too, as "#"
+    res, _ = aligned(gw, sl, strict, kept)
+    flags = unsure_at(s_ws, kept)
+    _, s_own = stream(sl, kept)
+    assert len(flags) == len(s_own)
     vs = {}
     if closed:
         for key, text in closed.items():
             cl = [{"line": 0, "corpus": x} for x in text.split()]
             g_res, _ = aligned(gw, cl, A.fold)
-            s_res, _ = aligned(as_akinidad(sw), cl, A.fold)
+            s_res, _ = aligned(sl, cl, A.fold)        # a lost stretch has no letter here: it does not count
             vs[key] = (g_res, s_res)
     out = []
     for k, x in enumerate(res):
@@ -268,7 +286,7 @@ def doubted(g_ws, s_ws, closed=None):
         if not w["doubt"]:
             continue
         other = x["other"]
-        unsure = any(flags[j] for j in x["at"] if j < len(flags))
+        unsure = any(flags[j] for j in x["at"])
         if not other:
             cls = "not found"
         elif unsure:
@@ -280,11 +298,8 @@ def doubted(g_ws, s_ws, closed=None):
         item = {"line": w["line"], "griffith": w["printed"], "doubt": w["doubt"], "sayce": other, "class": cls}
         for key, (g_res, s_res) in vs.items():
             g_ok = bool(g_res[k]["agrees"])
-            s_ok = None
-            if x["at"]:
-                s_stream, s_own = stream(as_akinidad(sw), strict)
-                s_words = {s_own[j] for j in x["at"] if j < len(s_own)}
-                s_ok = all(s_res[i]["agrees"] for i in s_words if s_res[i]["agrees"] is not None)
+            ok = [s_res[i]["agrees"] for i in sorted({s_own[j] for j in x["at"]}) if s_res[i]["agrees"] is not None]
+            s_ok = bool(ok) and all(ok)                # where he has no letter (lost, or not lined up) he has no say
             item[key] = "both" if g_ok and s_ok else "Griffith" if g_ok else "Sayce" if s_ok else "neither"
         out.append(item)
     return out
@@ -329,7 +344,7 @@ def blind(first=None, second=None):
         same = sum(blk.size for blk in m.get_matching_blocks())
         per[str(n)] = {"units": len(a), "units_second": len(b), "agree": same, "identical": first[n] == second[n]}
         tot = [tot[0] + same, tot[1] + len(a), tot[2] + len(b)]
-    share = min(tot[0] / tot[1], tot[0] / tot[2])
+    share = min(tot[0] / tot[1], tot[0] / tot[2]) if tot[1] and tot[2] else 0.0
     return {"lot": list(LOT), "bar": BAR, "units_first": tot[1], "units_second": tot[2], "agree": tot[0],
             "share": round(share, 4), "met": share >= BAR, "lines": per}
 
@@ -346,7 +361,9 @@ def figures(s_ws=None, g_ws=None, closed=None):
            "how": "both texts in the corpus spelling, lined up letter by letter (difflib) over the whole text; a "
                   "word agrees when all its letters lie in stretches the two share. folded: src/akinidad.py fold(); "
                   "strict: the corpus letters as they stand, x and X one letter. units: how often each of his "
-                  "units lines up with each of Griffith's signs where the two agree or are replaced one for one",
+                  "units lines up with each of Griffith's signs where the two agree or are replaced one for one. "
+                  "doubted: Sayce's letters at the place of each of Griffith's doubted words (strict; '#' a sign "
+                  "Sayce prints as lost), from the first that lines up with the word to the last",
            "against_griffith": {}, "units": unit_table(g_ws, s_ws)}
     for name, spell in (("folded", A.fold), ("strict", strict)):
         res, _ = aligned(sw, gw, spell)
@@ -385,9 +402,10 @@ def main(argv):
                      + "\n]\n", encoding="utf-8")                          # one word a line
     closed = A.closed_readings()
     figs = figures(s_ws, closed=closed)
-    if closed is None:            # the closed readings are not here: keep the counts that need them as they are
-        old = json.loads(COMPARISON.read_text()) if COMPARISON.exists() else {}
-        figs = {k: v for k, v in old.items() if k == "against_closed"} | figs
+    # what needs the local files (the closed readings, the blind second typing) is kept as it is where they are not here
+    old = json.loads(COMPARISON.read_text()) if COMPARISON.exists() else {}
+    keep = ({"against_closed"} if closed is None else set()) | ({"second_typing"} if "second_typing" not in figs else set())
+    figs = {k: v for k, v in old.items() if k in keep} | figs
     COMPARISON.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     s = figs["sayce"]
     print(f"Sayce: {s['words']} words on {s['lines']} lines, {s['signs']} signs, {s['numerals']} numerals")
