@@ -215,6 +215,31 @@ The packs' builder asked eight questions; the answers:
    as a code and not counted. Its reading would hint at the hidden word's meaning, where an open word has no such
    neighbour.
 
+### Result of track B (2026-11-16)
+
+The script was reviewed at the full tier by a fresh Opus 5.5 reviewer before any aligner started; every line of
+track B was met (the review stayed open only on gate A1). The six frame builders gave 150 frames (2,693,594
+tokens); 80 Opus aligners answered 4,550 codes in each arm (10,659,683 tokens); two judges read 419 rows, each
+answer beside a decoy (kappa 0.94 on the three verdicts, 0.91 on same or not). Local files:
+`data/sources/frames/`; the count is `result.json`, made once at 23:52 on the script of 6e383c3.
+
+**Gate B: missed.**
+
+| Arm | Hidden words given by both aligners | Right | Share right | Decoys called the same | Margin |
+|---|---|---|---|---|---|
+| With the frames | 26 | 7 | 26.9% | 7.7% | 19.2 points |
+| Without the frames | 38 | 5 | 13.2% | 7.9% | 5.3 points |
+
+The bars were 80% right on at least 10 given words, and 30 points above the decoys. Counted by word and pack
+instead of by word, the frames arm has 12 right of 33 given.
+
+**What it shows.** The Egyptian frames double the share of right meanings over the same readers without them, so
+they carry something real. But where two readers with the frames agree to give a hidden word a meaning, it is
+wrong about three times in four, so a meaning read off a frame cannot be trusted for an open word. The aligners
+named why: no frame fits the oracular decrees or the funerary formulas of the long texts, the Meroitic order
+(verb last) does not follow the Egyptian, and the commonest little word, `l`, is read "to give" or "the", which
+hides where the clauses end. No open word is listed, and `open-packs` is not run.
+
 ## 4. Track C: names as small sentences (H3)
 
 **The names.** Every place the map with its layers marks as a person's name: 705 places, 701 of them without a
