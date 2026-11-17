@@ -57,7 +57,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 
 ## 3. Local: the sources fetched, with where each came from
 
-Public domain here means published before 1930; the files are kept local all the same, as scans. The nine rows from `cnd/` on were fetched on 2026-11-16 on Mike's word ("Yes, fetch all nine"), 23 files and 134.8 MB; every archive.org file has the size and the md5 that archive.org gives for it.
+Public domain here means published before 1930; the files are kept local all the same, as scans. The nine rows from `cnd/` on were fetched on 2026-11-16 on Mike's word ("Yes, fetch all nine"), 23 files and 134.8 MB; every archive.org file has the size and the md5 that archive.org gives for it. Murray 1923 and Lukas 1933 were downloaded by Mike himself the same evening, because their hosts check for robots, and moved here from his Downloads folder (29,783,066 and 1,809,127 bytes).
 
 | Path | Source | Fetched | Size | Rights | What it is for |
 |---|---|---|---|---|---|
@@ -91,6 +91,8 @@ Public domain here means published before 1930; the files are kept local all the
 | `macmichael1922/` | MacMichael, *A History of the Arabs in the Sudan*, vol. 1 (1922), archive.org `historyofarabsin01macm` | 16 Nov | 22 MB, 386 pages | public domain | Its table of Midob, Birgid and Nile Nubian words side by side, by the scout's check; not yet opened |
 | `griffith1913/` | Griffith, *The Nubian Texts of the Christian Period* (1913), archive.org `nubiantextsofchr00grif` | 16 Nov | 7.8 MB, 148 pages | public domain | Its index of Old Nubian words with meanings; not yet opened |
 | `almkvist1911/` | Almkvist, *Nubische Studien im Sudan* (1911), archive.org `nubischestudieni0000almk` | 16 Nov | 21 MB, 324 pages | public domain | A third dictionary of Nile Nubian (Mahas, Dongola, Kenzi); not yet opened |
+| `murray1923/` | Murray, *An English-Nubian Comparative Dictionary* (Harvard African Studies 4, 1923), Heidelberg University Library, doi 10.11588/diglit.49263 | 16 Nov, by Mike (the site checks for robots) | 29.8 MB, 250 pages | public domain (the library's Public Domain Mark) | A Nubian–English dictionary of about 190 pages (PDF pages 50 to 240) with the dialects marked and Dair, Midob and Old Nubian compared; a text layer with reading errors. Not yet typed |
+| `lukas1933/` | Lukas, "Beiträge zur Kenntnis der Sprachen von Wádai (Mararét, Mába)", *Journal de la Société des Africanistes* 3 (1933), pp. 25 to 55, Persée | 16 Nov, by Mike (the download asks a captcha) | 1.8 MB, 32 pages | in copyright; free to read on Persée | A sketch of Mararit, a Taman language, with a word list of about three pages at its end (from PDF page 30). Not yet typed |
 
 ## 4. Not held
 
@@ -103,6 +105,4 @@ Public domain here means published before 1930; the files are kept local all the
 | The first half of *Liverpool Annals* 7 (pp. 1 to 68, plates I to XIV) | The plates of the Akinidad stela | Not found online |
 | The REM volumes on Persée (2000) | Photographs and drawings of REM 0001 to 1278 | Online, in copyright; not fetched |
 | A Demotic word list with meanings | The Demotic side of a search for loans | Not looked for yet |
-| Murray, *An English-Nubian Comparative Dictionary* (1923), Heidelberg University Library, doi 10.11588/diglit.49263 | About 3,500 headwords of Nile Nubian with Dair, Midob and Old Nubian compared (the scout's figure) | Public domain and free, behind a check for robots: Mike was asked on 16 November to download it himself |
-| Lukas, "Beiträge zur Kenntnis der Sprachen von Wádai (Mararét, Mába)", *Journal des Africanistes* 3 (1933), on Persée | The one free source for a Taman language beyond short lists | Free, its PDF behind a captcha: Mike was asked on 16 November to download it himself |
 | A dictionary of a Taman or a Nyima language | Two of the family's branches | None found free (the scout's search of 16 November) |
