@@ -1,0 +1,162 @@
+"""Checks for the REM pilot (src/rem_pilot.py).
+
+  python3 -I tests/test_rem_pilot.py
+
+The REM's pages and the readers' answers are local only, so the checks run on made-up texts and pages, and on the
+public files; a check that reads a local file says so and is skipped where it is absent.
+"""
+import pathlib, sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
+
+import rem_pilot as R                  # noqa: E402
+from local_only import needs, run      # noqa: E402
+
+
+# --- signs ---
+def test_corpus_spelling_as_signs():
+    assert R.corpus_to_signs("pelmoS") == ["p", "e", "l", "m", "o", "s"]           # S is the sign s
+    assert R.corpus_to_signs("pesto") == ["p", "e", "se", "to"]                   # s is the sign se, to one sign
+    assert R.corpus_to_signs("akiNtelo") == ["a", "k", "i", "ñ", "te", "l", "o"]
+    assert R.corpus_to_signs("xbxN XoSi") == ["ḫ", "b", "ḫ", "ñ", "ẖ", "o", "s", "i"]
+    assert R.corpus_to_signs("..re ab.c") == ["r", "e", "a", "b", "c"]            # lost signs are not signs
+    assert R.corpus_to_signs("qo(3)re : wi?") == ["q", "o", "r", "e", "w", "i"]   # line marks, dividers, queries
+    assert R.corpus_to_signs("12 keN") == ["1", "2", "k", "e", "ñ"]
+
+
+def test_fhn_print_as_the_same_signs():
+    assert R.fhn_to_signs("(1)qo pelmos (2)atolise") == R.corpus_to_signs("qo pelmoS atolis")
+    assert R.fhn_to_signs("Pilqe(12)telo,, an(13)t") == R.corpus_to_signs("pilqetelo ant")
+    assert R.fhn_to_signs("womnet(11)h̲,, [=womneselh̲]") == R.corpus_to_signs("womnetX")   # [=...] is not on the stone
+    assert R.fhn_to_signs("ps(i) ḫr *kete") == R.corpus_to_signs("pSi xr kete")        # (i) restored, * unsure
+    assert [len(w) for w in R.fhn_words("Bekemete(4)li sete,, Mnit(4)wwi")] == [9, 2, 7]   # a line mark is no break
+
+
+# --- the measures ---
+def test_measure_counts_extra_signs_against_the_reading():
+    ed = R.corpus_words("abc de")
+    assert R.measure(R.corpus_to_signs("abc de"), ed) == {"signs": 5, "right": 5, "words": 2, "agree": 2}
+    assert R.measure(R.corpus_to_signs("abx de"), ed) == {"signs": 5, "right": 4, "words": 2, "agree": 1}
+    assert R.measure(R.corpus_to_signs("abcz de"), ed)["right"] == 4                # a sign only the reading has
+    assert R.measure(R.corpus_to_signs("abcdefghij"), ed)["right"] == 0            # never below nothing
+    assert R.measure([], ed) == {"signs": 5, "right": 0, "words": 2, "agree": 0}
+
+
+def test_word_agrees_only_when_every_sign_is_matched():
+    ed = R.corpus_words("pesto akiNtelo")
+    assert R.measure(R.corpus_to_signs("pesto akiNtelo"), ed)["agree"] == 2
+    assert R.measure(R.corpus_to_signs("pesto akiNtlo"), ed)["agree"] == 1        # te read as t: a sign lost
+    assert R.measure(R.corpus_to_signs("pestoakiNtelo"), ed)["agree"] == 2        # word division is not scored
+
+
+def test_align_marks_matched_edition_signs():
+    d, same = R.align(list("axc"), list("abc"))
+    assert d == 1 and same == [True, False, True]
+    d, same = R.align(list("abc"), list("ac"))
+    assert d == 1 and same == [True, True]
+
+
+# --- the rule ---
+def made_up(n_fhn=0):
+    out = []
+    for i in range(12):
+        out.append({"id": f"REM {i:04d}", "rem": f"{i:04d}", "volume": 1, "kind": "funerary",
+                    "stratum": ["funerary", "M"], "words": 12, "fhn": i < n_fhn, "open": "x"})
+    return out
+
+
+def test_pick_is_fixed_by_its_seed_and_fills_the_stratum():
+    a, _ = R.pick(made_up())
+    b, _ = R.pick(made_up())
+    assert [e["id"] for e in a] == [e["id"] for e in b] and len(a) == R.ALLOC[("funerary", "M")]
+    c, _ = R.pick(made_up(), seed=1)
+    assert [e["id"] for e in c] != [e["id"] for e in a]
+
+
+def test_fhn_first_but_no_more_than_half():
+    chosen, _ = R.pick(made_up(n_fhn=6))
+    n = R.ALLOC[("funerary", "M")]
+    assert sum(e["fhn"] for e in chosen) == -(-n // 2)
+
+
+def test_no_plate_is_passed_over_and_the_next_taken():
+    entries = made_up()
+    first, _ = R.pick(entries)
+    skip = first[0]["id"]
+    chosen, passed = R.pick(entries, has_plate=lambda e: e["id"] != skip)
+    assert skip not in [e["id"] for e in chosen] and [e["id"] for e in passed] == [skip]
+    assert len(chosen) == len(first)
+
+
+def test_volumes_two_and_three_first_but_no_more_than_late():
+    late = [{"id": f"REM 04{i:02d}", "rem": f"04{i:02d}", "volume": 2, "kind": "funerary",
+             "stratum": ["funerary", "L"], "words": 60, "fhn": False, "open": "x"} for i in range(5)]
+    chosen, _ = R.pick(made_up() + late)
+    assert [e["volume"] for e in chosen][:R.LATE] == [2] * R.LATE             # taken first, no more than LATE
+    assert [e["volume"] for e in chosen][R.LATE] == 1
+    # the stratum is then filled as any other, and its place left can go to one more of them
+    assert sum(e["stratum"] == ["funerary", "L"] for e in chosen) == R.ALLOC[("funerary", "L")]
+    chosen, _ = R.pick(made_up() + late[:1])
+    assert [e["volume"] for e in chosen][:2] == [2, 1]
+
+
+def test_strata():
+    assert R.stratum("funerary", 2) is None and R.stratum("funerary", 151) is None
+    assert R.stratum("graffito", 40) == ("graffito", "M")                # graffiti of M and L are one stratum
+    assert R.stratum("royal or temple (stela)", 30) == ("royal", "L")
+    assert R.stratum("not known", 5) == ("other", "S")
+
+
+def test_the_pool_from_the_public_table():
+    p, left = R.pool()
+    assert p and all(R.MIN_WORDS <= e["words"] <= R.MAX_WORDS for e in p)
+    assert all(R.volume_of(e["rem"]) for e in p)
+    assert not [e for e in p if e["id"] in ("REM 1003", "REM 0094")]            # too long for the pilot
+    assert left["two REM numbers"] >= 1
+
+
+def test_fhn_typed_texts_are_read_from_the_repo():
+    f = R.fhn_typed()
+    assert {"0097", "0247", "0277", "0278", "0103"} <= set(f)
+    assert "ptteb" in f["0103"]                                               # the whole graffito, not the part
+
+
+# --- the volumes ---
+CAT = ("1. Meroitic Inscriptions REM 0003 Localisation actuelle Naga, in situ. Désignation originelle M. I. 3. "
+       "Identification du monument Naga, temple du Lion. Dimensions / Description de l'inscription Texte en "
+       "hiéroglyphique, gravé au nom de \"x\". Inscription sur trois colonnes, dont l'état de conservation est "
+       "mauvais. Bibliographie Griffith 1911c, p. 52.")
+PLATE = ("6 RÉPERTOIRE D'ÉPIGRAPHIE MÉROÏTIQUE REM 0003 Fac-similé de l'inscription M. I. 3 (Griffith 1911c, "
+         "pl. XVII, 3) Fac-similé de l'inscription M. I. 3 (Griffith 1911c, pl. XVII,) Statue de bélier de Soba "
+         "(Griffith 1911c, pl. XV)")
+
+
+def test_catalogue_fields():
+    c = R.catalogue(CAT)
+    assert c["script"] == "hieroglyphic" and c["lines"] == 3 and c["unit"] == "colonne" and c["state"] == "mauvais"
+    assert c["fields"]["Désignation originelle"].startswith("M. I. 3")
+
+
+def test_captions_once_each_with_their_kind():
+    caps = R.captions(PLATE)
+    assert [c["kind"] for c in caps] == ["drawing", "photograph"]
+    assert caps[0]["source"].startswith("Griffith 1911c")
+    assert R.rem_on(PLATE) == ["0003"]
+
+
+def test_plates_for_lettered_entries():
+    idx = [{"rem": "0057A"}, {"rem": "0057B"}, {"rem": "0058"}, {"rem": "0091A"}]
+    assert [e["rem"] for e in R.plates_for("0057", idx)] == ["0057A", "0057B"]
+    assert [e["rem"] for e in R.plates_for("0091a", idx)] == ["0091A"]
+
+
+def test_index_of_the_local_volumes():
+    needs("data/sources/rem/index.jsonl")
+    idx = R.read_index()
+    assert len({e["rem"] for e in idx}) == len(idx)
+    assert all(R.volume_of(e["rem"]) == e["volume"] for e in idx)
+
+
+if __name__ == "__main__":
+    run([(n, f) for n, f in sorted(globals().items()) if n.startswith("test_")])
