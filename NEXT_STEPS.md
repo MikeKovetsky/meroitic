@@ -309,7 +309,8 @@ all words in section G):
    - **Done, 2026-11-17** ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md),
      `src/ostraca.py`). Meroitic Studies V (JEA 11, 1925) prints 46 ostraca with letters (VI, JEA 15, 1929,
      prints none): 275 words, typed from page images; a tenth drawn by lot was typed again blind and agrees on
-     56 of 56 signs (bar 97%). They are open readings in `corpus_v6`, which has 594 inscriptions since.
+     56 of 56 signs (bar 97%). They are open readings in `corpus_v6`, which had 594 inscriptions with them (637
+     with the Faras texts).
    - **Left:** their REM numbers (each is numbered by its siglum, `F.O. 1`, until the REM volumes are in hand);
      pp. 218 and 219 of the article, missing from the scan (another copy of JEA 11 is a download); and taking
      them into the map, which needs a new sample of the unnamed stems for the north star's estimate

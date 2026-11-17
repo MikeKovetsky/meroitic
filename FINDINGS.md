@@ -145,8 +145,8 @@ Details: [cognates_rules.md](data/discovery/cognates_rules.md).
 
 ## 7. What would change the answer
 
-- **More text.** The project holds 594 inscriptions (since 2026-11-17, with Griffith's 46 ostraca; the map is
-  drawn on the 548 before them). Editions it does not hold contain more, and each new long text adds contexts for
+- **More text.** The project holds 637 inscriptions (since 2026-11-17, with Griffith's 46 ostraca and 46 Faras
+  texts; the map is drawn on the 548 before them). Editions it does not hold contain more, and each new long text adds contexts for
   words that now stand alone.
 - **Evidence from outside the texts:** a bilingual, or a published reading the project has not read.
 - **A comparison with whole dictionaries of the related languages,** in the place of short word lists, with

@@ -1,7 +1,7 @@
 # Meroitic with Opus 5.5
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
-the data and the method: the public corpus turned out to be mostly copies, 350 inscriptions are now machine-readable
+the data and the method: the public corpus turned out to be mostly copies, 396 inscriptions are now machine-readable
 under an open licence (327 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
@@ -325,8 +325,8 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     Griffith's "Meroitic Studies V" (*JEA* 11, 1925) prints 46 ostraca from Faras, Buhen and Dakkah in his
     transliteration of the time: 275 words, typed from page images and mapped to today's signs. A tenth of them,
     drawn by lot before the typing, was typed again by an agent that saw only the pages: all 56 signs agree (the
-    bar was 97%). They are open readings in `corpus_v6`, none of them in the public corpus: 594 inscriptions now,
-    350 with an open reading. The map stays on the 548 texts it is drawn on until it is counted again with a new
+    bar was 97%). They are open readings in `corpus_v6`, none of them in the public corpus: 594 inscriptions with them,
+    350 with an open reading (637 and 396 since the Faras texts, item 2). The map stays on the 548 texts it is drawn on until it is counted again with a new
     sample for the north star; of its 1,681 open spellings that stood in one text, 9 now stand in an ostracon too,
     five of them two-letter pieces. Sayce printed all 42 lines of REM 1003 in 1914-15 in his own letters (public
     domain: he died in 1933). Typed and mapped to Griffith's signs, his words agree with Millet's later reading at
@@ -337,7 +337,8 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     (2000, on Persée) gives each inscription as plates of photographs and drawings, with no transliteration. It
     holds 917 inscriptions, not 1,278 as its numbering suggests; 473 are not among the 548 texts the map is drawn
     on, about 4,600 words, and 91 of those 473 are typed but not yet in the map: the 46 ostraca of item 27 and 45
-    of Griffith's Faras texts (item 2; the 46th, REM 0544, was held). A reader
+    of Griffith's Faras texts (item 2; the 46th, REM 0544, was held; REM 0543 is Millet's line 286, which the map
+    holds under his number). A reader
     that saw only the plates read 4 inscriptions from their drawings: 426 of 555 signs right against Griffith
     (76.8%) and 43 of 103 words (41.7%), under the bar of 85%, at 158,438 subagent tokens an inscription, and
     nothing from the photographs. Reading all 473 so would cost about 28 to 75 million
