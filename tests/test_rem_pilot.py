@@ -145,6 +145,12 @@ def test_captions_once_each_with_their_kind():
     assert R.rem_on(PLATE) == ["0003"]
 
 
+def test_catalogue_counts_only_the_inscription_sentence():
+    c = R.catalogue("Description de l'inscription Texte en hiéroglyphique, gravé sur le fût d'une colonne. "
+                    "Inscription sur quatre colonnes, dont l'état de conservation est bon.")
+    assert (c["lines"], c["unit"]) == (4, "colonne")
+
+
 def test_catalogue_wordings():
     c = R.catalogue("Description de l'inscription Texte en cursif, gravé au nom de \"x\". Inscription de six lignes, "
                     "dont l'état de conservation était, au moment de leur découverte, relativement bon (l'érosion).")
@@ -213,6 +219,58 @@ def test_snap_takes_in_a_cut_line_and_stops_at_white():
 
 def test_folders_one_reader_a_pack_and_a_second_for_some():
     assert R.folders(SPEC) == {"P1": "P1", "P2": "P2", "P1b": "P1"}
+
+
+# --- the scores ---
+def test_score_item_takes_fhn_first():
+    eds = {"fhn": R.fhn_words("(1)qo pelmos"), "griffith": R.corpus_words("qo pelmoS")}
+    r = R.score_item("(1) qo pelmoS?", eds)
+    assert r["main"] == "fhn" and r["fhn"]["right"] == r["fhn"]["signs"] == 8 and r["unsure"] == 1
+    r = R.score_item("qo [.]elmoS", {"griffith": R.corpus_words("qo pelmoS")})
+    assert r["main"] == "griffith" and r["griffith"]["right"] == 7 and r["lost"] == 1
+
+
+def test_pooled_and_verdict():
+    rs = [{"main": "g", "g": {"signs": 90, "right": 81, "words": 10, "agree": 6}},
+          {"main": "g", "g": {"signs": 10, "right": 10, "words": 2, "agree": 2}}]
+    p = R.pooled(rs)
+    assert (p["signs"], p["right"], p["share"], p["word_share"]) == (100, 91, 0.91, round(8 / 12, 4))
+    assert R.verdict(0.95) == "GO" and R.verdict(0.9) == "LAYER" and R.verdict(0.849) == "NO-GO"
+
+
+def test_editions_of_a_rem_number():
+    e = R.editions("0277")
+    assert set(e) == {"fhn", "griffith"} and all(isinstance(w, list) for w in e["fhn"])
+    assert set(R.editions("0412")) == {"griffith"}
+
+
+# --- the estimate ---
+def test_recurrence_on_made_up_texts():
+    forms = {f"T{i}": {"a", f"x{i}"} for i in range(40)}          # x_i once each; a in every text
+    for i in range(0, 40, 2):
+        forms[f"T{i}"].add(f"x{i + 1}")                           # x_{i+1} stands in two texts
+    r = R.recurrence(forms, 20, 20, trials=50)
+    assert 0 < r["share"] < 1 and r["share_two"] == 0             # no spelling stands in three texts
+    assert R.recurrence({f"T{i}": {f"x{i}"} for i in range(10)}, 5, 5, trials=5)["share"] == 0
+
+
+def test_extrapolate_a_straight_line_in_log():
+    import math
+    pts = [{"k": k, "share": 0.1 + 0.02 * math.log(k)} for k in (100, 200, 300)]
+    v, slope = R.extrapolate(pts, 500)
+    assert abs(v - (0.1 + 0.02 * math.log(500))) < 1e-3 and abs(slope - 0.02) < 1e-3
+
+
+def test_word_rates_fall_back_to_the_script():
+    idx = [{"rem": f"{i:04d}", "catalogue": {"script": "cursive", "unit": "ligne", "lines": 2}} for i in range(12)]
+    idx += [{"rem": "0100", "catalogue": {"script": "cursive", "unit": "colonne", "lines": 1}}]
+    held = {f"{i:04d}": [{"rem": [f"{i:04d}"], "words": 4}] for i in range(12)}
+    held["0100"] = [{"rem": ["0100"], "words": 30}]
+    rates, medians, n = R.word_rates(idx, held, mean=True)
+    assert rates[("cursive", "ligne")] == 2 and n[("cursive", "colonne")] == 1
+    assert rates[("cursive", "colonne")] == (12 * 4 + 30) / (12 * 2 + 1)           # too few: the script's rate
+    rates, _, _ = R.word_rates(idx, held)
+    assert rates[("cursive", "ligne")] == 2 and rates[("cursive", "colonne")] == 2   # the median: 30 is an outlier
 
 
 if __name__ == "__main__":

@@ -40,6 +40,11 @@ GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"   # local: the analyst
 FIGURES = ROOT / "data/discovery/rem_pilot_figures.json"
 FHN_TYPED = (ROOT / "runs/work/griffith/score.py", "fhn"), (ROOT / "runs/work/handcopy/score_hc.py", "FHN")
 VOLUMES = {1: range(1, 388), 2: range(401, 852), 3: range(1001, 1279)}
+# the sections of the volumes, by their title pages: the numbers the REM gives (917 in all, not 1,278)
+SECTIONS = (("Meroitic Inscriptions", 1, 137), ("Other texts published before", 138, 150),
+            ("Karanog and Shablul", 201, 387), ("Meroe", 401, 451), ("Faras", 501, 546),
+            ("Ostraca of several sites", 551, 597), ("Kawa", 601, 707), ("Royal cemeteries of Kush", 801, 851),
+            ("Texts published singly since 1911", 1001, 1278))
 
 # ------------------------------------------------------------------------------------------ the rule (section 3)
 SEED = 20261117
@@ -206,6 +211,11 @@ def rem_int(rem):
     return int(m.group(1)) if m else None
 
 
+def section_of(rem):
+    n = rem_int(rem)
+    return next((name for name, lo, hi in SECTIONS if n is not None and lo <= n <= hi), None)
+
+
 def volume_of(rem):
     n = rem_int(rem)
     return next((v for v, r in VOLUMES.items() if n in r), None) if n else None
@@ -315,7 +325,7 @@ def catalogue(text):
     script = "hieroglyphic" if re.search(r"hiéroglyph", d, re.I) else "cursive" if re.search(r"cursi[fv]", d, re.I) \
         else ""
     lines, unit = None, ""
-    m = re.search(r"\b(?:sur|de|d'|en) ?(\S+?(?:-\S+)?) (ligne|colonne|bande)s?\b", d)
+    m = re.search(r"\bInscriptions? (?:sur|de|d'|en) ?(\S+?(?:-\S+)?) (ligne|colonne|bande)s?\b", d)
     one = re.search(r"\b[Uu]ne seule (ligne|colonne|bande)", d)
     if m:
         w = m.group(1).lower()
@@ -363,13 +373,21 @@ def index(folder=TEXT):
     run together."""
     entries, cat_text = collections.OrderedDict(), collections.defaultdict(list)
     for vol in (1, 2, 3):
+        last = None
         for p in sorted((folder / f"v{vol}").glob("T*.html")):
             text = page_text(p.read_text(encoding="utf-8"))
-            nums = rem_on(text)
-            if not nums or re.search(r"REM \d{4} à REM \d{4}", text):
+            if re.search(r"REM \d{4} à REM \d{4}", text):
+                continue                                  # a section's title page
+            nums = [n for n in rem_on(text) if volume_of(n) == vol and section_of(n)]
+            if nums:
+                num = nums[0]
+            elif last is not None:
+                num = last                                # a continuation whose heading the text layer lost
+            else:
                 continue
-            num = nums[0]
-            e = entries.setdefault(num, {"rem": num, "volume": vol, "plates": [], "catalogue": None, "pages": []})
+            last = num
+            e = entries.setdefault(num, {"rem": num, "volume": vol, "section": section_of(num), "plates": [],
+                                         "catalogue": None, "pages": []})
             e["pages"].append(p.stem)
             if is_catalogue(text):
                 cat_text[num].append((p.stem, text))
@@ -480,16 +498,19 @@ def snap(img, top, left, height, width, frame=None):
 
 
 def folders(spec):
-    """{folder name: pack name}: one reader for each pack, and a second for the packs named in the spec."""
+    """{folder name: pack name}: one reader for each pack, a second for the packs named in the spec, and the
+    packs of photographs alone (spec["photo_only"]: folder name -> pack)."""
     out = {p: p for p in spec["packs"]}
     out.update({p + "b": p for p in spec["second_reader"]})
+    out.update(spec.get("photo_only", {}))
     return out
 
 
-def write_packs(spec=None, run=None):
+def write_packs(spec=None, run=None, rebuild=False):
     """The readers' folders: the brief, the signs, each item's figures cut out of its plate page, items.json and an
-    empty out/; and the key (folder, item id -> REM number), outside the folders. Refuses once a reader has
-    answered."""
+    empty out/; and the key (folder, item id -> REM number), outside the folders. Writes only the folders that do
+    not exist yet, since a reader may be at work in one (rebuild: write them all again, refused where a reader has
+    answered)."""
     import shutil
     import subprocess
     spec = json.loads(SPEC.read_text(encoding="utf-8")) if spec is None else spec
@@ -498,12 +519,16 @@ def write_packs(spec=None, run=None):
     script = {r: next((x["catalogue"]["script"] for x in plates_for(r, idx) if x["catalogue"]), "") for r in picks}
     if picks != set(spec["items"]) or picks != {r for v in spec["packs"].values() for r in v}:
         raise SystemExit("the spec's items are not the rule's picks")
-    if any(PACKS.glob("*/out/readings.jsonl")):
-        raise SystemExit("a reader has answered: not writing the packs again")
     run = run or (lambda cmd: subprocess.run(cmd, check=True, capture_output=True))
-    key = {}
+    photo_only = set(spec.get("photo_only", {}))
+    key = {name: {"ABCDEFGH"[k]: rem for k, rem in enumerate(spec["packs"][pack])}
+           for name, pack in folders(spec).items()}
     for name, pack in folders(spec).items():
         d = PACKS / name
+        if d.exists() and not rebuild:
+            continue                    # a folder once written may have a reader at work in it: never touched again
+        if (d / "out" / "readings.jsonl").exists():
+            raise SystemExit(f"{name}: a reader has answered here; not writing it again")
         if d.exists():
             shutil.rmtree(d)
         (d / "plates").mkdir(parents=True)
@@ -515,7 +540,8 @@ def write_packs(spec=None, run=None):
             iid = "ABCDEFGH"[k]
             it = spec["items"][rem]
             files = []
-            for n, (page, box, kind) in enumerate(it["figures"], 1):
+            figs = [f for f in it["figures"] if name not in photo_only or f[2] == "photograph"]
+            for n, (page, box, kind) in enumerate(figs, 1):
                 top, left, h, w = box_on_page(box, spec, page, kind)
                 if kind == "drawing":
                     top, left, h, w = snap(gray(PAGES / f"{page}.jpg"), top, left, h, w, spec["frames"].get(page))
@@ -525,10 +551,311 @@ def write_packs(spec=None, run=None):
                 files.append(out.name)
             items.append({"id": iid, "object": it["object"], "script": script[rem] or "not stated", "lines": it["lines"],
                           "figures": files})
-            key.setdefault(name, {})[iid] = rem
         (d / "items.json").write_text(json.dumps(items, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     KEY.write_text(json.dumps(key, indent=1) + "\n", encoding="utf-8")
     return key
+
+
+# ------------------------------------------------------------------------------------------ the scores
+
+SCORES = PILOT / "scores.json"         # local: every item's counts, with the readings' kinds of figure
+
+
+def answers(folder):
+    """{item id: the reader's object} from a folder's out/readings.jsonl, or {} where it has not answered."""
+    f = PACKS / folder / "out" / "readings.jsonl"
+    if not f.exists():
+        return {}
+    out = {}
+    for line in f.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            o = json.loads(line)
+            out[str(o.get("id"))] = o
+    return out
+
+
+def editions(rem, table=None, fhn=None):
+    """{name: the edition's words as signs} for a REM number: FHN III where typed, and Griffith's open reading."""
+    table = rows() if table is None else table
+    fhn = fhn_typed() if fhn is None else fhn
+    out = {}
+    if rem in fhn:
+        out["fhn"] = fhn_words(fhn[rem])
+    r = next((x for x in table if x.get("rem") == [rem] and x.get("open_text")), None)
+    if r:
+        out["griffith"] = corpus_words(r["open_text"])
+    return out
+
+
+def score_item(reading, eds):
+    """{edition name: measure} of one reading against each edition, and the main score (FHN where typed)."""
+    sig = corpus_to_signs(reading)
+    out = {name: measure(sig, words) for name, words in eds.items()}
+    out["main"] = "fhn" if "fhn" in eds else "griffith"
+    out["reading_signs"] = len(sig)
+    out["unsure"] = len(re.findall(r"\?", reading))
+    out["lost"] = len(re.findall(r"\[\.\]", reading))
+    return out
+
+
+def pooled(results, key=lambda r: r[r["main"]]):
+    """{signs, right, share, words, agree, word_share} over results, by each one's main score (or by key)."""
+    ms = [key(r) for r in results if key(r)]
+    n, right = sum(m["signs"] for m in ms), sum(m["right"] for m in ms)
+    w, agree = sum(m["words"] for m in ms), sum(m["agree"] for m in ms)
+    return {"items": len(ms), "signs": n, "right": right, "share": round(right / n, 4) if n else None,
+            "words": w, "agree": agree, "word_share": round(agree / w, 4) if w else None}
+
+
+def verdict(share):
+    return "GO" if share >= BAR_GO else "LAYER" if share >= BAR_LAYER else "NO-GO"
+
+
+def score(spec=None, key=None):
+    """Every first reading scored against its editions; the second readers against the first."""
+    spec = json.loads(SPEC.read_text(encoding="utf-8")) if spec is None else spec
+    key = json.loads(KEY.read_text(encoding="utf-8")) if key is None else key
+    table, fhn = rows(), fhn_typed()
+    strata = {e["rem"]: e for e in pool(table, fhn)[0]}
+    items, second, photos = [], [], []
+    photo_only = set(spec.get("photo_only", {}))
+    for folder, ids in sorted(key.items()):
+        got = answers(folder)
+        for iid, rem in ids.items():
+            if iid not in got:
+                continue
+            rd = got[iid].get("reading", "")
+            if folder in photo_only:                       # beside the bar, not in it
+                photos.append({"rem": rem, "pack": folder, **score_item(rd, editions(rem, table, fhn))})
+                continue
+            if folder.endswith("b"):
+                first = answers(folder[:-1]).get(iid)
+                if first:
+                    m = measure(corpus_to_signs(rd), corpus_words(first.get("reading", "")))
+                    second.append({"rem": rem, "pack": folder[:-1], **m})
+                continue
+            r = score_item(rd, editions(rem, table, fhn))
+            e = strata.get(rem, {})
+            r.update({"rem": rem, "pack": folder, "item": iid, "stratum": e.get("stratum"),
+                      "words_open": e.get("words"), "source": "karanog" if (e.get("open") or "").startswith("karanog")
+                      else "griffith", "figures": got[iid].get("figures")})
+            items.append(r)
+    out = {"items": items, "second": second, "pooled": pooled(items),
+           "pooled_griffith": pooled(items, lambda r: r.get("griffith")),
+           "pooled_fhn": pooled(items, lambda r: r.get("fhn")),
+           "agreement": pooled(second, lambda r: r), "photo_only": photos,
+           "pooled_photo_only": pooled(photos),
+           "pooled_same_items_with_drawings": pooled([r for r in items if r["rem"] in {x["rem"] for x in photos}])}
+    if out["pooled"]["share"] is not None:
+        out["verdict"] = verdict(out["pooled"]["share"])
+    SCORES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return out
+
+
+# ------------------------------------------------------------------------------------------ the estimate
+
+OPEN_LEVELS = ("hypothesis", "kind", "unknown")      # a spelling is open when its most frequent level is one of these
+TRIALS, MIN_PAIRS = 200, 10
+TOKENS = PILOT / "tokens.json"         # local: the readers' tokens, written by hand from the task notifications
+ESTIMATE = PILOT / "estimate.json"
+
+
+def held_numbers(table=None):
+    """{four-digit REM number: [rows of the table in corpus_v6 that carry it]}."""
+    out = collections.defaultdict(list)
+    for r in rows() if table is None else table:
+        if r.get("in_corpus_v6"):
+            for x in r.get("rem") or []:
+                out[x[:4]].append(r)
+    return out
+
+
+def word_rates(idx, held, mean=False):
+    """{(script, unit): words a unit} from the REM numbers that are one entry (no lettered parts), held by one row
+    with that one REM number, with the catalogue's count; a pair (script, unit) seen fewer than MIN_PAIRS times
+    takes its script's rate over all units. The rate is the median of the numbers' words per unit (robust to a long
+    stela whose parts the index files under one entry), or with mean the words over the units (the high end)."""
+    pairs = collections.defaultdict(list)
+    parts = collections.Counter(e["rem"][:4] for e in idx)
+    for e in idx:
+        rs, c = held.get(e["rem"][:4]), e["catalogue"]
+        if parts[e["rem"][:4]] == 1 and rs and len(rs) == 1 and len(rs[0]["rem"]) == 1 and c and c["lines"]:
+            pairs[(c["script"], c["unit"])].append((c["lines"], rs[0]["words"]))
+    rate = (lambda v: sum(w for _, w in v) / sum(n for n, _ in v)) if mean else \
+        (lambda v: sorted(w / n for n, w in v)[len(v) // 2])
+    by_script = collections.defaultdict(list)
+    for (sc, _), v in pairs.items():
+        by_script[sc] += v
+    out = {k: rate(v) for k, v in pairs.items() if len(v) >= MIN_PAIRS}
+    for (sc, un), v in pairs.items():
+        if len(v) < MIN_PAIRS:
+            out[(sc, un)] = rate(by_script[sc])
+    medians = {sc: sorted(w for _, w in v)[len(v) // 2] for sc, v in by_script.items()}
+    return out, medians, {k: len(v) for k, v in pairs.items()}
+
+
+def by_number(idx):
+    """{four-digit REM number: its entries} (a number's parts, 0057A to C, and a plate and a catalogue filed under
+    0051 and 0051A, are one number)."""
+    out = collections.OrderedDict()
+    for e in idx:
+        out.setdefault(e["rem"][:4], []).append(e)
+    return out
+
+
+def words_of(entries, rates, medians, overall):
+    """The words a REM number is expected to hold: each part with a catalogue, by its script, unit and count;
+    a number with no count, the median of its script (or of all)."""
+    total, counted = 0.0, False
+    for e in entries:
+        c = e["catalogue"] or {}
+        sc, un, n = c.get("script", ""), c.get("unit", ""), c.get("lines")
+        if n and (sc, un) in rates:
+            total += rates[(sc, un)] * n
+            counted = True
+    if counted:
+        return total
+    sc = next(((e["catalogue"] or {}).get("script") for e in entries if e["catalogue"]), "")
+    return medians.get(sc, overall)
+
+
+def open_forms(path=GLOSSES):
+    """{inscription: its open spellings} from the analysts' map of corpus_v6 (local)."""
+    gl = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            r = json.loads(line)
+            gl[r["id"]] = r["glosses"]
+    level = collections.defaultdict(collections.Counter)
+    for gs in gl.values():
+        for g in gs:
+            level[g["form"]][g["level"]] += 1
+    opened = {f for f, c in level.items() if c.most_common(1)[0][0] in OPEN_LEVELS}
+    return {t: {g["form"] for g in gs} & opened for t, gs in gl.items()}
+
+
+def recurrence(forms, k, m, trials=TRIALS, seed=SEED):
+    """Of the open spellings that stand in exactly one of k inscriptions drawn at random, the share that stands in
+    at least one (and in at least two) of m other inscriptions: how often a spelling once in the corpus recurs when
+    m texts are added to k. Mean over trials."""
+    rnd = random.Random(seed)
+    ids = sorted(forms)
+    once_n = hit1 = hit2 = 0
+    for _ in range(trials):
+        rnd.shuffle(ids)
+        a, b = ids[:k], ids[k:k + m]
+        cnt = collections.Counter(f for t in a for f in forms[t])
+        once = {f for f, c in cnt.items() if c == 1}
+        inb = collections.Counter(f for t in b for f in forms[t] if f in once)
+        once_n += len(once)
+        hit1 += len(inb)
+        hit2 += sum(1 for c in inb.values() if c >= 2)
+    return {"k": k, "m": m, "once": round(once_n / trials, 1), "share": round(hit1 / once_n, 4),
+            "share_two": round(hit2 / once_n, 4)}
+
+
+def extrapolate(points, k):
+    """The share at k, from a straight line through (log k, share) of the points: how the measured share moves as
+    the corpus it is measured on grows."""
+    xs, ys = [math.log(p["k"]) for p in points], [p["share"] for p in points]
+    mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+    slope = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sum((x - mx) ** 2 for x in xs)
+    return round(my + slope * (math.log(k) - mx), 4), round(slope, 4)
+
+
+def estimate(scores=None):
+    idx, table = read_index(), rows()
+    held = held_numbers(table)
+    rates, medians, n_pairs = word_rates(idx, held)
+    sizes = sorted(r["words"] for r in table if r.get("in_corpus_v6"))
+    overall = sizes[len(sizes) // 2]
+    numbers = by_number(idx)
+    new = {n: es for n, es in numbers.items() if n not in held}
+    words = {n: words_of(es, rates, medians, overall) for n, es in new.items()}
+    rates_mean = word_rates(idx, held, mean=True)[0]
+    words_mean = sum(words_of(es, rates_mean, medians, overall) for es in new.values())
+    cat = lambda es, f: next(((e["catalogue"] or {}).get(f) for e in es if (e["catalogue"] or {}).get(f)), None)
+    drawn = lambda es: any(c["kind"] == "drawing" for e in es for pl in e["plates"] for c in pl["captions"])
+    section = lambda n: section_of(n)
+    out = {
+        "numbers": len(numbers), "entries": len(idx), "by_section": dict(collections.Counter(map(section, numbers))),
+        "held": sum(1 for n in numbers if n in held), "new": len(new),
+        "new_by_section": dict(collections.Counter(map(section, new))),
+        "new_by_script": dict(collections.Counter(cat(es, "script") or "not stated" for es in new.values())),
+        "new_with_a_drawing_by_caption": sum(drawn(es) for es in new.values()),
+        "new_with_a_plate": sum(1 for es in new.values() if any(e["plates"] for e in es)),
+        "new_lines_stated": sum(1 for es in new.values() if cat(es, "lines")),
+        "rates": {f"{a or 'not stated'} {b}": round(v, 2) for (a, b), v in sorted(rates.items())},
+        "rate_pairs": {f"{a or 'not stated'} {b}": v for (a, b), v in sorted(n_pairs.items())},
+        "words_new": round(sum(words.values())), "words_new_at_the_mean_rate": round(words_mean),
+        "words_new_by_section": {k: round(sum(w for n, w in words.items() if section(n) == k))
+                                 for k in dict.fromkeys(map(section, new))},
+        "corpus_inscriptions": sum(1 for r in table if r.get("in_corpus_v6")),
+    }
+    if GLOSSES.exists():
+        forms = open_forms()
+        k_all = len(forms)
+        corpus_words = sum(r["words"] for r in table if r.get("in_corpus_v6"))
+        out["corpus_words"] = corpus_words
+        rec = {}
+        for name, ratio in (("by_words", sum(words.values()) / corpus_words), ("by_words_mean", words_mean / corpus_words),
+                            ("by_inscriptions", len(new) / k_all)):
+            ks = [k for k in (120, 150, 180, 210) if k * (1 + ratio) <= k_all]
+            pts = [recurrence(forms, k, round(k * ratio)) for k in ks]
+            share, slope = extrapolate(pts, k_all)
+            two = extrapolate([{"k": p_["k"], "share": p_["share_two"]} for p_ in pts], k_all)[0]
+            rec[name] = {"ratio": round(ratio, 3), "points": pts, "share_at_corpus": share, "slope": slope,
+                         "share_two_at_corpus": two}
+        once_now = sum(1 for f, c in collections.Counter(f for fs in forms.values() for f in fs).items() if c == 1)
+        for v in rec.values():
+            v["would_recur"] = round(once_now * v["share_at_corpus"])
+            v["would_reach_three_texts"] = round(once_now * v["share_two_at_corpus"])
+        out["recurrence"] = {"once_now": once_now, **rec}
+    scores = scores or (json.loads(SCORES.read_text(encoding="utf-8")) if SCORES.exists() else None)
+    if scores and "recurrence" in out and scores["pooled"]["word_share"]:
+        for k in ("by_words", "by_words_mean", "by_inscriptions"):
+            v = out["recurrence"][k]
+            v["would_recur_read_right"] = round(v["would_recur"] * scores["pooled"]["word_share"])
+    if TOKENS.exists() and scores:
+        tok = json.loads(TOKENS.read_text(encoding="utf-8"))
+        first = {k: v for k, v in tok.items() if not k.endswith("b")}
+        signs = collections.Counter()
+        for r in scores["items"]:
+            signs[r["pack"]] += r[r["main"]]["signs"]
+        t, sg = sum(first[k] for k in first if k in signs), sum(signs[k] for k in first if k in signs)
+        items = sum(1 for r in scores["items"] if r["pack"] in first)
+        per_sign = t / sg if sg else None
+        avg_signs = sum(len(corpus_to_signs(r.get("open_text") or "")) for r in table if r.get("open_text")) / \
+            max(1, sum(open_words(r) for r in table if r.get("open_text")))
+        out["cost"] = {"tokens": t, "items": items, "signs": sg, "per_item": round(t / items) if items else None,
+                       "per_sign": round(per_sign, 1) if per_sign else None, "signs_per_word": round(avg_signs, 2),
+                       "full_read": round(per_sign * sum(words.values()) * avg_signs) if per_sign else None,
+                       "full_read_mean": round(per_sign * words_mean * avg_signs) if per_sign else None}
+    ESTIMATE.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return out
+
+
+# ------------------------------------------------------------------------------------------ the public figures
+
+def public(scores=None, est=None):
+    """The figures file: counts only, never a reading of the REM or an image."""
+    scores = scores or json.loads(SCORES.read_text(encoding="utf-8"))
+    est = est or json.loads(ESTIMATE.read_text(encoding="utf-8"))
+    items = []
+    for r in scores["items"]:
+        row = {"rem": r["rem"], "pack": r["pack"], "stratum": r["stratum"], "source": r["source"], "main": r["main"],
+               "reading_signs": r["reading_signs"], "unsure": r["unsure"], "lost": r["lost"]}
+        for name in ("fhn", "griffith"):
+            if name in r:
+                row[name] = r[name]
+        items.append(row)
+    out = {"bar": {"go": BAR_GO, "layer": BAR_LAYER, "expected": EXPECTED},
+           "pooled": scores["pooled"], "verdict": scores.get("verdict"),
+           "pooled_griffith": scores["pooled_griffith"], "pooled_fhn": scores["pooled_fhn"],
+           "agreement_of_two_readers": scores["agreement"], "items": items,
+           "estimate": {k: v for k, v in est.items()}}
+    FIGURES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return out
 
 
 # ------------------------------------------------------------------------------------------ commands
@@ -546,6 +873,21 @@ def main(argv):
     elif cmd == "packs":
         key = write_packs()
         print(f"{len(key)} folders:", {k: len(v) for k, v in key.items()})
+    elif cmd == "score":
+        out = score()
+        for r in out["items"]:
+            m = r[r["main"]]
+            print(r["rem"], r["pack"], r["item"], r["main"], f"{m['right']}/{m['signs']}", f"words {m['agree']}/{m['words']}",
+                  "| griffith" if "griffith" in r and r["main"] == "fhn" else "",
+                  f"{r['griffith']['right']}/{r['griffith']['signs']}" if r["main"] == "fhn" and "griffith" in r else "")
+        print("pooled", out["pooled"], out.get("verdict"))
+        print("against Griffith", out["pooled_griffith"])
+        print("second readers against the first", out["agreement"])
+    elif cmd == "estimate":
+        print(json.dumps(estimate(), ensure_ascii=False, indent=1))
+    elif cmd == "public":
+        out = public()
+        print(f"{FIGURES.relative_to(ROOT)}: {len(out['items'])} items, pooled {out['pooled']['share']}")
     elif cmd == "pick":
         p, _ = pool()
         idx = read_index() if INDEX.exists() else None
