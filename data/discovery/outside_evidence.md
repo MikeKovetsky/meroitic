@@ -282,6 +282,32 @@ four fifths and cutting the last fifth, 48.2% against 11.3% (36.9 points); with 
 for the held-back set, 33.7% against 6.4% (27.4 points). The real gate learns from all 342 tuning names. The bar
 of 30 points is not changed.
 
+### Result of track C (2026-11-16)
+
+The script was reviewed at the full tier by a fresh Opus 5.5 reviewer, which fixed eight faults before any gate
+ran (the gravest: the order of the codes in a pack told the known parts from the others) and marked it clean
+(18a3c11). Local files: `data/sources/names/`.
+
+**Gate C1, run once at 23:11:55 on 18a3c11: met.** 191 of the 305 held-back names are split wholly into parts that
+stand in three tuning names or more (62.6%); the same names with their letters shuffled, 15.8% (200 draws):
+46.8 points, where the bar was 30. Without the 31 spellings that stand in the tuning texts too: 165 of 274, 60.2%
+against 15.4% (44.8 points). Beside it, with no bar: names that keep their syllables and shuffle their order split
+39.9% of the time, so about 20 of the 46.8 points come from the parts and not from the syllables alone.
+
+What C1 shows: the parts that the cutter learned come back in names it never saw, far more often than chance
+letters do. It says nothing of what any part means.
+
+**Gate C2, counted at 23:16:27 on 18a3c11: too small to decide.** 260 parts in six packs, 26 of them known, two
+readers a pack, blind to the letters and to which parts are known. The readers answered "unclear" for 237 of the
+260 parts, and both did so for 23 of the 26 known ones (kappa on kinds 0.84, most of it agreement on "unclear").
+They agreed on the kind of one known part and gave it rightly (a god, Amun), and on its meaning; a bar needed 8.
+Where they gave a kind at all it was mostly "ending", for parts that close women's names. One reader called the
+part `kdi` "thing or person", "woman, female", which is its meaning; the other called it unclear.
+
+What C2 shows: the counts of where a part stands, with which gods and in whose names, do not tell careful readers
+what kind of part it is; they decline to guess, and the test cannot decide. This is a third kind of evidence from
+inside the texts that gives the kind of a word sooner than its meaning, and here not even the kind.
+
 ## 5. The order, and who writes what
 
 - The three tracks run side by side; none reads another's files. Agents write under `data/sources/nubian/`,
