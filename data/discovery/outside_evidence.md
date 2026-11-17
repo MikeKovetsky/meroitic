@@ -100,6 +100,28 @@ readers start. The bars are those of the blind test and stand now:
 
 Only if both hold are candidates made for the words without a meaning.
 
+**Rules added on 2026-11-16 at about 22:15, after the script was written and before it was committed or run on
+a typed page** (its builder had seen no typed page). Its builder named two weaknesses of the rules above:
+
+- **The meanings of the Meroitic words.** A word's meaning is taken, in this order, from the short wording of the
+  public tables (`lexicon_statuses.tsv`, `meaning_in_our_words`) where one exists; else from the map's wording,
+  for a word a layer of the map gives a meaning; else from the lexicon's English meaning. Words of grammar and of
+  cross-reference (articles, prepositions, conjunctions, auxiliaries, pronouns, and "see", "also", "variant",
+  "form", "cf", "perhaps", "probably", "kind", "sort", "type") are taken out of that wording, and out of the
+  typists' English meanings, before the engine makes its keys; a fixed list in the script, with no word of
+  content on it. The engine itself is not changed.
+- **A third reduction, by name,** each word with its reason in the public list: forms of a word the
+  correspondences were built from that the lexicon ties to it (`qor`, `yeto`, `mse`, `ḫ- (1)`, `ḫlẖl`, `ḫmlol`);
+  words built on a loan (`apote-lẖ`, `pesto`, `at (1)`); and of each family of stems under three letters that
+  stands more than once (`tk`, `ns`, `qo`, and any other found), the shortest headword alone. A word of the first
+  two kinds is dropped only where the lexicon's own entry or the Egyptian key says so.
+- **Decided by the builder and kept:** an entry with no dialect mark is one row, scored as Nobiin (the engine
+  scores Kenzi, Dongola and Nobiin by the same correspondences); `ṅ` is read as ŋ, `ń` as ɲ, a `g` with a mark as
+  the palatal stop, Reinisch's `q` as c, from the sound chapters of the two grammars; the sub-rows of a loan are
+  loans; the typing's bar sets aside the marks on vowels and case, and no mark on a consonant. The gate refuses
+  to run twice, on a script or a list that is not as committed, on a page that failed the merge's checks, or
+  while the typing's bar is not met.
+
 ## 3. Track B: the royal texts beside the Kushite kings' Egyptian texts (H2)
 
 **The Meroitic side.** The inscriptions of `corpus_v6` whose kind is "royal or temple" (87) or "oracular decree"
@@ -148,6 +170,29 @@ the Egyptian texts carry the result or the reader's own knowledge of such texts 
 as favoured by the frames, each with its frame. **What a pass would not show:** the hidden words are commoner
 than the open ones, and an aligner may know a published reading of a famous text. So each listed word still
 goes through the sources in hand and an independent check, by rules set before that step starts.
+
+**Rules added on 2026-11-16 at about 22:15, after the packs were built and before any aligner was started.**
+The packs' builder asked eight questions; the answers:
+
+1. **A hidden word that stands in several packs** (59 of the 102) is *given* when both aligners with the frames
+   give it a meaning in one of its packs, and *right* only when it is right in every pack where it is given. The
+   count by word and pack is reported beside it.
+2. **The meaning to judge against** is taken as in track A: the public tables' short wording where one exists,
+   else the meaning the map gives the word, else the lexicon's English.
+3. **A meaning that only names another word** ("variant of sr") is replaced by that word's meaning where the map
+   gives it one; a word left without a meaning of its own is left out of the count, and its number is reported.
+4. **The frames an aligner is given** are a digest of the six files written by the script: each frame's id,
+   name, place in a text and monuments, and each slot's number, meaning, wording and whether it may be left out
+   or repeated, without the sources' passages and notes (the six files together are about 120,000 tokens, too
+   many for one reader).
+5. **A text of 708 words** (REM 1044) stays one pack: a text is never split.
+6. **In the arm with the frames,** a meaning that names no frame and slot of the digest counts as "none"; the
+   number of such answers is reported. The brief does not tell the aligners that some codes are known words.
+7. **`l (2)`, "to give"**, stands at 98 of the 624 places of known words, 83 of them as the single letter `l`;
+   it is counted as one word like any other.
+8. **What the packs cannot hide:** a hidden code stands at three places in the median and an open one at one,
+   and hidden codes are more often joined to an ending (39 to 45% against 15 to 16%). A reader who guesses that
+   a common code is a known word gains nothing it can use: it does not know which word.
 
 ## 4. Track C: names as small sentences (H3)
 
