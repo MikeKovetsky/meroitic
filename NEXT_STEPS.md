@@ -221,7 +221,8 @@ all words in section G):
    Archaeology* 11 and 15. F4 reads none of them to start: its sources were in hand before. Also fetched: the
    half of *Liverpool Annals* 7 that archive.org holds. It prints Sayce's reading of REM 1003, all 42 lines in
    the letter values he used, and no picture of the stone; it is not yet typed or compared. Not fetched, on
-   purpose: the Nubian grammars of step 18, the REM volumes of step 7, and the books that have to be bought.
+   purpose: the Nubian grammars of step 18 and the books that have to be bought. The REM volumes of step 7 were
+   opened on 2026-11-17 for its pilot: the text layers of all their pages and 23 page images, kept locally.
 
 ## A. Share
 
@@ -294,11 +295,21 @@ all words in section G):
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
-   [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, REM 0001 to 1278:
-   about 1,280 inscriptions against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
+   [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, numbered REM 0001
+   to 1278 (917 inscriptions, counted on 2026-11-17) against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
    drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
    a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
    republishing.
+   - **Done, 2026-11-17: the plates cannot be read well enough**
+     ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)). An entry is a page of plates (photographs and
+     drawings, most reprinted from the first edition) and a catalogue page; no transliteration, as Otten said. The
+     REM holds 917 inscriptions in nine sections, not 1,278 (the numbering has gaps): 517 are new to `corpus_v6`,
+     about 5,300 words. A blind reader read 4 inscriptions from their drawings at 76.8% of signs and 41.7% of words
+     against Griffith (bar 85% for the lowest use), at 158,438 subagent tokens an inscription; it could read none
+     of the photographs. The full read would cost about 32 to 82 million tokens and give about 70 of the 2,013 open
+     spellings that stand in one text a second text, read right. The pilot stopped at 4 of its 20 inscriptions on
+     Mike's word, for the budget. Recommendation: do not read the plates; the transliterations in print (Hallof,
+     below) are the route.
    - **The complete transliterations exist in print (checked 2026-11-09).** Jochen Hallof, *Analytisches
      Wörterbuch des Meroitischen*, volume 7, "Dokumente" (J.H. Röll, 2024, SRaT 13.7, ISBN 978-3-89754-629-5):
      hardcover, 340 pages, 139.00 EUR. [The publisher's free 23-page sample](https://www.lehmanns.de/media/116874085)

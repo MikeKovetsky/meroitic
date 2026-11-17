@@ -1,0 +1,412 @@
+{
+ "bar": {
+  "go": 0.95,
+  "layer": 0.85,
+  "expected": {
+   "pooled": 0.75,
+   "drawings": 0.85,
+   "photographs": 0.5,
+   "words": 0.5,
+   "tokens_an_inscription": 40000
+  }
+ },
+ "pooled": {
+  "items": 4,
+  "signs": 555,
+  "right": 426,
+  "share": 0.7676,
+  "words": 103,
+  "agree": 43,
+  "word_share": 0.4175
+ },
+ "verdict": "NO-GO",
+ "pooled_griffith": {
+  "items": 4,
+  "signs": 555,
+  "right": 426,
+  "share": 0.7676,
+  "words": 103,
+  "agree": 43,
+  "word_share": 0.4175
+ },
+ "pooled_fhn": {
+  "items": 0,
+  "signs": 0,
+  "right": 0,
+  "share": null,
+  "words": 0,
+  "agree": 0,
+  "word_share": null
+ },
+ "agreement_of_two_readers": {
+  "items": 0,
+  "signs": 0,
+  "right": 0,
+  "share": null,
+  "words": 0,
+  "agree": 0,
+  "word_share": null
+ },
+ "faults": {
+  "substituted": 97,
+  "extra": 18,
+  "missing": 14,
+  "by_pair": {
+   "s for m": 13,
+   "e for l": 9,
+   "k for p": 7,
+   "ñ for d": 6,
+   "s for ẖ": 6,
+   "y for o": 4,
+   "m for s": 3,
+   "l for e": 3,
+   "m for q": 3,
+   "m for e": 2,
+   "o for q": 2,
+   "m for t": 2,
+   "a for e": 1,
+   "e for t": 1,
+   "ñ for te": 1,
+   "l for d": 1,
+   "k for ẖ": 1,
+   "k for s": 1,
+   "i for d": 1,
+   "l for t": 1,
+   "n for k": 1,
+   "i for l": 1,
+   "ñ for e": 1,
+   "te for e": 1,
+   "se for o": 1,
+   "n for se": 1,
+   "e for a": 1,
+   "y for q": 1,
+   "d for o": 1,
+   "s for q": 1,
+   "k for l": 1,
+   "w for q": 1,
+   "ẖ for s": 1,
+   "o for te": 1,
+   "te for o": 1,
+   "b for k": 1,
+   "te for to": 1,
+   "d for l": 1,
+   "l for n": 1,
+   "q for n": 1,
+   "y for b": 1,
+   "o for d": 1,
+   "se for y": 1,
+   "d for b": 1,
+   "w for n": 1,
+   "p for t": 1,
+   "q for o": 1,
+   "p for b": 1,
+   "d for te": 1
+  },
+  "marked": 116,
+  "wrong_marked": 55,
+  "right_marked": 61,
+  "wrong": 129
+ },
+ "items": [
+  {
+   "rem": "0412",
+   "pack": "P1",
+   "stratum": [
+    "royal",
+    "M"
+   ],
+   "source": "griffith",
+   "main": "griffith",
+   "reading_signs": 80,
+   "unsure": 27,
+   "lost": 2,
+   "extra": 4,
+   "missing": 1,
+   "wrong_marked": 13,
+   "right_marked": 14,
+   "griffith": {
+    "signs": 77,
+    "right": 53,
+    "words": 15,
+    "agree": 3
+   }
+  },
+  {
+   "rem": "0256",
+   "pack": "P1",
+   "stratum": [
+    "funerary",
+    "M"
+   ],
+   "source": "karanog",
+   "main": "griffith",
+   "reading_signs": 131,
+   "unsure": 12,
+   "lost": 1,
+   "extra": 3,
+   "missing": 3,
+   "wrong_marked": 6,
+   "right_marked": 6,
+   "griffith": {
+    "signs": 131,
+    "right": 110,
+    "words": 20,
+    "agree": 11
+   }
+  },
+  {
+   "rem": "0327",
+   "pack": "P1",
+   "stratum": [
+    "funerary",
+    "L"
+   ],
+   "source": "karanog",
+   "main": "griffith",
+   "reading_signs": 174,
+   "unsure": 37,
+   "lost": 1,
+   "extra": 5,
+   "missing": 3,
+   "wrong_marked": 13,
+   "right_marked": 24,
+   "griffith": {
+    "signs": 172,
+    "right": 133,
+    "words": 33,
+    "agree": 16
+   }
+  },
+  {
+   "rem": "0409",
+   "pack": "P1",
+   "stratum": [
+    "royal",
+    "L"
+   ],
+   "source": "griffith",
+   "main": "griffith",
+   "reading_signs": 174,
+   "unsure": 40,
+   "lost": 13,
+   "extra": 6,
+   "missing": 7,
+   "wrong_marked": 23,
+   "right_marked": 17,
+   "griffith": {
+    "signs": 175,
+    "right": 130,
+    "words": 35,
+    "agree": 13
+   }
+  }
+ ],
+ "estimate": {
+  "numbers": 917,
+  "entries": 962,
+  "by_section": {
+   "Meroitic Inscriptions": 137,
+   "Other texts published before": 13,
+   "Karanog and Shablul": 187,
+   "Meroe": 51,
+   "Faras": 46,
+   "Ostraca of several sites": 47,
+   "Kawa": 107,
+   "Royal cemeteries of Kush": 51,
+   "Texts published singly since 1911": 278
+  },
+  "held": 400,
+  "new": 517,
+  "new_by_section": {
+   "Meroitic Inscriptions": 18,
+   "Other texts published before": 13,
+   "Karanog and Shablul": 55,
+   "Meroe": 44,
+   "Faras": 45,
+   "Ostraca of several sites": 47,
+   "Kawa": 107,
+   "Royal cemeteries of Kush": 51,
+   "Texts published singly since 1911": 137
+  },
+  "new_by_script": {
+   "hieroglyphic": 39,
+   "cursive": 442,
+   "not stated": 36
+  },
+  "new_with_a_drawing_by_caption": 366,
+  "new_with_a_plate": 517,
+  "new_lines_stated": 430,
+  "rates": {
+   "cursive bande": 9.5,
+   "cursive colonne": 2.75,
+   "cursive ligne": 2.0,
+   "hieroglyphic bande": 1.67,
+   "hieroglyphic colonne": 1.33
+  },
+  "rate_pairs": {
+   "cursive bande": 106,
+   "cursive colonne": 3,
+   "cursive ligne": 184,
+   "hieroglyphic bande": 3,
+   "hieroglyphic colonne": 37
+  },
+  "words_new": 5291,
+  "words_new_at_the_mean_rate": 6441,
+  "words_new_by_section": {
+   "Meroitic Inscriptions": 169,
+   "Other texts published before": 118,
+   "Karanog and Shablul": 728,
+   "Meroe": 454,
+   "Faras": 698,
+   "Ostraca of several sites": 342,
+   "Kawa": 955,
+   "Royal cemeteries of Kush": 441,
+   "Texts published singly since 1911": 1386
+  },
+  "corpus_inscriptions": 548,
+  "all_by_script": {
+   "hieroglyphic": 84,
+   "not stated": 68,
+   "cursive": 765
+  },
+  "caption_check": {
+   "picks": 20,
+   "drawing_by_eye": 20,
+   "drawing_named_by_caption": 17
+  },
+  "corpus_words": 10290,
+  "recurrence": {
+   "once_now": 2013,
+   "by_words": {
+    "ratio": 0.514,
+    "points": [
+     {
+      "k": 120,
+      "m": 62,
+      "once": 558.1,
+      "share": 0.0558,
+      "share_two": 0.0081
+     },
+     {
+      "k": 150,
+      "m": 77,
+      "once": 679.2,
+      "share": 0.0588,
+      "share_two": 0.0088
+     },
+     {
+      "k": 180,
+      "m": 93,
+      "once": 797.5,
+      "share": 0.063,
+      "share_two": 0.0099
+     },
+     {
+      "k": 210,
+      "m": 108,
+      "once": 905.6,
+      "share": 0.066,
+      "share_two": 0.0109
+     }
+    ],
+    "share_at_corpus": 0.0836,
+    "slope": 0.0186,
+    "share_two_at_corpus": 0.0156,
+    "would_recur": 168,
+    "would_reach_three_texts": 31,
+    "would_recur_read_right": 70
+   },
+   "by_words_mean": {
+    "ratio": 0.626,
+    "points": [
+     {
+      "k": 120,
+      "m": 75,
+      "once": 558.1,
+      "share": 0.0654,
+      "share_two": 0.011
+     },
+     {
+      "k": 150,
+      "m": 94,
+      "once": 679.2,
+      "share": 0.0692,
+      "share_two": 0.0121
+     },
+     {
+      "k": 180,
+      "m": 113,
+      "once": 797.5,
+      "share": 0.0741,
+      "share_two": 0.0134
+     },
+     {
+      "k": 210,
+      "m": 131,
+      "once": 905.6,
+      "share": 0.077,
+      "share_two": 0.0149
+     }
+    ],
+    "share_at_corpus": 0.0974,
+    "slope": 0.0213,
+    "share_two_at_corpus": 0.0213,
+    "would_recur": 196,
+    "would_reach_three_texts": 43,
+    "would_recur_read_right": 82
+   },
+   "by_inscriptions": {
+    "ratio": 0.943,
+    "points": [
+     {
+      "k": 120,
+      "m": 113,
+      "once": 558.1,
+      "share": 0.0907,
+      "share_two": 0.0202
+     },
+     {
+      "k": 150,
+      "m": 142,
+      "once": 679.2,
+      "share": 0.0975,
+      "share_two": 0.0228
+     },
+     {
+      "k": 180,
+      "m": 170,
+      "once": 797.5,
+      "share": 0.1011,
+      "share_two": 0.0248
+     },
+     {
+      "k": 210,
+      "m": 198,
+      "once": 905.6,
+      "share": 0.1058,
+      "share_two": 0.0273
+     }
+    ],
+    "share_at_corpus": 0.1309,
+    "slope": 0.0263,
+    "share_two_at_corpus": 0.039,
+    "would_recur": 264,
+    "would_reach_three_texts": 79,
+    "would_recur_read_right": 110
+   }
+  },
+  "cost": {
+   "tokens": 633753,
+   "items": 4,
+   "signs": 555,
+   "per_item": 158438,
+   "per_sign": 1141.9,
+   "signs_per_word": 5.31,
+   "full_read": 32078727,
+   "full_read_mean": 39045945,
+   "full_read_by_inscriptions": 81912575,
+   "signs_an_inscription_pilot": 138.8,
+   "signs_an_inscription_new": 54.3
+  }
+ }
+}

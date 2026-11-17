@@ -60,7 +60,9 @@ LATE = 2                               # entries of volumes II and III taken fir
 # ------------------------------------------------------------------------------------------ the bar (section 3)
 BAR_GO = 0.95                          # signs right, pooled: the standard the Karanog rows met (97.7%, bar 95%)
 BAR_LAYER = 0.85                       # below this the readings are of no use, not even as a flagged layer
-EXPECTED = 0.85                        # what we expect, pooled, written before any reader ran
+# what we expect, as the page states it (section 3, committed before any reader ran). The first commit had one
+# constant here, 0.85 "pooled", which the page set beside drawings; the page's figures are the ones written down.
+EXPECTED = {"pooled": 0.75, "drawings": 0.85, "photographs": 0.50, "words": 0.50, "tokens_an_inscription": 40000}
 
 
 def kind_group(kind):
@@ -148,6 +150,16 @@ def fhn_words(text):
 def align(a, b):
     """The edit distance of two lists of signs and, for each sign of b, whether it is matched by an equal sign of
     a (Levenshtein, the first test's alignment: ties go to a match, then to a sign only a has)."""
+    d, pairs = alignment(a, b)
+    same = [False] * len(b)
+    for i, j in pairs:
+        if i is not None and j is not None:
+            same[j] = a[i] == b[j]
+    return d, same
+
+
+def alignment(a, b):
+    """The edit distance and the alignment itself: [(index in a or None, index in b or None)] in order."""
     n, m = len(a), len(b)
     D = [[0] * (m + 1) for _ in range(n + 1)]
     for i in range(n + 1):
@@ -157,16 +169,36 @@ def align(a, b):
     for i in range(1, n + 1):
         for j in range(1, m + 1):
             D[i][j] = min(D[i - 1][j] + 1, D[i][j - 1] + 1, D[i - 1][j - 1] + (a[i - 1] != b[j - 1]))
-    i, j, same = n, m, [False] * m
+    i, j, pairs = n, m, []
     while i > 0 or j > 0:
         if i > 0 and j > 0 and D[i][j] == D[i - 1][j - 1] + (a[i - 1] != b[j - 1]):
-            same[j - 1] = a[i - 1] == b[j - 1]
+            pairs.append((i - 1, j - 1))
             i, j = i - 1, j - 1
         elif i > 0 and D[i][j] == D[i - 1][j] + 1:
+            pairs.append((i - 1, None))
             i -= 1
         else:
+            pairs.append((None, j - 1))
             j -= 1
-    return D[n][m], same
+    return D[n][m], pairs[::-1]
+
+
+def doubted(text):
+    """For each sign corpus_to_signs gives for a text, whether the reader marked it '?' (the mark right after it)."""
+    t = re.sub(r"\(\d+\)|\[\.\]", " ", text).replace("?", "\x00 ")
+    out = []
+    for w in re.split(r"[\s:]+", t):
+        w = re.sub(r"[^A-Za-z0-9\x00]", "", w)
+        i = 0
+        while i < len(w):
+            if w[i] == "\x00":
+                if out:
+                    out[-1] = True
+                i += 1
+                continue
+            i += 2 if w[i] == "t" and i + 1 < len(w) and w[i + 1] in "eo" else 1
+            out.append(False)
+    return out
 
 
 def measure(reading_signs, edition_words):
@@ -595,6 +627,24 @@ def score_item(reading, eds):
     out["reading_signs"] = len(sig)
     out["unsure"] = len(re.findall(r"\?", reading))
     out["lost"] = len(re.findall(r"\[\.\]", reading))
+    flags = doubted(reading)
+    b = [x for w in eds[out["main"]] for x in w]
+    _, pairs = alignment(sig, b)
+    subs, extra, missing, wrong_doubted, right_doubted = collections.Counter(), 0, 0, 0, 0
+    for i, j in pairs:
+        if i is None:
+            missing += 1
+        elif j is None:
+            extra += 1
+            wrong_doubted += flags[i]
+        elif sig[i] != b[j]:
+            subs[f"{sig[i]} for {b[j]}"] += 1
+            wrong_doubted += flags[i]
+        else:
+            right_doubted += flags[i]
+    out["confusions"] = dict(subs)
+    out["extra"], out["missing"] = extra, missing
+    out["wrong_marked"], out["right_marked"] = wrong_doubted, right_doubted
     return out
 
 
@@ -646,6 +696,14 @@ def score(spec=None, key=None):
            "agreement": pooled(second, lambda r: r), "photo_only": photos,
            "pooled_photo_only": pooled(photos),
            "pooled_same_items_with_drawings": pooled([r for r in items if r["rem"] in {x["rem"] for x in photos}])}
+    conf = collections.Counter()
+    for r in items:
+        conf.update(r["confusions"])
+    out["faults"] = {"substituted": sum(conf.values()), "extra": sum(r["extra"] for r in items),
+                     "missing": sum(r["missing"] for r in items), "by_pair": dict(conf.most_common()),
+                     "marked": sum(r["unsure"] for r in items), "wrong_marked": sum(r["wrong_marked"] for r in items),
+                     "right_marked": sum(r["right_marked"] for r in items)}
+    out["faults"]["wrong"] = out["faults"]["substituted"] + out["faults"]["extra"] + out["faults"]["missing"]
     if out["pooled"]["share"] is not None:
         out["verdict"] = verdict(out["pooled"]["share"])
     SCORES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -791,7 +849,13 @@ def estimate(scores=None):
         "words_new_by_section": {k: round(sum(w for n, w in words.items() if section(n) == k))
                                  for k in dict.fromkeys(map(section, new))},
         "corpus_inscriptions": sum(1 for r in table if r.get("in_corpus_v6")),
+        "all_by_script": dict(collections.Counter(cat(es, "script") or "not stated" for es in numbers.values())),
     }
+    if SPEC.exists():                      # how often a caption names a drawing that is there, on the picks
+        spec = json.loads(SPEC.read_text(encoding="utf-8"))
+        eye = {r: any(f[2] == "drawing" for f in it["figures"]) for r, it in spec["items"].items()}
+        out["caption_check"] = {"picks": len(eye), "drawing_by_eye": sum(eye.values()),
+                                "drawing_named_by_caption": sum(drawn(numbers[r[:4]]) for r, v in eye.items() if v)}
     if GLOSSES.exists():
         forms = open_forms()
         k_all = len(forms)
@@ -830,7 +894,10 @@ def estimate(scores=None):
         out["cost"] = {"tokens": t, "items": items, "signs": sg, "per_item": round(t / items) if items else None,
                        "per_sign": round(per_sign, 1) if per_sign else None, "signs_per_word": round(avg_signs, 2),
                        "full_read": round(per_sign * sum(words.values()) * avg_signs) if per_sign else None,
-                       "full_read_mean": round(per_sign * words_mean * avg_signs) if per_sign else None}
+                       "full_read_mean": round(per_sign * words_mean * avg_signs) if per_sign else None,
+                       "full_read_by_inscriptions": round(t / items * len(new)) if items else None,
+                       "signs_an_inscription_pilot": round(sg / items, 1) if items else None,
+                       "signs_an_inscription_new": round(sum(words.values()) * avg_signs / len(new), 1) if new else None}
     ESTIMATE.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
 
@@ -843,8 +910,8 @@ def public(scores=None, est=None):
     est = est or json.loads(ESTIMATE.read_text(encoding="utf-8"))
     items = []
     for r in scores["items"]:
-        row = {"rem": r["rem"], "pack": r["pack"], "stratum": r["stratum"], "source": r["source"], "main": r["main"],
-               "reading_signs": r["reading_signs"], "unsure": r["unsure"], "lost": r["lost"]}
+        row = {k: r[k] for k in ("rem", "pack", "stratum", "source", "main", "reading_signs", "unsure", "lost",
+                                 "extra", "missing", "wrong_marked", "right_marked")}
         for name in ("fhn", "griffith"):
             if name in r:
                 row[name] = r[name]
@@ -852,7 +919,7 @@ def public(scores=None, est=None):
     out = {"bar": {"go": BAR_GO, "layer": BAR_LAYER, "expected": EXPECTED},
            "pooled": scores["pooled"], "verdict": scores.get("verdict"),
            "pooled_griffith": scores["pooled_griffith"], "pooled_fhn": scores["pooled_fhn"],
-           "agreement_of_two_readers": scores["agreement"], "items": items,
+           "agreement_of_two_readers": scores["agreement"], "faults": scores["faults"], "items": items,
            "estimate": {k: v for k, v in est.items()}}
     FIGURES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out

@@ -2,9 +2,17 @@
 
 Step 7 of section B of [`NEXT_STEPS.md`](../../NEXT_STEPS.md), and the lever named under G7: more texts. The
 REM (Leclant and others, 2000) is [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in
-three volumes, REM 0001 to 1278. `corpus_v6` holds 548 inscriptions. If a Claude reader could read the REM's
-plates well enough, the corpus could grow towards the REM's size, and some of the 2,013 open spellings that now
-stand in one text only would recur and could be tested.
+three volumes, numbered from REM 0001 to 1278. `corpus_v6` holds 548 inscriptions. If a Claude reader could read
+the REM's plates well enough, the corpus could grow towards the REM's size, and some of the 2,013 open spellings
+that now stand in one text only would recur and could be tested.
+
+**The answer, on 4 inscriptions (2026-11-17): no.** A blind reader read 426 of 555 signs right against Griffith
+(76.8%) and 43 of 103 words (41.7%), below the bar's lowest tier (85%), at 158,438 subagent tokens an inscription,
+four times the quote. The REM holds 917 inscriptions, not 1,278: 517 are new to the corpus, about 5,300 words.
+Reading them all this way would cost about 32 to 82 million tokens, and about 70 of the 2,013 open spellings that
+stand in one text would then recur in a word read right. The pilot stopped after its first pack of 4, of the 20
+planned, on Mike's word, because that pack alone used most of the budget (section 4). Every number below is in
+[`rem_pilot_figures.json`](rem_pilot_figures.json), written by the script.
 
 The REM is in copyright. Its pages, its plates and every reading taken from them stay on the author's machine
 (`data/sources/rem/`); this page and its figures file give counts only. The script is
@@ -31,7 +39,7 @@ in the pick). An entry is two pages or more:
 
 **No transliteration.** The catalogue quotes a name now and then; the text of the inscription is not printed.
 Persée serves each page as an image of 1621 by 2292 pixels (196 dots to the inch) and a text layer read by
-machine. The counts over the three volumes are in section 5, from the text layers of all their pages.
+machine. The counts over the three volumes are in section 5, from the text layers of all their 2,081 pages.
 
 ## 3. The rule, the bar and what we expect (written before any reader ran)
 
@@ -141,4 +149,175 @@ pool does not, the recommendation is to read only the entries with a drawing.
 - The faults we expect: the 3-shaped signs (m, ẖ, s, q), p against k, te against o + l; photographs too small to
   read at 196 dots to the inch; hieroglyphs better than cursive.
 
-<!-- results: below this line once the readers are in -->
+The script's first commit held one constant for this, 0.85 "pooled"; the page beside it gave 75% pooled and 85% on
+drawings. The page is what was written down, and the constant now repeats it (`EXPECTED`).
+
+## 4. What came of it
+
+### Stopped after the first pack, on Mike's word
+
+The first pack (P1: REM 0412, 0256, 0327 and 0409) ran alone, as planned, to count its tokens: **633,753 subagent
+tokens for 4 inscriptions**, 352 tool calls and 46 minutes. At that rate the other 16 inscriptions, the two second
+readers and the pack of photographs would have taken about 4 million more, far past the pilot's 1.5 million line.
+Asked through the main session, Mike chose on 2026-11-17 to stop at 4 inscriptions, write up and review ("Yes,
+both picks", to the pick "REM pilot: stop at 4 inscriptions, write up and review").
+
+So this page measures less than section 3 set out to:
+
+1. **4 inscriptions, not 20:** 555 signs of the edition, two Karanòg texts and two Meroë texts, all four royal or
+   funerary. No graffito, no Philae text, no short text.
+2. **No modern edition:** none of the four is among the texts typed from FHN III, so all four are scored against
+   Griffith's reading of the same drawings (his print, and the Karanòg copies checked against his type).
+3. **No second reader** (the agreement between readers is not measured) and **no pack of photographs alone.**
+4. The bar was set on the 20 pooled; it is read here on the 4.
+
+### The scores
+
+| Inscription | Plate | Signs right | Share | Words that agree | Signs marked `?` |
+|---|---|---|---|---|---|
+| REM 0412 (Meroë, stela, three parts) | photograph, the facsimile of *Meroë* (1911) | 53 of 77 | 68.8% | 3 of 15 | 27 |
+| REM 0256 (Karanòg, stela) | photograph, Griffith's hand copy | 110 of 131 | 84.0% | 11 of 20 | 12 |
+| REM 0327 (Karanòg, offering table) | photograph, Griffith's hand copy | 133 of 172 | 77.3% | 16 of 33 | 37 |
+| REM 0409 (Meroë, statue base, four faces) | photograph, the facsimile of *Meroë* (1911) | 130 of 175 | 74.3% | 13 of 35 | 40 |
+| **All four** | | **426 of 555** | **76.8%** | **43 of 103 (41.7%)** | 116 |
+
+**Verdict: NO-GO** (below 85%). Against what we expected: below the 85% expected on drawings, which every plate
+held, and near the 75% expected for a pool that would have mixed in photographs; words below the 50% expected;
+tokens four times the 40,000 quoted. The four lie between 68.8% and 84.0%; no tier above NO-GO is within that range.
+
+### What it fails on
+
+1. **The photographs give nothing.** The reader marked all four photographs "not legible" and read from the
+   drawings alone: at 196 dots to the inch the signs of a halftone photograph are a few pixels high. A REM entry
+   without a drawing is, for this reader, an entry without a text.
+2. **The signs that look alike, as in the Karanòg test.** Of the 129 signs wrong (97 read as another sign, 18 that
+   only the reading has, 14 missed), the 3-shaped signs m, s, ẖ and q account for 27 of the 97, e against l for
+   12, p against k for 7 and d against ne for 6. The commonest single fault is the sign s written for m (13).
+3. **The hand matters.** The best score is the Karanòg stela (84.0%), in the hand that the reader's sign key
+   describes; the worst is the small facsimile of the Meroë stela (68.8%), in another hand, in three parts whose
+   order and line count the reader had to guess (the drawing shows part c in four lines, the catalogue says two).
+4. **The reader's own doubts find half of its errors.** Of the 115 signs it wrote wrong (read as another sign, or
+   only in the reading), 55 carry its `?`; of its 116 marks, 61 sit on signs that are right. Checking only the
+   marked signs would leave about half the errors in.
+5. **Words fail faster than signs.** A word agrees only when every sign is right, so 76.8% of signs gives 41.7% of
+   words. Most of the words that agree are words of the formulae (`woSi`, `Soreyi`, `tedxelowi`, `yetmdelowi`,
+   `ato mXe`); the names and the rare words mostly do not, and they are what the corpus would gain.
+
+## 5. What reading all the REM would cost and add
+
+### What the REM holds
+
+The text layers of all 2,081 pages, indexed by the script: the REM gives **917 numbers in nine sections**, not 1,278
+(the numbering leaves gaps between sections), as 962 entries with their lettered parts. Every number has a page of
+plates, and the index finds a catalogue page for all but 3 (REM 1016, 1034 and 1059).
+
+| Section | Numbers | New to the corpus | Words new (estimate) |
+|---|---|---|---|
+| *Meroitic Inscriptions* (Griffith), 0001 to 0137 | 137 | 18 | 169 |
+| Other texts published before, 0138 to 0150 | 13 | 13 | 118 |
+| Karanòg and Shablul, 0201 to 0387 | 187 | 55 | 728 |
+| Meroë, 0401 to 0451 | 51 | 44 | 454 |
+| Faras, 0501 to 0546 | 46 | 45 | 698 |
+| Ostraca of several sites, 0551 to 0597 | 47 | 47 | 342 |
+| Kawa, 0601 to 0707 | 107 | 107 | 955 |
+| Royal cemeteries of Kush, 0801 to 0851 | 51 | 51 | 441 |
+| Texts published singly since 1911, 1001 to 1278 | 278 | 137 | 1,386 |
+| **All** | **917** | **517** | **5,291** |
+
+- **400 of the 917 are in `corpus_v6`; 517 are new** to it: the corpus would go from 548 to about 1,065
+  inscriptions, not to about 1,280. 92 of the 517 are the Faras texts and the ostraca, which two other sessions
+  are now typing from Griffith's own editions.
+- **Words:** about 5,300 new words, half the corpus's 10,290. Each new number's catalogue states its lines, bands
+  or columns (430 of the 517 do); the words a unit are the median over the numbers held by one row (2.0 a cursive
+  line, 9.5 a cursive band, 1.33 a hieroglyphic column). The mean gives 6,441, the high end.
+- **Script of the new:** 442 cursive, 39 hieroglyphic, 36 not stated.
+- **Plates:** every new number has a plate page; for 366 of the 517 a caption names a drawing. That is a floor:
+  on the 20 picks the captions named a drawing for 17 of the 20 that have one.
+
+### What it would cost
+
+At the first pack's rate, **1,142 tokens a sign of the edition**, and 5.31 signs a word: **about 32 million
+subagent tokens** for the 517 (39 million at the mean count of words). By the inscription, 158,438 each, it would be
+**82 million**; the new texts are shorter (about 54 signs each, against 139 in the pack), and part of a reader's
+cost (the brief, the sign tables, cutting crops) does not shrink with the text, so the cost lies between the two.
+That is for one reader; a checked reading (two readers and a settling pass, as for Karanòg) costs more.
+
+### What it would add
+
+How often an open spelling that stands in one text recurs when texts are added, measured on `corpus_v6` itself:
+draw k of its inscriptions, take the open spellings that stand in exactly one of them, and count how many stand in
+the next m inscriptions; 200 draws for each k from 120 to 210, with m/k equal to the share the REM would add, and
+the share carried to k = 548 along a straight line in log k.
+
+| The share added | Recur in a new text | Reach three texts | Recur and read right (41.7% of words) |
+|---|---|---|---|
+| By words, median (0.51) | 168 of 2,013 (8.4%) | 31 | 70 |
+| By words, mean (0.63) | 196 (9.7%) | 43 | 82 |
+| By inscriptions (0.94) | 264 (13.1%) | 79 | 110 |
+
+The words are the fair measure: the new texts are about half as long as the corpus's. So reading all the REM
+plates would give about 170 of the 2,013 a second text if every word were read right, and about 70 with the
+words this reader gets right; about 30 would reach the three texts that the recurring-words work needs. The count
+assumes the new texts are like those of the corpus and that the share keeps growing with the corpus as it does
+from 120 to 210 inscriptions.
+
+## 6. Recommendation
+
+**Do not read the REM plates this way.** The readings are below the bar where the plates are best (Griffith's own
+drawings), the photographs give nothing, and the full read would cost 32 to 82 million tokens for about 70
+spellings with a second text. The faults are the known ones of hand copies, and the reader's doubts find only half
+of them, so a cheap check does not rescue it.
+
+What the pilot leaves that is of use:
+
+1. **The REM's own size:** 917 inscriptions, 517 of them not in the corpus, by section, with the script and the
+   lines of each (`data/sources/rem/index.jsonl`, local). The goal of a corpus of about 1,280 should read about
+   1,065.
+2. **A typed source beats a read plate.** Every text the corpus holds came from a print in transliteration or from
+   hand copies checked against one. Hallof's volume 7 (2024) prints the transliteration of REM 0001 to 2780, and
+   reading print costs a fraction of this (about 7 million tokens by the Newsletter's rate, for five times the
+   texts). It is a purchase, parked by Mike's word of 12 November.
+3. **Sections with a print of their own:** Faras and the ostraca are being typed from Griffith; Kawa (107 new) and
+   the royal cemeteries (51 new) were published by Macadam and Dunham, whose editions are not held and were not
+   looked for here.
+
+## 7. Files, commands and cost
+
+| File | What | Where |
+|---|---|---|
+| `src/rem_pilot.py` | the index, the rule, the packs, the scores, the estimate, the figures | public |
+| `tests/test_rem_pilot.py` | the checks, on made-up texts and pages and on the public table | public |
+| `data/discovery/rem_pilot_figures.json` | every count on this page | public |
+| `data/sources/rem/text/` | the text layers of the 2,081 pages (Persée, 2,081 files, 11 MB) | local |
+| `data/sources/rem/pages/` | the 22 plate pages of the 20 picks and the plate of REM 0001 (23 images, 7.9 MB) | local |
+| `data/sources/rem/web/` | the volumes' and documents' pages on Persée (3.7 MB) | local |
+| `data/sources/rem/index.jsonl` | one row per entry: plate pages, captions, script, lines, state | local |
+| `data/sources/rem/pilot/` | the kit, the spec of the crops, the packs, the key, the reading, the scores, the estimate | local |
+
+```bash
+python3 -I src/rem_pilot.py index      # the volumes' text layers into the index (local)
+python3 -I src/rem_pilot.py pick       # the rule's 20
+python3 -I src/rem_pilot.py packs      # the readers' folders (writes only those not yet written)
+python3 -I src/rem_pilot.py score && python3 -I src/rem_pilot.py estimate && python3 -I src/rem_pilot.py public
+python3 -I tests/test_rem_pilot.py
+```
+
+All but the tests need the local files. Downloaded on 2026-11-17 from Persée, all within this pilot's approval: the
+text layers of every page, and the images of the plate pages of the 20 picks and of REM 0001; no PDF.
+
+**Cost.** Written by hand from the task notifications; the only numbers on this page that no script counts.
+
+<!-- cost: by hand, from the task notifications -->
+
+| Run | Subagent tokens | Running time |
+|---|---|---|
+| Reader of pack P1 (4 inscriptions) | 633,753 | 46 min 12 s |
+
+Quoted before the run: about 40,000 an inscription, 0.5 to 1 million for the pilot. Not run: packs P2 to P5, the
+second readers of P1 and P3, the pack of photographs alone.
+
+<!-- end of the cost -->
+
+**A fault of the run.** At 08:53 the pack builder, run to add the pack of photographs, wrote P1's folder again
+while its reader was at work, which emptied the reader's own crops; its figures, list and brief were the same files
+as before, the reader was told and cut its crops again. The builder now writes only folders that do not exist.
