@@ -1,2834 +1,356 @@
 [
-{
-"line": 1,
-"printed": "A-m-n-i-r-e-n-s",
-"griffith": "amnirens",
-"corpus": "amnirens",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "k'-r-e-l-i",
-"griffith": "qêreli",
-"corpus": "qoreli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "g-rh-e-l-i",
-"griffith": "kzeli",
-"corpus": "kdeli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "y-i-th-n-e",
-"griffith": "yitne",
-"corpus": "yitne",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "rh-e-b-ḥ-e-l",
-"griffith": "zebḫel",
-"corpus": "debxel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "k'-r-e-y-i",
-"griffith": "qêreyi",
-"corpus": "qoreyi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 1,
-"printed": "A-g-i-n-i-rhe-rhe",
-"griffith": "akinizz",
-"corpus": "akinidd",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "p-k'-r-ṇ-y-i",
-"griffith": "pqêrñyi",
-"corpus": "pqorNyi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "p-e-sh-t-ṇ-y-i",
-"griffith": "peštêñyi",
-"corpus": "peStoNyi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "p-k'-r",
-"griffith": "pqêr",
-"corpus": "pqor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "k'-r-e-s-l",
-"griffith": "qêresl",
-"corpus": "qoresl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "k'-r",
-"griffith": "qêr",
-"corpus": "qor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "ḥ-r-p-ḥ-e-l-u",
-"griffith": "ḫrpḫelw",
-"corpus": "xrpxelw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "K-e-sh",
-"griffith": "qeš",
-"corpus": "qeS",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 2,
-"printed": "A-r-'-m-e-y-s-l",
-"griffith": "arêmeysl",
-"corpus": "aromeysl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "k'-r",
-"griffith": "qêr",
-"corpus": "qor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "ḥ-r-p-ḥ-e-l",
-"griffith": "ḫrpḫel",
-"corpus": "xrpxel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "A-ḥ-r-'",
-"griffith": "aḫrê",
-"corpus": "axro",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "K-m-s-l",
-"griffith": "qmsl",
-"corpus": "qmsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "A-th-b-e",
-"griffith": "atbe",
-"corpus": "atbe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "th-m-'-th",
-"griffith": "tmêt",
-"corpus": "tmot",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "ḥ-r-p-ḥ-l",
-"griffith": "ḫrpḫl",
-"corpus": "xrpxl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 3,
-"printed": "A-r-m-i-l",
-"griffith": "armil",
-"corpus": "armil",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "K-e-sh-t",
-"griffith": "qeštê",
-"corpus": "qeSto",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "a-b-r-s-l",
-"griffith": "abrsl",
-"corpus": "abrsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "y-e-g-i-rh-i",
-"griffith": "yekizi",
-"corpus": "yekidi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "g-rh-i-s-l",
-"griffith": "kzisl",
-"corpus": "kdisl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "a-r-s-l-i",
-"griffith": "arsli",
-"corpus": "arsli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "y-e-m'-k-e",
-"griffith": "yemêqe",
-"corpus": "yemoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 4,
-"printed": "k-e-b-e-s-u-i",
-"griffith": "qebeswi",
-"corpus": "qebeswi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "y-e-r-g-i",
-"griffith": "yerki",
-"corpus": "yerki",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "A-r-m'-e-y-s-l-ḥ-e",
-"griffith": "armêeyslḫe",
-"corpus": "armoeyslxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "A-rh-ḥ-i-toh",
-"griffith": "azḫite",
-"corpus": "adxite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "K-e-p-e-r",
-"griffith": "qeper",
-"corpus": "qeper",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "a-b-r",
-"griffith": "abr",
-"corpus": "abr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "XII",
-"griffith": "XII",
-"corpus": "XII",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 5,
-"printed": "g-rh-i",
-"griffith": "kzi",
-"corpus": "kdi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "CXV",
-"griffith": "CXV",
-"corpus": "CXV",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 5,
-"printed": "k'-l-e-b",
-"griffith": "qêleb",
-"corpus": "qoleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 5,
-"printed": "N'-l-rh'-ḥ-e",
-"griffith": "nêlzêḫe",
-"corpus": "noldoxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "a-r-b-ḥ-toh-g-e",
-"griffith": "arbḫteke",
-"corpus": "arbxteke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "p-k'-r-l-i",
-"griffith": "pqêrli",
-"corpus": "pqorli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "y-e-rh'",
-"griffith": "yezê",
-"corpus": "yedo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "K-e-sh-l-i",
-"griffith": "qešli",
-"corpus": "qeSli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "I-m-l'-a",
-"griffith": "imlêa",
-"corpus": "imloa",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "th-r-rh-e-b",
-"griffith": "trzeb",
-"corpus": "trdeb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "a-b-e-p-b",
-"griffith": "abepb",
-"corpus": "abepb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "M-s-rh-e",
-"griffith": "msze",
-"corpus": "msde",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 6,
-"printed": "Th-ṇ-n-r",
-"griffith": "tñnr",
-"corpus": "tNnr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "E-rh-e-toh-k",
-"griffith": "ezeteq",
-"corpus": "edeteq",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "th-r'-[rh]-e",
-"griffith": "trêze",
-"corpus": "trode",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "th-r'-rh-e-b-g-toh",
-"griffith": "trêzebkte",
-"corpus": "trodebkte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "e-k-e-l-b-ḥ-e",
-"griffith": "eqelbḫe",
-"corpus": "eqelbxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "y-e-g",
-"griffith": "yek",
-"corpus": "yek",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "A-r'-b-e-l",
-"griffith": "arêbel",
-"corpus": "arobel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "sh-e-toh",
-"griffith": "šete",
-"corpus": "Sete",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "K-e-sh-t",
-"griffith": "qeštê",
-"corpus": "qeSto",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 7,
-"printed": "k'-r",
-"griffith": "qêr",
-"corpus": "qor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "ḥ-r-p-ḥ-e-l",
-"griffith": "ḫrpḫel",
-"corpus": "xrpxel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "A-ḥ-r'",
-"griffith": "aḫrê",
-"corpus": "axro",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "K-m-s-l",
-"griffith": "qmsl",
-"corpus": "qmsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "A-th-b-e",
-"griffith": "atbe",
-"corpus": "atbe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "th-m'-th",
-"griffith": "tmêt",
-"corpus": "tmot",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "h-r-p-ḥ-l",
-"griffith": "ḫrpḫl",
-"corpus": "xrpxl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "K-e-sh",
-"griffith": "qeš",
-"corpus": "qeS",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "N-p-t",
-"griffith": "nptê",
-"corpus": "npto",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "a-r'-s-e-l",
-"griffith": "arêsel",
-"corpus": "arosel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 8,
-"printed": "a-b-r-s-l",
-"griffith": "abrsl",
-"corpus": "abrsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "y-e-g",
-"griffith": "yek",
-"corpus": "yek",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "rh-i",
-"griffith": "zi",
-"corpus": "di",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "g-rh-e-s-l",
-"griffith": "kzesl",
-"corpus": "kdesl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "a-r-s-l-i",
-"griffith": "arsli",
-"corpus": "arsli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "e-m'-k-e",
-"griffith": "emêqe",
-"corpus": "emoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "k-e-b-e-s-u-e",
-"griffith": "qebeswe",
-"corpus": "qebeswe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "e-r-g",
-"griffith": "erk",
-"corpus": "erk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "sh-ă-toh",
-"griffith": "šate",
-"corpus": "Sate",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 9,
-"printed": "A-r'-b-l",
-"griffith": "arêbl",
-"corpus": "arobl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "A-rh-ḥ-i-toh",
-"griffith": "azḫite",
-"corpus": "adxite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "P-e-r-i-toh",
-"griffith": "perite",
-"corpus": "perite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "a-b-r",
-"griffith": "abr",
-"corpus": "abr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "C",
-"griffith": "C",
-"corpus": "C",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 10,
-"printed": "g-rh-i",
-"griffith": "kzi",
-"corpus": "kdi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "CVII",
-"griffith": "CVII",
-"corpus": "CVII",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 10,
-"printed": "k-e-l-e-b",
-"griffith": "qeleb",
-"corpus": "qeleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "A-p'-toh-b-e-s",
-"griffith": "apêtebes",
-"corpus": "apotebes",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 10,
-"printed": "m-g-i-u",
-"griffith": "mkiw",
-"corpus": "mkiw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "Y-k'-l",
-"griffith": "yqêl",
-"corpus": "yqol",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "m-g-i-sh-e-sh-toh-l",
-"griffith": "mkišeštel",
-"corpus": "mkiSeStel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "a-b-r-s-l",
-"griffith": "abrsl",
-"corpus": "abrsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "y-e-g-e-rh",
-"griffith": "yekez",
-"corpus": "yeked",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "g-rh-i-s-l",
-"griffith": "kzisl",
-"corpus": "kdisl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "a-r-e-s-l-i",
-"griffith": "aresli",
-"corpus": "aresli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "e-m'-a-k-e",
-"griffith": "emêaqe",
-"corpus": "emoaqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 11,
-"printed": "k-e-b-e-s-u-e",
-"griffith": "qebeswe",
-"corpus": "qebeswe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "y-e-r-g-i",
-"griffith": "yerki",
-"corpus": "yerki",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "A-p-e-s",
-"griffith": "apes",
-"corpus": "apes",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "m-g-i",
-"griffith": "mki",
-"corpus": "mki",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "u-e-toh-l-h-e",
-"griffith": "wetelḫe",
-"corpus": "wetelxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "A-rh-ḥ-e-toh",
-"griffith": "azḫete",
-"corpus": "adxete",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "P-r-i-toh",
-"griffith": "prite",
-"corpus": "prite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "a-b-r",
-"griffith": "abr",
-"corpus": "abr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "L",
-"griffith": "L",
-"corpus": "L",
-"doubt": "(?) after it",
-"kind": "numeral"
-},
-{
-"line": 12,
-"printed": "V",
-"griffith": "V",
-"corpus": "V",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 12,
-"printed": "g-rh-i",
-"griffith": "kzi",
-"corpus": "kdi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 12,
-"printed": "CCL",
-"griffith": "CCL",
-"corpus": "CCL",
-"doubt": "(?) after it",
-"kind": "numeral"
-},
-{
-"line": 12,
-"printed": "III",
-"griffith": "III",
-"corpus": "III",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 12,
-"printed": "k'-e-l-e-b",
-"griffith": "qêeleb",
-"corpus": "qoeleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "a-toh-toh",
-"griffith": "atete",
-"corpus": "atete",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "k-e-b-e-s",
-"griffith": "qebes",
-"corpus": "qebes",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "y-e-th-g-b(?)-ḥ-e",
-"griffith": "yetkbḫe",
-"corpus": "yetkbxe",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "Y-ka'-l",
-"griffith": "yqaêl",
-"corpus": "yqaol",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "M-e-m",
-"griffith": "mem",
-"corpus": "mem",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "a-l-e-k-l",
-"griffith": "aleql",
-"corpus": "aleql",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "K-e-sh-t",
-"griffith": "qeštê",
-"corpus": "qeSto",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "a-th-l-e-l-e-b",
-"griffith": "atleleb",
-"corpus": "atleleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 13,
-"printed": "a-b-r-[s]-l",
-"griffith": "abrsl",
-"corpus": "abrsl",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "y-e-g-e-rh",
-"griffith": "yekez",
-"corpus": "yeked",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "g-rh-i-s-l",
-"griffith": "kzisl",
-"corpus": "kdisl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "a-r'-s-l-i",
-"griffith": "arêsli",
-"corpus": "arosli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "rh-k-e-b-e-s-u-e",
-"griffith": "zqebeswe",
-"corpus": "dqebeswe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "A-p-e",
-"griffith": "ape",
-"corpus": "ape",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "toh-[b]-i",
-"griffith": "tebi",
-"corpus": "tebi",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "N-ḥ-i",
-"griffith": "nḫi",
-"corpus": "nxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 14,
-"printed": "a-r-g-e-rh-n-i-y-e",
-"griffith": "arkezniye",
-"corpus": "arkedniye",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "k-e-b-e-s-u-e",
-"griffith": "qebeswe",
-"corpus": "qebeswe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "s-b-ḥ-i",
-"griffith": "sbḫi",
-"corpus": "sbxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "a-l-e-p-b-k'",
-"griffith": "alepbqê",
-"corpus": "alepbqo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "p-e-r-toh-s",
-"griffith": "pertes",
-"corpus": "pertes",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "K-e-sh",
-"griffith": "qeš",
-"corpus": "qeS",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "k'-l-e-b-u-e",
-"griffith": "qêlebwe",
-"corpus": "qolebwe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "h-r-p-h-ṇ-m-l-e-g-s",
-"griffith": "ḫrpḫñmleks",
-"corpus": "xrpxNmleks",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 15,
-"printed": "I-p-i-a-l-i",
-"griffith": "ipiali",
-"corpus": "ipiali",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "k-e-s-u-e-rh-e-ḥ-i",
-"griffith": "qeswezeḫi",
-"corpus": "qeswedexi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "e-k-e-toh-rh-e-b-ḥ-i",
-"griffith": "eqetezebḫi",
-"corpus": "eqetedebxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "s-b-k-l-e-b-u-i-toh-s",
-"griffith": "sbqlebwites",
-"corpus": "sbqlebwites",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "Y-e-s-b-e",
-"griffith": "yesbe",
-"corpus": "yesbe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "N-sh",
-"griffith": "nš",
-"corpus": "nS",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "N-sh-l",
-"griffith": "nšl",
-"corpus": "nSl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 16,
-"printed": "k'-r",
-"griffith": "qêr",
-"corpus": "qor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "a-to-[to]",
-"griffith": "atêtê",
-"corpus": "atoto",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "e-k-e-p-i",
-"griffith": "eqepi",
-"corpus": "eqepi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "M-e-rh-e-u-e-toh-l",
-"griffith": "mezewetel",
-"corpus": "medewetel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "a-...-m(?)-rh-e",
-"griffith": "a...mze",
-"corpus": "a...mde",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "Gh'-b-i",
-"griffith": "ẖêbi",
-"corpus": "Xobi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "th-g-g",
-"griffith": "tkk",
-"corpus": "tkk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "Rhe-rhe",
-"griffith": "zz",
-"corpus": "dd",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "[s-b]",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "k-l-e-b",
-"griffith": "qleb",
-"corpus": "qleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "u-i-toh-s",
-"griffith": "wites",
-"corpus": "wites",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 17,
-"printed": "Y-e-s-b-i",
-"griffith": "yesbi",
-"corpus": "yesbi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "k-e-b-s-l-i-l-i",
-"griffith": "qebslili",
-"corpus": "qebslili",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "Gh-b-i",
-"griffith": "ẖbi",
-"corpus": "Xbi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "M-e-rh-e-u-i-toh-l-i",
-"griffith": "mezewiteli",
-"corpus": "medewiteli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "k'-r",
-"griffith": "qêr",
-"corpus": "qor",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "N-l",
-"griffith": "nl",
-"corpus": "nl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": "l",
-"griffith": "l",
-"corpus": "l",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "Y-e-k(?)-ḥ(?)-b-t",
-"griffith": "yeqḫbtê",
-"corpus": "yeqxbto",
-"doubt": "(?) or [ ] on a sign; (?) after it",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": "a-u(?)-g",
-"griffith": "awk",
-"corpus": "awk",
-"doubt": "(?) or [ ] on a sign; (?) after it",
-"kind": "word"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 18,
-"printed": "ṇ",
-"griffith": "ñ",
-"corpus": "N",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "k-s",
-"griffith": "qs",
-"corpus": "qs",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "M-e'",
-"griffith": "meê",
-"corpus": "meo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "l-gh",
-"griffith": "lẖ",
-"corpus": "lX",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "A-m-n-p",
-"griffith": "amnp",
-"corpus": "amnp",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "p-n-p-g",
-"griffith": "pnpk",
-"corpus": "pnpk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "A-ḥ-r'",
-"griffith": "aḫrê",
-"corpus": "axro",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "p-ḥ-r-p-ḥ-toh",
-"griffith": "pḫrpḫte",
-"corpus": "pxrpxte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "B-e-u-[i-]g-[e]",
-"griffith": "bewike",
-"corpus": "bewike",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "sh(?)-u(?)-i-rh'",
-"griffith": "šwizê",
-"corpus": "Swido",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 19,
-"printed": "k'-l-e-b",
-"griffith": "qêleb",
-"corpus": "qoleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "y-e-b-e",
-"griffith": "yebe",
-"corpus": "yebe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "Y-e-s-b-e-u-i-toh-s",
-"griffith": "yesbewites",
-"corpus": "yesbewites",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "N-sh",
-"griffith": "nš",
-"corpus": "nS",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "N-sh-l",
-"griffith": "nšl",
-"corpus": "nSl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "A-m-n-p",
-"griffith": "amnp",
-"corpus": "amnp",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "y-i-r'-gh",
-"griffith": "yirêẖ",
-"corpus": "yiroX",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "M-rh-e-u-i",
-"griffith": "mzewi",
-"corpus": "mdewi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "a-.-",
-"griffith": "a.",
-"corpus": "a.",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "G-r-toh-l-i",
-"griffith": "krteli",
-"corpus": "krteli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 20,
-"printed": "a-r-th-ḥ-n'-g-i",
-"griffith": "artḫnêki",
-"corpus": "artxnoki",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "toh-ṇ-g-e-l",
-"griffith": "teñkel",
-"corpus": "teNkel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "toh-ṇ-u(?)-i-b-ḥ-e",
-"griffith": "teñwibḫe",
-"corpus": "teNwibxe",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "s-b-m-e-g-e",
-"griffith": "sbmeke",
-"corpus": "sbmeke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "A-rh-b-l-e-l-ḥ-e",
-"griffith": "azblelḫe",
-"corpus": "adblelxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "E-n'-k-e",
-"griffith": "enêqe",
-"corpus": "enoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 21,
-"printed": "M-toh-y-b-e-l-i",
-"griffith": "mteybeli",
-"corpus": "mteybeli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "u(?)-k-ṇ-l-i",
-"griffith": "wqñli",
-"corpus": "wqNli",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "A-rh-b-l-e-l-ḥ",
-"griffith": "azblelḫ",
-"corpus": "adblelx",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "Th-b-r-e-toh",
-"griffith": "tbrete",
-"corpus": "tbrete",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "K-e-sh-l-i",
-"griffith": "qešli",
-"corpus": "qeSli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "M(?)-l-i-l-g-e",
-"griffith": "mlilke",
-"corpus": "mlilke",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "s-b-l-ḥ-e",
-"griffith": "sblḫe",
-"corpus": "sblxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "E-n'-u-i-toh",
-"griffith": "enêwite",
-"corpus": "enowite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 22,
-"printed": "U-e-b-r-toh",
-"griffith": "webrte",
-"corpus": "webrte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "[ḥ-r-]p-ḥ-e-g-e",
-"griffith": "ḫrpḫeke",
-"corpus": "xrpxeke",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "sh-u-i-rh'",
-"griffith": "šwizê",
-"corpus": "Swido",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "I-r-ḥ-ḥ-i",
-"griffith": "irḫḫi",
-"corpus": "irxxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "s-b-u-i",
-"griffith": "sbwi",
-"corpus": "sbwi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "e-k-e-s-u-i-l",
-"griffith": "eqeswil",
-"corpus": "eqeswil",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "e-g-toh",
-"griffith": "ekte",
-"corpus": "ekte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "g-rh-i-s-l-u",
-"griffith": "kzislw",
-"corpus": "kdislw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "a-b-r-l-u",
-"griffith": "abrlw",
-"corpus": "abrlw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 23,
-"printed": "y-e-m'-k-e",
-"griffith": "yemêqe",
-"corpus": "yemoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "k-e-b-e-s-u-i-l",
-"griffith": "qebeswil",
-"corpus": "qebeswil",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "u-ă-b-toh",
-"griffith": "wabte",
-"corpus": "wabte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "toh-ṇ-g-e-l-ḥ-e",
-"griffith": "teñkelḫe",
-"corpus": "teNkelxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "E-toh-ṇ-u-i-toh",
-"griffith": "eteñwite",
-"corpus": "eteNwite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "K-m'-l-i",
-"griffith": "qmêli",
-"corpus": "qmoli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "rh-m-b-e-l-i",
-"griffith": "zmbeli",
-"corpus": "dmbeli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "M-rh-e-u-e-y-i",
-"griffith": "mzeweyi",
-"corpus": "mdeweyi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 24,
-"printed": "m-g-rh-e-y-i",
-"griffith": "mkzeyi",
-"corpus": "mkdeyi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "To-i-ă",
-"griffith": "têia",
-"corpus": "toia",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "sh-u-i-a-h-i",
-"griffith": "šwiaḫi",
-"corpus": "Swiaxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "g-rh-e-y-i-p",
-"griffith": "kzeyip",
-"corpus": "kdeyip",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "a-b-r-i-g",
-"griffith": "abrik",
-"corpus": "abrik",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "u-i",
-"griffith": "wi",
-"corpus": "wi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "MMMCCCC",
-"griffith": "MMMCCCC",
-"corpus": "MMMCCCC",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 25,
-"printed": "ă-u-u-i-a-u-i",
-"griffith": "awwiawi",
-"corpus": "awwiawi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "e-r'-toh",
-"griffith": "erête",
-"corpus": "erote",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 25,
-"printed": "th-i-n-ṇ-g-e",
-"griffith": "tinñke",
-"corpus": "tinNke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "m(?)-l-i",
-"griffith": "mli",
-"corpus": "mli",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "p-i-rh-b-toh",
-"griffith": "pizbte",
-"corpus": "pidbte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "a-s-ă-toh",
-"griffith": "asate",
-"corpus": "asate",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "toh-e-r-l-i-s-l",
-"griffith": "teerlisl",
-"corpus": "teerlisl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "A-sh-r",
-"griffith": "ašr",
-"corpus": "aSr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "a-ḥ-i-rh-e-b-l-e",
-"griffith": "aḫizeble",
-"corpus": "axideble",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "u-i",
-"griffith": "wi",
-"corpus": "wi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 26,
-"printed": "CCL",
-"griffith": "CCL",
-"corpus": "CCL",
-"doubt": "(?) after it",
-"kind": "numeral"
-},
-{
-"line": 26,
-"printed": "VII",
-"griffith": "VII",
-"corpus": "VII",
-"doubt": "",
-"kind": "numeral"
-},
-{
-"line": 26,
-"printed": "A-g-i-n-i-rhe-rhe",
-"griffith": "akinizz",
-"corpus": "akinidd",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "k'",
-"griffith": "qê",
-"corpus": "qo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "p-k-r-l'",
-"griffith": "pqrlê",
-"corpus": "pqrlo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "p-e-sh-t-l'",
-"griffith": "peštêlê",
-"corpus": "peStolo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "p-k-r-i-l-g-e",
-"griffith": "pqrilke",
-"corpus": "pqrilke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "M-n'",
-"griffith": "mnê",
-"corpus": "mno",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "N-l-i",
-"griffith": "nli",
-"corpus": "nli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "e-k-e-th-ḥ-n",
-"griffith": "eqetḫn",
-"corpus": "eqetxn",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "a-n-th",
-"griffith": "ant",
-"corpus": "ant",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 27,
-"printed": "M-n'-toh-s-l-g-e",
-"griffith": "mnêteslke",
-"corpus": "mnoteslke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "M-n'",
-"griffith": "mnê",
-"corpus": "mno",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "N-l-i",
-"griffith": "nli",
-"corpus": "nli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "e-k-e-th-ḥ-n",
-"griffith": "eqetḫn",
-"corpus": "eqetxn",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "p-k-r-i-l-i",
-"griffith": "pqrili",
-"corpus": "pqrili",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "p-e-sh-t-l-i",
-"griffith": "peštêli",
-"corpus": "peStoli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 28,
-"printed": "th-b-i-th-n-i-rh-e-b-ḥ-e",
-"griffith": "tbitnizebḫe",
-"corpus": "tbitnidebxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "k'-r-e-b-l-i",
-"griffith": "qêrebli",
-"corpus": "qorebli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "N-p-th-b-i-ḥ",
-"griffith": "nptbiḫ",
-"corpus": "nptbix",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "a-m-r-e",
-"griffith": "amre",
-"corpus": "amre",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "M-h-r-toh-s-n",
-"griffith": "mḫrtesn",
-"corpus": "mxrtesn",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "A-m-n-i",
-"griffith": "amni",
-"corpus": "amni",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 29,
-"printed": "a-r-r-e-s-s",
-"griffith": "arress",
-"corpus": "arress",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "G-r-toh-rh-s",
-"griffith": "krtezs",
-"corpus": "krteds",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "ḥ-r-p-ḥ-e",
-"griffith": "ḫrpḫe",
-"corpus": "xrpxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "u-s-l",
-"griffith": "wsl",
-"corpus": "wsl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "th-g-th",
-"griffith": "tkt",
-"corpus": "tkt",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "G-r-toh-l-i",
-"griffith": "krteli",
-"corpus": "krteli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 30,
-"printed": "a-r-th-ḥ-n'-g-e-u-i",
-"griffith": "artḫnêkewi",
-"corpus": "artxnokewi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "toh-ṇ-g-e-l",
-"griffith": "teñkel",
-"corpus": "teNkel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "toh-ṇ-u-i-b-ḥ-e",
-"griffith": "teñwibḫe",
-"corpus": "teNwibxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "M-e-g-e",
-"griffith": "meke",
-"corpus": "meke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "A-rh-b-l-e-l-ḥ-e",
-"griffith": "azblelḫe",
-"corpus": "adblelxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "E-n'-k-e",
-"griffith": "enêqe",
-"corpus": "enoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 31,
-"printed": "M-toh-y-b-e-l-i",
-"griffith": "mteybeli",
-"corpus": "mteybeli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 32,
-"printed": "Sh-m-e-toh-s-ṇ-l-i",
-"griffith": "šmetesñli",
-"corpus": "SmetesNli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 32,
-"printed": "A-rh-b-l-e-l-ḥ",
-"griffith": "azblelḫ",
-"corpus": "adblelx",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 32,
-"printed": "Th-b-r-e-toh",
-"griffith": "tbrete",
-"corpus": "tbrete",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 32,
-"printed": "K-e-sh-l-i",
-"griffith": "qešli",
-"corpus": "qeSli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 32,
-"printed": "M'-l-e-l-e-g-e",
-"griffith": "mêleleke",
-"corpus": "moleleke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "s-b-l(?)-ḥ",
-"griffith": "sblḫ",
-"corpus": "sblx",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "E-n'-u-i-toh",
-"griffith": "enêwite",
-"corpus": "enowite",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "U-e-b-r-toh",
-"griffith": "webrte",
-"corpus": "webrte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "ḥ-r-p-ḥ-e-g-e",
-"griffith": "ḫrpḫeke",
-"corpus": "xrpxeke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "sh-u-i-rh'",
-"griffith": "šwizê",
-"corpus": "Swido",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "I-r-ḥ-ḥ-i",
-"griffith": "irḫḫi",
-"corpus": "irxxi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 33,
-"printed": "s-b-u-i",
-"griffith": "sbwi",
-"corpus": "sbwi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "e-k-e-s-u-i-l",
-"griffith": "eqeswil",
-"corpus": "eqeswil",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "e-g-toh",
-"griffith": "ekte",
-"corpus": "ekte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "g-rh-i-s-l-u",
-"griffith": "kzislw",
-"corpus": "kdislw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "a-b-r-s-l-u",
-"griffith": "abrslw",
-"corpus": "abrslw",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "e-m'-k-e",
-"griffith": "emêqe",
-"corpus": "emoqe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 34,
-"printed": "k-e-b-e-s-u-i-l",
-"griffith": "qebeswil",
-"corpus": "qebeswil",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "u-ă-b-toh",
-"griffith": "wabte",
-"corpus": "wabte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "p-e-rh-e-g-e-s-l-g-e",
-"griffith": "pezekeslke",
-"corpus": "pedekeslke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "ḥ-r-p-ḥ-l-g-e",
-"griffith": "ḫrpḫlke",
-"corpus": "xrpxlke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "k'-l-e-b",
-"griffith": "qêleb",
-"corpus": "qoleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "u(?)-toh-rh-e-toh",
-"griffith": "wtezete",
-"corpus": "wtedete",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "m-g",
-"griffith": "mk",
-"corpus": "mk",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 35,
-"printed": "u-i-toh-pi-i-rh-i-l-g-e",
-"griffith": "witepiizilke",
-"corpus": "witepiidilke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "k'",
-"griffith": "qê",
-"corpus": "qo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "e-ḥ-r-p-ḥ-e",
-"griffith": "eḫrpḫe",
-"corpus": "exrpxe",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "p-y-l-i",
-"griffith": "pyli",
-"corpus": "pyli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "e-p-p",
-"griffith": "epp",
-"corpus": "epp",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 36,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 36,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 36,
-"printed": "[l-]i",
-"griffith": "li",
-"corpus": "li",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "[u(?)-toh-]rh-e-toh-l-e-b-g",
-"griffith": "wtezetelebk",
-"corpus": "wtedetelebk",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "a-t-i-l",
-"griffith": "atêil",
-"corpus": "atoil",
-"doubt": "(?) after it",
-"kind": "word"
-},
-{
-"line": 36,
-"printed": "p-e-g-e",
-"griffith": "peke",
-"corpus": "peke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": "u(?)-toh-rh-e-toh",
-"griffith": "wtezete",
-"corpus": "wtedete",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": "A-m-n-p-toh",
-"griffith": "amnpte",
-"corpus": "amnpte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": "p-i-rh-e-l-g-e",
-"griffith": "pizelke",
-"corpus": "pidelke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": "r-b",
-"griffith": "rb",
-"corpus": "rb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": "u(?)-r-e-u-ḥ-e-l-i",
-"griffith": "wrewḫeli",
-"corpus": "wrewxeli",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 37,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 37,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 37,
-"printed": ".",
-"griffith": "",
-"corpus": ".",
-"doubt": "",
-"kind": "lost"
-},
-{
-"line": 38,
-"printed": "m-g-e-n'-u-i",
-"griffith": "mkenêwi",
-"corpus": "mkenowi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 38,
-"printed": "toh-ṇ-g-e-l",
-"griffith": "teñkel",
-"corpus": "teNkel",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 38,
-"printed": "Th-b-r-g-[e]",
-"griffith": "tbrke",
-"corpus": "tbrke",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 38,
-"printed": "k'-r-toh-[s-l]",
-"griffith": "qêrtesl",
-"corpus": "qortesl",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 38,
-"printed": "E-th-g-b-ḥ-l",
-"griffith": "etkbḫl",
-"corpus": "etkbxl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 38,
-"printed": "ḥ-r-[p]-ḥ-[e]-s-l",
-"griffith": "ḫrpḫesl",
-"corpus": "xrpxesl",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "th-g-th",
-"griffith": "tkt",
-"corpus": "tkt",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "A-m-n-i",
-"griffith": "amni",
-"corpus": "amni",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "a-r-r-e-s-s",
-"griffith": "arress",
-"corpus": "arress",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "A-m-n-p",
-"griffith": "amnp",
-"corpus": "amnp",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "Ṇ-toh-s-l",
-"griffith": "ñtesl",
-"corpus": "Ntesl",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 39,
-"printed": "[A-m-n-]p",
-"griffith": "amnp",
-"corpus": "amnp",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "p-i-rh-e-l-g-e",
-"griffith": "pizelke",
-"corpus": "pidelke",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "k'-l-e-b",
-"griffith": "qêleb",
-"corpus": "qoleb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "u(?)-toh-rh-e-b-toh",
-"griffith": "wtezebte",
-"corpus": "wtedebte",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "s-b",
-"griffith": "sb",
-"corpus": "sb",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "[toh-]-ṇ-g-e-l-ḥ-e",
-"griffith": "teñkelḫe",
-"corpus": "teNkelxe",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 40,
-"printed": "ă-u-u-[i-a-u]-i",
-"griffith": "awwiawi",
-"corpus": "awwiawi",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "e-r'-toh",
-"griffith": "erête",
-"corpus": "erote",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "th-n-n-g-i",
-"griffith": "tnnki",
-"corpus": "tnnki",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "a-rh-b-toh",
-"griffith": "azbte",
-"corpus": "adbte",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "a-s-[ă-]toh",
-"griffith": "asate",
-"corpus": "asate",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "k'",
-"griffith": "qê",
-"corpus": "qo",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 41,
-"printed": "[A-p-i-]toh-b-s-l-ḥ",
-"griffith": "apitebslḫ",
-"corpus": "apitebslx",
-"doubt": "(?) or [ ] on a sign",
-"kind": "word"
-},
-{
-"line": 42,
-"printed": "A-sh-r",
-"griffith": "ašr",
-"corpus": "aSr",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 42,
-"printed": "a-ḥ-i-rh-e-b-l-i",
-"griffith": "aḫizebli",
-"corpus": "axidebli",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 42,
-"printed": "u-i",
-"griffith": "wi",
-"corpus": "wi",
-"doubt": "",
-"kind": "word"
-},
-{
-"line": 42,
-"printed": "CCLII",
-"griffith": "CCLII",
-"corpus": "CCLII",
-"doubt": "",
-"kind": "numeral"
-}
+{"line": 1, "printed": "A-m-n-i-r-e-n-s", "griffith": "amnirens", "corpus": "amnirens", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "k'-r-e-l-i", "griffith": "qêreli", "corpus": "qoreli", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "g-rh-e-l-i", "griffith": "kzeli", "corpus": "kdeli", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "y-i-th-n-e", "griffith": "yitne", "corpus": "yitne", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "rh-e-b-ḥ-e-l", "griffith": "zebḫel", "corpus": "debxel", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "k'-r-e-y-i", "griffith": "qêreyi", "corpus": "qoreyi", "doubt": "", "kind": "word"},
+{"line": 1, "printed": "A-g-i-n-i-rhe-rhe", "griffith": "akinizz", "corpus": "akinidd", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "p-k'-r-ṇ-y-i", "griffith": "pqêrñyi", "corpus": "pqorNyi", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "p-e-sh-t-ṇ-y-i", "griffith": "peštêñyi", "corpus": "peStoNyi", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "p-k'-r", "griffith": "pqêr", "corpus": "pqor", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "k'-r-e-s-l", "griffith": "qêresl", "corpus": "qoresl", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "k'-r", "griffith": "qêr", "corpus": "qor", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "ḥ-r-p-ḥ-e-l-u", "griffith": "ḫrpḫelw", "corpus": "xrpxelw", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "K-e-sh", "griffith": "qeš", "corpus": "qeS", "doubt": "", "kind": "word"},
+{"line": 2, "printed": "A-r-'-m-e-y-s-l", "griffith": "arêmeysl", "corpus": "aromeysl", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "k'-r", "griffith": "qêr", "corpus": "qor", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "ḥ-r-p-ḥ-e-l", "griffith": "ḫrpḫel", "corpus": "xrpxel", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "A-ḥ-r-'", "griffith": "aḫrê", "corpus": "axro", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "K-m-s-l", "griffith": "qmsl", "corpus": "qmsl", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "A-th-b-e", "griffith": "atbe", "corpus": "atbe", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "th-m-'-th", "griffith": "tmêt", "corpus": "tmot", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "ḥ-r-p-ḥ-l", "griffith": "ḫrpḫl", "corpus": "xrpxl", "doubt": "", "kind": "word"},
+{"line": 3, "printed": "A-r-m-i-l", "griffith": "armil", "corpus": "armil", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "K-e-sh-t", "griffith": "qeštê", "corpus": "qeSto", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "a-b-r-s-l", "griffith": "abrsl", "corpus": "abrsl", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "y-e-g-i-rh-i", "griffith": "yekizi", "corpus": "yekidi", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "g-rh-i-s-l", "griffith": "kzisl", "corpus": "kdisl", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "a-r-s-l-i", "griffith": "arsli", "corpus": "arsli", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "y-e-m'-k-e", "griffith": "yemêqe", "corpus": "yemoqe", "doubt": "", "kind": "word"},
+{"line": 4, "printed": "k-e-b-e-s-u-i", "griffith": "qebeswi", "corpus": "qebeswi", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "y-e-r-g-i", "griffith": "yerki", "corpus": "yerki", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "A-r-m'-e-y-s-l-ḥ-e", "griffith": "armêeyslḫe", "corpus": "armoeyslxe", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "A-rh-ḥ-i-toh", "griffith": "azḫite", "corpus": "adxite", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "K-e-p-e-r", "griffith": "qeper", "corpus": "qeper", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "a-b-r", "griffith": "abr", "corpus": "abr", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "XII", "griffith": "XII", "corpus": "XII", "doubt": "", "kind": "numeral"},
+{"line": 5, "printed": "g-rh-i", "griffith": "kzi", "corpus": "kdi", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "CXV", "griffith": "CXV", "corpus": "CXV", "doubt": "", "kind": "numeral"},
+{"line": 5, "printed": "k'-l-e-b", "griffith": "qêleb", "corpus": "qoleb", "doubt": "", "kind": "word"},
+{"line": 5, "printed": "N'-l-rh'-ḥ-e", "griffith": "nêlzêḫe", "corpus": "noldoxe", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "a-r-b-ḥ-toh-g-e", "griffith": "arbḫteke", "corpus": "arbxteke", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "p-k'-r-l-i", "griffith": "pqêrli", "corpus": "pqorli", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "y-e-rh'", "griffith": "yezê", "corpus": "yedo", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "K-e-sh-l-i", "griffith": "qešli", "corpus": "qeSli", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "I-m-l'-a", "griffith": "imlêa", "corpus": "imloa", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "th-r-rh-e-b", "griffith": "trzeb", "corpus": "trdeb", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "a-b-e-p-b", "griffith": "abepb", "corpus": "abepb", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "M-s-rh-e", "griffith": "msze", "corpus": "msde", "doubt": "", "kind": "word"},
+{"line": 6, "printed": "Th-ṇ-n-r", "griffith": "tñnr", "corpus": "tNnr", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "E-rh-e-toh-k", "griffith": "ezeteq", "corpus": "edeteq", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "th-r'-[rh]-e", "griffith": "trêze", "corpus": "trode", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 7, "printed": "th-r'-rh-e-b-g-toh", "griffith": "trêzebkte", "corpus": "trodebkte", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "e-k-e-l-b-ḥ-e", "griffith": "eqelbḫe", "corpus": "eqelbxe", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "y-e-g", "griffith": "yek", "corpus": "yek", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "A-r'-b-e-l", "griffith": "arêbel", "corpus": "arobel", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "sh-e-toh", "griffith": "šete", "corpus": "Sete", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "K-e-sh-t", "griffith": "qeštê", "corpus": "qeSto", "doubt": "", "kind": "word"},
+{"line": 7, "printed": "k'-r", "griffith": "qêr", "corpus": "qor", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "ḥ-r-p-ḥ-e-l", "griffith": "ḫrpḫel", "corpus": "xrpxel", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "A-ḥ-r'", "griffith": "aḫrê", "corpus": "axro", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "K-m-s-l", "griffith": "qmsl", "corpus": "qmsl", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "A-th-b-e", "griffith": "atbe", "corpus": "atbe", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "th-m'-th", "griffith": "tmêt", "corpus": "tmot", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "h-r-p-ḥ-l", "griffith": "ḫrpḫl", "corpus": "xrpxl", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "K-e-sh", "griffith": "qeš", "corpus": "qeS", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "N-p-t", "griffith": "nptê", "corpus": "npto", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "a-r'-s-e-l", "griffith": "arêsel", "corpus": "arosel", "doubt": "", "kind": "word"},
+{"line": 8, "printed": "a-b-r-s-l", "griffith": "abrsl", "corpus": "abrsl", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "y-e-g", "griffith": "yek", "corpus": "yek", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "rh-i", "griffith": "zi", "corpus": "di", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "g-rh-e-s-l", "griffith": "kzesl", "corpus": "kdesl", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "a-r-s-l-i", "griffith": "arsli", "corpus": "arsli", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "e-m'-k-e", "griffith": "emêqe", "corpus": "emoqe", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "k-e-b-e-s-u-e", "griffith": "qebeswe", "corpus": "qebeswe", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "e-r-g", "griffith": "erk", "corpus": "erk", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "sh-ă-toh", "griffith": "šate", "corpus": "Sate", "doubt": "", "kind": "word"},
+{"line": 9, "printed": "A-r'-b-l", "griffith": "arêbl", "corpus": "arobl", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "A-rh-ḥ-i-toh", "griffith": "azḫite", "corpus": "adxite", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "P-e-r-i-toh", "griffith": "perite", "corpus": "perite", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "a-b-r", "griffith": "abr", "corpus": "abr", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "C", "griffith": "C", "corpus": "C", "doubt": "", "kind": "numeral"},
+{"line": 10, "printed": "g-rh-i", "griffith": "kzi", "corpus": "kdi", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "CVII", "griffith": "CVII", "corpus": "CVII", "doubt": "", "kind": "numeral"},
+{"line": 10, "printed": "k-e-l-e-b", "griffith": "qeleb", "corpus": "qeleb", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "A-p'-toh-b-e-s", "griffith": "apêtebes", "corpus": "apotebes", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 10, "printed": "m-g-i-u", "griffith": "mkiw", "corpus": "mkiw", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "Y-k'-l", "griffith": "yqêl", "corpus": "yqol", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "m-g-i-sh-e-sh-toh-l", "griffith": "mkišeštel", "corpus": "mkiSeStel", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "a-b-r-s-l", "griffith": "abrsl", "corpus": "abrsl", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "y-e-g-e-rh", "griffith": "yekez", "corpus": "yeked", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "g-rh-i-s-l", "griffith": "kzisl", "corpus": "kdisl", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "a-r-e-s-l-i", "griffith": "aresli", "corpus": "aresli", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "e-m'-a-k-e", "griffith": "emêaqe", "corpus": "emoaqe", "doubt": "", "kind": "word"},
+{"line": 11, "printed": "k-e-b-e-s-u-e", "griffith": "qebeswe", "corpus": "qebeswe", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "y-e-r-g-i", "griffith": "yerki", "corpus": "yerki", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "A-p-e-s", "griffith": "apes", "corpus": "apes", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "m-g-i", "griffith": "mki", "corpus": "mki", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "u-e-toh-l-h-e", "griffith": "wetelḫe", "corpus": "wetelxe", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "A-rh-ḥ-e-toh", "griffith": "azḫete", "corpus": "adxete", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "P-r-i-toh", "griffith": "prite", "corpus": "prite", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "a-b-r", "griffith": "abr", "corpus": "abr", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "L", "griffith": "L", "corpus": "L", "doubt": "(?) after it", "kind": "numeral"},
+{"line": 12, "printed": "V", "griffith": "V", "corpus": "V", "doubt": "", "kind": "numeral"},
+{"line": 12, "printed": "g-rh-i", "griffith": "kzi", "corpus": "kdi", "doubt": "", "kind": "word"},
+{"line": 12, "printed": "CCL", "griffith": "CCL", "corpus": "CCL", "doubt": "(?) after it", "kind": "numeral"},
+{"line": 12, "printed": "III", "griffith": "III", "corpus": "III", "doubt": "", "kind": "numeral"},
+{"line": 12, "printed": "k'-e-l-e-b", "griffith": "qêeleb", "corpus": "qoeleb", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "a-toh-toh", "griffith": "atete", "corpus": "atete", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "k-e-b-e-s", "griffith": "qebes", "corpus": "qebes", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "y-e-th-g-b(?)-ḥ-e", "griffith": "yetkbḫe", "corpus": "yetkbxe", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 13, "printed": "Y-ka'-l", "griffith": "yqaêl", "corpus": "yqaol", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "M-e-m", "griffith": "mem", "corpus": "mem", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "a-l-e-k-l", "griffith": "aleql", "corpus": "aleql", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "K-e-sh-t", "griffith": "qeštê", "corpus": "qeSto", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "a-th-l-e-l-e-b", "griffith": "atleleb", "corpus": "atleleb", "doubt": "", "kind": "word"},
+{"line": 13, "printed": "a-b-r-[s]-l", "griffith": "abrsl", "corpus": "abrsl", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 14, "printed": "y-e-g-e-rh", "griffith": "yekez", "corpus": "yeked", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "g-rh-i-s-l", "griffith": "kzisl", "corpus": "kdisl", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "a-r'-s-l-i", "griffith": "arêsli", "corpus": "arosli", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "rh-k-e-b-e-s-u-e", "griffith": "zqebeswe", "corpus": "dqebeswe", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "A-p-e", "griffith": "ape", "corpus": "ape", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "toh-[b]-i", "griffith": "tebi", "corpus": "tebi", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 14, "printed": "N-ḥ-i", "griffith": "nḫi", "corpus": "nxi", "doubt": "", "kind": "word"},
+{"line": 14, "printed": "a-r-g-e-rh-n-i-y-e", "griffith": "arkezniye", "corpus": "arkedniye", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "k-e-b-e-s-u-e", "griffith": "qebeswe", "corpus": "qebeswe", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "s-b-ḥ-i", "griffith": "sbḫi", "corpus": "sbxi", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "a-l-e-p-b-k'", "griffith": "alepbqê", "corpus": "alepbqo", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "p-e-r-toh-s", "griffith": "pertes", "corpus": "pertes", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "K-e-sh", "griffith": "qeš", "corpus": "qeS", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "k'-l-e-b-u-e", "griffith": "qêlebwe", "corpus": "qolebwe", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "h-r-p-h-ṇ-m-l-e-g-s", "griffith": "ḫrpḫñmleks", "corpus": "xrpxNmleks", "doubt": "", "kind": "word"},
+{"line": 15, "printed": "I-p-i-a-l-i", "griffith": "ipiali", "corpus": "ipiali", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "k-e-s-u-e-rh-e-ḥ-i", "griffith": "qeswezeḫi", "corpus": "qeswedexi", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "e-k-e-toh-rh-e-b-ḥ-i", "griffith": "eqetezebḫi", "corpus": "eqetedebxi", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "s-b-k-l-e-b-u-i-toh-s", "griffith": "sbqlebwites", "corpus": "sbqlebwites", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "Y-e-s-b-e", "griffith": "yesbe", "corpus": "yesbe", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "N-sh", "griffith": "nš", "corpus": "nS", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "N-sh-l", "griffith": "nšl", "corpus": "nSl", "doubt": "", "kind": "word"},
+{"line": 16, "printed": "k'-r", "griffith": "qêr", "corpus": "qor", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "a-to-[to]", "griffith": "atêtê", "corpus": "atoto", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 17, "printed": "e-k-e-p-i", "griffith": "eqepi", "corpus": "eqepi", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "M-e-rh-e-u-e-toh-l", "griffith": "mezewetel", "corpus": "medewetel", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "a-...-m(?)-rh-e", "griffith": "a...mze", "corpus": "a...mde", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 17, "printed": "Gh'-b-i", "griffith": "ẖêbi", "corpus": "Xobi", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "th-g-g", "griffith": "tkk", "corpus": "tkk", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "Rhe-rhe", "griffith": "zz", "corpus": "dd", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "[s-b]", "griffith": "sb", "corpus": "sb", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 17, "printed": "k-l-e-b", "griffith": "qleb", "corpus": "qleb", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "u-i-toh-s", "griffith": "wites", "corpus": "wites", "doubt": "", "kind": "word"},
+{"line": 17, "printed": "Y-e-s-b-i", "griffith": "yesbi", "corpus": "yesbi", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "k-e-b-s-l-i-l-i", "griffith": "qebslili", "corpus": "qebslili", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "Gh-b-i", "griffith": "ẖbi", "corpus": "Xbi", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "M-e-rh-e-u-i-toh-l-i", "griffith": "mezewiteli", "corpus": "medewiteli", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "k'-r", "griffith": "qêr", "corpus": "qor", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "N-l", "griffith": "nl", "corpus": "nl", "doubt": "", "kind": "word"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": "l", "griffith": "l", "corpus": "l", "doubt": "", "kind": "word"},
+{"line": 18, "printed": "Y-e-k(?)-ḥ(?)-b-t", "griffith": "yeqḫbtê", "corpus": "yeqxbto", "doubt": "(?) or [ ] on a sign; (?) after it", "kind": "word"},
+{"line": 18, "printed": "a-u(?)-g", "griffith": "awk", "corpus": "awk", "doubt": "(?) or [ ] on a sign; (?) after it", "kind": "word"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 18, "printed": "ṇ", "griffith": "ñ", "corpus": "N", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "k-s", "griffith": "qs", "corpus": "qs", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "M-e'", "griffith": "meê", "corpus": "meo", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "l-gh", "griffith": "lẖ", "corpus": "lX", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "A-m-n-p", "griffith": "amnp", "corpus": "amnp", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "p-n-p-g", "griffith": "pnpk", "corpus": "pnpk", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "A-ḥ-r'", "griffith": "aḫrê", "corpus": "axro", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "p-ḥ-r-p-ḥ-toh", "griffith": "pḫrpḫte", "corpus": "pxrpxte", "doubt": "", "kind": "word"},
+{"line": 19, "printed": "B-e-u-[i-]g-[e]", "griffith": "bewike", "corpus": "bewike", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 19, "printed": "sh(?)-u(?)-i-rh'", "griffith": "šwizê", "corpus": "Swido", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 19, "printed": "k'-l-e-b", "griffith": "qêleb", "corpus": "qoleb", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "y-e-b-e", "griffith": "yebe", "corpus": "yebe", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "Y-e-s-b-e-u-i-toh-s", "griffith": "yesbewites", "corpus": "yesbewites", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "N-sh", "griffith": "nš", "corpus": "nS", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "N-sh-l", "griffith": "nšl", "corpus": "nSl", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "A-m-n-p", "griffith": "amnp", "corpus": "amnp", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "y-i-r'-gh", "griffith": "yirêẖ", "corpus": "yiroX", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "M-rh-e-u-i", "griffith": "mzewi", "corpus": "mdewi", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "a-.-", "griffith": "a.", "corpus": "a.", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 20, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "G-r-toh-l-i", "griffith": "krteli", "corpus": "krteli", "doubt": "", "kind": "word"},
+{"line": 20, "printed": "a-r-th-ḥ-n'-g-i", "griffith": "artḫnêki", "corpus": "artxnoki", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "toh-ṇ-g-e-l", "griffith": "teñkel", "corpus": "teNkel", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "toh-ṇ-u(?)-i-b-ḥ-e", "griffith": "teñwibḫe", "corpus": "teNwibxe", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 21, "printed": "s-b-m-e-g-e", "griffith": "sbmeke", "corpus": "sbmeke", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "A-rh-b-l-e-l-ḥ-e", "griffith": "azblelḫe", "corpus": "adblelxe", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "E-n'-k-e", "griffith": "enêqe", "corpus": "enoqe", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 21, "printed": "M-toh-y-b-e-l-i", "griffith": "mteybeli", "corpus": "mteybeli", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "u(?)-k-ṇ-l-i", "griffith": "wqñli", "corpus": "wqNli", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 22, "printed": "A-rh-b-l-e-l-ḥ", "griffith": "azblelḫ", "corpus": "adblelx", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "Th-b-r-e-toh", "griffith": "tbrete", "corpus": "tbrete", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "K-e-sh-l-i", "griffith": "qešli", "corpus": "qeSli", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "M(?)-l-i-l-g-e", "griffith": "mlilke", "corpus": "mlilke", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 22, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "s-b-l-ḥ-e", "griffith": "sblḫe", "corpus": "sblxe", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "E-n'-u-i-toh", "griffith": "enêwite", "corpus": "enowite", "doubt": "", "kind": "word"},
+{"line": 22, "printed": "U-e-b-r-toh", "griffith": "webrte", "corpus": "webrte", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "[ḥ-r-]p-ḥ-e-g-e", "griffith": "ḫrpḫeke", "corpus": "xrpxeke", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 23, "printed": "sh-u-i-rh'", "griffith": "šwizê", "corpus": "Swido", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "I-r-ḥ-ḥ-i", "griffith": "irḫḫi", "corpus": "irxxi", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "s-b-u-i", "griffith": "sbwi", "corpus": "sbwi", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "e-k-e-s-u-i-l", "griffith": "eqeswil", "corpus": "eqeswil", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "e-g-toh", "griffith": "ekte", "corpus": "ekte", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "g-rh-i-s-l-u", "griffith": "kzislw", "corpus": "kdislw", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "a-b-r-l-u", "griffith": "abrlw", "corpus": "abrlw", "doubt": "", "kind": "word"},
+{"line": 23, "printed": "y-e-m'-k-e", "griffith": "yemêqe", "corpus": "yemoqe", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "k-e-b-e-s-u-i-l", "griffith": "qebeswil", "corpus": "qebeswil", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "u-ă-b-toh", "griffith": "wabte", "corpus": "wabte", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "toh-ṇ-g-e-l-ḥ-e", "griffith": "teñkelḫe", "corpus": "teNkelxe", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "E-toh-ṇ-u-i-toh", "griffith": "eteñwite", "corpus": "eteNwite", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "K-m'-l-i", "griffith": "qmêli", "corpus": "qmoli", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "rh-m-b-e-l-i", "griffith": "zmbeli", "corpus": "dmbeli", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "M-rh-e-u-e-y-i", "griffith": "mzeweyi", "corpus": "mdeweyi", "doubt": "", "kind": "word"},
+{"line": 24, "printed": "m-g-rh-e-y-i", "griffith": "mkzeyi", "corpus": "mkdeyi", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "To-i-ă", "griffith": "têia", "corpus": "toia", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "sh-u-i-a-h-i", "griffith": "šwiaḫi", "corpus": "Swiaxi", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "g-rh-e-y-i-p", "griffith": "kzeyip", "corpus": "kdeyip", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "a-b-r-i-g", "griffith": "abrik", "corpus": "abrik", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "u-i", "griffith": "wi", "corpus": "wi", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "MMMCCCC", "griffith": "MMMCCCC", "corpus": "MMMCCCC", "doubt": "", "kind": "numeral"},
+{"line": 25, "printed": "ă-u-u-i-a-u-i", "griffith": "awwiawi", "corpus": "awwiawi", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "e-r'-toh", "griffith": "erête", "corpus": "erote", "doubt": "", "kind": "word"},
+{"line": 25, "printed": "th-i-n-ṇ-g-e", "griffith": "tinñke", "corpus": "tinNke", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "m(?)-l-i", "griffith": "mli", "corpus": "mli", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 26, "printed": "p-i-rh-b-toh", "griffith": "pizbte", "corpus": "pidbte", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "a-s-ă-toh", "griffith": "asate", "corpus": "asate", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "toh-e-r-l-i-s-l", "griffith": "teerlisl", "corpus": "teerlisl", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "A-sh-r", "griffith": "ašr", "corpus": "aSr", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "a-ḥ-i-rh-e-b-l-e", "griffith": "aḫizeble", "corpus": "axideble", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "u-i", "griffith": "wi", "corpus": "wi", "doubt": "", "kind": "word"},
+{"line": 26, "printed": "CCL", "griffith": "CCL", "corpus": "CCL", "doubt": "(?) after it", "kind": "numeral"},
+{"line": 26, "printed": "VII", "griffith": "VII", "corpus": "VII", "doubt": "", "kind": "numeral"},
+{"line": 26, "printed": "A-g-i-n-i-rhe-rhe", "griffith": "akinizz", "corpus": "akinidd", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "k'", "griffith": "qê", "corpus": "qo", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "p-k-r-l'", "griffith": "pqrlê", "corpus": "pqrlo", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "p-e-sh-t-l'", "griffith": "peštêlê", "corpus": "peStolo", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "p-k-r-i-l-g-e", "griffith": "pqrilke", "corpus": "pqrilke", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "M-n'", "griffith": "mnê", "corpus": "mno", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "N-l-i", "griffith": "nli", "corpus": "nli", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "e-k-e-th-ḥ-n", "griffith": "eqetḫn", "corpus": "eqetxn", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "a-n-th", "griffith": "ant", "corpus": "ant", "doubt": "", "kind": "word"},
+{"line": 27, "printed": "M-n'-toh-s-l-g-e", "griffith": "mnêteslke", "corpus": "mnoteslke", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "M-n'", "griffith": "mnê", "corpus": "mno", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "N-l-i", "griffith": "nli", "corpus": "nli", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "e-k-e-th-ḥ-n", "griffith": "eqetḫn", "corpus": "eqetxn", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "p-k-r-i-l-i", "griffith": "pqrili", "corpus": "pqrili", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "p-e-sh-t-l-i", "griffith": "peštêli", "corpus": "peStoli", "doubt": "", "kind": "word"},
+{"line": 28, "printed": "th-b-i-th-n-i-rh-e-b-ḥ-e", "griffith": "tbitnizebḫe", "corpus": "tbitnidebxe", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "k'-r-e-b-l-i", "griffith": "qêrebli", "corpus": "qorebli", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "N-p-th-b-i-ḥ", "griffith": "nptbiḫ", "corpus": "nptbix", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "a-m-r-e", "griffith": "amre", "corpus": "amre", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "M-h-r-toh-s-n", "griffith": "mḫrtesn", "corpus": "mxrtesn", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "A-m-n-i", "griffith": "amni", "corpus": "amni", "doubt": "", "kind": "word"},
+{"line": 29, "printed": "a-r-r-e-s-s", "griffith": "arress", "corpus": "arress", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "G-r-toh-rh-s", "griffith": "krtezs", "corpus": "krteds", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "ḥ-r-p-ḥ-e", "griffith": "ḫrpḫe", "corpus": "xrpxe", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "u-s-l", "griffith": "wsl", "corpus": "wsl", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "th-g-th", "griffith": "tkt", "corpus": "tkt", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "G-r-toh-l-i", "griffith": "krteli", "corpus": "krteli", "doubt": "", "kind": "word"},
+{"line": 30, "printed": "a-r-th-ḥ-n'-g-e-u-i", "griffith": "artḫnêkewi", "corpus": "artxnokewi", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "toh-ṇ-g-e-l", "griffith": "teñkel", "corpus": "teNkel", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "toh-ṇ-u-i-b-ḥ-e", "griffith": "teñwibḫe", "corpus": "teNwibxe", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "M-e-g-e", "griffith": "meke", "corpus": "meke", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "A-rh-b-l-e-l-ḥ-e", "griffith": "azblelḫe", "corpus": "adblelxe", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "E-n'-k-e", "griffith": "enêqe", "corpus": "enoqe", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 31, "printed": "M-toh-y-b-e-l-i", "griffith": "mteybeli", "corpus": "mteybeli", "doubt": "", "kind": "word"},
+{"line": 32, "printed": "Sh-m-e-toh-s-ṇ-l-i", "griffith": "šmetesñli", "corpus": "SmetesNli", "doubt": "", "kind": "word"},
+{"line": 32, "printed": "A-rh-b-l-e-l-ḥ", "griffith": "azblelḫ", "corpus": "adblelx", "doubt": "", "kind": "word"},
+{"line": 32, "printed": "Th-b-r-e-toh", "griffith": "tbrete", "corpus": "tbrete", "doubt": "", "kind": "word"},
+{"line": 32, "printed": "K-e-sh-l-i", "griffith": "qešli", "corpus": "qeSli", "doubt": "", "kind": "word"},
+{"line": 32, "printed": "M'-l-e-l-e-g-e", "griffith": "mêleleke", "corpus": "moleleke", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "s-b-l(?)-ḥ", "griffith": "sblḫ", "corpus": "sblx", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 33, "printed": "E-n'-u-i-toh", "griffith": "enêwite", "corpus": "enowite", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "U-e-b-r-toh", "griffith": "webrte", "corpus": "webrte", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "ḥ-r-p-ḥ-e-g-e", "griffith": "ḫrpḫeke", "corpus": "xrpxeke", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "sh-u-i-rh'", "griffith": "šwizê", "corpus": "Swido", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "I-r-ḥ-ḥ-i", "griffith": "irḫḫi", "corpus": "irxxi", "doubt": "", "kind": "word"},
+{"line": 33, "printed": "s-b-u-i", "griffith": "sbwi", "corpus": "sbwi", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "e-k-e-s-u-i-l", "griffith": "eqeswil", "corpus": "eqeswil", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "e-g-toh", "griffith": "ekte", "corpus": "ekte", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "g-rh-i-s-l-u", "griffith": "kzislw", "corpus": "kdislw", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "a-b-r-s-l-u", "griffith": "abrslw", "corpus": "abrslw", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "e-m'-k-e", "griffith": "emêqe", "corpus": "emoqe", "doubt": "", "kind": "word"},
+{"line": 34, "printed": "k-e-b-e-s-u-i-l", "griffith": "qebeswil", "corpus": "qebeswil", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "u-ă-b-toh", "griffith": "wabte", "corpus": "wabte", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "p-e-rh-e-g-e-s-l-g-e", "griffith": "pezekeslke", "corpus": "pedekeslke", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "ḥ-r-p-ḥ-l-g-e", "griffith": "ḫrpḫlke", "corpus": "xrpxlke", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "k'-l-e-b", "griffith": "qêleb", "corpus": "qoleb", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "u(?)-toh-rh-e-toh", "griffith": "wtezete", "corpus": "wtedete", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 35, "printed": "m-g", "griffith": "mk", "corpus": "mk", "doubt": "", "kind": "word"},
+{"line": 35, "printed": "u-i-toh-pi-i-rh-i-l-g-e", "griffith": "witepiizilke", "corpus": "witepiidilke", "doubt": "", "kind": "word"},
+{"line": 36, "printed": "k'", "griffith": "qê", "corpus": "qo", "doubt": "", "kind": "word"},
+{"line": 36, "printed": "e-ḥ-r-p-ḥ-e", "griffith": "eḫrpḫe", "corpus": "exrpxe", "doubt": "", "kind": "word"},
+{"line": 36, "printed": "p-y-l-i", "griffith": "pyli", "corpus": "pyli", "doubt": "", "kind": "word"},
+{"line": 36, "printed": "e-p-p", "griffith": "epp", "corpus": "epp", "doubt": "", "kind": "word"},
+{"line": 36, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 36, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 36, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 36, "printed": "[l-]i", "griffith": "li", "corpus": "li", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 36, "printed": "[u(?)-toh-]rh-e-toh-l-e-b-g", "griffith": "wtezetelebk", "corpus": "wtedetelebk", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 36, "printed": "a-t-i-l", "griffith": "atêil", "corpus": "atoil", "doubt": "(?) after it", "kind": "word"},
+{"line": 36, "printed": "p-e-g-e", "griffith": "peke", "corpus": "peke", "doubt": "", "kind": "word"},
+{"line": 37, "printed": "u(?)-toh-rh-e-toh", "griffith": "wtezete", "corpus": "wtedete", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 37, "printed": "A-m-n-p-toh", "griffith": "amnpte", "corpus": "amnpte", "doubt": "", "kind": "word"},
+{"line": 37, "printed": "p-i-rh-e-l-g-e", "griffith": "pizelke", "corpus": "pidelke", "doubt": "", "kind": "word"},
+{"line": 37, "printed": "r-b", "griffith": "rb", "corpus": "rb", "doubt": "", "kind": "word"},
+{"line": 37, "printed": "u(?)-r-e-u-ḥ-e-l-i", "griffith": "wrewḫeli", "corpus": "wrewxeli", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 37, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 37, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 37, "printed": ".", "griffith": "", "corpus": ".", "doubt": "", "kind": "lost"},
+{"line": 38, "printed": "m-g-e-n'-u-i", "griffith": "mkenêwi", "corpus": "mkenowi", "doubt": "", "kind": "word"},
+{"line": 38, "printed": "toh-ṇ-g-e-l", "griffith": "teñkel", "corpus": "teNkel", "doubt": "", "kind": "word"},
+{"line": 38, "printed": "Th-b-r-g-[e]", "griffith": "tbrke", "corpus": "tbrke", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 38, "printed": "k'-r-toh-[s-l]", "griffith": "qêrtesl", "corpus": "qortesl", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 38, "printed": "E-th-g-b-ḥ-l", "griffith": "etkbḫl", "corpus": "etkbxl", "doubt": "", "kind": "word"},
+{"line": 38, "printed": "ḥ-r-[p]-ḥ-[e]-s-l", "griffith": "ḫrpḫesl", "corpus": "xrpxesl", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 39, "printed": "th-g-th", "griffith": "tkt", "corpus": "tkt", "doubt": "", "kind": "word"},
+{"line": 39, "printed": "A-m-n-i", "griffith": "amni", "corpus": "amni", "doubt": "", "kind": "word"},
+{"line": 39, "printed": "a-r-r-e-s-s", "griffith": "arress", "corpus": "arress", "doubt": "", "kind": "word"},
+{"line": 39, "printed": "A-m-n-p", "griffith": "amnp", "corpus": "amnp", "doubt": "", "kind": "word"},
+{"line": 39, "printed": "Ṇ-toh-s-l", "griffith": "ñtesl", "corpus": "Ntesl", "doubt": "", "kind": "word"},
+{"line": 39, "printed": "[A-m-n-]p", "griffith": "amnp", "corpus": "amnp", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 40, "printed": "p-i-rh-e-l-g-e", "griffith": "pizelke", "corpus": "pidelke", "doubt": "", "kind": "word"},
+{"line": 40, "printed": "k'-l-e-b", "griffith": "qêleb", "corpus": "qoleb", "doubt": "", "kind": "word"},
+{"line": 40, "printed": "u(?)-toh-rh-e-b-toh", "griffith": "wtezebte", "corpus": "wtedebte", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 40, "printed": "s-b", "griffith": "sb", "corpus": "sb", "doubt": "", "kind": "word"},
+{"line": 40, "printed": "[toh-]-ṇ-g-e-l-ḥ-e", "griffith": "teñkelḫe", "corpus": "teNkelxe", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 40, "printed": "ă-u-u-[i-a-u]-i", "griffith": "awwiawi", "corpus": "awwiawi", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 41, "printed": "e-r'-toh", "griffith": "erête", "corpus": "erote", "doubt": "", "kind": "word"},
+{"line": 41, "printed": "th-n-n-g-i", "griffith": "tnnki", "corpus": "tnnki", "doubt": "", "kind": "word"},
+{"line": 41, "printed": "a-rh-b-toh", "griffith": "azbte", "corpus": "adbte", "doubt": "", "kind": "word"},
+{"line": 41, "printed": "a-s-[ă-]toh", "griffith": "asate", "corpus": "asate", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 41, "printed": "k'", "griffith": "qê", "corpus": "qo", "doubt": "", "kind": "word"},
+{"line": 41, "printed": "[A-p-i-]toh-b-s-l-ḥ", "griffith": "apitebslḫ", "corpus": "apitebslx", "doubt": "(?) or [ ] on a sign", "kind": "word"},
+{"line": 42, "printed": "A-sh-r", "griffith": "ašr", "corpus": "aSr", "doubt": "", "kind": "word"},
+{"line": 42, "printed": "a-ḥ-i-rh-e-b-l-i", "griffith": "aḫizebli", "corpus": "axidebli", "doubt": "", "kind": "word"},
+{"line": 42, "printed": "u-i", "griffith": "wi", "corpus": "wi", "doubt": "", "kind": "word"},
+{"line": 42, "printed": "CCLII", "griffith": "CCLII", "corpus": "CCLII", "doubt": "", "kind": "numeral"}
 ]

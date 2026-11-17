@@ -380,8 +380,9 @@ def main(argv):
     if argv[1:]:
         sys.exit(__doc__)
     s_ws = words()
-    WORDS.write_text(json.dumps([{k: w[k] for k in ("line", "printed", "griffith", "corpus", "doubt", "kind")}
-                                 for w in s_ws], ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+    WORDS.write_text("[\n" + ",\n".join(json.dumps({k: w[k] for k in ("line", "printed", "griffith", "corpus", "doubt",
+                                                                    "kind")}, ensure_ascii=False) for w in s_ws)
+                     + "\n]\n", encoding="utf-8")                          # one word a line
     closed = A.closed_readings()
     figs = figures(s_ws, closed=closed)
     if closed is None:            # the closed readings are not here: keep the counts that need them as they are
