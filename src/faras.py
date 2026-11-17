@@ -435,8 +435,8 @@ def recur(corpus_path=ROOT / "data/corpus_v6.jsonl"):
     line of the recurring study, src/recurring.py); and how many distinct spellings of the new texts the map holds
     already, open or not (a word with a lost sign left out). The map itself holds only the texts the analysts
     glossed, so a new text is counted here from corpus_v6 (local), word by word as the build gives it; a word at a
-    place the build marks as a name is counted apart. Faras 44 is REM 0544, already on the map: only the new texts
-    count."""
+    place the build marks as a name is counted apart. Faras 44 (REM 0544) and Faras 43 (Millet's line 286, now REM
+    0543) are on the map already, and corpus_v6 takes Millet's reading of both: only the new texts count."""
     import themap as M
     import recurring as W
     gl = M.current()

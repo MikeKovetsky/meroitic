@@ -200,7 +200,7 @@ def test_rows_file_is_current():
 
 def test_rows_hold_every_text_typed_once_in_the_corpus_spelling():
     rows, typed = rows_file(), sorted(F.readings())
-    assert typed == list(range(1, len(typed) + 1)) and set(F.DRAWN) <= set(typed)   # Faras 1 to N, the drawn five in
+    assert typed == list(F.TEXTS) and set(F.DRAWN) <= set(typed)                     # all 46, the drawn five among them
     assert [r["label"] for r in rows] == [f"Faras {n}" for n in typed]
     for r in rows:
         assert all(re.fullmatch(r"[abdeiklmnopqrstwxySNX.]+|\d+", w) for w in r["text_corpus"].split()), r["label"]
