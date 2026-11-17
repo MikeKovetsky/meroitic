@@ -296,17 +296,17 @@ all words in section G):
    check every word against the page image. The cheapest texts that can be published.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
    [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, numbered REM 0001
-   to 1278 (917 inscriptions, counted on 2026-11-17) against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
-   drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
-   a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
-   republishing.
+   to 1278 (917 inscriptions, counted on 2026-11-17) against about 480 in Griffith. Otten's paper describes it as
+   photographs and facsimile drawings without transliteration (checked on 2026-11-17: so it is). Open one volume,
+   see what an entry holds, and score a reading on entries FHN also prints. It is not openly licensed: for analysis
+   and for checking readings, not for republishing.
    - **Done, 2026-11-17: the plates cannot be read well enough**
      ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)). An entry is a page of plates (photographs and
      drawings, most reprinted from the first edition) and a catalogue page; no transliteration, as Otten said. The
-     REM holds 917 inscriptions in nine sections, not 1,278 (the numbering has gaps): 517 are new to `corpus_v6`,
-     about 5,300 words. A blind reader read 4 inscriptions from their drawings at 76.8% of signs and 41.7% of words
+     REM holds 917 inscriptions in nine sections, not 1,278 (the numbering has gaps): 473 are new to `corpus_v6`,
+     about 4,600 words. A blind reader read 4 inscriptions from their drawings at 76.8% of signs and 41.7% of words
      against Griffith (bar 85% for the lowest use), at 158,438 subagent tokens an inscription; it could read none
-     of the photographs. The full read would cost about 32 to 82 million tokens and give about 70 of the 2,013 open
+     of the photographs. The full read would cost about 28 to 75 million tokens and give about 44 of the 2,013 open
      spellings that stand in one text a second text, read right. The pilot stopped at 4 of its 20 inscriptions on
      Mike's word, for the budget. Recommendation: do not read the plates; the transliterations in print (Hallof,
      below) are the route.

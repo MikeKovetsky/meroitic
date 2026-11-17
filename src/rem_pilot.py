@@ -201,18 +201,25 @@ def doubted(text):
     return out
 
 
+def agreement(reading_signs, edition_words):
+    """The edit distance of a reading from an edition, and for each word of the edition whether it agrees: every
+    one of its signs matched by an equal sign of the reading."""
+    d, same = align(reading_signs, [s for w in edition_words for s in w])
+    out, k = [], 0
+    for w in edition_words:
+        out.append(all(same[k:k + len(w)]))
+        k += len(w)
+    return d, out
+
+
 def measure(reading_signs, edition_words):
     """{signs, right, words, agree} of a reading against an edition. signs right: the edition's signs less the
     edit distance, so a sign the reading has and the edition has not counts against it too (the measure of the
     Karanog page). A word of the edition agrees when every one of its signs is matched by an equal sign of the
     reading (the rule of the Akinidad page, on signs and with nothing folded)."""
-    b = [s for w in edition_words for s in w]
-    d, same = align(reading_signs, b)
-    agree, k = 0, 0
-    for w in edition_words:
-        agree += all(same[k:k + len(w)])
-        k += len(w)
-    return {"signs": len(b), "right": max(len(b) - d, 0), "words": len(edition_words), "agree": agree}
+    n = sum(len(w) for w in edition_words)
+    d, agree = agreement(reading_signs, edition_words)
+    return {"signs": n, "right": max(n - d, 0), "words": len(edition_words), "agree": sum(agree)}
 
 
 # ------------------------------------------------------------------------------------------ the editions in hand
@@ -328,9 +335,30 @@ def pick(entries, has_plate=lambda e: True, seed=SEED):
 
 FIELDS = ("Localisation actuelle", "Désignation originelle", "Identification du monument", "Dimensions",
           "Description de l'inscription", "Bibliographie")
-NUMBERS = {"une": 1, "un": 1, "deux": 2, "trois": 3, "quatre": 4, "cinq": 5, "six": 6, "sept": 7, "huit": 8,
-           "neuf": 9, "dix": 10, "onze": 11, "douze": 12, "treize": 13, "quatorze": 14, "quinze": 15, "seize": 16,
-           "dix-sept": 17, "dix-huit": 18, "dix-neuf": 19, "vingt": 20}
+# the counts the catalogue writes out, 1 to 69: "trois", "dix-huit", "vingt et une", "trente-cinq", "quarante deux"
+_UNITS = ("un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize",
+          "quatorze", "quinze", "seize")
+_TENS = ("vingt", "trente", "quarante", "cinquante", "soixante")
+NUMBERS = {w: k for k, w in enumerate(_UNITS, 1)} | {"une": 1, "dix-sept": 17, "dix-huit": 18, "dix-neuf": 19}
+for _k, _t in enumerate(_TENS, 2):
+    NUMBERS |= {_t: 10 * _k, f"{_t}-et-un": 10 * _k + 1, f"{_t}-et-une": 10 * _k + 1}
+    NUMBERS |= {f"{_t}-{_UNITS[u - 1]}": 10 * _k + u for u in range(2, 10)}
+_NUMBER = (rf"\d+|(?:{'|'.join(_TENS)})(?:(?: ?- ?| et | )(?:une|{'|'.join(_UNITS)}))?|dix ?- ?(?:sept|huit|neuf)"
+           rf"|une|{'|'.join(_UNITS)}")
+# "Inscription de six lignes", "sur deux bandes", "en neuf colonnes", "d'au moins trois lignes"
+COUNT = re.compile(rf"\bInscriptions? (?:sur|de|d'|en) ?(?:au moins )?({_NUMBER}) (ligne|colonne|bande)s?\b")
+# the running head of a page where the text layer kept it: a page of plates ("RÉPERTOIRE D'ÉPIGRAPHIE MÉROÏTIQUE
+# REM 0066") or of catalogue ("1. Meroitic Inscriptions REM 0066"; section 2's head names no number)
+HEAD = re.compile(r"RÉPERTOIRE D'ÉPIGRAPHIE MÉRO.TIQUE\s*(?:\d{1,4}\s*)?REM\s*(\d{4}[A-Z]?)"
+                  r"|\b\d\. (?:Meroitic Inscriptions|Inscriptions de (?:Karanog et Shablul|Méroé|Faras|Kawa)"
+                  r"|Ostraca de divers sites|Royal Cemeteries of Kush|Textes publiés isolément depuis(?: 19\w\w)?)"
+                  r"\s*(?:\d{1,4}\s*)?REM\s*(\d{4}[A-Z]?)")
+
+
+def number(words):
+    """A count as the catalogue writes it ('6', 'trois', 'vingt et une', 'quarante deux', 'dix -neuf'), or None."""
+    w = re.sub(r"\s*-\s*|\s+", "-", words.strip().lower())
+    return int(w) if w.isdigit() else NUMBERS.get(w)
 
 
 def page_text(raw):
@@ -357,11 +385,10 @@ def catalogue(text):
     script = "hieroglyphic" if re.search(r"hiéroglyph", d, re.I) else "cursive" if re.search(r"cursi[fv]", d, re.I) \
         else ""
     lines, unit = None, ""
-    m = re.search(r"\bInscriptions? (?:sur|de|d'|en) ?(\S+?(?:-\S+)?) (ligne|colonne|bande)s?\b", d)
+    m = COUNT.search(d)
     one = re.search(r"\b[Uu]ne seule (ligne|colonne|bande)", d)
-    if m:
-        w = m.group(1).lower()
-        lines, unit = (int(w) if w.isdigit() else NUMBERS.get(w)), m.group(2)
+    if m and number(m.group(1)):
+        lines, unit = number(m.group(1)), m.group(2)
     elif one:
         lines, unit = 1, one.group(1)
     st = re.search(r"état de conservation (?:est|était)(?:, au moment de [^,]+,)? ([^.,;(]+)", d)
@@ -399,24 +426,42 @@ def is_catalogue(text):
     return bool(re.search(r"\b\d{1,2}\. \S[^:]{2,60}?REM \d{4}", text)) and "RÉPERTOIRE" not in text.upper()
 
 
+def is_title(text):
+    """A section's title page ("4. Inscriptions de Méroé : REM 0401 à REM 0451"): it names a section's range and
+    no catalogue field. A catalogue's commentary may name a range of documents too ("Les documents REM 1016 à
+    REM 1025"): that page is the catalogue of its entry."""
+    return any(f"REM {lo:04d} à REM {hi:04d}" in text for _, lo, hi in SECTIONS) and not any(f in text for f in FIELDS)
+
+
+def own_number(text, vol):
+    """The REM number a page is filed under: the one in its running head where the text layer kept it (a
+    catalogue may name another number before its head, "voir REM 0067", and the head may have a footnote's mark
+    glued to it, "REM 10341"), else the first number of the volume's sections it names; None if it names none."""
+    ok = lambda n: volume_of(n) == vol and section_of(n)                  # noqa: E731
+    for m in HEAD.finditer(text):
+        if ok(m.group(1) or m.group(2)):
+            return m.group(1) or m.group(2)
+    return next((n for n in rem_on(text) if ok(n)), None)
+
+
 def index(folder=TEXT):
     """One row per REM entry: its plate pages (every page of the entry that is not catalogue: each holds figures,
     with the captions the text layer has) and its catalogue (script, lines, state), read from its catalogue pages
-    run together."""
+    run together. The annexes, bibliography and indexes at the end of volume III (from "Annexe 1") are no entry's,
+    and nor are the blank pages (each stands before a section's title page or the annexes)."""
     entries, cat_text = collections.OrderedDict(), collections.defaultdict(list)
     for vol in (1, 2, 3):
         last = None
         for p in sorted((folder / f"v{vol}").glob("T*.html")):
             text = page_text(p.read_text(encoding="utf-8"))
-            if re.search(r"REM \d{4} à REM \d{4}", text):
-                continue                                  # a section's title page
-            nums = [n for n in rem_on(text) if volume_of(n) == vol and section_of(n)]
-            if nums:
-                num = nums[0]
-            elif last is not None:
-                num = last                                # a continuation whose heading the text layer lost
-            else:
+            if re.match(r"Annexe \d", text):
+                break                                     # the end matter: it names numbers of every section
+            if not text or is_title(text):
                 continue
+            num = own_number(text, vol)
+            if num is None and last is None:
+                continue
+            num = num or last                             # a continuation whose heading the text layer lost
             last = num
             e = entries.setdefault(num, {"rem": num, "volume": vol, "section": section_of(num), "plates": [],
                                          "catalogue": None, "pages": []})
@@ -649,6 +694,17 @@ def score_item(reading, eds):
     return out
 
 
+def once_open(reading, words, forms, once):
+    """{words, agree} over the edition's words whose spelling is open and stands in one text of corpus_v6: the
+    words the estimate's recurrences are made of. forms: the corpus spelling of each word of the edition, in order
+    (the analysts' map); once: those spellings. None where the map's words are not the edition's."""
+    if [corpus_to_signs(f) for f in forms] != words:
+        return None
+    _, agree = agreement(corpus_to_signs(reading), words)
+    k = [i for i, f in enumerate(forms) if f in once]
+    return {"words": len(k), "agree": sum(agree[i] for i in k)}
+
+
 def pooled(results, key=lambda r: r[r["main"]]):
     """{signs, right, share, words, agree, word_share} over results, by each one's main score (or by key)."""
     ms = [key(r) for r in results if key(r)]
@@ -670,6 +726,11 @@ def score(spec=None, key=None):
     strata = {e["rem"]: e for e in pool(table, fhn)[0]}
     items, second, photos = [], [], []
     photo_only = set(spec.get("photo_only", {}))
+    forms, once = {}, set()                                 # the corpus spelling of every word, by the analysts' map
+    if GLOSSES.exists():
+        forms = {t: [g["form"] for g in gs] for t, gs in read_glosses().items()}
+        n = collections.Counter(f for fs in open_forms().values() for f in fs)
+        once = {f for f, c in n.items() if c == 1}
     for folder, ids in sorted(key.items()):
         got = answers(folder)
         for iid, rem in ids.items():
@@ -685,11 +746,16 @@ def score(spec=None, key=None):
                     m = measure(corpus_to_signs(rd), corpus_words(first.get("reading", "")))
                     second.append({"rem": rem, "pack": folder[:-1], **m})
                 continue
-            r = score_item(rd, editions(rem, table, fhn))
+            eds = editions(rem, table, fhn)
+            r = score_item(rd, eds)
             e = strata.get(rem, {})
             r.update({"rem": rem, "pack": folder, "item": iid, "stratum": e.get("stratum"),
                       "words_open": e.get("words"), "source": "karanog" if (e.get("open") or "").startswith("karanog")
                       else "griffith", "figures": got[iid].get("figures")})
+            if "griffith" in eds and e.get("id") in forms:           # Griffith's reading is the corpus's text
+                o = once_open(rd, eds["griffith"], forms[e["id"]], once)
+                if o is not None:
+                    r["once_open"] = o
             items.append(r)
     out = {"items": items, "second": second, "pooled": pooled(items),
            "pooled_griffith": pooled(items, lambda r: r.get("griffith")),
@@ -705,6 +771,9 @@ def score(spec=None, key=None):
                      "marked": sum(r["unsure"] for r in items), "wrong_marked": sum(r["wrong_marked"] for r in items),
                      "right_marked": sum(r["right_marked"] for r in items)}
     out["faults"]["wrong"] = out["faults"]["substituted"] + out["faults"]["extra"] + out["faults"]["missing"]
+    oo = [r["once_open"] for r in items if "once_open" in r]
+    w, a = sum(o["words"] for o in oo), sum(o["agree"] for o in oo)
+    out["once_open"] = {"items": len(oo), "words": w, "agree": a, "share": round(a / w, 4) if w else None}
     if out["pooled"]["share"] is not None:
         out["verdict"] = verdict(out["pooled"]["share"])
     SCORES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -719,26 +788,44 @@ TOKENS = PILOT / "tokens.json"         # local: the readers' tokens, written by 
 ESTIMATE = PILOT / "estimate.json"
 
 
-def held_numbers(table=None):
-    """{four-digit REM number: [rows of the table in corpus_v6 that carry it]}."""
+def series_number(name):
+    """('Meroe', 13) for 'Meroe 13' or a REM designation 'Meroe 13.'; ('Sh.', 1) for 'Sh. 1' or 'Sh. l.' (the text
+    layer reads 1 as l, I or ! and 0 as O); else None. The table names some of Griffith's Meroë and Shablul texts
+    so, with no REM number; the REM gives them as REM 0401 to 0451 and 0368 to 0387."""
+    m = re.match(r"\s*(Meroe|Sh\.)\s*([0-9lIO!]{1,3})(?=\s*\.|\s|$)", name or "")
+    return (m.group(1), int(m.group(2).translate(str.maketrans("lI!O", "1110")))) if m else None
+
+
+def held_numbers(table=None, idx=None):
+    """{four-digit REM number: [rows of the table in corpus_v6 that stand for it]}: the rows that carry the number,
+    and, with the index, a row without a REM number whose name is the entry's first designation in the REM
+    ('Meroe 13' is REM 0413, by the REM's catalogue)."""
+    table = rows() if table is None else table
     out = collections.defaultdict(list)
-    for r in rows() if table is None else table:
+    for r in table:
         if r.get("in_corpus_v6"):
             for x in r.get("rem") or []:
                 out[x[:4]].append(r)
+    named = {series_number(r["id"]): r for r in table if r.get("in_corpus_v6") and not r.get("rem")}
+    named.pop(None, None)
+    for e in idx or []:
+        r = named.get(series_number(((e["catalogue"] or {}).get("fields") or {}).get("Désignation originelle")))
+        if r is not None and r not in out[e["rem"][:4]]:
+            out[e["rem"][:4]].append(r)
     return out
 
 
 def word_rates(idx, held, mean=False):
     """{(script, unit): words a unit} from the REM numbers that are one entry (no lettered parts), held by one row
-    with that one REM number, with the catalogue's count; a pair (script, unit) seen fewer than MIN_PAIRS times
-    takes its script's rate over all units. The rate is the median of the numbers' words per unit (robust to a long
-    stela whose parts the index files under one entry), or with mean the words over the units (the high end)."""
+    that stands for that number alone (it carries no other REM number), with the catalogue's count; a pair (script,
+    unit) seen fewer than MIN_PAIRS times takes its script's rate over all units. The rate is the median of the
+    numbers' words per unit (robust to a long stela whose parts the index files under one entry), or with mean the
+    words over the units (the high end)."""
     pairs = collections.defaultdict(list)
     parts = collections.Counter(e["rem"][:4] for e in idx)
     for e in idx:
         rs, c = held.get(e["rem"][:4]), e["catalogue"]
-        if parts[e["rem"][:4]] == 1 and rs and len(rs) == 1 and len(rs[0]["rem"]) == 1 and c and c["lines"]:
+        if parts[e["rem"][:4]] == 1 and rs and len(rs) == 1 and len(rs[0]["rem"]) <= 1 and c and c["lines"]:
             pairs[(c["script"], c["unit"])].append((c["lines"], rs[0]["words"]))
     rate = (lambda v: sum(w for _, w in v) / sum(n for n, _ in v)) if mean else \
         (lambda v: sorted(w / n for n, w in v)[len(v) // 2])
@@ -778,13 +865,19 @@ def words_of(entries, rates, medians, overall):
     return medians.get(sc, overall)
 
 
-def open_forms(path=GLOSSES):
-    """{inscription: its open spellings} from the analysts' map of corpus_v6 (local)."""
+def read_glosses(path=GLOSSES):
+    """{inscription: its words as the analysts' map of corpus_v6 gives them, in order} (local)."""
     gl = {}
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.strip():
             r = json.loads(line)
             gl[r["id"]] = r["glosses"]
+    return gl
+
+
+def open_forms(path=GLOSSES):
+    """{inscription: its open spellings} from the analysts' map of corpus_v6 (local)."""
+    gl = read_glosses(path)
     level = collections.defaultdict(collections.Counter)
     for gs in gl.values():
         for g in gs:
@@ -824,7 +917,7 @@ def extrapolate(points, k):
 
 def estimate(scores=None):
     idx, table = read_index(), rows()
-    held = held_numbers(table)
+    held = held_numbers(table, idx)
     rates, medians, n_pairs = word_rates(idx, held)
     sizes = sorted(r["words"] for r in table if r.get("in_corpus_v6"))
     overall = sizes[len(sizes) // 2]
@@ -836,9 +929,13 @@ def estimate(scores=None):
     cat = lambda es, f: next(((e["catalogue"] or {}).get(f) for e in es if (e["catalogue"] or {}).get(f)), None)
     drawn = lambda es: any(c["kind"] == "drawing" for e in es for pl in e["plates"] for c in pl["captions"])
     section = lambda n: section_of(n)
+    by_rem = held_numbers(table)                    # the numbers the table's rows carry themselves
     out = {
         "numbers": len(numbers), "entries": len(idx), "by_section": dict(collections.Counter(map(section, numbers))),
+        "with_a_plate": sum(1 for es in numbers.values() if any(e["plates"] for e in es)),
+        "with_a_catalogue": sum(1 for es in numbers.values() if any(e["catalogue"] for e in es)),
         "held": sum(1 for n in numbers if n in held), "new": len(new),
+        "held_by_designation": sum(1 for n in numbers if n in held and n not in by_rem),
         "new_by_section": dict(collections.Counter(map(section, new))),
         "new_by_script": dict(collections.Counter(cat(es, "script") or "not stated" for es in new.values())),
         "new_with_a_drawing_by_caption": sum(drawn(es) for es in new.values()),
@@ -877,10 +974,15 @@ def estimate(scores=None):
             v["would_reach_three_texts"] = round(once_now * v["share_two_at_corpus"])
         out["recurrence"] = {"once_now": once_now, **rec}
     scores = scores or (json.loads(SCORES.read_text(encoding="utf-8")) if SCORES.exists() else None)
-    if scores and "recurrence" in out and scores["pooled"]["word_share"]:
+    # a recurrence counts where the new text's word is read right: at the share the reader got right of the words
+    # that are such spellings (open, in one text), and beside it at its share of all words, the higher
+    right = (scores or {}).get("once_open", {}).get("share")
+    if scores and "recurrence" in out and right is not None:
+        out["recurrence"]["read_right"] = {"once_open": scores["once_open"], "all_words": scores["pooled"]["word_share"]}
         for k in ("by_words", "by_words_mean", "by_inscriptions"):
             v = out["recurrence"][k]
-            v["would_recur_read_right"] = round(v["would_recur"] * scores["pooled"]["word_share"])
+            v["would_recur_read_right"] = round(v["would_recur"] * right)
+            v["would_recur_at_the_share_of_all_words"] = round(v["would_recur"] * scores["pooled"]["word_share"])
     if TOKENS.exists() and scores:
         tok = json.loads(TOKENS.read_text(encoding="utf-8"))
         first = {k: v for k, v in tok.items() if not k.endswith("b")}
@@ -899,6 +1001,12 @@ def estimate(scores=None):
                        "full_read_by_inscriptions": round(t / items * len(new)) if items else None,
                        "signs_an_inscription_pilot": round(sg / items, 1) if items else None,
                        "signs_an_inscription_new": round(sum(words.values()) * avg_signs / len(new), 1) if new else None}
+        if SPEC.exists():                  # the readers' folders the pilot planned, and what the rest would have cost
+            planned = folders(json.loads(SPEC.read_text(encoding="utf-8")))
+            ran = [k for k in tok if k in planned]
+            out["cost"].update({"folders_planned": len(planned), "folders_run": len(ran),
+                                "the_rest_at_this_rate": round(sum(tok[k] for k in ran) / len(ran)
+                                                               * (len(planned) - len(ran))) if ran else None})
     ESTIMATE.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
 
@@ -913,13 +1021,14 @@ def public(scores=None, est=None):
     for r in scores["items"]:
         row = {k: r[k] for k in ("rem", "pack", "stratum", "source", "main", "reading_signs", "unsure", "lost",
                                  "extra", "missing", "wrong_marked", "right_marked")}
-        for name in ("fhn", "griffith"):
+        for name in ("fhn", "griffith", "once_open"):
             if name in r:
                 row[name] = r[name]
         items.append(row)
     out = {"bar": {"go": BAR_GO, "layer": BAR_LAYER, "expected": EXPECTED},
            "pooled": scores["pooled"], "verdict": scores.get("verdict"),
            "pooled_griffith": scores["pooled_griffith"], "pooled_fhn": scores["pooled_fhn"],
+           "once_open": scores["once_open"],
            "agreement_of_two_readers": scores["agreement"], "faults": scores["faults"], "items": items,
            "estimate": {k: v for k, v in est.items()}}
     FIGURES.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
