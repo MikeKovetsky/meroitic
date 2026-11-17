@@ -103,8 +103,9 @@ the signs. Result: 56 of 56 signs (100%), bar met. The two differed in F.O. 31 o
 typist put its doubt dot under the q, where I had it under the ê, and set its two lost signs apart from the word
 (`.. q̣êrli-šê`), where I joined them (`..q̣êrli-šê`). The page image shows the dot under the q, and it is moved;
 the spacing of the dots is not clear on the page, and the first typing is kept. The same check moved the dots of
-F.O. 21 and 22 too. The review, on the page images enlarged 24 to 40 times, found the dot of F.O. 21 under the ê
-after all (`qệ`, as first typed), dots under both letters in F.O. 22 (`ỵệ`), and three marks the typing missed: a
+F.O. 21 and 22 too. The review, on the page images enlarged 24 to 40 times, found a dot under the ê of F.O. 21
+after all, and dots under both letters in F.O. 22 (`ỵệ`); looked at once more, F.O. 21 has both dots too (`q̣ệ`, the
+lower one under the tail of the q, as in F.O. 22). It also found three marks the typing missed: a
 dot under the point and the 3 of `1̣·̣3̣` in F.O. 11, under the y of `...ỵik` in F.O. 26 (one doubted word more) and
 under the ê of `ṭệlis` in B.O. 3. No letter changed. The lot is short texts, as drawn.
 
@@ -190,4 +191,33 @@ Griffith, that is a second witness for the same doubtful reading, not a settleme
 
 ## 3. The hand copies
 
-The check of the 11 texts that have a hand copy on plates XXIX and XXX: in progress at this commit.
+Plates XXIX and XXX hold Griffith's hand copies of 11 of the texts (F.O. 1, 6, 35, 37, 39, 40, B.O. 1, 3, 4, 5
+and D.O. 1). As the bar said, they were checked sign by sign against the typing: an agent read each copy with the
+cursive key of [`data/expansion/README.md`](../expansion/README.md) (section 2) and gave every typed word one
+verdict, numerals and lost signs left out. Of 91 words, 71 are the same in the copy, 5 differ and 15 cannot be told
+(9 of them in D.O. 1, whose hand is thick; most of the others are signs he dotted as doubtful, or faint). In this
+hand m, ẖ and š are all 3-shaped and l and e are close, so "the same" on those signs means only that the shape
+fits.
+
+Each of the 5 was looked at on the printed page, and in each the typing follows the print: they are places where
+his print and his own copy differ, now listed among the row's doubts (`src/ostraca.py`, `COPIES`):
+
+| Text | Printed | His hand copy |
+|---|---|---|
+| F.O. 1 | `atr` | the sign te in the middle: a-te-r |
+| F.O. 1 | `ant-mnês` | two strokes (the sign y) where he prints ê, with his "sic" above them |
+| F.O. 35 | `šrbeḫ` | a 3-shaped last sign (m, ẖ or š), not his ḫ |
+| F.O. 39 | `zle` | a last sign shaped like his ḫ, not e |
+| F.O. 39 | `ep` | a first sign shaped like his ḫ, not e |
+
+The word dividers agree in number in 10 of the 11 texts. D.O. 1 has one more in the copy, before the last two signs
+of `ṭệḳes`; F.O. 1 has as many in both, in two other places (a divider between `teperet` and `zê`, none after
+`abelte` in l. 3). Both are listed among the doubts too. The answers are local
+(`data/sources/ostraca/copies/check.jsonl`), the counts public (`ostraca_figures.json`, `copy_check`).
+
+## 4. Cost
+
+Subagent tokens, from the task notifications: the blind second typing of the ostraca 102,132; of Sayce's lines
+114,668; the check against the hand copies 375,070; the review at the full tier 567,913; the review of the last
+commits COST_DELTA. In all COST_TOTAL, under the 1 to 2 million expected for the task. The typing of all 46
+ostraca and 42 of Sayce's lines, the rebuild and the comparisons ran in the session itself, without an agent.

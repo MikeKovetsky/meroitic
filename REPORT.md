@@ -1158,8 +1158,9 @@ order"). The bar and the lot were committed before any typing
    images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly. The
    review checked every text on the page images and found five more marks of the first typing misplaced or
    missed (no letter): one doubted word more, 67. Griffith's notes doubt or read otherwise at 11 places, not the 5
-   first listed. The 11 texts with a hand copy are checked against it (section 3 of the
-   page).
+   first listed. The 11 texts with a hand copy were checked against his copies: of 91 words, 71 are the same, 15
+   cannot be told, and the 5 that differ follow his print, where print and copy disagree; they are listed among
+   the doubts (section 3 of the page).
 3. **`corpus_v6` has 594 inscriptions**, 350 with an open reading; the ostraca carry no REM number in hand and are
    numbered by their sigla (`F.O. 1`). None of them was already held. The map stays on the 548 texts it is drawn
    on (`data/discovery/map_texts.json`): counting it on the new texts needs a new sample of the unnamed stems for
@@ -1173,5 +1174,5 @@ order"). The bar and the lot were committed before any typing
    himself at 11 (the review corrected the first count of 7 the same, 24 otherwise, 6 unsure and 1 not lined up:
    the script had not applied the classes to a numeral he queries or a place he prints as lost); Millet sides
    with Sayce alone at 1 of the 38, with Griffith alone at 17. He settles almost nothing.
-5. **Cost:** the two blind typists 216,800 subagent tokens (102,132 and 114,668); the check against the
-   hand copies and the review are on the page.
+5. **Cost:** COST_REPORT subagent tokens: the two blind typists 216,800 (102,132 and 114,668), the check against
+   the hand copies 375,070, the full review 567,913 and the review of the last commits COST_DELTA.

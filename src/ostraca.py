@@ -41,6 +41,7 @@ SOURCE = JEA / "griffith1925_ostraca.txt"
 ROW = JEA / "griffith_jea11.jsonl"
 FIGURES = JEA / "ostraca_figures.json"
 BLIND = ROOT / "data/sources/ostraca/blind/second_typing.txt"
+COPIES_CHECK = ROOT / "data/sources/ostraca/copies/check.jsonl"   # the check against his hand copies (local)
 WORK = 'Griffith, "Meroitic Studies V", JEA 11 (1925)'
 ITEM = "https://archive.org/details/in.ernet.dli.2015.70984"
 DOT = "̣"                       # combining dot below: his mark of a doubtful sign
@@ -100,13 +101,25 @@ NOTES = (
     ("F.O. 12", "10·1", "his note on F.O. 12 and 13: \"The upper spot after 10 may be accidental but looks like ink\""),
     ("F.O. 16", "abel", "his note: \"abel[te] F.O. 1/1\""),
     ("F.O. 19", "mkšḫi", "his note on l. 4 reads mkšḫi (5) ze as one word, mkšḫize (cf. the title mkešḫe K.I.)"),
-    ("F.O. 21", "qệ", "his note on l. 2: \"a horizontal line crossed by a short oblique line at the end\" (a sign "
+    ("F.O. 21", "q̣ệ", "his note on l. 2: \"a horizontal line crossed by a short oblique line at the end\" (a sign "
                       "of l. 2 that he does not name)"),
     ("B.O. 1", "qe", "his note: \"possibly šleqeñ 4·8 should be read here\" (for šle qe 74·8); \"if not, the "
                      "doubtful sign may be a 10-numeral\""),
     ("B.O. 1", "⍋", "his note on l. 2: \"the broken sign should be a 10-numeral or some special symbol\" (printed as "
                     "the symbol after 16·6, which the corpus leaves out)"),
     ("B.O. 2", "ṃr", "his note: \"the tail of the m(?) very short\""),
+)
+# Where his hand copies (plates XXIX and XXX) show other signs or dividers than his print, found by the check of
+# the 11 copied texts against the copies (local: data/sources/ostraca/copies/check.jsonl) and looked at on the page:
+# the typing follows the print in each.
+COPIES = (
+    ("F.O. 1", "atr", "his hand copy (pl. XXIX, 5) has the sign te in the middle: a-te-r"),
+    ("F.O. 1", "ant-mnês", "his hand copy has two strokes (the sign y) where he prints ê, and his \"sic\" above them"),
+    ("F.O. 1", "teperet", "his hand copy has a divider between teperet and zê, and none after abelte in l. 3"),
+    ("F.O. 35", "šrbeḫ", "his hand copy has a 3-shaped last sign (m, ẖ or š in this hand), not his ḫ"),
+    ("F.O. 39", "zle", "his hand copy has a last sign shaped like his ḫ, not e"),
+    ("F.O. 39", "ep", "his hand copy has a first sign shaped like his ḫ, not e"),
+    ("D.O. 1", "ṭệḳes", "his hand copy has a divider before its last two signs (es)"),
 )
 OURS = (
     ("F.O. 10", "·ḷ", "a point and an upright with a dot below: read as the numeral ·1 (doubtful); it could be the "
@@ -207,10 +220,11 @@ def signs(printed):
 
 
 def doubts(t, ws):
-    """[{line, word, why}] of a text: the words with a dot below or a (?), his notes, then ours."""
+    """[{line, word, why}] of a text: the words with a dot below or a (?), his notes, where his hand copy differs,
+    then ours."""
     out = [{"line": l, "word": p, "why": why} for l, p, why in dict.fromkeys((w["line"], w["printed"], w["doubt"])
                                                                             for w in ws if w["doubt"])]
-    for table in (NOTES, OURS):
+    for table in (NOTES, COPIES, OURS):
         for no, word, why in table:
             if no != t["no"]:
                 continue
@@ -265,6 +279,24 @@ def compare_signs(a, b):
     m = difflib.SequenceMatcher(None, a, b, autojunk=False)
     same = sum(blk.size for blk in m.get_matching_blocks())
     return same, len(a), len(b)
+
+
+def copy_check(path=COPIES_CHECK):
+    """The counts of the check against his hand copies (local answers), or None where they are not here: the words
+    of the 11 copied texts by verdict (numerals and lost signs left out) and the dividers counted in each."""
+    if not path.exists():
+        return None
+    rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+    ws = [r for r in rows if r.get("verdict") in ("same", "differs", "cannot tell")]
+    ds = [r for r in rows if "dividers_copy" in r]
+    return {"texts": len({r["text"] for r in ws}), "words": len(ws),
+            "by_verdict": dict(sorted(collections.Counter(r["verdict"] for r in ws).items())),
+            "differs": sorted([r["text"], r["word"]] for r in ws if r["verdict"] == "differs"),
+            "dividers_differ": sorted(r["text"] for r in ds if r["dividers_copy"] != r["dividers_typed"]
+                                      or r.get("detail", "").startswith("same total, different places")),
+            "how": "an agent read each hand copy (plates XXIX and XXX) with the cursive key of data/expansion/README.md "
+                   "and gave each typed word one verdict; every word it found different was looked at on the printed "
+                   "page, and the typing follows the print in each (src/ostraca.py, COPIES)"}
 
 
 def second_typing(path=BLIND):
@@ -354,7 +386,7 @@ def figures(rs=None):
             "numerals": sum(r["numerals"] for r in rs), "symbols": sum(r["symbols"] for r in rs),
             "lines": sum(len(r["lines"]) for r in rs),
             "words_doubted": sum(r["uncertain"] for r in rs),
-            "his_notes": len(NOTES), "ours": len(OURS),
+            "his_notes": len(NOTES), "his_copy_differs": len(COPIES), "ours": len(OURS),
             "printed_without_letters": ["F.O. 38"],
             "missing_pages": "pp. 218-219 (the opening of the article) are not in the scan used"}
 
@@ -376,6 +408,9 @@ def main(argv):
     rec = recurrence(rs)
     if rec is not None:
         figs["map"] = rec
+    cc = copy_check()
+    if cc is not None:
+        figs["copy_check"] = cc
     FIGURES.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{ROW.relative_to(ROOT)}: {figs['texts']} texts, {figs['words']} words, {figs['signs']} signs, "
           f"{figs['numerals']} numerals, {figs['words_doubted']} words doubted")

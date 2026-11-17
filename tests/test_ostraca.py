@@ -92,7 +92,9 @@ def test_the_rows_hold_the_texts():
         assert r["numerals"] == sum(1 for w in r["text_corpus"].split() if w.isdigit())
     assert sum(r["words"] for r in rs) == 275 and sum(r["signs"] for r in rs) == 959
     listed = {(r["number"], d["word"]) for r in rs for d in r["doubts"]}
-    assert {(n, w) for n, w, _ in O.NOTES + O.OURS if w != "·"} <= listed
+    assert {(n, w) for n, w, _ in O.NOTES + O.COPIES + O.OURS if w != "·"} <= listed
+    whys = {(r["number"], d["word"]): d["why"] for r in rs for d in r["doubts"]}
+    assert all(whys[(n, w)] == why for n, w, why in O.COPIES)                   # where his copy differs, said
 
 
 def test_the_corpus_reads_them_as_open_readings():
@@ -137,10 +139,29 @@ def test_published_figures():
     assert m["now_in_a_second_text"] == len(m["which"]) and m["spellings"] == sum(m["on_the_map"].values())
 
 
+def test_the_copy_check_counts():
+    import tempfile
+    rows = [{"text": "F.O. 1", "word": "atr", "verdict": "differs"}, {"text": "F.O. 1", "word": "ab", "verdict": "same"},
+            {"text": "F.O. 6", "word": "qê", "verdict": "cannot tell"},
+            {"text": "F.O. 1", "dividers_copy": 10, "dividers_typed": 10, "detail": "same total, different places: x"},
+            {"text": "F.O. 6", "dividers_copy": 0, "dividers_typed": 0}, {"text": "D.O. 1", "dividers_copy": 7, "dividers_typed": 6}]
+    with tempfile.TemporaryDirectory() as d:
+        path = pathlib.Path(d) / "check.jsonl"
+        path.write_text("".join(json.dumps(r) + "\n" for r in rows))
+        c = O.copy_check(path)
+    assert c["texts"] == 2 and c["words"] == 3 and c["by_verdict"] == {"cannot tell": 1, "differs": 1, "same": 1}
+    assert c["differs"] == [["F.O. 1", "atr"]] and c["dividers_differ"] == ["D.O. 1", "F.O. 1"]
+    assert O.copy_check(pathlib.Path("/nonexistent/check.jsonl")) is None
+    figs = json.loads(O.FIGURES.read_text(encoding="utf-8"))
+    assert set(map(tuple, figs["copy_check"]["differs"])) <= {(n, w) for n, w, _ in O.COPIES}    # each one said
+
+
 def test_published_figures_recomputed():
     needs("data/sources/ostraca/blind/second_typing.txt", "data/sources/v6/analysts/glosses.jsonl")
     figs = json.loads(O.FIGURES.read_text(encoding="utf-8"))
     assert figs["second_typing"] == O.blind() and figs["map"] == O.recurrence()
+    needs("data/sources/ostraca/copies/check.jsonl")
+    assert figs["copy_check"] == O.copy_check()
 
 
 if __name__ == "__main__":
