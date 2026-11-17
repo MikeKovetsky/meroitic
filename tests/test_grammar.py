@@ -359,6 +359,11 @@ def test_the_figures_add_up():
     assert [t["words"] for t in longs] == sorted((t["words"] for t in longs), reverse=True) and all(t["words"] >= G.LONG for t in longs)
     assert all(t["holds"] <= t["cases"] and t["rules_with_a_case"] <= f["rounds"]["1"]["passed"] and t["open_words"] <= t["words"] for t in longs)
     assert sum(t["set"] == "held back" for t in longs) == sp["held"]["long_texts"]
+    l2 = f["long_texts_round_2"]                                                   # the second round's rules in the same texts
+    assert [(t["text"], t["words"], t["open_words"], t["set"]) for t in l2] == [(t["text"], t["words"], t["open_words"], t["set"]) for t in longs]
+    assert all(t["holds"] <= t["cases"] and t["rules_with_a_case"] <= f["rounds"]["2"]["passed"] for t in l2)
+    for rnd, r in f["rounds"].items():
+        assert r["tests_frozen_in_this_history"] == G.ROUNDS[int(rnd)]["frozen"]["here"] and r["tests_frozen_in"].split()[0] == G.ROUNDS[int(rnd)]["frozen"]["first"]
     by = f["cases_by_kind"]
     assert by["all"] == sum(by["cases"].values()) and all(by["share"][k] == round(v / by["all"], 4) for k, v in by["cases"].items())
     cost = f["cost"]
@@ -423,8 +428,10 @@ def test_the_page_says_what_the_figures_say():
         f"Over two rounds {both['rules']} rules were proposed, {both['passed']} passed on held-back texts, and {both['ours']} is a finding of ours "
         f"where {f['ours_needed']} were needed",
         "`src/grammar.py` (checks: `tests/test_grammar.py`)", "[`grammar_pilot_figures.json`](grammar_pilot_figures.json)",
-        f"first committed on a branch of their own as {G.ROUNDS[1]['frozen']['first']} and {G.ROUNDS[2]['frozen']['first']}, in this history "
-        f"{G.ROUNDS[1]['frozen']['here']} and {G.ROUNDS[2]['frozen']['here']}",
+        f"first committed at {G.ROUNDS[1]['frozen']['at']} and {G.ROUNDS[2]['frozen']['at']} on a branch of their own, `grammar`, as "
+        f"{G.ROUNDS[1]['frozen']['first']} and {G.ROUNDS[2]['frozen']['first']}; in this history they are {G.ROUNDS[1]['frozen']['here']} and "
+        f"{G.ROUNDS[2]['frozen']['here']}, copies of the same files made at {git('log', '-1', '--format=%cd', '--date=format:%H:%M', G.ROUNDS[2]['frozen']['here'])} "
+        "that keep the first commits' author times",
         f"| Proposed | {both['rules']} |", f"| Passed on held-back texts | {both['passed']} |",
         f"| Stated or partly stated in a source in hand | {both['stated_or_partly_stated']} |", f"| A finding of ours | {both['ours']} |",
         f"**The bar set beforehand was {f['ours_needed']}. It is not met, and the pilot ends here,**",
@@ -487,6 +494,15 @@ def test_the_page_says_what_the_figures_say():
     three = f["long_texts"][:3]
     assert 0.55 < sum(x["holds"] for x in three) / sum(x["cases"] for x in three) < 0.65 and "they hold in about six cases of ten" in text
     assert round(h["not_funerary"]["words"] / f["bars"]["cases"], -1) == 90 and "comes about once in 90 words to reach 20 cases" in text
+    # the last part of the request, the parse of the long texts, is said plainly to be not done: only the rules' reach is counted
+    assert "| R3 | \"Then parse the long royal texts with them.\" | **Not done as section 6 set it.**" in text
+    assert "| R4 | \"A two-day pilot.\" | Ended on 2026-11-16, its first evening, by the verdict set beforehand (section 11). |" in text
+    assert "This counts each rule's reach; it is not the parse that section 6 set out." in text and "No word without a meaning gets a kind" not in text
+    l2 = f["long_texts_round_2"]
+    hold = [x["holds"] / x["cases"] for x in l2]
+    assert (f"the {two['passed']} rules that passed have cases in each of them ({min(x['rules_with_a_case'] for x in l2)} to "
+            f"{max(x['rules_with_a_case'] for x in l2)} of the {two['passed']} rules a text), and their cases hold there {round(100 * min(hold))}% to "
+            f"{round(100 * max(hold))}% of the time") in text and all(x["cases"] for x in l2)
 
 
 def test_the_summaries_name_the_pilot():
@@ -498,6 +514,7 @@ def test_the_summaries_name_the_pilot():
         text = " ".join((ROOT / name).read_text(encoding="utf-8").split())
         assert "grammar_pilot.md" in text and says in text, name
         assert f"{f['cost']['all']['agents']} agents" in text or name != "REPORT.md", name
+        assert "Its last part, parsing the long royal texts with the rules, was not done" in text, name   # the cut said where the step is told
     readme, report = (ROOT / "README.md").read_text(encoding="utf-8"), " ".join((ROOT / "REPORT.md").read_text(encoding="utf-8").split())
     assert "python3 -I tests/test_grammar.py" in readme and "- `python3 -I src/grammar.py public`" in readme and "(`src/grammar.py`)" in readme
     assert '"how can we make more structural strategic moves. I am a bit pissed we\'ve been working on "assembling some data" for the last week"' in report

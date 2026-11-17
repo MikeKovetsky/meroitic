@@ -609,7 +609,7 @@ def round_figures(rnd, tuning_rows, held_all):
     ok = [x for x in rows if x["verdict"] == "passed"]
     return {"finders": R["finders"], "rules": len(rows), "by_finder": dict(collections.Counter(x["finder"] for x in rows)),
             "tests_with_the_finders_counts": sum(same_as_finder(measure(ts[rid], seen), r["tuning"]) for rid, r in rs.items() if rid in ts),
-            "tests_frozen_in": res["tests_frozen_in"],
+            "tests_frozen_in": res["tests_frozen_in"], "tests_frozen_in_this_history": R["frozen"]["here"],
             "held_words": len(held_all if rnd == 1 else [r for r in held_all if r["kind"] != "funerary"]),
             "passed": len(ok), "not_passed": dict(collections.Counter(why_not(x["verdict"]) for x in rows if x["verdict"] != "passed")),
             "not_passed_also_under_the_margin": sum("holds in under 80%; under 30 points" in x["verdict"] for x in rows),
@@ -621,8 +621,8 @@ def round_figures(rnd, tuning_rows, held_all):
 
 
 def long_texts(tuning_rows, held_all, fns):
-    """The first round's rules that passed, applied to each long text: how many have a case there, and how the
-    cases come out."""
+    """A round's rules that passed, applied to each long text: how many have a case there, and how the cases come
+    out. It counts the rules' reach; it does not cut a text into clauses or give a word a kind or a role."""
     by = collections.defaultdict(list)
     for r in tuning_rows + held_all:
         by[r["text"]].append(r)
@@ -664,8 +664,9 @@ def figures():
     for rnd in ROUNDS:
         frozen(rnd)
     rounds = {str(rnd): round_figures(rnd, tuning_rows, held_all) for rnd in ROUNDS}
-    one = tests(1)
+    one, two = tests(1), tests(2)
     fns = [one[x["id"]] for x in rounds["1"]["the_rules"] if x["verdict"] == "passed"]
+    fns2 = [two[x["id"]] for x in rounds["2"]["the_rules"] if x["verdict"] == "passed"]
     passed_all = sum(r["passed"] for r in rounds.values())
     mine = sum(len(r["ours"]) for r in rounds.values())
     return {
@@ -677,6 +678,7 @@ def figures():
                  "stated_or_partly_stated": passed_all - mine, "ours": mine, "bar_met": mine >= OURS_NEEDED,
                  "partly_stated_by_both": sum(r["readers"]["partly stated by both"] for r in rounds.values())},
         "long_texts": long_texts(tuning_rows, held_all, fns),
+        "long_texts_round_2": long_texts(tuning_rows, held_all, fns2),
         "cases_by_kind": cases_by_kind(tuning_rows + held_all, fns),
         "cost": cost(),
         "when": {"split_drawn": WHEN["split_drawn"]} | {str(k): v for k, v in WHEN.items() if k != "split_drawn"},

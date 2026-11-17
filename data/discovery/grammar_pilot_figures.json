@@ -104,6 +104,7 @@
    },
    "tests_with_the_finders_counts": 54,
    "tests_frozen_in": "604c379 19:15:35",
+   "tests_frozen_in_this_history": "8b011a7",
    "held_words": 4676,
    "passed": 41,
    "not_passed": {
@@ -1448,6 +1449,7 @@
    },
    "tests_with_the_finders_counts": 19,
    "tests_frozen_in": "6c974f3 19:30:39",
+   "tests_frozen_in_this_history": "81a043e",
    "held_words": 1776,
    "passed": 12,
    "not_passed": {
@@ -1993,6 +1995,78 @@
    "rules_with_a_case": 33,
    "cases": 63,
    "holds": 58
+  }
+ ],
+ "long_texts_round_2": [
+  {
+   "text": "REM 1044",
+   "kind": "funerary",
+   "set": "held back",
+   "words": 708,
+   "open_words": 374,
+   "rules_with_a_case": 10,
+   "cases": 689,
+   "holds": 648
+  },
+  {
+   "text": "REM 1003",
+   "kind": "royal or temple (stela, wall, cartouche, label)",
+   "set": "tuning",
+   "words": 485,
+   "open_words": 204,
+   "rules_with_a_case": 9,
+   "cases": 561,
+   "holds": 547
+  },
+  {
+   "text": "REM 0094",
+   "kind": "royal or temple (stela, wall, cartouche, label)",
+   "set": "held back",
+   "words": 234,
+   "open_words": 136,
+   "rules_with_a_case": 11,
+   "cases": 349,
+   "holds": 327
+  },
+  {
+   "text": "REM 1333",
+   "kind": "funerary",
+   "set": "tuning",
+   "words": 190,
+   "open_words": 88,
+   "rules_with_a_case": 12,
+   "cases": 295,
+   "holds": 273
+  },
+  {
+   "text": "REM 1039",
+   "kind": "not known",
+   "set": "held back",
+   "words": 131,
+   "open_words": 52,
+   "rules_with_a_case": 8,
+   "cases": 84,
+   "holds": 73
+  },
+  {
+   "text": "REM 1066",
+   "kind": "funerary",
+   "set": "tuning",
+   "words": 113,
+   "open_words": 31,
+   "rules_with_a_case": 12,
+   "cases": 176,
+   "holds": 171
+  },
+  {
+   "text": "REM 1067",
+   "kind": "not known",
+   "set": "tuning",
+   "words": 111,
+   "open_words": 40,
+   "rules_with_a_case": 12,
+   "cases": 138,
+   "holds": 133
   }
  ],
  "cases_by_kind": {
