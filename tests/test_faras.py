@@ -275,12 +275,15 @@ def test_the_studies_of_the_map_read_the_texts_of_the_map():
     Faras 21); the map does not. Its studies read lexicon.MAPPED, the corpus as the analysts glossed it."""
     import lexicon as X
     import recurring as W
-    assert W.corpus_rows.__doc__ and "MAPPED" in W.corpus_rows.__doc__
-    needs("data/sources/v6/analysts/corpus.jsonl", "data/sources/v6/analysts/glosses.jsonl")
+    import f4
+    import words as D
+    assert f4.CORPUS == X.MAPPED
+    needs("data/sources/v6/analysts/corpus.jsonl", "data/sources/v6/analysts/glosses.jsonl", "data/rilly2003")
     mapped = [json.loads(l)["id"] for l in X.MAPPED.read_text(encoding="utf-8").splitlines() if l.strip()]
     glossed = [json.loads(l)["id"] for l in X.GLOSSES.read_text(encoding="utf-8").splitlines() if l.strip()]
     assert mapped == glossed and len(mapped) == 548
     assert not ({f"REM {F.rem(n)}" for n in F.readings()} - {"REM 0544"}) & set(mapped)    # the new texts are not on it
+    assert list(W.corpus_rows()) == mapped and set(D.lookup_only()) == set(mapped)          # the studies and "before us"
 
 
 if __name__ == "__main__":
