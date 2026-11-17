@@ -184,6 +184,17 @@ Done since this plan was written:
     the rules that passed cut the 7 long texts 11 times, 6 of them in one text built like an epitaph, and speak
     of 51 of their 925 words without a meaning; the long royal texts stay uncut. No count of the map changes.
 
+28. **Evidence from outside the texts, three tracks** (2026-11-16 and 17,
+    [`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md); section H). Mike: "design the best
+    next steps with subagents we can launch in parallel", then "Yes, launch all". The rules and bars were
+    committed before any agent started. Track C, the personal names cut into parts: gate C1 met (62.6% of the
+    held-back names split into parts learned from the others, 15.8% of shuffled ones), gate C2 too small to decide
+    (the readers called 237 of 260 parts unclear). Track B, the Kushite kings' Egyptian texts as frames for the
+    Meroitic royal texts: gate B missed (7 of 26 hidden words right with the frames, 26.9%; 5 of 38 without).
+    Track A, the Nubian dictionaries of Reinisch and Lepsius: all 340 pages typed, the script reviewed (the review
+    found that the bar as first written passes one time in three with no related word, and the bar became a shuffle
+    within words of one length), the gate not yet run. No count of the map changes; no meaning of our own.
+
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
 
@@ -633,6 +644,10 @@ methods left to attack it?", and then: "note down these paths in the doc if not 
 was closed too fast. What the tests of sections F and G and the grammar pilot close is narrow: a meaning or a
 rule got from these 548 texts alone. Three paths bring evidence from outside them. None is started, and none
 has a bar yet: each gets one, committed before its first agent, like every step above.
+
+**Where they stand on 2026-11-17** (point 28 above): H3 (names) met its first gate and could not decide its
+second; H2 (the Egyptian frames) missed its gate; H1 (the dictionaries) is typed and reviewed, and its gate is
+the next thing to run. What is left is section 6 of the page.
 
 **Launched on 2026-11-16** (Mike, asked "Should I launch the three tracks now?": "Yes, launch all"). The rules
 and the bars of all three, set before any agent was started, are on

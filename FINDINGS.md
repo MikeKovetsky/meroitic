@@ -147,8 +147,11 @@ Details: [cognates_rules.md](data/discovery/cognates_rules.md).
 - **Evidence from outside the texts:** a bilingual, or a published reading the project has not read.
 - **A comparison with whole dictionaries of the related languages,** in the place of short word lists, with
   each meaning it proposes checked against the contexts. It has not been run (section 4).
-- **Two more paths that have not been tried:** the Egyptian royal texts of the kings of Kush read beside the
-  Meroitic ones, frame by frame, and the personal names split into their parts. All three paths are set out in
+- **Two more paths, tried since this page was written** ([outside_evidence.md](data/discovery/outside_evidence.md)):
+  the Egyptian royal texts of the kings of Kush read beside the Meroitic ones, frame by frame, doubled the share
+  of right meanings for hidden known words but stayed wrong three times in four (its bar missed); the personal
+  names split into parts that come back in unseen names, but where a part stands did not tell readers its kind.
+  The comparison with whole dictionaries is typed and not yet counted. All three paths are set out in
   [NEXT_STEPS.md](NEXT_STEPS.md), section H.
 - **The scholars' judgment** on 16 points of grammar and spelling: the 15 where the project's counts are
   sharper than its sources, and the one rule those sources do not state. And the grammars the project does not

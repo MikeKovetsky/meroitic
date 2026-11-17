@@ -1,8 +1,17 @@
 # Evidence from outside the texts: three tracks, their rules and their bars
 
-Status on 2026-11-16, 21:24: **nothing is run yet.** This page sets the rules and the bars of the three paths of
-[`NEXT_STEPS.md`](../../NEXT_STEPS.md), section H, before any agent is started. Results are added below each
-track as they come; a bar is not changed after its test has run.
+Status on 2026-11-17, 07:00: **two of the three tracks are counted; no meaning of the project's own.**
+
+| Track | Gate | Result |
+|---|---|---|
+| A. Nubian dictionaries | A1: related words beat a shuffle | **Not run yet.** All 340 dictionary pages are typed and 34 typed twice; the script is reviewed and its bar chosen |
+| B. The Kushite kings' Egyptian texts as frames | B: 80% right, 30 points over decoys | **Missed.** With the frames 7 of 26 hidden words right (26.9%), without them 5 of 38 (13.2%) |
+| C. Names cut into parts | C1: parts recur in unseen names | **Met.** 62.6% of held-back names split into parts, 15.8% of shuffled ones |
+| | C2: readers tell a part's kind | **Too small to decide.** The readers called 237 of 260 parts unclear |
+
+This page set the rules and the bars of the three paths of [`NEXT_STEPS.md`](../../NEXT_STEPS.md), section H,
+before any agent was started; the rules added later each say when, and every one came before its gate ran. The
+results stand below each track; section 6 says what is left.
 
 ## 1. What was asked
 
@@ -345,3 +354,24 @@ inside the texts that gives the kind of a word sooner than its meaning, and here
 - No builder runs git. Each script is committed here before its test is run, and the commit is named in the
   track's result.
 - Everything is reviewed before it is called done, and nothing is pushed without Mike's word.
+
+## 6. What is left (2026-11-17, 07:00)
+
+Mike, 2026-11-17: "describe the progress in the doc with what is left. and push everything."
+
+1. **Gate A1, run once.** `python3 -I src/nubian.py merge`, then `agree` (the typing's bar: 95% of headwords and
+   90% of their meanings the same on the 34 pages typed twice; if it is missed, every page is typed a second time
+   before the gate), then `gate`, which counts the bar once: the length-matched shuffle, p < 0.05 on at least 30
+   words. The script refuses to run if it is not as committed.
+2. **The public figures files** of the three tracks (`public` in each script), checked against this page.
+3. **Gate A2,** only if A1 is met: the blind choice with the dictionaries' candidates, by the bars of section 2.
+4. **The other dictionaries fetched on 2026-11-16** (`data/INDEX.md`, section 3: Murray 1923, Almkvist 1911, the
+   Comparative Nubian Dictionary data, Reinisch's Barea, Meinhof, Czermak, MacMichael, Griffith 1913, Lukas
+   1933): typed and tested the same way only if gate A1 shows a signal in the two dictionaries typed so far.
+5. **What tracks B and C leave:** the frames double the share of right meanings but are wrong three times in
+   four, so they cannot name an open word; the name parts are real but their places do not tell their kind. Both
+   are closed as ways to a meaning of the project's own, unless new texts or a bilingual come.
+
+**What it cost:** track B about 14.8 million subagent tokens; track A's typing about 14.0 million; track C about
+1.9 million with its review; the reviews of A and B about 1.4 million. Fable's usage limit stopped 11 agents
+on 2026-11-16 at about 22:16; everything after ran on Opus 5.5.
