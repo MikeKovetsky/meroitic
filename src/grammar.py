@@ -19,6 +19,7 @@ readers' answers quote the sources), except the tests in runs/grammar/ and `publ
   python3 -I src/grammar.py packs        the rules that passed, for two readers (novelty/)
   python3 -I src/grammar.py count        the readers compared (novelty/result.json)
   python3 -I src/grammar.py briefs2 | tuning2 | held2 | packs2 | count2     the same for the second round
+  python3 -I src/grammar.py parse        the long texts cut by the rules that passed (parse/, local)
   python3 -I src/grammar.py public       data/discovery/grammar_pilot_figures.json
 
 What the finders and the readers were given is in runs/prompts/GRAMMAR_finders.md and GRAMMAR_round2.md.
@@ -29,6 +30,7 @@ import importlib.util
 import json
 import pathlib
 import random
+import re
 import subprocess
 import sys
 
@@ -649,6 +651,282 @@ def cases_by_kind(rows, fns):
             "share": {k: round(v / total, 4) for k, v in sorted(out.items(), key=lambda kv: -kv[1])}}
 
 
+# ------------------------------------------------------------------------------- the long texts, cut by the rules
+#
+# Section 6 of the page set this part before any finder ran: each long text cut into clauses and phrases by the
+# rules that passed, and for each word without a meaning what the rules make of it. It is a description, with no
+# bar. Nothing here is taken from outside the rules: a mark of an end stands only where a rule that passed puts
+# one, and a rule about the epitaph's fixed words marks only where those words stand.
+
+VERB_ENDS = ("te", "ke", "kes", "to")                    # the endings of a ps- verb, by rule L4-5
+MXE = ("mXe", "mxe", "mX", "mXo")                        # the word after the noun of an offering, by rule L1-3
+WHOLE_PARTS = re.compile(r"(\S+?)=(.+?)(?= \S+?=|$)")     # a word's parts with their whole entry, as rule L4-1 reads them
+COPULA = re.compile(r"^[lqt]?o(w|wi)?$|^lw$")            # the copula's letters, by rule M5-2
+
+
+def readable(r):
+    return r["level"] != "lost" and "." not in r["form"]
+
+
+def at(rs, i):
+    return rs[i] if 0 <= i < len(rs) else None
+
+
+def end_address(rs, i, passed):
+    n = at(rs, i + 1)
+    if rs[i]["form"] in ("woSi", "wiSi") and n and readable(n) and n["form"].startswith(("Sor", "aSor")) and n["form"].endswith("i"):
+        return i + 1
+
+
+def end_naming(rs, i, passed):
+    return i if rs[i]["form"].endswith("qowi") else None
+
+
+def end_wi(rs, i, passed):
+    f = rs[i]["form"]
+    return i if len(f) >= 4 and "." not in f and f.endswith("owi") else None
+
+
+def end_before_water(rs, i, passed):
+    n = at(rs, i + 1)
+    return i - 1 if rs[i]["form"] == "ato" and i > 0 and n and n["form"].lower() == "mxe" else None
+
+
+def end_before_bread(rs, i, passed):
+    return i - 1 if rs[i]["form"] == "at" and i > 0 and rs[i - 1]["level"] != "lost" else None
+
+
+def end_verb(rs, i, passed):
+    v = at(rs, i + 1)
+    if rs[i]["form"] in MXE and v and readable(v) and v["form"][:1] in ("p", "b", "y"):
+        two = at(rs, i + 2)
+        in_two = "L4-5" in passed and re.match(r"^p(i)?S", v["form"]) and not v["form"].endswith(VERB_ENDS) and two \
+            and two["form"].endswith(VERB_ENDS)
+        return i + 2 if in_two else i + 1
+
+
+# The marks of an end: the rules that give each (one of them that passed is enough), the rules that say the same
+# or shape it, where it can stand, and whether the rule's own count is about that place ("its count") or only its
+# wording names the end ("its wording": the count was of something else, as the page says).
+MARKS = [
+    {"id": "address", "gives": ("L1-4",), "with": ("L3-2", "L7-4"), "where": "at the epitaph's fixed words", "from": "its count",
+     "what": "after woSi or wiSi, the word for Osiris in -i closes the address to the two gods", "at": end_address},
+    {"id": "naming", "gives": ("L7-4", "L3-3"), "with": ("L6-1",), "where": "at any word", "from": "its wording",
+     "what": "a word in -qowi closes the naming of the dead", "at": end_naming},
+    {"id": "wi", "gives": ("L7-5",), "with": ("L8-4", "M3-1", "M6-1"), "where": "at any word", "from": "its wording",
+     "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence", "at": end_wi},
+    {"id": "before water", "gives": ("L7-3", "L2-6"), "with": (), "where": "at the epitaph's fixed words", "from": "its count",
+     "what": "the word before `ato mXe` closes a sentence", "at": end_before_water},
+    {"id": "before bread", "gives": ("L5-6",), "with": (), "where": "at the epitaph's fixed words", "from": "its count",
+     "what": "the word before `at` closes the item of the offering list that comes before it", "at": end_before_bread},
+    {"id": "verb", "gives": ("L3-7", "L1-3"), "with": ("L7-1", "L5-4", "L4-5"), "where": "at the epitaph's fixed words", "from": "its count",
+     "what": "the verb right after mXe closes the phrase of noun, mXe and verb; a ps- verb in two pieces closes with the second",
+     "at": end_verb},
+]
+
+
+def given(table, passed):
+    """The marks (or the statements) of a table that a rule that passed gives."""
+    return [m for m in table if set(m["gives"]) & set(passed)]
+
+
+def cuts(rs, passed):
+    """{index of a word: the marks of an end it carries}, for one text's words in their order."""
+    out = collections.defaultdict(list)
+    for m in given(MARKS, passed):
+        for i in range(len(rs)):
+            j = m["at"](rs, i, passed)
+            if j is not None and m["id"] not in out[j]:
+                out[j].append(m["id"])
+    return {j: v for j, v in sorted(out.items()) if v}
+
+
+def is_parent(rs, i, ends):
+    n = at(rs, i + 1)
+    return bool(n and readable(rs[i]) and n["form"].startswith(("terik", "tedx")))
+
+
+def is_governed(rs, i, ends):
+    n = at(rs, i + 1)
+    return bool(n and readable(rs[i]) and n["form"].startswith("yetmde"))
+
+
+def is_ps_verb(rs, i, ends):
+    f, n = rs[i]["form"], at(rs, i + 1)
+    return bool(re.match(r"^p(i)?S", f) and readable(rs[i]) and (f.endswith(VERB_ENDS) or (n and n["form"].endswith(VERB_ENDS))))
+
+
+def is_offering_verb(rs, i, ends):
+    p = at(rs, i - 1)
+    return bool(p and p["form"] in MXE and readable(rs[i]) and rs[i]["form"][:1] in ("p", "b", "y"))
+
+
+def is_kete_verb(rs, i, ends):
+    if not any(e == "-kete" for _, e in WHOLE_PARTS.findall(rs[i]["parts"] or "")):
+        return False
+    before = [at(rs, i - 1), at(rs, i - 2)]
+    return any(b and ("mX" in b["form"] or "mx" in b["form"] or "mlo" in b["form"] or b["form"].startswith("at")) for b in before)
+
+
+def is_copula(rs, i, ends):
+    f = rs[i]["form"]
+    return len(f) >= 4 and "." not in f and f.endswith("owi") and f[-4] in "lqt"
+
+
+def is_common_copula(rs, i, ends):
+    if rs[i]["level"] == "lost":
+        return False
+    ps = [tok.split("=", 1) for tok in rs[i]["parts"].split(" ") if "=" in tok]
+    for (l1, e1), (l2, e2) in zip(ps, ps[1:]):
+        stem = e1 not in ("?", "ending", "NUMBER", "") and not e1.startswith("-") and not e1.endswith("-")
+        if stem and (e2 == "ending" or e2.startswith("-")) and l1 and l2 and not (e1 == "NAME" or e1[:1].isupper()) \
+                and COPULA.match(l2) and (l2.startswith("l") or l1.endswith("l")):
+            return True
+    return False
+
+
+def is_place(rs, i, ends):
+    ps = WHOLE_PARTS.findall(rs[i]["parts"] or "")
+    return any(e == "-te (2)" and n[0][:1] == "l" for (_, e), n in zip(ps, ps[1:]))
+
+
+def is_plural(rs, i, ends):
+    f = rs[i]["form"]
+    return len(f) >= 3 and "." not in f and not f.isdigit() and f.endswith("eb")
+
+
+def is_closing(rs, i, ends):
+    return bool(ends)
+
+
+# What the rules make of a word without a meaning: the first statement that fits, in this order. Each names the
+# rules that give it; one that passed is enough.
+SAYS = [
+    {"id": "parent", "gives": ("L1-5", "L6-2"), "what": "it stands right before a word of filiation, where a parent's name is due", "is": is_parent},
+    {"id": "governed", "gives": ("L1-6",), "what": "it stands right before yetmde-, where the noun that word governs is due", "is": is_governed},
+    {"id": "verb", "gives": ("L4-5",), "what": "a verb, by the prefix ps- and a verbal ending", "is": is_ps_verb},
+    {"id": "verb", "gives": ("L3-7", "L1-3"), "what": "a verb, by its place right after mXe", "is": is_offering_verb},
+    {"id": "verb", "gives": ("L4-3",), "what": "a verb in -kete, with its object within two words before it", "is": is_kete_verb},
+    {"id": "copula", "gives": ("L8-4", "M3-1", "M6-1"), "what": "it carries the copula in -owi after l, q or t", "is": is_copula},
+    {"id": "copula", "gives": ("M5-2",), "what": "a common noun with the article and the copula", "is": is_common_copula},
+    {"id": "place", "gives": ("L4-1",), "what": "a place in -te, closed by the article or the copula", "is": is_place},
+    {"id": "plural", "gives": ("M1-2", "M3-3", "M4-2"), "what": "it ends in -eb, the mark of the plural", "is": is_plural},
+    {"id": "closes", "gives": tuple(r for m in MARKS for r in m["gives"]), "what": "it closes a clause or a sentence", "is": is_closing},
+]
+NOTHING = "none"                                         # no rule speaks of the word
+
+
+def said_of(rs, i, passed, ends=()):
+    """(the statement's id, the rules that give it) for a word, or (NOTHING, [])."""
+    for s in given(SAYS, passed):
+        if s["is"](rs, i, ends):
+            return s["id"], sorted(set(s["gives"]) & set(passed))
+    return NOTHING, []
+
+
+def parse_of(rs, passed):
+    """One text's words as the rules that passed cut them: each word with the marks of an end it carries and, for
+    a word without a meaning, what the rules make of it."""
+    ends = cuts(rs, passed)
+    out = []
+    for i, r in enumerate(rs):
+        w = {"n": r["n"], "form": r["form"], "level": r["level"], "ends": ends.get(i, [])}
+        if r["level"] in OPEN:
+            w["says"], w["by"] = said_of(rs, i, passed, ends.get(i, []))
+        out.append(w)
+    return out
+
+
+def parse_counts(words):
+    """A parsed text in numbers: the cuts, the stretches between them, and the words without a meaning by what
+    the rules make of them."""
+    cut = [i for i, w in enumerate(words) if w["ends"]]
+    stretches = [b - a for a, b in zip([-1] + cut, cut + [len(words) - 1]) if b > a]
+    opened = [w for w in words if w["level"] in OPEN]
+    return {"words": len(words), "open_words": len(opened), "cuts": len(cut),
+            "words_up_to_the_last_cut": cut[-1] + 1 if cut else 0,
+            "share_up_to_the_last_cut": round((cut[-1] + 1) / len(words), 4) if cut else 0.0,
+            "longest_stretch": max(stretches) if stretches else 0,
+            "marks": dict(collections.Counter(m for w in words for m in w["ends"]).most_common()),
+            "open_words_by_what_is_said": dict(collections.Counter(w["says"] for w in opened).most_common()),
+            "open_words_a_rule_speaks_of": sum(w["says"] != NOTHING for w in opened)}
+
+
+def passed_ids():
+    return sorted(rid for rnd in ROUNDS for rid, _, _ in passed(rnd))
+
+
+def long_rows():
+    """{long text: (its words in their order, the set it was dealt to)}, the longest first."""
+    held_all = rows_of(HOME / ".held/held.tsv")
+    held, by = {r["text"] for r in held_all}, collections.defaultdict(list)
+    for r in rows_of(HOME / "tuning.tsv") + held_all:
+        by[r["text"]].append(r)
+    return {t: (rs, "held back" if t in held else "tuning")
+            for t, rs in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])) if len(rs) >= LONG}
+
+
+def parse_file(text):
+    return HOME / "parse" / (text.replace(" ", "_") + ".jsonl")
+
+
+def parse():
+    """Write each long text's parse (local: it holds the spellings) and print its counts."""
+    ids = passed_ids()
+    (HOME / "parse").mkdir(exist_ok=True)
+    for t, (rs, _) in long_rows().items():
+        words = parse_of(rs, ids)
+        parse_file(t).write_text("".join(json.dumps(w, ensure_ascii=False) + "\n" for w in words), encoding="utf-8")
+        c = parse_counts(words)
+        print(t, {k: c[k] for k in ("words", "open_words", "cuts", "longest_stretch", "open_words_a_rule_speaks_of")}, c["marks"])
+
+
+# How a stretch of a parsed text is shown on the page: no spelling, each word by what the rules or the map know.
+FIXED = (("woSi", "Isis, addressed"), ("wiSi", "Isis, addressed"), ("ato", "water"), ("at", "bread")) \
+    + tuple((f, "abundant") for f in MXE)
+SAID = {"parent": "name due", "governed": "noun due", "verb": "verb", "copula": "copula", "place": "place", "plural": "plural",
+        "closes": "closes", NOTHING: "nothing said"}
+
+
+def shown(w):
+    f = w["form"]
+    if dict(FIXED).get(f):
+        return dict(FIXED)[f]
+    if f.startswith(("Sor", "aSor")):
+        return "Osiris, addressed"
+    if f.startswith("tedx"):
+        return "born of"
+    if f.startswith("terik"):
+        return "begotten of"
+    if w["level"] in OPEN:
+        return f"[open: {SAID[w['says']]}]"
+    return {"name": "(name)", "number": "(number)", "lost": "(lost)"}.get(w["level"], "(translated)")
+
+
+def stretch(words, lo, hi):
+    """Words lo to hi of a parsed text (counted from 1), a double bar after each word that closes."""
+    return " · ".join(shown(w) + (" ‖" if w["ends"] else "") for w in words[lo - 1: hi])
+
+
+def parse_figures():
+    ids = passed_ids()
+    texts = []
+    for t, (rs, where) in long_rows().items():
+        texts.append({"text": t, "kind": rs[0]["kind"], "set": where} | parse_counts(parse_of(rs, ids)))
+    said = collections.Counter()
+    for x in texts:
+        said.update(x["open_words_by_what_is_said"])
+    return {"rules_that_passed": len(ids),
+            "marks": [{k: m[k] for k in ("id", "what", "where", "from")} | {"gives": [r for r in m["gives"] if r in ids], "with": list(m["with"])}
+                      for m in given(MARKS, ids)],
+            "statements": [{"id": s["id"], "what": s["what"], "gives": [r for r in s["gives"] if r in ids]} for s in given(SAYS, ids)],
+            "texts": texts,
+            "all": {"words": sum(x["words"] for x in texts), "open_words": sum(x["open_words"] for x in texts),
+                    "cuts": sum(x["cuts"] for x in texts), "open_words_by_what_is_said": dict(said.most_common()),
+                    "open_words_a_rule_speaks_of": sum(x["open_words_a_rule_speaks_of"] for x in texts)}}
+
+
+
 def cost():
     out = {}
     for rnd, R in ROUNDS.items():
@@ -680,6 +958,7 @@ def figures():
         "long_texts": long_texts(tuning_rows, held_all, fns),
         "long_texts_round_2": long_texts(tuning_rows, held_all, fns2),
         "cases_by_kind": cases_by_kind(tuning_rows + held_all, fns),
+        "parse": parse_figures(),
         "cost": cost(),
         "when": {"split_drawn": WHEN["split_drawn"]} | {str(k): v for k, v in WHEN.items() if k != "split_drawn"},
     }
@@ -693,7 +972,7 @@ def public():
 
 COMMANDS = {"split": split, "dump": dump, "briefs": briefs, "tuning": tuning, "held-dump": held_dump, "held": held, "packs": packs,
             "count": count, "briefs2": lambda: briefs(2), "tuning2": lambda: tuning(2), "held2": lambda: held(2),
-            "packs2": lambda: packs(2), "count2": lambda: count(2), "public": public}
+            "packs2": lambda: packs(2), "count2": lambda: count(2), "parse": parse, "public": public}
 
 if __name__ == "__main__":
     if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:

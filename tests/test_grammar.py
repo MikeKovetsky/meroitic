@@ -487,17 +487,21 @@ def test_the_page_says_what_the_figures_say():
     assert f"finders were started at {w['1']['finders_started'][:5]}, after the commit with the bars" in text
     assert f"The six finders were started at {w['2']['finders_started']}" in text and round(nf / rem1003["words"]) == 8 and "one in eight of them in one stela" in text
     # the long texts, a row each, in the figures' order
-    rows = [l for l in raw.splitlines() if l.startswith("| REM ")]
+    rows = [l for l in raw[:raw.index("## 9. A second round")].splitlines() if l.startswith("| REM ")]     # section 8's table; section 12 has its own
     assert [l.split(" | ")[0][2:] for l in rows] == [x["text"] for x in f["long_texts"]]
     for l, x in zip(rows, f["long_texts"]):
         assert l.endswith(f" | {x['words']} | {x['open_words']} | {x['rules_with_a_case']} | {x['cases']} | {x['holds']} |"), l
     three = f["long_texts"][:3]
     assert 0.55 < sum(x["holds"] for x in three) / sum(x["cases"] for x in three) < 0.65 and "they hold in about six cases of ten" in text
     assert round(h["not_funerary"]["words"] / f["bars"]["cases"], -1) == 90 and "comes about once in 90 words to reach 20 cases" in text
-    # the last part of the request, the parse of the long texts, is said plainly to be not done: only the rules' reach is counted
-    assert "| R3 | \"Then parse the long royal texts with them.\" | **Not done as section 6 set it.**" in text
+    # the last part of the request, the parse of the long texts, was built after the review asked for it (section 12)
+    ps = f["parse"]["all"]
+    assert ("| R3 | \"Then parse the long royal texts with them.\" | Done on 2026-11-16 at " in text
+            and f"after the review asked for it (section 12): the rules that passed cut the 7 long texts {ps['cuts']} times and speak of "
+                f"{ps['open_words_a_rule_speaks_of']} of their {ps['open_words']} words without a meaning. At first only each rule's reach" in text)
     assert "| R4 | \"A two-day pilot.\" | Ended on 2026-11-16, its first evening, by the verdict set beforehand (section 11). |" in text
-    assert "This counts each rule's reach; it is not the parse that section 6 set out." in text and "No word without a meaning gets a kind" not in text
+    assert "This counts each rule's reach; the parse that section 6 set out is in section 12." in text and "No word without a meaning gets a kind" not in text
+    assert "1. **The parse of the long texts is said to be not done.**" in text                     # the review's note stands as written
     l2 = f["long_texts_round_2"]
     hold = [x["holds"] / x["cases"] for x in l2]
     assert (f"the {two['passed']} rules that passed have cases in each of them ({min(x['rules_with_a_case'] for x in l2)} to "
@@ -514,7 +518,10 @@ def test_the_summaries_name_the_pilot():
         text = " ".join((ROOT / name).read_text(encoding="utf-8").split())
         assert "grammar_pilot.md" in text and says in text, name
         assert f"{f['cost']['all']['agents']} agents" in text or name != "REPORT.md", name
-        assert "Its last part, parsing the long royal texts with the rules, was not done" in text, name   # the cut said where the step is told
+        ps, r66 = f["parse"]["all"], next(x for x in f["parse"]["texts"] if x["text"] == "REM 1066")
+        assert (f"Its last part, the parse of the long royal texts, was built after the review asked for it: the rules that passed cut the 7 "
+                f"long texts {ps['cuts']} times, {r66['cuts']} of them in one text built like an epitaph, and speak of "
+                f"{ps['open_words_a_rule_speaks_of']} of their {ps['open_words']} words without a meaning; the long royal texts stay uncut.") in text, name
     readme, report = (ROOT / "README.md").read_text(encoding="utf-8"), " ".join((ROOT / "REPORT.md").read_text(encoding="utf-8").split())
     assert "python3 -I tests/test_grammar.py" in readme and "- `python3 -I src/grammar.py public`" in readme and "(`src/grammar.py`)" in readme
     assert '"how can we make more structural strategic moves. I am a bit pissed we\'ve been working on "assembling some data" for the last week"' in report
@@ -631,6 +638,167 @@ def test_the_times_are_the_local_files():
         assert len(rules) == R["finders"] and (rules[0], rules[-1]) == (w[rnd]["first_rules"], w[rnd]["last_rules"]), (rnd, rules[0], rules[-1])
         answers = sorted(at(f) for f in (G.HOME / R["novelty"]).glob("answers*/*.jsonl"))
         assert len(answers) == 2 * R["packs"] and (answers[0], answers[-1]) == (w[rnd]["first_answer"], w[rnd]["last_answer"]), (rnd, answers[0], answers[-1])
+
+
+# ------------------------------------------------------------------------------- the long texts, cut by the rules
+
+def word(form, level="meaning", parts="", n=0, text="T"):
+    return {"text": text, "kind": "funerary", "words_in_text": 0, "n": n, "form": form, "level": level, "parts": parts, "gloss": ""}
+
+
+def a_text(*words):
+    out = [word(*w) if isinstance(w, tuple) else word(w) for w in words]
+    for n, w in enumerate(out, 1):
+        w["n"], w["words_in_text"] = n, len(out)
+    return out
+
+
+EVERY = sorted({r for m in G.MARKS for r in m["gives"] + m["with"]} | {r for s in G.SAYS for r in s["gives"]})
+
+
+def test_a_mark_cuts_where_its_rule_says_and_nowhere_else():
+    # an address, a naming, two clauses in -owi, the two offering formulas (the bread verb written in two pieces), a tail
+    rs = a_text("woSi", "Soreyi", ("abc", "name"), "xyzqowi", ("nnn", "name"), "tedxelowi", ("mmm", "name"), "terikelowi",
+                "ato", "mXe", "pSoXekete", "at", "mXe", "pSixr", "kete", ("zzz", "unknown"), ("yyy", "unknown"))
+    cut = G.cuts(rs, EVERY)
+    assert cut == {1: ["address"], 3: ["naming", "wi"], 5: ["wi"], 7: ["wi", "before water"], 10: ["before bread", "verb"], 14: ["verb"]}
+    assert 13 not in cut and 15 not in cut and 16 not in cut                       # the first piece of the verb and the tail carry no mark
+    # no fixed word, no -owi: no cut, however long the text
+    assert G.cuts(a_text(*["abcd", "efgh", "ijkl"] * 40), EVERY) == {}
+    # each mark keeps to its rule's own cases
+    assert G.cuts(a_text("woSi", "abc"), EVERY) == {} and G.cuts(a_text("woS", "Soreyi"), EVERY) == {}        # L1-4: woSi or wiSi, then Sor...i
+    assert G.cuts(a_text("abc", "ato", "mlo"), EVERY) == {} and G.cuts(a_text("ato", "mXe"), EVERY) == {}     # L7-3: ato, mXe after it, a word before it
+    assert G.cuts(a_text("abc", "ato", "mxe"), EVERY) == {0: ["before water"]}
+    assert G.cuts(a_text(("abc", "lost"), "at"), EVERY) == {} and G.cuts(a_text("abc", "atx"), EVERY) == {}   # L5-6: exactly at, a word before it not lost
+    assert G.cuts(a_text("mXe", "dkete"), EVERY) == {} and G.cuts(a_text("mXe", "b.ete"), EVERY) == {}        # L1-3: the next word begins p, b or y and is whole
+    assert G.cuts(a_text("mXe", "yirx"), EVERY) == {1: ["verb"]} and G.cuts(a_text("mlo", "pSixrkete"), EVERY) == {}
+    assert G.cuts(a_text("owi"), EVERY) == {} and G.cuts(a_text("x.owi"), EVERY) == {} and G.cuts(a_text("xbowi"), EVERY) == {0: ["wi"]}   # L7-5: four letters, no dot
+    # the counts: the stretches between the cuts, and the last cut
+    c = G.parse_counts(G.parse_of(rs, EVERY))
+    assert (c["words"], c["open_words"], c["cuts"], c["words_up_to_the_last_cut"], c["longest_stretch"]) == (17, 2, 6, 15, 4)
+    assert c["marks"] == {"wi": 3, "verb": 2, "address": 1, "naming": 1, "before water": 1, "before bread": 1}
+    assert c["share_up_to_the_last_cut"] == round(15 / 17, 4) and c["open_words_by_what_is_said"] == {"none": 2} and c["open_words_a_rule_speaks_of"] == 0
+    none = G.parse_counts(G.parse_of(a_text("abcd", ("efgh", "unknown")), EVERY))
+    assert (none["cuts"], none["words_up_to_the_last_cut"], none["share_up_to_the_last_cut"], none["longest_stretch"]) == (0, 0, 0.0, 2)
+
+
+def test_a_rule_that_did_not_pass_gives_no_mark_and_says_nothing():
+    rs = a_text("woSi", "Soreyi", "xyzqowi", "abclowi", "ato", "mXe", "pSixr", "kete", "at", "mXe", "yirxkete")
+    full = G.cuts(rs, EVERY)
+    assert full == {1: ["address"], 2: ["naming", "wi"], 3: ["wi", "before water"], 7: ["before bread", "verb"], 10: ["verb"]}
+    assert G.cuts(rs, []) == {} and G.given(G.MARKS, []) == [] and G.given(G.SAYS, []) == []
+    drop = lambda *ids: [r for r in EVERY if r not in ids]                                       # noqa: E731
+    assert "address" not in sum(G.cuts(rs, drop("L1-4")).values(), [])                           # L3-2 and L7-4 only go with it: they do not give it
+    assert "naming" not in sum(G.cuts(rs, drop("L7-4", "L3-3")).values(), []) and "naming" in sum(G.cuts(rs, drop("L7-4")).values(), [])
+    assert "wi" not in sum(G.cuts(rs, drop("L7-5")).values(), []) and "wi" in sum(G.cuts(rs, drop("L8-4", "M3-1", "M6-1")).values(), [])
+    assert "before water" not in sum(G.cuts(rs, drop("L7-3", "L2-6")).values(), []) and "before water" in sum(G.cuts(rs, drop("L7-3")).values(), [])
+    assert "before bread" not in sum(G.cuts(rs, drop("L5-6")).values(), [])
+    assert "verb" not in sum(G.cuts(rs, drop("L3-7", "L1-3")).values(), [])
+    assert G.cuts(rs, drop("L4-5"))[6] == ["verb"] and 7 not in {k for k, v in G.cuts(rs, drop("L4-5")).items() if "verb" in v}   # without L4-5 no second piece
+    # what is said of a word without a meaning needs a rule that passed too
+    name = a_text(("abc", "unknown"), "tedxelowi", ("def", "unknown"), "yetmdelowi", ("pSixrkete", "unknown"), ("ghileb", "unknown"),
+                  ("jkllowi", "unknown"), ("mno", "unknown"))
+    said = lambda passed: [w.get("says") for w in G.parse_of(name, passed)]                     # noqa: E731
+    assert said(EVERY) == ["parent", None, "governed", None, "verb", "plural", "copula", "none"]
+    assert said(drop("L1-5", "L6-2"))[0] == "none" and said(drop("L1-5"))[0] == "parent" and said(drop("L1-6"))[2] == "none"
+    assert said(drop("L4-5"))[4] == "none" and said(drop("M1-2", "M3-3", "M4-2"))[5] == "none" and said(drop("M1-2"))[5] == "plural"
+    assert said(drop("L8-4", "M3-1", "M6-1"))[6] == "closes" and said(drop("L8-4", "M3-1", "M6-1", "L7-5"))[6] == "none"
+    assert said([]) == ["none", None, "none", None, "none", "none", "none", "none"]
+    # by the map's parts: a place in -te closed by the article (L4-1), a common noun with the copula (M5-2), a verb in -kete (L4-3)
+    by_parts = a_text(("abctel", "unknown", "abc=Abc te=-te (2) l=-l (1)"), ("xyzlo", "hypothesis", "xyz=xyz lo=-lo"),
+                      ("Abclo", "hypothesis", "Abc=NAME lo=-lo"), "mlol", ("dkete", "unknown", "d=? kete=-kete"), ("ekete", "unknown", "e=? kete=-kete"))
+    assert [w.get("says") for w in G.parse_of(by_parts, EVERY)] == ["place", "copula", "none", None, "verb", "verb"]
+    assert [w.get("says") for w in G.parse_of(by_parts[:3] + a_text("abc", "abc", "abc") + by_parts[5:], EVERY)][-1] == "none"   # no object within two words
+    assert [w.get("by") for w in G.parse_of(by_parts, EVERY)][:2] == [["L4-1"], ["M5-2"]]
+
+
+def test_every_mark_and_statement_names_a_rule_that_passed():
+    f = figs()
+    ok = {x["id"] for r in f["rounds"].values() for x in r["the_rules"] if x["verdict"] == "passed"}
+    assert len(ok) == f["both"]["passed"] == f["parse"]["rules_that_passed"] and set(EVERY) <= ok
+    assert all(m["gives"] and callable(m["at"]) for m in G.MARKS) and all(s["gives"] and callable(s["is"]) for s in G.SAYS)
+    assert [m["id"] for m in f["parse"]["marks"]] == [m["id"] for m in G.MARKS] and len({m["id"] for m in G.MARKS}) == len(G.MARKS) == 6
+    for m, x in zip(G.MARKS, f["parse"]["marks"]):
+        assert x == {"id": m["id"], "what": m["what"], "where": m["where"], "from": m["from"], "gives": list(m["gives"]), "with": list(m["with"])}
+        assert m["where"] in ("at the epitaph's fixed words", "at any word") and m["from"] in ("its count", "its wording")
+    assert [(s["id"], s["what"], s["gives"]) for s in f["parse"]["statements"]] == [(s["id"], s["what"], list(s["gives"])) for s in G.SAYS]
+    assert {s["id"] for s in G.SAYS} | {G.NOTHING} == set(G.SAID)
+    # the parse adds up, text by text
+    p = f["parse"]
+    assert [x["text"] for x in p["texts"]] == [x["text"] for x in f["long_texts"]] and len(p["texts"]) == 7
+    for x, y in zip(p["texts"], f["long_texts"]):
+        assert (x["words"], x["open_words"], x["kind"], x["set"]) == (y["words"], y["open_words"], y["kind"], y["set"])
+        assert sum(x["open_words_by_what_is_said"].values()) == x["open_words"] and x["cuts"] <= sum(x["marks"].values())
+        assert x["open_words_a_rule_speaks_of"] == x["open_words"] - x["open_words_by_what_is_said"].get("none", 0)
+        assert x["longest_stretch"] <= x["words"] and (x["cuts"] > 0) == (x["words_up_to_the_last_cut"] > 0)
+        assert x["share_up_to_the_last_cut"] == round(x["words_up_to_the_last_cut"] / x["words"], 4)
+    a = p["all"]
+    assert a["words"] == sum(x["words"] for x in p["texts"]) and a["cuts"] == sum(x["cuts"] for x in p["texts"])
+    assert a["open_words"] == sum(a["open_words_by_what_is_said"].values()) == sum(x["open_words"] for x in p["texts"])
+    assert a["open_words_a_rule_speaks_of"] == a["open_words"] - a["open_words_by_what_is_said"]["none"]
+
+
+def test_the_page_gives_the_parse_as_the_figures_have_it():
+    f, raw = figs(), PAGE.read_text(encoding="utf-8")
+    p, text = f["parse"], page()
+    sec = raw[raw.index("## 12. The long texts, cut by the rules"):]
+    assert f"It uses the {p['rules_that_passed']} rules that passed and nothing else." in " ".join(sec.split())
+    for m in p["marks"]:
+        line = (f"| {m['what'][0].upper() + m['what'][1:]} | {', '.join(m['gives'])}" + (f" (with {', '.join(m['with'])})" if m["with"] else "")
+                + f" | {m['where']} | {m['from'].replace('its', 'the rule' + chr(39) + 's')} |")
+        assert line in sec, line
+    worded = [m["id"] for m in p["marks"] if m["from"] == "its wording"]
+    assert worded == ["naming", "wi"] and "Two of the six rest on a rule's wording alone. The rules L7-4 and L7-5 name an end" in " ".join(sec.split())
+    for x in p["texts"]:
+        line = (f"| {x['text']} | {x['kind'].split(' (')[0]} | {x['words']} | {x['cuts']} | {x['longest_stretch']} | {x['open_words']} | "
+                f"{x['open_words_a_rule_speaks_of']} |")
+        assert line in sec, line
+    a, said = p["all"], p["all"]["open_words_by_what_is_said"]
+    assert f"| All seven | | {a['words']:,} | {a['cuts']} | | {a['open_words']} | {a['open_words_a_rule_speaks_of']} |" in sec
+    assert set(said) == {"none", "plural", "governed", "verb", "place", "copula"}
+    for label, key in (("Nothing", "none"), ("It ends in `-eb`, like a plural", "plural"), ("It stands where the noun governed by `yetmde-` is due", "governed"),
+                       ("A verb", "verb"), ("A place in `-te`", "place"), ("It carries the copula", "copula")):
+        assert f"| {label} | {said[key]} |" in sec, label
+    assert f"| What the rules say of the {a['open_words']} words without a meaning | Words |" in sec
+    for s in p["statements"]:
+        assert all(r in sec for r in s["gives"]), s["id"]
+    three, r66 = p["texts"][:3], next(x for x in p["texts"] if x["text"] == "REM 1066")
+    flat = " ".join(sec.split())
+    assert [x["text"] for x in three] == ["REM 1044", "REM 1003", "REM 0094"] and three[1]["cuts"] == 0
+    assert f"REM 1066 is cut {r66['cuts']} times" in flat
+    assert (f"REM 1044, REM 1003 and REM 0094 hold {sum(x['words'] for x in three):,} words and are cut {sum(x['cuts'] for x in three)} times; "
+            "REM 1003 not once.") in flat
+    assert (f"**Of the {a['open_words']} words without a meaning the rules speak of {a['open_words_a_rule_speaks_of']},** and of {said['plural']} of those "
+            f"they say only that the word ends in `-eb`, like a plural. Of {said['none']} they say nothing.") in flat
+    assert "The parse gives no word a meaning and proposes none" in flat
+    assert "After the review (2026-11-16, " in text and "the parse of section 6 was built: section 12." in text
+    # the stretches show no spelling: only the fixed words' meanings and what the map and the rules know
+    lines = [l.strip() for l in sec.splitlines() if " · " in l]
+    assert len(lines) == 3
+    allowed = {"Isis, addressed", "Osiris, addressed", "water", "bread", "abundant", "born of", "begotten of", "(name)", "(number)", "(lost)",
+               "(translated)"} | {f"[open: {v}]" for v in G.SAID.values()}
+    for l in lines:
+        assert {tok.replace(" ‖", "") for tok in l.split(" · ")} <= allowed, l
+
+
+def test_the_parse_is_the_count_of_the_local_files():
+    needs(*LOCAL, "data/sources/grammar/parse")
+    f = figs()
+    assert G.parse_figures() == f["parse"]
+    ids, rows = G.passed_ids(), G.long_rows()
+    assert len(ids) == f["both"]["passed"] and list(rows) == [x["text"] for x in f["parse"]["texts"]]
+    raw = PAGE.read_text(encoding="utf-8")
+    for x in f["parse"]["texts"]:
+        words = [json.loads(l) for l in G.parse_file(x["text"]).read_text(encoding="utf-8").splitlines()]
+        assert words == G.parse_of(rows[x["text"]][0], ids), x["text"]                        # the script writes the same parse again
+        counts = G.parse_counts(words)
+        assert {k: x[k] for k in counts} == counts and len(words) == x["words"], x["text"]
+        assert [w["form"] for w in words] == [r["form"] for r in rows[x["text"]][0]]
+    # the stretches on the page are those of the local parse
+    one, three = [G.parse_of(rows[t][0], ids) for t in ("REM 1066", "REM 1003")]
+    for words, lo, hi in ((one, 1, 16), (one, 90, 99), (three, 1, 24)):
+        assert G.stretch(words, lo, hi) in raw, (lo, hi)
+    assert sum(bool(w["ends"]) for w in three) == 0
 
 
 if __name__ == "__main__":

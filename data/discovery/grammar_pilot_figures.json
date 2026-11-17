@@ -2088,6 +2088,334 @@
    "oracular decree": 0.0049
   }
  },
+ "parse": {
+  "rules_that_passed": 53,
+  "marks": [
+   {
+    "id": "address",
+    "what": "after woSi or wiSi, the word for Osiris in -i closes the address to the two gods",
+    "where": "at the epitaph's fixed words",
+    "from": "its count",
+    "gives": [
+     "L1-4"
+    ],
+    "with": [
+     "L3-2",
+     "L7-4"
+    ]
+   },
+   {
+    "id": "naming",
+    "what": "a word in -qowi closes the naming of the dead",
+    "where": "at any word",
+    "from": "its wording",
+    "gives": [
+     "L7-4",
+     "L3-3"
+    ],
+    "with": [
+     "L6-1"
+    ]
+   },
+   {
+    "id": "wi",
+    "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence",
+    "where": "at any word",
+    "from": "its wording",
+    "gives": [
+     "L7-5"
+    ],
+    "with": [
+     "L8-4",
+     "M3-1",
+     "M6-1"
+    ]
+   },
+   {
+    "id": "before water",
+    "what": "the word before `ato mXe` closes a sentence",
+    "where": "at the epitaph's fixed words",
+    "from": "its count",
+    "gives": [
+     "L7-3",
+     "L2-6"
+    ],
+    "with": []
+   },
+   {
+    "id": "before bread",
+    "what": "the word before `at` closes the item of the offering list that comes before it",
+    "where": "at the epitaph's fixed words",
+    "from": "its count",
+    "gives": [
+     "L5-6"
+    ],
+    "with": []
+   },
+   {
+    "id": "verb",
+    "what": "the verb right after mXe closes the phrase of noun, mXe and verb; a ps- verb in two pieces closes with the second",
+    "where": "at the epitaph's fixed words",
+    "from": "its count",
+    "gives": [
+     "L3-7",
+     "L1-3"
+    ],
+    "with": [
+     "L7-1",
+     "L5-4",
+     "L4-5"
+    ]
+   }
+  ],
+  "statements": [
+   {
+    "id": "parent",
+    "what": "it stands right before a word of filiation, where a parent's name is due",
+    "gives": [
+     "L1-5",
+     "L6-2"
+    ]
+   },
+   {
+    "id": "governed",
+    "what": "it stands right before yetmde-, where the noun that word governs is due",
+    "gives": [
+     "L1-6"
+    ]
+   },
+   {
+    "id": "verb",
+    "what": "a verb, by the prefix ps- and a verbal ending",
+    "gives": [
+     "L4-5"
+    ]
+   },
+   {
+    "id": "verb",
+    "what": "a verb, by its place right after mXe",
+    "gives": [
+     "L3-7",
+     "L1-3"
+    ]
+   },
+   {
+    "id": "verb",
+    "what": "a verb in -kete, with its object within two words before it",
+    "gives": [
+     "L4-3"
+    ]
+   },
+   {
+    "id": "copula",
+    "what": "it carries the copula in -owi after l, q or t",
+    "gives": [
+     "L8-4",
+     "M3-1",
+     "M6-1"
+    ]
+   },
+   {
+    "id": "copula",
+    "what": "a common noun with the article and the copula",
+    "gives": [
+     "M5-2"
+    ]
+   },
+   {
+    "id": "place",
+    "what": "a place in -te, closed by the article or the copula",
+    "gives": [
+     "L4-1"
+    ]
+   },
+   {
+    "id": "plural",
+    "what": "it ends in -eb, the mark of the plural",
+    "gives": [
+     "M1-2",
+     "M3-3",
+     "M4-2"
+    ]
+   },
+   {
+    "id": "closes",
+    "what": "it closes a clause or a sentence",
+    "gives": [
+     "L1-4",
+     "L7-4",
+     "L3-3",
+     "L7-5",
+     "L7-3",
+     "L2-6",
+     "L5-6",
+     "L3-7",
+     "L1-3"
+    ]
+   }
+  ],
+  "texts": [
+   {
+    "text": "REM 1044",
+    "kind": "funerary",
+    "set": "held back",
+    "words": 708,
+    "open_words": 374,
+    "cuts": 3,
+    "words_up_to_the_last_cut": 350,
+    "share_up_to_the_last_cut": 0.4944,
+    "longest_stretch": 358,
+    "marks": {
+     "verb": 2,
+     "before bread": 1
+    },
+    "open_words_by_what_is_said": {
+     "none": 361,
+     "plural": 11,
+     "verb": 2
+    },
+    "open_words_a_rule_speaks_of": 13
+   },
+   {
+    "text": "REM 1003",
+    "kind": "royal or temple (stela, wall, cartouche, label)",
+    "set": "tuning",
+    "words": 485,
+    "open_words": 204,
+    "cuts": 0,
+    "words_up_to_the_last_cut": 0,
+    "share_up_to_the_last_cut": 0.0,
+    "longest_stretch": 485,
+    "marks": {},
+    "open_words_by_what_is_said": {
+     "none": 184,
+     "plural": 20
+    },
+    "open_words_a_rule_speaks_of": 20
+   },
+   {
+    "text": "REM 0094",
+    "kind": "royal or temple (stela, wall, cartouche, label)",
+    "set": "held back",
+    "words": 234,
+    "open_words": 136,
+    "cuts": 1,
+    "words_up_to_the_last_cut": 116,
+    "share_up_to_the_last_cut": 0.4957,
+    "longest_stretch": 118,
+    "marks": {
+     "wi": 1
+    },
+    "open_words_by_what_is_said": {
+     "none": 131,
+     "plural": 4,
+     "place": 1
+    },
+    "open_words_a_rule_speaks_of": 5
+   },
+   {
+    "text": "REM 1333",
+    "kind": "funerary",
+    "set": "tuning",
+    "words": 190,
+    "open_words": 88,
+    "cuts": 1,
+    "words_up_to_the_last_cut": 1,
+    "share_up_to_the_last_cut": 0.0053,
+    "longest_stretch": 189,
+    "marks": {
+     "naming": 1,
+     "wi": 1
+    },
+    "open_words_by_what_is_said": {
+     "none": 85,
+     "place": 1,
+     "copula": 1,
+     "plural": 1
+    },
+    "open_words_a_rule_speaks_of": 3
+   },
+   {
+    "text": "REM 1039",
+    "kind": "not known",
+    "set": "held back",
+    "words": 131,
+    "open_words": 52,
+    "cuts": 0,
+    "words_up_to_the_last_cut": 0,
+    "share_up_to_the_last_cut": 0.0,
+    "longest_stretch": 131,
+    "marks": {},
+    "open_words_by_what_is_said": {
+     "none": 51,
+     "plural": 1
+    },
+    "open_words_a_rule_speaks_of": 1
+   },
+   {
+    "text": "REM 1066",
+    "kind": "funerary",
+    "set": "tuning",
+    "words": 113,
+    "open_words": 31,
+    "cuts": 16,
+    "words_up_to_the_last_cut": 99,
+    "share_up_to_the_last_cut": 0.8761,
+    "longest_stretch": 29,
+    "marks": {
+     "wi": 10,
+     "verb": 4,
+     "before water": 2,
+     "address": 1,
+     "naming": 1,
+     "before bread": 1
+    },
+    "open_words_by_what_is_said": {
+     "none": 20,
+     "governed": 7,
+     "verb": 3,
+     "copula": 1
+    },
+    "open_words_a_rule_speaks_of": 11
+   },
+   {
+    "text": "REM 1067",
+    "kind": "not known",
+    "set": "tuning",
+    "words": 111,
+    "open_words": 40,
+    "cuts": 4,
+    "words_up_to_the_last_cut": 99,
+    "share_up_to_the_last_cut": 0.8919,
+    "longest_stretch": 90,
+    "marks": {
+     "verb": 2,
+     "wi": 1,
+     "before water": 1,
+     "before bread": 1
+    },
+    "open_words_by_what_is_said": {
+     "none": 39,
+     "plural": 1
+    },
+    "open_words_a_rule_speaks_of": 1
+   }
+  ],
+  "all": {
+   "words": 1972,
+   "open_words": 925,
+   "cuts": 25,
+   "open_words_by_what_is_said": {
+    "none": 871,
+    "plural": 38,
+    "governed": 7,
+    "verb": 5,
+    "place": 2,
+    "copula": 2
+   },
+   "open_words_a_rule_speaks_of": 54
+  }
+ },
  "cost": {
   "round 1, the finders": {
    "agents": 8,
