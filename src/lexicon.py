@@ -102,6 +102,10 @@ import tally as T                                      # noqa: E402
 import lexicon_refs as R                               # noqa: E402
 
 GLOSSES = ROOT / "data/sources/v6/analysts/glosses.jsonl"
+# the texts of corpus_v6 that the map holds, as the analysts glossed them (548 inscriptions, local): the studies of
+# the map read these and not data/corpus_v6.jsonl, which grows as texts are added (the Faras texts, 2026-11-17) and
+# loses a text that is found to be part of another; a copy of corpus_v6 as it stood before the first such rebuild
+MAPPED = GLOSSES.with_name("corpus.jsonl")
 EXPERT = ROOT / "data/sources/expert"
 OUT = ROOT / "data/sources/lexicon"
 PUBLIC = ROOT / "data/discovery/lexicon_figures.json"

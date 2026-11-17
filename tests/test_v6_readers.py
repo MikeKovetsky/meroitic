@@ -18,6 +18,10 @@ from local_only import needs, run   # noqa: E402
 PAGE = ROOT / "data/discovery/v6_readers.md"
 FIGURES = ROOT / "data/discovery/corpus_v6_readers.json"
 LOCAL = ("data/rilly2003", "data/corpus_v6.jsonl", "data/sources/coverage/packs", "data/sources/v6/packs")
+# the words of corpus_v6 that no analyst had seen when the readers ran (the build of 2026-11-12, counted after the map's
+# corrections): the page quotes them; corpus_v6 has grown since, so the figures of its build no longer hold them, and
+# test_public_figures_are_what_the_local_files_give counts them again on the texts of the map
+BUILT = {"words": 1013, "spellings": 912}
 
 
 def test_a_tagged_name_is_masked_and_not_sent():
@@ -108,7 +112,7 @@ def known(f):
         elif isinstance(x, float):
             out.add(f"{x:.1%}")
     walk(f)
-    v6 = json.loads((ROOT / "data/discovery/corpus_v6_figures.json").read_text())["coverage"]["not_analysed"]
+    v6 = BUILT
     walk({k: v6[k] for k in ("words", "spellings")})
     a, n = f["answers"], f["newly_translated"]
     for part in f["by_part"].values():
@@ -178,7 +182,7 @@ def test_reported_numbers():
     assert f"was {EXPECTED[0]} to {EXPECTED[1]} words; it is {n['words']}, about half the lower figure" in text
     assert 0.45 <= n["words"] / EXPECTED[0] <= 0.55
     assert f["still_not_analysed"] == 0
-    v6 = json.loads((ROOT / "data/discovery/corpus_v6_figures.json").read_text())["coverage"]["not_analysed"]
+    v6 = BUILT
     assert f"built with {v6['words']:,} of its words, in {v6['spellings']} spellings, that no analyst had seen" in text
     assert f"({v6['spellings']} and {v6['words']:,} are counted after the map's corrections)" in text
     assert f"without its limit on length, would translate {f['longer_joins']} words more" in text
@@ -189,13 +193,22 @@ def test_reported_numbers():
         sorted(numbers(PAGE.read_text(encoding="utf-8"), STATED) - known(f))
 
 
+def recount_of_the_map():
+    """The coverage recount of src/v6/recount.py on the texts the readers read, the texts of the map
+    (lexicon.MAPPED), not on corpus_v6 as it has grown since (the Faras texts were added on 2026-11-17)."""
+    corpus = [json.loads(l) for l in X.L.MAPPED.read_text().splitlines() if l.strip()]
+    v5 = [json.loads(l) for l in X.R.V5.read_text().splitlines() if l.strip()]
+    return X.R.coverage(corpus, {w for r in v5 for w in r["text"].split()})[-1]
+
+
 def test_public_figures_are_what_the_local_files_give():
     needs(*LOCAL)
-    corpus = [json.loads(l) for l in X.R.CORPUS.read_text().splitlines() if l.strip()]
+    corpus = [json.loads(l) for l in X.L.MAPPED.read_text().splitlines() if l.strip()]
     _, figs = X.count(corpus)
     assert figs == json.loads(FIGURES.read_text(encoding="utf-8"))
-    recount = json.loads((ROOT / "data/sources/v6/recount.json").read_text())["coverage"]["all"]
-    assert (figs["before"]["words"], figs["before"]["translated"]) == (recount["words"], recount["translated"])
+    recount = recount_of_the_map()
+    assert (figs["before"]["words"], figs["before"]["translated"]) == (recount["all"]["words"], recount["all"]["translated"])
+    assert {k: recount["not_analysed"][k] for k in BUILT} == BUILT
     words, affixes, _ = X.C.index(X.C.lexicon())
     assert X.unread(X.R.rows_for_map(corpus), words, affixes, X.held(X.R.PACKS, X.NEW)) == []   # nothing left unread
     sent = sum(1 for p in sorted(X.NEW.iterdir()) if p.name.startswith("A")

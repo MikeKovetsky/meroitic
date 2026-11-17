@@ -567,7 +567,8 @@ COST = ("<!-- cost: by hand, from the task notifications -->", "<!-- end of the 
 STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544", "0101", "362", "370",
           "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0",       # 4.0: the licence CC BY 4.0
           "16", "489",                                                    # GA 13+16; MilletExamples.txt line 489
-          "933", "242", "29"}                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
+          "933", "242", "29",                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
+          "2026-11-17", "414", "0521"}           # the Faras texts: MilletExamples.txt line 414 is a part of REM 0521
 
 
 def test_page_text_quotes_the_tables():

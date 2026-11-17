@@ -4,52 +4,52 @@
   "words": 21977,
   "classes": {
    "a name-swapped copy of a reading": {
-    "texts": 207,
-    "words": 11967
+    "texts": 206,
+    "words": 11955
    },
    "a name-swapped copy of an example phrase": {
-    "texts": 123,
-    "words": 1599
+    "texts": 124,
+    "words": 1611
    },
    "a second reading of an inscription already counted": {
     "texts": 4,
     "words": 181
    },
    "an example phrase or a word-list entry": {
-    "texts": 273,
-    "words": 1616
+    "texts": 274,
+    "words": 1629
    },
    "not settled by two readers": {
     "texts": 3,
     "words": 28
    },
    "stands for its inscription": {
-    "texts": 289,
-    "words": 6586
+    "texts": 288,
+    "words": 6573
    }
   }
  },
  "inscriptions": {
-  "all": 563,
-  "with_a_typed_reading": 548,
+  "all": 585,
+  "with_a_typed_reading": 570,
   "only_a_text_layer": 9,
   "typed_without_a_legible_word": 6,
   "in_two_or_more_parts": 9,
-  "with_a_rem_number": 441,
-  "with_real_names": 548,
+  "with_a_rem_number": 464,
+  "with_real_names": 570,
   "with_readings_from_two_editions_or_more": 64,
-  "with_an_open_reading": 304,
-  "with_an_open_reading_of_the_whole_text": 275,
-  "preferred_reading_is_open": 286,
-  "in_corpus_v5": 289,
+  "with_an_open_reading": 327,
+  "with_an_open_reading_of_the_whole_text": 298,
+  "preferred_reading_is_open": 309,
+  "in_corpus_v5": 288,
   "new_to_the_corpus_by_source": {
    "mnl": 209,
-   "griffith": 50
+   "griffith": 73
   },
-  "not_identified": 8,
+  "not_identified": 7,
   "by_kind": {
-   "funerary": 268,
-   "not known": 112,
+   "funerary": 291,
+   "not known": 111,
    "royal or temple (stela, wall, cartouche, label)": 87,
    "document (ostracon, papyrus, wood, vessel)": 53,
    "graffito": 36,
@@ -58,30 +58,30 @@
   "kind_not_known_and_only_in_the_printout": 72,
   "preferred_by_source": {
    "mnl": 210,
+   "griffith": 159,
    "karanog": 150,
-   "griffith": 136,
-   "otten": 49,
+   "otten": 48,
    "otten:narrative": 3
   }
  },
  "corpus_v6": {
-  "texts": 548,
-  "words": 10290,
-  "words_of_inscriptions_in_corpus_v5": 6586,
+  "texts": 570,
+  "words": 10648,
+  "words_of_inscriptions_in_corpus_v5": 6579,
   "name_words_marked": 87,
   "numerals_set": 13
  },
  "lines": {
-  "phrase": 906,
-  "reading": 47,
-  "unidentified": 8,
+  "phrase": 908,
+  "reading": 46,
+  "unidentified": 7,
   "pending": 3,
   "word list": 195
  },
  "pending": 3,
  "twins": {
-  "pairs": 13,
-  "rows": 20,
+  "pairs": 12,
+  "rows": 18,
   "list": [
    [
     "REM 0005",
@@ -112,10 +112,6 @@
     "REM 0037"
    ],
    [
-    "REM 0051",
-    "REM 0052"
-   ],
-   [
     "REM 0119",
     "REM 0120"
    ],
@@ -137,12 +133,8 @@
    ]
   ],
   "across_numberings": {
-   "pairs": 2,
+   "pairs": 1,
    "list": [
-    [
-     "Meroe 27",
-     "Millet 1968 p. 238-240 (MilletExamples.txt line 286)"
-    ],
     [
      "Meroe 28",
      "Millet 1968 p. 238-240 (MilletExamples.txt line 286)"
@@ -152,16 +144,16 @@
   }
  },
  "phrases": {
-  "in_one_text": 310,
-  "in_several": 166,
-  "doubtful": 35,
+  "in_one_text": 316,
+  "in_several": 168,
+  "doubtful": 34,
   "set_aside": 1,
-  "nothing": 394,
-  "doubtful_and_rival": 3
+  "nothing": 389,
+  "doubtful_and_rival": 2
  },
  "settled": {
   "readings": 3,
-  "phrases": 9,
+  "phrases": 8,
   "set_aside": 1,
   "none": 1
  },
@@ -204,7 +196,7 @@
  },
  "held": {
   "edition_readings": {
-   "griffith": 153,
+   "griffith": 176,
    "karanog": 151,
    "mnl": 256,
    "millet2005": 34,
@@ -228,8 +220,8 @@
   },
   "as_written": {
    "right": 45,
-   "sure": 30,
-   "doubtful": 15,
+   "sure": 29,
+   "doubtful": 16,
    "right_or_another_line_of_the_same_text": 46,
    "with_a_sure_other": 3,
    "with_a_sure_other_of_another_text": 2,
@@ -270,7 +262,7 @@
      "a": "mnl:REM 0544|MeroNews28",
      "b": "otten:MilletExamples.txt:629",
      "verdict": "doubtful",
-     "shared": 73,
+     "shared": 71,
      "best_key": "otten:MilletExamples.txt:642"
     },
     {
@@ -294,8 +286,8 @@
      "a": "mnl:REM 1044|MeroNews6",
      "b": "otten:narrative:tanyidamani",
      "verdict": "sure",
-     "shared": 1299,
-     "best_key": "otten:MilletExamples.txt:851"
+     "shared": 1294,
+     "best_key": "otten:LobbanVocabList.txt:71"
     },
     {
      "what": "Newsletter second edition",
@@ -309,8 +301,8 @@
   },
   "with_the_floor": {
    "right": 45,
-   "sure": 32,
-   "doubtful": 13,
+   "sure": 31,
+   "doubtful": 14,
    "right_or_another_line_of_the_same_text": 47,
    "with_a_sure_other": 3,
    "with_a_sure_other_of_another_text": 2,
@@ -335,7 +327,7 @@
      "a": "mnl:REM 0544|MeroNews28",
      "b": "otten:MilletExamples.txt:629",
      "verdict": "doubtful",
-     "shared": 73,
+     "shared": 71,
      "best_key": "otten:MilletExamples.txt:904"
     },
     {
@@ -433,27 +425,27 @@
  },
  "coverage": {
   "all": {
-   "texts": 548,
-   "words": 10290,
-   "translated": 5280,
-   "share": 0.5131,
+   "texts": 570,
+   "words": 10648,
+   "translated": 5458,
+   "share": 0.5126,
    "levels": {
-    "meaning": 2932,
-    "grammar": 682,
-    "name": 1427,
+    "meaning": 3057,
+    "grammar": 690,
+    "name": 1472,
     "number": 239,
-    "hypothesis": 1283,
-    "kind": 580,
-    "unknown": 1931,
-    "lost": 1216
+    "hypothesis": 1310,
+    "kind": 587,
+    "unknown": 2041,
+    "lost": 1252
    }
   },
   "by_part": {
    "Griffith's other volumes": {
-    "texts": 136,
-    "words": 1216,
-    "translated": 511,
-    "share": 0.4202
+    "texts": 159,
+    "words": 1581,
+    "translated": 689,
+    "share": 0.4358
    },
    "Karanog and Shablul (Griffith 1911)": {
     "texts": 150,
@@ -462,10 +454,10 @@
     "share": 0.7584
    },
    "Otten's files with real names (Millet 1968, the three narratives)": {
-    "texts": 52,
-    "words": 2594,
+    "texts": 51,
+    "words": 2587,
     "translated": 1273,
-    "share": 0.4907
+    "share": 0.4921
    },
    "the Meroitic Newsletter": {
     "texts": 210,
@@ -475,56 +467,56 @@
    }
   },
   "near_copies_once": {
-   "texts": 538,
-   "words": 10255,
-   "translated": 5258
+   "texts": 560,
+   "words": 10613,
+   "translated": 5436
   },
   "inscriptions_that_were_in_corpus_v5": {
-   "texts": 289,
-   "words": 6586,
+   "texts": 288,
+   "words": 6579,
    "translated": 3950,
-   "share": 0.5998,
+   "share": 0.6004,
    "levels": {
     "meaning": 2225,
     "grammar": 428,
     "name": 1211,
     "number": 86,
     "hypothesis": 943,
-    "kind": 438,
-    "unknown": 881,
+    "kind": 436,
+    "unknown": 876,
     "lost": 374
    }
   },
   "inscriptions_new_to_the_corpus": {
-   "texts": 259,
-   "words": 3704,
-   "translated": 1330,
-   "share": 0.3591,
+   "texts": 282,
+   "words": 4069,
+   "translated": 1508,
+   "share": 0.3706,
    "levels": {
-    "meaning": 707,
-    "grammar": 254,
-    "name": 216,
+    "meaning": 832,
+    "grammar": 262,
+    "name": 261,
     "number": 153,
-    "hypothesis": 340,
-    "kind": 142,
-    "unknown": 1050,
-    "lost": 842
+    "hypothesis": 367,
+    "kind": 151,
+    "unknown": 1165,
+    "lost": 878
    }
   },
   "texts": {
-   "texts": 538,
-   "legible": 507,
+   "texts": 560,
+   "legible": 529,
    "no_blocker": 42,
-   "one_blocker": 92,
-   "median": 0.625
+   "one_blocker": 94,
+   "median": 0.6153846153846154
   },
-  "pieces_without_an_accepted_meaning": 2075,
+  "pieces_without_an_accepted_meaning": 2186,
   "names_by_the_source": 87,
   "not_analysed": {
-   "words": 1013,
-   "spellings": 912,
-   "in_new_inscriptions": 966,
-   "in_inscriptions_that_were_in_corpus_v5": 47,
+   "words": 1124,
+   "spellings": 1017,
+   "in_new_inscriptions": 1080,
+   "in_inscriptions_that_were_in_corpus_v5": 44,
    "unknown_words_seen_before": 1
   },
   "corrections": {
@@ -541,10 +533,10 @@
     "newly_translated_once": 23
    },
    "a word written apart": {
-    "words": 108,
-    "newly_translated": 74,
-    "words_once": 108,
-    "newly_translated_once": 74
+    "words": 112,
+    "newly_translated": 77,
+    "words_once": 112,
+    "newly_translated_once": 77
    },
    "a spelling of a known word": {
     "words": 33,

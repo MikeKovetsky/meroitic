@@ -1,0 +1,67 @@
+{
+ "texts": [
+  "Faras 2",
+  "Faras 10",
+  "Faras 13",
+  "Faras 14",
+  "Faras 15"
+ ],
+ "seed": 20261117,
+ "bar": 0.95,
+ "how": "the signs of the first typing less the edit distance between the two typings, over the signs of the first typing; lost and restored signs and line numbers left out (BAR.md)",
+ "final": {
+  "agree": 373,
+  "signs": 382,
+  "share": 0.9764,
+  "by_text": {
+   "Faras 2": {
+    "agree": 83,
+    "signs": 83
+   },
+   "Faras 10": {
+    "agree": 132,
+    "signs": 137
+   },
+   "Faras 13": {
+    "agree": 68,
+    "signs": 69
+   },
+   "Faras 14": {
+    "agree": 25,
+    "signs": 26
+   },
+   "Faras 15": {
+    "agree": 65,
+    "signs": 67
+   }
+  }
+ },
+ "first": {
+  "agree": 331,
+  "signs": 376,
+  "share": 0.8803,
+  "by_text": {
+   "Faras 2": {
+    "agree": 74,
+    "signs": 83
+   },
+   "Faras 10": {
+    "agree": 107,
+    "signs": 132
+   },
+   "Faras 13": {
+    "agree": 67,
+    "signs": 68
+   },
+   "Faras 14": {
+    "agree": 24,
+    "signs": 26
+   },
+   "Faras 15": {
+    "agree": 59,
+    "signs": 67
+   }
+  }
+ },
+ "met": true
+}

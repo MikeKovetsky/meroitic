@@ -224,7 +224,8 @@ def items_of(gl, rows, lex, texts_ok=lambda n: n >= MIN_TEXTS, hows=None, order=
 
 
 def corpus_rows():
-    return {r["id"]: r for r in map(json.loads, (ROOT / "data/corpus_v6.jsonl").read_text(encoding="utf-8").splitlines())}
+    """The texts of the map, by id (lexicon.MAPPED: corpus_v6 as the analysts glossed it)."""
+    return {r["id"]: r for r in map(json.loads, X.MAPPED.read_text(encoding="utf-8").splitlines())}
 
 
 def lexicon():

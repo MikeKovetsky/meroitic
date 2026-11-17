@@ -15,14 +15,16 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **304 inscriptions are machine-readable under an open licence, 237 of them missing from the public corpus.**
+2. **327 inscriptions are machine-readable under an open licence, 260 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
    The test covered cursive type only; the 48 rows in hieroglyphic type were not scored. REM 1003, the longest
    text, is open too: Griffith printed all of it in 1917 in his transliteration of the time; typed from page
    images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
-   (`src/akinidad.py`, `data/expansion/jea/`).
+   (`src/akinidad.py`, `data/expansion/jea/`). Faras 1 to 23 of Griffith 1922, typed from his hand copies and
+   checked against his English renderings: 2,034 signs; a blind second typing of five texts drawn by lot agrees on
+   373 of 382 signs, 97.6% (`src/faras.py`, `data/expansion/faras/`).
    Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
    once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
    and Shablûl inscriptions are transcribed too, all of them new, +15% words (Day three, below).
@@ -488,14 +490,15 @@ The table, the map and the corpus were built without an agent; two readers then 
    files, with real names and the page of Millet's 1968 thesis. Of the 17,995 different lines of the padded file,
    340 are a line of those files letter for letter, 17,446 are such a line with one stretch swapped, and 206 more
    differ in a second small place. The 659 texts of the older corpus come from 329 source lines.
-2. **What `corpus_v5` was:** 289 of its 899 texts stand for an inscription (30.0% of its 21,977 words); 207 are
-   copies of a reading with a name swapped (54.5% of the words), 273 are example phrases from a grammar or
-   word-list entries and 123 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
+2. **What `corpus_v5` was:** 288 of its 899 texts stand for an inscription (29.9% of its 21,977 words); 206 are
+   copies of a reading with a name swapped (54.4% of the words), 274 are example phrases from a grammar or
+   word-list entries and 124 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
    text, GA 28, stood 86 times (6,284 words, from 2 of Millet's lines).
-3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (209 of
-   the Newsletter's texts and 50 of Griffith's rows that `corpus_v5` left out). The table holds 563 inscriptions:
-   441 with a REM number, 64 with readings from two editions or more, 304 with a reading under an open licence, 8
-   quoted by Millet and not identified.
+3. **`corpus_v6`:** 570 inscriptions, each once, with real names; 288 were in `corpus_v5` and 282 are new (209 of
+   the Newsletter's texts and 73 of Griffith's rows that `corpus_v5` left out). The table holds 585 inscriptions:
+   464 with a REM number, 64 with readings from two editions or more, 327 with a reading under an open licence, 7
+   quoted by Millet and not identified. (These counts are those of the build as it stands, with the Faras texts
+   added on 2026-11-17; one of the Millet texts then not identified is a part of a Faras text.)
 4. **The bar for the matching rule was missed:** the right partner is the best match for 45 of 54 known pairs
    (83.3%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a
    second monument of the same person. So a number decides before letters do, a sure match stands only when it
@@ -511,8 +514,8 @@ The table, the map and the corpus were built without an agent; two readers then 
    in the epitaph of Makheye (REM 0544; 4 after Newsletter 28 and 6 by analogy in the same list) and 3 in REM 0101
    after Griffith's print.
 8. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
-   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 966 of their words
-   are spellings no analyst has seen.
+   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,080 of their words
+   are spellings no analyst has seen (the Faras texts of 2026-11-17 among them).
 9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,005 still stand in
    `corpus_v6`; on those the editions give the map's meaning for 71.4% of the words they translate (267 of 374;
    it was 276 of 397, 69.5%).

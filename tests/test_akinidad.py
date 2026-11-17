@@ -94,7 +94,7 @@ def test_the_corpus_reads_it_as_an_open_reading_of_rem_1003():
     g = R.finish(rows[0])
     assert g["key"] == "griffith:G-jea4-1003" and g["numbers"] == {"rem": ["1003"]} and g["v5"] is None
     assert g["open"] and g["typed"] and g["whole"] and g["number"] == "JEA 4 (1917), §§ 1-21"
-    assert R.GRIFFITH[-1] == ("data/expansion/jea", "griffith")
+    assert ("data/expansion/jea", "griffith") in R.GRIFFITH
 
 
 def test_corpus_v5_does_not_take_it():

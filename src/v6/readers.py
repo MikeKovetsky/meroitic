@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(Path(__file__).resolve().parent)]
 import coverage as C   # noqa: E402
+import lexicon as L    # noqa: E402
 import recount as R    # noqa: E402
 
 NEW = ROOT / "data/sources/v6/packs"
@@ -123,7 +124,7 @@ def count(corpus, old=R.PACKS, new=NEW):
 
 
 def main(argv):
-    corpus = [json.loads(l) for l in R.CORPUS.read_text().splitlines() if l.strip()]
+    corpus = [json.loads(l) for l in L.MAPPED.read_text().splitlines() if l.strip()]     # the texts the readers read
     if argv[1:] == ["packs"]:
         es = C.lexicon()
         words, affixes, _ = C.index(es)

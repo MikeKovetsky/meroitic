@@ -1,0 +1,72 @@
+{
+ "how": {
+  "by_letters": "the rule of src/v6/readings.py (runs of five letters, formula runs left out) from each typed text to every reading corpus_v6 holds but the Faras rows",
+  "by_number": "the readings corpus_v6 holds under the text's REM number; letters spelled alike (fold()); the other's letters less the edit distance, over the other's letters"
+ },
+ "texts": {
+  "Faras 2": {
+   "rem": "0502",
+   "matches": [
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.393,
+     "share_other": 0.056,
+     "shared": 11,
+     "key": "griffith:G-mi2b-129"
+    },
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.321,
+     "share_other": 0.045,
+     "shared": 9,
+     "key": "otten:MilletExamples.txt:1398"
+    }
+   ]
+  },
+  "Faras 4": {
+   "rem": "0504",
+   "matches": [
+    {
+     "verdict": "doubtful",
+     "share_faras": 0.085,
+     "share_other": 0.35,
+     "shared": 7,
+     "key": "mnl:REM 1062|MeroNews6"
+    }
+   ]
+  },
+  "Faras 21": {
+   "rem": "0521",
+   "matches": [
+    {
+     "verdict": "sure",
+     "share_faras": 0.062,
+     "share_other": 1.0,
+     "shared": 15,
+     "key": "otten:MilletExamples.txt:1248"
+    },
+    {
+     "verdict": "sure",
+     "share_faras": 0.062,
+     "share_other": 1.0,
+     "shared": 15,
+     "key": "otten:MilletExamples.txt:985"
+    },
+    {
+     "verdict": "sure",
+     "share_faras": 0.116,
+     "share_other": 0.875,
+     "shared": 28,
+     "key": "otten:MilletExamples.txt:414"
+    },
+    {
+     "verdict": "sure",
+     "share_faras": 0.116,
+     "share_other": 0.875,
+     "shared": 28,
+     "key": "otten:MilletExamples.txt:56"
+    }
+   ]
+  }
+ }
+}

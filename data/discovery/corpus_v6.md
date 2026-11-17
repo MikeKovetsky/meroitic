@@ -4,12 +4,12 @@ Built on 2026-11-12. This is piece F1 (step 22) of [`NEXT_STEPS.md`](../../NEXT_
 inscription, with real names and a source for every reading. Every number on this page is written by
 `src/v6/public.py` into the tables of section 4, and the text quotes them from there.
 
-**The result in three sentences.** The 899 texts of `corpus_v5` hold 289 inscriptions, and more than half of
+**The result in three sentences.** The 899 texts of `corpus_v5` hold 288 inscriptions, and more than half of
 its words were copies of a reading with a name swapped; the rest are example phrases and word-list entries.
-`corpus_v6` holds 548 inscriptions, each once, with real names, and 304 of the 563 inscriptions in the table
+`corpus_v6` holds 570 inscriptions, each once, with real names, and 327 of the 585 inscriptions in the table
 have a reading under an open licence. Counted on it, the coverage map translates 60.0% of the words of the
 inscriptions that were already in the corpus (62.0% on `corpus_v5`), and 51.3% with the inscriptions new to the
-corpus, 966 of whose words are spellings no analyst has seen.
+corpus, 1,080 of whose words are spellings no analyst has seen.
 
 ## 1. What was wrong with `corpus_v5`
 
@@ -148,67 +148,67 @@ So 13 of the readers' matches are taken, 4 as the whole text and 9 as a part; of
 - Otten's padded file: 18,090 lines, 17,995 of them different. Equal to a line of his per-scholar files: 340. Such a line with one stretch swapped: 17,446. Near one, with a second small difference: 206. From no such line: 3 (the three narratives, which have files of their own).
 - Source lines in the per-scholar files: 1,159. The 659 texts of the older corpus come from 329 of them.
 - The most copied line: MilletExamples.txt line 433 (GA 28), 52 texts and 4,540 words of `corpus_v5`. The most copied inscription: GA 28, 86 texts and 6,284 words, from 2 source lines.
-- Readings held besides Otten's lines: 153 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files; and 15 texts that FHN III prints under one number (no. 267), each set beside the inscription of its REM number after the matching.
-- Source lines by what they are: 47 readings of an inscription, 906 example phrases, 195 word-list entries, 8 inscriptions not identified, 3 with a doubtful match that is not settled.
-- The example phrases: 310 are a part of one held text or stand whole in it, 166 stand whole in several, 35 have a match that was not read (3 of them a sure one with a second inscription close behind, the rest doubtful), 1 was taken by the readers for a text of one inscription and is set aside because the rule matches it surely with another, and 394 match nothing held.
+- Readings held besides Otten's lines: 176 rows of Griffith's print, 151 Karanòg rows, 256 Newsletter rows, 34 texts of Millet 2005, 11 entries of FHN III, 3 narrative files; and 15 texts that FHN III prints under one number (no. 267), each set beside the inscription of its REM number after the matching.
+- Source lines by what they are: 46 readings of an inscription, 908 example phrases, 195 word-list entries, 7 inscriptions not identified, 3 with a doubtful match that is not settled.
+- The example phrases: 316 are a part of one held text or stand whole in it, 168 stand whole in several, 34 have a match that was not read (2 of them a sure one with a second inscription close behind, the rest doubtful), 1 was taken by the readers for a text of one inscription and is set aside because the rule matches it surely with another, and 389 match nothing held.
 - Doubtful matches read by two readers: 17 lines. Both gave the same answer for 15 and differ on 2. Both named the same candidate for 14: 13 are used, 4 as the whole text and 9 as a part of it, and 1 is not, because both marked it as a guess. Both answered "none" for 1. Not settled: 3 lines, behind 3 texts and 28 words of `corpus_v5`.
-- The lines the readers settled, as they stand in the build: 3 are readings of an inscription, 9 are example phrases from one, 1 is set aside, and 1 matches nothing and is an inscription of its own.
+- The lines the readers settled, as they stand in the build: 3 are readings of an inscription, 8 are example phrases from one, 1 is set aside, and 1 matches nothing and is an inscription of its own.
 - A lone `l` read as a numeral: 13 (7 by another edition, 6 by analogy), in 2 inscription(s): REM 0101 (3), REM 0544 (10).
 - Words marked as a personal name by Otten's own tags: 87.
 - Inscriptions whose text is in two or more parts: 9.
-- Pairs of rows of `corpus_v6` that the rule takes for a sure match and that carry two different numbers of one numbering: 13 (in 20 rows). Pairs of rows numbered in two different ways (a REM number and a number of Griffith's, Millet's or the Newsletter's, or none) that the rule matches at all: 2, of them surely 0: Meroe 27 and Millet 1968 p. 238-240 (MilletExamples.txt line 286); Meroe 28 and Millet 1968 p. 238-240 (MilletExamples.txt line 286).
+- Pairs of rows of `corpus_v6` that the rule takes for a sure match and that carry two different numbers of one numbering: 12 (in 18 rows). Pairs of rows numbered in two different ways (a REM number and a number of Griffith's, Millet's or the Newsletter's, or none) that the rule matches at all: 1, of them surely 0: Meroe 28 and Millet 1968 p. 238-240 (MilletExamples.txt line 286).
 
 ### The measures
 
 | Measure | Count | Share of the inscriptions |
 |---|---|---|
-| Inscriptions | 563 | |
-| with a REM number | 441 | 78.3% |
-| with a typed reading (the rows of `corpus_v6`) | 548 | 97.3% |
-| with real names in the preferred reading | 548 | 97.3% |
-| with two readings or more, from two editions or more | 64 | 11.4% |
-| with a reading under an open licence | 304 | 54.0% |
-| with an open reading of the whole text | 275 | 48.8% |
-| whose preferred reading is the open one | 286 | 50.8% |
-| held only as a text layer of Millet 2005 (not typed) | 9 | 1.6% |
-| typed, without a legible word | 6 | 1.1% |
-| quoted by Millet 1968 and not identified | 8 | 1.4% |
+| Inscriptions | 585 | |
+| with a REM number | 464 | 79.3% |
+| with a typed reading (the rows of `corpus_v6`) | 570 | 97.4% |
+| with real names in the preferred reading | 570 | 97.4% |
+| with two readings or more, from two editions or more | 64 | 10.9% |
+| with a reading under an open licence | 327 | 55.9% |
+| with an open reading of the whole text | 298 | 50.9% |
+| whose preferred reading is the open one | 309 | 52.8% |
+| held only as a text layer of Millet 2005 (not typed) | 9 | 1.5% |
+| typed, without a legible word | 6 | 1.0% |
+| quoted by Millet 1968 and not identified | 7 | 1.2% |
 
-New to the corpus (rows of `corpus_v6` that no text of `corpus_v5` is a reading of): 209 from the Meroitic Newsletter, 50 from Griffith's printed type (rows that `corpus_v5` left out).
+New to the corpus (rows of `corpus_v6` that no text of `corpus_v5` is a reading of): 209 from the Meroitic Newsletter, 73 from Griffith's printed type (rows that `corpus_v5` left out).
 
 ### What the texts of `corpus_v5` turned out to be
 
 | What | Texts | Words | Share of the words |
 |---|---|---|---|
-| A name-swapped copy of a reading | 207 | 11,967 | 54.5% |
-| A name-swapped copy of an example phrase | 123 | 1,599 | 7.3% |
+| A name-swapped copy of a reading | 206 | 11,955 | 54.4% |
+| A name-swapped copy of an example phrase | 124 | 1,611 | 7.3% |
 | A second reading of an inscription already counted | 4 | 181 | 0.8% |
-| An example phrase or a word-list entry | 273 | 1,616 | 7.4% |
+| An example phrase or a word-list entry | 274 | 1,629 | 7.4% |
 | Not settled by two readers | 3 | 28 | 0.1% |
-| Stands for its inscription | 289 | 6,586 | 30.0% |
+| Stands for its inscription | 288 | 6,573 | 29.9% |
 | All of `corpus_v5` | 899 | 21,977 | |
 
 ### The kinds of text
 
 | Kind | Inscriptions |
 |---|---|
-| Funerary | 268 |
-| Not known | 112 |
+| Funerary | 291 |
+| Not known | 111 |
 | Royal or temple (stela, wall, cartouche, label) | 87 |
 | Document (ostracon, papyrus, wood, vessel) | 53 |
 | Graffito | 36 |
 | Oracular decree | 7 |
 
-Of the 112 of a kind not known, 72 are held only in the Newsletter's printout of 1971, which states no object for them.
+Of the 111 of a kind not known, 72 are held only in the Newsletter's printout of 1971, which states no object for them.
 
 ### The preferred reading, by source
 
 | Source | Inscriptions |
 |---|---|
 | The Meroitic Newsletter (typed by the model, in copyright) | 210 |
+| Griffith's printed type (open) | 159 |
 | Griffith's Karanòg hand copies, checked against his type (open) | 150 |
-| Griffith's printed type (open) | 136 |
-| Millet 1968 as Otten typed it, with real names | 49 |
+| Millet 1968 as Otten typed it, with real names | 48 |
 | Otten's three narrative files | 3 |
 
 ### The rule on the pairs already known
@@ -217,8 +217,8 @@ Of the 112 of a kind not known, 72 are held only in the Newsletter's printout of
 |---|---|---|
 | Known pairs | 54 | 54 |
 | The partner is the best match, sure or doubtful | 45 (83.3%) | 45 (83.3%) |
-| of them sure | 30 | 32 |
-| of them doubtful | 15 | 13 |
+| of them sure | 29 | 31 |
+| of them doubtful | 16 | 14 |
 | Counting another line of the same text as right | 46 (85.2%) | 47 (87.0%) |
 | Pairs with a sure match to another text | 3 | 3 |
 | Missed | 9 | 9 |
@@ -246,22 +246,22 @@ Bar B: 4 of the 151 Karanòg texts have a sure match to another Karanòg number 
 |---|---|---|---|---|
 | `corpus_v5`, every text (the old figure) | 899 | 21,977 | 13,618 | 62.0% |
 | `corpus_v5`, near-copies counted once (the old figure) | 608 | 8,786 | 5,413 | 61.6% |
-| `corpus_v6`, the inscriptions that were in `corpus_v5` | 289 | 6,586 | 3,950 | 60.0% |
-| `corpus_v6`, the inscriptions new to the corpus | 259 | 3,704 | 1,330 | 35.9% |
-| `corpus_v6`, all | 548 | 10,290 | 5,280 | 51.3% |
+| `corpus_v6`, the inscriptions that were in `corpus_v5` | 288 | 6,579 | 3,950 | 60.0% |
+| `corpus_v6`, the inscriptions new to the corpus | 282 | 4,069 | 1,508 | 37.1% |
+| `corpus_v6`, all | 570 | 10,648 | 5,458 | 51.3% |
 
 | Level | `corpus_v5` | `corpus_v6`, were in `corpus_v5` | `corpus_v6`, new | `corpus_v6`, all |
 |---|---|---|---|---|
-| meaning | 6,981 | 2,225 | 707 | 2,932 |
-| grammar | 1,956 | 428 | 254 | 682 |
-| name | 4,418 | 1,211 | 216 | 1,427 |
+| meaning | 6,981 | 2,225 | 832 | 3,057 |
+| grammar | 1,956 | 428 | 262 | 690 |
+| name | 4,418 | 1,211 | 261 | 1,472 |
 | number | 263 | 86 | 153 | 239 |
-| hypothesis | 3,512 | 943 | 340 | 1,283 |
-| kind | 2,073 | 438 | 142 | 580 |
-| unknown | 2,512 | 881 | 1,050 | 1,931 |
-| lost | 262 | 374 | 842 | 1,216 |
+| hypothesis | 3,512 | 943 | 367 | 1,310 |
+| kind | 2,073 | 436 | 151 | 587 |
+| unknown | 2,512 | 876 | 1,165 | 2,041 |
+| lost | 262 | 374 | 878 | 1,252 |
 
-Near-copies counted once in both: texts with a legible word, 507 of 538 in `corpus_v6` (605 of 608 in `corpus_v5`); every legible word translated in 42 (106); one piece missing in 92 (122). Words whose spelling no analyst has seen: 1,013 in 912 spellings, 966 of them in the inscriptions new to the corpus and 47 in the others. Words that are a name by the source's own tag: 87. Words written apart that the map joins by its own rule: 108.
+Near-copies counted once in both: texts with a legible word, 529 of 560 in `corpus_v6` (605 of 608 in `corpus_v5`); every legible word translated in 42 (106); one piece missing in 94 (122). Words whose spelling no analyst has seen: 1,124 in 1,017 spellings, 1,080 of them in the inscriptions new to the corpus and 44 in the others. Words that are a name by the source's own tag: 87. Words written apart that the map joins by its own rule: 112.
 
 ### The check against the two editions, counted again
 
@@ -295,18 +295,19 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
 ## 5. What the recount shows
 
 1. **More than half of the words of `corpus_v5` were copies.** The words of the texts that stand for an
-   inscription are 30.0% of its 21,977 words. One Gebel Adda text, GA 28, stood 86 times, with 6,284 words,
+   inscription are 29.9% of its 21,977 words. One Gebel Adda text, GA 28, stood 86 times, with 6,284 words,
    from 2 of Millet's lines.
-2. **The coverage map loses two points on the same inscriptions, and this is the honest figure.** On the 289
+2. **The coverage map loses two points on the same inscriptions, and this is the honest figure.** On the 288
    inscriptions that were in `corpus_v5` it translates 60.0% of the words, against 62.0% on `corpus_v5` and
    61.6% with near-copies counted once. Masked names counted as translated in every copy; a broken word now
    counts as one lost word where its pieces were read as words; and the rest of a swapped name is gone.
-3. **The inscriptions new to the corpus are at 35.9%:** 842 of their 3,704 words are lost, and 966 are spellings
-   that no analyst has seen and that have only the lookup (47 more such words are in the other inscriptions,
-   1,013 in 912 spellings in all). Reading those spellings is what the build left undone on purpose (the
+3. **The inscriptions new to the corpus are at 37.1%:** 878 of their 4,069 words are lost, and 1,080 are spellings
+   that no analyst has seen and that have only the lookup (44 more such words are in the other inscriptions,
+   1,124 in 1,017 spellings in all). Reading those spellings is what the build left undone on purpose (the
    analysts have read them since: [the readers' page](v6_readers.md) gives what changed); the lost
-   words are the state of the texts. The new inscriptions are 209 of the Newsletter's texts and 50 of
-   Griffith's rows that `corpus_v5` left out.
+   words are the state of the texts. The new inscriptions are 209 of the Newsletter's texts and 73 of
+   Griffith's rows that `corpus_v5` left out (among them the Faras texts typed on 2026-11-17,
+   [`../expansion/faras/`](../expansion/faras/README.md), which the analysts have not read).
 4. **The check against the two editions holds:** on the 1,005 judged rows that still stand in `corpus_v6`, the
    editions give the map's meaning for 71.4% of the words they translate (69.5% on `corpus_v5`). 110 judged
    rows are not carried over: 70 are a part of a longer word in the preferred reading (written apart in
@@ -326,18 +327,19 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
 
 1. **Three doubtful matches are not settled:** the readers differ on two and both guessed on one. The 3 texts of
    `corpus_v5` behind them are in no row.
-2. **Eight texts quoted by Millet 1968 are not identified,** two of them long epitaphs (pp. 362 to 370 of the
+2. **Seven texts quoted by Millet 1968 are not identified,** two of them long epitaphs (pp. 362 to 370 of the
    thesis). They are inscriptions of their own in the corpus until an edition is found that holds them. One of
-   them may be Griffith's Meroë 27 or 28: Griffith printed only the benedictions of those two, the line has the
-   same benedictions, and the readers could not say from that. These are the 2 pairs across numberings in the
-   tables.
+   them may be Griffith's Meroë 28: Griffith printed only its benedictions, the line has the same benedictions,
+   and the readers could not say from that. This is the 1 pair across numberings in the tables (a second Meroë
+   altar was matched too until the Faras texts made a few more runs formula). An eighth, Millet's line 414, is
+   now known: it is a part of REM 0521, a Faras text.
 3. **Example phrases are out of the corpus.** A phrase quoted in a grammar is not an inscription. Where its
-   source is not held (394 of the 906 match nothing held), its words are in no row. They stay in the local list
+   source is not held (389 of the 908 match nothing held), its words are in no row. They stay in the local list
    of source lines, with Millet's translations where Otten typed them.
 4. **Word division is one rule, not one practice.** Millet's spaces inside a group of words are partly line ends
-   of the stone; the Newsletter sets some texts out by sense units. The coverage map joins 108 words written
+   of the stone; the Newsletter sets some texts out by sense units. The coverage map joins 112 words written
    apart by its own rule; the corpus does not.
-5. **The kind of text is not known for 112 inscriptions,** 72 of them held only in the 1971 printout, which
+5. **The kind of text is not known for 111 inscriptions,** 72 of them held only in the 1971 printout, which
    states no object for them. The reader quoted for this did not run.
 6. **Names are marked only where Otten's files tag them:** 87 words. A name is matched letter for letter, a
    lost sign included, so a spelling that Otten typed otherwise in another line is not marked. The names of the

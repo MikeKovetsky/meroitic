@@ -46,8 +46,10 @@ OPEN = ("griffith", "karanog")
 TYPED = ("griffith", "karanog", "mnl", "otten")       # the two text layers are witnesses, not typed readings
 VOLUME = {"mi1a": "Inscr.", "mi1b": "Inscr.", "mi2a": "Inscr.", "mi2b": "Inscr.", "meroe": "Meroe", "karanog": "Kar."}
 # the folders of Griffith rows: his editions, the Karanog texts, and the texts his articles print whole (JEA 4, 1917:
-# REM 1003), which have no number of his and stand for no text of corpus_v5 (src/akinidad.py)
-GRIFFITH = (("data/expansion", "griffith"), ("data/expansion/karanog", "karanog"), ("data/expansion/jea", "griffith"))
+# REM 1003, src/akinidad.py; Recueil Champollion, 1922: the 46 Faras texts, REM 0501 to 0546, src/faras.py), which
+# have no number of his and stand for no text of corpus_v5
+GRIFFITH = (("data/expansion", "griffith"), ("data/expansion/karanog", "karanog"), ("data/expansion/jea", "griffith"),
+            ("data/expansion/faras", "griffith"))
 
 
 def runs(letters, n=RUN):

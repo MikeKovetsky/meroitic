@@ -206,8 +206,8 @@ def lookup_only():
     analysts or corrections ("before us")."""
     es = C.lexicon()
     words, affixes, _ = C.index(es)
-    import recount as V
-    corpus = [json.loads(l) for l in V.CORPUS.read_text(encoding="utf-8").splitlines() if l.strip()]
+    import recount as V                                # the texts of the map, so that it counts what the map counts
+    corpus = [json.loads(l) for l in W.X.MAPPED.read_text(encoding="utf-8").splitlines() if l.strip()]
     return {r["id"]: gs for r, gs in C.gloss_texts(V.rows_for_map(corpus), words, affixes, {})}
 
 
