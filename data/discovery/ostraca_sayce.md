@@ -225,5 +225,5 @@ of `ṭệḳes`; F.O. 1 has as many in both, in two other places (a divider bet
 
 Subagent tokens, from the task notifications: the blind second typing of the ostraca 102,132; of Sayce's lines
 114,668; the check against the hand copies 375,070; the review at the full tier 567,913; the review of the last
-commits COST_DELTA. In all COST_TOTAL, under the 1 to 2 million expected for the task. The typing of all 46
+commits 342,226. In all 1,502,009, under the 1 to 2 million expected for the task. The typing of all 46
 ostraca and 42 of Sayce's lines, the rebuild and the comparisons ran in the session itself, without an agent.

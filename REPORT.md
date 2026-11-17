@@ -1176,5 +1176,5 @@ order"). The bar and the lot were committed before any typing
    himself at 11 (the review corrected the first count of 7 the same, 24 otherwise, 6 unsure and 1 not lined up:
    the script had not applied the classes to a numeral he queries or a place he prints as lost); Millet sides
    with Sayce alone at 1 of the 38, with Griffith alone at 17. He settles almost nothing.
-5. **Cost:** COST_REPORT subagent tokens: the two blind typists 216,800 (102,132 and 114,668), the check against
-   the hand copies 375,070, the full review 567,913 and the review of the last commits COST_DELTA.
+5. **Cost:** 1,502,009 subagent tokens: the two blind typists 216,800 (102,132 and 114,668), the check against
+   the hand copies 375,070, the full review 567,913 and the review of the last commits 342,226.
