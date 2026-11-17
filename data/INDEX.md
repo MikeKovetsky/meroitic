@@ -57,7 +57,7 @@ open licence or is in copyright ([`LICENSE-DATA.md`](../LICENSE-DATA.md) and the
 
 ## 3. Local: the sources fetched, with where each came from
 
-Public domain here means published before 1930; the files are kept local all the same, as scans.
+Public domain here means published before 1930; the files are kept local all the same, as scans. The nine rows from `cnd/` on were fetched on 2026-11-16 on Mike's word ("Yes, fetch all nine"), 23 files and 134.8 MB; every archive.org file has the size and the md5 that archive.org gives for it.
 
 | Path | Source | Fetched | Size | Rights | What it is for |
 |---|---|---|---|---|---|
@@ -82,6 +82,15 @@ Public domain here means published before 1930; the files are kept local all the
 | `reinisch1879/` | Reinisch, *Die Nuba-Sprache* (1879), archive.org `sprachenvonnord03reingoog` | 13 Nov | 19.2 MB, 579 pages | public domain | A full Nubian dictionary, for the comparison by kind of word; page images, no text layer |
 | `lepsius1880/` | Lepsius, *Nubische Grammatik* (1880), archive.org `nubischegrammat00lepsgoog` | 13 Nov | 19.5 MB, 658 pages | public domain | The same; page images, no text layer |
 | `rilly2016/`, `rilly2016-text/` | Rilly, "Meroitic", UCLA Encyclopedia of Egyptology 1(1) (2016), eScholarship item 3128r3sw | 13 Nov, through the browser | 0.5 MB, 13 pages | all rights reserved | Which meanings Rilly accepts since the lexicon of 2003 |
+| `cnd/` | van Gerven Oei (ed.), *Comparative Nubian Dictionary*, the data files of the GitHub repository `4nubianstudies/cnd-data` (8 files) | 16 Nov | 0.2 MB | CC BY 4.0 by its README; its LICENSE file is Apache 2.0 | 2,857 forms in 506 sets of related words, each form with its source: Old Nubian (482), Midob (388), Birgid (228), Proto-Nubian (218) and Proto-Kordofan Nubian (258) beside Nobiin, Andaandi and Mattokki. Not yet used |
+| `reinisch1874/` | Reinisch, *Die Barea-Sprache* (1874), archive.org `diebareasprache00reingoog` | 16 Nov | 6.5 MB, 242 pages | public domain | The one dictionary of Nara found free; page images (the PDF has no usable text layer; archive.org's text is kept beside it). Not yet typed |
+| `meinhof1918/` | *Zeitschrift für Kolonialsprachen* 9 and 10 (1918 to 1920), archive.org `afrikaundberse0910meinuoft` | 16 Nov | 52 MB, 616 pages | public domain | Meinhof's word lists of Hill Nubian (Dulman, Garko, Gulfan, Kadero, Koldegi), by the scout's search inside the item; not yet opened |
+| `czermak1919/` | Czermak, *Kordufānnubische Studien* (Sitzungsberichte der Akademie der Wissenschaften in Wien 177, 1; 1919), archive.org `oahi-1771` | 16 Nov | 11 MB, 241 pages | 1919; the item states no licence | The word list of the Hill Nubian of Gebel Dair, by the scout's search inside the item; not yet opened |
+| `macmichael1912/` | MacMichael's article of 1912 on the Zaghawa and Gebel Midob, Zenodo record 2198104 | 16 Nov | 3.2 MB, 58 pages | CC0 by Zenodo's record | A Midob vocabulary, by the scout's check; not yet opened |
+| `macmichael1918/` | *Sudan Notes and Records* 1 (1918), archive.org `sudannotesrecord01philuoft` | 16 Nov | 6.9 MB, 68 pages | public domain | MacMichael on the Nubian of Darfur (Midob words); not yet opened |
+| `macmichael1922/` | MacMichael, *A History of the Arabs in the Sudan*, vol. 1 (1922), archive.org `historyofarabsin01macm` | 16 Nov | 22 MB, 386 pages | public domain | Its table of Midob, Birgid and Nile Nubian words side by side, by the scout's check; not yet opened |
+| `griffith1913/` | Griffith, *The Nubian Texts of the Christian Period* (1913), archive.org `nubiantextsofchr00grif` | 16 Nov | 7.8 MB, 148 pages | public domain | Its index of Old Nubian words with meanings; not yet opened |
+| `almkvist1911/` | Almkvist, *Nubische Studien im Sudan* (1911), archive.org `nubischestudieni0000almk` | 16 Nov | 21 MB, 324 pages | public domain | A third dictionary of Nile Nubian (Mahas, Dongola, Kenzi); not yet opened |
 
 ## 4. Not held
 
@@ -94,3 +103,6 @@ Public domain here means published before 1930; the files are kept local all the
 | The first half of *Liverpool Annals* 7 (pp. 1 to 68, plates I to XIV) | The plates of the Akinidad stela | Not found online |
 | The REM volumes on Persée (2000) | Photographs and drawings of REM 0001 to 1278 | Online, in copyright; not fetched |
 | A Demotic word list with meanings | The Demotic side of a search for loans | Not looked for yet |
+| Murray, *An English-Nubian Comparative Dictionary* (1923), Heidelberg University Library, doi 10.11588/diglit.49263 | About 3,500 headwords of Nile Nubian with Dair, Midob and Old Nubian compared (the scout's figure) | Public domain and free, behind a check for robots: Mike was asked on 16 November to download it himself |
+| Lukas, "Beiträge zur Kenntnis der Sprachen von Wádai (Mararét, Mába)", *Journal des Africanistes* 3 (1933), on Persée | The one free source for a Taman language beyond short lists | Free, its PDF behind a captcha: Mike was asked on 16 November to download it himself |
+| A dictionary of a Taman or a Nyima language | Two of the family's branches | None found free (the scout's search of 16 November) |
