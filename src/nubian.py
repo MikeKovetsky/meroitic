@@ -422,9 +422,12 @@ def merge_of(folder, books=None):
     """(the rows of dictionary.tsv, the report) from the files of the first typing. A sub-row of a page that
     begins inside an entry (`parent` = "(continued)") gets the headword of the last entry before that page: of
     the page before, or of an earlier one when the pages between hold no entry. Across a page that is missing
-    or fails a check it is not attached. The printed page is counted from the file's index."""
+    or fails a check it is not attached. The printed page is counted from the file's index. The report lists every
+    loan mark the entries carry and every part of a dialect cell that is no dialect mark of the books, with their
+    numbers: any loan mark drops an entry from the gate, so a mark that means none ("-", "none") shows here first."""
     books = books or BOOKS
     out, fails, missing, loose = [], {}, [], []
+    marks, odd = collections.Counter(), collections.Counter()
     by_book = {}
     wanted = {name_of(b, i) + ".tsv" for b in books for i in indexes(b, books)}
     extra = sorted(p.name for p in folder.iterdir() if p.name not in wanted) if folder.is_dir() else []
@@ -457,12 +460,15 @@ def merge_of(folder, books=None):
                     last = r["headword"]
                 c["subrows" if r["parent"] else "entries"] += 1
                 c["marked_as_loans"] += bool(r["loan"]) and not r["parent"]
+                marks.update([r["loan"]] if r["loan"] else [])
+                odd.update(languages(r["dialect"])[1].split())
                 c["unsure"] += "unsure" in r["note"]
                 out.append({**{k: r[k] for k in COLUMNS if k in r}, "page": str(index - books[book]["page"]), "parent": parent})
         by_book[book] = {k: c[k] for k in ("pages", "pages_without_a_row", "entries", "subrows", "marked_as_loans", "continued", "unsure")}
     report = {"pages": {"expected": len(wanted), "merged": sum(b["pages"] for b in by_book.values()), "failed": len(fails), "missing": len(missing)},
               "entries": sum(b["entries"] for b in by_book.values()), "subrows": sum(b["subrows"] for b in by_book.values()),
-              "by_book": by_book, "continued_not_attached": loose, "failed": fails, "missing": missing, "other_files": extra}
+              "by_book": by_book, "continued_not_attached": loose, "failed": fails, "missing": missing, "other_files": extra,
+              "loan_marks": dict(marks.most_common()), "dialect_parts_not_of_the_books": dict(odd.most_common())}
     return out, report
 
 
@@ -483,6 +489,8 @@ def merge():
     write_dictionary(rows, HOME / "dictionary.tsv")
     write("merge_report.json", report)
     print({k: report[k] for k in ("pages", "entries", "subrows")}, "continued, not attached:", len(report["continued_not_attached"]))
+    print("  loan marks (each drops its entry from the gate):", report["loan_marks"])
+    print("  parts of a dialect cell that are no dialect mark:", report["dialect_parts_not_of_the_books"])
     for name, why in report["failed"].items():
         print("  failed", name, "-", "; ".join(why))
     if report["missing"]:

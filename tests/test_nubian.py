@@ -290,7 +290,11 @@ def test_merge_joins_clean_pages():
         assert rep["pages"] == {"expected": 6, "merged": 6, "failed": 0, "missing": 0} and not rep["failed"] and not rep["other_files"]
         assert (rep["entries"], rep["subrows"]) == (7, 4) == (sum(not r["parent"] for r in rows), sum(bool(r["parent"]) for r in rows))
         assert rep["by_book"]["R"] == {"pages": 4, "pages_without_a_row": 1, "entries": 5, "subrows": 3, "marked_as_loans": 1, "continued": 2, "unsure": 1}
-        assert rep["by_book"]["L"]["marked_as_loans"] == 1
+        assert rep["by_book"]["L"]["marked_as_loans"] == 1 and rep["loan_marks"] == {"Ar": 1, "*": 1} and rep["dialect_parts_not_of_the_books"] == {}
+        typed(home / "typed", "R", 335, [dict(headword="Bad", de="x", en="x", loan="-", dialect="Derr"), dict(headword="Bal", de="y", en="y", loan="none")])
+        assert N.merge_of(home / "typed", SMALL)[1]["loan_marks"] == {"Ar": 1, "*": 1, "-": 1, "none": 1}   # each shows before the gate drops it
+        assert N.merge_of(home / "typed", SMALL)[1]["dialect_parts_not_of_the_books"] == {"DERR": 1}
+        clean_pages(home / "typed")
         assert [r["headword"] for r in rows][:4] == ["Āb", "āb-kiñ", "Agar", "agar-ti"]                 # the order of the pages
         assert all(list(r) == N.COLUMNS for r in rows)
         assert rows[0] == {"book": "R", "page": "1", "headword": "Āb", "dialect": "KD", "loan": "", "pos": "n", "gloss_de": "vater", "gloss_en": "father", "parent": ""}
