@@ -2,7 +2,8 @@
 
 Status on 2026-11-16, 19:34: **the pilot is over, and its bar is not met.** Over two rounds 73 rules were
 proposed, 53 passed on held-back texts, and 1 is a finding of ours where 3 were needed (sections 8, 10 and 11).
-The grammar that can be tested on this corpus is the grammar the sources already describe. The script is
+The grammar that can be tested on this corpus is the grammar the sources already describe. The long texts were
+cut by the rules that passed after the review asked for it (section 12). The script is
 `src/grammar.py` (checks: `tests/test_grammar.py`); the rules' tests stand in `runs/grammar/` as they were frozen
 (first committed at 19:15:35 and 19:30:39 on a branch of their own, `grammar`, as 604c379 and 6c974f3; in this
 history they are 8b011a7 and 81a043e, copies of the same files made at 19:35 that keep the first commits' author
@@ -26,7 +27,7 @@ Asked "Should I start a two-day grammar-first pilot?", he answered: "Yes, start 
 |---|---|---|
 | R1 | "Find rules of the grammar (word order, endings, agreement)." | Done: 73 rules in two rounds (sections 8 and 10). |
 | R2 | "Test each on held-back texts." | Done: each rule's frozen test was run once on the held-back texts (sections 8 and 10). |
-| R3 | "Then parse the long royal texts with them." | **Not done as section 6 set it.** Each rule's reach in the 7 long texts is counted (sections 8 and 10), but no text is cut into clauses and no word without a meaning is given a kind or a role: the rules' tests count cases and label no word. |
+| R3 | "Then parse the long royal texts with them." | Done on 2026-11-16 at 20:15, after the review asked for it (section 12): the rules that passed cut the 7 long texts 25 times and speak of 54 of their 925 words without a meaning. At first only each rule's reach in those texts had been counted (sections 8 and 10). |
 | R4 | "A two-day pilot." | Ended on 2026-11-16, its first evening, by the verdict set beforehand (section 11). |
 | R5 | The project's rules for such steps: every bar committed before its agents are started, counts from a figures file, nothing called a finding of ours unless it passes a test set beforehand. | The bars are in this page, committed before any finder is started. |
 
@@ -160,9 +161,8 @@ Whether Rilly's grammar of 2007 or Hintze 1979 state them is not known: the proj
 
 In the two epitaph-like texts (REM 1066, REM 1067) nearly all rules apply and hold. In the three longest
 texts few apply, and where they do they hold in about six cases of ten: the grammar that can be tested is the
-grammar of the epitaph, and it does not carry over. This counts each rule's reach; it is not the parse that
-section 6 set out. The rules' tests count cases and label no word, so no text is cut into clauses here, and no
-word without a meaning is given a kind or a role.
+grammar of the epitaph, and it does not carry over. This counts each rule's reach; the parse that section 6
+set out is in section 12.
 
 Cost: 8 finders, 845,046 tokens; 4 readers, 630,212 tokens (typed from the task notifications, local).
 
@@ -266,3 +266,85 @@ and 6c974f3 at 19:30:39; the session's log has the finders started at 19:09:47 a
 19:16:54 and 19:31:10; the files have the held-back table written at 19:15:45, after the first commit. The second
 round's tests were committed and then run in one command, at 19:30:39. The tokens of all 20 agents are those of
 their task notifications. No rule, test, answer, bar or count changed.
+
+After the review (2026-11-16, 20:15) the parse of section 6 was built: section 12. The R3 row above and the
+last lines of section 8 were changed with it; the review's note stands as it was written.
+
+
+## 12. The long texts, cut by the rules (built on 2026-11-16 at 20:15, after the review)
+
+The review found that section 6 had not been carried out: each rule's reach in the long texts had been counted,
+but no text had been cut. This section does it as section 6 set it before any finder ran: a description, with no
+bar. It uses the 53 rules that passed and nothing else. The script is `src/grammar.py` (`parse`); the cut
+texts stay local, because they hold the spellings.
+
+**The marks of an end.** A text is cut after every word that carries one.
+
+| Mark | Rules | Where it can stand | It rests on |
+|---|---|---|---|
+| After woSi or wiSi, the word for Osiris in -i closes the address to the two gods | L1-4 (with L3-2, L7-4) | at the epitaph's fixed words | the rule's count |
+| A word in -qowi closes the naming of the dead | L7-4, L3-3 (with L6-1) | at any word | the rule's wording |
+| A word in -owi carries the ending -wi, which the rule calls the last of a sentence | L7-5 (with L8-4, M3-1, M6-1) | at any word | the rule's wording |
+| The word before `ato mXe` closes a sentence | L7-3, L2-6 | at the epitaph's fixed words | the rule's count |
+| The word before `at` closes the item of the offering list that comes before it | L5-6 | at the epitaph's fixed words | the rule's count |
+| The verb right after mXe closes the phrase of noun, mXe and verb; a ps- verb in two pieces closes with the second | L3-7, L1-3 (with L7-1, L5-4, L4-5) | at the epitaph's fixed words | the rule's count |
+
+Two of the six rest on a rule's wording alone. The rules L7-4 and L7-5 name an end ("the name closed by -qowi",
+"the sentence-final ending -wi"), but what their tests counted was the order of the frame's parts and the letter
+before -wi. No rule that passed gives a mark that does not hang on the epitaph's own words or on -owi.
+
+**What the rules make of a word without a meaning** (the first that fits):
+
+| The rules say | Rules |
+|---|---|
+| It stands right before a word of filiation, where a parent's name is due | L1-5, L6-2 |
+| It stands right before `yetmde-`, where the noun that word governs is due | L1-6 |
+| A verb: by the prefix `ps-` and a verbal ending; by its place right after mXe; in `-kete` with its object within two words before it | L4-5; L3-7, L1-3; L4-3 |
+| It carries the copula: in `-owi` after l, q or t; or as a common noun with the article | L8-4, M3-1, M6-1; M5-2 |
+| A place in `-te`, closed by the article or the copula | L4-1 |
+| It ends in `-eb`, the mark of the plural | M1-2, M3-3, M4-2 |
+| It closes a clause or a sentence (it carries a mark of an end) | the marks' rules |
+| Nothing: no rule speaks of it | |
+
+**The seven texts.**
+
+| Text | Kind | Words | Cuts | Longest stretch without a cut | Words without a meaning | Of these, a rule speaks of |
+|---|---|---|---|---|---|---|
+| REM 1044 | funerary | 708 | 3 | 358 | 374 | 13 |
+| REM 1003 | royal or temple | 485 | 0 | 485 | 204 | 20 |
+| REM 0094 | royal or temple | 234 | 1 | 118 | 136 | 5 |
+| REM 1333 | funerary | 190 | 1 | 189 | 88 | 3 |
+| REM 1039 | not known | 131 | 0 | 131 | 52 | 1 |
+| REM 1066 | funerary | 113 | 16 | 29 | 31 | 11 |
+| REM 1067 | not known | 111 | 4 | 90 | 40 | 1 |
+| All seven | | 1,972 | 25 | | 925 | 54 |
+
+| What the rules say of the 925 words without a meaning | Words |
+|---|---|
+| Nothing | 871 |
+| It ends in `-eb`, like a plural | 38 |
+| It stands where the noun governed by `yetmde-` is due | 7 |
+| A verb | 5 |
+| A place in `-te` | 2 |
+| It carries the copula | 2 |
+
+**A stretch of each sort.** No spelling is shown: a word stands as what the map knows of it, a word without a
+meaning as "[open: what the rules say]", and a double bar marks a cut.
+
+- REM 1066, words 1 to 16 (a long text built like an epitaph):
+  Isis, addressed · Osiris, addressed ‖ · (name) · (lost) · (translated) · (translated) · (translated) ‖ · (name) · (translated) · (translated) · (translated) ‖ · (name) ‖ · (lost) · (translated) · (translated) ‖ · (name)
+- REM 1066, words 90 to 99:
+  (translated) · [open: nothing said] · (name) ‖ · water · abundant · [open: verb] · (translated) ‖ · bread · abundant · [open: verb] ‖
+- REM 1003, words 1 to 24 (the longest royal text):
+  (name) · (translated) · (translated) · (translated) · (translated) · [open: nothing said] · (translated) · (translated) · (name) · (translated) · (translated) · (translated) · (translated) · (translated) · (translated) · (translated) · (translated) · (translated) · [open: nothing said] · (translated) · (translated) · (translated) · (translated) · [open: nothing said]
+
+**What the parse gives, and what it does not.**
+
+- **Where a text is built like an epitaph, the rules find its frame.** REM 1066 is cut 16 times: after the address
+  to the gods, after the naming, and around the offering formulas with their verbs.
+- **The three longest texts stay uncut.** REM 1044, REM 1003 and REM 0094 hold 1,427 words and are cut
+  4 times; REM 1003 not once. A stretch of hundreds of words between two cuts is not a clause.
+- **Of the 925 words without a meaning the rules speak of 54,** and of 38 of those they say only that the
+  word ends in `-eb`, like a plural. Of 871 they say nothing.
+- **So the rules that could be tested do not parse the long royal texts.** The parse gives no word a meaning and
+  proposes none; it shows in numbers what section 8 said of the rules' reach.
