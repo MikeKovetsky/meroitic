@@ -1,0 +1,376 @@
+{
+ "page": "data/discovery/outside_evidence.md, section 2",
+ "known_words": {
+  "with_a_meaning": 160,
+  "loans_by_both_readers": 15,
+  "rule_words": 18,
+  "left": 127,
+  "built_on_a_rule_word": 11,
+  "a_form_of_a_rule_word_by_name": 7,
+  "built_on_a_loan_by_name": 3,
+  "counted_under_a_shorter_stem": 5,
+  "counted_once_in_a_family_under_three_letters": 18,
+  "kept": 83,
+  "kept_by_the_lexicon": 63,
+  "kept_by_a_layer": 20,
+  "kept_wording_from": {
+   "the public table": 61,
+   "the layers' lines": 19,
+   "the lexicon": 3
+  },
+  "kept_without_a_key": 2,
+  "kept_with_a_same_meaning_row_in_the_short_lists": 67
+ },
+ "typed": {
+  "pages": {
+   "expected": 340,
+   "merged": 340,
+   "failed": 0,
+   "missing": 0
+  },
+  "entries": 5846,
+  "subrows": 2510,
+  "by_book": {
+   "R": {
+    "pages": 188,
+    "pages_without_a_row": 3,
+    "entries": 2694,
+    "subrows": 2063,
+    "marked_as_loans": 818,
+    "continued": 89,
+    "unsure": 97
+   },
+   "L": {
+    "pages": 152,
+    "pages_without_a_row": 0,
+    "entries": 3152,
+    "subrows": 447,
+    "marked_as_loans": 1028,
+    "continued": 10,
+    "unsure": 588
+   }
+  },
+  "continued_not_attached": 0,
+  "other_files": 0
+ },
+ "typed_twice": {
+  "bars": {
+   "found": 0.95,
+   "same_meaning": 0.9,
+   "likeness": 0.8
+  },
+  "pages": {
+   "drawn": 34,
+   "compared": 34,
+   "not_compared": 0
+  },
+  "entries": {
+   "first": 567,
+   "second": 567,
+   "found": 554,
+   "same_meaning": 538,
+   "mark_for_mark": 545,
+   "same_sounds": 554,
+   "found_share": 0.9771,
+   "same_meaning_share": 0.9711,
+   "mark_for_mark_share": 0.9612,
+   "same_sounds_share": 0.9771
+  },
+  "subrows": {
+   "first": 257,
+   "second": 302,
+   "found": 238,
+   "same_meaning": 234,
+   "mark_for_mark": 237,
+   "same_sounds": 238,
+   "found_share": 0.9261,
+   "same_meaning_share": 0.9832,
+   "mark_for_mark_share": 0.9222,
+   "same_sounds_share": 0.9261
+  },
+  "by_book": {
+   "R": {
+    "entries": {
+     "first": 235,
+     "second": 235,
+     "found": 235,
+     "same_meaning": 228,
+     "mark_for_mark": 235,
+     "same_sounds": 235,
+     "found_share": 1.0,
+     "same_meaning_share": 0.9702,
+     "mark_for_mark_share": 1.0,
+     "same_sounds_share": 1.0
+    },
+    "subrows": {
+     "first": 213,
+     "second": 254,
+     "found": 201,
+     "same_meaning": 197,
+     "mark_for_mark": 201,
+     "same_sounds": 201,
+     "found_share": 0.9437,
+     "same_meaning_share": 0.9801,
+     "mark_for_mark_share": 0.9437,
+     "same_sounds_share": 0.9437
+    }
+   },
+   "L": {
+    "entries": {
+     "first": 332,
+     "second": 332,
+     "found": 319,
+     "same_meaning": 310,
+     "mark_for_mark": 310,
+     "same_sounds": 319,
+     "found_share": 0.9608,
+     "same_meaning_share": 0.9718,
+     "mark_for_mark_share": 0.9337,
+     "same_sounds_share": 0.9608
+    },
+    "subrows": {
+     "first": 44,
+     "second": 48,
+     "found": 37,
+     "same_meaning": 37,
+     "mark_for_mark": 36,
+     "same_sounds": 37,
+     "found_share": 0.8409,
+     "same_meaning_share": 1.0,
+     "mark_for_mark_share": 0.8182,
+     "same_sounds_share": 0.8409
+    }
+   }
+  },
+  "verdict": "met"
+ },
+ "gate_a1": {
+  "commit": "df5244c5a1a10e173f823f51c44aae335b849c9d",
+  "bar": {
+   "p": 0.05,
+   "words": 30,
+   "sims": 2000,
+   "seed": 3,
+   "short_rows": 5442,
+   "engine": "1b4f0ff"
+  },
+  "typing": "met",
+  "words": 81,
+  "rows": {
+   "short_lists": 5442,
+   "dictionaries": 8194
+  },
+  "all": {
+   "rule": {
+    "shuffle": {
+     "n": 75,
+     "of": 81,
+     "stat": 0.2633444444444443,
+     "ge": 933,
+     "sims": 2000,
+     "p": 0.46676661669165415,
+     "seed": 3
+    },
+    "by_length": {
+     "n": 75,
+     "groups": {
+      "1": 5,
+      "2": 38,
+      "3": 18,
+      "4": 14
+     },
+     "stat": 0.2633444444444443,
+     "ge": 1195,
+     "sims": 2000,
+     "p": 0.5977011494252874,
+     "seed": 3
+    },
+    "top1": {
+     "precision": 0.0020085470085470084,
+     "chance": 0.0027564290603304966,
+     "ge": 512,
+     "p": 0.2563718140929535,
+     "words_with_a_hit": 2
+    },
+    "top10": {
+     "precision": 0.0016752136752136752,
+     "chance": 0.0027564290603304966,
+     "ge": 1155,
+     "p": 0.5777111444277861,
+     "words_with_a_hit": 2
+    },
+    "ranks": {
+     "median": 973.0,
+     "best": 4.5,
+     "in_the_top_10": 1,
+     "of_rows": 13636
+    }
+   },
+   "raw": {
+    "shuffle": {
+     "n": 75,
+     "of": 81,
+     "stat": 0.28429100529100515,
+     "ge": 1948,
+     "sims": 2000,
+     "p": 0.9740129935032483,
+     "seed": 3
+    },
+    "by_length": {
+     "n": 75,
+     "groups": {
+      "1": 5,
+      "2": 38,
+      "3": 18,
+      "4": 14
+     },
+     "stat": 0.28429100529100515,
+     "ge": 1852,
+     "sims": 2000,
+     "p": 0.9260369815092454,
+     "seed": 3
+    },
+    "top1": {
+     "precision": 0.000904977375565611,
+     "chance": 0.0027564290603304966,
+     "ge": 1142,
+     "p": 0.5712143928035982,
+     "words_with_a_hit": 2
+    },
+    "top10": {
+     "precision": 0.0033065852909707877,
+     "chance": 0.0027564290603304966,
+     "ge": 680,
+     "p": 0.3403298350824588,
+     "words_with_a_hit": 8
+    },
+    "ranks": {
+     "median": 1074.5,
+     "best": 4.5,
+     "in_the_top_10": 1,
+     "of_rows": 13636
+    }
+   }
+  },
+  "dictionaries": {
+   "rule": {
+    "shuffle": {
+     "n": 74,
+     "of": 81,
+     "stat": 0.2439527027027027,
+     "ge": 288,
+     "sims": 2000,
+     "p": 0.14442778610694654,
+     "seed": 3
+    },
+    "by_length": {
+     "n": 74,
+     "groups": {
+      "1": 5,
+      "2": 38,
+      "3": 18,
+      "4": 13
+     },
+     "stat": 0.2439527027027027,
+     "ge": 593,
+     "sims": 2000,
+     "p": 0.29685157421289354,
+     "seed": 3
+    },
+    "top1": {
+     "precision": 0.0033783783783783786,
+     "chance": 0.0031334727453838987,
+     "ge": 411,
+     "p": 0.20589705147426288,
+     "words_with_a_hit": 1
+    },
+    "top10": {
+     "precision": 0.0013513513513513514,
+     "chance": 0.0031334727453838987,
+     "ge": 1272,
+     "p": 0.6361819090454772,
+     "words_with_a_hit": 1
+    },
+    "ranks": {
+     "median": 668.25,
+     "best": 2.5,
+     "in_the_top_10": 1,
+     "of_rows": 8194
+    }
+   },
+   "raw": {
+    "shuffle": {
+     "n": 74,
+     "of": 81,
+     "stat": 0.26086443586443575,
+     "ge": 1956,
+     "sims": 2000,
+     "p": 0.9780109945027486,
+     "seed": 3
+    },
+    "by_length": {
+     "n": 74,
+     "groups": {
+      "1": 5,
+      "2": 38,
+      "3": 18,
+      "4": 13
+     },
+     "stat": 0.26086443586443575,
+     "ge": 1849,
+     "sims": 2000,
+     "p": 0.9245377311344328,
+     "seed": 3
+    },
+    "top1": {
+     "precision": 0.0,
+     "chance": 0.0031334727453838987,
+     "ge": 2000,
+     "p": 1.0,
+     "words_with_a_hit": 0
+    },
+    "top10": {
+     "precision": 0.0031556735647444807,
+     "chance": 0.0031334727453838987,
+     "ge": 837,
+     "p": 0.41879060469765117,
+     "words_with_a_hit": 5
+    },
+    "ranks": {
+     "median": 845.25,
+     "best": 2.0,
+     "in_the_top_10": 1,
+     "of_rows": 8194
+    }
+   }
+  },
+  "verdict": "missed",
+  "known_words": {
+   "kept": 83,
+   "compared": 81,
+   "without_a_key": 2
+  },
+  "dictionary": {
+   "entries_read": 5846,
+   "subrows_read": 2510,
+   "loans_left_out": 1846,
+   "subrows_of_loans_left_out": 444,
+   "without_an_english_meaning": 123,
+   "without_a_letter_the_engine_reads": 0,
+   "compared": 5943,
+   "without_a_dialect": 640,
+   "without_a_key": 276,
+   "subrows_under_the_entry_before": 99,
+   "rows": 8194,
+   "rows_by_list": {
+    "reinisch1879": 4825,
+    "lepsius1880": 3369
+   },
+   "rows_by_language": {
+    "nobiin": 3777,
+    "kenzi": 2187,
+    "dongolawi": 2230
+   }
+  }
+ }
+}

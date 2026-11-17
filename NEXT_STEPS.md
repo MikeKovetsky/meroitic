@@ -193,7 +193,9 @@ Done since this plan was written:
     Meroitic royal texts: gate B missed (7 of 26 hidden words right with the frames, 26.9%; 5 of 38 without).
     Track A, the Nubian dictionaries of Reinisch and Lepsius: all 340 pages typed, the script reviewed (the review
     found that the bar as first written passes one time in three with no related word, and the bar became a shuffle
-    within words of one length), the gate not yet run. No count of the map changes; no meaning of our own.
+    within words of one length); gate A1, run on 2026-11-17, missed (p = 0.598: the true meaning ranks no higher
+    than chance), so gate A2 is not run and the other dictionaries are not typed. All three tracks are closed. No
+    count of the map changes; no meaning of our own.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):

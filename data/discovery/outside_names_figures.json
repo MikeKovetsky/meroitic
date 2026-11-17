@@ -1,0 +1,186 @@
+{
+ "names": {
+  "places": 705,
+  "without_a_lost_sign": 701,
+  "spellings": 624,
+  "tuning": 350,
+  "held": 305,
+  "both": 31,
+  "layers": [
+   "recurring",
+   "rare_sure",
+   "rare_later",
+   "unnamed",
+   "rare_millet",
+   "leftover",
+   "leftover_stems"
+  ]
+ },
+ "tuning": {
+  "places": 378,
+  "spellings": 350,
+  "names": 342,
+  "cut": {
+   "whole": 287,
+   "reading": 52,
+   "parts": 39
+  },
+  "roles": {
+   "not shown": 107,
+   "dead": 88,
+   "mother": 82,
+   "father": 64,
+   "other": 37
+  },
+  "kinds_of_text": {
+   "funerary": 325,
+   "royal or temple (stela, wall, cartouche, label)": 26,
+   "not known": 17,
+   "graffito": 9,
+   "document (ostracon, papyrus, wood, vessel)": 1
+  },
+  "sites": 21,
+  "different_ends_taken_off": 6
+ },
+ "cutter": {
+  "method": "strings of MIN_LETTERS letters or more that stand in MIN_NAMES names and that no string one letter longer carries",
+  "thresholds": {
+   "MIN_LETTERS": 2,
+   "MIN_NAMES": 3,
+   "CARRIED": 1.0
+  },
+  "names": 342,
+  "parts_in_three_names": 328,
+  "strings_in_three_names_carried_ones_too": 358,
+  "by_length": {
+   "2": 151,
+   "3": 129,
+   "4": 38,
+   "5": 9,
+   "6": 1
+  },
+  "names_wholly_split_in_sample": 241,
+  "unseen_half": {
+   "learned_from": 0.5,
+   "runs": 50,
+   "draws": 50,
+   "names_cut": 8550,
+   "parts": 155.2,
+   "share": 0.3002,
+   "made_up": 0.0593,
+   "margin": 0.2409,
+   "syllables_kept": 0.1839,
+   "margin_syllables_kept": 0.1164
+  },
+  "unseen_fifth": {
+   "learned_from": 0.8,
+   "runs": 50,
+   "draws": 50,
+   "names_cut": 3400,
+   "parts": 258.7,
+   "share": 0.4815,
+   "made_up": 0.1126,
+   "margin": 0.3689,
+   "syllables_kept": 0.3096,
+   "margin_syllables_kept": 0.1719
+  }
+ },
+ "gate_c1": {
+  "frozen_in": "18a3c11 2026-11-16T23:07:27-08:00",
+  "bar": 0.3,
+  "draws": 200,
+  "seed": 20261116,
+  "thresholds": {
+   "MIN_LETTERS": 2,
+   "MIN_NAMES": 3,
+   "CARRIED": 1.0
+  },
+  "tuning_names": 342,
+  "parts_in_three_tuning_names": 328,
+  "gate": {
+   "names": 305,
+   "wholly_split": 191,
+   "share": 0.6262,
+   "made_up": 0.1582,
+   "margin": 0.468,
+   "syllables_kept": 0.4171,
+   "margin_syllables_kept": 0.2092,
+   "verdict": "met"
+  },
+  "without_the_spellings_also_in_tuning": {
+   "names": 274,
+   "wholly_split": 165,
+   "share": 0.6022,
+   "made_up": 0.1543,
+   "margin": 0.4479,
+   "syllables_kept": 0.3991,
+   "margin_syllables_kept": 0.203
+  },
+  "without_the_names_also_in_tuning": {
+   "names": 264,
+   "wholly_split": 157,
+   "share": 0.5947,
+   "made_up": 0.1557,
+   "margin": 0.439,
+   "syllables_kept": 0.3948,
+   "margin_syllables_kept": 0.1999
+  },
+  "by_different_names": {
+   "names": 302,
+   "wholly_split": 189,
+   "share": 0.6258,
+   "made_up": 0.1589,
+   "margin": 0.4669,
+   "syllables_kept": 0.4123,
+   "margin_syllables_kept": 0.2135
+  }
+ },
+ "packs": {
+  "codes": 260,
+  "packs": [
+   44,
+   44,
+   43,
+   43,
+   43,
+   43
+  ],
+  "known": 26,
+  "known_with_a_kind": 25,
+  "known_by_kind": {
+   "god": 7,
+   "deed": 6,
+   "thing or person": 4,
+   "kin word": 3,
+   "ending": 3,
+   "title": 3,
+   "quality": 2
+  }
+ },
+ "gate_c2": {
+  "frozen_in": "18a3c11 2026-11-16T23:07:27-08:00",
+  "bars": {
+   "rate": 0.8,
+   "least": 8
+  },
+  "codes": 260,
+  "known": 26,
+  "answered_by_both": 260,
+  "kappa_kinds": 0.839,
+  "kinds": {
+   "known_with_a_kind": 25,
+   "agreed": 1,
+   "right": 1,
+   "verdict": "too small to decide"
+  },
+  "meanings": {
+   "agreed": 1,
+   "right": 1,
+   "verdict": "too small to decide"
+  },
+  "both_give_a_meaning": 3,
+  "listed": 0,
+  "listed_by_kind": {},
+  "listed_with_a_proposal": 0
+ }
+}

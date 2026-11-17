@@ -1126,3 +1126,15 @@ counts and its readers' verdicts.
 
 **Cost.** 20 agents, 2,485,947 subagent tokens, from the task notifications: the finders 845,046 and
 739,226, the readers 630,212 and 271,463.
+
+## Day ten, morning (2026-11-17): gate A1, the Nubian dictionaries
+
+Mike: "run gate A1". The 340 typed pages of Reinisch (1879) and Lepsius (1880) merged without a failure, and the
+typing met its bar (97.7% of headwords and 97.1% of their meanings found again on the 34 pages typed twice). Gate
+A1 was missed: 75 of the 81 known words have a row of the same meaning, but a shuffle of the meanings among words
+of the same length scores as high in 1,195 of 2,000 draws (p = 0.598; the bar was p < 0.05). Rilly's sound
+correspondences on two whole dictionaries find the true meaning no more often than chance, as they did on the
+short lists on 9 November (p = 0.49). Gate A2 is not run and the other dictionaries are not typed. All three tracks
+of outside evidence are now counted and closed; the figures files of all three are public
+([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
+changes.

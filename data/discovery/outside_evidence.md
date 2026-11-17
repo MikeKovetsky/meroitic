@@ -1,10 +1,10 @@
 # Evidence from outside the texts: three tracks, their rules and their bars
 
-Status on 2026-11-17, 07:00: **two of the three tracks are counted; no meaning of the project's own.**
+Status on 2026-11-17, 07:57: **all three tracks are counted; no meaning of the project's own.**
 
 | Track | Gate | Result |
 |---|---|---|
-| A. Nubian dictionaries | A1: related words beat a shuffle | **Not run yet.** All 340 dictionary pages are typed and 34 typed twice; the script is reviewed and its bar chosen |
+| A. Nubian dictionaries | A1: related words beat a shuffle | **Missed.** 75 of 81 known words have a row of the same meaning, but the length-matched shuffle scores as high in 1,195 of 2,000 (p = 0.598) |
 | B. The Kushite kings' Egyptian texts as frames | B: 80% right, 30 points over decoys | **Missed.** With the frames 7 of 26 hidden words right (26.9%), without them 5 of 38 (13.2%) |
 | C. Names cut into parts | C1: parts recur in unseen names | **Met.** 62.6% of held-back names split into parts, 15.8% of shuffled ones |
 | | C2: readers tell a part's kind | **Too small to decide.** The readers called 237 of 260 parts unclear |
@@ -151,6 +151,27 @@ a typed page** (its builder had seen no typed page). Its builder named two weakn
 - `pqr` is dropped by name as a form of `qore`: the lexicon's entry `p- (2)` analyses it as p- + `qr`.
 - Left as it is: the rule for the families of short stems goes by letters and also drops a few words not built
   on them (`ateqi`, `qetrri`, `qetneyineqeli`). It lowers the number of words; it does not make the test easier.
+
+### Result of track A (2026-11-17)
+
+Run on Mike's "run gate A1", on main at df5244c, once; figures in
+[`outside_nubian_figures.json`](outside_nubian_figures.json).
+
+**The typing: met.** All 340 pages merged (5,846 entries, 2,510 sub-rows; none failed). On the 34 pages typed
+twice, 97.7% of the first typist's headwords stand in the second reading (bar 95%) and 97.1% of them with the same
+meaning (bar 90%).
+
+**Gate A1: missed.** Of the 81 known words, 75 have a row of the same meaning in the short lists or the two
+dictionaries. Their mean best score is 0.263; shuffling the meanings among words of the same number of consonants
+gives as high a mean in 1,195 of 2,000 draws (p = 0.598; the bar was p < 0.05). Beside the bar, with no bar of their
+own: the engine's own shuffle p = 0.467; the two dictionaries alone (8,194 rows, 74 words) p = 0.144; raw likeness
+of the letters p = 0.974. The row of the true meaning stands at a median rank of 973 of 13,636 rows; for one word
+it is among the best ten.
+
+What A1 shows: Rilly's sound correspondences, applied to two whole dictionaries of Nile Nubian, do not find the
+right meaning of the known Meroitic words more often than chance. This repeats the comparison of 9 November on
+the short lists (p = 0.49). By the rule above, no meaning is proposed from these dictionaries, gate A2 is not run,
+and the other dictionaries are not typed.
 
 ## 3. Track B: the royal texts beside the Kushite kings' Egyptian texts (H2)
 
@@ -355,22 +376,21 @@ inside the texts that gives the kind of a word sooner than its meaning, and here
   track's result.
 - Everything is reviewed before it is called done, and nothing is pushed without Mike's word.
 
-## 6. What is left (2026-11-17, 07:00)
+## 6. What is left (2026-11-17, 07:57)
 
 Mike, 2026-11-17: "describe the progress in the doc with what is left. and push everything."
 
-1. **Gate A1, run once.** `python3 -I src/nubian.py merge`, then `agree` (the typing's bar: 95% of headwords and
-   90% of their meanings the same on the 34 pages typed twice; if it is missed, every page is typed a second time
-   before the gate), then `gate`, which counts the bar once: the length-matched shuffle, p < 0.05 on at least 30
-   words. The script refuses to run if it is not as committed.
-2. **The public figures files** of the three tracks (`public` in each script), checked against this page.
-3. **Gate A2,** only if A1 is met: the blind choice with the dictionaries' candidates, by the bars of section 2.
+1. **Gate A1: run once on 2026-11-17 at 07:57 and missed** (section 2, "Result of track A").
+2. **The public figures files** of the three tracks are written: `outside_nubian_figures.json`,
+   `outside_frames_figures.json`, `outside_names_figures.json`.
+3. **Gate A2 is not run:** A1 was missed.
 4. **The other dictionaries fetched on 2026-11-16** (`data/INDEX.md`, section 3: Murray 1923, Almkvist 1911, the
    Comparative Nubian Dictionary data, Reinisch's Barea, Meinhof, Czermak, MacMichael, Griffith 1913, Lukas
-   1933): typed and tested the same way only if gate A1 shows a signal in the two dictionaries typed so far.
+   1933) are not typed: A1 showed no signal in the two typed so far.
 5. **What tracks B and C leave:** the frames double the share of right meanings but are wrong three times in
-   four, so they cannot name an open word; the name parts are real but their places do not tell their kind. Both
-   are closed as ways to a meaning of the project's own, unless new texts or a bilingual come.
+   four, so they cannot name an open word; the name parts are real but their places do not tell their kind. With
+   A1 missed, all three are closed as ways to a meaning of the project's own, unless new texts or a bilingual
+   come.
 
 **What it cost:** track B about 14.8 million subagent tokens; track A's typing about 14.0 million; track C about
 1.9 million with its review; the reviews of A and B about 1.4 million. Fable's usage limit stopped 11 agents

@@ -1,0 +1,284 @@
+{
+ "counts": {
+  "texts": 99,
+  "words": 2945,
+  "open": 1370,
+  "known": 102,
+  "places": 624
+ },
+ "seed": 20261116,
+ "layers": [
+  "recurring",
+  "rare_sure",
+  "rare_later",
+  "unnamed",
+  "rare_millet",
+  "leftover",
+  "leftover_stems"
+ ],
+ "bars": {
+  "given_at_least": 10,
+  "right": 0.8,
+  "margin": 0.3,
+  "kappa": 0.6
+ },
+ "known_words": {
+  "meaning_from": {
+   "the public table": 77,
+   "the layers' lines": 23,
+   "the lexicon": 1,
+   "the layers' lines, of mlowi": 1
+  },
+  "meaning_taken_from_another_word": 1,
+  "without_a_meaning_of_their_own": 2,
+  "by_kind": {
+   "noun": 39,
+   "title": 25,
+   "verb": 22,
+   "no kind": 7,
+   "adjective": 5,
+   "epithet": 3,
+   "function word": 1
+  },
+  "by_packs_they_stand_in": {
+   "1": 43,
+   "2": 22,
+   "3": 19,
+   "4": 3,
+   "5": 5,
+   "6": 6,
+   "7": 3,
+   "8": 1
+  },
+  "in_more_than_one_pack": 59
+ },
+ "packs": [
+  {
+   "pack": "p01",
+   "texts": 55,
+   "words": 310,
+   "fold_1": {
+    "hidden": 20,
+    "open": 81
+   },
+   "fold_2": {
+    "hidden": 16,
+    "open": 81
+   }
+  },
+  {
+   "pack": "p02",
+   "texts": 21,
+   "words": 350,
+   "fold_1": {
+    "open": 152,
+    "hidden": 15
+   },
+   "fold_2": {
+    "open": 150,
+    "hidden": 15
+   }
+  },
+  {
+   "pack": "p03",
+   "texts": 16,
+   "words": 313,
+   "fold_1": {
+    "open": 141,
+    "hidden": 8
+   },
+   "fold_2": {
+    "open": 140,
+    "hidden": 8
+   }
+  },
+  {
+   "pack": "p04",
+   "texts": 1,
+   "words": 234,
+   "fold_1": {
+    "open": 94,
+    "hidden": 13
+   },
+   "fold_2": {
+    "open": 93,
+    "hidden": 10
+   }
+  },
+  {
+   "pack": "p05",
+   "texts": 1,
+   "words": 485,
+   "fold_1": {
+    "open": 120,
+    "hidden": 16
+   },
+   "fold_2": {
+    "open": 119,
+    "hidden": 16
+   }
+  },
+  {
+   "pack": "p06",
+   "texts": 1,
+   "words": 131,
+   "fold_1": {
+    "open": 45,
+    "hidden": 2
+   },
+   "fold_2": {
+    "open": 45,
+    "hidden": 5
+   }
+  },
+  {
+   "pack": "p07",
+   "texts": 1,
+   "words": 708,
+   "fold_1": {
+    "open": 249,
+    "hidden": 17
+   },
+   "fold_2": {
+    "open": 246,
+    "hidden": 19
+   }
+  },
+  {
+   "pack": "p08",
+   "texts": 1,
+   "words": 113,
+   "fold_1": {
+    "open": 23,
+    "hidden": 10
+   },
+   "fold_2": {
+    "hidden": 11,
+    "open": 24
+   }
+  },
+  {
+   "pack": "p09",
+   "texts": 1,
+   "words": 111,
+   "fold_1": {
+    "open": 34,
+    "hidden": 11
+   },
+   "fold_2": {
+    "hidden": 11,
+    "open": 33
+   }
+  },
+  {
+   "pack": "p10",
+   "texts": 1,
+   "words": 190,
+   "fold_1": {
+    "open": 79,
+    "hidden": 11
+   },
+   "fold_2": {
+    "open": 80,
+    "hidden": 12
+   }
+  }
+ ],
+ "folds": {
+  "1": {
+   "hidden_words": 51,
+   "coded_as_built_on_a_hidden_word": 4,
+   "open_codes": 855,
+   "hidden_codes": 51
+  },
+  "2": {
+   "hidden_words": 51,
+   "coded_as_built_on_a_hidden_word": 3,
+   "open_codes": 854,
+   "hidden_codes": 51
+  }
+ },
+ "names": {
+  "PERSON": 33,
+  "PLACE": 20,
+  "NAME": 13,
+  "GOD": 1
+ },
+ "aligners": 80,
+ "result": {
+  "complete": true,
+  "files_missing_or_not_valid": 0,
+  "pairs_without_two_verdicts": 0,
+  "frames_meanings_without_a_frame_and_slot": 0,
+  "hidden_without_a_meaning_of_their_own": 2,
+  "judges": {
+   "rows": 419,
+   "judged_by_both": 419,
+   "kappa": 0.9428,
+   "kappa_same_or_not": 0.9073,
+   "verdicts": [
+    {
+     "another": 235,
+     "partly": 110,
+     "same": 74
+    },
+    {
+     "another": 235,
+     "partly": 115,
+     "same": 69
+    }
+   ]
+  },
+  "gate_met": false,
+  "frames": {
+   "hidden": 100,
+   "given": 26,
+   "right": 7,
+   "decoys_same": 2,
+   "share_right": 0.2692,
+   "share_decoys": 0.0769,
+   "margin": 0.1923,
+   "by_word_and_pack": {
+    "given": 33,
+    "right": 12,
+    "decoy_same": 2
+   },
+   "answers_with_a_meaning": 94,
+   "gate": {
+    "bars": {
+     "given_at_least_10": true,
+     "right_80": false,
+     "above_decoys_30": false,
+     "kappa_0.6": true
+    },
+    "complete": true,
+    "met": false
+   }
+  },
+  "plain": {
+   "hidden": 100,
+   "given": 38,
+   "right": 5,
+   "decoys_same": 3,
+   "share_right": 0.1316,
+   "share_decoys": 0.0789,
+   "margin": 0.0526,
+   "by_word_and_pack": {
+    "given": 55,
+    "right": 14,
+    "decoy_same": 3
+   },
+   "answers_with_a_meaning": 140,
+   "gate": {
+    "bars": {
+     "given_at_least_10": true,
+     "right_80": false,
+     "above_decoys_30": false,
+     "kappa_0.6": true
+    },
+    "complete": true,
+    "met": false
+   }
+  }
+ }
+}
