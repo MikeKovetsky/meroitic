@@ -305,22 +305,25 @@ def rem_on(text):
 
 def catalogue(text):
     """{field: text} of a catalogue page, and what it says of script, lines and state."""
-    pos = [(text.find(f), f) for f in FIELDS if text.find(f) >= 0]
+    pos = [(text.find(f), f) for f in FIELDS if text.find(f) >= 0]     # the first place each field is named
     pos.sort()
     out = {}
     for k, (p, f) in enumerate(pos):
         end = pos[k + 1][0] if k + 1 < len(pos) else len(text)
         out[f] = text[p + len(f):end].strip()
     d = out.get("Description de l'inscription", "")
-    script = "hieroglyphic" if re.search(r"hiéroglyph", d, re.I) else "cursive" if re.search(r"cursive", d, re.I) else ""
-    m = re.search(r"sur (\S+(?:-\S+)?) (ligne|lignes|colonne|colonnes)", d)
-    lines = None
+    script = "hieroglyphic" if re.search(r"hiéroglyph", d, re.I) else "cursive" if re.search(r"cursi[fv]", d, re.I) \
+        else ""
+    lines, unit = None, ""
+    m = re.search(r"\b(?:sur|de|d'|en) ?(\S+?(?:-\S+)?) (ligne|colonne|bande)s?\b", d)
+    one = re.search(r"\b[Uu]ne seule (ligne|colonne|bande)", d)
     if m:
         w = m.group(1).lower()
-        lines = int(w) if w.isdigit() else NUMBERS.get(w)
-    st = re.search(r"état de conservation est ([^.,;]+)", d)
-    return {"fields": out, "script": script, "lines": lines, "unit": m.group(2).rstrip("s") if m else "",
-            "state": st.group(1).strip() if st else ""}
+        lines, unit = (int(w) if w.isdigit() else NUMBERS.get(w)), m.group(2)
+    elif one:
+        lines, unit = 1, one.group(1)
+    st = re.search(r"état de conservation (?:est|était)(?:, au moment de [^,]+,)? ([^.,;(]+)", d)
+    return {"fields": out, "script": script, "lines": lines, "unit": unit, "state": st.group(1).strip() if st else ""}
 
 
 def caption_kind(caption):
@@ -345,9 +348,20 @@ def captions(text):
     return out
 
 
+def is_catalogue(text):
+    """A catalogue page names one of its fields (a continuation may hold the bibliography alone), or, where the
+    text layer kept little, has the running head of a right-hand page ("5. Inscriptions de Méroé REM 0403") and
+    not that of a page of plates ("RÉPERTOIRE D'ÉPIGRAPHIE MÉROÏTIQUE")."""
+    if any(f in text for f in FIELDS):
+        return True
+    return bool(re.search(r"\b\d{1,2}\. \S[^:]{2,60}?REM \d{4}", text)) and "RÉPERTOIRE" not in text.upper()
+
+
 def index(folder=TEXT):
-    """One row per REM entry: its plate pages (with captions) and its catalogue (script, lines, state)."""
-    entries = collections.OrderedDict()
+    """One row per REM entry: its plate pages (every page of the entry that is not catalogue: each holds figures,
+    with the captions the text layer has) and its catalogue (script, lines, state), read from its catalogue pages
+    run together."""
+    entries, cat_text = collections.OrderedDict(), collections.defaultdict(list)
     for vol in (1, 2, 3):
         for p in sorted((folder / f"v{vol}").glob("T*.html")):
             text = page_text(p.read_text(encoding="utf-8"))
@@ -357,14 +371,14 @@ def index(folder=TEXT):
             num = nums[0]
             e = entries.setdefault(num, {"rem": num, "volume": vol, "plates": [], "catalogue": None, "pages": []})
             e["pages"].append(p.stem)
-            if "Localisation actuelle" in text or "Identification du monument" in text:
-                if e["catalogue"] is None:
-                    e["catalogue"] = catalogue(text)
-                    e["catalogue"]["page"] = p.stem
+            if is_catalogue(text):
+                cat_text[num].append((p.stem, text))
             else:
-                caps = captions(text)
-                if caps:
-                    e["plates"].append({"page": p.stem, "captions": caps})
+                e["plates"].append({"page": p.stem, "captions": captions(text)})
+    for num, e in entries.items():
+        if cat_text[num]:
+            e["catalogue"] = catalogue(" ".join(t for _, t in cat_text[num]))
+            e["catalogue"]["pages"] = [s for s, _ in cat_text[num]]
     return list(entries.values())
 
 
@@ -385,6 +399,138 @@ def plates_for(rem, idx):
     return [e for e in idx if e["rem"][:4] == digits and (not letter or e["rem"][4:] in ("", letter))]
 
 
+# ------------------------------------------------------------------------------------------ the readers' packs
+
+SPEC = PILOT / "spec.json"            # local: each pick's figures (page, box, kind), object and lines; the packs
+KIT = PILOT / "kit"                   # local: the brief and the signs
+PACKS = PILOT / "packs"
+KEY = PILOT / "key.json"
+PAGES = REM / "pages"
+
+
+def chosen():
+    """The picks, by the rule, against the index of the volumes."""
+    idx = read_index()
+    p, _ = pool()
+    return pick(p, lambda e: any(x["plates"] for x in plates_for(e["rem"], idx)))[0]
+
+
+WIDE = 250                            # a drawing this wide on the preview runs across the plate: cut to the frame
+MARGIN = 15                           # preview pixels added to each side of a box drawn by eye
+
+
+def box_on_page(box, spec, page=None, kind=""):
+    """A box drawn by eye on the preview of a page, on the page itself: (top, left, height, width) in its pixels.
+    The eye misjudged the sides by up to 25 preview pixels, so the sides are widened by MARGIN and kept within the
+    page's frame (spec["frames"], found by a scan for dark columns and checked on the page), and a wide drawing is
+    cut from frame to frame, so that no line loses its ends. Top and bottom stay as drawn: the captions are there."""
+    (pw, ph), (W, H) = spec["preview_size"], spec["page_size"]
+    x0, y0, x1, y1 = box
+    frame = (spec.get("frames") or {}).get(page) or (0, W)
+    left = max(round((x0 - MARGIN) * W / pw), frame[0] + 4)
+    right = min(round((x1 + MARGIN) * W / pw), frame[1] - 4)
+    if kind == "drawing" and x1 - x0 >= WIDE:
+        left, right = frame[0] + 4, frame[1] - 4
+    top, bottom = round(y0 * H / ph), min(round(y1 * H / ph), H)
+    return top, left, bottom - top, right - left
+
+
+def gray(path, run=None):
+    """The page as rows of grey values (0 black, 255 white), read from a BMP that macOS sips writes."""
+    import struct
+    import subprocess
+    import tempfile
+    tmp = Path(tempfile.mkdtemp()) / "page.bmp"
+    (run or (lambda c: subprocess.run(c, check=True, capture_output=True)))(
+        ["sips", "-s", "format", "bmp", str(path), "--out", str(tmp)])
+    b = tmp.read_bytes()
+    off = struct.unpack_from("<I", b, 10)[0]
+    w, h = struct.unpack_from("<ii", b, 18)
+    px = struct.unpack_from("<H", b, 28)[0] // 8
+    row = ((w * px * 8 + 31) // 32) * 4
+    up, h = h > 0, abs(h)
+    return [[b[off + (h - 1 - y if up else y) * row + x * px] for x in range(w)] for y in range(h)]
+
+
+INK = 110                             # darker than this is ink
+SNAP_UP_DOWN, SNAP_SIDES = 25, 80      # how far an edge may move out, in pixels
+
+
+def snap(img, top, left, height, width, frame=None):
+    """Move each edge of a box out while the row or column just outside it holds ink, so that a box drawn by eye
+    does not cut a line of signs; the white gap before a caption stops it. Never onto the frame (6 pixels inside
+    it), and up or down by SNAP_UP_DOWN at most, so that a photograph close above or below is not taken in.
+    (top, left, height, width) again."""
+    H, W = len(img), len(img[0])
+    lo, hi = (frame[0] + 6, frame[1] - 6) if frame else (0, W)
+    bottom, right = top + height, left + width
+    left, right = max(left, lo), min(right, hi)
+    ink_row = lambda y: 0 <= y < H and any(img[y][x] < INK for x in range(left, right))
+    ink_col = lambda x: lo <= x < hi and any(img[y][x] < INK for y in range(max(top, 0), min(bottom, H)))
+    t0, b0, l0, r0 = top, bottom, left, right
+    while top > t0 - SNAP_UP_DOWN and ink_row(top - 1):
+        top -= 1
+    while bottom < b0 + SNAP_UP_DOWN and ink_row(bottom):
+        bottom += 1
+    while left > max(l0 - SNAP_SIDES, lo) and ink_col(left - 1):
+        left -= 1
+    while right < min(r0 + SNAP_SIDES, hi) and ink_col(right):
+        right += 1
+    return top, left, bottom - top, right - left
+
+
+def folders(spec):
+    """{folder name: pack name}: one reader for each pack, and a second for the packs named in the spec."""
+    out = {p: p for p in spec["packs"]}
+    out.update({p + "b": p for p in spec["second_reader"]})
+    return out
+
+
+def write_packs(spec=None, run=None):
+    """The readers' folders: the brief, the signs, each item's figures cut out of its plate page, items.json and an
+    empty out/; and the key (folder, item id -> REM number), outside the folders. Refuses once a reader has
+    answered."""
+    import shutil
+    import subprocess
+    spec = json.loads(SPEC.read_text(encoding="utf-8")) if spec is None else spec
+    picks = {e["rem"] for e in chosen()}
+    idx = read_index()
+    script = {r: next((x["catalogue"]["script"] for x in plates_for(r, idx) if x["catalogue"]), "") for r in picks}
+    if picks != set(spec["items"]) or picks != {r for v in spec["packs"].values() for r in v}:
+        raise SystemExit("the spec's items are not the rule's picks")
+    if any(PACKS.glob("*/out/readings.jsonl")):
+        raise SystemExit("a reader has answered: not writing the packs again")
+    run = run or (lambda cmd: subprocess.run(cmd, check=True, capture_output=True))
+    key = {}
+    for name, pack in folders(spec).items():
+        d = PACKS / name
+        if d.exists():
+            shutil.rmtree(d)
+        (d / "plates").mkdir(parents=True)
+        (d / "out" / "crops").mkdir(parents=True)
+        shutil.copy(KIT / "BRIEF.md", d / "BRIEF.md")
+        shutil.copytree(KIT / "signs", d / "signs")
+        items = []
+        for k, rem in enumerate(spec["packs"][pack]):
+            iid = "ABCDEFGH"[k]
+            it = spec["items"][rem]
+            files = []
+            for n, (page, box, kind) in enumerate(it["figures"], 1):
+                top, left, h, w = box_on_page(box, spec, page, kind)
+                if kind == "drawing":
+                    top, left, h, w = snap(gray(PAGES / f"{page}.jpg"), top, left, h, w, spec["frames"].get(page))
+                out = d / "plates" / f"{iid}_{n}.jpg"
+                run(["sips", "-c", str(h), str(w), "--cropOffset", str(top), str(left), str(PAGES / f"{page}.jpg"),
+                     "--out", str(out)])
+                files.append(out.name)
+            items.append({"id": iid, "object": it["object"], "script": script[rem] or "not stated", "lines": it["lines"],
+                          "figures": files})
+            key.setdefault(name, {})[iid] = rem
+        (d / "items.json").write_text(json.dumps(items, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    KEY.write_text(json.dumps(key, indent=1) + "\n", encoding="utf-8")
+    return key
+
+
 # ------------------------------------------------------------------------------------------ commands
 
 def main(argv):
@@ -397,6 +543,9 @@ def main(argv):
         p, left = pool()
         print(len(p), "in the pool;", dict(left))
         print(collections.Counter(tuple(e["stratum"]) for e in p))
+    elif cmd == "packs":
+        key = write_packs()
+        print(f"{len(key)} folders:", {k: len(v) for k, v in key.items()})
     elif cmd == "pick":
         p, _ = pool()
         idx = read_index() if INDEX.exists() else None

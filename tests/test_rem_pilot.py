@@ -145,6 +145,32 @@ def test_captions_once_each_with_their_kind():
     assert R.rem_on(PLATE) == ["0003"]
 
 
+def test_catalogue_wordings():
+    c = R.catalogue("Description de l'inscription Texte en cursif, gravé au nom de \"x\". Inscription de six lignes, "
+                    "dont l'état de conservation était, au moment de leur découverte, relativement bon (l'érosion).")
+    assert (c["script"], c["lines"], c["unit"], c["state"]) == ("cursive", 6, "ligne", "relativement bon")
+    c = R.catalogue("Description de l'inscription Épitaphe en cursif. Inscription sur deux bandes, dont l'état de "
+                    "conservation est relativement bon.")
+    assert (c["lines"], c["unit"]) == (2, "bande")
+    c = R.catalogue("Description de l'inscription Texte en cursif. Inscription de dix-huit lignes (a, 10 ; b, 6).")
+    assert c["lines"] == 18
+    c = R.catalogue("Description de l'inscription Texte en cursif. Inscription d'une ligne, dont l'état de "
+                    "conservation est bon.")
+    assert (c["lines"], c["state"]) == (1, "bon")
+    c = R.catalogue("Description de l'inscription Texte en cursif. 43 Une seule ligne, dont l'état est bon.")
+    assert (c["lines"], c["unit"]) == (1, "ligne")
+    c = R.catalogue("Description de l'inscription Texte en hiéroglyphique. Inscription en neuf colonnes, six en "
+                    "méroïtique.")
+    assert (c["script"], c["lines"], c["unit"]) == ("hieroglyphic", 9, "colonne")
+
+
+def test_catalogue_or_plate_page():
+    assert R.is_catalogue(CAT) and not R.is_catalogue(PLATE)
+    assert R.is_catalogue("5. Inscriptions de Méroé REM 0407 (suite) Bibliographie Breasted 1908a, p. 98.")
+    assert R.is_catalogue("5. Inscriptions de Méroé REM 0403 Garstang, Sayce et Griffith 1911, pp. 61sq. 721")
+    assert not R.is_catalogue("730 RÉPERTOIRE D'ÉPIGRAPHIE MÉROÏTIQUE REM 0407 (suite) Fac-similé de l'inscription")
+
+
 def test_plates_for_lettered_entries():
     idx = [{"rem": "0057A"}, {"rem": "0057B"}, {"rem": "0058"}, {"rem": "0091A"}]
     assert [e["rem"] for e in R.plates_for("0057", idx)] == ["0057A", "0057B"]
@@ -156,6 +182,37 @@ def test_index_of_the_local_volumes():
     idx = R.read_index()
     assert len({e["rem"] for e in idx}) == len(idx)
     assert all(R.volume_of(e["rem"]) == e["volume"] for e in idx)
+
+
+# --- the packs ---
+SPEC = {"preview_size": [500, 1000], "page_size": [1000, 2000], "frames": {"pg": [100, 900]},
+        "packs": {"P1": ["0001"], "P2": ["0002"]}, "second_reader": ["P1"]}
+
+
+def test_box_on_page_widens_the_sides_within_the_frame():
+    top, left, h, w = R.box_on_page([200, 100, 300, 200], SPEC, "pg", "photograph")
+    assert (top, h) == (200, 200)                                             # top and bottom as drawn
+    assert left == (200 - R.MARGIN) * 2 and w == (300 + R.MARGIN) * 2 - left   # sides widened
+    top, left, h, w = R.box_on_page([10, 100, 490, 200], SPEC, "pg", "photograph")
+    assert left == 104 and left + w == 896                                   # never past the frame
+    top, left, h, w = R.box_on_page([200, 100, 200 + R.WIDE, 200], SPEC, "pg", "drawing")
+    assert (left, left + w) == (104, 896)                                   # a wide drawing: frame to frame
+
+
+def test_snap_takes_in_a_cut_line_and_stops_at_white():
+    img = [[255] * 100 for _ in range(100)]
+    for x in range(20, 80):
+        for y in (40, 41, 42, 43):
+            img[y][x] = 0                                                    # a line of ink, rows 40 to 43
+    img[90][50] = 0                                                          # a caption further down
+    top, left, h, w = R.snap(img, 30, 30, 12, 30)                            # a box that cuts the line
+    assert (top, top + h) == (30, 44) and (left, left + w) == (20, 80)
+    top, left, h, w = R.snap(img, 30, 30, 12, 30, frame=(25, 70))           # never onto the frame
+    assert (left, left + w) == (31, 64)
+
+
+def test_folders_one_reader_a_pack_and_a_second_for_some():
+    assert R.folders(SPEC) == {"P1": "P1", "P2": "P2", "P1b": "P1"}
 
 
 if __name__ == "__main__":

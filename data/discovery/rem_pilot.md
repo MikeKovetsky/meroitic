@@ -64,6 +64,45 @@ s, `s` the sign se, `N` the sign ne, `x` ḫ, `X` ẖ, `o` the sign o, `te` and 
 runs alone, to count its tokens before the rest are started. A second reader reads two of the packs again, for
 the agreement between readers; that is reported and is not part of the bar.
 
+### The pick (by the rule, before any reader)
+
+Drawn at 08:48 PST against the index of the volumes' text layers; no entry was passed over for want of a plate.
+The packs take the picks in turn (the first pick to P1, the second to P2, and so on); the second reader reads P1
+and P3 again.
+
+| Inscription | Stratum | Words (open reading) | Scored against | What the REM shows | Pack |
+|---|---|---|---|---|---|
+| REM 0412 | royal M | 15 | Griffith | 1 photograph, 1 drawing | P1 |
+| REM 0410 | royal M | 25 | Griffith | 1 photograph, 1 drawing | P2 |
+| REM 0304 | funerary S | 8 | Griffith | 1 photograph, 1 drawing | P3 |
+| REM 0080 | funerary S | 3 | Griffith | 1 photograph, 1 drawing | P4 |
+| REM 0277 | funerary M | 22 | FHN III | 1 photograph, 1 drawing | P5 |
+| REM 0256 | funerary M | 20 | Griffith | 1 photograph, 1 drawing | P1 |
+| REM 0213 | funerary M | 18 | Griffith | 1 photograph, 1 drawing | P2 |
+| REM 0211 | funerary M | 25 | Griffith | 1 photograph, 1 drawing | P3 |
+| REM 0247 | funerary L | 46 | FHN III | 1 photograph, 1 drawing | P4 |
+| REM 0278 | funerary L | 34 | FHN III | 1 photograph, 1 drawing | P5 |
+| REM 0327 | funerary L | 33 | Griffith | 1 photograph, 1 drawing | P1 |
+| REM 0105 | royal S | 4 | FHN III | 1 photograph, 1 drawing | P2 |
+| REM 0106 | royal S | 4 | FHN III | 1 photograph, 1 drawing | P3 |
+| REM 0099 | royal S | 6 | Griffith | 1 photograph, 1 drawing | P4 |
+| REM 0101 | royal L | 68 | Griffith | 1 photograph, 2 drawings | P5 |
+| REM 0409 | royal L | 35 | Griffith | 1 photograph, 1 drawing | P1 |
+| REM 0124 | graffito S | 7 | Griffith | 1 photograph, 1 drawing | P2 |
+| REM 0120 | graffito S | 8 | Griffith | 1 photograph, 1 drawing | P3 |
+| REM 0112 | graffito M | 12 | Griffith | 1 photograph, 1 drawing | P4 |
+| REM 0065 | other S | 6 | Griffith | 1 photograph, 1 drawing | P5 |
+
+Two things the pick shows before any reading, which narrow what the pilot can say:
+
+1. **Every plate holds a drawing** beside its photograph (the drawings are Griffith's facsimiles and hand copies,
+   reprinted). So the readers read drawings with a photograph to check against, and the expectation for
+   photographs alone (about 50%) cannot be measured on this sample.
+2. **All 20 are in cursive**, by the catalogue. The seed drew no hieroglyphic text, so hieroglyphs are not tested.
+
+The figures were cut by eye on small previews of each page; the script widens their sides to the page's frame and
+moves the edges of a drawing out to the first blank row or column, so that no line of signs is cut.
+
 ### How a reading is scored
 
 Against FHN III's text where one is typed (the modern reading), else against Griffith's open reading; against
