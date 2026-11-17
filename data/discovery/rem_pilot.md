@@ -100,6 +100,11 @@ Two things the pick shows before any reading, which narrow what the pilot can sa
    photographs alone (about 50%) cannot be measured on this sample.
 2. **All 20 are in cursive**, by the catalogue. The seed drew no hieroglyphic text, so hieroglyphs are not tested.
 
+Added at 08:51 PST, while the first reader was at work and before any reading was in: **a pack of photographs
+alone** (PH), the photographs of pack P2's four inscriptions given to a fresh reader who sees no drawing, to measure
+what a plate without a drawing allows. It is reported beside the bar, not part of it, and runs only if the first
+pack's tokens leave room under the pilot's budget.
+
 The figures were cut by eye on small previews of each page; the script widens their sides to the page's frame and
 moves the edges of a drawing out to the first blank row or column, so that no line of signs is cut.
 
