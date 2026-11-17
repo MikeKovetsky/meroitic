@@ -263,6 +263,10 @@ Two builds compared, the same code without the Faras rows and with all 46 and th
   word is in `rendering` only.
 - **The two new verdicts** rest on two readers each, on two items and with none of the known lines and decoys of
   the readers of 2026-11-12, who passed 12 of 12 of each.
+- **The lot fell in the first half.** The five drawn texts are all among Faras 1 to 23 (packs A to D), so the blind
+  measure says nothing directly of packs E to H, whose readers had the second brief and the corrected key. Their
+  only outside checks are Faras 43 and 44 against modern editions (section 4), which measure the editions'
+  differences as well.
 - Readers cut far more crops than the brief allowed (pack D 102, pack H 119), which is where the tokens went.
 
 ## 7. Files, commands and cost
@@ -288,11 +292,18 @@ python3 -I tests/test_faras.py
 
 **Merging this branch.** Three local steps, before the main checkout rebuilds `corpus_v6` with the Faras rows:
 
-1. `cp data/corpus_v6.jsonl data/sources/v6/analysts/corpus.jsonl` while `data/corpus_v6.jsonl` is still the
-   548-text build (the map's texts; the studies of the map read this copy, `lexicon.MAPPED`).
-2. `git show 1e55987:data/inscriptions.jsonl > data/sources/v6/analysts/inscriptions.jsonl` (F1's table as it
-   stood with the map; F4's sizing reads it, `lexicon.MAPPED_TABLE`).
+1. `cp data/sources/faras/map_corpus.jsonl data/sources/v6/analysts/corpus.jsonl`: the 548-text build of
+   `corpus_v6`, byte for byte, which the studies of the map read (`lexicon.MAPPED`). It is kept there because the
+   main checkout's `data/corpus_v6.jsonl` is that build no longer: since the ostraca (commit e415d02) it holds 594
+   texts.
+2. `cp data/sources/faras/map_table.jsonl data/sources/v6/analysts/inscriptions.jsonl` (F1's table as it stood with
+   the map, the same as `git show 1e55987:data/inscriptions.jsonl`; F4's sizing reads it, `lexicon.MAPPED_TABLE`).
 3. `python3 -I src/faras.py verdicts` (the two verdicts into `data/sources/v6/readers/verdicts.jsonl`).
+
+`main` keeps the map on its 548 texts another way since e415d02 (`data/discovery/map_texts.json`, `rows_for_map`
+in `src/v6/recount.py`, and F4's sizing on the current table with `r["id"] in gl`); the merge keeps one of the two.
+F4's filter on the current table would count Faras 44's open reading (REM 0544 is on the map): 305 texts against
+the 304 the published sizing holds.
 
 Then the rebuild: `python3 -I src/faras.py && python3 -I src/akinidad.py && python3 -I src/v6/build.py &&
 python3 -I src/v6/recount.py && python3 -I src/v6/public.py && python3 -I src/themap.py && python3 -I src/faras.py
