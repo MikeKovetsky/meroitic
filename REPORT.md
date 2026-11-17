@@ -1113,9 +1113,9 @@ consonant signs are. Every finder reported the same limit on its own: outside th
 and too broken for rules of word order, and what passes is mostly spelling.
 
 **The verdict.** Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
-the pilot ended on its first evening. Its last part, the parse of the long royal texts, was built after the review asked for it: the rules that passed
-cut the 7 long texts 25 times, 16 of them in one text built like an epitaph, and speak of 54 of their 925 words
-without a meaning; the long royal texts stay uncut. The grammar that can be tested on this corpus is the grammar the sources
+the pilot ended on its first evening. Its last part, the parse of the long royal texts, was built after the
+review asked for it: the rules that passed cut the 7 long texts 11 times, 6 of them in one text built like an
+epitaph, and speak of 51 of their 925 words without a meaning; the long royal texts stay uncut. The grammar that can be tested on this corpus is the grammar the sources
 already describe. Its yield is 53 rules that hold out of sample, 15 points where the count is sharper than what
 the sources in hand say, and one rule they do not state. With the blind tests it closes the ways that need no
 new source: meanings cannot be told from the contexts, and new grammar cannot be tested on this little text.

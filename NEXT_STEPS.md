@@ -180,9 +180,9 @@ Done since this plan was written:
     texts were touched. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3.
     The 41 rules of the first round that passed describe the epitaph, and the sources in hand state or partly
     state every one; outside the epitaphs the texts are too few for rules of word order. The pilot ended on its
-    first evening. Its last part, the parse of the long royal texts, was built after the review asked for it: the rules that
-    passed cut the 7 long texts 25 times, 16 of them in one text built like an epitaph, and speak of 54 of their
-    925 words without a meaning; the long royal texts stay uncut. No count of the map changes.
+    first evening. Its last part, the parse of the long royal texts, was built after the review asked for it:
+    the rules that passed cut the 7 long texts 11 times, 6 of them in one text built like an epitaph, and speak
+    of 51 of their 925 words without a meaning; the long royal texts stay uncut. No count of the map changes.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):

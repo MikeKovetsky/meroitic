@@ -306,9 +306,9 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     epitaphs (2,210 words for finding, 1,776 held back) gave 19 rules; 12 passed, and one is in no
     source in hand: inside a word the sign `q` is followed by o or e far more often than other consonant signs
     are. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
-    the pilot ended on its first evening. Its last part, the parse of the long royal texts, was built after the review asked for it: the rules that
-    passed cut the 7 long texts 25 times, 16 of them in one text built like an epitaph, and speak of 54 of their
-    925 words without a meaning; the long royal texts stay uncut. At 15 points the count is sharper than what the
+    the pilot ended on its first evening. Its last part, the parse of the long royal texts, was built after the
+    review asked for it: the rules that passed cut the 7 long texts 11 times, 6 of them in one text built like an
+    epitaph, and speak of 51 of their 925 words without a meaning; the long royal texts stay uncut. At 15 points the count is sharper than what the
     sources in hand say. The map and its counts do not change
     ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
 
@@ -803,7 +803,9 @@ second round (`briefs2`, `tuning2`, `held2`, `packs2`, `count2`) does the same o
 funerary, with six finders and at most 6 rules each. The figures give every rule with its counts and its
 readers' verdicts; a statement that shared four words in a row with a source is reworded there. `parse` cuts the long
 texts by the rules that passed: after every word a rule marks as the end of a clause, a sentence or a phrase,
-and says of each word without a meaning what a rule that passed makes of it, or that none speaks of it
+only where that rule has its case and holds, and says of each word without a meaning what a rule that passed
+makes of it there, or that none speaks of it; two ends that only a rule's wording names are counted apart and do
+not cut
 ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
 
 ## Reproduce
