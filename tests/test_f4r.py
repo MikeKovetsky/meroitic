@@ -638,7 +638,8 @@ def test_what_is_not_built_is_said_plainly():
 
 def test_the_readme_counts_the_rounds_among_the_local_commands():
     """The README's list of what needs local files names the rounds' script, and its count of the list is right."""
-    words = ("Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Twenty-one")
+    words = ("Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Twenty-one",
+             "Twenty-two")
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     head = next(l for l in text.splitlines() if l.endswith("things need files that are kept locally (Data, above), so "
                                                            "they don't run from a clone:"))

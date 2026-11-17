@@ -1,0 +1,2067 @@
+{
+ "split": {
+  "seed": 20261128,
+  "held_share": 0.4,
+  "long_from_words": 100,
+  "layers": [
+   "recurring",
+   "rare_sure",
+   "rare_later",
+   "unnamed",
+   "rare_millet",
+   "leftover"
+  ],
+  "tuning": {
+   "texts": 329,
+   "words": 5614,
+   "long_texts": 4,
+   "not_funerary": {
+    "texts": 168,
+    "words": 2210
+   },
+   "by_kind": {
+    "document (ostracon, papyrus, wood, vessel)": {
+     "texts": 32,
+     "words": 299
+    },
+    "funerary": {
+     "texts": 161,
+     "words": 3404
+    },
+    "graffito": {
+     "texts": 22,
+     "words": 167
+    },
+    "not known": {
+     "texts": 58,
+     "words": 790
+    },
+    "oracular decree": {
+     "texts": 4,
+     "words": 95
+    },
+    "royal or temple (stela, wall, cartouche, label)": {
+     "texts": 52,
+     "words": 859
+    }
+   }
+  },
+  "held": {
+   "texts": 219,
+   "words": 4676,
+   "long_texts": 3,
+   "not_funerary": {
+    "texts": 112,
+    "words": 1776
+   },
+   "by_kind": {
+    "document (ostracon, papyrus, wood, vessel)": {
+     "texts": 21,
+     "words": 252
+    },
+    "funerary": {
+     "texts": 107,
+     "words": 2900
+    },
+    "graffito": {
+     "texts": 14,
+     "words": 105
+    },
+    "not known": {
+     "texts": 39,
+     "words": 681
+    },
+    "oracular decree": {
+     "texts": 3,
+     "words": 99
+    },
+    "royal or temple (stela, wall, cartouche, label)": {
+     "texts": 35,
+     "words": 639
+    }
+   }
+  }
+ },
+ "bars": {
+  "cases": 20,
+  "rate": 0.8,
+  "margin": 0.3
+ },
+ "ours_needed": 3,
+ "rounds": {
+  "1": {
+   "finders": 8,
+   "rules": 54,
+   "by_finder": {
+    "L1": 6,
+    "L2": 8,
+    "L3": 8,
+    "L4": 5,
+    "L5": 6,
+    "L6": 8,
+    "L7": 6,
+    "L8": 7
+   },
+   "tests_with_the_finders_counts": 54,
+   "tests_frozen_in": "604c379 19:15:35",
+   "held_words": 4676,
+   "passed": 41,
+   "not_passed": {
+    "holds in under 80%": 8,
+    "fewer than 20 cases": 4,
+    "under 30 points above its comparison": 1
+   },
+   "not_passed_also_under_the_margin": 1,
+   "readers": {
+    "rules": 41,
+    "answered_by_both": 41,
+    "stated by both": 28,
+    "stated by one, partly by the other": 4,
+    "partly stated by both": 9,
+    "not found by both": 0
+   },
+   "ours": [],
+   "works": {
+    "Rilly 2021": 17,
+    "Griffith 1911 (Karanog)": 17,
+    "Rilly 2003": 12,
+    "Rilly 2016": 6,
+    "Fontes Historiae Nubiorum": 6,
+    "Griffith, Meroitic Studies": 1
+   },
+   "the_rules": [
+    {
+     "id": "L1-1",
+     "finder": "L1",
+     "statement": "The noun ato/at (water/bread) is followed directly by the adjective mXe (abundant): the adjective comes after its noun.",
+     "tuning": {
+      "cases": 196,
+      "holds": 175,
+      "comparison_rate": 0.042
+     },
+     "held": {
+      "cases": 141,
+      "holds": 128,
+      "rate": 0.9078,
+      "comparison_rate": 0.0342
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2016",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L1-2",
+     "finder": "L1",
+     "statement": "The adjective mXe stands right after the noun it qualifies, ato or at; it does not open a phrase on its own.",
+     "tuning": {
+      "cases": 188,
+      "holds": 172,
+      "comparison_rate": 0.041
+     },
+     "held": {
+      "cases": 131,
+      "holds": 124,
+      "rate": 0.9466,
+      "comparison_rate": 0.0342
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L1-3",
+     "finder": "L1",
+     "statement": "The noun phrase 'noun + mXe' is closed by a verb: the word after mXe begins with a verbal prefix p-, b- or y-.",
+     "tuning": {
+      "cases": 176,
+      "holds": 174,
+      "comparison_rate": 0.193
+     },
+     "held": {
+      "cases": 123,
+      "holds": 118,
+      "rate": 0.9593,
+      "comparison_rate": 0.1769
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2016",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L1-4",
+     "finder": "L1",
+     "statement": "When Isis is addressed as woSi (with final -i), the next word is Osiris, also ending in -i (Soreyi, aSoreyi): the two addressed nouns stand side by side with the same ending.",
+     "tuning": {
+      "cases": 111,
+      "holds": 95,
+      "comparison_rate": 0.024
+     },
+     "held": {
+      "cases": 95,
+      "holds": 83,
+      "rate": 0.8737,
+      "comparison_rate": 0.0241
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L1-5",
+     "finder": "L1",
+     "statement": "A filiation word (terike-, tedxe- 'begotten by', 'born of') comes directly after the parent's noun phrase, which is a name or else ends in -li or -ye.",
+     "tuning": {
+      "cases": 166,
+      "holds": 155,
+      "comparison_rate": 0.242
+     },
+     "held": {
+      "cases": 136,
+      "holds": 129,
+      "rate": 0.9485,
+      "comparison_rate": 0.228
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L1-6",
+     "finder": "L1",
+     "statement": "The relation word yetmde- ('relative of') comes directly after the noun phrase it governs, closed by a determiner -l/-leb (or -li, -ye) or being a name.",
+     "tuning": {
+      "cases": 114,
+      "holds": 92,
+      "comparison_rate": 0.314
+     },
+     "held": {
+      "cases": 84,
+      "holds": 75,
+      "rate": 0.8929,
+      "comparison_rate": 0.2935
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-1",
+     "finder": "L2",
+     "statement": "In the offering formulas the verb's stem follows the noun two words before it: after 'ato mXe' the verb has the stem X (ẖe, water), after 'at mXe' it has the stem xr/kr (ḫr, bread).",
+     "tuning": {
+      "cases": 151,
+      "holds": 138,
+      "comparison_rate": 0.48
+     },
+     "held": {
+      "cases": 113,
+      "holds": 105,
+      "rate": 0.9292,
+      "comparison_rate": 0.4786
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-2",
+     "finder": "L2",
+     "statement": "A verb with the prefix ps- (written pS, piS, peS, bS, ps) stands directly after a word ending in mXe/mxe/mXo: the verb closes its clause right after that word.",
+     "tuning": {
+      "cases": 190,
+      "holds": 159,
+      "comparison_rate": 0.036
+     },
+     "held": {
+      "cases": 134,
+      "holds": 104,
+      "rate": 0.7761,
+      "comparison_rate": 0.0302
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L2-3",
+     "finder": "L2",
+     "statement": "The prefix vowel o (pSo-, piSo-, bSo-) appears on a ps- verb almost only when the stem begins with X/x (ẖ); before xr it never occurs.",
+     "tuning": {
+      "cases": 48,
+      "holds": 45,
+      "comparison_rate": 0.49
+     },
+     "held": {
+      "cases": 35,
+      "holds": 32,
+      "rate": 0.9143,
+      "comparison_rate": 0.4701
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-4",
+     "finder": "L2",
+     "statement": "The verb with the stem Xol (ẖol, formula C) takes the bare prefix p- or no prefix, not the ps- that the water and bread verbs take.",
+     "tuning": {
+      "cases": 60,
+      "holds": 56,
+      "comparison_rate": 0.071
+     },
+     "held": {
+      "cases": 36,
+      "holds": 34,
+      "rate": 0.9444,
+      "comparison_rate": 0.1031
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-5",
+     "finder": "L2",
+     "statement": "On a ps- verb ending in -te, the stem xr/kr (ḫr) always keeps k before the ending (-kte, -kete), while the stem X (ẖ) often has bare -te (pSiXte).",
+     "tuning": {
+      "cases": 46,
+      "holds": 45,
+      "comparison_rate": 0.37
+     },
+     "held": {
+      "cases": 31,
+      "holds": 29,
+      "rate": 0.9355,
+      "comparison_rate": 0.5
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-6",
+     "finder": "L2",
+     "statement": "The first offering formula ('ato mXe' + verb) has before it a word ending in -i, mostly the filiation predicate in -lowi/-qowi or the vocative Soreyi.",
+     "tuning": {
+      "cases": 76,
+      "holds": 63,
+      "comparison_rate": 0.34
+     },
+     "held": {
+      "cases": 62,
+      "holds": 50,
+      "rate": 0.8065,
+      "comparison_rate": 0.3075
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L2-7",
+     "finder": "L2",
+     "statement": "When several persons are named (the last filiation word before the verb ends in -bkwi), the benediction verb carries the plural marker -bx(e)- (-bḫe-) before its ending.",
+     "tuning": {
+      "cases": 8,
+      "holds": 8,
+      "comparison_rate": 0.012
+     },
+     "held": {
+      "cases": 2,
+      "holds": 1,
+      "rate": 0.5,
+      "comparison_rate": 0.0923
+     },
+     "verdict": "not passed: fewer than 20 cases; holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L2-8",
+     "finder": "L2",
+     "statement": "Within one text the benediction verbs agree in their final -s: once a verb ends in -kes/-ketes/-ks/-ktes, the next verb also ends in -s.",
+     "tuning": {
+      "cases": 9,
+      "holds": 8,
+      "comparison_rate": 0.1
+     },
+     "held": {
+      "cases": 8,
+      "holds": 7,
+      "rate": 0.875,
+      "comparison_rate": 0.1232
+     },
+     "verdict": "not passed: fewer than 20 cases",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L3-1",
+     "finder": "L3",
+     "statement": "The vocative invocation woSi (or wiSi) opens the text as its first word.",
+     "tuning": {
+      "cases": 115,
+      "holds": 100,
+      "comparison_rate": 0.059
+     },
+     "held": {
+      "cases": 96,
+      "holds": 76,
+      "rate": 0.7917,
+      "comparison_rate": 0.0468
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L3-2",
+     "finder": "L3",
+     "statement": "The second vocative, Soreyi (Osiris), comes right after the invocation of Isis: among the three words before it stands woS/woSi/wiS/wiSi.",
+     "tuning": {
+      "cases": 121,
+      "holds": 110,
+      "comparison_rate": 0.075
+     },
+     "held": {
+      "cases": 103,
+      "holds": 94,
+      "rate": 0.9126,
+      "comparison_rate": 0.0723
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum",
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-3",
+     "finder": "L3",
+     "statement": "The naming clause (a word ending in -qowi, 'this is NN') comes before the filiation clauses (born of / begotten of).",
+     "tuning": {
+      "cases": 71,
+      "holds": 70,
+      "comparison_rate": 0.377
+     },
+     "held": {
+      "cases": 49,
+      "holds": 49,
+      "rate": 1.0,
+      "comparison_rate": 0.3699
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-4",
+     "finder": "L3",
+     "statement": "All filiation clauses come before the first benediction (ato/at mXe ...): the benedictions close the descent part and no filiation word follows them.",
+     "tuning": {
+      "cases": 70,
+      "holds": 70,
+      "comparison_rate": 0.22
+     },
+     "held": {
+      "cases": 56,
+      "holds": 52,
+      "rate": 0.9286,
+      "comparison_rate": 0.2004
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-5",
+     "finder": "L3",
+     "statement": "When a text has both the water benediction (ato mXe ...) and the bread benediction (at mXe ...), the water one comes first.",
+     "tuning": {
+      "cases": 67,
+      "holds": 66,
+      "comparison_rate": 0.501
+     },
+     "held": {
+      "cases": 48,
+      "holds": 43,
+      "rate": 0.8958,
+      "comparison_rate": 0.5001
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-6",
+     "finder": "L3",
+     "statement": "In a benediction the verb agrees with the object word two places before it: after 'ato mXe' the verb has the stem with X (ẖ), after 'at mXe' it has the stem with xr or kr.",
+     "tuning": {
+      "cases": 141,
+      "holds": 138,
+      "comparison_rate": 0.499
+     },
+     "held": {
+      "cases": 111,
+      "holds": 110,
+      "rate": 0.991,
+      "comparison_rate": 0.5002
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-7",
+     "finder": "L3",
+     "statement": "The word right after mXe ('much, plenty') is the verb of the benediction, beginning with the prefix p- (or b-, y-): object and quantifier stand before the verb, verb last.",
+     "tuning": {
+      "cases": 188,
+      "holds": 186,
+      "comparison_rate": 0.181
+     },
+     "held": {
+      "cases": 130,
+      "holds": 126,
+      "rate": 0.9692,
+      "comparison_rate": 0.1704
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2016",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L3-8",
+     "finder": "L3",
+     "statement": "Benediction verbs (ending in -kete, -kte, -kes, -ketes) stand in their text's latter half.",
+     "tuning": {
+      "cases": 219,
+      "holds": 199,
+      "comparison_rate": 0.514
+     },
+     "held": {
+      "cases": 164,
+      "holds": 143,
+      "rate": 0.872,
+      "comparison_rate": 0.512
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L4-1",
+     "finder": "L4",
+     "statement": "When the locative ending -te of a place stands inside a word with more letters after it, the next letter is l: the place phrase is closed by the article or copula (-l, -li, -lo, -lowi, -leb).",
+     "tuning": {
+      "cases": 63,
+      "holds": 56,
+      "comparison_rate": 0.054
+     },
+     "held": {
+      "cases": 60,
+      "holds": 52,
+      "rate": 0.8667,
+      "comparison_rate": 0.0372
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L4-2",
+     "finder": "L4",
+     "statement": "Words with the verbal ending -kete stand in their text's final third: the benediction formulas close the inscription.",
+     "tuning": {
+      "cases": 144,
+      "holds": 124,
+      "comparison_rate": 0.355
+     },
+     "held": {
+      "cases": 102,
+      "holds": 79,
+      "rate": 0.7745,
+      "comparison_rate": 0.3492
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L4-3",
+     "finder": "L4",
+     "statement": "A -kete verb is preceded within two words by its object noun of water or food: a word containing mX/mx or mlo (mXe, xmlol, mlol) or beginning with at (at, ato).",
+     "tuning": {
+      "cases": 144,
+      "holds": 126,
+      "comparison_rate": 0.188
+     },
+     "held": {
+      "cases": 102,
+      "holds": 85,
+      "rate": 0.8333,
+      "comparison_rate": 0.1615
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L4-4",
+     "finder": "L4",
+     "statement": "A -kete verb closes its clause: after it the text ends or the next clause begins with a word in a, x or m (at, ato, xmlol, mlo...).",
+     "tuning": {
+      "cases": 144,
+      "holds": 125,
+      "comparison_rate": 0.318
+     },
+     "held": {
+      "cases": 102,
+      "holds": 77,
+      "rate": 0.7549,
+      "comparison_rate": 0.2977
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L4-5",
+     "finder": "L4",
+     "statement": "A word beginning with the causative prefix ps- (pS, piS) carries a verbal ending -te, -ke, -kes or -to, on itself or on the next word when the verb is written in two pieces.",
+     "tuning": {
+      "cases": 181,
+      "holds": 153,
+      "comparison_rate": 0.271
+     },
+     "held": {
+      "cases": 125,
+      "holds": 109,
+      "rate": 0.872,
+      "comparison_rate": 0.2902
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L5-1",
+     "finder": "L5",
+     "statement": "Words standing directly beside a numeral carry no suffix: both the counted word in front and the following word are bare stems, without article, case or predicate endings.",
+     "tuning": {
+      "cases": 119,
+      "holds": 114,
+      "comparison_rate": 0.669
+     },
+     "held": {
+      "cases": 138,
+      "holds": 121,
+      "rate": 0.8768,
+      "comparison_rate": 0.6893
+     },
+     "verdict": "not passed: under 30 points above its comparison",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L5-2",
+     "finder": "L5",
+     "statement": "In the offering list of a text, the item 'ato' comes before the item 'at'.",
+     "tuning": {
+      "cases": 76,
+      "holds": 72,
+      "comparison_rate": 0.5
+     },
+     "held": {
+      "cases": 57,
+      "holds": 51,
+      "rate": 0.8947,
+      "comparison_rate": 0.5
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L5-3",
+     "finder": "L5",
+     "statement": "Each item of the offering list, 'ato' or 'at', has after it a word beginning with m (mostly mXe).",
+     "tuning": {
+      "cases": 196,
+      "holds": 184,
+      "comparison_rate": 0.123
+     },
+     "held": {
+      "cases": 141,
+      "holds": 135,
+      "rate": 0.9574,
+      "comparison_rate": 0.1139
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L5-4",
+     "finder": "L5",
+     "statement": "The quantity word mXe/mxe in a list item has after it a verb beginning with p (the causative/verbal prefix p-, mostly pS- or piS-).",
+     "tuning": {
+      "cases": 170,
+      "holds": 152,
+      "comparison_rate": 0.097
+     },
+     "held": {
+      "cases": 117,
+      "holds": 103,
+      "rate": 0.8803,
+      "comparison_rate": 0.0834
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L5-5",
+     "finder": "L5",
+     "statement": "The verb of an offering item agrees with the item noun: after 'ato mXe' the verb has X or x but no 'xr'; after 'at mXe' it has 'xr'.",
+     "tuning": {
+      "cases": 155,
+      "holds": 132,
+      "comparison_rate": 0.446
+     },
+     "held": {
+      "cases": 113,
+      "holds": 100,
+      "rate": 0.885,
+      "comparison_rate": 0.4604
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L5-6",
+     "finder": "L5",
+     "statement": "A list item 'at' starts right where the previous item ends: the preceding word is a verb beginning with p or ending in -te or -s.",
+     "tuning": {
+      "cases": 92,
+      "holds": 82,
+      "comparison_rate": 0.191
+     },
+     "held": {
+      "cases": 61,
+      "holds": 52,
+      "rate": 0.8525,
+      "comparison_rate": 0.1784
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L6-1",
+     "finder": "L6",
+     "statement": "The word that names the dead person (ending in -qo or -qowi) comes before every filiation and relation clause of the epitaph.",
+     "tuning": {
+      "cases": 90,
+      "holds": 86,
+      "comparison_rate": 0.337
+     },
+     "held": {
+      "cases": 66,
+      "holds": 64,
+      "rate": 0.9697,
+      "comparison_rate": 0.3769
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L6-2",
+     "finder": "L6",
+     "statement": "The word just before a filiation predicate (tedxe-lowi 'born of', terike-lowi 'begotten by') names a person: the parent's name stands immediately before the verb of filiation.",
+     "tuning": {
+      "cases": 167,
+      "holds": 138,
+      "comparison_rate": 0.206
+     },
+     "held": {
+      "cases": 147,
+      "holds": 124,
+      "rate": 0.8435,
+      "comparison_rate": 0.2046
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L6-3",
+     "finder": "L6",
+     "statement": "A word ending in -leb (plural determiner) directly before a predicate occurs only with the relation verb yetmde, never with the filiation verbs: one has one mother and one father but may have several relatives with a title.",
+     "tuning": {
+      "cases": 27,
+      "holds": 27,
+      "comparison_rate": 0.429
+     },
+     "held": {
+      "cases": 16,
+      "holds": 16,
+      "rate": 1.0,
+      "comparison_rate": 0.3822
+     },
+     "verdict": "not passed: fewer than 20 cases",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L6-4",
+     "finder": "L6",
+     "statement": "Relation clauses (yetmde-lowi) come after all filiation clauses (mother and father) in a text.",
+     "tuning": {
+      "cases": 48,
+      "holds": 39,
+      "comparison_rate": 0.212
+     },
+     "held": {
+      "cases": 24,
+      "holds": 19,
+      "rate": 0.7917,
+      "comparison_rate": 0.148
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L6-5",
+     "finder": "L6",
+     "statement": "The benediction formulas ('ato/at mXe ...') come after every filiation and relation clause.",
+     "tuning": {
+      "cases": 77,
+      "holds": 74,
+      "comparison_rate": 0.176
+     },
+     "held": {
+      "cases": 60,
+      "holds": 56,
+      "rate": 0.9333,
+      "comparison_rate": 0.1787
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum",
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L6-6",
+     "finder": "L6",
+     "statement": "In the benediction 'NOUN mXe VERB', the verb after 'ato mXe' (water) carries X (pS(i/o)Xe-kete), the verb after 'at mXe' (bread) carries xr (pS(i)xr-kete).",
+     "tuning": {
+      "cases": 138,
+      "holds": 135,
+      "comparison_rate": 0.5
+     },
+     "held": {
+      "cases": 108,
+      "holds": 107,
+      "rate": 0.9907,
+      "comparison_rate": 0.5
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L6-7",
+     "finder": "L6",
+     "statement": "A filiation predicate in -li (tedxeli, terikeli) is followed at once by the same verb again with its copula (tedxeli tedxelowi, terikeli terikelowi).",
+     "tuning": {
+      "cases": 35,
+      "holds": 31,
+      "comparison_rate": 0.015
+     },
+     "held": {
+      "cases": 14,
+      "holds": 12,
+      "rate": 0.8571,
+      "comparison_rate": 0.0143
+     },
+     "verdict": "not passed: fewer than 20 cases",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L6-8",
+     "finder": "L6",
+     "statement": "When both are present, the maternal filiation (tedxe-) comes before the paternal one (terike-).",
+     "tuning": {
+      "cases": 70,
+      "holds": 55,
+      "comparison_rate": 0.518
+     },
+     "held": {
+      "cases": 60,
+      "holds": 38,
+      "rate": 0.6333,
+      "comparison_rate": 0.5297
+     },
+     "verdict": "not passed: holds in under 80%; under 30 points above its comparison",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L7-1",
+     "finder": "L7",
+     "statement": "The word after mXe in the offering formula is a prefixed verb: it begins with p, b or y.",
+     "tuning": {
+      "cases": 183,
+      "holds": 181,
+      "comparison_rate": 0.181
+     },
+     "held": {
+      "cases": 126,
+      "holds": 123,
+      "rate": 0.9762,
+      "comparison_rate": 0.1704
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L7-2",
+     "finder": "L7",
+     "statement": "When a text has both offering clauses, the 'ato mXe' clause comes before the 'at mXe' clause.",
+     "tuning": {
+      "cases": 65,
+      "holds": 64,
+      "comparison_rate": 0.5
+     },
+     "held": {
+      "cases": 46,
+      "holds": 41,
+      "rate": 0.8913,
+      "comparison_rate": 0.5
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L7-3",
+     "finder": "L7",
+     "statement": "The word just before 'ato mXe' closes a sentence: it ends in -wi, -te or -s.",
+     "tuning": {
+      "cases": 76,
+      "holds": 65,
+      "comparison_rate": 0.251
+     },
+     "held": {
+      "cases": 61,
+      "holds": 56,
+      "rate": 0.918,
+      "comparison_rate": 0.2374
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L7-4",
+     "finder": "L7",
+     "statement": "The parts of the funerary frame come in a fixed order: invocation (woS/wiS), the Sor- word, the name closed by -qowi, the relationship words (teri-, tedx-, tdx-, tereke-), then 'ato mXe'.",
+     "tuning": {
+      "cases": 744,
+      "holds": 733,
+      "comparison_rate": 0.5
+     },
+     "held": {
+      "cases": 580,
+      "holds": 561,
+      "rate": 0.9672,
+      "comparison_rate": 0.5
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Fontes Historiae Nubiorum",
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L7-5",
+     "finder": "L7",
+     "statement": "The sentence-final ending -wi follows the vowel o in the word: -lowi, -qowi, -towi.",
+     "tuning": {
+      "cases": 587,
+      "holds": 529,
+      "comparison_rate": 0.277
+     },
+     "held": {
+      "cases": 464,
+      "holds": 410,
+      "rate": 0.8836,
+      "comparison_rate": 0.2713
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L7-6",
+     "finder": "L7",
+     "statement": "The two offering clauses take different verb roots: after 'ato mXe' the verb contains X (not xr/kr); after 'at mXe' it contains xr or kr.",
+     "tuning": {
+      "cases": 166,
+      "holds": 135,
+      "comparison_rate": 0.072
+     },
+     "held": {
+      "cases": 120,
+      "holds": 107,
+      "rate": 0.8917,
+      "comparison_rate": 0.0619
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-1",
+     "finder": "L8",
+     "statement": "Two vowel letters (a, e, i, o) are almost never written side by side: where a vowel meets another vowel, as at a stem-ending joint, a glide y or w is written between them.",
+     "tuning": {
+      "cases": 885,
+      "holds": 856,
+      "comparison_rate": 0.146
+     },
+     "held": {
+      "cases": 710,
+      "holds": 690,
+      "rate": 0.9718,
+      "comparison_rate": 0.1479
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-2",
+     "finder": "L8",
+     "statement": "Where a glide joins two vowels and the later vowel is e or o, that glide is y, not w (w appears mainly in o-w-i).",
+     "tuning": {
+      "cases": 140,
+      "holds": 122,
+      "comparison_rate": 0.298
+     },
+     "held": {
+      "cases": 131,
+      "holds": 124,
+      "rate": 0.9466,
+      "comparison_rate": 0.3304
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith, Meroitic Studies",
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-3",
+     "finder": "L8",
+     "statement": "A word ending in wi has o just before it (-owi): the ending -wi follows the vowel o, with w as the glide.",
+     "tuning": {
+      "cases": 593,
+      "holds": 529,
+      "comparison_rate": 0.224
+     },
+     "held": {
+      "cases": 469,
+      "holds": 410,
+      "rate": 0.8742,
+      "comparison_rate": 0.2186
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2021"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-4",
+     "finder": "L8",
+     "statement": "Word-final -owi is joined only after l, q or t (-lowi, -qowi, -towi): the copula attaches to the determiner l, to qo, or to a t-final stem or ending.",
+     "tuning": {
+      "cases": 529,
+      "holds": 526,
+      "comparison_rate": 0.601
+     },
+     "held": {
+      "cases": 410,
+      "holds": 409,
+      "rate": 0.9976,
+      "comparison_rate": 0.586
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-5",
+     "finder": "L8",
+     "statement": "Before the vowel letters i or o, an s or n is written with the plain sign (S, n), never with the syllabic se or ne sign (s, N); so a stem in -se/-ne meeting an i- or o-ending switches sign.",
+     "tuning": {
+      "cases": 708,
+      "holds": 704,
+      "comparison_rate": 0.636
+     },
+     "held": {
+      "cases": 549,
+      "holds": 530,
+      "rate": 0.9654,
+      "comparison_rate": 0.5949
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "L8-6",
+     "finder": "L8",
+     "statement": "Before a glide y or w, n is written with the ne sign (N), as in -Nyi, unlike before i or o where plain n is used.",
+     "tuning": {
+      "cases": 54,
+      "holds": 49,
+      "comparison_rate": 0.351
+     },
+     "held": {
+      "cases": 49,
+      "holds": 33,
+      "rate": 0.6735,
+      "comparison_rate": 0.3391
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "L8-7",
+     "finder": "L8",
+     "statement": "The ending kete (also shortened kte) follows a stem ending in r, l or e, e.g. pSixr-kete, Xol-kte, pSiXe-kete.",
+     "tuning": {
+      "cases": 185,
+      "holds": 151,
+      "comparison_rate": 0.273
+     },
+     "held": {
+      "cases": 128,
+      "holds": 99,
+      "rate": 0.7734,
+      "comparison_rate": 0.2723
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    }
+   ]
+  },
+  "2": {
+   "finders": 6,
+   "rules": 19,
+   "by_finder": {
+    "M1": 2,
+    "M2": 5,
+    "M3": 3,
+    "M4": 3,
+    "M5": 3,
+    "M6": 3
+   },
+   "tests_with_the_finders_counts": 19,
+   "tests_frozen_in": "6c974f3 19:30:39",
+   "held_words": 1776,
+   "passed": 12,
+   "not_passed": {
+    "holds in under 80%": 7
+   },
+   "not_passed_also_under_the_margin": 3,
+   "readers": {
+    "rules": 12,
+    "answered_by_both": 12,
+    "stated by both": 4,
+    "stated by one, partly by the other": 1,
+    "partly stated by both": 6,
+    "not found by both": 1
+   },
+   "ours": [
+    "M2-3"
+   ],
+   "works": {
+    "Griffith 1911 (Karanog)": 5,
+    "Rilly 2016": 4,
+    "Rilly 2003": 2,
+    "Griffith, Meroitic Studies": 2
+   },
+   "the_rules": [
+    {
+     "id": "M1-1",
+     "finder": "M1",
+     "statement": "After a word ending in -se comes a short word of at most three letters, mostly a determiner written apart (l, li, lw or lke) or the copula wi; the -se phrase is closed right after it.",
+     "tuning": {
+      "cases": 48,
+      "holds": 39,
+      "comparison_rate": 0.415
+     },
+     "held": {
+      "cases": 23,
+      "holds": 7,
+      "rate": 0.3043,
+      "comparison_rate": 0.3655
+     },
+     "verdict": "not passed: holds in under 80%; under 30 points above its comparison",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M1-2",
+     "finder": "M1",
+     "statement": "A word that ends in the letter b has e just before it (-leb, -teb, -seb): the -b that marks the plural follows the vowel e, not another letter.",
+     "tuning": {
+      "cases": 69,
+      "holds": 59,
+      "comparison_rate": 0.308
+     },
+     "held": {
+      "cases": 33,
+      "holds": 29,
+      "rate": 0.8788,
+      "comparison_rate": 0.2639
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M2-1",
+     "finder": "M2",
+     "statement": "The sign a stands word-initially only; word-internally and word-finally this sign never writes a vowel.",
+     "tuning": {
+      "cases": 214,
+      "holds": 211,
+      "comparison_rate": 0.2237
+     },
+     "held": {
+      "cases": 149,
+      "holds": 146,
+      "rate": 0.9799,
+      "comparison_rate": 0.2189
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)",
+      "Rilly 2003"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M2-2",
+     "finder": "M2",
+     "statement": "Two vowel signs never stand side by side: inside a word, e, i or o always has a consonant sign after it.",
+     "tuning": {
+      "cases": 1504,
+      "holds": 1501,
+      "comparison_rate": 0.5826
+     },
+     "held": {
+      "cases": 1253,
+      "holds": 1251,
+      "rate": 0.9984,
+      "comparison_rate": 0.5738
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith, Meroitic Studies"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M2-3",
+     "finder": "M2",
+     "statement": "Inside a word the sign q is followed by o or e far more often than other consonant signs are.",
+     "tuning": {
+      "cases": 224,
+      "holds": 192,
+      "comparison_rate": 0.4092
+     },
+     "held": {
+      "cases": 169,
+      "holds": 140,
+      "rate": 0.8284,
+      "comparison_rate": 0.4334
+     },
+     "verdict": "passed",
+     "readers": [
+      "not found",
+      "not found"
+     ],
+     "works": [],
+     "ours": true
+    },
+    {
+     "id": "M2-4",
+     "finder": "M2",
+     "statement": "A word ending in -wi has a vowel sign o, e or i just before the w: the copula -wi follows a vowel-final element such as the determiner -lo or qo (-lowi, qowi, -towi).",
+     "tuning": {
+      "cases": 76,
+      "holds": 64,
+      "comparison_rate": 0.3846
+     },
+     "held": {
+      "cases": 60,
+      "holds": 45,
+      "rate": 0.75,
+      "comparison_rate": 0.4155
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M2-5",
+     "finder": "M2",
+     "statement": "Inside a word the sign N (ne) has a consonant sign after it, never a vowel sign.",
+     "tuning": {
+      "cases": 63,
+      "holds": 61,
+      "comparison_rate": 0.4044
+     },
+     "held": {
+      "cases": 52,
+      "holds": 51,
+      "rate": 0.9808,
+      "comparison_rate": 0.3862
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M3-1",
+     "finder": "M3",
+     "statement": "A word that ends in -owi has l, t or q just before it: the ending appears as -lowi, -towi or -qowi.",
+     "tuning": {
+      "cases": 56,
+      "holds": 55,
+      "comparison_rate": 0.2383
+     },
+     "held": {
+      "cases": 41,
+      "holds": 40,
+      "rate": 0.9756,
+      "comparison_rate": 0.25
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2003",
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M3-2",
+     "finder": "M3",
+     "statement": "A word that ends in -wi, without being only wi, has o or e just before it (-owi, -ewi).",
+     "tuning": {
+      "cases": 76,
+      "holds": 63,
+      "comparison_rate": 0.2891
+     },
+     "held": {
+      "cases": 60,
+      "holds": 44,
+      "rate": 0.7333,
+      "comparison_rate": 0.3187
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M3-3",
+     "finder": "M3",
+     "statement": "A word that ends in b has e just before it: the ending is -eb (as in -leb, -seb, -teb).",
+     "tuning": {
+      "cases": 73,
+      "holds": 59,
+      "comparison_rate": 0.1152
+     },
+     "held": {
+      "cases": 36,
+      "holds": 29,
+      "rate": 0.8056,
+      "comparison_rate": 0.1009
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M4-1",
+     "finder": "M4",
+     "statement": "Word-final copula -wi comes after the vowel o or e: words end in -owi (-lowi, -towi, -qowi) or -ewi, rarely in a consonant plus -wi.",
+     "tuning": {
+      "cases": 76,
+      "holds": 63,
+      "comparison_rate": 0.3692
+     },
+     "held": {
+      "cases": 60,
+      "holds": 44,
+      "rate": 0.7333,
+      "comparison_rate": 0.3732
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M4-2",
+     "finder": "M4",
+     "statement": "A word that ends in b has e just before it: the plural ending is written -eb (-leb, -seb, -teb), seldom with another letter before the b.",
+     "tuning": {
+      "cases": 73,
+      "holds": 59,
+      "comparison_rate": 0.2536
+     },
+     "held": {
+      "cases": 36,
+      "holds": 29,
+      "rate": 0.8056,
+      "comparison_rate": 0.2308
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Griffith 1911 (Karanog)"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M4-3",
+     "finder": "M4",
+     "statement": "After a word ending in -se comes a short word of at most three letters, mostly a free-standing ending or particle such as l, li, lw, wi or lke.",
+     "tuning": {
+      "cases": 48,
+      "holds": 39,
+      "comparison_rate": 0.4152
+     },
+     "held": {
+      "cases": 23,
+      "holds": 7,
+      "rate": 0.3043,
+      "comparison_rate": 0.3655
+     },
+     "verdict": "not passed: holds in under 80%; under 30 points above its comparison",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M5-1",
+     "finder": "M5",
+     "statement": "A name that carries an ending does not take an ending beginning with l (the article -l, -li, -lo, -lowi, -leb); names take -te, -i, -qo, -to, -se and the like instead.",
+     "tuning": {
+      "cases": 81,
+      "holds": 66,
+      "comparison_rate": 0.451
+     },
+     "held": {
+      "cases": 78,
+      "holds": 70,
+      "rate": 0.8974,
+      "comparison_rate": 0.5318
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M5-2",
+     "finder": "M5",
+     "statement": "A title or other common noun (not a name) that carries the copula -o / -owi has the article l directly before the o: -lo, -lowi, -lw, not bare -o, -to or -qo.",
+     "tuning": {
+      "cases": 72,
+      "holds": 65,
+      "comparison_rate": 0.5
+     },
+     "held": {
+      "cases": 41,
+      "holds": 36,
+      "rate": 0.878,
+      "comparison_rate": 0.4621
+     },
+     "verdict": "passed",
+     "readers": [
+      "stated",
+      "stated"
+     ],
+     "works": [
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M5-3",
+     "finder": "M5",
+     "statement": "An ending that begins with a vowel (a, e, i, o) is attached only to a stem ending in a consonant sign (woS-i, apedemk-i, pqr-i); after a stem ending in a vowel the ending begins with y instead (Sore-yi, mdewe-yi).",
+     "tuning": {
+      "cases": 35,
+      "holds": 34,
+      "comparison_rate": 0.483
+     },
+     "held": {
+      "cases": 29,
+      "holds": 25,
+      "rate": 0.8621,
+      "comparison_rate": 0.4936
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "stated"
+     ],
+     "works": [
+      "Griffith, Meroitic Studies"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M6-1",
+     "finder": "M6",
+     "statement": "The word ending -owi stands after l or t: words end in -lowi or -towi, almost never in another consonant plus -owi.",
+     "tuning": {
+      "cases": 56,
+      "holds": 50,
+      "comparison_rate": 0.2014
+     },
+     "held": {
+      "cases": 41,
+      "holds": 35,
+      "rate": 0.8537,
+      "comparison_rate": 0.2138
+     },
+     "verdict": "passed",
+     "readers": [
+      "partly",
+      "partly"
+     ],
+     "works": [
+      "Rilly 2016"
+     ],
+     "ours": false
+    },
+    {
+     "id": "M6-2",
+     "finder": "M6",
+     "statement": "A word that ends in -wi has the vowel o or e just before it (-owi, -ewi).",
+     "tuning": {
+      "cases": 76,
+      "holds": 63,
+      "comparison_rate": 0.2891
+     },
+     "held": {
+      "cases": 60,
+      "holds": 44,
+      "rate": 0.7333,
+      "comparison_rate": 0.3187
+     },
+     "verdict": "not passed: holds in under 80%",
+     "readers": null,
+     "works": null,
+     "ours": false
+    },
+    {
+     "id": "M6-3",
+     "finder": "M6",
+     "statement": "A word written more than once in a text tends to come back inside the same frame: at least one of its neighbours (the word before or the word after) recurs at another of its occurrences.",
+     "tuning": {
+      "cases": 492,
+      "holds": 274,
+      "comparison_rate": 0.0915
+     },
+     "held": {
+      "cases": 236,
+      "holds": 64,
+      "rate": 0.2712,
+      "comparison_rate": 0.0169
+     },
+     "verdict": "not passed: holds in under 80%; under 30 points above its comparison",
+     "readers": null,
+     "works": null,
+     "ours": false
+    }
+   ]
+  }
+ },
+ "both": {
+  "rules": 73,
+  "passed": 53,
+  "stated_or_partly_stated": 52,
+  "ours": 1,
+  "bar_met": false,
+  "partly_stated_by_both": 15
+ },
+ "long_texts": [
+  {
+   "text": "REM 1044",
+   "kind": "funerary",
+   "set": "held back",
+   "words": 708,
+   "open_words": 374,
+   "rules_with_a_case": 22,
+   "cases": 101,
+   "holds": 55
+  },
+  {
+   "text": "REM 1003",
+   "kind": "royal or temple (stela, wall, cartouche, label)",
+   "set": "tuning",
+   "words": 485,
+   "open_words": 204,
+   "rules_with_a_case": 7,
+   "cases": 40,
+   "holds": 27
+  },
+  {
+   "text": "REM 0094",
+   "kind": "royal or temple (stela, wall, cartouche, label)",
+   "set": "held back",
+   "words": 234,
+   "open_words": 136,
+   "rules_with_a_case": 12,
+   "cases": 55,
+   "holds": 36
+  },
+  {
+   "text": "REM 1333",
+   "kind": "funerary",
+   "set": "tuning",
+   "words": 190,
+   "open_words": 88,
+   "rules_with_a_case": 10,
+   "cases": 41,
+   "holds": 33
+  },
+  {
+   "text": "REM 1039",
+   "kind": "not known",
+   "set": "held back",
+   "words": 131,
+   "open_words": 52,
+   "rules_with_a_case": 5,
+   "cases": 16,
+   "holds": 8
+  },
+  {
+   "text": "REM 1066",
+   "kind": "funerary",
+   "set": "tuning",
+   "words": 113,
+   "open_words": 31,
+   "rules_with_a_case": 36,
+   "cases": 168,
+   "holds": 147
+  },
+  {
+   "text": "REM 1067",
+   "kind": "not known",
+   "set": "tuning",
+   "words": 111,
+   "open_words": 40,
+   "rules_with_a_case": 33,
+   "cases": 63,
+   "holds": 58
+  }
+ ],
+ "cases_by_kind": {
+  "cases": {
+   "funerary": 13412,
+   "not known": 926,
+   "royal or temple (stela, wall, cartouche, label)": 299,
+   "graffito": 107,
+   "document (ostracon, papyrus, wood, vessel)": 88,
+   "oracular decree": 73
+  },
+  "all": 14905,
+  "share": {
+   "funerary": 0.8998,
+   "not known": 0.0621,
+   "royal or temple (stela, wall, cartouche, label)": 0.0201,
+   "graffito": 0.0072,
+   "document (ostracon, papyrus, wood, vessel)": 0.0059,
+   "oracular decree": 0.0049
+  }
+ },
+ "cost": {
+  "round 1, the finders": {
+   "agents": 8,
+   "tokens": 845046
+  },
+  "round 1, the readers": {
+   "agents": 4,
+   "tokens": 630212
+  },
+  "round 2, the finders": {
+   "agents": 6,
+   "tokens": 739226
+  },
+  "round 2, the readers": {
+   "agents": 2,
+   "tokens": 271463
+  },
+  "all": {
+   "agents": 20,
+   "tokens": 2485947
+  }
+ },
+ "when": {
+  "split_drawn": "19:08:03",
+  "1": {
+   "set_in": "b5093e6",
+   "set": "19:09:13",
+   "finders_started": "19:09:47",
+   "first_rules": "19:12:45",
+   "last_rules": "19:14:11",
+   "tests_frozen": "19:15:35",
+   "held_table_written": "19:15:45",
+   "tested": "19:15:46",
+   "readers_started": "19:16",
+   "first_answer": "19:19:35",
+   "last_answer": "19:20:40"
+  },
+  "2": {
+   "set_in": "bd9a68e",
+   "set": "19:22:34",
+   "finders_started": "19:23",
+   "first_rules": "19:27:21",
+   "last_rules": "19:30:03",
+   "tests_frozen": "19:30:39",
+   "tested": "19:30:39",
+   "readers_started": "19:31",
+   "first_answer": "19:33:15",
+   "last_answer": "19:33:24"
+  }
+ }
+}
