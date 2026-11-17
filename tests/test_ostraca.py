@@ -5,7 +5,7 @@
 The source text, the rows and the figures are public (Griffith's article is in the public domain); the blind second
 typing and the map are local, so the checks that recompute from them are skipped where they are absent.
 """
-import json, pathlib, re, sys
+import json, pathlib, re, sys, unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src" / "v6"), str(ROOT / "src" / "experts"), str(ROOT / "src"), str(ROOT / "tests")]
@@ -93,8 +93,8 @@ def test_the_rows_hold_the_texts():
     assert sum(r["words"] for r in rs) == 275 and sum(r["signs"] for r in rs) == 959
     listed = {(r["number"], d["word"]) for r in rs for d in r["doubts"]}
     assert {(n, w) for n, w, _ in O.NOTES + O.COPIES + O.OURS if w != "·"} <= listed
-    whys = {(r["number"], d["word"]): d["why"] for r in rs for d in r["doubts"]}
-    assert all(whys[(n, w)] == why for n, w, why in O.COPIES)                   # where his copy differs, said
+    said = {(r["number"], d["word"], d["why"]) for r in rs for d in r["doubts"]}
+    assert set(O.COPIES) <= said                                                # where his copy differs, said
 
 
 def test_the_corpus_reads_them_as_open_readings():
@@ -141,19 +141,66 @@ def test_published_figures():
 
 def test_the_copy_check_counts():
     import tempfile
-    rows = [{"text": "F.O. 1", "word": "atr", "verdict": "differs"}, {"text": "F.O. 1", "word": "ab", "verdict": "same"},
-            {"text": "F.O. 6", "word": "qê", "verdict": "cannot tell"},
-            {"text": "F.O. 1", "dividers_copy": 10, "dividers_typed": 10, "detail": "same total, different places: x"},
-            {"text": "F.O. 6", "dividers_copy": 0, "dividers_typed": 0}, {"text": "D.O. 1", "dividers_copy": 7, "dividers_typed": 6}]
-    with tempfile.TemporaryDirectory() as d:
-        path = pathlib.Path(d) / "check.jsonl"
-        path.write_text("".join(json.dumps(r) + "\n" for r in rows))
-        c = O.copy_check(path)
-    assert c["texts"] == 2 and c["words"] == 3 and c["by_verdict"] == {"cannot tell": 1, "differs": 1, "same": 1}
+    ts = [{"no": "F.O. 1", "printed": "(1) atr : ab 6·3 : (2) tb...šb..."}, {"no": "F.O. 6", "printed": "qê li"},
+          {"no": "D.O. 1", "printed": "ke : ṭệḳes"}]
+    judged = [{"text": "F.O. 1", "word": "atr", "verdict": "differs"},
+              {"text": "F.O. 1", "word": "ab", "verdict": "same"},
+              {"text": "F.O. 1", "word": "tb...", "verdict": "same"},       # one typed word judged in two pieces
+              {"text": "F.O. 1", "word": "šb...", "verdict": "cannot tell"},
+              {"text": "F.O. 6", "word": "qê", "verdict": "cannot tell"},
+              {"text": "F.O. 6", "word": "li", "verdict": "same"},
+              {"text": "D.O. 1", "word": "ke", "verdict": "same"},
+              {"text": "D.O. 1", "word": "ṭêḳes", "verdict": "same"}]      # lined up by letters, not by dots
+    dividers = [{"text": "F.O. 1", "dividers_copy": 2, "dividers_typed": 2, "detail": "same total, different places"},
+                {"text": "F.O. 6", "dividers_copy": 0, "dividers_typed": 0},
+                {"text": "D.O. 1", "dividers_copy": 2, "dividers_typed": 1}]
+
+    def check(rows):
+        with tempfile.TemporaryDirectory() as d:
+            path = pathlib.Path(d) / "check.jsonl"
+            path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+            return O.copy_check(path, ts)
+
+    def stops(rows):
+        try:
+            check(rows)
+        except SystemExit:
+            return True
+        return False
+
+    c = check(judged + dividers)
+    assert c["texts"] == 3 and c["words"] == 7 and c["by_verdict"] == {"cannot tell": 2, "differs": 1, "same": 4}
     assert c["differs"] == [["F.O. 1", "atr"]] and c["dividers_differ"] == ["D.O. 1", "F.O. 1"]
+    assert not stops(judged + dividers)
+    assert stops([dict(w, word="qo") if w["word"] == "qê" else w for w in judged] + dividers)    # a word not typed
+    assert stops([w for w in judged if w["word"] != "li"] + dividers)                    # a typed word not judged
+    assert stops(judged + [{"text": "F.O. 6", "word": "ab", "verdict": "same"}] + dividers)      # one judged too many
+    assert stops([dict(w, verdict="different") if w["word"] == "li" else w for w in judged] + dividers)  # no verdict
+    assert stops(judged + dividers + [{"text": "F.O. 6", "note": "a sign above the line"}])     # neither kind of answer
+    assert stops(judged + [dict(d, dividers_typed=1) if d["text"] == "F.O. 6" else d for d in dividers])
+    assert stops(judged + dividers[:2])                                                  # a text without its dividers
+    assert stops(judged + dividers + [{"text": "F.O. 99", "word": "ab", "verdict": "same"},
+                                     {"text": "F.O. 99", "dividers_copy": 0, "dividers_typed": 0}])   # a text not typed
     assert O.copy_check(pathlib.Path("/nonexistent/check.jsonl")) is None
-    figs = json.loads(O.FIGURES.read_text(encoding="utf-8"))
-    assert set(map(tuple, figs["copy_check"]["differs"])) <= {(n, w) for n, w, _ in O.COPIES}    # each one said
+    figs = json.loads(O.FIGURES.read_text(encoding="utf-8"))["copy_check"]
+    copied = [t for t in O.texts() if re.search(r"XXIX|XXX\b", t["plates"])]
+    assert figs["texts"] == len(copied) == 11
+    assert figs["words"] == sum(1 for t in copied for w in O.words(t["printed"]) if w["kind"] == "word")
+    assert set(map(tuple, figs["differs"])) <= {(n, w) for n, w, _ in O.COPIES}         # each one said
+    assert set(figs["dividers_differ"]) == {n for n, _, why in O.COPIES if "divider" in why}     # and only those
+
+
+def test_the_page_and_report_quote_the_copy_check():
+    c = json.loads(O.FIGURES.read_text(encoding="utf-8"))["copy_check"]
+    v = c["by_verdict"]
+    nfc = lambda s: unicodedata.normalize("NFC", s)
+    flat = lambda name: nfc(" ".join((ROOT / name).read_text(encoding="utf-8").split()))
+    page, report = flat("data/discovery/ostraca_sayce.md"), flat("REPORT.md")
+    assert (f"Of the {c['words']} typed words of the {c['texts']} texts, {v['same']} are the same in the copy, "
+            f"{v['differs']} differ and {v['cannot tell']} cannot be told") in page
+    assert all(nfc(f"| {n} | `{w}`") in page for n, w, why in O.COPIES if "divider" not in why)   # a row for each sign
+    assert (f"of their {c['words']} words, {v['same']} are the same, {v['cannot tell']} cannot be told, and the "
+            f"{v['differs']} that differ") in report
 
 
 def test_published_figures_recomputed():
@@ -162,6 +209,8 @@ def test_published_figures_recomputed():
     assert figs["second_typing"] == O.blind() and figs["map"] == O.recurrence()
     needs("data/sources/ostraca/copies/check.jsonl")
     assert figs["copy_check"] == O.copy_check()
+    judged = {json.loads(l)["text"] for l in O.COPIES_CHECK.read_text(encoding="utf-8").splitlines() if l.strip()}
+    assert judged == {t["no"] for t in O.texts() if re.search(r"XXIX|XXX\b", t["plates"])}   # every copy, only those
 
 
 if __name__ == "__main__":

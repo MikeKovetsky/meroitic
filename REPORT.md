@@ -1158,9 +1158,11 @@ order"). The bar and the lot were committed before any typing
    images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly. The
    review checked every text on the page images and found five more marks of the first typing misplaced or
    missed (no letter): one doubted word more, 67. Griffith's notes doubt or read otherwise at 11 places, not the 5
-   first listed. The 11 texts with a hand copy were checked against his copies: of 91 words, 71 are the same, 15
-   cannot be told, and the 5 that differ follow his print, where print and copy disagree; they are listed among
-   the doubts (section 3 of the page).
+   first listed. The 11 texts with a hand copy were checked against his copies: of their 89 words, 69 are the
+   same, 15 cannot be told, and the 5 that differ follow his print, where print and copy disagree (the first count,
+   91 and 71, took the three lines of B.O. 5's one printed word for three words). They are listed among the doubts,
+   with a sign of F.O. 40 that his copy has and his print lacks, which the review found in the answers (section 3
+   of the page).
 3. **`corpus_v6` has 594 inscriptions**, 350 with an open reading; the ostraca carry no REM number in hand and are
    numbered by their sigla (`F.O. 1`). None of them was already held. The map stays on the 548 texts it is drawn
    on (`data/discovery/map_texts.json`): counting it on the new texts needs a new sample of the unnamed stems for

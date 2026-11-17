@@ -108,14 +108,14 @@
   "running_words": 275,
   "how": "the map as it stands (src/themap.py current()): a spelling has the group its places have most often; an open spelling that stood in one text of the map and stands in an ostracon now stands in two; spellings with a lost sign are left out"
  },
- "his_copy_differs": 7,
+ "his_copy_differs": 8,
  "copy_check": {
   "texts": 11,
-  "words": 91,
+  "words": 89,
   "by_verdict": {
    "cannot tell": 15,
    "differs": 5,
-   "same": 71
+   "same": 69
   },
   "differs": [
    [
@@ -143,6 +143,6 @@
    "D.O. 1",
    "F.O. 1"
   ],
-  "how": "an agent read each hand copy (plates XXIX and XXX) with the cursive key of data/expansion/README.md and gave each typed word one verdict; every word it found different was looked at on the printed page, and the typing follows the print in each (src/ostraca.py, COPIES)"
+  "how": "an agent read each hand copy (plates XXIX and XXX) with the cursive key of data/expansion/README.md and judged each typed word; its answers are lined up with the typing by letters, and a word it judged in pieces (B.O. 5's tb...šb...šb..., on three lines of the copy) takes the worst verdict of its pieces; every word it found different was looked at on the printed page, and the typing follows the print in each (src/ostraca.py, COPIES)"
  }
 }

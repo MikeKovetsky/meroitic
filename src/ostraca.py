@@ -48,6 +48,7 @@ DOT = "̣"                       # combining dot below: his mark of a doubtful s
 SYMBOLS = "⍋⍦"
 LOT = ("F.O. 6", "F.O. 12", "F.O. 25", "F.O. 31", "F.O. 36")     # drawn 2026-11-17 08:28 (data/discovery/ostraca_sayce.md)
 BAR = 0.97
+VERDICTS = ("same", "cannot tell", "differs")   # the check against his hand copies, on a typed word: mildest first
 NUMERAL = re.compile(r"[\d·½]+")
 MARK = re.compile(r"^\((\d+)\)$")
 
@@ -119,6 +120,9 @@ COPIES = (
     ("F.O. 35", "šrbeḫ", "his hand copy has a 3-shaped last sign (m, ẖ or š in this hand), not his ḫ"),
     ("F.O. 39", "zle", "his hand copy has a last sign shaped like his ḫ, not e"),
     ("F.O. 39", "ep", "his hand copy has a first sign shaped like his ḫ, not e"),
+    ("F.O. 40", "1" + DOT, "his hand copy (pl. XXX, 1) has a 3-shaped sign just before this stroke, after the ẹ "
+                           "and a gap he marks \"blank?\"; his print lacks it, and with the stroke it looks like the "
+                           "sign q"),
     ("D.O. 1", "ṭệḳes", "his hand copy has a divider before its last two signs (es)"),
 )
 OURS = (
@@ -263,8 +267,8 @@ def row(t):
                   "hyphens joining, his restorations kept as letters, '.' a lost sign, his numerals in digits (his "
                   "point parts two numerals, his ½ is left out); "
                   "the second hand's '*' and the symbols ⍋ ⍦ left out. doubts: the words with his dot below a "
-                  "sign or a (?), what his notes doubt, and the places we are unsure of. src/ostraca.py writes "
-                  "this row from data/expansion/jea/griffith1925_ostraca.txt."),
+                  "sign or a (?), what his notes doubt, where his hand copy differs from his print, and the places "
+                  "we are unsure of. src/ostraca.py writes this row from data/expansion/jea/griffith1925_ostraca.txt."),
     }
 
 
@@ -281,22 +285,53 @@ def compare_signs(a, b):
     return same, len(a), len(b)
 
 
-def copy_check(path=COPIES_CHECK):
-    """The counts of the check against his hand copies (local answers), or None where they are not here: the words
-    of the 11 copied texts by verdict (numerals and lost signs left out) and the dividers counted in each."""
+def copy_check(path=COPIES_CHECK, ts=None):
+    """The counts of the check against his hand copies (local answers), or None where they are not here: the typed
+    words of the copied texts by verdict (numerals and lost signs left out) and the texts whose dividers differ in
+    number or place. The answers are lined up with the typing by letters, and the build stops where the two part or
+    where the answers count the typing's dividers otherwise; a word judged in pieces (B.O. 5's tb...šb...šb..., on
+    three lines of the copy) takes the worst verdict of its pieces."""
     if not path.exists():
         return None
-    rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
-    ws = [r for r in rows if r.get("verdict") in ("same", "differs", "cannot tell")]
-    ds = [r for r in rows if "dividers_copy" in r]
-    return {"texts": len({r["text"] for r in ws}), "words": len(ws),
-            "by_verdict": dict(sorted(collections.Counter(r["verdict"] for r in ws).items())),
-            "differs": sorted([r["text"], r["word"]] for r in ws if r["verdict"] == "differs"),
-            "dividers_differ": sorted(r["text"] for r in ds if r["dividers_copy"] != r["dividers_typed"]
+    printed = {t["no"]: t["printed"] for t in (texts() if ts is None else ts)}
+    judged, dividers = collections.defaultdict(list), {}
+    for r in (json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()):
+        if r.get("verdict") in VERDICTS:
+            judged[r["text"]].append(r)
+        elif "dividers_copy" in r:
+            dividers[r["text"]] = r
+        else:
+            raise SystemExit(f"{path.name}: neither a verdict nor a count of dividers: {r}")
+    if set(judged) != set(dividers) or not set(judged) <= set(printed):
+        raise SystemExit(f"{path.name}: the texts judged, the texts whose dividers are counted and the typed texts "
+                         f"do not match: {sorted(set(judged) ^ set(dividers) | set(judged) - set(printed))}")
+    out = []                                                       # (text, typed word, verdict)
+    for no, pieces in judged.items():
+        k = 0
+        for w in (x["printed"] for x in words(printed[no]) if x["kind"] == "word"):
+            got, letters = [], ""
+            while k < len(pieces) and len(letters) < len(plain(w)):
+                got.append(pieces[k])
+                letters += plain(pieces[k]["word"])
+                k += 1
+            if letters != plain(w):
+                raise SystemExit(f"{no}: the check judges {[g['word'] for g in got]} where the typing has {w}")
+            out.append((no, w, max((g["verdict"] for g in got), key=VERDICTS.index)))
+        if k < len(pieces):
+            raise SystemExit(f"{no}: the check judges words the typing has not: {[g['word'] for g in pieces[k:]]}")
+    typed = {no: printed[no].count(":") for no in dividers}
+    if any(r["dividers_typed"] != typed[no] for no, r in dividers.items()):
+        raise SystemExit(f"{path.name}: the answers count the typing's dividers otherwise than the typing has them")
+    return {"texts": len(judged), "words": len(out),
+            "by_verdict": dict(sorted(collections.Counter(v for _, _, v in out).items())),
+            "differs": sorted([no, w] for no, w, v in out if v == "differs"),
+            "dividers_differ": sorted(no for no, r in dividers.items() if r["dividers_copy"] != typed[no]
                                       or r.get("detail", "").startswith("same total, different places")),
             "how": "an agent read each hand copy (plates XXIX and XXX) with the cursive key of data/expansion/README.md "
-                   "and gave each typed word one verdict; every word it found different was looked at on the printed "
-                   "page, and the typing follows the print in each (src/ostraca.py, COPIES)"}
+                   "and judged each typed word; its answers are lined up with the typing by letters, and a word it "
+                   "judged in pieces (B.O. 5's tb...šb...šb..., on three lines of the copy) takes the worst verdict "
+                   "of its pieces; every word it found different was looked at on the printed page, and the typing "
+                   "follows the print in each (src/ostraca.py, COPIES)"}
 
 
 def second_typing(path=BLIND):

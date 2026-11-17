@@ -193,14 +193,19 @@ Griffith, that is a second witness for the same doubtful reading, not a settleme
 
 Plates XXIX and XXX hold Griffith's hand copies of 11 of the texts (F.O. 1, 6, 35, 37, 39, 40, B.O. 1, 3, 4, 5
 and D.O. 1). As the bar said, they were checked sign by sign against the typing: an agent read each copy with the
-cursive key of [`data/expansion/README.md`](../expansion/README.md) (section 2) and gave every typed word one
-verdict, numerals and lost signs left out. Of 91 words, 71 are the same in the copy, 5 differ and 15 cannot be told
-(9 of them in D.O. 1, whose hand is thick; most of the others are signs he dotted as doubtful, or faint). In this
-hand m, ẖ and š are all 3-shaped and l and e are close, so "the same" on those signs means only that the shape
-fits.
+cursive key of [`data/expansion/README.md`](../expansion/README.md) (section 2) and judged every typed word,
+numerals and lost signs left out, and its answers are lined up with the typing by their letters. Of the 89 typed
+words of the 11 texts, 69 are the same in the copy, 5 differ and 15 cannot be told (9 of them in D.O. 1, whose
+hand is thick; most of the others are signs he dotted as doubtful, or faint). B.O. 5's one printed word,
+`tb...šb...šb...`, stands on three lines of the copy: the agent judged the three pieces, all the same. (The first
+count, 91 words with 71 the same, took those three pieces for three words; the review lined the answers up with
+the typing.) In this hand m, ẖ and š are all 3-shaped and l and e are close, so "the same" on those signs means
+only that the shape fits.
 
 Each of the 5 was looked at on the printed page, and in each the typing follows the print: they are places where
-his print and his own copy differ, now listed among the row's doubts (`src/ostraca.py`, `COPIES`):
+his print and his own copy differ, now listed among the row's doubts (`src/ostraca.py`, `COPIES`). So is a sixth,
+which the agent noted beside a numeral (the verdicts leave numerals out) and which the review found in its answers:
+in F.O. 40 the copy has a sign that the print lacks.
 
 | Text | Printed | His hand copy |
 |---|---|---|
@@ -209,6 +214,7 @@ his print and his own copy differ, now listed among the row's doubts (`src/ostra
 | F.O. 35 | `šrbeḫ` | a 3-shaped last sign (m, ẖ or š), not his ḫ |
 | F.O. 39 | `zle` | a last sign shaped like his ḫ, not e |
 | F.O. 39 | `ep` | a first sign shaped like his ḫ, not e |
+| F.O. 40 | `1̣` (a numeral, `..ẹ 1̣ ṣ̌r` in l. 1) | a 3-shaped sign just before the stroke, after the ẹ and a gap he marks "blank?"; with the stroke it looks like the sign q |
 
 The word dividers agree in number in 10 of the 11 texts. D.O. 1 has one more in the copy, before the last two signs
 of `ṭệḳes`; F.O. 1 has as many in both, in two other places (a divider between `teperet` and `zê`, none after

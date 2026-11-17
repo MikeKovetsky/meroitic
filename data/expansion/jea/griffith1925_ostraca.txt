@@ -23,7 +23,8 @@
 # Letters: ê (today o), š (the sign s), plain s (the sign se), ñ (the sign ne), z (today d), ḫ (h with a breve
 # below, today ḫ), ẖ (h with a line below, today ẖ), tê (the sign to). A dot below a letter (the combining dot
 # below, U+0323) is his mark of a doubtful sign. Footnotes, his italics and his notes are not typed here; what his
-# notes doubt or read otherwise is in src/ostraca.py (NOTES), with the places we are unsure of.
+# notes doubt or read otherwise is in src/ostraca.py (NOTES), with where his hand copies differ from his print
+# (COPIES) and the places we are unsure of (OURS).
 # F.O. 38 prints no letters (it refers to Liverpool Annals XI, pl. LXXII, 16) and is not typed.
 F.O. 1	p. 220	Pl. XXIX, 5	(1) mlewês : winqerems abelte : mn : arbte : (2) trêzes-lw 22 : atr 6·3 : teperet zê (3) lẖlik : abelte : 12·1 alêẖ : ant-mnês 1·3 (4) tpelêqe ·4½ asqere 1·6 azeqe : bl 2·9 tr 2·8 (5) abwês
 F.O. 2	p. 220	Pl. XXVI, 13	mlewês : azḫblês 33 mnês 25.
