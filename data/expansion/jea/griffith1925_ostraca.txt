@@ -1,0 +1,73 @@
+# Griffith's ostraca from Faras, Buhen and Dakkah in his transliteration of 1925
+#
+# Source: F. Ll. Griffith, "Meroitic Studies V", Journal of Egyptian Archaeology 11 (1925), pp. 218-224, plates
+# XXVI to XXX. Public domain (published 1925; the author died in 1934). The copy used is archive.org
+# in.ernet.dli.2015.70984 (Digital Library of India), which lacks printed pp. 218-219: the article's opening, before
+# F.O. 1 (p. 220). Typed by hand from page images of pp. 220-224 rendered at high resolution, sign by sign, on
+# 2026-11-17; the article's text layer was not used for the letters. Every h, every s, every letter with a dot below
+# and every accent was looked at again on a crop of the line enlarged six to sixteen times.
+#
+# One line per text: its number, the page, the plates, a tab, then the text as printed. Griffith's marks:
+#   (N)      the start of line N of the ostracon (his numbers); in B.O. 1 the two printed lines carry no numbers and
+#            (1) (2) are ours
+#   :        his word divider; a divider printed with dots one above the other is typed ":" too
+#   [ ]      his restorations; ( ) a letter he supplies
+#   .        a lost sign; a run of dots a gap
+#   -        his hyphen (he joins with it)
+#   *        what follows is in the thin second hand (F.O. 12, 13 and others); *ap* is two-sided as printed
+#   //       a hatched stretch (damaged)
+#   ⍋        the "rectilinear symbol" (clearly not a numeral, his note on F.O. 10); ⍦ the sign "like a branching
+#            tree or ear of corn"
+#   (?)      his doubt about the numeral or word before it; (sic) his
+#   numerals as printed: 6·3, ·4½, 12·1 (his point and his fractions)
+# Letters: ê (today o), š (the sign s), plain s (the sign se), ñ (the sign ne), z (today d), ḫ (h with a breve
+# below, today ḫ), ẖ (h with a line below, today ẖ), tê (the sign to). A dot below a letter (the combining dot
+# below, U+0323) is his mark of a doubtful sign. Footnotes, his italics and his notes are not typed here; what his
+# notes doubt or read otherwise is in src/ostraca.py (NOTES), with the places we are unsure of.
+# F.O. 38 prints no letters (it refers to Liverpool Annals XI, pl. LXXII, 16) and is not typed.
+F.O. 1	p. 220	Pl. XXIX, 5	(1) mlewês : winqerems abelte : mn : arbte : (2) trêzes-lw 22 : atr 6·3 : teperet zê (3) lẖlik : abelte : 12·1 alêẖ : ant-mnês 1·3 (4) tpelêqe ·4½ asqere 1·6 azeqe : bl 2·9 tr 2·8 (5) abwês
+F.O. 2	p. 220	Pl. XXVI, 13	mlewês : azḫblês 33 mnês 25.
+F.O. 3	p. 220	Pl. XXVII, 13	arb[te] : trêze[s] li : tḳiñ-lw ·9 ·2 (sic).
+F.O. 4	p. 220	Pl. XXVII, 16	ašitbre : ạ...arenês 4 : ...slimnê : alêẖ : bli :
+F.O. 5	p. 220	Pl. XXVI, 10	mẖzi : šmeñtêñ blḫe 125 : qêleb : timlêqes : abet 3 :
+F.O. 6	p. 220	Pl. XXVIII, 2; Pl. XXX, 2	qê li keñ azeqe 2·6.
+F.O. 7	p. 220	Pl. XXVI, 3	qê li keñ arbte zliketel ·4½.
+F.O. 8	p. 220	Pl. XXVI, 8	[qê li k]eñ : šrḫi ........ te 40(?) ·9 ....
+F.O. 9	p. 220	Pl. XXVI, 7	qê li keñ .... ẖlw ⍋ ..... ·7 ḫr : ..... *artepệ .....
+F.O. 10	p. 221	Pl. XXVII, 8	qê li keñ abinte ·ḷ ... ⍦ bẓ ỵete ⍦ 11·6 bek ....
+F.O. 11	p. 221	Pl. XXVII, 6	qê li keñ 31 ⍋ *a.ṭ..ḳ : qe 1̣·3.
+F.O. 12	p. 221	Pl. XXVI, 2	qê li ⍋ 10·1 5·8 *ḫ ·4½ ariketê 2.
+F.O. 13	p. 221	Pl. XXVI, 4	qê li ⍋ 5·5 *ḫ ·6 ariketê.
+F.O. 14	p. 221	Pl. XXVI, 5	qê li ⍋ 3 ḫr : arbte : antlis-lw 1 : šimetê.
+F.O. 15	p. 221	Pl. XXVII, 17	ḫ̣mṛkeli : šbil : mḫwị : qê li ⍋ 2·7½ tẖ-lw : qe kḫê.
+F.O. 16	p. 221	Pl. XXVII, 2	abel ... lw ⍋ 1·1 ... 3·2 ... ⍋ a ... *pe....
+F.O. 17	p. 221	Pl. XXVII, 3	qê li ..... qê li .... ḷi ñte : ṃlḫl ·9 wztr 2·2.
+F.O. 18	p. 221	Pl. XXVI, 6	qê l[i] ........ lerke : tkiz : ššimetele ṭẹ · 6·3½ wị.
+F.O. 19	p. 221	Pl. XXVI, 1	(1) ..rêli : tñ : zêtke : bêqe (2) .. ⍋ 10·1 tmñteke 1·3 (3) .. ịlkze ·3 blilemê (4) ṃe ·4 mrêñli 1·5 mkšḫi (5) ze ·5 abṛṭnli ·4½. (6) qê mêškze 3 *ap*. (7) qê li ·2 mksy ·3 (8) wi 15·5½.
+F.O. 20	p. 222	Pl. XXVI, 12	(1) ... en : ašeris 9 (2) ... nite 10·8 tnr (3) ... 3·6 wi 19·3.
+F.O. 21	p. 222	Pl. XXVI, 11	(1) ... knr : abẖe : btewi (2) ... qệ 1 mnqer : arteli : qe (3) ... ite : tebezekiz : tñs 2 (4) ... erqête 1 abẖ-lẖ 2 : mete (5) ... ḷi : zḫrṣ̌ ...
+F.O. 22	p. 222	Pl. XXVII, 5	.... yệ ... ṃleqe 2 ... erqêtê.
+F.O. 23	p. 222	Pl. XXVII, 4	aq : zwi zête 15·6.
+F.O. 24	p. 222	Pl. XXVII, 18	.. ẓ : šer ... 1̣·3̣½ ṣ̌ḅk 1·3½ ... ar..ị : mẖ ... ·7½ ... ḷw 15 ... etês ·1 ... ze : ỵlz.
+F.O. 25	p. 222	Pl. XXVII, 1	. rêb .. nte : ḫ̣ ... ibres ... sḳes 1 ḷ ... mêle 10 ... s 1̣.
+F.O. 26	p. 222	Pl. XXVI, 9	...yik ...... eb : yẖ ...... ṃe // l // ...... yl 9 ...... *eti ...
+F.O. 27	p. 222	Pl. XXVII, 7	...ẖ̣ḫ : teñ a...... te 141̣ ...... s 2.
+F.O. 28	p. 222	Pl. XXVII, 15	... ệs 1 ... eẖ̣ltê ... mrke 1 ... li ḳe.
+F.O. 29	p. 222	Pl. XXVII, 14	... peṣ zệ 8̣.
+F.O. 30	p. 222	Pl. XXVI, 14	(y)eqêqebli-šê.
+F.O. 31	p. 222	Pl. XXVII, 9	..qệrli-šê.
+F.O. 32	p. 223	Pl. XXVII, 10	wiṃ ... ịz-šê.
+F.O. 33	p. 223	Pl. XXVII, 12	... ṭiñ-šê * ·4½.
+F.O. 34	p. 223	Pl. XXVII, 11	... ṃimnli ...
+F.O. 35	p. 223	Pl. XXVIII, 1; Pl. XXIX, 2	yezê .. šrbeḫ msliy .. šẓerb .. šqêymệ .. metemšệ.
+F.O. 36	p. 223	Pl. XXVIII, 5	........ me .... telẖ̣ ...
+F.O. 37	p. 223	Pl. XXVIII, 7; Pl. XXIX, 3	(1) zetezêmeṭệli (2) tekẹ 3 zeteyi (3) zêli ṣ kepêñ : (4) ..
+F.O. 39	p. 223	Pl. XXVIII, 4; Pl. XXIX, 4	zle ... 110 ... reši ... štḫñ ... štḫ̣ ..... ḫê . ep ...
+F.O. 40	p. 223	Pl. XXX, 1	(1) ..ẹ 1̣ ṣ̌r 2 n (2) s 2̣ šr 2̣ tṣnệ (3) ṃṭẹ : klmes 2.
+B.O. 1	p. 223	Pl. XXIX, 1	(1) mrê : šltli : mr 1·2̣½ šle qe 74·8. (2) a..r. qetete : tepe[re]t 16·6 ⍋ ...... 1·5.
+B.O. 2	p. 224	-	(1) ... li ṃr ... (2) ... šle ...
+B.O. 3	p. 224	Pl. XXX, 5	ṃze : š . re : ṭêlis : ty 3 : mrê 4·4 wi arbte : meñtel ẉ 7 qêli 7̣ (y)ereke.
+B.O. 4	p. 224	Pl. XXX, 3	antêš-šê.
+B.O. 5	p. 224	Pl. XXX, 4	tb...šb...šb...
+B.O. 6	p. 224	Pl. XXVIII, 9	...ḫtê-lw : ... qêr ... e : ẖelni ... e 10 ỵ ..... : pe ...
+D.O. 1	p. 224	Pl. XXX, 6	(1) ḅị : ke : tšisml : (2) ṭệṛzekeršêl ·2 pe (3) zeyẹ wete mte ḅệ (4) rê metekel : apêẓ (5) lḫ : birṃẖ̣etê : ṭy (6) .. bêryḫi zỵ ..... ṭệḳes (7) ...
