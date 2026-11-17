@@ -567,7 +567,9 @@ COST = ("<!-- cost: by hand, from the task notifications -->", "<!-- end of the 
 STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544", "0101", "362", "370",
           "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0",       # 4.0: the licence CC BY 4.0
           "16", "489",                                                    # GA 13+16; MilletExamples.txt line 489
-          "933", "242", "29"}                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
+          "933", "242", "29",                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
+          "2026-11-17", "1925",                  # Griffith's ostraca (JEA 11, 1925) came in on 2026-11-17
+          "563", "304", "50"}                    # the counts of 2026-11-12, before the ostraca, that dated passages quote
 
 
 def test_page_text_quotes_the_tables():

@@ -207,6 +207,8 @@ def tables(f):
                 f"| Passes the bar | {'yes' if rd['reader1']['passes'] else 'no'} | {'yes' if rd['reader2']['passes'] else 'no'} |",
                 ""]
     out += ["### The coverage map, counted again", "",
+            "On the texts the map is drawn on (`data/discovery/map_texts.json`, src/v6/recount.py `rows_for_map`): "
+            "a text added to `corpus_v6` later waits outside the map until the map is counted again on it.", "",
             "| Counted on | Texts | Words | Translated | Share |", "|---|---|---|---|---|"]
     old, was, new, al = cov["corpus_v5"]["all"], cov["inscriptions_that_were_in_corpus_v5"], cov["inscriptions_new_to_the_corpus"], cov["all"]
     once = cov["corpus_v5"]["near_copies_once"]
@@ -214,8 +216,8 @@ def tables(f):
             f"| `corpus_v5`, near-copies counted once (the old figure) | {once['texts']} | {once['words']:,} | {once['translated']:,} | {pct(once['translated'], once['words'])} |",
             f"| `corpus_v6`, the inscriptions that were in `corpus_v5` | {was['texts']} | {was['words']:,} | {was['translated']:,} | {pct(was['translated'], was['words'])} |",
             f"| `corpus_v6`, the inscriptions new to the corpus | {new['texts']} | {new['words']:,} | {new['translated']:,} | {pct(new['translated'], new['words'])} |",
-            f"| `corpus_v6`, all | {al['texts']} | {al['words']:,} | {al['translated']:,} | {pct(al['translated'], al['words'])} |",
-            "", "| Level | `corpus_v5` | `corpus_v6`, were in `corpus_v5` | `corpus_v6`, new | `corpus_v6`, all |", "|---|---|---|---|---|"]
+            f"| `corpus_v6`, all the map holds | {al['texts']} | {al['words']:,} | {al['translated']:,} | {pct(al['translated'], al['words'])} |",
+            "", "| Level | `corpus_v5` | `corpus_v6`, were in `corpus_v5` | `corpus_v6`, new | `corpus_v6`, all the map holds |", "|---|---|---|---|---|"]
     for level in old["levels"]:
         out.append(f"| {level} | {old['levels'][level]:,} | {was['levels'][level]:,} | {new['levels'][level]:,} | {al['levels'][level]:,} |")
     t5, t6 = cov["corpus_v5"]["texts"], cov["texts"]

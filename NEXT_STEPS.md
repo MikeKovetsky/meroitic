@@ -205,8 +205,8 @@ all words in section G):
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
 2. **Step 8, Faras** (46 funerary texts, hand copies): the same method, if that article prints indexes too. The
    volume is in hand since 13 November.
-3. **Step 6, Griffith's ostraca** in JEA 11: the volume is in hand since 13 November, as page images without a
-   text layer, and so is JEA 15 with his Meroitic Studies VI.
+3. **Step 6, Griffith's ostraca: done on 2026-11-17** (section B, step 6). Left from it: the REM numbers of the
+   46 texts, and pp. 218 and 219 of JEA 11, which the scan in hand lacks.
 4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
    no reader (Kar. 17 `sotnkel` and Kar. 111 `tewideqowi`, section 9 of the Karanòg page); word division outside
    the closing formulae still follows each reader, and so does a formula word parted by a divider on the stone;
@@ -220,7 +220,9 @@ all words in section G):
    Ethiopians* (1911), the *Recueil Champollion* (1922) with his Faras article, and *Journal of Egyptian
    Archaeology* 11 and 15. F4 reads none of them to start: its sources were in hand before. Also fetched: the
    half of *Liverpool Annals* 7 that archive.org holds. It prints Sayce's reading of REM 1003, all 42 lines in
-   the letter values he used, and no picture of the stone; it is not yet typed or compared. Not fetched, on
+   the letter values he used, and no picture of the stone; typed and compared on 2026-11-17
+   ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)): it settles almost nothing that
+   Griffith left open. Not fetched, on
    purpose: the Nubian grammars of step 18, the REM volumes of step 7, and the books that have to be bought.
 
 ## A. Share
@@ -293,6 +295,15 @@ all words in section G):
        reference pages and reading all the copies cost about 14 million subagent tokens.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
+   - **Done, 2026-11-17** ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md),
+     `src/ostraca.py`). Meroitic Studies V (JEA 11, 1925) prints 46 ostraca with letters (VI, JEA 15, 1929,
+     prints none): 275 words, typed from page images; a tenth drawn by lot was typed again blind and agrees on
+     56 of 56 signs (bar 97%). They are open readings in `corpus_v6`, which has 594 inscriptions since.
+   - **Left:** their REM numbers (each is numbered by its siglum, `F.O. 1`, until the REM volumes are in hand);
+     pp. 218 and 219 of the article, missing from the scan (another copy of JEA 11 is a download); and taking
+     them into the map, which needs a new sample of the unnamed stems for the north star's estimate
+     (`data/discovery/map_texts.json` lists the 548 texts the map is drawn on), best done once for all the
+     texts added on 2026-11-17.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
    [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, REM 0001 to 1278:
    about 1,280 inscriptions against about 480 in Griffith. Otten's paper describes it as photographs and facsimile

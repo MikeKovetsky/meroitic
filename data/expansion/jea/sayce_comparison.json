@@ -1,0 +1,832 @@
+{
+ "sayce": {
+  "lines": 42,
+  "words": 328,
+  "numerals": 12,
+  "signs": 1647,
+  "words_unsure": 33
+ },
+ "how": "both texts in the corpus spelling, lined up letter by letter (difflib) over the whole text; a word agrees when all its letters lie in stretches the two share. folded: src/akinidad.py fold(); strict: the corpus letters as they stand, x and X one letter. units: how often each of his units lines up with each of Griffith's signs where the two agree or are replaced one for one",
+ "against_griffith": {
+  "folded": {
+   "sayce_words": 340,
+   "sayce_words_agree": 212,
+   "griffith_words": 337,
+   "griffith_words_agree": 212,
+   "by_line": {
+    "1": {
+     "agree": 7,
+     "words": 7
+    },
+    "2": {
+     "agree": 4,
+     "words": 8
+    },
+    "3": {
+     "agree": 7,
+     "words": 8
+    },
+    "4": {
+     "agree": 7,
+     "words": 8
+    },
+    "5": {
+     "agree": 6,
+     "words": 10
+    },
+    "6": {
+     "agree": 5,
+     "words": 9
+    },
+    "7": {
+     "agree": 8,
+     "words": 9
+    },
+    "8": {
+     "agree": 7,
+     "words": 10
+    },
+    "9": {
+     "agree": 6,
+     "words": 10
+    },
+    "10": {
+     "agree": 8,
+     "words": 10
+    },
+    "11": {
+     "agree": 5,
+     "words": 9
+    },
+    "12": {
+     "agree": 7,
+     "words": 13
+    },
+    "13": {
+     "agree": 3,
+     "words": 9
+    },
+    "14": {
+     "agree": 3,
+     "words": 9
+    },
+    "15": {
+     "agree": 2,
+     "words": 8
+    },
+    "16": {
+     "agree": 4,
+     "words": 7
+    },
+    "17": {
+     "agree": 6,
+     "words": 11
+    },
+    "18": {
+     "agree": 5,
+     "words": 9
+    },
+    "19": {
+     "agree": 4,
+     "words": 10
+    },
+    "20": {
+     "agree": 9,
+     "words": 11
+    },
+    "21": {
+     "agree": 5,
+     "words": 7
+    },
+    "22": {
+     "agree": 5,
+     "words": 9
+    },
+    "23": {
+     "agree": 7,
+     "words": 9
+    },
+    "24": {
+     "agree": 1,
+     "words": 8
+    },
+    "25": {
+     "agree": 4,
+     "words": 9
+    },
+    "26": {
+     "agree": 3,
+     "words": 10
+    },
+    "27": {
+     "agree": 9,
+     "words": 9
+    },
+    "28": {
+     "agree": 5,
+     "words": 6
+    },
+    "29": {
+     "agree": 3,
+     "words": 6
+    },
+    "30": {
+     "agree": 7,
+     "words": 7
+    },
+    "31": {
+     "agree": 7,
+     "words": 8
+    },
+    "32": {
+     "agree": 3,
+     "words": 5
+    },
+    "33": {
+     "agree": 6,
+     "words": 8
+    },
+    "34": {
+     "agree": 4,
+     "words": 6
+    },
+    "35": {
+     "agree": 5,
+     "words": 7
+    },
+    "36": {
+     "agree": 2,
+     "words": 8
+    },
+    "37": {
+     "agree": 4,
+     "words": 5
+    },
+    "38": {
+     "agree": 4,
+     "words": 6
+    },
+    "39": {
+     "agree": 6,
+     "words": 6
+    },
+    "40": {
+     "agree": 4,
+     "words": 6
+    },
+    "41": {
+     "agree": 3,
+     "words": 6
+    },
+    "42": {
+     "agree": 2,
+     "words": 4
+    }
+   }
+  },
+  "strict": {
+   "sayce_words": 340,
+   "sayce_words_agree": 205,
+   "griffith_words": 337,
+   "griffith_words_agree": 209,
+   "by_line": {
+    "1": {
+     "agree": 6,
+     "words": 7
+    },
+    "2": {
+     "agree": 4,
+     "words": 8
+    },
+    "3": {
+     "agree": 7,
+     "words": 8
+    },
+    "4": {
+     "agree": 7,
+     "words": 8
+    },
+    "5": {
+     "agree": 6,
+     "words": 10
+    },
+    "6": {
+     "agree": 5,
+     "words": 9
+    },
+    "7": {
+     "agree": 7,
+     "words": 9
+    },
+    "8": {
+     "agree": 7,
+     "words": 10
+    },
+    "9": {
+     "agree": 6,
+     "words": 10
+    },
+    "10": {
+     "agree": 7,
+     "words": 10
+    },
+    "11": {
+     "agree": 5,
+     "words": 9
+    },
+    "12": {
+     "agree": 7,
+     "words": 13
+    },
+    "13": {
+     "agree": 3,
+     "words": 9
+    },
+    "14": {
+     "agree": 3,
+     "words": 9
+    },
+    "15": {
+     "agree": 2,
+     "words": 8
+    },
+    "16": {
+     "agree": 4,
+     "words": 7
+    },
+    "17": {
+     "agree": 6,
+     "words": 11
+    },
+    "18": {
+     "agree": 4,
+     "words": 9
+    },
+    "19": {
+     "agree": 4,
+     "words": 10
+    },
+    "20": {
+     "agree": 9,
+     "words": 11
+    },
+    "21": {
+     "agree": 5,
+     "words": 7
+    },
+    "22": {
+     "agree": 5,
+     "words": 9
+    },
+    "23": {
+     "agree": 7,
+     "words": 9
+    },
+    "24": {
+     "agree": 1,
+     "words": 8
+    },
+    "25": {
+     "agree": 4,
+     "words": 9
+    },
+    "26": {
+     "agree": 3,
+     "words": 10
+    },
+    "27": {
+     "agree": 8,
+     "words": 9
+    },
+    "28": {
+     "agree": 4,
+     "words": 6
+    },
+    "29": {
+     "agree": 3,
+     "words": 6
+    },
+    "30": {
+     "agree": 7,
+     "words": 7
+    },
+    "31": {
+     "agree": 7,
+     "words": 8
+    },
+    "32": {
+     "agree": 3,
+     "words": 5
+    },
+    "33": {
+     "agree": 6,
+     "words": 8
+    },
+    "34": {
+     "agree": 4,
+     "words": 6
+    },
+    "35": {
+     "agree": 5,
+     "words": 7
+    },
+    "36": {
+     "agree": 2,
+     "words": 8
+    },
+    "37": {
+     "agree": 4,
+     "words": 5
+    },
+    "38": {
+     "agree": 4,
+     "words": 6
+    },
+    "39": {
+     "agree": 6,
+     "words": 6
+    },
+    "40": {
+     "agree": 4,
+     "words": 6
+    },
+    "41": {
+     "agree": 2,
+     "words": 6
+    },
+    "42": {
+     "agree": 2,
+     "words": 4
+    }
+   }
+  }
+ },
+ "units": {
+  "'": {
+   "ê": 60,
+   "e": 1
+  },
+  "a": {
+   "a": 69,
+   "r": 1
+  },
+  "b": {
+   "b": 95
+  },
+  "e": {
+   "e": 215,
+   "i": 14,
+   "l": 8,
+   "k": 1,
+   "ê": 1,
+   "t": 1
+  },
+  "g": {
+   "k": 81
+  },
+  "gh": {
+   "š": 2,
+   "ḫ": 1,
+   "ẖ": 1
+  },
+  "h": {
+   "ḫ": 5
+  },
+  "i": {
+   "i": 121,
+   "e": 8,
+   "l": 2
+  },
+  "k": {
+   "q": 66,
+   "š": 1,
+   "m": 1
+  },
+  "ka": {
+   "q": 1
+  },
+  "l": {
+   "l": 111,
+   "t": 8,
+   "ḫ": 2,
+   "e": 1,
+   "i": 1,
+   "k": 1
+  },
+  "m": {
+   "m": 42,
+   "ẖ": 3,
+   "e": 1,
+   "w": 1,
+   "t": 1
+  },
+  "n": {
+   "n": 38,
+   "ñ": 3
+  },
+  "p": {
+   "p": 41,
+   "k": 5,
+   "w": 1,
+   "l": 1
+  },
+  "pi": {
+   "p": 1,
+   "i": 1
+  },
+  "r": {
+   "r": 91,
+   "s": 1
+  },
+  "rh": {
+   "z": 56,
+   "ñ": 1
+  },
+  "rhe": {
+   "z": 6
+  },
+  "s": {
+   "s": 74,
+   "b": 1
+  },
+  "sh": {
+   "š": 24,
+   "w": 1
+  },
+  "t": {
+   "tê": 7,
+   "ḫ": 1
+  },
+  "th": {
+   "t": 36,
+   "l": 1
+  },
+  "toh": {
+   "te": 64,
+   "i": 1,
+   "q": 1
+  },
+  "u": {
+   "w": 57,
+   "š": 2,
+   "ñ": 1
+  },
+  "y": {
+   "y": 29
+  },
+  "ă": {
+   "k": 3,
+   "n": 2
+  },
+  "ḥ": {
+   "ḫ": 62,
+   "l": 1,
+   "w": 1
+  },
+  "ṇ": {
+   "ñ": 12,
+   "w": 3
+  }
+ },
+ "doubted": {
+  "words": 38,
+  "by_class": {
+   "reads otherwise": 24,
+   "confirms": 7,
+   "also unsure": 6,
+   "not found": 1
+  },
+  "places": [
+   {
+    "line": 5,
+    "griffith": "32",
+    "doubt": "? after the word",
+    "sayce": "12",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 5,
+    "griffith": "135",
+    "doubt": "? after the word",
+    "sayce": "115",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 7,
+    "griffith": "š?kte",
+    "doubt": "? above a sign",
+    "sayce": "Sete",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 11,
+    "griffith": "are?sli",
+    "doubt": "? above a sign",
+    "sayce": "aresli",
+    "class": "confirms"
+   },
+   {
+    "line": 12,
+    "griffith": "wete?tḫe",
+    "doubt": "? above a sign",
+    "sayce": "wetelxe",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 12,
+    "griffith": "58",
+    "doubt": "? after the word",
+    "sayce": "505",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 12,
+    "griffith": "223",
+    "doubt": "? after the word",
+    "sayce": "2503",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 14,
+    "griffith": "awete",
+    "doubt": "? after the word",
+    "sayce": "apete",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 14,
+    "griffith": "etkb?ḫi",
+    "doubt": "? above a sign",
+    "sayce": "bxi",
+    "class": "also unsure"
+   },
+   {
+    "line": 15,
+    "griffith": "eqebesw?i",
+    "doubt": "? above a sign",
+    "sayce": "eqebeswes",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 15,
+    "griffith": "ḫ?rbḫi",
+    "doubt": "? above a sign",
+    "sayce": "esbxi",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 15,
+    "griffith": "all?ebšê",
+    "doubt": "? above a sign",
+    "sayce": "alebqo",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 15,
+    "griffith": "ḫrpḫ.",
+    "doubt": "? after the word",
+    "sayce": "xrpx",
+    "class": "confirms"
+   },
+   {
+    "line": 15,
+    "griffith": "mlewslke",
+    "doubt": "? after the word",
+    "sayce": "mleksipi",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 17,
+    "griffith": "[sb",
+    "doubt": "? after the word",
+    "sayce": "sb",
+    "class": "also unsure"
+   },
+   {
+    "line": 18,
+    "griffith": "qebeslil?i",
+    "doubt": "? above a sign",
+    "sayce": "qebslili",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 18,
+    "griffith": "Amn.(?)",
+    "doubt": "(?) by the word",
+    "sayce": "ame",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 19,
+    "griffith": "qêr",
+    "doubt": "? after the word",
+    "sayce": "e",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 19,
+    "griffith": "(?)..kwizê",
+    "doubt": "(?) by the word",
+    "sayce": "eSwido",
+    "class": "also unsure"
+   },
+   {
+    "line": 20,
+    "griffith": "l?",
+    "doubt": "? above a sign",
+    "sayce": "be",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 20,
+    "griffith": "nš",
+    "doubt": "? after the word",
+    "sayce": "a",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 21,
+    "griffith": "e?nêqe",
+    "doubt": "? above a sign",
+    "sayce": "enoqe",
+    "class": "confirms"
+   },
+   {
+    "line": 23,
+    "griffith": "yemêqe(l. 24)e?qebeswit",
+    "doubt": "? above a sign",
+    "sayce": "yemoqeqebeswil",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 24,
+    "griffith": "mm?êli",
+    "doubt": "? above a sign",
+    "sayce": "qmoli",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 25,
+    "griffith": "3348",
+    "doubt": "? after the word",
+    "sayce": "3400a",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 26,
+    "griffith": "qerl?islw",
+    "doubt": "? above a sign",
+    "sayce": "teerlisl",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 28,
+    "griffith": "mnê",
+    "doubt": "? after the word",
+    "sayce": "mno",
+    "class": "confirms"
+   },
+   {
+    "line": 29,
+    "griffith": "qêrebk?i",
+    "doubt": "? above a sign",
+    "sayce": "qorebli",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 30,
+    "griffith": "krtez?s",
+    "doubt": "? above a sign",
+    "sayce": "krteds",
+    "class": "confirms"
+   },
+   {
+    "line": 35,
+    "griffith": "p?ezekeslke",
+    "doubt": "? above a sign",
+    "sayce": "pedekeslke",
+    "class": "confirms"
+   },
+   {
+    "line": 36,
+    "griffith": "l?ḫrpḫe",
+    "doubt": "? above a sign",
+    "sayce": "exrpxe",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 36,
+    "griffith": "w?tezetelebk",
+    "doubt": "? above a sign",
+    "sayce": "wtedetelebk",
+    "class": "also unsure"
+   },
+   {
+    "line": 36,
+    "griffith": "pl?ke",
+    "doubt": "? above a sign",
+    "sayce": "peke",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 37,
+    "griffith": "w(?)re-wḫeli(?)",
+    "doubt": "(?) by the word",
+    "sayce": "wrewxeli",
+    "class": "also unsure"
+   },
+   {
+    "line": 37,
+    "griffith": "pe?t?",
+    "doubt": "? above a sign",
+    "sayce": "",
+    "class": "not found"
+   },
+   {
+    "line": 38,
+    "griffith": "qêrteb?",
+    "doubt": "? above a sign",
+    "sayce": "qortesl",
+    "class": "also unsure"
+   },
+   {
+    "line": 39,
+    "griffith": "ñtesl?i?",
+    "doubt": "? above a sign",
+    "sayce": "Ntesl",
+    "class": "reads otherwise"
+   },
+   {
+    "line": 40,
+    "griffith": "p?izelke",
+    "doubt": "? above a sign",
+    "sayce": "pidelke",
+    "class": "confirms"
+   }
+  ]
+ },
+ "against_closed": {
+  "otten:narrative:hamadab": {
+   "sayce_words": 340,
+   "agree": 210,
+   "share": 0.618,
+   "doubted_sides_with": {
+    "Griffith": 17,
+    "both": 12,
+    "Sayce": 1,
+    "neither": 8
+   }
+  },
+  "mnl:REM 1003|MeroNews6": {
+   "sayce_words": 340,
+   "agree": 201,
+   "share": 0.591,
+   "doubted_sides_with": {
+    "Griffith": 18,
+    "both": 10,
+    "Sayce": 4,
+    "neither": 6
+   }
+  }
+ },
+ "second_typing": {
+  "lot": [
+   3,
+   13,
+   19,
+   35
+  ],
+  "bar": 0.97,
+  "units_first": 169,
+  "units_second": 169,
+  "agree": 169,
+  "share": 1.0,
+  "met": true,
+  "lines": {
+   "3": {
+    "units": 42,
+    "units_second": 42,
+    "agree": 42,
+    "identical": true
+   },
+   "13": {
+    "units": 43,
+    "units_second": 43,
+    "agree": 43,
+    "identical": true
+   },
+   "19": {
+    "units": 41,
+    "units_second": 41,
+    "agree": 41,
+    "identical": true
+   },
+   "35": {
+    "units": 43,
+    "units_second": 43,
+    "agree": 43,
+    "identical": true
+   }
+  }
+ }
+}

@@ -3,7 +3,7 @@ T0000	2	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0001	50	a reading of an inscription	another reading of an inscription that a row already stands for	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0002	68	an inscription not identified		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0003	4	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:509	378	1.0	0.089	18	1.0	0.091	griffith:G-mi2a-101	the rule: a sure match to one inscription
-T0004	14	an example phrase from a grammar, not an inscription		REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0004	14	an example phrase from a grammar, not an inscription		REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0005	25	a reading of an inscription		GA 54	otten:MilletExamples.txt:479	356-358	1.0	1.0	86	0.994	1.0	millet2005:GA54	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0006	54	a reading of an inscription		GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0007	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:573	71-72							matches nothing held
@@ -15,17 +15,17 @@ T0012	4	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0013	28	a reading of an inscription		GA 43	otten:MilletExamples.txt:1295	350	0.343	0.657	23	0.392	0.702	millet2005:GA43	the rule: a sure match to one inscription
 T0014	86	a reading of an inscription		GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0015	46	an inscription not identified		Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:489	362-364							40 letters or more, matching nothing held
-T0016	108	a reading of an inscription	another reading of an inscription that a row already stands for	REM 0101	otten:MilletExamples.txt:979	254/255	0.643	0.665	135	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0016	108	a reading of an inscription	another reading of an inscription that a row already stands for	REM 0101	otten:MilletExamples.txt:979	254/255	0.641	0.663	134	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0017	6	an example phrase from a grammar, not an inscription		REM 1049	otten:MilletExamples.txt:90	108	1.0	0.109	15	1.0	0.132	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
 T0018	5	an example phrase from a grammar, not an inscription		Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:522	383							its letters stand whole in a line that matches nothing held
 T0019	63	a reading of an inscription		REM 0544	otten:MilletExamples.txt:629	114	0.428	0.365	65	0.534	0.467	fhn:271	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0020	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:695	129							its letters stand whole in 3 held texts
 T0021	14	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0022	8	a reading of an inscription		GA 24	otten:MilletExamples.txt:423	325/326	1.0	1.0	12	1.0	1.0	millet2005:GA24	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0023	30	a reading of an inscription		GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0023	30	a reading of an inscription		GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0024	14	a reading of an inscription		REM 0102	otten:MilletExamples.txt:329	266/267	0.792	0.792	38	0.808	0.808	griffith:G-mi2a-102	the rule: a sure match to one inscription
-T0025	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
-T0026	71	a reading of an inscription		REM 0101	otten:MilletExamples.txt:977	254/255	0.861	0.882	179	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0025	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0026	71	a reading of an inscription		REM 0101	otten:MilletExamples.txt:977	254/255	0.86	0.881	178	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0027	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:779	142							matches nothing held
 T0028	7	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:313	255	0.737	0.069	14	0.696	0.07	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0029	6	a reading of an inscription		REM 0099	otten:MilletExamples.txt:309	252/253	1.0	1.0	16	1.0	1.0	griffith:G-mi2a-99	the rule: a sure match to one inscription
@@ -36,7 +36,7 @@ T0033	2	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0034	5	a reading of an inscription		REM 0110	otten:MilletExamples.txt:337	268	1.0	1.0	12	1.0	1.0	griffith:G-mi2b-110	the rule: a sure match to one inscription
 T0035	31	an inscription not identified		Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:1443	383/384							40 letters or more, matching nothing held
 T0036	2	an example phrase from a grammar, not an inscription		REM 1049	otten:MilletExamples.txt:26	33/34							its letters stand whole in one held text
-T0037	71	a reading of an inscription		GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0037	71	a reading of an inscription		GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0038	35	a reading of an inscription		GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0040	9	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:93	108	0.625	0.035	10	0.679	0.047	mnl:REM 1067|MeroNews6	a doubtful match that was not read: a phrase whichever text it is from
 T0041	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:368	290/291							matches nothing held
@@ -44,7 +44,7 @@ T0042	3	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0043	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1144	314/315	0.471	0.041	8	0.5	0.034	millet2005:GA19	a doubtful match that was not read: a phrase whichever text it is from
 T0044	4	an example phrase from a grammar, not an inscription		REM 0132	otten:MilletExamples.txt:620	109							its letters stand whole in one held text
 T0045	11	a reading of an inscription		GA 21	otten:MilletExamples.txt:1204	323/324	0.808	0.913	21	0.903	0.918	millet2005:GA21	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0046	72	a reading of an inscription		REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.711	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
+T0046	72	a reading of an inscription		REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.715	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
 T0048	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0049	4	an example phrase from a grammar, not an inscription		Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:1346	361							its letters stand whole in a line that matches nothing held
 T0050	7	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1015	278	1.0	0.017	16	1.0	0.019	fhn:300	the rule: a sure match to one inscription
@@ -57,12 +57,12 @@ T0059	48	a reading of an inscription		GA 22	otten:MilletExamples.txt:1205	323/32
 T0061	37	an example phrase from a grammar, not an inscription		GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
 T0062	38	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
 T0063	7	an example phrase from a grammar, not an inscription		REM 1049	otten:MilletExamples.txt:92	108	1.0	0.117	16	0.862	0.123	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
-T0064	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.711	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
+T0064	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.715	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
 T0065	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:370	290/291	0.636	0.008	7	0.667	0.008	griffith:G-mi2a-94	a doubtful match that was not read: a phrase whichever text it is from
 T0066	2	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:641	120							matches nothing held
 T0067	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:576	71-72							its letters stand whole in 4 held texts
 T0068	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
-T0070	14	an example phrase from a grammar, not an inscription		REM 0129	otten:MilletExamples.txt:512	379-380	0.483	0.07	14	0.605	0.059	griffith:G-mi2b-129	two readers who saw both texts
+T0070	14	an example phrase from a grammar, not an inscription		REM 0129	otten:MilletExamples.txt:512	379-380	0.464	0.065	13	0.605	0.059	griffith:G-mi2b-129	two readers who saw both texts
 T0072	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:307	252/253							its letters stand whole in 2 held texts
 T0073	5	an example phrase from a grammar, not an inscription		REM 0105	otten:MilletExamples.txt:331	266/267							its letters stand whole in one held text
 T0074	10	a reading of an inscription		GA 41	otten:MilletExamples.txt:1290	347	1.0	1.0	9	1.0	1.0	millet2005:GA41	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
@@ -86,7 +86,7 @@ T0101	87	a reading of an inscription	a copy of its source line with a name swapp
 T0105	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1340	360							matches nothing held
 T0107	5	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0217	otten:MilletExamples.txt:120	121							its letters stand whole in one held text
 T0108	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
-T0111	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0111	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0113	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:881	198							its letters stand whole in 3 held texts
 T0115	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:426	327							matches nothing held
 T0121	3	an example phrase from a grammar, not an inscription		REM 0297	otten:MilletExamples.txt:1091	307							its letters stand whole in one held text
@@ -104,21 +104,21 @@ T0138	38	an example phrase from a grammar, not an inscription	a copy of its sour
 T0139	5	an example phrase from a grammar, not an inscription		REM 1049	otten:MilletExamples.txt:91	108							its letters stand whole in one held text
 T0143	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:24	33/34							its letters stand whole in 3 held texts
 T0144	4	an example phrase from a grammar, not an inscription		REM 1064	otten:MilletExamples.txt:493	367-370							its letters stand whole in one held text
-T0146	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0149	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0146	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0149	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0150	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0151	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
-T0152	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:984	256/257	0.583	0.034	7	0.533	0.035	griffith:G-mi2a-101	a doubtful match that was not read: a phrase whichever text it is from
+T0152	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:984	256/257	0.583	0.035	7	0.533	0.035	griffith:G-mi2a-101	a doubtful match that was not read: a phrase whichever text it is from
 T0156	19	a reading of an inscription	a copy of its source line with a name swapped	GA 07	otten:MilletExamples.txt:400	309	0.333	0.467	7	0.729	0.637	millet2005:GA07	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0158	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1116	310							matches nothing held
 T0159	9	an example phrase from a grammar, not an inscription		REM 0289	otten:MilletExamples.txt:928	242	0.8	0.196	28	0.805	0.126	karanog:G-karanog-89	the rule: a sure match to one inscription
 T0163	38	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
-T0164	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.861	0.882	179	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0164	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.86	0.881	178	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0166	3	not identified: a doubtful match that two readers have not settled			otten:MilletExamples.txt:1005	268	0.5	0.5	6	0.5	0.5	griffith:G-mi2b-108	
 T0167	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0168	4	a reading of an inscription		GA 57	otten:MilletExamples.txt:1337	359	0.167	0.5	3	0.537	0.667	millet2005:GA57	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0171	39	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
-T0172	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0172	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0173	7	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:522	383							its letters stand whole in a line that matches nothing held
 T0174	7	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:378	294-297	1.0	0.017	16	1.0	0.017	fhn:300	the rule: a sure match to one inscription
 T0175	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1122	311							its letters stand whole in 3 held texts
@@ -129,8 +129,8 @@ T0181	7	a reading of an inscription	a copy of its source line with a name swappe
 T0182	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0183	32	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:1443	383/384							40 letters or more, matching nothing held
 T0184	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0188	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0189	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0188	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0189	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0190	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0191	13	a reading of an inscription		Millet 1968 p. 321 (MilletExamples.txt line 414)	otten:MilletExamples.txt:56	60	1.0	1.0	32	1.0	1.0	otten:MilletExamples.txt:414	the rule: a sure match to a longer line that matches nothing held
 T0193	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:269	234							matches nothing held
@@ -143,12 +143,12 @@ T0200	3	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0203	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0205	5	a reading of an inscription		REM 0104	otten:MilletExamples.txt:330	266/267	1.0	1.0	12	1.0	1.0	griffith:G-mi2a-104	the rule: a sure match to one inscription
 T0206	2	an example phrase from a grammar, not an inscription		REM 1030	otten:MilletExamples.txt:1030	280/281							its letters stand whole in one held text
-T0207	12	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:512	379-380	0.483	0.07	14	0.605	0.059	griffith:G-mi2b-129	two readers who saw both texts
+T0207	12	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:512	379-380	0.464	0.065	13	0.605	0.059	griffith:G-mi2b-129	two readers who saw both texts
 T0209	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0210	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0211	7	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1034	284/285	1.0	0.028	24	1.0	0.028	griffith:G-mi2a-94	the rule: a sure match to one inscription
-T0212	15	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:989	256/257	0.5	0.064	13	0.481	0.057	griffith:G-mi2a-101	a doubtful match that was not read: a phrase whichever text it is from
-T0213	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0212	15	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:989	256/257	0.48	0.059	12	0.481	0.057	griffith:G-mi2a-101	a doubtful match that was not read: a phrase whichever text it is from
+T0213	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0214	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0215	2	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1064	292/293							its letters stand whole in one held text
 T0217	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1160	318/319							matches nothing held
@@ -173,21 +173,21 @@ T0248	3	an example phrase from a grammar, not an inscription	a copy of its sourc
 T0250	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:992	259							matches nothing held
 T0252	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:993	259							matches nothing held
 T0253	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1049	otten:MilletExamples.txt:92	108	1.0	0.117	16	0.862	0.123	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
-T0256	32	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0256	32	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0257	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0260	38	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
 T0262	4	an example phrase from a grammar, not an inscription		REM 0324	otten:MilletExamples.txt:435	329-331							its letters stand whole in one held text
 T0263	5	an example phrase from a grammar, not an inscription		GA 42	otten:MilletExamples.txt:784	142							its letters stand whole in one held text
-T0264	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0264	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0266	34	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:1141	314/315	0.766	0.303	59	0.876	0.429	millet2005:GA19	the rule: a sure match to one inscription
 T0268	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:420	325/326	0.875	0.118	14	0.875	0.111	millet2005:GA22	a sure match with a second inscription close behind that was not read: a phrase whichever text it is from
-T0269	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
-T0271	74	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.711	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
+T0269	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0271	74	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.715	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
 T0272	6	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0094	otten:MilletExamples.txt:378	294-297	1.0	0.017	16	1.0	0.017	fhn:300	the rule: a sure match to one inscription
-T0273	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0273	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0274	20	an example phrase from a grammar, not an inscription		REM 1066	otten:MilletExamples.txt:101	112	0.567	0.075	17	0.698	0.095	mnl:REM 1066|MeroNews6	two readers who saw both texts
 T0275	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0276	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:580	74	1.0	0.203	12	1.0	0.236	griffith:G-mi2a-84	a sure match with a second inscription close behind that was not read: a phrase whichever text it is from
+T0276	3	an example phrase from a grammar, not an inscription		REM 0084	otten:MilletExamples.txt:580	74							its letters stand whole in one held text
 T0277	4	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0217	otten:MilletExamples.txt:120	121							its letters stand whole in one held text
 T0278	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:417	324							matches nothing held
 T0279	3	an example phrase from a grammar, not an inscription		REM 0316	otten:MilletExamples.txt:135	124							its letters stand whole in one held text
@@ -196,16 +196,16 @@ T0281	38	an example phrase from a grammar, not an inscription	a copy of its sour
 T0282	20	a reading of an inscription	a copy of its source line with a name swapped	GA 20	otten:MilletExamples.txt:1163	320	0.986	0.944	68	0.993	0.972	millet2005:GA20	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0284	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0286	3	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:994	259							its letters stand whole in one held text
-T0287	3	an example phrase from a grammar, not an inscription		REM 0084	otten:MilletExamples.txt:579	74	1.0	0.203	12	1.0	0.181	griffith:G-mi2a-84	two readers who saw both texts
+T0287	3	an example phrase from a grammar, not an inscription		REM 0084	otten:MilletExamples.txt:579	74							its letters stand whole in one held text
 T0288	9	an example phrase from a grammar, not an inscription		Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:1360	362-364	0.64	0.097	16	0.667	0.074	otten:MilletExamples.txt:489	the rule: a sure match to a line that matches nothing held
-T0290	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0290	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0291	6	an example phrase from a grammar, not an inscription		REM 0123	otten:MilletExamples.txt:179	162							its letters stand whole in one held text
 T0292	6	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0123	otten:MilletExamples.txt:179	162							its letters stand whole in one held text
 T0293	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0295	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:214	185/186							matches nothing held
 T0296	27	a reading of an inscription		GA 46	otten:MilletExamples.txt:1308	353	0.7	0.895	77	0.703	0.892	millet2005:GA46	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0297	10	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:929	242	0.769	0.115	10	0.867	0.127	karanog:G-karanog-125	a doubtful match that was not read: a phrase whichever text it is from
-T0298	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0297	10	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:929	242	0.769	0.116	10	0.867	0.127	karanog:G-karanog-125	a doubtful match that was not read: a phrase whichever text it is from
+T0298	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0300	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0301	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1112	310							its letters stand whole in 3 held texts
 T0302	26	a reading of an inscription	a copy of its source line with a name swapped	GA 54	otten:MilletExamples.txt:479	356-358	1.0	1.0	86	0.994	1.0	millet2005:GA54	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
@@ -217,11 +217,11 @@ T0307	6	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0309	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:42	54							its letters stand whole in 8 held texts
 T0311	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0315	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1405	373-375							matches nothing held
-T0316	13	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:936	242	0.639	0.116	23	0.641	0.071	millet2005:GA29	the rule: a sure match to one inscription
+T0316	13	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:936	242	0.639	0.117	23	0.641	0.071	millet2005:GA29	the rule: a sure match to one inscription
 T0318	18	a reading of an inscription		REM 0098	otten:MilletExamples.txt:971	252/253	1.0	1.0	39	1.0	1.0	griffith:G-mi2a-98	the rule: a sure match to one inscription
 T0320	13	a reading of an inscription		REM 0103	otten:MilletExamples.txt:1001	266/267	0.911	0.911	51	0.914	0.914	griffith:G-mi2a-103	the rule: a sure match to one inscription
 T0321	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0322	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0322	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0324	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1095	307							matches nothing held
 T0326	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0327	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:951	245							matches nothing held
@@ -254,27 +254,27 @@ T0358	87	a reading of an inscription	a copy of its source line with a name swapp
 T0359	5	an example phrase from a grammar, not an inscription		REM 1003	otten:MilletExamples.txt:535	14	1.0	0.016	19	1.0	0.016	griffith:G-jea4-1003	the rule: a sure match to one inscription
 T0360	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0361	29	a reading of an inscription	a copy of its source line with a name swapped	GA 43	otten:MilletExamples.txt:1295	350	0.343	0.657	23	0.392	0.702	millet2005:GA43	the rule: a sure match to one inscription
-T0363	72	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.861	0.882	179	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0363	72	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.86	0.881	178	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0364	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0365	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:939	242							matches nothing held
 T0366	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0367	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0367	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0368	3	an example phrase from a grammar, not an inscription		REM 0089	otten:MilletExamples.txt:1438	382							its letters stand whole in one held text
 T0369	4	an example phrase from a grammar, not an inscription		REM 0247	otten:MilletExamples.txt:115	120							its letters stand whole in one held text
 T0370	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0375	6	an example phrase from a grammar, not an inscription		Millet 1968 p. 308 (MilletExamples.txt line 1106)	otten:MilletExamples.txt:866	185							its letters stand whole in a line that matches nothing held
-T0378	20	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:325	263	0.71	0.108	22	0.721	0.135	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0378	20	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:325	263	0.71	0.109	22	0.721	0.135	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0381	4	an example phrase from a grammar, not an inscription		REM 0089	otten:MilletExamples.txt:440	332-335	1.0	0.078	12	1.0	0.072	griffith:G-mi2a-89	the rule: a sure match to one inscription
 T0382	11	an example phrase from a grammar, not an inscription		GA 19	otten:MilletExamples.txt:884	200	0.633	0.097	19	0.618	0.071	millet2005:GA19	the rule: a sure match to one inscription
 T0383	69	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0385	38	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
-T0386	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0386	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0387	6	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:522	383							its letters stand whole in a line that matches nothing held
 T0390	26	a reading of an inscription	a copy of its source line with a name swapped	GA 54	otten:MilletExamples.txt:479	356-358	1.0	1.0	86	0.994	1.0	millet2005:GA54	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0391	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1151	316							matches nothing held
 T0395	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1129	312							matches nothing held
 T0397	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:93	108	0.625	0.035	10	0.679	0.047	mnl:REM 1067|MeroNews6	a doubtful match that was not read: a phrase whichever text it is from
-T0398	32	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0398	32	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0399	15	a reading of an inscription	a copy of its source line with a name swapped	REM 0102	otten:MilletExamples.txt:329	266/267	0.792	0.792	38	0.808	0.808	griffith:G-mi2a-102	the rule: a sure match to one inscription
 T0401	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0403	8	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:281	238-240							its letters stand whole in a line that matches nothing held
@@ -286,11 +286,11 @@ T0409	8	an example phrase from a grammar, not an inscription	a copy of its sourc
 T0413	7	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:235	227	0.857	0.059	12	0.842	0.07	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0414	8	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:313	255	0.737	0.069	14	0.696	0.07	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0417	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
-T0418	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0418	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0421	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:201	178							matches nothing held
 T0422	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0424	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:62	61							its letters stand whole in 2 held texts
-T0425	109	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.643	0.665	135	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0425	109	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.641	0.663	134	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0426	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0429	8	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1049	otten:MilletExamples.txt:90	108	1.0	0.109	15	1.0	0.132	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
 T0430	16	a reading of an inscription	a copy of its source line with a name swapped	REM 0102	otten:MilletExamples.txt:329	266/267	0.792	0.792	38	0.808	0.808	griffith:G-mi2a-102	the rule: a sure match to one inscription
@@ -303,7 +303,7 @@ T0439	51	a reading of an inscription	a copy of its source line with a name swapp
 T0440	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:519	381/382							matches nothing held
 T0441	12	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:215	185/186							matches nothing held
 T0442	12	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:215	185/186							matches nothing held
-T0443	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0443	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0444	47	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:489	362-364							40 letters or more, matching nothing held
 T0445	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:317	256							its letters stand whole in 5 held texts
 T0446	4	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0217	otten:MilletExamples.txt:120	121							its letters stand whole in one held text
@@ -319,15 +319,15 @@ T0464	33	an inscription not identified	a copy of its source line with a name swa
 T0465	7	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:779	142							matches nothing held
 T0466	39	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
 T0467	6	an example phrase from a grammar, not an inscription		REM 1003	otten:MilletExamples.txt:956	245							its letters stand whole in one held text
-T0469	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0469	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0470	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:287	238-240							matches nothing held
 T0471	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0472	3	an example phrase from a grammar, not an inscription		GA 13+16	otten:MilletExamples.txt:1381	368-370							its letters stand whole in one held text
 T0473	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0475	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0476	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0477	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
-T0478	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.789	0.843	75	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0477	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0478	31	a reading of an inscription	a copy of its source line with a name swapped	GA 53	otten:MilletExamples.txt:475	355/356	0.785	0.839	73	0.874	0.88	millet2005:GA53	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0481	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:276	234							matches nothing held
 T0483	9	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1303	352							matches nothing held
 T0484	1	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1096	307							matches nothing held
@@ -341,7 +341,7 @@ T0496	6	an example phrase from a grammar, not an inscription		GA 19	otten:Millet
 T0498	5	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:509	378	1.0	0.089	18	1.0	0.091	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0500	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0503	9	a reading of an inscription	a copy of its source line with a name swapped	GA 24	otten:MilletExamples.txt:423	325/326	1.0	1.0	12	1.0	1.0	millet2005:GA24	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0505	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0505	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0506	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0510	3	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:1142	314/315							its letters stand whole in one held text
 T0511	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:963	249/250							matches nothing held
@@ -364,9 +364,9 @@ T0539	26	a reading of an inscription	a copy of its source line with a name swapp
 T0541	6	an example phrase from a grammar, not an inscription		REM 1064	otten:MilletExamples.txt:344	275	0.789	0.087	15	0.818	0.064	mnl:REM 1064|MeroNews6	the rule: a sure match to one inscription
 T0543	2	an example phrase from a grammar, not an inscription		REM 0297	otten:MilletExamples.txt:128	122/123							its letters stand whole in one held text
 T0545	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:274	234							matches nothing held
-T0550	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0550	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0551	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:561	58							its letters stand whole in 23 held texts
-T0553	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0553	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0554	37	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0555	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0556	37	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
@@ -392,7 +392,7 @@ T0587	55	a reading of an inscription	a copy of its source line with a name swapp
 T0588	5	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0132	otten:MilletExamples.txt:620	109							its letters stand whole in one held text
 T0590	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:375	292/293	0.636	0.008	7	0.636	0.007	fhn:300	a doubtful match that was not read: a phrase whichever text it is from
 T0591	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0592	8	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:934	242	0.833	0.075	15	0.818	0.051	millet2005:GA29	the rule: a sure match to one inscription
+T0592	8	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:934	242	0.812	0.066	13	0.818	0.051	millet2005:GA29	the rule: a sure match to one inscription
 T0593	3	an example phrase from a grammar, not an inscription		GA 42	otten:MilletExamples.txt:782	142							its letters stand whole in one held text
 T0595	11	a reading of an inscription	another reading of an inscription that a row already stands for	REM 0064	otten:MilletExamples.txt:460	344	0.696	0.667	16	0.696	0.667	griffith:G-mi1b-64	the rule: a sure match to one inscription
 T0596	3	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:369	290/291							its letters stand whole in one held text
@@ -411,7 +411,7 @@ T0622	3	an example phrase from a grammar, not an inscription	a copy of its sourc
 T0623	2	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:357	285/286							its letters stand whole in one held text
 T0624	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0625	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:275	234							matches nothing held
-T0626	9	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:933	242	0.778	0.07	14	0.8	0.057	millet2005:GA29	a sure match with a second inscription close behind that was not read: a phrase whichever text it is from
+T0626	9	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:933	242	0.75	0.061	12	0.8	0.057	millet2005:GA29	a sure match with a second inscription close behind that was not read: a phrase whichever text it is from
 T0629	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:63	61							matches nothing held
 T0630	6	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0132	otten:MilletExamples.txt:620	109							its letters stand whole in one held text
 T0631	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:451	342							matches nothing held
@@ -422,7 +422,7 @@ T0638	2	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0640	36	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0641	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1049	otten:MilletExamples.txt:92	108	1.0	0.117	16	0.862	0.123	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
 T0642	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
-T0643	8	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:1276	343	1.0	0.075	15	1.0	0.066	millet2005:GA29	the rule: a sure match to one inscription
+T0643	8	an example phrase from a grammar, not an inscription		GA 29	otten:MilletExamples.txt:1276	343	1.0	0.076	15	1.0	0.066	millet2005:GA29	the rule: a sure match to one inscription
 T0644	7	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:122	121							matches nothing held
 T0646	20	a reading of an inscription	a copy of its source line with a name swapped	GA 07	otten:MilletExamples.txt:400	309	0.333	0.467	7	0.729	0.637	millet2005:GA07	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0647	6	a reading of an inscription	a copy of its source line with a name swapped	REM 0110	otten:MilletExamples.txt:337	268	1.0	1.0	12	1.0	1.0	griffith:G-mi2b-110	the rule: a sure match to one inscription
@@ -444,14 +444,14 @@ T0673	87	a reading of an inscription	a copy of its source line with a name swapp
 T0674	65	a reading of an inscription	a copy of its source line with a name swapped	REM 0544	otten:MilletExamples.txt:629	114	0.428	0.365	65	0.534	0.467	fhn:271	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0675	1	an example phrase from a grammar, not an inscription		GA 28	otten:MilletExamples.txt:1180	329							its letters stand whole in one held text
 T0677	56	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0678	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0678	10	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0679	9	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:234	227	0.826	0.094	19	0.846	0.096	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0680	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:271	234							matches nothing held
 T0681	8	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:361	285/286	0.826	0.02	19	0.833	0.02	fhn:300	the rule: a sure match to one inscription
-T0682	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0682	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0684	3	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:1346	361							its letters stand whole in a line that matches nothing held
 T0688	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1145	314/315	1.0	0.077	11	0.933	0.062	mnl:REM 1057|MeroNews6	a doubtful match that was not read: a phrase whichever text it is from
-T0689	5	an example phrase from a grammar, not an inscription		REM 0247	otten:MilletExamples.txt:901	226	1.0	0.066	12	1.0	0.089	karanog:G-karanog-47	the rule: a sure match to one inscription
+T0689	5	an example phrase from a grammar, not an inscription		REM 0247	otten:MilletExamples.txt:901	226	1.0	0.067	12	1.0	0.089	karanog:G-karanog-47	the rule: a sure match to one inscription
 T0692	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0693	14	a reading of an inscription		GA 42	otten:MilletExamples.txt:466	347	0.905	1.0	19	0.892	1.0	millet2005:GA42	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0694	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1247	336							matches nothing held
@@ -470,19 +470,19 @@ T0707	3	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0709	3	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:1142	314/315							its letters stand whole in one held text
 T0711	2	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:498	367-370							matches nothing held
 T0712	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1137	313							its letters stand whole in 6 held texts
-T0714	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0714	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0715	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:766	140/142							matches nothing held
-T0716	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0716	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0717	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0719	69	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0720	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0721	22	a reading of an inscription		REM 0111	otten:MilletExamples.txt:338	268	0.845	0.831	49	0.88	0.857	griffith:G-mi2b-111	the rule: a sure match to one inscription
+T0721	22	a reading of an inscription		REM 0111	otten:MilletExamples.txt:338	268	0.842	0.828	48	0.88	0.857	griffith:G-mi2b-111	the rule: a sure match to one inscription
 T0722	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0725	19	a reading of an inscription	a copy of its source line with a name swapped	GA 07	otten:MilletExamples.txt:400	309	0.333	0.467	7	0.729	0.637	millet2005:GA07	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0728	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0729	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0731	109	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.643	0.665	135	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
-T0732	24	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1080	300	0.906	0.089	77	0.892	0.087	griffith:G-mi2a-94	the rule: a sure match to one inscription
+T0729	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0731	109	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.641	0.663	134	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0732	24	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1080	300	0.905	0.087	76	0.892	0.087	griffith:G-mi2a-94	the rule: a sure match to one inscription
 T0733	36	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0734	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1426	379-380							matches nothing held
 T0735	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
@@ -495,7 +495,7 @@ T0746	10	an example phrase from a grammar, not an inscription		REM 0094	otten:Mi
 T0749	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0750	70	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0751	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:304	252/253							its letters stand whole in 3 held texts
-T0752	3	an example phrase from a grammar, not an inscription		REM 0084	otten:MilletExamples.txt:581	74	1.0	0.254	15	1.0	0.236	griffith:G-mi2a-84	the rule: a sure match to one inscription
+T0752	3	an example phrase from a grammar, not an inscription		REM 0084	otten:MilletExamples.txt:581	74	1.0	0.241	14	1.0	0.236	griffith:G-mi2a-84	the rule: a sure match to one inscription
 T0753	36	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0754	3	an example phrase from a grammar, not an inscription		Sh. 4	otten:MilletExamples.txt:517	381/382							its letters stand whole in one held text
 T0756	5	an example phrase from a grammar, not an inscription		GA 20	otten:MilletExamples.txt:1138	313	1.0	0.194	14	0.679	0.134	millet2005:GA20	the rule: a sure match to one inscription
@@ -506,7 +506,7 @@ T0761	48	an inscription not identified	a copy of its source line with a name swa
 T0766	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0767	27	a reading of an inscription	a copy of its source line with a name swapped	GA 54	otten:MilletExamples.txt:479	356-358	1.0	1.0	86	0.994	1.0	millet2005:GA54	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0768	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:277	234							matches nothing held
-T0769	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0769	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0770	3	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:1378	368-370							its letters stand whole in a line that matches nothing held
 T0771	2	an example phrase from a grammar, not an inscription		REM 0098	otten:MilletExamples.txt:306	252/253							its letters stand whole in one held text
 T0773	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1434	382							matches nothing held
@@ -532,7 +532,7 @@ T0813	16	an example phrase from a grammar, not an inscription		REM 0094	otten:Mi
 T0815	10	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:878	198	0.955	0.023	21	0.962	0.025	fhn:300	the rule: a sure match to one inscription
 T0818	64	a reading of an inscription	a copy of its source line with a name swapped	REM 0544	otten:MilletExamples.txt:629	114	0.428	0.365	65	0.534	0.467	fhn:271	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0819	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0821	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0821	73	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0822	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0823	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0825	9	an example phrase from a grammar, not an inscription		REM 1003	otten:MilletExamples.txt:533	14	1.0	0.035	41	1.0	0.041	griffith:G-jea4-1003	the rule: a sure match to one inscription
@@ -542,22 +542,22 @@ T0829	2	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T0830	4	an example phrase from a grammar, not an inscription		REM 0217	otten:MilletExamples.txt:154	149							its letters stand whole in one held text
 T0832	3	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:830	152							matches nothing held
 T0835	3	an example phrase from a grammar, not an inscription		REM 0249	otten:MilletExamples.txt:130	122/123							its letters stand whole in one held text
-T0837	72	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.861	0.882	179	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0837	72	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:977	254/255	0.86	0.881	178	0.868	0.883	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0841	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0842	110	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.643	0.665	135	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
+T0842	110	a reading of an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:979	254/255	0.641	0.663	134	0.654	0.691	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T0843	8	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:779	142							matches nothing held
 T0844	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0845	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:626	112							matches nothing held
 T0846	12	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:884	200	0.633	0.097	19	0.618	0.071	millet2005:GA19	the rule: a sure match to one inscription
 T0849	2	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:42	54							its letters stand whole in 8 held texts
 T0850	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0852	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.529	0.058	9	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
+T0852	9	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1384	368-370	0.5	0.052	8	0.6	0.054	griffith:G-mi2a-89	a doubtful match that was not read: a phrase whichever text it is from
 T0853	56	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0855	48	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:489	362-364							40 letters or more, matching nothing held
 T0856	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:904	227	0.714	0.056	10	0.846	0.081	fhn:271	a doubtful match that was not read: a phrase whichever text it is from
 T0857	69	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0859	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:74	70-73							matches nothing held
-T0860	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0860	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0862	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0863	14	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:880	198	1.0	0.035	33	1.0	0.039	fhn:300	the rule: a sure match to one inscription
 T0864	52	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
@@ -585,7 +585,7 @@ T0899	4	an example phrase from a grammar, not an inscription	a copy of its sourc
 T0901	36	a reading of an inscription	a copy of its source line with a name swapped	GA 39	otten:MilletExamples.txt:1262	341	0.922	0.943	83	0.912	0.963	millet2005:GA39	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0903	64	a reading of an inscription	a copy of its source line with a name swapped	REM 0544	otten:MilletExamples.txt:629	114	0.428	0.365	65	0.534	0.467	fhn:271	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0905	3	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:1142	314/315							its letters stand whole in one held text
-T0906	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T0906	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T0907	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0908	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0909	88	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
@@ -604,7 +604,7 @@ T0926	4	an example phrase from a grammar, not an inscription	a copy of its sourc
 T0928	8	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:973	252/253	0.579	0.077	11	0.579	0.048	mnl:REM 1057|MeroNews6	a doubtful match that was not read: a phrase whichever text it is from
 T0931	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
 T0934	69	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
-T0937	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0937	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0938	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0940	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1104	308							matches nothing held
 T0941	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:107	115-117							its letters stand whole in 2 held texts
@@ -621,7 +621,7 @@ T0954	13	an example phrase from a grammar, not an inscription	a copy of its sour
 T0956	2	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:1117	310							matches nothing held
 T0958	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:131	122/123							matches nothing held
 T0961	56	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
-T0962	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.942	0.975	194	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+T0962	72	a reading of an inscription	a copy of its source line with a name swapped	GA 29	otten:MilletExamples.txt:439	332-335	0.941	0.975	192	0.958	0.983	millet2005:GA29	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0963	7	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1049	otten:MilletExamples.txt:90	108	1.0	0.109	15	1.0	0.132	mnl:REM 1049|MeroNews6	the rule: a sure match to one inscription
 T0965	38	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1220	329	0.784	0.324	91	0.85	0.393	millet2005:GA28	the rule: a sure match to one inscription
 T0966	4	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:24	33/34							its letters stand whole in 3 held texts
@@ -631,16 +631,16 @@ T0972	27	a reading of an inscription	a copy of its source line with a name swapp
 T0974	70	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:492	367-370							40 letters or more, matching nothing held
 T0976	15	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped		otten:MilletExamples.txt:1358	362-364	0.227	0.405	15	0.282	0.465	millet2005:GA13&GA16	set aside: two readers took it for a text of this inscription, and the rule matches it surely with the text of Millet 1968 p. 362-364 (MilletExamples.txt line 489)
 T0977	2	an example phrase from a grammar, not an inscription		Millet 1968 p. 238-240 (MilletExamples.txt line 286)	otten:MilletExamples.txt:768	140/142							its letters stand whole in a line that matches nothing held
-T0978	13	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:495	367-370	1.0	0.115	27	1.0	0.121	otten:MilletExamples.txt:492	the rule: a sure match to a longer line that matches nothing held
+T0978	13	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:495	367-370	1.0	0.112	26	1.0	0.121	otten:MilletExamples.txt:492	the rule: a sure match to a longer line that matches nothing held
 T0980	5	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1028	280/281							its letters stand whole in one held text
 T0981	4	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:190	174/175							matches nothing held
 T0983	2	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:1062	292/293							its letters stand whole in one held text
 T0984	6	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:787	143							matches nothing held
 T0985	87	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:433	329-331	0.896	0.918	258	0.918	0.928	millet2005:GA28	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0986	32	an inscription not identified	a copy of its source line with a name swapped	Millet 1968 p. 383/384 (MilletExamples.txt line 1443)	otten:MilletExamples.txt:1443	383/384							40 letters or more, matching nothing held
-T0989	23	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:988	256/257	0.595	0.108	22	0.625	0.109	griffith:G-mi2a-101	two readers who saw both texts
+T0989	23	an example phrase from a grammar, not an inscription		REM 0101	otten:MilletExamples.txt:988	256/257	0.595	0.109	22	0.625	0.109	griffith:G-mi2a-101	two readers who saw both texts
 T0992	3	an example phrase from a grammar, not an inscription		GA 19	otten:MilletExamples.txt:1143	314/315							its letters stand whole in one held text
-T0993	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.711	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
+T0993	73	a reading of an inscription	a copy of its source line with a name swapped	REM 0129	otten:MilletExamples.txt:1398	371	0.698	0.715	143	0.818	0.78	griffith:G-mi2b-129	the rule: a sure match to one inscription
 T0994	10	an inscription not identified		Millet 1968 p. 346 (MilletExamples.txt line 1287)	otten:MilletExamples.txt:1287	346							40 letters or more, matching nothing held
 T0997	55	a reading of an inscription	a copy of its source line with a name swapped	GA 30	otten:MilletExamples.txt:445	335-338	0.701	0.821	115	0.736	0.88	millet2005:GA30	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T0998	2	an example phrase from a grammar, not an inscription		REM 0221	otten:MilletExamples.txt:155	149							its letters stand whole in one held text
@@ -649,18 +649,18 @@ T1001	4	an example phrase from a grammar, not an inscription			otten:MilletExamp
 T1002	10	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:926	242	0.5	0.107	6	0.654	0.122	karanog:G-karanog-25	a doubtful match that was not read: a phrase whichever text it is from
 T1003	5	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 0101	otten:MilletExamples.txt:509	378	1.0	0.089	18	1.0	0.091	griffith:G-mi2a-101	the rule: a sure match to one inscription
 T1004	51	a reading of an inscription	a copy of its source line with a name swapped	GA 28	otten:MilletExamples.txt:1221	329	0.973	0.648	182	0.979	0.636	millet2005:GA28	the rule: a sure match to one inscription
-T1006	24	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:1377	368-370	1.0	0.192	45	1.0	0.154	otten:MilletExamples.txt:492	the rule: a sure match to a longer line that matches nothing held
+T1006	24	an example phrase from a grammar, not an inscription		Millet 1968 p. 367-370 (MilletExamples.txt line 492)	otten:MilletExamples.txt:1377	368-370	1.0	0.19	44	1.0	0.154	otten:MilletExamples.txt:492	the rule: a sure match to a longer line that matches nothing held
 T1007	16	a reading of an inscription		GA 56	otten:MilletExamples.txt:482	359	0.316	0.444	12	0.481	0.625	millet2005:GA56	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 T1008	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:947	242	0.375	0.006	6	0.375	0.006	fhn:300	a doubtful match that was not read: a phrase whichever text it is from
 T1011	34	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	GA 19	otten:MilletExamples.txt:1141	314/315	0.766	0.303	59	0.876	0.429	millet2005:GA19	the rule: a sure match to one inscription
 T1012	8	an example phrase from a grammar, not an inscription		REM 0094	otten:MilletExamples.txt:379	294-297	0.868	0.038	33	0.884	0.04	griffith:G-mi2a-94	the rule: a sure match to one inscription
-T1013	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.578	0.243	26	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
+T1013	16	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	REM 1096	otten:MilletExamples.txt:1446	385	0.568	0.236	25	0.652	0.315	mnl:REM 1096|MeroNews27d	two readers who saw both texts
 T1014	5	an example phrase from a grammar, not an inscription			otten:MilletExamples.txt:268	234							matches nothing held
 T1016	6	an example phrase from a grammar, not an inscription		GA 22	otten:MilletExamples.txt:422	325/326							its letters stand whole in one held text
 T1018	3	an example phrase from a grammar, not an inscription	a copy of its source line with a name swapped	Millet 1968 p. 362-364 (MilletExamples.txt line 489)	otten:MilletExamples.txt:1346	361							its letters stand whole in a line that matches nothing held
-hamadab	488	a reading of an inscription		REM 1003	otten:narrative:hamadab		0.643	0.648	773	0.655	0.661	mnl:REM 1003|MeroNews6	the rule: a sure match to one inscription
-tanyidamani	721	a reading of an inscription		REM 1044	otten:narrative:tanyidamani		0.641	0.646	1299	0.65	0.653	mnl:REM 1044|MeroNews6	the rule: a sure match to one inscription
-kharamadoye	234	a reading of an inscription		REM 0094	otten:narrative:kharamadoye		0.698	0.686	639	0.705	0.692	fhn:300	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
+hamadab	488	a reading of an inscription		REM 1003	otten:narrative:hamadab		0.643	0.648	772	0.655	0.661	mnl:REM 1003|MeroNews6	the rule: a sure match to one inscription
+tanyidamani	721	a reading of an inscription		REM 1044	otten:narrative:tanyidamani		0.64	0.646	1297	0.65	0.653	mnl:REM 1044|MeroNews6	the rule: a sure match to one inscription
+kharamadoye	234	a reading of an inscription		REM 0094	otten:narrative:kharamadoye		0.697	0.685	638	0.705	0.692	fhn:300	read side by side on 2026-11-12 (src/experts/prepare.py, HELD)
 G-meroe-5	22	a reading of an inscription		REM 0405	griffith:G-meroe-5								the row is the edition's own text
 G-meroe-6	28	a reading of an inscription		Meroe 6	griffith:G-meroe-6								the row is the edition's own text
 G-meroe-7	60	a reading of an inscription		REM 0407	griffith:G-meroe-7								the row is the edition's own text

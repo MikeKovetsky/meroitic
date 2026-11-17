@@ -15,7 +15,7 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **304 inscriptions are machine-readable under an open licence, 237 of them missing from the public corpus.**
+2. **350 inscriptions are machine-readable under an open licence, 283 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
@@ -26,6 +26,8 @@ open). What is new, with the run behind each claim:
    Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
    once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
    and Shablûl inscriptions are transcribed too, all of them new, +15% words (Day three, below).
+   And 46 ostraca that Griffith printed in his transliteration in 1925, none of them in the public corpus
+   (`src/ostraca.py`, Day ten, below).
    Photographs: almost nothing (`data/discovery/vision.md`).
 3. **Scrambled-script blind tests fail on a frontier model.** From a 17-word glossary of letter-swapped Meroitic and
    no texts it matched 35 of 35 meanings by breaking the cipher (`S0_f0`, `S0_f1`); from the scrambled corpus with
@@ -1141,3 +1143,32 @@ tied them to a signal in A1, and which holds is Mike's to say. All three tracks 
 counted; the figures files of all three are public
 ([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
 changes.
+
+## Day ten, morning (2026-11-17): Griffith's ostraca and Sayce on REM 1003
+
+Two pieces from sources in hand, both public domain (step 6 of section B, and the Sayce item of "Next, in this
+order"). The bar and the lot were committed before any typing
+([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
+
+1. **Griffith's ostraca.** *Meroitic Studies V* (*JEA* 11, 1925) prints 46 ostraca with Meroitic letters, 39 from
+   Faras, 6 from Buhen and 1 from Dakkah (F.O. 38 prints none); *Meroitic Studies VI* (*JEA* 15, 1929) prints none.
+   275 words and 959 signs, typed by hand from page images (the text layer drops the marks that carry the signs)
+   and mapped to today's signs as in 1917. The scan in hand lacks pp. 218 and 219, the article's opening.
+2. **The typing holds.** A second typing of the five texts drawn by lot, by an agent that saw only the page
+   images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly, and
+   two more of mine moved with it. The 11 texts with a hand copy are checked against it (section 3 of the
+   page).
+3. **`corpus_v6` has 594 inscriptions**, 350 with an open reading; the ostraca carry no REM number in hand and are
+   numbered by their sigla (`F.O. 1`). None of them was already held. The map stays on the 548 texts it is drawn
+   on (`data/discovery/map_texts.json`): counting it on the new texts needs a new sample of the unnamed stems for
+   the north star's estimate, and `src/themap.py` refuses to go on without one. So the scoreboard is unchanged
+   (north star 12.5%, running words 59.1%, spellings 30.2%). Of the map's 1,681 open spellings that stood in one
+   text, 9 now stand in an ostracon too, five of them two letters long.
+4. **Sayce on REM 1003.** His 42 lines (*Liverpool Annals* 7, pp. 69-72), typed from page images, four lines of
+   them typed again blind (169 of 169 of his units agree). He died in 1933, so his reading is public. Mapped to
+   Griffith's signs by a table fixed before the comparison, his words agree with Millet's reading at 61.8%, where
+   Griffith's do at 82.5%. At Griffith's 38 doubted words Sayce reads 7 the same, 24 otherwise, is unsure himself
+   at 6 and cannot be lined up at 1; Millet sides with Sayce alone at 1 of the 38, with Griffith alone at 17. He
+   settles almost nothing.
+5. **Cost:** the two blind typists 216,800 subagent tokens (102,132 and 114,668); the check against the
+   hand copies and the review are on the page.

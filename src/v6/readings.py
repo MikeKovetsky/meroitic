@@ -46,7 +46,8 @@ OPEN = ("griffith", "karanog")
 TYPED = ("griffith", "karanog", "mnl", "otten")       # the two text layers are witnesses, not typed readings
 VOLUME = {"mi1a": "Inscr.", "mi1b": "Inscr.", "mi2a": "Inscr.", "mi2b": "Inscr.", "meroe": "Meroe", "karanog": "Kar."}
 # the folders of Griffith rows: his editions, the Karanog texts, and the texts his articles print whole (JEA 4, 1917:
-# REM 1003), which have no number of his and stand for no text of corpus_v5 (src/akinidad.py)
+# REM 1003, src/akinidad.py; JEA 11, 1925: the ostraca, src/ostraca.py), which have no number of his and stand for
+# no text of corpus_v5
 GRIFFITH = (("data/expansion", "griffith"), ("data/expansion/karanog", "karanog"), ("data/expansion/jea", "griffith"))
 
 
@@ -78,10 +79,12 @@ def griffith_rows(folder, family):
                 continue
             letter = re.sub(r"^\d*", "", str(r.get("rem") or ""))
             article = r.get("griffith_no") is None          # a text an article prints: no number of his
-            no = rem_of(r["rem"]) if article else str(r.get("griffith_no"))
+            no = (rem_of(r["rem"]) or r["number"]) if article else str(r.get("griffith_no"))
             vid = f"G-{part}-{no}{'' if article else letter}"
             shablul = no.startswith("Sh")
             numbers = {"rem": [rem_of(r["rem"])]} if rem_of(r.get("rem")) else {}
+            if article and not numbers:                     # no REM number: the article's own siglum (F.O. 1)
+                numbers["article"] = [r["number"]]
             if not article:
                 numbers["shablul" if shablul else part if part in ("meroe", "karanog") else "griffith"] = \
                     [(no[2:] if shablul else no) + letter]

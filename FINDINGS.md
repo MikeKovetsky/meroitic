@@ -168,4 +168,4 @@ times on each page. `python3 -I src/themap.py`, `src/blind2.py` and `src/grammar
 `src/cognates_rules.py` prints the numbers of section 4, which its page gives; `tests/` holds a check for each
 page's numbers. The corpus files, the lexicon and most of the agents' answers are not in the repository, because
 they follow editions under copyright ([data/INDEX.md](data/INDEX.md) says which files are local and why); the
-open readings of 304 inscriptions are.
+open readings of 350 inscriptions are.

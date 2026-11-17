@@ -134,7 +134,7 @@ def test_the_page_names_what_it_rests_on():
         assert f"(data/discovery/{page})" in PAGE and (ROOT / "data/discovery" / page).exists(), page
     assert "[FINDINGS.md](FINDINGS.md)" in (ROOT / "README.md").read_text(encoding="utf-8") and "python3 -I tests/test_findings.py" in flat("README.md")
     assert "decipher" not in PAGE.lower().replace("undeciphered", "")
-    assert "the open readings of 304 inscriptions are" in PAGE and "304 inscriptions are now machine-readable under an open licence" in flat("README.md")
+    assert "the open readings of 350 inscriptions are" in PAGE and "350 inscriptions are now machine-readable under an open licence" in flat("README.md")
 
 
 if __name__ == "__main__":

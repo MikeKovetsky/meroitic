@@ -49,7 +49,7 @@ LOOSE = 3            # shared own runs from which a long line that matches nothi
 DOUBT_SHARE = 0.3    # ... when the line holds this share of an inscription's own runs (it may be a reading)
 WHOLE = 0.8          # a reading with this share of the longest typed reading's letters gives the whole text
 ORDER = ("otten-narrative", "otten", "griffith", "karanog", "mnl-print", "mnl-printout")   # the preferred reading
-SYSTEMS = ("rem", "ga", "griffith", "meroe", "shablul", "karanog", "mnl")
+SYSTEMS = ("rem", "ga", "griffith", "meroe", "shablul", "karanog", "mnl", "article")
 PRINTOUT = "Meroitic Newsletter 6 (1971)"   # the printout of REM 1001 to 1110: REM numbers and texts, no site
 HELD_BY = "read side by side on 2026-11-12 (src/experts/prepare.py, HELD)"
 READ = "two readers who saw both texts"
@@ -152,13 +152,13 @@ def by_number(editions):
 
 def name_of(rs):
     """The id of an inscription from the numbers of its readings: its REM numbers, else Millet's GA number, else
-    Griffith's number, else the Newsletter's own."""
+    Griffith's number, else the Newsletter's own, else the siglum of the article that prints it (F.O. 1)."""
     nums = collections.defaultdict(set)
     for r in [r for r in rs if not r.get("superseded")] or rs:
         for system, values in r["numbers"].items():
             nums[system].update(values)
     for system, label in (("rem", "REM"), ("ga", "GA"), ("griffith", "Inscr."), ("meroe", "Meroe"), ("shablul", "Sh."),
-                          ("karanog", "Kar."), ("mnl", "")):
+                          ("karanog", "Kar."), ("mnl", ""), ("article", "")):
         if nums[system]:
             return f"{label} {'+'.join(sorted(nums[system]))}".strip()
     return ""
