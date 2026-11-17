@@ -1,0 +1,1164 @@
+{
+ "page": "data/discovery/outside_evidence.md, section 2, gate A1",
+ "map_layers": [
+  "recurring",
+  "rare_sure",
+  "rare_later",
+  "unnamed",
+  "rare_millet",
+  "leftover",
+  "leftover_stems"
+ ],
+ "counts": {
+  "with_a_meaning": 160,
+  "loans_by_both_readers": 15,
+  "rule_words": 18,
+  "left": 127,
+  "built_on_a_rule_word": 11,
+  "counted_under_a_shorter_stem": 9,
+  "kept": 107,
+  "kept_by_the_lexicon": 83,
+  "kept_by_a_layer": 24,
+  "kept_without_a_key": 0,
+  "kept_with_a_same_meaning_row_in_the_short_lists": 94
+ },
+ "engine": {
+  "rule_words_only_in_the_engine": [],
+  "rule_words_only_on_the_page": [],
+  "loans_only_in_the_engine": [
+   "ssor"
+  ],
+  "loans_only_on_the_page": [
+   "Aqedise",
+   "adb",
+   "atẖe",
+   "plsn",
+   "tlt",
+   "wte",
+   "ḫrpḫe",
+   "ḫrpḫne"
+  ]
+ },
+ "words": [
+  {
+   "headword": "-erike-",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "Aqedise",
+   "kind": "epithet",
+   "meaning_from": "layer rare_later",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "abr",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "abrse",
+   "kind": "title",
+   "meaning_from": "layer rare_later",
+   "kept": false,
+   "rule": "built on the rule word abr"
+  },
+  {
+   "headword": "adb",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "anese",
+   "kind": "noun",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ant",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "apote",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "apote-lẖ",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "aqebese",
+   "kind": "function word",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "aqese",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ar (2)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "are (3)",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "asr",
+   "kind": "noun",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "at (1)",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "at (2)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ateqi",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ato",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "atẖe",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "aḫide",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "beliloke",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "beloloke",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "beltore",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "bqo",
+   "kind": "verb",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "deseke",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "dik",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "dime",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "dm",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "dot",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "dḫe",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "dḫno",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "erk",
+   "kind": "",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "esebe",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ireqe",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "kb",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "kdi",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "kdimdḫe",
+   "kind": "noun",
+   "meaning_from": "layer rare_millet",
+   "kept": false,
+   "rule": "built on the rule word kdi"
+  },
+  {
+   "headword": "kdise",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word kdi"
+  },
+  {
+   "headword": "kdke",
+   "kind": "title",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ked",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "kroro",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ktke",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "l (2)",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "lẖ",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "mdese",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mk",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mkdi",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word kdi"
+  },
+  {
+   "headword": "mkesḫe",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mleyi",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mlo",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mlowi",
+   "kind": "noun",
+   "meaning_from": "layer recurring",
+   "kept": false,
+   "rule": "counted once, under mlo"
+  },
+  {
+   "headword": "mlowose",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under mlo"
+  },
+  {
+   "headword": "mloyose",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under mlo"
+  },
+  {
+   "headword": "mnitke",
+   "kind": "epithet",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mreke",
+   "kind": "noun",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mse",
+   "kind": "title",
+   "meaning_from": "layer rare_millet",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mte",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "mtekdi",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word kdi and mte"
+  },
+  {
+   "headword": "mtmte",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word mte"
+  },
+  {
+   "headword": "mḫe",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mẖe",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "mẖeyose",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under mẖe"
+  },
+  {
+   "headword": "mẖo (1)",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "n-lw",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "nbr",
+   "kind": "noun",
+   "meaning_from": "layer leftover",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "nob",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "nobo",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word nob"
+  },
+  {
+   "headword": "ns",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ns per",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "nse doke",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ntke (1)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ntki",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "pelmos",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "perite",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "peseto",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "pesto",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "pke",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "pl (2)",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "plete",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "plsn",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "pqr",
+   "kind": "title",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "pso",
+   "kind": "title",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "pwrite (2)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "pẖo",
+   "kind": "title",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qe (1)",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qetneyineqeli",
+   "kind": "epithet",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qetrri",
+   "kind": "epithet",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qewi",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qo",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qoleb",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qoli",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qor",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "qor-o",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under qor"
+  },
+  {
+   "headword": "qorbse",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under qor"
+  },
+  {
+   "headword": "qore",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "qorene",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word qore"
+  },
+  {
+   "headword": "qoresem",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word qore"
+  },
+  {
+   "headword": "qorise",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under qor"
+  },
+  {
+   "headword": "qorode",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under qor"
+  },
+  {
+   "headword": "qowi",
+   "kind": "function word",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "sem",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "siremroke",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "sleqene",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "slw",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "slẖ",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "slẖs",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "counted once, under slẖ"
+  },
+  {
+   "headword": "smlo (1)",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "snmdese",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "snptete",
+   "kind": "epithet",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "snte",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "soni",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "sqo",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "sr",
+   "kind": "noun",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ssimete",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ssor",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ste",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "stmdese",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "sḫi",
+   "kind": "adjective",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "t-dḫe",
+   "kind": "",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "t-erike-l",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tbqo",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "te-dḫe-l",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "teneke",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "teter",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tewiseti",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "tk (1)",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tk (2)",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tk (3)",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tkk",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tlt",
+   "kind": "noun",
+   "meaning_from": "layer rare_later",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "tqi",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tre",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "trtekese",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ttne",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "tḫ (1)",
+   "kind": "verb",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "wese",
+   "kind": "",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "wi (1)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "wide",
+   "kind": "noun",
+   "meaning_from": "layer recurring",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "wle",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "wse",
+   "kind": "noun",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "wte",
+   "kind": "noun",
+   "meaning_from": "layer recurring",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "yel",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "yer",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "yerki",
+   "kind": "verb",
+   "meaning_from": "layer rare_later",
+   "kept": false,
+   "rule": "built on the rule word yer"
+  },
+  {
+   "headword": "yetmde",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "yeto",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "yireqe (1)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "yiroẖe",
+   "kind": "verb",
+   "meaning_from": "layer leftover",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫ- (1)",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫbḫne",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫlbi",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a word the correspondences were built from"
+  },
+  {
+   "headword": "ḫlbine",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "built on the rule word ḫlbi"
+  },
+  {
+   "headword": "ḫlẖl",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫmlol",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫr",
+   "kind": "verb",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ḫrpḫe",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "ḫrpḫne",
+   "kind": "title",
+   "meaning_from": "the lexicon",
+   "kept": false,
+   "rule": "a loan into Meroitic by both readers of the Egyptian key"
+  },
+  {
+   "headword": "ẖe (1)",
+   "kind": "verb",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ẖol",
+   "kind": "verb",
+   "meaning_from": "layer recurring",
+   "kept": true,
+   "rule": "kept"
+  },
+  {
+   "headword": "ẖr",
+   "kind": "noun",
+   "meaning_from": "the lexicon",
+   "kept": true,
+   "rule": "kept"
+  }
+ ]
+}
