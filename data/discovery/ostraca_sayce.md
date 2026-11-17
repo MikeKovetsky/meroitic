@@ -69,7 +69,8 @@ Millet's later reading sides with Sayce alone at 1 of the 38 (with Griffith alon
 **What the two articles print.** *Meroitic Studies V* (JEA 11, 1925, pp. 218-224, plates XXVI to XXX) prints 47
 numbered ostraca in his transliteration of 1925; F.O. 38 prints no letters (it refers to *Liverpool Annals* XI,
 pl. LXXII, 16), so 46 texts are typed. They are short accounts and labels on sherds: one to nineteen words each, 6
-of one word, with numerals and two symbols that he says are not numerals (12 symbols in all). Plates XXVI to XXVIII
+of one word, with numerals and two symbols that he says are not numerals (12 symbols in all; one, in B.O. 1, his
+note takes for "a 10-numeral or some special symbol"). Plates XXVI to XXVIII
 are photographs; plates XXIX and XXX hold his hand copies of 11 of the texts. *Meroitic Studies VI* (JEA 15, 1929,
 pp. 69-74) prints no ostraca: it is on the demotic graffiti of the Dodecaschoenus, on the sign he wrote z (he gives
 it the value r there, "nearly d"; today d) and on Mandulis and Talmis.
@@ -84,9 +85,13 @@ hand, `(?)` after a word or numeral. In the corpus his hyphens join (as in REM 1
 digits (his point parts the whole from the fraction, so `6·3` is the two numerals 6 and 3; his ½ is kept in his
 text only), and the symbols are left out.
 
-**Unsure.** 66 words carry his dot below a sign or his `(?)`. His notes doubt or read otherwise at 5 places
-(`tr` or `trê` in F.O. 1; `mkšḫi ze` one word in F.O. 19; a sign he describes but does not name in F.O. 21;
-`šle qe` perhaps `šleqeñ` in B.O. 1; the tail of the `m` in B.O. 2). We are unsure at 10 (`src/ostraca.py`,
+**Unsure.** 67 words carry his dot below a sign or his `(?)`. His notes doubt or read otherwise at 11 places
+(`src/ostraca.py`, `NOTES`): in F.O. 1 `12·1` ("Or omit ·1"), `1·3` ("or 1·1") and `tr` or `trê`; the two spots
+of `·9 ·2` in F.O. 3, "additions to the original ·9"; the point of `10·1` in F.O. 12, which "may be accidental";
+`abel[te]` for `abel` in F.O. 16; `mkšḫi ze` one word in F.O. 19; a sign he describes but does not name in F.O. 21;
+in B.O. 1 `šle qe` perhaps `šleqeñ`, and the sign printed as a symbol after `16·6`, which "should be a 10-numeral
+or some special symbol"; the tail of the `m` in B.O. 2. (Five of them were listed at first; the review read his
+notes again on the page images and added the other six.) We are unsure at 10 (`src/ostraca.py`,
 `OURS`): an upright after a point read as the numeral 1 (F.O. 10) and two others read as the letter l (F.O. 25,
 26); a circumflex printed as a grave accent (F.O. 13, 22); the tilde of `tñs`, faint in the text line and printed in
 his note (F.O. 21); a point printed apart (F.O. 18); the line numbers of B.O. 1, which are ours; a mark under the
@@ -94,10 +99,14 @@ his note (F.O. 21); a point printed apart (F.O. 18); the line numbers of B.O. 1,
 
 **The second typing.** The bar, set and committed before any typing: on the five texts drawn by lot (F.O. 6, 12,
 25, 31, 36), a fresh agent that saw only the page images types them again, and the two agree on at least 97% of
-the signs. Result: 56 of 56 signs (100%), bar met. The two differed in one place, where a doubt dot stands: the
-second typist put the dot of F.O. 31 under the q, I had it under the ê. The page image shows the second typist
-right, and the same check found two more such dots of mine under the wrong letter (F.O. 21 `q̣ê`, F.O. 22 `ỵê`):
-all three are corrected (the dot moves; the letters do not change). The lot is short texts, as drawn.
+the signs. Result: 56 of 56 signs (100%), bar met. The two differed in F.O. 31 only, and in no sign: the second
+typist put its doubt dot under the q, where I had it under the ê, and set its two lost signs apart from the word
+(`.. q̣êrli-šê`), where I joined them (`..q̣êrli-šê`). The page image shows the dot under the q, and it is moved;
+the spacing of the dots is not clear on the page, and the first typing is kept. The same check moved the dots of
+F.O. 21 and 22 too. The review, on the page images enlarged 24 to 40 times, found the dot of F.O. 21 under the ê
+after all (`qệ`, as first typed), dots under both letters in F.O. 22 (`ỵệ`), and three marks the typing missed: a
+dot under the point and the 3 of `1̣·̣3̣` in F.O. 11, under the y of `...ỵik` in F.O. 26 (one doubted word more) and
+under the ê of `ṭệlis` in B.O. 3. No letter changed. The lot is short texts, as drawn.
 
 **The hand copies.** See section 3.
 
@@ -106,8 +115,9 @@ all three are corrected (the dot moves; the letters do not change). The lot is s
 shares a number with a held text. By letters, under the matching rule of `corpus_v6`, none of Otten's source lines
 became a reading of an ostracon; two of his lines changed how they are placed, because the run `desel` now stands
 in 9 edition texts (two of them ostraca, `trodeslw` and `trodes li`) and so counts as formula: MilletExamples.txt
-lines 579 and 580 both stay example phrases of REM 0084 (580 was without an inscription before). 29 more lines
-changed only in their shares.
+lines 579 and 580 both stay example phrases of REM 0084 (580 was without an inscription before). 27 more lines
+changed only in their shares, and the letters of 7 short phrases now stand whole in one held text more (an
+ostracon).
 
 **What it changes in `corpus_v6`.** 594 inscriptions with a typed reading (548 before), 10,688 words (10,290), 609
 in the public table (563), 350 with an open reading (304), 321 with an open reading of the whole text (275), 99

@@ -60,6 +60,18 @@ def test_words_kinds_and_doubts():
                      ("ab", "(?) after it")]
 
 
+def test_a_note_on_a_mark_the_corpus_leaves_out_stands_on_its_line():
+    t = {"no": "B.O. 1", "printed": "(1) mrê : qe 74·8. (2) a..r. tepe[re]t 16·6 ⍋ ...... 1·5."}
+    got = [(d["line"], d["word"]) for d in O.doubts(t, O.words(t["printed"]))]
+    assert got == [(1, "qe"), (2, "⍋"), (1, "mrê")]
+    try:
+        O.doubts({"no": "B.O. 1", "printed": "(1) mrê : qe 74·8."}, O.words("(1) mrê : qe 74·8."))
+    except SystemExit as e:
+        assert "⍋" in str(e)                               # a note whose mark is not in the text stops the build
+    else:
+        raise AssertionError("a note on a mark that is not in the text passed")
+
+
 # --- the files ---
 def test_rows_are_written_from_the_source():
     assert rows_file() == O.rows()

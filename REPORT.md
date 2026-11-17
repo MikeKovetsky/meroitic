@@ -1155,8 +1155,10 @@ order"). The bar and the lot were committed before any typing
    275 words and 959 signs, typed by hand from page images (the text layer drops the marks that carry the signs)
    and mapped to today's signs as in 1917. The scan in hand lacks pp. 218 and 219, the article's opening.
 2. **The typing holds.** A second typing of the five texts drawn by lot, by an agent that saw only the page
-   images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly, and
-   two more of mine moved with it. The 11 texts with a hand copy are checked against it (section 3 of the
+   images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly. The
+   review checked every text on the page images and found five more marks of the first typing misplaced or
+   missed (no letter): one doubted word more, 67. Griffith's notes doubt or read otherwise at 11 places, not the 5
+   first listed. The 11 texts with a hand copy are checked against it (section 3 of the
    page).
 3. **`corpus_v6` has 594 inscriptions**, 350 with an open reading; the ostraca carry no REM number in hand and are
    numbered by their sigla (`F.O. 1`). None of them was already held. The map stays on the 548 texts it is drawn

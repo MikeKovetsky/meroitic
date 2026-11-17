@@ -92,12 +92,20 @@ DESCRIBED = {
 # What his notes doubt or read otherwise (his words), and the places we are unsure of (OURS): (text, word as
 # typed, why). The word is found in the text by its letters without the marks.
 NOTES = (
+    ("F.O. 1", "12·1", "his note on l. 3: \"Or omit ·1\""),
+    ("F.O. 1", "1·3", "his note on l. 3 ends \"or 1·1 :\" (for ant-mnês 1·3)"),
     ("F.O. 1", "tr", "his note on l. 4: \"It is not clear whether tr 2·8 or trê 1·8 should be read\""),
+    ("F.O. 3", "·2", "his note: \"the last two spots seem best explained as additions to the original ·9, producing "
+                     "a total which would have been properly expressed by 1·1\""),
+    ("F.O. 12", "10·1", "his note on F.O. 12 and 13: \"The upper spot after 10 may be accidental but looks like ink\""),
+    ("F.O. 16", "abel", "his note: \"abel[te] F.O. 1/1\""),
     ("F.O. 19", "mkšḫi", "his note on l. 4 reads mkšḫi (5) ze as one word, mkšḫize (cf. the title mkešḫe K.I.)"),
-    ("F.O. 21", "q̣ê", "his note on l. 2: \"a horizontal line crossed by a short oblique line at the end\" (a sign "
+    ("F.O. 21", "qệ", "his note on l. 2: \"a horizontal line crossed by a short oblique line at the end\" (a sign "
                       "of l. 2 that he does not name)"),
     ("B.O. 1", "qe", "his note: \"possibly šleqeñ 4·8 should be read here\" (for šle qe 74·8); \"if not, the "
                      "doubtful sign may be a 10-numeral\""),
+    ("B.O. 1", "⍋", "his note on l. 2: \"the broken sign should be a 10-numeral or some special symbol\" (printed as "
+                    "the symbol after 16·6, which the corpus leaves out)"),
     ("B.O. 2", "ṃr", "his note: \"the tail of the m(?) very short\""),
 )
 OURS = (
@@ -107,7 +115,7 @@ OURS = (
     ("F.O. 18", "·", "a point printed apart between ṭẹ and 6·3½: left out"),
     ("F.O. 21", "tñs", "the tilde does not show in the text line on this scan; his note on l. 3 writes tñs"),
     ("F.O. 22", "erqêtê", "printed erqêtè: read as ê, as his note on F.O. 21 writes it (\".erqêtê F.O. 22\")"),
-    ("F.O. 22", "ỵê", "the ê printed with a grave accent: read as ê (the dot below is under the y)"),
+    ("F.O. 22", "ỵệ", "the ê printed with a grave accent: read as ê (dots below both the y and the è)"),
     ("F.O. 25", "ḷ", "an upright with a dot below and no flag at the top: read as the letter l; it could be the "
                      "numeral 1 (the last sign of the text, with a flag, is read as the numeral 1)"),
     ("F.O. 26", "l", "an upright between two hatched stretches: read as the letter l; it could be the numeral 1"),
@@ -207,9 +215,11 @@ def doubts(t, ws):
             if no != t["no"]:
                 continue
             w = next((x for x in ws if plain(x["printed"]) == plain(word)), None)
-            if w is None and word != "·":
+            # a mark that is no token of the corpus (the point of F.O. 18, a symbol): found among his tokens
+            line = w["line"] if w else next((l for l, tok in tokens(t["printed"]) if tok == word), None)
+            if line is None:
                 raise SystemExit(f"{no}: not in the text: {word}")
-            out.append({"line": w["line"] if w else 1, "word": word, "why": why})
+            out.append({"line": line, "word": word, "why": why})
     return out
 
 
