@@ -439,7 +439,10 @@ def in_run_83(step):
 def figures_83():
     """The figures of the run with all 83 accepted words: those of figures() under its settings, the result by
     sort of word, the 40 entries with their sort and meaning, the first run's bars beside it, and the cost as far
-    as it was reported."""
+    as it was reported. Without the local file of the packs' wording the figures would carry that wording, which
+    follows the lexicon's for four words in a row, so they are not counted."""
+    if not PACK_WORDING.exists():
+        raise SystemExit(f"{PACK_WORDING} is missing: the figures would carry the packs' wording of four meanings")
     first_run = read("result.json")["figures"]
     with run_83():
         f, res = figures(), read("result.json")

@@ -627,6 +627,33 @@ def test_the_page_of_the_run_with_83_says_what_the_figures_say():
     assert (f"Cost: {cost['agents']} readers. {cost['with_a_count']} of them reported {cost['tokens_counted']:,} tokens together") in text
     assert "The other nine wrote their complete answer files" in text and len(cost["without_a_count"]) == 9 and "none is estimated here" in text
     assert "A label is not a translation" in text and "No meaning found here is the project's own." in text
+    # the review's correction of section 2, which stands as it was written before the readers
+    o = f["options"]
+    near = o["open_words_with_near_proposals"]
+    assert "proposals of the open words, those of the word's kind first, never two near meanings." in text and o["words"] == f["words"]
+    assert (f"under {len(near)} open words ({', '.join(f'`{e}`' for e in near)}) two or three of the four are near meanings") in text
+    assert f"The four options hold both an accepted meaning and a proposal under {o['of_both_sorts']} of the {o['words']} words." in text
+    def close(a, b):                                                            # the run's rule, in the wording of the figures
+        return bool(W.content(a) & W.content(b)) or any(a in g and b in g for g in B.GROUPS_83)
+    for r in f["rows"]:                                                         # no filler is near another option
+        own = [r["true"]] if r["true"] else r["candidates"]
+        fillers = [m for m in r["options"] if m not in own]
+        assert not any(close(m, x) for i, m in enumerate(fillers) for x in own + fillers[:i]), r["entry"]
+    assert set(near) == {r["entry"] for r in f["rows"] if r["sort"] == "open" and any(close(a, b) for a in r["candidates"] for b in r["candidates"] if a != b)}
+    accepted = {m for m, _ in B.ACCEPTED_83.values()}
+    proposals = {m for r in f["rows"] if r["sort"] == "open" for m in r["candidates"]}
+    assert o["of_both_sorts"] == sum(bool(set(r["options"]) & accepted and set(r["options"]) & proposals) for r in f["rows"])
+
+
+def test_the_figures_of_the_run_with_83_need_the_packs_wording():
+    """Without the local file of the packs' wording, the figures of the run with 83 are not counted: they would carry
+    a wording that follows the lexicon's for four words in a row."""
+    saved = B.PACK_WORDING
+    B.PACK_WORDING = B.HOME_83 / "no such file.json"
+    try:
+        assert stops(B.figures_83, "the figures would carry the packs' wording of four meanings")
+    finally:
+        B.PACK_WORDING = saved
 
 
 def test_the_summaries_name_the_run_with_83():
