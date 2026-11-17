@@ -32,6 +32,9 @@ why): the comparison of requirement 4 is counted with decoys, not with frames de
 of requirement 6 is a count against made-up names, because only about seven known parts stand in five or more of
 the held-back names.
 
+**Both are waived by Mike,** in writing, before any gate was run: asked on 2026-11-16 "Do you waive the original
+wording of the two changed gates (B and C)?", he answered at 22:27: "Yes, waive both".
+
 What none of the three tracks can do alone: call a meaning the project's own. A proposal that passes a gate
 still has to be searched for in the sources in hand (a meaning a source states is the scholar's), to pass an
 independent check and the review ([the reporting rules](../../.claude/skills/reporting/SKILL.md), "Our own
