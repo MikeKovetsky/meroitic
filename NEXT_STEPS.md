@@ -202,8 +202,9 @@ Done since this plan was written:
     section B). Griffith's article of 1922 prints 46 hand copies and English renderings, no index. Faras 1 to 23
     are typed (2,034 signs) and in `corpus_v6` as open readings of REM 0501 to 0523; a blind second typing of
     five texts drawn by lot agrees on 97.6% of the signs (bar 95%, met). Faras 21 was held in part: seven of
-    Millet's example lines quote it, one of which stood as an inscription not identified. Of the map's 1,678 open
-    spellings in one text, 3 now stand in a Faras text too. Faras 24 to 46 wait for a yes on the cost (about 2.3
+    Millet's example lines quote it, one of which stood as an inscription not identified, and they agree with the
+    typing but for one sign lost in the copy. Of the map's 1,681 open spellings in one text (1,678 without that
+    line), 3 now stand in a Faras text too. Faras 24 to 46 wait for a yes on the cost (about 2.3
     million subagent tokens; the first half took 2,451,369). The studies of the map now read the corpus as the
     analysts glossed it (`data/sources/v6/analysts/corpus.jsonl`), so that texts added to `corpus_v6` leave them
     and the scoreboard's "before us" as they were.
@@ -327,11 +328,11 @@ all words in section G):
 8. **Faras funerary texts** (46, Griffith 1922, hand copies, archive.org `bibliothquedel234ecol`): the Karanòg
    pipeline once it passes. Check first whether that article has indexes like Karanòg's.
    - **Status, 2026-11-17: Faras 1 to 23 typed** ([`data/expansion/faras/`](data/expansion/faras/README.md)). No
-     indexes: the check is against his English renderings and his notes on the formulae. 2,034 signs, 365 words;
+     indexes: the check is against his English renderings and his notes on the formulae. 2,034 signs, 366 words;
      the blind second typing of five texts drawn by lot agrees on 373 of 382 signs (97.6%, bar 95%). In
-     `corpus_v6` as open readings of REM 0501 to 0523. Cost 2,451,369 subagent tokens, about 1,100 a sign, so the
-     estimate of 1 to 2 million for all 46 was half the cost. Left: Faras 24 to 46 (about 2.3 million, packs
-     ready), and glossing the new texts on the map.
+     `corpus_v6` as open readings of REM 0501 to 0523. Cost 2,451,369 subagent tokens (995 a sign for the first
+     typing), so all 46 come to about 4.8 million, where 1 to 2 million was estimated. Left: Faras 24 to 46 (about
+     2.3 million, packs ready), and glossing the new texts on the map.
 9. **FHN's modern transliterations** (about 30 texts, OCR in `/private/tmp/claude-501/expansion/survey/fhn/`):
    clean modern readings for private analysis only (FHN is "all rights reserved").
 10. **Mask names in the Griffith rows** the way `corpus_v2` masks them, so frequency counts in `corpus_v3` mean the

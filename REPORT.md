@@ -1144,3 +1144,18 @@ tied them to a signal in A1, and which holds is Mike's to say. All three tracks 
 counted; the figures files of all three are public
 ([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
 changes.
+
+## Day ten, morning (2026-11-17): the Faras texts, half typed
+
+Step 8 of section B, half done: Faras 1 to 23 of Griffith's 46 funerary texts (*Recueil Champollion*, 1922) are
+typed, and **Faras 24 to 46 are not**: the readers had used 2,451,369 subagent tokens, at the line of 2.5 million
+set for the step, and the other half (about 2.3 million) waits for Mike's yes. The article prints hand copies and
+English renderings, with no transliteration of whole texts and no index, so every sign was read from the copies
+and checked against his Latin letters for the names, titles and formula words: 2,034 signs, 366 words. The bar,
+committed before any reader ran, was met: a fresh reader typed five texts drawn by lot a second time, blind, and
+the two agree on 373 of 382 signs (97.6%; the bar was 95%). The corpus held Faras 21 in part, in seven of Millet's
+example lines; they agree with the typing but for one sign lost in the copy, and one of them, which stood as an
+inscription not identified, is now a part of REM 0521. `corpus_v6` holds 570 inscriptions (548 before) and the
+public table 585 (563), 327 of them with an open reading (304). The map is unchanged: the new texts are not
+glossed, and its studies now read the 548 texts the analysts glossed. Of its 1,681 open spellings that stand in
+one text, 3 now stand in a Faras text too ([`data/expansion/faras/`](data/expansion/faras/README.md)).
