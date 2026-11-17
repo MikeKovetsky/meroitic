@@ -1134,7 +1134,10 @@ typing met its bar (97.7% of headwords and 97.1% of their meanings found again o
 A1 was missed: 75 of the 81 known words have a row of the same meaning, but a shuffle of the meanings among words
 of the same length scores as high in 1,195 of 2,000 draws (p = 0.598; the bar was p < 0.05). Rilly's sound
 correspondences on two whole dictionaries find the true meaning no more often than chance, as they did on the
-short lists on 9 November (p = 0.49). Gate A2 is not run and the other dictionaries are not typed. All three tracks
-of outside evidence are now counted and closed; the figures files of all three are public
+short lists on 9 November (p = 0.49). Gate A2 is not run, and the comparison for Nile Nubian is closed. The
+dictionaries of the other branches of the family, fetched on 2026-11-16, are not typed: the page's rule set before
+the agents (section 2) tests them the same way once fetched, its list of what is left (section 6, written at 07:00)
+tied them to a signal in A1, and which holds is Mike's to say. All three tracks of outside evidence are now
+counted; the figures files of all three are public
 ([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
 changes.

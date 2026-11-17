@@ -164,14 +164,16 @@ meaning (bar 90%).
 **Gate A1: missed.** Of the 81 known words, 75 have a row of the same meaning in the short lists or the two
 dictionaries. Their mean best score is 0.263; shuffling the meanings among words of the same number of consonants
 gives as high a mean in 1,195 of 2,000 draws (p = 0.598; the bar was p < 0.05). Beside the bar, with no bar of their
-own: the engine's own shuffle p = 0.467; the two dictionaries alone (8,194 rows, 74 words) p = 0.144; raw likeness
-of the letters p = 0.974. The row of the true meaning stands at a median rank of 973 of 13,636 rows; for one word
-it is among the best ten.
+own: the engine's own shuffle p = 0.467; the two dictionaries alone (8,194 rows, 74 words) p = 0.297 by the
+length-matched shuffle and 0.144 by the engine's own; raw likeness of the letters p = 0.926 and 0.974 by the
+same two. The row of the true meaning stands at a median rank of 973 of 13,636 rows; for one word it is among
+the best ten.
 
 What A1 shows: Rilly's sound correspondences, applied to two whole dictionaries of Nile Nubian, do not find the
 right meaning of the known Meroitic words more often than chance. This repeats the comparison of 9 November on
-the short lists (p = 0.49). By the rule above, no meaning is proposed from these dictionaries, gate A2 is not run,
-and the other dictionaries are not typed.
+the short lists (p = 0.49). By the rule above, no meaning is proposed from these dictionaries and gate A2 is not
+run: the comparison for Nile Nubian is closed. The same rule tests the other branches of the family the same way
+once their dictionaries are fetched; section 6, point 4, says where they stand.
 
 ## 3. Track B: the royal texts beside the Kushite kings' Egyptian texts (H2)
 
@@ -386,11 +388,15 @@ Mike, 2026-11-17: "describe the progress in the doc with what is left. and push 
 3. **Gate A2 is not run:** A1 was missed.
 4. **The other dictionaries fetched on 2026-11-16** (`data/INDEX.md`, section 3: Murray 1923, Almkvist 1911, the
    Comparative Nubian Dictionary data, Reinisch's Barea, Meinhof, Czermak, MacMichael, Griffith 1913, Lukas
-   1933) are not typed: A1 showed no signal in the two typed so far.
+   1933) are not typed. Almkvist and the Nile Nubian of Murray fall with A1. The others hold the other branches of
+   the family (Old Nubian, Hill Nubian, Midob and Birgid, Nara, Taman), and for them the page has two rules that
+   disagree: section 2, set before any agent started, tests them the same way once their dictionaries are
+   fetched; this list said at 07:00, before the gate ran, that they are typed only if A1 shows a signal in the two
+   dictionaries typed so far. Which rule holds is Mike's to say; none is typed before he does.
 5. **What tracks B and C leave:** the frames double the share of right meanings but are wrong three times in
-   four, so they cannot name an open word; the name parts are real but their places do not tell their kind. With
-   A1 missed, all three are closed as ways to a meaning of the project's own, unless new texts or a bilingual
-   come.
+   four, so they cannot name an open word; the name parts are real but their places do not tell their kind. Both
+   are closed as ways to a meaning of the project's own, unless new texts or a bilingual come, and so is track A
+   for Nile Nubian; its other branches wait on point 4.
 
 **What it cost:** track B about 14.8 million subagent tokens; track A's typing about 14.0 million; track C about
 1.9 million with its review; the reviews of A and B about 1.4 million. Fable's usage limit stopped 11 agents

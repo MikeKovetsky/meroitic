@@ -111,6 +111,11 @@ def test_the_comparison_with_the_family_is_its_pages():
     assert "compare with 2,000 shuffles of the Meroitic meanings" in cog and "On the 31 gold words the rules were not built from, it does no better than chance (p = 0.49)" in cog
     assert "(p = 0.49)" in PAGE and "p = 0.49 on words held out" in PAGE
     assert "Rilly's 82 sound correspondences" in readme and "Rilly's 82 sound correspondences" in PAGE
+    # gate A1, the two whole dictionaries of Nile Nubian: its bar's p, as the figures file of track A gives it
+    a1 = figures("outside_nubian_figures.json")["gate_a1"]
+    p = f"p = {a1['all']['rule']['by_length']['p']:.3f}"
+    assert a1["verdict"] == "missed" and f"did no better ({p} against a shuffle within words of one length" in PAGE
+    assert f"missed its bar ({p})" in PAGE and "has not been run" not in PAGE and "not yet counted" not in PAGE
 
 
 def test_what_went_wrong_is_the_figures():

@@ -194,8 +194,10 @@ Done since this plan was written:
     Track A, the Nubian dictionaries of Reinisch and Lepsius: all 340 pages typed, the script reviewed (the review
     found that the bar as first written passes one time in three with no related word, and the bar became a shuffle
     within words of one length); gate A1, run on 2026-11-17, missed (p = 0.598: the true meaning ranks no higher
-    than chance), so gate A2 is not run and the other dictionaries are not typed. All three tracks are closed. No
-    count of the map changes; no meaning of our own.
+    than chance), so gate A2 is not run and the comparison for Nile Nubian is closed. The dictionaries of the other
+    branches, fetched on 2026-11-16, are not typed: the page's section 2 tests them the same way, its section 6 had
+    tied them to a signal in A1, and which rule holds is Mike's to say. No count of the map changes; no meaning of
+    our own.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):
@@ -648,8 +650,9 @@ rule got from these 548 texts alone. Three paths bring evidence from outside the
 has a bar yet: each gets one, committed before its first agent, like every step above.
 
 **Where they stand on 2026-11-17** (point 28 above): H3 (names) met its first gate and could not decide its
-second; H2 (the Egyptian frames) missed its gate; H1 (the dictionaries) is typed and reviewed, and its gate is
-the next thing to run. What is left is section 6 of the page.
+second; H2 (the Egyptian frames) missed its gate; H1 (the dictionaries) missed gate A1 on the two dictionaries of
+Nile Nubian (p = 0.598), which closes it for Nile Nubian, and whether the dictionaries of the other branches are
+typed is Mike's to say. What is left is section 6 of the page.
 
 **Launched on 2026-11-16** (Mike, asked "Should I launch the three tracks now?": "Yes, launch all"). The rules
 and the bars of all three, set before any agent was started, are on
