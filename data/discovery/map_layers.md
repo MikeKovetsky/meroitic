@@ -152,11 +152,12 @@ two entries that both readers say Millet calls a personal name, and 1 piece of a
 4 places become translated words and 13 names; all 17 were open. The first reading of the other part of that
 step, the unnamed parts of spellings, is not taken and lays nothing; the second is the layer `leftover`.
 
-**`leftover`** (the second reading of the leftover parts). The 96 places of `rare_sure` and `rare_later` where both
-checkers of those steps recognised the word but the map leaves a part of the spelling unnamed. Two fresh checkers
-said what the unnamed part is, with places of known answer mixed in. The layer holds the places where both call
-it an ending, or a known word of the lexicon and the same one, and no other stem of the spelling is without a
-meaning: 14 forms of a word the lexicon calls sure and 18 places of a word for which Rilly states a meaning.
+**`leftover`** (the second reading of the leftover parts). The 96 places of steps G2 and G4 that `rare_sure` and
+`rare_later` left open: both checkers of those steps recognised the word, but the map leaves a part of the spelling
+unnamed. Two fresh checkers said what the unnamed part is, with places of known answer mixed in. The layer holds
+the places where both call it an ending, or a known word of the lexicon and the same one, and no other stem of the
+spelling is without a meaning: 14 forms of a word the lexicon calls sure and 18 places of a word for which Rilly
+states a meaning.
 27 places become translated words and 5 names; all 32 were open. A place both checkers call a name is not laid.
 
 ## 5. What keeps the base, and why
@@ -181,11 +182,11 @@ base they were run on. What is counted from now on, and the steps that follow, r
 
 - **No meaning here is the project's own.** A layer applies what scholars have published. The row "Our own
   meanings" of the status table stays at 0.
-- **The 432 stated places of `recurring`, `rare_later` and `leftover` rest on Rilly's readings of 2016 and 2021,**
-  the 14 of `rare_millet` on Millet 2005 (10, all of them names of places) and on Lipiński 2011 (4). Step G5 set each of the 66 meanings
-  behind them beside what other scholars say: 33 are stated by another scholar too (15 with a dissent), 13 are
-  disputed and 20 rest on Rilly alone ([second_scholar_later.md](second_scholar_later.md)). The layers do not
-  change with it.
+- **The 432 stated places of `recurring`, `rare_later` and `leftover` rest on Rilly's readings of 2016 and 2021.**
+  Step G5 set each of Rilly's 66 later meanings, those behind these places among them, beside what other scholars
+  say: 33 are stated by another scholar too (15 with a dissent), 13 are disputed and 20 rest on Rilly alone
+  ([second_scholar_later.md](second_scholar_later.md)). The layers do not change with it. The 14 stated places of
+  `rare_millet` rest on Millet 2005 (10, all of them names of places) and on Lipiński 2011 (4).
 - **The north star counts entries of the lexicon.** Several of the entries that `rare_later` gives a meaning are,
   by the same later source, forms or variants of one another or of known words
   ([the page of the rare spellings](rare_spellings.md), section 9).
@@ -236,3 +237,12 @@ that saw the change and the task, not the reasoning) changed:
 3. The layers make 41 stems names, not "names or pieces": a piece laid as part of a translated word keeps its stem
    in the count (section 3). Each layer's figures now give the stems left after it (`north_star.unnamed_stems`).
 4. Mike's answer on the recount is recorded in his words (section 3), and section 6 gives the result of G5.
+
+Review of the fifth and sixth layers (2026-11-16, with the leftover parts and G6): an independent reviewer (Opus
+5.5, a fresh agent that saw the change and the task, not the reasoning) changed:
+
+1. Section 4 called the places of `leftover` "the 96 places of `rare_sure` and `rare_later`"; they are places of
+   steps G2 and G4 that those two layers left open.
+2. Section 6 no longer reads as if step G5 had judged the meanings behind the stated places of `rare_millet`: G5
+   judged Rilly's 66 later meanings, not Millet's or Lipiński's. A check holds every stated place of the layers to
+   the source that section names.

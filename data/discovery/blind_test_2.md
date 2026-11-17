@@ -120,7 +120,7 @@ By rule 5 of section 3 no label is given: no proposal is called favoured by the 
 - **The one wrong choice with the meaning offered:** "small, young" was taken for "great, elder".
 - **The three wrong choices without it:** "sister" was taken for "direct descendant", "god" for "silver", and
   "general" for "governor". In each case all five readers agreed.
-- **The 5 new accepted words:** one was chosen, rightly ("to bear a child"); for the three others shown with
+- **The 5 new accepted words:** one was chosen, rightly ("to bear (a child)"); for the three others shown with
   their meaning the readers made no choice; the one shown without it got no choice either.
 
 **The open words (33), had the bars held.**
@@ -161,3 +161,18 @@ python3 -I tests/test_blind2.py   # the method on made-up words; the figures and
 
 `python3 -I src/blind2.py count` counts the readers' answers again; the packs are not written again once a reader
 has answered.
+
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked the script, the checks and this page against the local files. It corrects two sentences of
+section 2, which stand as they were written before the readers were started:
+
+1. "Now the two sorts stand mixed under every word." The pool of fillers mixes them, but a word's four options are
+   drawn by lot from it: they hold both an accepted meaning and a proposal under 63 of the 76 words.
+2. "**Never two near meanings.**" A filler is never near another option, but a word's own proposals stay together
+   as the sources give them: under 5 open words (`mde`, `mlomrse`, `mreperi`, `wte`, `ẖol`) two or three of the
+   four are near meanings, such as "to present" and "to grant".
+
+Neither touches a bar or a count. The review also checked that no pack shows the spelling of a word it hides, and
+that each pack offers each of its words the key's four meanings (`tests/test_blind2.py`); that the rules were in
+git before the readers were started (the time of the commit in git's own log of the branch, the launches in the
+session's log, the answer files); and that the tokens of the 25 readers are those of their task notifications.

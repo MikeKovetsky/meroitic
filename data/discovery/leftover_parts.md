@@ -5,7 +5,7 @@ by one answer (section 6), so no place of it is laid. **The second reading of pa
 ([leftover_parts_2.md](leftover_parts_2.md)) and is the map's sixth layer, `leftover`: 32 places, 27 of them
 translated words and 5 names. **Part 2 met its bars** (section 7) and is the map's fifth layer, `rare_millet`:
 17 places, 13 of them names and 4 translated words. **The step in all:** 49 places are laid, 31 of them as
-translated words and 18 as names, and 4 words of the dictionary get a meaning, each from one scholar; it took 20
+translated words and 18 as names, and 4 words of the dictionary get a meaning a scholar published; it took 20
 agents and 1,854,110 tokens. Figures: `leftover_parts_figures.json`. Script: `src/leftover.py`. Checks:
 `tests/test_leftover.py`. What the checkers of part 1 were given:
 [`runs/prompts/G8_parts.md`](../../runs/prompts/G8_parts.md).
@@ -222,3 +222,17 @@ python3 -I tests/test_leftover.py   # the method on made-up words; the figures a
 
 `python3 -I src/leftover.py count`, `count-again`, `verify` and `places` count the answers again; the packs are
 not written again once they are answered.
+
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked the script, the checks and both pages against the local files, and changed:
+
+1. The status line said the 4 words of the dictionary get a meaning "each from one scholar"; step G5 found a
+   second scholar for two of them, `nbr` and `yiroẖe` ([second_scholar_later.md](second_scholar_later.md)).
+2. The figures count a run of lot letters as explained only as the first reading's bar does: an ending, a known
+   word or a name, not "unclear". No figure changes: no checker answered "unclear" there.
+3. Part 2 counts its words of the dictionary by the map's own rule, that a word counts for the first layer that
+   gives it a meaning, as the second reading of part 1 did. No figure changes.
+
+Each step's rules were in git before its agents were started: the times of the commits in git's own log of the
+branch, the launches in the session's log and the answer files agree with sections 6 and 7 and with the second
+reading's page. The tokens of all 20 agents are those of their task notifications.

@@ -220,10 +220,11 @@ still changes only on his word is what a row means, its "Before us" and its sour
 - This file: "note down all into reporting.md skill in repo with how we measure each number to make sure we have
   consistent ways of measuring across compactions and sessions".
 - The layers: "Yes, start G1 and G4, queue G2". G1 put the recurring-words results into the map as a layer, as
-  sections 3 and 4 had announced; G2, G4 and G3 each added one the same day. Since then the first three rows are read
-  from `data/discovery/map_figures.json`. No row's definition or "Before us" changed with it. The three dated pages
-  that G1 named to be rebuilt (the coverage of the clean corpus, the lexicon's statuses, the translations'
-  baseline, which is the last row's "Before us") keep their numbers: "Yes, waive it." (13:52).
+  sections 3 and 4 had announced; G2, G4 and G3 each added one the same day, and the leftover parts two more.
+  Since then the first three rows are read from `data/discovery/map_figures.json`. No row's definition or "Before
+  us" changed with it. The three dated pages that G1 named to be rebuilt (the coverage of the clean corpus, the
+  lexicon's statuses, the translations' baseline, which is the last row's "Before us") keep their numbers: "Yes,
+  waive it." (13:52).
 - The recount of the north star after G3, from the old sample's stems still unnamed (section 3, "Counting
   again"), asked as "Accept the north star recount from the old sample, or draw a new sample?": "are you saying we
   need a new sample?", then "why do you need my approval to recount? this is obvious you need to recount to show

@@ -161,8 +161,8 @@ Done since this plan was written:
     map's fifth layer lays 17 places, 13 of them as names and 4 as translated words. The map as it stands:
     4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%).
 25. **The blind test again** (2026-11-16, [`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md);
-    step G6). No label is given. With the meaning offered, 16 of 17 accepted words that all five readers agreed
-    on got the right one; without it, 3 of 13 got a wrong one from all five, where the bar allowed one. A choice
+    step G6). No label is given. With the meaning offered, 17 accepted words got a meaning from all five readers and
+    16 of 17 the right one; without it, 3 of 13 got a wrong one from all five, where the bar allowed one. A choice
     among four meanings from the contexts alone is not a test a proposal can pass: this is its second miss. No
     count of the map changes.
 

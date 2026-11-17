@@ -998,13 +998,13 @@ meanings the two layers add were published before it.
 near meanings are kept apart. The plan named 83 accepted words. Only 43 could be used: of the 45 entries beyond
 the first test's 38, 20 are titles of which only the kind of office is known, 15 are forms or variants of words
 already in the test, 3 have no meaning of their own, 2 are also open words of the test, and 5 have a meaning that
-can be offered. 25 readers answered all 380 lines. Shown with their meaning, 17 of 30 accepted words got a choice
-and 16 of 17 the right one (94.1%; the bar of 80% is met). Shown without it, 3 of 13 got a wrong meaning from
-all five readers (23.1%; the bar of 10% is missed): "sister" was taken for "direct descendant", "god" for
-"silver", "general" for "governor". So no label is given. All five chose the same proposal for 7 of the 33 open
-words, six of them words on which the first test's readers had all agreed too; for one of the six, `ẖol`, the
-two tests' readers agreed on two different proposals. What the first test showed after its count, no wrong
-choice among 11 words without their meaning, did not hold when it was set as a bar.
+can be offered. 25 readers answered all 380 lines. Shown with their meaning, 17 of 30 accepted words got a meaning
+from all five readers and 16 of 17 the right one (94.1%; the bar of 80% is met). Shown without it, 3 of 13 got a
+wrong meaning from all five readers (23.1%; the bar of 10% is missed): "sister" was taken for "direct
+descendant", "god" for "silver", "general" for "governor". So no label is given. All five chose the same
+proposal for 7 of the 33 open words, six of them words on which the first test's readers had all agreed too; for
+one of the six, `ẖol`, the two tests' readers agreed on two different proposals. What the first test showed after
+its count, no wrong choice among 11 words without their meaning, did not hold when it was set as a bar.
 
 **What it means.** 31 more running words are translated, four more words of the dictionary have a scholar's
 meaning in the map, and 18 places are names. The blind choice

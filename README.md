@@ -265,15 +265,16 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     checkers judged the 56 places (kappa 0.97). The map's fifth layer lays 17 places, 13 of them as names and 4 as
     translated words ([`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md)). With both layers,
     4,185 of the 7,099 running words that need a meaning are translated (59.0%), 840 of 2,798 distinct spellings (30.0%) and 160 of about 1,284 distinct words (12.5%, between 11.8% and 15.6%); before us the north star is the same.
-24. **The blind test again gives no label: when five readers agree they are right 16 times in 17 if the meaning is
-    offered, and they agree on a wrong one 3 times in 13 if it is not.** The choice test of item 17 with what it
-    taught: a choice needs all five readers, the fillers are worded like the proposals, and near meanings are kept
-    apart. The plan named 83 accepted words; 43 could be used, because only 5 of the 45 further entries have a
-    meaning that can be offered. Shown with their meaning, 16 of 17 accepted words that got a choice got the right
-    one (the bar of 80% is met). Shown without it, 3 of 13 got a wrong one from all five readers (the bar allowed
-    one). So no label is given: a proposal that all five choose cannot be told from a wrong meaning chosen for
-    want of the right one. All five chose the same proposal for 7 of the 33 open words; they carry no label
-    ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
+24. **The blind test again gives no label: when all five readers pick the same meaning it is the right one 16 times
+    in 17 if the right one is offered, and they all pick a wrong one 3 times in 13 if it is not.** The choice test of
+    item 17 with what it taught: a choice needs all five readers, the fillers are drawn from one pool of accepted
+    meanings and proposals, and a filler is never near another option. The plan named 83 accepted words; 43 could be
+    used, because only 5 of the 45 further entries have a meaning that can be offered. Shown with their meaning, 17
+    accepted words got a meaning from all five readers and 16 of 17 the right one (the bar of 80% is met; one more
+    got "none of these" from all five). Shown without it, 3 of 13 got a wrong one from all five readers (the
+    bar allowed one). So no label is given: a proposal that all five choose cannot be told from a wrong meaning
+    chosen for want of the right one. All five chose the same proposal for 7 of the 33 open words; they carry no
+    label ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
 
 ## The question
 
@@ -722,10 +723,12 @@ both readers say the source calls it one ([`data/discovery/leftover_parts.md`](d
 
 The choice test of section 24 with three changes, set before any reader was started. A choice needs all five
 readers. The four options under a word are filled by lot from one pool of accepted meanings and proposals, so
-that a proposal no longer stands out by its wording. Meanings that no context could tell apart (bull and cow)
-are never offered together. The accepted words are the 38 of the first test and the 5 further entries of the
-lexicon that have a meaning of their own; in each kind every third by lot is shown without its true meaning. The
-bars are those of the first test ([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
+that a proposal no longer stands out by its wording (by that lot, 63 of the 76 words have both sorts among their
+four). A filler is never a meaning that no context could tell apart from another option of its word (bull and
+cow); an open word's own proposals stay together as the sources give them. The accepted words are the 38 of the
+first test and the 5 further entries of the lexicon that have a meaning of their own; in each kind every third by
+lot is shown without its true meaning. The bars are those of the first test
+([`data/discovery/blind_test_2.md`](data/discovery/blind_test_2.md)).
 
 ## Reproduce
 
