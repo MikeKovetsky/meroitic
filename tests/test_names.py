@@ -10,6 +10,7 @@ checks read what `packs` and `public` write, which is counted on the held-back n
 those files stand, that is until the script is in git and the gate has been run.
 """
 import ast
+import collections
 import contextlib
 import io
 import json
@@ -172,6 +173,11 @@ def names_lose_their_endings():
     assert joined == {"ζοϝι", "-ζο", "-κυ", "-λι"} and N.ends_read(gl, split["tuning"], LEX, joined) == ["ζοϝι"]
     assert N.ends_read(gl, split["tuning"] + split["held"], LEX, joined) == ["ζοϝι"]                 # -κυ: one name; -ζο: one name
     assert N.name_of(person("ζοϝι", "this is"), joined, ["ζοϝι"]) == ("ζοϝι", "whole", "")          # an end is no name
+    # the reading takes an end off only where the map does not cut the word: in one piece, or in pieces that do not spell
+    # it; where the map cuts it into parts, none of them an ending, nothing is taken off
+    assert N.name_of(person("πιδζοϝι", "this is Pid"), joined, ["ζοϝι"]) == ("πιδ", "reading", "ζοϝι")
+    assert N.name_of(person("πιδζοϝι", "this is Pid", [("πιδ", "NAME"), ("ζο", "NAME")]), joined, ["ζοϝι"]) == ("πιδ", "reading", "ζοϝι")
+    assert N.name_of(person("πιδζοϝι", "this is Pid", [("πιδζο", "NAME"), ("ϝι", "NAME")]), joined, ["ζοϝι"]) == ("πιδζοϝι", "whole", "")
     assert N.by_parts(person("ζοβακζο", parts=[("ζο", "-ζο"), ("βακ", "NAME"), ("ζο", "-ζο")]), joined) == ("ζο", "βακ", "ζο")
     assert N.by_parts(person("ζοζο", parts=[("ζο", "-ζο"), ("ζο", "-ζο")]), joined) == ("", "ζο", "ζο")                # one piece at least is left
     assert N.by_parts(person("βακζο", parts=[("βα", "NAME"), ("ζο", "-ζο")]), joined) is None                         # the pieces do not spell it
@@ -182,6 +188,11 @@ def names_lose_their_endings():
     assert N.spellings_of(rows, "held") == {"βακ": "βακ", "βακκυ": "βακκυ", "νορκυ": "νορ", "πιδζοϝι": "πιδ", "τυν": "τυν"}
     assert [r["set"] for r in rows] == ["held"] * 5 + ["tuning"] * 12 and set(by[("T1", "τυν")]) == {
         "text", "n", "set", "form", "lost", "name", "cut", "off", "role", "site", "kind"}
+    # the ends are learned from the tuning texts alone: an end the held-back texts take off three names is not taken off
+    more = {"T9": [person("ραζκυ", "this is Raz")], "H7": [person(n + "κυ", f"this is {n}", [(n, "NAME"), ("κυ", "-κυ")]) for n in ("τυν", "σολ", "δεπ")]}
+    nine = N.rows_of(more, {"T9": {"kind": "funerary", "site": ""}, "H7": {"kind": "funerary", "site": ""}}, LEX, {"tuning": ["T9"], "held": ["H7"]})
+    assert [(r["form"], r["name"], r["cut"]) for r in nine if r["set"] == "tuning"] == [("ραζκυ", "ραζκυ", "whole")]
+    assert N.ends_read(more, ["H7"], LEX, joined) == ["κυ"]                      # learned from those texts, it would be one
 
 
 def test_the_role_the_site_and_the_kind_come_from_the_map_and_the_corpus():
@@ -311,6 +322,14 @@ def test_the_cutter_is_compared_on_names_it_has_not_learned_from():
     with set_to(N, RUNS=3, DRAWS_LEARN=20):
         assert N.learned(rows)["unseen_half"]["share"] == half["share"]
     assert (N.RUNS, N.DRAWS_LEARN) == (50, 50)
+    # in every run the cutter learns from one share of the names and cuts the others: never a name it learned from
+    learned_from, cut_ = [], []
+    real = N.learn_parts
+    with set_to(N, learn_parts=lambda ns, **kw: learned_from.append(list(ns)) or real(ns, **kw),
+                tally=lambda ns, parts, *a: cut_.append(list(ns)) or (0, 0.0, 0.0)):
+        N.unseen(names, 0.8, 4, 1, 1)
+    assert len(learned_from) == len(cut_) == 4 and [(len(a), len(b)) for a, b in zip(learned_from, cut_)] == [(128, 32)] * 4
+    assert all(not set(a) & set(b) and sorted(a + b) == sorted(names) for a, b in zip(learned_from, cut_))
 
 
 def test_the_parts_file_is_what_the_cutter_learns_from_the_tuning_names():
@@ -319,7 +338,7 @@ def test_the_parts_file_is_what_the_cutter_learns_from_the_tuning_names():
     rows = [r for r in N.the_rows() if r["set"] == "tuning"]                          # the tuning texts alone
     assert saved["parts"] == N.learn_parts(N.names_of(rows, "tuning")) and saved["thresholds"] == N.learned_thresholds()
     assert (saved["names"], saved["parts_in_three_names"]) == (342, 328) and saved["by_length"] == {"2": 151, "3": 129, "4": 38, "5": 9, "6": 1}
-    assert saved["strings_in_three_names_carried_ones_too"] == len(N.learn_parts(N.names_of(rows, "tuning"), carried=math.inf)) > 328
+    assert saved["strings_in_three_names_carried_ones_too"] == len(N.learn_parts(N.names_of(rows, "tuning"), carried=math.inf)) == 358   # the page, rule 3
     for u, share in ((saved["unseen_half"], 0.5), (saved["unseen_fifth"], 0.8)):
         assert (u["learned_from"], u["runs"], u["draws"]) == (share, N.RUNS, N.DRAWS_LEARN) and abs(u["margin"] - (u["share"] - u["made_up"])) < 0.0002
     assert saved["unseen_half"]["names_cut"] == N.RUNS * 171 and saved["unseen_fifth"]["names_cut"] == N.RUNS * 68
@@ -366,6 +385,18 @@ def test_gate_c1_is_met_at_thirty_points_and_missed_under_them():
     assert (missed["wholly_split"], missed["share"], missed["made_up"], missed["margin"], missed["verdict"]) == (0, 0.0, 0.0, 0.0, "missed")
     quarter = N.gate_c1(held_rows(fresh[:10] + other[:30]), "abc1234")["gate"]
     assert quarter["wholly_split"] == 10 and 0.2 < quarter["margin"] < 0.30 and quarter["verdict"] == "missed"
+    # the gate's made-up names shuffle letters, not syllables: on names with the script's vowel signs the two differ
+    vowelled = ["βe", "κiτ", "μo", "σoλ", "δeπ", "γi", "ζoρ", "λeκ"]
+    t2 = made_up(120, 12, vowelled)
+    f2 = [n for n in made_up(300, 13, vowelled) if n not in t2][:30]
+    g2 = N.gate_c1([row(n, "tuning") for n in t2] + [row(n, "held") for n in f2], "abc1234")["gate"]
+    p2 = N.learn_parts(t2)
+
+    def made_by(how):
+        rng = random.Random(20261116)
+        return sum(sum(N.whole(how(n, rng), p2) for _ in range(200)) / 200 for n in sorted(f2))
+
+    assert len(f2) == 30 and g2["made_up"] == round(made_by(N.shuffled) / 30, 4) != round(made_by(N.reordered) / 30, 4)
 
 
 def test_a_held_back_spelling_that_also_stands_in_a_tuning_text_is_still_a_held_back_name():
@@ -381,6 +412,7 @@ def test_a_held_back_spelling_that_also_stands_in_a_tuning_text_is_still_a_held_
     assert out["by_different_names"]["names"] == 40 and sum(r["in_tuning"] for r in out["rows"]) == 5
     twice = N.gate_c1(rows + [row(fresh[0] + "ζο", "held", name=fresh[0])], "abc1234")
     assert twice["gate"]["names"] == 41 and twice["by_different_names"]["names"] == 40               # two spellings of one name: two in the gate
+    assert twice["gate"]["wholly_split"] == 31 and twice["by_different_names"]["wholly_split"] == 30
     assert set(out) == {"frozen_in", "bar", "draws", "seed", "thresholds", "tuning_names", "parts_in_three_tuning_names", "gate",
                         "without_the_spellings_also_in_tuning", "without_the_names_also_in_tuning", "by_different_names", "rows"}
     assert "syllables_kept" in out["gate"] and "verdict" not in out["by_different_names"]            # one bar, on the gate alone
@@ -389,7 +421,7 @@ def test_a_held_back_spelling_that_also_stands_in_a_tuning_text_is_still_a_held_
 def test_the_gate_runs_once_and_only_with_the_script_in_git():
     tuning = made_up(120, 8)
     rows = held_rows([n for n in made_up(400, 9) if n not in tuning][:12])
-    never = lambda: (_ for _ in ()).throw(AssertionError("the names were read"))                                        # noqa: E731
+    never = lambda *a: (_ for _ in ()).throw(AssertionError("the names were read"))                                     # noqa: E731
     with a_home(the_rows=lambda: rows) as d:
         quiet(N.held)
         out = N.read("held.json")
@@ -398,9 +430,10 @@ def test_the_gate_runs_once_and_only_with_the_script_in_git():
         (d / "held.json").unlink()
         # not in git, or changed since: nothing is read, nothing is written
         for git in (lambda *a: "", lambda *a: "1111" if a[0] == "hash-object" else "2222"):
-            with set_to(N, frozen=FROZEN, git=git, the_rows=never):
+            with set_to(N, frozen=FROZEN, git=git, the_rows=never, read=never):
                 assert stops(N.held, "is not in git as it stands") and stops(N.packs, "is not in git as it stands")
-        assert not (d / "held.json").exists() and not (d / "packs").exists()
+                assert stops(N.count, "is not in git as it stands")
+        assert not (d / "held.json").exists() and not (d / "packs").exists() and not (d / "count.json").exists()
         with set_to(N, frozen=FROZEN, git=lambda *a: "3333" if a[0] in ("hash-object", "rev-parse") else "abc1234 2026-11-16T22:30:00-08:00"):
             assert N.frozen() == "abc1234 2026-11-16T22:30:00-08:00"
     assert N.FROZEN == ("src/names.py", "tests/test_names.py")
@@ -463,6 +496,8 @@ def test_the_packs_show_codes_and_numbers_and_no_letter_of_a_part_or_a_name():
     assert by["αμν"]["known"] and by["αμν"]["kinds"] == ["god"] and by["αμν"]["is"] == [{"entry": None, "kinds": ["god"], "meaning": "the god Amun"}]
     assert by["μλο"]["known"] and by["μλο"]["kinds"] == ["quality", "thing or person"] and by["μλο"]["is"][0]["meaning"] == "good"
     assert sum(c["known"] for c in codes.values()) == 2 and not by["βακ"]["known"] and by["βακ"]["kinds"] == [] and by["βακ"]["is"] == []
+    # ... and which kind each known part has for the bar: title and quality as one
+    assert (by["αμν"]["kinds_for_the_bar"], by["μλο"]["kinds_for_the_bar"], by["βακ"]["kinds_for_the_bar"]) == (["god"], ["thing or person", "title or quality"], [])
     for name, text in texts.items():
         head, body = text.split("\n---\n\n")
         assert head == N.BRIEF.replace("<<N>>", str(len(key["packs"][name]))) and "<<N>>" not in text and text.count("<<ANSWERS>>") == 1
@@ -489,6 +524,24 @@ def test_the_known_parts_are_dealt_evenly_and_a_pack_keeps_its_codes_in_order():
     assert sorted(c for c in codes if codes[c]["known"]) != sorted(codes)[:6]
 
 
+def test_the_numbers_of_a_packs_codes_do_not_tell_which_are_known():
+    """The deal is drawn by lot apart from the numbering. Dealt in the order of the codes, every pack would hold
+    the codes at even steps among the unknown ones (and among the known ones), and a known code would stand off the
+    steps of the unknown codes around it: the gaps between the numbers would show it."""
+    stats = {f"π{i:03d}": {"names": 5, "place": collections.Counter(), "gods": collections.Counter(), "roles": collections.Counter(),
+                           "sites": collections.Counter(), "beside": collections.Counter()} for i in range(240)}
+    known = set(sorted(stats)[::8])
+    with set_to(N, learn_parts=lambda names: stats, statistics=lambda people, parts, gods: stats,
+                known_of=lambda p, gods, words: [{"entry": p, "kinds": ["deed"], "meaning": "a deed"}] if p in known else None):
+        key, _ = N.packs_of([], {}, {})
+    codes, packs = key["codes"], key["packs"]
+    assert len(packs) == 6 and sum(c["known"] for c in codes.values()) == 30 and {sum(codes[c]["known"] for c in v) for v in packs.values()} == {5}
+    for which in (True, False):
+        group = sorted(c for c in codes if codes[c]["known"] == which)
+        steps = [{group.index(c) % len(packs) for c in v if codes[c]["known"] == which} for v in packs.values()]
+        assert all(len(s) > 1 for s in steps), (which, steps)
+
+
 def shown(body, gods, sites):
     """The words of a pack's codes that are no label of the pack, no god's English name and no site."""
     labels = set("names place first middle last whole name with gods whose mothers fathers the dead sites beside none site not known".split())
@@ -500,9 +553,12 @@ def test_the_packs_are_written_for_two_readers_and_not_again_once_one_has_answer
     rows, (key, texts) = a_key_and_packs()
     with a_home(the_rows=lambda: rows, the_map=lambda: {}, gods_of=lambda gl, lex: {"αμν": "Amun"}, words_of=lambda gl, lex, lines: {}), \
             set_to(W, lexicon=lambda: {}), set_to(M, lines_of=lambda layer: []):
+        # not before gate C1: the packs count the held-back names
+        assert stops(N.packs, "gate C1 has not been run") and not (N.HOME / "packs").exists() and not (N.HOME / "key.json").exists()
+        quiet(N.held)
         quiet(N.packs)
         saved = N.read("key.json")
-        assert saved["packs"] == key["packs"] and sum(c["known"] for c in saved["codes"].values()) == 1
+        assert saved["packs"] == key["packs"] and sum(c["known"] for c in saved["codes"].values()) == 1 and saved["frozen_in"].startswith("abc1234 ")
         for name in saved["packs"]:
             a, b = [(N.HOME / "packs" / f"{name}_{r}.md").read_text(encoding="utf-8") for r in "ab"]
             assert f"in the file `data/sources/names/answers/{name}_a.jsonl`" in a and b == a.replace(f"{name}_a.jsonl", f"{name}_b.jsonl")
@@ -547,26 +603,51 @@ def test_a_god_is_named_in_english_and_a_half_of_a_gods_name_is_no_god():
 
 
 def test_a_known_word_has_the_kinds_the_lexicon_gives_it():
-    k = lambda kind, meaning="": N.kinds_of({"kind": kind, "meaning": meaning})                                         # noqa: E731
-    assert k("adjective", "good") == ["quality"] and k("verb") == ["deed"] and k("title") == ["title"] and k("epithet") == ["quality"]
-    assert k("noun", "woman") == ["thing or person"] and k("noun", "brother (of a male person)") == ["kin word"] and k("", "the child (of a mother)") == ["kin word"]
-    assert k("function word") == ["ending"] and k("") == [] and k("place name") == [] and k("verb", "'whom X bore', 'child (of such a mother)'") == ["deed"]
-    assert k("adjective", 'adjective: "good"; noun: "man of worth"') == ["quality", "thing or person"]
-    assert k("title", '(1) noun: "child"; (2) title: "page (?)"; (3) adjective: "small"') == ["kin word", "quality", "title"]
+    k = N.kinds_of
+    assert k("adjective", "good") == ["quality"] and k("verb", "") == ["deed"] and k("title", "") == ["title"] and k("epithet", "") == ["quality"]
+    assert k("noun", "woman") == ["thing or person"] and k("noun", "brother (of a male person)") == ["kin word"]
+    assert k("function word", "") == ["ending"] and k("", "") == [] and k("place name", "") == [] and k("verb", "'whom X bore', 'child (of such a mother)'") == ["deed"]
+    # a word without a kind in the lexicon counts for the meanings only, even where its meaning is a kin term
+    assert k("", "the child (of a mother)") == []
+    # the kind is the lexicon's kind of the word by the table: a label in its meaning is no kind of it
+    assert k("adjective", 'adjective: "good"; noun: "man of worth"') == ["quality"]
+    assert k("title", '(1) noun: "child"; (2) title: "page (?)"; (3) adjective: "small"') == ["title"]
     assert set(N.KIND_OF.values()) | {"kin word"} == set(N.KINDS) - {"unclear"}
-    lex = {h: e | {"headword": h} for h, e in LEX.items()} | {"κδι": {"headword": "κδι", "kind": "noun", "status": "hypothesis", "meaning": "?"}}
+    # title and quality are one kind for the bar; no other two kinds are
+    assert N.bar_kinds(["title"]) == N.bar_kinds(["quality"]) == N.bar_kinds(["quality", "title"]) == ["title or quality"]
+    assert N.bar_kinds(["god", "kin word"]) == ["god", "kin word"] and N.bar_kinds([]) == [] and N.bar_kinds(["unclear"]) == ["unclear"]
+    assert len({N.bar_kinds([x])[0] for x in N.KINDS}) == len(N.KINDS) - 1
+    lex = {h: e | {"headword": h} for h, e in LEX.items()} | {h: {"headword": h, "kind": "noun", "status": "hypothesis", "meaning": "?"} for h in ("κδι", "σμ")}
     gl = {"T1": [word("μλολοϝι", "meaning", parts=[("μλο", "μλο"), ("λοϝι", "ending")]), word("κδι", "meaning", parts=[("κδι", "κδι")]),
-                 word("τεδ", "meaning", parts=[("τεδ", "τεδ")]), word("ζοϝι", "grammar", parts=[("ζοϝι", "ζοϝι")]), word("Αμν", "name", "god name", parts=[("Αμν", "Αμν")])]}
+                 word("τεδ", "meaning", parts=[("τεδ", "τεδ")]), word("ζοϝι", "grammar", parts=[("ζοϝι", "ζοϝι")]), word("Αμν", "name", "god name", parts=[("Αμν", "Αμν")]),
+                 word("σμ", "meaning", parts=[("σμ", "σμ")])]}
     line = {"text": "T1", "n": 2, "form": "κδι", "item": "κδι", "why": "stated", "level": "meaning", "gloss": "woman (a later source)"}
+    wife = {"text": "T1", "n": 6, "form": "σμ", "item": "σμ", "why": "stated", "level": "meaning", "gloss": "wife (a later source)"}
     with set_to(N, letters=greek):
-        words = N.words_of(gl, lex, [("a layer", [line | {"why": "piece", "gloss": "a piece"}, line])])
-        assert set(words) == {"μλο", "τεδ", "ζοϝι", "κδι"}                              # in use and with a meaning; no god's name, no ending
-        assert words["μλο"] == [{"entry": "μλο", "kinds": ["quality", "thing or person"], "meaning": LEX["μλο"]["meaning"]}]
+        words = N.words_of(gl, lex, [("a layer", [line | {"why": "piece", "gloss": "a piece"}, line, wife])])
+        assert set(words) == {"μλο", "τεδ", "ζοϝι", "κδι", "σμ"}                        # in use and with a meaning; no god's name, no ending
+        assert words["μλο"] == [{"entry": "μλο", "kinds": ["quality"], "meaning": LEX["μλο"]["meaning"]}]
         assert words["κδι"] == [{"entry": "κδι", "kinds": ["thing or person"], "meaning": "woman (a later source)"}]       # the layer's meaning
+        assert words["σμ"] == [{"entry": "σμ", "kinds": ["kin word"], "meaning": "wife (a later source)"}]          # a kin term in the meaning the key gives
         assert set(N.words_of(gl, lex, [])) == {"μλο", "τεδ", "ζοϝι"}
     assert N.known_of("αμν", {"αμν": "Amun"}, {"αμν": [{"entry": "x", "kinds": ["deed"], "meaning": "to take"}]}) == [
         {"entry": None, "kinds": ["god"], "meaning": "the god Amun"}, {"entry": "x", "kinds": ["deed"], "meaning": "to take"}]
     assert N.known_of("βακ", {"αμν": "Amun"}, {}) is None
+
+
+def test_no_known_tuning_part_has_a_meaning_that_only_names_another_word():
+    """The page, rule 7: a meaning that only names another word ("a variant of X") would be replaced as in track B,
+    and no known part among the tuning parts needs it, so the script replaces none. The codes of gate C2 are tuning
+    parts; the gods and the words are those of the map. Read on the tuning names; nothing is printed."""
+    needs(*THE_MAP)
+    gl, lex = N.the_map(), W.lexicon()
+    gods, words = N.gods_of(gl, lex), N.words_of(gl, lex, [(l["name"], M.lines_of(l)) for l in M.LAYERS[:len(N.LAYERS)]])
+    parts = N.learn_parts(N.names_of([r for r in N.the_rows() if r["set"] == "tuning"], "tuning"))
+    known = [w for p in parts for w in N.known_of(p, gods, words) or []]
+    only = re.compile(r"(?i)^(?:(?:probably|perhaps|possibly|rather|another|an?|the)\s+)*(?:(?:variants?|forms?)\s*(?:\(\?\))?\s+of|see)\s+\S+\s*(?:\([^)]*\))?\W*$")
+    assert only.match("variant (?) of μτε") and only.match("see Ϝος") and only.match("probably a variant of Αμν (Amun)")
+    assert not only.match("variant of ζο: 'this one'") and not only.match("the god Amun")
+    assert len(known) > 20 and [w["entry"] for w in known if only.match(w["meaning"]) or not w["meaning"].strip()] == []
 
 
 # ------------------------------------------------------------------------------------------------- gate C2: the count
@@ -601,19 +682,34 @@ def test_the_kinds_bar_needs_eight_agreed_parts_and_four_fifths_of_them_right():
     # met: both give the ten known parts the same kind, nine of them the key's (the second part may be either of its two kinds)
     met = N.counted(key, answers(key, right[:9] + ["deed"] + ["ending"] * 4, right[:9] + ["deed"] + ["ending", "ending", "title", "unclear"]), None)
     assert met["kinds"] == {"known_with_a_kind": 10, "agreed": 10, "right": 9, "verdict": "met"} and met["codes"] == 14 and met["known"] == 10
-    assert met["answered_by_both"] == 14 and met["kappa_kinds"] == round(W.kappa([(a, b) for a, b in zip(
-        right[:9] + ["deed"] + ["ending"] * 4, right[:9] + ["deed"] + ["ending", "ending", "title", "unclear"])]), 4)
+    assert met["answered_by_both"] == 14 and met["kappa_kinds"] == round(W.kappa([(N.bar_kinds([a])[0], N.bar_kinds([b])[0]) for a, b in zip(
+        right[:9] + ["deed"] + ["ending"] * 4, right[:9] + ["deed"] + ["ending", "ending", "title", "unclear"])]), 4)     # the kinds as the bar counts them
+    assert met["kappa_kinds"] != round(W.kappa(list(zip(right[:9] + ["deed"] + ["ending"] * 4, right[:9] + ["deed"] + ["ending", "ending", "title", "unclear"]))), 4)
     # the parts without a known meaning that both give the same kind are listed, with their kind and no meaning
     assert met["listed"] == [{"code": "P011", "part": "part11", "kind": "ending"}, {"code": "P012", "part": "part12", "kind": "ending"}]
     assert met["meanings"] == {"verdict": "not judged yet"}
     # missed: ten agreed, seven right
-    wrong = ["deed", "thing or person", "title", "title"] + ["quality"] * 6
+    wrong = ["deed", "thing or person", "deed", "kin word"] + ["quality"] * 6
     missed = N.counted(key, answers(key, wrong + ["ending"] * 4, wrong + ["ending"] * 4), None)
     assert missed["kinds"] == {"known_with_a_kind": 10, "agreed": 10, "right": 7, "verdict": "missed"} and missed["listed"] == []
     # too small: the readers agree on seven known parts only ("unclear" from both is no kind; a part one reader did not answer is not agreed)
     few = N.counted(key, answers(key, right[:7] + ["unclear", "title", None] + ["ending"] * 4, right[:7] + ["unclear", "deed", "quality"] + ["ending"] * 4), None)
     assert few["kinds"] == {"known_with_a_kind": 10, "agreed": 7, "right": 7, "verdict": "too small to decide"} and few["listed"] == []
     assert few["answered_by_both"] == 13 and [r["same_kind"] for r in few["rows"][7:10]] == [None, None, None]
+    # title and quality are one kind for the bar: one reader's title and the other's quality agree, and either is right for a
+    # part the key calls a title or a quality; an unknown part they split so is listed as "title or quality"
+    tq = a_key()
+    tq["codes"]["P010"]["kinds"] = ["title"]
+    one = ["god", "thing or person"] + ["title"] * 4 + ["quality"] * 4 + ["title", "quality", "deed", "unclear"]
+    two = ["god", "thing or person"] + ["quality"] * 4 + ["title"] * 3 + ["quality"] + ["quality", "quality", "deed", "unclear"]
+    mixed = N.counted(tq, answers(tq, one, two), None)
+    assert mixed["kinds"] == {"known_with_a_kind": 10, "agreed": 10, "right": 10, "verdict": "met"} and mixed["kappa_kinds"] == 1.0
+    assert [(x["code"], x["kind"]) for x in mixed["listed"]] == [("P011", "title or quality"), ("P012", "quality"), ("P013", "deed")]
+    assert mixed["rows"][9]["kinds_for_the_bar"] == ["title or quality"] and mixed["rows"][9]["same_kind"] == "title or quality"
+    # ... but a title is not a deed, and a quality the key does not give is wrong
+    off = N.counted(tq, answers(tq, one[:2] + ["deed"] + one[3:], two[:2] + ["deed"] + two[3:]), None)
+    assert off["kinds"] == {"known_with_a_kind": 10, "agreed": 10, "right": 9, "verdict": "met"}
+    assert N.counted(tq, answers(tq, ["quality"] + one[1:], ["title"] + two[1:]), None)["kinds"]["right"] == 9
     # a known part whose key has no kind is not counted for the kinds
     key["codes"]["P010"]["kinds"] = []
     assert N.counted(key, answers(key, right + ["ending"] * 4, right + ["ending"] * 4), None)["kinds"] == {
@@ -629,6 +725,9 @@ def test_the_meanings_bar_is_counted_from_the_judges_verdicts():
     assert [p["code"] for p in pairs] == [f"P{n:03d}" for n in range(1, 10)] + ["P011", "P012"]            # P010: one reader gives none
     assert pairs[0] == {"code": "P001", "a": "P001 as a says it", "b": "P001 as b says it", "key": ["meaning 1"]} and pairs[-1]["key"] is None
     assert N.meant({"meaning": "none"}) is None and N.meant({"meaning": ""}) is None and N.meant({}) is None and N.meant({"meaning": " the  good one "}) == "the good one"
+    # a meaning that gives none, however it is written, is none: it would otherwise go to the judge as a meaning both readers give
+    assert all(N.meant({"meaning": m}) is None for m in ("None.", " NONE ", "unknown", "Unclear.", "not known", "-", "?", "'none'", None))
+    assert N.meant({"meaning": "an unknown god"}) == "an unknown god" and N.meant({"meaning": "none of these"}) == "none of these"
     verdicts = {f"P{n:03d}": {"same": True, "right": n != 3} for n in range(1, 10)} | {"P011": {"same": True}, "P012": {"same": False}}
     met = N.counted(key, ans, verdicts)
     assert met["meanings"] == {"agreed": 9, "right": 8, "verdict": "met"} and met["kinds"]["verdict"] == "met" and met["both_give_a_meaning"] == 11
@@ -667,6 +766,7 @@ def test_a_readers_file_counts_for_its_own_pack_and_the_count_waits_for_the_judg
         quiet(N.count)
         pairs, out = N.read("count-pairs.json"), N.read("count.json")
         assert [p["code"] for p in pairs] == [f"P{n:03d}" for n in range(1, 12)] and out["meanings"] == {"verdict": "not judged yet"}
+        assert out["frozen_in"].startswith("abc1234 ")                                    # the commit of the script that counted
         assert out["kinds"] == {"known_with_a_kind": 10, "agreed": 10, "right": 10, "verdict": "met"} and out["kappa_kinds"] == 1.0
         assert out["bars"] == N.BARS_C2 and len(out["rows"]) == 12 and [x["code"] for x in out["listed"]] == ["P011", "P012"]
         N.write("count-verdicts.json", {p["code"]: {"same": True, "right": True} for p in pairs[:-1]})
@@ -677,7 +777,10 @@ def test_a_readers_file_counts_for_its_own_pack_and_the_count_waits_for_the_judg
         N.write("count-verdicts.json", {p["code"]: {"same": p["code"] != "P003"} if p["code"] in ("P003", "P011") else {"same": True, "right": True} for p in pairs})
         quiet(N.count)
         assert N.read("count.json")["meanings"] == {"agreed": 9, "right": 9, "verdict": "met"}
+        # once counted with the judge's verdicts, the count is not made again, whatever the verdicts say now
         N.write("count-verdicts.json", {p["code"]: {"same": True, "right": p["code"] != "P005"} for p in pairs})
+        assert stops(N.count, "it is not counted again") and N.read("count.json")["meanings"] == {"agreed": 9, "right": 9, "verdict": "met"}
+        (d / "count.json").unlink()
         quiet(N.count)
         out = N.read("count.json")
         assert out["meanings"] == {"agreed": 10, "right": 9, "verdict": "met"} and out["listed"][0] == {

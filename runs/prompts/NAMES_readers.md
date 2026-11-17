@@ -3,9 +3,11 @@
 Written on 2026-11-16 at 22:05, with the script (`src/names.py`), before the script was run on the held-back
 names and before any reader was started. The rules and the bars are in
 [`data/discovery/outside_evidence.md`](../../data/discovery/outside_evidence.md), section 4. `python3 -I
-src/names.py packs` writes the packs: every part that stands in at least five names under a code, in packs of
-about 40. The codes are numbered by lot; the known parts and the others are dealt evenly over the packs, and a
-pack lists its codes in their order, so nothing in it says which are known (the key, `key.json`, stays apart).
+src/names.py packs` writes the packs, once gate C1 has been run: every part that stands in at least five names
+under a code, in packs of about 40. The codes are numbered by lot; the known parts and the others are dealt evenly
+over the packs by a second draw, apart from the numbering, and a pack lists its codes in their order, so nothing in
+it says which are known (the key, `key.json`, stays apart). The review of 2026-11-16 made the deal a draw of its
+own: dealt in the order of the codes, the gaps between a pack's numbers would have shown its known codes.
 Each pack goes to two readers, who do not see each other's answers; each gets the brief below with the
 number of codes of its pack and its own answers file (`data/sources/names/answers/<pack>_<a|b>.jsonl`), and after
 it the codes with their numbers. A reader sees no letter of a name or of a part.

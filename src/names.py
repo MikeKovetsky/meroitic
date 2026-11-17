@@ -46,16 +46,18 @@ Everything is read and written under data/sources/names/ (local only: the rows h
   python3 -I src/names.py names    every place of a name with its role, site and kind of text (names.json)
   python3 -I src/names.py learn    the parts, from the tuning names alone, and how they do on unseen tuning names (parts.json)
   python3 -I src/names.py held     gate C1 on the held-back names: once, and only with this script in git (held.json)
-  python3 -I src/names.py packs    gate C2: the parts as codes with their statistics, for two readers (packs/, key.json)
+  python3 -I src/names.py packs    gate C2, after `held`: the parts as codes with their statistics, for two readers (packs/, key.json)
   python3 -I src/names.py count    gate C2: the two readers compared with the key (count-pairs.json, count.json)
   python3 -I src/names.py public   data/discovery/outside_names_figures.json: counts only
 
 Gate C2 counts a part as standing in a name wherever its letters stand in it, as the cutter and the page count it
 (not only where the one best cut of the name uses it), and it counts different names, endings off: two spellings
-of one name count once. What the readers are given is BRIEF below and runs/prompts/NAMES_readers.md. Whether two
-meanings are the same is not decided here: `count` writes the pairs (count-pairs.json) and reads the judge's
-verdicts from count-verdicts.json, {"P017": {"same": true, "right": false}, ...}: "same" says whether the two
-readers' meanings are one meaning, "right" (for a known part) whether that meaning is the key's.
+of one name count once. The key's kinds come from the lexicon's kind of each word (KIND_OF), and title and quality
+count as one kind for the bar (the page, rule 5). What the readers are given is BRIEF below and
+runs/prompts/NAMES_readers.md. Whether two meanings are the same is not decided here: `count` writes the pairs
+(count-pairs.json) and reads the judge's verdicts from count-verdicts.json, {"P017": {"same": true, "right":
+false}, ...}: "same" says whether the two readers' meanings are one meaning, "right" (for a known part) whether that
+meaning is the key's.
 """
 import collections
 import json
@@ -98,7 +100,7 @@ MIN_CODED = 5                                            # gate C2: a part with 
 PACK = 40                                                # codes in a pack, about
 BARS_C2 = {"rate": 0.80, "least": 8}                    # of the known parts both readers agree on, at least 8, 80% right
 KINDS = ("god", "quality", "thing or person", "deed", "kin word", "title", "ending", "unclear")
-NO_MEANING = ("", "none")
+NO_MEANING = ("", "none", "unknown", "unclear", "not known")   # a reader's meaning that gives none (stops and case aside)
 # The comparison on tuning names the cutter has not learned from.
 RUNS, DRAWS_LEARN = 50, 50                              # the tuning names dealt this often, with this many made-up names each
 # The map's wording, in English, that the names' rows are read from. None of it is Meroitic.
@@ -119,7 +121,8 @@ NOT_NAMED = "a god the lexicon gives no English name"
 # meaning is a kin term is a kin word.
 KIND_OF = {"god name": "god", "adjective": "quality", "epithet": "quality", "verb": "deed", "title": "title",
            "noun": "thing or person", "function word": "ending"}
-LABEL = re.compile(r"\b(noun|title|adjective|verb)\s*:")   # a kind the lexicon's meaning names as a label
+# Title and quality count as one kind for the bar of gate C2 (the page, rule 5): in names both describe the bearer.
+ONE_KIND = {"title": "title or quality", "quality": "title or quality"}
 PLACES = ("first", "middle", "last", "whole name")     # where a part stands in a name
 VOWELS = "eio"                                           # the script's vowel signs: only for the made-up names that keep their syllables
 
@@ -257,13 +260,14 @@ def ends_read(gl, texts, lex, joined):
 
 def name_of(g, joined, ends):
     """(the name without what the map names as an ending or a word joined to it, how it was cut, what was taken off).
-    "parts": the map's parts take something off. "reading": the map's parts take nothing off but the map reads the
-    word "this is ..."; the script takes off the longest of `ends` it ends in (and the row says so). "whole":
-    nothing is taken off."""
+    "parts": the map's parts take something off. "reading": the map gives the word in one piece (or in pieces that
+    do not spell it) and reads it "this is ..."; the script takes off the longest of `ends` it ends in (and the row
+    says so). "whole": nothing is taken off, also where the map cuts the word into parts none of which is an ending
+    (the page, rule 1: the reading takes an end off only where the map does not cut the word)."""
     cut = by_parts(g, joined)
     if cut and (cut[0] or cut[2]):
         return cut[1], "parts", " + ".join(x for x in (cut[0], cut[2]) if x)
-    if (g.get("gloss") or "").startswith(THIS_IS):
+    if cut is None and (g.get("gloss") or "").startswith(THIS_IS):
         for e in ends:
             if g["form"].endswith(e) and len(g["form"]) > len(e):
                 return g["form"][:-len(e)], "reading", e
@@ -609,15 +613,19 @@ def gods_of(gl, lex):
     return {f: c.most_common(1)[0][0] for f, c in sorted(by.items()) if f in own or (len(f) >= 3 and sum(c.values()) >= MIN_NAMES)}
 
 
-def kinds_of(entry):
-    """The readers' kinds of a word of the lexicon: its kind there by the table KIND_OF, and the kinds its meaning
-    names there as a label ("adjective: ...; noun: ..."). A noun, or a word without a kind, whose meaning is a kin
-    term is a kin word. Empty where the table has none."""
-    meaning = entry.get("meaning") or ""
-    out = set()
-    for kind in [entry.get("kind") or ""] + LABEL.findall(meaning):
-        out.add("kin word" if kind in ("noun", "") and KIN.search(meaning) else KIND_OF.get(kind))
-    return sorted(out - {None})
+def kinds_of(kind, meaning):
+    """The readers' kind of a word of the lexicon, from its kind there by the table KIND_OF (the page, rule 5): a
+    noun whose meaning (the one the key gives it) is a kin term is a kin word. Only the lexicon's kind of the word
+    counts, not a label in its meaning ("adjective: ...; noun: ..."). Empty where the table has none: a word without
+    a kind counts for the meanings only, whatever its meaning."""
+    if kind == "noun" and KIN.search(meaning or ""):
+        return ["kin word"]
+    return [KIND_OF[kind]] if kind in KIND_OF else []
+
+
+def bar_kinds(kinds):
+    """Kinds as the bar of gate C2 counts them: title and quality are one kind."""
+    return sorted({ONE_KIND.get(k, k) for k in kinds})
 
 
 def words_of(gl, lex, layers_lines):
@@ -634,7 +642,7 @@ def words_of(gl, lex, layers_lines):
     out = collections.defaultdict(list)
     for h in sorted(meaning):
         if letters(h):
-            out[letters(h)].append({"entry": h, "kinds": kinds_of(lex[h]), "meaning": meaning[h]})
+            out[letters(h)].append({"entry": h, "kinds": kinds_of(lex[h].get("kind") or "", meaning[h]), "meaning": meaning[h]})
     return dict(out)
 
 
@@ -706,38 +714,49 @@ def packs_of(rows, gods, words, seed=SEED_PACKS):
     """(the key, {pack: its text for one reader, with the place of the answers file left open}): the cutter learns
     its parts from the tuning names, and each part that stands in MIN_CODED of all the names gets a code from a
     numbering drawn by lot. The codes are dealt into packs of about PACK, the known ones first and then the others,
-    each in the order of their codes, so that every pack holds as many known parts as another, give or take one;
-    within a pack the codes stand in their order, so that nothing in a pack says which are known. The key says of
-    each code what part it is and, if its letters are a god's name of the map or a dictionary word with a meaning,
-    what that is."""
+    each in an order drawn by lot apart from the numbering, so that every pack holds as many known parts as another,
+    give or take one; within a pack the codes stand in their order, so that nothing in a pack says which are known.
+    (Dealt in the order of their codes, a pack's codes would stand at even steps among the others of their group,
+    and a known code would stand off the steps of the unknown ones.) The key says of each code what part it is and,
+    if its letters are a god's name of the map or a dictionary word with a meaning, what that is, with its kinds by
+    the lexicon and as the bar counts them (title and quality as one)."""
     parts = learn_parts(names_of(rows, "tuning"))
     stats = statistics(people_of(rows), parts, gods)
+    rng = random.Random(seed)
     order = sorted(stats)
-    random.Random(seed).shuffle(order)
+    rng.shuffle(order)
     codes = {p: f"P{n:03d}" for n, p in enumerate(order, 1)}
     known = {p: known_of(p, gods, words) for p in order}
-    deal = [p for p in order if known[p]] + [p for p in order if not known[p]]
+    first, then = sorted(p for p in order if known[p]), sorted(p for p in order if not known[p])
+    rng.shuffle(first)
+    rng.shuffle(then)
+    deal = first + then
     k = max(1, round(len(order) / PACK))
     groups = {f"N{i + 1}": sorted(deal[i::k], key=codes.get) for i in range(k)}
     key = {"codes": {}, "packs": {name: [codes[p] for p in ps] for name, ps in groups.items()}}
     for name, ps in groups.items():
         for p in ps:
             what = known[p]
+            kinds = sorted({k for w in what or [] for k in w["kinds"]})
             key["codes"][codes[p]] = {"part": p, "pack": name, "names": stats[p]["names"], "known": bool(what),
-                                      "kinds": sorted({k for w in what or [] for k in w["kinds"]}), "is": what or []}
+                                      "kinds": kinds, "kinds_for_the_bar": bar_kinds(kinds), "is": what or []}
     texts = {name: BRIEF.replace("<<N>>", str(len(ps))) + "\n---\n\n" + "\n".join(block(codes[p], stats[p], codes) for p in ps)
              for name, ps in groups.items()}
     return key, texts
 
 
 def packs():
-    """The packs of gate C2, with the script in git as it stands (they are counted on the held-back names too),
-    and not again once a reader has answered."""
-    frozen()
+    """The packs of gate C2, with the script in git as it stands, only once gate C1 has been run (they are counted
+    on the held-back names too, which nothing reads before `held`), and not again once a reader has answered. The
+    key names the commit of the script."""
+    commit = frozen()
+    if not (HOME / "held.json").exists():
+        raise SystemExit("gate C1 has not been run: the packs count the held-back names, which `held` reads first")
     if any((HOME / "answers").glob("*.jsonl")):
         raise SystemExit("answers exist: the packs are not written again")
     gl, lex = the_map(), W.lexicon()
     key, texts = packs_of(the_rows(), gods_of(gl, lex), words_of(gl, lex, [(l["name"], M.lines_of(l)) for l in M.LAYERS[:len(LAYERS)]]))
+    key = {"frozen_in": commit} | key
     (HOME / "packs").mkdir(parents=True, exist_ok=True)
     (HOME / "answers").mkdir(exist_ok=True)
     for name, text in texts.items():
@@ -769,9 +788,9 @@ def answers_of(key, folder):
 
 
 def meant(a):
-    """A reader's meaning, or None where it gives none."""
+    """A reader's meaning, or None where it gives none ("none", "None.", "unknown": stops and capitals set aside)."""
     m = " ".join(str(a.get("meaning") or "").split())
-    return None if m.lower() in NO_MEANING else m
+    return None if " ".join(re.sub(r"[^\w\s]", " ", m).lower().split()) in NO_MEANING else m
 
 
 def pairs_of(key, ans):
@@ -796,21 +815,26 @@ def bar_c2(right, agreed):
 def counted(key, ans, verdicts):
     """Gate C2 from the key, the readers' lines and the judge's verdicts (None: not judged yet).
 
-    Kinds: the known parts whose key has a kind, to which both readers give one and the same kind (not "unclear");
-    right where that kind is one of the key's. Meanings: the known parts to which both give a meaning that the
-    judge calls the same; right where the judge calls it the key's. Kappa: the two readers' kinds over every code
-    both answered. Listed: if the kinds' bar is met, the parts without a known meaning that both give the same
-    kind; with the meaning both give (the first reader's wording) only if the meanings' bar is met too."""
+    Kinds, as the bar counts them (bar_kinds: title and quality are one kind): the known parts whose key has a
+    kind, to which both readers give one and the same kind (not "unclear"); right where that kind is one of the
+    key's. Meanings: the known parts to which both give a meaning that the judge calls the same; right where the
+    judge calls it the key's. Kappa: the two readers' kinds, as the bar counts them, over every code both answered.
+    Listed: if the kinds' bar is met, the parts without a known meaning that both give the same kind (the kind
+    both give, or "title or quality" where one says title and the other quality); with the meaning both give (the
+    first reader's wording) only if the meanings' bar is met too."""
     rows, pairs = [], []
     for code, c in key["codes"].items():
         a, b = ans.get(("a", code)), ans.get(("b", code))
+        ka, kb = (ONE_KIND.get(x["kind"], x["kind"]) if x else None for x in (a, b))
         if a and b:
-            pairs.append((a["kind"], b["kind"]))
-        same_kind = a["kind"] if a and b and a["kind"] == b["kind"] != "unclear" else None
+            pairs.append((ka, kb))
+        same_kind = ka if a and b and ka == kb != "unclear" else None
+        keyed = bar_kinds(c["kinds"])
         v = (verdicts or {}).get(code) or {}
         both_mean = bool(a and b and meant(a) and meant(b))
-        rows.append({"code": code, "part": c["part"], "known": c["known"], "kinds": c["kinds"], "a": a and a["kind"], "b": b and b["kind"],
-                     "same_kind": same_kind, "kind_right": None if not (c["kinds"] and same_kind) else same_kind in c["kinds"],
+        rows.append({"code": code, "part": c["part"], "known": c["known"], "kinds": c["kinds"], "kinds_for_the_bar": keyed,
+                     "a": a and a["kind"], "b": b and b["kind"],
+                     "same_kind": same_kind, "kind_right": None if not (keyed and same_kind) else same_kind in keyed,
                      "meanings": [meant(a), meant(b)] if both_mean else None,
                      "same_meaning": bool(v.get("same")) if both_mean and verdicts is not None else None,
                      "meaning_right": bool(v.get("same") and v.get("right")) if both_mean and c["known"] and verdicts is not None else None})
@@ -829,15 +853,20 @@ def counted(key, ans, verdicts):
         for r in rows:
             if not r["known"] and r["same_kind"]:
                 with_meaning = meanings["verdict"] == "met" and r["same_meaning"]
-                listed.append({"code": r["code"], "part": r["part"], "kind": r["same_kind"]} | ({"proposal": r["meanings"][0]} if with_meaning else {}))
+                listed.append({"code": r["code"], "part": r["part"], "kind": r["a"] if r["a"] == r["b"] else r["same_kind"]}
+                              | ({"proposal": r["meanings"][0]} if with_meaning else {}))
     return {"bars": BARS_C2, "codes": len(rows), "known": sum(r["known"] for r in rows), "answered_by_both": len(pairs),
             "kappa_kinds": None if kp is None else round(kp, 4), "kinds": kinds, "meanings": meanings,
             "both_give_a_meaning": sum(r["meanings"] is not None for r in rows), "listed": listed, "rows": rows}
 
 
 def count():
-    """Gate C2. The pairs of meanings are written for the judge; the meanings' bar is counted once the judge's
-    verdicts stand in count-verdicts.json, one for every pair."""
+    """Gate C2, with the script in git as it stands. The pairs of meanings are written for the judge; the meanings'
+    bar is counted once the judge's verdicts stand in count-verdicts.json, one for every pair, and that count is
+    not made again. The count names the commit of the script."""
+    commit = frozen()
+    if (HOME / "count.json").exists() and read("count.json")["meanings"]["verdict"] != "not judged yet":
+        raise SystemExit("gate C2 has been counted with the judge's verdicts: it is not counted again")
     key = read("key.json")
     ans = answers_of(key, HOME / "answers")
     pairs = pairs_of(key, ans)
@@ -850,7 +879,7 @@ def count():
         unjudged = [p["code"] for p in pairs if p["key"] is not None and verdicts[p["code"]]["same"] and "right" not in verdicts[p["code"]]]
         if unjudged:
             raise SystemExit(f"no \"right\" for {', '.join(unjudged[:10])}: a known part whose two meanings are the same needs one")
-    out = counted(key, ans, verdicts)
+    out = {"frozen_in": commit} | counted(key, ans, verdicts)
     write("count.json", out)
     print(json.dumps({k: v for k, v in out.items() if k not in ("rows", "listed")}, ensure_ascii=False, indent=1))
     print("listed:", len(out["listed"]), "| pairs for the judge:", len(pairs), "| verdicts:", "none yet" if verdicts is None else len(verdicts))
