@@ -306,8 +306,10 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     epitaphs (2,210 words for finding, 1,776 held back) gave 19 rules; 12 passed, and one is in no
     source in hand: inside a word the sign `q` is followed by o or e far more often than other consonant signs
     are. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
-    the pilot ended on its first evening. At 15 points the count is sharper than what the sources in hand say. The
-    map and its counts do not change ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
+    the pilot ended on its first evening. Its last part, parsing the long royal texts with the rules, was not
+    done: only each rule's reach in those texts was counted. At 15 points the count is sharper than what the
+    sources in hand say. The map and its counts do not change
+    ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
 
 ## The question
 

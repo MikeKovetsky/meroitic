@@ -180,7 +180,8 @@ Done since this plan was written:
     texts were touched. Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3.
     The 41 rules of the first round that passed describe the epitaph, and the sources in hand state or partly
     state every one; outside the epitaphs the texts are too few for rules of word order. The pilot ended on its
-    first evening. No count of the map changes.
+    first evening. Its last part, parsing the long royal texts with the rules, was not done: only each rule's
+    reach in those texts was counted. No count of the map changes.
 
 Next, in this order (the small steps; the four big pieces are in section F, and the steps toward the meaning of
 all words in section G):

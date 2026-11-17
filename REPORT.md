@@ -1113,7 +1113,9 @@ consonant signs are. Every finder reported the same limit on its own: outside th
 and too broken for rules of word order, and what passes is mostly spelling.
 
 **The verdict.** Over two rounds 73 rules were proposed, 53 passed on held-back texts and 1 is a finding of ours, where the bar set beforehand was 3:
-the pilot ended on its first evening. The grammar that can be tested on this corpus is the grammar the sources
+the pilot ended on its first evening. Its last part, parsing the long royal texts with the rules, was not done:
+each rule's reach in them was counted, but no text was cut into clauses and no word without a meaning was given
+a kind or a role. The grammar that can be tested on this corpus is the grammar the sources
 already describe. Its yield is 53 rules that hold out of sample, 15 points where the count is sharper than what
 the sources in hand say, and one rule they do not state. With the blind tests it closes the ways that need no
 new source: meanings cannot be told from the contexts, and new grammar cannot be tested on this little text.

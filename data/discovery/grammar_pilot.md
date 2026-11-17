@@ -4,8 +4,9 @@ Status on 2026-11-16, 19:34: **the pilot is over, and its bar is not met.** Over
 proposed, 53 passed on held-back texts, and 1 is a finding of ours where 3 were needed (sections 8, 10 and 11).
 The grammar that can be tested on this corpus is the grammar the sources already describe. The script is
 `src/grammar.py` (checks: `tests/test_grammar.py`); the rules' tests stand in `runs/grammar/` as they were frozen
-(first committed on a branch of their own as 604c379 and 6c974f3, in this history 8b011a7 and 81a043e, the same
-files at the same times). Every count of this page is in
+(first committed at 19:15:35 and 19:30:39 on a branch of their own, `grammar`, as 604c379 and 6c974f3; in this
+history they are 8b011a7 and 81a043e, copies of the same files made at 19:35 that keep the first commits' author
+times). Every count of this page is in
 [`grammar_pilot_figures.json`](grammar_pilot_figures.json), where each rule stands with its counts and its two
 readers' verdicts. What the agents were given:
 [`runs/prompts/GRAMMAR_finders.md`](../../runs/prompts/GRAMMAR_finders.md) and
@@ -23,10 +24,10 @@ Asked "Should I start a two-day grammar-first pilot?", he answered: "Yes, start 
 
 | | Requirement | State |
 |---|---|---|
-| R1 | "Find rules of the grammar (word order, endings, agreement)." | Set: sections 3 and 4. |
-| R2 | "Test each on held-back texts." | Set: sections 2 and 5. |
-| R3 | "Then parse the long royal texts with them." | Set: section 6. |
-| R4 | "A two-day pilot." | Started on 2026-11-16; its verdict is due by the evening of 2026-11-18. |
+| R1 | "Find rules of the grammar (word order, endings, agreement)." | Done: 73 rules in two rounds (sections 8 and 10). |
+| R2 | "Test each on held-back texts." | Done: each rule's frozen test was run once on the held-back texts (sections 8 and 10). |
+| R3 | "Then parse the long royal texts with them." | **Not done as section 6 set it.** Each rule's reach in the 7 long texts is counted (sections 8 and 10), but no text is cut into clauses and no word without a meaning is given a kind or a role: the rules' tests count cases and label no word. |
+| R4 | "A two-day pilot." | Ended on 2026-11-16, its first evening, by the verdict set beforehand (section 11). |
 | R5 | The project's rules for such steps: every bar committed before its agents are started, counts from a figures file, nothing called a finding of ours unless it passes a test set beforehand. | The bars are in this page, committed before any finder is started. |
 
 ## 2. The split
@@ -159,8 +160,9 @@ Whether Rilly's grammar of 2007 or Hintze 1979 state them is not known: the proj
 
 In the two epitaph-like texts (REM 1066, REM 1067) nearly all rules apply and hold. In the three longest
 texts few apply, and where they do they hold in about six cases of ten: the grammar that can be tested is the
-grammar of the epitaph, and it does not carry over. No word without a meaning gets a kind or a role from these
-rules that the map did not already give it.
+grammar of the epitaph, and it does not carry over. This counts each rule's reach; it is not the parse that
+section 6 set out. The rules' tests count cases and label no word, so no text is cut into clauses here, and no
+word without a meaning is given a kind or a role.
 
 Cost: 8 finders, 845,046 tokens; 4 readers, 630,212 tokens (typed from the task notifications, local).
 
@@ -213,6 +215,10 @@ tuning texts; several candidates stood in one stela alone (REM 1003) and were dr
 spelling (a word ends in b after e; in `-owi` after l or t; two vowel signs never meet), and three rules about
 names and titles: a name with an ending takes no article, which the sources state for two uses only.
 
+**The long texts.** Applied to the 7 long texts as in section 8, the 12 rules that passed have cases in each of
+them (8 to 12 of the 12 rules a text), and their cases hold there 87% to 98% of the time: rules of spelling hold
+in any text. As in section 8 their reach is counted; they cut no text into clauses.
+
 Cost: 6 finders, 739,226 tokens; 2 readers, 271,463 tokens.
 
 ## 11. The verdict
@@ -242,3 +248,21 @@ would search the same few words again.
   the scholars who hold them.
 
 Cost of the pilot: 20 agents, 2,485,947 tokens.
+
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked the script, the checks and this page against the local files, and changed:
+
+1. **The parse of the long texts is said to be not done.** Section 6 set it out (each long text cut into clauses
+   by the rules, and for each word without a meaning what the rules make of it), and the request said "then
+   parse the long royal texts with them". What was done is a count of each rule's reach in those texts. Section
+   8 had said that no word without a meaning gets a kind or a role from the rules; no count stood behind it.
+2. **The second round's rules are counted in the long texts too** (section 10), as section 6 set for every rule
+   that passed.
+3. **The commits that froze the tests are named as git has them:** the figures name the first commits and the
+   copies in this history, and the opening says that the copies keep the first commits' author times.
+
+The times were checked against three records: git's own log of the branch `grammar` has 604c379 at 19:15:35
+and 6c974f3 at 19:30:39; the session's log has the finders started at 19:09:47 and 19:23:21 and the readers at
+19:16:54 and 19:31:10; the files have the held-back table written at 19:15:45, after the first commit. The second
+round's tests were committed and then run in one command, at 19:30:39. The tokens of all 20 agents are those of
+their task notifications. No rule, test, answer, bar or count changed.
