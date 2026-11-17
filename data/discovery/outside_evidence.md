@@ -125,6 +125,20 @@ a typed page** (its builder had seen no typed page). Its builder named two weakn
   to run twice, on a script or a list that is not as committed, on a page that failed the merge's checks, or
   while the typing's bar is not met.
 
+**Found by the review and added on 2026-11-16 at about 23:15, before gate A1 is run.**
+
+- **The engine's shuffle is not a fair 5% test for these words.** The reviewer ran it with no related word in the
+  data at all (the kept words against the short lists, each row's forms moved to another row): it gave p < 0.05
+  in 13 of 40 draws (median p 0.136). Short Meroitic words carry broad meanings that match many rows, and a shuffle
+  across words of every length breaks that pairing. Shuffling the meanings only among words with the same number
+  of consonants gave p < 0.05 in 2 of 40 (median 0.488), the size a 5% test should have. The script computes both
+  (`by_length` beside the engine's own). Which one is the bar is Mike's to say, and is asked before the gate runs.
+- Words that name a kind of word or speak of meaning ("noun", "verb", "adjective", "adverb", "particle",
+  "suffix", "prefix", "ending", "word", "meaning", "sense") join the words taken out before the keys.
+- `pqr` is dropped by name as a form of `qore`: the lexicon's entry `p- (2)` analyses it as p- + `qr`.
+- Left as it is: the rule for the families of short stems goes by letters and also drops a few words not built
+  on them (`ateqi`, `qetrri`, `qetneyineqeli`). It lowers the number of words; it does not make the test easier.
+
 ## 3. Track B: the royal texts beside the Kushite kings' Egyptian texts (H2)
 
 **The Meroitic side.** The inscriptions of `corpus_v6` whose kind is "royal or temple" (87) or "oracular decree"
@@ -196,6 +210,10 @@ The packs' builder asked eight questions; the answers:
 8. **What the packs cannot hide:** a hidden code stands at three places in the median and an open one at one,
    and hidden codes are more often joined to an ending (39 to 45% against 15 to 16%). A reader who guesses that
    a common code is a known word gains nothing it can use: it does not know which word.
+9. **Forms built on a hidden word** (added at about 23:15, after the review): in each fold, a word whose headword
+   begins with the headword of a hidden entry of three letters or more (`qorene` when `qore` is hidden) is shown
+   as a code and not counted. Its reading would hint at the hidden word's meaning, where an open word has no such
+   neighbour.
 
 ## 4. Track C: names as small sentences (H3)
 
