@@ -2,7 +2,7 @@
 
 **Did we decipher anything? No.** No new reading of the Meroitic language survived checking. What is new is about
 the data and the method: the public corpus turned out to be mostly copies, 350 inscriptions are now machine-readable
-under an open licence (281 of them missing from that corpus), the obvious way to blind a test of AI on an
+under an open licence (327 of them missing from that corpus), the obvious way to blind a test of AI on an
 undeciphered script (scramble the letters) turned out not to work, and we built a test that does.
 
 Why the texts alone do not give more is written up in one place: [FINDINGS.md](FINDINGS.md).
@@ -23,7 +23,7 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
    662 is lower than the paper's 871, probably because, with names masked, examples that differ only in a name count
    once; that was not checked. `src/pool.py` recovers the two swap pools (178 private and 11 royal names) from the
    data alone, and `src/dedup.py`, `src/collapse.py`, `src/clean_v2.py` undo it.
-2. **350 inscriptions are now machine-readable under an open licence, 281 of them missing from the public corpus.**
+2. **396 inscriptions are now machine-readable under an open licence, 327 of them missing from the public corpus.**
    The model reads the Meroitic cursive type printed in Griffith's 1911–12 editions at 95.6% sign accuracy against
    the modern edition (99.6% against what Griffith printed), measured on 12 texts. The test covered cursive type
    only: about a third of the rows (48) are in hieroglyphic type, read with Griffith's sign table and not scored.
@@ -38,12 +38,13 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
    It can't read photographs of the stones (almost nothing). The longest text, the Akinidad stela (REM 1003), is
    open too: Griffith printed all 42 lines in 1917 in his transliteration of the time; typed by hand from page
    images and mapped to today's signs, 278 of its 337 words (82.5%) agree with Millet's closed reading
-   ([`data/expansion/jea/`](data/expansion/jea/), `src/akinidad.py`). Griffith's Faras texts of 1922 are hand copies
-   with no type to check them by, only his English renderings of the names, titles and formula words: all 46 are
-   typed, 3,865 signs; two readers who did not see each other's work agree on 97.6% of the signs of five texts
-   drawn by lot (the bar was 95%), and the two texts held in a modern edition agree on 90.4% (Faras 43, Millet) and
-   83.0% (Faras 44, the Newsletter) of the letters ([`data/expansion/faras/`](data/expansion/faras/README.md),
-   `src/faras.py`).
+   ([`data/expansion/jea/`](data/expansion/jea/), `src/akinidad.py`). And 46 short texts on potsherds, none of
+   them in the public corpus: the ostraca from Faras, Buhen and Dakkah that Griffith printed in 1925, typed from
+   page images (item 27). Griffith's 46 funerary texts from Faras of 1922 are hand copies with no type to check
+   them by, only his English renderings of the names, titles and formula words: all are typed, 3,865 signs; two
+   readers who did not see each other's work agree on 97.6% of the signs of five texts drawn by lot (the bar was
+   95%), and the two texts held in a modern edition agree on 90.4% (Faras 43, Millet) and 83.0% (Faras 44, the
+   Newsletter) of the letters ([`data/expansion/faras/`](data/expansion/faras/README.md), `src/faras.py`).
 3. **Scrambled-script "blind" tests don't work on a frontier model.** Given only a 17-word glossary of Meroitic
    re-spelled with a random letter swap, it broke the cipher and matched all 35 test words to their meanings; given the
    scrambled corpus with neutral labels, it recognised the opening formula "O Isis, O Osiris" and read the script from
@@ -112,11 +113,12 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     exactly from his own per-scholar files: of its 17,995 different lines, 340 are a line of those files and
     17,446 are such a line with one name swapped. Traced that way, 54.4% of the words of `corpus_v5` are copies of
     a reading with a name swapped, and the texts that stand for an inscription hold 29.9% of them. `corpus_v6`
-    has one row per inscription, with the real names: 591 inscriptions, 303 of them new to the corpus (209 of the
-    Newsletter's texts, kept locally, and 94 of Griffith's rows that `corpus_v5` left out, the Faras texts typed on
-    2026-11-17 among them). The table of all 606
-    inscriptions is public, with every reading's source and licence and the text of the open ones: 486 have a REM
-    number, 65 readings from two editions or more, 350 a reading under an open licence. Counted again on the
+    has one row per inscription, with the real names: 637 inscriptions since 2026-11-17, 288 that were in
+    `corpus_v5`, 209 of the Newsletter's texts, kept locally, and 140 of Griffith's texts that `corpus_v5` left out
+    (46 of them his ostraca, item 27, and the Faras texts the corpus did not hold). The table of all 652 inscriptions is public, with
+    every reading's source and licence and the text of the open ones: 486 have a REM number, 65 readings from two
+    editions or more, 396 a reading under an open licence. The map is drawn on the 548 there were before the
+    ostraca and the Faras texts. Counted again on the
     inscriptions that were already in the corpus, the coverage map translates 60.0% of the words (62.0% before),
     and the two editions give its meaning for 71.4% of the words they translate (69.5% before). The matching rule
     missed the bar set for it (the right partner for 45 of 54 known pairs, where 90% was asked), so numbers
@@ -319,6 +321,29 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     epitaph, and speak of 51 of their 925 words without a meaning; the long royal texts stay uncut. At 15 points the count is sharper than what the
     sources in hand say. The map and its counts do not change
     ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
+27. **Griffith's 46 ostraca are open texts now, and Sayce's reading of the longest text settles almost nothing.**
+    Griffith's "Meroitic Studies V" (*JEA* 11, 1925) prints 46 ostraca from Faras, Buhen and Dakkah in his
+    transliteration of the time: 275 words, typed from page images and mapped to today's signs. A tenth of them,
+    drawn by lot before the typing, was typed again by an agent that saw only the pages: all 56 signs agree (the
+    bar was 97%). They are open readings in `corpus_v6`, none of them in the public corpus: 594 inscriptions now,
+    350 with an open reading. The map stays on the 548 texts it is drawn on until it is counted again with a new
+    sample for the north star; of its 1,681 open spellings that stood in one text, 9 now stand in an ostracon too,
+    five of them two-letter pieces. Sayce printed all 42 lines of REM 1003 in 1914-15 in his own letters (public
+    domain: he died in 1933). Typed and mapped to Griffith's signs, his words agree with Millet's later reading at
+    61.8%, where Griffith's agree at 82.5%; at Griffith's 38 doubted words Sayce reads 7 the same and 20
+    otherwise and is unsure himself at 11, and Millet sides with Sayce alone at 1
+    ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
+28. **The REM's plates cannot be read well enough to grow the corpus.** The *Répertoire d'épigraphie méroïtique*
+    (2000, on Persée) gives each inscription as plates of photographs and drawings, with no transliteration. It
+    holds 917 inscriptions, not 1,278 as its numbering suggests; 473 are not among the 548 texts the map is drawn
+    on, about 4,600 words, and 91 of those 473 are typed but not yet in the map: the 46 ostraca of item 27 and 45
+    of Griffith's Faras texts (item 2; the 46th, REM 0544, was held). A reader
+    that saw only the plates read 4 inscriptions from their drawings: 426 of 555 signs right against Griffith
+    (76.8%) and 43 of 103 words (41.7%), under the bar of 85%, at 158,438 subagent tokens an inscription, and
+    nothing from the photographs. Reading all 473 so would cost about 28 to 75 million
+    tokens and give about 44 of the 2,013 open spellings that stand in one text a second text read right. The pilot
+    stopped at 4 of its 20 inscriptions on Mike's word; the route is a printed transliteration
+    ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)).
 
 ## The question
 
@@ -354,7 +379,7 @@ what can be rebuilt.
 | Millet, "The Meroitic Inscriptions from Gebel Adda", JSSEA 32 (2005), [the society's PDF](https://news.thessea.org/images/SSEA_assets/journals/JSSEA_32.pdf); *Fontes Historiae Nubiorum* III as a whole, [the copy on Zenodo](https://zenodo.org/records/821860) (the book says all rights reserved, the record CC BY 4.0) | 46 and 12 entries on inscriptions, with comments: the second witness in the check of the coverage map; and FHN III's Demotic and Greek graffiti, read beside its Meroitic texts | not committed (in copyright): `data/sources/jssea/`, `data/sources/fhn/` and their text layers (`data/sources/jssea-text/`, `data/sources/fhn-text/`), the judges' packs and answers in `data/sources/expert/`, and the readers' and judges' packs and answers of the Demotic step in `data/sources/demotic/`; `data/discovery/experts_figures.json` and `experts_words.tsv` hold counts and word forms only, `demotic_figures.json` counts and five title words |
 
 Since 2026-11-12 the readings are also listed by inscription: [`data/inscriptions.jsonl`](data/inscriptions.jsonl)
-has one row for each of the 606 inscriptions the project holds a reading of, with its REM or edition number, site,
+has one row for each of the 652 inscriptions the project holds a reading of, with its REM or edition number, site,
 kind and every reading's source and licence, and the text of the readings that are open;
 [`data/inscriptions_map.tsv`](data/inscriptions_map.tsv) says what each of the 899 texts of `corpus_v5` is.
 `data/corpus_v6.jsonl`, one row per inscription with real names, is local like the corpora before it.
@@ -816,6 +841,22 @@ makes of it there, or that none speaks of it; two ends that only a rule's wordin
 not cut
 ([`data/discovery/grammar_pilot.md`](data/discovery/grammar_pilot.md)).
 
+### 33. Griffith's ostraca and Sayce's reading (`src/ostraca.py`, `src/sayce.py`)
+
+The pages are rendered from the PDFs at high resolution, and every text is typed by hand from the images, never
+from the text layer, which drops the marks that carry the signs (ê, š, ñ, ḫ, ẖ, the dot below a doubtful sign).
+Every h, every s and every dotted letter is looked at again on a crop of its line enlarged six to sixteen times.
+The bar and the lot are committed before the typing: a tenth of the texts, drawn with `secrets.SystemRandom`, is
+typed again by a fresh agent that sees the page images and the typing rules only, and the two typings must
+agree on 97% of the signs (difflib over the signs of each text). `src/ostraca.py` writes one row per ostracon
+(his text as printed, the corpus spelling, the words by line, the doubts: his dots and queries, his notes, ours);
+`src/v6/readings.py` reads them as open readings numbered by the article's siglum, since they carry no REM
+number. `src/sayce.py` maps Sayce's letters to Griffith's by a table fixed before the comparison and counts how
+often each of his units lines up with each of Griffith's signs, lines the two texts up letter by letter, and
+classes Griffith's doubted words by what Sayce reads at the same place (classes fixed before the comparison);
+against the closed readings it writes counts only
+([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
+
 ## Reproduce
 
 From a clone of this repository and Otten's corpus, with nothing else:
@@ -834,7 +875,7 @@ python3 -I tests/test_f4.py && python3 -I tests/test_f4r.py && python3 -I tests/
 python3 -I tests/test_words.py && python3 -I tests/test_themap.py && python3 -I tests/test_rare.py
 python3 -I tests/test_unnamed.py && python3 -I tests/test_second_later.py
 python3 -I tests/test_leftover.py && python3 -I tests/test_blind2.py && python3 -I tests/test_grammar.py
-python3 -I tests/test_findings.py
+python3 -I tests/test_findings.py && python3 -I tests/test_ostraca.py && python3 -I tests/test_sayce.py
 ```
 
 The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.jsonl`). The third prints
@@ -843,7 +884,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Twenty-two things need files that are kept locally (Data, above), so they don't run from a clone:
+Twenty-three things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -896,6 +937,8 @@ Twenty-two things need files that are kept locally (Data, above), so they don't 
 - `python3 -I src/grammar.py public` (and `split`, `dump`, `briefs`, `tuning`, `held-dump`, `held`, `packs`,
   `count`, the five ending in `2` for the second round, and `parse`) reads `corpus_v6` and its gloss file, the layers'
   lines, the tables of the two sets, the finders' rules and the readers' answers.
+- `python3 -I src/rem_pilot.py public` (and `index`, `pick`, `packs`, `score`, `estimate`) reads the REM volumes'
+  text layers and plate pages, the readers' answers and the analysts' map of `corpus_v6`.
 
 ## Layout
 

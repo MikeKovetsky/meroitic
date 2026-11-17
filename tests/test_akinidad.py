@@ -89,8 +89,8 @@ def test_row_holds_the_whole_text():
 
 
 def test_the_corpus_reads_it_as_an_open_reading_of_rem_1003():
-    rows = R.griffith_rows("data/expansion/jea", "griffith")
-    assert len(rows) == 1
+    rows = [r for r in R.griffith_rows("data/expansion/jea", "griffith") if r["key"] == "griffith:G-jea4-1003"]
+    assert len(rows) == 1                                  # the folder also holds the ostraca of JEA 11 (src/ostraca.py)
     g = R.finish(rows[0])
     assert g["key"] == "griffith:G-jea4-1003" and g["numbers"] == {"rem": ["1003"]} and g["v5"] is None
     assert g["open"] and g["typed"] and g["whole"] and g["number"] == "JEA 4 (1917), §§ 1-21"

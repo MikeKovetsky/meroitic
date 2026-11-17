@@ -4,7 +4,10 @@
 
 Local only (Rilly's lexicon, the analysts' answers, the judges' answers). No new analyst and no new judge:
 
-1. The coverage map (src/coverage.py, `correct`) runs as it is on the rows of corpus_v6. A word keeps what the
+1. The coverage map (src/coverage.py, `correct`) runs as it is on the rows of corpus_v6 that the map is drawn on
+   (data/discovery/map_texts.json; rows_for_map), as the analysts glossed them (lexicon.MAPPED: a text that the
+   build has since found to be a part of another inscription, as Millet's lines 286 and 414 are of Faras texts,
+   stays on the map as it was). A word keeps what the
    lookup or an analyst gave its spelling; a word at a place the row marks as a name is a name, as a masked name
    was; a spelling that no analyst saw is "unknown" as before, and counted apart as not analysed.
 2. The check against Millet 2005 and FHN III (src/experts/) is counted on the judged words that still stand in
@@ -22,11 +25,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "src" / "experts"), str(Path(__file__).resolve().parent)]
 import coverage as C   # noqa: E402
+import lexicon as L    # noqa: E402
 import tally as T      # noqa: E402
 
 CORPUS = ROOT / "data/corpus_v6.jsonl"
 V5 = ROOT / "data/corpus_v5.jsonl"
 MAP = ROOT / "data/sources/v6/map.jsonl"
+MAP_TEXTS = ROOT / "data/discovery/map_texts.json"      # the texts the map is drawn on (rows_for_map)
 OUT = ROOT / "data/sources/v6"
 PACKS = ROOT / "data/sources/coverage/packs"
 OLD = ROOT / "data/sources/coverage/corrected/figures.json"
@@ -36,10 +41,19 @@ GROUPS = {"otten": "Otten's files with real names (Millet 1968, the three narrat
           "mnl": "the Meroitic Newsletter"}
 
 
-def rows_for_map(corpus):
-    """The rows of corpus_v6 as src/coverage.py takes them."""
+def map_texts(path=MAP_TEXTS):
+    """The ids of the texts the map is drawn on (data/discovery/map_texts.json)."""
+    return set(json.loads(path.read_text(encoding="utf-8"))["texts"])
+
+
+def rows_for_map(corpus, texts=None):
+    """The rows of corpus_v6 that the map is drawn on (map_texts(), or `texts`), as src/coverage.py takes them. A row
+    added to corpus_v6 after the map was drawn is not one of them until its id is added to the list."""
+    texts = map_texts() if texts is None else texts
     out = []
     for c in corpus:
+        if c["id"] not in texts:
+            continue
         family, _, rest = c["reading"].partition(":")
         row = {"id": c["id"], "text": c["text"], "names": c["names"], "group": GROUPS[family], "v5": c["v5"]}
         if family == "karanog":
@@ -144,7 +158,7 @@ def experts(glossed, mapped, v5_text, folder=EXPERT):
 def main(argv):
     if argv[1:]:
         sys.exit(__doc__)
-    corpus = [json.loads(l) for l in CORPUS.read_text().splitlines() if l.strip()]
+    corpus = [json.loads(l) for l in L.MAPPED.read_text().splitlines() if l.strip()]     # the map's texts as glossed
     v5 = [json.loads(l) for l in V5.read_text().splitlines() if l.strip()]
     mapped = [json.loads(l) for l in MAP.read_text().splitlines() if l.strip()]
     old_forms = {w for r in v5 for w in r["text"].split()}

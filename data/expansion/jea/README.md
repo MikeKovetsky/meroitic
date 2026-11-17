@@ -1,4 +1,19 @@
-# REM 1003 from Griffith 1917
+# REM 1003 from Griffith 1917, Griffith's ostraca of 1925, and Sayce on REM 1003
+
+Three open texts in this folder: REM 1003 as Griffith printed it in 1917 (below), the 46 ostraca of his "Meroitic
+Studies V" (1925), and Sayce's reading of REM 1003 (1914-15). The last two came in on 2026-11-17
+([`data/discovery/ostraca_sayce.md`](../../discovery/ostraca_sayce.md) has the method, the bar and the results).
+
+| File | What |
+|---|---|
+| `griffith1925_ostraca.txt` | the 46 ostraca of *JEA* 11 (1925), pp. 220-224, as printed, typed by hand from page images; the head says how his marks are typed |
+| `griffith_jea11.jsonl` | their rows, one per text, in the shape of the other `griffith_*.jsonl` rows, written by `src/ostraca.py` |
+| `ostraca_figures.json` | their counts, the blind second typing of the lot, and what their spellings are on the map |
+| `sayce1914_rem1003.txt` | Sayce's 42 lines of REM 1003 (*Liverpool Annals* 7, pp. 69-72), typed by hand from page images |
+| `sayce_rem1003.json` | his words in Griffith's letters and the corpus spelling, written by `src/sayce.py` |
+| `sayce_comparison.json` | the comparison with Griffith 1917 and, as counts only, with the two closed readings; his values against Griffith's signs; Griffith's 38 doubted words |
+
+## REM 1003 from Griffith 1917
 
 The Great Stela of Queen Amanirenas and Prince Akinidad (REM 1003, British Museum EA 1650, from Hamadab near
 Meroe) is the longest Meroitic text. Its reading in the corpus, Millet's as Otten typed it, has no licence. F. Ll.
@@ -13,8 +28,10 @@ Egyptian Archaeology* 4 (1917), pp. 159-173, in his transliteration of 1917. The
 | `rem1003_comparison.json` | the counts of the comparison with the two closed readings, by line (no closed text) |
 
 `python3 -I src/akinidad.py` writes the row from the text, and the comparison where the closed readings are
-present (local only). `src/v6/readings.py` reads the row as an open reading of REM 1003. `src/expand.py` does not
-read this folder, so `corpus_v3` and `corpus_v5` are as they were.
+present (local only). `src/v6/readings.py` reads the row as an open reading of REM 1003, and the ostraca's rows as
+open readings of 46 inscriptions numbered by the article's sigla (F.O. 1). `src/expand.py` does not read this
+folder, so `corpus_v3` and `corpus_v5` are as they were. `python3 -I src/ostraca.py` writes the ostraca's rows and
+figures, `python3 -I src/sayce.py` Sayce's words and the comparison.
 
 **His signs and today's.** ê `o` (tê is the sign `to`), š `S`, plain s `s` (the sign se), ñ `N`, z `d`, ḫ (his h
 with a breve below) `x`, ẖ (his h with a line below) `X`; every other letter as written, names lowered. The map is

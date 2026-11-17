@@ -45,8 +45,9 @@ pp. 565-600, public domain, [archive.org `bibliothquedel234ecol`](https://archiv
    - Faras 2 shares its title chain with Griffith's *Inscr.* 129 (REM 0129), the British Museum stela of the same
      man, Malêwitar, and Faras 4 its extended invocation with REM 1062 of the Newsletter: two monuments each, not
      one text ([`comparison.json`](comparison.json)).
-6. **`corpus_v6` now:** 606 inscriptions (563 before: 45 new numbers, two fewer "not identified"), 350 with an open
-   reading (304), 591 texts and 10,962 words (548 and 10,290).
+6. **`corpus_v6` now**, with Griffith's ostraca, which another session added the same day: 652 inscriptions (609
+   with the ostraca alone: the Faras texts bring 45 new numbers and fold two "not identified" into them), 396 with
+   an open reading (350), 637 texts and 11,360 words (594 and 10,688; 548 and 10,290 before both).
 7. **What recurs now: little.** The map holds 1,681 open spellings that stand in one of its texts (1,678 with
    Millet's lines 286 and 414 left out, which are Faras 43 and a part of Faras 21). **5 of them now stand in a new
    Faras text too** (`anSyi`, `ete`, `qoredeklo`, `wyekite`, `yeqo`), and 5 open spellings reach three texts (`md`,
@@ -205,34 +206,38 @@ Millet: the rows keep what the readers typed, since a closed reading does not co
 
 ## 5. What adding them changed in `corpus_v6`
 
-Two builds compared, the same code without the Faras rows and with all 46 and the two new verdicts
-(`python3 -I src/v6/build.py`, 2026-11-17):
+Two builds compared, the same code (`python3 -I src/v6/build.py`, 2026-11-17): `main` with Griffith's ostraca, and
+the same with all 46 Faras texts and the two new verdicts:
 
-- **Inscriptions** 563 to 606, with a REM number 441 to 486, with an open reading 304 to 350, with readings from
-  two editions or more 64 to 65, funerary 268 to 310, "not identified" 8 to 6. `corpus_v6` 548 to 591 texts,
-  10,290 to 10,962 words.
-- **Source lines of Otten's files** (1,159): 16 changed what they are or which inscription they belong to; 126 more
+- **Inscriptions** 609 to 652, with a REM number 441 to 486, with an open reading 350 to 396, with readings from
+  two editions or more 64 to 65, funerary 268 to 310, "not identified" 8 to 6. `corpus_v6` 594 to 637 texts,
+  10,688 to 11,360 words.
+- **Source lines of Otten's files** (1,159): 15 changed what they are or which inscription they belong to; 125 more
   only how they are placed (the number of held texts their letters stand whole in, their shares, shared runs or the
-  reading they are compared with). Of the 16: Millet's lines 286 (Faras 43, now a reading) and 414 (Faras 21), which
+  reading they are compared with). Of the 15: Millet's lines 286 (Faras 43, now a reading) and 414 (Faras 21), which
   stood as inscriptions not identified; seven more quotations of Faras 21 and one each of Faras 7, 11, 34, 38 and
-  43; line 580 now stands whole in REM 0084; lines 852 (`bedewitel`) and 1172 (`tketore`) now stand whole in two
-  or three held texts and so belong to none. Line 1368 (the name `kditrye`, Faras 11) also stands in the text of
-  line 489; the rule's choice, not checked. The three readings waiting for two readers are the same three.
-- **The rule's measures moved**: a run of five letters that eight edition texts hold is formula, and 45 more
+  43; lines 852 (`bedewitel`) and 1172 (`tketore`) now stand whole in two or three held texts and so belong to
+  none. Line 1368 (the name `kditrye`, Faras 11) also stands in the text of line 489; the rule's choice, not
+  checked. The three readings waiting for two readers are the same three.
+- **The rule's measures moved**: a run of five letters that eight edition texts hold is formula, and 46 more
   funerary texts make a few more runs formula. On the pairs already known, the rule as written finds 29 sure (30
-  before) and 16 doubtful (15); with the floor 31 and 14 (32 and 13). The pairs across numberings are one, Faras 43
-  with Meroë 28, whose benedictions alone Griffith printed (formula only); one pair of rows with two numbers of one
-  numbering (REM 0051 and REM 0052) is no longer a sure match: 12 such pairs where there were 13.
-- **The coverage recount** (`src/v6/recount.py`) counts the new texts with the rest: 51.3% of all words translated
-  as before (5,626 of 10,962); the inscriptions new to the corpus 38.2% (35.9% before). The inscriptions that were
-  in `corpus_v5` are one fewer (288; line 414's inscription is a part of Faras 21 now).
+  before) and 16 doubtful (15); with the floor 31 and 14 (32 and 13). Bar B: 2 of the 151 Karanòg texts have a sure
+  match to another Karanòg number, where there were 4 (Kar. 20 and 21 no longer). The pairs across numberings are
+  one, Faras 43 with Meroë 28, whose benedictions alone Griffith printed (formula only); pairs of rows with two
+  numbers of one numbering are 11 where there were 13.
+- **The coverage recount** (`src/v6/recount.py`) stays on the 548 texts the map is drawn on, as `main` counts it
+  since the ostraca: 51.3% of their words translated, as before.
 - **The map** (`src/themap.py`) is unchanged: it holds the 548 texts the analysts glossed, and the Faras texts are
-  not glossed. Its studies and its **plain lookup**, the scoreboard's "before us" for the running words and the
-  spellings, read those 548 texts as the analysts glossed them (`lexicon.MAPPED`,
-  `data/sources/v6/analysts/corpus.jsonl`, a copy of `corpus_v6` as it stood before the Faras rows), and F4's
-  sizing reads F1's table as it stood then (`lexicon.MAPPED_TABLE`), so they stand as they were: the lookup
-  translates 2,816 of 7,847 running words (35.9%) and 325 of 3,189 spellings (10.2%). Glossing the new texts, which
-  would put them on the map, is not done.
+  not glossed. `main` keeps it on them by their ids (`data/discovery/map_texts.json`, `rows_for_map`). That alone
+  would lose two of them, since the build now holds Millet's lines 286 and 414 as parts of Faras inscriptions: so
+  the map's studies, its recount, the readers' count and the **plain lookup** (the scoreboard's "before us" for
+  the running words and the spellings) read the 548 rows as the analysts glossed them (`lexicon.MAPPED`,
+  `data/sources/v6/analysts/corpus.jsonl`); F4's sizing reads F1's table as it stood then (`lexicon.MAPPED_TABLE`),
+  since REM 0544, a text of the map, now has an open reading; and the REM pilot counts the two folded texts as the
+  table held them (`map_texts.json`, "folded"). The map's figures, its glosses and the scoreboard are byte for byte
+  `main`'s: the lookup translates 2,816 of 7,847 running words (35.9%) and 325 of 3,189 spellings (10.2%). The REM
+  pilot's estimate of the cost of reading the REM moved a little (5.29 signs a word, not 5.31), because REM 0544's
+  open reading is new; its page says so. Glossing the new texts, which would put them on the map, is not done.
 - **What recurs** (`python3 -I src/faras.py recur`, [`recur.json`](recur.json)): section 1, point 7.
 
 ## 6. Faults and limits
@@ -290,24 +295,20 @@ python3 -I src/faras.py recur         # after the rebuild: what recurs on the ma
 python3 -I tests/test_faras.py
 ```
 
-**Merging this branch.** Three local steps, before the main checkout rebuilds `corpus_v6` with the Faras rows:
+**Merging this branch.** It holds `main` as of de20bd9 (the ostraca and the REM pilot). Three local steps, before
+the main checkout rebuilds `corpus_v6` with the Faras rows:
 
 1. `cp data/sources/faras/map_corpus.jsonl data/sources/v6/analysts/corpus.jsonl`: the 548-text build of
-   `corpus_v6`, byte for byte, which the studies of the map read (`lexicon.MAPPED`). It is kept there because the
-   main checkout's `data/corpus_v6.jsonl` is that build no longer: since the ostraca (commit e415d02) it holds 594
-   texts.
+   `corpus_v6`, byte for byte, which the map's studies read (`lexicon.MAPPED`); the main checkout's
+   `data/corpus_v6.jsonl` is that build no longer.
 2. `cp data/sources/faras/map_table.jsonl data/sources/v6/analysts/inscriptions.jsonl` (F1's table as it stood with
    the map, the same as `git show 1e55987:data/inscriptions.jsonl`; F4's sizing reads it, `lexicon.MAPPED_TABLE`).
 3. `python3 -I src/faras.py verdicts` (the two verdicts into `data/sources/v6/readers/verdicts.jsonl`).
 
-`main` keeps the map on its 548 texts another way since e415d02 (`data/discovery/map_texts.json`, `rows_for_map`
-in `src/v6/recount.py`, and F4's sizing on the current table with `r["id"] in gl`); the merge keeps one of the two.
-F4's filter on the current table would count Faras 44's open reading (REM 0544 is on the map): 305 texts against
-the 304 the published sizing holds.
-
-Then the rebuild: `python3 -I src/faras.py && python3 -I src/akinidad.py && python3 -I src/v6/build.py &&
-python3 -I src/v6/recount.py && python3 -I src/v6/public.py && python3 -I src/themap.py && python3 -I src/faras.py
-compare && python3 -I src/faras.py recur`.
+Then the rebuild: `python3 -I src/akinidad.py && python3 -I src/ostraca.py && python3 -I src/sayce.py &&
+python3 -I src/faras.py && python3 -I src/v6/build.py && python3 -I src/v6/recount.py && python3 -I src/v6/public.py
+&& python3 -I src/v6/readers.py count && python3 -I src/themap.py && python3 -I src/faras.py compare &&
+python3 -I src/faras.py recur`.
 
 **Cost:** 4,988,040 subagent tokens. Readers 4,339,767: pack A 535,784, B 494,108, C 458,865, D 535,444 (the
 first wave, with X), E 487,874, F 477,019, G 412,724, H 510,781, and the blind second typing X 427,168; 2,102 tool

@@ -65,7 +65,7 @@ Done since this plan was written:
     consequence.
 12. **The corpus keyed by inscription** (2026-11-12, [`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)),
     piece F1 of section F: built without an agent, then read by two readers. The 899 texts of `corpus_v5` hold
-    288 inscriptions; `corpus_v6` holds 591 with real names, and the public table 606 with every reading's
+    289 inscriptions; `corpus_v6` holds 548 with real names, and the public table 563 with every reading's
     source and licence. The matching rule missed its bar (45 of 54 known pairs), so numbers decide before
     letters; of the 17 doubtful matches the readers settled all but 3.
 13. **Analysts on the unread spellings of the clean corpus** (2026-11-12,
@@ -215,8 +215,8 @@ all words in section G):
 1. **Offer the Karanòg rows to Otten** as a second pull request, like the first (public domain source, CC BY).
 2. **Step 8, Faras** (46 funerary texts, hand copies): done on 2026-11-17 (point 29). Left: the analysts' gloss of
    the 44 texts new to the map, so that the map counts them.
-3. **Step 6, Griffith's ostraca** in JEA 11: the volume is in hand since 13 November, as page images without a
-   text layer, and so is JEA 15 with his Meroitic Studies VI.
+3. **Step 6, Griffith's ostraca: done on 2026-11-17** (section B, step 6). Left from it: the REM numbers of the
+   46 texts, and pp. 218 and 219 of JEA 11, which the scan in hand lacks.
 4. **Left over from the quality pass:** the other 42 pages have one reader each; two printed entries were seen by
    no reader (Kar. 17 `sotnkel` and Kar. 111 `tewideqowi`, section 9 of the Karanòg page); word division outside
    the closing formulae still follows each reader, and so does a formula word parted by a divider on the stone;
@@ -230,8 +230,11 @@ all words in section G):
    Ethiopians* (1911), the *Recueil Champollion* (1922) with his Faras article, and *Journal of Egyptian
    Archaeology* 11 and 15. F4 reads none of them to start: its sources were in hand before. Also fetched: the
    half of *Liverpool Annals* 7 that archive.org holds. It prints Sayce's reading of REM 1003, all 42 lines in
-   the letter values he used, and no picture of the stone; it is not yet typed or compared. Not fetched, on
-   purpose: the Nubian grammars of step 18, the REM volumes of step 7, and the books that have to be bought.
+   the letter values he used, and no picture of the stone; typed and compared on 2026-11-17
+   ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)): it settles almost nothing that
+   Griffith left open. Not fetched, on purpose: the Nubian grammars of step 18 and the books that have to be
+   bought. The REM volumes of step 7 were opened on 2026-11-17 for its pilot: the text layers of all their pages
+   and 23 page images, kept locally.
 
 ## A. Share
 
@@ -303,12 +306,31 @@ all words in section G):
        reference pages and reading all the copies cost about 14 million subagent tokens.
 6. **Griffith's JEA "Meroitic Studies"** (about 45 ostraca, public domain, printed in Latin letters): OCR, then
    check every word against the page image. The cheapest texts that can be published.
+   - **Done, 2026-11-17** ([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md),
+     `src/ostraca.py`). Meroitic Studies V (JEA 11, 1925) prints 46 ostraca with letters (VI, JEA 15, 1929,
+     prints none): 275 words, typed from page images; a tenth drawn by lot was typed again blind and agrees on
+     56 of 56 signs (bar 97%). They are open readings in `corpus_v6`, which has 594 inscriptions since.
+   - **Left:** their REM numbers (each is numbered by its siglum, `F.O. 1`, until the REM volumes are in hand);
+     pp. 218 and 219 of the article, missing from the scan (another copy of JEA 11 is a download); and taking
+     them into the map, which needs a new sample of the unnamed stems for the north star's estimate
+     (`data/discovery/map_texts.json` lists the 548 texts the map is drawn on), best done once for all the
+     texts added on 2026-11-17.
 7. **A first look inside the REM.** The *Répertoire d'épigraphie méroïtique* (Leclant and others, 2000) is
-   [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, REM 0001 to 1278:
-   about 1,280 inscriptions against about 480 in Griffith. Otten's paper describes it as photographs and facsimile
-   drawings without transliteration; that was not checked here. Open one volume, see what an entry holds, and score
-   a reading on entries FHN also prints. It is not openly licensed: for analysis and for checking readings, not for
-   republishing.
+   [online at Persée](https://www.persee.fr/issue/rem_0000-0000_2000_num_1_1) in three volumes, numbered REM 0001
+   to 1278 (917 inscriptions, counted on 2026-11-17) against about 480 in Griffith. Otten's paper describes it as
+   photographs and facsimile drawings without transliteration (checked on 2026-11-17: so it is). Open one volume,
+   see what an entry holds, and score a reading on entries FHN also prints. It is not openly licensed: for analysis
+   and for checking readings, not for republishing.
+   - **Done, 2026-11-17: the plates cannot be read well enough**
+     ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)). An entry is a page of plates (photographs and
+     drawings, most reprinted from the first edition) and a catalogue page; no transliteration, as Otten said. The
+     REM holds 917 inscriptions in nine sections, not 1,278 (the numbering has gaps): 473 are new to `corpus_v6`,
+     about 4,600 words. A blind reader read 4 inscriptions from their drawings at 76.8% of signs and 41.7% of words
+     against Griffith (bar 85% for the lowest use), at 158,438 subagent tokens an inscription; it could read none
+     of the photographs. The full read would cost about 28 to 75 million tokens and give about 44 of the 2,013 open
+     spellings that stand in one text a second text, read right. The pilot stopped at 4 of its 20 inscriptions on
+     Mike's word, for the budget. Recommendation: do not read the plates; the transliterations in print (Hallof,
+     below) are the route.
    - **The complete transliterations exist in print (checked 2026-11-09).** Jochen Hallof, *Analytisches
      Wörterbuch des Meroitischen*, volume 7, "Dokumente" (J.H. Röll, 2024, SRaT 13.7, ISBN 978-3-89754-629-5):
      hardcover, 340 pages, 139.00 EUR. [The publisher's free 23-page sample](https://www.lehmanns.de/media/116874085)
@@ -476,16 +498,15 @@ days, not hours. The costs are estimates from what the runs so far cost.
     - Comes first: F2 to F4 are all counted on it.
     - **Status, 2026-11-12: built** ([`data/discovery/corpus_v6.md`](data/discovery/corpus_v6.md)). Otten's file
       is undone from his own per-scholar files, so every older text has a source line with real names. Done: the
-      table of 606 inscriptions, the map of all 899 old ids, `corpus_v6` with 591 inscriptions, the coverage map
+      table of 563 inscriptions, the map of all 899 old ids, `corpus_v6` with 548 inscriptions, the coverage map
       and the expert check counted again (60.0% and 71.4% on the inscriptions that were in the corpus, against
       62.0% and 69.5%), and two readers on the 17 doubtful matches, for 253,065 subagent tokens. Reviewed at the
       full tier (523,726 subagent tokens).
-    - **What it leaves for later:** 1,138 words of the new inscriptions (and 44 of the others) have no analyst in
-      the build as it stands; those of 2026-11-12 were read the same day ([the readers' page](data/discovery/v6_readers.md)
-      gives what that changed), the Faras texts of 2026-11-17 not yet;
-      nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and could be typed; 6 texts
-      quoted by Millet 1968 are not identified (two more turned out to be Faras texts on 2026-11-17); 3 doubtful matches
-      are not settled; the kind of text is not known for 113 inscriptions; and word division still follows each
+    - **What it leaves for later:** 966 words of the new inscriptions (and 47 of the others) had no analyst;
+      they were read the same day ([the readers' page](data/discovery/v6_readers.md) gives what that changed);
+      nine Gebel Adda inscriptions are held only as a text layer of Millet 2005 and could be typed; 8 texts
+      quoted by Millet 1968 are not identified, one of which may be Griffith's Meroë 27 or 28; 3 doubtful matches
+      are not settled; the kind of text is not known for 112 inscriptions; and word division still follows each
       edition.
 23. **F2. A lexicon with a source and a status for every meaning.**
     - Why: "translated" in the map means that one lexicon of 2003 accepts the meaning. The check of 2026-11-12

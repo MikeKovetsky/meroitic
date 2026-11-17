@@ -15,7 +15,7 @@ open). What is new, with the run behind each claim:
    once per name). 18,090 lines, 662 distinct texts (about 27 copies each), 442 distinct funerary texts in 306 families; some
    titles are counted about 100 times too often (`src/pool.py`, `src/dedup.py`, `src/collapse.py`,
    `src/clean_v2.py`; `data/discovery/funerary.md` for the families).
-2. **350 inscriptions are machine-readable under an open licence, 281 of them missing from the public corpus.**
+2. **396 inscriptions are machine-readable under an open licence, 327 of them missing from the public corpus.**
    Griffith's printed Meroitic type read at
    95.6% sign accuracy against FHN (482 of 504 signs, 12 texts; 99.6% against Griffith's print;
    `data/expansion/printed_type_test.md`); 152 inscriptions transcribed, 86 new, +5% words (`src/expand.py`).
@@ -28,6 +28,8 @@ open). What is new, with the run behind each claim:
    Hand copies: 88.8% on their own (`hand_copy_test.md`), below the bar; 97.7% (639 of 654 signs, four texts)
    once each reading is checked against the words Griffith prints in type in the same book, so the 151 Karanòg
    and Shablûl inscriptions are transcribed too, all of them new, +15% words (Day three, below).
+   And 46 ostraca that Griffith printed in his transliteration in 1925, none of them in the public corpus
+   (`src/ostraca.py`, Day ten, below).
    Photographs: almost nothing (`data/discovery/vision.md`).
 3. **Scrambled-script blind tests fail on a frontier model.** From a 17-word glossary of letter-swapped Meroitic and
    no texts it matched 35 of 35 meanings by breaking the cipher (`S0_f0`, `S0_f1`); from the scrambled corpus with
@@ -490,15 +492,14 @@ The table, the map and the corpus were built without an agent; two readers then 
    files, with real names and the page of Millet's 1968 thesis. Of the 17,995 different lines of the padded file,
    340 are a line of those files letter for letter, 17,446 are such a line with one stretch swapped, and 206 more
    differ in a second small place. The 659 texts of the older corpus come from 329 source lines.
-2. **What `corpus_v5` was:** 288 of its 899 texts stand for an inscription (29.9% of its 21,977 words); 206 are
-   copies of a reading with a name swapped (54.4% of the words), 274 are example phrases from a grammar or
-   word-list entries and 124 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
+2. **What `corpus_v5` was:** 289 of its 899 texts stand for an inscription (30.0% of its 21,977 words); 207 are
+   copies of a reading with a name swapped (54.5% of the words), 273 are example phrases from a grammar or
+   word-list entries and 123 more are copies of those; 4 are second readings; 3 are not settled. One Gebel Adda
    text, GA 28, stood 86 times (6,284 words, from 2 of Millet's lines).
-3. **`corpus_v6`:** 591 inscriptions, each once, with real names; 288 were in `corpus_v5` and 303 are new (209 of
-   the Newsletter's texts and 94 of Griffith's rows that `corpus_v5` left out). The table holds 606 inscriptions:
-   486 with a REM number, 65 with readings from two editions or more, 350 with a reading under an open licence, 6
-   quoted by Millet and not identified. (These counts are those of the build as it stands, with the Faras texts
-   added on 2026-11-17; one of the Millet texts then not identified is a part of a Faras text.)
+3. **`corpus_v6`:** 548 inscriptions, each once, with real names; 289 were in `corpus_v5` and 259 are new (209 of
+   the Newsletter's texts and 50 of Griffith's rows that `corpus_v5` left out). The table holds 563 inscriptions:
+   441 with a REM number, 64 with readings from two editions or more, 304 with a reading under an open licence, 8
+   quoted by Millet and not identified.
 4. **The bar for the matching rule was missed:** the right partner is the best match for 45 of 54 known pairs
    (83.3%; the bar was 90%), and 4 of the 151 Karanòg texts have a sure match to another Karanòg number, a
    second monument of the same person. So a number decides before letters do, a sure match stands only when it
@@ -514,8 +515,8 @@ The table, the map and the corpus were built without an agent; two readers then 
    in the epitaph of Makheye (REM 0544; 4 after Newsletter 28 and 6 by analogy in the same list) and 3 in REM 0101
    after Griffith's print.
 8. **The coverage map counted again:** 60.0% of the words of the inscriptions that were in `corpus_v5` (62.0% on
-   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 1,138 of their words
-   are spellings no analyst has seen (the Faras texts of 2026-11-17 among them).
+   `corpus_v5`, 61.6% with near-copies once). With the new inscriptions it is 51.3%, because 966 of their words
+   are spellings no analyst has seen.
 9. **The check against the two editions counted again:** of the 1,115 judged rows, 1,005 still stand in
    `corpus_v6`; on those the editions give the map's meaning for 71.4% of the words they translate (267 of 374;
    it was 276 of 397, 69.5%).
@@ -1145,6 +1146,41 @@ counted; the figures files of all three are public
 ([`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md)). No agents ran; no count of the map
 changes.
 
+## Day ten, morning (2026-11-17): Griffith's ostraca and Sayce on REM 1003
+
+Two pieces from sources in hand, both public domain (step 6 of section B, and the Sayce item of "Next, in this
+order"). The bar and the lot were committed before any typing
+([`data/discovery/ostraca_sayce.md`](data/discovery/ostraca_sayce.md)).
+
+1. **Griffith's ostraca.** *Meroitic Studies V* (*JEA* 11, 1925) prints 46 ostraca with Meroitic letters, 39 from
+   Faras, 6 from Buhen and 1 from Dakkah (F.O. 38 prints none); *Meroitic Studies VI* (*JEA* 15, 1929) prints none.
+   275 words and 959 signs, typed by hand from page images (the text layer drops the marks that carry the signs)
+   and mapped to today's signs as in 1917. The scan in hand lacks pp. 218 and 219, the article's opening.
+2. **The typing holds.** A second typing of the five texts drawn by lot, by an agent that saw only the page
+   images, agrees on 56 of 56 signs (bar 97%); it also put one doubt dot under a different letter, rightly. The
+   review checked every text on the page images and found five more marks of the first typing misplaced or
+   missed (no letter): one doubted word more, 67. Griffith's notes doubt or read otherwise at 11 places, not the 5
+   first listed. The 11 texts with a hand copy were checked against his copies: of their 89 words, 69 are the
+   same, 15 cannot be told, and the 5 that differ follow his print, where print and copy disagree (the first count,
+   91 and 71, took the three lines of B.O. 5's one printed word for three words). They are listed among the doubts,
+   with a sign of F.O. 40 that his copy has and his print lacks, which the review found in the answers (section 3
+   of the page).
+3. **`corpus_v6` has 594 inscriptions**, 350 with an open reading; the ostraca carry no REM number in hand and are
+   numbered by their sigla (`F.O. 1`). None of them was already held. The map stays on the 548 texts it is drawn
+   on (`data/discovery/map_texts.json`): counting it on the new texts needs a new sample of the unnamed stems for
+   the north star's estimate, and `src/themap.py` refuses to go on without one. So the scoreboard is unchanged
+   (north star 12.5%, running words 59.1%, spellings 30.2%). Of the map's 1,681 open spellings that stood in one
+   text, 9 now stand in an ostracon too, five of them two letters long.
+4. **Sayce on REM 1003.** His 42 lines (*Liverpool Annals* 7, pp. 69-72), typed from page images, four lines of
+   them typed again blind (169 of 169 of his units agree). He died in 1933, so his reading is public. Mapped to
+   Griffith's signs by a table fixed before the comparison, his words agree with Millet's reading at 61.8%, where
+   Griffith's do at 82.5%. At Griffith's 38 doubted words Sayce reads 7 the same, 20 otherwise and is unsure
+   himself at 11 (the review corrected the first count of 7 the same, 24 otherwise, 6 unsure and 1 not lined up:
+   the script had not applied the classes to a numeral he queries or a place he prints as lost); Millet sides
+   with Sayce alone at 1 of the 38, with Griffith alone at 17. He settles almost nothing.
+5. **Cost:** 1,502,009 subagent tokens: the two blind typists 216,800 (102,132 and 114,668), the check against
+   the hand copies 375,070, the full review 567,913 and the review of the last commits 342,226.
+
 ## Day ten, morning (2026-11-17): the Faras texts
 
 Step 8 of section B: Griffith's 46 funerary texts from Faras (*Recueil Champollion*, 1922) are typed. The article
@@ -1155,7 +1191,7 @@ time, blind, and the two agree on 373 of 382 signs (97.6%; the bar was 95%). The
 subagent tokens after Faras 1 to 23 and went on, on Mike's word, once the bar was met; it cost 4,988,040 in all.
 Against the modern readings the corpus holds, Faras 43 agrees with Millet's on 90.4% of the letters and Faras 44
 with the Newsletter's on 83.0%. Two of Millet's texts counted as "not identified" are Faras texts: line 414 a part
-of Faras 21, and line 286 the whole of Faras 43, which two readers settled. `corpus_v6` holds 591 inscriptions (548
-before) and the public table 606 (563), 350 of them with an open reading (304). The map is unchanged: the new texts
+of Faras 21, and line 286 the whole of Faras 43, which two readers settled. `corpus_v6` holds 637 inscriptions (594
+before, with the ostraca) and the public table 652 (609), 396 of them with an open reading (350). The map is unchanged: the new texts
 are not glossed, and its studies now read the 548 texts the analysts glossed. Of its 1,681 open spellings that
 stand in one text, 5 now stand in a Faras text too ([`data/expansion/faras/`](data/expansion/faras/README.md)).

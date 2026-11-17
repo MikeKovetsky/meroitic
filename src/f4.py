@@ -728,11 +728,11 @@ def sizing(figs, tokens, rows, gl, entries=None, table=INSCRIPTIONS):
         run["one_judge"] = round(per_line * 3 * units_per_rend_word * rw)
         return run
 
-    open_rows = [i for i, r in rows.items() if r.get("open")]
+    open_rows = [i for i, r in rows.items() if r.get("open") and i in gl]       # the open rows the map holds
     open_words = sum(len(gl[t]) for t in open_rows)
     scored_run = {**scored(held), "not_in_pilot": scored([t for t in held if t not in pilot])}
     pages_run = {"texts": len(open_rows), "words": open_words, "translator": round(per_word_pages * open_words)}
-    readings = [r for r in jsonl(table) if r.get("open_reading")]
+    readings = [r for r in jsonl(table) if r.get("open_reading") and r["id"] in gl]   # the map's texts only
     reading_words = sum(len((r.get("open_text") or "").split()) for r in readings)
     pages_run["open_readings"] = {"texts": len(readings), "words": reading_words,
                                   "translator": round(per_word_pages * reading_words)}

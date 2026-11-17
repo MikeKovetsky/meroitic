@@ -1,0 +1,65 @@
+# The Great Stela of Akinidad (REM 1003) in Sayce's transliteration
+#
+# Source: A. H. Sayce, his reading of the great stela found by Garstang at Meroe, "The Inscription", Liverpool
+# Annals of Archaeology and Anthropology 7 (1914-15), pp. 69-72, with his notes on pp. 73-80. Public domain in the
+# US (published before 1931) and in the UK (Sayce died on 4 February 1933: life plus 70 years ended on 31 December
+# 2003). The copy used is archive.org annals-of-archaeology-and-anthropology_1914-1915_7, which holds pp. 69-135 of
+# the volume. Typed by hand from page images of pp. 69-72 rendered at high resolution, sign by sign, on 2026-11-17;
+# the volume's text layer was not used for the letters. Every h and n with or without a dot below, every prime and
+# every letter in brackets was looked at again on a crop enlarged six to ten times.
+#
+# One line per line of the stela, as he numbers them (1. to 42.), his transliteration lines only: his English
+# translation under each line is not typed. As printed:
+#   -        his hyphen between the letters of a word; a hyphen at the end of a stela line means the word runs on
+#            into the next line (A-g-i- | n-i-rhe-rhe), as he prints it
+#   :        his word divider; a space without a divider stands as he printed it
+#   '        his prime after a letter (k', m', n', p', r', rh', l', M', N', ka'), and a lone ' between hyphens
+#   ḥ        h with a dot below; h without the dot is typed h; ṇ n with a dot below (also Ṇ); ă a with a breve
+#   [ ]      his restorations; ( ) and (?) as printed; ". . ." lost signs
+#   numerals in his small capitals are typed as capital roman numerals (XII, CXV, MMMCCCC)
+# Left out: his footnote numbers (superscript) and the asterisk after E-th-g-b-ḥ-l in l. 38 (his footnote:
+# "Or perhaps 'children of the princes'; cp. line 13"). "A-g-i-n-i-rhe-rhe" stands on a line of its own between
+# ll. 26 and 27, without a number: it is typed at the end of l. 26, where Griffith 1917 has it (Akinizz, before
+# his mark of l. 27).
+1	A-m-n-i-r-e-n-s : k'-r-e-l-i : g-rh-e-l-i : y-i-th-n-e rh-e-b-ḥ-e-l : k'-r-e-y-i : A-g-i-
+2	n-i-rhe-rhe : p-k'-r-ṇ-y-i : p-e-sh-t-ṇ-y-i : p-k'-r : k'-r-e-s-l : k'-r : ḥ-r-p-ḥ-e-l-u : K-e-sh : A-
+3	r-'-m-e-y-s-l : k'-r : ḥ-r-p-ḥ-e-l : A-ḥ-r-' : K-m-s-l : A-th-b-e : th-m-'-th : ḥ-r-p-ḥ-l : A-r-m-i-l :
+4	K-e-sh-t : a-b-r-s-l : y-e-g-i-rh-i : g-rh-i-s-l : a-r-s-l-i : th-g-g : y-e-m'-k-e : k-e-b-e-s-u-i
+5	y-e-r-g-i : A-r-m'-e-y-s-l-ḥ-e : A-rh-ḥ-i-toh : K-e-p-e-r a-b-r XII : g-rh-i CXV : k'-l-e-b : N'-l-rh'-ḥ-e :
+6	a-r-b-ḥ-toh-g-e : p-k'-r-l-i : y-e-rh' : K-e-sh-l-i : I-m-l'-a : th-r-rh-e-b : a-b-e-p-b : M-s-rh-e : Th-ṇ-n-r :
+7	E-rh-e-toh-k : th-r'-[rh]-e : th-r'-rh-e-b-g-toh : e-k-e-l-b-ḥ-e : y-e-g : A-r'-b-e-l : sh-e-toh : K-e-sh-t : k'-r :
+8	ḥ-r-p-ḥ-e-l : A-ḥ-r' : K-m-s-l : A-th-b-e th-m'-th : h-r-p-ḥ-l : K-e-sh : N-p-t : a-r'-s-e-l : a-b-r-s-l
+9	y-e-g : rh-i g-rh-e-s-l : a-r-s-l-i : th-g-g : e-m'-k-e : k-e-b-e-s-u-e : e-r-g : sh-ă-toh : A-r'-b-l :
+10	A-rh-ḥ-i-toh : P-e-r-i-toh : a-b-r C : g-rh-i CVII : k-e-l-e-b : A-p'-toh-b-e-s : th-g-g : m-g-i-u :
+11	Y-k'-l : m-g-i-sh-e-sh-toh-l : a-b-r-s-l : y-e-g-e-rh : g-rh-i-s-l : a-r-e-s-l-i : th-g-g : e-m'-a-k-e : k-e-b-e-s-u-e :
+12	y-e-r-g-i : A-p-e-s : m-g-i : u-e-toh-l-h-e : A-rh-ḥ-e-toh : P-r-i-toh : a-b-r L (?) V : g-rh-i CCL (?) III : k'-e-l-e-b :
+13	a-toh-toh : k-e-b-e-s : y-e-th-g-b (?)-ḥ-e : Y-ka'-l : M-e-m : a-l-e-k-l : K-e-sh-t : a-th-l-e-l-e-b : a-b-r-[s]-l :
+14	y-e-g-e-rh : g-rh-i-s-l a-r'-s-l-i : th-g-g : rh-k-e-b-e-s-u-e : A-p-e toh-[b]-i : N-ḥ-i : a-r-g-e-rh-n-i-y-e
+15	k-e-b-e-s-u-e : s-b-ḥ-i : a-l-e-p-b-k' : p-e-r-toh-s : K-e-sh : k'-l-e-b-u-e : h-r-p-h-ṇ-m-l-e-g-s : I-p-i-a-l-i :
+16	k-e-s-u-e-rh-e-ḥ-i : e-k-e-toh-rh-e-b-ḥ-i s-b-k-l-e-b-u-i-toh-s : Y-e-s-b-e : N-sh : N-sh-l : k'-r :
+17	a-to-[to :] e-k-e-p-i : M-e-rh-e-u-e-toh-l : a- . . . m (?)-rh-e Gh'-b-i : th-g-g : Rhe-rhe : [s-b] : k-l-e-b : u-i-toh-s : Y-e-s-b-i
+18	k-e-b-s-l-i-l-i : Gh-b-i : M-e-rh-e-u-i-toh-l-i : k'-r : N-l : . . . . . l : Y-e-k (?)-ḥ (?)-b-t (?) : a-u (?)-g (?) . . . ṇ :
+19	k-s : M-e' l-gh A-m-n-p : p-n-p-g : A-ḥ-r' : p-ḥ-r-p-ḥ-toh : B-e-u-[i-] g-[e :] sh (?)-u (?)-i-rh' : k'-l-e-b :
+20	y-e-b-e : Y-e-s-b-e-u-i-toh-s : N-sh : N-sh-l : A-m-n-p : y-i-r'-gh : M-rh-e-u-i : a- . : s-b : G-r-toh-l-i : a-r-th-
+21	ḥ-n'-g-i : toh-ṇ-g-e-l : toh-ṇ-u (?)-i-b-ḥ-e : s-b-m-e-g-e : A-rh-b-l-e-l-ḥ-e : E-n'-k-e : s-b : M-toh-y-b-e-l-i :
+22	u (?)-k-ṇ-l-i : A-rh-b-l-e-l-ḥ : Th-b-r-e-toh : K-e-sh-l-i : M (?)-l-i-l-g-e : s-b : s-b-l-ḥ-e : E-n'-u-i-toh : U-e-b-r-toh :
+23	[ḥ-r-] p-ḥ-e-g-e : sh-u-i-rh' I-r-ḥ-ḥ-i : s-b-u-i : e-k-e-s-u-i-l : e-g-toh : g-rh-i-s-l-u : a-b-r-l-u : y-e-m'-k-e :
+24	k-e-b-e-s-u-i-l : u-ă-b-toh : toh-ṇ-g-e-l-ḥ-e : E-toh-ṇ-u-i-toh : K-m'-l-i : rh-m-b-e-l-i : M-rh-e-u-e-y-i : m-g-rh-e-y-i :
+25	To-i-ă : sh-u-i-a-h-i : g-rh-e-y-i-p : a-b-r-i-g : u-i MMMCCCC ă-u-u-i-a-u-i : e-r'-toh : th-i-n-ṇ-g-e :
+26	m (?)-l-i p-i-rh-b-toh : a-s-ă-toh : toh-e-r-l-i-s-l : A-sh-r : a-ḥ-i-rh-e-b-l-e : u-i CCL (?) VII A-g-i-n-i-rhe-rhe
+27	k' : p-k-r-l' : p-e-sh-t-l' : p-k-r-i-l-g-e : M-n' : N-l-i : e-k-e-th-ḥ-n : a-n-th : M-n'-toh-s-l-g-e :
+28	M-n' : N-l-i : e-k-e-th-ḥ-n : p-k-r-i-l-i : p-e-sh-t-l-i : th-b-i-th-n-i-rh-e-b-ḥ-e :
+29	k'-r-e-b-l-i : N-p-th-b-i-ḥ : a-m-r-e : M-h-r-toh-s-n : A-m-n-i : a-r-r-e-s-s
+30	G-r-toh-rh-s : ḥ-r-p-ḥ-e : u-s-l : th-g-th : s-b : G-r-toh-l-i : a-r-th-ḥ-n'-g-e-u-i :
+31	toh-ṇ-g-e-l : toh-ṇ-u-i-b-ḥ-e : s-b : M-e-g-e : A-rh-b-l-e-l-ḥ-e : E-n'-k-e : s-b : M-toh-y-b-e-l-i :
+32	Sh-m-e-toh-s-ṇ-l-i : A-rh-b-l-e-l-ḥ : Th-b-r-e-toh : K-e-sh-l-i : M'-l-e-l-e-g-e :
+33	s-b : s-b-l (?)-ḥ : E-n'-u-i-toh : U-e-b-r-toh : ḥ-r-p-ḥ-e-g-e : sh-u-i-rh' : I-r-ḥ-ḥ-i : s-b-u-i :
+34	e-k-e-s-u-i-l : e-g-toh : g-rh-i-s-l-u : a-b-r-s-l-u : e-m'-k-e k-e-b-e-s-u-i-l
+35	u-ă-b-toh : p-e-rh-e-g-e-s-l-g-e : ḥ-r-p-ḥ-l-g-e : k'-l-e-b : u (?)-toh-rh-e-toh : m-g : u-i-toh-pi-i-rh-i-l-g-e :
+36	k' : e-ḥ-r-p-ḥ-e : p-y-l-i : e-p-p . . . [l-] i : [u (?)-toh-] rh-e-toh-l-e-b-g : a-t-i-l (?) : p-e-g-e :
+37	u (?)-toh-rh-e-toh : A-m-n-p-toh : p-i-rh-e-l-g-e : r-b : u (?)-r-e-u-ḥ-e-l-i : . . .
+38	m-g-e-n'-u-i : toh-ṇ-g-e-l : Th-b-r-g-[e] : k'-r-toh-[s-l] : E-th-g-b-ḥ-l : ḥ-r-[p]-ḥ-[e]-s-l :
+39	th-g-th : A-m-n-i : a-r-r-e-s-s : A-m-n-p : Ṇ-toh-s-l : [A-m-n-] p :
+40	p-i-rh-e-l-g-e : k'-l-e-b : u (?)-toh-rh-e-b-toh : s-b : [toh-]-ṇ-g-e-l-ḥ-e : ă-u-u-[i-a-u]-i :
+41	e-r'-toh : th-n-n-g-i : a-rh-b-toh : a-s-[ă-] toh : k' : [A-p-i-] toh-b-s-l-ḥ :
+42	A-sh-r : a-ḥ-i-rh-e-b-l-i u-i CCLII

@@ -365,15 +365,17 @@ def test_the_cost_of_the_full_run():
                ("GA02",): "GA02: stela\nTEXT\n1: ato\nRENDERING\nwater bread\n",
                ("GA03",): "GA03: stela\nTEXT\n1: qore\nRENDERING\na b c d e f\n"}
     rows = {"GA 01": {"text": "woS"}, "GA 02": {"text": "ato"}, "GA 03": {"text": "qore"},
-            "P1": {"text": "a", "open": True}, "P2": {"text": "b", "open": True}}
+            "P1": {"text": "a", "open": True}, "P2": {"text": "b", "open": True},
+            "F.O. 1": {"text": "c", "open": True}}                        # open, but not a text of the map
     gl = {"GA 01": [g("w", "meaning")] * 2, "GA 02": [g("w", "meaning")] * 3, "GA 03": [g("w", "meaning")] * 5,
           "P1": [g("w", "meaning")] * 4, "P2": [g("w", "meaning")] * 6}
     figs = {"pilot": ["GA 01"], "pages": ["P1"], "translator": {"words_pilot": 2, "words_pages": 4}, "units": {"judged": 2}}
     tokens = {"translator_pilot": 1000, "translator_pages": 800, "splitter": 400, "judge1": 600, "judge2": 600}
     with tempfile.TemporaryDirectory() as d:
         table = Path(d) / "inscriptions.jsonl"
-        lines(table, [{"open_reading": "k1", "open_text": "a b c"}, {"open_reading": None}, {"open_reading": "k2",
-                                                                                             "open_text": "d e"}])
+        lines(table, [{"id": "P1", "open_reading": "k1", "open_text": "a b c"}, {"id": "GA 01", "open_reading": None},
+                      {"id": "P2", "open_reading": "k2", "open_text": "d e"},
+                      {"id": "F.O. 1", "open_reading": "k3", "open_text": "f g h i"}])       # not on the map: not counted
         s = F.sizing(figs, tokens, rows, gl, entries=entries, table=table)
     # rates: 1000/2 a word of the pilot, 800/4 of the pages, 400/4 a word of rendering, 1200/(2*3*2) a line,
     # 2/4 units a word of rendering; the three held texts have 10 words and 12 of rendering, GA02 and GA03 8 and 8

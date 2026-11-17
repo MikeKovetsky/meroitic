@@ -1,0 +1,148 @@
+{
+ "texts": 46,
+ "by_series": {
+  "B.O.": 6,
+  "D.O.": 1,
+  "F.O.": 39
+ },
+ "words": 275,
+ "signs": 959,
+ "numerals": 123,
+ "symbols": 12,
+ "lines": 76,
+ "words_doubted": 67,
+ "his_notes": 11,
+ "ours": 10,
+ "printed_without_letters": [
+  "F.O. 38"
+ ],
+ "missing_pages": "pp. 218-219 (the opening of the article) are not in the scan used",
+ "second_typing": {
+  "lot": [
+   "F.O. 6",
+   "F.O. 12",
+   "F.O. 25",
+   "F.O. 31",
+   "F.O. 36"
+  ],
+  "bar": 0.97,
+  "signs_first": 56,
+  "signs_second": 56,
+  "agree": 56,
+  "share": 1.0,
+  "met": true,
+  "texts": {
+   "F.O. 6": {
+    "signs": 12,
+    "signs_second": 12,
+    "agree": 12,
+    "words_same": true,
+    "doubted_words": 0,
+    "doubted_alike": true
+   },
+   "F.O. 12": {
+    "signs": 11,
+    "signs_second": 11,
+    "agree": 11,
+    "words_same": true,
+    "doubted_words": 0,
+    "doubted_alike": true
+   },
+   "F.O. 25": {
+    "signs": 21,
+    "signs_second": 21,
+    "agree": 21,
+    "words_same": true,
+    "doubted_words": 4,
+    "doubted_alike": true
+   },
+   "F.O. 31": {
+    "signs": 7,
+    "signs_second": 7,
+    "agree": 7,
+    "words_same": false,
+    "doubted_words": 1,
+    "doubted_alike": false
+   },
+   "F.O. 36": {
+    "signs": 5,
+    "signs_second": 5,
+    "agree": 5,
+    "words_same": true,
+    "doubted_words": 1,
+    "doubted_alike": true
+   }
+  }
+ },
+ "map": {
+  "spellings": 184,
+  "on_the_map": {
+   "named": 1,
+   "not on the map": 127,
+   "open": 36,
+   "translated": 20
+  },
+  "open_in_one_text_before": 1681,
+  "now_in_a_second_text": 9,
+  "which": [
+   "ap",
+   "bl",
+   "bo",
+   "dwi",
+   "ep",
+   "nte",
+   "ty",
+   "yedo",
+   "yereke"
+  ],
+  "new_in_two_ostraca_or_more": 7,
+  "which_new": [
+   "Sle",
+   "adeqe",
+   "aloX",
+   "arbte",
+   "ariketo",
+   "mlewos",
+   "teperet"
+  ],
+  "running_words": 275,
+  "how": "the map as it stands (src/themap.py current()): a spelling has the group its places have most often; an open spelling that stood in one text of the map and stands in an ostracon now stands in two; spellings with a lost sign are left out"
+ },
+ "his_copy_differs": 8,
+ "copy_check": {
+  "texts": 11,
+  "words": 89,
+  "by_verdict": {
+   "cannot tell": 15,
+   "differs": 5,
+   "same": 69
+  },
+  "differs": [
+   [
+    "F.O. 1",
+    "ant-mnês"
+   ],
+   [
+    "F.O. 1",
+    "atr"
+   ],
+   [
+    "F.O. 35",
+    "šrbeḫ"
+   ],
+   [
+    "F.O. 39",
+    "ep"
+   ],
+   [
+    "F.O. 39",
+    "zle"
+   ]
+  ],
+  "dividers_differ": [
+   "D.O. 1",
+   "F.O. 1"
+  ],
+  "how": "an agent read each hand copy (plates XXIX and XXX) with the cursive key of data/expansion/README.md and judged each typed word; its answers are lined up with the typing by letters, and a word it judged in pieces (B.O. 5's tb...šb...šb..., on three lines of the copy) takes the worst verdict of its pieces; every word it found different was looked at on the printed page, and the typing follows the print in each (src/ostraca.py, COPIES)"
+ }
+}

@@ -145,8 +145,9 @@ Details: [cognates_rules.md](data/discovery/cognates_rules.md).
 
 ## 7. What would change the answer
 
-- **More text.** The project holds 548 inscriptions. Editions it does not hold contain more, and each new long
-  text adds contexts for words that now stand alone.
+- **More text.** The project holds 594 inscriptions (since 2026-11-17, with Griffith's 46 ostraca; the map is
+  drawn on the 548 before them). Editions it does not hold contain more, and each new long text adds contexts for
+  words that now stand alone.
 - **Evidence from outside the texts:** a bilingual, or a published reading the project has not read.
 - **A comparison with whole dictionaries of the related languages,** in the place of short word lists, with
   each meaning it proposes checked against the contexts. The two dictionaries of Nile Nubian did no better than
@@ -168,4 +169,4 @@ times on each page. `python3 -I src/themap.py`, `src/blind2.py` and `src/grammar
 `src/cognates_rules.py` prints the numbers of section 4, which its page gives; `tests/` holds a check for each
 page's numbers. The corpus files, the lexicon and most of the agents' answers are not in the repository, because
 they follow editions under copyright ([data/INDEX.md](data/INDEX.md) says which files are local and why); the
-open readings of 350 inscriptions are.
+open readings of 396 inscriptions are.

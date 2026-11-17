@@ -568,7 +568,11 @@ STATED = {"2026-11-12", "12:03", "1968", "2005", "1971", "0001", "2780", "0544",
           "60%", "30%", "90%", "12", "10", "40", "22", "28", "4.0",       # 4.0: the licence CC BY 4.0
           "16", "489",                                                    # GA 13+16; MilletExamples.txt line 489
           "933", "242", "29",                    # MilletExamples.txt line 933, p. 242 of the thesis, GA 29 (REM 1003)
-          "2026-11-17", "414", "0521",           # the Faras texts: MilletExamples.txt line 414 is a part of REM 0521
+          "2026-11-17", "1925",                  # Griffith's ostraca (JEA 11, 1925) came in on 2026-11-17
+          "563", "304", "50",                    # the counts of 2026-11-12, before the ostraca, that dated passages quote
+          "441", "64", "207", "273", "123",      # ... and before the Faras texts, which folded two of Millet's lines
+          "30.0%", "54.5%", "112",               #     into Faras inscriptions (REPORT, day five; F1's status)
+          "414", "0521",                         # the Faras texts: MilletExamples.txt line 414 is a part of REM 0521
           "1922", "0501", "0546", "46",          # Griffith's article of 1922; the 46 Faras texts, REM 0501 to 0546
           "286", "0543", "27"}                   # MilletExamples.txt line 286 is REM 0543; Griffith's Meroe 27
 
