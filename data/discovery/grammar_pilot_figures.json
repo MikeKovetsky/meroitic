@@ -2105,33 +2105,6 @@
     ]
    },
    {
-    "id": "naming",
-    "what": "a word in -qowi closes the naming of the dead",
-    "where": "at any word",
-    "from": "its wording",
-    "gives": [
-     "L7-4",
-     "L3-3"
-    ],
-    "with": [
-     "L6-1"
-    ]
-   },
-   {
-    "id": "wi",
-    "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence",
-    "where": "at any word",
-    "from": "its wording",
-    "gives": [
-     "L7-5"
-    ],
-    "with": [
-     "L8-4",
-     "M3-1",
-     "M6-1"
-    ]
-   },
-   {
     "id": "before water",
     "what": "the word before `ato mXe` closes a sentence",
     "where": "at the epitaph's fixed words",
@@ -2168,13 +2141,41 @@
     ]
    }
   ],
+  "worded": [
+   {
+    "id": "naming",
+    "what": "a word in -qowi closes the naming of the dead",
+    "where": "at any word",
+    "from": "its wording",
+    "gives": [
+     "L7-4",
+     "L3-3"
+    ],
+    "with": [
+     "L6-1"
+    ]
+   },
+   {
+    "id": "wi",
+    "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence",
+    "where": "at any word",
+    "from": "its wording",
+    "gives": [
+     "L7-5"
+    ],
+    "with": [
+     "L8-4",
+     "M3-1",
+     "M6-1"
+    ]
+   }
+  ],
   "statements": [
    {
     "id": "parent",
     "what": "it stands right before a word of filiation, where a parent's name is due",
     "gives": [
-     "L1-5",
-     "L6-2"
+     "L1-5"
     ]
    },
    {
@@ -2217,7 +2218,7 @@
    },
    {
     "id": "copula",
-    "what": "a common noun with the article and the copula",
+    "what": "the copula after l, on a stem that is no name",
     "gives": [
      "M5-2"
     ]
@@ -2243,9 +2244,6 @@
     "what": "it closes a clause or a sentence",
     "gives": [
      "L1-4",
-     "L7-4",
-     "L3-3",
-     "L7-5",
      "L7-3",
      "L2-6",
      "L5-6",
@@ -2261,14 +2259,14 @@
     "set": "held back",
     "words": 708,
     "open_words": 374,
-    "cuts": 3,
-    "words_up_to_the_last_cut": 350,
-    "share_up_to_the_last_cut": 0.4944,
-    "longest_stretch": 358,
+    "cuts": 2,
+    "words_up_to_the_last_cut": 132,
+    "share_up_to_the_last_cut": 0.1864,
+    "longest_stretch": 576,
     "marks": {
-     "verb": 2,
-     "before bread": 1
+     "verb": 2
     },
+    "more_cuts_by_wording": 0,
     "open_words_by_what_is_said": {
      "none": 361,
      "plural": 11,
@@ -2287,6 +2285,7 @@
     "share_up_to_the_last_cut": 0.0,
     "longest_stretch": 485,
     "marks": {},
+    "more_cuts_by_wording": 0,
     "open_words_by_what_is_said": {
      "none": 184,
      "plural": 20
@@ -2299,13 +2298,12 @@
     "set": "held back",
     "words": 234,
     "open_words": 136,
-    "cuts": 1,
-    "words_up_to_the_last_cut": 116,
-    "share_up_to_the_last_cut": 0.4957,
-    "longest_stretch": 118,
-    "marks": {
-     "wi": 1
-    },
+    "cuts": 0,
+    "words_up_to_the_last_cut": 0,
+    "share_up_to_the_last_cut": 0.0,
+    "longest_stretch": 234,
+    "marks": {},
+    "more_cuts_by_wording": 1,
     "open_words_by_what_is_said": {
      "none": 131,
      "plural": 4,
@@ -2319,14 +2317,12 @@
     "set": "tuning",
     "words": 190,
     "open_words": 88,
-    "cuts": 1,
-    "words_up_to_the_last_cut": 1,
-    "share_up_to_the_last_cut": 0.0053,
-    "longest_stretch": 189,
-    "marks": {
-     "naming": 1,
-     "wi": 1
-    },
+    "cuts": 0,
+    "words_up_to_the_last_cut": 0,
+    "share_up_to_the_last_cut": 0.0,
+    "longest_stretch": 190,
+    "marks": {},
+    "more_cuts_by_wording": 1,
     "open_words_by_what_is_said": {
      "none": 85,
      "place": 1,
@@ -2346,6 +2342,7 @@
     "share_up_to_the_last_cut": 0.0,
     "longest_stretch": 131,
     "marks": {},
+    "more_cuts_by_wording": 0,
     "open_words_by_what_is_said": {
      "none": 51,
      "plural": 1
@@ -2358,25 +2355,24 @@
     "set": "tuning",
     "words": 113,
     "open_words": 31,
-    "cuts": 16,
+    "cuts": 6,
     "words_up_to_the_last_cut": 99,
     "share_up_to_the_last_cut": 0.8761,
-    "longest_stretch": 29,
+    "longest_stretch": 63,
     "marks": {
-     "wi": 10,
      "verb": 4,
-     "before water": 2,
      "address": 1,
-     "naming": 1,
+     "before water": 1,
      "before bread": 1
     },
+    "more_cuts_by_wording": 9,
     "open_words_by_what_is_said": {
-     "none": 20,
-     "governed": 7,
+     "none": 23,
+     "governed": 4,
      "verb": 3,
      "copula": 1
     },
-    "open_words_a_rule_speaks_of": 11
+    "open_words_a_rule_speaks_of": 8
    },
    {
     "text": "REM 1067",
@@ -2384,16 +2380,16 @@
     "set": "tuning",
     "words": 111,
     "open_words": 40,
-    "cuts": 4,
+    "cuts": 3,
     "words_up_to_the_last_cut": 99,
     "share_up_to_the_last_cut": 0.8919,
-    "longest_stretch": 90,
+    "longest_stretch": 93,
     "marks": {
      "verb": 2,
-     "wi": 1,
      "before water": 1,
      "before bread": 1
     },
+    "more_cuts_by_wording": 1,
     "open_words_by_what_is_said": {
      "none": 39,
      "plural": 1
@@ -2404,16 +2400,17 @@
   "all": {
    "words": 1972,
    "open_words": 925,
-   "cuts": 25,
+   "cuts": 11,
+   "more_cuts_by_wording": 12,
    "open_words_by_what_is_said": {
-    "none": 871,
+    "none": 874,
     "plural": 38,
-    "governed": 7,
     "verb": 5,
+    "governed": 4,
     "place": 2,
     "copula": 2
    },
-   "open_words_a_rule_speaks_of": 54
+   "open_words_a_rule_speaks_of": 51
   }
  },
  "cost": {

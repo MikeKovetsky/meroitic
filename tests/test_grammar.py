@@ -653,7 +653,7 @@ def a_text(*words):
     return out
 
 
-EVERY = sorted({r for m in G.MARKS for r in m["gives"] + m["with"]} | {r for s in G.SAYS for r in s["gives"]})
+EVERY = sorted({r for m in G.MARKS + G.WORDED for r in m["gives"] + m["with"]} | {r for s in G.SAYS for r in s["gives"]})
 
 
 def test_a_mark_cuts_where_its_rule_says_and_nowhere_else():
@@ -661,22 +661,29 @@ def test_a_mark_cuts_where_its_rule_says_and_nowhere_else():
     rs = a_text("woSi", "Soreyi", ("abc", "name"), "xyzqowi", ("nnn", "name"), "tedxelowi", ("mmm", "name"), "terikelowi",
                 "ato", "mXe", "pSoXekete", "at", "mXe", "pSixr", "kete", ("zzz", "unknown"), ("yyy", "unknown"))
     cut = G.cuts(rs, EVERY)
-    assert cut == {1: ["address"], 3: ["naming", "wi"], 5: ["wi"], 7: ["wi", "before water"], 10: ["before bread", "verb"], 14: ["verb"]}
+    assert cut == {1: ["address"], 7: ["before water"], 10: ["before bread", "verb"], 14: ["verb"]}
     assert 13 not in cut and 15 not in cut and 16 not in cut                       # the first piece of the verb and the tail carry no mark
-    # no fixed word, no -owi: no cut, however long the text
+    assert G.cuts(rs, EVERY, G.WORDED) == {3: ["naming", "wi"], 5: ["wi"], 7: ["wi"]}   # the ends only a rule's wording names: apart, no cut
+    # no fixed word: no cut, however long the text
     assert G.cuts(a_text(*["abcd", "efgh", "ijkl"] * 40), EVERY) == {}
-    # each mark keeps to its rule's own cases
+    # each mark keeps to its rule's own cases, and stands only where the rule holds there
     assert G.cuts(a_text("woSi", "abc"), EVERY) == {} and G.cuts(a_text("woS", "Soreyi"), EVERY) == {}        # L1-4: woSi or wiSi, then Sor...i
     assert G.cuts(a_text("abc", "ato", "mlo"), EVERY) == {} and G.cuts(a_text("ato", "mXe"), EVERY) == {}     # L7-3: ato, mXe after it, a word before it
-    assert G.cuts(a_text("abc", "ato", "mxe"), EVERY) == {0: ["before water"]}
-    assert G.cuts(a_text(("abc", "lost"), "at"), EVERY) == {} and G.cuts(a_text("abc", "atx"), EVERY) == {}   # L5-6: exactly at, a word before it not lost
+    assert G.cuts(a_text("abc", "ato", "mxe"), EVERY) == {}                         # neither L7-3 (-wi, -te, -s) nor L2-6 (-i) holds at abc
+    for before in ("abcwi", "abcte", "abcs", "abci"):
+        assert G.cuts(a_text(before, "ato", "mxe"), EVERY) == {0: ["before water"]}, before
+    no_l26 = [r for r in EVERY if r != "L2-6"]
+    assert G.cuts(a_text("abci", "ato", "mxe"), no_l26) == {} and G.cuts(a_text("abcwi", "ato", "mxe"), no_l26) == {0: ["before water"]}
+    assert G.cuts(a_text(("abc", "lost"), "at"), EVERY) == {} and G.cuts(a_text("pabc", "atx"), EVERY) == {}  # L5-6: exactly at, a word before it not lost
+    assert G.cuts(a_text("abc", "at"), EVERY) == {} and all(G.cuts(a_text(b, "at"), EVERY) == {0: ["before bread"]} for b in ("pabc", "abcte", "abcs"))
     assert G.cuts(a_text("mXe", "dkete"), EVERY) == {} and G.cuts(a_text("mXe", "b.ete"), EVERY) == {}        # L1-3: the next word begins p, b or y and is whole
     assert G.cuts(a_text("mXe", "yirx"), EVERY) == {1: ["verb"]} and G.cuts(a_text("mlo", "pSixrkete"), EVERY) == {}
-    assert G.cuts(a_text("owi"), EVERY) == {} and G.cuts(a_text("x.owi"), EVERY) == {} and G.cuts(a_text("xbowi"), EVERY) == {0: ["wi"]}   # L7-5: four letters, no dot
-    # the counts: the stretches between the cuts, and the last cut
+    assert G.cuts(a_text("xbowi"), EVERY) == {} and G.cuts(a_text("xbowi"), EVERY, G.WORDED) == {0: ["wi"]}   # -owi: by L7-5's wording only
+    assert G.cuts(a_text("owi"), EVERY, G.WORDED) == {} and G.cuts(a_text("x.owi"), EVERY, G.WORDED) == {}
+    # the counts: the stretches between the cuts, the last cut, and the cuts the wording would add
     c = G.parse_counts(G.parse_of(rs, EVERY))
-    assert (c["words"], c["open_words"], c["cuts"], c["words_up_to_the_last_cut"], c["longest_stretch"]) == (17, 2, 6, 15, 4)
-    assert c["marks"] == {"wi": 3, "verb": 2, "address": 1, "naming": 1, "before water": 1, "before bread": 1}
+    assert (c["words"], c["open_words"], c["cuts"], c["words_up_to_the_last_cut"], c["longest_stretch"], c["more_cuts_by_wording"]) == (17, 2, 4, 15, 6, 2)
+    assert c["marks"] == {"verb": 2, "address": 1, "before water": 1, "before bread": 1}
     assert c["share_up_to_the_last_cut"] == round(15 / 17, 4) and c["open_words_by_what_is_said"] == {"none": 2} and c["open_words_a_rule_speaks_of"] == 0
     none = G.parse_counts(G.parse_of(a_text("abcd", ("efgh", "unknown")), EVERY))
     assert (none["cuts"], none["words_up_to_the_last_cut"], none["share_up_to_the_last_cut"], none["longest_stretch"]) == (0, 0, 0.0, 2)
@@ -685,26 +692,27 @@ def test_a_mark_cuts_where_its_rule_says_and_nowhere_else():
 def test_a_rule_that_did_not_pass_gives_no_mark_and_says_nothing():
     rs = a_text("woSi", "Soreyi", "xyzqowi", "abclowi", "ato", "mXe", "pSixr", "kete", "at", "mXe", "yirxkete")
     full = G.cuts(rs, EVERY)
-    assert full == {1: ["address"], 2: ["naming", "wi"], 3: ["wi", "before water"], 7: ["before bread", "verb"], 10: ["verb"]}
-    assert G.cuts(rs, []) == {} and G.given(G.MARKS, []) == [] and G.given(G.SAYS, []) == []
+    assert full == {1: ["address"], 3: ["before water"], 7: ["before bread", "verb"], 10: ["verb"]}
+    assert G.cuts(rs, []) == {} and G.given(G.MARKS, []) == [] and G.given(G.SAYS, []) == [] and G.given(G.WORDED, []) == []
     drop = lambda *ids: [r for r in EVERY if r not in ids]                                       # noqa: E731
     assert "address" not in sum(G.cuts(rs, drop("L1-4")).values(), [])                           # L3-2 and L7-4 only go with it: they do not give it
-    assert "naming" not in sum(G.cuts(rs, drop("L7-4", "L3-3")).values(), []) and "naming" in sum(G.cuts(rs, drop("L7-4")).values(), [])
-    assert "wi" not in sum(G.cuts(rs, drop("L7-5")).values(), []) and "wi" in sum(G.cuts(rs, drop("L8-4", "M3-1", "M6-1")).values(), [])
+    worded = lambda passed: sum(G.cuts(rs, passed, G.WORDED).values(), [])                       # noqa: E731
+    assert "naming" not in worded(drop("L7-4", "L3-3")) and "naming" in worded(drop("L7-4"))
+    assert "wi" not in worded(drop("L7-5")) and "wi" in worded(drop("L8-4", "M3-1", "M6-1"))
     assert "before water" not in sum(G.cuts(rs, drop("L7-3", "L2-6")).values(), []) and "before water" in sum(G.cuts(rs, drop("L7-3")).values(), [])
     assert "before bread" not in sum(G.cuts(rs, drop("L5-6")).values(), [])
     assert "verb" not in sum(G.cuts(rs, drop("L3-7", "L1-3")).values(), [])
     assert G.cuts(rs, drop("L4-5"))[6] == ["verb"] and 7 not in {k for k, v in G.cuts(rs, drop("L4-5")).items() if "verb" in v}   # without L4-5 no second piece
-    # what is said of a word without a meaning needs a rule that passed too
-    name = a_text(("abc", "unknown"), "tedxelowi", ("def", "unknown"), "yetmdelowi", ("pSixrkete", "unknown"), ("ghileb", "unknown"),
-                  ("jkllowi", "unknown"), ("mno", "unknown"))
+    # what is said of a word without a meaning needs a rule that passed, and that rule holding at the word
+    name = a_text(("abcli", "unknown"), "tedxelowi", ("defl", "unknown"), "yetmdelowi", ("pSixrkete", "unknown"), ("ghileb", "unknown"),
+                  ("jkllowi", "unknown"), ("mno", "unknown"), ("pqr", "unknown"), "tedxelowi", ("stu", "unknown"), "yetmdelowi")
     said = lambda passed: [w.get("says") for w in G.parse_of(name, passed)]                     # noqa: E731
-    assert said(EVERY) == ["parent", None, "governed", None, "verb", "plural", "copula", "none"]
-    assert said(drop("L1-5", "L6-2"))[0] == "none" and said(drop("L1-5"))[0] == "parent" and said(drop("L1-6"))[2] == "none"
+    assert said(EVERY) == ["parent", None, "governed", None, "verb", "plural", "copula", "none", "none", None, "none", None]   # pqr, stu: the rules do not hold
+    assert said(drop("L1-5"))[0] == "none" and said(drop("L1-6"))[2] == "none"                 # L6-2 holds only at a name: it gives no statement
     assert said(drop("L4-5"))[4] == "none" and said(drop("M1-2", "M3-3", "M4-2"))[5] == "none" and said(drop("M1-2"))[5] == "plural"
-    assert said(drop("L8-4", "M3-1", "M6-1"))[6] == "closes" and said(drop("L8-4", "M3-1", "M6-1", "L7-5"))[6] == "none"
-    assert said([]) == ["none", None, "none", None, "none", "none", "none", "none"]
-    # by the map's parts: a place in -te closed by the article (L4-1), a common noun with the copula (M5-2), a verb in -kete (L4-3)
+    assert said(drop("L8-4", "M3-1", "M6-1"))[6] == "none"                                       # an end in -owi does not cut: nothing closes there
+    assert said([]) == ["none", None, "none", None, "none", "none", "none", "none", "none", None, "none", None]
+    # by the map's parts: a place in -te closed by the article (L4-1), the copula after l on a stem that is no name (M5-2), a verb in -kete (L4-3)
     by_parts = a_text(("abctel", "unknown", "abc=Abc te=-te (2) l=-l (1)"), ("xyzlo", "hypothesis", "xyz=xyz lo=-lo"),
                       ("Abclo", "hypothesis", "Abc=NAME lo=-lo"), "mlol", ("dkete", "unknown", "d=? kete=-kete"), ("ekete", "unknown", "e=? kete=-kete"))
     assert [w.get("says") for w in G.parse_of(by_parts, EVERY)] == ["place", "copula", "none", None, "verb", "verb"]
@@ -717,10 +725,13 @@ def test_every_mark_and_statement_names_a_rule_that_passed():
     ok = {x["id"] for r in f["rounds"].values() for x in r["the_rules"] if x["verdict"] == "passed"}
     assert len(ok) == f["both"]["passed"] == f["parse"]["rules_that_passed"] and set(EVERY) <= ok
     assert all(m["gives"] and callable(m["at"]) for m in G.MARKS) and all(s["gives"] and callable(s["is"]) for s in G.SAYS)
-    assert [m["id"] for m in f["parse"]["marks"]] == [m["id"] for m in G.MARKS] and len({m["id"] for m in G.MARKS}) == len(G.MARKS) == 6
-    for m, x in zip(G.MARKS, f["parse"]["marks"]):
-        assert x == {"id": m["id"], "what": m["what"], "where": m["where"], "from": m["from"], "gives": list(m["gives"]), "with": list(m["with"])}
-        assert m["where"] in ("at the epitaph's fixed words", "at any word") and m["from"] in ("its count", "its wording")
+    assert all(m["gives"] and callable(m["at"]) for m in G.WORDED)
+    assert [m["id"] for m in f["parse"]["marks"]] == [m["id"] for m in G.MARKS] and len({m["id"] for m in G.MARKS}) == len(G.MARKS) == 4
+    assert [m["id"] for m in f["parse"]["worded"]] == [m["id"] for m in G.WORDED] == ["naming", "wi"]
+    for table, key, source in ((G.MARKS, "marks", "its count"), (G.WORDED, "worded", "its wording")):    # a mark that cuts rests on its rule's count
+        for m, x in zip(table, f["parse"][key]):
+            assert x == {"id": m["id"], "what": m["what"], "where": m["where"], "from": m["from"], "gives": list(m["gives"]), "with": list(m["with"])}
+            assert m["where"] in ("at the epitaph's fixed words", "at any word") and m["from"] == source
     assert [(s["id"], s["what"], s["gives"]) for s in f["parse"]["statements"]] == [(s["id"], s["what"], list(s["gives"])) for s in G.SAYS]
     assert {s["id"] for s in G.SAYS} | {G.NOTHING} == set(G.SAID)
     # the parse adds up, text by text
@@ -747,8 +758,10 @@ def test_the_page_gives_the_parse_as_the_figures_have_it():
         line = (f"| {m['what'][0].upper() + m['what'][1:]} | {', '.join(m['gives'])}" + (f" (with {', '.join(m['with'])})" if m["with"] else "")
                 + f" | {m['where']} | {m['from'].replace('its', 'the rule' + chr(39) + 's')} |")
         assert line in sec, line
-    worded = [m["id"] for m in p["marks"] if m["from"] == "its wording"]
-    assert worded == ["naming", "wi"] and "Two of the six rest on a rule's wording alone. The rules L7-4 and L7-5 name an end" in " ".join(sec.split())
+    r66 = next(x for x in p["texts"] if x["text"] == "REM 1066")
+    assert all(m["from"] == "its count" for m in p["marks"]) and [m["id"] for m in p["worded"]] == ["naming", "wi"]
+    assert ("**Two ends that only a rule's wording names do not cut.** The rules L7-4 and L7-5 name an end" in " ".join(sec.split())
+            and f"would cut the seven texts {p['all']['more_cuts_by_wording']} more times, {r66['more_cuts_by_wording']} of them in REM 1066." in " ".join(sec.split()))
     for x in p["texts"]:
         line = (f"| {x['text']} | {x['kind'].split(' (')[0]} | {x['words']} | {x['cuts']} | {x['longest_stretch']} | {x['open_words']} | "
                 f"{x['open_words_a_rule_speaks_of']} |")
@@ -771,6 +784,8 @@ def test_the_page_gives_the_parse_as_the_figures_have_it():
     assert (f"**Of the {a['open_words']} words without a meaning the rules speak of {a['open_words_a_rule_speaks_of']},** and of {said['plural']} of those "
             f"they say only that the word ends in `-eb`, like a plural. Of {said['none']} they say nothing.") in flat
     assert "The parse gives no word a meaning and proposes none" in flat
+    assert (f"With these, the rules cut the seven texts {a['cuts']} times, not 25, and speak of {a['open_words_a_rule_speaks_of']} of their "
+            f"{a['open_words']} words without a meaning, not 54.") in flat                      # the review of the parse
     assert "After the review (2026-11-16, " in text and "the parse of section 6 was built: section 12." in text
     # the stretches show no spelling: only the fixed words' meanings and what the map and the rules know
     lines = [l.strip() for l in sec.splitlines() if " · " in l]

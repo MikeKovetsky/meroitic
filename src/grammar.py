@@ -688,12 +688,20 @@ def end_wi(rs, i, passed):
 
 
 def end_before_water(rs, i, passed):
+    """The word before `ato mXe`, where rule L7-3 holds there (it ends in -wi, -te or -s) or rule L2-6 does (it
+    ends in -i): where neither holds, neither rule says an end is there."""
     n = at(rs, i + 1)
-    return i - 1 if rs[i]["form"] == "ato" and i > 0 and n and n["form"].lower() == "mxe" else None
+    if rs[i]["form"] == "ato" and i > 0 and n and n["form"].lower() == "mxe":
+        p = rs[i - 1]["form"]
+        if ("L7-3" in passed and p.endswith(("wi", "te", "s"))) or ("L2-6" in passed and "." not in p and p.endswith("i")):
+            return i - 1
 
 
 def end_before_bread(rs, i, passed):
-    return i - 1 if rs[i]["form"] == "at" and i > 0 and rs[i - 1]["level"] != "lost" else None
+    """The word before `at`, where rule L5-6 holds there: it begins with p or ends in -te or -s."""
+    p = at(rs, i - 1)
+    if rs[i]["form"] == "at" and p and p["level"] != "lost" and (p["form"].startswith("p") or p["form"].endswith(("te", "s"))):
+        return i - 1
 
 
 def end_verb(rs, i, passed):
@@ -706,15 +714,11 @@ def end_verb(rs, i, passed):
 
 
 # The marks of an end: the rules that give each (one of them that passed is enough), the rules that say the same
-# or shape it, where it can stand, and whether the rule's own count is about that place ("its count") or only its
-# wording names the end ("its wording": the count was of something else, as the page says).
+# or shape it, and where it can stand. A mark stands only at a place that is a case of a rule that gives it and
+# where that rule holds: what the rule's own count is about.
 MARKS = [
     {"id": "address", "gives": ("L1-4",), "with": ("L3-2", "L7-4"), "where": "at the epitaph's fixed words", "from": "its count",
      "what": "after woSi or wiSi, the word for Osiris in -i closes the address to the two gods", "at": end_address},
-    {"id": "naming", "gives": ("L7-4", "L3-3"), "with": ("L6-1",), "where": "at any word", "from": "its wording",
-     "what": "a word in -qowi closes the naming of the dead", "at": end_naming},
-    {"id": "wi", "gives": ("L7-5",), "with": ("L8-4", "M3-1", "M6-1"), "where": "at any word", "from": "its wording",
-     "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence", "at": end_wi},
     {"id": "before water", "gives": ("L7-3", "L2-6"), "with": (), "where": "at the epitaph's fixed words", "from": "its count",
      "what": "the word before `ato mXe` closes a sentence", "at": end_before_water},
     {"id": "before bread", "gives": ("L5-6",), "with": (), "where": "at the epitaph's fixed words", "from": "its count",
@@ -723,6 +727,14 @@ MARKS = [
      "what": "the verb right after mXe closes the phrase of noun, mXe and verb; a ps- verb in two pieces closes with the second",
      "at": end_verb},
 ]
+# Two ends that only a rule's wording names: the rules' tests counted something else there (the order of the frame's
+# parts; the letter before -wi). They do not cut: the parse counts how many more cuts they would make, and no more.
+WORDED = [
+    {"id": "naming", "gives": ("L7-4", "L3-3"), "with": ("L6-1",), "where": "at any word", "from": "its wording",
+     "what": "a word in -qowi closes the naming of the dead", "at": end_naming},
+    {"id": "wi", "gives": ("L7-5",), "with": ("L8-4", "M3-1", "M6-1"), "where": "at any word", "from": "its wording",
+     "what": "a word in -owi carries the ending -wi, which the rule calls the last of a sentence", "at": end_wi},
+]
 
 
 def given(table, passed):
@@ -730,10 +742,11 @@ def given(table, passed):
     return [m for m in table if set(m["gives"]) & set(passed)]
 
 
-def cuts(rs, passed):
-    """{index of a word: the marks of an end it carries}, for one text's words in their order."""
+def cuts(rs, passed, table=None):
+    """{index of a word: the marks of an end it carries}, for one text's words in their order (the marks of MARKS,
+    or of another table such as WORDED)."""
     out = collections.defaultdict(list)
-    for m in given(MARKS, passed):
+    for m in given(MARKS if table is None else table, passed):
         for i in range(len(rs)):
             j = m["at"](rs, i, passed)
             if j is not None and m["id"] not in out[j]:
@@ -742,13 +755,17 @@ def cuts(rs, passed):
 
 
 def is_parent(rs, i, ends):
+    """Rule L1-5 at a word without a meaning: right before a word of filiation, and ending in -li or -ye, as the rule
+    holds there (a word without a meaning is no name)."""
     n = at(rs, i + 1)
-    return bool(n and readable(rs[i]) and n["form"].startswith(("terik", "tedx")))
+    return bool(n and readable(rs[i]) and n["form"].startswith(("terik", "tedx")) and rs[i]["form"].endswith(("li", "ye")))
 
 
 def is_governed(rs, i, ends):
+    """Rule L1-6 at a word without a meaning: right before yetmde-, and ending in -l, -b, -li or -ye, as the rule
+    holds there."""
     n = at(rs, i + 1)
-    return bool(n and readable(rs[i]) and n["form"].startswith("yetmde"))
+    return bool(n and readable(rs[i]) and n["form"].startswith("yetmde") and rs[i]["form"].endswith(("l", "b", "li", "ye")))
 
 
 def is_ps_verb(rs, i, ends):
@@ -800,15 +817,16 @@ def is_closing(rs, i, ends):
 
 
 # What the rules make of a word without a meaning: the first statement that fits, in this order. Each names the
-# rules that give it; one that passed is enough.
+# rules that give it; one that passed is enough. Like a mark, a statement is made only where its rule holds at the
+# word (L6-2, which holds only where the word is a name, cannot give one).
 SAYS = [
-    {"id": "parent", "gives": ("L1-5", "L6-2"), "what": "it stands right before a word of filiation, where a parent's name is due", "is": is_parent},
+    {"id": "parent", "gives": ("L1-5",), "what": "it stands right before a word of filiation, where a parent's name is due", "is": is_parent},
     {"id": "governed", "gives": ("L1-6",), "what": "it stands right before yetmde-, where the noun that word governs is due", "is": is_governed},
     {"id": "verb", "gives": ("L4-5",), "what": "a verb, by the prefix ps- and a verbal ending", "is": is_ps_verb},
     {"id": "verb", "gives": ("L3-7", "L1-3"), "what": "a verb, by its place right after mXe", "is": is_offering_verb},
     {"id": "verb", "gives": ("L4-3",), "what": "a verb in -kete, with its object within two words before it", "is": is_kete_verb},
     {"id": "copula", "gives": ("L8-4", "M3-1", "M6-1"), "what": "it carries the copula in -owi after l, q or t", "is": is_copula},
-    {"id": "copula", "gives": ("M5-2",), "what": "a common noun with the article and the copula", "is": is_common_copula},
+    {"id": "copula", "gives": ("M5-2",), "what": "the copula after l, on a stem that is no name", "is": is_common_copula},
     {"id": "place", "gives": ("L4-1",), "what": "a place in -te, closed by the article or the copula", "is": is_place},
     {"id": "plural", "gives": ("M1-2", "M3-3", "M4-2"), "what": "it ends in -eb, the mark of the plural", "is": is_plural},
     {"id": "closes", "gives": tuple(r for m in MARKS for r in m["gives"]), "what": "it closes a clause or a sentence", "is": is_closing},
@@ -825,12 +843,13 @@ def said_of(rs, i, passed, ends=()):
 
 
 def parse_of(rs, passed):
-    """One text's words as the rules that passed cut them: each word with the marks of an end it carries and, for
-    a word without a meaning, what the rules make of it."""
-    ends = cuts(rs, passed)
+    """One text's words as the rules that passed cut them: each word with the marks of an end it carries, the ends
+    only a rule's wording names there (they do not cut), and, for a word without a meaning, what the rules make of
+    it."""
+    ends, worded = cuts(rs, passed), cuts(rs, passed, WORDED)
     out = []
     for i, r in enumerate(rs):
-        w = {"n": r["n"], "form": r["form"], "level": r["level"], "ends": ends.get(i, [])}
+        w = {"n": r["n"], "form": r["form"], "level": r["level"], "ends": ends.get(i, []), "worded": worded.get(i, [])}
         if r["level"] in OPEN:
             w["says"], w["by"] = said_of(rs, i, passed, ends.get(i, []))
         out.append(w)
@@ -838,8 +857,8 @@ def parse_of(rs, passed):
 
 
 def parse_counts(words):
-    """A parsed text in numbers: the cuts, the stretches between them, and the words without a meaning by what
-    the rules make of them."""
+    """A parsed text in numbers: the cuts, the stretches between them, how many more cuts the ends of WORDED would
+    make, and the words without a meaning by what the rules make of them."""
     cut = [i for i, w in enumerate(words) if w["ends"]]
     stretches = [b - a for a, b in zip([-1] + cut, cut + [len(words) - 1]) if b > a]
     opened = [w for w in words if w["level"] in OPEN]
@@ -848,6 +867,7 @@ def parse_counts(words):
             "share_up_to_the_last_cut": round((cut[-1] + 1) / len(words), 4) if cut else 0.0,
             "longest_stretch": max(stretches) if stretches else 0,
             "marks": dict(collections.Counter(m for w in words for m in w["ends"]).most_common()),
+            "more_cuts_by_wording": sum(bool(w["worded"]) and not w["ends"] for w in words),
             "open_words_by_what_is_said": dict(collections.Counter(w["says"] for w in opened).most_common()),
             "open_words_a_rule_speaks_of": sum(w["says"] != NOTHING for w in opened)}
 
@@ -916,15 +936,16 @@ def parse_figures():
     said = collections.Counter()
     for x in texts:
         said.update(x["open_words_by_what_is_said"])
-    return {"rules_that_passed": len(ids),
-            "marks": [{k: m[k] for k in ("id", "what", "where", "from")} | {"gives": [r for r in m["gives"] if r in ids], "with": list(m["with"])}
-                      for m in given(MARKS, ids)],
+    def described(table):
+        return [{k: m[k] for k in ("id", "what", "where", "from")} | {"gives": [r for r in m["gives"] if r in ids], "with": list(m["with"])}
+                for m in given(table, ids)]
+    return {"rules_that_passed": len(ids), "marks": described(MARKS), "worded": described(WORDED),
             "statements": [{"id": s["id"], "what": s["what"], "gives": [r for r in s["gives"] if r in ids]} for s in given(SAYS, ids)],
             "texts": texts,
             "all": {"words": sum(x["words"] for x in texts), "open_words": sum(x["open_words"] for x in texts),
-                    "cuts": sum(x["cuts"] for x in texts), "open_words_by_what_is_said": dict(said.most_common()),
+                    "cuts": sum(x["cuts"] for x in texts), "more_cuts_by_wording": sum(x["more_cuts_by_wording"] for x in texts),
+                    "open_words_by_what_is_said": dict(said.most_common()),
                     "open_words_a_rule_speaks_of": sum(x["open_words_a_rule_speaks_of"] for x in texts)}}
-
 
 
 def cost():
