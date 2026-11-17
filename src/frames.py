@@ -23,6 +23,10 @@ The arm with the frames reads a digest of the six files of the frame builders, w
 and whether it may be left out or repeated, without the sources' passages and notes. There, a meaning that names no
 frame and slot of the digest counts as "none", and the number of such answers is reported (answers 4 and 6).
 
+In each fold a known word whose headword begins with the headword of a hidden entry of three letters or more
+(qorene when qore is hidden) is coded too, as an open word, and not counted: its reading would hint at the hidden
+word's meaning, where an open word has no such neighbour (the page's answer 9, about 23:15; kin_of()).
+
 A hidden word that stands in several packs is answered in each. The count takes it as given when both aligners
 of one of its packs give it a meaning, and as right only when it is right in every pack where it is given
 (arm_figures); the same count by word and pack stands beside it.
@@ -579,17 +583,28 @@ def open_units(w, entries):
     return [(None, ("spelling", w["form"]))]
 
 
-def units_of(w, entries, hidden):
-    """The coded units of a word in a fold: each hidden entry of a word the map reads, or the units of an open word."""
+def kin_of(hidden, entries):
+    """The known words a fold codes because they are built on one of its hidden words: those not hidden whose
+    headword begins with the headword of a hidden entry of three letters or more (qorene when qore is hidden; the
+    page's answer 9). They are coded as open words, by their entry, and not counted."""
+    stems = [A.bare(h) for h in hidden if len(A.bare(h)) >= 3]
+    return {e for e, v in entries.items() if v["class"] == "known" and e not in hidden and any(A.bare(e).startswith(s) for s in stems)}
+
+
+def units_of(w, entries, hidden, kin=frozenset()):
+    """The coded units of a word in a fold: each hidden entry of a word the map reads and each entry of it that the
+    fold codes as built on a hidden word (`kin`, kin_of(): as an open word, by its entry), or the units of an open
+    word."""
     if w["level"] in W.READ:
-        return [("hidden", e) for e in dict.fromkeys(e for _, e in w["parts"] if e in hidden)]
+        return [("hidden", e) if e in hidden else ("entry", e) for e in dict.fromkeys(e for _, e in w["parts"] if e in hidden or e in kin)]
     return list(dict.fromkeys(u for _, u in open_units(w, entries))) if w["level"] in W.OPEN else []
 
 
 def codes_of(texts, entries, hidden, fold, seed=SEED):
     """unit -> its code. The hidden entries and the open words' units are numbered together after one shuffle, so
     nothing in a code tells which of the two it is."""
-    units = sorted({u for t in texts for w in t["words"] for u in units_of(w, entries, hidden)})
+    kin = kin_of(hidden, entries)
+    units = sorted({u for t in texts for w in t["words"] for u in units_of(w, entries, hidden, kin)})
     random.Random(seed + fold).shuffle(units)
     width = max(3, len(str(len(units))))
     return {u: f"W{n:0{width}d}" for n, u in enumerate(units, 1)}
@@ -635,8 +650,9 @@ def beside(w, entries, at):
     return "+".join(out)
 
 
-def token(w, entries, known, hidden, code, names):
-    """One word as a pack shows it: a reading or a code, never a spelling."""
+def token(w, entries, known, hidden, code, names, kin=frozenset()):
+    """One word as a pack shows it: a reading or a code, never a spelling. An entry the fold codes as built on a
+    hidden word (`kin`) is its code where the map reads it, and is not shown in an open word."""
     level = w["level"]
     if level == "lost":
         return "[lost]"
@@ -649,15 +665,15 @@ def token(w, entries, known, hidden, code, names):
         head = names.get(got[0]) or f"[{entries[got[0]]['god']}]"
         first = next((i for i, (f, e) in enumerate(w["parts"]) if e == "NAME" or entries.get(e, {}).get("class") == "name"), None)
         return beside(w, entries, lambda i, e: head if i == first else None) if first is not None else head
-    other = lambda e: f"[{known[e]['reading']}]" if e in known and e not in hidden else None       # noqa: E731
+    other = lambda e: f"[{known[e]['reading']}]" if e in known and e not in hidden and e not in kin else None       # noqa: E731
     if level in W.OPEN:
         plan = open_units(w, entries)
         if plan[0][0] is None:
             return code[plan[0][1]]
         return beside(w, entries, lambda i, e: code[dict(plan)[i]] if i in dict(plan) else other(e))
-    if not any(e in hidden for _, e in w["parts"]):
+    if not any(e in hidden or e in kin for _, e in w["parts"]):
         return f"[{w['reading']}]"
-    return beside(w, entries, lambda i, e: code["hidden", e] if e in hidden else other(e))
+    return beside(w, entries, lambda i, e: code["hidden", e] if e in hidden else code["entry", e] if e in kin else other(e))
 
 
 def wrap(tokens, width=WIDTH):
@@ -720,7 +736,7 @@ def build(data, halves, seed=SEED):
     files, rng = {}, random.Random(seed)
     for fold in FOLDS:
         hidden = set(halves[str(fold)])
-        code, decoy = codes_of(texts, entries, hidden, fold, seed), decoys_of(hidden, known, rng)
+        code, decoy, kin = codes_of(texts, entries, hidden, fold, seed), decoys_of(hidden, known, rng), kin_of(hidden, entries)
         of = {c: {"fold": fold, "sort": "hidden" if s == "hidden" else "open", "entry" if s != "spelling" else "spelling": u,
                   "kind": (known[u]["kind"] if s == "hidden" else entries[u]["kind"] if s == "entry" else ""), "packs": [], "places": 0}
               for (s, u), c in code.items()}
@@ -731,13 +747,15 @@ def build(data, halves, seed=SEED):
                       "own_meaning": known[e]["own_meaning"], "decoy": decoy.get(e, ""), "decoy_meaning": known[decoy[e]]["meaning"] if e in decoy else ""}
             elif k.get("entry") in known:
                 k["known_where_the_map_is_sure"] = True
+                if k["entry"] in kin:
+                    k["built_on_a_hidden_word"] = sorted(h for h in hidden if len(A.bare(h)) >= 3 and A.bare(k["entry"]).startswith(A.bare(h)))
         in_pack = {}
         for n, g in enumerate(groups, 1):
             name, toks, mine = f"f{fold}_p{n:02d}", [], set()
             for i in g:
-                toks.append((labels[i], texts[i]["kind"], [token(w, entries, known, hidden, code, names) for w in texts[i]["words"]]))
+                toks.append((labels[i], texts[i]["kind"], [token(w, entries, known, hidden, code, names, kin) for w in texts[i]["words"]]))
                 for w in texts[i]["words"]:
-                    for u in units_of(w, entries, hidden):
+                    for u in units_of(w, entries, hidden, kin):
                         of[code[u]]["places"] += 1
                         mine.add(code[u])
                         if of[code[u]]["sort"] == "open" and not of[code[u]]["kind"]:
@@ -746,7 +764,7 @@ def build(data, halves, seed=SEED):
                 of[c]["packs"].append(name)
             in_pack[name] = sorted(mine)
             files[name] = pack_text(name, toks, in_pack[name])
-        key["folds"][str(fold)] = {"hidden": sorted(hidden), "codes": dict(sorted(of.items())), "packs": in_pack}
+        key["folds"][str(fold)] = {"hidden": sorted(hidden), "built_on_a_hidden_word": sorted(kin), "codes": dict(sorted(of.items())), "packs": in_pack}
     return files, key
 
 
@@ -1164,7 +1182,7 @@ def figures():
            "packs": [{"pack": p, "texts": len(v["texts"]), "words": v["words"]}
                      | {f"fold_{f}": dict(collections.Counter(key["folds"][str(f)]["codes"][c]["sort"] for c in key["folds"][str(f)]["packs"][f"f{f}_{p}"]))
                         for f in FOLDS} for p, v in key["packs"].items()],
-           "folds": {str(f): {"hidden_words": len(key["folds"][str(f)]["hidden"])}
+           "folds": {str(f): {"hidden_words": len(key["folds"][str(f)]["hidden"]), "coded_as_built_on_a_hidden_word": len(key["folds"][str(f)]["built_on_a_hidden_word"])}
                      | dict(collections.Counter(f"{k['sort']}_codes" for k in key["folds"][str(f)]["codes"].values())) for f in FOLDS},
            "names": dict(collections.Counter(c.split("-")[0] for c in key["names"]).most_common()),
            "aligners": len(FOLDS) * len(ARMS) * len(ALIGNERS) * len(key["packs"])}

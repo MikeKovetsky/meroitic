@@ -117,8 +117,8 @@ def made_up(texts=None):
 def shown(hidden, fold=1, data=None):
     data = data or made_up()
     code = F.codes_of(data["texts"], data["entries"], set(hidden), fold)
-    names = F.names_of(data["texts"], data["entries"])
-    return [F.token(w, data["entries"], data["known"], set(hidden), code, names) for w in data["texts"][0]["words"]], code
+    names, kin = F.names_of(data["texts"], data["entries"]), F.kin_of(set(hidden), data["entries"])
+    return [F.token(w, data["entries"], data["known"], set(hidden), code, names, kin) for w in data["texts"][0]["words"]], code
 
 
 # ------------------------------------------------------------------------------------------------ the method
@@ -145,6 +145,28 @@ def test_a_word_is_a_reading_or_a_code():
     assert none[:4] == ["[ruler]", "[the ruler]", "[great ruler]", "[woman]"]           # nothing hidden: the map's gloss of the whole word
     for toks in (toks, both, none):                                                     # never a spelling
         assert not any(w["form"] in re.findall(r"[^\W\d_]+", t) for w, t in zip(TEXT, toks) if w["level"] not in ("number",)), toks
+
+
+def test_a_word_built_on_a_hidden_one_is_coded_and_not_counted():
+    entries = ENTRIES | {"qorene": {"class": "known", "kind": "title"}, "kdise": {"class": "known", "kind": "noun"},
+                         "lẖs": {"class": "known", "kind": "title"}}
+    known = KNOWN | {e: KNOWN["qore"] | {"kind": entries[e]["kind"], "meaning": m, "reading": m}
+                     for e, m in (("qorene", "a royal title"), ("kdise", "sister"), ("lẖs", "a title"))}
+    words = [word("qorene", "meaning", ("qorene", "qorene"), gloss="a royal title"),
+             word("qorenel", "meaning", ("qorene", "qorene"), ("l", "-l (1)"), gloss="the royal title"),
+             word("kdise", "meaning", ("kdise", "kdise"), gloss="sister"), word("lẖs", "meaning", ("lẖs", "lẖs"), gloss="a title"), TEXT[0]]
+    data = {"texts": [{"id": "T1", "kind": "royal or temple", "words": words}], "entries": entries, "known": known}
+    assert F.kin_of({"qore", "lẖ"}, entries) == {"qorene"}                                        # lẖ has under three letters
+    assert F.kin_of({"qorene"}, entries) == set() and F.kin_of({"kdi"}, entries) == {"kdise"}
+    toks, code = shown({"qore", "lẖ"}, data=data)
+    q = code["entry", "qorene"]
+    assert toks[:4] == [q, f"{q}+[postposed article]", "[sister]", "[a title]"] and toks[4] == code["hidden", "qore"]
+    files, key = F.build(data, {"1": ["lẖ", "qore"], "2": ["kdi", "ked"]})
+    one = key["folds"]["1"]["codes"]
+    assert one[q]["sort"] == "open" and one[q]["built_on_a_hidden_word"] == ["qore"] and one[q]["places"] == 2   # an open word: not counted
+    assert key["folds"]["1"]["built_on_a_hidden_word"] == ["qorene"] and key["folds"]["2"]["built_on_a_hidden_word"] == ["kdise"]
+    assert [h["entry"] for h in F.hidden_words(key) if h["fold"] == 1] == ["qore"]               # qorene is not counted (lẖ stands nowhere)
+    assert "a royal title" not in files["f1_p01"] and "[sister]" in files["f1_p01"] and "sister" not in files["f2_p01"]
 
 
 def test_a_name_has_one_code_and_says_what_it_names():
@@ -574,9 +596,10 @@ def local():
 
 
 def tokens_of(data, hidden, fold):
-    """Every word of the test with what a pack of the fold shows of it: (text, word, token, its units)."""
+    """Every word of the test with what a pack of the fold shows of it: (text, word, token, its units' codes)."""
     code, names = F.codes_of(data["texts"], data["entries"], hidden, fold), F.names_of(data["texts"], data["entries"])
-    return [(t["id"], w, F.token(w, data["entries"], data["known"], hidden, code, names), [code[u] for u in F.units_of(w, data["entries"], hidden)])
+    kin = F.kin_of(hidden, data["entries"])
+    return [(t["id"], w, F.token(w, data["entries"], data["known"], hidden, code, names, kin), [code[u] for u in F.units_of(w, data["entries"], hidden, kin)])
             for t in data["texts"] for w in t["words"]], code
 
 
@@ -629,10 +652,15 @@ def test_no_pack_holds_the_spelling_of_a_coded_word_or_the_gloss_of_a_hidden_one
             assert not found, (fold, w["form"], tok, found)                                      # no Meroitic letters of a coded word, anywhere
             if units:
                 assert re.fullmatch(r"(?:\[[^\]]*\]\+)*W\d+(?:\+(?:W\d+|\[[^\]]*\]))*", tok), tok   # a coded word: codes, and readings of what is cut off it
+        kin = F.kin_of(hidden, data["entries"])
+        assert kin == set(key["folds"][str(fold)]["built_on_a_hidden_word"]) and kin and not kin & hidden
         for _, w, tok, units in toks:
             mine = [e for _, e in w["parts"] if e in hidden]
+            built = [e for _, e in w["parts"] if e in kin]
+            if w["level"] in W.READ and built:                                                   # a word built on a hidden one: a code, not its reading
+                assert all(code["entry", e] in units for e in built) and not any(f"[{data['known'][e]['reading']}]" in tok for e in built), (w["form"], tok)
             if w["level"] in W.READ and mine:                                                    # a place where a hidden word stands
-                assert units == [code["hidden", e] for e in dict.fromkeys(mine)]
+                assert units == [code["hidden", e] if e in hidden else code["entry", e] for e in dict.fromkeys(e for _, e in w["parts"] if e in hidden or e in kin)]
                 shown = re.findall(r"\[([^\]]*)\]", tok)
                 kept = {data["known"][e]["reading"] for _, e in w["parts"] if e in data["known"] and e not in hidden}
                 glosses = {data["entries"][e]["gloss"] for _, e in w["parts"] if data["entries"].get(e, {}).get("gloss")}
@@ -667,7 +695,7 @@ def test_hidden_and_open_codes_cannot_be_told_apart_by_their_shape():
         of = {"hidden": collections.Counter(), "open": collections.Counter()}
         for _, w, tok, units in toks:
             if units:
-                of["hidden" if w["level"] in W.READ else "open"][shape(tok)] += 1
+                of["hidden" if any(codes[c]["sort"] == "hidden" for c in units) else "open"][shape(tok)] += 1
         assert set(of["hidden"]) <= set(of["open"]), set(of["hidden"]) - set(of["open"])         # every shape a hidden word takes, open words take too
         assert of["hidden"]["W"] > 0.75 * sum(of["hidden"].values()) and of["open"]["W"] > 0.75 * sum(of["open"].values())
 
@@ -700,7 +728,13 @@ def test_a_hidden_entry_has_one_code_in_a_fold_and_a_code_one_word():
                 assert k["meaning"] == data["known"][k["entry"]]["meaning"] and k["from"] and k["kind"] == data["known"][k["entry"]]["kind"]
             else:
                 assert ("entry" in k) != ("spelling" in k) and "meaning" not in k and k["packs"] and k["places"] >= 1
-    assert sum(len(key["folds"][f]["codes"]) for f in ("1", "2")) == 2 * (51 + sum(k["sort"] == "open" for k in key["folds"]["1"]["codes"].values()))
+    built = set(key["folds"]["1"]["built_on_a_hidden_word"]) | set(key["folds"]["2"]["built_on_a_hidden_word"])
+    opened = [{(k.get("entry"), k.get("spelling")) for k in key["folds"][f]["codes"].values() if k["sort"] == "open" and k.get("entry") not in built}
+              for f in ("1", "2")]
+    assert opened[0] == opened[1] and len(opened[0]) == 851                                    # the open words are the same in both folds
+    for f in ("1", "2"):                                                                         # and each fold codes its own built words besides
+        mine = {k["entry"] for k in key["folds"][f]["codes"].values() if k["sort"] == "open" and k.get("entry") in built}
+        assert set(key["folds"][f]["built_on_a_hidden_word"]) <= mine
 
 
 def test_the_figures_are_counts_only():
@@ -709,8 +743,9 @@ def test_the_figures_are_counts_only():
     assert f["counts"] == F.PAGE and f["aligners"] == 80 and f["folds"]["1"]["hidden_words"] == f["folds"]["2"]["hidden_words"] == 51
     k = f["known_words"]
     assert (k["meaning_taken_from_another_word"], k["without_a_meaning_of_their_own"], k["in_more_than_one_pack"]) == (1, 2, 59)   # the page's 59 of 102
+    assert [f["folds"][x]["coded_as_built_on_a_hidden_word"] for x in ("1", "2")] == [4, 3]     # qore, qor-o, qorise, qorbse; nobo, qorene, qoresem
     assert sum(f["known_words"]["by_packs_they_stand_in"].values()) == 102 and len(f["packs"]) == 10
-    assert sum(p["words"] for p in f["packs"]) == 2945 and all(p["fold_1"]["open"] == p["fold_2"]["open"] for p in f["packs"])
+    assert sum(p["words"] for p in f["packs"]) == 2945 and all(abs(p["fold_1"]["open"] - p["fold_2"]["open"]) <= 4 for p in f["packs"])
 
     def leaves(x):
         if isinstance(x, dict):
