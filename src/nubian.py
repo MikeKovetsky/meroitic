@@ -780,12 +780,12 @@ LENGTHS = 4          # by_length(): words of this many consonants or more shuffl
 
 
 def by_length(words, t, sims, seed):
-    """Beside the bar, not part of it: the engine's statistic over the words that have a row of the same meaning
-    (t: its shuffle test), their meanings shuffled only among words of the same number of consonants (pattern();
-    LENGTHS or more as one group). A shuffle across lengths gives the broad meanings of short words, which match
-    many rows, to long forms that score low against any row: the real pairing beats it with no cognate at all.
-    On the short lists with each row's forms moved to another row, the engine's test gave p < 0.05 in 13 of 40
-    such draws, this one in 2 of 40 (the review of 2026-11-16)."""
+    """The bar of gate A1 (decided before the gate ran: the page, section 2): the engine's statistic over the words
+    that have a row of the same meaning (t: its shuffle test), their meanings shuffled only among words of the same
+    number of consonants (pattern(); LENGTHS or more as one group). A shuffle across lengths gives the broad
+    meanings of short words, which match many rows, to long forms that score low against any row: the real pairing
+    beats it with no cognate at all. On the short lists with each row's forms moved to another row, the engine's
+    test gave p < 0.05 in 13 of 40 such draws, this one in 2 of 40 (the review of 2026-11-16)."""
     have = [a for a, m in enumerate(t["match"]) if m]
     groups = collections.defaultdict(list)
     for a in have:
@@ -822,10 +822,12 @@ def measures(words, rows, S, sims, seed):
 
 def gate_of(words, short, dictionary, sims=None, seed=None):
     """Gate A1 on the engine's words, the rows of the short lists and the rows of the two dictionaries: the
-    engine's shuffle test with its score by the correspondences, on all rows; the verdict; and beside it, not
-    part of the bar, the same on the dictionaries alone, the precision at the top, the ranks, and all of it with
-    raw similarity. Every word is shuffled, as in the engine's own run; `n` counts those that have a row of the
-    same meaning. `pairs` lists, for each word that has one, its best row of the same meaning."""
+    engine's statistic with its score by the correspondences, on all rows, its meanings shuffled within words of
+    one number of consonants (by_length(), the bar decided before the gate ran); the verdict; and beside it, not
+    part of the bar, the engine's own shuffle across all lengths, the same on the dictionaries alone, the precision
+    at the top, the ranks, and all of it with raw similarity. In the engine's own shuffle every word is shuffled, as
+    in its own run; `n` counts those that have a row of the same meaning. `pairs` lists, for each word that has
+    one, its best row of the same meaning."""
     sims, seed = sims or GATE["sims"], GATE["seed"] if seed is None else seed
     rows = short + dictionary
     scores = {"rule": cr.matrix(words, rows, cr.rule_score), "raw": cr.matrix(words, rows, cr.raw_score)}
@@ -836,7 +838,7 @@ def gate_of(words, short, dictionary, sims=None, seed=None):
         out["dictionaries"][name], _ = measures(words, dictionary, alone, sims, seed)
         if name == "rule":
             match = t["match"]
-    bar = out["all"]["rule"]["shuffle"]
+    bar = out["all"]["rule"]["by_length"]
     out["verdict"] = verdict(bar["n"], bar["p"])
     out["pairs"] = []
     for (f, _, meaning), mt in zip(words, match):
@@ -890,12 +892,12 @@ def gate():
            "known_words": {"kept": len(words) + len(no_key), "compared": len(words), "without_a_key": no_key},
            "dictionary": counts} | res
     write("gate.json", res)
-    bar = res["all"]["rule"]["shuffle"]
-    print(f"gate A1: {res['verdict']}. {bar['n']} of {bar['of']} words have a row of the same meaning; mean best score {bar['stat']:.3f}; "
-          f"shuffled >= real in {bar['ge']} of {bar['sims']} (p = {bar['p']:.4f}); commit {res['commit'][:7]}")
+    bar, engine = res["all"]["rule"]["by_length"], res["all"]["rule"]["shuffle"]
+    print(f"gate A1: {res['verdict']}. {bar['n']} of {engine['of']} words have a row of the same meaning; mean best score {bar['stat']:.3f}; "
+          f"shuffled within one length >= real in {bar['ge']} of {bar['sims']} (p = {bar['p']:.4f}); commit {res['commit'][:7]}")
+    print(f"  beside the bar, the engine's own shuffle across all lengths: p = {engine['p']:.4f}")
     alone = res["dictionaries"]["rule"]["shuffle"]
     print(f"  the two dictionaries alone ({res['rows']['dictionaries']} rows): {alone['n']} words, p = {alone['p']:.4f}")
-    print(f"  beside the bar, shuffled within words of one length (by_length): p = {res['all']['rule']['by_length']['p']:.4f}")
     print(f"  raw similarity, all rows: p = {res['all']['raw']['shuffle']['p']:.4f}")
 
 

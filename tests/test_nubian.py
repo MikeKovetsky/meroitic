@@ -749,6 +749,8 @@ def test_the_shuffle_by_length_keeps_each_meaning_among_words_of_its_length():
     t = cr.shuffle_test(words, rows, cr.matrix(words, rows, cr.rule_score), 500, 3)
     lengths = N.by_length(words, t, 500, 3)
     assert t["p"] < 0.05 < 0.2 < lengths["p"] and lengths["groups"] == {"2": 12, "4": 24} and lengths["stat"] == t["stat"]
+    res = N.gate_of(words, [], rows, sims=500)                                               # the bar is the shuffle within one length
+    assert res["all"]["rule"]["shuffle"]["p"] < 0.05 and res["verdict"] == "missed" == N.verdict(36, res["all"]["rule"]["by_length"]["p"])
 
 
 def test_the_gate_is_the_engines_own_test():
