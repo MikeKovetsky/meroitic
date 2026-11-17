@@ -288,7 +288,8 @@ undeciphered script (scramble the letters) turned out not to work, and we built 
     a hidden stem, hidden endings, a name, and letters drawn by lot in a stem's place. Each verdict stood on its
     own bars: found by each checker at least 14 times in 20, said wrongly at most 2 times in 20. Every bar was
     met (kappa 0.79; hidden stems named with their entry 18 and 15 times, hidden endings found 20 and 20 times,
-    names 18 and 18 times; no run of lot letters and no hidden stem called a name, an ending or a known word).
+    names 18 and 18 times; no run of lot letters called a name, an ending or a known word, and no hidden stem
+    called a name).
     Both checkers call the stem unknown at 55 places, a name at 22, an ending at 1, and differ at 8; at no place
     do both find a known word. The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated
     word ([`data/discovery/leftover_stems.md`](data/discovery/leftover_stems.md)). The map as it stands:
@@ -738,10 +739,12 @@ word only when both readers say the meaning is given in full; a name when the le
 both readers say the source calls it one ([`data/discovery/leftover_parts.md`](data/discovery/leftover_parts.md)).
 Part 3, the leftover stems (`packs-stems`, `count-stems`, `layer-stems`), gives two checkers the 86 places of the
 same kind where the entry recognised is an ending or a particle and the unnamed part is the stem itself, with the
-same brief. Four kinds of control are mixed in, 20 of each, each kind from 20 different entries of the lexicon: a
-translated word with its stem shown as unnamed (the answer: a known word, that entry), one with its endings shown
-as unnamed (ending), a name with endings and the name shown as unnamed (name), and a translated word whose stem's
-letters are replaced by letters drawn by lot (none of the three). Both checkers must answer every place with a
+same brief. Four kinds of control are mixed in, 20 of each: a translated word with its stem shown as unnamed (the
+answer: a known word, that entry), one with its endings shown as unnamed (ending), a name with endings and the
+name shown as unnamed (name), and a translated word whose stem's letters are replaced by letters drawn by lot
+(none of the three). The first, second and last kinds are each drawn from 20 different entries of the lexicon,
+as the rules said; the names are the 9 personal names the map holds and 11 places of 7 names of the lexicon, drawn
+by place, and the page counts their bar once a name as well. Both checkers must answer every place with a
 kappa of 0.6 or more; beyond that each verdict stands on its own bars and is laid only if they are met: each
 checker finds it at least 14 times in 20 where it is hidden, and says it at most 2 times in 20 of the lot
 letters (a name also at most 2 times in 20 of the hidden stems). A known word and a name are laid only where the

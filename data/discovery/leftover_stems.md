@@ -145,3 +145,21 @@ python3 -I tests/test_leftover.py         # the method on made-up words; the fig
 
 The packs, the key, the checkers' answers, the result and the layer's lines are local (`data/sources/g9/`): they
 show the texts and quote the lexicon. The script writes the key, the packs and the result again as they were.
+
+Review (2026-11-16): an independent reviewer (Opus 5.5, a fresh agent that saw the change and the task, not the
+reasoning) checked the script, the checks and this page against the local files. It corrects two statements of
+sections 2 and 3, which stand as they were written before the checkers were started:
+
+1. "Each kind takes 20 different entries of the lexicon." The hidden stems, the hidden endings and the letters by
+   lot were drawn so. The names were not: they are the 9 personal names the map holds and 11 places of 7 names of
+   the lexicon, drawn by place, so that four names stand twice. Counted once each, the 16 names were found by each
+   checker 14 and 14 times, which still meets the bar of 70%.
+2. "A word of grammar when both call every unnamed part an ending: the spelling is then endings or particles
+   only." At the one place laid so it is not: the map names there the stem of the verb "to beget" (`-erike-`),
+   which the lexicon writes with hyphens and the script takes for an ending. The place is a form of the word for
+   "begotten of" with the genitive, as section 6 says, and counts as translated either way; its line in the map
+   reads "endings or particles only".
+
+Neither changes a bar, a verdict or a count. The rules were in git before the checkers were started (the time of
+the commit in git's own log of the branch, the 8 launches in the session's log, one for each pack and checker, and
+the answer files), and the tokens of the 8 checkers are those of their task notifications.

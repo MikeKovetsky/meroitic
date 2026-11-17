@@ -62,9 +62,10 @@ The corpus is `corpus_v6` (548 inscriptions, 10,290 running words). The map is t
 (`src/themap.py`, page `data/discovery/map_layers.md`; seven layers since 2026-11-16: the recurring open spellings
 of step G1, the rare spellings of steps G2 and G4, the names and pieces of step G3, the entries Millet 2005 or
 Lipiński 2011 give a meaning or call a name, the rare spellings whose unnamed part two checkers call an ending
-or a known word, and those whose unnamed stem they call a name or an ending). `python3 -I src/themap.py` counts it and writes `data/discovery/map_figures.json`: the first
-three rows are read from that file. Read a number from its figures file or count it with the command given; never
-quote it from memory, from this file's log, or from an earlier message.
+or a known word, and those whose unnamed stem they call a name or an ending). `python3 -I src/themap.py` counts
+it and writes `data/discovery/map_figures.json`: the first three rows are read from that file. Read a number from
+its figures file or count it with the command given; never quote it from memory, from this file's log, or from an
+earlier message.
 
 ### Distinct words translated (the north star)
 

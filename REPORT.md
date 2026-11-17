@@ -1060,12 +1060,16 @@ laid here, as it could not in the second reading of the leftover parts, because 
 can tell a good judgment from a bad one.
 
 **The result.** Eight fresh checkers answered all 166 places; their kappa on the 86 is 0.79. They named 18 and
-15 of the 20 hidden stems with their entry, found 20 and 20 of the hidden endings and 18 and 18 of the names, and
-called no run of lot letters and no hidden stem a name, an ending or a known word: every bar is met. Of the 86
-places both call the stem unknown at 55, a name at 22 and an ending at 1, and they differ at 8. At no place do
-both find a word the lexicon knows: the review's question has its answer, and it is no. The judgment by place
-is not steady: one spelling stands at five places of one text, and the checkers call it a name at two, differ at
-two and call it unknown at one; only the agreed places are laid.
+15 of the 20 hidden stems with their entry, found 20 and 20 of the hidden endings and 18 and 18 of the names,
+called no run of lot letters a name, an ending or a known word, and called no hidden stem a name: every bar is
+met. The names among the controls did not keep the rule of 20 different entries: they are the 9 personal names
+the map holds and 11 places of 7 names of the lexicon. Counted once each, the 16 names were found 14 and 14 times,
+which still meets their bar. The one place laid as a word of grammar holds the stem of the verb "to beget", which
+the lexicon writes with hyphens; it is translated either way. Of the 86 places both call the stem unknown at 55, a
+name at 22 and an ending at 1, and they differ at 8. At no place do both find a word the lexicon knows: the
+review's question has its answer, and it is no. The judgment by place is not steady: one spelling stands at five
+places of one text, and the checkers call it a name at two, differ at two and call it unknown at one; only the
+agreed places are laid.
 
 **What it changes.** The map's seventh layer lays 23 places, 22 of them as names and 1 as a translated word. The
 map as it stands: 4,186 of the 7,077 running words that need a meaning are translated (59.1%), 841 of 2,781 distinct spellings (30.2%) and 160 of about 1,283 distinct words (12.5%, between 11.8% and 15.6%). The layer gives no word of the dictionary a meaning, so the north star does
