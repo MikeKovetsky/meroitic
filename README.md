@@ -331,9 +331,10 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
 28. **The REM's plates cannot be read well enough to grow the corpus.** The *Répertoire d'épigraphie méroïtique*
     (2000, on Persée) gives each inscription as plates of photographs and drawings, with no transliteration. It
     holds 917 inscriptions, not 1,278 as its numbering suggests; 473 are not among the 548 texts the map is drawn
-    on, about 4,600 words. A reader that saw only the plates read 4 inscriptions from their drawings: 426 of 555
-    signs right against Griffith (76.8%) and 43 of 103 words (41.7%), under the bar of 85%, at 158,438 subagent
-    tokens an inscription, and nothing from the photographs. Reading all 473 so would cost about 28 to 75 million
+    on, about 4,600 words, and 46 of those 473 are the ostraca of item 27, typed but not yet in the map. A reader
+    that saw only the plates read 4 inscriptions from their drawings: 426 of 555 signs right against Griffith
+    (76.8%) and 43 of 103 words (41.7%), under the bar of 85%, at 158,438 subagent tokens an inscription, and
+    nothing from the photographs. Reading all 473 so would cost about 28 to 75 million
     tokens and give about 44 of the 2,013 open spellings that stand in one text a second text read right. The pilot
     stopped at 4 of its 20 inscriptions on Mike's word; the route is a printed transliteration
     ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)).

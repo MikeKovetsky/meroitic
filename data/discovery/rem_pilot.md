@@ -13,7 +13,10 @@ Reading them all this way would cost about 28 to 75 million tokens, and about 44
 stand in one text would then recur in a word read right. The pilot stopped after its first pack of 4, of the 20
 planned, on Mike's word, because that pack alone used most of the budget (section 4). Every number below is in
 [`rem_pilot_figures.json`](rem_pilot_figures.json), written by the script. The review corrected the count of
-the REM and of what it would add (section 8).
+the REM and of what it would add (section 8). Since the merge of 2026-11-17, `corpus_v6` also holds 46 of the
+47 ostraca of REM 0551 to 0597 (Griffith's of 1925, all but F.O. 38), typed from his print: it has 594
+inscriptions. The pilot counts against the 548 texts the map is drawn on, as the open spellings are, so those 46
+are among the 473 counted new; they are typed, but not yet in the map.
 
 The REM is in copyright. Its pages, its plates and every reading taken from them stay on the author's machine
 (`data/sources/rem/`); this page and its figures file give counts only. The script is
@@ -233,7 +236,7 @@ section; the index leaves them out.
   inscriptions, not to about 1,280. 44 of the 444 are Griffith's Meroë and Shablul texts that the corpus names by
   his numbers, without a REM number (`Meroe 13`, `Sh. 1`); the REM's catalogue gives each the same designation.
   92 of the 473 are the Faras texts and the ostraca, which two other sessions are now typing from Griffith's own
-  editions.
+  editions. The ostraca (46 of the 47) joined `corpus_v6` on 2026-11-17, not the map, so they stay counted here.
 - **Words:** about 4,600 new words, under half the corpus's 10,290. Each new number's catalogue states its lines,
   bands or columns (394 of the 473 do); the words a unit are the median over the numbers held by one row (2.0 a
   cursive line, 8.67 a cursive band, 1.33 a hieroglyphic column). The mean gives 6,198, the high end.
