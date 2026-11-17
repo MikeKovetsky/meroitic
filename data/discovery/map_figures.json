@@ -411,26 +411,94 @@
      }
     }
    }
+  },
+  {
+   "name": "leftover_stems",
+   "page": "data/discovery/leftover_stems.md",
+   "laid": "2026-11-16",
+   "what": "rare spellings whose unnamed stem two checkers call a name, an ending or a known word (the leftover stems)",
+   "places": 23,
+   "why": {
+    "name": 22,
+    "form": 1
+   },
+   "to": {
+    "name": 22,
+    "grammar": 1
+   },
+   "was": {
+    "hypothesis": 19,
+    "unknown": 4
+   },
+   "after": {
+    "running": {
+     "translated": 4186,
+     "named": 1997,
+     "open": 2891,
+     "lost": 1216,
+     "need": 7077,
+     "share": 0.5915,
+     "all": 10290,
+     "of_all": 0.6009
+    },
+    "spellings": {
+     "translated": 841,
+     "named": 943,
+     "open": 1940,
+     "lost": 1069,
+     "need": 2781,
+     "share": 0.3024,
+     "all": 4793
+    }
+   },
+   "distinct_words_translated": 160,
+   "north_star": {
+    "translated": 160,
+    "distinct_words": {
+     "point": 1283,
+     "low": 1023,
+     "high": 1355
+    },
+    "star": {
+     "point": 0.1247,
+     "low": 0.1181,
+     "high": 0.1564
+    },
+    "unnamed_stems": {
+     "sampled": 1107,
+     "now": 1065,
+     "sample_still_unnamed": 230,
+     "its_verdicts": {
+      "word": 152,
+      "unclear": 42,
+      "piece": 21,
+      "not agreed": 7,
+      "same": 4,
+      "known": 3,
+      "name": 1
+     }
+    }
+   }
   }
  ],
  "current": {
   "running": {
-   "translated": 4185,
-   "named": 1975,
-   "open": 2914,
+   "translated": 4186,
+   "named": 1997,
+   "open": 2891,
    "lost": 1216,
-   "need": 7099,
-   "share": 0.5895,
+   "need": 7077,
+   "share": 0.5915,
    "all": 10290,
-   "of_all": 0.5986
+   "of_all": 0.6009
   },
   "spellings": {
-   "translated": 840,
-   "named": 926,
-   "open": 1958,
+   "translated": 841,
+   "named": 943,
+   "open": 1940,
    "lost": 1069,
-   "need": 2798,
-   "share": 0.3002,
+   "need": 2781,
+   "share": 0.3024,
    "all": 4793
   }
  },
@@ -464,32 +532,33 @@
    "rare_later": 20,
    "unnamed": 0,
    "rare_millet": 2,
-   "leftover": 2
+   "leftover": 2,
+   "leftover_stems": 0
   },
   "translated": 160,
   "distinct_words": {
-   "point": 1284,
+   "point": 1283,
    "low": 1023,
-   "high": 1356
+   "high": 1355
   },
   "star": {
-   "point": 0.1246,
-   "low": 0.118,
+   "point": 0.1247,
+   "low": 0.1181,
    "high": 0.1564
   },
   "before_us": {
-   "point": 0.1246,
-   "low": 0.118,
+   "point": 0.1247,
+   "low": 0.1181,
    "high": 0.1564
   },
   "unnamed_words": {
-   "point": 907,
+   "point": 906,
    "low": 646,
-   "high": 979
+   "high": 978
   },
   "unnamed_stems": {
    "sampled": 1107,
-   "now": 1066,
+   "now": 1065,
    "sample_still_unnamed": 230,
    "its_verdicts": {
     "word": 152,

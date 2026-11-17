@@ -219,14 +219,16 @@ def test_the_figures_hold_counts_only():
 def test_the_page_says_what_the_figures_say():
     f, text = figs(), page()
     pct = lambda x: f"{100 * x:.1f}%"                                     # noqa: E731
+    of = lambda x: pct(x["translated"] / x["need"])                       # noqa: E731  a share divided from its counts, rounded once
     b, c, lk, n = f["base"], f["current"], f["lookup"], f["north_star"]
     for name, x in (("Plain lookup of the lexicon", lk), ("The base", b), ("With the layers", c)):
         r, s = x["running"], x["spellings"]
-        assert f"| {name} | {r['translated']:,} of {r['need']:,} | {pct(r['share'])} | {s['translated']:,} of {s['need']:,} | {pct(s['share'])} | {pct(r['of_all'])} |" in text, name
+        assert f"| {name} | {r['translated']:,} of {r['need']:,} | {of(r)} | {s['translated']:,} of {s['need']:,} | {of(s)} | {pct(r['of_all'])} |" in text, name
+    assert of(c["running"]) == M.lines(f)[2].split(" = ")[1].split(";")[0] != pct(c["running"]["share"])   # 4186 of 7077 is 59.149%: 59.1%, not 59.2%
     for l in f["layers"]:
         why = l["why"]
         assert (f"| `{l['name']}` | {l['laid']} | {l['places']} | {why.get('stated', 0)} | {why.get('form', 0)} | {why.get('piece', 0)} | {why.get('name', 0)} | "
-                f"{pct(l['after']['running']['share'])} |") in text, l["name"]
+                f"{of(l['after']['running'])} |") in text, l["name"]
         assert f"[{l['page'].split('/')[-1]}]({l['page'].split('/')[-1]})" in PAGE.read_text(encoding="utf-8"), l["name"]
     first = f["layers"][0]
     already = sum(first["was"].get(k, 0) for k in ("meaning", "grammar", "name"))
@@ -252,8 +254,17 @@ def test_the_page_says_what_the_figures_say():
     for name in ("rare_millet", "leftover"):
         assert by_name[name]["north_star"]["unnamed_stems"] == by_name["unnamed"]["north_star"]["unnamed_stems"], name
     five = M.star_pct(by_name["rare_millet"]["north_star"])["point"]
-    assert by["rare_millet"] == by["leftover"] and f["layers"][-1]["name"] == "leftover"
-    assert f"and the {by['leftover']} words each gives a meaning bring the north star from {four} to {five} and then to {s['point']}" in text
+    six = by_name["leftover"]
+    assert by["rare_millet"] == by["leftover"] and f["layers"][-2] is six
+    assert f"and the {by['leftover']} words each gives a meaning bring the north star from {four} to {five} and then to {M.star_pct(six['north_star'])['point']}" in text
+    seven = f["layers"][-1]                                              # the seventh layer makes one more stem a name and gives no word a meaning
+    gone = six["north_star"]["unnamed_stems"]["now"] - seven["north_star"]["unnamed_stems"]["now"]
+    assert seven["name"] == "leftover_stems" and by["leftover_stems"] == 0 and gone == 1
+    assert (seven["north_star"]["translated"], seven["north_star"]["distinct_words"]) == (n["translated"], n["distinct_words"])
+    assert (f"The seventh, `leftover_stems`, makes {gone} more stem a name and gives no word a meaning: the count of distinct words goes from about "
+            f"{six['north_star']['distinct_words']['point']:,} to about {n['distinct_words']['point']:,}, and the north star stays at {s['point']}") in text
+    assert M.star_pct(six["north_star"])["point"] == s["point"]
+    assert "The layers `rare_sure`, `unnamed` and `leftover_stems` add none" in text
     a = first["after"]                                                   # the map after the first layer alone
     gain = a["running"]["translated"] - b["running"]["translated"]
     names = a["running"]["named"] - b["running"]["named"]
@@ -263,13 +274,15 @@ def test_the_page_says_what_the_figures_say():
     was = first["was"]
     assert f"({was.get('meaning', 0)} with a meaning, {was.get('grammar', 0)} as a grammar word, {was.get('name', 0)} as a name)" in text
     assert f"The other {first['places'] - already} were open" in text
-    assert f"({pct(c['running']['share'])}, from {pct(b['running']['share'])})" in text and f"({b['spellings']['translated']} to {a['spellings']['translated']})" in text
+    assert f"({of(c['running'])}, from {of(b['running'])})" in text and f"({b['spellings']['translated']} to {a['spellings']['translated']})" in text
     assert (f"{by['recurring']} through the layer `recurring`, {by['rare_later']} through `rare_later` and {by['leftover']} through `leftover`; "
             f"Lipiński 2011: {by['rare_millet']} through `rare_millet`") in text
     assert by["rare_sure"] == by["unnamed"] == 0
     for l in f["layers"][1:]:
         to = l["to"]
-        assert f"{to.get('meaning', 0) + to.get('grammar', 0)} places become translated words and {to.get('name', 0)} names; all {l['places']} were open" in text, l["name"]
+        words = to.get("meaning", 0) + to.get("grammar", 0)
+        become = "1 place becomes a translated word" if words == 1 else f"{words} places become translated words"
+        assert f"{become} and {to.get('name', 0)} names; all {l['places']} were open" in text, l["name"]
         assert set(l["was"]) <= {"hypothesis", "kind", "unknown"}, l["name"]
     stated = sum(l["why"].get("stated", 0) for l in f["layers"] if l["name"] != "rare_millet")
     assert {l["name"] for l in f["layers"] if l["why"].get("stated")} == {"recurring", "rare_later", "leftover", "rare_millet"}
@@ -291,7 +304,14 @@ def test_the_page_says_what_the_figures_say():
     assert (f"({by_name['rare_millet']['why']['stated']}: {by_why['stated']['name']} of entries the lexicon files as place names, {by_why['stated']['meaning']} of the "
             f"{len(left['words'])} words Lipiński gives a meaning in full), {by_why['name']['name']} places of two entries that both readers say Millet calls a "
             f"personal name, and {by_why['piece']['name']} piece of a name the map holds") in text.replace("two words Lipiński", f"{len(left['words'])} words Lipiński")
-    assert f"{left['the_places']['kappa']:.2f} for `rare_millet` and {again['kappa']:.2f} for `leftover`, against a bar of 0.6" in text
+    stems = json.loads((PAGE.parent / "leftover_stems_figures.json").read_text(encoding="utf-8"))
+    assert (f"{left['the_places']['kappa']:.2f} for `rare_millet`, {again['kappa']:.2f} for `leftover` and {stems['kappa']:.2f} for `leftover_stems`, "
+            f"against a bar of 0.6") in text
+    laid = stems["laid"]                                                 # the seventh layer is the leftover stems
+    assert (seven["places"], seven["why"], seven["to"], seven["was"]) == (laid["lines"], laid["why"], laid["to"], laid["was"])
+    assert (f"The layer holds the places both call a name ({laid['to']['name']}) and the one place where both call the unnamed part an ending "
+            f"({laid['to']['grammar']}); at no place did both recognise a word the lexicon knows.") in text
+    assert laid["to"]["grammar"] == 1 and "known" not in stems["verdicts"] and stems["words"] == []
     g5 = json.loads((PAGE.parent / "second_scholar_later_figures.json").read_text(encoding="utf-8"))
     st = g5["statuses"]
     assert (f"Step G5 set each of Rilly's {g5['entries']} later meanings, those behind these places among them, beside what other scholars say: "

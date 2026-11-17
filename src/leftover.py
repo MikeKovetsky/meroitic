@@ -10,8 +10,14 @@ Part 1 was read twice (data/discovery/leftover_parts_2.md): the first reading mi
 second, by fresh checkers on controls drawn anew, has a bar for each verdict and lays only what both checkers call
 an ending or a known word, never a name.
 
+Part 3, the leftover stems (data/discovery/leftover_stems.md): the 86 places of the same kind that part 1 did not
+give to checkers, because the entry both checkers had recognised there is an ending or a particle and the unnamed
+part is the stem itself. Four kinds of place of known answer are mixed in, and each verdict (a known word, an
+ending, a name) is laid only if its own bars are met.
+
 Part 1 is read and written under data/sources/g8/ (the first reading) and data/sources/g8b/ (the second), part 2
-under data/sources/rare/g4m/ (local only: the packs and the answers quote the sources), except `public`.
+under data/sources/rare/g4m/, part 3 under data/sources/g9/ (local only: the packs and the answers quote the
+sources), except `public`.
 
   python3 -I src/leftover.py packs          part 1: the places and the controls for two checkers (packs/, key.json)
   python3 -I src/leftover.py count          part 1: the checkers compared, the bars (result.json)
@@ -24,9 +30,13 @@ under data/sources/rare/g4m/ (local only: the packs and the answers quote the so
   python3 -I src/leftover.py place-packs    part 2: the places for two checkers
   python3 -I src/leftover.py places         part 2: the checkers compared, the bar
   python3 -I src/leftover.py layer          part 2: the lines for the map (overlay.jsonl; src/themap.py lays them)
-  python3 -I src/leftover.py public         data/discovery/leftover_parts_figures.json
+  python3 -I src/leftover.py packs-stems    part 3: the 86 places and four kinds of control for two checkers
+  python3 -I src/leftover.py count-stems    part 3: the checkers compared, the bars of each verdict
+  python3 -I src/leftover.py layer-stems    part 3: the lines for the map (overlay.jsonl)
+  python3 -I src/leftover.py public         data/discovery/leftover_parts_figures.json and leftover_stems_figures.json
 
-What the checkers of part 1 were given is in runs/prompts/G8_parts.md and G8_parts_2.md.
+What the checkers of part 1 were given is in runs/prompts/G8_parts.md and G8_parts_2.md, those of part 3 in
+runs/prompts/G9_stems.md.
 """
 import collections
 import json
@@ -215,7 +225,12 @@ def packs(home=None, again=False):
     items = real_places(gl, lex) + controls(gl, lex, rnd, CONTROLS)
     rnd.shuffle(items)
     key = [{"place": f"Q{q:04d}", **c, **place_of(c, gl, rows)} for q, c in enumerate(items, 1)]
-    groups = [key[i: i + PACK] for i in range(0, len(key), PACK)]
+    write_packs(home, key, PACK, lex)
+
+
+def write_packs(home, key, size, lex):
+    """The key cut into packs of `size` places, each written with the brief for two checkers; key.json, groups.json."""
+    groups = [key[i: i + size] for i in range(0, len(key), size)]
     (home / "packs").mkdir(parents=True, exist_ok=True)
     folder = home.relative_to(ROOT) if home.is_relative_to(ROOT) else home
 
@@ -477,6 +492,236 @@ def layer():
           "left out:", apart)
 
 
+# ------------------------------------------------------------------------------- part 3: the leftover stems
+
+HOME_STEMS = ROOT / "data/sources/g9"
+PUBLIC_STEMS = ROOT / "data/discovery/leftover_stems_figures.json"
+LAYER_STEMS = "leftover_stems"                         # part 3's layer in src/themap.py, laid after LAYER_AGAIN
+BEFORE_STEMS = BEFORE + (LAYER, LAYER_AGAIN)           # the six layers laid when part 3 was set
+SEED_STEMS, PACK_STEMS = 20261116 + 11, 42
+N_STEMS = 20                                           # places of each kind of control
+KINDS_STEMS = ("stem", "ending", "name", "lot")        # the kinds of control (controls_stems)
+HIT, FALSE = 0.70, 0.10                                # a verdict's bars: found at least, said wrongly at most
+VERDICTS = ("known", "ending", "name")                 # the verdicts that can be laid, each on its own bars
+TOKENS_STEMS = HOME_STEMS / "tokens.json"              # from the task notifications, typed by hand (local)
+# As WHEN: the commit of the rules and its time in git, the clock read in the message that launched the checkers,
+# the earliest and the latest times of the answer files, the count.
+WHEN_STEMS = {"step": "part 3, the leftover stems", "set_in": "238cc7a", "set": "18:42:24", "started": "18:42:46",
+              "first_answer": "18:43:43", "last_answer": "18:44:36", "counted": "18:44:45", "answers": ["g9/answers1", "g9/answers2"]}
+
+
+def before_stems():
+    """The map with the six layers laid when part 3 was set, without its own."""
+    names = tuple(l["name"] for l in M.LAYERS)
+    if names[:len(BEFORE_STEMS)] != BEFORE_STEMS:
+        raise SystemExit(f"the layers before this step are no longer {BEFORE_STEMS}")
+    return M.current(upto=len(BEFORE_STEMS))
+
+
+def real_places_stems(gl):
+    """The stated places of G2 and G4 under an ending or a particle that no layer has laid."""
+    out = []
+    for run in R.LAYER:
+        R.here(run)
+        its = R.place_items(run)[0]
+        for r in R.taken(run)[1]["rows"]:
+            if r["verdict"] == "stated" and its[r["item"]]["how"].startswith("affix"):
+                p = its[r["item"]]["places"][r["place"] - 1]
+                if "layer" not in gl[p["text"]][p["n"] - 1]:
+                    out.append({"control": None, "run": run, "entry": r["item"], "text": p["text"], "i": p["n"] - 1})
+    W.OUT = R.RECURRING
+    return out
+
+
+def controls_stems(gl, lex, rnd):
+    """Places whose answer is known, N_STEMS of each kind, no word twice:
+    stem: a translated word of one sure stem (three letters or more) and endings, the stem shown as unnamed (the
+        answer: known, that entry);
+    ending: such a word with its endings shown as unnamed (the answer: ending);
+    name: a name with endings, the name shown as unnamed (the answer: name): every personal name with endings the
+        map holds, filled up by lot with names the lexicon holds;
+    lot: such a translated word with the letters of its stem replaced by as many letters drawn by lot (three at
+        least) and shown as unnamed (the answer: none of the three verdicts; no name stands there, and the letters
+        are no word)."""
+    def plain(g):
+        return "layer" not in g and len(g.get("parts") or []) > 1
+
+    words = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if g["level"] in W.READ and plain(g)
+                   and all(p.get("entry") in lex for p in g["parts"]) and sum(not W.affix(p["entry"]) for p in g["parts"]) == 1)
+    person = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if g["level"] == "name" and plain(g)
+                    and sum(p.get("entry") == "NAME" for p in g["parts"]) == 1
+                    and all(p.get("entry") == "NAME" or (p.get("entry") in lex and W.affix(p["entry"])) for p in g["parts"]))
+    held = sorted((t, i) for t, gs in gl.items() for i, g in enumerate(gs) if g["level"] == "name" and plain(g)
+                  and all(p.get("entry") in lex for p in g["parts"])
+                  and sum(not W.affix(p["entry"]) for p in g["parts"]) == 1
+                  and all(W.affix(p["entry"]) or (lex[p["entry"]].get("kind") or "") in R.C.NAME_KINDS for p in g["parts"]))
+    holds = set(W.spellings_of(gl)[0])
+
+    def stem_at(t, i):
+        return next(j for j, p in enumerate(gl[t][i]["parts"]) if p.get("entry") == "NAME" or not W.affix(p["entry"]))
+
+    # each kind of control takes N_STEMS different entries, so that the commonest words (the two verbs of filiation)
+    # do not fill it; an entry may serve two kinds, a word only one
+    by_entry = collections.defaultdict(list)
+    for t, i in words:
+        by_entry[gl[t][i]["parts"][stem_at(t, i)]["entry"]].append((t, i))
+    long_stems = sorted(e for e, ws in by_entry.items() if any(len(gl[t][i]["parts"][stem_at(t, i)]["form"]) >= 3 for t, i in ws))
+    used, drawn = set(), []
+    for entries, long in ((long_stems, True), (sorted(by_entry), False), (sorted(by_entry), False)):   # stem, ending, lot controls
+        took = 0
+        for e in rnd.sample(entries, len(entries)):         # the entries in a drawn order; the first N_STEMS with a free word
+            free = [w for w in by_entry[e] if w not in used and (not long or len(gl[w[0]][w[1]]["parts"][stem_at(*w)]["form"]) >= 3)]
+            if free and took < N_STEMS:
+                w = rnd.choice(free)
+                used.add(w)
+                drawn.append(w)
+                took += 1
+        if took < N_STEMS:
+            raise SystemExit("too few entries for a kind of control")
+    out = []
+    for t, i in drawn[:N_STEMS]:
+        j = stem_at(t, i)
+        out.append({"control": "stem", "answer": "known", "answer_entry": gl[t][i]["parts"][j]["entry"], "text": t, "i": i, "hide": [j]})
+    for t, i in drawn[N_STEMS: 2 * N_STEMS]:
+        out.append({"control": "ending", "answer": "ending", "text": t, "i": i,
+                    "hide": [j for j, p in enumerate(gl[t][i]["parts"]) if W.affix(p["entry"])]})
+    for t, i in drawn[2 * N_STEMS:]:
+        j = stem_at(t, i)
+        while True:
+            junk = "".join(rnd.choice(LETTERS) for _ in range(max(3, len(gl[t][i]["parts"][j]["form"]))))
+            if junk not in holds:
+                break
+        out.append({"control": "lot", "answer": "unknown", "text": t, "i": i, "hide": [j], "junk": junk, "at": j})
+    names = person[:N_STEMS] + rnd.sample(held, max(0, N_STEMS - len(person)))
+    for t, i in names:
+        out.append({"control": "name", "answer": "name", "text": t, "i": i, "hide": [stem_at(t, i)]})
+    return out
+
+
+def place_of_stems(c, gl, rows):
+    """A place as the pack shows it (place_of); for the letters drawn by lot, the stem's letters are replaced in the
+    word and in the line of words."""
+    if c.get("control") != "lot":
+        return place_of(c, gl, rows)
+    gs = gl[c["text"]]
+    parts = parts_of(gs[c["i"]], c["hide"])
+    parts[c["at"]] = (c["junk"], None)
+    g = {"form": "".join(f for f, _ in parts), "level": "unknown"}
+    gs = gs[:c["i"]] + [g] + gs[c["i"] + 1:]
+    return U.shown(gs, c["i"], {c["i"]}, rows, c["text"]) | {"parts": parts}
+
+
+def packs_stems(home=None):
+    home = home or HOME_STEMS
+    if any(home.glob("answers*/*.jsonl")):
+        raise SystemExit("answers exist: the packs are not written again")
+    gl, lex, rows = before_stems(), W.lexicon(), W.corpus_rows()
+    rnd = random.Random(SEED_STEMS)
+    items = real_places_stems(gl) + controls_stems(gl, lex, rnd)
+    rnd.shuffle(items)
+    key = [{"place": f"Q{q:04d}", **c, **place_of_stems(c, gl, rows)} for q, c in enumerate(items, 1)]
+    write_packs(home, key, PACK_STEMS, lex)
+
+
+def count_stems(home=None):
+    """Part 3 counted: the two bars every verdict needs (all answered, the kappa), and each verdict's own."""
+    home = home or HOME_STEMS
+    key, lex = read("key.json", home), W.lexicon()
+    ans = {1: answers(1, home), 2: answers(2, home)}
+    real = [p for p in key if p["control"] is None]
+    both = [(ans[1][p["place"]]["case"], ans[2][p["place"]]["case"]) for p in real if p["place"] in ans[1] and p["place"] in ans[2]]
+    kp = W.kappa(both)
+
+    def said(j, kind, case, entry=False):
+        return sum(1 for p in key if p["control"] == kind and (a := ans[j].get(p["place"])) and a["case"] == case
+                   and (not entry or R.plain((a.get("entry") or "").strip()) == R.plain(p["answer_entry"])))
+
+    ctrl = {str(j): {kind: {"shown": sum(p["control"] == kind for p in key),
+                            **{f"called_{k}": v for k, v in sorted(collections.Counter(ans[j][p["place"]]["case"] for p in key if p["control"] == kind and p["place"] in ans[j]).items())}}
+                     for kind in KINDS_STEMS} | {"stem_with_its_entry": said(j, "stem", "known", True)} for j in (1, 2)}
+    general = {"every_place_answered_by_both": all(p["place"] in ans[1] and p["place"] in ans[2] for p in key),
+               "kappa": kp is not None and kp >= BARS["kappa"]}
+    bars = {
+        "known": {"found": all(said(j, "stem", "known", True) >= HIT * N_STEMS for j in (1, 2)),
+                  "not_said_of_lot_letters": all(said(j, "lot", "known") <= FALSE * N_STEMS for j in (1, 2))},
+        "ending": {"found": all(said(j, "ending", "ending") >= HIT * N_STEMS for j in (1, 2)),
+                   "not_said_of_lot_letters": all(said(j, "lot", "ending") <= FALSE * N_STEMS for j in (1, 2))},
+        "name": {"found": all(said(j, "name", "name") >= HIT * N_STEMS for j in (1, 2)),
+                 "not_said_of_lot_letters": all(said(j, "lot", "name") <= FALSE * N_STEMS for j in (1, 2)),
+                 "not_said_of_known_stems": all(said(j, "stem", "name") <= FALSE * N_STEMS for j in (1, 2))},
+    }
+    taken = {v: all(general.values()) and all(bars[v].values()) for v in VERDICTS}
+    rows = []
+    for p in real:
+        a, b = ans[1].get(p["place"]), ans[2].get(p["place"])
+        v = "not answered by both" if not (a and b) else "not agreed" if a["case"] != b["case"] else a["case"]
+        entry = ""
+        if v == "known":
+            ea, eb = (a.get("entry") or "").strip(), (b.get("entry") or "").strip()
+            v, entry = ("known", ea) if ea == eb and (lex.get(ea, {}).get("status") or "") in W.SURE else ("known, not the same sure entry", "")
+        rows.append({"place": p["place"], "run": p["run"], "entry": p["entry"], "text": p["text"], "n": p["n"], "form": p["form"],
+                     "unnamed": sum(e is None for _, e in p["parts"]), "verdict": v, "known_entry": entry})
+    out = {"places": len(real), "answered_by_both": len(both), "kappa": None if kp is None else round(kp, 4), "controls": ctrl,
+           "general": general, "bars": bars, "taken": taken,
+           "verdicts": dict(collections.Counter(r["verdict"] for r in rows).most_common()),
+           "by_run": {run: dict(collections.Counter(r["verdict"] for r in rows if r["run"] == run).most_common()) for run in R.LAYER}, "rows": rows}
+    write("result.json", out, home)
+    print(json.dumps({k: v for k, v in out.items() if k != "rows"}, ensure_ascii=False, indent=1))
+
+
+MORE_UNNAMED = "more than one part of the spelling is unnamed"
+BARS_MISSED = "its bars were missed"
+
+
+def lines_stems(res, gl, lex, stated):
+    """(the lines part 3 lays, the places it leaves out and why), verdict by verdict where the verdict's bars are
+    met: a known word (the same sure entry from both checkers) and a name only where the spelling has one unnamed
+    part; an ending where every unnamed part is one. No line where another stem of the spelling has no meaning. gl
+    is the map with the layers laid when the part was set; the lexicon's wording goes into the local lines only."""
+    out, apart = [], collections.Counter()
+    for r in res["rows"]:
+        v = r["verdict"]
+        if v not in VERDICTS:
+            continue
+        if not res["taken"][v]:
+            apart[f"{v}: {BARS_MISSED}"] += 1
+            continue
+        g = gl[r["text"]][r["n"] - 1]
+        if g["form"] != r["form"] or "layer" in g:
+            raise SystemExit(f"{r['place']}: the map has changed at this place")
+        if v in ("known", "name") and r["unnamed"] != 1:
+            apart[f"{v}: {MORE_UNNAMED}"] += 1
+            continue
+        if R.unsettled(g, lex, stated):
+            apart[f"{v}: {OTHER_STEM}"] += 1
+            continue
+        base = {"text": r["text"], "n": r["n"], "form": r["form"], "item": r["entry"], "was": g["level"]}
+        if v == "known":
+            e = lex[r["known_entry"]]
+            out.append(base | {"level": "meaning", "gloss": f"{r['known_entry']}: {e['meaning']}", "why": "form",
+                               "source": f"the lexicon of 2003, p. {e['page']}"})
+        elif v == "ending":
+            out.append(base | {"level": "grammar", "gloss": "endings or particles only", "why": "form",
+                               "source": "the lexicon's entries of the endings"})
+        else:
+            out.append(base | {"level": "name", "gloss": "a name, by its place in the text", "why": "name", "source": "two checkers"})
+    return out, dict(apart)
+
+
+def build_stems(home=None):
+    res = read("result.json", home or HOME_STEMS)
+    stated = R.stated_entries(json.loads((R.RECURRING / "lit/verify/result.json").read_text(encoding="utf-8")),
+                              json.loads((R.HOME / "g4/lit/verify/result.json").read_text(encoding="utf-8")))
+    return lines_stems(res, before_stems(), W.lexicon(), stated)
+
+
+def layer_stems(home=None):
+    out, apart = build_stems(home)
+    ((home or HOME_STEMS) / "overlay.jsonl").write_text("".join(json.dumps(o, ensure_ascii=False) + "\n" for o in out), encoding="utf-8")
+    print(len(out), "lines", dict(collections.Counter(o["why"] for o in out)), dict(collections.Counter(o["level"] for o in out)),
+          "left out:", apart)
+
+
 # ---------------------------------------------------------------------------------------------------- the figures
 
 def tokens():
@@ -592,16 +837,58 @@ def figures():
             "when": [{k: w[k] for k in w if k != "answers"} for w in WHEN]}
 
 
+def steadiness(rows):
+    """How steady the judgment by place is: of the spellings that stand at two real places or more, how many get
+    one verdict at all of them, and the verdicts of the spelling with the most places (no spelling is given)."""
+    by_form = collections.defaultdict(list)
+    for r in rows:
+        by_form[r["form"]].append(r["verdict"])
+    many = {f: vs for f, vs in by_form.items() if len(vs) > 1}
+    most = max(many.values(), key=lambda vs: (len(vs), len(set(vs)))) if many else []
+    return {"spellings": len(by_form), "at_two_places_or_more": len(many), "with_one_verdict": sum(len(set(vs)) == 1 for vs in many.values()),
+            "the_most_places": len(most), "its_verdicts": dict(collections.Counter(most).most_common())}
+
+
+def figures_stems(home=None):
+    """What the page of part 3 reports, from the local files: counts, bars and verdicts, no word of a pack."""
+    home = home or HOME_STEMS
+    key, res = read("key.json", home), read("result.json", home)
+    lines, apart = build_stems(home)
+    real = [p for p in key if p["control"] is None]
+    words = first_given(LAYER_STEMS, lines, W.lexicon())
+    if words:
+        raise SystemExit(f"part 3 gives words of the dictionary a meaning, and none is worded for the figures: {words}")
+    t = json.loads((home / TOKENS_STEMS.name).read_text(encoding="utf-8"))["checkers"] if (home / TOKENS_STEMS.name).exists() else {}
+    return {"places": len(real), "places_by_run": dict(collections.Counter(p["run"] for p in real).most_common()),
+            "controls": dict(collections.Counter(p["control"] for p in key if p["control"])),
+            "control_entries": {k: len({p["answer_entry"] for p in key if p["control"] == k}) for k in ("stem",)},
+            "packs": len(read("groups.json", home)), "lines_expected": len(key),
+            "answered": {str(c): len(answers(c, home)) for c in (1, 2)},
+            "answered_by_both": res["answered_by_both"], "kappa": res["kappa"],
+            "bars_set": {"kappa": BARS["kappa"], "found_at_least": HIT, "said_wrongly_at_most": FALSE, "of": N_STEMS},
+            "controls_by_checker": res["controls"], "general": res["general"], "bars": res["bars"], "taken": res["taken"],
+            "verdicts": res["verdicts"], "verdicts_by_run": res["by_run"],
+            "one_unnamed_part": sum(r["unnamed"] == 1 for r in res["rows"]),
+            "steadiness": steadiness(res["rows"]),
+            "laid": laid_of(lines), "left_out": apart, "words": [],
+            "cost": {"agents": len(t), "tokens": sum(t.values())},
+            "when": {k: v for k, v in WHEN_STEMS.items() if k != "answers"}}
+
+
 def public():
     figs = figures()
     PUBLIC.write_text(json.dumps(figs, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    stems = figures_stems()
+    PUBLIC_STEMS.write_text(json.dumps(stems, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print("wrote", PUBLIC_STEMS.relative_to(ROOT), {k: stems[k] for k in ("taken", "verdicts", "laid", "left_out")})
     print("wrote", PUBLIC.relative_to(ROOT), {k: figs["part_2"][k] for k in ("read_twice", "gives", "laid", "left_out")},
           {k: figs["part_1_again"][k] for k in ("bars", "verdicts", "laid", "left_out")})
 
 
 COMMANDS = {"packs": packs, "count": count, "packs-again": lambda: packs(again=True), "count-again": lambda: count(again=True),
             "layer-again": layer_again, "setup": setup, "verify-packs": verify_packs, "verify": verify,
-            "place-packs": place_packs, "places": places, "layer": layer, "public": public}
+            "place-packs": place_packs, "places": places, "layer": layer,
+            "packs-stems": packs_stems, "count-stems": count_stems, "layer-stems": layer_stems, "public": public}
 
 if __name__ == "__main__":
     if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:

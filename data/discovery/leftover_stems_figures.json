@@ -1,0 +1,165 @@
+{
+ "places": 86,
+ "places_by_run": {
+  "g2": 74,
+  "g4": 12
+ },
+ "controls": {
+  "stem": 20,
+  "lot": 20,
+  "name": 20,
+  "ending": 20
+ },
+ "control_entries": {
+  "stem": 20
+ },
+ "packs": 4,
+ "lines_expected": 166,
+ "answered": {
+  "1": 166,
+  "2": 166
+ },
+ "answered_by_both": 86,
+ "kappa": 0.791,
+ "bars_set": {
+  "kappa": 0.6,
+  "found_at_least": 0.7,
+  "said_wrongly_at_most": 0.1,
+  "of": 20
+ },
+ "controls_by_checker": {
+  "1": {
+   "stem": {
+    "shown": 20,
+    "called_known": 20
+   },
+   "ending": {
+    "shown": 20,
+    "called_ending": 20
+   },
+   "name": {
+    "shown": 20,
+    "called_name": 18,
+    "called_unknown": 2
+   },
+   "lot": {
+    "shown": 20,
+    "called_unclear": 1,
+    "called_unknown": 19
+   },
+   "stem_with_its_entry": 18
+  },
+  "2": {
+   "stem": {
+    "shown": 20,
+    "called_known": 19,
+    "called_unknown": 1
+   },
+   "ending": {
+    "shown": 20,
+    "called_ending": 20
+   },
+   "name": {
+    "shown": 20,
+    "called_name": 18,
+    "called_unknown": 2
+   },
+   "lot": {
+    "shown": 20,
+    "called_unknown": 20
+   },
+   "stem_with_its_entry": 15
+  }
+ },
+ "general": {
+  "every_place_answered_by_both": true,
+  "kappa": true
+ },
+ "bars": {
+  "known": {
+   "found": true,
+   "not_said_of_lot_letters": true
+  },
+  "ending": {
+   "found": true,
+   "not_said_of_lot_letters": true
+  },
+  "name": {
+   "found": true,
+   "not_said_of_lot_letters": true,
+   "not_said_of_known_stems": true
+  }
+ },
+ "taken": {
+  "known": true,
+  "ending": true,
+  "name": true
+ },
+ "verdicts": {
+  "unknown": 55,
+  "name": 22,
+  "not agreed": 8,
+  "ending": 1
+ },
+ "verdicts_by_run": {
+  "g2": {
+   "unknown": 44,
+   "name": 22,
+   "not agreed": 8
+  },
+  "g4": {
+   "unknown": 11,
+   "ending": 1
+  }
+ },
+ "one_unnamed_part": 85,
+ "steadiness": {
+  "spellings": 72,
+  "at_two_places_or_more": 10,
+  "with_one_verdict": 8,
+  "the_most_places": 5,
+  "its_verdicts": {
+   "name": 2,
+   "not agreed": 2,
+   "unknown": 1
+  }
+ },
+ "laid": {
+  "lines": 23,
+  "why": {
+   "name": 22,
+   "form": 1
+  },
+  "to": {
+   "name": 22,
+   "grammar": 1
+  },
+  "to_by_why": {
+   "form": {
+    "grammar": 1
+   },
+   "name": {
+    "name": 22
+   }
+  },
+  "was": {
+   "hypothesis": 19,
+   "unknown": 4
+  }
+ },
+ "left_out": {},
+ "words": [],
+ "cost": {
+  "agents": 8,
+  "tokens": 725765
+ },
+ "when": {
+  "step": "part 3, the leftover stems",
+  "set_in": "238cc7a",
+  "set": "18:42:24",
+  "started": "18:42:46",
+  "first_answer": "18:43:43",
+  "last_answer": "18:44:36",
+  "counted": "18:44:45"
+ }
+}

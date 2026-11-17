@@ -1,5 +1,6 @@
 """Checks for the leftover parts and the meanings Millet and Lipinski state (src/leftover.py,
-data/discovery/leftover_parts.md, and leftover_parts_2.md for the second reading of part 1).
+data/discovery/leftover_parts.md, leftover_parts_2.md for the second reading of part 1, and leftover_stems.md for
+part 3, the leftover stems).
 
   python3 -I tests/test_leftover.py
 
@@ -7,10 +8,12 @@ The map, the lexicon, the sources and the agents' answers are local only: the ch
 words; the checks of the reported numbers read the public figures file, compare the page with it, and compare it
 with a count from the local files where those are present.
 """
+import collections
 import contextlib
 import filecmp
 import io
 import json
+import random
 import re
 import shutil
 import subprocess
@@ -29,12 +32,17 @@ from local_only import needs, run    # noqa: E402
 
 PAGE = ROOT / "data/discovery/leftover_parts.md"
 PAGE_AGAIN = ROOT / "data/discovery/leftover_parts_2.md"
+PAGE_STEMS = ROOT / "data/discovery/leftover_stems.md"
 LEX = {"ato": {"kind": "noun", "status": "established"}, "kb": {"kind": "verb", "status": "hypothesis"},
        "Skl": {"kind": "place name", "status": "unknown"}}
 
 
 def figs():
     return json.loads(L.PUBLIC.read_text(encoding="utf-8"))
+
+
+def stems():
+    return json.loads(L.PUBLIC_STEMS.read_text(encoding="utf-8"))
 
 
 def page(path=PAGE):
@@ -234,13 +242,192 @@ def test_a_word_of_the_dictionary_counts_for_the_first_layer_that_gives_it_a_mea
 
 def test_part_1_reads_the_map_as_it_was_when_the_step_was_set():
     assert L.BEFORE == tuple(l["name"] for l in M.LAYERS[:len(L.BEFORE)]) and L.LAYER == M.LAYERS[len(L.BEFORE)]["name"]
-    assert L.LAYER_AGAIN == M.LAYERS[len(L.BEFORE) + 1]["name"] and len(M.LAYERS) == len(L.BEFORE) + 2
+    assert L.LAYER_AGAIN == M.LAYERS[len(L.BEFORE) + 1]["name"] and len(M.LAYERS) == len(L.BEFORE) + 3
+    # part 3 was set on the six layers before its own, which is the last
+    assert L.BEFORE_STEMS == tuple(l["name"] for l in M.LAYERS[:-1]) and L.LAYER_STEMS == M.LAYERS[-1]["name"]
     layers = M.LAYERS
     M.LAYERS = [{"name": "another"}] + layers
     try:
         assert stops(L.before, "the layers before this step are no longer")
+        assert stops(L.before_stems, "the layers before this step are no longer")
     finally:
         M.LAYERS = layers
+
+
+def a_stems(d, said, wrong=None):
+    """A made-up part 3 in folder d, one pack: 20 hidden stems of `ato`, 20 hidden endings, 20 names and 20 runs of
+    lot letters, each answered rightly by both checkers but for `wrong` ({(checker, kind): (how many of that kind,
+    the case said of them, the entry said)}), and the real places of `said` ({place: (checker 1's answer, checker
+    2's answer, how many parts of the spelling are unnamed)}; an answer is a case or ("known", an entry))."""
+    wrong = wrong or {}
+    key = [{"place": f"{kind[0].upper()}{i:02d}", "control": kind, "answer": answer} | ({"answer_entry": "ato"} if kind == "stem" else {})
+           for kind, answer in (("stem", "known"), ("ending", "ending"), ("name", "name"), ("lot", "unknown")) for i in range(20)]
+    key += [{"place": q, "control": None, "run": "g2", "entry": "-qo", "text": "T", "n": n, "form": f"zz{n}qo",
+             "parts": [["zz", None]] * v[2] + [["qo", "-qo"]]} for n, (q, v) in enumerate(said.items(), 1)]
+    L.write("key.json", key, d)
+    L.write("groups.json", [[p["place"] for p in key]], d)
+    for c in (1, 2):
+        (d / f"answers{c}").mkdir()
+        lines = []
+        for p in key:
+            if p["control"]:
+                many, case, entry = (wrong.get((c, p["control"])) or (0, "", "")) + ("",) * 3 if False else (*(wrong.get((c, p["control"])) or (0, "")), "")[:3]
+                if int(p["place"][1:]) < many:
+                    lines.append({"place": p["place"], "case": case, "entry": entry})
+                else:
+                    lines.append({"place": p["place"], "case": p["answer"], "entry": p.get("answer_entry", "")})
+            else:
+                a = said[p["place"]][c - 1]
+                lines.append({"place": p["place"], "case": a[0], "entry": a[1]} if isinstance(a, tuple) else {"place": p["place"], "case": a})
+        (d / f"answers{c}" / "P01.jsonl").write_text("".join(json.dumps(l) + "\n" for l in lines), encoding="utf-8")
+
+
+def counted_stems(said, wrong=None, drop=None):
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        a_stems(d, said, wrong)
+        if drop:                                                                # one checker leaves a place out
+            f = d / "answers1" / "P01.jsonl"
+            f.write_text("".join(l + "\n" for l in f.read_text(encoding="utf-8").splitlines() if json.loads(l)["place"] != drop), encoding="utf-8")
+        with_lexicon(lambda: quiet(L.count_stems, d))
+        return L.read("result.json", d)
+
+
+SAID = {"R1": ("name", "name", 1), "R2": ("unknown", "unknown", 1), "R3": (("known", "ato"), ("known", "ato"), 1), "R4": ("ending", "ending", 2)}
+
+
+def test_each_verdict_of_the_stems_stands_on_its_own_bars():
+    res = counted_stems(SAID)
+    assert res["taken"] == {"known": True, "ending": True, "name": True} and res["kappa"] == 1.0 and res["places"] == res["answered_by_both"] == 4
+    assert res["verdicts"] == {"name": 1, "unknown": 1, "known": 1, "ending": 1}
+    assert [(r["place"], r["unnamed"], r["known_entry"]) for r in res["rows"]] == [("R1", 1, ""), ("R2", 1, ""), ("R3", 1, "ato"), ("R4", 2, "")]
+    # one bar missed by one answer stops its own verdict and no other
+    for wrong, lost in (({(1, "lot"): (3, "name")}, "name"), ({(2, "stem"): (3, "name")}, "name"), ({(2, "name"): (7, "unknown")}, "name"),
+                        ({(1, "lot"): (3, "known", "ato")}, "known"), ({(1, "stem"): (7, "unknown")}, "known"), ({(2, "stem"): (7, "known", "kb")}, "known"),
+                        ({(2, "lot"): (3, "ending")}, "ending"), ({(1, "ending"): (7, "unknown")}, "ending")):
+        taken = counted_stems(SAID, wrong)["taken"]
+        assert taken == {v: v != lost for v in L.VERDICTS}, (wrong, taken)
+    # at the bar itself every verdict stands: 2 of 20 said wrongly, 14 of 20 found
+    at = {(1, "lot"): (2, "name"), (2, "lot"): (2, "ending"), (1, "stem"): (6, "unknown"), (2, "ending"): (6, "unknown"), (2, "name"): (6, "unknown")}
+    assert counted_stems(SAID, at)["taken"] == {"known": True, "ending": True, "name": True}
+    assert round(L.HIT * L.N_STEMS) == 14 and round(L.FALSE * L.N_STEMS) == 2
+    # a hidden stem counts as found only with its own entry, a homonym number or a hyphen aside
+    assert counted_stems(SAID, {(1, "stem"): (20, "known", "ato (2)")})["controls"]["1"]["stem_with_its_entry"] == 20
+    assert counted_stems(SAID, {(1, "stem"): (20, "known", "kb")})["controls"]["1"]["stem_with_its_entry"] == 0
+    # the two bars every verdict needs: a place one checker left out, or a kappa under 0.6, and nothing is taken
+    assert counted_stems(SAID, drop="E03")["taken"] == {"known": False, "ending": False, "name": False}
+    apart = {"R1": ("name", "unknown", 1), "R2": ("unknown", "name", 1), "R3": ("name", "name", 1), "R4": ("unknown", "unknown", 1)}
+    res = counted_stems(apart)
+    assert res["kappa"] < 0.6 and not any(res["taken"].values()) and res["general"] == {"every_place_answered_by_both": True, "kappa": False}
+
+
+def test_a_known_stem_needs_the_same_sure_entry_from_both():
+    said = {"R1": (("known", "ato"), ("known", "ato"), 1), "R2": (("known", "ato"), ("known", "kb"), 1), "R3": (("known", "kb"), ("known", "kb"), 1),
+            "R4": ("name", "name", 1), "R5": ("unknown", "unknown", 1), "R6": ("name", "ending", 1)}
+    rows = {r["place"]: (r["verdict"], r["known_entry"]) for r in counted_stems(said)["rows"]}
+    assert rows == {"R1": ("known", "ato"), "R2": ("known, not the same sure entry", ""), "R3": ("known, not the same sure entry", ""),   # kb is not sure
+                    "R4": ("name", ""), "R5": ("unknown", ""), "R6": ("not agreed", "")}
+
+
+def test_the_stems_lay_a_known_word_a_name_and_an_ending_each_by_its_rule():
+    def g(form, *parts, **more):
+        return {"form": form, "level": "unknown", "parts": [{"form": f, "entry": e} for f, e in parts]} | more
+
+    def row(q, n, form, verdict, unnamed=1, entry=""):
+        return {"place": q, "run": "g2", "entry": "-qo", "text": "T", "n": n, "form": form, "unnamed": unnamed, "verdict": verdict, "known_entry": entry}
+    gl = {"T": [g("zzqo", ("zz", None), ("qo", "-qo")), g("atqo", ("at", None), ("qo", "-qo")), g("xyqo", ("x", None), ("y", None), ("qo", "-qo")),
+                g("zzyqo", ("zz", None), ("y", None), ("qo", "-qo")), g("atyqo", ("at", None), ("y", None), ("qo", "-qo")),
+                g("zzkbqo", ("zz", None), ("kb", "kb"), ("qo", "-qo")), g("wwqo", ("ww", None), ("qo", "-qo")), g("vvqo", ("vv", None), ("qo", "-qo")),
+                g("uuqo", ("uu", None), ("qo", "-qo"))]}
+    rows = [row("Q1", 1, "zzqo", "name"), row("Q2", 2, "atqo", "known", 1, "ato"), row("Q3", 3, "xyqo", "ending", 2),
+            row("Q4", 4, "zzyqo", "name", 2), row("Q5", 5, "atyqo", "known", 2, "ato"), row("Q6", 6, "zzkbqo", "name"),
+            row("Q7", 7, "wwqo", "unknown"), row("Q8", 8, "vvqo", "known, not the same sure entry"), row("Q9", 9, "uuqo", "not agreed")]
+    lex = {"ato": {"kind": "noun", "status": "established", "meaning": "water", "page": 7}, "kb": {"kind": "verb", "status": "hypothesis"},
+           "-qo": {"kind": "function word", "status": "established"}}
+    every = {"known": True, "ending": True, "name": True}
+    out, apart = L.lines_stems({"taken": every, "rows": rows}, gl, lex, set())
+    base = {"text": "T", "item": "-qo", "was": "unknown"}
+    assert out == [
+        base | {"n": 1, "form": "zzqo", "level": "name", "gloss": "a name, by its place in the text", "why": "name", "source": "two checkers"},
+        base | {"n": 2, "form": "atqo", "level": "meaning", "gloss": "ato: water", "why": "form", "source": "the lexicon of 2003, p. 7"},
+        base | {"n": 3, "form": "xyqo", "level": "grammar", "gloss": "endings or particles only", "why": "form", "source": "the lexicon's entries of the endings"}]
+    assert [list(o) for o in out] == [["text", "n", "form", "item", "was", "level", "gloss", "why", "source"]] * 3
+    # a name and a known word need a spelling with one unnamed part; an ending may fill several; no line beside a stem without a meaning
+    assert apart == {f"name: {L.MORE_UNNAMED}": 1, f"known: {L.MORE_UNNAMED}": 1, f"name: {L.OTHER_STEM}": 1}
+    assert all(o["why"] in M.WHY and o["level"] in W.READ + W.NAMED for o in out)
+    assert L.lines_stems({"taken": every, "rows": rows}, gl, lex, {"kb"})[1] == {f"name: {L.MORE_UNNAMED}": 1, f"known: {L.MORE_UNNAMED}": 1}   # kb stated by a later source
+    # a verdict whose bars were missed is not laid, the others are
+    for lost, levels in (("name", ["meaning", "grammar"]), ("known", ["name", "grammar"]), ("ending", ["name", "meaning"])):
+        out, apart = L.lines_stems({"taken": every | {lost: False}, "rows": rows}, gl, lex, set())
+        assert [o["level"] for o in out] == levels and apart[f"{lost}: {L.BARS_MISSED}"] == sum(r["verdict"] == lost for r in rows), lost
+    assert L.lines_stems({"taken": dict.fromkeys(L.VERDICTS, False), "rows": rows}, gl, lex, set())[0] == []
+    # the map must still be what the checkers saw
+    assert stops(lambda: L.lines_stems({"taken": every, "rows": [row("Q1", 1, "zzqe", "name")]}, gl, lex, set()), "the map has changed at this place")
+    laid = {"T": [gl["T"][0] | {"layer": "another"}]}
+    assert stops(lambda: L.lines_stems({"taken": every, "rows": rows[:1]}, laid, lex, set()), "the map has changed at this place")
+
+
+def a_map_for_controls(entries=30):
+    """A made-up map: `entries` sure words, three places each (the first 25 with a stem of four letters, the others
+    of two), 9 personal names and 15 names the lexicon holds, each with an ending; a word a layer has laid and a
+    word of one part, which no control may take."""
+    def word(form, level, *parts, **more):
+        return {"form": form, "level": level, "parts": [{"form": f, "entry": e} for f, e in parts]} | more
+    lex = {f"w{i:02d}": {"kind": "noun", "status": "established"} for i in range(entries)}
+    lex |= {f"N{i:02d}": {"kind": "place name", "status": "established"} for i in range(15)}
+    lex |= {"-lo": {"kind": "function word", "status": "established"}, "-qo": {"kind": "function word", "status": "established"}}
+    stem = lambda i: f"s{i:02d}x" if i < 25 else f"{'bdklm'[i - 25]}a"                 # noqa: E731
+    gl = {f"T{k}": [word(stem(i) + "lo", "meaning", (stem(i), f"w{i:02d}"), ("lo", "-lo")) for i in range(entries)] for k in range(3)}
+    gl["P"] = [word(f"p{i}yeqo", "name", (f"p{i}ye", "NAME"), ("qo", "-qo")) for i in range(9)]
+    gl["H"] = [word(f"n{i:02d}qo", "name", (f"n{i:02d}", f"N{i:02d}"), ("qo", "-qo")) for i in range(15)]
+    gl["X"] = [word("s00xlo", "meaning", ("s00x", "w00"), ("lo", "-lo"), layer="another"), word("s01x", "meaning", ("s01x", "w01"))]
+    return gl, lex
+
+
+def test_the_controls_of_the_stems_take_twenty_entries_a_kind_and_no_word_twice():
+    gl, lex = a_map_for_controls()
+    cs = L.controls_stems(gl, lex, random.Random(5))
+    assert collections.Counter(c["control"] for c in cs) == dict.fromkeys(L.KINDS_STEMS, L.N_STEMS)
+    assert len({(c["text"], c["i"]) for c in cs}) == len(cs) == 4 * L.N_STEMS and not any(c["text"] == "X" for c in cs)
+
+    def stem(c):
+        return next(p for p in gl[c["text"]][c["i"]]["parts"] if p["entry"] == "NAME" or not W.affix(p["entry"]))
+    for kind in ("stem", "ending", "lot"):                                      # twenty different entries a kind
+        assert len({stem(c)["entry"] for c in cs if c["control"] == kind}) == L.N_STEMS, kind
+    holds = {g["form"] for gs in gl.values() for g in gs}
+    for c in cs:
+        parts = gl[c["text"]][c["i"]]["parts"]
+        if c["control"] == "stem":                                              # the stem hidden, three letters or more, its entry the answer
+            assert c["hide"] == [parts.index(stem(c))] and len(stem(c)["form"]) >= 3 and (c["answer"], c["answer_entry"]) == ("known", stem(c)["entry"])
+        elif c["control"] == "ending":                                          # every ending hidden, the stem shown
+            assert c["hide"] == [j for j, p in enumerate(parts) if W.affix(p["entry"])] and c["answer"] == "ending"
+        elif c["control"] == "lot":                                             # as many letters by lot as the stem has, three at least, no spelling of the map
+            assert len(c["junk"]) == max(3, len(stem(c)["form"])) and c["junk"] not in holds and c["at"] == parts.index(stem(c)) and c["answer"] == "unknown"
+        else:
+            assert c["hide"] == [parts.index(stem(c))] and c["answer"] == "name"
+    names = [c for c in cs if c["control"] == "name"]                           # every personal name of the map, filled up with names the lexicon holds
+    assert sum(c["text"] == "P" for c in names) == 9 and sum(c["text"] == "H" for c in names) == L.N_STEMS - 9
+    assert any(len(stem(c)["form"]) < 3 for c in cs if c["control"] in ("ending", "lot"))    # a short stem may have its endings hidden or its letters replaced
+    assert L.controls_stems(gl, lex, random.Random(5)) == cs != L.controls_stems(gl, lex, random.Random(6))
+    few, lex_few = a_map_for_controls(15)
+    assert stops(lambda: L.controls_stems(few, lex_few, random.Random(5)), "too few entries for a kind of control")
+
+
+def test_the_letters_by_lot_stand_in_the_stems_place():
+    gl, lex = a_map_for_controls()
+    old = L.U.shown
+    L.U.shown = lambda gs, i, hide, rows, t: {"form": gs[i]["form"], "level": gs[i]["level"], "hidden": sorted(hide)}
+    try:
+        c = next(c for c in L.controls_stems(gl, lex, random.Random(5)) if c["control"] == "lot")
+        p = L.place_of_stems(c, gl, {})
+        real = gl[c["text"]][c["i"]]
+        assert p["parts"][c["at"]] == (c["junk"], None) and p["form"] == "".join(f for f, _ in p["parts"]) != real["form"] and p["level"] == "unknown"
+        assert [e for _, e in p["parts"]].count(None) == 1 and p["hidden"] == [c["i"]] and gl[c["text"]][c["i"]] is real   # the map itself is not changed
+        s = next(c for c in L.controls_stems(gl, lex, random.Random(5)) if c["control"] == "stem")
+        shown = L.place_of_stems(s, gl, {})
+        assert shown["form"] == gl[s["text"]][s["i"]]["form"] and shown["parts"][s["hide"][0]][1] is None
+    finally:
+        L.U.shown = old
 
 
 def test_part_2_is_the_brief_of_g4_with_the_source_changed():
@@ -403,11 +590,17 @@ def test_the_map_lays_what_the_figures_say():
     assert before["after"]["running"]["need"] - mine["after"]["running"]["need"] == f["laid"]["to"]["name"]
     assert mine["distinct_words_translated"] - before["distinct_words_translated"] == len(f["words"])
     a, again = figs()["part_1_again"], layers[len(L.BEFORE) + 1]                # the second reading of part 1 is the layer after it
-    assert again["name"] == L.LAYER_AGAIN and again is layers[-1]
+    assert again["name"] == L.LAYER_AGAIN and again is layers[-2]
     assert (again["places"], again["why"], again["to"], again["was"]) == (a["laid"]["lines"], a["laid"]["why"], a["laid"]["to"], a["laid"]["was"])
     assert again["after"]["running"]["translated"] - mine["after"]["running"]["translated"] == a["laid"]["to"]["meaning"]
     assert mine["after"]["running"]["need"] - again["after"]["running"]["need"] == a["laid"]["to"]["name"]
     assert again["distinct_words_translated"] - mine["distinct_words_translated"] == len(a["words"])
+    s, last = stems(), layers[-1]                                               # part 3, the leftover stems, is the last layer
+    assert last["name"] == L.LAYER_STEMS
+    assert (last["places"], last["why"], last["to"], last["was"]) == (s["laid"]["lines"], s["laid"]["why"], s["laid"]["to"], s["laid"]["was"])
+    assert last["after"]["running"]["translated"] - again["after"]["running"]["translated"] == sum(s["laid"]["to"].get(k, 0) for k in W.READ)
+    assert again["after"]["running"]["need"] - last["after"]["running"]["need"] == s["laid"]["to"]["name"]
+    assert last["distinct_words_translated"] == again["distinct_words_translated"] and s["words"] == []
 
 
 def test_the_page_says_what_the_figures_say():
@@ -582,6 +775,116 @@ def test_the_second_readings_page_says_what_the_figures_say():
     assert "`data/sources/g8b/run.py`" not in text and "- `python3 -I src/leftover.py layer-again`" not in text
 
 
+def test_the_stems_figures_add_up_and_hold_counts_only():
+    f = stems()
+    assert f["places"] == sum(f["places_by_run"].values()) == sum(f["verdicts"].values()) == f["answered_by_both"]
+    assert sum(sum(v.values()) for v in f["verdicts_by_run"].values()) == f["places"]
+    assert f["lines_expected"] == f["places"] + sum(f["controls"].values()) == f["answered"]["1"] == f["answered"]["2"]
+    assert f["controls"] == dict.fromkeys(f["controls"], L.N_STEMS) and set(f["controls"]) == set(L.KINDS_STEMS) and f["control_entries"] == {"stem": L.N_STEMS}
+    for j in "12":
+        c = f["controls_by_checker"][j]
+        for kind in L.KINDS_STEMS:
+            assert sum(v for k, v in c[kind].items() if k.startswith("called_")) == c[kind]["shown"] == L.N_STEMS, (j, kind)
+        assert c["stem_with_its_entry"] <= c["stem"].get("called_known", 0)
+    assert f["bars_set"] == {"kappa": L.BARS["kappa"], "found_at_least": L.HIT, "said_wrongly_at_most": L.FALSE, "of": L.N_STEMS}
+    assert f["general"]["kappa"] == (f["kappa"] >= L.BARS["kappa"])
+    assert f["taken"] == {v: all(f["general"].values()) and all(f["bars"][v].values()) for v in L.VERDICTS}
+    # each bar is what the controls say
+    c = f["controls_by_checker"]
+    found = {"known": lambda x: x["stem_with_its_entry"], "ending": lambda x: x["ending"].get("called_ending", 0), "name": lambda x: x["name"].get("called_name", 0)}
+    for v in L.VERDICTS:
+        assert f["bars"][v]["found"] == all(found[v](c[j]) >= L.HIT * L.N_STEMS for j in "12"), v
+        assert f["bars"][v]["not_said_of_lot_letters"] == all(c[j]["lot"].get(f"called_{v}", 0) <= L.FALSE * L.N_STEMS for j in "12"), v
+    assert f["bars"]["name"]["not_said_of_known_stems"] == all(c[j]["stem"].get("called_name", 0) <= L.FALSE * L.N_STEMS for j in "12")
+    laid = f["laid"]
+    assert laid["lines"] == sum(laid["why"].values()) == sum(laid["to"].values()) == sum(laid["was"].values())
+    assert laid["lines"] + sum(f["left_out"].values()) == sum(f["verdicts"].get(v, 0) for v in L.VERDICTS)
+    assert set(laid["why"]) <= set(M.WHY) and set(laid["to"]) <= set(W.READ + W.NAMED) and set(laid["was"]) <= set(W.OPEN)
+    assert laid["to"].get("name", 0) == laid["why"].get("name", 0) == f["verdicts"].get("name", 0) and f["words"] == []
+    s = f["steadiness"]
+    assert s["with_one_verdict"] <= s["at_two_places_or_more"] <= s["spellings"] <= f["places"] and sum(s["its_verdicts"].values()) == s["the_most_places"]
+    assert f["one_unnamed_part"] <= f["places"]
+
+    def strings(o, key=None):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                yield from strings(v, k)
+        elif isinstance(o, list):
+            for v in o:
+                yield from strings(v, key)
+        elif isinstance(o, str):
+            yield key, o
+    for key, v in strings(f):                                                   # no spelling, no entry, no word of a pack: the step's name and its times
+        assert (key == "step" and v == L.WHEN_STEMS["step"]) or (key in ("set_in", "set", "started", "first_answer", "last_answer", "counted")
+                                                                   and re.fullmatch(r"[0-9a-f]{7}|\d\d:\d\d:\d\d", v)), (key, v)
+
+
+def test_the_stems_page_says_what_the_figures_say():
+    f, text = stems(), page(PAGE_STEMS)
+    v, laid, one, two = f["verdicts"], f["laid"], f["controls_by_checker"]["1"], f["controls_by_checker"]["2"]
+    names, grammar = laid["to"]["name"], laid["to"]["grammar"]
+    assert f"{laid['lines']} of the {f['places']} places are laid, {names} as names and {grammar} as a word of grammar" in text
+    assert "No stem was recognised as a word the lexicon knows." in text and "known" not in v
+    assert f"the map's seventh layer, `{L.LAYER_STEMS}`" in text and "`leftover_stems_figures.json`" in text and "`src/leftover.py`" in text
+    assert f"the {f['places']} places of [the rare spellings](rare_spellings.md)" in text
+    assert f"({f['places_by_run']['g2']} of G2, {f['places_by_run']['g4']} of G4), on the map with its six layers" in text and len(L.BEFORE_STEMS) == 6
+    controls = sum(f["controls"].values())
+    assert f"**Controls: {controls} places of known answer,** {L.N_STEMS} of each kind" in text
+    assert f"Each kind takes {L.N_STEMS} different entries of the lexicon" in text
+    assert f"two for each of {f['packs']} packs ({f['lines_expected']} places), each a fresh agent (Opus): {2 * f['packs']}. Seed {L.SEED_STEMS}." in text
+    hit, false = round(L.HIT * L.N_STEMS), round(L.FALSE * L.N_STEMS)
+    assert (f"| Verdict | It is found (each checker, at least {hit} of {L.N_STEMS}) | It is not said wrongly (each checker, at most {false} of "
+            f"{L.N_STEMS}) |") in text
+    assert f"| Verdict | Found (at least {hit} of {L.N_STEMS}) | Said wrongly (at most {false} of {L.N_STEMS}) | |" in text
+    assert f"Cohen's kappa of the two checkers over the five cases, on the real places, is {L.BARS['kappa']} or more." in text
+    assert f"| Every place answered by both | {f['lines_expected']} of {f['lines_expected']} ({f['places']} places, {controls} controls) | met |" in text
+    assert f"| Kappa of 0.6 or more on the real places | {f['kappa']:.2f} | met |" in text and all(f["taken"].values())
+    lot = lambda x, case: x["lot"].get(f"called_{case}", 0)                     # noqa: E731
+    assert (f"| A known word | {one['stem_with_its_entry']} and {two['stem_with_its_entry']} hidden stems named with their entry | "
+            f"{lot(one, 'known')} and {lot(two, 'known')} runs of lot letters called a known word | met |") in text
+    assert (f"| Ending | {one['ending']['called_ending']} and {two['ending']['called_ending']} | {lot(one, 'ending')} and {lot(two, 'ending')} runs of lot "
+            f"letters called ending | met |") in text
+    assert (f"| A name | {one['name']['called_name']} and {two['name']['called_name']} | {lot(one, 'name')} and {lot(two, 'name')} runs of lot letters, and "
+            f"{one['stem'].get('called_name', 0)} and {two['stem'].get('called_name', 0)} hidden stems, called a name | met |") in text
+    for label, key in (("unknown", "unknown"), ("a name", "name"), ("ending", "ending"), ("a known word", "known"), ("not agreed", "not agreed")):
+        assert f"| {label} | {v.get(key, 0)} |" in text, label
+    assert set(v) <= {"unknown", "name", "ending", "known", "not agreed"}
+    assert f"**What can be laid: {laid['lines']} places,** {names} as names and {grammar} as a word of grammar" in text
+    assert f["left_out"] == {} and "No place is left out for a second unnamed part or for another stem without a meaning." in text
+    assert (f"though both found such stems where they were hidden ({one['stem_with_its_entry']} and {two['stem_with_its_entry']} of "
+            f"{L.N_STEMS})") in text
+    s = f["steadiness"]
+    assert (s["the_most_places"], s["its_verdicts"]) == (5, {"name": 2, "not agreed": 2, "unknown": 1})
+    assert "One spelling stands at five places of one text: the two checkers call it a name at two, differ at two, and call it unknown at one." in text
+    assert f"Cost: {f['cost']['agents']} agents, {f['cost']['tokens']:,} tokens" in text and f["cost"]["agents"] == 2 * f["packs"]
+    w = f["when"]
+    assert (f"The eight checkers were started at {w['started'][:5]}, after the commit with the bars ({w['set']}); their answers came between "
+            f"{w['first_answer'][:5]} and {w['last_answer'][:5]}.") in text and f"counted at {w['counted'][:5]}" in text
+    # the map with this layer: the shares divided from the counts
+    m = json.loads(M.PUBLIC.read_text(encoding="utf-8"))
+    by_name = {x["name"]: x for x in m["layers"]}
+    mine, before = by_name[L.LAYER_STEMS], by_name[L.LAYER_AGAIN]
+    of = lambda x: f"{100 * x['translated'] / x['need']:.1f}%"                  # noqa: E731
+    a, b = mine["after"], before["after"]
+    star, star0 = M.star_pct(mine["north_star"]), M.star_pct(before["north_star"])
+    assert (f"{a['running']['translated']:,} of the {a['running']['need']:,} running words that need a meaning are translated "
+            f"({of(a['running'])}, from {of(b['running'])}), {a['spellings']['translated']} of {a['spellings']['need']:,} distinct spellings "
+            f"({of(a['spellings'])}, from {of(b['spellings'])}) and {mine['north_star']['translated']} of about "
+            f"{mine['north_star']['distinct_words']['point']:,} distinct words ({star['point']}, between {star['low']} and {star['high']}, from "
+            f"{star0['point']})") in text
+    gone = before["north_star"]["unnamed_stems"]["now"] - mine["north_star"]["unnamed_stems"]["now"]
+    assert (f"the {names} names leave the count of words that need a meaning, and {gone} of the stems the map could not name is now a name") in text
+    assert b["running"]["need"] - a["running"]["need"] == names and mine["north_star"]["translated"] == before["north_star"]["translated"]
+    assert "`data/sources/g9/run.py`" not in text and "- `python3 -I src/leftover.py layer-stems`" not in text
+    for cmd in ("packs-stems", "count-stems", "layer-stems", "public"):
+        assert f"python3 -I src/leftover.py {cmd}" in PAGE_STEMS.read_text(encoding="utf-8") and cmd in L.COMMANDS, cmd
+    # the two earlier pages of the step point here
+    for path in (PAGE, PAGE_AGAIN):
+        assert "[leftover_stems.md](leftover_stems.md)" in path.read_text(encoding="utf-8"), path.name
+    assert (f"{laid['lines']} of them are laid, {names} as names and {grammar} as a word of grammar, the map's seventh layer; no stem was recognised as a "
+            f"word the lexicon knows") in page()
+
+
 def test_the_summaries_name_the_step():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "python3 -I tests/test_leftover.py" in readme and "- `python3 -I src/leftover.py public`" in readme
@@ -595,6 +898,20 @@ def test_the_summaries_name_the_step():
         assert f"{again['lines']} places, {again['to']['meaning']} of them as translated words and {again['to']['name']} as names" in text, name
     index = (ROOT / "data/INDEX.md").read_text(encoding="utf-8")
     assert "`data/sources/g8/`" in index and "`data/sources/g8b/`" in index and "`data/sources/rare/`" in index
+    # part 3, and the map as it stands with its layer
+    s, m = stems(), json.loads(M.PUBLIC.read_text(encoding="utf-8"))
+    of = lambda x: f"{100 * x['translated'] / x['need']:.1f}%"                  # noqa: E731
+    r, sp, n, star = m["current"]["running"], m["current"]["spellings"], m["north_star"], M.star_pct(m["north_star"])
+    stands = (f"{r['translated']:,} of the {r['need']:,} running words that need a meaning are translated ({of(r)}), {sp['translated']} of "
+              f"{sp['need']:,} distinct spellings ({of(sp)}) and {n['translated']} of about {n['distinct_words']['point']:,} distinct words "
+              f"({star['point']}, between {star['low']} and {star['high']})")
+    for name in ("README.md", "NEXT_STEPS.md", "REPORT.md"):
+        text = " ".join((ROOT / name).read_text(encoding="utf-8").split())
+        assert "leftover_stems.md" in text and (name == "NEXT_STEPS.md" or '"run it and document everything in our doc"' in text), name
+        assert (f"The map's seventh layer lays {s['laid']['lines']} places, {s['laid']['to']['name']} of them as names and {s['laid']['to']['grammar']} as a "
+                f"translated word") in text, name
+        assert f"The map as it stands: {stands}" in text, name
+    assert "`data/sources/g9/`" in index and "`packs-stems`, `count-stems`, `layer-stems`" in readme
 
 
 # ------------------------------------------------------------------------------------------- with the local files
@@ -697,6 +1014,100 @@ def test_part_2_writes_its_packs_and_results_again():
         finally:
             R.HOME, L.HOME2, W.OUT = live, mine, out
     assert sorted(it["item"] for it in L.picked()[0]) == sorted(e["entry"] for e in figs()["part_2"]["by_entry"])
+
+
+LOCAL_STEMS = ("data/sources/g9/result.json", "data/sources/g9/key.json", "data/sources/g9/overlay.jsonl", "data/sources/g9/tokens.json",
+               "data/sources/g8b/overlay.jsonl", "data/sources/rare/g4m/overlay.jsonl", "data/sources/v6/analysts/glosses.jsonl", "data/rilly2003")
+
+
+def test_the_stems_figures_are_the_count_of_the_local_files():
+    needs(*LOCAL_STEMS)
+    assert L.figures_stems() == stems()
+    assert stems()["cost"] == {"agents": 8, "tokens": sum(json.loads(L.TOKENS_STEMS.read_text(encoding="utf-8"))["checkers"].values())}
+
+
+def test_the_stems_layer_is_what_the_script_builds():
+    needs(*LOCAL_STEMS)
+    lines, apart = L.build_stems()
+    assert lines == M.lines_of(M.LAYERS[-1]) and M.LAYERS[-1]["name"] == L.LAYER_STEMS and apart == stems()["left_out"]
+    gl = L.before_stems()                                                       # the map with the six layers before it: every place open and not yet laid
+    assert all(gl[o["text"]][o["n"] - 1]["level"] == o["was"] and "layer" not in gl[o["text"]][o["n"] - 1] for o in lines)
+    mine = {(o["text"], o["n"]) for o in lines}
+    assert len(mine) == len(lines) and not any(mine & {(o["text"], o["n"]) for o in M.lines_of(l)} for l in M.LAYERS[:-1])
+    res = L.read("result.json", L.HOME_STEMS)                                   # only the places of a verdict whose bars are met, and all of them
+    by = {(r["text"], r["n"]): r["verdict"] for r in res["rows"]}
+    assert all(res["taken"].values()) and {k for k, v in by.items() if v in L.VERDICTS} == mine
+    assert all((o["level"] == "name") == (by[o["text"], o["n"]] == "name") for o in lines)
+    # the places are those of G2 and G4 that part 1 was not given: none of its places is among them
+    for home in (L.HOME, L.HOME_AGAIN):
+        assert not {(p["text"], p["i"]) for p in L.read("key.json", home) if p["control"] is None} & {(t, n - 1) for t, n in by}, home.name
+
+
+def test_the_script_writes_the_stems_packs_again():
+    """Part 3 again in a folder of its own, the checkers' answers copied in afterwards: the key and the packs of the
+    run (but for the folder the brief names), its result and its lines. The controls: 20 of each kind, each kind
+    from 20 different entries, no word twice, none of them a real place."""
+    needs(*LOCAL_STEMS, *[f"data/sources/g9/{x}" for x in ("packs", "answers1", "answers2")])
+    live = L.HOME_STEMS
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        quiet(L.packs_stems, d)
+        assert L.read("key.json", d) == L.read("key.json", live) and L.read("groups.json", d) == L.read("groups.json", live)
+        names = sorted(p.name for p in (live / "packs").iterdir())
+        assert names == sorted(p.name for p in (d / "packs").iterdir()) and len(names) == 8
+        for n in names:
+            mine = (d / "packs" / n).read_text(encoding="utf-8").replace(str(d), str(live.relative_to(ROOT)))
+            assert mine == (live / "packs" / n).read_text(encoding="utf-8"), n
+            assert mine.startswith(L.BRIEF.split("{places}")[0])                # the brief of the leftover parts, word for word
+        assert stops(lambda: L.packs_stems(live), "answers exist: the packs are not written again")
+        for c in (1, 2):
+            shutil.copytree(live / f"answers{c}", d / f"answers{c}", dirs_exist_ok=True)
+        quiet(L.count_stems, d)
+        assert (d / "result.json").read_bytes() == (live / "result.json").read_bytes()
+        quiet(L.layer_stems, d)
+        assert (d / "overlay.jsonl").read_bytes() == (live / "overlay.jsonl").read_bytes()
+    key, gl = L.read("key.json", live), L.before_stems()
+    ctrl = [p for p in key if p["control"]]
+    assert collections.Counter(p["control"] for p in ctrl) == dict.fromkeys(L.KINDS_STEMS, L.N_STEMS)
+    assert len({(p["text"], p["i"]) for p in key}) == len(key) == stems()["lines_expected"]
+
+    def stem(p):
+        return next(x for x in gl[p["text"]][p["i"]]["parts"] if x.get("entry") == "NAME" or not W.affix(x["entry"]))
+    for kind in ("stem", "ending", "lot"):
+        assert len({stem(p)["entry"] for p in ctrl if p["control"] == kind}) == L.N_STEMS, kind
+    assert all(p["answer_entry"] == stem(p)["entry"] and len(stem(p)["form"]) >= 3 for p in ctrl if p["control"] == "stem")
+    assert all(len(p["junk"]) == max(3, len(stem(p)["form"])) and p["form"] != gl[p["text"]][p["i"]]["form"] for p in ctrl if p["control"] == "lot")
+    assert sum(any(x.get("entry") == "NAME" for x in gl[p["text"]][p["i"]]["parts"]) for p in ctrl if p["control"] == "name") == 9
+    # every real place hangs on an ending or a particle that both checkers of G2 or G4 had recognised, and its stem is unnamed
+    assert all(W.affix(p["entry"]) and any(e is None for _, e in p["parts"]) for p in key if p["control"] is None)
+
+
+def test_the_stems_rules_were_in_git_before_the_checkers_were_started():
+    def git(*args):
+        return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True).stdout
+    w = L.WHEN_STEMS
+    assert git("log", "-1", "--format=%cI", w["set_in"]).strip() == f"2026-11-16T{w['set']}-08:00"
+    assert w["set"] < w["started"] < w["first_answer"] <= w["last_answer"] < w["counted"]
+    for phrase in ("## 3. The bars, set before any checker is started", "**Each verdict then stands on its own bars.**",
+                   "| A name | the names called a name | the letters by lot called a name; the hidden stems called a name |",
+                   "- **a name** when both call it a name and the spelling has one unnamed part;",
+                   "If bar 1 or 2 is missed, nothing is taken, and the step stops until Mike has seen why."):
+        out = git("log", "--reverse", "--format=%cI", f"-S{phrase}", "--", str(PAGE_STEMS.relative_to(ROOT))).split()
+        assert out and out[0][11:19] <= w["set"], phrase
+        assert phrase in PAGE_STEMS.read_text(encoding="utf-8"), phrase
+    prompt = (ROOT / "runs/prompts/G9_stems.md").read_text(encoding="utf-8")
+    assert "The brief of the leftover parts, in [`G8_parts.md`](G8_parts.md), word for word." in prompt and "data/sources/g9/packs/P<nn>_c<1|2>.md" in prompt
+
+
+def test_the_times_of_the_stems_answers_are_the_files():
+    needs("data/sources/g9/answers1", "data/sources/g9/answers2")
+    import datetime
+    import zoneinfo
+    pacific = zoneinfo.ZoneInfo("America/Los_Angeles")
+    w = L.WHEN_STEMS
+    times = sorted(datetime.datetime.fromtimestamp(f.stat().st_mtime, pacific).strftime("%H:%M:%S")
+                   for a in w["answers"] for f in (ROOT / "data/sources" / a).glob("*.jsonl"))
+    assert len(times) == 8 and (times[0], times[-1]) == (w["first_answer"], w["last_answer"]), (times[0], times[-1])
 
 
 def test_each_rule_was_in_git_before_its_agents_were_started():
