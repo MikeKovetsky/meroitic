@@ -98,11 +98,12 @@ pp. 565-600, public domain, [archive.org `bibliothquedel234ecol`](https://archiv
    `S`, se `s`, ñ `N`, ḫ `x`, ẖ `X`; a lost or restored sign is `.`; a numeral of the stone, the 1 after each
    prince of Faras 44, is a word of its own). Two things make the division uniform, as in the Karanòg rows: a gap
    of the copy inside a word is closed where the parts together spell a word that stands in three or more of the
-   other public Griffith rows (`so (2) reyi` is `Soreyi`, `a(6) t` is `at`: 41 gaps in 23 texts; a divider is
-   never crossed), and the closing formulae are parted by the 17 pairs Griffith's Karanòg formula tables print
-   apart five times or more (`ato mẖe`, `at mẖe`, `mẖe psḫrkete`). `rendering` keeps his English rendering,
-   `doubts` the reader's unsure places, `notes` what the check changed and, for the drawn texts, the agreement of
-   the two typings.
+   other public Griffith rows (`so (2) reyi` is `Soreyi`, `a(6) t` is `at`: 21 gaps in 9 texts; a divider is
+   never crossed, and nor is a word end that a formula pair parts again: `ato mẖe` stays two words, though three
+   of those rows write `atomẖe`), and the closing formulae are parted by the 17 pairs Griffith's Karanòg formula
+   tables print apart five times or more (`ato mẖe`, `at mẖe`, `mẖe psḫrkete`). `rendering` keeps his English
+   rendering, `doubts` the reader's unsure places, `notes` what the check changed and, for the drawn texts, the
+   agreement of the two typings.
 8. **REM numbers.** Faras n is REM 05nn, as Karanòg n is REM 02nn: three passages of the *Meroitic Newsletter*
    agree ("Atpil (REM 0503/3)", the second name of Faras 3, in REM's l. 3 and Griffith's l. 2; the extended
    invocation "at Faras (REM 0534, 0538, 0544)", Griffith's nos. 34, 38 and 44; and "REM 0501 & 0546"), and

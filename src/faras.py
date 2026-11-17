@@ -29,6 +29,7 @@ a sub-folder that src/expand.py does not read, so corpus_v3 and corpus_v5 stay a
 """
 import collections
 import difflib
+import itertools
 import json
 import re
 import sys
@@ -59,6 +60,8 @@ OFFSET = 36                          # the PDF's page number less the printed on
 # printed number falls two further behind the PDF's (PDF p. 609 is p. 571, PDF p. 647 is p. 599)
 PLATES = (605, 606, 615, 616, 621, 622, 629, 630, 639, 640, 643, 644)
 REM_FARAS = re.compile(r"05(0[1-9]|[1-3]\d|4[0-6])")      # REM 0501 to 0546: Faras n is REM 05nn
+NUMERAL = re.compile(r"(?<![\d(])(\d+)(?![\d)])")       # a numeral of the stone ("1" after each prince, Faras 44),
+#                                                      not a line number "(13)"
 LINES = ROOT / "data/sources/v6/lines.jsonl"
 
 
@@ -76,6 +79,11 @@ def load(path):
     return [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()] if path.exists() else []
 
 
+def stray(final):
+    """What a final reading holds besides signs, marks and numerals (karanog.stray, with the stone's numerals let be)."""
+    return K.stray(NUMERAL.sub(" ", final or ""))
+
+
 def readings(folder=READINGS):
     """{n: the reader's object for Faras n} from every pack under folder; a text read twice in one folder, a text
     that is not 'Faras N', or a final reading that holds something neither sign nor mark stops the run. The first
@@ -89,10 +97,9 @@ def readings(folder=READINGS):
                 raise ValueError(f"{pack.name}: text {o.get('text')!r} is not 'Faras N' (1 to 46)")
             if n in out:
                 raise ValueError(f"{pack.name}: Faras {n} is read twice (also in pack {out[n]['pack']})")
-            stray = K.stray(NUMERAL.sub(" ", o.get("final", "")))   # the row's reading: signs, marks and numerals
-            if stray:
+            if stray(o.get("final")):                      # the row's reading: signs, marks and numerals
                 raise ValueError(f"{pack.name}: the final reading of Faras {n} holds "
-                                 f"{stray!r}, neither signs nor marks: {o['final']!r}")
+                                 f"{stray(o['final'])!r}, neither signs nor marks: {o['final']!r}")
             out[n] = dict(o, pack=pack.name)
     return out
 
@@ -138,7 +145,7 @@ def settled(path=SETTLED):
     out = {}
     for o in load(path):
         n = number(o.get("text"))
-        if n is None or K.stray(o.get("final", "")):
+        if n is None or stray(o.get("final")):
             raise ValueError(f"{path.name}: {o.get('text')!r} or its reading is not well formed")
         out[n] = o
     return out
@@ -183,26 +190,31 @@ def known_words(folders=GRIFFITH_ROWS, least=KNOWN):
     return {w for w, n in texts.items() if n >= least}
 
 
-def joined(runs, known, most=K.JOIN):
+def holds(words, pairs):
+    """Whether words, joined into one, stay joined: karanog.divided() parts the joined word at none of their gaps.
+    "ato" and "mẖe" spell atomẖe, which three of the other rows write, but the pair (ato, mẖe) parts it again: two
+    words that the reader set apart, not a gap of the copy."""
+    gaps = set(itertools.accumulate(len(w) for w in words[:-1]))
+    parts, _ = K.divided([[s for w in words for s in w]], pairs)
+    return not gaps & set(itertools.accumulate(len(p) for p in parts[:-1]))
+
+
+def joined(runs, known, pairs=(), most=K.JOIN):
     """The words of runs (karanog.runs: the words between two dividers, each a list of signs) as one list, with
     neighbours of one run joined where together they spell a known word: the copies leave gaps inside words (the
     altars' borders, a raised number of Griffith's), and the readers wrote a space at each gap ("so (2) reyi",
-    "a(6)t", "pSi Xte"). Two to `most` words, the longest join first; a divider is the stone's and is never crossed.
-    Returns (words, gaps closed)."""
+    "a(6)t", "pSi Xte"). Two to `most` words, the longest join first; a divider is the stone's and is never crossed,
+    and nor is a word end that the formula pairs would part again (holds()). Returns (words, gaps closed)."""
     out, closed = [], 0
     for run in runs:
         i = 0
         while i < len(run):
             j = next((j for j in range(min(len(run), i + most), i + 1, -1)
-                      if K.spell([[s for w in run[i:j] for s in w]]) in known), i + 1)
+                      if K.spell([[s for w in run[i:j] for s in w]]) in known and holds(run[i:j], pairs)), i + 1)
             out.append([s for w in run[i:j] for s in w])
             closed += j - i - 1
             i = j
     return out, closed
-
-
-NUMERAL = re.compile(r"(?<![\d(])(\d+)(?![\d)])")       # a numeral of the stone ("1" after each prince, Faras 44),
-#                                                      not a line number "(13)"
 
 
 def words_of(reading, known, pairs):
@@ -213,7 +225,7 @@ def words_of(reading, known, pairs):
         if k % 2:
             words.append([part])
             continue
-        ws, c = joined(K.runs(part), known)
+        ws, c = joined(K.runs(part), known, pairs)
         words += ws
         closed += c
     words, parted = K.divided(words, pairs)

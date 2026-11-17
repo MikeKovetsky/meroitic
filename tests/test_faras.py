@@ -124,6 +124,14 @@ def test_a_gap_of_the_copy_inside_a_known_word_is_closed():
     r = F.rows(first, {}, {}, F.formula_pairs(), {"Soreyi", "pSoXte"})[0]
     assert r["text_corpus"] == "woSi Soreyi ato mXe pSoXte" and "closes 2 gaps" in r["notes"]
     assert r["text_std"] == "(1) wosi : so (2) reyi : ato mẖe : p (7) soẖte"            # the reading as written
+    # three of the other rows write atomẖe, but the pair (ato, mẖe) parts it again: the reader's word end stands, and
+    # only the gap inside m ẖe is closed (Faras 29's "ato m (6) ẖe")
+    words, closed = F.joined(F.K.runs("ato mẖe : ato m ẖe : at mẖe"), {"atomXe", "atmXe", "mXe"}, F.formula_pairs())
+    assert F.K.spell(words).split() == ["ato", "mXe", "ato", "mXe", "at", "mXe"] and closed == 1
+    assert F.joined(F.K.runs("ato mẖe"), {"atomXe"})[1] == 1                             # without the pairs it would join
+    first = {2: made_up(2, "wosi", "wosi : ato mẖe : at m ẖe")}
+    r = F.rows(first, {}, {}, F.formula_pairs(), {"atomXe", "mXe"})[0]
+    assert r["text_corpus"] == "woSi ato mXe at mXe" and "closes 1 gap " in r["notes"] and "text_corpus parts" not in r["notes"]
 
 
 def test_a_numeral_is_a_word_of_its_own_and_a_line_number_is_not():
@@ -137,13 +145,24 @@ def test_a_numeral_is_a_word_of_its_own_and_a_line_number_is_not():
         (pathlib.Path(d) / "A").mkdir()
         (pathlib.Path(d) / "A" / "readings.jsonl").write_text(json.dumps(first[44]) + "\n")
         assert list(F.readings(pathlib.Path(d))) == [44]
+        (pathlib.Path(d) / "settled.jsonl").write_text(json.dumps(first[44]) + "\n")    # and so does the settling's
+        assert list(F.settled(pathlib.Path(d) / "settled.jsonl")) == [44]
 
 
 def test_the_known_words_are_the_other_griffith_rows():
     kw = F.known_words()
     assert {"woSi", "Soreyi", "tedxelowi", "terikelowi", "at", "ato", "mXe"} <= kw
-    assert all(w.isalpha() for w in kw) and not any(w.startswith("G-faras") for w in kw)
-    assert F.known_words(least=10_000) == set()
+    assert all(w.isalpha() for w in kw) and F.known_words(least=10_000) == set()
+    # a word counts once a text; a word with a lost sign is none; the Faras rows, a sub-folder, are not read
+    with tempfile.TemporaryDirectory() as d:
+        d = pathlib.Path(d)
+        (d / "faras").mkdir()
+        row = lambda text: json.dumps({"text_corpus": text}) + "\n"
+        (d / "griffith_a.jsonl").write_text(row("woSi woSi qore.") + row("woSi Soreyi qore.") + row("Soreyi qore."))
+        (d / "griffith_b.jsonl").write_text(row("woSi") + row("Soreyi"))
+        (d / "other.jsonl").write_text(row("ato") * 3)
+        (d / "faras" / "griffith_faras.jsonl").write_text(row("mXe") * 3)
+        assert F.known_words((d,)) == {"woSi", "Soreyi"} and F.known_words((d,), least=4) == set()
 
 
 def test_a_restoration_over_a_word_end_keeps_the_two_words():
@@ -257,6 +276,30 @@ def test_the_page_quotes_the_comparison():
         assert f"| {a['letters']} | {a['agree']} ({a['agree'] / a['letters']:.1%}) |" in page, (text, key)
 
 
+def test_the_page_quotes_the_rows():
+    """Section 3's table, the counts of sections 1 and 2 and the gaps closed are what the rows and the readers' files
+    give."""
+    rows, first, decided = rows_file(), F.readings(), F.settled()
+    page = " ".join((F.FARAS / "README.md").read_text(encoding="utf-8").split())
+    lost = lambda r: F.K.signs(r["text_std"]).count(".")                       # noqa: E731
+    for r in rows:
+        o = first[int(r["label"].split()[1])]
+        line = re.escape(f"| {r['label']} | {r['rem']} | {o['pack']} |") + r" [^|]* \| (\d+) \| (\d+) \| (\d+) \| (\d+) \| (\d+) \|"
+        m = re.search(line, page)
+        assert m and tuple(map(int, m.groups())) == (o["rows"], r["signs"], r["words"], lost(r),
+                                                      F.K.changed(o["first"], o["final"])), r["label"]
+    changed = sum(F.K.changed(o["first"], o["final"]) for o in first.values())
+    read = sum(len(F.bare(o["first"])) for o in first.values())
+    assert (f"with {sum(map(lost, rows))} lost signs and {sum(r['uncertain'] for r in rows)} query marks), in "
+            f"{sum(o['rows'] for o in first.values())} rows of the copies" in page)
+    assert f"**{changed} ({changed / read:.1%})**" in page and f"over the {read:,} signs first read" in page
+    assert f"(`kept`, {sum(len(o.get('kept', [])) for o in first.values())} places)" in page
+    assert f"(`unsure`, {sum(len(o.get('unsure', [])) for o in first.values())} places)" in page
+    known, pairs = F.known_words(), F.formula_pairs()
+    gaps = [F.words_of(decided[n]["final"] if n in decided else o["final"], known, pairs)[1] for n, o in first.items()]
+    assert f"{sum(gaps)} gaps in {sum(g > 0 for g in gaps)} texts" in page
+
+
 def test_settled_readings_differ_from_the_first_only_where_listed():
     """The settled reading is the first reader's with each listed place put right, and nothing else changed (line
     numbers stand inside words, so the places are compared without them)."""
@@ -280,6 +323,33 @@ def test_settled_readings_differ_from_the_first_only_where_listed():
             text = text.replace(bare_(p["first"]), bare_(p["settled"]), 1)
             todo.remove(p)
         assert text == bare_(o["final"]), n
+
+
+def test_the_verdicts_go_into_the_builds_file_in_place_of_the_old_ones():
+    with tempfile.TemporaryDirectory() as d:
+        ours, build = pathlib.Path(d) / "ours.jsonl", pathlib.Path(d) / "verdicts.jsonl"
+        line = lambda o: json.dumps(o) + "\n"                                    # noqa: E731
+        ours.write_text(line({"line": "L2", "same_as": "k2", "part": False, "readers": "two"}) +
+                        line({"line": "L9", "same_as": "k9", "part": True, "readers": "two"}))
+        build.write_text(line({"line": "L1", "same_as": "k1", "part": True}) + line({"line": "L2", "same_as": "", "part": False}))
+        want = [{"line": "L1", "same_as": "k1", "part": True}, {"line": "L2", "same_as": "k2", "part": False},
+                {"line": "L9", "same_as": "k9", "part": True}]
+        assert F.merge_verdicts(ours, build) == (1, 1) and F.load(build) == want
+        assert F.merge_verdicts(ours, build) == (2, 0) and F.load(build) == want            # run again: the same file
+
+
+def test_the_verdicts_are_what_both_readers_answered():
+    """verdicts.jsonl holds the line, the text and the part that both readers named, each on its own pack (local)."""
+    folder = "data/sources/faras/v6readers"
+    needs(f"{folder}/key.json", f"{folder}/r1/answers.jsonl", f"{folder}/r2/answers.jsonl")
+    key = json.loads((ROOT / folder / "key.json").read_text(encoding="utf-8"))
+    said = {}
+    for r in ("1", "2"):
+        for a in F.load(ROOT / folder / f"r{r}" / "answers.jsonl"):
+            item = key[r][a["item"]]
+            said.setdefault(item["line"], []).append((item.get(a["same_as"], ""), a["part"]))
+    agreed = {line: v[0] for line, v in said.items() if len(v) == 2 and v[0] == v[1]}
+    assert {o["line"]: (o["same_as"], o["part"]) for o in F.load(F.VERDICTS)} == agreed and len(agreed) == 2
 
 
 def test_published_recur():
@@ -316,7 +386,7 @@ def test_the_studies_of_the_map_read_the_texts_of_the_map():
     import recurring as W
     import f4
     import words as D
-    assert f4.CORPUS == X.MAPPED
+    assert f4.CORPUS == X.MAPPED and f4.INSCRIPTIONS == X.MAPPED_TABLE
     needs("data/sources/v6/analysts/corpus.jsonl", "data/sources/v6/analysts/glosses.jsonl", "data/rilly2003")
     mapped = [json.loads(l)["id"] for l in X.MAPPED.read_text(encoding="utf-8").splitlines() if l.strip()]
     glossed = [json.loads(l)["id"] for l in X.GLOSSES.read_text(encoding="utf-8").splitlines() if l.strip()]
