@@ -1,10 +1,10 @@
 # The grammar-first pilot
 
-Status on 2026-11-16, 19:22: the first round is counted (section 8): 41 of 54 rules passed on the held-back
-texts, and none of them is a finding of ours, since the sources in hand state or partly state every one. A
-second round, on the texts outside the epitaphs, is set (section 9); its finders have not been started. Working
-scripts (local, not reviewed yet): `data/sources/grammar/`; the rules' tests are frozen on the branch `grammar`.
-What the finders are given: [`runs/prompts/GRAMMAR_finders.md`](../../runs/prompts/GRAMMAR_finders.md).
+Status on 2026-11-16, 19:34: **the pilot is over, and its bar is not met.** Over two rounds 73 rules were
+proposed, 53 passed on held-back texts, and 1 is a finding of ours where 3 were needed (sections 8, 10 and 11).
+The grammar that can be tested on this corpus is the grammar the sources already describe. Working scripts
+(local, not reviewed yet): `data/sources/grammar/`; the rules' tests are frozen on the branch `grammar`. What the
+finders were given: [`runs/prompts/GRAMMAR_finders.md`](../../runs/prompts/GRAMMAR_finders.md).
 
 ## 1. What was asked
 
@@ -177,3 +177,63 @@ The second round keeps every bar of section 5 and changes what is searched:
 
 With 1,776 held-back words a rule needs a construction that comes about once in 90 words to reach 20 cases:
 few will.
+
+## 10. The second round (counted at 19:33)
+
+The six finders were started at 19:23, after the commit that set the round (19:22:34), and proposed 19 rules,
+each with its test. All 19 tests give their finder's counts on the tuning texts. They were committed at
+19:30:39 and then run once on the 1,776 held-back words that are not funerary.
+
+| Result on the held-back texts | Rules |
+|---|---|
+| Passed | 12 |
+| Holding in under 80% (three of them also under the margin) | 7 |
+
+Two readers searched the sources in hand for each of the 12 between 19:31 and 19:33.
+
+| Both readers | Rules |
+|---|---|
+| Stated by a source | 4 |
+| Stated by one reader's source, partly by the other's | 1 |
+| Partly stated | 6 |
+| Not found | 1 |
+
+**One rule is a finding of ours:** inside a word the sign `q` is followed by o or e far more often than other
+consonant signs are (140 of 169 held-back cases, 82.8%, against 43.3%). It is a fact about spelling and sound.
+Rilly reads `q` as a k spoken with rounded lips, and a grammar the project does not hold may well state it.
+
+**What the finders reported, each on its own:** outside the epitaphs the texts are too few and too broken for
+rules of word order. No frame in the graffiti, the oracular decrees or the documents reached the bar on the
+tuning texts; several candidates stood in one stela alone (REM 1003) and were dropped or failed. What passed is
+spelling (a word ends in b after e; in `-owi` after l or t; two vowel signs never meet), and three rules about
+names and titles: a name with an ending takes no article, which the sources state for two uses only.
+
+Cost: 6 finders, 739,226 tokens; 2 readers, 271,463 tokens.
+
+## 11. The verdict
+
+| Over both rounds | Rules |
+|---|---|
+| Proposed | 73 |
+| Passed on held-back texts | 53 |
+| Stated or partly stated in a source in hand | 52 |
+| A finding of ours | 1 |
+
+**The bar set beforehand was 3. It is not met, and the pilot ends here,** on its first evening: a third round
+would search the same few words again.
+
+**What it shows.**
+
+- **The testable grammar is the known grammar.** A rule needs a construction that comes back at least 20
+  times in texts it was not found in. On this corpus only the epitaph's formulas and the habits of the script
+  do, and scholars have described both.
+- **Outside the epitaphs there are about 4,000 words,** a quarter of them in one stela. That is too little to
+  test word order, endings or agreement, however regular they may be.
+- **The yield is small and real:** 53 rules that hold out of sample (a check on the map's grammar), 15 points
+  where the count is sharper than what the sources in hand say (the 9 of section 8 and 6 of this round), and
+  one rule the sources in hand do not state.
+- **It closes the second door.** Meanings cannot be read from the contexts (the blind tests), and new grammar
+  cannot be tested on this little text. What is left is evidence the project does not hold: more texts, and
+  the scholars who hold them.
+
+Cost of the pilot: 20 agents, 2,485,947 tokens.
