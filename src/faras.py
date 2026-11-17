@@ -6,11 +6,12 @@ bibliothquedel234ecol, PDF pages 601 to 648). He prints each text as a hand copy
 English rendering that spells the names, titles and formula words in Latin letters, and notes on the formulae in his
 transliteration (pp. 599-600). He prints no transliteration of whole texts and no indexes.
 
-Readers (Claude Opus 5.5) typed every text from page images, pack by pack (data/expansion/faras/readings/<pack>/
-readings.jsonl, the brief beside them): first from the copy alone (`first`), then checked against his Latin letters
-(`final`). Five texts drawn by lot before typing (BAR.md) were typed a second time by a fresh reader who saw nothing
-of the first typing (data/expansion/faras/second/). Where the two differ, the place was settled against the page
-(settled.jsonl), and the row takes the settled reading.
+Readers (Claude Opus 5.5) type the texts from page images, pack by pack (data/expansion/faras/readings/<pack>/
+readings.jsonl, the brief beside them; Faras 1 to 23 so far, README.md says why the rest wait): first from the copy
+alone (`first`), then checked against his Latin letters (`final`). Five texts drawn by lot before typing (BAR.md)
+were typed a second time by a fresh reader who saw nothing of the first typing (data/expansion/faras/second/).
+Where the two differ, the place was settled against the page (settled.jsonl), and the row takes the settled
+reading.
 
 Faras n is REM 05nn (three passages of the Meroitic Newsletter agree: README.md), as Karanòg n is REM 02nn. Each row
 is an open reading of its REM number in corpus_v6: src/v6/readings.py reads this folder like the folder of REM 1003
@@ -50,7 +51,12 @@ ITEM = "bibliothquedel234ecol"
 TEXTS = range(1, 47)
 DRAWN = (2, 10, 13, 14, 15)          # BAR.md: random.Random(20261117).sample(range(1, 47), 5), sorted
 SEED = 20261117
-OFFSET = 36                          # the PDF's page number less the printed page number (PDF p. 603 is p. 567)
+OFFSET = 36                          # the PDF's page number less the printed one before the first plate (603 is p. 567)
+# the PDF pages of Plates VIII to XIII and their blank backs, which carry no printed number: after each plate the
+# printed number falls two further behind the PDF's (PDF p. 609 is p. 571, PDF p. 647 is p. 599)
+PLATES = (605, 606, 615, 616, 621, 622, 629, 630, 639, 640, 643, 644)
+REM_FARAS = re.compile(r"05(0[1-9]|[1-3]\d|4[0-6])")      # REM 0501 to 0546: Faras n is REM 05nn
+LINES = ROOT / "data/sources/v6/lines.jsonl"
 
 
 def number(text):
@@ -134,14 +140,28 @@ def settled(path=SETTLED):
     return out
 
 
+def printed(pdf):
+    """The printed page number of a page of the PDF; a plate has none."""
+    if pdf in PLATES:
+        raise ValueError(f"PDF p. {pdf} is a plate (or its back), with no printed page number")
+    return pdf - OFFSET - sum(p < pdf for p in PLATES)
+
+
 def page(o):
-    """'p. 567 (PDF p. 603)', or 'pp. 568-569 (PDF pp. 604-605)'."""
+    """'p. 567 (PDF p. 603)', or 'pp. 568-569 (PDF pp. 604-607)' across a plate."""
     pdf = sorted(int(re.sub(r"\D", "", p)) for p in o.get("pages", []) if re.search(r"\d", p))
     if not pdf:
         return ""
     if len(pdf) == 1:
-        return f"p. {pdf[0] - OFFSET} (PDF p. {pdf[0]})"
-    return f"pp. {pdf[0] - OFFSET}-{pdf[-1] - OFFSET} (PDF pp. {pdf[0]}-{pdf[-1]})"
+        return f"p. {printed(pdf[0])} (PDF p. {pdf[0]})"
+    return f"pp. {printed(pdf[0])}-{printed(pdf[-1])} (PDF pp. {pdf[0]}-{pdf[-1]})"
+
+
+def restored(reading):
+    """The reading with a restoration that runs over a word end written as one bracket a word: "terike[li teri]kelowi"
+    (Faras 5) is "terike[li] [teri]kelowi". karanog.marked() makes a whole bracket one stretch of lost signs, which
+    would join the two words; the signs are the same either way."""
+    return re.sub(r"\[([^\]]*\s[^\]]*)\]", lambda m: " ".join(f"[{w}]" for w in m.group(1).split()), reading)
 
 
 def counted(word):
@@ -163,7 +183,7 @@ def rows(first=None, second=None, decided=None, pairs=None):
     for n in sorted(first):
         o = first[n]
         final = decided[n]["final"] if n in decided else o["final"]
-        words, parted = K.divided(K.words_of(final), pairs)
+        words, parted = K.divided(K.words_of(restored(final)), pairs)
         corpus = K.spell(words)
         notes = [f"Typed from Griffith's hand copy by Claude Opus 5.5 (pack {o['pack']}), then checked against his "
                  f"Latin letters (the names, titles and formula words of his English rendering, and his notes on the "
@@ -210,7 +230,8 @@ def measure(first=None, second=None):
         out[key] = {"agree": agree, "signs": total, "share": round(agree / total, 4) if total else None,
                     "by_text": {f"Faras {n}": dict(zip(("agree", "signs"), agreement([(first[n][key], second[n][key])])))
                                 for n in DRAWN}}
-    out["met"] = out["final"]["share"] is not None and out["final"]["share"] >= out["bar"]
+    # on the counts, not on the rounded share: 37,999 of 40,000 rounds to 0.95 and misses the bar
+    out["met"] = out["final"]["signs"] > 0 and out["final"]["agree"] * 100 >= out["final"]["signs"] * 95
     return out
 
 
@@ -258,6 +279,34 @@ def against(text, other):
     return max(len(a) - distance(a, b), 0), len(a)
 
 
+def within(text, other, folded=True):
+    """(letters of the other text that agree, its letters) for a passage quoted from a text: the other's letters less
+    the fewest edits that make them one stretch of the text, wherever it starts and ends. folded: letters spelled
+    alike (fold()); otherwise only word division and lost signs are left out (x and X, s and S stay apart)."""
+    letters = fold if folded else (lambda t: re.sub(r"[^A-Za-z]", "", t))
+    a, b = letters(other), letters(text)
+    prev = [0] * (len(b) + 1)                      # the passage may start anywhere in the text ...
+    for i, x in enumerate(a, 1):
+        cur = [i]
+        for j, y in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (x != y)))
+        prev = cur
+    return max(len(a) - min(prev), 0), len(a)      # ... and end anywhere
+
+
+def quoted(path=LINES):
+    """{REM number: [the source line]} of the source lines of Otten's files that the build of corpus_v6 gives to a
+    Faras text, as a reading or as a phrase (local), or None."""
+    if not path.exists():
+        return None
+    out = collections.defaultdict(list)
+    for o in load(path):
+        rem_ = (o.get("inscription") or "").removeprefix("REM ")
+        if REM_FARAS.fullmatch(rem_) and o.get("text"):
+            out[rem_].append(o)
+    return dict(out)
+
+
 def closed_readings(path=V6):
     """{REM number: {key: text}} of the readings corpus_v6 holds for REM 0501 to 0546 (local), or None."""
     if not path.exists():
@@ -268,20 +317,26 @@ def closed_readings(path=V6):
         for x in r["readings"]:
             if x.get("text") and not x["key"].startswith("griffith:G-faras-"):
                 for value in r.get("rem") or []:
-                    if re.fullmatch(r"05(0[1-9]|[1-3]\d|4[0-6])", value):
+                    if REM_FARAS.fullmatch(value):
                         out[value][x["key"]] = x["text"]
     return dict(out)
 
 
 def comparison(rows):
     """The counts of the comparison (public; no closed text): which held readings each typed text matches by the
-    rule, and how far each typed text agrees with the readings of its REM number that corpus_v6 already holds."""
+    rule, how far each typed text agrees with the readings of its REM number that corpus_v6 already holds, and how
+    far it agrees with the source lines (Millet's quotations) that the build gives to it."""
     by_letters = held_by_letters()
     closed = closed_readings() or {}
+    lines = quoted() or {}
     out = {"how": {"by_letters": "the rule of src/v6/readings.py (runs of five letters, formula runs left out) from "
                                  "each typed text to every reading corpus_v6 holds but the Faras rows",
                    "by_number": "the readings corpus_v6 holds under the text's REM number; letters spelled alike "
-                                "(fold()); the other's letters less the edit distance, over the other's letters"},
+                                "(fold()); the other's letters less the edit distance, over the other's letters",
+                   "lines": "the source lines of Otten's files that the build gives to the text (a quotation of a "
+                            "part of it, as a phrase or a reading): the line's letters less the fewest edits that "
+                            "make them a stretch of the typed text, over the line's letters; folded with letters "
+                            "spelled alike (fold()), strict with nothing folded but word division and lost signs"},
            "texts": {}}
     for r in rows:
         n = int(r["label"].split()[1])
@@ -290,7 +345,12 @@ def comparison(rows):
         if r["rem"] in closed:
             entry["against"] = {k: dict(zip(("agree", "letters"), against(r["text_corpus"], t)))
                                 for k, t in sorted(closed[r["rem"]].items())}
-        if entry["matches"] or entry.get("against"):
+        if r["rem"] in lines:
+            entry["lines"] = [{"key": o["key"], "class": o["class"], "by": o["by"],
+                               **{how: dict(zip(("agree", "letters"), within(r["text_corpus"], o["text"], folded)))
+                                  for how, folded in (("folded", True), ("strict", False))}}
+                              for o in sorted(lines[r["rem"]], key=lambda o: (o["file"], o["line"]))]
+        if entry["matches"] or entry.get("against") or entry.get("lines"):
             out["texts"][r["label"]] = entry
     return out
 
@@ -300,36 +360,46 @@ def comparison(rows):
 def recur(corpus_path=ROOT / "data/corpus_v6.jsonl"):
     """How the new Faras texts meet the map (src/themap.py, the map as it stands): the open spellings of the map
     that stood in one of its texts and now stand in a new Faras text too, and those that reach three texts (the
-    line of the recurring study, src/recurring.py). The map itself holds only the texts the analysts glossed, so
-    a new text is counted here from corpus_v6 (local), word by word as the build gives it; a word at a place the
-    build marks as a name is counted apart. Faras 44 is REM 0544, already on the map: only the new texts count."""
+    line of the recurring study, src/recurring.py); and how many distinct spellings of the new texts the map holds
+    already, open or not (a word with a lost sign left out). The map itself holds only the texts the analysts
+    glossed, so a new text is counted here from corpus_v6 (local), word by word as the build gives it; a word at a
+    place the build marks as a name is counted apart. Faras 44 is REM 0544, already on the map: only the new texts
+    count."""
     import themap as M
     import recurring as W
     gl = M.current()
-    level, texts, _ = W.spellings_of(gl)
+    level, on_the_map, _ = W.spellings_of(gl)
     opened = {f for f, c in level.items() if c.most_common(1)[0][0] in W.OPEN}
     corpus = load(corpus_path)
     new = [c for c in corpus if c["reading"].startswith("griffith:G-faras-") and c["id"] not in gl]
     # a text of the map that the rebuild no longer holds has been found to be a part of another inscription (Millet's
     # example line 414 is ll. 26-28 of Faras 21): its spellings are not a second text beside the Faras one
     gone = set(gl) - {c["id"] for c in corpus}
-    texts = {f: ts - gone for f, ts in texts.items()}
+    texts = {f: ts - gone for f, ts in on_the_map.items()}
     faras, as_name = collections.defaultdict(set), collections.defaultdict(set)
     for c in new:
         named = set(c.get("names") or ())
         for i, tok in enumerate(c["text"].split()):
             (as_name if i in named else faras)[tok].add(c["id"])
+    faras, as_name = dict(faras), dict(as_name)       # looked up below: no empty entry may be made by a lookup
+    spelt = [f for f in faras if "." not in f]         # the new texts' spellings, a word with a lost sign left out
+    on_map = [f for f in spelt if f in level]
+    off_map = [f for f in spelt if f not in level]
     single = sorted(f for f in opened if len(texts[f]) == 1)
-    again = [f for f in single if faras[f]]
-    reach = [f for f in opened if len(texts[f]) < W.MIN_TEXTS <= len(texts[f]) + len(faras[f])]
-    return {"map": {"inscriptions": len(gl), "open_spellings": len(opened), "in_one_text": len(single),
-                    "texts_now_part_of_another_inscription": sorted(gone)},
+    again = [f for f in single if f in faras]
+    reach = [f for f in opened if len(texts[f]) < W.MIN_TEXTS <= len(texts[f]) + len(faras.get(f, ()))]
+    return {"map": {"inscriptions": len(gl), "open_spellings": len(opened),
+                    "in_one_text_on_the_map": sum(len(on_the_map[f]) == 1 for f in opened),
+                    "in_one_text": len(single), "texts_now_part_of_another_inscription": sorted(gone)},
             "new_texts": len(new),
             "in_one_text_now_in_a_faras_text": len(again),
-            "in_one_text_now_in_a_faras_text_as_a_name_only": sum(1 for f in single if as_name[f] and not faras[f]),
+            "in_one_text_now_in_a_faras_text_as_a_name_only": sum(1 for f in single if f in as_name and f not in faras),
             "reach_three_texts": len(reach),
             "new_words": sum(len(c["text"].split()) for c in new),
-            "spellings": {f: {"map_texts": len(texts[f]), "faras_texts": len(faras[f])}
+            "new_spellings": {"distinct": len(spelt), "on_the_map": len(on_map),
+                              "open_on_the_map": sum(f in opened for f in on_map), "new_to_the_map": len(off_map),
+                              "new_to_the_map_in_two_faras_texts": sum(len(faras[f]) > 1 for f in off_map)},
+            "spellings": {f: {"map_texts": len(texts[f]), "faras_texts": len(faras.get(f, ()))}
                           for f in sorted(set(again) | set(reach))}}
 
 

@@ -1,7 +1,8 @@
 {
  "how": {
   "by_letters": "the rule of src/v6/readings.py (runs of five letters, formula runs left out) from each typed text to every reading corpus_v6 holds but the Faras rows",
-  "by_number": "the readings corpus_v6 holds under the text's REM number; letters spelled alike (fold()); the other's letters less the edit distance, over the other's letters"
+  "by_number": "the readings corpus_v6 holds under the text's REM number; letters spelled alike (fold()); the other's letters less the edit distance, over the other's letters",
+  "lines": "the source lines of Otten's files that the build gives to the text (a quotation of a part of it, as a phrase or a reading): the line's letters less the fewest edits that make them a stretch of the typed text, over the line's letters; folded with letters spelled alike (fold()), strict with nothing folded but word division and lost signs"
  },
  "texts": {
   "Faras 2": {
@@ -35,6 +36,44 @@
     }
    ]
   },
+  "Faras 7": {
+   "rem": "0507",
+   "matches": [],
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:787",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 15,
+      "letters": 15
+     },
+     "strict": {
+      "agree": 15,
+      "letters": 16
+     }
+    }
+   ]
+  },
+  "Faras 11": {
+   "rem": "0511",
+   "matches": [],
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:1368",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 7,
+      "letters": 7
+     },
+     "strict": {
+      "agree": 7,
+      "letters": 7
+     }
+    }
+   ]
+  },
   "Faras 21": {
    "rem": "0521",
    "matches": [
@@ -65,6 +104,99 @@
      "share_other": 0.875,
      "shared": 28,
      "key": "otten:MilletExamples.txt:56"
+    }
+   ],
+   "lines": [
+    {
+     "key": "otten:MilletExamples.txt:56",
+     "class": "phrase",
+     "by": "the rule: a sure match to one inscription",
+     "folded": {
+      "agree": 41,
+      "letters": 42
+     },
+     "strict": {
+      "agree": 41,
+      "letters": 42
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:58",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 7,
+      "letters": 7
+     },
+     "strict": {
+      "agree": 7,
+      "letters": 7
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:414",
+     "class": "phrase",
+     "by": "the rule: a sure match to one inscription",
+     "folded": {
+      "agree": 41,
+      "letters": 42
+     },
+     "strict": {
+      "agree": 41,
+      "letters": 42
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:764",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 8,
+      "letters": 8
+     },
+     "strict": {
+      "agree": 8,
+      "letters": 8
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:765",
+     "class": "phrase",
+     "by": "its letters stand whole in one held text",
+     "folded": {
+      "agree": 6,
+      "letters": 6
+     },
+     "strict": {
+      "agree": 6,
+      "letters": 6
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:985",
+     "class": "phrase",
+     "by": "the rule: a sure match to one inscription",
+     "folded": {
+      "agree": 21,
+      "letters": 21
+     },
+     "strict": {
+      "agree": 21,
+      "letters": 21
+     }
+    },
+    {
+     "key": "otten:MilletExamples.txt:1248",
+     "class": "phrase",
+     "by": "the rule: a sure match to one inscription",
+     "folded": {
+      "agree": 21,
+      "letters": 21
+     },
+     "strict": {
+      "agree": 21,
+      "letters": 21
+     }
     }
    ]
   }

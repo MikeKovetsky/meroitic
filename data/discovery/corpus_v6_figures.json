@@ -66,7 +66,7 @@
  },
  "corpus_v6": {
   "texts": 570,
-  "words": 10648,
+  "words": 10649,
   "words_of_inscriptions_in_corpus_v5": 6579,
   "name_words_marked": 87,
   "numerals_set": 13
@@ -426,9 +426,9 @@
  "coverage": {
   "all": {
    "texts": 570,
-   "words": 10648,
+   "words": 10649,
    "translated": 5458,
-   "share": 0.5126,
+   "share": 0.5125,
    "levels": {
     "meaning": 3057,
     "grammar": 690,
@@ -437,15 +437,15 @@
     "hypothesis": 1310,
     "kind": 587,
     "unknown": 2041,
-    "lost": 1252
+    "lost": 1253
    }
   },
   "by_part": {
    "Griffith's other volumes": {
     "texts": 159,
-    "words": 1581,
+    "words": 1582,
     "translated": 689,
-    "share": 0.4358
+    "share": 0.4355
    },
    "Karanog and Shablul (Griffith 1911)": {
     "texts": 150,
@@ -468,7 +468,7 @@
   },
   "near_copies_once": {
    "texts": 560,
-   "words": 10613,
+   "words": 10614,
    "translated": 5436
   },
   "inscriptions_that_were_in_corpus_v5": {
@@ -489,9 +489,9 @@
   },
   "inscriptions_new_to_the_corpus": {
    "texts": 282,
-   "words": 4069,
+   "words": 4070,
    "translated": 1508,
-   "share": 0.3706,
+   "share": 0.3705,
    "levels": {
     "meaning": 832,
     "grammar": 262,
@@ -500,7 +500,7 @@
     "hypothesis": 367,
     "kind": 151,
     "unknown": 1165,
-    "lost": 878
+    "lost": 879
    }
   },
   "texts": {

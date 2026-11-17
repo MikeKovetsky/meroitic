@@ -2,6 +2,7 @@
  "map": {
   "inscriptions": 548,
   "open_spellings": 1940,
+  "in_one_text_on_the_map": 1681,
   "in_one_text": 1678,
   "texts_now_part_of_another_inscription": [
    "Millet 1968 p. 321 (MilletExamples.txt line 414)"
@@ -11,7 +12,14 @@
  "in_one_text_now_in_a_faras_text": 3,
  "in_one_text_now_in_a_faras_text_as_a_name_only": 0,
  "reach_three_texts": 2,
- "new_words": 365,
+ "new_words": 366,
+ "new_spellings": {
+  "distinct": 211,
+  "on_the_map": 87,
+  "open_on_the_map": 17,
+  "new_to_the_map": 124,
+  "new_to_the_map_in_two_faras_texts": 0
+ },
  "spellings": {
   "anSyi": {
    "map_texts": 1,

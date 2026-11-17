@@ -41,6 +41,18 @@ def test_page():
     assert F.page({"pages": ["p603"]}) == "p. 567 (PDF p. 603)"
     assert F.page({"pages": ["p604", "p603"]}) == "pp. 567-568 (PDF pp. 603-604)"
     assert F.page({"pages": []}) == ""
+    # each plate and its blank back carry no printed number (the running heads of the PDF's pages: 609 is 571,
+    # 619 is 579, 623 is 581, 647 is 599)
+    assert F.page({"pages": ["p609"]}) == "p. 571 (PDF p. 609)" and F.page({"pages": ["p619"]}) == "p. 579 (PDF p. 619)"
+    assert F.page({"pages": ["p623"]}) == "p. 581 (PDF p. 623)"
+    assert F.page({"pages": ["p604", "p607"]}) == "pp. 568-569 (PDF pp. 604-607)"
+    assert [F.printed(p) for p in (601, 647, 648)] == [565, 599, 600]       # the article is pp. 565-600
+    try:
+        F.printed(615)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a plate has no printed page number")
 
 
 # --- the measure ---
@@ -63,6 +75,16 @@ def test_agreement_counts_signs_not_letters_and_leaves_lost_signs_out():
 def test_places_are_the_stretches_that_differ():
     assert F.places("wos : ato", "wos : ato") == []
     assert F.places("wos : ato mẖe", "wos : at mḫe") == [("to", "t", "wosa", "mẖe"), ("ẖ", "ḫ", "satom", "e")]       # four signs either side: s a to m
+
+
+# --- the comparison ---
+def test_a_quoted_passage_is_scored_against_its_best_stretch_of_the_text():
+    assert F.within("abcdefgh", "cdef") == (4, 4) and F.within("abcdefgh", "cdxf") == (3, 4)
+    assert F.within("ab", "abcd") == (2, 4) and F.within("", "ab") == (0, 2) and F.within("ab", "") == (0, 0)
+    # folded, x and X and s and S are one letter (fold()); strict, they are two and only word division goes
+    assert F.within("woSi SSor lxlowi", "SSor lXlowi") == (9, 9)
+    assert F.within("woSi SSor lxlowi", "SSor lXlowi", folded=False) == (9, 10)
+    assert F.within("aXrr. amodteli", "aXrrb amodteli", folded=False) == (12, 13)    # a lost sign counts against
 
 
 # --- the rows ---
@@ -88,6 +110,17 @@ def test_rows_from_made_up_readings():
     r2 = rows[1]
     assert r2["text_std"] == "wos : ẖol" and "agree on 5 of 6 signs" in r2["notes"] and "(1 place;" in r2["notes"]
     assert "ẖol (his Latin: khêl)" in r2["notes"] and r2["notes"].endswith("a note")
+
+
+def test_a_restoration_over_a_word_end_keeps_the_two_words():
+    """Faras 5: "terike[li teri](6)kelowi" is terikeli terikelowi, its middle restored; the bracket's lost signs
+    stay in both words and the reading as written is untouched."""
+    assert F.restored("keyñ terike[li teri](6)kelowi") == "keyñ terike[li] [teri](6)kelowi"
+    assert F.restored("so[re](2)yi [:] ye") == "so[re](2)yi [:] ye"                   # nothing to part
+    first = {5: made_up(5, "keyñ", "(5)keyñ terike[li teri](6)kelowi")}
+    r = F.rows(first, {}, {}, F.formula_pairs())[0]
+    assert r["text_corpus"] == "keyN terike.. ...kelowi" and r["words"] == 3
+    assert r["text_std"] == "(5)keyñ terike[li teri](6)kelowi" and r["signs"] == 4 + 5 + 6    # restored: lost
 
 
 def test_readings_stops_on_what_is_not_a_reading():
@@ -139,7 +172,19 @@ def test_published_measure():
     m = json.loads(F.MEASURE.read_text())
     assert m == F.measure()
     assert m["texts"] == [f"Faras {n}" for n in F.DRAWN] and m["bar"] == 0.95
-    assert m["met"] == (m["final"]["share"] >= 0.95)
+    assert m["met"] == (m["final"]["agree"] / m["final"]["signs"] >= 0.95)
+
+
+def test_the_bar_is_met_on_the_counts():
+    """95 of 100 signs meets the bar and 94 do not; 37,999 of 40,000, whose share rounds to 0.95, do not."""
+    real, texts = F.agreement, {n: made_up(n, "", "") for n in F.DRAWN}
+    try:
+        for agree, total, met in ((95, 100, True), (94, 100, False), (37999, 40000, False), (38000, 40000, True)):
+            F.agreement = lambda pairs, a=agree, t=total: (a, t)
+            m = F.measure(texts, texts)
+            assert m["met"] is met and m["final"]["share"] == round(agree / total, 4), (agree, total)
+    finally:
+        F.agreement = real
 
 
 def test_published_comparison_has_counts_only():
@@ -154,32 +199,75 @@ def test_published_comparison_has_counts_only():
             for v in x:
                 walk(v, at)
         elif isinstance(x, str):
-            assert at[:1] == ("how",) or at[-1] in ("verdict", "key", "rem"), at   # no text, closed or ours
+            assert at[:1] == ("how",) or at[-1] in ("verdict", "key", "rem", "class", "by"), at   # no text
     walk(figs)
     assert "text" not in keys
 
 
 def test_comparison_recomputed():
-    needs("data/sources/v6/inscriptions.jsonl", "data/otten")
+    needs("data/sources/v6/inscriptions.jsonl", "data/sources/v6/lines.jsonl", "data/otten")
     assert json.loads(F.COMPARISON.read_text()) == F.comparison(F.rows())
 
 
+def test_the_page_quotes_the_comparison():
+    """What the page says of Millet's quotations is what comparison.json counts."""
+    texts = json.loads(F.COMPARISON.read_text())["texts"]
+    page = " ".join((F.FARAS / "README.md").read_text(encoding="utf-8").split())
+    lines = texts["Faras 21"]["lines"]
+    agree, letters = (sum(l["strict"][k] for l in lines) for k in ("agree", "letters"))
+    assert len(lines) == 7 and f"{agree} of their {letters} letters" in page
+    (l787,) = texts["Faras 7"]["lines"]
+    assert f"{l787['strict']['agree']} of {l787['strict']['letters']}" in page
+
+
 def test_settled_readings_differ_from_the_first_only_where_listed():
+    """The settled reading is the first reader's with each listed place put right, and nothing else changed (line
+    numbers stand inside words, so the places are compared without them)."""
+    bare_ = lambda t: re.sub(r"\(\d+\)", "", t)
+    # each line number with the signs before it: no place settled here adds or drops a sign, so they stand alike
+    at = lambda t: [(m.group(0), len(F.K.signs(t[:m.start()]))) for m in re.finditer(r"\(\d+\)", t)]
     first, decided = F.readings(), F.settled()
     assert sorted(decided) == list(F.DRAWN)
     for n, o in decided.items():
-        if not o["places"]:
-            assert o["final"] == first[n]["final"]
-        for p in o["places"]:                       # line numbers stand inside words: compare without them
-            assert re.sub(r"\(\d+\)", "", p["settled"]) in re.sub(r"\(\d+\)", "", o["final"]) and p["why"]
+        assert at(o["final"]) == at(first[n]["final"]), n
+        for p in o["places"]:
+            assert p["why"] and bare_(p["settled"]) in bare_(o["final"]), (n, p)
+            assert p["first"] == p["settled"] or len(F.K.signs(p["first"])) == len(F.K.signs(p["settled"])), (n, p)
+        # a place where the first reading stands changes nothing; two places can lie on one stretch (Faras 13's
+        # psiḫ r, parted, and psiḫr with or without lost signs after it), so each is put right once its stretch is
+        # found, in whatever order
+        text, todo = bare_(first[n]["final"]), [p for p in o["places"] if p["first"] != p["settled"]]
+        while todo:
+            p = next((p for p in todo if bare_(p["first"]) in text), None)
+            assert p is not None, (n, todo)
+            text = text.replace(bare_(p["first"]), bare_(p["settled"]), 1)
+            todo.remove(p)
+        assert text == bare_(o["final"]), n
 
 
 def test_published_recur():
     needs("data/sources/v6/analysts/glosses.jsonl", "data/corpus_v6.jsonl")
     r = json.loads(F.RECUR.read_text())
     assert r == F.recur()
-    assert r["in_one_text_now_in_a_faras_text"] <= r["map"]["in_one_text"]
+    assert r["in_one_text_now_in_a_faras_text"] <= r["map"]["in_one_text"] <= r["map"]["in_one_text_on_the_map"]
     assert r["new_texts"] == len([n for n in F.readings() if F.rem(n) != "0544"])
+    s = r["new_spellings"]
+    assert s["on_the_map"] + s["new_to_the_map"] == s["distinct"] and s["open_on_the_map"] <= s["on_the_map"]
+
+
+def test_the_page_quotes_the_recount():
+    """What the page says recurs is what recur.json counts (public)."""
+    r = json.loads(F.RECUR.read_text())
+    s, m = r["new_spellings"], r["map"]
+    page = " ".join((F.FARAS / "README.md").read_text(encoding="utf-8").split())
+    assert f"{m['in_one_text_on_the_map']:,} open spellings that stand in one of its texts" in page
+    assert f"{r['in_one_text_now_in_a_faras_text']} of them now stand in a new Faras text too" in page
+    assert f"{r['reach_three_texts']} open spellings reach three texts" in page
+    assert (f"Of the {s['distinct']} distinct spellings of the new texts" in page and f"{s['on_the_map']} are on the "
+            f"map already, {s['open_on_the_map']} of them open; {s['new_to_the_map']} are new to it" in page)
+    assert s["new_to_the_map_in_two_faras_texts"] == 0 and "none of those stands in two Faras texts" in page
+    rows = rows_file()
+    assert f"{len(rows)} texts, {sum(r['signs'] for r in rows):,} signs, {sum(r['words'] for r in rows)} words" in page
 
 
 def test_the_studies_of_the_map_read_the_texts_of_the_map():

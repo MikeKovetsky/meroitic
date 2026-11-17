@@ -1,8 +1,9 @@
 # corpus_v6: one inscription once
 
-Built on 2026-11-12. This is piece F1 (step 22) of [`NEXT_STEPS.md`](../../NEXT_STEPS.md): a corpus keyed by
-inscription, with real names and a source for every reading. Every number on this page is written by
-`src/v6/public.py` into the tables of section 4, and the text quotes them from there.
+Built on 2026-11-12, and again on 2026-11-17 with the Faras texts (section 2, item 9). This is piece F1 (step 22)
+of [`NEXT_STEPS.md`](../../NEXT_STEPS.md): a corpus keyed by inscription, with real names and a source for every
+reading. Every number on this page is written by `src/v6/public.py` into the tables of section 4, and the text
+quotes them from there.
 
 **The result in three sentences.** The 899 texts of `corpus_v5` hold 288 inscriptions, and more than half of
 its words were copies of a reading with a name swapped; the rest are example phrases and word-list entries.
@@ -30,13 +31,14 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
    the source line gives the reading with its names. The names are marked as names where Otten's files tag
    them (`ANTHROPONYM`, `ROYAL NAME`).
 2. **Every reading held, in one list** (`src/v6/readings.py`): Griffith's printed texts and the checked Karanòg
-   copies (public domain, the rows CC BY 4.0), Griffith's text of REM 1003 from his article of 1917 (item 8), the texts typed from the *Meroitic Newsletter*, the entries of
+   copies (public domain, the rows CC BY 4.0), Griffith's text of REM 1003 from his article of 1917 (item 8) and
+   his Faras texts from his article of 1922 (item 9), the texts typed from the *Meroitic Newsletter*, the entries of
    Millet 2005 and of *Fontes Historiae Nubiorum* III (text layers, in copyright, used as witnesses and not as
    typed readings), Otten's three narrative files and his source lines. FHN no. 267 prints 15 texts under one
    number; each is set beside the inscription of its REM number after the matching, and matched with nothing.
 3. **Numbers first.** Two readings that share a number of one numbering (REM, Millet's GA numbers, Griffith's)
    are one inscription. Two readings with two different numbers of one numbering are two inscriptions, however
-   alike their letters: 13 pairs of rows of `corpus_v6` look alike in this way, among them a stela and an
+   alike their letters: 12 pairs of rows of `corpus_v6` look alike in this way, among them a stela and an
    offering table of one person at Karanòg. FHN names the REM numbers of each of its entries, and prints two
    texts in two pieces under two numbers each; those are joined.
 4. **Letters for what has no number:** the narratives and the source lines. A text is reduced to bare letters in
@@ -84,6 +86,15 @@ tell an inscription from a phrase quoted in a grammar; and no link from a text t
    to GA 29 until this row, which shares half as many of the line's own runs as GA 29, ranked close behind it.
    The folder's README has the counts. REM 1003 is now of the kind royal or temple, not funerary, because a
    reading describes its object.
+9. **The Faras texts have open readings since 2026-11-17** (`src/faras.py`,
+   [`data/expansion/faras/`](../expansion/faras/README.md)). Griffith printed the funerary texts of Faras in 1922
+   as hand copies with English renderings; the first half of them, typed from page images and checked against his
+   Latin letters, are the open readings of REM 0501 to 0523, read like REM 1003: texts an article prints, with no
+   number of his and no row of `corpus_v5`. The analysts have not read them, so they are not on the map. They
+   moved the rule's formulae by a few runs, so some shares in the map moved: a pair of REM numbers that the rule
+   took for a sure match no longer is, and a pair across numberings is no longer matched (sections 4 and 7).
+   Millet's line 414, until then an inscription not identified, is a part of REM 0521, and so are six more of his
+   example lines.
 
 ## 3. The bar, set before the run, and what came of it
 
@@ -247,8 +258,8 @@ Bar B: 4 of the 151 Karanòg texts have a sure match to another Karanòg number 
 | `corpus_v5`, every text (the old figure) | 899 | 21,977 | 13,618 | 62.0% |
 | `corpus_v5`, near-copies counted once (the old figure) | 608 | 8,786 | 5,413 | 61.6% |
 | `corpus_v6`, the inscriptions that were in `corpus_v5` | 288 | 6,579 | 3,950 | 60.0% |
-| `corpus_v6`, the inscriptions new to the corpus | 282 | 4,069 | 1,508 | 37.1% |
-| `corpus_v6`, all | 570 | 10,648 | 5,458 | 51.3% |
+| `corpus_v6`, the inscriptions new to the corpus | 282 | 4,070 | 1,508 | 37.1% |
+| `corpus_v6`, all | 570 | 10,649 | 5,458 | 51.3% |
 
 | Level | `corpus_v5` | `corpus_v6`, were in `corpus_v5` | `corpus_v6`, new | `corpus_v6`, all |
 |---|---|---|---|---|
@@ -259,7 +270,7 @@ Bar B: 4 of the 151 Karanòg texts have a sure match to another Karanòg number 
 | hypothesis | 3,512 | 943 | 367 | 1,310 |
 | kind | 2,073 | 436 | 151 | 587 |
 | unknown | 2,512 | 876 | 1,165 | 2,041 |
-| lost | 262 | 374 | 878 | 1,252 |
+| lost | 262 | 374 | 879 | 1,253 |
 
 Near-copies counted once in both: texts with a legible word, 529 of 560 in `corpus_v6` (605 of 608 in `corpus_v5`); every legible word translated in 42 (106); one piece missing in 94 (122). Words whose spelling no analyst has seen: 1,124 in 1,017 spellings, 1,080 of them in the inscriptions new to the corpus and 44 in the others. Words that are a name by the source's own tag: 87. Words written apart that the map joins by its own rule: 112.
 
@@ -301,7 +312,7 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
    inscriptions that were in `corpus_v5` it translates 60.0% of the words, against 62.0% on `corpus_v5` and
    61.6% with near-copies counted once. Masked names counted as translated in every copy; a broken word now
    counts as one lost word where its pieces were read as words; and the rest of a swapped name is gone.
-3. **The inscriptions new to the corpus are at 37.1%:** 878 of their 4,069 words are lost, and 1,080 are spellings
+3. **The inscriptions new to the corpus are at 37.1%:** 879 of their 4,070 words are lost, and 1,080 are spellings
    that no analyst has seen and that have only the lookup (44 more such words are in the other inscriptions,
    1,124 in 1,017 spellings in all). Reading those spellings is what the build left undone on purpose (the
    analysts have read them since: [the readers' page](v6_readers.md) gives what changed); the lost
@@ -358,20 +369,23 @@ Not carried over: 110 of the 1,115 judged rows (70 because the word is a part of
 | `data/inscriptions_map.tsv` | every id of `corpus_v5`: what it is, its inscription, the shares both ways, who settled it | public |
 | `data/discovery/corpus_v6_figures.json` | the counts | public |
 | `data/expansion/jea/` | REM 1003 as Griffith printed it in 1917, its row in the corpus spelling, the counts of the comparison | public |
+| `data/expansion/faras/` | Faras 1 to 23 as typed from Griffith's hand copies of 1922, their rows in the corpus spelling, the readers' files and the counts | public |
 | `data/corpus_v6.jsonl` | one row per inscription with a typed reading | local |
 | `data/sources/v6/` | the table with all texts, the source lines, the readers' pack, key and answers, the recount | local |
 
 ```bash
 python3 -I src/akinidad.py
+python3 -I src/faras.py
 python3 -I src/v6/build.py && python3 -I src/v6/recount.py && python3 -I src/v6/public.py
 python3 -I src/v6/readings.py test
 python3 -I src/v6/packs.py merge
 python3 -I tests/test_corpus_v6.py
 python3 -I tests/test_akinidad.py
+python3 -I tests/test_faras.py
 ```
 
-The second to the fourth line need the local files (README, Data); the first writes the row of REM 1003 without
-them and its comparison only with them. The tests run on made-up rows and on the public files, and skip the
+The third to the fifth line need the local files (README, Data); the first two write the rows of REM 1003 and of
+the Faras texts without them, and the comparison of REM 1003 only with them. The tests run on made-up rows and on the public files, and skip the
 checks that read local ones.
 
 **Cost.** The table, the map, the corpus and both recounts were built without an agent. The figures below are
