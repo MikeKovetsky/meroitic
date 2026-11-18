@@ -350,8 +350,9 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     captions whose relief is drawn in Lepsius's *Denkmäler* (section V), on Griffith's plate of the Philae chamber,
     or in Garstang's photographs. Each scene was cut out with its writing painted white. Each of 65 caption words of
     known meaning was then hidden, and read by two readers with its own picture and by two with a wrong one. With
-    the true picture they got 24.4% right, with a wrong one 19.4%. The bars, pushed before anything ran, were 50%
-    and 20 points more (p = 0.156). So the 71 open spellings of the captions were not read. A relief shows who a
+    the true picture they scored 24.4% (half credit for a meaning partly right), with a wrong one 19.4%: a gain of
+    5 points, p = 0.156. The bars, pushed before anything ran, were 50% and a gain of 20 points with p < 0.05. So
+    the 71 open spellings of the captions were not read. A relief shows who a
     figure is, which the caption's names already say, not what its titles and epithets mean; 4.5 million tokens
     ([`data/discovery/caption_pilot.md`](data/discovery/caption_pilot.md)).
 
@@ -949,7 +950,7 @@ Twenty-four things need files that are kept locally (Data, above), so they don't
   lines, the tables of the two sets, the finders' rules and the readers' answers.
 - `python3 -I src/rem_pilot.py public` (and `index`, `pick`, `packs`, `score`, `estimate`) reads the REM volumes'
   text layers and plate pages, the readers' answers and the analysts' map of `corpus_v6`.
-- `python3 -I src/captions.py public` (and `count`, `packs`, `judges`, `score`) reads the caption pilot's
+- `python3 -I src/captions.py public` (and `count`, `packs known`, `judges known`, `score known`) reads the caption pilot's
   inventory, its cut pictures, the readers' answers, the judges' scores and the map with its layers.
 
 ## Layout

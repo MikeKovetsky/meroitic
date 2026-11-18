@@ -181,7 +181,7 @@ Only the first row is the gate; the other rows were split out afterwards to see 
 
 **What it means.** A relief shows who a figure is (a god, a king, a queen, an official), and the names in the
 caption already say that. What the caption words that need a meaning do, as titles, epithets and verbs of blessing,
-is not something a drawing shows. Even with the true picture, readers got a quarter of the known words right. This
+is not something a drawing shows. Even with the true picture, readers scored a quarter on the known words. This
 is the result of the six digs of 11 November in another form: the surroundings of a word give its kind, rarely its
 meaning. By the rule set in section 4, the 83 open items were not read.
 
@@ -195,14 +195,15 @@ meaning. By the rule set in section 4, the 83 open items were not read.
 
    Since that fix, each pack is read by one fresh agent; no pack holds two items that would give each other away;
    pack files carry only the items; and pictures have names drawn by lot. Readers "A" and "B" (right picture) and
-   "C" and "D" (wrong picture) are therefore each 12 packs of 5 or 6 items, read by 48 agents in all. That is what
+   "C" and "D" (wrong picture) are therefore each 12 packs of 5 or 6 items, read by 48 agents in all (49 with
+   the pack read again, point 2). That is what
    section 4 asks ("every reader is a fresh agent"; "no reader sees both conditions of one caption").
 2. **One pack was read twice.** One reader of pack 35 gave a six-word meaning, past the five-word limit. Its answers
    were set aside unread, and a fresh agent read the pack again with the same instruction plus "count them: five
    is the limit".
-3. **A known limit, left as the rules have it.** In 4 of the 65 items, a variant spelling of the hidden word stands
-   in the same caption with the same gloss. Both conditions see it, so it can raise both scores but cannot make a
-   gain.
+3. **A known limit, left as the rules have it.** In 4 of the 65 items, another word of the same caption is shown
+   with the hidden word's meaning: `mte` and `mtelo` ("child") stand together in one caption, and `elxte` and `l`
+   ("to give") in another. Both conditions see it, so it can raise both scores but cannot make a gain.
 4. **The readers' instruction** said the pictures were cut from "a drawing or photograph of a relief or carved
    object", since two of them are photographs. The judges were told to ignore endings written as "+l" in a gloss.
    Both instructions are kept with the local files (`data/sources/captions/`).
