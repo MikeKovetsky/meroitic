@@ -1,0 +1,43 @@
+{
+ "gate1": {
+  "texts": 87,
+  "captions": 56,
+  "by_kind": {
+   "king": 9,
+   "queen": 5,
+   "god": 18,
+   "goddess": 4,
+   "official": 16,
+   "scene": 3,
+   "priest": 1
+  },
+  "known_items": 65,
+  "known_spellings": 42,
+  "open_items": 83,
+  "open_spellings": 71,
+  "bar": {
+   "known": 20,
+   "open_spellings": 10
+  },
+  "met": true
+ },
+ "gate2": {
+  "items": 65,
+  "right": 0.2442,
+  "wrong": 0.1942,
+  "gain": 0.05,
+  "p": 0.1559,
+  "bar": {
+   "items": 20,
+   "right": 0.5,
+   "gain": 0.2,
+   "p": 0.05
+  },
+  "met": false
+ },
+ "judges": {
+  "answers": 260,
+  "same": 0.9769,
+  "kappa": 0.9453
+ }
+}

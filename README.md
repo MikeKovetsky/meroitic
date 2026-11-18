@@ -345,6 +345,15 @@ Why the texts alone do not give more is written up in one place: [FINDINGS.md](F
     tokens and give about 44 of the 2,013 open spellings that stand in one text a second text read right. The pilot
     stopped at 4 of its 20 inscriptions on Mike's word; the route is a printed transliteration
     ([`data/discovery/rem_pilot.md`](data/discovery/rem_pilot.md)).
+29. **The pictures beside the temple captions do not show what their words mean.** This is the one method left
+    untried, the way the pictured objects in Linear B helped Ventris: 56 of the map's 87 royal and temple texts are
+    captions whose relief is drawn in Lepsius's *Denkmäler* (section V), on Griffith's plate of the Philae chamber,
+    or in Garstang's photographs. Each scene was cut out with its writing painted white. Each of 65 caption words of
+    known meaning was then hidden, and read by two readers with its own picture and by two with a wrong one. With
+    the true picture they got 24.4% right, with a wrong one 19.4%. The bars, pushed before anything ran, were 50%
+    and 20 points more (p = 0.156). So the 71 open spellings of the captions were not read. A relief shows who a
+    figure is, which the caption's names already say, not what its titles and epithets mean; 4.5 million tokens
+    ([`data/discovery/caption_pilot.md`](data/discovery/caption_pilot.md)).
 
 ## The question
 
@@ -885,7 +894,7 @@ The second line ends `texts 662; tokens 18075; types 1622` (`data/corpus_v2.json
 check that reads a local-only file, and each file's last line counts the checks passed and skipped
 (`src/mnl/test_mnl.py`, a unittest file, ends `OK`); none fails.
 
-Twenty-three things need files that are kept locally (Data, above), so they don't run from a clone:
+Twenty-four things need files that are kept locally (Data, above), so they don't run from a clone:
 
 - `python3 -I src/cloze_families.py copies runs/answers/C3_cloze.json runs/cloze_families_ngram.json` and the other
   restoration checks read the corpus snapshot several runs used (`data/corpus_v2_c3_snapshot.jsonl`, taken before
@@ -940,6 +949,8 @@ Twenty-three things need files that are kept locally (Data, above), so they don'
   lines, the tables of the two sets, the finders' rules and the readers' answers.
 - `python3 -I src/rem_pilot.py public` (and `index`, `pick`, `packs`, `score`, `estimate`) reads the REM volumes'
   text layers and plate pages, the readers' answers and the analysts' map of `corpus_v6`.
+- `python3 -I src/captions.py public` (and `count`, `packs`, `judges`, `score`) reads the caption pilot's
+  inventory, its cut pictures, the readers' answers, the judges' scores and the map with its layers.
 
 ## Layout
 

@@ -1,8 +1,15 @@
 # Captions read against their pictures: the rules and the bars of a pilot
 
-Status on 2026-11-17, 15:50: **the rules and bars are set, and nothing has run yet.** This page was written and
-pushed before the material was counted and before any reader saw a picture. Sections 1 to 5 do not change once
-the inventory is started; the results go in section 6 and in this status line.
+Status on 2026-11-17, 16:40: **gate 2 missed; the pilot has ended, with no meaning of the project's own.**
+
+| Gate | Bar | Result |
+|---|---|---|
+| 1. Enough material | at least 20 known items and 10 open spellings | **Met.** 56 of the 87 texts are captions with a picture held: 65 known items and 71 open spellings |
+| 2. The picture helps on known words | right picture at least 0.50, and at least 0.20 above the wrong picture, p < 0.05 | **Missed.** Right picture 0.244, wrong picture 0.194: 5 points, p = 0.156 |
+| 3. The open words | read only if gate 2 is met | **Not run** |
+
+The rules and bars (sections 1 to 5) were written and pushed in 1f8c80e, before the material was counted and
+before any reader saw a picture. They have not changed since. The results are in section 6.
 
 ## 1. What was asked
 
@@ -131,3 +138,91 @@ The pilot stops and reports if its subagent tokens pass 6 million, the top of th
 3. The kind of a word without its meaning: "a title" is not a meaning, but "a priest who carries the censer"
    would be.
 4. A meaning the picture shows but only one right-picture reader gives.
+
+## 6. Results (2026-11-17)
+
+### Gate 1: met
+
+An agent made the inventory before any reader started. It went through the 87 texts, using Griffith's catalogues to
+see where each one stands, and cut each caption's scene out of its plate with all writing painted white. Every cut
+was checked by eye for leftover signs.
+
+- **Captions:** 56 of the 87 texts.
+  - 40 are drawn in Lepsius's section V (Naga, the Meroë chapels, Barkal).
+  - 14 are drawn on Griffith's plate of the Meroitic chamber at Philae (*Meroitic Inscriptions* II, pl. XVIII).
+  - 2 are photographed in Garstang's *Meroë*.
+- **Not captions:** the other 31, each recorded with its reason. Among them are pieces of one stela, statue bases,
+  graffiti, bands on columns, the long texts of Kalabsha (REM 0094), Hamadab (REM 1003) and Philae (REM 0101), and
+  two texts whose picture we do not hold.
+- **The figures beside the captions:** 18 gods, 4 goddesses, 9 kings, 5 queens, 16 officials, 1 priest and 3 whole
+  scenes.
+- **The count:** 65 known items (42 spellings) and 83 open items (71 spellings), against bars of 20 and 10.
+
+### Gate 2: missed
+
+All 65 known items were read with their own picture and with a wrong one, two readers in each condition: 260
+answers in all. The two judges gave the same score to 97.7% of them (Cohen's kappa 0.945).
+
+| | Right picture | Wrong picture | Gain | p |
+|---|---|---|---|---|
+| All 65 items | 0.244 | 0.194 | 0.050 | 0.156 |
+| Lepsius's drawings (27 items) | 0.227 | 0.222 | 0.005 | |
+| Griffith's Philae chamber (32 items) | 0.281 | 0.176 | 0.105 | |
+| Garstang's photographs (6 items) | 0.125 | 0.167 | −0.042 | |
+
+Only the first row is the gate; the other rows were split out afterwards to see where the gain came from.
+
+- **Most items do not move:** 39 of the 65 score the same with either picture. 29 of those are wrong in both.
+- **17 items score higher with the right picture, and 9 lower.** The gains are mostly titles of the officials at
+  Philae. For example, `atolis` ("of the water", in "general of the water") was read as "of the water" with its own
+  picture and "of the land (army)" with a wrong one.
+- **A picture also misled.** In one royal scene, the right picture led both readers to read `qore` ("ruler") as
+  "god", while the wrong picture gave "king".
+
+**What it means.** A relief shows who a figure is (a god, a king, a queen, an official), and the names in the
+caption already say that. What the caption words that need a meaning do, as titles, epithets and verbs of blessing,
+is not something a drawing shows. Even with the true picture, readers got a quarter of the known words right. This
+is the result of the six digs of 11 November in another form: the surroundings of a word give its kind, rarely its
+meaning. By the rule set in section 4, the 83 open items were not read.
+
+### How the run kept to the rules, and where it differed
+
+1. **The code was reviewed before the gate ran** (full review, 328,434 tokens). The review found three ways the
+   first packs would have spoiled gate 2, and fixed them in eb56ebb:
+   - a caption with several items came back once per item, so one copy showed the word hidden in another;
+   - the pack files named their condition;
+   - the picture files were named after their text.
+
+   Since that fix, each pack is read by one fresh agent; no pack holds two items that would give each other away;
+   pack files carry only the items; and pictures have names drawn by lot. Readers "A" and "B" (right picture) and
+   "C" and "D" (wrong picture) are therefore each 12 packs of 5 or 6 items, read by 48 agents in all. That is what
+   section 4 asks ("every reader is a fresh agent"; "no reader sees both conditions of one caption").
+2. **One pack was read twice.** One reader of pack 35 gave a six-word meaning, past the five-word limit. Its answers
+   were set aside unread, and a fresh agent read the pack again with the same instruction plus "count them: five
+   is the limit".
+3. **A known limit, left as the rules have it.** In 4 of the 65 items, a variant spelling of the hidden word stands
+   in the same caption with the same gloss. Both conditions see it, so it can raise both scores but cannot make a
+   gain.
+4. **The readers' instruction** said the pictures were cut from "a drawing or photograph of a relief or carved
+   object", since two of them are photographs. The judges were told to ignore endings written as "+l" in a gloss.
+   Both instructions are kept with the local files (`data/sources/captions/`).
+
+### Cost
+
+4,511,343 subagent tokens in all, under the 6 million set in section 4:
+
+| Step | Tokens |
+|---|---|
+| The inventory | 548,503 |
+| The review of the code | 328,434 |
+| 49 readers' packs | 3,459,356 |
+| The two judges | 175,050 |
+
+The review of this write-up is extra. The plates came from Halle (29 MB, public domain).
+
+### Files
+
+- **Public:** `src/captions.py`, `tests/test_captions.py`, and the counts in
+  [`caption_pilot_figures.json`](caption_pilot_figures.json).
+- **Local** (`data/sources/captions/`): the inventory, the cut pictures, the packs and their key, the readers'
+  answers, the judges' scores and the item scores. They hold the map's glosses, which are not public.

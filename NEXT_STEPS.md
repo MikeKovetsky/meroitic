@@ -692,6 +692,19 @@ second; H2 (the Egyptian frames) missed its gate; H1 (the dictionaries) missed g
 Nile Nubian (p = 0.598), which closes it for Nile Nubian, and whether the dictionaries of the other branches are
 typed is Mike's to say. What is left is section 6 of the page.
 
+**A fourth path, tried on 2026-11-17 and closed: the pictures beside the captions.** Asked whether any other
+language or method was left, the answer was that no language is worth a test, and one method was untried: reading
+temple captions against their reliefs. Mike: "Yes, run the pilot".
+- **Gate 1 met:** 56 of the map's 87 royal and temple texts are captions whose picture is held, in Lepsius's
+  *Denkmäler* V, Griffith's Philae plate and Garstang's *Meroë*.
+- **Gate 2 missed:** readers given the true picture got 24.4% of 65 known words right, and 19.4% with a wrong
+  picture (bars 50% and 20 points, p = 0.156).
+- **Not read:** the open words, by the rule set beforehand.
+- **What it shows:** a relief shows who a figure is, not what the titles and epithets beside it mean.
+
+See [`data/discovery/caption_pilot.md`](data/discovery/caption_pilot.md). The doors left are those of G7: more
+texts, and the scholars who hold them.
+
 **Launched on 2026-11-16** (Mike, asked "Should I launch the three tracks now?": "Yes, launch all"). The rules
 and the bars of all three, set before any agent was started, are on
 [`data/discovery/outside_evidence.md`](data/discovery/outside_evidence.md): H1 is its track A, H2 its track B,
